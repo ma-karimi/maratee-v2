@@ -15,9 +15,9 @@ class CreateCryoBankActionTable extends Migration {
 		Schema::create('cryo_bank_action', function(Blueprint $table)
 		{
 		    $table->increments('id');
-			$table->integer('cryo_bank_id')->index('fk_cryo_bank_has_action_cryo_bank1_idx');
-			$table->integer('action_id')->index('fk_cryo_bank_has_action_action1_idx');
-			$table->primary(['cryo_bank_id','action_id']);
+			$table->unsignedInteger('cryo_bank_id')->index('fk_cryo_bank_has_action_cryo_bank1_idx');
+			$table->unsignedInteger('action_id')->index('fk_cryo_bank_has_action_action1_idx');
+//			$table->primary(['cryo_bank_id','action_id']);
 
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);

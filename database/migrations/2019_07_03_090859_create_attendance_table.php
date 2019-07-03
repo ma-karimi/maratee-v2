@@ -15,12 +15,11 @@ class CreateAttendanceTable extends Migration {
 		Schema::create('attendance', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('person_id')->index('fk_attendance_person2_idx');
+			$table->unsignedInteger('person_id')->index('fk_attendance_person2_idx');
 			$table->dateTime('start_time')->nullable();
 			$table->dateTime('end_time')->nullable();
-			$table->integer('herbarium_id')->nullable()->index('fk_attendance_herbarium1_idx');
+			$table->unsignedInteger('herbarium_id')->nullable()->index('fk_attendance_herbarium1_idx');
 
-            $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();
             $table->dateTimeTz('deleted_at')->nullable();

@@ -15,8 +15,8 @@ class CreateSeedPlantTable extends Migration {
 		Schema::create('seed_plant', function(Blueprint $table)
 		{
 		    $table->increments('id');
-			$table->integer('seed_id')->index('fk_seed_plant_seed1_idx');
-			$table->integer('plant_id')->index('fk_seed_plant_plant1_idx');
+			$table->unsignedInteger('seed_id')->index('fk_seed_plant_seed1_idx');
+			$table->unsignedInteger('plant_id')->index('fk_seed_plant_plant1_idx');
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();

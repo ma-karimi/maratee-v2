@@ -16,10 +16,10 @@ class CreateMedicinalPlantMorphologyTable extends Migration {
 		{
             $table->increments('id');
 
-            $table->integer('medicinal_plant_id')->index('fk_medicinal_plant_has_morphology_medicinal_plant1_idx');
-			$table->integer('morphology_id')->index('fk_medicinal_plant_has_morphology_morphology1_idx');
+            $table->unsignedInteger('medicinal_plant_id')->index('fk_medicinal_plant_has_morphology_medicinal_plant1_idx');
+			$table->unsignedInteger('morphology_id')->index('fk_medicinal_plant_has_morphology_morphology1_idx');
 			$table->string('value', 45)->nullable();
-			$table->primary(['medicinal_plant_id','morphology_id']);
+//			$table->primary(['medicinal_plant_id','morphology_id']);
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();

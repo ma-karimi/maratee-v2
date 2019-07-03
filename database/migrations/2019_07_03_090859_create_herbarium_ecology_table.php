@@ -15,10 +15,10 @@ class CreateHerbariumEcologyTable extends Migration {
 		Schema::create('herbarium_ecology', function(Blueprint $table)
 		{
 	        $table->increments('id');
-			$table->integer('herbarium_id')->index('fk_herbarium_has_ecology_herbarium1_idx');
-			$table->integer('ecology_id')->index('fk_herbarium_has_ecology_ecology1_idx');
+			$table->unsignedInteger('herbarium_id')->index('fk_herbarium_has_ecology_herbarium1_idx');
+			$table->unsignedInteger('ecology_id')->index('fk_herbarium_has_ecology_ecology1_idx');
 			$table->text('description')->nullable();
-			$table->primary(['herbarium_id','ecology_id']);
+//			$table->primary(['herbarium_id','ecology_id']);
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();

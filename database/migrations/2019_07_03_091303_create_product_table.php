@@ -18,7 +18,7 @@ class CreateProductTable extends Migration {
 			$table->text('name')->nullable();
 			$table->text('description')->nullable();
 			$table->string('registration_status', 45)->nullable();
-			$table->integer('organization_id')->nullable()->index('fk_product_organization1_idx');
+			$table->unsignedInteger('organization_id')->nullable()->index('fk_product_organization1_idx');
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();

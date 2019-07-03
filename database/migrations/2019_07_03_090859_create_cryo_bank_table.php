@@ -16,8 +16,8 @@ class CreateCryoBankTable extends Migration
         Schema::create('cryo_bank', function (Blueprint $table) {
             $table->increments('id');
             $table->string('voucher_number', 45)->nullable();
-            $table->string('Geotype_code', 45)->nullable();
-            $table->integer('protection_id')->nullable()->index('fk_cryo_bank_protection1_idx');
+            $table->string('geotype_code', 45)->nullable();
+            $table->unsignedInteger('protection_id')->nullable()->index('fk_cryo_bank_protection1_idx');
             $table->date('entry_date')->nullable();
             $table->string('sample_type', 45)->nullable();
             $table->text('treatment')->nullable();
@@ -28,7 +28,7 @@ class CreateCryoBankTable extends Migration
             $table->integer('row_no')->nullable();
             $table->string('rack_no', 45)->nullable();
             $table->integer('cell_no')->nullable();
-            $table->integer('herbarium_id')->index('fk_cryo_bank_herbarium1_idx');
+            $table->unsignedInteger('herbarium_id')->index('fk_cryo_bank_herbarium1_idx');
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();

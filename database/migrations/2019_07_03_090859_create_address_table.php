@@ -15,8 +15,8 @@ class CreateAddressTable extends Migration {
 		Schema::create('address', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('city_id')->nullable()->index('fk_location_city1_idx');
-			$table->integer('village_id')->nullable()->index('fk_address_village1_idx');
+			$table->unsignedInteger('city_id')->nullable()->index('fk_location_city1_idx');
+			$table->unsignedInteger('village_id')->nullable()->index('fk_address_village1_idx');
 			$table->text('address')->nullable();
 
             $table->integer('person_id');

@@ -18,10 +18,10 @@ class CreateChromosomeTable extends Migration
             $table->integer('n_no')->nullable();
             $table->integer('2n_no')->nullable();
             $table->text('notes')->nullable();
-            $table->integer('herbarium_id')->index('fk_chromosome_herbarium1_idx');
-            $table->integer('cryo_bank_id')->nullable()->index('fk_chromosome_cryo_bank1_idx');
-            $table->integer('article_id')->nullable()->index('fk_chromosome_article1_idx');
-            $table->integer('location_id')->nullable()->index('fk_chromosome_location1_idx');
+            $table->unsignedInteger('herbarium_id')->index('fk_chromosome_herbarium1_idx');
+            $table->unsignedInteger('cryo_bank_id')->nullable()->index('fk_chromosome_cryo_bank1_idx');
+            $table->unsignedInteger('article_id')->nullable()->index('fk_chromosome_article1_idx');
+            $table->unsignedInteger('location_id')->nullable()->index('fk_chromosome_location1_idx');
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();

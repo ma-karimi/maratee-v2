@@ -15,15 +15,15 @@ class CreateLocalityTable extends Migration {
 		Schema::create('locality', function(Blueprint $table)
 		{
 		    $table->increments('id');
-			$table->integer('paleontology_id')->nullable()->index('fk_locality_paleontology1_idx');
-			$table->integer('location_id')->nullable()->index('fk_locality_location1_idx');
+			$table->unsignedInteger('paleontology_id')->nullable()->index('fk_locality_paleontology1_idx');
+			$table->unsignedInteger('location_id')->nullable()->index('fk_locality_location1_idx');
 			$table->text('formation')->nullable();
 			$table->text('layer')->nullable();
 			$table->text('stratigraphy')->nullable();
 			$table->text('lithology')->nullable();
 			$table->text('fauna')->nullable();
 			$table->string('description', 45)->nullable();
-			$table->integer('map_id')->nullable()->index('fk_locality_map1_idx');
+			$table->unsignedInteger('map_id')->nullable()->index('fk_locality_map1_idx');
 
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);

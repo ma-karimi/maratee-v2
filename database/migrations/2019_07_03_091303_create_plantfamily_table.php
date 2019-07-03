@@ -17,7 +17,7 @@ class CreatePlantfamilyTable extends Migration {
 			$table->increments('id');
 			$table->text('name')->nullable();
 			$table->text('description')->nullable();
-			$table->integer('Author_id')->nullable()->index('fk_plantfamily_Author1_idx');
+			$table->unsignedInteger('author_id')->nullable()->index('fk_plantfamily_author1_idx');
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();

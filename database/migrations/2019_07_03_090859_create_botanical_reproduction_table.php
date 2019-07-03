@@ -15,9 +15,9 @@ class CreateBotanicalReproductionTable extends Migration {
 		Schema::create('botanical_reproduction', function(Blueprint $table)
 		{
 		    $table->increments('id');
-			$table->integer('botanical_id')->index('fk_botanical_has_reproduction_botanical1_idx');
-			$table->integer('reproduction_id')->index('fk_botanical_has_reproduction_reproduction1_idx');
-			$table->primary(['botanical_id','reproduction_id']);
+			$table->unsignedInteger('botanical_id')->index('fk_botanical_has_reproduction_botanical1_idx');
+			$table->unsignedInteger('reproduction_id')->index('fk_botanical_has_reproduction_reproduction1_idx');
+//			$table->primary(['botanical_id','reproduction_id']);
 
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);

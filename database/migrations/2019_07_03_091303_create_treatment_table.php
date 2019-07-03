@@ -15,7 +15,7 @@ class CreateTreatmentTable extends Migration {
 		Schema::create('treatment', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('paleontology_id')->index('fk_treatment_paleontology1_idx');
+			$table->unsignedInteger('paleontology_id')->index('fk_treatment_paleontology1_idx');
 			$table->string('name', 45)->nullable();
 			$table->string('description', 45)->nullable();
             $table->integer('person_id');

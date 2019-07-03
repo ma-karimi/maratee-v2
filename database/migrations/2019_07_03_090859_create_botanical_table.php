@@ -15,7 +15,7 @@ class CreateBotanicalTable extends Migration {
 		Schema::create('botanical', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('herbarium_id')->index('fk_garden_herbarium1_idx');
+			$table->unsignedInteger('herbarium_id')->index('fk_garden_herbarium1_idx');
 			$table->integer('height')->nullable();
 			$table->text('flower_color')->nullable();
 			$table->text('fruit_color')->nullable();

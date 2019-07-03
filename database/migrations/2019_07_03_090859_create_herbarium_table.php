@@ -17,11 +17,11 @@ class CreateHerbariumTable extends Migration {
 			$table->increments('id');
 			$table->integer('number')->nullable()->comment('herbarium number
 ');
-			$table->integer('location_id')->index('fk_herbarium_location1_idx');
-			$table->integer('phenology_state_id')->nullable()->index('fk_herbarium_phenology_state1_idx');
-			$table->integer('protection_id')->nullable()->index('fk_herbarium_protection1_idx');
-			$table->integer('phytogeography_id')->nullable()->index('fk_herbarium_phytogeography1_idx');
-			$table->integer('organization_id')->index('fk_herbarium_organization1_idx');
+			$table->unsignedInteger('location_id')->index('fk_herbarium_location1_idx');
+			$table->unsignedInteger('phenology_state_id')->nullable()->index('fk_herbarium_phenology_state1_idx');
+			$table->unsignedInteger('protection_id')->nullable()->index('fk_herbarium_protection1_idx');
+			$table->unsignedInteger('phytogeography_id')->nullable()->index('fk_herbarium_phytogeography1_idx');
+			$table->unsignedInteger('organization_id')->index('fk_herbarium_organization1_idx');
 			$table->integer('sheets_no')->nullable()->comment('Number of required sheets per herbarium sample');
 			$table->integer('samples_no')->nullable()->comment('Quantity of samples of each herbarium number
  ');
@@ -48,9 +48,9 @@ that is an herbarium organization which we can but its id in this place');
 			$table->string('type_description', 45)->nullable()->comment('plant type description
 
 ');
-			$table->integer('plant_type_id')->nullable()->index('fk_herbarium_plant_type1_idx');
+			$table->unsignedInteger('plant_type_id')->nullable()->index('fk_herbarium_plant_type1_idx');
 			$table->text('flowering')->nullable();
-			$table->integer('plantgroup_id')->nullable()->index('fk_herbarium_plantgroup1_idx');
+			$table->unsignedInteger('plantgroup_id')->nullable()->index('fk_herbarium_plantgroup1_idx');
 
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);

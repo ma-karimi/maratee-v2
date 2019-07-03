@@ -15,8 +15,8 @@ class CreateGeraminTable extends Migration {
 		Schema::create('geramin', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('collection_id')->index('fk_geramin_collection1_idx');
-			$table->integer('seed_id')->index('fk_geramin_seed1_idx');
+			$table->unsignedInteger('collection_id')->index('fk_geramin_collection1_idx');
+			$table->unsignedInteger('seed_id')->index('fk_geramin_seed1_idx');
 			$table->string('repeat', 45)->nullable();
 			$table->integer('bush')->nullable();
 			$table->integer('average')->nullable();

@@ -15,8 +15,8 @@ class CreateBotanicalIrrigationTable extends Migration {
 		Schema::create('botanical_irrigation', function(Blueprint $table)
 		{
 		    $table->increments('id');
-			$table->integer('botanical_id')->index('fk_botanical_has_irrigation_botanical1_idx');
-			$table->integer('irrigation_id')->index('fk_botanical_has_irrigation_irrigation1_idx');
+			$table->unsignedInteger('botanical_id')->index('fk_botanical_has_irrigation_botanical1_idx');
+			$table->unsignedInteger('irrigation_id')->index('fk_botanical_has_irrigation_irrigation1_idx');
 			$table->text('requirement')->nullable();
 			$table->text('daytime')->nullable();
 			$table->text('seasonal_feature')->nullable()->comment('features are :
@@ -24,7 +24,7 @@ value
 description
 per season
 ');
-			$table->primary(['botanical_id','irrigation_id']);
+//			$table->primary(['botanical_id','irrigation_id']);
 
 
             $table->integer('person_id');

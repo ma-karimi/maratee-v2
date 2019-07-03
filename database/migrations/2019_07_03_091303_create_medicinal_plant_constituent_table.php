@@ -15,10 +15,10 @@ class CreateMedicinalPlantConstituentTable extends Migration {
 		Schema::create('medicinal_plant_constituent', function(Blueprint $table)
 		{
 		    $table->increments('id');
-			$table->integer('medicinal_plant_id')->index('fk_medicinal_plant_has_constituent_medicinal_plant1_idx');
-			$table->integer('constituent_id')->index('fk_medicinal_plant_has_constituent_constituent1_idx');
+			$table->unsignedInteger('medicinal_plant_id')->index('fk_medicinal_plant_has_constituent_medicinal_plant1_idx');
+			$table->unsignedInteger('constituent_id')->index('fk_medicinal_plant_has_constituent_constituent1_idx');
 			$table->integer('value')->nullable();
-			$table->primary(['medicinal_plant_id','constituent_id']);
+//			$table->primary(['medicinal_plant_id','constituent_id']);
 
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);

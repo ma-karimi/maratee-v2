@@ -15,10 +15,10 @@ class CreatePaleontagroupTable extends Migration {
 		Schema::create('paleontagroup', function(Blueprint $table)
 		{
 		    $table->increments('id');
-			$table->integer('plantgroup_id')->index('fk_paleontagroup_plantgroup1_idx');
-			$table->integer('plantorder_id')->index('fk_paleontagroup_plantorder1_idx');
-			$table->integer('paleontology_id')->index('fk_paleontagroup_paleontology1_idx');
-			$table->integer('planthub_id')->index('fk_paleontagroup_planthub1_idx');
+			$table->unsignedInteger('plantgroup_id')->index('fk_paleontagroup_plantgroup1_idx');
+			$table->unsignedInteger('plantorder_id')->index('fk_paleontagroup_plantorder1_idx');
+			$table->unsignedInteger('paleontology_id')->index('fk_paleontagroup_paleontology1_idx');
+			$table->unsignedInteger('planthub_id')->index('fk_paleontagroup_planthub1_idx');
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();

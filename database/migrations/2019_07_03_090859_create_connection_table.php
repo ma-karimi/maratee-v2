@@ -15,12 +15,11 @@ class CreateConnectionTable extends Migration {
 		Schema::create('connection', function(Blueprint $table)
 		{
 		    $table->increments('id');
-			$table->integer('person_id')->index('fk_contact_has_address_person1_idx');
-			$table->integer('organization_id')->index('fk_connection_organization1_idx');
-			$table->integer('location_id')->nullable()->index('fk_connection_location1_idx');
-			$table->integer('department_id')->index('fk_connection_department1_idx');
+			$table->unsignedInteger('person_id')->index('fk_contact_has_address_person1_idx');
+			$table->unsignedInteger('organization_id')->index('fk_connection_organization1_idx');
+			$table->unsignedInteger('location_id')->nullable()->index('fk_connection_location1_idx');
+			$table->unsignedInteger('department_id')->index('fk_connection_department1_idx');
 
-            $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();
             $table->dateTimeTz('deleted_at')->nullable();

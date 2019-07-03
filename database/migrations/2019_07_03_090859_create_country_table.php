@@ -17,7 +17,7 @@ class CreateCountryTable extends Migration {
 			$table->increments('id');
 			$table->string('code', 45)->nullable();
 			$table->text('name');
-			$table->integer('continent_id')->nullable()->index('fk_country_continent1_idx');
+			$table->unsignedInteger('continent_id')->nullable()->index('fk_country_continent1_idx');
 
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);

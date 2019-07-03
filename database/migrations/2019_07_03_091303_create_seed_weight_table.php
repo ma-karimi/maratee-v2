@@ -15,7 +15,7 @@ class CreateSeedWeightTable extends Migration {
 		Schema::create('seed_weight', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('seed_technology_id')->index('fk_seed_weight_seed_technology1_idx');
+			$table->unsignedInteger('seed_technology_id')->index('fk_seed_weight_seed_technology1_idx');
 			$table->integer('total')->nullable();
 			$table->integer('active')->nullable();
 			$table->integer('base')->nullable();

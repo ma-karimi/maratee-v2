@@ -15,15 +15,14 @@ class CreateActionHubTable extends Migration {
 		Schema::create('action_hub', function(Blueprint $table)
 		{
 		    $table->increments('id');
-			$table->integer('person_id')->index('fk_person_has_action_person1_idx');
-			$table->integer('action_id')->index('fk_person_has_action_action1_idx');
-			$table->integer('location_id')->nullable()->index('fk_person_has_action_location1_idx');
-			$table->integer('herbarium_id')->nullable()->index('fk_action_relations_herbarium1_idx');
+			$table->unsignedInteger('person_id')->index('fk_person_has_action_person1_idx');
+			$table->unsignedInteger('action_id')->index('fk_person_has_action_action1_idx');
+			$table->unsignedInteger('location_id')->nullable()->index('fk_person_has_action_location1_idx');
+			$table->unsignedInteger('herbarium_id')->nullable()->index('fk_action_relations_herbarium1_idx');
 			$table->date('date')->nullable();
 			$table->text('description')->nullable();
-			$table->integer('project_id')->nullable()->index('fk_action_hub_project1_idx');
-			$table->integer('department_id')->nullable()->index('fk_action_hub_department1_idx');
-            $table->integer('person_id');
+			$table->unsignedInteger('project_id')->nullable()->index('fk_action_hub_project1_idx');
+			$table->unsignedInteger('department_id')->nullable()->index('fk_action_hub_department1_idx');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();
             $table->dateTimeTz('deleted_at')->nullable();

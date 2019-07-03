@@ -15,7 +15,7 @@ class CreateProvinceTable extends Migration {
 		Schema::create('province', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('country_id')->index('fk_province_country1_idx');
+			$table->unsignedInteger('country_id')->index('fk_province_country1_idx');
 			$table->text('name')->nullable();
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);

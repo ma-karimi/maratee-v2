@@ -15,8 +15,8 @@ class CreateSeedTable extends Migration
     {
         Schema::create('seed', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('herbarium_id')->index('fk_seed_herbarium1_idx');
-            $table->integer('protection_id')->nullable()->index('fk_seed_protection1_idx');
+            $table->unsignedInteger('herbarium_id')->index('fk_seed_herbarium1_idx');
+            $table->unsignedInteger('protection_id')->nullable()->index('fk_seed_protection1_idx');
             $table->integer('field_code')->nullable();
             $table->string('correct_field_code', 45)->nullable();
             $table->integer('sample_code')->nullable();
@@ -49,7 +49,7 @@ class CreateSeedTable extends Migration
             $table->text('vegetative_form')->nullable();
             $table->integer('height')->nullable();
             $table->text('mother_health')->nullable();
-            $table->integer('department_id')->nullable()->index('fk_seed_department1_idx');
+            $table->unsignedInteger('department_id')->nullable()->index('fk_seed_department1_idx');
             $table->date('send_date')->nullable();
             $table->integer('collected_qt')->nullable();
             $table->integer('must_collected_qt')->nullable();

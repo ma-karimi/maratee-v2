@@ -14,7 +14,7 @@ class AddForeignKeysToPlantgenusTable extends Migration {
 	{
 		Schema::table('plantgenus', function(Blueprint $table)
 		{
-			$table->foreign('Author_id', 'fk_plantgenus_Author1')->references('id')->on('Author')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('author_id', 'fk_plantgenus_author1')->references('id')->on('author')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
 
@@ -28,7 +28,7 @@ class AddForeignKeysToPlantgenusTable extends Migration {
 	{
 		Schema::table('plantgenus', function(Blueprint $table)
 		{
-			$table->dropForeign('fk_plantgenus_Author1');
+			$table->dropForeign('fk_plantgenus_author1');
 		});
 	}
 

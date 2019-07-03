@@ -15,12 +15,13 @@ class CreateSeedChemicalTable extends Migration
     {
         Schema::create('seed_chemical', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('chemical_id');
-            $table->integer('seed_id')->index('fk_seed_chemical_seed1_idx');
+            $table->unsignedInteger('chemical_id')->index('fk_seed_chemical_chemica
+l1');
+            $table->unsignedInteger('seed_id')->index('fk_seed_chemical_seed1_idx');
             $table->text('treatment')->nullable();
             $table->integer('repeat')->nullable();
-            $table->integer('location_id')->nullable()->index('fk_seed_chemical_location1_idx');
-            $table->primary(['chemical_id', 'seed_id']);
+            $table->unsignedInteger('location_id')->nullable()->index('fk_seed_chemical_location1_idx');
+//            $table->primary(['chemical_id', 'seed_id']);
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();

@@ -15,7 +15,7 @@ class CreateSeedTechnologyTable extends Migration
     {
         Schema::create('seed_technology', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('seed_id')->index('fk_seed_technology_seed1_idx');
+            $table->unsignedInteger('seed_id')->index('fk_seed_technology_seed1_idx');
             $table->text('seed_type')->nullable();
             $table->text('type')->nullable();
             $table->integer('husk_average')->nullable();

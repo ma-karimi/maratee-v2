@@ -32,7 +32,7 @@ class CreatePaleontologyTable extends Migration
             $table->integer('pieces')->nullable();
             $table->text('color')->nullable();
             $table->text('element')->nullable();
-            $table->integer('geology_age_id')->nullable()->index('fk_paleontology_geology_age1_idx');
+            $table->unsignedInteger('geology_age_id')->nullable()->index('fk_paleontology_geology_age1_idx');
             $table->text('treatment')->nullable();
             $table->text('additional_info')->nullable();
             $table->text('access')->nullable();

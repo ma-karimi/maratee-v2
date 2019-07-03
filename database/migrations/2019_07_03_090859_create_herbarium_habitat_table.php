@@ -15,10 +15,10 @@ class CreateHerbariumHabitatTable extends Migration {
 		Schema::create('herbarium_habitat', function(Blueprint $table)
 		{
 		    $table->increments('id');
-			$table->integer('herbarium_id')->index('fk_herbarium_has_habitat_herbarium1_idx');
-			$table->integer('habitat_id')->index('fk_herbarium_has_habitat_habitat1_idx');
+			$table->unsignedInteger('herbarium_id')->index('fk_herbarium_has_habitat_herbarium1_idx');
+			$table->unsignedInteger('habitat_id')->index('fk_herbarium_has_habitat_habitat1_idx');
 			$table->text('description')->nullable();
-			$table->primary(['herbarium_id','habitat_id']);
+//			$table->primary(['herbarium_id','habitat_id']);
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();

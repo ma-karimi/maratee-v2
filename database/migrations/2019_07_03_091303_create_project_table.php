@@ -18,7 +18,7 @@ class CreateProjectTable extends Migration {
 			$table->text('name');
 			$table->string('approved_id', 45)->nullable();
 			$table->string('registered_id', 45)->nullable();
-			$table->integer('plan_id')->nullable()->index('fk_project_plan1_idx');
+			$table->unsignedInteger('plan_id')->nullable()->index('fk_project_plan1_idx');
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();

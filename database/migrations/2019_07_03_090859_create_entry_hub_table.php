@@ -15,12 +15,12 @@ class CreateEntryHubTable extends Migration {
 		Schema::create('entry_hub', function(Blueprint $table)
 		{
 		    $table->increments('id');
-			$table->integer('location_id')->nullable()->index('fk_entry_hub_location1_idx')->comment(' برای بررسی رویشگاه ان
+			$table->unsignedInteger('location_id')->nullable()->index('fk_entry_hub_location1_idx')->comment(' برای بررسی رویشگاه ان
 ');
-			$table->integer('botanical_entry_id')->nullable()->index('fk_entry_hub_botanical_entry1_idx')->comment('براس نوع ورود به باغ
+			$table->unsignedInteger('botanical_entry_id')->nullable()->index('fk_entry_hub_botanical_entry1_idx')->comment('براس نوع ورود به باغ
 ');
-			$table->integer('botanical_id')->index('fk_entry_hub_botanical1_idx')->comment('گیاه در باغ');
-			$table->integer('organization_id')->nullable()->index('fk_entry_hub_organization1_idx')->comment('سازمان یا باغ گیاه شناسی که نمونه از انجا می باشد.');
+			$table->unsignedInteger('botanical_id')->index('fk_entry_hub_botanical1_idx')->comment('گیاه در باغ');
+			$table->unsignedInteger('organization_id')->nullable()->index('fk_entry_hub_organization1_idx')->comment('سازمان یا باغ گیاه شناسی که نمونه از انجا می باشد.');
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();

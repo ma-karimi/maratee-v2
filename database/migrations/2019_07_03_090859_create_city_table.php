@@ -17,7 +17,7 @@ class CreateCityTable extends Migration {
 			$table->increments('id');
 			$table->text('name')->nullable();
 			$table->string('code', 45)->nullable();
-			$table->integer('province_id')->nullable()->index('fk_city_province1_idx');
+			$table->unsignedInteger('province_id')->nullable()->index('fk_city_province1_idx');
 
             $table->integer('person_id');
             $table->tinyInteger('status_id')->default(0);

@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateCorrespondanceTable extends Migration {
+class CreateCorrespondenceTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateCorrespondanceTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('correspondance', function(Blueprint $table)
+		Schema::create('correspondence', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->text('title')->nullable();
@@ -32,7 +32,7 @@ class CreateCorrespondanceTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('correspondance');
+		Schema::drop('correspondence');
 	}
 
 }

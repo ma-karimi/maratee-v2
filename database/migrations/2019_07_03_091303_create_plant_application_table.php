@@ -15,11 +15,12 @@ class CreatePlantApplicationTable extends Migration {
 		Schema::create('plant_application', function(Blueprint $table)
 		{
 		    $table->increments('id');
-			$table->integer('herbarium_id')->primary();
-			$table->integer('plant_part_id')->nullable()->index('fk_herbarium_has_plant_part_plant_part1_idx');
-			$table->integer('application_id')->nullable()->index('fk_herbarium_has_plant_part_application1_idx');
-			$table->integer('usage_type_id')->nullable()->index('fk_plant_application_usage_type1_idx');
-			$table->integer('industry_id')->nullable()->index('fk_plant_application_industry1_idx');
+			$table->unsignedInteger('herbarium_id')->index('fk_herbarium_has_pla
+nt_part_herbarium1');
+			$table->unsignedInteger('plant_part_id')->nullable()->index('fk_herbarium_has_plant_part_plant_part1_idx');
+			$table->unsignedInteger('application_id')->nullable()->index('fk_herbarium_has_plant_part_application1_idx');
+			$table->unsignedInteger('usage_type_id')->nullable()->index('fk_plant_application_usage_type1_idx');
+			$table->unsignedInteger('industry_id')->nullable()->index('fk_plant_application_industry1_idx');
 			$table->text('presence')->nullable()->comment('options: 
 now
 future
