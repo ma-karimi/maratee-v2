@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
+class AddForeignKeysToMedicinalPlantConstituentTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::table('medicinal_plant_constituent', function(Blueprint $table)
+		{
+			$table->foreign('constituent_id', 'fk_medicinal_plant_has_constituent_constituent1')->references('id')->on('constituent')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('medicinal_plant_id', 'fk_medicinal_plant_has_constituent_medicinal_plant1')->references('id')->on('medicinal_plant')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+		});
+	}
+
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::table('medicinal_plant_constituent', function(Blueprint $table)
+		{
+			$table->dropForeign('fk_medicinal_plant_has_constituent_constituent1');
+			$table->dropForeign('fk_medicinal_plant_has_constituent_medicinal_plant1');
+		});
+	}
+
+}

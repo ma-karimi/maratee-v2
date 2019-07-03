@@ -1,0 +1,3 @@
+@if(session()->has('flash_notification.message'))
+    <div class="notification delNotification alert alert-{{session('flash_notification.level')}}">{!!session('flash_notification.message')!!}</div>
+@endif
