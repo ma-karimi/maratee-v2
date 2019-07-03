@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateGroupTable extends Migration {
+class CreateGroupsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,17 +12,17 @@ class CreateGroupTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('group', function(Blueprint $table)
+		Schema::create('groups', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->unsignedInteger('role_id')->index('fk_group_role1_idx');
+			$table->unsignedInteger('role_id')->index('fk_groups_role1_idx');
 			$table->date('assign')->nullable();
 			$table->text('permissions')->nullable();
-			$table->unsignedInteger('permission_id')->index('fk_group_permission1_idx');
-			$table->unsignedInteger('person_id')->index('fk_group_person1_idx');
+			$table->unsignedInteger('permission_id')->index('fk_groups_permission1_idx');
+			$table->unsignedInteger('person_id')->index('fk_groups_person1_idx');
 			$table->text('role')->nullable();
-			$table->unsignedInteger('department_id')->index('fk_group_department1_idx');
-			$table->unsignedInteger('organization_id')->index('fk_group_organization1_idx');
+			$table->unsignedInteger('department_id')->index('fk_groups_department1_idx');
+			$table->unsignedInteger('organization_id')->index('fk_groups_organization1_idx');
 
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();
@@ -38,7 +38,7 @@ class CreateGroupTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('group');
+		Schema::drop('groups');
 	}
 
 }
