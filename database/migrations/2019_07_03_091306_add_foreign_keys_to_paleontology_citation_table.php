@@ -14,7 +14,7 @@ class AddForeignKeysToPaleontologyCitationTable extends Migration {
 	{
 		Schema::table('paleontology_citation', function(Blueprint $table)
 		{
-			$table->foreign('article_id', 'fk_paleontology_citation_article1')->references('id')->on('article')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('article_id', 'fk_paleontology_citation_article1')->references('id')->on('articles')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('paleontology_id', 'fk_paleontology_citation_paleontology1')->references('id')->on('paleontology')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('person_id', 'fk_paleontology_citation_person1')->references('id')->on('person')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('photo_id', 'fk_paleontology_citation_photo1')->references('id')->on('media')->onUpdate('NO ACTION')->onDelete('NO ACTION');

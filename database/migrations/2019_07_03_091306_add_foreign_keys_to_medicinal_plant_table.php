@@ -14,7 +14,7 @@ class AddForeignKeysToMedicinalPlantTable extends Migration {
 	{
 		Schema::table('medicinal_plant', function(Blueprint $table)
 		{
-			$table->foreign('article_id', 'fk_medicinal_plant_article1')->references('id')->on('article')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('article_id', 'fk_medicinal_plant_article1')->references('id')->on('articles')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('herbarium_id', 'fk_medicinal_plant_herbarium1')->references('id')->on('herbarium')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('location_id', 'fk_medicinal_plant_location1')->references('id')->on('location')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('media_id', 'fk_medicinal_plant_media1')->references('id')->on('media')->onUpdate('NO ACTION')->onDelete('NO ACTION');

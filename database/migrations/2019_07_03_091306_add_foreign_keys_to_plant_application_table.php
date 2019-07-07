@@ -12,13 +12,13 @@ class AddForeignKeysToPlantApplicationTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('plant_application', function(Blueprint $table)
+		Schema::table('plant_applications', function(Blueprint $table)
 		{
-			$table->foreign('application_id', 'fk_herbarium_has_plant_part_application1')->references('id')->on('application')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('herbarium_id', 'fk_herbarium_has_plant_part_herbarium1')->references('id')->on('herbarium')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('plant_part_id', 'fk_herbarium_has_plant_part_plant_part1')->references('id')->on('plant_part')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('industry_id', 'fk_plant_application_industry1')->references('id')->on('industry')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('usage_type_id', 'fk_plant_application_usage_type1')->references('id')->on('usage_type')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('application_id')->references('id')->on('applications')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('herbarium_id')->references('id')->on('herbarium')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('plant_part_id')->references('id')->on('plant_part')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('industry_id')->references('id')->on('industry')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('usage_type_id')->references('id')->on('usage_type')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
 
@@ -30,7 +30,7 @@ class AddForeignKeysToPlantApplicationTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('plant_application', function(Blueprint $table)
+		Schema::table('plant_applications', function(Blueprint $table)
 		{
 			$table->dropForeign('fk_herbarium_has_plant_part_application1');
 			$table->dropForeign('fk_herbarium_has_plant_part_herbarium1');

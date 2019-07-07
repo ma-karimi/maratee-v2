@@ -12,10 +12,10 @@ class AddForeignKeysToAddressTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('address', function(Blueprint $table)
+		Schema::table('addresses', function(Blueprint $table)
 		{
-			$table->foreign('village_id', 'fk_address_village1')->references('id')->on('village')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('city_id', 'fk_location_city1')->references('id')->on('city')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('village_id')->references('id')->on('village')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('city_id')->references('id')->on('city')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
 
@@ -27,10 +27,10 @@ class AddForeignKeysToAddressTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('address', function(Blueprint $table)
+		Schema::table('addresses', function(Blueprint $table)
 		{
-			$table->dropForeign('fk_address_village1');
-			$table->dropForeign('fk_location_city1');
+			$table->dropForeign(['village_id']);
+			$table->dropForeign(['city_id']);
 		});
 	}
 

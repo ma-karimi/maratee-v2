@@ -15,9 +15,10 @@ class CreateExpensesTable extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 45)->nullable();
-            $table->string('description', 45)->nullable();
-            $table->integer('person_id');
+            $table->json('name');
+            $table->json('description')->nullable();
+            $table->unsignedInteger('person_id');
+			$table->unsignedInteger('creator_id');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();
             $table->dateTimeTz('deleted_at')->nullable();

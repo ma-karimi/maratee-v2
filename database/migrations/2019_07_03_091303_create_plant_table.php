@@ -15,10 +15,11 @@ class CreatePlantTable extends Migration {
 		Schema::create('plant', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->text('name')->nullable();
-			$table->text('description')->nullable();
-			$table->text('domestic_name')->nullable();
-            $table->integer('person_id');
+			$table->json('name');
+			$table->json('description')->nullable();
+			$table->json('domestic_name')->nullable();
+            $table->unsignedInteger('person_id');
+			$table->unsignedInteger('creator_id');
             $table->tinyInteger('status_id')->default(0);
             $table->timeStampsTz();
             $table->dateTimeTz('deleted_at')->nullable();

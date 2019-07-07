@@ -19,7 +19,7 @@ class AddForeignKeysToSeedHubTable extends Migration {
 			$table->foreign('person_id', 'fk_project_has_person_person1')->references('id')->on('person')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('project_id', 'fk_project_has_person_project1')->references('id')->on('project')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('seed_id', 'fk_project_has_person_seed1')->references('id')->on('seed')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('action_id', 'fk_seed_hub_action1')->references('id')->on('action')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('action_id', 'fk_seed_hub_action1')->references('id')->on('actions')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
 

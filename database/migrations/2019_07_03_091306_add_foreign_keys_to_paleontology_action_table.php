@@ -14,7 +14,7 @@ class AddForeignKeysToPaleontologyActionTable extends Migration {
 	{
 		Schema::table('paleontology_action', function(Blueprint $table)
 		{
-			$table->foreign('action_id', 'fk_paleontology_action_action1')->references('id')->on('action')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('action_id', 'fk_paleontology_action_action1')->references('id')->on('actions')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('paleontology_id', 'fk_paleontology_action_paleontology1')->references('id')->on('paleontology')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('person_id', 'fk_paleontology_action_person1')->references('id')->on('person')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});

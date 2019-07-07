@@ -20,7 +20,7 @@ class AddForeignKeysToPlanthubTable extends Migration {
 			$table->foreign('plantspecies_id', 'fk_plantsubspecies_has_author_plantspecies1')->references('id')->on('plantspecies')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('plantsubspecies_id', 'fk_plantsubspecies_has_author_plantsubspecies1')->references('id')->on('plantsubspecies')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('plantvariety_id', 'fk_plantsubspecies_has_author_plantvariety1')->references('id')->on('plantvariety')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('article_id', 'fk_plant_group_article1')->references('id')->on('article')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('article_id', 'fk_plant_group_article1')->references('id')->on('articles')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('person_id', 'fk_plant_group_person1')->references('id')->on('person')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('plant_id', 'fk_plant_group_plant1')->references('id')->on('plant')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('plantclass_id', 'fk_plant_group_plantclass1')->references('id')->on('plantclass')->onUpdate('NO ACTION')->onDelete('NO ACTION');

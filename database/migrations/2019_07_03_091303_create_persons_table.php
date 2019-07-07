@@ -1,0 +1,52 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
+class CreatePersonsTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('persons', function(Blueprint $table)
+		{
+			$table->increments('id');
+			$table->json('title');
+			$table->json('education')->nullable();
+			$table->json('degree')->nullable();
+			$table->integer('national_id')->nullable();
+			$table->date('birthday')->nullable();
+			$table->json('nationality')->nullable();
+			$table->string('passport_no', 45)->nullable();
+			$table->json('first_name');
+			$table->json('last_name');
+			$table->json('nickname')->nullable();
+			$table->tinyInteger('is_author')->default(0)->comment('0:disable, 1:enable');
+			$table->string('mobile')->nullable();
+			$table->string('phone')->nullable();
+			$table->string('email')->nullable();
+			$table->integer('work_experience')->nullable();
+            $table->unsignedInteger('person_id');
+			$table->unsignedInteger('creator_id');
+            $table->tinyInteger('status_id')->default(0);
+            $table->timeStampsTz();
+            $table->dateTimeTz('deleted_at')->nullable();
+		});
+	}
+
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::drop('persons');
+	}
+
+}

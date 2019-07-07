@@ -14,7 +14,7 @@ class AddForeignKeysToCryoBankActionTable extends Migration {
 	{
 		Schema::table('cryo_bank_action', function(Blueprint $table)
 		{
-			$table->foreign('action_id', 'fk_cryo_bank_has_action_action1')->references('id')->on('action')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('action_id', 'fk_cryo_bank_has_action_action1')->references('id')->on('actions')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('cryo_bank_id', 'fk_cryo_bank_has_action_cryo_bank1')->references('id')->on('cryo_bank')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
