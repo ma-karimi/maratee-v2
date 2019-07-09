@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Usersss extends Model
+class Users extends Authenticatable
 {
+    use Notifiable;
 
-    
 
     /**
      * The database table used by the model.
