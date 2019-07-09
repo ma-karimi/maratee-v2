@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class Visits extends Model
+class Visits extends BaseModel
 {
 
-
+    
 
     /**
      * The database table used by the model.
@@ -35,10 +35,7 @@ class Visits extends Model
      *
      * @var array
      */
-    protected $casts = [
-        'description' => 'json',
-        'purpose' => 'json'
-    ];
+    protected $casts = [];
 
     /**
      * The attributes that should be mutated to dates.
@@ -46,20 +43,5 @@ class Visits extends Model
      * @var array
      */
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
-
-    public function media()
-    {
-        return $this->belongsTo(Medias::class, 'media_id');
-    }
-
-    public function paleontology()
-    {
-        return $this->belongsTo(Paleontologies::class, 'paleontology_id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(Users::class, 'user_id');
-    }
 
 }

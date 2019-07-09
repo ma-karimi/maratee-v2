@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class Articles extends Model  
+class Articles extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -35,7 +34,7 @@ class Articles extends Model
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = ['title' => 'json', 'type' => 'json', 'authors' => 'json', 'journal_name' => 'json'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -44,4 +43,8 @@ class Articles extends Model
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at', 'year'];
 
+    public function articleHubs()
+    {
+        return $this->hasMany(ArticleHubs::class, 'article_id')->latest();
+    }
 }

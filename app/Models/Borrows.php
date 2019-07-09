@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Borrows extends Model  
+class Borrows extends BaseModel
 {
 
-    
 
+    use SoftDeletes;
     /**
      * The database table used by the model.
      *
@@ -44,4 +45,18 @@ class Borrows extends Model
      */
     protected $dates = ['borrows_date', 'created_at', 'deadline', 'deleted_at', 'return', 'updated_at'];
 
+    public function herbarium()
+    {
+        return $this->belongsTo(Herbariums::class);
+    }
+
+    public function media()
+    {
+        return $this->belongsTo(Medias::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(Users::class);
+    }
 }

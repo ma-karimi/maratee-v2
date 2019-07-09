@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class ArticleHubs extends Model  
+class ArticleHubs extends BaseModel
 {
-
-    
 
     /**
      * The database table used by the model.
@@ -44,4 +42,23 @@ class ArticleHubs extends Model
      */
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
 
+    public function article()
+    {
+        return $this->belongsTo(Articles::class);
+    }
+
+    public function action()
+    {
+        return $this->belongsTo(Actions::class);
+    }
+
+    public function cryoBank()
+    {
+        return $this->belongsTo(CryoBanks::class);
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Locations::class);
+    }
 }

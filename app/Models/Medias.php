@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class Medias extends Model  
+class Medias extends BaseModel
 {
 
     
@@ -44,8 +44,4 @@ class Medias extends Model
      */
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
 
-    public function visits()
-    {
-        return $this->hasMany(Visits::class, 'media_id');
-    }
 }

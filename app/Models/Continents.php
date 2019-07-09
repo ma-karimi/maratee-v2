@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class Continents extends Model  
+class Continents extends BaseModel
 {
 
     
@@ -37,11 +37,6 @@ class Continents extends Model
      */
     protected $casts = [];
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['created_at', 'deleted_at', 'updated_at'];
+
 
 }

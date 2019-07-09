@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class AssessmentCollections extends Model  
+class AssessmentCollections extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -37,11 +36,30 @@ class AssessmentCollections extends Model
      */
     protected $casts = [];
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
+
+    public function assessment()
+    {
+        return $this->belongsTo(Assessments::class);
+    }
+
+    public function collection()
+    {
+        return $this->belongsTo(Collections::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Departments::class);
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Projects::class);
+    }
+
+    public function seed()
+    {
+        return $this->belongsTo(Seeds::class);
+    }
 }

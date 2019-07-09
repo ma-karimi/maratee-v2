@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class Actions extends Model  
+class Actions extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -35,13 +34,17 @@ class Actions extends Model
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = ['name' => 'json', 'description' => 'json'];
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
+
+    public function actions()
+    {
+        return $this->hasMany(ActionHubs::class, 'action_id')->latest();
+    }
+
+    public function articleHubs()
+    {
+        return $this->hasMany(ArticleHubs::class, 'action_id')->latest();
+    }
 }

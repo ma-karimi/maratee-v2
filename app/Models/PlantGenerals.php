@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class PlantGenerals extends Model  
+class PlantGenerals extends BaseModel
 {
 
     
@@ -37,11 +37,6 @@ class PlantGenerals extends Model
      */
     protected $casts = [];
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['created_at', 'deleted_at', 'updated_at'];
+
 
 }

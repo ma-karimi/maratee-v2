@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class Collections extends Model  
+class Collections extends BaseModel
 {
 
     
@@ -43,10 +43,5 @@ class Collections extends Model
      * @var array
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
-
-    public function technologyCollections()
-    {
-        return $this->hasMany(TechnologyCollections::class, 'seed_technology_id');
-    }
 
 }

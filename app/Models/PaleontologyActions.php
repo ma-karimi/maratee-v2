@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class PaleontologyActions extends Model  
+class PaleontologyActions extends BaseModel
 {
 
     
