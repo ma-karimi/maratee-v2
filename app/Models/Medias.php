@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class Medias extends Model  
+class Medias extends BaseModel
 {
 
     
@@ -43,5 +43,10 @@ class Medias extends Model
      * @var array
      */
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
+
+    public function borrows()
+    {
+        return $this->hasMany(Borrows::class, 'media_id')->latest();
+    }
 
 }

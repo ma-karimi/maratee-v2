@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Authors extends Model  
+class Authors extends BaseModel
 {
 
-    
+    use SoftDeletes;
 
     /**
      * The database table used by the model.
@@ -37,11 +38,11 @@ class Authors extends Model
      */
     protected $casts = [];
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
+
+
+    public function plants()
+    {
+        return $this->hasMany(Plants::class, 'author_id')->latest();
+    }
 }

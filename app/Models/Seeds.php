@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class Seeds extends Model  
+class Seeds extends BaseModel
 {
 
     
@@ -44,4 +44,9 @@ class Seeds extends Model
      */
     protected $dates = ['created_at', 'deleted_at', 'send_date', 'updated_at'];
 
+
+    public function assessmentCollections()
+    {
+        return $this->hasMany(AssessmentCollections::class, 'seed_id')->latest();
+    }
 }

@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class CryoBanks extends Model  
+class CryoBanks extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -44,4 +43,9 @@ class CryoBanks extends Model
      */
     protected $dates = ['created_at', 'deleted_at', 'entry_date', 'updated_at'];
 
+
+    public function articleHubs()
+    {
+        return $this->hasMany(ArticleHubs::class, 'cryo_bank_id')->latest();
+    }
 }

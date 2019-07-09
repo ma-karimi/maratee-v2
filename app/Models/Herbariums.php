@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class Herbariums extends Model  
+class Herbariums extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -37,11 +36,19 @@ class Herbariums extends Model
      */
     protected $casts = [];
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
+    public function actionHubs()
+    {
+        return $this->hasMany(ActionHubs::class, 'herbarium_id')->latest();
+    }
+
+    public function borrows()
+    {
+        return $this->hasMany(Borrows::class, 'herbarium_id')->latest();
+    }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendances::class, 'herbarium_id')->latest();
+    }
 }

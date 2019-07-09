@@ -21,7 +21,7 @@ class CreateActionHubsTable extends Migration {
 			$table->unsignedInteger('location_id')->nullable();
 			$table->unsignedInteger('herbarium_id')->nullable();
 			$table->date('date')->nullable();
-			$table->text('description')->nullable();
+			$table->json('description')->nullable();
 			$table->unsignedInteger('project_id')->nullable();
 			$table->unsignedInteger('department_id')->nullable();
 

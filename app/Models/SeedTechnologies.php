@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class SeedTechnologies extends Model  
+class SeedTechnologies extends BaseModel
 {
 
     

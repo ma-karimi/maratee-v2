@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class Attendances extends Model  
+class Attendances extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -44,4 +43,14 @@ class Attendances extends Model
      */
     protected $dates = ['created_at', 'deleted_at', 'end_time', 'start_time', 'updated_at'];
 
+
+    public function herbarium()
+    {
+        return $this->belongsTo(Herbariums::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(Users::class);
+    }
 }

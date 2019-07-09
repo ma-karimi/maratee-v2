@@ -45,4 +45,9 @@ class Users extends Authenticatable
      */
     protected $dates = ['birthday', 'created_at', 'deleted_at', 'updated_at'];
 
+    public function users()
+    {
+        return $this->hasMany(Borrows::class, 'user_id')->latest();
+    }
+
 }
