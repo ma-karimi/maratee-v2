@@ -1,1 +1,0 @@
-export const ERROR_TYPE = 'error';export const SUCCESS_TYPE = 'success';
