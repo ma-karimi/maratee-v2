@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Treatments extends Model  
 {
 
+
     
 
     /**
@@ -35,7 +36,10 @@ class Treatments extends Model
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'name' => 'json',
+        'description' => 'json'
+    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -43,5 +47,10 @@ class Treatments extends Model
      * @var array
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
+
+    public function paleontology()
+    {
+        return $this->belongsTo(Paleontologies::class, 'paleontology_id');
+    }
 
 }

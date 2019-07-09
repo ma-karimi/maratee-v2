@@ -44,4 +44,13 @@ class TechnologyCollections extends Model
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
+    public function seedTechnology()
+    {
+        return $this->belongsTo(SeedTechnologies::class, 'seed_technology_id');
+    }
+    public function collection()
+    {
+        return $this->belongsTo(Collections::class, 'collection_id');
+    }
+
 }

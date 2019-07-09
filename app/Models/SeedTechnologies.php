@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SeedTechnologies extends Model  
+class SeedTechnologies extends Model
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -43,5 +42,15 @@ class SeedTechnologies extends Model
      * @var array
      */
     protected $dates = ['created_at', 'deleted_at', 'examine', 'updated_at'];
+
+    public function technologyCollections()
+    {
+        return $this->hasMany(TechnologyCollections::class, 'seed_technology_id');
+    }
+
+    public function seedWeights()
+    {
+        return $this->hasMany(SeedWeights::class, 'seed_technology_id');
+    }
 
 }

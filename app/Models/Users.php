@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Users extends Model  
+class Users extends Model
 {
 
-    
+
 
     /**
      * The database table used by the model.
@@ -35,7 +35,15 @@ class Users extends Model
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'title' => 'json',
+        'education' => 'json',
+        'degree' => 'json',
+        'nationality' => 'json',
+        'first_name' => 'json',
+        'last_name' => 'json',
+        'nickname' => 'json',
+    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -43,5 +51,10 @@ class Users extends Model
      * @var array
      */
     protected $dates = ['birthday', 'created_at', 'deleted_at', 'updated_at'];
+
+    public function visits()
+    {
+        return $this->hasMany(Visits::class, 'user_id');
+    }
 
 }

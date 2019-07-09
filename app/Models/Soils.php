@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Soils extends Model  
+class Soils extends Model
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -35,7 +34,10 @@ class Soils extends Model
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'type' => 'json',
+        'description' => 'json'
+    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -44,4 +46,11 @@ class Soils extends Model
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
+    public function soilFeatures()
+    {
+        return $this->belongsToMany(SoilFeatures::class,
+            'soil_has_soil_features',
+            'soil_id',
+            'soil_feature_id');
+    }
 }

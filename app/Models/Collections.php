@@ -44,4 +44,9 @@ class Collections extends Model
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
+    public function technologyCollections()
+    {
+        return $this->hasMany(TechnologyCollections::class, 'seed_technology_id');
+    }
+
 }

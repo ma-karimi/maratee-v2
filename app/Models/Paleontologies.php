@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Paleontologies extends Model  
+class Paleontologies extends Model
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -43,5 +42,15 @@ class Paleontologies extends Model
      * @var array
      */
     protected $dates = ['created_at', 'deleted_at', 'last_update', 'updated_at'];
+
+    public function visits()
+    {
+        return $this->hasMany(Visits::class, 'paleontology_id');
+    }
+
+    public function treatments()
+    {
+        return $this->hasMany(Treatments::class, 'paleontology_id');
+    }
 
 }

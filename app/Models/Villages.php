@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Villages extends Model  
+class Villages extends Model
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -35,7 +34,9 @@ class Villages extends Model
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'name' => 'json',
+    ];
 
     /**
      * The attributes that should be mutated to dates.
