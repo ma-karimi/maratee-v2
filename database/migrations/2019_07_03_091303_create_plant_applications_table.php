@@ -1,0 +1,44 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
+class CreatePlantApplicationsTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('plant_applications', function(Blueprint $table)
+		{
+			$table->unsignedInteger('herbarium_id');
+			$table->unsignedInteger('plant_part_id')->nullable();
+			$table->unsignedInteger('application_id')->nullable();
+			$table->unsignedInteger('plant_growth_id')->nullable();
+			$table->unsignedInteger('plant_usage_type_id')->nullable();
+			$table->unsignedInteger('plant_industry_id')->nullable();
+			$table->json('presence')->nullable()->comment('options: 
+now
+future
+to descirbe if that plant is used or could be used in the specific industry now or in future.');
+
+            $table->timeStampsTz();
+            $table->dateTimeTz('deleted_at')->nullable();
+		});
+	}
+
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::drop('plant_applications');
+	}
+
+}
