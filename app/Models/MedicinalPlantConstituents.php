@@ -23,12 +23,7 @@ class MedicinalPlantConstituents extends BaseModel
      */
     protected $fillable = ['constituent_id', 'created_at', 'deleted_at', 'medicinal_plant_id', 'updated_at', 'value'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.

@@ -23,12 +23,7 @@ class Lightings extends BaseModel
      */
     protected $fillable = ['created_at', 'deleted_at', 'description', 'type', 'updated_at'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.
@@ -39,4 +34,8 @@ class Lightings extends BaseModel
 
 
 
+    public function botanicalGardenActions()
+    {
+        return $this->hasMany(BotanicalGardenAction::class, ['from_lighting_id', 'to_lighting_id'])->latest();
+    }
 }

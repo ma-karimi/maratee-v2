@@ -23,12 +23,7 @@ class Paleontologies extends BaseModel
      */
     protected $fillable = ['access', 'additional_info', 'barcode_no', 'catalog_no', 'closet', 'collection_name', 'color', 'common_name', 'created_at', 'deleted_at', 'drawer', 'element', 'excavation', 'field_no', 'geology_age_id', 'infraspecific', 'last_update', 'location_no', 'move_status', 'pieces', 'preservation', 'salon', 'specimen_no', 'treatment', 'typestatus', 'updated_at'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.
@@ -44,4 +39,8 @@ class Paleontologies extends BaseModel
      */
     protected $dates = ['created_at', 'deleted_at', 'last_update', 'updated_at'];
 
+    public function exchanges()
+    {
+        return $this->hasMany(Exchange::class, ['send_paleontology_id', 'receive_paleontology_id'])->latest();
+    }
 }

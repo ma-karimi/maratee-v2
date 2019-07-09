@@ -23,12 +23,7 @@ class Languages extends BaseModel
      */
     protected $fillable = ['code', 'created_at', 'deleted_at', 'name', 'updated_at'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.

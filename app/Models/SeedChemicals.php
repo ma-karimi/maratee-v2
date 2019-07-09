@@ -23,12 +23,7 @@ class SeedChemicals extends BaseModel
      */
     protected $fillable = ['chemical_id', 'created_at', 'deleted_at', 'location_id', 'repeat', 'seed_id', 'treatment', 'updated_at'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.

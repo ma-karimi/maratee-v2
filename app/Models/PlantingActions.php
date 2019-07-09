@@ -7,7 +7,6 @@ use App\Models\Contracts\BaseModel;
 class PlantingActions extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -23,12 +22,7 @@ class PlantingActions extends BaseModel
      */
     protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'updated_at'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.
@@ -37,6 +31,9 @@ class PlantingActions extends BaseModel
      */
     protected $casts = [];
 
-
+    public function botanicalGardenAction()
+    {
+        return $this->hasMany(BotanicalGardenAction::class, 'planting_action_id');
+    }
 
 }

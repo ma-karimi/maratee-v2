@@ -24,12 +24,7 @@ class Users extends Authenticatable
      */
     protected $fillable = ['birthday', 'created_at', 'degree', 'deleted_at', 'education', 'email', 'first_name', 'is_author', 'last_name', 'mobile', 'national_id', 'nationality', 'nickname', 'passport_no', 'phone', 'title', 'updated_at', 'work_experience'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.
@@ -47,7 +42,7 @@ class Users extends Authenticatable
 
     public function users()
     {
-        return $this->hasMany(Borrows::class, 'user_id')->latest();
+        return $this->hasMany(Borrow::class, 'user_id')->latest();
     }
 
 }

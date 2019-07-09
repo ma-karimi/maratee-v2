@@ -23,12 +23,7 @@ class SeedTechnologies extends BaseModel
      */
     protected $fillable = ['abnormality', 'created_at', 'deleted_at', 'description', 'examine', 'hard_seed', 'humidity', 'husk_average', 'husk_weight', 'purity', 'seed_id', 'seed_type', 'seed_weight', 'sprout', 'type', 'updated_at', 'vigor'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.

@@ -23,12 +23,7 @@ class SeedWeights extends BaseModel
      */
     protected $fillable = ['active', 'active_revival', 'base', 'base_revival', 'created_at', 'deleted_at', 'description', 'revival_code', 'seed_technology_id', 'support', 'support_revival', 'total', 'updated_at'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.

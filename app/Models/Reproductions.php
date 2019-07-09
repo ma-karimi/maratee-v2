@@ -23,12 +23,7 @@ class Reproductions extends BaseModel
      */
     protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'updated_at'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.
@@ -38,5 +33,8 @@ class Reproductions extends BaseModel
     protected $casts = [];
 
 
-
+    public function botanicalReproductions()
+    {
+        return $this->hasMany(BotanicalReproduction::class, 'reproduction_id')->latest();
+    }
 }

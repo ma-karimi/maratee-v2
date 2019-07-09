@@ -23,12 +23,7 @@ class SeedExchanges extends BaseModel
      */
     protected $fillable = ['approval_no', 'collection_id', 'created_at', 'date', 'deleted_at', 'description', 'saved_type', 'seed_id', 'type', 'updated_at', 'weight'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.

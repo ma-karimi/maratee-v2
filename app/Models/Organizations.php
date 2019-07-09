@@ -23,12 +23,7 @@ class Organizations extends BaseModel
      */
     protected $fillable = ['created_at', 'deleted_at', 'description', 'domestic_code', 'email', 'international_code', 'is_herbarium', 'name', 'phone', 'updated_at', 'website'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.
@@ -38,5 +33,9 @@ class Organizations extends BaseModel
     protected $casts = [];
 
 
+    public function entryHubs()
+    {
+        return $this->hasMany(EntryHub::class, 'organization_id')->latest();
+    }
 
 }

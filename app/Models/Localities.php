@@ -23,12 +23,7 @@ class Localities extends BaseModel
      */
     protected $fillable = ['created_at', 'deleted_at', 'description', 'fauna', 'formation', 'layer', 'lithology', 'location_id', 'map_id', 'paleontology_id', 'stratigraphy', 'updated_at'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.

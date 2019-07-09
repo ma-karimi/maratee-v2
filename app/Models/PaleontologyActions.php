@@ -23,12 +23,7 @@ class PaleontologyActions extends BaseModel
      */
     protected $fillable = ['action_id', 'created_at', 'date', 'deleted_at', 'description', 'paleontology_id', 'updated_at', 'user_id'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.

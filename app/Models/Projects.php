@@ -23,12 +23,7 @@ class Projects extends BaseModel
      */
     protected $fillable = ['approved_id', 'created_at', 'deleted_at', 'name', 'plan_description', 'plan_id', 'plan_name', 'plan_number', 'registered_id', 'updated_at'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.
@@ -42,12 +37,12 @@ class Projects extends BaseModel
 
     public function actionHubs()
     {
-        return $this->hasMany(ActionHubs::class, 'project_id')->latest();
+        return $this->hasMany(ActionHub::class, 'project_id')->latest();
     }
 
 
     public function assessmentCollections()
     {
-        return $this->hasMany(AssessmentCollections::class, 'project_id')->latest();
+        return $this->hasMany(AssessmentCollection::class, 'project_id')->latest();
     }
 }

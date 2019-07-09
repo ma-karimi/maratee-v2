@@ -23,12 +23,7 @@ class Villages extends BaseModel
      */
     protected $fillable = ['created_at', 'deleted_at', 'name', 'updated_at'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.
@@ -42,6 +37,6 @@ class Villages extends BaseModel
 
     public function addresses()
     {
-        return $this->hasMany(Addresses::class, 'village_id')->latest();
+        return $this->hasMany(Address::class, 'village_id')->latest();
     }
 }

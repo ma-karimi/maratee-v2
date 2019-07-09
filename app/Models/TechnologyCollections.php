@@ -23,12 +23,7 @@ class TechnologyCollections extends BaseModel
      */
     protected $fillable = ['collection_id', 'created_at', 'deleted_at', 'seed_technology_id', 'updated_at'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.
@@ -45,7 +40,7 @@ class TechnologyCollections extends BaseModel
     }
     public function collection()
     {
-        return $this->belongsTo(Collections::class, 'collection_id');
+        return $this->belongsTo(Collection::class, 'collection_id');
     }
 
 }

@@ -23,12 +23,7 @@ class SoilFeatures extends Model
      */
     protected $fillable = ['created_at', 'deleted_at', 'name', 'unit', 'updated_at'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+
 
     /**
      * The attributes that should be casted to native types.
