@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class Projects extends BaseModel
+class Project extends BaseModel
 {
 
     

@@ -4,10 +4,10 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class Visits extends BaseModel
+class Visit extends BaseModel
 {
 
-    
+
 
     /**
      * The database table used by the model.
@@ -30,7 +30,10 @@ class Visits extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'description' => 'json',
+        'purpose' => 'json'
+    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -38,5 +41,20 @@ class Visits extends BaseModel
      * @var array
      */
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
+
+    public function media()
+    {
+        return $this->belongsTo(Medias::class, 'media_id');
+    }
+
+    public function paleontology()
+    {
+        return $this->belongsTo(Paleontologies::class, 'paleontology_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(Usersssssssss::class, 'user_id');
+    }
 
 }

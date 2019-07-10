@@ -71,12 +71,12 @@ class BotanicalGardenAction extends BaseModel
 
     public function fromSoil()
     {
-        return $this->belongsTo(Soils::class, 'from_soil_id');
+        return $this->belongsTo(Soil::class, 'from_soil_id');
     }
 
     public function toSoil()
     {
-        return $this->belongsTo(Soils::class, 'to_soil_id');
+        return $this->belongsTo(Soil::class, 'to_soil_id');
     }
 
     public function plantingAction()

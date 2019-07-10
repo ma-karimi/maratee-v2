@@ -38,4 +38,11 @@ class Plants extends BaseModel
     {
         return $this->belongsTo(Author::class);
     }
+    public function seeds()
+    {
+        return $this->belongsToMany(Seed::class,
+            'seed_plants',
+            'plant_id',
+            'seed_id');
+    }
 }

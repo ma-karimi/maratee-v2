@@ -62,4 +62,9 @@ class Herbariums extends BaseModel
     {
         return $this->hasMany(Exchange::class, ['send_herbarium_id', 'receive_herbarium_id'])->latest();
     }
+
+    public function seeds()
+    {
+        return $this->hasMany(Seed::class, 'herbarium_id')->latest();
+    }
 }

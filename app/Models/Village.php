@@ -4,10 +4,9 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class Villages extends BaseModel
+class Village extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -30,13 +29,21 @@ class Villages extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'name' => 'json',
+    ];
 
-
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
 
     public function addresses()
     {
         return $this->hasMany(Address::class, 'village_id')->latest();
     }
+
 }

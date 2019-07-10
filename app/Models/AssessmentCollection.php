@@ -50,11 +50,11 @@ class AssessmentCollection extends BaseModel
 
     public function project()
     {
-        return $this->belongsTo(Projects::class);
+        return $this->belongsTo(Project::class);
     }
 
     public function seed()
     {
-        return $this->belongsTo(Seeds::class);
+        return $this->belongsTo(Seed::class);
     }
 }

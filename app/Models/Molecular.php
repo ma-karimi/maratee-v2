@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class SeedPlants extends BaseModel
+class Molecular extends BaseModel
 {
 
     
@@ -14,14 +14,14 @@ class SeedPlants extends BaseModel
      *
      * @var string
      */
-    protected $table = 'seed_plants';
+    protected $table = 'moleculars';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'plant_id', 'seed_id', 'updated_at'];
+    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'updated_at'];
 
 
 

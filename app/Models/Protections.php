@@ -32,7 +32,10 @@ class Protections extends BaseModel
      */
     protected $casts = [];
 
-
+    public function seeds()
+    {
+        return $this->hasMany(Seed::class, 'protection_id')->latest();
+    }
 
     public function cryoBanks()
     {

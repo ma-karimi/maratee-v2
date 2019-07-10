@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Str;
 
+
 return [
 
     /*
@@ -44,6 +45,9 @@ return [
         ],
 
         'mysql' => [
+            'mapping_types' => [
+                'point'  => Grimzy\LaravelMysqlSpatial\Types\Point::class,
+            ],
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),

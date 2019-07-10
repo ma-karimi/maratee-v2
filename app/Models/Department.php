@@ -32,12 +32,10 @@ class Department extends BaseModel
      */
     protected $casts = ['name' => 'json', 'description' => 'json'];
 
-
     public function actionHubs()
     {
         return $this->hasMany(ActionHub::class, self::DEPARTMENT_ID)->latest();
     }
-
 
     public function assessmentCollections()
     {
@@ -49,4 +47,8 @@ class Department extends BaseModel
         return $this->hasMany(Connection::class, self::DEPARTMENT_ID)->latest();
     }
 
+    public function seeds()
+    {
+        return $this->hasMany(Seed::class, 'department_id')->latest();
+    }
 }

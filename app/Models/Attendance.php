@@ -46,6 +46,6 @@ class Attendance extends BaseModel
 
     public function user()
     {
-        return $this->belongsTo(Users::class);
+        return $this->belongsTo(Usersssssssss::class);
     }
 }

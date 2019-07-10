@@ -4,10 +4,9 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class SeedTechnologies extends BaseModel
+class SeedTechnology extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -30,13 +29,20 @@ class SeedTechnologies extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'seed_type' => 'json',
+        'type' => 'json',
+        'description' => 'json',
+    ];
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['created_at', 'deleted_at', 'examine', 'updated_at'];
+    public function technologyCollections()
+    {
+        return $this->hasMany(TechnologyCollection::class, 'seed_technology_id');
+    }
+
+    public function seedWeights()
+    {
+        return $this->hasMany(SeedWeight::class, 'seed_technology_id');
+    }
 
 }

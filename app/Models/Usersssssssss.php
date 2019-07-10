@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class Users extends Authenticatable
+class Usersssssssss extends Model
 {
-    use Notifiable;
 
 
     /**
@@ -31,7 +29,15 @@ class Users extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'title' => 'json',
+        'education' => 'json',
+        'degree' => 'json',
+        'nationality' => 'json',
+        'first_name' => 'json',
+        'last_name' => 'json',
+        'nickname' => 'json',
+    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -40,9 +46,13 @@ class Users extends Authenticatable
      */
     protected $dates = ['birthday', 'created_at', 'deleted_at', 'updated_at'];
 
-    public function users()
+    public function visits()
+    {
+        return $this->hasMany(Visit::class, 'user_id');
+    }
+
+    public function borrows()
     {
         return $this->hasMany(Borrow::class, 'user_id')->latest();
     }
-
 }

@@ -40,6 +40,6 @@ class Address extends BaseModel
 
     public function village()
     {
-        return $this->belongsTo(Villages::class);
+        return $this->belongsTo(Village::class);
     }
 }

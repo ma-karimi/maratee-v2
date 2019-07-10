@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class TechnologyCollections extends BaseModel
+class TechnologyCollection extends BaseModel
 {
 
     
@@ -36,7 +36,7 @@ class TechnologyCollections extends BaseModel
 
     public function seedTechnology()
     {
-        return $this->belongsTo(SeedTechnologies::class, 'seed_technology_id');
+        return $this->belongsTo(SeedTechnology::class, 'seed_technology_id');
     }
     public function collection()
     {

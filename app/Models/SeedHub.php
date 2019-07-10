@@ -4,10 +4,9 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class SeedHubs extends BaseModel
+class SeedHub extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -24,13 +23,15 @@ class SeedHubs extends BaseModel
     protected $fillable = ['action_id', 'action_role', 'action_role_description', 'created_at', 'date', 'deleted_at', 'location_id', 'project_id', 'seed_id', 'updated_at', 'user_id'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'action_role' => 'json',
+        'action_role_description' => 'json',
+    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -38,5 +39,31 @@ class SeedHubs extends BaseModel
      * @var array
      */
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(Usersssssssss::class, 'user_id');
+    }
+
+    public function seed()
+    {
+        return $this->belongsTo(Seed::class, 'seed_id');
+    }
+
+    public function action()
+    {
+        return $this->belongsTo(Action::class, 'action_id');
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class, 'location_id');
+    }
+
 
 }

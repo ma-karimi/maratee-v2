@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Model;
 
-class Soils extends BaseModel
+class Soil extends Model
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -30,7 +29,10 @@ class Soils extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'type' => 'json',
+        'description' => 'json'
+    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -40,8 +42,17 @@ class Soils extends BaseModel
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
 
+    public function soilFeatures()
+    {
+        return $this->belongsToMany(SoilFeature::class,
+            'soil_has_soil_features',
+            'soil_id',
+            'soil_feature_id');
+    }
+
     public function botanicalGardenActions()
     {
         return $this->hasMany(BotanicalGardenAction::class, ['from_soil_id', 'to_soil_id'])->latest();
+
     }
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class Treatments extends BaseModel
+class Treatment extends BaseModel
 {
 
 
@@ -42,5 +42,11 @@ class Treatments extends BaseModel
     {
         return $this->belongsTo(Paleontologies::class, 'paleontology_id');
     }
-
+    public function soilFeatures()
+    {
+        return $this->belongsToMany(SoilFeature::class,
+            'soil_has_soil_features',
+            'soil_id',
+            'soil_feature_id');
+    }
 }

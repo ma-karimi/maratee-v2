@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class SoilHasSoilFeatures extends BaseModel
+class SoilHasSoilFeature extends BaseModel
 {
 
     
@@ -30,7 +30,9 @@ class SoilHasSoilFeatures extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'value'=>'json'
+    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -38,5 +40,14 @@ class SoilHasSoilFeatures extends BaseModel
      * @var array
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
+    public function soilFeature()
+    {
+        return $this->belongsTo(SoilFeature::class, 'soil_feature_id');
+    }
+
+    public function soil()
+    {
+        return $this->belongsTo(Soil::class, 'soil_id');
+    }
 
 }

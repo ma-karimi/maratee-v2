@@ -48,6 +48,6 @@ class Geramin extends BaseModel
 
     public function seed()
     {
-        return $this->belongsTo(Seeds::class);
+        return $this->belongsTo(Seed::class);
     }
 }
