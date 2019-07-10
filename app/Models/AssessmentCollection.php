@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class AssessmentCollection extends BaseModel
 {
@@ -23,37 +24,42 @@ class AssessmentCollection extends BaseModel
     protected $fillable = ['assessment_id', 'collection_id', 'created_at', 'deleted_at', 'department_id', 'project_id', 'seed_id', 'updated_at'];
 
 
-
     /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
+     * @return BelongsTo
      */
-    protected $casts = [];
-
-
-
-    public function assessment()
+    public function assessment(): BelongsTo
     {
         return $this->belongsTo(Assessment::class);
     }
 
-    public function collection()
+    /**
+     * @return BelongsTo
+     */
+    public function collection(): BelongsTo
     {
         return $this->belongsTo(Collection::class);
     }
 
-    public function department()
+    /**
+     * @return BelongsTo
+     */
+    public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
     }
 
-    public function project()
+    /**
+     * @return BelongsTo
+     */
+    public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
     }
 
-    public function seed()
+    /**
+     * @return BelongsTo
+     */
+    public function seed(): BelongsTo
     {
         return $this->belongsTo(Seed::class);
     }

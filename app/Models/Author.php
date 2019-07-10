@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Plants;
 
 class Author extends BaseModel
 {
@@ -29,9 +31,11 @@ class Author extends BaseModel
      */
     protected $casts = ['name' => 'json'];
 
-
-    public function plants()
+    /**
+     * @return HasMany
+     */
+    public function plants(): HasMany
     {
-        return $this->hasMany(Plants::class, 'author_id')->latest();
+        return $this->hasMany(Plants::class);
     }
 }

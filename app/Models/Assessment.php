@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\AssessmentCollection;
 
 class Assessment extends BaseModel
 {
@@ -40,8 +42,11 @@ class Assessment extends BaseModel
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
 
 
-    public function assessmentCollections()
+    /**
+     * @return HasMany
+     */
+    public function assessmentCollections(): HasMany
     {
-        return $this->hasMany(AssessmentCollection::class, 'assessment_id')->latest();
+        return $this->hasMany(AssessmentCollection::class);
     }
 }

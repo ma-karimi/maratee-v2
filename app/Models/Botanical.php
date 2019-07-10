@@ -3,6 +3,14 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Herbariums;
+use App\Models\BotanicalGardenAction;
+use App\Models\BotanicalIrrigation;
+use App\Models\BotanicalReproduction;
+use App\Models\EntryHub;
+use App\Models\Medias;
 
 class Botanical extends BaseModel
 {
@@ -58,24 +66,51 @@ class Botanical extends BaseModel
      */
     protected $dates = ['created_at', 'deleted_at', 'planting', 'updated_at', 'year'];
 
-
-    public function botanicalGardenActions()
+    /**
+     * @return BelongsTo
+     */
+    public function herbarium(): BelongsTo
     {
-        return $this->hasMany(BotanicalGardenAction::class, self::BOTANICAL_ID)->latest();
+        return $this->belongsTo(Herbariums::class);
     }
 
-    public function botanicalIrrigations()
+    /**
+     * @return HasMany
+     */
+    public function botanicalGardenActions(): HasMany
     {
-        return $this->hasMany(BotanicalIrrigation::class, self::BOTANICAL_ID)->latest();
+        return $this->hasMany(BotanicalGardenAction::class);
     }
 
-    public function botanicalReproductions()
+    /**
+     * @return HasMany
+     */
+    public function botanicalIrrigations(): HasMany
     {
-        return $this->hasMany(BotanicalReproduction::class, self::BOTANICAL_ID)->latest();
+        return $this->hasMany(BotanicalIrrigation::class);
     }
 
-    public function entryHubs()
+    /**
+     * @return HasMany
+     */
+    public function botanicalReproductions(): HasMany
     {
-        return $this->hasMany(EntryHub::class, self::BOTANICAL_ID)->latest();
+        return $this->hasMany(BotanicalReproduction::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function entryHubs(): HasMany
+    {
+        return $this->hasMany(EntryHub::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function medias(): HasMany
+    {
+        return $this->hasMany(Medias::class);
     }
 }

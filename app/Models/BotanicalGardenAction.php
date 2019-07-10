@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BotanicalGardenAction extends BaseModel
 {
@@ -44,42 +45,66 @@ class BotanicalGardenAction extends BaseModel
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
 
 
-    public function botanical()
+    /**
+     * @return BelongsTo
+     */
+    public function botanical(): BelongsTo
     {
         return $this->belongsTo(Botanical::class);
     }
 
-    public function fromGarden()
+    /**
+     * @return BelongsTo
+     */
+    public function fromGarden(): BelongsTo
     {
         return $this->belongsTo(Garden::class, 'from_garden_id');
     }
 
-    public function toGarden()
+    /**
+     * @return BelongsTo
+     */
+    public function toGarden(): BelongsTo
     {
         return $this->belongsTo(Garden::class, 'to_garden_id');
     }
 
-    public function fromLighting()
+    /**
+     * @return BelongsTo
+     */
+    public function fromLighting(): BelongsTo
     {
         return $this->belongsTo(Lightings::class, 'from_lighting_id');
     }
 
-    public function toLightings()
+    /**
+     * @return BelongsTo
+     */
+    public function toLightings(): BelongsTo
     {
         return $this->belongsTo(Lightings::class, 'to_lighting_id');
     }
 
-    public function fromSoil()
+    /**
+     * @return BelongsTo
+     */
+    public function fromSoil(): BelongsTo
     {
         return $this->belongsTo(Soil::class, 'from_soil_id');
     }
 
-    public function toSoil()
+    /**
+     * @return BelongsTo
+     */
+    public function toSoil(): BelongsTo
     {
         return $this->belongsTo(Soil::class, 'to_soil_id');
     }
 
-    public function plantingAction()
+    /**
+     * @return BelongsTo
+     */
+    public function plantingAction(): BelongsTo
     {
         return $this->belongsTo(PlantingActions::class);
     }

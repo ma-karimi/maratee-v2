@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Action extends BaseModel
 {
@@ -24,7 +25,6 @@ class Action extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
@@ -33,18 +33,43 @@ class Action extends BaseModel
     protected $casts = ['name' => 'json', 'description' => 'json'];
 
 
-
-    public function actionHubs()
+    /**
+     * @return HasMany
+     */
+    public function actionHubs(): HasMany
     {
-        return $this->hasMany(ActionHub::class, self::ACTION_ID)->latest();
+        return $this->hasMany(ActionHub::class)->latest();
     }
 
-    public function articleHubs()
+    /**
+     * @return HasMany
+     */
+    public function articleHubs(): HasMany
     {
-        return $this->hasMany(ArticleHub::class, self::ACTION_ID)->latest();
+        return $this->hasMany(ArticleHub::class)->latest();
     }
-    public function cryoBankActions()
+
+    /**
+     * @return HasMany
+     */
+    public function cryoBankActions(): HasMany
     {
-        return $this->hasMany(CryoBankAction::class, self::ACTION_ID)->latest();
+        return $this->hasMany(CryoBankAction::class)->latest();
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function paleontologyActions(): HasMany
+    {
+        return $this->hasMany(PaleontologyActions::class)->latest();
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function seedHubs(): HasMany
+    {
+        return $this->hasMany(SeedHub::class)->latest();
     }
 }

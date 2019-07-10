@@ -3,6 +3,11 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\City;
+use App\Models\Village;
+use App\Models\Location;
 
 class Address extends BaseModel
 {
@@ -31,15 +36,27 @@ class Address extends BaseModel
      */
     protected $casts = ['address' => 'json'];
 
-
-
-    public function city()
+    /**
+     * @return BelongsTo
+     */
+    public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
     }
 
-    public function village()
+    /**
+     * @return BelongsTo
+     */
+    public function village(): BelongsTo
     {
         return $this->belongsTo(Village::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function locations(): HasMany
+    {
+        return $this->hasMany(Location::class);
     }
 }

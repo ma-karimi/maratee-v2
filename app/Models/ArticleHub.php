@@ -3,6 +3,12 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Action;
+use App\Models\Article;
+use App\Models\CryoBank;
+use App\Models\Location;
+use App\Models\User;
 
 class ArticleHub extends BaseModel
 {
@@ -37,23 +43,43 @@ class ArticleHub extends BaseModel
      */
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
 
-    public function article()
-    {
-        return $this->belongsTo(Article::class);
-    }
-
-    public function action()
+    /**
+     * @return BelongsTo
+     */
+    public function action(): BelongsTo
     {
         return $this->belongsTo(Action::class);
     }
 
-    public function cryoBank()
+    /**
+     * @return BelongsTo
+     */
+    public function article(): BelongsTo
+    {
+        return $this->belongsTo(Article::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function cryoBank(): BelongsTo
     {
         return $this->belongsTo(CryoBank::class);
     }
 
-    public function location()
+    /**
+     * @return BelongsTo
+     */
+    public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

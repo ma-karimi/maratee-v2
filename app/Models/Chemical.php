@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\SeedChemicals;
 
 class Chemical extends BaseModel
 {
@@ -31,5 +33,11 @@ class Chemical extends BaseModel
      */
     protected $casts = ['name' => 'json', 'description' => 'json'];
 
-
+    /**
+     * @return HasMany
+     */
+    public function seedChemicals(): HasMany
+    {
+        return $this->hasMany(SeedChemicals::class);
+    }
 }

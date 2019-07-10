@@ -6,8 +6,6 @@
 .env
 .phpunit.result.cache
 /composer.lock
-.idea/
-*.xml
 /.idea
+*.xml
 /.idea/workspace.xml
-/.idea/php.xml

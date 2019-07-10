@@ -3,6 +3,12 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\ArticleHub;
+use App\Models\Chromosome;
+use App\Models\PaleontologyCitations;
+use App\Models\MedicinalPlants;
+use App\Models\Plants;
 
 class Article extends BaseModel
 {
@@ -38,15 +44,43 @@ class Article extends BaseModel
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at', 'year'];
 
-    public function articleHubs()
+    /**
+     * @return HasMany
+     */
+    public function articleHubs(): HasMany
     {
-        return $this->hasMany(ArticleHub::class, 'article_id')->latest();
+        return $this->hasMany(ArticleHub::class);
     }
 
-
-
-    public function chromosomes()
+    /**
+     * @return HasMany
+     */
+    public function chromosomes(): HasMany
     {
-        return $this->hasMany(Chromosome::class, 'article_id')->latest();
+        return $this->hasMany(Chromosome::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function medicinalPlants(): HasMany
+    {
+        return $this->hasMany(MedicinalPlants::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function paleontologyCitations(): HasMany
+    {
+        return $this->hasMany(PaleontologyCitations::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function plants(): HasMany
+    {
+        return $this->hasMany(Plants::class);
     }
 }

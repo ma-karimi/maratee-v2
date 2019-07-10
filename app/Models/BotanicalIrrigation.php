@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BotanicalIrrigation extends BaseModel
 {
@@ -33,12 +34,18 @@ class BotanicalIrrigation extends BaseModel
     protected $casts = ['requirement'=>'json', 'daytime'=>'json', 'seasonal_feature'=>'json'];
 
 
-    public function botanical()
+    /**
+     * @return BelongsTo
+     */
+    public function botanical(): BelongsTo
     {
         return $this->belongsTo(Botanical::class);
     }
 
-    public function irrigation()
+    /**
+     * @return BelongsTo
+     */
+    public function irrigation(): BelongsTo
     {
         return $this->belongsTo(Irrigations::class);
     }

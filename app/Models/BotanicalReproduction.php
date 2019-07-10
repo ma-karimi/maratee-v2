@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BotanicalReproduction extends BaseModel
 {
@@ -24,21 +25,18 @@ class BotanicalReproduction extends BaseModel
     protected $fillable = ['botanical_id', 'created_at', 'deleted_at', 'reproduction_id', 'updated_at'];
 
 
-
     /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
+     * @return BelongsTo
      */
-    protected $casts = [];
-
-
-    public function botanical()
+    public function botanical(): BelongsTo
     {
         return $this->belongsTo(Botanical::class);
     }
 
-    public function reproduction()
+    /**
+     * @return BelongsTo
+     */
+    public function reproduction(): BelongsTo
     {
         return $this->belongsTo(Reproduction::class);
     }
