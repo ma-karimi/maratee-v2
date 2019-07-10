@@ -30,7 +30,12 @@ class Project extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'name'=>'json',
+        'plan_name'=>'json',
+        'plan_description'=>'json',
+        'plan_number'=>'json',
+    ];
 
 
 
@@ -44,5 +49,13 @@ class Project extends BaseModel
     public function assessmentCollections()
     {
         return $this->hasMany(AssessmentCollection::class, 'project_id')->latest();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function seedHubs()
+    {
+        return $this->hasMany('App\Models\SeedHub');
     }
 }

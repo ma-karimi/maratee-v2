@@ -40,7 +40,7 @@ class BotanicalReproduction extends BaseModel
 
     public function reproduction()
     {
-        return $this->belongsTo(Reproductions::class);
+        return $this->belongsTo(Reproduction::class);
     }
 
 }

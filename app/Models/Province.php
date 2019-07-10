@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class Provinces extends BaseModel
+class Province extends BaseModel
 {
 
     
@@ -30,8 +30,24 @@ class Provinces extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'name'=>'json'
+    ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function country()
+    {
+        return $this->belongsTo('App\Models\Country');
+    }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cities()
+    {
+        return $this->hasMany('App\Models\City');
+    }
 
 }

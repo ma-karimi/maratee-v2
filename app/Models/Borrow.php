@@ -52,6 +52,6 @@ class Borrow extends BaseModel
 
     public function user()
     {
-        return $this->belongsTo(Usersssssssss::class);
+        return $this->belongsTo(User::class);
     }
 }

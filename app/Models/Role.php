@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class Regions extends BaseModel
+class Role extends BaseModel
 {
 
     
@@ -14,7 +14,7 @@ class Regions extends BaseModel
      *
      * @var string
      */
-    protected $table = 'regions';
+    protected $table = 'roles';
 
     /**
      * Attributes that should be mass-assignable.
@@ -30,7 +30,10 @@ class Regions extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'name'=>'json',
+        'description'=>'json',
+    ];
 
 
 

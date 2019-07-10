@@ -36,6 +36,6 @@ class City extends BaseModel
 
     public function province()
     {
-        return $this->belongsTo(Provinces::class);
+        return $this->belongsTo(Province::class);
     }
 }

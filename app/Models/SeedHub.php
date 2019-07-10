@@ -47,7 +47,7 @@ class SeedHub extends BaseModel
 
     public function user()
     {
-        return $this->belongsTo(Usersssssssss::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function seed()

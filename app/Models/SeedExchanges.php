@@ -30,7 +30,11 @@ class SeedExchanges extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'approval_no'=>'json',
+        'saved_type'=>'json',
+        'description'=>'json',
+    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -38,5 +42,21 @@ class SeedExchanges extends BaseModel
      * @var array
      */
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function collection()
+    {
+        return $this->belongsTo('App\Models\Collection');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function seed()
+    {
+        return $this->belongsTo('App\Models\Seed');
+    }
 
 }

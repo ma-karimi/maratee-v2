@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class Protections extends BaseModel
+class Protection extends BaseModel
 {
 
     
@@ -30,7 +30,10 @@ class Protections extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'name'=>'json',
+        'description'=>'json',
+    ];
 
     public function seeds()
     {
@@ -40,6 +43,14 @@ class Protections extends BaseModel
     public function cryoBanks()
     {
         return $this->hasMany(CryoBank::class, 'protection_id')->latest();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function herbariums()
+    {
+        return $this->hasMany('App\Models\Herbarium');
     }
 
 }

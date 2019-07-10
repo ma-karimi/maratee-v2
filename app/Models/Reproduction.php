@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class Roles extends BaseModel
+class Reproduction extends BaseModel
 {
 
     
@@ -14,7 +14,7 @@ class Roles extends BaseModel
      *
      * @var string
      */
-    protected $table = 'roles';
+    protected $table = 'reproductions';
 
     /**
      * Attributes that should be mass-assignable.
@@ -30,8 +30,14 @@ class Roles extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'name'=>'json',
+        'description'=>'json',
+    ];
 
 
-
+    public function botanicalReproductions()
+    {
+        return $this->hasMany(BotanicalReproduction::class, 'reproduction_id')->latest();
+    }
 }

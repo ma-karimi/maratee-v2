@@ -32,4 +32,17 @@ class SeedPlant extends BaseModel
      */
     protected $casts = [];
 
+    public function plant()
+    {
+        return $this->belongsTo('App\Models\Plant');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function seed()
+    {
+        return $this->belongsTo('App\Models\Seed');
+    }
+
 }

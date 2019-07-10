@@ -45,4 +45,11 @@ class SeedTechnology extends BaseModel
         return $this->hasMany(SeedWeight::class, 'seed_technology_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function seed()
+    {
+        return $this->belongsTo('App\Models\Seed');
+    }
 }

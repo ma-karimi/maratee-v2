@@ -1,0 +1,59 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * @property int $id
+ * @property int $seed_id
+ * @property int $collection_id
+ * @property string $type
+ * @property int $weight
+ * @property string $date
+ * @property mixed $approval_no
+ * @property mixed $saved_type
+ * @property mixed $description
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $deleted_at
+ * @property Collection $collection
+ * @property Seed $seed
+ */
+class SE extends Model
+{
+    /**
+     * The table associated with the model.
+     * 
+     * @var string
+     */
+    protected $table = 'seed_exchanges';
+
+    /**
+     * @var array
+     */
+    protected $fillable = ['seed_id', 'collection_id', 'type', 'weight', 'date', 'approval_no', 'saved_type', 'description', 'created_at', 'updated_at', 'deleted_at'];
+
+    /**
+     * The storage format of the model's date columns.
+     * 
+     * @var string
+     */
+    protected $dateFormat = 'U';
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function collection()
+    {
+        return $this->belongsTo('App\Models\Collection');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function seed()
+    {
+        return $this->belongsTo('App\Models\Seed');
+    }
+}

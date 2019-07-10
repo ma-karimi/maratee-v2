@@ -62,7 +62,7 @@ class CryoBank extends BaseModel
 
     public function protection()
     {
-        return $this->belongsTo(Protections::class);
+        return $this->belongsTo(Protection::class);
     }
 
     public function herbarium()

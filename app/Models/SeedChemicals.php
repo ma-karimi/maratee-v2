@@ -30,8 +30,32 @@ class SeedChemicals extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'treatment'=>'json'
+    ];
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function chemical()
+    {
+        return $this->belongsTo('App\Models\Chemical');
+    }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function location()
+    {
+        return $this->belongsTo('App\Models\Location');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function seed()
+    {
+        return $this->belongsTo('App\Models\Seed');
+    }
 
 
 }

@@ -30,8 +30,33 @@ class Products extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'name'=>'json',
+        'description'=>'json',
+    ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function organization()
+    {
+        return $this->belongsTo('App\Models\Organization');
+    }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function medias()
+    {
+        return $this->hasMany('App\Models\Media');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function medicals()
+    {
+        return $this->hasMany('App\Models\Medical');
+    }
 
 }

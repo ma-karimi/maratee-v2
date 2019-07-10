@@ -55,4 +55,11 @@ class Soil extends Model
         return $this->hasMany(BotanicalGardenAction::class, ['from_soil_id', 'to_soil_id'])->latest();
 
     }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function medicinalPlants()
+    {
+        return $this->hasMany('App\Models\MedicinalPlant');
+    }
 }

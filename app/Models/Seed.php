@@ -62,6 +62,50 @@ class Seed extends BaseModel
         return $this->hasMany(AssessmentCollection::class)->latest();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function seedHubs()
+    {
+        return $this->hasMany('App\Models\SeedHub');
+    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function seedExchanges()
+    {
+        return $this->hasMany('App\Models\SeedExchange');
+    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function seedTechnologies()
+    {
+        return $this->hasMany('App\Models\SeedTechnology');
+    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function seedMoleculars()
+    {
+        return $this->hasMany('App\Models\SeedMolecular');
+    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function seedChemicals()
+    {
+        return $this->hasMany('App\Models\SeedChemical');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function medias()
+    {
+        return $this->hasMany('App\Models\Media');
+    }
+
     public function geramins()
     {
         return $this->hasMany(Geramin::class)->latest();
@@ -74,7 +118,7 @@ class Seed extends BaseModel
 
     public function protection()
     {
-        return $this->belongsTo(Protections::class, 'protection_id');
+        return $this->belongsTo(Protection::class, 'protection_id');
     }
 
     public function department()

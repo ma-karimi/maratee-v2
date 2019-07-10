@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * @property int $seed_id
+ * @property int $plant_id
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $deleted_at
+ * @property Plant $plant
+ * @property Seed $seed
+ */
+class SHP extends Model
+{
+    /**
+     * The table associated with the model.
+     * 
+     * @var string
+     */
+    protected $table = 'seed_has_plants';
+
+    /**
+     * @var array
+     */
+    protected $fillable = ['seed_id', 'plant_id', 'created_at', 'updated_at', 'deleted_at'];
+
+    /**
+     * The storage format of the model's date columns.
+     * 
+     * @var string
+     */
+    protected $dateFormat = 'U';
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function plant()
+    {
+        return $this->belongsTo('App\Models\Plant');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function seed()
+    {
+        return $this->belongsTo('App\Models\Seed');
+    }
+}

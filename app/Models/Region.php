@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class Reproductions extends BaseModel
+class Region extends BaseModel
 {
 
     
@@ -14,7 +14,7 @@ class Reproductions extends BaseModel
      *
      * @var string
      */
-    protected $table = 'reproductions';
+    protected $table = 'regions';
 
     /**
      * Attributes that should be mass-assignable.
@@ -30,11 +30,17 @@ class Reproductions extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'name'=>'json',
+        'description'=>'json',
+    ];
 
-
-    public function botanicalReproductions()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function locations()
     {
-        return $this->hasMany(BotanicalReproduction::class, 'reproduction_id')->latest();
+        return $this->hasMany('App\Models\Location');
     }
+
 }
