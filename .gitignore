@@ -6,4 +6,5 @@
 .env
 .phpunit.result.cache
 /composer.lock
-.idea/
+composer.lock
+/.idea/
