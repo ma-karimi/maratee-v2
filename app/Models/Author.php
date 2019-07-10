@@ -32,6 +32,6 @@ class Author extends BaseModel
 
     public function plants()
     {
-        return $this->hasMany(Plants::class, 'author_id')->latest();
+        return $this->hasMany(Plant::class, 'author_id')->latest();
     }
 }

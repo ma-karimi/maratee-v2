@@ -55,12 +55,12 @@ class Exchange extends BaseModel
 
     public function sendPaleontology()
     {
-        return $this->belongsTo(Paleontologies::class, 'send_paleontology_id');
+        return $this->belongsTo(Paleontology::class, 'send_paleontology_id');
     }
 
     public function receivePaleontology()
     {
-        return $this->belongsTo(Paleontologies::class, 'receive_paleontology_id');
+        return $this->belongsTo(Paleontology::class, 'receive_paleontology_id');
     }
 
 }

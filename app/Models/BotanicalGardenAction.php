@@ -81,6 +81,6 @@ class BotanicalGardenAction extends BaseModel
 
     public function plantingAction()
     {
-        return $this->belongsTo(PlantingActions::class);
+        return $this->belongsTo(PlantingAction::class);
     }
 }

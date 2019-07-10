@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class PlantGenerals extends BaseModel
+class Permission extends BaseModel
 {
 
     
@@ -14,14 +14,14 @@ class PlantGenerals extends BaseModel
      *
      * @var string
      */
-    protected $table = 'plant_generals';
+    protected $table = 'permissions';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'parent_id', 'type', 'updated_at'];
+    protected $fillable = ['created_at', 'deleted_at', 'set_name', 'set_value', 'updated_at'];
 
 
 
@@ -30,7 +30,10 @@ class PlantGenerals extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'set_name'=>'json',
+        'set_value'=>'json',
+    ];
 
 
 

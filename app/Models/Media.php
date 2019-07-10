@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class Medias extends BaseModel
+class Media extends BaseModel
 {
 
     

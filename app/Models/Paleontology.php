@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class Paleontologies extends BaseModel
+class Paleontology extends BaseModel
 {
 
     

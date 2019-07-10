@@ -47,7 +47,7 @@ class Borrow extends BaseModel
 
     public function media()
     {
-        return $this->belongsTo(Medias::class);
+        return $this->belongsTo(Media::class);
     }
 
     public function user()

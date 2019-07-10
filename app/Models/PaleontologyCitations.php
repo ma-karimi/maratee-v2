@@ -7,8 +7,6 @@ use App\Models\Contracts\BaseModel;
 class PaleontologyCitations extends BaseModel
 {
 
-    
-
     /**
      * The database table used by the model.
      *
@@ -26,12 +24,34 @@ class PaleontologyCitations extends BaseModel
 
 
     /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    protected $casts = [];
+    public function article()
+    {
+        return $this->belongsTo(Article::class);
+    }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function media()
+    {
+        return $this->belongsTo(Media::class);
+    }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function paleontology()
+    {
+        return $this->belongsTo(Paleontology::class);
+    }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

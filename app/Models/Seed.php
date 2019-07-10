@@ -128,7 +128,7 @@ class Seed extends BaseModel
 
     public function plants()
     {
-        return $this->belongsToMany(Plants::class,
+        return $this->belongsToMany(Plant::class,
             'seed_plants',
             'seed_id',
             'plant_id');

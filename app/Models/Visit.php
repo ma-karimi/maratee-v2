@@ -44,12 +44,12 @@ class Visit extends BaseModel
 
     public function media()
     {
-        return $this->belongsTo(Medias::class, 'media_id');
+        return $this->belongsTo(Media::class, 'media_id');
     }
 
     public function paleontology()
     {
-        return $this->belongsTo(Paleontologies::class, 'paleontology_id');
+        return $this->belongsTo(Paleontology::class, 'paleontology_id');
     }
 
     public function user()

@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\BotanicalGardenAction;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class PlantingActions extends BaseModel
+class PlantingAction extends BaseModel
 {
 
 
@@ -29,11 +31,16 @@ class PlantingActions extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'name' => 'json',
+        'description' => 'json',
+    ];
 
-    public function botanicalGardenAction()
+    /**
+     * @return HasMany
+     */
+    public function botanicalGardenActions(): HasMany
     {
-        return $this->hasMany(BotanicalGardenAction::class, 'planting_action_id');
+        return $this->hasMany(BotanicalGardenAction::class);
     }
-
 }

@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\MedicinalPlant;
 
-class PlantFactors extends BaseModel
+class PlantFactor extends BaseModel
 {
 
     
@@ -30,8 +31,17 @@ class PlantFactors extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'name'=>'json',
+        'description'=>'json'
+    ];
 
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function medicinalPlants()
+    {
+        return $this->hasMany(MedicinalPlant::class, 'plant_origin_id');
+    }
 
 }

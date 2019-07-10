@@ -40,7 +40,7 @@ class Treatment extends BaseModel
 
     public function paleontology()
     {
-        return $this->belongsTo(Paleontologies::class, 'paleontology_id');
+        return $this->belongsTo(Paleontology::class, 'paleontology_id');
     }
     public function soilFeatures()
     {

@@ -1,0 +1,122 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * @property int $credential_gift_id
+ * @property int $credential_expense_id
+ * @property int $credential_purchase_id
+ * @property int $credential_correspondence_id
+ * @property int $paleontology_id
+ * @property int $media_id
+ * @property int $user_id
+ * @property int $exchange_id
+ * @property int $credential_fair_id
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $deleted_at
+ * @property Credential $credential
+ * @property Credential $credential
+ * @property Credential $credential
+ * @property Credential $credential
+ * @property Credential $credential
+ * @property Exchange $exchange
+ * @property Media $media
+ * @property Paleontology $paleontology
+ * @property User $user
+ */
+class PG extends Model
+{
+    /**
+     * The table associated with the model.
+     * 
+     * @var string
+     */
+    protected $table = 'paleontology_medias';
+
+    /**
+     * @var array
+     */
+    protected $fillable = ['credential_gift_id', 'credential_expense_id', 'credential_purchase_id', 'credential_correspondence_id', 'paleontology_id', 'media_id', 'user_id', 'exchange_id', 'credential_fair_id', 'created_at', 'updated_at', 'deleted_at'];
+
+    /**
+     * The storage format of the model's date columns.
+     * 
+     * @var string
+     */
+    protected $dateFormat = 'U';
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function credential()
+    {
+        return $this->belongsTo('App\Models\Credential', 'credential_correspondence_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function credential()
+    {
+        return $this->belongsTo('App\Models\Credential', 'credential_expense_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function credential()
+    {
+        return $this->belongsTo('App\Models\Credential', 'credential_fair_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function credential()
+    {
+        return $this->belongsTo('App\Models\Credential', 'credential_gift_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function credential()
+    {
+        return $this->belongsTo('App\Models\Credential', 'credential_purchase_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function exchange()
+    {
+        return $this->belongsTo('App\Models\Exchange');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function media()
+    {
+        return $this->belongsTo('App\Models\Media');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function paleontology()
+    {
+        return $this->belongsTo('App\Models\Paleontology');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+}
