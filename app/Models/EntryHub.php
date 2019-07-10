@@ -53,7 +53,7 @@ class EntryHub extends BaseModel
      */
     public function organization(): BelongsTo
     {
-        return $this->belongsTo(Organizations::class);
+        return $this->belongsTo(Organization::class);
     }
 
 }

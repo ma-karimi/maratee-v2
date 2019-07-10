@@ -3,19 +3,12 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use App\Models\GeologyAge;
-use App\Models\Locality;
-use App\Models\Visit;
-use App\Models\Treatment;
-use App\Models\PaleontologyMedia;
-use App\Models\PaleontologyCitation;
-use App\Models\PaleontologyAction;
-use App\Models\Media;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Paleontology extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -32,24 +25,23 @@ class Paleontology extends BaseModel
     protected $fillable = ['access', 'additional_info', 'barcode_no', 'catalog_no', 'closet', 'collection_name', 'color', 'common_name', 'created_at', 'deleted_at', 'drawer', 'element', 'excavation', 'field_no', 'geology_age_id', 'infraspecific', 'last_update', 'location_no', 'move_status', 'pieces', 'preservation', 'salon', 'specimen_no', 'treatment', 'typestatus', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = [
-        'infraspecific'=>'json',
-        'typestatus'=>'json',
-        'preservation'=>'json',
-        'color'=>'json',
-        'element'=>'json',
-        'treatment'=>'json',
-        'additional_info'=>'json',
-        'access'=>'json',
-        'excavation'=>'json',
-        'collection_name'=>'json',
-        'common_name'=>'json',
+        'infraspecific' => 'json',
+        'typestatus' => 'json',
+        'preservation' => 'json',
+        'color' => 'json',
+        'element' => 'json',
+        'treatment' => 'json',
+        'additional_info' => 'json',
+        'access' => 'json',
+        'excavation' => 'json',
+        'collection_name' => 'json',
+        'common_name' => 'json',
     ];
 
     /**
@@ -59,70 +51,75 @@ class Paleontology extends BaseModel
      */
     protected $dates = ['created_at', 'deleted_at', 'last_update', 'updated_at'];
 
-    public function exchanges()
+    /**
+     * @return HasMany
+     */
+    public function exchanges(): HasMany
     {
         return $this->hasMany(Exchange::class, ['send_paleontology_id', 'receive_paleontology_id'])->latest();
     }
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function geologyAge()
+    public function geologyAge(): BelongsTo
     {
         return $this->belongsTo(GeologyAge::class);
     }
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function localities()
+    public function localities(): HasMany
     {
-        return $this->hasMany(Locality::class);
+        return $this->hasMany(Locality::class)->latest();
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function medias()
+    public function medias(): HasMany
     {
-        return $this->hasMany(Media::class);
+        return $this->hasMany(Media::class)->latest();
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function paleontologyActions()
+    public function paleontologyActions(): HasMany
     {
-        return $this->hasMany(PaleontologyAction::class);
+        return $this->hasMany(PaleontologyAction::class)->latest();
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function paleontologyCitations()
+    public function paleontologyCitations(): HasMany
     {
-        return $this->hasMany(PaleontologyCitation::class);
+        return $this->hasMany(PaleontologyCitation::class)->latest();
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function paleontologyMedias()
+    public function paleontologyMedias(): HasMany
     {
-        return $this->hasMany(PaleontologyMedia::class);
+        return $this->hasMany(PaleontologyMedia::class)->latest();
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function treatments()
+    public function treatments(): HasMany
     {
-        return $this->hasMany(Treatment::class);
+        return $this->hasMany(Treatment::class)->latest();
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function visits()
+    public function visits(): HasMany
     {
-        return $this->hasMany(Visit::class);
+        return $this->hasMany(Visit::class)->latest();
     }
 }

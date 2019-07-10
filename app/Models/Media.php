@@ -108,7 +108,7 @@ class Media extends BaseModel
      */
     public function borrows(): HasMany
     {
-        return $this->hasMany(Borrow::class);
+        return $this->hasMany(Borrow::class)->latest();
     }
 
     /**
@@ -116,7 +116,7 @@ class Media extends BaseModel
      */
     public function medicinalPlants(): HasMany
     {
-        return $this->hasMany(MedicinalPlant::class);
+        return $this->hasMany(MedicinalPlant::class)->latest();
     }
 
     /**
@@ -124,7 +124,7 @@ class Media extends BaseModel
      */
     public function paleontologyCitations(): HasMany
     {
-        return $this->hasMany(PaleontologyCitation::class);
+        return $this->hasMany(PaleontologyCitation::class)->latest();
     }
 
     /**
@@ -132,7 +132,7 @@ class Media extends BaseModel
      */
     public function paleontologyMedias(): HasMany
     {
-        return $this->hasMany(PaleontologyMedia::class);
+        return $this->hasMany(PaleontologyMedia::class)->latest();
     }
 
     /**
@@ -140,6 +140,6 @@ class Media extends BaseModel
      */
     public function visits(): HasMany
     {
-        return $this->hasMany(Visit::class);
+        return $this->hasMany(Visit::class)->latest();
     }
 }

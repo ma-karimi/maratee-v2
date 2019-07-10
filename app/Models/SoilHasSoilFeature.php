@@ -7,7 +7,6 @@ use App\Models\Contracts\BaseModel;
 class SoilHasSoilFeature extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -24,14 +23,13 @@ class SoilHasSoilFeature extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'soil_feature_id', 'soil_id', 'updated_at', 'value'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = [
-        'value'=>'json'
+        'value' => 'json'
     ];
 
     /**
@@ -40,6 +38,7 @@ class SoilHasSoilFeature extends BaseModel
      * @var array
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
+
     public function soilFeature()
     {
         return $this->belongsTo(SoilFeature::class, 'soil_feature_id');

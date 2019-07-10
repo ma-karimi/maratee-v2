@@ -24,7 +24,6 @@ class Garden extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'number', 'region', 'section', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *

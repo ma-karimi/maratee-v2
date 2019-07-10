@@ -4,13 +4,10 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\Department;
-use App\Models\Location;
 
 class Connection extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.

@@ -3,13 +3,11 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use App\Models\Herbarium;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class HerbariumAppendixes extends BaseModel
+class HerbariumAppendix extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -24,7 +22,6 @@ class HerbariumAppendixes extends BaseModel
      * @var array
      */
     protected $fillable = ['appendix', 'created_at', 'deleted_at', 'destination_herbarium_id', 'herbarium_id', 'updated_at'];
-
 
 
     /**

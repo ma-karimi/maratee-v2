@@ -4,12 +4,10 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\Locality;
 
 class Map extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -24,7 +22,6 @@ class Map extends BaseModel
      * @var array
      */
     protected $fillable = ['created_at', 'deleted_at', 'reference_year', 'scale', 'updated_at'];
-
 
 
     /**
@@ -46,6 +43,6 @@ class Map extends BaseModel
      */
     public function localities(): HasMany
     {
-        return $this->hasMany(Locality::class);
+        return $this->hasMany(Locality::class)->latest();
     }
 }

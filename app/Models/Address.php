@@ -23,14 +23,12 @@ class Address extends BaseModel
     protected $fillable = ['address', 'city_id', 'created_at', 'deleted_at', 'updated_at', 'village_id'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = ['address' => 'json'];
-
 
 
     public function city()

@@ -15,11 +15,11 @@ class CreatePlantApplicationsTable extends Migration {
 		Schema::create('plant_applications', function(Blueprint $table)
 		{
 			$table->unsignedInteger('herbarium_id');
-			$table->unsignedInteger('plant_part_id')->nullable();
-			$table->unsignedInteger('application_id')->nullable();
-			$table->unsignedInteger('plant_growth_id')->nullable();
-			$table->unsignedInteger('plant_usage_type_id')->nullable();
-			$table->unsignedInteger('plant_industry_id')->nullable();
+			$table->unsignedInteger('plant_factor_part_id')->nullable();
+			$table->unsignedInteger('plant_factor_application_id')->nullable();
+			$table->unsignedInteger('plant_factor_growth_id')->nullable();
+			$table->unsignedInteger('plant_factor_usage_type_id')->nullable();
+			$table->unsignedInteger('plant_factor_industry_id')->nullable();
 			$table->json('presence')->nullable()->comment('options: 
 now
 future

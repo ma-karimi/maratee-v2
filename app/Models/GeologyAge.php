@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use App\Models\Paleontology;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class GeologyAge extends BaseModel
 {
@@ -24,7 +24,6 @@ class GeologyAge extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'epoch', 'era', 'period', 'stage', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
@@ -33,10 +32,10 @@ class GeologyAge extends BaseModel
     protected $casts = ['era' => 'json', 'period' => 'json', 'epoch' => 'json', 'stage' => 'json'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function paleontologies()
     {
-        return $this->hasMany(Paleontology::class);
+        return $this->hasMany(Paleontology::class)->latest();
     }
 }

@@ -3,14 +3,11 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use App\Models\Action;
-use App\Models\Paleontology;
-use App\Models\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PaleontologyAction extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -27,15 +24,14 @@ class PaleontologyAction extends BaseModel
     protected $fillable = ['action_id', 'created_at', 'date', 'deleted_at', 'description', 'paleontology_id', 'updated_at', 'user_id'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = [
-        'name'=>'json',
-        'description'=>'json',
+        'name' => 'json',
+        'description' => 'json',
     ];
 
     /**
@@ -46,25 +42,25 @@ class PaleontologyAction extends BaseModel
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function action()
+    public function action(): BelongsTo
     {
         return $this->belongsTo(Action::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function paleontology()
+    public function paleontology(): BelongsTo
     {
         return $this->belongsTo(Paleontology::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

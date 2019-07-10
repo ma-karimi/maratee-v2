@@ -23,7 +23,6 @@ class ActionHub extends BaseModel
     protected $fillable = ['action_id', 'created_at', 'date', 'deleted_at', 'department_id', 'description', 'herbarium_id', 'location_id', 'project_id', 'updated_at', 'user_id'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *

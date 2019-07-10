@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Seed extends BaseModel
 {
@@ -63,47 +64,51 @@ class Seed extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function seedHubs()
     {
-        return $this->hasMany('App\Models\SeedHub');
-    }
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function seedExchanges()
-    {
-        return $this->hasMany('App\Models\SeedExchange');
-    }
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function seedTechnologies()
-    {
-        return $this->hasMany('App\Models\SeedTechnology');
-    }
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function seedMoleculars()
-    {
-        return $this->hasMany('App\Models\SeedMolecular');
-    }
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function seedChemicals()
-    {
-        return $this->hasMany('App\Models\SeedChemical');
+        return $this->hasMany(SeedHub::class)->latest();
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
+     */
+    public function seedExchanges()
+    {
+        return $this->hasMany(SeedExchange::class)->latest();
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function seedTechnologies()
+    {
+        return $this->hasMany(SeedTechnology::class)->latest();
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function seedMoleculars()
+    {
+        return $this->hasMany(SeedMolecular::class)->latest();
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function seedChemicals()
+    {
+        return $this->hasMany(SeedChemical::class)->latest();
+    }
+
+    /**
+     * @return HasMany
      */
     public function medias()
     {
-        return $this->hasMany('App\Models\Media');
+        return $this->hasMany(Media::class)->latest();
     }
 
     public function geramins()

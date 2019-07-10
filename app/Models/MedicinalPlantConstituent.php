@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class MedicinalPlantConstituents extends BaseModel
+class MedicinalPlantConstituent extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -24,14 +24,20 @@ class MedicinalPlantConstituents extends BaseModel
     protected $fillable = ['constituent_id', 'created_at', 'deleted_at', 'medicinal_plant_id', 'updated_at', 'value'];
 
 
+    /**
+     * @return BelongsTo
+     */
+    public function constituent(): BelongsTo
+    {
+        return $this->belongsTo(Constituent::class);
+    }
 
     /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
+     * @return BelongsTo
      */
-    protected $casts = [];
-
-
+    public function medicinalPlant(): BelongsTo
+    {
+        return $this->belongsTo(MedicinalPlant::class);
+    }
 
 }

@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\PaleontologyMedia;
 
 class Exchange extends BaseModel
 {
@@ -24,7 +23,6 @@ class Exchange extends BaseModel
      * @var array
      */
     protected $fillable = ['created_at', 'deleted_at', 'description', 'receive_date', 'receive_herbarium_id', 'receive_paleontology_id', 'receive_sample_no', 'receive_sheet_no', 'receive_type', 'send_date', 'send_herbarium_id', 'send_paleontology_id', 'send_sample_no', 'send_sheet_no', 'send_type', 'updated_at'];
-
 
 
     /**
@@ -87,6 +85,6 @@ class Exchange extends BaseModel
      */
     public function paleontologyMedias(): HasMany
     {
-        return $this->hasMany(PaleontologyMedia::class);
+        return $this->hasMany(PaleontologyMedia::class)->latest();
     }
 }

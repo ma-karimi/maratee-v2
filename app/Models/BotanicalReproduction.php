@@ -7,7 +7,6 @@ use App\Models\Contracts\BaseModel;
 class BotanicalReproduction extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -22,7 +21,6 @@ class BotanicalReproduction extends BaseModel
      * @var array
      */
     protected $fillable = ['botanical_id', 'created_at', 'deleted_at', 'reproduction_id', 'updated_at'];
-
 
 
     /**

@@ -25,7 +25,6 @@ class Borrow extends BaseModel
     protected $fillable = ['borrows_date', 'created_at', 'deadline', 'deleted_at', 'herbarium_id', 'media_id', 'return', 'sheets_no', 'updated_at', 'user_id'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *

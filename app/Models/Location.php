@@ -59,7 +59,7 @@ class Location extends BaseModel
      */
     public function actionHubs(): HasMany
     {
-        return $this->hasMany(ActionHub::class);
+        return $this->hasMany(ActionHub::class)->latest();
     }
 
     /**
@@ -67,7 +67,7 @@ class Location extends BaseModel
      */
     public function articleHubs(): HasMany
     {
-        return $this->hasMany(ArticleHub::class);
+        return $this->hasMany(ArticleHub::class)->latest();
     }
 
     /**
@@ -75,7 +75,7 @@ class Location extends BaseModel
      */
     public function chromosomes(): HasMany
     {
-        return $this->hasMany(Chromosome::class);
+        return $this->hasMany(Chromosome::class)->latest();
     }
 
     /**
@@ -83,7 +83,7 @@ class Location extends BaseModel
      */
     public function connections(): HasMany
     {
-        return $this->hasMany(Connection::class);
+        return $this->hasMany(Connection::class)->latest();
     }
 
     /**
@@ -91,7 +91,7 @@ class Location extends BaseModel
      */
     public function entryHubs(): HasMany
     {
-        return $this->hasMany(EntryHub::class);
+        return $this->hasMany(EntryHub::class)->latest();
     }
 
     /**
@@ -99,7 +99,7 @@ class Location extends BaseModel
      */
     public function herbariums(): HasMany
     {
-        return $this->hasMany(Herbarium::class);
+        return $this->hasMany(Herbarium::class)->latest();
     }
 
     /**
@@ -107,7 +107,7 @@ class Location extends BaseModel
      */
     public function localities(): HasMany
     {
-        return $this->hasMany(Locality::class);
+        return $this->hasMany(Locality::class)->latest();
     }
 
     /**
@@ -115,7 +115,7 @@ class Location extends BaseModel
      */
     public function medias(): HasMany
     {
-        return $this->hasMany(Media::class);
+        return $this->hasMany(Media::class)->latest();
     }
 
     /**
@@ -123,7 +123,7 @@ class Location extends BaseModel
      */
     public function medicinalPlants(): HasMany
     {
-        return $this->hasMany(MedicinalPlant::class);
+        return $this->hasMany(MedicinalPlant::class)->latest();
     }
 
     /**
@@ -131,7 +131,7 @@ class Location extends BaseModel
      */
     public function plants(): HasMany
     {
-        return $this->hasMany(Plant::class);
+        return $this->hasMany(Plant::class)->latest();
     }
 
     /**
@@ -139,7 +139,7 @@ class Location extends BaseModel
      */
     public function seedChemicals(): HasMany
     {
-        return $this->hasMany(SeedChemicals::class);
+        return $this->hasMany(SeedChemical::class)->latest();
     }
 
     /**
@@ -147,7 +147,7 @@ class Location extends BaseModel
      */
     public function seedHubs(): HasMany
     {
-        return $this->hasMany(SeedHub::class);
+        return $this->hasMany(SeedHub::class)->latest();
     }
 
     /**
@@ -155,6 +155,6 @@ class Location extends BaseModel
      */
     public function seedMoleculars(): HasMany
     {
-        return $this->hasMany(SeedMolecular::class);
+        return $this->hasMany(SeedMolecular::class)->latest();
     }
 }

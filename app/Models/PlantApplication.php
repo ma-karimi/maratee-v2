@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PlantApplication extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -21,8 +21,7 @@ class PlantApplication extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['application_id', 'created_at', 'deleted_at', 'herbarium_id', 'plant_growth_id', 'plant_industry_id', 'plant_part_id', 'plant_usage_type_id', 'presence', 'updated_at'];
-
+    protected $fillable = ['plant_factor_application_id', 'created_at', 'deleted_at', 'herbarium_id', 'plant_factor_growth_id', 'plant_factor_industry_id', 'plant_factor_part_id', 'plant_factor_usage_type_id', 'presence', 'updated_at'];
 
 
     /**
@@ -31,9 +30,55 @@ class PlantApplication extends BaseModel
      * @var array
      */
     protected $casts = [
-        'presence'=>'json'
+        'presence' => 'json'
     ];
 
+    /**
+     * @return BelongsTo
+     */
+    public function herbarium(): BelongsTo
+    {
+        return $this->belongsTo(Herbarium::class);
+    }
 
+    /**
+     * @return BelongsTo
+     */
+    public function plantFactorApplication(): BelongsTo
+    {
+        return $this->belongsTo(PlantFactor::class, 'plant_factor_application_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function plantFactorGrowth(): BelongsTo
+    {
+        return $this->belongsTo(PlantFactor::class, 'plant_factor_growth_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function plantFactorIndustry(): BelongsTo
+    {
+        return $this->belongsTo(PlantFactor::class, 'plant_factor_industry_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function plantFactorPart(): BelongsTo
+    {
+        return $this->belongsTo(PlantFactor::class, 'plant_factor_part_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function plantFactorUsage(): BelongsTo
+    {
+        return $this->belongsTo(PlantFactor::class, 'plant_factor_usage_type_id');
+    }
 
 }

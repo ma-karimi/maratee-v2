@@ -23,14 +23,12 @@ class AssessmentCollection extends BaseModel
     protected $fillable = ['assessment_id', 'collection_id', 'created_at', 'deleted_at', 'department_id', 'project_id', 'seed_id', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = [];
-
 
 
     public function assessment()

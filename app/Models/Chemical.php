@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\SeedChemicals;
 
 class Chemical extends BaseModel
 {
@@ -25,7 +24,6 @@ class Chemical extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
@@ -39,6 +37,6 @@ class Chemical extends BaseModel
      */
     public function seedChemicals(): HasMany
     {
-        return $this->hasMany(SeedChemicals::class);
+        return $this->hasMany(SeedChemical::class)->latest();
     }
 }

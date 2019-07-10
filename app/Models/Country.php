@@ -5,8 +5,6 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\Continent;
-use App\Models\Province;
 
 class Country extends BaseModel
 {
@@ -25,7 +23,6 @@ class Country extends BaseModel
      * @var array
      */
     protected $fillable = ['code', 'continent_id', 'created_at', 'deleted_at', 'name', 'updated_at'];
-
 
 
     /**
@@ -48,7 +45,7 @@ class Country extends BaseModel
      */
     public function provinces(): HasMany
     {
-        return $this->hasMany(Province::class);
+        return $this->hasMany(Province::class)->latest();
     }
 
 }

@@ -23,7 +23,6 @@ class Article extends BaseModel
     protected $fillable = ['authors', 'created_at', 'deleted_at', 'journal_name', 'journal_no', 'page_no', 'title', 'type', 'updated_at', 'year'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
@@ -42,7 +41,6 @@ class Article extends BaseModel
     {
         return $this->hasMany(ArticleHub::class, 'article_id')->latest();
     }
-
 
 
     public function chromosomes()

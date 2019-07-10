@@ -5,10 +5,9 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Irrigations extends BaseModel
+class Irrigation extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -25,13 +24,12 @@ class Irrigations extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'description', 'type', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
-    protected $casts = ['type'=>'json', 'description'=>'json'];
+    protected $casts = ['type' => 'json', 'description' => 'json'];
 
 
     /**

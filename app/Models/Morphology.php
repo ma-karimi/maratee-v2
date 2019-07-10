@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Morphologies extends BaseModel
+class Morphology extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -24,14 +24,20 @@ class Morphologies extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'unit', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = ['name' => 'json', 'description' => 'json', 'unit' => 'json'];
 
 
+    /**
+     * @return HasMany
+     */
+    public function medicinalPlantMorphologies(): HasMany
+    {
+        return $this->hasMany(MedicinalPlantMorphology::class)->latest();
+    }
 
 }

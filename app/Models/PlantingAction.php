@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use App\Models\BotanicalGardenAction;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PlantingAction extends BaseModel
@@ -25,7 +24,6 @@ class PlantingAction extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
@@ -41,6 +39,6 @@ class PlantingAction extends BaseModel
      */
     public function botanicalGardenActions(): HasMany
     {
-        return $this->hasMany(BotanicalGardenAction::class);
+        return $this->hasMany(BotanicalGardenAction::class)->latest();
     }
 }

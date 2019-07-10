@@ -25,7 +25,6 @@ class Continent extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'name', 'parent_id', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
@@ -38,7 +37,7 @@ class Continent extends BaseModel
      */
     public function childs(): HasMany
     {
-        return $this->hasMany(self::class, 'parent_id');
+        return $this->hasMany(self::class, 'parent_id')->latest();
     }
 
 
@@ -56,7 +55,7 @@ class Continent extends BaseModel
      */
     public function countries(): HasMany
     {
-        return $this->hasMany(Country::class);
+        return $this->hasMany(Country::class)->latest();
     }
 
 }

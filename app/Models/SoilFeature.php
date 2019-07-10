@@ -7,7 +7,6 @@ use App\Models\Contracts\BaseModel;
 class SoilFeature extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -22,7 +21,6 @@ class SoilFeature extends BaseModel
      * @var array
      */
     protected $fillable = ['created_at', 'deleted_at', 'name', 'unit', 'updated_at'];
-
 
 
     /**

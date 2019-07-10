@@ -3,15 +3,11 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use App\Models\Location;
-use App\Models\Map;
-use App\Models\Paleontology;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Locality extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -28,18 +24,17 @@ class Locality extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'description', 'fauna', 'formation', 'layer', 'lithology', 'location_id', 'map_id', 'paleontology_id', 'stratigraphy', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = [
-        'formation'=>'json',
-        'layer'=>'json',
-        'stratigraphy'=>'json',
-        'fauna'=>'json',
-        'description'=>'json',
+        'formation' => 'json',
+        'layer' => 'json',
+        'stratigraphy' => 'json',
+        'fauna' => 'json',
+        'description' => 'json',
     ];
 
     /**

@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class SeedExchanges extends BaseModel
+class SeedExchange extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -24,16 +24,15 @@ class SeedExchanges extends BaseModel
     protected $fillable = ['approval_no', 'collection_id', 'created_at', 'date', 'deleted_at', 'description', 'saved_type', 'seed_id', 'type', 'updated_at', 'weight'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = [
-        'approval_no'=>'json',
-        'saved_type'=>'json',
-        'description'=>'json',
+        'approval_no' => 'json',
+        'saved_type' => 'json',
+        'description' => 'json',
     ];
 
     /**
@@ -44,7 +43,7 @@ class SeedExchanges extends BaseModel
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function collection()
     {
@@ -52,7 +51,7 @@ class SeedExchanges extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function seed()
     {

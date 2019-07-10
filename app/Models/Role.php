@@ -7,7 +7,6 @@ use App\Models\Contracts\BaseModel;
 class Role extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -24,17 +23,15 @@ class Role extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = [
-        'name'=>'json',
-        'description'=>'json',
+        'name' => 'json',
+        'description' => 'json',
     ];
-
 
 
 }

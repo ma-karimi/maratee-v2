@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class SeedChemicals extends BaseModel
+class SeedChemical extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -24,17 +24,17 @@ class SeedChemicals extends BaseModel
     protected $fillable = ['chemical_id', 'created_at', 'deleted_at', 'location_id', 'repeat', 'seed_id', 'treatment', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = [
-        'treatment'=>'json'
+        'treatment' => 'json'
     ];
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function chemical()
     {
@@ -42,7 +42,7 @@ class SeedChemicals extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function location()
     {
@@ -50,7 +50,7 @@ class SeedChemicals extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function seed()
     {

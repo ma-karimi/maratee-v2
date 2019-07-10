@@ -3,13 +3,11 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use App\Models\Herbarium;
-use App\Models\Plant;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PlantGeneral extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -26,7 +24,6 @@ class PlantGeneral extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'parent_id', 'type', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
@@ -38,17 +35,17 @@ class PlantGeneral extends BaseModel
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function herbariums()
+    public function herbariums(): HasMany
     {
-        return $this->hasMany(Herbarium::class, 'plant_group_id');
+        return $this->hasMany(Herbarium::class, 'plant_group_id')->latest();
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function plants()
+    public function plants(): HasMany
     {
         return $this->hasMany(Plant::class, [
             'plant_general_class_id',
@@ -61,7 +58,7 @@ class PlantGeneral extends BaseModel
             'plant_general_sperm_id',
             'plant_general_sub_specie_id',
             'plant_general_variety_id',
-        ]);
+        ])->latest();
     }
 
 }

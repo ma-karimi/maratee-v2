@@ -23,7 +23,6 @@ class Attendance extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'end_time', 'herbarium_id', 'start_time', 'updated_at', 'user_id'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *

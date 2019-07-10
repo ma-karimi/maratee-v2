@@ -23,7 +23,6 @@ class Village extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'name', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
@@ -43,7 +42,7 @@ class Village extends BaseModel
 
     public function addresses()
     {
-        return $this->hasMany(Address::class, 'village_id')->latest();
+        return $this->hasMany(Address::class)->latest();
     }
 
 }

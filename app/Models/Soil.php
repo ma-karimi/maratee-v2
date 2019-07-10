@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\MedicinalPlant;
 
 class Soil extends Model
 {
@@ -21,7 +23,6 @@ class Soil extends Model
      * @var array
      */
     protected $fillable = ['created_at', 'deleted_at', 'description', 'type', 'updated_at'];
-
 
 
     /**
@@ -55,11 +56,12 @@ class Soil extends Model
         return $this->hasMany(BotanicalGardenAction::class, ['from_soil_id', 'to_soil_id'])->latest();
 
     }
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function medicinalPlants()
     {
-        return $this->hasMany('App\Models\MedicinalPlant');
+        return $this->hasMany(MedicinalPlant::class)->latest();
     }
 }

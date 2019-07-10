@@ -7,7 +7,6 @@ use App\Models\Contracts\BaseModel;
 class Reproduction extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -24,20 +23,19 @@ class Reproduction extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = [
-        'name'=>'json',
-        'description'=>'json',
+        'name' => 'json',
+        'description' => 'json',
     ];
 
 
     public function botanicalReproductions()
     {
-        return $this->hasMany(BotanicalReproduction::class, 'reproduction_id')->latest();
+        return $this->hasMany(BotanicalReproduction::class)->latest();
     }
 }

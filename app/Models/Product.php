@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -24,39 +25,38 @@ class Product extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'organization_id', 'registration_status', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = [
-        'name'=>'json',
-        'description'=>'json',
+        'name' => 'json',
+        'description' => 'json',
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function organization()
     {
-        return $this->belongsTo('App\Models\Organization');
+        return $this->belongsTo(Organization::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function medias()
     {
-        return $this->hasMany('App\Models\Media');
+        return $this->hasMany(Media::class)->latest();
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function medicals()
     {
-        return $this->hasMany('App\Models\Medical');
+        return $this->hasMany(Medical::class)->latest();
     }
 
 }

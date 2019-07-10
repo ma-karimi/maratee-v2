@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class SeedHasPlants extends BaseModel
+class SeedHasPlant extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -24,7 +24,6 @@ class SeedHasPlants extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'plant_id', 'seed_id', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
@@ -38,7 +37,7 @@ class SeedHasPlants extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function seed()
     {

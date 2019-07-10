@@ -3,13 +3,11 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use App\Models\Herbarium;
-use App\Models\Product;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Organizations extends BaseModel
+class Organization extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -26,38 +24,40 @@ class Organizations extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'description', 'domestic_code', 'email', 'international_code', 'is_herbarium', 'name', 'phone', 'updated_at', 'website'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = [
-        'name'=>'json',
-        'description'=>'json',
+        'name' => 'json',
+        'description' => 'json',
     ];
 
 
-    public function entryHubs()
+    /**
+     * @return HasMany
+     */
+    public function entryHubs(): HasMany
     {
-        return $this->hasMany(EntryHub::class, 'organization_id')->latest();
+        return $this->hasMany(EntryHub::class)->latest();
     }
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function herbariums()
+    public function herbariums(): HasMany
     {
-        return $this->hasMany(Herbarium::class);
+        return $this->hasMany(Herbarium::class)->latest();
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function products()
+    public function products(): HasMany
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class)->latest();
     }
 
 }

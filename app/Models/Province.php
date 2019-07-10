@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Province extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -24,30 +25,29 @@ class Province extends BaseModel
     protected $fillable = ['country_id', 'created_at', 'deleted_at', 'name', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = [
-        'name'=>'json'
+        'name' => 'json'
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function country()
     {
-        return $this->belongsTo('App\Models\Country');
+        return $this->belongsTo(Country::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function cities()
     {
-        return $this->hasMany('App\Models\City');
+        return $this->hasMany(City::class)->latest();
     }
 
 }

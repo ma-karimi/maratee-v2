@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Entry extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -23,7 +22,6 @@ class Entry extends BaseModel
      * @var array
      */
     protected $fillable = ['created_at', 'deleted_at', 'description', 'type', 'updated_at'];
-
 
 
     /**

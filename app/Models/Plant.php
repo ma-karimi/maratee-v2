@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Plant extends BaseModel
 {
@@ -36,12 +38,12 @@ class Plant extends BaseModel
     ];
 
 
-    public function author()
+    public function author(): BelongsTo
     {
         return $this->belongsTo(Author::class);
     }
 
-    public function seeds()
+    public function seeds(): BelongsToMany
     {
         return $this->belongsToMany(Seed::class,
             'seed_plants',
@@ -52,7 +54,7 @@ class Plant extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function article()
+    public function article(): BelongsTo
     {
         return $this->belongsTo(Article::class);
     }
@@ -60,7 +62,7 @@ class Plant extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function location()
+    public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class);
     }
@@ -68,7 +70,7 @@ class Plant extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function plantGeneral()
+    public function plantGeneral(): BelongsTo
     {
         return $this->belongsTo(PlantGeneral::class,
             [
@@ -88,16 +90,16 @@ class Plant extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function seedPlants()
+    public function seedPlants(): HasMany
     {
-        return $this->hasMany(SeedPlant::class);
+        return $this->hasMany(SeedPlant::class)->latest();
     }
 }

@@ -4,9 +4,6 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\MedicinalPlant;
-use App\Models\Medicals;
-use App\Models\Media;
 
 class Herbarium extends BaseModel
 {
@@ -28,17 +25,16 @@ class Herbarium extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'description', 'flowering', 'herbarium_tip_location', 'is_flowering', 'location_id', 'name', 'number', 'organization_description', 'organization_id', 'phenology_id', 'physical_tip_qt', 'phytogeography_id', 'plant_group_id', 'plant_type_id', 'protection_id', 'samples_no', 'sheets_no', 'tip_qt', 'tip_type', 'type_description', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = [
-        'name'=>'json',
-        'description'=>'json',
-        'flowering'=>'json',
-        'organization_description'=>'json',
+        'name' => 'json',
+        'description' => 'json',
+        'flowering' => 'json',
+        'organization_description' => 'json',
     ];
 
 
@@ -104,7 +100,7 @@ class Herbarium extends BaseModel
      */
     public function medias(): HasMany
     {
-        return $this->hasMany(Media::class);
+        return $this->hasMany(Media::class)->latest();
     }
 
     /**
@@ -112,7 +108,7 @@ class Herbarium extends BaseModel
      */
     public function medicals(): HasMany
     {
-        return $this->hasMany(Medicals::class);
+        return $this->hasMany(Medical::class)->latest();
     }
 
     /**
@@ -120,6 +116,6 @@ class Herbarium extends BaseModel
      */
     public function medicinalPlants(): HasMany
     {
-        return $this->hasMany(MedicinalPlant::class);
+        return $this->hasMany(MedicinalPlant::class)->latest();
     }
 }

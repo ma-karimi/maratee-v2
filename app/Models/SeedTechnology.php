@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SeedTechnology extends BaseModel
 {
@@ -23,7 +24,6 @@ class SeedTechnology extends BaseModel
     protected $fillable = ['abnormality', 'created_at', 'deleted_at', 'description', 'examine', 'hard_seed', 'humidity', 'husk_average', 'husk_weight', 'purity', 'seed_id', 'seed_type', 'seed_weight', 'sprout', 'type', 'updated_at', 'vigor'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
@@ -37,16 +37,16 @@ class SeedTechnology extends BaseModel
 
     public function technologyCollections()
     {
-        return $this->hasMany(TechnologyCollection::class, 'seed_technology_id');
+        return $this->hasMany(TechnologyCollection::class, 'seed_technology_id')->latest();
     }
 
     public function seedWeights()
     {
-        return $this->hasMany(SeedWeight::class, 'seed_technology_id');
+        return $this->hasMany(SeedWeight::class, 'seed_technology_id')->latest();
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function seed()
     {

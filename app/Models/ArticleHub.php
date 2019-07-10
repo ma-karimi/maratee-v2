@@ -22,7 +22,6 @@ class ArticleHub extends BaseModel
     protected $fillable = ['action_id', 'article_id', 'created_at', 'cryo_bank_id', 'date', 'deleted_at', 'location_id', 'updated_at', 'user_id'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *

@@ -3,15 +3,12 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use App\Models\Province;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\Address;
 
 class City extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -28,13 +25,12 @@ class City extends BaseModel
     protected $fillable = ['code', 'created_at', 'deleted_at', 'name', 'province_id', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
-    protected $casts = ['name'=>'json'];
+    protected $casts = ['name' => 'json'];
 
     /**
      * @return BelongsTo
@@ -49,6 +45,6 @@ class City extends BaseModel
      */
     public function addresses(): HasMany
     {
-        return $this->hasMany(Address::class);
+        return $this->hasMany(Address::class)->latest();
     }
 }

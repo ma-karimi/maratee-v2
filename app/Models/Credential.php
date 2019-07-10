@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use App\Models\PaleontologyMedia;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -46,7 +45,7 @@ class Credential extends BaseModel
      */
     public function childs(): HasMany
     {
-        return $this->hasMany(self::class, self::PARENT_ID);
+        return $this->hasMany(self::class, self::PARENT_ID)->latest();
     }
 
 
@@ -63,6 +62,6 @@ class Credential extends BaseModel
      */
     public function paleontologyMedias(): HasMany
     {
-        return $this->hasMany(PaleontologyMedia::class, ['credential_correspondence_id', 'credential_expense_id', 'credential_fair_id', 'credential_gift_id', 'credential_purchase_id']);
+        return $this->hasMany(PaleontologyMedia::class, ['credential_correspondence_id', 'credential_expense_id', 'credential_fair_id', 'credential_gift_id', 'credential_purchase_id'])->latest();
     }
 }

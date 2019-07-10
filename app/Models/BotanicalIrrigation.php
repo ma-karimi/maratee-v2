@@ -7,7 +7,6 @@ use App\Models\Contracts\BaseModel;
 class BotanicalIrrigation extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -24,13 +23,12 @@ class BotanicalIrrigation extends BaseModel
     protected $fillable = ['botanical_id', 'created_at', 'daytime', 'deleted_at', 'irrigation_id', 'requirement', 'seasonal_feature', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
-    protected $casts = ['requirement'=>'json', 'daytime'=>'json', 'seasonal_feature'=>'json'];
+    protected $casts = ['requirement' => 'json', 'daytime' => 'json', 'seasonal_feature' => 'json'];
 
 
     public function botanical()
@@ -40,7 +38,7 @@ class BotanicalIrrigation extends BaseModel
 
     public function irrigation()
     {
-        return $this->belongsTo(Irrigations::class);
+        return $this->belongsTo(Irrigation::class);
     }
 
 }

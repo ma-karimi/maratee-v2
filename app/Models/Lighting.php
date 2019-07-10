@@ -4,10 +4,9 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class Lightings extends BaseModel
+class Lighting extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -24,14 +23,12 @@ class Lightings extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'description', 'type', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
-    protected $casts = ['type'=>'json', 'description'=>'json'];
-
+    protected $casts = ['type' => 'json', 'description' => 'json'];
 
 
     public function botanicalGardenActions()

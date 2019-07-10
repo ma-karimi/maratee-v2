@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Geramin extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -25,13 +24,12 @@ class Geramin extends BaseModel
     protected $fillable = ['average', 'big_bush_diameter', 'bush', 'bush_height', 'bush_weight', 'collection_id', 'created_at', 'crown_coverage', 'deleted_at', 'essence_rate', 'flower_color', 'flowering_bish_qt', 'flowering_completion', 'gdd_flowering', 'repeat', 'seed_id', 'small_bush_diameter', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
-    protected $casts = ['flower_color'=>'json'];
+    protected $casts = ['flower_color' => 'json'];
 
     /**
      * The attributes that should be mutated to dates.

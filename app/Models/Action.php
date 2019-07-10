@@ -24,14 +24,12 @@ class Action extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = ['name' => 'json', 'description' => 'json'];
-
 
 
     public function actionHubs()
@@ -43,6 +41,7 @@ class Action extends BaseModel
     {
         return $this->hasMany(ArticleHub::class, self::ACTION_ID)->latest();
     }
+
     public function cryoBankActions()
     {
         return $this->hasMany(CryoBankAction::class, self::ACTION_ID)->latest();

@@ -35,12 +35,12 @@ class Plantology extends BaseModel
 
     public function herbariums()
     {
-        return $this->hasMany('App\Models\Herbarium',
+        return $this->hasMany(Herbarium::class,
             [
                 'phenology_id',
                 'plant_type_id'
             ]
-        );
+        )->latest();
     }
 
 

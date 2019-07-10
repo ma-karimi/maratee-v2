@@ -4,10 +4,9 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class Languages extends BaseModel
+class Language extends BaseModel
 {
 
-    
 
     /**
      * The database table used by the model.
@@ -22,9 +21,6 @@ class Languages extends BaseModel
      * @var array
      */
     protected $fillable = ['code', 'created_at', 'deleted_at', 'name', 'updated_at'];
-
-
-
 
 
 }

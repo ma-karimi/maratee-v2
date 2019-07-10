@@ -8,8 +8,6 @@ class Treatment extends BaseModel
 {
 
 
-    
-
     /**
      * The database table used by the model.
      *
@@ -25,7 +23,6 @@ class Treatment extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'paleontology_id', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
@@ -37,11 +34,11 @@ class Treatment extends BaseModel
     ];
 
 
-
     public function paleontology()
     {
         return $this->belongsTo(Paleontology::class, 'paleontology_id');
     }
+
     public function soilFeatures()
     {
         return $this->belongsToMany(SoilFeature::class,

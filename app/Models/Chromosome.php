@@ -4,10 +4,6 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\CryoBank;
-use App\Models\Herbarium;
-use App\Models\Location;
-use App\Models\Article;
 
 class Chromosome extends BaseModel
 {
@@ -28,14 +24,12 @@ class Chromosome extends BaseModel
     protected $fillable = ['2n_no', 'article_id', 'created_at', 'cryo_bank_id', 'deleted_at', 'herbarium_id', 'location_id', 'n_no', 'notes', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = ['notes' => 'json'];
-
 
 
     /**
