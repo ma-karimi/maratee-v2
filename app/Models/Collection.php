@@ -3,6 +3,11 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\TechnologyCollection;
+use App\Models\SeedExchanges;
+use App\Models\Geramin;
+use App\Models\AssessmentCollection;
 
 class Collection extends BaseModel
 {
@@ -29,9 +34,35 @@ class Collection extends BaseModel
      * @var array
      */
     protected $casts = ['name' => 'json'];
+    /**
+     * @return HasMany
+     */
+    public function assessmentCollections(): HasMany
+    {
+        return $this->hasMany(AssessmentCollection::class);
+    }
 
-    public function geramins()
+    /**
+     * @return HasMany
+     */
+    public function geramins(): HasMany
     {
         return $this->hasMany(Geramin::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function seedExchanges(): HasMany
+    {
+        return $this->hasMany(SeedExchanges::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function technologyCollections(): HasMany
+    {
+        return $this->hasMany(TechnologyCollection::class);
     }
 }

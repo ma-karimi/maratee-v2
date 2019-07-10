@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Irrigations extends BaseModel
 {
@@ -30,12 +31,14 @@ class Irrigations extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = ['type'=>'json', 'description'=>'json'];
 
 
-
-    public function botanicalIrrigations()
+    /**
+     * @return HasMany
+     */
+    public function botanicalIrrigations(): HasMany
     {
-        return $this->hasMany(BotanicalIrrigation::class, 'irrigation_id')->latest();
+        return $this->hasMany(BotanicalIrrigation::class)->latest();
     }
 }

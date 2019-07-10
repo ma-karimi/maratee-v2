@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CryoBank extends BaseModel
 {
@@ -43,29 +45,44 @@ class CryoBank extends BaseModel
     protected $dates = ['created_at', 'deleted_at', 'entry_date', 'updated_at'];
 
 
-    public function articleHubs()
+    /**
+     * @return HasMany
+     */
+    public function articleHubs(): HasMany
     {
-        return $this->hasMany(ArticleHub::class, self::CRYO_BANK_ID)->latest();
+        return $this->hasMany(ArticleHub::class)->latest();
     }
 
 
-    public function chromosomes()
+    /**
+     * @return HasMany
+     */
+    public function chromosomes(): HasMany
     {
-        return $this->hasMany(Chromosome::class, self::CRYO_BANK_ID)->latest();
+        return $this->hasMany(Chromosome::class)->latest();
     }
 
-    public function cryoBankActions()
+    /**
+     * @return HasMany
+     */
+    public function cryoBankActions(): HasMany
     {
-        return $this->hasMany(CryoBankAction::class, self::CRYO_BANK_ID)->latest();
+        return $this->hasMany(CryoBankAction::class)->latest();
     }
 
 
-    public function protection()
+    /**
+     * @return BelongsTo
+     */
+    public function protection(): BelongsTo
     {
         return $this->belongsTo(Protection::class);
     }
 
-    public function herbarium()
+    /**
+     * @return BelongsTo
+     */
+    public function herbarium(): BelongsTo
     {
         return $this->belongsTo(Herbarium::class);
     }

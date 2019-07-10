@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Department extends BaseModel
 {
-    const DEPARTMENT_ID = 'department_id';
 
 
     /**
@@ -24,7 +24,6 @@ class Department extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
@@ -32,22 +31,34 @@ class Department extends BaseModel
      */
     protected $casts = ['name' => 'json', 'description' => 'json'];
 
-    public function actionHubs()
+    /**
+     * @return HasMany
+     */
+    public function actionHubs(): HasMany
     {
-        return $this->hasMany(ActionHub::class, self::DEPARTMENT_ID)->latest();
+        return $this->hasMany(ActionHub::class)->latest();
     }
 
-    public function assessmentCollections()
+    /**
+     * @return HasMany
+     */
+    public function assessmentCollections(): HasMany
     {
-        return $this->hasMany(AssessmentCollection::class, self::DEPARTMENT_ID)->latest();
+        return $this->hasMany(AssessmentCollection::class)->latest();
     }
 
-    public function connections()
+    /**
+     * @return HasMany
+     */
+    public function connections(): HasMany
     {
-        return $this->hasMany(Connection::class, self::DEPARTMENT_ID)->latest();
+        return $this->hasMany(Connection::class)->latest();
     }
 
-    public function seeds()
+    /**
+     * @return HasMany
+     */
+    public function seeds(): HasMany
     {
         return $this->hasMany(Seed::class, 'department_id')->latest();
     }

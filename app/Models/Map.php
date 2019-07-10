@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Locality;
 
-class Maps extends BaseModel
+class Map extends BaseModel
 {
 
     
@@ -39,4 +41,11 @@ class Maps extends BaseModel
      */
     protected $dates = ['created_at', 'deleted_at', 'reference_year', 'updated_at'];
 
+    /**
+     * @return HasMany
+     */
+    public function localities(): HasMany
+    {
+        return $this->hasMany(Locality::class);
+    }
 }

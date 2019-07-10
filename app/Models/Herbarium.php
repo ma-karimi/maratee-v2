@@ -3,6 +3,10 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\MedicinalPlant;
+use App\Models\Medicals;
+use App\Models\Media;
 
 class Herbarium extends BaseModel
 {
@@ -30,41 +34,92 @@ class Herbarium extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'name'=>'json',
+        'description'=>'json',
+        'flowering'=>'json',
+        'organization_description'=>'json',
+    ];
 
 
-    public function actionHubs()
+    /**
+     * @return HasMany
+     */
+    public function actionHubs(): HasMany
     {
-        return $this->hasMany(ActionHub::class, self::HERBARIUM_ID)->latest();
+        return $this->hasMany(ActionHub::class)->latest();
     }
 
-    public function borrows()
+    /**
+     * @return HasMany
+     */
+    public function borrows(): HasMany
     {
-        return $this->hasMany(Borrow::class, self::HERBARIUM_ID)->latest();
+        return $this->hasMany(Borrow::class)->latest();
     }
 
-    public function attendances()
+    /**
+     * @return HasMany
+     */
+    public function attendances(): HasMany
     {
-        return $this->hasMany(Attendance::class, self::HERBARIUM_ID)->latest();
+        return $this->hasMany(Attendance::class)->latest();
     }
 
-    public function chromosomes()
+    /**
+     * @return HasMany
+     */
+    public function chromosomes(): HasMany
     {
-        return $this->hasMany(Chromosome::class, self::HERBARIUM_ID)->latest();
+        return $this->hasMany(Chromosome::class)->latest();
     }
 
-    public function cryoBanks()
+    /**
+     * @return HasMany
+     */
+    public function cryoBanks(): HasMany
     {
-        return $this->hasMany(CryoBank::class, self::HERBARIUM_ID)->latest();
+        return $this->hasMany(CryoBank::class)->latest();
     }
 
-    public function exchanges()
+    /**
+     * @return HasMany
+     */
+    public function exchanges(): HasMany
     {
         return $this->hasMany(Exchange::class, ['send_herbarium_id', 'receive_herbarium_id'])->latest();
     }
 
-    public function seeds()
+    /**
+     * @return HasMany
+     */
+    public function seeds(): HasMany
     {
         return $this->hasMany(Seed::class, 'herbarium_id')->latest();
+    }
+
+
+    /**
+     * @return HasMany
+     */
+    public function medias(): HasMany
+    {
+        return $this->hasMany(Media::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function medicals(): HasMany
+    {
+        return $this->hasMany(Medicals::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function medicinalPlants(): HasMany
+    {
+        return $this->hasMany(MedicinalPlant::class);
     }
 }

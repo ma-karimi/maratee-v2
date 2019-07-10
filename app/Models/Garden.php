@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Garden extends BaseModel
 {
@@ -32,7 +33,10 @@ class Garden extends BaseModel
     protected $casts = ['region' => 'json', 'section' => 'json', 'number' => 'json'];
 
 
-    public function botanicalGardenActions()
+    /**
+     * @return HasMany
+     */
+    public function botanicalGardenActions(): HasMany
     {
         return $this->hasMany(BotanicalGardenAction::class, ['from_garden_id', 'to_garden_id'])->latest();
     }

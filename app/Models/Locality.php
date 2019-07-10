@@ -3,6 +3,10 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Location;
+use App\Models\Map;
+use App\Models\Paleontology;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Locality extends BaseModel
 {
@@ -30,8 +34,36 @@ class Locality extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'formation'=>'json',
+        'layer'=>'json',
+        'stratigraphy'=>'json',
+        'fauna'=>'json',
+        'description'=>'json',
+    ];
 
+    /**
+     * @return BelongsTo
+     */
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
+    }
 
+    /**
+     * @return BelongsTo
+     */
+    public function map(): BelongsTo
+    {
+        return $this->belongsTo(Map::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function paleontology(): BelongsTo
+    {
+        return $this->belongsTo(Paleontology::class);
+    }
 
 }

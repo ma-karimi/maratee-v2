@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\MedicinalPlantConstituents;
 
 class Constituent extends BaseModel
 {
@@ -34,4 +36,11 @@ class Constituent extends BaseModel
 
 
 
+    /**
+     * @return HasMany
+     */
+    public function medicinalPlantConstituents(): HasMany
+    {
+        return $this->hasMany(MedicinalPlantConstituents::class);
+    }
 }

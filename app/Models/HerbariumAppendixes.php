@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Herbarium;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class HerbariumAppendixes extends BaseModel
 {
@@ -32,6 +34,20 @@ class HerbariumAppendixes extends BaseModel
      */
     protected $casts = [];
 
+    /**
+     * @return BelongsTo
+     */
+    public function destinationHerbarium(): BelongsTo
+    {
+        return $this->belongsTo(Herbarium::class, 'destination_herbarium_id');
+    }
 
+    /**
+     * @return BelongsTo
+     */
+    public function herbarium(): BelongsTo
+    {
+        return $this->belongsTo(Herbarium::class);
+    }
 
 }

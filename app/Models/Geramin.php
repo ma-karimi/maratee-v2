@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Geramin extends BaseModel
 {
@@ -40,13 +41,18 @@ class Geramin extends BaseModel
     protected $dates = ['created_at', 'deleted_at', 'flowering_completion', 'gdd_flowering', 'updated_at'];
 
 
-
-    public function collection()
+    /**
+     * @return BelongsTo
+     */
+    public function collection(): BelongsTo
     {
         return $this->belongsTo(Collection::class);
     }
 
-    public function seed()
+    /**
+     * @return BelongsTo
+     */
+    public function seed(): BelongsTo
     {
         return $this->belongsTo(Seed::class);
     }

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Continent extends BaseModel
 {
@@ -31,21 +33,30 @@ class Continent extends BaseModel
      */
     protected $casts = ['name' => 'json'];
 
-    public function childs()
+    /**
+     * @return HasMany
+     */
+    public function childs(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id');
     }
 
 
-    public function parent()
+    /**
+     * @return BelongsTo
+     */
+    public function parent(): BelongsTo
     {
         return $this->belongsTo(self::class, 'parent_id');
     }
 
 
-    public function countries()
+    /**
+     * @return HasMany
+     */
+    public function countries(): HasMany
     {
-        return $this->hasMany(Country::class, 'continent_id');
+        return $this->hasMany(Country::class);
     }
 
 }

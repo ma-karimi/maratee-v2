@@ -30,7 +30,7 @@ class Lightings extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = ['type'=>'json', 'description'=>'json'];
 
 
 

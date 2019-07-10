@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\PaleontologyMedia;
 
 class Exchange extends BaseModel
 {
@@ -38,29 +41,52 @@ class Exchange extends BaseModel
      */
     protected $dates = ['created_at', 'deleted_at', 'receive_date', 'send_date', 'updated_at'];
 
-    public function recieverHerbarium()
+    /**
+     * @return BelongsTo
+     */
+    public function recieverHerbarium(): BelongsTo
     {
         return $this->belongsTo(Herbarium::class, 'receive_herbarium_id');
     }
 
-    public function sendHerbarium()
+    /**
+     * @return BelongsTo
+     */
+    public function sendHerbarium(): BelongsTo
     {
         return $this->belongsTo(Herbarium::class, 'send_herbarium_id');
     }
 
-    public function receiveHerbarium()
+    /**
+     * @return BelongsTo
+     */
+    public function receiveHerbarium(): BelongsTo
     {
         return $this->belongsTo(Herbarium::class, 'receive_herbarium_id');
     }
 
-    public function sendPaleontology()
+    /**
+     * @return BelongsTo
+     */
+    public function sendPaleontology(): BelongsTo
     {
         return $this->belongsTo(Paleontology::class, 'send_paleontology_id');
     }
 
-    public function receivePaleontology()
+    /**
+     * @return BelongsTo
+     */
+    public function receivePaleontology(): BelongsTo
     {
         return $this->belongsTo(Paleontology::class, 'receive_paleontology_id');
     }
 
+
+    /**
+     * @return HasMany
+     */
+    public function paleontologyMedias(): HasMany
+    {
+        return $this->hasMany(PaleontologyMedia::class);
+    }
 }

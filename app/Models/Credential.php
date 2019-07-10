@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\PaleontologyMedia;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Credential extends BaseModel
 {
@@ -24,7 +27,6 @@ class Credential extends BaseModel
     protected $fillable = ['archive_no', 'created_at', 'date', 'deleted_at', 'name', 'parent_id', 'place', 'type', 'updated_at'];
 
 
-
     /**
      * The attributes that should be casted to native types.
      *
@@ -39,14 +41,28 @@ class Credential extends BaseModel
      */
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
 
-    public function childs()
+    /**
+     * @return HasMany
+     */
+    public function childs(): HasMany
     {
         return $this->hasMany(self::class, self::PARENT_ID);
     }
 
 
-    public function parent()
+    /**
+     * @return BelongsTo
+     */
+    public function parent(): BelongsTo
     {
         return $this->belongsTo(self::class, self::PARENT_ID);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function paleontologyMedias(): HasMany
+    {
+        return $this->hasMany(PaleontologyMedia::class, ['credential_correspondence_id', 'credential_expense_id', 'credential_fair_id', 'credential_gift_id', 'credential_purchase_id']);
     }
 }

@@ -3,6 +3,10 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Province;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Address;
 
 class City extends BaseModel
 {
@@ -32,10 +36,19 @@ class City extends BaseModel
      */
     protected $casts = ['name'=>'json'];
 
-
-
-    public function province()
+    /**
+     * @return BelongsTo
+     */
+    public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(Address::class);
     }
 }

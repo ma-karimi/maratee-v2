@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Entry extends BaseModel
 {
@@ -33,9 +34,12 @@ class Entry extends BaseModel
     protected $casts = ['type' => 'json', 'description' => 'json'];
 
 
-    public function entryHubs()
+    /**
+     * @return HasMany
+     */
+    public function entryHubs(): HasMany
     {
-        return $this->hasMany(EntryHub::class, 'entry_id')->latest();
+        return $this->hasMany(EntryHub::class)->latest();
     }
 
 }

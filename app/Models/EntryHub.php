@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class EntryHub extends BaseModel
 {
@@ -23,24 +24,34 @@ class EntryHub extends BaseModel
     protected $fillable = ['botanical_id', 'created_at', 'deleted_at', 'entry_id', 'location_id', 'organization_id', 'updated_at'];
 
 
-
-
-    public function location()
+    /**
+     * @return BelongsTo
+     */
+    public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class);
     }
 
-    public function botanical()
+    /**
+     * @return BelongsTo
+     */
+    public function botanical(): BelongsTo
     {
         return $this->belongsTo(Botanical::class);
     }
 
-    public function entry()
+    /**
+     * @return BelongsTo
+     */
+    public function entry(): BelongsTo
     {
         return $this->belongsTo(Entry::class);
     }
 
-    public function organization()
+    /**
+     * @return BelongsTo
+     */
+    public function organization(): BelongsTo
     {
         return $this->belongsTo(Organizations::class);
     }

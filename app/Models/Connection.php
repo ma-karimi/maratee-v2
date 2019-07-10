@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Department;
+use App\Models\Location;
 
 class Connection extends BaseModel
 {
@@ -24,18 +27,19 @@ class Connection extends BaseModel
     protected $fillable = ['created_at', 'deleted_at', 'department_id', 'location_id', 'updated_at'];
 
 
-
-
-
-
-    public function location()
-    {
-        return $this->belongsTo(Location::class);
-    }
-
-
-    public function department()
+    /**
+     * @return BelongsTo
+     */
+    public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
     }
 }

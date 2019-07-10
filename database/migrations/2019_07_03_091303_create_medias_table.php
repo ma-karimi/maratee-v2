@@ -24,8 +24,8 @@ class CreateMediasTable extends Migration
             $table->unsignedInteger('herbarium_id')->nullable();
             $table->unsignedInteger('seed_id')->nullable();
             $table->unsignedInteger('paleontology_id')->nullable();
-            $table->text('info_type')->nullable();
-            $table->text('reference')->nullable();
+            $table->json('info_type')->nullable();
+            $table->json('reference')->nullable();
             $table->unsignedInteger('medicinal_plant_id')->nullable();
             $table->unsignedInteger('product_id')->nullable();
             $table->unsignedInteger('botanical_id')->nullable();

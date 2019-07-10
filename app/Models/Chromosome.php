@@ -3,6 +3,11 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\CryoBank;
+use App\Models\Herbarium;
+use App\Models\Location;
+use App\Models\Article;
 
 class Chromosome extends BaseModel
 {
@@ -32,22 +37,35 @@ class Chromosome extends BaseModel
     protected $casts = ['notes' => 'json'];
 
 
-    public function herbarium()
-    {
-        return $this->belongsTo(Herbarium::class);
-    }
 
-    public function cryoBank()
-    {
-        return $this->belongsTo(CryoBank::class, 'cryo_bank_id');
-    }
-
-    public function article()
+    /**
+     * @return BelongsTo
+     */
+    public function article(): BelongsTo
     {
         return $this->belongsTo(Article::class);
     }
 
-    public function location()
+    /**
+     * @return BelongsTo
+     */
+    public function cryoBank(): BelongsTo
+    {
+        return $this->belongsTo(CryoBank::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function herbarium(): BelongsTo
+    {
+        return $this->belongsTo(Herbarium::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class);
     }

@@ -25,13 +25,6 @@ class Languages extends BaseModel
 
 
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [];
-
 
 
 }
