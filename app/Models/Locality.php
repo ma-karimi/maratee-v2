@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class Localities extends BaseModel
+class Locality extends BaseModel
 {
 
     

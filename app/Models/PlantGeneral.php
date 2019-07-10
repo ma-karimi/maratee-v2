@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use App\Models\Herbariums;
+use App\Models\Herbarium;
 use App\Models\Plant;
 
 class PlantGeneral extends BaseModel
@@ -42,7 +42,7 @@ class PlantGeneral extends BaseModel
      */
     public function herbariums()
     {
-        return $this->hasMany(Herbariums::class, 'plant_group_id');
+        return $this->hasMany(Herbarium::class, 'plant_group_id');
     }
 
     /**

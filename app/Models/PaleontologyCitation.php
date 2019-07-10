@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class PaleontologyCitations extends BaseModel
+class PaleontologyCitation extends BaseModel
 {
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Paleontology;
 
 class GeologyAge extends BaseModel
 {
@@ -31,5 +32,11 @@ class GeologyAge extends BaseModel
      */
     protected $casts = ['era' => 'json', 'period' => 'json', 'epoch' => 'json', 'stage' => 'json'];
 
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function paleontologies()
+    {
+        return $this->hasMany(Paleontology::class);
+    }
 }

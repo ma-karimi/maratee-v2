@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
-class Herbariums extends BaseModel
+class Herbarium extends BaseModel
 {
     const HERBARIUM_ID = 'herbarium_id';
 

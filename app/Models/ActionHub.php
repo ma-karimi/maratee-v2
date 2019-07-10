@@ -56,7 +56,7 @@ class ActionHub extends BaseModel
 
     public function herbarium()
     {
-        return $this->belongsTo(Herbariums::class);
+        return $this->belongsTo(Herbarium::class);
     }
 
     public function location()

@@ -40,17 +40,17 @@ class Exchange extends BaseModel
 
     public function recieverHerbarium()
     {
-        return $this->belongsTo(Herbariums::class, 'receive_herbarium_id');
+        return $this->belongsTo(Herbarium::class, 'receive_herbarium_id');
     }
 
     public function sendHerbarium()
     {
-        return $this->belongsTo(Herbariums::class, 'send_herbarium_id');
+        return $this->belongsTo(Herbarium::class, 'send_herbarium_id');
     }
 
     public function receiveHerbarium()
     {
-        return $this->belongsTo(Herbariums::class, 'receive_herbarium_id');
+        return $this->belongsTo(Herbarium::class, 'receive_herbarium_id');
     }
 
     public function sendPaleontology()

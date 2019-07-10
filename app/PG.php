@@ -6,18 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property int $paleontology_id
- * @property int $article_id
- * @property int $user_id
- * @property int $media_id
- * @property string $plates_no
+ * @property mixed $region
+ * @property mixed $section
+ * @property mixed $number
  * @property string $created_at
  * @property string $updated_at
  * @property string $deleted_at
- * @property Article $article
- * @property Media $media
- * @property Paleontology $paleontology
- * @property User $user
+ * @property BotanicalGardenAction[] $botanicalGardenActions
+ * @property BotanicalGardenAction[] $botanicalGardenActions
  */
 class PG extends Model
 {
@@ -26,12 +22,12 @@ class PG extends Model
      * 
      * @var string
      */
-    protected $table = 'paleontology_citations';
+    protected $table = 'gardens';
 
     /**
      * @var array
      */
-    protected $fillable = ['paleontology_id', 'article_id', 'user_id', 'media_id', 'plates_no', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['region', 'section', 'number', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The storage format of the model's date columns.
@@ -41,34 +37,18 @@ class PG extends Model
     protected $dateFormat = 'U';
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function article()
+    public function botanicalGardenActions()
     {
-        return $this->belongsTo('App\Models\Article');
+        return $this->hasMany('App\Models\BotanicalGardenAction', 'from_garden_id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function media()
+    public function botanicalGardenActions()
     {
-        return $this->belongsTo('App\Models\Media');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function paleontology()
-    {
-        return $this->belongsTo('App\Models\Paleontology');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User');
+        return $this->hasMany('App\Models\BotanicalGardenAction', 'to_garden_id');
     }
 }

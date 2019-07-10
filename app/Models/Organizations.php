@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Herbarium;
+use App\Models\Product;
 
 class Organizations extends BaseModel
 {
@@ -30,12 +32,32 @@ class Organizations extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'name'=>'json',
+        'description'=>'json',
+    ];
 
 
     public function entryHubs()
     {
         return $this->hasMany(EntryHub::class, 'organization_id')->latest();
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function herbariums()
+    {
+        return $this->hasMany(Herbarium::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 
 }

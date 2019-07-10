@@ -113,7 +113,7 @@ class Seed extends BaseModel
 
     public function herbarium()
     {
-        return $this->belongsTo(Herbariums::class, 'herbarium_id');
+        return $this->belongsTo(Herbarium::class, 'herbarium_id');
     }
 
     public function protection()
