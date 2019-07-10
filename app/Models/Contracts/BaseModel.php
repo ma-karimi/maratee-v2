@@ -23,5 +23,5 @@ class BaseModel extends Model
      *
      * @var array
      */
-    protected $dates = ['created_at', 'deleted_at', 'updated_at'];
+//    protected $dates = ['deleted_at'];
 }

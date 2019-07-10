@@ -3,12 +3,10 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Author extends BaseModel
 {
 
-    use SoftDeletes;
 
     /**
      * The database table used by the model.
@@ -24,16 +22,12 @@ class Author extends BaseModel
      */
     protected $fillable = ['created_at', 'deleted_at', 'name', 'updated_at'];
 
-
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
-    protected $casts = [];
-
-
+    protected $casts = ['name' => 'json'];
 
 
     public function plants()

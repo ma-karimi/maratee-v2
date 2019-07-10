@@ -1,2 +1,3 @@
 *.local.xml
 *.xml
+/workspace.xml

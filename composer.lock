@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fee9a8979d73b7f0a64504d357f6c764",
+    "content-hash": "0c07fe92dacc344cddec71a0fb427e63",
     "packages": [
         {
             "name": "appointer/swaggervel",
@@ -4138,6 +4138,52 @@
                 "testing"
             ],
             "time": "2019-02-13T09:37:52+00:00"
+        },
+        {
+            "name": "mpociot/laravel-test-factory-helper",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpociot/laravel-test-factory-helper.git",
+                "reference": "dd82fab8a72530bce3a628b29cbc5454a1427d35"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpociot/laravel-test-factory-helper/zipball/dd82fab8a72530bce3a628b29cbc5454a1427d35",
+                "reference": "dd82fab8a72530bce3a628b29cbc5454a1427d35",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "~2.3",
+                "illuminate/console": "^5.5",
+                "illuminate/filesystem": "^5.5",
+                "illuminate/support": "^5.5",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mpociot\\LaravelTestFactoryHelper\\TestFactoryHelperServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mpociot\\LaravelTestFactoryHelper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Generate Laravel test factories from your existing models",
+            "keywords": [
+                "factory",
+                "laravel",
+                "tests"
+            ],
+            "time": "2019-06-23T16:09:16+00:00"
         },
         {
             "name": "myclabs/deep-copy",
