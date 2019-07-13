@@ -5,17 +5,14 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\SeedChemical::class, function (Faker $faker) {
+    $seeds = \App\Models\Seed::pluck('id')->toArray();
+    $chemicals = \App\Models\Chemical::pluck('id')->toArray();
+    $locations = \App\Models\Location::pluck('id')->toArray();
     return [
-        'chemical_id' => function () {
-            return factory(App\Models\Chemical::class)->create()->id;
-        },
-        'seed_id' => function () {
-            return factory(App\Models\Seed::class)->create()->id;
-        },
+        'chemical_id' => $faker->randomElement($chemicals),
+        'seed_id' => $faker->randomElement($seeds),
         'treatment' => make_json($faker->word),
         'repeat' => $faker->randomNumber(),
-        'location_id' => function () {
-            return factory(App\Models\Location::class)->create()->id;
-        },
+        'location_id' =>$faker->randomElement($locations),
     ];
 });

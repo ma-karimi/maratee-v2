@@ -5,13 +5,12 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Seed::class, function (Faker $faker) {
+    $herbariums = \App\Models\Herbarium::pluck('id')->toArray();
+    $protections = \App\Models\Protection::pluck('id')->toArray();
+    $departments = \App\Models\Department::pluck('id')->toArray();
     return [
-        'herbarium_id' => function () {
-            return factory(App\Models\Herbarium::class)->create()->id;
-        },
-        'protection_id' => function () {
-            return factory(App\Models\Protection::class)->create()->id;
-        },
+        'herbarium_id' => $faker->randomElement($herbariums),
+        'protection_id' => $faker->randomElement($protections),
         'field_code' => $faker->randomNumber(),
         'correct_field_code' => $faker->word,
         'sample_code' => $faker->randomNumber(),
@@ -44,9 +43,7 @@ $factory->define(App\Models\Seed::class, function (Faker $faker) {
         'vegetative_form' => make_json($faker->word),
         'height' => $faker->randomNumber(),
         'mother_health' => make_json($faker->word),
-        'department_id' => function () {
-            return factory(App\Models\Department::class)->create()->id;
-        },
+        'department_id' => $faker->randomElement($departments),
         'send_date' => $faker->date(),
         'collected_qt' => $faker->randomNumber(),
         'must_collected_qt' => $faker->randomNumber(),

@@ -5,12 +5,10 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\TechnologyCollection::class, function (Faker $faker) {
+    $seed_techs=\App\Models\SeedTechnology::pluck('id')->toArray();
+    $collections=\App\Models\Collection::pluck('id')->toArray();
     return [
-        'seed_technology_id' => function () {
-            return factory(App\Models\SeedTechnology::class)->create()->id;
-        },
-        'collection_id' => function () {
-            return factory(App\Models\Collection::class)->create()->id;
-        },
+        'seed_technology_id' => $faker->randomElement($seed_techs),
+        'collection_id' => $faker->randomElement($collections),
     ];
 });

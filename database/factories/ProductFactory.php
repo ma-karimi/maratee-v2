@@ -5,12 +5,11 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Product::class, function (Faker $faker) {
+    $organizations=\App\Models\Organization::pluck('id')->toArray();
     return [
         'name' => make_json($faker->name),
         'description' => make_json($faker->text),
         'registration_status' => $faker->word,
-        'organization_id' => function () {
-            return factory(App\Models\Organization::class)->create()->id;
-        },
+        'organization_id' => $faker->randomElement($organizations),
     ];
 });
