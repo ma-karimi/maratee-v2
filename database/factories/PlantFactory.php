@@ -5,51 +5,37 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Plant::class, function (Faker $faker) {
+    $authors=\App\Models\Author::all()->pluck('id')->toArray();
+    $articles=\App\Models\Article::all()->pluck('id')->toArray();
+    $users=\App\Models\User::all()->pluck('id')->toArray();
+    $locations=\App\Models\Location::all()->pluck('id')->toArray();
+    $plant_class_generals=\App\Models\PlantGeneral::where('type','class')->pluck('id')->toArray();
+    $plant_family_generals=\App\Models\PlantGeneral::where('type','family')->pluck('id')->toArray();
+    $plant_flowering_generals=\App\Models\PlantGeneral::where('type','flowering')->pluck('id')->toArray();
+    $plant_genus_generals=\App\Models\PlantGeneral::where('type','genus')->pluck('id')->toArray();
+    $plant_group_generals=\App\Models\PlantGeneral::where('type','group')->pluck('id')->toArray();
+    $plant_order_generals=\App\Models\PlantGeneral::where('type','order')->pluck('id')->toArray();
+    $plant_specie_generals=\App\Models\PlantGeneral::where('type','specie')->pluck('id')->toArray();
+    $plant_sperm_generals=\App\Models\PlantGeneral::where('type','sperm')->pluck('id')->toArray();
+    $plant_sub_specie_generals=\App\Models\PlantGeneral::where('type','sub_specie')->pluck('id')->toArray();
+    $plant_variety_generals=\App\Models\PlantGeneral::where('type','variety')->pluck('id')->toArray();
     return [
         'name' => make_json($faker->word),
         'domestic_name' => make_json($faker->word),
         'description' => make_json($faker->text),
-        'author_id' => function () {
-            return factory(App\Models\Author::class)->create()->id;
-        },
-        'article_id' => function () {
-            return factory(App\Models\Article::class)->create()->id;
-        },
-        'user_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
-        'location' => function () {
-            return factory(App\Models\Location::class)->create()->id;
-        },
-        'plant_general_class_id' => function () {
-            return factory(App\Models\PlantGeneral::class)->create(['type' => 'class'])->id;
-        },
-        'plant_general_family_id' => function () {
-            return factory(App\Models\PlantGeneral::class)->create(['type' => 'family'])->id;
-        },
-        'plant_general_flowering_id' => function () {
-            return factory(App\Models\PlantGeneral::class)->create(['type' => 'flowering'])->id;
-        },
-        'plant_general_genus_id' => function () {
-            return factory(App\Models\PlantGeneral::class)->create(['type' => 'genus'])->id;
-        },
-        'plant_general_group_id' => function () {
-            return factory(App\Models\PlantGeneral::class)->create(['type' => 'group'])->id;
-        },
-        'plant_general_order_id' => function () {
-            return factory(App\Models\PlantGeneral::class)->create(['type' => 'order'])->id;
-        },
-        'plant_general_specie_id' => function () {
-            return factory(App\Models\PlantGeneral::class)->create(['type' => 'specie'])->id;
-        },
-        'plant_general_sperm_id' => function () {
-            return factory(App\Models\PlantGeneral::class)->create(['type' => 'sperm'])->id;
-        },
-        'plant_general_sub_specie_id' => function () {
-            return factory(App\Models\PlantGeneral::class)->create(['type' => 'sub_specie'])->id;
-        },
-        'plant_general_variety_id' => function () {
-            return factory(App\Models\PlantGeneral::class)->create(['type' => 'variety'])->id;
-        },
+        'author_id' => $faker->randomElement($authors),
+        'article_id' => $faker->randomElement($articles),
+        'user_id' =>$faker->randomElement($users),
+        'location' => $faker->randomElement($locations),
+        'plant_general_class_id' => $faker->randomElement($plant_class_generals),
+        'plant_general_family_id' => $faker->randomElement($plant_family_generals),
+        'plant_general_flowering_id' => $faker->randomElement($plant_flowering_generals),
+        'plant_general_genus_id' => $faker->randomElement($plant_genus_generals),
+        'plant_general_group_id' => $faker->randomElement($plant_group_generals),
+        'plant_general_order_id' => $faker->randomElement($plant_order_generals),
+        'plant_general_specie_id' => $faker->randomElement($plant_specie_generals),
+        'plant_general_sperm_id' =>$faker->randomElement($plant_sperm_generals),
+        'plant_general_sub_specie_id' => $faker->randomElement($plant_sub_specie_generals),
+        'plant_general_variety_id' => $faker->randomElement($plant_variety_generals),
     ];
 });

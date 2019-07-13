@@ -143,4 +143,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(SeedHub::class)->latest();
     }
+
+    /**
+     * @return HasMany
+     */
+    public function connection()
+    {
+        return $this->hasMany(Connection::class)->latest();
+    }
 }

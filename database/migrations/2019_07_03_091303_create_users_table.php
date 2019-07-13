@@ -29,7 +29,10 @@ class CreateUsersTable extends Migration {
 			$table->string('mobile')->nullable();
 			$table->string('phone')->nullable();
 			$table->string('email');
+<<<<<<< HEAD
+=======
 			$table->string('password');
+>>>>>>> 47ccb6284c6a668c45e9212f9c99f411b34cc873
 			$table->integer('work_experience')->nullable();
 
             $table->timeStampsTz();

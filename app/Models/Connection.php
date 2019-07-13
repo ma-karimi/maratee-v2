@@ -21,7 +21,7 @@ class Connection extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'department_id', 'location_id', 'updated_at'];
+    protected $fillable = ['created_at', 'deleted_at', 'department_id', 'user_id', 'location_id', 'updated_at'];
 
 
     /**
@@ -38,5 +38,13 @@ class Connection extends BaseModel
     public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -5,6 +5,10 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Visit::class, function (Faker $faker) {
+    $users = \App\Models\User::pluck('id')->toArray();
+    $medias = \App\Models\Media::pluck('id')->toArray();
+    $paleontologies = \App\Models\Paleontology::pluck('id')->toArray();
+
     return [
         'date' => $faker->dateTimeBetween(),
         'description' => make_json($faker->text),
@@ -12,14 +16,8 @@ $factory->define(App\Models\Visit::class, function (Faker $faker) {
         'peoples' => $faker->randomNumber(),
         'archives_types' => $faker->word,
         'archive_no' => $faker->word,
-        'paleontology_id' => function () {
-            return factory(App\Models\Paleontology::class)->create()->id;
-        },
-        'media_id' => function () {
-            return factory(App\Models\Media::class)->create()->id;
-        },
-        'user_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
+        'paleontology_id' => $faker->randomElement($paleontologies),
+        'media_id' => $faker->randomElement($medias),
+        'user_id' =>$faker->randomElement($users),
     ];
 });

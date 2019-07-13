@@ -11,6 +11,6 @@ class AuthorTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Author::class, 2)->create();
+        factory(App\Models\Author::class, 50)->create();
     }
 }
