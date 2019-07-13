@@ -12,6 +12,6 @@ $factory->define(App\Models\SoilHasSoilFeature::class, function (Faker $faker) {
         'soil_feature_id' => function () {
             return factory(App\Models\SoilFeature::class)->create()->id;
         },
-        'value' => $faker->word,
+        'value' => make_json($faker->word),
     ];
 });

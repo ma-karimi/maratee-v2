@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Media::class, function (Faker $faker) {
     return [
-        'name' => make_json($faker->name),
+        'name' => $faker->name,
         'format_type' => $faker->word,
         'date' => $faker->dateTimeBetween(),
         'user_id' => function () {
@@ -25,8 +25,8 @@ $factory->define(App\Models\Media::class, function (Faker $faker) {
         'paleontology_id' => function () {
             return factory(App\Models\Paleontology::class)->create()->id;
         },
-        'info_type' => $faker->word,
-        'reference' => $faker->word,
+        'info_type' => make_json($faker->word),
+        'reference' => make_json($faker->word),
         'medicinal_plant_id' => function () {
             return factory(App\Models\MedicinalPlant::class)->create()->id;
         },

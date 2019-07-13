@@ -12,7 +12,7 @@ $factory->define(App\Models\SeedChemical::class, function (Faker $faker) {
         'seed_id' => function () {
             return factory(App\Models\Seed::class)->create()->id;
         },
-        'treatment' => $faker->word,
+        'treatment' => make_json($faker->word),
         'repeat' => $faker->randomNumber(),
         'location_id' => function () {
             return factory(App\Models\Location::class)->create()->id;
