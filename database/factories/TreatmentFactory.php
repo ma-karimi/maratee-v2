@@ -5,6 +5,7 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Treatment::class, function (Faker $faker) {
+
     return [
         'paleontology_id' => function () {
             return factory(App\Models\Paleontology::class)->create()->id;
