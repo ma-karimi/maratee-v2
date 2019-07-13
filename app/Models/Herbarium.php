@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Herbarium extends BaseModel
 {
-    const HERBARIUM_ID = 'herbarium_id';
-
 
     /**
      * The database table used by the model.
@@ -117,5 +115,40 @@ class Herbarium extends BaseModel
     public function medicinalPlants(): HasMany
     {
         return $this->hasMany(MedicinalPlant::class)->latest();
+    }
+
+    public function phenology()
+    {
+        return $this->belongsTo(Paleontology::class);
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
+    }
+
+    public function protection()
+    {
+        return $this->belongsTo(Protection::class);
+    }
+
+    public function plantType()
+    {
+        return $this->belongsTo(Paleontology::class);
+    }
+
+    public function plantGroup()
+    {
+        return $this->belongsTo(PlantGeneral::class);
+    }
+
+    public function phytogeography()
+    {
+        return $this->belongsTo(Paleontology::class);
     }
 }

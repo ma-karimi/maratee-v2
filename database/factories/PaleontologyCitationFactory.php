@@ -5,19 +5,15 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\PaleontologyCitation::class, function (Faker $faker) {
+    $paleontologies = \App\Models\Paleontology::pluck('id')->toArray();
+    $articles = \App\Models\Article::pluck('id')->toArray();
+    $users = \App\Models\User::pluck('id')->toArray();
+    $medias = \App\Models\Media::pluck('id')->toArray();
     return [
-        'paleontology_id' => function () {
-            return factory(App\Models\Paleontology::class)->create()->id;
-        },
-        'article_id' => function () {
-            return factory(App\Models\Article::class)->create()->id;
-        },
-        'user_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
-        'media_id' => function () {
-            return factory(App\Models\Media::class)->create()->id;
-        },
+        'paleontology_id' => $faker->randomElement($paleontologies),
+        'article_id' => $faker->randomElement($articles),
+        'user_id' => $faker->randomElement($users),
+        'media_id' => $faker->randomElement($medias),
         'plates_no' => $faker->word,
     ];
 });

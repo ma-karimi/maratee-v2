@@ -95,7 +95,7 @@ class DatabaseSeeder extends Seeder
             SeedWeightTableSeeder::class,
             SeedHubSeeder::class,
             SeedMolecularTableSeeder::class,
-            SeedHasPlantTableSeeder::class,/////////////////////////////////////////
+            SeedHasPlantTableSeeder::class,
             SoilHasSoilFeatureTableSeeder::class,
             TechnologyCollectionTableSeeder::class,
             VisitTableSeeder::class

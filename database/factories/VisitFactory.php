@@ -18,6 +18,6 @@ $factory->define(App\Models\Visit::class, function (Faker $faker) {
         'archive_no' => $faker->word,
         'paleontology_id' => $faker->randomElement($paleontologies),
         'media_id' => $faker->randomElement($medias),
-        'user_id' => $users,
+        'user_id' =>$faker->randomElement($users),
     ];
 });
