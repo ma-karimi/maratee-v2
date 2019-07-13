@@ -10,9 +10,9 @@ $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
             return factory(App\Models\PlantFactor::class)->create()->id;
         },
         'code_no' => $faker->randomNumber(),
-        'treatment' => $faker->word,
-        'vast_cultivation' => $faker->word,
-        'studied_sample' => $faker->word,
+        'treatment' => make_json($faker->word),
+        'vast_cultivation' => make_json($faker->word),
+        'studied_sample' => make_json($faker->word),
         'efficiency' => $faker->randomFloat(),
         'secondary_metabolite' => $faker->word,
         'herbarium_id' => function () {
@@ -27,9 +27,9 @@ $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
         'article_id' => function () {
             return factory(App\Models\Article::class)->create()->id;
         },
-        'exclusivity' => $faker->word,
-        'life_cycle' => $faker->word,
-        'acidity' => $faker->word,
+        'exclusivity' => make_json($faker->word),
+        'life_cycle' => make_json($faker->word),
+        'acidity' => make_json($faker->word),
         'soil_id' => function () {
             return factory(App\Models\Soil::class)->create()->id;
         },

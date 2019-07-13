@@ -24,6 +24,6 @@ $factory->define(App\Models\Geramin::class, function (Faker $faker) {
         'small_bush_diameter' => $faker->randomNumber(),
         'flowering_bish_qt' => $faker->randomNumber(),
         'crown_coverage' => $faker->randomNumber(),
-        'flower_color' => $faker->word,
+        'flower_color' => make_json($faker->word),
     ];
 });

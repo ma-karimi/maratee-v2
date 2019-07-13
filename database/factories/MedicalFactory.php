@@ -12,33 +12,33 @@ $factory->define(App\Models\Medical::class, function (Faker $faker) {
         'medicine_side_effect_id' => function () {
             return factory(App\Models\Medicine::class)->create()->id;
         },
-        'side_effect_description' => $faker->word,
+        'side_effect_description' => make_json($faker->word),
         'medicine_effect_id' => function () {
             return factory(App\Models\Medicine::class)->create()->id;
         },
-        'medicine_effect_description' => $faker->word,
+        'medicine_effect_description' => make_json($faker->word),
         'medicine_therapy_id' => function () {
             return factory(App\Models\Medicine::class)->create()->id;
         },
-        'therapy_description' => $faker->word,
+        'therapy_description' => make_json($faker->word),
         'medicine_drug_id' => function () {
             return factory(App\Models\Medicine::class)->create()->id;
         },
-        'drug_description' => $faker->word,
+        'drug_description' => make_json($faker->word),
         'product_id' => function () {
             return factory(App\Models\Product::class)->create()->id;
         },
         'medicine_drug_shape_id' => function () {
             return factory(App\Models\Medicine::class)->create()->id;
         },
-        'drug_shape_description' => $faker->word,
+        'drug_shape_description' => make_json($faker->word),
         'medicine_medicinal_part_id' => function () {
             return factory(App\Models\Medicine::class)->create()->id;
         },
-        'medicinal_part_description' => $faker->word,
+        'medicinal_part_description' => make_json($faker->word),
         'medicine_drug_usage_id' => function () {
             return factory(App\Models\Medicine::class)->create()->id;
         },
-        'drug_usage_description' => $faker->word,
+        'drug_usage_description' => make_json($faker->word),
     ];
 });

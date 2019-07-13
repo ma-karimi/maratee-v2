@@ -3,6 +3,7 @@
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
 use Faker\Generator as Faker;
+use Grimzy\LaravelMysqlSpatial\Types\Point;
 
 $factory->define(App\Models\Location::class, function (Faker $faker) {
     return [
@@ -13,7 +14,7 @@ $factory->define(App\Models\Location::class, function (Faker $faker) {
             return factory(App\Models\Region::class)->create()->id;
         },
         'altitude' => $faker->randomNumber(),
-        'point' => $faker->word,
+        'point' => new Point($faker->randomFloat(null, 36.5988295, 37.65656), $faker->randomFloat(null, 56.565665, 58.656565)),
         'name' => make_json($faker->name),
         'description' => make_json($faker->text),
     ];

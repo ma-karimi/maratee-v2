@@ -31,10 +31,10 @@ $factory->define(App\Models\BotanicalGardenAction::class, function (Faker $faker
         'to_garden_id' => function () {
             return factory(App\Models\Garden::class)->create()->id;
         },
-        'initial_place_type' => $faker->word,
-        'destination_place_type' => $faker->word,
-        'initial_place_condition' => $faker->word,
-        'destination_place_condition' => $faker->word,
-        'treatment' => $faker->word,
+        'initial_place_type' => make_json($faker->word),
+        'destination_place_type' => make_json($faker->word),
+        'initial_place_condition' => make_json($faker->word),
+        'destination_place_condition' => make_json($faker->word),
+        'treatment' => make_json($faker->word),
     ];
 });
