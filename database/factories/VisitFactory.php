@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Models\Visit::class, function (Faker $faker) {
     return [
         'date' => $faker->dateTimeBetween(),
-        'description' => $faker->text,
+        'description' => make_json($faker->text),
         'purpose' => $faker->word,
         'peoples' => $faker->randomNumber(),
         'archives_types' => $faker->word,

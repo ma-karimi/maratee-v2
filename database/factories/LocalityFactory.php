@@ -17,7 +17,7 @@ $factory->define(App\Models\Locality::class, function (Faker $faker) {
         'stratigraphy' => $faker->word,
         'lithology' => $faker->word,
         'fauna' => $faker->word,
-        'description' => $faker->text,
+        'description' => make_json($faker->text),
         'map_id' => function () {
             return factory(App\Models\Map::class)->create()->id;
         },

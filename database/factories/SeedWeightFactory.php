@@ -17,6 +17,6 @@ $factory->define(App\Models\SeedWeight::class, function (Faker $faker) {
         'active_revival' => $faker->randomNumber(),
         'support_revival' => $faker->randomNumber(),
         'revival_code' => $faker->word,
-        'description' => $faker->text,
+        'description' => make_json($faker->text),
     ];
 });

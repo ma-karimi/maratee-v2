@@ -14,7 +14,7 @@ $factory->define(App\Models\Location::class, function (Faker $faker) {
         },
         'altitude' => $faker->randomNumber(),
         'point' => $faker->word,
-        'name' => $faker->name,
-        'description' => $faker->text,
+        'name' => make_json($faker->name),
+        'description' => make_json($faker->text),
     ];
 });

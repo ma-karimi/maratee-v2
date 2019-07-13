@@ -9,7 +9,7 @@ $factory->define(App\Models\Treatment::class, function (Faker $faker) {
         'paleontology_id' => function () {
             return factory(App\Models\Paleontology::class)->create()->id;
         },
-        'name' => $faker->name,
-        'description' => $faker->text,
+        'name' => make_json($faker->name),
+        'description' => make_json($faker->text),
     ];
 });

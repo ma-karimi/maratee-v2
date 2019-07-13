@@ -11,7 +11,7 @@ $factory->define(App\Models\Exchange::class, function (Faker $faker) {
         },
         'send_date' => $faker->dateTimeBetween(),
         'receive_date' => $faker->dateTimeBetween(),
-        'description' => $faker->text,
+        'description' => make_json($faker->text),
         'receive_herbarium_id' => function () {
             return factory(App\Models\Herbarium::class)->create()->id;
         },

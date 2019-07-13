@@ -16,6 +16,6 @@ $factory->define(App\Models\PaleontologyAction::class, function (Faker $faker) {
             return factory(App\Models\Action::class)->create()->id;
         },
         'date' => $faker->dateTimeBetween(),
-        'description' => $faker->text,
+        'description' => make_json($faker->text),
     ];
 });

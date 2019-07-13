@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Media::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'name' => make_json($faker->name),
         'format_type' => $faker->word,
         'date' => $faker->dateTimeBetween(),
         'user_id' => function () {
@@ -15,7 +15,7 @@ $factory->define(App\Models\Media::class, function (Faker $faker) {
         'location_id' => function () {
             return factory(App\Models\Location::class)->create()->id;
         },
-        'description' => $faker->text,
+        'description' => make_json($faker->text),
         'herbarium_id' => function () {
             return factory(App\Models\Herbarium::class)->create()->id;
         },

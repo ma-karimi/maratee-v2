@@ -17,6 +17,6 @@ $factory->define(App\Models\SeedExchange::class, function (Faker $faker) {
         'date' => $faker->dateTimeBetween(),
         'approval_no' => $faker->word,
         'saved_type' => $faker->word,
-        'description' => $faker->text,
+        'description' => make_json($faker->text),
     ];
 });

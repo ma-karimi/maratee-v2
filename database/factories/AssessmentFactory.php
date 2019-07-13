@@ -31,6 +31,6 @@ $factory->define(App\Models\Assessment::class, function (Faker $faker) {
         'dry_material_rate' => $faker->randomNumber(),
         'seed_length' => $faker->randomNumber(),
         'seed_width' => $faker->randomNumber(),
-        'description' => $faker->text,
+        'description' => make_json($faker->text),
     ];
 });

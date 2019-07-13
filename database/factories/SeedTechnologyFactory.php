@@ -21,6 +21,6 @@ $factory->define(App\Models\SeedTechnology::class, function (Faker $faker) {
         'sprout' => $faker->randomNumber(),
         'vigor' => $faker->randomNumber(),
         'examine' => $faker->date(),
-        'description' => $faker->text,
+        'description' => make_json($faker->text),
     ];
 });

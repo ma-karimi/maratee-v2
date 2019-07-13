@@ -6,8 +6,8 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Morphology::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'description' => $faker->text,
+        'name' => make_json($faker->name),
+        'description' => make_json($faker->text),
         'unit' => $faker->word,
     ];
 });

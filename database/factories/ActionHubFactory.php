@@ -17,7 +17,7 @@ $factory->define(App\Models\ActionHub::class, function (Faker $faker) {
             return factory(App\Models\Herbarium::class)->create()->id;
         },
         'date' => $faker->dateTimeBetween(),
-        'description' => $faker->text,
+        'description' => make_json($faker->text),
         'project_id' => function () {
             return factory(App\Models\Project::class)->create()->id;
         },

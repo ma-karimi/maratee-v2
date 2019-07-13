@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 $factory->define(App\Models\Lighting::class, function (Faker $faker) {
     return [
         'type' => $faker->word,
-        'description' => $faker->text,
+        'description' => make_json($faker->text),
     ];
 });
