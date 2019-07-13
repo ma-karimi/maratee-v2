@@ -1,0 +1,28 @@
+<?php
+
+/* @var $factory \Illuminate\Database\Eloquent\Factory */
+
+use Faker\Generator as Faker;
+
+$factory->define(App\Models\ActionHub::class, function (Faker $faker) {
+    return [
+        'action_id' => function () {
+            return factory(App\Models\Action::class)->create()->id;
+        },
+        'user_id' => $faker->randomNumber(),
+        'location_id' => function () {
+            return factory(App\Models\Location::class)->create()->id;
+        },
+        'herbarium_id' => function () {
+            return factory(App\Models\Herbarium::class)->create()->id;
+        },
+        'date' => $faker->dateTimeBetween(),
+        'description' => $faker->text,
+        'project_id' => function () {
+            return factory(App\Models\Project::class)->create()->id;
+        },
+        'department_id' => function () {
+            return factory(App\Models\Department::class)->create()->id;
+        },
+    ];
+});
