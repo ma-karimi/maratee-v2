@@ -13,7 +13,31 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        $this->call(AuthorTableSeeder::class);
+        $this->call([
+            AuthorTableSeeder::class,
+            ProductTableSeeder::class,
+            ProjectTableSeeder::class,
+            ProtectionTableSeeder::class,
+            ProvinceTableSeeder::class,
+            RegionTableSeeder::class,
+            ReproductionTableSeeder::class,
+            SeedChemicalTableSeeder::class,
+            SeedExchangeTableSeeder::class,
+            SeedHasPlantTableSeeder::class,
+            SeedHubSeeder::class,
+            SeedMolecularTableSeeder::class,
+            SeedHasPlantTableSeeder::class,
+            SeedTableSeeder::class,
+            SeedTechnologyTableSeeder::class,
+            SeedWeightTableSeeder::class,
+            SoilFeatureTableSeeder::class,
+            SoilHasSoilFeatureTableSeeder::class,
+            TechnologyCollectionTableSeeder::class,
+            TreatmentTableSeeder::class,
+            UserTableSeeder::class,
+            VillageTableSeeder::class,
+            VisitTableSeeder::class,
+        ]);
         Model::reguard();
 
     }
