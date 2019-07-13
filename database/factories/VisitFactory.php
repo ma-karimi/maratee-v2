@@ -8,7 +8,7 @@ $factory->define(App\Models\Visit::class, function (Faker $faker) {
     return [
         'date' => $faker->dateTimeBetween(),
         'description' => make_json($faker->text),
-        'purpose' => $faker->word,
+        'purpose' => make_json($faker->word),
         'peoples' => $faker->randomNumber(),
         'archives_types' => $faker->word,
         'archive_no' => $faker->word,

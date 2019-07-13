@@ -15,7 +15,7 @@ $factory->define(App\Models\SeedMolecular::class, function (Faker $faker) {
         'location_id' => function () {
             return factory(App\Models\Location::class)->create()->id;
         },
-        'treatment' => $faker->word,
+        'treatment' => make_json($faker->word),
         'repeat' => $faker->randomNumber(),
     ];
 });

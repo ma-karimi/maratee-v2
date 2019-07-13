@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Soil::class, function (Faker $faker) {
     return [
-        'type' => $faker->word,
+        'type' => make_json($faker->word),
         'description' => make_json($faker->text),
         'deleted_at' => $faker->dateTimeBetween(),
     ];

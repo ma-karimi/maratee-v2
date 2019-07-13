@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 $factory->define(App\Models\SoilFeature::class, function (Faker $faker) {
     return [
         'name' => make_json($faker->name),
-        'unit' => $faker->word,
+        'unit' => make_json($faker->word),
     ];
 });

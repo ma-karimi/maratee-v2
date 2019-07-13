@@ -12,8 +12,8 @@ $factory->define(App\Models\SeedHub::class, function (Faker $faker) {
         'user_id' => function () {
             return factory(App\Models\User::class)->create()->id;
         },
-        'action_role' => $faker->word,
-        'action_role_description' => $faker->word,
+        'action_role' => make_json($faker->word),
+        'action_role_description' => make_json($faker->word),
         'seed_id' => function () {
             return factory(App\Models\Seed::class)->create()->id;
         },
