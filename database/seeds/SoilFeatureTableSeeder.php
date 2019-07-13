@@ -11,6 +11,6 @@ class SoilFeatureTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\SoilHasSoilFeature::class, 50)->create();
+        factory(App\Models\SoilFeature::class, 50)->create();
     }
 }

@@ -26,7 +26,7 @@ class AddForeignKeysToProvincesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('province', function(Blueprint $table)
+		Schema::table('provinces', function(Blueprint $table)
 		{
 			$table->dropForeign(['country_id']);
 		});

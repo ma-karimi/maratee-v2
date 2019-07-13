@@ -30,7 +30,7 @@ class Media extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['info_type' => 'json', 'reference' => 'json'];
+    protected $casts = ['info_type' => 'json', 'reference' => 'json', 'description' => 'json'];
 
     /**
      * The attributes that should be mutated to dates.

@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Models\Botanical::class, function (Faker $faker) {
     return [
         'herbarium_id' => $faker->randomNumber(),
-        'height' => $faker->randomFloat(),
+        'height' => '2.3',
         'flower_color' => make_json($faker->word),
         'fruit_color' => make_json($faker->word),
         'leaf_color' => make_json($faker->word),
@@ -20,7 +20,7 @@ $factory->define(App\Models\Botanical::class, function (Faker $faker) {
         'seed_value' => make_json($faker->word),
         'seed_production' => make_json($faker->word),
         'season_resistance' => make_json($faker->word),
-        'year' => $faker->dateTimeBetween($faker->word),
+        'year' => $faker->dateTimeBetween(),
         'sensitivity' => make_json($faker->word),
         'sensitivity_description' => make_json($faker->word),
         'notes' => make_json($faker->word),

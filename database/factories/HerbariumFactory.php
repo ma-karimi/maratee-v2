@@ -5,13 +5,20 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Herbarium::class, function (Faker $faker) {
+    $locations = \App\Models\Location::pluck('id')->toArray();
+    $phenologies = \App\Models\Plantology::whereType('phenology')->pluck('id')->toArray();
+    $phytogeographies = \App\Models\Plantology::whereType('phytogeography')->pluck('id')->toArray();
+    $protections = \App\Models\Protection::pluck('id')->toArray();
+    $plant_groups = \App\Models\PlantGeneral::whereType('group')->pluck('id')->toArray();
+    $organizations = \App\Models\Organization::pluck('id')->toArray();
+    $plant_types = \App\Models\PlantGeneral::whereType('plant_type')->pluck('id')->toArray();
     return [
         'number' => $faker->randomNumber(),
-        'location_id' => $faker->randomNumber(),
-        'phenology_id' => $faker->randomNumber(),
-        'protection_id' => $faker->randomNumber(),
-        'phytogeography_id' => $faker->randomNumber(),
-        'organization_id' => $faker->randomNumber(),
+        'location_id' => $faker->randomElement($locations),
+        'phenology_id' => $faker->randomElement($phenologies),
+        'protection_id' => $faker->randomElement($protections),
+        'phytogeography_id' => $faker->randomElement($phytogeographies),
+        'organization_id' => $faker->randomElement($organizations),
         'sheets_no' => $faker->randomNumber(),
         'samples_no' => $faker->randomNumber(),
         'tip_qt' => $faker->randomNumber(),
@@ -23,8 +30,8 @@ $factory->define(App\Models\Herbarium::class, function (Faker $faker) {
         'organization_description' => $faker->word,
         'herbarium_tip_location' => $faker->randomNumber(),
         'type_description' => $faker->word,
-        'plant_type_id' => $faker->randomNumber(),
+        'plant_type_id' => $faker->randomElement($plant_types),
         'flowering' => $faker->word,
-        'plant_group_id' => $faker->randomNumber(),
+        'plant_group_id' => $faker->randomElement($plant_groups),
     ];
 });
