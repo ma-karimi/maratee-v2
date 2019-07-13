@@ -5,6 +5,8 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Paleontology::class, function (Faker $faker) {
+    $geology_ages = \App\Models\GeologyAge::pluck('id')->toArray();
+
     return [
         'catalog_no' => $faker->randomNumber(),
         'specimen_no' => $faker->word,
@@ -20,9 +22,7 @@ $factory->define(App\Models\Paleontology::class, function (Faker $faker) {
         'pieces' => $faker->randomNumber(),
         'color' => make_json($faker->word),
         'element' => make_json($faker->word),
-        'geology_age_id' => function () {
-            return factory(App\Models\GeologyAge::class)->create()->id;
-        },
+        'geology_age_id' => $faker->randomElement($geology_ages),
         'treatment' => make_json($faker->word),
         'additional_info' => make_json($faker->word),
         'access' => make_json($faker->word),
