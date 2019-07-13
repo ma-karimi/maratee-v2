@@ -5,10 +5,9 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Province::class, function (Faker $faker) {
+    $countries = \App\Models\Country::pluck('id')->toArray();
     return [
-        'country_id' => function () {
-            return factory(App\Models\Country::class)->create()->id;
-        },
+        'country_id' => $faker->randomElement($countries),
         'name' => make_json($faker->name),
     ];
 });

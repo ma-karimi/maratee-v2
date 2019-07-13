@@ -19,6 +19,7 @@ class CreateConnectionsTable extends Migration {
 
 			$table->unsignedInteger('location_id')->nullable();
 			$table->unsignedInteger('department_id');
+			$table->unsignedInteger('user_id');
 
 
             $table->timeStampsTz();
