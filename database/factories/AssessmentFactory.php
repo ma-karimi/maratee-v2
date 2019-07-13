@@ -13,7 +13,7 @@ $factory->define(App\Models\Assessment::class, function (Faker $faker) {
         'hollow' => $faker->randomNumber(),
         'dropped' => $faker->randomNumber(),
         'repeat' => $faker->randomNumber(),
-        'treatment' => $faker->word,
+        'treatment' => make_json($faker->word),
         'abnormality' => $faker->randomNumber(),
         'hard_seed' => $faker->randomNumber(),
         'vigor' => $faker->randomNumber(),

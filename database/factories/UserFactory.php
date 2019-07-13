@@ -1,27 +1,26 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-use App\User;
-use Illuminate\Support\Str;
+/* @var $factory \Illuminate\Database\Eloquent\Factory */
+
 use Faker\Generator as Faker;
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
-
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(App\Models\User::class, function (Faker $faker) {
     return [
-        'name' => make_json($faker->name),
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'remember_token' => Str::random(10),
+        'title' => $faker->word,
+        'education' => $faker->word,
+        'degree' => $faker->word,
+        'national_id' => $faker->randomNumber(),
+        'birthday' => $faker->dateTimeBetween(),
+        'nationality' => $faker->word,
+        'passport_no' => $faker->word,
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'nickname' => $faker->word,
+        'is_author' => $faker->boolean,
+        'mobile' => $faker->word,
+        'phone' => $faker->phoneNumber,
+        'email' => $faker->safeEmail,
+        'work_experience' => $faker->randomNumber(),
+        'deleted_at' => $faker->dateTimeBetween(),
     ];
 });

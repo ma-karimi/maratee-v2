@@ -6,8 +6,6 @@ use App\Models\Contracts\BaseModel;
 
 class Botanical extends BaseModel
 {
-    const BOTANICAL_ID = 'botanical_id';
-
 
     /**
      * The database table used by the model.
@@ -21,7 +19,7 @@ class Botanical extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'entry_type', 'first_flowering', 'first_seeding', 'flower_color', 'flowring_interval', 'fruit_color', 'growth_rate', 'height', 'herbarium_id', 'leaf_color', 'notes', 'planting', 'scion_rooting_per', 'season_resistance', 'seed_production', 'seed_value', 'sensitivity', 'sensitivity_description', 'sprout', 'treatment', 'updated_at', 'year'];
+    protected $fillable = ['created_at', 'deleted_at', 'entry_type', 'first_flowering', 'first_seeding', 'flower_color', 'flowering_interval', 'fruit_color', 'growth_rate', 'height', 'herbarium_id', 'leaf_color', 'notes', 'planting', 'scion_rooting_per', 'season_resistance', 'seed_production', 'seed_value', 'sensitivity', 'sensitivity_description', 'sprout', 'treatment', 'updated_at', 'year'];
 
 
     /**
@@ -31,7 +29,6 @@ class Botanical extends BaseModel
      */
     protected $casts = [
         'height' => 'double',
-        'requirement' => 'json',
         'flower_color' => 'json',
         'fruit_color' => 'json',
         'leaf_color' => 'json',
@@ -39,7 +36,7 @@ class Botanical extends BaseModel
         'treatment' => 'json',
         'growth_rate' => 'json',
         'first_flowering' => 'json',
-        'flowring_interval' => 'json',
+        'flowering_interval' => 'json',
         'first_seeding' => 'json',
         'seed_value' => 'json',
         'seed_production' => 'json',
@@ -60,21 +57,21 @@ class Botanical extends BaseModel
 
     public function botanicalGardenActions()
     {
-        return $this->hasMany(BotanicalGardenAction::class, self::BOTANICAL_ID)->latest();
+        return $this->hasMany(BotanicalGardenAction::class)->latest();
     }
 
     public function botanicalIrrigations()
     {
-        return $this->hasMany(BotanicalIrrigation::class, self::BOTANICAL_ID)->latest();
+        return $this->hasMany(BotanicalIrrigation::class)->latest();
     }
 
     public function botanicalReproductions()
     {
-        return $this->hasMany(BotanicalReproduction::class, self::BOTANICAL_ID)->latest();
+        return $this->hasMany(BotanicalReproduction::class)->latest();
     }
 
     public function entryHubs()
     {
-        return $this->hasMany(EntryHub::class, self::BOTANICAL_ID)->latest();
+        return $this->hasMany(EntryHub::class)->latest();
     }
 }

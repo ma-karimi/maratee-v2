@@ -12,6 +12,6 @@ $factory->define(App\Models\Address::class, function (Faker $faker) {
         'village_id' => function () {
             return factory(App\Models\Village::class)->create()->id;
         },
-        'address' => $faker->word,
+        'address' => make_json($faker->word),
     ];
 });

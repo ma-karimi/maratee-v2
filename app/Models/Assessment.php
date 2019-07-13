@@ -28,7 +28,7 @@ class Assessment extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = ['treatment'=>'json', 'description'=>'json'];
 
     /**
      * The attributes that should be mutated to dates.

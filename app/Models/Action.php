@@ -6,7 +6,6 @@ use App\Models\Contracts\BaseModel;
 
 class Action extends BaseModel
 {
-    const ACTION_ID = 'action_id';
 
 
     /**
@@ -34,16 +33,16 @@ class Action extends BaseModel
 
     public function actionHubs()
     {
-        return $this->hasMany(ActionHub::class, self::ACTION_ID)->latest();
+        return $this->hasMany(ActionHub::class)->latest();
     }
 
     public function articleHubs()
     {
-        return $this->hasMany(ArticleHub::class, self::ACTION_ID)->latest();
+        return $this->hasMany(ArticleHub::class)->latest();
     }
 
     public function cryoBankActions()
     {
-        return $this->hasMany(CryoBankAction::class, self::ACTION_ID)->latest();
+        return $this->hasMany(CryoBankAction::class)->latest();
     }
 }

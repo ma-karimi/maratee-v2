@@ -9,7 +9,9 @@ $factory->define(App\Models\ActionHub::class, function (Faker $faker) {
         'action_id' => function () {
             return factory(App\Models\Action::class)->create()->id;
         },
-        'user_id' => $faker->randomNumber(),
+        'user_id' => function () {
+            return factory(App\Models\User::class)->create()->id;
+        },
         'location_id' => function () {
             return factory(App\Models\Location::class)->create()->id;
         },

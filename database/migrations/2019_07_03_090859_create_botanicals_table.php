@@ -24,7 +24,7 @@ class CreateBotanicalsTable extends Migration {
 			$table->json('treatment')->nullable();
 			$table->json('growth_rate')->nullable();
 			$table->json('first_flowering')->nullable();
-			$table->json('flowring_interval')->nullable()->comment('based on the number of days
+			$table->json('flowering_interval')->nullable()->comment('based on the number of days
 ');
 			$table->json('first_seeding')->nullable();
 			$table->json('seed_value')->nullable();

@@ -62,4 +62,9 @@ class ActionHub extends BaseModel
     {
         return $this->belongsTo(Location::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
