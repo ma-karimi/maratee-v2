@@ -30,7 +30,6 @@ class PaleontologyAction extends BaseModel
      * @var array
      */
     protected $casts = [
-        'name' => 'json',
         'description' => 'json',
     ];
 

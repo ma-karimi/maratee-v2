@@ -6,9 +6,9 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\GeologyAge::class, function (Faker $faker) {
     return [
-        'era' => $faker->word,
-        'period' => $faker->word,
-        'epoch' => $faker->word,
-        'stage' => $faker->word,
+        'era' => make_json($faker->word),
+        'period' => make_json($faker->word),
+        'epoch' => make_json($faker->word),
+        'stage' => make_json($faker->word),
     ];
 });

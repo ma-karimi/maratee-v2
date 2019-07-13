@@ -12,11 +12,11 @@ $factory->define(App\Models\Locality::class, function (Faker $faker) {
         'location_id' => function () {
             return factory(App\Models\Location::class)->create()->id;
         },
-        'formation' => $faker->word,
-        'layer' => $faker->word,
-        'stratigraphy' => $faker->word,
-        'lithology' => $faker->word,
-        'fauna' => $faker->word,
+        'formation' => make_json($faker->word),
+        'layer' => make_json($faker->word),
+        'stratigraphy' => make_json($faker->word),
+        'lithology' => make_json($faker->word),
+        'fauna' => make_json($faker->word),
         'description' => make_json($faker->text),
         'map_id' => function () {
             return factory(App\Models\Map::class)->create()->id;

@@ -8,6 +8,6 @@ $factory->define(App\Models\Morphology::class, function (Faker $faker) {
     return [
         'name' => make_json($faker->name),
         'description' => make_json($faker->text),
-        'unit' => $faker->word,
+        'unit' => make_json($faker->word),
     ];
 });

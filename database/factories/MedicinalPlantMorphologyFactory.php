@@ -12,6 +12,6 @@ $factory->define(App\Models\MedicinalPlantMorphology::class, function (Faker $fa
         'morphology_id' => function () {
             return factory(App\Models\Morphology::class)->create()->id;
         },
-        'value' => $faker->word,
+        'value' => make_json($faker->word),
     ];
 });

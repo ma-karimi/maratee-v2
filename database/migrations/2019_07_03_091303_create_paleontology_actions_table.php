@@ -20,7 +20,7 @@ class CreatePaleontologyActionsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('action_id');
             $table->date('date');
-            $table->text('description')->nullable();
+            $table->json('description')->nullable();
 
             $table->timeStampsTz();
             $table->dateTimeTz('deleted_at')->nullable();
