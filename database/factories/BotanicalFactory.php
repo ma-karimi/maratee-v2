@@ -5,9 +5,10 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Botanical::class, function (Faker $faker) {
+    $herbariums = \App\Models\Herbarium::pluck('id')->toArray();
     return [
-        'herbarium_id' => $faker->randomNumber(),
-        'height' => '2.3',
+        'herbarium_id' => $faker->randomElement($herbariums),
+        'height' => 2,
         'flower_color' => make_json($faker->word),
         'fruit_color' => make_json($faker->word),
         'leaf_color' => make_json($faker->word),

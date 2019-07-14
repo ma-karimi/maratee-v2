@@ -30,7 +30,7 @@ class AddForeignKeysToPaleontologyCitationsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('paleontology_citation', function(Blueprint $table)
+		Schema::table('paleontology_citations', function(Blueprint $table)
 		{
 			$table->dropForeign(['article_id']);
 			$table->dropForeign(['user_id']);

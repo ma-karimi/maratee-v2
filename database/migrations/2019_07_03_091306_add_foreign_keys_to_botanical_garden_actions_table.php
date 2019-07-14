@@ -35,13 +35,13 @@ class AddForeignKeysToBotanicalGardenActionsTable extends Migration {
 	{
 		Schema::table('botanical_garden_actions', function(Blueprint $table)
 		{
-			$table->dropForeign(['garden_id1']);
-			$table->dropForeign(['lighting_id']);
-			$table->dropForeign(['lighting_id1']);
-			$table->dropForeign(['soil_id']);
-			$table->dropForeign(['soil_id1']);
+			$table->dropForeign(['to_garden_id']);
+			$table->dropForeign(['to_lighting_id']);
+			$table->dropForeign(['from_lighting_id']);
+			$table->dropForeign(['to_soil_id']);
+			$table->dropForeign(['from_soil_id']);
 			$table->dropForeign(['botanical_id']);
-			$table->dropForeign(['garden_id']);
+			$table->dropForeign(['from_garden_id']);
 			$table->dropForeign(['planting_action_id']);
 		});
 	}
