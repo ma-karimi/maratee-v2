@@ -16,9 +16,10 @@ class ResetPassword extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($newPassword)
     {
-        //
+      $this->newPassword = $newPassword;
+
     }
 
     /**
@@ -42,7 +43,7 @@ class ResetPassword extends Notification
     {
         return (new MailMessage)
                     ->subject('فراموشی رمز عبور')
-                    ->line(" کاربر گرامی $notifiable->first_name");
+                    ->line(" رمز جدید شما :$this->newPassword");
     }
 
     /**
