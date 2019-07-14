@@ -35,7 +35,7 @@ return [
 
         'repository_test'   => base_path('tests/Repositories/'),
 
-        'api_test'          => base_path('tests/Apis/'),
+        'api_test'          => base_path('tests/Api/'),
 
         'tests'             => base_path('tests/'),
 
@@ -75,7 +75,7 @@ return [
 
         'repository_test'   => 'Tests\Repositories',
 
-        'api_test'          => 'Tests\Apis',
+        'api_test'          => 'Tests\Api',
 
         'tests'             => 'Tests',
     ],
