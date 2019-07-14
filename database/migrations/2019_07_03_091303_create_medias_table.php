@@ -20,7 +20,7 @@ class CreateMediasTable extends Migration
             $table->dateTime('date')->nullable();
             $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('location_id')->nullable();
-            $table->text('description')->nullable();
+            $table->json('description')->nullable();
             $table->unsignedInteger('herbarium_id')->nullable();
             $table->unsignedInteger('seed_id')->nullable();
             $table->unsignedInteger('paleontology_id')->nullable();

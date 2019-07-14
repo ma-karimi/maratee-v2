@@ -5,8 +5,8 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\CryoBank::class, function (Faker $faker) {
-    $protections=\App\Models\Protection::pluck('id')->toArray();
-    $herbariums=\App\Models\Herbarium::pluck('id')->toArray();
+    $protections = \App\Models\Protection::pluck('id')->toArray();
+    $herbariums = \App\Models\Herbarium::pluck('id')->toArray();
     return [
         'voucher_number' => $faker->word,
         'geotype_code' => $faker->word,

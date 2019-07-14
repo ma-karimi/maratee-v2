@@ -35,6 +35,7 @@ class Locality extends BaseModel
         'stratigraphy' => 'json',
         'fauna' => 'json',
         'description' => 'json',
+        'lithology' => 'json',
     ];
 
     /**

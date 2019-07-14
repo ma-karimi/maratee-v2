@@ -5,26 +5,19 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\ActionHub::class, function (Faker $faker) {
+    $actions = \App\Models\Action::pluck('id')->toArray();
+    $users = \App\Models\User::pluck('id')->toArray();
+    $locations = \App\Models\Location::pluck('id')->toArray();
+    $projects = \App\Models\Project::pluck('id')->toArray();
+    $departments = \App\Models\Department::pluck('id')->toArray();
     return [
-        'action_id' => function () {
-            return factory(App\Models\Action::class)->create()->id;
-        },
-        'user_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
-        'location_id' => function () {
-            return factory(App\Models\Location::class)->create()->id;
-        },
-        'herbarium_id' => function () {
-            return factory(App\Models\Herbarium::class)->create()->id;
-        },
+        'action_id' => $faker->randomElement($actions),
+        'user_id' => $faker->randomElement($users),
+        'location_id' => $faker->randomElement($locations),
+        'herbarium_id' => $faker->numberBetween(1, 50),
         'date' => $faker->dateTimeBetween(),
         'description' => make_json($faker->text),
-        'project_id' => function () {
-            return factory(App\Models\Project::class)->create()->id;
-        },
-        'department_id' => function () {
-            return factory(App\Models\Department::class)->create()->id;
-        },
+        'project_id' => $faker->randomElement($projects),
+        'department_id' => $faker->randomElement($departments),
     ];
 });

@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Language::class, function (Faker $faker) {
     return [
-        'name' => make_json($faker->name),
+        'name' => $faker->name,
         'code' => $faker->word,
     ];
 });

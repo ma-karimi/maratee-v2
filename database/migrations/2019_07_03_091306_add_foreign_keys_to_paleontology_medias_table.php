@@ -43,10 +43,10 @@ class AddForeignKeysToPaleontologyMediasTable extends Migration {
 			$table->dropForeign(['user_id']);
 
 			$table->dropForeign(['credential_correspondence_id']);
-			$table->dropForeign(['expenses_id']);
+			$table->dropForeign(['credential_expense_id']);
 			$table->dropForeign(['credential_gift_id']);
 			$table->dropForeign(['paleontology_id']);
-			$table->dropForeign(['purchase_id']);
+			$table->dropForeign(['credential_purchase_id']);
 		});
 	}
 

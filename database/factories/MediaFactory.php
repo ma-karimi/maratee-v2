@@ -5,36 +5,28 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Media::class, function (Faker $faker) {
+    $users = \App\Models\User::pluck('id')->toArray();
+    $herbariums = \App\Models\Herbarium::pluck('id')->toArray();
+    $locations = \App\Models\Location::pluck('id')->toArray();
+    $seeds = \App\Models\Seed::pluck('id')->toArray();
+    $paleontologies = \App\Models\Paleontology::pluck('id')->toArray();
+    $medicinal_plants = \App\Models\MedicinalPlant::pluck('id')->toArray();
+    $products = \App\Models\Product::pluck('id')->toArray();
+    $botanicals = \App\Models\Botanical::pluck('id')->toArray();
     return [
         'name' => $faker->name,
         'format_type' => $faker->word,
         'date' => $faker->dateTimeBetween(),
-        'user_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
-        'location_id' => function () {
-            return factory(App\Models\Location::class)->create()->id;
-        },
+        'user_id' => $faker->randomElement($users),
+        'location_id' => $faker->randomElement($locations),
         'description' => make_json($faker->text),
-        'herbarium_id' => function () {
-            return factory(App\Models\Herbarium::class)->create()->id;
-        },
-        'seed_id' => function () {
-            return factory(App\Models\Seed::class)->create()->id;
-        },
-        'paleontology_id' => function () {
-            return factory(App\Models\Paleontology::class)->create()->id;
-        },
+        'herbarium_id' => $faker->randomElement($herbariums),
+        'seed_id' => $faker->randomElement($seeds),
+        'paleontology_id' => $faker->randomElement($paleontologies),
         'info_type' => make_json($faker->word),
         'reference' => make_json($faker->word),
-        'medicinal_plant_id' => function () {
-            return factory(App\Models\MedicinalPlant::class)->create()->id;
-        },
-        'product_id' => function () {
-            return factory(App\Models\Product::class)->create()->id;
-        },
-        'botanical_id' => function () {
-            return factory(App\Models\Botanical::class)->create()->id;
-        },
+        'medicinal_plant_id' => $faker->randomElement($medicinal_plants),
+        'product_id' => $faker->randomElement($products),
+        'botanical_id' => $faker->randomElement($botanicals),
     ];
 });

@@ -18,7 +18,7 @@ class CreateMedicinesTable extends Migration {
 			$table->json('name');
 			$table->json('description')->nullable();
 			$table->string('type')->comment('medicinal_parts, drug_usage, drug_shape, medicine_side_effects, therapies, medicine_effects', 'drug');
-			$table->unsignedInteger('parent_id');
+			$table->unsignedInteger('parent_id')->nullable();
 
 
             $table->timeStampsTz();

@@ -5,11 +5,12 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Method::class, function (Faker $faker) {
+    $methods = \App\Models\Continent::pluck('id')->toArray();
+    $parent = $faker->randomElement($methods);
+
     return [
         'name' => make_json($faker->name),
         'description' => make_json($faker->text),
-        'parent_id' => function () {
-            return factory(App\Models\Method::class)->create()->id;
-        },
+        'parent_id' =>   ($parent % 2) ? $parent : null,
     ];
 });
