@@ -29,11 +29,11 @@ class AddForeignKeysToChromosomesTable extends Migration
      */
     public function down()
     {
-        Schema::table('chromosome', function (Blueprint $table) {
+        Schema::table('chromosomes', function (Blueprint $table) {
             $table->dropForeign(['article_id']);
             $table->dropForeign(['cryo_bank_id']);
             $table->dropForeign(['herbarium_id']);
-            $table->dropForeign(['herbarium_id']);
+            $table->dropForeign(['location_id']);
         });
     }
 

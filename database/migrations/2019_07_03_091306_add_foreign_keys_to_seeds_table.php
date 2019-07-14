@@ -28,7 +28,7 @@ class AddForeignKeysToSeedsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('seed', function(Blueprint $table)
+		Schema::table('seeds', function(Blueprint $table)
 		{
 			$table->dropForeign(['department_id']);
 			$table->dropForeign(['herbarium_id']);

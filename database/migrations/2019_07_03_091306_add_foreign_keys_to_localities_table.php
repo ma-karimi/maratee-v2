@@ -28,7 +28,7 @@ class AddForeignKeysToLocalitiesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('locality', function(Blueprint $table)
+		Schema::table('localities', function(Blueprint $table)
 		{
 			$table->dropForeign(['location_id']);
 			$table->dropForeign(['map_id']);

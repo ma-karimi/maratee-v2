@@ -28,10 +28,9 @@ class CreateUsersTable extends Migration {
 			$table->tinyInteger('is_author')->default(0)->comment('0:disable, 1:enable');
 			$table->string('mobile')->nullable();
 			$table->string('phone')->nullable();
-
+			$table->string('email');
 			$table->string('password');
 			$table->integer('work_experience')->nullable();
-
             $table->timeStampsTz();
             $table->dateTimeTz('deleted_at')->nullable();
 		});

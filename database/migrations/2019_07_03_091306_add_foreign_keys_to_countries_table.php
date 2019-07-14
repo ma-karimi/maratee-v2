@@ -28,7 +28,7 @@ class AddForeignKeysToCountriesTable extends Migration {
 	{
 		Schema::table('countries', function(Blueprint $table)
 		{
-			$table->dropForeign('fk_countries_continent1');
+			$table->dropForeign(['continent_id']);
 		});
 	}
 

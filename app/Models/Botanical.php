@@ -28,7 +28,7 @@ class Botanical extends BaseModel
      * @var array
      */
     protected $casts = [
-        'height' => 'double',
+        'height' => 'float',
         'flower_color' => 'json',
         'fruit_color' => 'json',
         'leaf_color' => 'json',

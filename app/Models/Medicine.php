@@ -30,7 +30,7 @@ class Medicine extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['type' => 'json', 'description' => 'json'];
+    protected $casts = ['name' => 'json', 'description' => 'json'];
 
 
     /**

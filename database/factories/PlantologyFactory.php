@@ -8,6 +8,6 @@ $factory->define(App\Models\Plantology::class, function (Faker $faker) {
     return [
         'name' => make_json($faker->name),
         'description' => make_json($faker->text),
-        'type' => $faker->word,
+        'type' => $faker->randomElement(['phytogeography, phenology, plant_type']),
     ];
 });

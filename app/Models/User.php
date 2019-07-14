@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Accessor\UserAccessor;
+use App\Models\Scope\UserScope;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
-
+    use HasApiTokens,UserScope,UserAccessor,Notifiable;
 
     /**
      * The database table used by the model.
@@ -21,7 +25,7 @@ class User extends Model
      *
      * @var array
      */
-    protected $fillable = ['birthday', 'created_at', 'degree', 'deleted_at', 'education', 'email', 'first_name', 'is_author', 'last_name', 'mobile', 'national_id', 'nationality', 'nickname', 'passport_no', 'phone', 'title', 'updated_at', 'work_experience','password'];
+    protected $fillable = ['birthday', 'created_at', 'degree', 'deleted_at', 'education', 'email', 'first_name', 'is_author', 'last_name', 'mobile', 'national_id', 'nationality', 'nickname', 'passport_no', 'phone', 'title', 'updated_at', 'work_experience', 'password'];
 
 
     /**
@@ -46,6 +50,26 @@ class User extends Model
      */
     protected $dates = ['birthday', 'created_at', 'deleted_at', 'updated_at'];
 
+    /**
+     * Find the user instance for the given username.
+     *
+     * @param  string $username
+     * @return \App\Models\User
+     */
+    public function findForPassport($username)
+    {
+        $request = \Request::all();
+        if (strpos($request['username'], '@')) {
+            return $this->where('email', $username)->first();
+        } else {
+            return $this->where('national_id', $username)->first();
+        }
+    }
+
+
+    /**
+     * @return $this
+     */
     public function visits()
     {
         return $this->hasMany(Visit::class)->latest();

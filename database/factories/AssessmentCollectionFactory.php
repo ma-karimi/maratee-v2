@@ -5,21 +5,16 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\AssessmentCollection::class, function (Faker $faker) {
+    $collections = \App\Models\Collection::pluck('id')->toArray();
+    $assessments = \App\Models\Assessment::pluck('id')->toArray();
+    $departments = \App\Models\Department::pluck('id')->toArray();
+    $projects = \App\Models\Project::pluck('id')->toArray();
+    $seeds = \App\Models\Seed::pluck('id')->toArray();
     return [
-        'collection_id' => function () {
-            return factory(App\Models\Collection::class)->create()->id;
-        },
-        'assessment_id' => function () {
-            return factory(App\Models\Assessment::class)->create()->id;
-        },
-        'seed_id' => function () {
-            return factory(App\Models\Seed::class)->create()->id;
-        },
-        'department_id' => function () {
-            return factory(App\Models\Department::class)->create()->id;
-        },
-        'project_id' => function () {
-            return factory(App\Models\Project::class)->create()->id;
-        },
+        'collection_id' => $faker->randomElement($collections),
+        'assessment_id' => $faker->randomElement($assessments),
+        'seed_id' =>  $faker->randomElement($seeds),
+        'department_id' =>  $faker->randomElement($departments),
+        'project_id' =>  $faker->randomElement($projects),
     ];
 });
