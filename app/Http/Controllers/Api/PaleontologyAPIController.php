@@ -26,11 +26,36 @@ class PaleontologyAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Paleontology.
-     * GET|HEAD /paleontologies
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/paleontologies",
+     *      summary="Get a listing of the Paleontologies.",
+     *      tags={"Paleontology"},
+     *      description="Get all Paleontologies",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Paleontology")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class PaleontologyAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Paleontology in storage.
-     * POST /paleontologies
-     *
      * @param CreatePaleontologyAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/paleontologies",
+     *      summary="Store a newly created Paleontology in storage",
+     *      tags={"Paleontology"},
+     *      description="Store Paleontology",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Paleontology"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreatePaleontologyAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class PaleontologyAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Paleontology.
-     * GET|HEAD /paleontologies/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/paleontologies/{id}",
+     *      summary="Display the specified Paleontology",
+     *      tags={"Paleontology"},
+     *      description="Get Paleontology",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Paleontology",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Paleontology"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class PaleontologyAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Paleontology in storage.
-     * PUT/PATCH /paleontologies/{id}
-     *
      * @param int $id
      * @param UpdatePaleontologyAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/paleontologies/{id}",
+     *      summary="Update the specified Paleontology in storage",
+     *      tags={"Paleontology"},
+     *      description="Update Paleontology",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Paleontology",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Paleontology that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Paleontology"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdatePaleontologyAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class PaleontologyAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Paleontology from storage.
-     * DELETE /paleontologies/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/paleontologies/{id}",
+     *      summary="Remove the specified Paleontology from storage",
+     *      tags={"Paleontology"},
+     *      description="Delete Paleontology",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Paleontology",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

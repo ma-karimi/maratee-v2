@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class MorphologyRepository
  * @package App\Repositories
- * @version July 14, 2019, 11:27 am UTC
+ * @version July 14, 2019, 11:25 am UTC
 */
 
 class MorphologyRepository extends BaseRepository

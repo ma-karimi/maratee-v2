@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class PaleontologyCitationRepository
  * @package App\Repositories
- * @version July 14, 2019, 11:26 am UTC
+ * @version July 14, 2019, 11:27 am UTC
 */
 
 class PaleontologyCitationRepository extends BaseRepository
