@@ -10,7 +10,6 @@ namespace App\Services;
 
 
 use App\Models\User;
-use App\Utility;
 use Illuminate\Support\Facades\Hash;
 
 class UserServices
