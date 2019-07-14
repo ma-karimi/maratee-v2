@@ -18,7 +18,7 @@ class CreatePlantGeneralsTable extends Migration {
 			$table->json('name');
 			$table->json('description')->nullable();
 			$table->string('type')->comment('species, sub_species, variety, family, genus, class, group, order, flowering, sperm, cotyledon');
-            $table->unsignedInteger('parent_id');
+            $table->unsignedInteger('parent_id')->nullable();
 
             $table->timeStampsTz();
             $table->dateTimeTz('deleted_at')->nullable();

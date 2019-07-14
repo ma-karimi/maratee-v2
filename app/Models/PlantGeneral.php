@@ -58,6 +58,7 @@ class PlantGeneral extends BaseModel
             'plant_general_sperm_id',
             'plant_general_sub_specie_id',
             'plant_general_variety_id',
+            'plant_general_cotyledon_id',
         ])->latest();
     }
 

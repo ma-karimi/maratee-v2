@@ -29,6 +29,7 @@ class AddForeignKeysToPlantsTable extends Migration {
 			$table->foreign('plant_general_flowering_id')->references('id')->on('plant_generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('plant_general_order_id')->references('id')->on('plant_generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('plant_general_group_id')->references('id')->on('plant_generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('plant_general_cotyledon_id')->references('id')->on('plant_generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
 
@@ -48,6 +49,7 @@ class AddForeignKeysToPlantsTable extends Migration {
 			$table->dropForeign(['plant_general_sub_specie_id']);
 			$table->dropForeign(['plant_general_variety_id']);
 			$table->dropForeign(['article_id']);
+			$table->dropForeign(['user_id']);
 
 			$table->dropForeign(['plant_general_class_id']);
 			$table->dropForeign(['plant_general_family_id']);
@@ -55,6 +57,7 @@ class AddForeignKeysToPlantsTable extends Migration {
 			$table->dropForeign(['plant_general_flowering_id']);
 			$table->dropForeign(['plant_general_order_id']);
 			$table->dropForeign(['plant_general_group_id']);
+			$table->dropForeign(['plant_general_cotyledon_id']);
 		});
 	}
 

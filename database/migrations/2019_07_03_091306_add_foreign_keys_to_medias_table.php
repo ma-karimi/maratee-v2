@@ -33,7 +33,7 @@ class AddForeignKeysToMediasTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('media', function(Blueprint $table)
+		Schema::table('medias', function(Blueprint $table)
 		{
 			$table->dropForeign(['botanical_id']);
 			$table->dropForeign(['medicinal_plant_id']);
