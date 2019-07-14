@@ -26,11 +26,36 @@ class ProjectAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Project.
-     * GET|HEAD /projects
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/projects",
+     *      summary="Get a listing of the Projects.",
+     *      tags={"Project"},
+     *      description="Get all Projects",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Project")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class ProjectAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Project in storage.
-     * POST /projects
-     *
      * @param CreateProjectAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/projects",
+     *      summary="Store a newly created Project in storage",
+     *      tags={"Project"},
+     *      description="Store Project",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Project"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateProjectAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class ProjectAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Project.
-     * GET|HEAD /projects/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/projects/{id}",
+     *      summary="Display the specified Project",
+     *      tags={"Project"},
+     *      description="Get Project",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Project",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Project"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class ProjectAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Project in storage.
-     * PUT/PATCH /projects/{id}
-     *
      * @param int $id
      * @param UpdateProjectAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/projects/{id}",
+     *      summary="Update the specified Project in storage",
+     *      tags={"Project"},
+     *      description="Update Project",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Project",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Project that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Project"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateProjectAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class ProjectAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Project from storage.
-     * DELETE /projects/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/projects/{id}",
+     *      summary="Remove the specified Project from storage",
+     *      tags={"Project"},
+     *      description="Delete Project",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Project",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

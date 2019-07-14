@@ -26,11 +26,36 @@ class ProvinceAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Province.
-     * GET|HEAD /provinces
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/provinces",
+     *      summary="Get a listing of the Provinces.",
+     *      tags={"Province"},
+     *      description="Get all Provinces",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Province")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class ProvinceAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Province in storage.
-     * POST /provinces
-     *
      * @param CreateProvinceAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/provinces",
+     *      summary="Store a newly created Province in storage",
+     *      tags={"Province"},
+     *      description="Store Province",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Province that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Province")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Province"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateProvinceAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class ProvinceAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Province.
-     * GET|HEAD /provinces/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/provinces/{id}",
+     *      summary="Display the specified Province",
+     *      tags={"Province"},
+     *      description="Get Province",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Province",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Province"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class ProvinceAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Province in storage.
-     * PUT/PATCH /provinces/{id}
-     *
      * @param int $id
      * @param UpdateProvinceAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/provinces/{id}",
+     *      summary="Update the specified Province in storage",
+     *      tags={"Province"},
+     *      description="Update Province",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Province",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Province that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Province")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Province"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateProvinceAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class ProvinceAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Province from storage.
-     * DELETE /provinces/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/provinces/{id}",
+     *      summary="Remove the specified Province from storage",
+     *      tags={"Province"},
+     *      description="Delete Province",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Province",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

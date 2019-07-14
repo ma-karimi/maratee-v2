@@ -26,11 +26,36 @@ class PlantingActionAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the PlantingAction.
-     * GET|HEAD /plantingActions
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/plantingActions",
+     *      summary="Get a listing of the PlantingActions.",
+     *      tags={"PlantingAction"},
+     *      description="Get all PlantingActions",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/PlantingAction")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class PlantingActionAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created PlantingAction in storage.
-     * POST /plantingActions
-     *
      * @param CreatePlantingActionAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/plantingActions",
+     *      summary="Store a newly created PlantingAction in storage",
+     *      tags={"PlantingAction"},
+     *      description="Store PlantingAction",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="PlantingAction that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PlantingAction")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/PlantingAction"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreatePlantingActionAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class PlantingActionAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified PlantingAction.
-     * GET|HEAD /plantingActions/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/plantingActions/{id}",
+     *      summary="Display the specified PlantingAction",
+     *      tags={"PlantingAction"},
+     *      description="Get PlantingAction",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of PlantingAction",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/PlantingAction"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class PlantingActionAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified PlantingAction in storage.
-     * PUT/PATCH /plantingActions/{id}
-     *
      * @param int $id
      * @param UpdatePlantingActionAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/plantingActions/{id}",
+     *      summary="Update the specified PlantingAction in storage",
+     *      tags={"PlantingAction"},
+     *      description="Update PlantingAction",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of PlantingAction",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="PlantingAction that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PlantingAction")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/PlantingAction"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdatePlantingActionAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class PlantingActionAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified PlantingAction from storage.
-     * DELETE /plantingActions/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/plantingActions/{id}",
+     *      summary="Remove the specified PlantingAction from storage",
+     *      tags={"PlantingAction"},
+     *      description="Delete PlantingAction",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of PlantingAction",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

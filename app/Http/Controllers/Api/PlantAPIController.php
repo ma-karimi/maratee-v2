@@ -26,11 +26,36 @@ class PlantAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Plant.
-     * GET|HEAD /plants
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/plants",
+     *      summary="Get a listing of the Plants.",
+     *      tags={"Plant"},
+     *      description="Get all Plants",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Plant")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class PlantAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Plant in storage.
-     * POST /plants
-     *
      * @param CreatePlantAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/plants",
+     *      summary="Store a newly created Plant in storage",
+     *      tags={"Plant"},
+     *      description="Store Plant",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Plant"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreatePlantAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class PlantAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Plant.
-     * GET|HEAD /plants/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/plants/{id}",
+     *      summary="Display the specified Plant",
+     *      tags={"Plant"},
+     *      description="Get Plant",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Plant",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Plant"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class PlantAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Plant in storage.
-     * PUT/PATCH /plants/{id}
-     *
      * @param int $id
      * @param UpdatePlantAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/plants/{id}",
+     *      summary="Update the specified Plant in storage",
+     *      tags={"Plant"},
+     *      description="Update Plant",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Plant",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Plant that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Plant"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdatePlantAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class PlantAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Plant from storage.
-     * DELETE /plants/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/plants/{id}",
+     *      summary="Remove the specified Plant from storage",
+     *      tags={"Plant"},
+     *      description="Delete Plant",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Plant",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

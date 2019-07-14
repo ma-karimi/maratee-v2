@@ -26,11 +26,36 @@ class PaleontologyMediaAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the PaleontologyMedia.
-     * GET|HEAD /paleontologyMedia
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/paleontologyMedia",
+     *      summary="Get a listing of the PaleontologyMedia.",
+     *      tags={"PaleontologyMedia"},
+     *      description="Get all PaleontologyMedia",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/PaleontologyMedia")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class PaleontologyMediaAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created PaleontologyMedia in storage.
-     * POST /paleontologyMedia
-     *
      * @param CreatePaleontologyMediaAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/paleontologyMedia",
+     *      summary="Store a newly created PaleontologyMedia in storage",
+     *      tags={"PaleontologyMedia"},
+     *      description="Store PaleontologyMedia",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/PaleontologyMedia"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreatePaleontologyMediaAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class PaleontologyMediaAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified PaleontologyMedia.
-     * GET|HEAD /paleontologyMedia/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/paleontologyMedia/{id}",
+     *      summary="Display the specified PaleontologyMedia",
+     *      tags={"PaleontologyMedia"},
+     *      description="Get PaleontologyMedia",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of PaleontologyMedia",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/PaleontologyMedia"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class PaleontologyMediaAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified PaleontologyMedia in storage.
-     * PUT/PATCH /paleontologyMedia/{id}
-     *
      * @param int $id
      * @param UpdatePaleontologyMediaAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/paleontologyMedia/{id}",
+     *      summary="Update the specified PaleontologyMedia in storage",
+     *      tags={"PaleontologyMedia"},
+     *      description="Update PaleontologyMedia",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of PaleontologyMedia",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="PaleontologyMedia that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/PaleontologyMedia"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdatePaleontologyMediaAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class PaleontologyMediaAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified PaleontologyMedia from storage.
-     * DELETE /paleontologyMedia/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/paleontologyMedia/{id}",
+     *      summary="Remove the specified PaleontologyMedia from storage",
+     *      tags={"PaleontologyMedia"},
+     *      description="Delete PaleontologyMedia",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of PaleontologyMedia",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

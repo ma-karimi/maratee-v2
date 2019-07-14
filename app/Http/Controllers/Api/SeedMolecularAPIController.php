@@ -26,11 +26,36 @@ class SeedMolecularAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the SeedMolecular.
-     * GET|HEAD /seedMoleculars
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/seedMoleculars",
+     *      summary="Get a listing of the SeedMoleculars.",
+     *      tags={"SeedMolecular"},
+     *      description="Get all SeedMoleculars",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/SeedMolecular")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class SeedMolecularAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created SeedMolecular in storage.
-     * POST /seedMoleculars
-     *
      * @param CreateSeedMolecularAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/seedMoleculars",
+     *      summary="Store a newly created SeedMolecular in storage",
+     *      tags={"SeedMolecular"},
+     *      description="Store SeedMolecular",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="SeedMolecular that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedMolecular")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/SeedMolecular"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateSeedMolecularAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class SeedMolecularAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified SeedMolecular.
-     * GET|HEAD /seedMoleculars/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/seedMoleculars/{id}",
+     *      summary="Display the specified SeedMolecular",
+     *      tags={"SeedMolecular"},
+     *      description="Get SeedMolecular",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of SeedMolecular",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/SeedMolecular"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class SeedMolecularAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified SeedMolecular in storage.
-     * PUT/PATCH /seedMoleculars/{id}
-     *
      * @param int $id
      * @param UpdateSeedMolecularAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/seedMoleculars/{id}",
+     *      summary="Update the specified SeedMolecular in storage",
+     *      tags={"SeedMolecular"},
+     *      description="Update SeedMolecular",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of SeedMolecular",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="SeedMolecular that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedMolecular")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/SeedMolecular"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateSeedMolecularAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class SeedMolecularAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified SeedMolecular from storage.
-     * DELETE /seedMoleculars/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/seedMoleculars/{id}",
+     *      summary="Remove the specified SeedMolecular from storage",
+     *      tags={"SeedMolecular"},
+     *      description="Delete SeedMolecular",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of SeedMolecular",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

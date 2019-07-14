@@ -26,11 +26,36 @@ class SoilAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Soil.
-     * GET|HEAD /soils
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/soils",
+     *      summary="Get a listing of the Soils.",
+     *      tags={"Soil"},
+     *      description="Get all Soils",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Soil")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class SoilAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Soil in storage.
-     * POST /soils
-     *
      * @param CreateSoilAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/soils",
+     *      summary="Store a newly created Soil in storage",
+     *      tags={"Soil"},
+     *      description="Store Soil",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Soil that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Soil")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Soil"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateSoilAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class SoilAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Soil.
-     * GET|HEAD /soils/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/soils/{id}",
+     *      summary="Display the specified Soil",
+     *      tags={"Soil"},
+     *      description="Get Soil",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Soil",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Soil"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class SoilAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Soil in storage.
-     * PUT/PATCH /soils/{id}
-     *
      * @param int $id
      * @param UpdateSoilAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/soils/{id}",
+     *      summary="Update the specified Soil in storage",
+     *      tags={"Soil"},
+     *      description="Update Soil",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Soil",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Soil that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Soil")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Soil"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateSoilAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class SoilAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Soil from storage.
-     * DELETE /soils/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/soils/{id}",
+     *      summary="Remove the specified Soil from storage",
+     *      tags={"Soil"},
+     *      description="Delete Soil",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Soil",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

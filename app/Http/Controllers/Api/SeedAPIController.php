@@ -26,11 +26,36 @@ class SeedAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Seed.
-     * GET|HEAD /seeds
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/seeds",
+     *      summary="Get a listing of the Seeds.",
+     *      tags={"Seed"},
+     *      description="Get all Seeds",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Seed")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class SeedAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Seed in storage.
-     * POST /seeds
-     *
      * @param CreateSeedAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/seeds",
+     *      summary="Store a newly created Seed in storage",
+     *      tags={"Seed"},
+     *      description="Store Seed",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Seed that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Seed")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Seed"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateSeedAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class SeedAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Seed.
-     * GET|HEAD /seeds/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/seeds/{id}",
+     *      summary="Display the specified Seed",
+     *      tags={"Seed"},
+     *      description="Get Seed",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Seed",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Seed"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class SeedAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Seed in storage.
-     * PUT/PATCH /seeds/{id}
-     *
      * @param int $id
      * @param UpdateSeedAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/seeds/{id}",
+     *      summary="Update the specified Seed in storage",
+     *      tags={"Seed"},
+     *      description="Update Seed",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Seed",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Seed that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Seed")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Seed"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateSeedAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class SeedAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Seed from storage.
-     * DELETE /seeds/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/seeds/{id}",
+     *      summary="Remove the specified Seed from storage",
+     *      tags={"Seed"},
+     *      description="Delete Seed",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Seed",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

@@ -26,11 +26,36 @@ class PlantologyAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Plantology.
-     * GET|HEAD /plantologies
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/plantologies",
+     *      summary="Get a listing of the Plantologies.",
+     *      tags={"Plantology"},
+     *      description="Get all Plantologies",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Plantology")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class PlantologyAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Plantology in storage.
-     * POST /plantologies
-     *
      * @param CreatePlantologyAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/plantologies",
+     *      summary="Store a newly created Plantology in storage",
+     *      tags={"Plantology"},
+     *      description="Store Plantology",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Plantology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plantology")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Plantology"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreatePlantologyAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class PlantologyAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Plantology.
-     * GET|HEAD /plantologies/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/plantologies/{id}",
+     *      summary="Display the specified Plantology",
+     *      tags={"Plantology"},
+     *      description="Get Plantology",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Plantology",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Plantology"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class PlantologyAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Plantology in storage.
-     * PUT/PATCH /plantologies/{id}
-     *
      * @param int $id
      * @param UpdatePlantologyAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/plantologies/{id}",
+     *      summary="Update the specified Plantology in storage",
+     *      tags={"Plantology"},
+     *      description="Update Plantology",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Plantology",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Plantology that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plantology")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Plantology"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdatePlantologyAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class PlantologyAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Plantology from storage.
-     * DELETE /plantologies/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/plantologies/{id}",
+     *      summary="Remove the specified Plantology from storage",
+     *      tags={"Plantology"},
+     *      description="Delete Plantology",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Plantology",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

@@ -26,11 +26,36 @@ class SeedHubAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the SeedHub.
-     * GET|HEAD /seedHubs
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/seedHubs",
+     *      summary="Get a listing of the SeedHubs.",
+     *      tags={"SeedHub"},
+     *      description="Get all SeedHubs",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/SeedHub")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class SeedHubAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created SeedHub in storage.
-     * POST /seedHubs
-     *
      * @param CreateSeedHubAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/seedHubs",
+     *      summary="Store a newly created SeedHub in storage",
+     *      tags={"SeedHub"},
+     *      description="Store SeedHub",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="SeedHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedHub")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/SeedHub"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateSeedHubAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class SeedHubAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified SeedHub.
-     * GET|HEAD /seedHubs/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/seedHubs/{id}",
+     *      summary="Display the specified SeedHub",
+     *      tags={"SeedHub"},
+     *      description="Get SeedHub",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of SeedHub",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/SeedHub"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class SeedHubAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified SeedHub in storage.
-     * PUT/PATCH /seedHubs/{id}
-     *
      * @param int $id
      * @param UpdateSeedHubAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/seedHubs/{id}",
+     *      summary="Update the specified SeedHub in storage",
+     *      tags={"SeedHub"},
+     *      description="Update SeedHub",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of SeedHub",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="SeedHub that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedHub")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/SeedHub"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateSeedHubAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class SeedHubAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified SeedHub from storage.
-     * DELETE /seedHubs/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/seedHubs/{id}",
+     *      summary="Remove the specified SeedHub from storage",
+     *      tags={"SeedHub"},
+     *      description="Delete SeedHub",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of SeedHub",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

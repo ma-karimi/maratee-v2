@@ -26,11 +26,36 @@ class PlantingFactorAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the PlantingFactor.
-     * GET|HEAD /plantingFactors
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/plantingFactors",
+     *      summary="Get a listing of the PlantingFactors.",
+     *      tags={"PlantingFactor"},
+     *      description="Get all PlantingFactors",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/PlantingFactor")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class PlantingFactorAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created PlantingFactor in storage.
-     * POST /plantingFactors
-     *
      * @param CreatePlantingFactorAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/plantingFactors",
+     *      summary="Store a newly created PlantingFactor in storage",
+     *      tags={"PlantingFactor"},
+     *      description="Store PlantingFactor",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="PlantingFactor that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PlantingFactor")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/PlantingFactor"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreatePlantingFactorAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class PlantingFactorAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified PlantingFactor.
-     * GET|HEAD /plantingFactors/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/plantingFactors/{id}",
+     *      summary="Display the specified PlantingFactor",
+     *      tags={"PlantingFactor"},
+     *      description="Get PlantingFactor",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of PlantingFactor",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/PlantingFactor"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class PlantingFactorAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified PlantingFactor in storage.
-     * PUT/PATCH /plantingFactors/{id}
-     *
      * @param int $id
      * @param UpdatePlantingFactorAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/plantingFactors/{id}",
+     *      summary="Update the specified PlantingFactor in storage",
+     *      tags={"PlantingFactor"},
+     *      description="Update PlantingFactor",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of PlantingFactor",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="PlantingFactor that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PlantingFactor")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/PlantingFactor"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdatePlantingFactorAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class PlantingFactorAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified PlantingFactor from storage.
-     * DELETE /plantingFactors/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/plantingFactors/{id}",
+     *      summary="Remove the specified PlantingFactor from storage",
+     *      tags={"PlantingFactor"},
+     *      description="Delete PlantingFactor",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of PlantingFactor",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

@@ -26,11 +26,36 @@ class ReproductionAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Reproduction.
-     * GET|HEAD /reproductions
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/reproductions",
+     *      summary="Get a listing of the Reproductions.",
+     *      tags={"Reproduction"},
+     *      description="Get all Reproductions",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Reproduction")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class ReproductionAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Reproduction in storage.
-     * POST /reproductions
-     *
      * @param CreateReproductionAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/reproductions",
+     *      summary="Store a newly created Reproduction in storage",
+     *      tags={"Reproduction"},
+     *      description="Store Reproduction",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Reproduction that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Reproduction")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Reproduction"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateReproductionAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class ReproductionAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Reproduction.
-     * GET|HEAD /reproductions/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/reproductions/{id}",
+     *      summary="Display the specified Reproduction",
+     *      tags={"Reproduction"},
+     *      description="Get Reproduction",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Reproduction",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Reproduction"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class ReproductionAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Reproduction in storage.
-     * PUT/PATCH /reproductions/{id}
-     *
      * @param int $id
      * @param UpdateReproductionAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/reproductions/{id}",
+     *      summary="Update the specified Reproduction in storage",
+     *      tags={"Reproduction"},
+     *      description="Update Reproduction",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Reproduction",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Reproduction that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Reproduction")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Reproduction"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateReproductionAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class ReproductionAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Reproduction from storage.
-     * DELETE /reproductions/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/reproductions/{id}",
+     *      summary="Remove the specified Reproduction from storage",
+     *      tags={"Reproduction"},
+     *      description="Delete Reproduction",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Reproduction",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

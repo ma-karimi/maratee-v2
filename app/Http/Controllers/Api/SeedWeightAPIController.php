@@ -26,11 +26,36 @@ class SeedWeightAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the SeedWeight.
-     * GET|HEAD /seedWeights
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/seedWeights",
+     *      summary="Get a listing of the SeedWeights.",
+     *      tags={"SeedWeight"},
+     *      description="Get all SeedWeights",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/SeedWeight")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class SeedWeightAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created SeedWeight in storage.
-     * POST /seedWeights
-     *
      * @param CreateSeedWeightAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/seedWeights",
+     *      summary="Store a newly created SeedWeight in storage",
+     *      tags={"SeedWeight"},
+     *      description="Store SeedWeight",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/SeedWeight"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateSeedWeightAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class SeedWeightAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified SeedWeight.
-     * GET|HEAD /seedWeights/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/seedWeights/{id}",
+     *      summary="Display the specified SeedWeight",
+     *      tags={"SeedWeight"},
+     *      description="Get SeedWeight",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of SeedWeight",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/SeedWeight"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class SeedWeightAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified SeedWeight in storage.
-     * PUT/PATCH /seedWeights/{id}
-     *
      * @param int $id
      * @param UpdateSeedWeightAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/seedWeights/{id}",
+     *      summary="Update the specified SeedWeight in storage",
+     *      tags={"SeedWeight"},
+     *      description="Update SeedWeight",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of SeedWeight",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="SeedWeight that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/SeedWeight"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateSeedWeightAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class SeedWeightAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified SeedWeight from storage.
-     * DELETE /seedWeights/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/seedWeights/{id}",
+     *      summary="Remove the specified SeedWeight from storage",
+     *      tags={"SeedWeight"},
+     *      description="Delete SeedWeight",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of SeedWeight",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

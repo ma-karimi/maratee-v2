@@ -26,11 +26,36 @@ class VillageAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Village.
-     * GET|HEAD /villages
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/villages",
+     *      summary="Get a listing of the Villages.",
+     *      tags={"Village"},
+     *      description="Get all Villages",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Village")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class VillageAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Village in storage.
-     * POST /villages
-     *
      * @param CreateVillageAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/villages",
+     *      summary="Store a newly created Village in storage",
+     *      tags={"Village"},
+     *      description="Store Village",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Village that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Village")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Village"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateVillageAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class VillageAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Village.
-     * GET|HEAD /villages/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/villages/{id}",
+     *      summary="Display the specified Village",
+     *      tags={"Village"},
+     *      description="Get Village",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Village",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Village"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class VillageAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Village in storage.
-     * PUT/PATCH /villages/{id}
-     *
      * @param int $id
      * @param UpdateVillageAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/villages/{id}",
+     *      summary="Update the specified Village in storage",
+     *      tags={"Village"},
+     *      description="Update Village",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Village",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Village that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Village")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Village"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateVillageAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class VillageAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Village from storage.
-     * DELETE /villages/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/villages/{id}",
+     *      summary="Remove the specified Village from storage",
+     *      tags={"Village"},
+     *      description="Delete Village",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Village",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

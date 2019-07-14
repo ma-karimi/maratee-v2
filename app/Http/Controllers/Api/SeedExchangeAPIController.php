@@ -26,11 +26,36 @@ class SeedExchangeAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the SeedExchange.
-     * GET|HEAD /seedExchanges
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/seedExchanges",
+     *      summary="Get a listing of the SeedExchanges.",
+     *      tags={"SeedExchange"},
+     *      description="Get all SeedExchanges",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/SeedExchange")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class SeedExchangeAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created SeedExchange in storage.
-     * POST /seedExchanges
-     *
      * @param CreateSeedExchangeAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/seedExchanges",
+     *      summary="Store a newly created SeedExchange in storage",
+     *      tags={"SeedExchange"},
+     *      description="Store SeedExchange",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/SeedExchange"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateSeedExchangeAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class SeedExchangeAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified SeedExchange.
-     * GET|HEAD /seedExchanges/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/seedExchanges/{id}",
+     *      summary="Display the specified SeedExchange",
+     *      tags={"SeedExchange"},
+     *      description="Get SeedExchange",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of SeedExchange",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/SeedExchange"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class SeedExchangeAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified SeedExchange in storage.
-     * PUT/PATCH /seedExchanges/{id}
-     *
      * @param int $id
      * @param UpdateSeedExchangeAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/seedExchanges/{id}",
+     *      summary="Update the specified SeedExchange in storage",
+     *      tags={"SeedExchange"},
+     *      description="Update SeedExchange",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of SeedExchange",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="SeedExchange that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/SeedExchange"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateSeedExchangeAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class SeedExchangeAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified SeedExchange from storage.
-     * DELETE /seedExchanges/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/seedExchanges/{id}",
+     *      summary="Remove the specified SeedExchange from storage",
+     *      tags={"SeedExchange"},
+     *      description="Delete SeedExchange",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of SeedExchange",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

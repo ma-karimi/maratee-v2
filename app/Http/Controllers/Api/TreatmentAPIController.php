@@ -26,30 +26,85 @@ class TreatmentAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Treatment.
-     * GET|HEAD /treatments
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/treatments",
+     *      summary="Get a listing of the Treatments.",
+     *      tags={"Treatment"},
+     *      description="Get all Treatments",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Treatment")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
-        $treatments = $this->treatmentRepository->allQuery(
+        $treatments = $this->treatmentRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
-        )->paginate(10);
+        );
 
         return $this->sendResponse($treatments->toArray(), 'Treatments retrieved successfully');
     }
 
     /**
-     * Store a newly created Treatment in storage.
-     * POST /treatments
-     *
      * @param CreateTreatmentAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/treatments",
+     *      summary="Store a newly created Treatment in storage",
+     *      tags={"Treatment"},
+     *      description="Store Treatment",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Treatment that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Treatment")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Treatment"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateTreatmentAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class TreatmentAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Treatment.
-     * GET|HEAD /treatments/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/treatments/{id}",
+     *      summary="Display the specified Treatment",
+     *      tags={"Treatment"},
+     *      description="Get Treatment",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Treatment",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Treatment"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class TreatmentAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Treatment in storage.
-     * PUT/PATCH /treatments/{id}
-     *
      * @param int $id
      * @param UpdateTreatmentAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/treatments/{id}",
+     *      summary="Update the specified Treatment in storage",
+     *      tags={"Treatment"},
+     *      description="Update Treatment",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Treatment",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Treatment that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Treatment")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Treatment"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateTreatmentAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class TreatmentAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Treatment from storage.
-     * DELETE /treatments/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/treatments/{id}",
+     *      summary="Remove the specified Treatment from storage",
+     *      tags={"Treatment"},
+     *      description="Delete Treatment",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Treatment",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {

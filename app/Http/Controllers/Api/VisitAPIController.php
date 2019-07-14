@@ -26,11 +26,36 @@ class VisitAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Visit.
-     * GET|HEAD /visits
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/visits",
+     *      summary="Get a listing of the Visits.",
+     *      tags={"Visit"},
+     *      description="Get all Visits",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Visit")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,42 @@ class VisitAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Visit in storage.
-     * POST /visits
-     *
      * @param CreateVisitAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/visits",
+     *      summary="Store a newly created Visit in storage",
+     *      tags={"Visit"},
+     *      description="Store Visit",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Visit"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateVisitAPIRequest $request)
     {
@@ -61,12 +116,42 @@ class VisitAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Visit.
-     * GET|HEAD /visits/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/visits/{id}",
+     *      summary="Display the specified Visit",
+     *      tags={"Visit"},
+     *      description="Get Visit",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Visit",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Visit"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -81,13 +166,50 @@ class VisitAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Visit in storage.
-     * PUT/PATCH /visits/{id}
-     *
      * @param int $id
      * @param UpdateVisitAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/visits/{id}",
+     *      summary="Update the specified Visit in storage",
+     *      tags={"Visit"},
+     *      description="Update Visit",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Visit",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Visit that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Visit"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateVisitAPIRequest $request)
     {
@@ -106,14 +228,42 @@ class VisitAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Visit from storage.
-     * DELETE /visits/{id}
-     *
      * @param int $id
-     *
-     * @throws \Exception
-     *
      * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/visits/{id}",
+     *      summary="Remove the specified Visit from storage",
+     *      tags={"Visit"},
+     *      description="Delete Visit",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Visit",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {
