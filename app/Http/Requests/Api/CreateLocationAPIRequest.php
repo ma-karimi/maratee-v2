@@ -26,4 +26,10 @@ class CreateLocationAPIRequest extends APIRequest
     {
         return Location::$rules;
     }
+
+
+    public function messages()
+    {
+        return Location::$messages;
+    }
 }

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Organization extends BaseModel
 {
 
-
     /**
      * The database table used by the model.
      *
@@ -22,7 +21,6 @@ class Organization extends BaseModel
      * @var array
      */
     protected $fillable = ['created_at', 'deleted_at', 'description', 'domestic_code', 'email', 'international_code', 'is_herbarium', 'name', 'phone', 'updated_at', 'website'];
-
 
     /**
      * The attributes that should be casted to native types.
@@ -42,7 +40,6 @@ class Organization extends BaseModel
     {
         return $this->hasMany(EntryHub::class)->latest();
     }
-
 
     /**
      * @return HasMany

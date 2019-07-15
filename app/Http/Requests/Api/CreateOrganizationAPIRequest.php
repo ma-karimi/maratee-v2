@@ -27,5 +27,10 @@ class CreateOrganizationAPIRequest extends APIRequest
         return Organization::$rules;
     }
 
+    public function messages()
+    {
+        return Organization::$messages;
+    }
+
 
 }

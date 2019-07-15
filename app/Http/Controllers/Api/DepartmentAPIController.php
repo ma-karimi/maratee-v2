@@ -128,4 +128,5 @@ class DepartmentAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Department deleted successfully');
     }
+
 }

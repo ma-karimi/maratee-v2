@@ -9,8 +9,10 @@
 namespace App\Services;
 
 
+use App\Models\Connection;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserServices
 {
@@ -54,5 +56,18 @@ class UserServices
         return User::ofEmail($email)->first();
     }
 
+    public function assignDepartmentAndLocation($userId,$request)
+    {
+
+        Validator::make($request->all(), [
+            'department_id' => 'required',
+            'location_id' => 'required',
+        ],$messages=['location_id.required'=>'مکان الزامی است'])->validate();
+        $connection = new Connection();
+        $connection->user_id = $userId;
+        $connection->department_id = $request->department_id;
+        $connection->location_id = $request->location_id;
+        $connection->save();
+    }
 
 }
