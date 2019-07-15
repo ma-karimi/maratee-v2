@@ -24,20 +24,8 @@ class CreateOrganizationAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return [
-            'name'=>'required|min:3',
-            'is_herbarium'=>'required',
-            'phone'=>'required',
-        ];
+        return Organization::$rules;
     }
 
-    public function messages()
-    {
-        return[
-          'name.required'=>'این فیلد الزامی است',
-          'is_herbarium.required'=>'این فیلد الزامی است',
-          'phone.required'=>'این فیلد الزامی است',
-          'name.min'=>'حداقل ۳ کاراکتر الزامی است',
-        ];
-    }
+
 }
