@@ -79,7 +79,21 @@ class AddressAPIController extends AppBaseController
      *      description="Store Address",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="address",
+     *          in="body",
+     *          description="Address that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Address")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="city_id",
+     *          in="body",
+     *          description="Address that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Address")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="village_id",
      *          in="body",
      *          description="Address that should be stored",
      *          required=false,
@@ -184,9 +198,23 @@ class AddressAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="address",
      *          in="body",
-     *          description="Address that should be updated",
+     *          description="Address that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Address")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="city_id",
+     *          in="body",
+     *          description="Address that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Address")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="village_id",
+     *          in="body",
+     *          description="Address that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Address")
      *      ),
@@ -231,6 +259,7 @@ class AddressAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/addresses/{id}",
      *      summary="Remove the specified Address from storage",
