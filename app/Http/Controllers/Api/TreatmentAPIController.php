@@ -79,11 +79,25 @@ class TreatmentAPIController extends AppBaseController
      *      description="Store Treatment",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="paleontology_id",
      *          in="body",
      *          description="Treatment that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Treatment")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="name",
+     *          in="body",
+     *          description="Treatment that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Treatment")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -231,6 +245,7 @@ class TreatmentAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/treatments/{id}",
      *      summary="Remove the specified Treatment from storage",

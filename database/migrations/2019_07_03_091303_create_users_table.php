@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration {
 			$table->json('title');
 			$table->json('education')->nullable();
 			$table->json('degree')->nullable();
-			$table->integer('national_id')->nullable();
+			$table->string('national_id',255)->nullable();
 			$table->date('birthday')->nullable();
 			$table->json('nationality')->nullable();
 			$table->string('passport_no', 45)->nullable();

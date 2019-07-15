@@ -4,10 +4,40 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
+/**
+ * @SWG\Definition(
+ *      definition="Village",
+ *      required={"name"},
+ *      @SWG\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="name",
+ *          description="name",
+ *          type="array",
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @SWG\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */
 class Village extends BaseModel
 {
 
-
+    public static $rules=[];
     /**
      * The database table used by the model.
      *
@@ -31,14 +61,6 @@ class Village extends BaseModel
     protected $casts = [
         'name' => 'json',
     ];
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['created_at', 'deleted_at', 'updated_at'];
-
 
     public function addresses()
     {

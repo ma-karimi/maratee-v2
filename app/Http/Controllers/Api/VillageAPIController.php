@@ -79,10 +79,10 @@ class VillageAPIController extends AppBaseController
      *      description="Store Village",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
      *          description="Village that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Village")
      *      ),
      *      @SWG\Response(

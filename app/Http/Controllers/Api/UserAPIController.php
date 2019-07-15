@@ -79,7 +79,112 @@ class UserAPIController extends AppBaseController
      *      description="Store User",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="title",
+     *          in="body",
+     *          description="User that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *       @SWG\Parameter(
+     *          name="email",
+     *          in="body",
+     *          description="User that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="first_name",
+     *          in="body",
+     *          description="User that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="last_name",
+     *          in="body",
+     *          description="User that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="password",
+     *          in="body",
+     *          description="User that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="education",
+     *          in="body",
+     *          description="User that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="degree",
+     *          in="body",
+     *          description="User that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="national_id",
+     *          in="body",
+     *          description="User that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="birthday",
+     *          in="body",
+     *          description="User that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="nationality",
+     *          in="body",
+     *          description="User that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="passport_no",
+     *          in="body",
+     *          description="User that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="nickname",
+     *          in="body",
+     *          description="User that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="is_author",
+     *          in="body",
+     *          description="User that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="mobile",
+     *          in="body",
+     *          description="User that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="phone",
+     *          in="body",
+     *          description="User that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="work_experience",
      *          in="body",
      *          description="User that should be stored",
      *          required=false,

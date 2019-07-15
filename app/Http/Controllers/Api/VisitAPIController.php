@@ -79,7 +79,63 @@ class VisitAPIController extends AppBaseController
      *      description="Store Visit",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="date",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="purpose",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="peoples",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="archives_types",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="archive_no",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="plantology_id",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="media_id",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="user_id",
      *          in="body",
      *          description="Visit that should be stored",
      *          required=false,
@@ -231,6 +287,7 @@ class VisitAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/visits/{id}",
      *      summary="Remove the specified Visit from storage",
