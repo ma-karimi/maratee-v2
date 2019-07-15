@@ -4,7 +4,6 @@
 namespace App\Models\Contracts;
 
 
-use App\Models\Language;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -38,7 +37,7 @@ class BaseModel extends Model
         foreach ($jsons as $key => $value) {
             foreach (config('settings.languages') as $language) {
                 if (array_key_exists($language, request()->$key)) {
-                    self::$rules[$key . '.' . $language] = 'sometimes|required|min:3';
+                    static::$rules[$key . '.' . $language] = 'sometimes|required|min:3';
                 }
             }
         }

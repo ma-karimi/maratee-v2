@@ -4,8 +4,90 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
+/**
+ * @SWG\Definition(
+ *      definition="ActionHub",
+ *      required={""},
+ *      @SWG\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="user_id",
+ *          description="user_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="herbarium_id",
+ *          description="herbarium_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="project_id",
+ *          description="project_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="location_id",
+ *          description="location_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="action_id",
+ *          description="action_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="department_id",
+ *          description="department_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="description",
+ *          description="description",
+ *          type="json",
+ *          format="json"
+ *      ),
+ *      @SWG\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @SWG\Property(
+ *          property="date",
+ *          description="date",
+ *          type="string",
+ *          format="date"
+ *      ),
+ *      @SWG\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */
+
 class ActionHub extends BaseModel
 {
+
+    public static $rules = [
+        'action_id'=>'required|exists:actions,id',
+        'department_id'=>'exists:departments,id',
+        'herbarium_id'=>'exists:herbariums,id',
+        'project_id'=>'exists:projects,id',
+        'location_id'=>'exists:locations,id',
+        'date'=>'date',
+    ];
 
 
     /**
