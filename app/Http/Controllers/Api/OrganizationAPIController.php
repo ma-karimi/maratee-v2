@@ -48,8 +48,6 @@ class OrganizationAPIController extends AppBaseController
     public function store(CreateOrganizationAPIRequest $request)
     {
         $input = $request->all();
-        $input['name']= json_decode($request->name);
-        $input['description']= json_decode($request->description);
         $organization = $this->organizationRepository->create($input);
 
         return $this->sendResponse($organization->toArray(), 'Organization saved successfully');
@@ -84,7 +82,7 @@ class OrganizationAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, CreateOrganizationAPIRequest $request)
+    public function update($id, UpdateOrganizationAPIRequest $request)
     {
         $input = $request->all();
         /** @var Organization $organization */

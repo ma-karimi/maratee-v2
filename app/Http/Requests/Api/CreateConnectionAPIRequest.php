@@ -24,25 +24,6 @@ class CreateConnectionAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return [
-            'location_id'=>'required|numeric',
-            'department_id'=>'required|numeric',
-            'user_id'=>'required|numeric',
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            'location_id.required'=>'وارد کردن لوکیشن الزامی است',
-            'user_id.required'=>'وارد کردن کاربر الزامی است',
-            'department_id.required'=>'وارد کردن دپارتمان الزامی است',
-            'department_id.numeric'=>'فقط مقادیر عددی قابل قبول است',
-            'location_id.numeric'=>'فقط مقادیر عددی قابل قبول است',
-            'user_id.numeric'=>'فقط مقادیر عددی قابل قبول است',
-        ];
+        return Connection::$rules;
     }
 }

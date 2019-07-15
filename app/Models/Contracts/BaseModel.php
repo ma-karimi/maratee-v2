@@ -25,10 +25,13 @@ class BaseModel extends Model
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
+    /**
+     * BaseModel constructor.
+     * @param array $attributes
+     */
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-
 
         $jsons = array_filter($this->getCasts(), function ($key) {
             return $key === 'json';
@@ -36,12 +39,12 @@ class BaseModel extends Model
 
         foreach ($jsons as $key => $value) {
             foreach (config('settings.languages') as $language) {
-                if (array_key_exists($language, request()->$key)) {
-
+                if (!empty(request()->get($key)) && array_key_exists($language, request()->$key)) {
                     static::$rules[$key . '.' . $language] = 'sometimes|required|min:3';
                 }
             }
         }
+
     }
 
 }
