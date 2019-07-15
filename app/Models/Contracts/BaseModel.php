@@ -3,7 +3,6 @@
 
 namespace App\Models\Contracts;
 
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -12,6 +11,7 @@ class BaseModel extends Model
     use SoftDeletes;
 
     public static $rules = [];
+    public static $messages = [];
     /**
      * The attributes excluded from the model's JSON form.
      *
@@ -41,6 +41,8 @@ class BaseModel extends Model
             foreach (config('settings.languages') as $language) {
                 if (!empty(request()->get($key)) && array_key_exists($language, request()->$key)) {
                     static::$rules[$key . '.' . $language] = 'sometimes|required|min:3';
+                    static::$messages[$key . '.' .$language.'.'. 'required'] = ' الزامی است'.$key.'فیلد';
+                    static::$messages[$key . '.' .$language.'.'. 'min'] = 'حداقل ۳ کاراکتر الزامی است' ;
                 }
             }
         }
