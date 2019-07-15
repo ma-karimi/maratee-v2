@@ -87,9 +87,6 @@ class OrganizationAPIController extends AppBaseController
     public function update($id, CreateOrganizationAPIRequest $request)
     {
         $input = $request->all();
-        $input['name']= json_decode($request->name);
-        $input['description']= json_decode($request->description);
-
         /** @var Organization $organization */
         $organization = $this->organizationRepository->find($id);
 
