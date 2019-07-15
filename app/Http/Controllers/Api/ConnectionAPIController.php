@@ -85,11 +85,11 @@ class ConnectionAPIController extends AppBaseController
      * PUT/PATCH /connections/{id}
      *
      * @param int $id
-     * @param UpdateConnectionAPIRequest $request
+     * @param CreateConnectionAPIRequest $request
      *
      * @return Response
      */
-    public function update($id, UpdateConnectionAPIRequest $request)
+    public function update($id, CreateConnectionAPIRequest $request)
     {
         $input = $request->all();
 
