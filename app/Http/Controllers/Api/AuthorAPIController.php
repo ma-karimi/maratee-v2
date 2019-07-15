@@ -79,10 +79,9 @@ class AuthorAPIController extends AppBaseController
      *      description="Store Author",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Author that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Author")
      *      ),
      *      @SWG\Response(
@@ -184,10 +183,9 @@ class AuthorAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Author that should be updated",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Author")
      *      ),
      *      @SWG\Response(
@@ -231,6 +229,7 @@ class AuthorAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/authors/{id}",
      *      summary="Remove the specified Author from storage",

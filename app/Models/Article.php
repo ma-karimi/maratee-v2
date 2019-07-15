@@ -4,32 +4,99 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
+/**
+ * @SWG\Definition(
+ *      definition="Article",
+ *      required={"city_id"},
+ *      @SWG\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="journal_no",
+ *          description="journal_no",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="page_no",
+ *          description="page_no",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="title",
+ *          description="title",
+ *          type="array",
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="year",
+ *          description="year",
+ *          type="string",
+ *          format="date"
+ *      ),
+ *      @SWG\Property(
+ *          property="journal_name",
+ *          description="journal_name",
+ *          type="array",
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="type",
+ *          description="type",
+ *          type="array",
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="auhtors",
+ *          description="auhtors",
+ *          type="array",
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @SWG\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */
 class Article extends BaseModel
 {
 
 
+    public static $rules = [
+        'year' => 'date',
+        'journal_no'=>'integer',
+        'page_no'=>'integer',
+    ];
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'articles';
-
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
     protected $fillable = ['authors', 'created_at', 'deleted_at', 'journal_name', 'journal_no', 'page_no', 'title', 'type', 'updated_at', 'year'];
-
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = ['title' => 'json', 'type' => 'json', 'authors' => 'json', 'journal_name' => 'json'];
-
     /**
      * The attributes that should be mutated to dates.
      *

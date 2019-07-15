@@ -79,9 +79,38 @@ class BorrowAPIController extends AppBaseController
      *      description="Store Borrow",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="herbarium_id",
      *          in="body",
-     *          description="Borrow that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Borrow")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Borrow")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="sheets_no",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Borrow")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="deadline",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Borrow")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="return",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Borrow")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="media_id",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Borrow")
      *      ),
@@ -184,9 +213,38 @@ class BorrowAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="herbarium_id",
      *          in="body",
-     *          description="Borrow that should be updated",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Borrow")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Borrow")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="sheets_no",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Borrow")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="deadline",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Borrow")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="return",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Borrow")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="media_id",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Borrow")
      *      ),
@@ -231,6 +289,7 @@ class BorrowAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/borrows/{id}",
      *      summary="Remove the specified Borrow from storage",
