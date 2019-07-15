@@ -7,7 +7,7 @@ use App\Models\Contracts\BaseModel;
 /**
  * @SWG\Definition(
  *      definition="ActionHub",
- *      required={""},
+ *      required={"action_id", "user_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -53,8 +53,8 @@ use App\Models\Contracts\BaseModel;
  *      @SWG\Property(
  *          property="description",
  *          description="description",
- *          type="json",
- *          format="json"
+ *          type="array",
+ *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="created_at",

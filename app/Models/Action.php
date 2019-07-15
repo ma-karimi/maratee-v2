@@ -7,7 +7,7 @@ use App\Models\Contracts\BaseModel;
 /**
  * @SWG\Definition(
  *      definition="Action",
- *      required={""},
+ *      required={"name"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -17,14 +17,14 @@ use App\Models\Contracts\BaseModel;
  *      @SWG\Property(
  *          property="name",
  *          description="name",
- *          type="json",
- *          format="json"
+ *          type="array",
+ *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
- *          type="json",
- *          format="json"
+ *          type="array",
+ *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="created_at",

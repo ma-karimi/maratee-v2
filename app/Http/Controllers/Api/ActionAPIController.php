@@ -79,7 +79,14 @@ class ActionAPIController extends AppBaseController
      *      description="Store Action",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
+     *          in="body",
+     *          description="Action that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Action")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
      *          in="body",
      *          description="Action that should be stored",
      *          required=false,
@@ -184,9 +191,16 @@ class ActionAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Action that should be updated",
+     *          description="Action that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Action")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Action that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Action")
      *      ),
@@ -231,6 +245,7 @@ class ActionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/actions/{id}",
      *      summary="Remove the specified Action from storage",
