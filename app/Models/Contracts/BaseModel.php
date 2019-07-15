@@ -37,7 +37,6 @@ class BaseModel extends Model
         foreach ($jsons as $key => $value) {
             foreach (config('settings.languages') as $language) {
                 if (array_key_exists($language, request()->$key)) {
-
                     static::$rules[$key . '.' . $language] = 'sometimes|required|min:3';
                 }
             }
