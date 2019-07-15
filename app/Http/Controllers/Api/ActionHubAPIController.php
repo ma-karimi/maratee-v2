@@ -79,7 +79,56 @@ class ActionHubAPIController extends AppBaseController
      *      description="Store ActionHub",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="action_id",
+     *          in="body",
+     *          description="ActionHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="ActionHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          description="ActionHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="herbarium_id",
+     *          in="body",
+     *          description="ActionHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
+     *          description="ActionHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
+     *          in="body",
+     *          description="ActionHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="ActionHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
      *          in="body",
      *          description="ActionHub that should be stored",
      *          required=false,
@@ -130,6 +179,63 @@ class ActionHubAPIController extends AppBaseController
      *          type="integer",
      *          required=true,
      *          in="path"
+     *      ),
+     *
+     *      @SWG\Parameter(
+     *          name="action_id",
+     *          in="body",
+     *          description="ActionHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="ActionHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          description="ActionHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="herbarium_id",
+     *          in="body",
+     *          description="ActionHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
+     *          description="ActionHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
+     *          in="body",
+     *          description="ActionHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="ActionHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="ActionHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -230,6 +336,7 @@ class ActionHubAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/actionHubs/{id}",
      *      summary="Remove the specified ActionHub from storage",
