@@ -109,7 +109,6 @@ class ActionHubAPIController extends AppBaseController
     public function store(CreateActionHubAPIRequest $request)
     {
         $input = $request->all();
-
         $actionHub = $this->actionHubRepository->create($input);
 
         return $this->sendResponse($actionHub->toArray(), 'Action Hub saved successfully');
