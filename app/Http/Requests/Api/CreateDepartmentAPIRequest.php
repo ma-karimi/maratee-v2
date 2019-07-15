@@ -26,4 +26,12 @@ class CreateDepartmentAPIRequest extends APIRequest
     {
         return Department::$rules;
     }
+
+    /**
+     * @return array
+     */
+    public function messages()
+    {
+        return Department::$messages;
+    }
 }
