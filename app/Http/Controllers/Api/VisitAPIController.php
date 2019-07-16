@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateVisitAPIRequest;
 use App\Http\Requests\Api\UpdateVisitAPIRequest;
 use App\Models\Visit;
 use App\Repositories\VisitRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
@@ -187,6 +187,69 @@ class VisitAPIController extends AppBaseController
      *          type="integer",
      *          required=true,
      *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="purpose",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="peoples",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="archives_types",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="archive_no",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="plantology_id",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="media_id",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
      *      ),
      *      @SWG\Response(
      *          response=200,

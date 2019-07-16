@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\PlantingFactor;
+use App\Models\PaleontologyCitation;
+use App\Models\PaleontologyMedia;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdatePlantingFactorAPIRequest extends APIRequest
+class CreatePaleontologCitationAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +25,6 @@ class UpdatePlantingFactorAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return PlantingFactor::$rules;
+        return PaleontologyCitation::$rules;
     }
 }

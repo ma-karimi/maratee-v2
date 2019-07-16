@@ -2,7 +2,7 @@
 
 use Faker\Factory as Faker;
 use App\Models\PlantingFactor;
-use App\Repositories\PlantingFactorRepository;
+use App\Repositories\PlantFactorRepository;
 
 trait MakePlantingFactorTrait
 {
@@ -14,8 +14,8 @@ trait MakePlantingFactorTrait
      */
     public function makePlantingFactor($plantingFactorFields = [])
     {
-        /** @var PlantingFactorRepository $plantingFactorRepo */
-        $plantingFactorRepo = \App::make(PlantingFactorRepository::class);
+        /** @var PlantFactorRepository $plantingFactorRepo */
+        $plantingFactorRepo = \App::make(PlantFactorRepository::class);
         $theme = $this->fakePlantingFactorData($plantingFactorFields);
         return $plantingFactorRepo->create($theme);
     }

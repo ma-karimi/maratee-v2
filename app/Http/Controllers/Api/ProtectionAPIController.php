@@ -79,11 +79,18 @@ class ProtectionAPIController extends AppBaseController
      *      description="Store Protection",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Protection that should be stored",
+     *          description="Reproduction that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Reproduction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Reproduction that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Protection")
+     *          @SWG\Schema(ref="#/definitions/Reproduction")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -184,11 +191,18 @@ class ProtectionAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Protection that should be updated",
+     *          description="Reproduction that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Reproduction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Reproduction that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Protection")
+     *          @SWG\Schema(ref="#/definitions/Reproduction")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -231,6 +245,7 @@ class ProtectionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/protections/{id}",
      *      summary="Remove the specified Protection from storage",

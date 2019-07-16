@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\PlantingGeneral;
+use App\Models\PlantingApplication;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreatePlantingGeneralAPIRequest extends APIRequest
+class CreatePlantApplicationAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class CreatePlantingGeneralAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return PlantingGeneral::$rules;
+        return PlantingApplication::$rules;
     }
 }

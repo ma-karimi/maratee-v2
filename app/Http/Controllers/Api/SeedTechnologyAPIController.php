@@ -79,7 +79,91 @@ class SeedTechnologyAPIController extends AppBaseController
      *      description="Store SeedTechnology",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="seed_id",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_type",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="husk_average",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="husk_weight",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="humidity",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="purity",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="hard_seed",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="abnormality",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="sprout",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="vigor",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="examine",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
      *          in="body",
      *          description="SeedTechnology that should be stored",
      *          required=false,
@@ -182,11 +266,94 @@ class SeedTechnologyAPIController extends AppBaseController
      *          type="integer",
      *          required=true,
      *          in="path"
+     *      ), @SWG\Parameter(
+     *          name="seed_id",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="seed_type",
      *          in="body",
-     *          description="SeedTechnology that should be updated",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="husk_average",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="husk_weight",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="humidity",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="purity",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="hard_seed",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="abnormality",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="sprout",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="vigor",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="examine",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedTechnology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="SeedTechnology that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/SeedTechnology")
      *      ),
@@ -231,6 +398,7 @@ class SeedTechnologyAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/seedTechnologies/{id}",
      *      summary="Remove the specified SeedTechnology from storage",

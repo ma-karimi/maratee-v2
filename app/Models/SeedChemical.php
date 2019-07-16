@@ -4,6 +4,53 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+/**
+ * @SWG\Definition(
+ *      definition="SeedChemical",
+ *      required={"chemical_id","seed_id","treatment","repeat"},
+ *      @SWG\Property(
+ *          property="chemical_id",
+ *          description="chemical_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="seed_id",
+ *          description="seed_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="treatment",
+ *          description="treatment",
+ *          type="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="repeat",
+ *          description="repeat",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="location_id",
+ *          description="location_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @SWG\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */
 
 class SeedChemical extends BaseModel
 {

@@ -4,6 +4,79 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
+/**
+ * @SWG\Definition(
+ *      definition="SeedHub",
+ *      required={"user_id","seed_id","location_id","action_id"},
+ *      @SWG\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="project_id",
+ *          description="project_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="user_id",
+ *          description="user_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="action_role",
+ *          description="action_role",
+ *          type="array",
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="action_role_description",
+ *          description="action_role_description",
+ *          type="array",
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="seed_id",
+ *          description="seed_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="location_id",
+ *          description="location_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="action_id",
+ *          description="action_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="date",
+ *          description="date",
+ *          type="string",
+ *          format="date"
+ *      ),
+ *      @SWG\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @SWG\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */
+
 class SeedHub extends BaseModel
 {
 

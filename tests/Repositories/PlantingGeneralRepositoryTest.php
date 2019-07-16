@@ -1,7 +1,7 @@
 <?php namespace Tests\Repositories;
 
 use App\Models\PlantingGeneral;
-use App\Repositories\PlantingGeneralRepository;
+use App\Repositories\PlantGeneralRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\Traits\MakePlantingGeneralTrait;
@@ -12,14 +12,14 @@ class PlantingGeneralRepositoryTest extends TestCase
     use MakePlantingGeneralTrait, ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var PlantingGeneralRepository
+     * @var PlantGeneralRepository
      */
     protected $plantingGeneralRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->plantingGeneralRepo = \App::make(PlantingGeneralRepository::class);
+        $this->plantingGeneralRepo = \App::make(PlantGeneralRepository::class);
     }
 
     /**

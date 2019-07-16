@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Models\PlantingApplication;
-use App\Repositories\BaseRepository;
+use App\Models\PlantApplication;
+
 
 /**
  * Class PlantingApplicationRepository
@@ -11,7 +11,7 @@ use App\Repositories\BaseRepository;
  * @version July 14, 2019, 11:25 am UTC
 */
 
-class PlantingApplicationRepository extends BaseRepository
+class PlantApplicationRepository extends BaseRepository
 {
     /**
      * @var array
@@ -35,6 +35,6 @@ class PlantingApplicationRepository extends BaseRepository
      **/
     public function model()
     {
-        return PlantingApplication::class;
+        return PlantApplication::class;
     }
 }

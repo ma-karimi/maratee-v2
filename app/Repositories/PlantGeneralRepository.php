@@ -2,16 +2,15 @@
 
 namespace App\Repositories;
 
-use App\Models\PlantingFactor;
-use App\Repositories\BaseRepository;
+use App\Models\PlantGeneral;
 
 /**
- * Class PlantingFactorRepository
+ * Class PlantGeneralRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:25 am UTC
 */
 
-class PlantingFactorRepository extends BaseRepository
+class PlantGeneralRepository extends BaseRepository
 {
     /**
      * @var array
@@ -35,6 +34,6 @@ class PlantingFactorRepository extends BaseRepository
      **/
     public function model()
     {
-        return PlantingFactor::class;
+        return PlantGeneral::class;
     }
 }

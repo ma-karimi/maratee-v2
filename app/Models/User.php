@@ -11,7 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * @SWG\Definition(
- *      definition="Action",
+ *      definition="User",
  *      required={"title","email","first_name","last_name","password"},
  *      @SWG\Property(
  *          property="id",

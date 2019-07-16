@@ -4,6 +4,66 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+/**
+ * @SWG\Definition(
+ *      definition="Project",
+ *      required={"name","plan_name","plan_number"},
+ *      @SWG\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="name",
+ *          description="name",
+ *          type="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="plan_name",
+ *          description="name",
+ *          type="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="plan_description",
+ *          description="plan_description",
+ *          type="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="plan_number",
+ *          description="plan_number",
+ *          type="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="approved_id",
+ *          description="approved_id",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="registered_id",
+ *          description="registered_id",
+ *          type="string"
+ *      ),
+ *       @SWG\Property(
+ *          property="plan_id",
+ *          description="plan_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @SWG\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */
 
 class Project extends BaseModel
 {

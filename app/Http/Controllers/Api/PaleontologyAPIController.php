@@ -79,7 +79,161 @@ class PaleontologyAPIController extends AppBaseController
      *      description="Store Paleontology",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="geology_age_id",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="catalog_no",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="specimen_no",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="field_no",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="barcode_no",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="move_status",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="salon",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="closet",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="drawer",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="infraspecific",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="typestatus",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="preservation",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="pieces",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="color",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="element",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="treatment",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="additional_info",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="access",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="last_update",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="excavation",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="collection_name",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_no",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="common_name",
      *          in="body",
      *          description="Paleontology that should be stored",
      *          required=false,
@@ -184,9 +338,163 @@ class PaleontologyAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="geology_age_id",
      *          in="body",
-     *          description="Paleontology that should be updated",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="catalog_no",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="specimen_no",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="field_no",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="barcode_no",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="move_status",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="salon",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="closet",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="drawer",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="infraspecific",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="typestatus",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="preservation",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="pieces",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="color",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="element",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="treatment",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="additional_info",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="access",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="last_update",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="excavation",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="collection_name",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_no",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="common_name",
+     *          in="body",
+     *          description="Paleontology that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
@@ -231,6 +539,7 @@ class PaleontologyAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/paleontologies/{id}",
      *      summary="Remove the specified Paleontology from storage",

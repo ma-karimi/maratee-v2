@@ -79,7 +79,49 @@ class ProjectAPIController extends AppBaseController
      *      description="Store Project",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plan_name",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plan_number",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plan_description",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="approved_id",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="registered_id",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plan_id",
      *          in="body",
      *          description="Project that should be stored",
      *          required=false,
@@ -184,9 +226,44 @@ class ProjectAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="plan_name",
      *          in="body",
-     *          description="Project that should be updated",
+     *          description="Project that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plan_number",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plan_description",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="approved_id",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="registered_id",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plan_id",
+     *          in="body",
+     *          description="Project that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Project")
      *      ),
@@ -231,6 +308,7 @@ class ProjectAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/projects/{id}",
      *      summary="Remove the specified Project from storage",

@@ -79,7 +79,14 @@ class SoilFeatureAPIController extends AppBaseController
      *      description="Store SoilFeature",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
+     *          in="body",
+     *          description="SoilFeature that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SoilFeature")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="unit",
      *          in="body",
      *          description="SoilFeature that should be stored",
      *          required=false,
@@ -184,9 +191,16 @@ class SoilFeatureAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="SoilFeature that should be updated",
+     *          description="SoilFeature that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SoilFeature")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="unit",
+     *          in="body",
+     *          description="SoilFeature that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/SoilFeature")
      *      ),
@@ -231,6 +245,7 @@ class SoilFeatureAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/soilFeatures/{id}",
      *      summary="Remove the specified SoilFeature from storage",

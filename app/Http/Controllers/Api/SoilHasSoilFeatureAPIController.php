@@ -79,10 +79,24 @@ class SoilHasSoilFeatureAPIController extends AppBaseController
      *      description="Store SoilHasSoilFeature",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="soil_id",
      *          in="body",
      *          description="SoilHasSoilFeature that should be stored",
-     *          required=false,
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SoilHasSoilFeature")
+     *      ),
+     *       @SWG\Parameter(
+     *          name="soil_feature_id",
+     *          in="body",
+     *          description="SoilHasSoilFeature that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SoilHasSoilFeature")
+     *      ),
+     *       @SWG\Parameter(
+     *          name="value",
+     *          in="body",
+     *          description="SoilHasSoilFeature that should be stored",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/SoilHasSoilFeature")
      *      ),
      *      @SWG\Response(
@@ -184,10 +198,24 @@ class SoilHasSoilFeatureAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="soil_id",
      *          in="body",
-     *          description="SoilHasSoilFeature that should be updated",
-     *          required=false,
+     *          description="SoilHasSoilFeature that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SoilHasSoilFeature")
+     *      ),
+     *       @SWG\Parameter(
+     *          name="soil_feature_id",
+     *          in="body",
+     *          description="SoilHasSoilFeature that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SoilHasSoilFeature")
+     *      ),
+     *       @SWG\Parameter(
+     *          name="value",
+     *          in="body",
+     *          description="SoilHasSoilFeature that should be stored",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/SoilHasSoilFeature")
      *      ),
      *      @SWG\Response(
@@ -231,6 +259,7 @@ class SoilHasSoilFeatureAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/soilHasSoilFeatures/{id}",
      *      summary="Remove the specified SoilHasSoilFeature from storage",

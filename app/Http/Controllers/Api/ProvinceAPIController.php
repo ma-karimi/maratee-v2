@@ -79,7 +79,14 @@ class ProvinceAPIController extends AppBaseController
      *      description="Store Province",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
+     *          in="body",
+     *          description="Province that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Province")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="country_id",
      *          in="body",
      *          description="Province that should be stored",
      *          required=false,
@@ -184,9 +191,16 @@ class ProvinceAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Province that should be updated",
+     *          description="Province that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Province")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="country_id",
+     *          in="body",
+     *          description="Province that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Province")
      *      ),
@@ -231,6 +245,7 @@ class ProvinceAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/provinces/{id}",
      *      summary="Remove the specified Province from storage",

@@ -3,6 +3,54 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+/**
+ * @SWG\Definition(
+ *      definition="SeedMolecular",
+ *      required={"molecular_id","seed_id","treatment","repeat"},
+ *      @SWG\Property(
+ *          property="molecular_id",
+ *          description="molecular_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="seed_id",
+ *          description="seed_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="location_id",
+ *          description="location_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="treatment",
+ *          description="treatment",
+ *          type="array",
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="repeat",
+ *          description="repeat",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @SWG\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */
 
 class SeedMolecular extends BaseModel
 {

@@ -79,7 +79,35 @@ class PaleontologyActionAPIController extends AppBaseController
      *      description="Store PaleontologyAction",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="paleontology_id",
+     *          in="body",
+     *          description="PaleontologyAction that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyAction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="PaleontologyAction that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyAction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="action_id",
+     *          in="body",
+     *          description="PaleontologyAction that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyAction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="PaleontologyAction that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyAction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
      *          in="body",
      *          description="PaleontologyAction that should be stored",
      *          required=false,
@@ -184,9 +212,37 @@ class PaleontologyActionAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="paleontology_id",
      *          in="body",
-     *          description="PaleontologyAction that should be updated",
+     *          description="PaleontologyAction that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyAction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="PaleontologyAction that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyAction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="action_id",
+     *          in="body",
+     *          description="PaleontologyAction that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyAction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="PaleontologyAction that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyAction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="PaleontologyAction that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PaleontologyAction")
      *      ),
@@ -231,6 +287,7 @@ class PaleontologyActionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/paleontologyActions/{id}",
      *      summary="Remove the specified PaleontologyAction from storage",

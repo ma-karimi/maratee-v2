@@ -90,7 +90,7 @@ Route::resource('planting_actions', 'PlantingActionAPIController');
 
 Route::resource('planting_generals', 'PlantingGeneralAPIController');
 
-Route::resource('planting_factors', 'PlantingFactorAPIController');
+Route::resource('planting_factors', 'PlantFactorAPIController');
 
 Route::resource('planting_applications', 'PlantingApplicationAPIController');
 

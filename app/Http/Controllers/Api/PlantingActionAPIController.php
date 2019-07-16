@@ -79,7 +79,14 @@ class PlantingActionAPIController extends AppBaseController
      *      description="Store PlantingAction",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
+     *          in="body",
+     *          description="PlantingAction that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PlantingAction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
      *          in="body",
      *          description="PlantingAction that should be stored",
      *          required=false,
@@ -184,9 +191,16 @@ class PlantingActionAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="PlantingAction that should be updated",
+     *          description="PlantingAction that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PlantingAction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="PlantingAction that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantingAction")
      *      ),
@@ -231,6 +245,7 @@ class PlantingActionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/plantingActions/{id}",
      *      summary="Remove the specified PlantingAction from storage",

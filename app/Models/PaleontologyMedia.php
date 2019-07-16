@@ -4,7 +4,78 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+/**
+ * @SWG\Definition(
+ *      definition="PaleontologyMedia",
+ *      required={"paleontology_id","media_id","user_id"},
+ *      @SWG\Property(
+ *          property="credential_gift_id",
+ *          description="credential_gift_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *       @SWG\Property(
+ *          property="credential_expense_id",
+ *          description="credential_expense_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *       @SWG\Property(
+ *          property="credential_purchase_id",
+ *          description="credential_purchase_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *       @SWG\Property(
+ *          property="credential_correspondence_id",
+ *          description="credential_correspondence_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *       @SWG\Property(
+ *          property="paleontology_id",
+ *          description="paleontology_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *       @SWG\Property(
+ *          property="media_id",
+ *          description="media_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *       @SWG\Property(
+ *          property="user_id",
+ *          description="user_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *       @SWG\Property(
+ *          property="exchange_id",
+ *          description="exchange_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *       @SWG\Property(
+ *          property="credential_fair_id",
+ *          description="credential_fair_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @SWG\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */
 class PaleontologyMedia extends BaseModel
 {
 

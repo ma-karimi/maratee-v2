@@ -184,10 +184,10 @@ class VillageAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
      *          description="Village that should be updated",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Village")
      *      ),
      *      @SWG\Response(
@@ -231,6 +231,7 @@ class VillageAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/villages/{id}",
      *      summary="Remove the specified Village from storage",

@@ -79,10 +79,17 @@ class SeedHasPlantAPIController extends AppBaseController
      *      description="Store SeedHasPlant",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="seed_id",
      *          in="body",
      *          description="SeedHasPlant that should be stored",
-     *          required=false,
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedHasPlant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plant_id",
+     *          in="body",
+     *          description="SeedHasPlant that should be stored",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/SeedHasPlant")
      *      ),
      *      @SWG\Response(
@@ -184,10 +191,17 @@ class SeedHasPlantAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="seed_id",
      *          in="body",
-     *          description="SeedHasPlant that should be updated",
-     *          required=false,
+     *          description="SeedHasPlant that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedHasPlant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plant_id",
+     *          in="body",
+     *          description="SeedHasPlant that should be stored",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/SeedHasPlant")
      *      ),
      *      @SWG\Response(
@@ -231,6 +245,7 @@ class SeedHasPlantAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/seedHasPlants/{id}",
      *      summary="Remove the specified SeedHasPlant from storage",

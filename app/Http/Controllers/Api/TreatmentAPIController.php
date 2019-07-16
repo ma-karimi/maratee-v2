@@ -191,18 +191,25 @@ class TreatmentAPIController extends AppBaseController
      *      description="Update Treatment",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Treatment",
-     *          type="integer",
+     *          name="paleontology_id",
+     *          in="body",
+     *          description="Treatment that should be stored",
      *          required=true,
-     *          in="path"
+     *          @SWG\Schema(ref="#/definitions/Treatment")
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Treatment that should be updated",
-     *          required=false,
+     *          description="Treatment that should be stored",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Treatment")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Visit")
      *      ),
      *      @SWG\Response(
      *          response=200,

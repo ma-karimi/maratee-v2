@@ -79,7 +79,14 @@ class SoilAPIController extends AppBaseController
      *      description="Store Soil",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="type",
+     *          in="body",
+     *          description="Soil that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Soil")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="description",
      *          in="body",
      *          description="Soil that should be stored",
      *          required=false,
@@ -131,6 +138,20 @@ class SoilAPIController extends AppBaseController
      *          type="integer",
      *          required=true,
      *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          description="Soil that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Soil")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Soil that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Soil")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -184,9 +205,16 @@ class SoilAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="type",
      *          in="body",
-     *          description="Soil that should be updated",
+     *          description="Soil that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Soil")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Soil that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Soil")
      *      ),
@@ -231,6 +259,7 @@ class SoilAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/soils/{id}",
      *      summary="Remove the specified Soil from storage",

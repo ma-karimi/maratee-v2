@@ -1,7 +1,7 @@
 <?php namespace Tests\Repositories;
 
 use App\Models\PlantingFactor;
-use App\Repositories\PlantingFactorRepository;
+use App\Repositories\PlantFactorRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\Traits\MakePlantingFactorTrait;
@@ -12,14 +12,14 @@ class PlantingFactorRepositoryTest extends TestCase
     use MakePlantingFactorTrait, ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var PlantingFactorRepository
+     * @var PlantFactorRepository
      */
     protected $plantingFactorRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->plantingFactorRepo = \App::make(PlantingFactorRepository::class);
+        $this->plantingFactorRepo = \App::make(PlantFactorRepository::class);
     }
 
     /**

@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreatePlantingGeneralAPIRequest;
-use App\Http\Requests\Api\UpdatePlantingGeneralAPIRequest;
-use App\Models\PlantingGeneral;
-use App\Repositories\PlantingGeneralRepository;
+use App\Http\Requests\Api\CreatePlantGeneralAPIRequest;
+use App\Http\Requests\Api\UpdatePlantGeneralAPIRequest;
+use App\Models\PlantGeneral;
+use App\Repositories\PlantGeneralRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class PlantingGeneralController
+ * Class PlantGeneralController
  * @package App\Http\Controllers\Api
  */
 
-class PlantingGeneralAPIController extends AppBaseController
+class PlantGeneralAPIController extends AppBaseController
 {
-    /** @var  PlantingGeneralRepository */
-    private $plantingGeneralRepository;
+    /** @var  PlantGeneralRepository */
+    private $PlantGeneralRepository;
 
-    public function __construct(PlantingGeneralRepository $plantingGeneralRepo)
+    public function __construct(PlantGeneralRepository $PlantGeneralRepo)
     {
-        $this->plantingGeneralRepository = $plantingGeneralRepo;
+        $this->PlantGeneralRepository = $PlantGeneralRepo;
     }
 
     /**
@@ -30,10 +30,10 @@ class PlantingGeneralAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/plantingGenerals",
-     *      summary="Get a listing of the PlantingGenerals.",
-     *      tags={"PlantingGeneral"},
-     *      description="Get all PlantingGenerals",
+     *      path="/PlantGenerals",
+     *      summary="Get a listing of the PlantGenerals.",
+     *      tags={"PlantGeneral"},
+     *      description="Get all PlantGenerals",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -47,7 +47,7 @@ class PlantingGeneralAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/PlantingGeneral")
+     *                  @SWG\Items(ref="#/definitions/PlantGeneral")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -59,31 +59,52 @@ class PlantingGeneralAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $plantingGenerals = $this->plantingGeneralRepository->all(
+        $PlantGenerals = $this->PlantGeneralRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
         );
 
-        return $this->sendResponse($plantingGenerals->toArray(), 'Planting Generals retrieved successfully');
+        return $this->sendResponse($PlantGenerals->toArray(), 'Planting Generals retrieved successfully');
     }
 
     /**
-     * @param CreatePlantingGeneralAPIRequest $request
+     * @param CreatePlantGeneralAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/plantingGenerals",
-     *      summary="Store a newly created PlantingGeneral in storage",
-     *      tags={"PlantingGeneral"},
-     *      description="Store PlantingGeneral",
+     *      path="/PlantGenerals",
+     *      summary="Store a newly created PlantGeneral in storage",
+     *      tags={"PlantGeneral"},
+     *      description="Store PlantGeneral",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="PlantingGeneral that should be stored",
+     *          description="PlantGeneral that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PlantGeneral")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          description="PlantGeneral that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PlantGeneral")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="parent_id",
+     *          in="body",
+     *          description="PlantGeneral that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PlantGeneral")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="PlantGeneral that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/PlantingGeneral")
+     *          @SWG\Schema(ref="#/definitions/PlantGeneral")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -96,7 +117,7 @@ class PlantingGeneralAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/PlantingGeneral"
+     *                  ref="#/definitions/PlantGeneral"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -106,13 +127,13 @@ class PlantingGeneralAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreatePlantingGeneralAPIRequest $request)
+    public function store(CreatePlantGeneralAPIRequest $request)
     {
         $input = $request->all();
 
-        $plantingGeneral = $this->plantingGeneralRepository->create($input);
+        $PlantGeneral = $this->PlantGeneralRepository->create($input);
 
-        return $this->sendResponse($plantingGeneral->toArray(), 'Planting General saved successfully');
+        return $this->sendResponse($PlantGeneral->toArray(), 'Planting General saved successfully');
     }
 
     /**
@@ -120,14 +141,14 @@ class PlantingGeneralAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/plantingGenerals/{id}",
-     *      summary="Display the specified PlantingGeneral",
-     *      tags={"PlantingGeneral"},
-     *      description="Get PlantingGeneral",
+     *      path="/PlantGenerals/{id}",
+     *      summary="Display the specified PlantGeneral",
+     *      tags={"PlantGeneral"},
+     *      description="Get PlantGeneral",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of PlantingGeneral",
+     *          description="id of PlantGeneral",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -143,7 +164,7 @@ class PlantingGeneralAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/PlantingGeneral"
+     *                  ref="#/definitions/PlantGeneral"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -155,40 +176,61 @@ class PlantingGeneralAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var PlantingGeneral $plantingGeneral */
-        $plantingGeneral = $this->plantingGeneralRepository->find($id);
+        /** @var PlantGeneral $PlantGeneral */
+        $PlantGeneral = $this->PlantGeneralRepository->find($id);
 
-        if (empty($plantingGeneral)) {
+        if (empty($PlantGeneral)) {
             return $this->sendError('Planting General not found');
         }
 
-        return $this->sendResponse($plantingGeneral->toArray(), 'Planting General retrieved successfully');
+        return $this->sendResponse($PlantGeneral->toArray(), 'Planting General retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdatePlantingGeneralAPIRequest $request
+     * @param UpdatePlantGeneralAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/plantingGenerals/{id}",
-     *      summary="Update the specified PlantingGeneral in storage",
-     *      tags={"PlantingGeneral"},
-     *      description="Update PlantingGeneral",
+     *      path="/PlantGenerals/{id}",
+     *      summary="Update the specified PlantGeneral in storage",
+     *      tags={"PlantGeneral"},
+     *      description="Update PlantGeneral",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of PlantingGeneral",
+     *          description="id of PlantGeneral",
      *          type="integer",
      *          required=true,
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="PlantingGeneral that should be updated",
+     *          description="PlantGeneral that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PlantGeneral")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          description="PlantGeneral that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PlantGeneral")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="parent_id",
+     *          in="body",
+     *          description="PlantGeneral that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PlantGeneral")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="PlantGeneral that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/PlantingGeneral")
+     *          @SWG\Schema(ref="#/definitions/PlantGeneral")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -201,7 +243,7 @@ class PlantingGeneralAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/PlantingGeneral"
+     *                  ref="#/definitions/PlantGeneral"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -211,35 +253,36 @@ class PlantingGeneralAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdatePlantingGeneralAPIRequest $request)
+    public function update($id, UpdatePlantGeneralAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var PlantingGeneral $plantingGeneral */
-        $plantingGeneral = $this->plantingGeneralRepository->find($id);
+        /** @var PlantGeneral $PlantGeneral */
+        $PlantGeneral = $this->PlantGeneralRepository->find($id);
 
-        if (empty($plantingGeneral)) {
+        if (empty($PlantGeneral)) {
             return $this->sendError('Planting General not found');
         }
 
-        $plantingGeneral = $this->plantingGeneralRepository->update($input, $id);
+        $PlantGeneral = $this->PlantGeneralRepository->update($input, $id);
 
-        return $this->sendResponse($plantingGeneral->toArray(), 'PlantingGeneral updated successfully');
+        return $this->sendResponse($PlantGeneral->toArray(), 'PlantGeneral updated successfully');
     }
 
     /**
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
-     *      path="/plantingGenerals/{id}",
-     *      summary="Remove the specified PlantingGeneral from storage",
-     *      tags={"PlantingGeneral"},
-     *      description="Delete PlantingGeneral",
+     *      path="/PlantGenerals/{id}",
+     *      summary="Remove the specified PlantGeneral from storage",
+     *      tags={"PlantGeneral"},
+     *      description="Delete PlantGeneral",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of PlantingGeneral",
+     *          description="id of PlantGeneral",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -267,14 +310,14 @@ class PlantingGeneralAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var PlantingGeneral $plantingGeneral */
-        $plantingGeneral = $this->plantingGeneralRepository->find($id);
+        /** @var PlantGeneral $PlantGeneral */
+        $PlantGeneral = $this->PlantGeneralRepository->find($id);
 
-        if (empty($plantingGeneral)) {
+        if (empty($PlantGeneral)) {
             return $this->sendError('Planting General not found');
         }
 
-        $plantingGeneral->delete();
+        $PlantGeneral->delete();
 
         return $this->sendResponse($id, 'Planting General deleted successfully');
     }
