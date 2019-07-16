@@ -79,7 +79,35 @@ class ArticleHubAPIController extends AppBaseController
      *      description="Store ArticleHub",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="article_id",
+     *          in="body",
+     *          description="ArticleHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/ArticleHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="ArticleHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/ArticleHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="action_id",
+     *          in="body",
+     *          description="ArticleHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ArticleHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          description="ArticleHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ArticleHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
      *          in="body",
      *          description="ArticleHub that should be stored",
      *          required=false,
@@ -184,9 +212,37 @@ class ArticleHubAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="article_id",
      *          in="body",
-     *          description="ArticleHub that should be updated",
+     *          description="ArticleHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/ArticleHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="ArticleHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/ArticleHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="action_id",
+     *          in="body",
+     *          description="ArticleHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ArticleHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          description="ArticleHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ArticleHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="ArticleHub that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/ArticleHub")
      *      ),
@@ -231,6 +287,7 @@ class ArticleHubAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/articleHubs/{id}",
      *      summary="Remove the specified ArticleHub from storage",

@@ -19,16 +19,19 @@ class Location extends BaseModel
      */
     protected $table = 'locations';
 
+    /**
+     * @var array
+     */
     protected $spatialFields = [
         'point'
     ];
+
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
     protected $fillable = ['address_id', 'altitude', 'created_at', 'deleted_at', 'description', 'name', 'point', 'region_id', 'updated_at'];
-
 
     /**
      * The attributes that should be casted to native types.
@@ -37,6 +40,17 @@ class Location extends BaseModel
      */
     protected $casts = ['name' => 'json', 'description' => 'json'];
 
+    /**
+     * @var array
+     */
+    public static $rules = ['address_id'=>'required'];
+
+    /**
+     * @var array
+     */
+    public static $messages = [
+        'address_id.required'=>'آدرس الزامی است'
+    ];
 
     /**
      * @return BelongsTo

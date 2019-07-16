@@ -4,9 +4,27 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
+/**
+ * @SWG\Definition(
+ *            name="Attendance",
+ *            required={"start_time", "end_time", "user_id"},
+ * 			@SWG\Property(name="start_time", type="string"),
+ * 			@SWG\Property(name="end_time", type="string"),
+ * 			@SWG\Property(name="user_id", type="integer"),
+ * 			@SWG\Property(name="herbarium_id", type="integer"),
+ * 			@SWG\Property(name="created_at", type="string"),
+ * 			@SWG\Property(name="updated_at", type="string"),
+ *        )
+ **/
 class Attendance extends BaseModel
 {
 
+    public static $rules = [
+        'start_time' => 'required|datetime',
+        'end_time' => 'required|datetime',
+        'user_id' => 'exists:users,id',
+        'herbarium_id' => 'exists:herbariums,id'
+    ];
 
     /**
      * The database table used by the model.

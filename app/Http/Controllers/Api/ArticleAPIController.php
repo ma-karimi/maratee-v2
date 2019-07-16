@@ -79,7 +79,49 @@ class ArticleAPIController extends AppBaseController
      *      description="Store Article",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="title",
+     *          in="body",
+     *          description="Article that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Article")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="year",
+     *          in="body",
+     *          description="Article that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Article")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="journal_name",
+     *          in="body",
+     *          description="Article that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Article")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="journal_no",
+     *          in="body",
+     *          description="Article that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Article")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="page_no",
+     *          in="body",
+     *          description="Article that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Article")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          description="Article that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Article")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="authors",
      *          in="body",
      *          description="Article that should be stored",
      *          required=false,
@@ -184,9 +226,51 @@ class ArticleAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="title",
      *          in="body",
-     *          description="Article that should be updated",
+     *          description="Article that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Article")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="year",
+     *          in="body",
+     *          description="Article that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Article")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="journal_name",
+     *          in="body",
+     *          description="Article that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Article")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="journal_no",
+     *          in="body",
+     *          description="Article that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Article")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="page_no",
+     *          in="body",
+     *          description="Article that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Article")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          description="Article that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Article")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="authors",
+     *          in="body",
+     *          description="Article that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Article")
      *      ),
@@ -231,6 +315,7 @@ class ArticleAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/articles/{id}",
      *      summary="Remove the specified Article from storage",

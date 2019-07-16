@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 
 abstract class BaseRepository
@@ -88,7 +89,7 @@ abstract class BaseRepository
         $query = $this->model->newQuery();
 
         if (count($search)) {
-            foreach($search as $key => $value) {
+            foreach ($search as $key => $value) {
                 if (in_array($key, $this->getFieldsSearchable())) {
                     $query->where($key, $value);
                 }
@@ -190,4 +191,20 @@ abstract class BaseRepository
 
         return $model->delete();
     }
+
+    /**
+     * @return array
+     */
+    public function pluckName()
+    {
+        $plucks = $this->model->pluck('name', 'id')->toArray();
+        $result = [];
+
+        foreach ($plucks as $index => $pluck) {
+            $result[$index] = $pluck['fa'];
+        }
+
+        return $result;
+    }
+
 }

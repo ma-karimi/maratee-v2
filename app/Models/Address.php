@@ -4,6 +4,48 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
+/**
+ * @SWG\Definition(
+ *      definition="Address",
+ *      required={"city_id"},
+ *      @SWG\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="address",
+ *          description="address",
+ *          type="array",
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="city_id",
+ *          description="city_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="village_id",
+ *          description="village_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @SWG\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */
 class Address extends BaseModel
 {
 
@@ -30,6 +72,10 @@ class Address extends BaseModel
      */
     protected $casts = ['address' => 'json'];
 
+    public static $rules =[
+        'city_id'=>'required|exists:cities,id',
+        'village_id'=>'exists:villages,id',
+    ];
 
     public function city()
     {

@@ -79,9 +79,32 @@ class AssessmentCollectionAPIController extends AppBaseController
      *      description="Store AssessmentCollection",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="collection_id",
      *          in="body",
-     *          description="AssessmentCollection that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="assessment_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
      *      ),
@@ -184,9 +207,32 @@ class AssessmentCollectionAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="collection_id",
      *          in="body",
-     *          description="AssessmentCollection that should be updated",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="assessment_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
      *      ),
@@ -231,6 +277,7 @@ class AssessmentCollectionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/assessmentCollections/{id}",
      *      summary="Remove the specified AssessmentCollection from storage",

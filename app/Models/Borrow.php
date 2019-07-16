@@ -5,8 +5,32 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @SWG\Definition(
+ *            name="Borrow",
+ *            required={"start_time", "end_time", "user_id"},
+ * 			@SWG\Property(name="borrows_date", type="string"),
+ * 			@SWG\Property(name="sheets_no", type="string"),
+ * 			@SWG\Property(name="user_id", type="integer"),
+ * 			@SWG\Property(name="media_id", type="integer"),
+ * 			@SWG\Property(name="herbarium_id", type="integer"),
+ * 			@SWG\Property(name="deadline", type="integer"),
+ * 			@SWG\Property(name="return", type="integer"),
+ * 			@SWG\Property(name="created_at", type="string"),
+ * 			@SWG\Property(name="updated_at", type="string"),
+ *        )
+ **/
 class Borrow extends BaseModel
 {
+
+    public static $rules = [
+        'media_id' => 'exists:medias,id',
+        'borrows_date' => 'required|datetime',
+        'deadline' => 'required|date',
+        'sheets_no' => 'required|integer',
+        'user_id' => 'exists:users,id',
+        'herbarium_id' => 'exists:herbariums,id'
+    ];
 
     /**
      * The database table used by the model.

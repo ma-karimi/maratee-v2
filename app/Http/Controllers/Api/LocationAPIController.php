@@ -128,4 +128,5 @@ class LocationAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Location deleted successfully');
     }
+
 }

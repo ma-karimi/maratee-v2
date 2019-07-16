@@ -8,6 +8,7 @@ use App\Notifications\ResetPassword;
 use App\Services\UserServices;
 use App\Utility;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @property UserServices userServices
@@ -28,10 +29,20 @@ class AuthController extends Controller
     public function register(UserRequest $request)
     {
         $success = [];
-        $user = $this->userServices->create($request);
-        $success['token'] = $user->createToken('Laravel Password Grant Client')->accessToken;
-        $success['user'] = $user->toArray();
-        return $this->responser($success);
+        try {
+
+            DB::beginTransaction();
+            $user = $this->userServices->create($request);
+            $this->userServices->assignDepartmentAndLocation($user->id, $request);
+            $success['token'] = $user->createToken('Laravel Password Grant Client')->accessToken;
+            $success['user'] = $user->toArray();
+            DB::commit();
+            return $this->responser($success);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            report($exception);
+            return response()->json([[], 'وارد کردن مکان و دپارتمان الزامی است']);
+        }
     }
 
     /**
@@ -57,6 +68,7 @@ class AuthController extends Controller
         }
 
     }
+
 
 
 }
