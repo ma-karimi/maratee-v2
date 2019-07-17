@@ -175,7 +175,7 @@ class AttendanceAPIController extends AppBaseController
         /** @var Attendance $attendance */
         $attendance = $this->attendanceRepository->find($id);
 
-        if (empty($attendance)) {
+        if ($attendance === null) {
             return $this->sendError('Attendance not found');
         }
 
@@ -252,7 +252,7 @@ class AttendanceAPIController extends AppBaseController
         /** @var Attendance $attendance */
         $attendance = $this->attendanceRepository->find($id);
 
-        if (empty($attendance)) {
+        if ($attendance === null) {
             return $this->sendError('Attendance not found');
         }
 
@@ -305,7 +305,7 @@ class AttendanceAPIController extends AppBaseController
         /** @var Attendance $attendance */
         $attendance = $this->attendanceRepository->find($id);
 
-        if (empty($attendance)) {
+        if ($attendance === null) {
             return $this->sendError('Attendance not found');
         }
 

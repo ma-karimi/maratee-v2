@@ -79,10 +79,27 @@ class GeologyAgeAPIController extends AppBaseController
      *      description="Store GeologyAge",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="era",
      *          in="body",
-     *          description="GeologyAge that should be stored",
-     *          required=false,
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/GeologyAge")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="period",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/GeologyAge")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="epoch",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/GeologyAge")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="stage",
+     *          in="body",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/GeologyAge")
      *      ),
      *      @SWG\Response(
@@ -158,7 +175,7 @@ class GeologyAgeAPIController extends AppBaseController
         /** @var GeologyAge $geologyAge */
         $geologyAge = $this->geologyAgeRepository->find($id);
 
-        if (empty($geologyAge)) {
+        if ($geologyAge === null) {
             return $this->sendError('Geology Age not found');
         }
 
@@ -184,10 +201,27 @@ class GeologyAgeAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="era",
      *          in="body",
-     *          description="GeologyAge that should be updated",
-     *          required=false,
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/GeologyAge")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="period",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/GeologyAge")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="epoch",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/GeologyAge")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="stage",
+     *          in="body",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/GeologyAge")
      *      ),
      *      @SWG\Response(
@@ -218,7 +252,7 @@ class GeologyAgeAPIController extends AppBaseController
         /** @var GeologyAge $geologyAge */
         $geologyAge = $this->geologyAgeRepository->find($id);
 
-        if (empty($geologyAge)) {
+        if ($geologyAge === null) {
             return $this->sendError('Geology Age not found');
         }
 
@@ -231,6 +265,7 @@ class GeologyAgeAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/geologyAges/{id}",
      *      summary="Remove the specified GeologyAge from storage",
@@ -270,7 +305,7 @@ class GeologyAgeAPIController extends AppBaseController
         /** @var GeologyAge $geologyAge */
         $geologyAge = $this->geologyAgeRepository->find($id);
 
-        if (empty($geologyAge)) {
+        if ($geologyAge === null) {
             return $this->sendError('Geology Age not found');
         }
 

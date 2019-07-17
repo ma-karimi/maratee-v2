@@ -6,10 +6,27 @@ use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @SWG\Definition(
+ *            name="Country",
+ *            required={"name"},
+ * 			@SWG\Property(name="id", type="integer"),
+ * 			@SWG\Property(name="name", type="array"),
+ * 			@SWG\Property(name="code", type="string"),
+ * 			@SWG\Property(name="continent_id", type="integer"),
+ * 			@SWG\Property(name="description", type="array"),
+ * 			@SWG\Property(name="created_at", type="string"),
+ * 			@SWG\Property(name="updated_at", type="string"),
+ *        )
+ **/
 class Country extends BaseModel
 {
 
 
+    public static $rules = [
+        'code' => 'string',
+        'continent_id' => 'required|exists:continents,id',
+    ];
     /**
      * The database table used by the model.
      *

@@ -79,9 +79,38 @@ class CredentialAPIController extends AppBaseController
      *      description="Store Credential",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Credential that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Credential")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Credential")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Credential")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="archive_no",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Credential")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="place",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Credential")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="parent_id",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Credential")
      *      ),
@@ -158,7 +187,7 @@ class CredentialAPIController extends AppBaseController
         /** @var Credential $credential */
         $credential = $this->credentialRepository->find($id);
 
-        if (empty($credential)) {
+        if ($credential === null) {
             return $this->sendError('Credential not found');
         }
 
@@ -184,9 +213,38 @@ class CredentialAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Credential that should be updated",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Credential")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Credential")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Credential")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="archive_no",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Credential")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="place",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Credential")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="parent_id",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Credential")
      *      ),
@@ -218,7 +276,7 @@ class CredentialAPIController extends AppBaseController
         /** @var Credential $credential */
         $credential = $this->credentialRepository->find($id);
 
-        if (empty($credential)) {
+        if ($credential === null) {
             return $this->sendError('Credential not found');
         }
 
@@ -264,13 +322,14 @@ class CredentialAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function destroy($id)
     {
         /** @var Credential $credential */
         $credential = $this->credentialRepository->find($id);
 
-        if (empty($credential)) {
+        if ($credential === null) {
             return $this->sendError('Credential not found');
         }
 

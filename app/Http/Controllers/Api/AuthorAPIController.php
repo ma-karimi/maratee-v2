@@ -157,7 +157,7 @@ class AuthorAPIController extends AppBaseController
         /** @var Author $author */
         $author = $this->authorRepository->find($id);
 
-        if (empty($author)) {
+        if ($author === null) {
             return $this->sendError('Author not found');
         }
 
@@ -216,7 +216,7 @@ class AuthorAPIController extends AppBaseController
         /** @var Author $author */
         $author = $this->authorRepository->find($id);
 
-        if (empty($author)) {
+        if ($author === null) {
             return $this->sendError('Author not found');
         }
 
@@ -269,7 +269,7 @@ class AuthorAPIController extends AppBaseController
         /** @var Author $author */
         $author = $this->authorRepository->find($id);
 
-        if (empty($author)) {
+        if ($author === null) {
             return $this->sendError('Author not found');
         }
 

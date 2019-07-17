@@ -5,10 +5,27 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @SWG\Definition(
+ *            name="Connection",
+ *            required={"department_id", "user_id"},
+ * 			@SWG\Property(name="id", type="integer"),
+ * 			@SWG\Property(name="location_id", type="integer"),
+ * 			@SWG\Property(name="department_id", type="integer"),
+ * 			@SWG\Property(name="user_id", type="integer"),
+ * 			@SWG\Property(name="created_at", type="string"),
+ * 			@SWG\Property(name="updated_at", type="string"),
+ *        )
+ **/
 class Connection extends BaseModel
 {
 
 
+    public static $rules = [
+        'location_id' => 'required|exists:locations,id',
+        'department_id' => 'required|exists:departments,id',
+        'user_id' => 'required|exists:users,id'
+    ];
     /**
      * The database table used by the model.
      *

@@ -79,10 +79,9 @@ class CollectionAPIController extends AppBaseController
      *      description="Store Collection",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Collection that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Collection")
      *      ),
      *      @SWG\Response(
@@ -158,7 +157,7 @@ class CollectionAPIController extends AppBaseController
         /** @var Collection $collection */
         $collection = $this->collectionRepository->find($id);
 
-        if (empty($collection)) {
+        if ($collection === null) {
             return $this->sendError('Collection not found');
         }
 
@@ -184,10 +183,9 @@ class CollectionAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Collection that should be updated",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Collection")
      *      ),
      *      @SWG\Response(
@@ -218,7 +216,7 @@ class CollectionAPIController extends AppBaseController
         /** @var Collection $collection */
         $collection = $this->collectionRepository->find($id);
 
-        if (empty($collection)) {
+        if ($collection === null) {
             return $this->sendError('Collection not found');
         }
 
@@ -231,6 +229,7 @@ class CollectionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/collections/{id}",
      *      summary="Remove the specified Collection from storage",
@@ -270,7 +269,7 @@ class CollectionAPIController extends AppBaseController
         /** @var Collection $collection */
         $collection = $this->collectionRepository->find($id);
 
-        if (empty($collection)) {
+        if ($collection === null) {
             return $this->sendError('Collection not found');
         }
 

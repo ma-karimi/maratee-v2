@@ -5,6 +5,18 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @SWG\Definition(
+ *            name="Garden",
+ *            required={"region", "section"},
+ * 			@SWG\Property(name="id", type="integer"),
+ * 			@SWG\Property(name="region", type="array"),
+ * 			@SWG\Property(name="section", type="array"),
+ * 			@SWG\Property(name="number", type="array"),
+ * 			@SWG\Property(name="created_at", type="string"),
+ * 			@SWG\Property(name="updated_at", type="string"),
+ *        )
+ **/
 class Garden extends BaseModel
 {
 

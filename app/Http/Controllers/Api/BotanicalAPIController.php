@@ -277,7 +277,7 @@ class BotanicalAPIController extends AppBaseController
         /** @var Botanical $botanical */
         $botanical = $this->botanicalRepository->find($id);
 
-        if (empty($botanical)) {
+        if ($botanical === null) {
             return $this->sendError('Botanical not found');
         }
 
@@ -456,7 +456,7 @@ class BotanicalAPIController extends AppBaseController
         /** @var Botanical $botanical */
         $botanical = $this->botanicalRepository->find($id);
 
-        if (empty($botanical)) {
+        if ($botanical === null) {
             return $this->sendError('Botanical not found');
         }
 
@@ -509,7 +509,7 @@ class BotanicalAPIController extends AppBaseController
         /** @var Botanical $botanical */
         $botanical = $this->botanicalRepository->find($id);
 
-        if (empty($botanical)) {
+        if ($botanical === null) {
             return $this->sendError('Botanical not found');
         }
 

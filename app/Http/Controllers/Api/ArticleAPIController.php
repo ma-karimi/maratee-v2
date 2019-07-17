@@ -200,7 +200,7 @@ class ArticleAPIController extends AppBaseController
         /** @var Article $article */
         $article = $this->articleRepository->find($id);
 
-        if (empty($article)) {
+        if ($article === null) {
             return $this->sendError('Article not found');
         }
 
@@ -302,7 +302,7 @@ class ArticleAPIController extends AppBaseController
         /** @var Article $article */
         $article = $this->articleRepository->find($id);
 
-        if (empty($article)) {
+        if ($article === null) {
             return $this->sendError('Article not found');
         }
 
@@ -355,7 +355,7 @@ class ArticleAPIController extends AppBaseController
         /** @var Article $article */
         $article = $this->articleRepository->find($id);
 
-        if (empty($article)) {
+        if ($article === null) {
             return $this->sendError('Article not found');
         }
 
