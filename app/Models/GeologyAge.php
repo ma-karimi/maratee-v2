@@ -5,6 +5,19 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @SWG\Definition(
+ *            name="GeologyAge",
+ *            required={"era", "period", "epoch", "stage"},
+ * 			@SWG\Property(name="id", type="integer"),
+ * 			@SWG\Property(name="era", type="array"),
+ * 			@SWG\Property(name="period", type="array"),
+ * 			@SWG\Property(name="epoch", type="array"),
+ * 			@SWG\Property(name="stage", type="array"),
+ * 			@SWG\Property(name="created_at", type="string"),
+ * 			@SWG\Property(name="updated_at", type="string"),
+ *        )
+ **/
 class GeologyAge extends BaseModel
 {
 

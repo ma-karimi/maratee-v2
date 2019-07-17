@@ -79,9 +79,20 @@ class GardenAPIController extends AppBaseController
      *      description="Store Garden",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="region",
      *          in="body",
-     *          description="Garden that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Garden")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="section",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Garden")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="number",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Garden")
      *      ),
@@ -158,7 +169,7 @@ class GardenAPIController extends AppBaseController
         /** @var Garden $garden */
         $garden = $this->gardenRepository->find($id);
 
-        if (empty($garden)) {
+        if ($garden === null) {
             return $this->sendError('Garden not found');
         }
 
@@ -184,9 +195,20 @@ class GardenAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="region",
      *          in="body",
-     *          description="Garden that should be updated",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Garden")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="section",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Garden")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="number",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Garden")
      *      ),
@@ -218,7 +240,7 @@ class GardenAPIController extends AppBaseController
         /** @var Garden $garden */
         $garden = $this->gardenRepository->find($id);
 
-        if (empty($garden)) {
+        if ($garden === null) {
             return $this->sendError('Garden not found');
         }
 
@@ -231,6 +253,7 @@ class GardenAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/gardens/{id}",
      *      summary="Remove the specified Garden from storage",
@@ -270,7 +293,7 @@ class GardenAPIController extends AppBaseController
         /** @var Garden $garden */
         $garden = $this->gardenRepository->find($id);
 
-        if (empty($garden)) {
+        if ($garden === null) {
             return $this->sendError('Garden not found');
         }
 
