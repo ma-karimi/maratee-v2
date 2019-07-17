@@ -79,7 +79,21 @@ class MorphologyAPIController extends AppBaseController
      *      description="Store Morphology",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
+     *          in="body",
+     *          description="Morphology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Morphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="unit",
+     *          in="body",
+     *          description="Morphology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Morphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
      *          in="body",
      *          description="Morphology that should be stored",
      *          required=false,
@@ -158,7 +172,7 @@ class MorphologyAPIController extends AppBaseController
         /** @var Morphology $morphology */
         $morphology = $this->morphologyRepository->find($id);
 
-        if (empty($morphology)) {
+        if ($morphology === null) {
             return $this->sendError('Morphology not found');
         }
 
@@ -184,9 +198,23 @@ class MorphologyAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Morphology that should be updated",
+     *          description="Morphology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Morphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="unit",
+     *          in="body",
+     *          description="Morphology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Morphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Morphology that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Morphology")
      *      ),
@@ -218,7 +246,7 @@ class MorphologyAPIController extends AppBaseController
         /** @var Morphology $morphology */
         $morphology = $this->morphologyRepository->find($id);
 
-        if (empty($morphology)) {
+        if ($morphology === null) {
             return $this->sendError('Morphology not found');
         }
 
@@ -231,6 +259,7 @@ class MorphologyAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/morphologies/{id}",
      *      summary="Remove the specified Morphology from storage",

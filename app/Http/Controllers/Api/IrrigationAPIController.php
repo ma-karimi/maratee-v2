@@ -79,7 +79,14 @@ class IrrigationAPIController extends AppBaseController
      *      description="Store Irrigation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="type",
+     *          in="body",
+     *          description="Irrigation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Irrigation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
      *          in="body",
      *          description="Irrigation that should be stored",
      *          required=false,
@@ -158,7 +165,7 @@ class IrrigationAPIController extends AppBaseController
         /** @var Irrigation $irrigation */
         $irrigation = $this->irrigationRepository->find($id);
 
-        if (empty($irrigation)) {
+        if ($irrigation === null) {
             return $this->sendError('Irrigation not found');
         }
 
@@ -184,9 +191,16 @@ class IrrigationAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="type",
      *          in="body",
-     *          description="Irrigation that should be updated",
+     *          description="Irrigation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Irrigation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Irrigation that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Irrigation")
      *      ),
@@ -218,7 +232,7 @@ class IrrigationAPIController extends AppBaseController
         /** @var Irrigation $irrigation */
         $irrigation = $this->irrigationRepository->find($id);
 
-        if (empty($irrigation)) {
+        if ($irrigation === null) {
             return $this->sendError('Irrigation not found');
         }
 
@@ -231,6 +245,7 @@ class IrrigationAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/irrigations/{id}",
      *      summary="Remove the specified Irrigation from storage",

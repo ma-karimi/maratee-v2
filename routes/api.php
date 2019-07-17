@@ -165,7 +165,7 @@ Route::resource('herbarium_appendixes', 'HerbariumAppendixAPIController');
 
 Route::resource('irrigations', 'IrrigationAPIController');
 
-Route::resource('languages', 'LanguageAPIController');
+
 
 Route::resource('lightings', 'LightingAPIController');
 

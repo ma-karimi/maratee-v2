@@ -79,7 +79,14 @@ class MethodAPIController extends AppBaseController
      *      description="Store Method",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
+     *          in="body",
+     *          description="Method that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Method")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
      *          in="body",
      *          description="Method that should be stored",
      *          required=false,
@@ -158,7 +165,7 @@ class MethodAPIController extends AppBaseController
         /** @var Method $method */
         $method = $this->methodRepository->find($id);
 
-        if (empty($method)) {
+        if ($method === null) {
             return $this->sendError('Method not found');
         }
 
@@ -184,9 +191,16 @@ class MethodAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Method that should be updated",
+     *          description="Method that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Method")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Method that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Method")
      *      ),
@@ -218,7 +232,7 @@ class MethodAPIController extends AppBaseController
         /** @var Method $method */
         $method = $this->methodRepository->find($id);
 
-        if (empty($method)) {
+        if ($method === null) {
             return $this->sendError('Method not found');
         }
 
@@ -231,6 +245,7 @@ class MethodAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/methods/{id}",
      *      summary="Remove the specified Method from storage",
@@ -270,7 +285,7 @@ class MethodAPIController extends AppBaseController
         /** @var Method $method */
         $method = $this->methodRepository->find($id);
 
-        if (empty($method)) {
+        if ($method === null) {
             return $this->sendError('Method not found');
         }
 

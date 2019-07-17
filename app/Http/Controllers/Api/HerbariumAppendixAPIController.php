@@ -79,10 +79,24 @@ class HerbariumAppendixAPIController extends AppBaseController
      *      description="Store HerbariumAppendix",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="herbarium_id",
      *          in="body",
      *          description="HerbariumAppendix that should be stored",
-     *          required=false,
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/HerbariumAppendix")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="appendix",
+     *          in="body",
+     *          description="HerbariumAppendix that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/HerbariumAppendix")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="destination_herbarium_id",
+     *          in="body",
+     *          description="HerbariumAppendix that should be stored",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/HerbariumAppendix")
      *      ),
      *      @SWG\Response(
@@ -158,7 +172,7 @@ class HerbariumAppendixAPIController extends AppBaseController
         /** @var HerbariumAppendix $herbariumAppendix */
         $herbariumAppendix = $this->herbariumAppendixRepository->find($id);
 
-        if (empty($herbariumAppendix)) {
+        if ($herbariumAppendix === null) {
             return $this->sendError('Herbarium Appendix not found');
         }
 
@@ -184,10 +198,24 @@ class HerbariumAppendixAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="herbarium_id",
      *          in="body",
-     *          description="HerbariumAppendix that should be updated",
-     *          required=false,
+     *          description="HerbariumAppendix that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/HerbariumAppendix")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="appendix",
+     *          in="body",
+     *          description="HerbariumAppendix that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/HerbariumAppendix")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="destination_herbarium_id",
+     *          in="body",
+     *          description="HerbariumAppendix that should be stored",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/HerbariumAppendix")
      *      ),
      *      @SWG\Response(
@@ -218,7 +246,7 @@ class HerbariumAppendixAPIController extends AppBaseController
         /** @var HerbariumAppendix $herbariumAppendix */
         $herbariumAppendix = $this->herbariumAppendixRepository->find($id);
 
-        if (empty($herbariumAppendix)) {
+        if ($herbariumAppendix === null) {
             return $this->sendError('Herbarium Appendix not found');
         }
 
@@ -231,6 +259,7 @@ class HerbariumAppendixAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/herbariumAppendixes/{id}",
      *      summary="Remove the specified HerbariumAppendix from storage",

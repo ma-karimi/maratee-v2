@@ -79,7 +79,28 @@ class MedicineAPIController extends AppBaseController
      *      description="Store Medicine",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
+     *          in="body",
+     *          description="Medicine that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Medicine")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          description="Medicine that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Medicine")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Medicine that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medicine")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="parent_id",
      *          in="body",
      *          description="Medicine that should be stored",
      *          required=false,
@@ -158,7 +179,7 @@ class MedicineAPIController extends AppBaseController
         /** @var Medicine $medicine */
         $medicine = $this->medicineRepository->find($id);
 
-        if (empty($medicine)) {
+        if ($medicine === null) {
             return $this->sendError('Medicine not found');
         }
 
@@ -184,9 +205,30 @@ class MedicineAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Medicine that should be updated",
+     *          description="Medicine that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Medicine")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          description="Medicine that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Medicine")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Medicine that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medicine")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="parent_id",
+     *          in="body",
+     *          description="Medicine that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Medicine")
      *      ),
@@ -218,7 +260,7 @@ class MedicineAPIController extends AppBaseController
         /** @var Medicine $medicine */
         $medicine = $this->medicineRepository->find($id);
 
-        if (empty($medicine)) {
+        if ($medicine === null) {
             return $this->sendError('Medicine not found');
         }
 
@@ -231,6 +273,7 @@ class MedicineAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/medicines/{id}",
      *      summary="Remove the specified Medicine from storage",

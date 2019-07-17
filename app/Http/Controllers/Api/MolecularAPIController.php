@@ -79,7 +79,14 @@ class MolecularAPIController extends AppBaseController
      *      description="Store Molecular",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
+     *          in="body",
+     *          description="Molecular that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Molecular")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
      *          in="body",
      *          description="Molecular that should be stored",
      *          required=false,
@@ -158,7 +165,7 @@ class MolecularAPIController extends AppBaseController
         /** @var Molecular $molecular */
         $molecular = $this->molecularRepository->find($id);
 
-        if (empty($molecular)) {
+        if ($molecular === null) {
             return $this->sendError('Molecular not found');
         }
 
@@ -184,9 +191,16 @@ class MolecularAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Molecular that should be updated",
+     *          description="Molecular that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Molecular")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Molecular that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Molecular")
      *      ),
@@ -218,7 +232,7 @@ class MolecularAPIController extends AppBaseController
         /** @var Molecular $molecular */
         $molecular = $this->molecularRepository->find($id);
 
-        if (empty($molecular)) {
+        if ($molecular === null) {
             return $this->sendError('Molecular not found');
         }
 
@@ -231,6 +245,7 @@ class MolecularAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/moleculars/{id}",
      *      summary="Remove the specified Molecular from storage",
@@ -270,7 +285,7 @@ class MolecularAPIController extends AppBaseController
         /** @var Molecular $molecular */
         $molecular = $this->molecularRepository->find($id);
 
-        if (empty($molecular)) {
+        if ($molecular === null) {
             return $this->sendError('Molecular not found');
         }
 

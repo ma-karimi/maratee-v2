@@ -79,7 +79,63 @@ class LocalityAPIController extends AppBaseController
      *      description="Store Locality",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="paleontology_id",
+     *          in="body",
+     *          description="Locality that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Locality")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          description="Locality that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Locality")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="formation",
+     *          in="body",
+     *          description="Locality that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Locality")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="layer",
+     *          in="body",
+     *          description="Locality that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Locality")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="stratigraphy",
+     *          in="body",
+     *          description="Locality that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Locality")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="lithology",
+     *          in="body",
+     *          description="Locality that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Locality")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="fauna",
+     *          in="body",
+     *          description="Locality that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Locality")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Locality that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Locality")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="map_id",
      *          in="body",
      *          description="Locality that should be stored",
      *          required=false,

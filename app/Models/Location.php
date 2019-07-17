@@ -6,7 +6,63 @@ use App\Models\Contracts\BaseModel;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
+/**
+ * @SWG\Definition(
+ *      definition="Region",
+ *      required={"address_id","name"},
+ *      @SWG\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="address_id",
+ *          description="address_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="region_id",
+ *          description="region_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="altitude",
+ *          description="altitude",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="point",
+ *          description="point"
+ *          type="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="name",
+ *          description="name"
+ *          type="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="description",
+ *          description="description"
+ *          type="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @SWG\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */
 class Location extends BaseModel
 {
 
