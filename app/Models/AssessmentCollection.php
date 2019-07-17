@@ -8,6 +8,7 @@ use App\Models\Contracts\BaseModel;
  * @SWG\Definition(
  *            name="AssessmentCollection",
  *            required={"collection_id", "assessment_id", "seed_id"},
+ * 			@SWG\Property(name="id", type="integer"),
  * 			@SWG\Property(name="collection_id", type="integer"),
  * 			@SWG\Property(name="assessment_id", type="integer"),
  * 			@SWG\Property(name="seed_id", type="integer"),

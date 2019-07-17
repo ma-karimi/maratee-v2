@@ -198,3 +198,6 @@ Route::resource('paleontology_actions', 'PaleontologyActionAPIController');
 Route::resource('paleontology_citations', 'PaleontologyCitationAPIController');
 Route::resource('morphologies', 'MorphologyAPIController');
 
+
+
+Route::resource('chemicals', 'ChemicalAPIController');

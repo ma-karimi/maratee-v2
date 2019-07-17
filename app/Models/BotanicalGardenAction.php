@@ -8,6 +8,7 @@ use App\Models\Contracts\BaseModel;
  * @SWG\Definition(
  *            name="BotanicalGardenAction",
  *            required={"botanical_id", "planting_action_id", "from_soil_id", "from_lighting_id", "from_garden_id"},
+ * 			@SWG\Property(name="id", type="integer"),
  * 			@SWG\Property(name="botanical_id", type="integer"),
  * 			@SWG\Property(name="planting_action_id", type="integer"),
  * 			@SWG\Property(name="date", type="string"),

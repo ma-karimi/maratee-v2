@@ -3,10 +3,31 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+/**
+ * @SWG\Definition(
+ *            name="BotanicalIrrigation",
+ *            required={"botanical_id", "irrigation_id", "daytime"},
+ * 			@SWG\Property(name="id", type="integer"),
+ * 			@SWG\Property(name="botanical_id", type="integer"),
+ * 			@SWG\Property(name="irrigation_id", type="integer"),
+ * 			@SWG\Property(name="daytime", type="array"),
+ * 			@SWG\Property(name="requirement", type="array"),
+ * 			@SWG\Property(name="seasonal_feature", type="array"),
+ * 			@SWG\Property(name="created_at", type="string"),
+ * 			@SWG\Property(name="updated_at", type="string"),
+ *        )
+ **/
 
 class BotanicalIrrigation extends BaseModel
 {
 
+
+    public static $rules = [
+        'botanical_id' => 'required|exists:botanicals,id',
+        'irrigation_id' => 'required|exists:irrigations,id'
+    ];
 
     /**
      * The database table used by the model.
@@ -31,12 +52,18 @@ class BotanicalIrrigation extends BaseModel
     protected $casts = ['requirement' => 'json', 'daytime' => 'json', 'seasonal_feature' => 'json'];
 
 
-    public function botanical()
+    /**
+     * @return BelongsTo
+     */
+    public function botanical(): BelongsTo
     {
         return $this->belongsTo(Botanical::class);
     }
 
-    public function irrigation()
+    /**
+     * @return BelongsTo
+     */
+    public function irrigation(): BelongsTo
     {
         return $this->belongsTo(Irrigation::class);
     }
