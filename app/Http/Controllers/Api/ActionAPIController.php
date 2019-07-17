@@ -165,7 +165,7 @@ class ActionAPIController extends AppBaseController
         /** @var Action $action */
         $action = $this->actionRepository->find($id);
 
-        if (empty($action)) {
+        if ($action === null) {
             return $this->sendError('Action not found');
         }
 
@@ -232,7 +232,7 @@ class ActionAPIController extends AppBaseController
         /** @var Action $action */
         $action = $this->actionRepository->find($id);
 
-        if (empty($action)) {
+        if ($action === null) {
             return $this->sendError('Action not found');
         }
 
@@ -285,7 +285,7 @@ class ActionAPIController extends AppBaseController
         /** @var Action $action */
         $action = $this->actionRepository->find($id);
 
-        if (empty($action)) {
+        if ($action === null) {
             return $this->sendError('Action not found');
         }
 

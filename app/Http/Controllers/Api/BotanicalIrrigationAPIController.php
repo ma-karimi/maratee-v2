@@ -30,7 +30,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/botanicalIrrigations",
+     *      path="/botanical_irrigations",
      *      summary="Get a listing of the BotanicalIrrigations.",
      *      tags={"BotanicalIrrigation"},
      *      description="Get all BotanicalIrrigations",
@@ -73,15 +73,38 @@ class BotanicalIrrigationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/botanicalIrrigations",
+     *      path="/botanical_irrigations",
      *      summary="Store a newly created BotanicalIrrigation in storage",
      *      tags={"BotanicalIrrigation"},
      *      description="Store BotanicalIrrigation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="botanical_id",
      *          in="body",
-     *          description="BotanicalIrrigation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="irrigation_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="requirement",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="daytime",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seasonal_feature",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
      *      ),
@@ -120,7 +143,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/botanicalIrrigations/{id}",
+     *      path="/botanical_irrigations/{id}",
      *      summary="Display the specified BotanicalIrrigation",
      *      tags={"BotanicalIrrigation"},
      *      description="Get BotanicalIrrigation",
@@ -158,7 +181,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
         /** @var BotanicalIrrigation $botanicalIrrigation */
         $botanicalIrrigation = $this->botanicalIrrigationRepository->find($id);
 
-        if (empty($botanicalIrrigation)) {
+        if ($botanicalIrrigation === null) {
             return $this->sendError('Botanical Irrigation not found');
         }
 
@@ -171,7 +194,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/botanicalIrrigations/{id}",
+     *      path="/botanical_irrigations/{id}",
      *      summary="Update the specified BotanicalIrrigation in storage",
      *      tags={"BotanicalIrrigation"},
      *      description="Update BotanicalIrrigation",
@@ -184,9 +207,32 @@ class BotanicalIrrigationAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="botanical_id",
      *          in="body",
-     *          description="BotanicalIrrigation that should be updated",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="irrigation_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="requirement",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="daytime",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seasonal_feature",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
      *      ),
@@ -218,7 +264,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
         /** @var BotanicalIrrigation $botanicalIrrigation */
         $botanicalIrrigation = $this->botanicalIrrigationRepository->find($id);
 
-        if (empty($botanicalIrrigation)) {
+        if ($botanicalIrrigation === null) {
             return $this->sendError('Botanical Irrigation not found');
         }
 
@@ -231,8 +277,9 @@ class BotanicalIrrigationAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
-     *      path="/botanicalIrrigations/{id}",
+     *      path="/botanical_irrigations/{id}",
      *      summary="Remove the specified BotanicalIrrigation from storage",
      *      tags={"BotanicalIrrigation"},
      *      description="Delete BotanicalIrrigation",
@@ -270,7 +317,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
         /** @var BotanicalIrrigation $botanicalIrrigation */
         $botanicalIrrigation = $this->botanicalIrrigationRepository->find($id);
 
-        if (empty($botanicalIrrigation)) {
+        if ($botanicalIrrigation === null) {
             return $this->sendError('Botanical Irrigation not found');
         }
 

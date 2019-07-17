@@ -172,7 +172,7 @@ class AddressAPIController extends AppBaseController
         /** @var Address $address */
         $address = $this->addressRepository->find($id);
 
-        if (empty($address)) {
+        if ($address === null) {
             return $this->sendError('Address not found');
         }
 
@@ -246,7 +246,7 @@ class AddressAPIController extends AppBaseController
         /** @var Address $address */
         $address = $this->addressRepository->find($id);
 
-        if (empty($address)) {
+        if ($address === null) {
             return $this->sendError('Address not found');
         }
 
@@ -299,7 +299,7 @@ class AddressAPIController extends AppBaseController
         /** @var Address $address */
         $address = $this->addressRepository->find($id);
 
-        if (empty($address)) {
+        if ($address === null) {
             return $this->sendError('Address not found');
         }
 

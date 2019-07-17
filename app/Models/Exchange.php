@@ -6,9 +6,46 @@ use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @SWG\Definition(
+ *            name="Exchange",
+ *            required={"send_herbarium_id"},
+ * 			@SWG\Property(name="id", type="integer"),
+ * 			@SWG\Property(name="send_herbarium_id", type="integer"),
+ * 			@SWG\Property(name="send_date", type="string"),
+ * 			@SWG\Property(name="receive_date", type="string"),
+ * 			@SWG\Property(name="description", type="array"),
+ * 			@SWG\Property(name="receive_herbarium_id", type="integer"),
+ * 			@SWG\Property(name="send_sheet_no", type="integer"),
+ * 			@SWG\Property(name="send_sample_no", type="integer"),
+ * 			@SWG\Property(name="receive_sheet_no", type="integer"),
+ * 			@SWG\Property(name="receive_sample_no", type="integer"),
+ * 			@SWG\Property(name="send_paleontology_id", type="integer"),
+ * 			@SWG\Property(name="receive_paleontology_id", type="integer"),
+ * 			@SWG\Property(name="send_type", type="string"),
+ * 			@SWG\Property(name="receive_type", type="string"),
+ * 			@SWG\Property(name="created_at", type="string"),
+ * 			@SWG\Property(name="updated_at", type="string"),
+ *        )
+ **/
 class Exchange extends BaseModel
 {
 
+
+    public static $rules = [
+        'send_herbarium_id' => 'required|exists:herbariums,id',
+        'send_paleontology_id' => 'required|exists:paleontologies,id',
+        'receive_herbarium_id' => 'required|exists:herbariums,id',
+        'receive_paleontology_id' => 'required|exists:paleontologies,id',
+        'send_date' => 'datetime',
+        'receive_date' => 'datetime',
+        'send_sheet_no' => 'integer',
+        'send_sample_no' => 'integer',
+        'receive_sheet_no' => 'integer',
+        'receive_sample_no' => 'integer',
+        'send_type' => 'string',
+        'receive_type' => 'string',
+    ];
 
     /**
      * The database table used by the model.

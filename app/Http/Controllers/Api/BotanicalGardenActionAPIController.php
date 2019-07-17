@@ -30,7 +30,7 @@ class BotanicalGardenActionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/botanicalGardenActions",
+     *      path="/botanical_garden_actions",
      *      summary="Get a listing of the BotanicalGardenActions.",
      *      tags={"BotanicalGardenAction"},
      *      description="Get all BotanicalGardenActions",
@@ -73,7 +73,7 @@ class BotanicalGardenActionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/botanicalGardenActions",
+     *      path="/botanical_garden_actions",
      *      summary="Store a newly created BotanicalGardenAction in storage",
      *      tags={"BotanicalGardenAction"},
      *      description="Store BotanicalGardenAction",
@@ -197,7 +197,7 @@ class BotanicalGardenActionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/botanicalGardenActions/{id}",
+     *      path="/botanical_garden_actions/{id}",
      *      summary="Display the specified BotanicalGardenAction",
      *      tags={"BotanicalGardenAction"},
      *      description="Get BotanicalGardenAction",
@@ -235,7 +235,7 @@ class BotanicalGardenActionAPIController extends AppBaseController
         /** @var BotanicalGardenAction $botanicalGardenAction */
         $botanicalGardenAction = $this->botanicalGardenActionRepository->find($id);
 
-        if (empty($botanicalGardenAction)) {
+        if ($botanicalGardenAction === null) {
             return $this->sendError('Botanical Garden Action not found');
         }
 
@@ -248,7 +248,7 @@ class BotanicalGardenActionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/botanicalGardenActions/{id}",
+     *      path="/botanical_garden_actions/{id}",
      *      summary="Update the specified BotanicalGardenAction in storage",
      *      tags={"BotanicalGardenAction"},
      *      description="Update BotanicalGardenAction",
@@ -295,7 +295,7 @@ class BotanicalGardenActionAPIController extends AppBaseController
         /** @var BotanicalGardenAction $botanicalGardenAction */
         $botanicalGardenAction = $this->botanicalGardenActionRepository->find($id);
 
-        if (empty($botanicalGardenAction)) {
+        if ($botanicalGardenAction === null) {
             return $this->sendError('Botanical Garden Action not found');
         }
 
@@ -308,8 +308,9 @@ class BotanicalGardenActionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
-     *      path="/botanicalGardenActions/{id}",
+     *      path="/botanical_garden_actions/{id}",
      *      summary="Remove the specified BotanicalGardenAction from storage",
      *      tags={"BotanicalGardenAction"},
      *      description="Delete BotanicalGardenAction",

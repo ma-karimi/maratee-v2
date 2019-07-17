@@ -30,7 +30,7 @@ class CryoBankActionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/cryoBankActions",
+     *      path="/cryo_bank_actions",
      *      summary="Get a listing of the CryoBankActions.",
      *      tags={"CryoBankAction"},
      *      description="Get all CryoBankActions",
@@ -73,16 +73,21 @@ class CryoBankActionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/cryoBankActions",
+     *      path="/cryo_bank_actions",
      *      summary="Store a newly created CryoBankAction in storage",
      *      tags={"CryoBankAction"},
      *      description="Store CryoBankAction",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="cryo_bank_id",
      *          in="body",
-     *          description="CryoBankAction that should be stored",
-     *          required=false,
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/CryoBankAction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="action_id",
+     *          in="body",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/CryoBankAction")
      *      ),
      *      @SWG\Response(
@@ -120,7 +125,7 @@ class CryoBankActionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/cryoBankActions/{id}",
+     *      path="/cryo_bank_actions/{id}",
      *      summary="Display the specified CryoBankAction",
      *      tags={"CryoBankAction"},
      *      description="Get CryoBankAction",
@@ -158,7 +163,7 @@ class CryoBankActionAPIController extends AppBaseController
         /** @var CryoBankAction $cryoBankAction */
         $cryoBankAction = $this->cryoBankActionRepository->find($id);
 
-        if (empty($cryoBankAction)) {
+        if ($cryoBankAction === null) {
             return $this->sendError('Cryo Bank Action not found');
         }
 
@@ -171,7 +176,7 @@ class CryoBankActionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/cryoBankActions/{id}",
+     *      path="/cryo_bank_actions/{id}",
      *      summary="Update the specified CryoBankAction in storage",
      *      tags={"CryoBankAction"},
      *      description="Update CryoBankAction",
@@ -184,10 +189,15 @@ class CryoBankActionAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="cryo_bank_id",
      *          in="body",
-     *          description="CryoBankAction that should be updated",
-     *          required=false,
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/CryoBankAction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="action_id",
+     *          in="body",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/CryoBankAction")
      *      ),
      *      @SWG\Response(
@@ -218,7 +228,7 @@ class CryoBankActionAPIController extends AppBaseController
         /** @var CryoBankAction $cryoBankAction */
         $cryoBankAction = $this->cryoBankActionRepository->find($id);
 
-        if (empty($cryoBankAction)) {
+        if ($cryoBankAction === null) {
             return $this->sendError('Cryo Bank Action not found');
         }
 
@@ -231,8 +241,9 @@ class CryoBankActionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
-     *      path="/cryoBankActions/{id}",
+     *      path="/cryo_bank_actions/{id}",
      *      summary="Remove the specified CryoBankAction from storage",
      *      tags={"CryoBankAction"},
      *      description="Delete CryoBankAction",
@@ -270,7 +281,7 @@ class CryoBankActionAPIController extends AppBaseController
         /** @var CryoBankAction $cryoBankAction */
         $cryoBankAction = $this->cryoBankActionRepository->find($id);
 
-        if (empty($cryoBankAction)) {
+        if ($cryoBankAction === null) {
             return $this->sendError('Cryo Bank Action not found');
         }
 

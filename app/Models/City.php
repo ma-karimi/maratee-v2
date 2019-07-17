@@ -6,9 +6,26 @@ use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @SWG\Definition(
+ *            name="City",
+ *            required={"name","province_id"},
+ * 			@SWG\Property(name="id", type="integer"),
+ * 			@SWG\Property(name="name", type="array"),
+ * 			@SWG\Property(name="province_id", type="integer"),
+ * 			@SWG\Property(name="code", type="string"),
+ * 			@SWG\Property(name="created_at", type="string"),
+ * 			@SWG\Property(name="updated_at", type="string"),
+ *        )
+ **/
 class City extends BaseModel
 {
 
+
+    public static $rules = [
+        'province_id' => 'required|exists:provinces,id',
+        'code' => 'string',
+    ];
 
     /**
      * The database table used by the model.

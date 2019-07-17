@@ -79,9 +79,80 @@ class ExchangeAPIController extends AppBaseController
      *      description="Store Exchange",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="send_herbarium_id",
      *          in="body",
-     *          description="Exchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="send_date",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="receive_date",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="receive_herbarium_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="send_sheet_no",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="send_sample_no",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="receive_sheet_no",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="receive_sample_no",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="send_type",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="receive_type",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="send_paleontology_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="receive_paleontology_id",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Exchange")
      *      ),
@@ -158,7 +229,7 @@ class ExchangeAPIController extends AppBaseController
         /** @var Exchange $exchange */
         $exchange = $this->exchangeRepository->find($id);
 
-        if (empty($exchange)) {
+        if ($exchange === null) {
             return $this->sendError('Exchange not found');
         }
 
@@ -184,9 +255,80 @@ class ExchangeAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="send_herbarium_id",
      *          in="body",
-     *          description="Exchange that should be updated",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="send_date",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="receive_date",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="receive_herbarium_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="send_sheet_no",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="send_sample_no",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="receive_sheet_no",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="receive_sample_no",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="send_type",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="receive_type",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="send_paleontology_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Exchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="receive_paleontology_id",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Exchange")
      *      ),
@@ -218,7 +360,7 @@ class ExchangeAPIController extends AppBaseController
         /** @var Exchange $exchange */
         $exchange = $this->exchangeRepository->find($id);
 
-        if (empty($exchange)) {
+        if ($exchange === null) {
             return $this->sendError('Exchange not found');
         }
 
@@ -231,6 +373,7 @@ class ExchangeAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/exchanges/{id}",
      *      summary="Remove the specified Exchange from storage",
@@ -270,7 +413,7 @@ class ExchangeAPIController extends AppBaseController
         /** @var Exchange $exchange */
         $exchange = $this->exchangeRepository->find($id);
 
-        if (empty($exchange)) {
+        if ($exchange === null) {
             return $this->sendError('Exchange not found');
         }
 

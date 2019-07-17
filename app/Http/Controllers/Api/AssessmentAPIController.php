@@ -516,7 +516,7 @@ class AssessmentAPIController extends AppBaseController
         /** @var Assessment $assessment */
         $assessment = $this->assessmentRepository->find($id);
 
-        if (empty($assessment)) {
+        if ($assessment === null) {
             return $this->sendError('Assessment not found');
         }
 

@@ -6,10 +6,32 @@ use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @SWG\Definition(
+ *            name="Credential",
+ *            required={"name", "type", "date"},
+ * 			@SWG\Property(name="id", type="integer"),
+ * 			@SWG\Property(name="name", type="array"),
+ * 			@SWG\Property(name="parent_id", type="integer"),
+ * 			@SWG\Property(name="type", type="string"),
+ * 			@SWG\Property(name="date", type="string"),
+ * 			@SWG\Property(name="archive_no", type="string"),
+ * 			@SWG\Property(name="place", type="string"),
+ * 			@SWG\Property(name="created_at", type="string"),
+ * 			@SWG\Property(name="updated_at", type="string"),
+ *        )
+ **/
 class Credential extends BaseModel
 {
-    const PARENT_ID = 'parent_id';
+    public const PARENT_ID = 'parent_id';
 
+    public static $rules = [
+        'parent_id' => 'required|exists:credentials,id',
+        'type' => 'required|string',
+        'archive_no' => 'string',
+        'place' => 'string',
+        'date' => 'required|date',
+    ];
 
     /**
      * The database table used by the model.

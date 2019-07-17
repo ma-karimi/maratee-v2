@@ -187,7 +187,7 @@ class BorrowAPIController extends AppBaseController
         /** @var Borrow $borrow */
         $borrow = $this->borrowRepository->find($id);
 
-        if (empty($borrow)) {
+        if ($borrow === null) {
             return $this->sendError('Borrow not found');
         }
 
@@ -276,7 +276,7 @@ class BorrowAPIController extends AppBaseController
         /** @var Borrow $borrow */
         $borrow = $this->borrowRepository->find($id);
 
-        if (empty($borrow)) {
+        if ($borrow === null) {
             return $this->sendError('Borrow not found');
         }
 
@@ -329,7 +329,7 @@ class BorrowAPIController extends AppBaseController
         /** @var Borrow $borrow */
         $borrow = $this->borrowRepository->find($id);
 
-        if (empty($borrow)) {
+        if ($borrow === null) {
             return $this->sendError('Borrow not found');
         }
 

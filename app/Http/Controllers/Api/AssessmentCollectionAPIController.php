@@ -30,7 +30,7 @@ class AssessmentCollectionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/assessmentCollections",
+     *      path="/assessment_collections",
      *      summary="Get a listing of the AssessmentCollections.",
      *      tags={"AssessmentCollection"},
      *      description="Get all AssessmentCollections",
@@ -73,7 +73,7 @@ class AssessmentCollectionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/assessmentCollections",
+     *      path="/assessment_collections",
      *      summary="Store a newly created AssessmentCollection in storage",
      *      tags={"AssessmentCollection"},
      *      description="Store AssessmentCollection",
@@ -143,7 +143,7 @@ class AssessmentCollectionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/assessmentCollections/{id}",
+     *      path="/assessment_collections/{id}",
      *      summary="Display the specified AssessmentCollection",
      *      tags={"AssessmentCollection"},
      *      description="Get AssessmentCollection",
@@ -181,7 +181,7 @@ class AssessmentCollectionAPIController extends AppBaseController
         /** @var AssessmentCollection $assessmentCollection */
         $assessmentCollection = $this->assessmentCollectionRepository->find($id);
 
-        if (empty($assessmentCollection)) {
+        if ($assessmentCollection === null) {
             return $this->sendError('Assessment Collection not found');
         }
 
@@ -194,7 +194,7 @@ class AssessmentCollectionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/assessmentCollections/{id}",
+     *      path="/assessment_collections/{id}",
      *      summary="Update the specified AssessmentCollection in storage",
      *      tags={"AssessmentCollection"},
      *      description="Update AssessmentCollection",
@@ -264,7 +264,7 @@ class AssessmentCollectionAPIController extends AppBaseController
         /** @var AssessmentCollection $assessmentCollection */
         $assessmentCollection = $this->assessmentCollectionRepository->find($id);
 
-        if (empty($assessmentCollection)) {
+        if ($assessmentCollection === null) {
             return $this->sendError('Assessment Collection not found');
         }
 
@@ -279,7 +279,7 @@ class AssessmentCollectionAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/assessmentCollections/{id}",
+     *      path="/assessment_collections/{id}",
      *      summary="Remove the specified AssessmentCollection from storage",
      *      tags={"AssessmentCollection"},
      *      description="Delete AssessmentCollection",
@@ -317,7 +317,7 @@ class AssessmentCollectionAPIController extends AppBaseController
         /** @var AssessmentCollection $assessmentCollection */
         $assessmentCollection = $this->assessmentCollectionRepository->find($id);
 
-        if (empty($assessmentCollection)) {
+        if ($assessmentCollection === null) {
             return $this->sendError('Assessment Collection not found');
         }
 
