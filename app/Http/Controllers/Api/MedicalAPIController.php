@@ -79,7 +79,112 @@ class MedicalAPIController extends AppBaseController
      *      description="Store Medical",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="herbarium_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_effect_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_medicinal_part_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_side_effect_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_therapy_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_drug_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="product_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_drug_shape_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_drug_usage_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="side_effect_description",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="drug_usage_description",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicinal_part_description",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="drug_shape_description",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="drug_description",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="therapy_description",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_effect_description",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=false,
@@ -158,7 +263,7 @@ class MedicalAPIController extends AppBaseController
         /** @var Medical $medical */
         $medical = $this->medicalRepository->find($id);
 
-        if (empty($medical)) {
+        if ($medical === null) {
             return $this->sendError('Medical not found');
         }
 
@@ -184,9 +289,114 @@ class MedicalAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="herbarium_id",
      *          in="body",
-     *          description="Medical that should be updated",
+     *          description="Medical that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_effect_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_medicinal_part_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_side_effect_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_therapy_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_drug_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="product_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_drug_shape_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_drug_usage_id",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="side_effect_description",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="drug_usage_description",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicinal_part_description",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="drug_shape_description",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="drug_description",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="therapy_description",
+     *          in="body",
+     *          description="Medical that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Medical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_effect_description",
+     *          in="body",
+     *          description="Medical that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Medical")
      *      ),
@@ -218,7 +428,7 @@ class MedicalAPIController extends AppBaseController
         /** @var Medical $medical */
         $medical = $this->medicalRepository->find($id);
 
-        if (empty($medical)) {
+        if ($medical === null) {
             return $this->sendError('Medical not found');
         }
 
@@ -231,6 +441,7 @@ class MedicalAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/medicals/{id}",
      *      summary="Remove the specified Medical from storage",
@@ -270,7 +481,7 @@ class MedicalAPIController extends AppBaseController
         /** @var Medical $medical */
         $medical = $this->medicalRepository->find($id);
 
-        if (empty($medical)) {
+        if ($medical === null) {
             return $this->sendError('Medical not found');
         }
 

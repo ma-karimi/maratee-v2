@@ -5,10 +5,29 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @SWG\Definition(
+ *            name="EntryHub",
+ *            required={"type"},
+ * 			@SWG\Property(name="id", type="integer"),
+ * 			@SWG\Property(name="location_id", type="integer"),
+ * 			@SWG\Property(name="entry_id", type="integer"),
+ * 			@SWG\Property(name="botanical_id", type="integer"),
+ * 			@SWG\Property(name="organization_id", type="integer"),
+ * 			@SWG\Property(name="created_at", type="string"),
+ * 			@SWG\Property(name="updated_at", type="string"),
+ *        )
+ **/
 class EntryHub extends BaseModel
 {
 
 
+    public static $rules = [
+        'location_id' => 'required|exists:locations,id',
+        'entry_id' => 'required|exists:entries,id',
+        'botanical_id' => 'required|exists:botanicals,id',
+        'organization_id' => 'required|exists:organizations,id',
+    ];
     /**
      * The database table used by the model.
      *

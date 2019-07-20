@@ -26,11 +26,36 @@ class ConnectionAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Connection.
-     * GET|HEAD /connections
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/connections",
+     *      summary="Get a listing of the Connections.",
+     *      tags={"Connection"},
+     *      description="Get all Connections",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Connection")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,41 @@ class ConnectionAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Connection in storage.
-     * POST /connections
-     *
      * @param CreateConnectionAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/connections",
+     *      summary="Store a newly created Connection in storage",
+     *      tags={"Connection"},
+     *      description="Store Connection",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="name",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Connection")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Connection"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateConnectionAPIRequest $request)
     {
@@ -61,19 +115,49 @@ class ConnectionAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Connection.
-     * GET|HEAD /connections/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/connections/{id}",
+     *      summary="Display the specified Connection",
+     *      tags={"Connection"},
+     *      description="Get Connection",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Connection",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Connection"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
         /** @var Connection $connection */
         $connection = $this->connectionRepository->find($id);
 
-        if (empty($connection)) {
+        if ($connection === null) {
             return $this->sendError('Connection not found');
         }
 
@@ -81,22 +165,58 @@ class ConnectionAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Connection in storage.
-     * PUT/PATCH /connections/{id}
-     *
      * @param int $id
-     * @param CreateConnectionAPIRequest $request
-     *
+     * @param UpdateConnectionAPIRequest $request
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/connections/{id}",
+     *      summary="Update the specified Connection in storage",
+     *      tags={"Connection"},
+     *      description="Update Connection",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Connection",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="name",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Connection")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Connection"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
-    public function update($id, CreateConnectionAPIRequest $request)
+    public function update($id, UpdateConnectionAPIRequest $request)
     {
         $input = $request->all();
 
         /** @var Connection $connection */
         $connection = $this->connectionRepository->find($id);
 
-        if (empty($connection)) {
+        if ($connection === null) {
             return $this->sendError('Connection not found');
         }
 
@@ -106,21 +226,50 @@ class ConnectionAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Connection from storage.
-     * DELETE /connections/{id}
-     *
      * @param int $id
+     * @return Response
      *
      * @throws \Exception
-     *
-     * @return Response
+     * @SWG\Delete(
+     *      path="/connections/{id}",
+     *      summary="Remove the specified Connection from storage",
+     *      tags={"Connection"},
+     *      description="Delete Connection",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Connection",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {
         /** @var Connection $connection */
         $connection = $this->connectionRepository->find($id);
 
-        if (empty($connection)) {
+        if ($connection === null) {
             return $this->sendError('Connection not found');
         }
 

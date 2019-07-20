@@ -79,7 +79,21 @@ class PlantologyAPIController extends AppBaseController
      *      description="Store Plantology",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
+     *          in="body",
+     *          description="Plantology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Plantology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          description="Plantology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Plantology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
      *          in="body",
      *          description="Plantology that should be stored",
      *          required=false,
@@ -184,9 +198,23 @@ class PlantologyAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Plantology that should be updated",
+     *          description="Plantology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Plantology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          description="Plantology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Plantology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Plantology that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Plantology")
      *      ),
@@ -231,6 +259,7 @@ class PlantologyAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/plantologies/{id}",
      *      summary="Remove the specified Plantology from storage",

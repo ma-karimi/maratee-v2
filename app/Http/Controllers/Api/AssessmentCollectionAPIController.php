@@ -30,7 +30,7 @@ class AssessmentCollectionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/assessmentCollections",
+     *      path="/assessment_collections",
      *      summary="Get a listing of the AssessmentCollections.",
      *      tags={"AssessmentCollection"},
      *      description="Get all AssessmentCollections",
@@ -73,15 +73,38 @@ class AssessmentCollectionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/assessmentCollections",
+     *      path="/assessment_collections",
      *      summary="Store a newly created AssessmentCollection in storage",
      *      tags={"AssessmentCollection"},
      *      description="Store AssessmentCollection",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="collection_id",
      *          in="body",
-     *          description="AssessmentCollection that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="assessment_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
      *      ),
@@ -120,7 +143,7 @@ class AssessmentCollectionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/assessmentCollections/{id}",
+     *      path="/assessment_collections/{id}",
      *      summary="Display the specified AssessmentCollection",
      *      tags={"AssessmentCollection"},
      *      description="Get AssessmentCollection",
@@ -158,7 +181,7 @@ class AssessmentCollectionAPIController extends AppBaseController
         /** @var AssessmentCollection $assessmentCollection */
         $assessmentCollection = $this->assessmentCollectionRepository->find($id);
 
-        if (empty($assessmentCollection)) {
+        if ($assessmentCollection === null) {
             return $this->sendError('Assessment Collection not found');
         }
 
@@ -171,7 +194,7 @@ class AssessmentCollectionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/assessmentCollections/{id}",
+     *      path="/assessment_collections/{id}",
      *      summary="Update the specified AssessmentCollection in storage",
      *      tags={"AssessmentCollection"},
      *      description="Update AssessmentCollection",
@@ -184,9 +207,32 @@ class AssessmentCollectionAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="collection_id",
      *          in="body",
-     *          description="AssessmentCollection that should be updated",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="assessment_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/AssessmentCollection")
      *      ),
@@ -218,7 +264,7 @@ class AssessmentCollectionAPIController extends AppBaseController
         /** @var AssessmentCollection $assessmentCollection */
         $assessmentCollection = $this->assessmentCollectionRepository->find($id);
 
-        if (empty($assessmentCollection)) {
+        if ($assessmentCollection === null) {
             return $this->sendError('Assessment Collection not found');
         }
 
@@ -231,8 +277,9 @@ class AssessmentCollectionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
-     *      path="/assessmentCollections/{id}",
+     *      path="/assessment_collections/{id}",
      *      summary="Remove the specified AssessmentCollection from storage",
      *      tags={"AssessmentCollection"},
      *      description="Delete AssessmentCollection",
@@ -270,7 +317,7 @@ class AssessmentCollectionAPIController extends AppBaseController
         /** @var AssessmentCollection $assessmentCollection */
         $assessmentCollection = $this->assessmentCollectionRepository->find($id);
 
-        if (empty($assessmentCollection)) {
+        if ($assessmentCollection === null) {
             return $this->sendError('Assessment Collection not found');
         }
 

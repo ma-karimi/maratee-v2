@@ -79,10 +79,17 @@ class TechnologyCollectionAPIController extends AppBaseController
      *      description="Store TechnologyCollection",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="seed_technology_id",
      *          in="body",
      *          description="TechnologyCollection that should be stored",
-     *          required=false,
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/TechnologyCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="collection_id",
+     *          in="body",
+     *          description="TechnologyCollection that should be stored",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/TechnologyCollection")
      *      ),
      *      @SWG\Response(
@@ -126,11 +133,18 @@ class TechnologyCollectionAPIController extends AppBaseController
      *      description="Get TechnologyCollection",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of TechnologyCollection",
-     *          type="integer",
+     *          name="seed_technology_id",
+     *          in="body",
+     *          description="TechnologyCollection that should be stored",
      *          required=true,
-     *          in="path"
+     *          @SWG\Schema(ref="#/definitions/TechnologyCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="collection_id",
+     *          in="body",
+     *          description="TechnologyCollection that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/TechnologyCollection")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -184,10 +198,17 @@ class TechnologyCollectionAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="seed_technology_id",
      *          in="body",
-     *          description="TechnologyCollection that should be updated",
-     *          required=false,
+     *          description="TechnologyCollection that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/TechnologyCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="collection_id",
+     *          in="body",
+     *          description="TechnologyCollection that should be stored",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/TechnologyCollection")
      *      ),
      *      @SWG\Response(
@@ -231,6 +252,7 @@ class TechnologyCollectionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/technologyCollections/{id}",
      *      summary="Remove the specified TechnologyCollection from storage",

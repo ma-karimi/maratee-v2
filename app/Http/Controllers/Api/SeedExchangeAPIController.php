@@ -79,7 +79,56 @@ class SeedExchangeAPIController extends AppBaseController
      *      description="Store SeedExchange",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="seed_id",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="collection_id",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="weight",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="approval_no",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="saved_type",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
      *          in="body",
      *          description="SeedExchange that should be stored",
      *          required=false,
@@ -184,9 +233,58 @@ class SeedExchangeAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="seed_id",
      *          in="body",
-     *          description="SeedExchange that should be updated",
+     *          description="SeedExchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="collection_id",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="weight",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="approval_no",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="saved_type",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/SeedExchange")
      *      ),
@@ -231,6 +329,7 @@ class SeedExchangeAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/seedExchanges/{id}",
      *      summary="Remove the specified SeedExchange from storage",

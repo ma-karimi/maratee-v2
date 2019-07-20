@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\PlantingApplication;
+use App\Models\Paleontology;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreatePlantingApplicationAPIRequest extends APIRequest
+class UpdatePaleontologyAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class CreatePlantingApplicationAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return PlantingApplication::$rules;
+        return Paleontology::$rules;
     }
 }

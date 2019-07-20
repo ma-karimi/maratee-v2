@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\SeedHasPlant;
+use App\Models\PaleontologyCitation;
+use App\Models\PaleontologyMedia;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreateSeedHasPlantAPIRequest extends APIRequest
+class CreatePaleontologCitationAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +25,6 @@ class CreateSeedHasPlantAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return SeedHasPlant::$rules;
+        return PaleontologyCitation::$rules;
     }
 }

@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\Language;
-use App\Repositories\BaseRepository;
+use App\Models\PlantApplication;
+
 
 /**
- * Class LanguageRepository
+ * Class PlantingApplicationRepository
  * @package App\Repositories
- * @version July 14, 2019, 11:16 am UTC
+ * @version July 14, 2019, 11:25 am UTC
 */
 
-class LanguageRepository extends BaseRepository
+class PlantApplicationRepository extends BaseRepository
 {
     /**
      * @var array
@@ -35,6 +35,6 @@ class LanguageRepository extends BaseRepository
      **/
     public function model()
     {
-        return Language::class;
+        return PlantApplication::class;
     }
 }

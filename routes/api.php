@@ -90,7 +90,7 @@ Route::resource('planting_actions', 'PlantingActionAPIController');
 
 Route::resource('planting_generals', 'PlantingGeneralAPIController');
 
-Route::resource('planting_factors', 'PlantingFactorAPIController');
+Route::resource('planting_factors', 'PlantFactorAPIController');
 
 Route::resource('planting_applications', 'PlantingApplicationAPIController');
 
@@ -165,7 +165,7 @@ Route::resource('herbarium_appendixes', 'HerbariumAppendixAPIController');
 
 Route::resource('irrigations', 'IrrigationAPIController');
 
-Route::resource('languages', 'LanguageAPIController');
+
 
 Route::resource('lightings', 'LightingAPIController');
 
@@ -198,3 +198,6 @@ Route::resource('paleontology_actions', 'PaleontologyActionAPIController');
 Route::resource('paleontology_citations', 'PaleontologyCitationAPIController');
 Route::resource('morphologies', 'MorphologyAPIController');
 
+
+
+Route::resource('chemicals', 'ChemicalAPIController');

@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateSeedHasPlantAPIRequest;
-use App\Http\Requests\Api\UpdateSeedHasPlantAPIRequest;
-use App\Models\SeedHasPlant;
-use App\Repositories\SeedHasPlantRepository;
+use App\Http\Requests\Api\CreateChemicalAPIRequest;
+use App\Http\Requests\Api\UpdateChemicalAPIRequest;
+use App\Models\Chemical;
+use App\Repositories\ChemicalRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class SeedHasPlantController
+ * Class ChemicalController
  * @package App\Http\Controllers\Api
  */
 
-class SeedHasPlantAPIController extends AppBaseController
+class ChemicalAPIController extends AppBaseController
 {
-    /** @var  SeedHasPlantRepository */
-    private $seedHasPlantRepository;
+    /** @var  ChemicalRepository */
+    private $chemicalRepository;
 
-    public function __construct(SeedHasPlantRepository $seedHasPlantRepo)
+    public function __construct(ChemicalRepository $chemicalRepo)
     {
-        $this->seedHasPlantRepository = $seedHasPlantRepo;
+        $this->chemicalRepository = $chemicalRepo;
     }
 
     /**
@@ -30,10 +30,10 @@ class SeedHasPlantAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/seedHasPlants",
-     *      summary="Get a listing of the SeedHasPlants.",
-     *      tags={"SeedHasPlant"},
-     *      description="Get all SeedHasPlants",
+     *      path="/chemicals",
+     *      summary="Get a listing of the Chemicals.",
+     *      tags={"Chemical"},
+     *      description="Get all Chemicals",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -47,7 +47,7 @@ class SeedHasPlantAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/SeedHasPlant")
+     *                  @SWG\Items(ref="#/definitions/Chemical")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -59,31 +59,36 @@ class SeedHasPlantAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $seedHasPlants = $this->seedHasPlantRepository->all(
+        $chemicals = $this->chemicalRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
         );
 
-        return $this->sendResponse($seedHasPlants->toArray(), 'Seed Has Plants retrieved successfully');
+        return $this->sendResponse($chemicals->toArray(), 'Chemicals retrieved successfully');
     }
 
     /**
-     * @param CreateSeedHasPlantAPIRequest $request
+     * @param CreateChemicalAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/seedHasPlants",
-     *      summary="Store a newly created SeedHasPlant in storage",
-     *      tags={"SeedHasPlant"},
-     *      description="Store SeedHasPlant",
+     *      path="/chemicals",
+     *      summary="Store a newly created Chemical in storage",
+     *      tags={"Chemical"},
+     *      description="Store Chemical",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="SeedHasPlant that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Chemical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SeedHasPlant")
+     *          @SWG\Schema(ref="#/definitions/Chemical")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -96,7 +101,7 @@ class SeedHasPlantAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/SeedHasPlant"
+     *                  ref="#/definitions/Chemical"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -106,13 +111,13 @@ class SeedHasPlantAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateSeedHasPlantAPIRequest $request)
+    public function store(CreateChemicalAPIRequest $request)
     {
         $input = $request->all();
 
-        $seedHasPlant = $this->seedHasPlantRepository->create($input);
+        $chemical = $this->chemicalRepository->create($input);
 
-        return $this->sendResponse($seedHasPlant->toArray(), 'Seed Has Plant saved successfully');
+        return $this->sendResponse($chemical->toArray(), 'Chemical saved successfully');
     }
 
     /**
@@ -120,14 +125,14 @@ class SeedHasPlantAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/seedHasPlants/{id}",
-     *      summary="Display the specified SeedHasPlant",
-     *      tags={"SeedHasPlant"},
-     *      description="Get SeedHasPlant",
+     *      path="/chemicals/{id}",
+     *      summary="Display the specified Chemical",
+     *      tags={"Chemical"},
+     *      description="Get Chemical",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of SeedHasPlant",
+     *          description="id of Chemical",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -143,7 +148,7 @@ class SeedHasPlantAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/SeedHasPlant"
+     *                  ref="#/definitions/Chemical"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -155,40 +160,45 @@ class SeedHasPlantAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var SeedHasPlant $seedHasPlant */
-        $seedHasPlant = $this->seedHasPlantRepository->find($id);
+        /** @var Chemical $chemical */
+        $chemical = $this->chemicalRepository->find($id);
 
-        if (empty($seedHasPlant)) {
-            return $this->sendError('Seed Has Plant not found');
+        if (empty($chemical)) {
+            return $this->sendError('Chemical not found');
         }
 
-        return $this->sendResponse($seedHasPlant->toArray(), 'Seed Has Plant retrieved successfully');
+        return $this->sendResponse($chemical->toArray(), 'Chemical retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdateSeedHasPlantAPIRequest $request
+     * @param UpdateChemicalAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/seedHasPlants/{id}",
-     *      summary="Update the specified SeedHasPlant in storage",
-     *      tags={"SeedHasPlant"},
-     *      description="Update SeedHasPlant",
+     *      path="/chemicals/{id}",
+     *      summary="Update the specified Chemical in storage",
+     *      tags={"Chemical"},
+     *      description="Update Chemical",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of SeedHasPlant",
+     *          description="id of Chemical",
      *          type="integer",
      *          required=true,
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="SeedHasPlant that should be updated",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Chemical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SeedHasPlant")
+     *          @SWG\Schema(ref="#/definitions/Chemical")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -201,7 +211,7 @@ class SeedHasPlantAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/SeedHasPlant"
+     *                  ref="#/definitions/Chemical"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -211,35 +221,36 @@ class SeedHasPlantAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateSeedHasPlantAPIRequest $request)
+    public function update($id, UpdateChemicalAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var SeedHasPlant $seedHasPlant */
-        $seedHasPlant = $this->seedHasPlantRepository->find($id);
+        /** @var Chemical $chemical */
+        $chemical = $this->chemicalRepository->find($id);
 
-        if (empty($seedHasPlant)) {
-            return $this->sendError('Seed Has Plant not found');
+        if ($chemical === null) {
+            return $this->sendError('Chemical not found');
         }
 
-        $seedHasPlant = $this->seedHasPlantRepository->update($input, $id);
+        $chemical = $this->chemicalRepository->update($input, $id);
 
-        return $this->sendResponse($seedHasPlant->toArray(), 'SeedHasPlant updated successfully');
+        return $this->sendResponse($chemical->toArray(), 'Chemical updated successfully');
     }
 
     /**
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
-     *      path="/seedHasPlants/{id}",
-     *      summary="Remove the specified SeedHasPlant from storage",
-     *      tags={"SeedHasPlant"},
-     *      description="Delete SeedHasPlant",
+     *      path="/chemicals/{id}",
+     *      summary="Remove the specified Chemical from storage",
+     *      tags={"Chemical"},
+     *      description="Delete Chemical",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of SeedHasPlant",
+     *          description="id of Chemical",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -267,15 +278,15 @@ class SeedHasPlantAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var SeedHasPlant $seedHasPlant */
-        $seedHasPlant = $this->seedHasPlantRepository->find($id);
+        /** @var Chemical $chemical */
+        $chemical = $this->chemicalRepository->find($id);
 
-        if (empty($seedHasPlant)) {
-            return $this->sendError('Seed Has Plant not found');
+        if ($chemical === null) {
+            return $this->sendError('Chemical not found');
         }
 
-        $seedHasPlant->delete();
+        $chemical->delete();
 
-        return $this->sendResponse($id, 'Seed Has Plant deleted successfully');
+        return $this->sendResponse($id, 'Chemical deleted successfully');
     }
 }

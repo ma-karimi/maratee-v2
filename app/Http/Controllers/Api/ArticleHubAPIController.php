@@ -30,7 +30,7 @@ class ArticleHubAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/articleHubs",
+     *      path="/article_hubs",
      *      summary="Get a listing of the ArticleHubs.",
      *      tags={"ArticleHub"},
      *      description="Get all ArticleHubs",
@@ -73,13 +73,41 @@ class ArticleHubAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/articleHubs",
+     *      path="/article_hubs",
      *      summary="Store a newly created ArticleHub in storage",
      *      tags={"ArticleHub"},
      *      description="Store ArticleHub",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="article_id",
+     *          in="body",
+     *          description="ArticleHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/ArticleHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="ArticleHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/ArticleHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="action_id",
+     *          in="body",
+     *          description="ArticleHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ArticleHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          description="ArticleHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ArticleHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
      *          in="body",
      *          description="ArticleHub that should be stored",
      *          required=false,
@@ -120,7 +148,7 @@ class ArticleHubAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/articleHubs/{id}",
+     *      path="/article_hubs/{id}",
      *      summary="Display the specified ArticleHub",
      *      tags={"ArticleHub"},
      *      description="Get ArticleHub",
@@ -158,7 +186,7 @@ class ArticleHubAPIController extends AppBaseController
         /** @var ArticleHub $articleHub */
         $articleHub = $this->articleHubRepository->find($id);
 
-        if (empty($articleHub)) {
+        if ($articleHub === null) {
             return $this->sendError('Article Hub not found');
         }
 
@@ -171,7 +199,7 @@ class ArticleHubAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/articleHubs/{id}",
+     *      path="/article_hubs/{id}",
      *      summary="Update the specified ArticleHub in storage",
      *      tags={"ArticleHub"},
      *      description="Update ArticleHub",
@@ -184,9 +212,37 @@ class ArticleHubAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="article_id",
      *          in="body",
-     *          description="ArticleHub that should be updated",
+     *          description="ArticleHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/ArticleHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="ArticleHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/ArticleHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="action_id",
+     *          in="body",
+     *          description="ArticleHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ArticleHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          description="ArticleHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ArticleHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="ArticleHub that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/ArticleHub")
      *      ),
@@ -218,7 +274,7 @@ class ArticleHubAPIController extends AppBaseController
         /** @var ArticleHub $articleHub */
         $articleHub = $this->articleHubRepository->find($id);
 
-        if (empty($articleHub)) {
+        if ($articleHub === null) {
             return $this->sendError('Article Hub not found');
         }
 
@@ -231,8 +287,9 @@ class ArticleHubAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
-     *      path="/articleHubs/{id}",
+     *      path="/article_hubs/{id}",
      *      summary="Remove the specified ArticleHub from storage",
      *      tags={"ArticleHub"},
      *      description="Delete ArticleHub",
@@ -270,7 +327,7 @@ class ArticleHubAPIController extends AppBaseController
         /** @var ArticleHub $articleHub */
         $articleHub = $this->articleHubRepository->find($id);
 
-        if (empty($articleHub)) {
+        if ($articleHub === null) {
             return $this->sendError('Article Hub not found');
         }
 

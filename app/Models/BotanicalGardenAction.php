@@ -4,9 +4,44 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
+/**
+ * @SWG\Definition(
+ *            name="BotanicalGardenAction",
+ *            required={"botanical_id", "planting_action_id", "from_soil_id", "from_lighting_id", "from_garden_id"},
+ * 			@SWG\Property(name="id", type="integer"),
+ * 			@SWG\Property(name="botanical_id", type="integer"),
+ * 			@SWG\Property(name="planting_action_id", type="integer"),
+ * 			@SWG\Property(name="date", type="string"),
+ * 			@SWG\Property(name="from_soil_id", type="integer"),
+ * 			@SWG\Property(name="to_soil_id", type="integer"),
+ * 			@SWG\Property(name="from_lighting_id", type="integer"),
+ * 			@SWG\Property(name="to_lighting_id", type="integer"),
+ * 			@SWG\Property(name="from_garden_id", type="string"),
+ * 			@SWG\Property(name="to_garden_id", type="string"),
+ * 			@SWG\Property(name="initial_place_type", type="array"),
+ * 			@SWG\Property(name="destination_place_type", type="array"),
+ * 			@SWG\Property(name="initial_place_condition", type="array"),
+ * 			@SWG\Property(name="destination_place_condition", type="array"),
+ * 			@SWG\Property(name="treatment", type="array"),
+ * 			@SWG\Property(name="created_at", type="string"),
+ * 			@SWG\Property(name="updated_at", type="string"),
+ *        )
+ **/
 class BotanicalGardenAction extends BaseModel
 {
 
+
+    public static $rules = [
+        'botanical_id' => 'required|exists:botanicals,id',
+        'planting_action_id' => 'required|exists:planting_actions,id',
+        'from_soil_id' => 'required|exists:soils,id',
+        'from_lighting_id' => 'required|exists:lightings,id',
+        'from_garden_id' => 'required|exists:gardens,id',
+        'to_soil_id' => 'required|exists:soils,id',
+        'to_lighting_id' => 'required|exists:lightings,id',
+        'to_garden_id' => 'required|exists:gardens,id',
+        'date' => 'date',
+    ];
 
     /**
      * The database table used by the model.

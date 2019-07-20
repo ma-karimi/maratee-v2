@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\PlantingFactor;
+use App\Models\Morphology;
+use App\Models\SeedChemical;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreatePlantingFactorAPIRequest extends APIRequest
+class UpdateMorphologyAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +25,6 @@ class CreatePlantingFactorAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return PlantingFactor::$rules;
+        return Morphology::$rules;
     }
 }

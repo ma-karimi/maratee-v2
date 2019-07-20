@@ -79,7 +79,56 @@ class SeedHubAPIController extends AppBaseController
      *      description="Store SeedHub",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="user_id",
+     *          in="body",
+     *          description="SeedHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_id",
+     *          in="body",
+     *          description="SeedHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          description="SeedHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="action_id",
+     *          in="body",
+     *          description="SeedHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
+     *          description="SeedHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="action_role",
+     *          in="body",
+     *          description="SeedHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="action_role_description",
+     *          in="body",
+     *          description="SeedHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
      *          in="body",
      *          description="SeedHub that should be stored",
      *          required=false,
@@ -184,9 +233,58 @@ class SeedHubAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="user_id",
      *          in="body",
-     *          description="SeedHub that should be updated",
+     *          description="SeedHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_id",
+     *          in="body",
+     *          description="SeedHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          description="SeedHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="action_id",
+     *          in="body",
+     *          description="SeedHub that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
+     *          description="SeedHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="action_role",
+     *          in="body",
+     *          description="SeedHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="action_role_description",
+     *          in="body",
+     *          description="SeedHub that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="SeedHub that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/SeedHub")
      *      ),
@@ -231,6 +329,7 @@ class SeedHubAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/seedHubs/{id}",
      *      summary="Remove the specified SeedHub from storage",

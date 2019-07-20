@@ -79,10 +79,45 @@ class ChromosomeAPIController extends AppBaseController
      *      description="Store Chromosome",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="n_no",
      *          in="body",
-     *          description="Chromosome that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="2n_no",
+     *          in="body",
      *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="notes",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="herbarium_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="cryo_bank_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="article_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Chromosome")
      *      ),
      *      @SWG\Response(
@@ -158,7 +193,7 @@ class ChromosomeAPIController extends AppBaseController
         /** @var Chromosome $chromosome */
         $chromosome = $this->chromosomeRepository->find($id);
 
-        if (empty($chromosome)) {
+        if ($chromosome === null) {
             return $this->sendError('Chromosome not found');
         }
 
@@ -184,10 +219,45 @@ class ChromosomeAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="n_no",
      *          in="body",
-     *          description="Chromosome that should be updated",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="2n_no",
+     *          in="body",
      *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="notes",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="herbarium_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="cryo_bank_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="article_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Chromosome")
      *      ),
      *      @SWG\Response(
@@ -218,7 +288,7 @@ class ChromosomeAPIController extends AppBaseController
         /** @var Chromosome $chromosome */
         $chromosome = $this->chromosomeRepository->find($id);
 
-        if (empty($chromosome)) {
+        if ($chromosome === null) {
             return $this->sendError('Chromosome not found');
         }
 
@@ -231,6 +301,7 @@ class ChromosomeAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/chromosomes/{id}",
      *      summary="Remove the specified Chromosome from storage",
@@ -270,7 +341,7 @@ class ChromosomeAPIController extends AppBaseController
         /** @var Chromosome $chromosome */
         $chromosome = $this->chromosomeRepository->find($id);
 
-        if (empty($chromosome)) {
+        if ($chromosome === null) {
             return $this->sendError('Chromosome not found');
         }
 

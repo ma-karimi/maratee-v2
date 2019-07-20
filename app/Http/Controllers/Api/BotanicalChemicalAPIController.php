@@ -30,7 +30,7 @@ class BotanicalChemicalAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/botanicalChemicals",
+     *      path="/botanical_chemicals",
      *      summary="Get a listing of the BotanicalChemicals.",
      *      tags={"BotanicalChemical"},
      *      description="Get all BotanicalChemicals",
@@ -73,7 +73,7 @@ class BotanicalChemicalAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/botanicalChemicals",
+     *      path="/botanical_chemicals",
      *      summary="Store a newly created BotanicalChemical in storage",
      *      tags={"BotanicalChemical"},
      *      description="Store BotanicalChemical",
@@ -120,7 +120,7 @@ class BotanicalChemicalAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/botanicalChemicals/{id}",
+     *      path="/botanical_chemicals/{id}",
      *      summary="Display the specified BotanicalChemical",
      *      tags={"BotanicalChemical"},
      *      description="Get BotanicalChemical",
@@ -171,7 +171,7 @@ class BotanicalChemicalAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/botanicalChemicals/{id}",
+     *      path="/botanical_chemicals/{id}",
      *      summary="Update the specified BotanicalChemical in storage",
      *      tags={"BotanicalChemical"},
      *      description="Update BotanicalChemical",
@@ -218,7 +218,7 @@ class BotanicalChemicalAPIController extends AppBaseController
         /** @var BotanicalChemical $botanicalChemical */
         $botanicalChemical = $this->botanicalChemicalRepository->find($id);
 
-        if (empty($botanicalChemical)) {
+        if ($botanicalChemical === null) {
             return $this->sendError('Botanical Chemical not found');
         }
 
@@ -232,7 +232,7 @@ class BotanicalChemicalAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Delete(
-     *      path="/botanicalChemicals/{id}",
+     *      path="/botanical_chemicals/{id}",
      *      summary="Remove the specified BotanicalChemical from storage",
      *      tags={"BotanicalChemical"},
      *      description="Delete BotanicalChemical",
@@ -270,7 +270,7 @@ class BotanicalChemicalAPIController extends AppBaseController
         /** @var BotanicalChemical $botanicalChemical */
         $botanicalChemical = $this->botanicalChemicalRepository->find($id);
 
-        if (empty($botanicalChemical)) {
+        if ($botanicalChemical === null) {
             return $this->sendError('Botanical Chemical not found');
         }
 

@@ -1,7 +1,7 @@
 <?php namespace Tests\Repositories;
 
 use App\Models\PlantingApplication;
-use App\Repositories\PlantingApplicationRepository;
+use App\Repositories\PlantApplicationRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\Traits\MakePlantingApplicationTrait;
@@ -12,14 +12,14 @@ class PlantingApplicationRepositoryTest extends TestCase
     use MakePlantingApplicationTrait, ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var PlantingApplicationRepository
+     * @var PlantApplicationRepository
      */
     protected $plantingApplicationRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->plantingApplicationRepo = \App::make(PlantingApplicationRepository::class);
+        $this->plantingApplicationRepo = \App::make(PlantApplicationRepository::class);
     }
 
     /**

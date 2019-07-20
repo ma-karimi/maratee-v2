@@ -26,11 +26,36 @@ class DepartmentAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Department.
-     * GET|HEAD /departments
-     *
      * @param Request $request
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/departments",
+     *      summary="Get a listing of the Credentials.",
+     *      tags={"Credential"},
+     *      description="Get all Credentials",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Credential")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request)
     {
@@ -44,12 +69,47 @@ class DepartmentAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Department in storage.
-     * POST /departments
-     *
      * @param CreateDepartmentAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Post(
+     *      path="/continents",
+     *      summary="Store a newly created Department in storage",
+     *      tags={"Department"},
+     *      description="Store Department",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="name",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Department")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Department")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Department"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateDepartmentAPIRequest $request)
     {
@@ -61,19 +121,49 @@ class DepartmentAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Department.
-     * GET|HEAD /departments/{id}
-     *
      * @param int $id
-     *
      * @return Response
+     *
+     * @SWG\Get(
+     *      path="/continents/{id}",
+     *      summary="Display the specified Department",
+     *      tags={"Department"},
+     *      description="Get Department",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Department",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Department"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
         /** @var Department $department */
         $department = $this->departmentRepository->find($id);
 
-        if (empty($department)) {
+        if ($department === null) {
             return $this->sendError('Department not found');
         }
 
@@ -81,13 +171,57 @@ class DepartmentAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Department in storage.
-     * PUT/PATCH /departments/{id}
-     *
      * @param int $id
      * @param UpdateDepartmentAPIRequest $request
-     *
      * @return Response
+     *
+     * @SWG\Put(
+     *      path="/continents/{id}",
+     *      summary="Update the specified Department in storage",
+     *      tags={"Department"},
+     *      description="Update Department",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Department",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="name",
+     *          in="body",
+     *          description="Department that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Department")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Department that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Department")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Department"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateDepartmentAPIRequest $request)
     {
@@ -96,7 +230,7 @@ class DepartmentAPIController extends AppBaseController
         /** @var Department $department */
         $department = $this->departmentRepository->find($id);
 
-        if (empty($department)) {
+        if ($department === null) {
             return $this->sendError('Department not found');
         }
 
@@ -106,21 +240,50 @@ class DepartmentAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Department from storage.
-     * DELETE /departments/{id}
-     *
      * @param int $id
+     * @return Response
      *
      * @throws \Exception
-     *
-     * @return Response
+     * @SWG\Delete(
+     *      path="/continents/{id}",
+     *      summary="Remove the specified Department from storage",
+     *      tags={"Department"},
+     *      description="Delete Department",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Department",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {
         /** @var Department $department */
         $department = $this->departmentRepository->find($id);
 
-        if (empty($department)) {
+        if ($department === null) {
             return $this->sendError('Department not found');
         }
 

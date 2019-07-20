@@ -72,6 +72,10 @@ class Address extends BaseModel
      */
     protected $casts = ['address' => 'json'];
 
+    public static $rules =[
+        'city_id'=>'required|exists:cities,id',
+        'village_id'=>'exists:villages,id',
+    ];
 
     public function city()
     {

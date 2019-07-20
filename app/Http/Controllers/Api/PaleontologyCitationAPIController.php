@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\CreatePaleontologCitationAPIRequest;
 use App\Http\Requests\Api\CreatePaleontologyCitationAPIRequest;
 use App\Http\Requests\Api\UpdatePaleontologyCitationAPIRequest;
 use App\Models\PaleontologyCitation;
@@ -79,7 +80,35 @@ class PaleontologyCitationAPIController extends AppBaseController
      *      description="Store PaleontologyCitation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="paleontology_id",
+     *          in="body",
+     *          description="PaleontologyCitation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="article_id",
+     *          in="body",
+     *          description="PaleontologyCitation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="PaleontologyCitation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="media_id",
+     *          in="body",
+     *          description="PaleontologyCitation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plates_no",
      *          in="body",
      *          description="PaleontologyCitation that should be stored",
      *          required=false,
@@ -106,7 +135,7 @@ class PaleontologyCitationAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreatePaleontologyCitationAPIRequest $request)
+    public function store(CreatePaleontologCitationAPIRequest $request)
     {
         $input = $request->all();
 
@@ -184,9 +213,37 @@ class PaleontologyCitationAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="paleontology_id",
      *          in="body",
-     *          description="PaleontologyCitation that should be updated",
+     *          description="PaleontologyCitation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="article_id",
+     *          in="body",
+     *          description="PaleontologyCitation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="PaleontologyCitation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="media_id",
+     *          in="body",
+     *          description="PaleontologyCitation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plates_no",
+     *          in="body",
+     *          description="PaleontologyCitation that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
@@ -231,6 +288,7 @@ class PaleontologyCitationAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/paleontologyCitations/{id}",
      *      summary="Remove the specified PaleontologyCitation from storage",

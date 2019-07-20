@@ -79,9 +79,26 @@ class AttendanceAPIController extends AppBaseController
      *      description="Store Attendance",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="start_time",
      *          in="body",
-     *          description="Attendance that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Attendance")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="end_time",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Attendance")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Attendance")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="herbarium_id",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Attendance")
      *      ),
@@ -158,7 +175,7 @@ class AttendanceAPIController extends AppBaseController
         /** @var Attendance $attendance */
         $attendance = $this->attendanceRepository->find($id);
 
-        if (empty($attendance)) {
+        if ($attendance === null) {
             return $this->sendError('Attendance not found');
         }
 
@@ -184,9 +201,26 @@ class AttendanceAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="start_time",
      *          in="body",
-     *          description="Attendance that should be updated",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Attendance")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="end_time",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Attendance")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Attendance")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="herbarium_id",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Attendance")
      *      ),
@@ -218,7 +252,7 @@ class AttendanceAPIController extends AppBaseController
         /** @var Attendance $attendance */
         $attendance = $this->attendanceRepository->find($id);
 
-        if (empty($attendance)) {
+        if ($attendance === null) {
             return $this->sendError('Attendance not found');
         }
 
@@ -231,6 +265,7 @@ class AttendanceAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/attendances/{id}",
      *      summary="Remove the specified Attendance from storage",
@@ -270,7 +305,7 @@ class AttendanceAPIController extends AppBaseController
         /** @var Attendance $attendance */
         $attendance = $this->attendanceRepository->find($id);
 
-        if (empty($attendance)) {
+        if ($attendance === null) {
             return $this->sendError('Attendance not found');
         }
 

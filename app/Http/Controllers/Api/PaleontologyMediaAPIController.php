@@ -79,7 +79,63 @@ class PaleontologyMediaAPIController extends AppBaseController
      *      description="Store PaleontologyMedia",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="paleontology_id",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="media_id",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="credential_gift_id",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="credential_expense_id",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="credential_purchase_id",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="credential_correspondence_id",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="exchange_id",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="credential_fair_id",
      *          in="body",
      *          description="PaleontologyMedia that should be stored",
      *          required=false,
@@ -184,9 +240,65 @@ class PaleontologyMediaAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="paleontology_id",
      *          in="body",
-     *          description="PaleontologyMedia that should be updated",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="media_id",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="credential_gift_id",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="credential_expense_id",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="credential_purchase_id",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="credential_correspondence_id",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="exchange_id",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="credential_fair_id",
+     *          in="body",
+     *          description="PaleontologyMedia that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PaleontologyMedia")
      *      ),

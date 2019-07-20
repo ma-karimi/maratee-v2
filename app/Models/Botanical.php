@@ -4,8 +4,45 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 
+/**
+ * @SWG\Definition(
+ *            name="Assessment",
+ *            required={"herbarium_id"},
+ * 			@SWG\Property(name="herbarium_id", type="integer"),
+ * 			@SWG\Property(name="height", type="float"),
+ * 			@SWG\Property(name="weight_k", type="integer"),
+ * 			@SWG\Property(name="flower_color", type="array"),
+ * 			@SWG\Property(name="fruit_color", type="array"),
+ * 			@SWG\Property(name="leaf_color", type="array"),
+ * 			@SWG\Property(name="sprout", type="array"),
+ * 			@SWG\Property(name="treatment", type="array"),
+ * 			@SWG\Property(name="growth_rate", type="array"),
+ * 			@SWG\Property(name="first_flowering", type="array"),
+ * 			@SWG\Property(name="flowering_interval", type="array"),
+ * 			@SWG\Property(name="first_seeding", type="array"),
+ * 			@SWG\Property(name="seed_value", type="array"),
+ * 			@SWG\Property(name="seed_production", type="array"),
+ * 			@SWG\Property(name="season_resistance", type="array"),
+ * 			@SWG\Property(name="year", type="string"),
+ * 			@SWG\Property(name="sensitivity", type="array"),
+ * 			@SWG\Property(name="sensitivity_description", type="array"),
+ * 			@SWG\Property(name="notes", type="array"),
+ * 			@SWG\Property(name="planting", type="string"),
+ * 			@SWG\Property(name="scion_rooting_per", type="integer"),
+ * 			@SWG\Property(name="entry_type", type="array"),
+ * 			@SWG\Property(name="created_at", type="string"),
+ * 			@SWG\Property(name="updated_at", type="string"),
+ *        )
+ **/
 class Botanical extends BaseModel
 {
+
+    public static $rules = [
+        'year' => 'date',
+        'planting'=>'date',
+        'scion_rooting_per'=>'integer',
+    ];
+
 
     /**
      * The database table used by the model.

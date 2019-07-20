@@ -79,7 +79,105 @@ class GeraminAPIController extends AppBaseController
      *      description="Store Geramin",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="collection_id",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_id",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="repeat",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="bush",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="average",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="flowering_completion",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="gdd_flowering",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="essence_rate",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="bush_weight",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="bush_height",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="big_bush_diameter",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="small_bush_diameter",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="flowering_bish_qt",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="crown_coverage",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="flower_color",
      *          in="body",
      *          description="Geramin that should be stored",
      *          required=false,
@@ -158,7 +256,7 @@ class GeraminAPIController extends AppBaseController
         /** @var Geramin $geramin */
         $geramin = $this->geraminRepository->find($id);
 
-        if (empty($geramin)) {
+        if ($geramin === null) {
             return $this->sendError('Geramin not found');
         }
 
@@ -184,9 +282,107 @@ class GeraminAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="collection_id",
      *          in="body",
-     *          description="Geramin that should be updated",
+     *          description="Geramin that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_id",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="repeat",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="bush",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="average",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="flowering_completion",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="gdd_flowering",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="essence_rate",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="bush_weight",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="bush_height",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="big_bush_diameter",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="small_bush_diameter",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="flowering_bish_qt",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="crown_coverage",
+     *          in="body",
+     *          description="Geramin that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Geramin")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="flower_color",
+     *          in="body",
+     *          description="Geramin that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Geramin")
      *      ),
@@ -218,7 +414,7 @@ class GeraminAPIController extends AppBaseController
         /** @var Geramin $geramin */
         $geramin = $this->geraminRepository->find($id);
 
-        if (empty($geramin)) {
+        if ($geramin === null) {
             return $this->sendError('Geramin not found');
         }
 
@@ -231,6 +427,7 @@ class GeraminAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/geramins/{id}",
      *      summary="Remove the specified Geramin from storage",
@@ -270,7 +467,7 @@ class GeraminAPIController extends AppBaseController
         /** @var Geramin $geramin */
         $geramin = $this->geraminRepository->find($id);
 
-        if (empty($geramin)) {
+        if ($geramin === null) {
             return $this->sendError('Geramin not found');
         }
 

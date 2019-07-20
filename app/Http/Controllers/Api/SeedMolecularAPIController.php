@@ -79,7 +79,35 @@ class SeedMolecularAPIController extends AppBaseController
      *      description="Store SeedMolecular",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="molecular_id",
+     *          in="body",
+     *          description="SeedMolecular that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedMolecular")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_id",
+     *          in="body",
+     *          description="SeedMolecular that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedMolecular")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="treatment",
+     *          in="body",
+     *          description="SeedMolecular that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedMolecular")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="repeat",
+     *          in="body",
+     *          description="SeedMolecular that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedMolecular")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
      *          in="body",
      *          description="SeedMolecular that should be stored",
      *          required=false,
@@ -184,9 +212,37 @@ class SeedMolecularAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="molecular_id",
      *          in="body",
-     *          description="SeedMolecular that should be updated",
+     *          description="SeedMolecular that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedMolecular")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_id",
+     *          in="body",
+     *          description="SeedMolecular that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedMolecular")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="treatment",
+     *          in="body",
+     *          description="SeedMolecular that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedMolecular")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="repeat",
+     *          in="body",
+     *          description="SeedMolecular that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedMolecular")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          description="SeedMolecular that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/SeedMolecular")
      *      ),
@@ -231,6 +287,7 @@ class SeedMolecularAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/seedMoleculars/{id}",
      *      summary="Remove the specified SeedMolecular from storage",

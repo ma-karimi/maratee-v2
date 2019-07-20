@@ -79,7 +79,14 @@ class LightingAPIController extends AppBaseController
      *      description="Store Lighting",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="type",
+     *          in="body",
+     *          description="Lighting that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Lighting")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
      *          in="body",
      *          description="Lighting that should be stored",
      *          required=false,
@@ -158,7 +165,7 @@ class LightingAPIController extends AppBaseController
         /** @var Lighting $lighting */
         $lighting = $this->lightingRepository->find($id);
 
-        if (empty($lighting)) {
+        if ($lighting === null) {
             return $this->sendError('Lighting not found');
         }
 
@@ -184,9 +191,16 @@ class LightingAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="type",
      *          in="body",
-     *          description="Lighting that should be updated",
+     *          description="Lighting that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Lighting")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Lighting that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Lighting")
      *      ),
@@ -218,7 +232,7 @@ class LightingAPIController extends AppBaseController
         /** @var Lighting $lighting */
         $lighting = $this->lightingRepository->find($id);
 
-        if (empty($lighting)) {
+        if ($lighting === null) {
             return $this->sendError('Lighting not found');
         }
 
@@ -231,6 +245,7 @@ class LightingAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/lightings/{id}",
      *      summary="Remove the specified Lighting from storage",

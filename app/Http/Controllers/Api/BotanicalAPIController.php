@@ -79,9 +79,128 @@ class BotanicalAPIController extends AppBaseController
      *      description="Store Botanical",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="herbarium_id",
      *          in="body",
-     *          description="Botanical that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="height",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="flower_color",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="fruit_color",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="leaf_color",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="sprout",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="treatment",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="growth_rate",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="first_flowering",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="flowering_interval",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="first_seeding",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_value",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_production",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="season_resistance",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="year",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="sensitivity",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="sensitivity_description",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="notes",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="planting",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="scion_rooting_per",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="entry_type",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
@@ -158,7 +277,7 @@ class BotanicalAPIController extends AppBaseController
         /** @var Botanical $botanical */
         $botanical = $this->botanicalRepository->find($id);
 
-        if (empty($botanical)) {
+        if ($botanical === null) {
             return $this->sendError('Botanical not found');
         }
 
@@ -184,9 +303,128 @@ class BotanicalAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="herbarium_id",
      *          in="body",
-     *          description="Botanical that should be updated",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="height",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="flower_color",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="fruit_color",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="leaf_color",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="sprout",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="treatment",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="growth_rate",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="first_flowering",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="flowering_interval",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="first_seeding",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_value",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_production",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="season_resistance",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="year",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="sensitivity",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="sensitivity_description",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="notes",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="planting",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="scion_rooting_per",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="entry_type",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
@@ -218,7 +456,7 @@ class BotanicalAPIController extends AppBaseController
         /** @var Botanical $botanical */
         $botanical = $this->botanicalRepository->find($id);
 
-        if (empty($botanical)) {
+        if ($botanical === null) {
             return $this->sendError('Botanical not found');
         }
 
@@ -231,6 +469,7 @@ class BotanicalAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/botanicals/{id}",
      *      summary="Remove the specified Botanical from storage",
@@ -270,7 +509,7 @@ class BotanicalAPIController extends AppBaseController
         /** @var Botanical $botanical */
         $botanical = $this->botanicalRepository->find($id);
 
-        if (empty($botanical)) {
+        if ($botanical === null) {
             return $this->sendError('Botanical not found');
         }
 

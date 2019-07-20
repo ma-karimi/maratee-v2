@@ -79,7 +79,98 @@ class MediaAPIController extends AppBaseController
      *      description="Store Media",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="format_type",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="herbarium_id",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_id",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="paleontology_id",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="info_type",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="reference",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicinal_plant_id",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="product_id",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="botanical_id",
      *          in="body",
      *          description="Media that should be stored",
      *          required=false,
@@ -158,7 +249,7 @@ class MediaAPIController extends AppBaseController
         /** @var Media $media */
         $media = $this->mediaRepository->find($id);
 
-        if (empty($media)) {
+        if ($media === null) {
             return $this->sendError('Media not found');
         }
 
@@ -184,9 +275,100 @@ class MediaAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Media that should be updated",
+     *          description="Media that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="format_type",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="herbarium_id",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_id",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="paleontology_id",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="info_type",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="reference",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicinal_plant_id",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="product_id",
+     *          in="body",
+     *          description="Media that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Media")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="botanical_id",
+     *          in="body",
+     *          description="Media that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Media")
      *      ),
@@ -218,7 +400,7 @@ class MediaAPIController extends AppBaseController
         /** @var Media $media */
         $media = $this->mediaRepository->find($id);
 
-        if (empty($media)) {
+        if ($media === null) {
             return $this->sendError('Media not found');
         }
 
@@ -231,6 +413,7 @@ class MediaAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/media/{id}",
      *      summary="Remove the specified Media from storage",
@@ -270,7 +453,7 @@ class MediaAPIController extends AppBaseController
         /** @var Media $media */
         $media = $this->mediaRepository->find($id);
 
-        if (empty($media)) {
+        if ($media === null) {
             return $this->sendError('Media not found');
         }
 

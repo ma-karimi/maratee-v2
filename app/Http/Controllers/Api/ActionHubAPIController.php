@@ -30,7 +30,7 @@ class ActionHubAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/actionHubs",
+     *      path="/action_hubs",
      *      summary="Get a listing of the ActionHubs.",
      *      tags={"ActionHub"},
      *      description="Get all ActionHubs",
@@ -73,7 +73,7 @@ class ActionHubAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/actionHubs",
+     *      path="/action_hubs",
      *      summary="Store a newly created ActionHub in storage",
      *      tags={"ActionHub"},
      *      description="Store ActionHub",
@@ -168,7 +168,7 @@ class ActionHubAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/actionHubs/{id}",
+     *      path="/action_hubs/{id}",
      *      summary="Display the specified ActionHub",
      *      tags={"ActionHub"},
      *      description="Get ActionHub",
@@ -276,7 +276,7 @@ class ActionHubAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/actionHubs/{id}",
+     *      path="/action_hubs/{id}",
      *      summary="Update the specified ActionHub in storage",
      *      tags={"ActionHub"},
      *      description="Update ActionHub",
@@ -338,7 +338,7 @@ class ActionHubAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/actionHubs/{id}",
+     *      path="/action_hubs/{id}",
      *      summary="Remove the specified ActionHub from storage",
      *      tags={"ActionHub"},
      *      description="Delete ActionHub",

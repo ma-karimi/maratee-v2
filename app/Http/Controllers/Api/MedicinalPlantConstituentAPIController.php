@@ -79,10 +79,24 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      *      description="Store MedicinalPlantConstituent",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="medicinal_plant_id",
      *          in="body",
      *          description="MedicinalPlantConstituent that should be stored",
-     *          required=false,
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantConstituent")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="constituent_id",
+     *          in="body",
+     *          description="MedicinalPlantConstituent that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantConstituent")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="value",
+     *          in="body",
+     *          description="MedicinalPlantConstituent that should be stored",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantConstituent")
      *      ),
      *      @SWG\Response(
@@ -158,7 +172,7 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
         /** @var MedicinalPlantConstituent $medicinalPlantConstituent */
         $medicinalPlantConstituent = $this->medicinalPlantConstituentRepository->find($id);
 
-        if (empty($medicinalPlantConstituent)) {
+        if ($medicinalPlantConstituent === null) {
             return $this->sendError('Medicinal Plant Constituent not found');
         }
 
@@ -184,10 +198,24 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="medicinal_plant_id",
      *          in="body",
-     *          description="MedicinalPlantConstituent that should be updated",
-     *          required=false,
+     *          description="MedicinalPlantConstituent that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantConstituent")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="constituent_id",
+     *          in="body",
+     *          description="MedicinalPlantConstituent that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantConstituent")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="value",
+     *          in="body",
+     *          description="MedicinalPlantConstituent that should be stored",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantConstituent")
      *      ),
      *      @SWG\Response(
@@ -218,7 +246,7 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
         /** @var MedicinalPlantConstituent $medicinalPlantConstituent */
         $medicinalPlantConstituent = $this->medicinalPlantConstituentRepository->find($id);
 
-        if (empty($medicinalPlantConstituent)) {
+        if ($medicinalPlantConstituent === null) {
             return $this->sendError('Medicinal Plant Constituent not found');
         }
 
@@ -231,6 +259,7 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/medicinalPlantConstituents/{id}",
      *      summary="Remove the specified MedicinalPlantConstituent from storage",

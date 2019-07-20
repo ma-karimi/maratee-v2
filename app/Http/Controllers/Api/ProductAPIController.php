@@ -79,7 +79,28 @@ class ProductAPIController extends AppBaseController
      *      description="Store Product",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
+     *          in="body",
+     *          description="Product that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Product")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_id",
+     *          in="body",
+     *          description="Product that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Product")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Product that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Product")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="registration_status",
      *          in="body",
      *          description="Product that should be stored",
      *          required=false,
@@ -184,9 +205,30 @@ class ProductAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Product that should be updated",
+     *          description="Product that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Product")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_id",
+     *          in="body",
+     *          description="Product that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Product")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Product that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Product")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="registration_status",
+     *          in="body",
+     *          description="Product that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Product")
      *      ),
@@ -231,6 +273,7 @@ class ProductAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/products/{id}",
      *      summary="Remove the specified Product from storage",

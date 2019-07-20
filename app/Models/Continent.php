@@ -6,10 +6,24 @@ use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @SWG\Definition(
+ *            name="Continent",
+ *            required={"name"},
+ * 			@SWG\Property(name="id", type="integer"),
+ * 			@SWG\Property(name="name", type="array"),
+ * 			@SWG\Property(name="parent_id", type="integer"),
+ * 			@SWG\Property(name="created_at", type="string"),
+ * 			@SWG\Property(name="updated_at", type="string"),
+ *        )
+ **/
 class Continent extends BaseModel
 {
 
 
+    public static $rules = [
+        'parent_id' => 'integer|exists:continents,id',
+    ];
     /**
      * The database table used by the model.
      *

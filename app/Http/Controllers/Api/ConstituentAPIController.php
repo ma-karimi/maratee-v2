@@ -79,7 +79,14 @@ class ConstituentAPIController extends AppBaseController
      *      description="Store Constituent",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
+     *          in="body",
+     *          description="Constituent that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Constituent")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
      *          in="body",
      *          description="Constituent that should be stored",
      *          required=false,
@@ -158,7 +165,7 @@ class ConstituentAPIController extends AppBaseController
         /** @var Constituent $constituent */
         $constituent = $this->constituentRepository->find($id);
 
-        if (empty($constituent)) {
+        if ($constituent === null) {
             return $this->sendError('Constituent not found');
         }
 
@@ -184,9 +191,16 @@ class ConstituentAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Constituent that should be updated",
+     *          description="Constituent that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Constituent")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Constituent that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Constituent")
      *      ),
@@ -218,7 +232,7 @@ class ConstituentAPIController extends AppBaseController
         /** @var Constituent $constituent */
         $constituent = $this->constituentRepository->find($id);
 
-        if (empty($constituent)) {
+        if ($constituent === null) {
             return $this->sendError('Constituent not found');
         }
 
@@ -231,6 +245,7 @@ class ConstituentAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/constituents/{id}",
      *      summary="Remove the specified Constituent from storage",
@@ -270,7 +285,7 @@ class ConstituentAPIController extends AppBaseController
         /** @var Constituent $constituent */
         $constituent = $this->constituentRepository->find($id);
 
-        if (empty($constituent)) {
+        if ($constituent === null) {
             return $this->sendError('Constituent not found');
         }
 

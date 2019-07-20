@@ -79,10 +79,17 @@ class MapAPIController extends AppBaseController
      *      description="Store Map",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="reference_year",
      *          in="body",
      *          description="Map that should be stored",
-     *          required=false,
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Map")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="scale",
+     *          in="body",
+     *          description="Map that should be stored",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Map")
      *      ),
      *      @SWG\Response(
@@ -158,7 +165,7 @@ class MapAPIController extends AppBaseController
         /** @var Map $map */
         $map = $this->mapRepository->find($id);
 
-        if (empty($map)) {
+        if ($map === null) {
             return $this->sendError('Map not found');
         }
 
@@ -184,10 +191,17 @@ class MapAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="reference_year",
      *          in="body",
-     *          description="Map that should be updated",
-     *          required=false,
+     *          description="Map that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Map")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="scale",
+     *          in="body",
+     *          description="Map that should be stored",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Map")
      *      ),
      *      @SWG\Response(
@@ -218,7 +232,7 @@ class MapAPIController extends AppBaseController
         /** @var Map $map */
         $map = $this->mapRepository->find($id);
 
-        if (empty($map)) {
+        if ($map === null) {
             return $this->sendError('Map not found');
         }
 
@@ -231,6 +245,7 @@ class MapAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/maps/{id}",
      *      summary="Remove the specified Map from storage",
@@ -270,7 +285,7 @@ class MapAPIController extends AppBaseController
         /** @var Map $map */
         $map = $this->mapRepository->find($id);
 
-        if (empty($map)) {
+        if ($map === null) {
             return $this->sendError('Map not found');
         }
 

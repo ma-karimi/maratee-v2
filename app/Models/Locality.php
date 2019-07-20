@@ -4,7 +4,78 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+/**
+ * @SWG\Definition(
+ *      definition="Locality",
+ *      required={"paleontology_id","location_id"},
+ *      @SWG\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="paleontology_id",
+ *          description="paleontology_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="location_id",
+ *          description="location_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="formation",
+ *          description="formation",
+ *          type="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="layer",
+ *          description="layer",
+ *          type="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="stratigraphy",
+ *          description="stratigraphy",
+ *          type="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="lithology",
+ *          description="lithology",
+ *          type="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="fauna",
+ *          description="fauna",
+ *          type="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="description",
+ *          description="description",
+ *          type="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="map_id",
+ *          description="map_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @SWG\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */
 class Locality extends BaseModel
 {
 

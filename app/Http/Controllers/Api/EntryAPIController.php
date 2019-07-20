@@ -79,9 +79,14 @@ class EntryAPIController extends AppBaseController
      *      description="Store Entry",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Entry that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Entry")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Entry")
      *      ),
@@ -158,7 +163,7 @@ class EntryAPIController extends AppBaseController
         /** @var Entry $entry */
         $entry = $this->entryRepository->find($id);
 
-        if (empty($entry)) {
+        if ($entry === null) {
             return $this->sendError('Entry not found');
         }
 
@@ -184,9 +189,14 @@ class EntryAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Entry that should be updated",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Entry")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Entry")
      *      ),
@@ -218,7 +228,7 @@ class EntryAPIController extends AppBaseController
         /** @var Entry $entry */
         $entry = $this->entryRepository->find($id);
 
-        if (empty($entry)) {
+        if ($entry === null) {
             return $this->sendError('Entry not found');
         }
 
@@ -231,6 +241,7 @@ class EntryAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/entries/{id}",
      *      summary="Remove the specified Entry from storage",

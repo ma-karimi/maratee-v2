@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\PlantingApplication;
+use App\Models\Chemical;
 use App\Repositories\BaseRepository;
 
 /**
- * Class PlantingApplicationRepository
+ * Class ChemicalRepository
  * @package App\Repositories
- * @version July 14, 2019, 11:25 am UTC
+ * @version July 17, 2019, 5:33 am UTC
 */
 
-class PlantingApplicationRepository extends BaseRepository
+class ChemicalRepository extends BaseRepository
 {
     /**
      * @var array
@@ -35,6 +35,6 @@ class PlantingApplicationRepository extends BaseRepository
      **/
     public function model()
     {
-        return PlantingApplication::class;
+        return Chemical::class;
     }
 }

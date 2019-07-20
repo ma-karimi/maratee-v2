@@ -79,7 +79,35 @@ class SeedChemicalAPIController extends AppBaseController
      *      description="Store SeedChemical",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="chemical_id",
+     *          in="body",
+     *          description="SeedChemical that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedChemical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_id",
+     *          in="body",
+     *          description="SeedChemical that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedChemical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="treatment",
+     *          in="body",
+     *          description="SeedChemical that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedChemical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="repeat",
+     *          in="body",
+     *          description="SeedChemical that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedChemical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
      *          in="body",
      *          description="SeedChemical that should be stored",
      *          required=false,
@@ -184,9 +212,37 @@ class SeedChemicalAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="chemical_id",
      *          in="body",
-     *          description="SeedChemical that should be updated",
+     *          description="SeedChemical that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedChemical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_id",
+     *          in="body",
+     *          description="SeedChemical that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedChemical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="treatment",
+     *          in="body",
+     *          description="SeedChemical that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedChemical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="repeat",
+     *          in="body",
+     *          description="SeedChemical that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedChemical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          description="SeedChemical that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/SeedChemical")
      *      ),
@@ -231,6 +287,7 @@ class SeedChemicalAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/seedChemicals/{id}",
      *      summary="Remove the specified SeedChemical from storage",

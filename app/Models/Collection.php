@@ -5,6 +5,16 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @SWG\Definition(
+ *            name="Collection",
+ *            required={"name"},
+ * 			@SWG\Property(name="id", type="integer"),
+ * 			@SWG\Property(name="name", type="array"),
+ * 			@SWG\Property(name="created_at", type="string"),
+ * 			@SWG\Property(name="updated_at", type="string"),
+ *        )
+ **/
 class Collection extends BaseModel
 {
 

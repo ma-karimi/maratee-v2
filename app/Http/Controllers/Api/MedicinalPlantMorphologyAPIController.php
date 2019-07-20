@@ -79,10 +79,24 @@ class MedicinalPlantMorphologyAPIController extends AppBaseController
      *      description="Store MedicinalPlantMorphology",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="medicinal_plant_id",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="morphology_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="value",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Response(
@@ -158,7 +172,7 @@ class MedicinalPlantMorphologyAPIController extends AppBaseController
         /** @var MedicinalPlantMorphology $medicinalPlantMorphology */
         $medicinalPlantMorphology = $this->medicinalPlantMorphologyRepository->find($id);
 
-        if (empty($medicinalPlantMorphology)) {
+        if ($medicinalPlantMorphology === null) {
             return $this->sendError('Medicinal Plant Morphology not found');
         }
 
@@ -184,10 +198,24 @@ class MedicinalPlantMorphologyAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="medicinal_plant_id",
      *          in="body",
-     *          description="MedicinalPlantMorphology that should be updated",
-     *          required=false,
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="morphology_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="value",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Response(
@@ -218,7 +246,7 @@ class MedicinalPlantMorphologyAPIController extends AppBaseController
         /** @var MedicinalPlantMorphology $medicinalPlantMorphology */
         $medicinalPlantMorphology = $this->medicinalPlantMorphologyRepository->find($id);
 
-        if (empty($medicinalPlantMorphology)) {
+        if ($medicinalPlantMorphology === null) {
             return $this->sendError('Medicinal Plant Morphology not found');
         }
 
@@ -231,6 +259,7 @@ class MedicinalPlantMorphologyAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/medicinalPlantMorphologies/{id}",
      *      summary="Remove the specified MedicinalPlantMorphology from storage",
@@ -270,7 +299,7 @@ class MedicinalPlantMorphologyAPIController extends AppBaseController
         /** @var MedicinalPlantMorphology $medicinalPlantMorphology */
         $medicinalPlantMorphology = $this->medicinalPlantMorphologyRepository->find($id);
 
-        if (empty($medicinalPlantMorphology)) {
+        if ($medicinalPlantMorphology === null) {
             return $this->sendError('Medicinal Plant Morphology not found');
         }
 

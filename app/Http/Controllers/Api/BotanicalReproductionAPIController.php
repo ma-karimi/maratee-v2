@@ -30,7 +30,7 @@ class BotanicalReproductionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/botanicalReproductions",
+     *      path="/botanical_reproductions",
      *      summary="Get a listing of the BotanicalReproductions.",
      *      tags={"BotanicalReproduction"},
      *      description="Get all BotanicalReproductions",
@@ -73,16 +73,21 @@ class BotanicalReproductionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/botanicalReproductions",
+     *      path="/botanical_reproductions",
      *      summary="Store a newly created BotanicalReproduction in storage",
      *      tags={"BotanicalReproduction"},
      *      description="Store BotanicalReproduction",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="botanical_id",
      *          in="body",
-     *          description="BotanicalReproduction that should be stored",
-     *          required=false,
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/BotanicalReproduction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="reproduction_id",
+     *          in="body",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/BotanicalReproduction")
      *      ),
      *      @SWG\Response(
@@ -120,7 +125,7 @@ class BotanicalReproductionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/botanicalReproductions/{id}",
+     *      path="/botanical_reproductions/{id}",
      *      summary="Display the specified BotanicalReproduction",
      *      tags={"BotanicalReproduction"},
      *      description="Get BotanicalReproduction",
@@ -158,7 +163,7 @@ class BotanicalReproductionAPIController extends AppBaseController
         /** @var BotanicalReproduction $botanicalReproduction */
         $botanicalReproduction = $this->botanicalReproductionRepository->find($id);
 
-        if (empty($botanicalReproduction)) {
+        if ($botanicalReproduction === null) {
             return $this->sendError('Botanical Reproduction not found');
         }
 
@@ -171,7 +176,7 @@ class BotanicalReproductionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/botanicalReproductions/{id}",
+     *      path="/botanical_reproductions/{id}",
      *      summary="Update the specified BotanicalReproduction in storage",
      *      tags={"BotanicalReproduction"},
      *      description="Update BotanicalReproduction",
@@ -184,10 +189,15 @@ class BotanicalReproductionAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="botanical_id",
      *          in="body",
-     *          description="BotanicalReproduction that should be updated",
-     *          required=false,
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/BotanicalReproduction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="reproduction_id",
+     *          in="body",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/BotanicalReproduction")
      *      ),
      *      @SWG\Response(
@@ -218,7 +228,7 @@ class BotanicalReproductionAPIController extends AppBaseController
         /** @var BotanicalReproduction $botanicalReproduction */
         $botanicalReproduction = $this->botanicalReproductionRepository->find($id);
 
-        if (empty($botanicalReproduction)) {
+        if ($botanicalReproduction === null) {
             return $this->sendError('Botanical Reproduction not found');
         }
 
@@ -231,8 +241,9 @@ class BotanicalReproductionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
-     *      path="/botanicalReproductions/{id}",
+     *      path="/botanical_reproductions/{id}",
      *      summary="Remove the specified BotanicalReproduction from storage",
      *      tags={"BotanicalReproduction"},
      *      description="Delete BotanicalReproduction",
@@ -270,7 +281,7 @@ class BotanicalReproductionAPIController extends AppBaseController
         /** @var BotanicalReproduction $botanicalReproduction */
         $botanicalReproduction = $this->botanicalReproductionRepository->find($id);
 
-        if (empty($botanicalReproduction)) {
+        if ($botanicalReproduction === null) {
             return $this->sendError('Botanical Reproduction not found');
         }
 

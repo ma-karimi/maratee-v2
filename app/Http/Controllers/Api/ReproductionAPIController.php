@@ -79,7 +79,14 @@ class ReproductionAPIController extends AppBaseController
      *      description="Store Reproduction",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
+     *          in="body",
+     *          description="Reproduction that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Reproduction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
      *          in="body",
      *          description="Reproduction that should be stored",
      *          required=false,
@@ -184,9 +191,16 @@ class ReproductionAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="Reproduction that should be updated",
+     *          description="Reproduction that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Reproduction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Reproduction that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Reproduction")
      *      ),
@@ -231,6 +245,7 @@ class ReproductionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/reproductions/{id}",
      *      summary="Remove the specified Reproduction from storage",

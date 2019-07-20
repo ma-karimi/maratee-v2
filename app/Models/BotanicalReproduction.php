@@ -3,10 +3,28 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @SWG\Definition(
+ *            name="BotanicalReproduction",
+ *            required={"botanical_id", "reproduction_id"},
+ * 			@SWG\Property(name="id", type="integer"),
+ * 			@SWG\Property(name="botanical_id", type="integer"),
+ * 			@SWG\Property(name="reproduction_id", type="integer"),
+ * 			@SWG\Property(name="created_at", type="string"),
+ * 			@SWG\Property(name="updated_at", type="string"),
+ *        )
+ **/
 class BotanicalReproduction extends BaseModel
 {
 
+
+
+    public static $rules = [
+        'botanical_id' => 'required|exists:botanicals,id',
+        'reproduction_id' => 'required|exists:reproductions,id'
+    ];
 
     /**
      * The database table used by the model.
@@ -24,19 +42,17 @@ class BotanicalReproduction extends BaseModel
 
 
     /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
+     * @return BelongsTo
      */
-    protected $casts = [];
-
-
-    public function botanical()
+    public function botanical(): BelongsTo
     {
         return $this->belongsTo(Botanical::class);
     }
 
-    public function reproduction()
+    /**
+     * @return BelongsTo
+     */
+    public function reproduction(): BelongsTo
     {
         return $this->belongsTo(Reproduction::class);
     }

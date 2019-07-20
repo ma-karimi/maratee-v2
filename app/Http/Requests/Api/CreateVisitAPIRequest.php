@@ -24,6 +24,6 @@ class CreateVisitAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return Visit::$rules;
+      return [] ;
     }
 }

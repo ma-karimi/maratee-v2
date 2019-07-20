@@ -79,10 +79,21 @@ class CityAPIController extends AppBaseController
      *      description="Store City",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="City that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/City")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="code",
+     *          in="body",
      *          required=false,
+     *          @SWG\Schema(ref="#/definitions/City")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="province_id",
+     *          in="body",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/City")
      *      ),
      *      @SWG\Response(
@@ -158,7 +169,7 @@ class CityAPIController extends AppBaseController
         /** @var City $city */
         $city = $this->cityRepository->find($id);
 
-        if (empty($city)) {
+        if ($city === null) {
             return $this->sendError('City not found');
         }
 
@@ -184,10 +195,21 @@ class CityAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="City that should be updated",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/City")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="code",
+     *          in="body",
      *          required=false,
+     *          @SWG\Schema(ref="#/definitions/City")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="province_id",
+     *          in="body",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/City")
      *      ),
      *      @SWG\Response(
@@ -218,7 +240,7 @@ class CityAPIController extends AppBaseController
         /** @var City $city */
         $city = $this->cityRepository->find($id);
 
-        if (empty($city)) {
+        if ($city === null) {
             return $this->sendError('City not found');
         }
 
@@ -231,6 +253,7 @@ class CityAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/cities/{id}",
      *      summary="Remove the specified City from storage",
@@ -270,7 +293,7 @@ class CityAPIController extends AppBaseController
         /** @var City $city */
         $city = $this->cityRepository->find($id);
 
-        if (empty($city)) {
+        if ($city === null) {
             return $this->sendError('City not found');
         }
 

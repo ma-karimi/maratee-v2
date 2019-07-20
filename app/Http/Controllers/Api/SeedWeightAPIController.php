@@ -79,7 +79,70 @@ class SeedWeightAPIController extends AppBaseController
      *      description="Store SeedWeight",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="seed_technology_id",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="total",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="active",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="base",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="support",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="base_revival",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="active_revival",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="support_revival",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="revival_code",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
      *          in="body",
      *          description="SeedWeight that should be stored",
      *          required=false,
@@ -182,11 +245,73 @@ class SeedWeightAPIController extends AppBaseController
      *          type="integer",
      *          required=true,
      *          in="path"
+     *      ),  *      @SWG\Parameter(
+     *          name="seed_technology_id",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="total",
      *          in="body",
-     *          description="SeedWeight that should be updated",
+     *          description="SeedWeight that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="active",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="base",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="support",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="base_revival",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="active_revival",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="support_revival",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="revival_code",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedWeight")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="SeedWeight that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/SeedWeight")
      *      ),
@@ -231,6 +356,7 @@ class SeedWeightAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Delete(
      *      path="/seedWeights/{id}",
      *      summary="Remove the specified SeedWeight from storage",
