@@ -18,6 +18,7 @@ use App\Models\Contracts\BaseModel;
  *          property="name",
  *          description="name",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(

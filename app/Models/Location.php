@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @SWG\Definition(
- *      definition="Region",
+ *      definition="Location",
  *      required={"address_id","name"},
  *      @SWG\Property(
  *          property="id",
@@ -36,18 +36,21 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      ),
  *      @SWG\Property(
  *          property="point",
- *          description="point"
- *          type="array"
+ *          description="point",
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="name",
- *          description="name"
- *          type="array"
+ *          description="name",
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="description",
- *          description="description"
- *          type="array"
+ *          description="description",
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="created_at",

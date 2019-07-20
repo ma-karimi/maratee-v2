@@ -61,17 +61,20 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="infraspecific",
  *          description="infraspecific",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="typestatus",
  *          description="typestatus",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="preservation",
  *          description="preservation",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="pieces",
@@ -82,12 +85,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="color",
  *          description="color",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="element",
  *          description="element",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="geology_age_id",
@@ -98,17 +103,20 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="treatment",
  *          description="treatment",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="additional_info",
  *          description="additional_info",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="access",
  *          description="access",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="last_update",
@@ -119,12 +127,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="excavation",
  *          description="excavation",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="collection_name",
  *          description="collection_name",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="location_no",
@@ -135,7 +145,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="common_name",
  *          description="common_name",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="created_at",

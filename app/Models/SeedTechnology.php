@@ -24,12 +24,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          property="seed_type",
  *          description="seed_type",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="type",
  *          description="type",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -90,6 +92,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          property="description",
  *          description="description",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="created_at",

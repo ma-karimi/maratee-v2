@@ -29,32 +29,38 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      @SWG\Property(
  *          property="formation",
  *          description="formation",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="layer",
  *          description="layer",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="stratigraphy",
  *          description="stratigraphy",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="lithology",
  *          description="lithology",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="fauna",
  *          description="fauna",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="map_id",

@@ -6,14 +6,14 @@ use App\Models\Contracts\BaseModel;
 
 /**
  * @SWG\Definition(
- *            name="Attendance",
+ *            definition="Attendance",
  *            required={"start_time", "end_time", "user_id"},
- * 			@SWG\Property(name="start_time", type="string"),
- * 			@SWG\Property(name="end_time", type="string"),
- * 			@SWG\Property(name="user_id", type="integer"),
- * 			@SWG\Property(name="herbarium_id", type="integer"),
- * 			@SWG\Property(name="created_at", type="string"),
- * 			@SWG\Property(name="updated_at", type="string"),
+ * 			@SWG\Property(property="start_time", type="string"),
+ * 			@SWG\Property(property="end_time", type="string"),
+ * 			@SWG\Property(property="user_id", type="integer"),
+ * 			@SWG\Property(property="herbarium_id", type="integer"),
+ * 			@SWG\Property(property="created_at", type="string"),
+ * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
 class Attendance extends BaseModel

@@ -24,12 +24,14 @@ use App\Models\Contracts\BaseModel;
  *          property="description",
  *          description="description",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="purpose",
  *          description="purpose",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(

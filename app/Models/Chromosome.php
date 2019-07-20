@@ -7,19 +7,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @SWG\Definition(
- *            name="Chromosome",
+ *            definition="Chromosome",
  *            required={"n_no", "herbarium_id"},
- * 			@SWG\Property(name="id", type="integer"),
- * 			@SWG\Property(name="n_no", type="integer"),
- * 			@SWG\Property(name="2n_no", type="integer"),
- * 			@SWG\Property(name="notes", type="array"),
- * 			@SWG\Property(name="herbarium_id", type="integer"),
- * 			@SWG\Property(name="cryo_bank_id", type="integer"),
- * 			@SWG\Property(name="article_id", type="integer"),
- * 			@SWG\Property(name="location_id", type="integer"),
- * 			@SWG\Property(name="description", type="array"),
- * 			@SWG\Property(name="created_at", type="string"),
- * 			@SWG\Property(name="updated_at", type="string"),
+ * 			@SWG\Property(property="id", type="integer"),
+ * 			@SWG\Property(property="n_no", type="integer"),
+ * 			@SWG\Property(property="2n_no", type="integer"),
+ * 			@SWG\Property(property="notes", type="array",
+	 *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="herbarium_id", type="integer"),
+ * 			@SWG\Property(property="cryo_bank_id", type="integer"),
+ * 			@SWG\Property(property="article_id", type="integer"),
+ * 			@SWG\Property(property="location_id", type="integer"),
+ * 			@SWG\Property(property="description", type="array",
+	 *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="created_at", type="string"),
+ * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
 

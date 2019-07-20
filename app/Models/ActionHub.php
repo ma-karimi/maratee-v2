@@ -54,6 +54,7 @@ use App\Models\Contracts\BaseModel;
  *          property="description",
  *          description="description",
  *          type="array",
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -76,17 +77,16 @@ use App\Models\Contracts\BaseModel;
  *      )
  * )
  */
-
 class ActionHub extends BaseModel
 {
 
     public static $rules = [
-        'action_id'=>'required|exists:actions,id',
-        'department_id'=>'exists:departments,id',
-        'herbarium_id'=>'exists:herbariums,id',
-        'project_id'=>'exists:projects,id',
-        'location_id'=>'exists:locations,id',
-        'date'=>'date',
+        'action_id' => 'required|exists:actions,id',
+        'department_id' => 'exists:departments,id',
+        'herbarium_id' => 'exists:herbariums,id',
+        'project_id' => 'exists:projects,id',
+        'location_id' => 'exists:locations,id',
+        'date' => 'date',
     ];
 
 

@@ -6,7 +6,7 @@ use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @SWG\Definition(
- *      definition="Region",
+ *      definition="Medical",
  *      required={"herbarium_id","medicine_effect_id","medicine_medicinal_part_id"},
  *      @SWG\Property(
  *          property="id",
@@ -71,37 +71,44 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      @SWG\Property(
  *          property="side_effect_description",
  *          description="side_effect_description",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="drug_usage_description",
  *          description="drug_usage_description",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="medicinal_part_description",
  *          description="medicinal_part_description",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="drug_shape_description",
  *          description="drug_shape_description",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="drug_description",
  *          description="drug_description",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="therapy_description",
  *          description="therapy_description",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="medicine_effect_description",
  *          description="medicine_effect_description",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="created_at",

@@ -30,12 +30,14 @@ use App\Models\Contracts\BaseModel;
  *          property="action_role",
  *          description="action_role",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="action_role_description",
  *          description="action_role_description",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(

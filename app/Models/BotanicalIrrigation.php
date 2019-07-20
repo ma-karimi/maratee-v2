@@ -7,16 +7,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @SWG\Definition(
- *            name="BotanicalIrrigation",
+ *            definition="BotanicalIrrigation",
  *            required={"botanical_id", "irrigation_id", "daytime"},
- * 			@SWG\Property(name="id", type="integer"),
- * 			@SWG\Property(name="botanical_id", type="integer"),
- * 			@SWG\Property(name="irrigation_id", type="integer"),
- * 			@SWG\Property(name="daytime", type="array"),
- * 			@SWG\Property(name="requirement", type="array"),
- * 			@SWG\Property(name="seasonal_feature", type="array"),
- * 			@SWG\Property(name="created_at", type="string"),
- * 			@SWG\Property(name="updated_at", type="string"),
+ * 			@SWG\Property(property="id", type="integer"),
+ * 			@SWG\Property(property="botanical_id", type="integer"),
+ * 			@SWG\Property(property="irrigation_id", type="integer"),
+ * 			@SWG\Property(property="daytime", type="array",
+	 *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="requirement", type="array",
+	 *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="seasonal_feature", type="array",
+	 *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="created_at", type="string"),
+ * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
 

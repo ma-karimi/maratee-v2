@@ -73,7 +73,7 @@ class DepartmentAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/continents",
+     *      path="/departments",
      *      summary="Store a newly created Department in storage",
      *      tags={"Department"},
      *      description="Store Department",
@@ -125,7 +125,7 @@ class DepartmentAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/continents/{id}",
+     *      path="/departments/{id}",
      *      summary="Display the specified Department",
      *      tags={"Department"},
      *      description="Get Department",
@@ -176,7 +176,7 @@ class DepartmentAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/continents/{id}",
+     *      path="/departments/{id}",
      *      summary="Update the specified Department in storage",
      *      tags={"Department"},
      *      description="Update Department",
@@ -245,7 +245,7 @@ class DepartmentAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/continents/{id}",
+     *      path="/departments/{id}",
      *      summary="Remove the specified Department from storage",
      *      tags={"Department"},
      *      description="Delete Department",

@@ -16,12 +16,14 @@ use App\Models\Contracts\BaseModel;
  *      @SWG\Property(
  *          property="name",
  *          description="name",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="created_at",

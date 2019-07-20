@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
- *            name="Borrow",
+ *            definition="Borrow",
  *            required={"start_time", "end_time", "user_id"},
- * 			@SWG\Property(name="borrows_date", type="string"),
- * 			@SWG\Property(name="sheets_no", type="string"),
- * 			@SWG\Property(name="user_id", type="integer"),
- * 			@SWG\Property(name="media_id", type="integer"),
- * 			@SWG\Property(name="herbarium_id", type="integer"),
- * 			@SWG\Property(name="deadline", type="integer"),
- * 			@SWG\Property(name="return", type="integer"),
- * 			@SWG\Property(name="created_at", type="string"),
- * 			@SWG\Property(name="updated_at", type="string"),
+ * 			@SWG\Property(property="borrows_date", type="string"),
+ * 			@SWG\Property(property="sheets_no", type="string"),
+ * 			@SWG\Property(property="user_id", type="integer"),
+ * 			@SWG\Property(property="media_id", type="integer"),
+ * 			@SWG\Property(property="herbarium_id", type="integer"),
+ * 			@SWG\Property(property="deadline", type="integer"),
+ * 			@SWG\Property(property="return", type="integer"),
+ * 			@SWG\Property(property="created_at", type="string"),
+ * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
 class Borrow extends BaseModel

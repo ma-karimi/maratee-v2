@@ -47,7 +47,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      @SWG\Property(
  *          property="presence",
  *          description="presence",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="created_at",

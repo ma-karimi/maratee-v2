@@ -82,12 +82,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="name",
  *          description="name",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="is_flowering",
@@ -98,7 +100,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="organization_description",
  *          description="organization_description",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="herbarium_tip_location",
@@ -109,7 +112,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="type_description",
  *          description="type_description",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="plant_type_id",
@@ -120,7 +124,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="flowering",
  *          description="flowering",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="plant_group_id",
