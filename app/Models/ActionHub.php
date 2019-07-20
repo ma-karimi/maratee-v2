@@ -88,7 +88,7 @@ class ActionHub extends BaseModel
         'location_id' => 'exists:locations,id',
         'date' => 'date',
     ];
-
+    public static $linguistically = ['description' => false];
 
     /**
      * The database table used by the model.

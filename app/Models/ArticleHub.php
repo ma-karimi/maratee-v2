@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @SWG\Definition(
@@ -102,22 +103,34 @@ class ArticleHub extends BaseModel
      */
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
 
-    public function article()
+    /**
+     * @return BelongsTo
+     */
+    public function article(): BelongsTo
     {
         return $this->belongsTo(Article::class);
     }
 
-    public function action()
+    /**
+     * @return BelongsTo
+     */
+    public function action(): BelongsTo
     {
         return $this->belongsTo(Action::class);
     }
 
-    public function cryoBank()
+    /**
+     * @return BelongsTo
+     */
+    public function cryoBank(): BelongsTo
     {
         return $this->belongsTo(CryoBank::class);
     }
 
-    public function location()
+    /**
+     * @return BelongsTo
+     */
+    public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class);
     }
