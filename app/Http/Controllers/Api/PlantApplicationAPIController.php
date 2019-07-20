@@ -47,7 +47,7 @@ class PlantApplicationAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/plantApplication")
+     *                  @SWG\Items(ref="#/definitions/PlantApplication")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -83,49 +83,49 @@ class PlantApplicationAPIController extends AppBaseController
      *          in="body",
      *          description="plantApplication that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/plantApplication")
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
      *          name="plant_factor_part_id",
      *          in="body",
      *          description="plantApplication that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/plantApplication")
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
      *          name="plant_factor_application_id",
      *          in="body",
      *          description="plantApplication that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/plantApplication")
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
      *          name="plant_factor_growth_id",
      *          in="body",
      *          description="plantApplication that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/plantApplication")
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
      *          name="plant_factor_usage_type_id",
      *          in="body",
      *          description="plantApplication that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/plantApplication")
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
      *          name="plant_factor_industry_id",
      *          in="body",
      *          description="plantApplication that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/plantApplication")
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
      *          name="presence",
      *          in="body",
      *          description="plantApplication that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/plantApplication")
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -138,7 +138,7 @@ class PlantApplicationAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/plantApplication"
+     *                  ref="#/definitions/PlantApplication"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -185,7 +185,7 @@ class PlantApplicationAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/plantApplication"
+     *                  ref="#/definitions/PlantApplication"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -230,49 +230,49 @@ class PlantApplicationAPIController extends AppBaseController
      *          in="body",
      *          description="plantApplication that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/plantApplication")
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
      *          name="plant_factor_part_id",
      *          in="body",
      *          description="plantApplication that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/plantApplication")
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
      *          name="plant_factor_application_id",
      *          in="body",
      *          description="plantApplication that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/plantApplication")
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
      *          name="plant_factor_growth_id",
      *          in="body",
      *          description="plantApplication that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/plantApplication")
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
      *          name="plant_factor_usage_type_id",
      *          in="body",
      *          description="plantApplication that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/plantApplication")
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
      *          name="plant_factor_industry_id",
      *          in="body",
      *          description="plantApplication that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/plantApplication")
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
      *          name="presence",
      *          in="body",
      *          description="plantApplication that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/plantApplication")
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -285,7 +285,7 @@ class PlantApplicationAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/plantApplication"
+     *                  ref="#/definitions/PlantApplication"
      *              ),
      *              @SWG\Property(
      *                  property="message",

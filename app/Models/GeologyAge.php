@@ -7,15 +7,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @SWG\Definition(
- *            name="GeologyAge",
+ *            definition="GeologyAge",
  *            required={"era", "period", "epoch", "stage"},
- * 			@SWG\Property(name="id", type="integer"),
- * 			@SWG\Property(name="era", type="array"),
- * 			@SWG\Property(name="period", type="array"),
- * 			@SWG\Property(name="epoch", type="array"),
- * 			@SWG\Property(name="stage", type="array"),
- * 			@SWG\Property(name="created_at", type="string"),
- * 			@SWG\Property(name="updated_at", type="string"),
+ * 			@SWG\Property(property="id", type="integer"),
+ * 			@SWG\Property(property="era", type="array",
+	 *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="period", type="array",
+	 *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="epoch", type="array",
+	 *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="stage", type="array",
+	 *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="created_at", type="string"),
+ * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
 class GeologyAge extends BaseModel

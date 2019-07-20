@@ -6,7 +6,7 @@ use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @SWG\Definition(
- *      definition="SoilHasSoilFeature",
+ *      definition="SeedPlant",
  *      required={"seed_id","plant_id"},
  *      @SWG\Property(
  *          property="seed_id",

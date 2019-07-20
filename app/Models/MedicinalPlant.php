@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @SWG\Definition(
- *      definition="MedicinalPlantMorphology",
+ *      definition="MedicinalPlant",
  *      required={"herbarium_id","location_id","method_id"},
  *      @SWG\Property(
  *          property="id",
@@ -30,22 +30,26 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="treatment",
  *          description="treatment",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="vast_cultivation",
  *          description="vast_cultivation",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="studied_sample",
  *          description="studied_sample",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="secondary_metabolite",
  *          description="secondary_metabolite",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="efficiency",
@@ -56,17 +60,20 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="exclusivity",
  *          description="exclusivity",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="life_cycle",
  *          description="life_cycle",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="acidity",
  *          description="acidity",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="herbarium_id",

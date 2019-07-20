@@ -29,7 +29,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      @SWG\Property(
  *          property="value",
  *          description="value",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="created_at",

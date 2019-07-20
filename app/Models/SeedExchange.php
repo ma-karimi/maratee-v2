@@ -46,17 +46,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      @SWG\Property(
  *          property="approval_no",
  *          description="approval_no",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="saved_type",
  *          description="saved_type",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="created_at",

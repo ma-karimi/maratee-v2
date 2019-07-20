@@ -23,6 +23,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  *          property="title",
  *          description="title",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -34,12 +35,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  *          property="education",
  *          description="education",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="degree",
  *          description="degree",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -57,6 +60,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  *          property="nationality",
  *          description="nationality",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -68,18 +72,21 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  *          property="first_name",
  *          description="first_name",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="last_name",
  *          description="last_name",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="nickname",
  *          description="nickname",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(

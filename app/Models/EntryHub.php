@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @SWG\Definition(
- *            name="EntryHub",
+ *            definition="EntryHub",
  *            required={"type"},
- * 			@SWG\Property(name="id", type="integer"),
- * 			@SWG\Property(name="location_id", type="integer"),
- * 			@SWG\Property(name="entry_id", type="integer"),
- * 			@SWG\Property(name="botanical_id", type="integer"),
- * 			@SWG\Property(name="organization_id", type="integer"),
- * 			@SWG\Property(name="created_at", type="string"),
- * 			@SWG\Property(name="updated_at", type="string"),
+ * 			@SWG\Property(property="id", type="integer"),
+ * 			@SWG\Property(property="location_id", type="integer"),
+ * 			@SWG\Property(property="entry_id", type="integer"),
+ * 			@SWG\Property(property="botanical_id", type="integer"),
+ * 			@SWG\Property(property="organization_id", type="integer"),
+ * 			@SWG\Property(property="created_at", type="string"),
+ * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
 class EntryHub extends BaseModel

@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @SWG\Definition(
- *            name="Collection",
+ *            definition="Collection",
  *            required={"name"},
- * 			@SWG\Property(name="id", type="integer"),
- * 			@SWG\Property(name="name", type="array"),
- * 			@SWG\Property(name="created_at", type="string"),
- * 			@SWG\Property(name="updated_at", type="string"),
+ * 			@SWG\Property(property="id", type="integer"),
+ * 			@SWG\Property(property="name", type="array",
+	 *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="created_at", type="string"),
+ * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
 class Collection extends BaseModel

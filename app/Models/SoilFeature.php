@@ -23,6 +23,7 @@ use App\Models\Contracts\BaseModel;
  *          property="unit",
  *          description="unit",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(

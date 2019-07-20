@@ -6,11 +6,12 @@ use App\Models\Contracts\BaseModel;
 
 /**
  * @SWG\Definition(
- *            name="Author",
+ *            definition="Author",
  *            required={"name"},
- * 			@SWG\Property(name="name", type="array"),
- * 			@SWG\Property(name="created_at", type="string"),
- * 			@SWG\Property(name="updated_at", type="string"),
+ * 			@SWG\Property(property="name", type="array",
+	 *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="created_at", type="string"),
+ * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
 class Author extends BaseModel
