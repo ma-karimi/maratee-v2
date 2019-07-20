@@ -33,9 +33,10 @@ class AuthController extends Controller
 
             DB::beginTransaction();
             $user = $this->userServices->create($request);
-            $this->userServices->assignDepartmentAndLocation($user->id, $request);
             $success['token'] = $user->createToken('Laravel Password Grant Client')->accessToken;
             $success['user'] = $user->toArray();
+
+            $this->userServices->assignDepartmentAndLocation($user->id, $request);
             DB::commit();
             return $this->responser($success);
         } catch (\Exception $exception) {
