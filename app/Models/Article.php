@@ -30,6 +30,7 @@ use App\Models\Contracts\BaseModel;
  *          property="title",
  *          description="title",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -42,18 +43,21 @@ use App\Models\Contracts\BaseModel;
  *          property="journal_name",
  *          description="journal_name",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="type",
  *          description="type",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="auhtors",
  *          description="auhtors",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(

@@ -18,12 +18,14 @@ use App\Models\Contracts\BaseModel;
  *          property="name",
  *          description="name",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(

@@ -23,7 +23,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      @SWG\Property(
  *          property="treatment",
  *          description="treatment",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="repeat",

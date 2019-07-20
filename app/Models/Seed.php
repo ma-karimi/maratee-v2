@@ -52,22 +52,26 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="transmittance",
  *          description="transmittance",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="land_form",
  *          description="land_form",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="slope_direction",
  *          description="slope_direction",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="landscape",
  *          description="landscape",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="slope_degree",
@@ -79,81 +83,97 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          property="soil_depth",
  *          description="soil_depth",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="density",
  *          description="density",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="drainage",
  *          description="drainage",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="soil_ph",
  *          description="soil_ph",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="salinity",
  *          description="salinity",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="lime",
  *          description="lime",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="climate",
  *          description="climate",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="extent_population",
  *          description="extent_population",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="vegetation",
  *          description="vegetation",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="soil_erosion",
  *          description="soil_erosion",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="land_reforming",
  *          description="land_reforming",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="sample_type",
  *          description="sample_type",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="flowering",
  *          description="flowering",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="pollination",
  *          description="pollination",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="pollination_agent",
  *          description="pollination_agent",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="fruit_type",
  *          description="fruit_type",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="seeding_bush_qt",
@@ -165,21 +185,25 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          property="collecting_type",
  *          description="collecting_type",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="seeding_month",
  *          description="seeding_month",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="reproduction",
  *          description="reproduction",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="vegetative_form",
  *          description="vegetative_form",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="height",
@@ -191,6 +215,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          property="mother_health",
  *          description="mother_health",
  *           type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="department_id",
@@ -225,7 +250,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="notes",
  *          description="notes",
- *          type="array"
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="created_at",

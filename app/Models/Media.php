@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @SWG\Definition(
- *      definition="Region",
+ *      definition="Media",
  *      required={"name","format_type"},
  *      @SWG\Property(
  *          property="id",
@@ -18,7 +18,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="name",
  *          description="name",
- *          type="array"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="format_type",

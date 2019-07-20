@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\MedicinalPlant;
 /**
  * @SWG\Definition(
- *      definition="SoilHasSoilFeature",
+ *      definition="Soil",
  *      required={"value","soil_id","soil_feature_id"},
  *      @SWG\Property(
  *          property="id",
@@ -19,11 +18,13 @@ use App\Models\MedicinalPlant;
  *          property="type",
  *          description="type",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="created_at",

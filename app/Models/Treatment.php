@@ -6,7 +6,7 @@ use App\Models\Contracts\BaseModel;
 
 /**
  * @SWG\Definition(
- *      definition="Action",
+ *      definition="Treatment",
  *      required={"name","paleontology_id"},
  *      @SWG\Property(
  *          property="id",
@@ -24,12 +24,14 @@ use App\Models\Contracts\BaseModel;
  *          property="name",
  *          description="name",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
  *          type="array",
+	 *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(

@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @SWG\Definition(
- *            name="Entry",
+ *            definition="Entry",
  *            required={"type"},
- * 			@SWG\Property(name="id", type="integer"),
- * 			@SWG\Property(name="type", type="array"),
- * 			@SWG\Property(name="description", type="array"),
- * 			@SWG\Property(name="created_at", type="string"),
- * 			@SWG\Property(name="updated_at", type="string"),
+ * 			@SWG\Property(property="id", type="integer"),
+ * 			@SWG\Property(property="type", type="array",
+	 *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="description", type="array",
+	 *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="created_at", type="string"),
+ * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
 class Entry extends BaseModel

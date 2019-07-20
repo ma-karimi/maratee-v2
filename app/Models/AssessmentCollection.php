@@ -6,16 +6,16 @@ use App\Models\Contracts\BaseModel;
 
 /**
  * @SWG\Definition(
- *            name="AssessmentCollection",
+ *            definition="AssessmentCollection",
  *            required={"collection_id", "assessment_id", "seed_id"},
- * 			@SWG\Property(name="id", type="integer"),
- * 			@SWG\Property(name="collection_id", type="integer"),
- * 			@SWG\Property(name="assessment_id", type="integer"),
- * 			@SWG\Property(name="seed_id", type="integer"),
- * 			@SWG\Property(name="department_id", type="integer"),
- * 			@SWG\Property(name="project_id", type="integer"),
- * 			@SWG\Property(name="created_at", type="string"),
- * 			@SWG\Property(name="updated_at", type="string"),
+ * 			@SWG\Property(property="id", type="integer"),
+ * 			@SWG\Property(property="collection_id", type="integer"),
+ * 			@SWG\Property(property="assessment_id", type="integer"),
+ * 			@SWG\Property(property="seed_id", type="integer"),
+ * 			@SWG\Property(property="department_id", type="integer"),
+ * 			@SWG\Property(property="project_id", type="integer"),
+ * 			@SWG\Property(property="created_at", type="string"),
+ * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
 class AssessmentCollection extends BaseModel

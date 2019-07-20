@@ -8,17 +8,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @SWG\Definition(
- *            name="Credential",
+ *            definition="Credential",
  *            required={"name", "type", "date"},
- * 			@SWG\Property(name="id", type="integer"),
- * 			@SWG\Property(name="name", type="array"),
- * 			@SWG\Property(name="parent_id", type="integer"),
- * 			@SWG\Property(name="type", type="string"),
- * 			@SWG\Property(name="date", type="string"),
- * 			@SWG\Property(name="archive_no", type="string"),
- * 			@SWG\Property(name="place", type="string"),
- * 			@SWG\Property(name="created_at", type="string"),
- * 			@SWG\Property(name="updated_at", type="string"),
+ * 			@SWG\Property(property="id", type="integer"),
+ * 			@SWG\Property(property="name", type="array",
+	 *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="parent_id", type="integer"),
+ * 			@SWG\Property(property="type", type="string"),
+ * 			@SWG\Property(property="date", type="string"),
+ * 			@SWG\Property(property="archive_no", type="string"),
+ * 			@SWG\Property(property="place", type="string"),
+ * 			@SWG\Property(property="created_at", type="string"),
+ * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
 class Credential extends BaseModel

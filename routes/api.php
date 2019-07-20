@@ -129,7 +129,6 @@ Route::resource('botanical_irrigations', 'BotanicalIrrigationAPIController');
 
 Route::resource('botanical_reproductions', 'BotanicalReproductionAPIController');
 
-Route::resource('botanical_chemicals', 'BotanicalChemicalAPIController');
 
 Route::resource('chromosomes', 'ChromosomeAPIController');
 

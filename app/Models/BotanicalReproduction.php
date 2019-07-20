@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @SWG\Definition(
- *            name="BotanicalReproduction",
+ *            definition="BotanicalReproduction",
  *            required={"botanical_id", "reproduction_id"},
- * 			@SWG\Property(name="id", type="integer"),
- * 			@SWG\Property(name="botanical_id", type="integer"),
- * 			@SWG\Property(name="reproduction_id", type="integer"),
- * 			@SWG\Property(name="created_at", type="string"),
- * 			@SWG\Property(name="updated_at", type="string"),
+ * 			@SWG\Property(property="id", type="integer"),
+ * 			@SWG\Property(property="botanical_id", type="integer"),
+ * 			@SWG\Property(property="reproduction_id", type="integer"),
+ * 			@SWG\Property(property="created_at", type="string"),
+ * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
 class BotanicalReproduction extends BaseModel

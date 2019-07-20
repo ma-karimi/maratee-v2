@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @SWG\Definition(
- *            name="Connection",
+ *            definition="Connection",
  *            required={"department_id", "user_id"},
- * 			@SWG\Property(name="id", type="integer"),
- * 			@SWG\Property(name="location_id", type="integer"),
- * 			@SWG\Property(name="department_id", type="integer"),
- * 			@SWG\Property(name="user_id", type="integer"),
- * 			@SWG\Property(name="created_at", type="string"),
- * 			@SWG\Property(name="updated_at", type="string"),
+ * 			@SWG\Property(property="id", type="integer"),
+ * 			@SWG\Property(property="location_id", type="integer"),
+ * 			@SWG\Property(property="department_id", type="integer"),
+ * 			@SWG\Property(property="user_id", type="integer"),
+ * 			@SWG\Property(property="created_at", type="string"),
+ * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
 class Connection extends BaseModel
