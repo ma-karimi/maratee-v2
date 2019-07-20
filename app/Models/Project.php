@@ -67,7 +67,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Project extends BaseModel
 {
-
+    public static $rules=[
+        'name' => 'required',
+        'plan_name' => 'required',
+        'plan_number' => 'required',
+        'approved_id' => 'string',
+        'registered_id' => 'string',
+        'plan_id' => 'integer',
+    ];
 
     /**
      * The database table used by the model.

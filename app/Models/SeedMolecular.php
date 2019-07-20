@@ -55,7 +55,13 @@ use App\Models\Contracts\BaseModel;
 class SeedMolecular extends BaseModel
 {
 
-
+    public static $rules=[
+        'molecular_id' => 'required|exists:moleculars,id',
+        'seed_id' => 'required|exists:seeds,id',
+        'location_id' => 'integer',
+        'treatment' => 'required',
+        'repeat' => 'required|integer',
+    ];
     /**
      * The database table used by the model.
      *

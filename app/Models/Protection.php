@@ -41,7 +41,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Protection extends BaseModel
 {
 
-
+    public static $rules=[
+        'name' => 'required'
+    ];
     /**
      * The database table used by the model.
      *

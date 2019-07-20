@@ -244,7 +244,21 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Seed extends BaseModel
 {
-
+    public static $rules=[
+        'herbarium_id' => 'required|exists:herbariums,id',
+        'protection_id' => 'required|exists:protections,id',
+        'department_id' => 'required|exists:departments,id',
+        'field_code' => 'integer',
+        'sample_code' => 'integer',
+        'voucher_no' => 'integer',
+        'slope_degree' => 'integer',
+        'seeding_bush_qt' => 'integer',
+        'height' => 'integer',
+        'collected_qt' => 'integer',
+        'must_collected_qt' => 'integer',
+        'critical_extensions_qt' => 'integer',
+        'send_date' => 'date',
+    ];
 
     /**
      * The database table used by the model.

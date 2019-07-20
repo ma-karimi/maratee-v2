@@ -54,7 +54,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Product extends BaseModel
 {
 
-
+    public static $rules=[
+        'organization_id' => 'required|exists:organizations,id',
+        'name' => 'required',
+        'registration_status' => 'string',
+    ];
     /**
      * The database table used by the model.
      *

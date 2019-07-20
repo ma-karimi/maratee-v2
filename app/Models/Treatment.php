@@ -49,7 +49,10 @@ use App\Models\Contracts\BaseModel;
 class Treatment extends BaseModel
 {
 
-
+    public static $rules=[
+        'paleontology_id' => 'required|exists:paleontologies,id',
+        'name' => 'required',
+    ];
     /**
      * The database table used by the model.
      *

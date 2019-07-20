@@ -52,7 +52,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class PlantGeneral extends BaseModel
 {
 
-
+    public static $rules=[
+        'name' => 'required',
+        'type' => 'required|string',
+        'parent_id' => 'required|integer',
+    ];
     /**
      * The database table used by the model.
      *

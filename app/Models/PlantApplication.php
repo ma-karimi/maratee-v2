@@ -66,7 +66,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class PlantApplication extends BaseModel
 {
 
-
+    public static $rules=[
+        'herbarium_id' => 'required|exists:herbariums,id',
+        'plant_factor_part_id' => 'integer',
+        'plant_factor_application_id' => 'integer',
+        'plant_factor_growth_id' => 'integer',
+        'plant_factor_usage_type_id' => 'integer',
+        'plant_factor_industry_id' => 'integer'
+    ];
     /**
      * The database table used by the model.
      *

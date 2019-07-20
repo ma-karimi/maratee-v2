@@ -60,6 +60,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class PaleontologyCitation extends BaseModel
 {
 
+    public static $rules=[
+        'paleontology_id' => 'required|exists:paleontologies,id',
+        'article_id' => 'required|exists:articles,id',
+        'user_id' => 'required|exists:users,id',
+        'media_id' => 'exists:medias,id',
+        'plates_no' => 'string'
+    ];
     /**
      * The database table used by the model.
      *

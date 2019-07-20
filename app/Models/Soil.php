@@ -43,7 +43,9 @@ use App\Models\MedicinalPlant;
 class Soil extends Model
 {
 
-
+    public static $rules=[
+        'type' => 'required',
+    ];
     /**
      * The database table used by the model.
      *

@@ -46,7 +46,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Morphology extends BaseModel
 {
 
-
+    public static $rules=[
+        'name' => 'required',
+        'unit' => 'required'
+    ];
     /**
      * The database table used by the model.
      *

@@ -79,7 +79,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class PaleontologyMedia extends BaseModel
 {
 
+    public static $rules=[
+        'credential_gift_id' => 'integer',
+        'credential_expense_id' => 'integer',
+        'credential_purchase_id' => 'integer',
+        'credential_correspondence_id' => 'integer',
+        'paleontology_id' => 'required|exists:paleontologies,id',
+        'media_id' => 'required|exists:medias,id',
+        'user_id' => 'required|exists:users,id',
+        'exchange_id' => 'exists:users,id',
+        'credential_fair_id' => 'integer',
 
+
+    ];
     /**
      * The database table used by the model.
      *

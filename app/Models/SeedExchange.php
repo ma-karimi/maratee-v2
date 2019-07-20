@@ -75,7 +75,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SeedExchange extends BaseModel
 {
 
-
+    public static $rules=[
+        'seed_id' => 'exists:seeds,id',
+        'collection_id' => 'required|exists:collections,id',
+        'type' => 'string',
+        'weight' => 'integer',
+        'date' => 'date',
+    ];
     /**
      * The database table used by the model.
      *
