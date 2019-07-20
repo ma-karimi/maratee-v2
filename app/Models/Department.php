@@ -73,4 +73,20 @@ class Department extends BaseModel
     {
         return $this->hasMany(Seed::class, 'department_id')->latest();
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function table()
+    {
+        return $this->hasOne(Table::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function permission()
+    {
+        return $this->hasMany(Permission::class);
+    }
 }
