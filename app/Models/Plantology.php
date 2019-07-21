@@ -47,7 +47,6 @@ use App\Models\Contracts\BaseModel;
 class Plantology extends BaseModel
 {
     public static $rules=[
-        'name' => 'required',
         'type' => 'string',
     ];
 

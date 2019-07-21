@@ -42,10 +42,6 @@ use App\Models\Contracts\BaseModel;
 
 class Reproduction extends BaseModel
 {
-
-    public static $rules=[
-        'name' => 'required'
-    ];
     /**
      * The database table used by the model.
      *

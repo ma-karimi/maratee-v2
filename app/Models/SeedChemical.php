@@ -59,7 +59,6 @@ class SeedChemical extends BaseModel
     public static $rules=[
         'chemical_id' => 'required|exists:chemicals,id',
         'seed_id' => 'required|exists:seeds,id',
-        'treatment' => 'required',
         'repeat' => 'required|integer',
         'location_id' => 'exists:locations,id',
     ];

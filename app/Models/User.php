@@ -133,9 +133,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     public static $rules=[
-        'title' => 'required',
-        'first_name' => 'required',
-        'last_name' => 'required',
         'national_id' => 'string',
         'passport_no' => 'string',
         'birthday' => 'date',

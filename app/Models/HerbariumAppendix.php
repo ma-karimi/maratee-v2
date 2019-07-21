@@ -48,7 +48,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class HerbariumAppendix extends BaseModel
 {
 
-
+    public static $rules=[
+        'herbarium_id' => 'required|exists:herbariums,id',
+        'destination_herbarium_id' => 'required|integer',
+        'appendix' => 'required|string',
+    ];
     /**
      * The database table used by the model.
      *

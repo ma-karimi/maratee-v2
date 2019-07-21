@@ -149,7 +149,25 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Herbarium extends BaseModel
 {
+    public static $rules=[
+        'location_id' => 'required|exists:locations,id',
+        'protection_id' => 'required|exists:protections,id',
+        'organization_id' => 'required|exists:organizations,id',
+        'phytogeography_id' => 'integer',
+        'phenology_id' => 'integer',
+        'sheets_no' => 'integer',
+        'samples_no' => 'integer',
+        'tip_qt' => 'integer',
+        'physical_tip_qt' => 'integer',
+        'tip_type' => 'string',
+        'is_flowering' => 'integer',
+        'herbarium_tip_location' => 'integer',
+        'type_description' => 'string',
+        'plant_type_id' => 'integer',
+        'plant_group_id' => 'integer',
+        'number' => 'integer',
 
+    ];
     /**
      * The database table used by the model.
      *

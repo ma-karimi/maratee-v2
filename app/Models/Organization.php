@@ -76,7 +76,6 @@ class Organization extends BaseModel
         'domestic_code' => 'string',
         'international_code' => 'string',
         'is_herbarium' => 'integer',
-        'name' => 'required',
         'phone' => 'required|string',
         'email' => 'email',
         'website' => 'string'

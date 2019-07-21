@@ -142,7 +142,6 @@ class Plant extends BaseModel
 {
 
     public static $rules=[
-        'name' => 'required',
         'user_id' => 'exists:moleculars,id',
         'article_id' => 'exists:moleculars,id',
         'author_id' => 'exists:moleculars,id',

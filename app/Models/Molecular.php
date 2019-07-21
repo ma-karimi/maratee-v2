@@ -42,10 +42,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Molecular extends BaseModel
 {
-
-    public static $rules=[
-        'name' => 'required'
-    ];
     /**
      * The database table used by the model.
      *

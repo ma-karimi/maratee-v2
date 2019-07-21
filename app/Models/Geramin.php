@@ -121,7 +121,22 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Geramin extends BaseModel
 {
 
-
+    public static $rules=[
+        'collection_id' => 'required|exists:collections,id',
+        'seed_id' => 'required|exists:seeds,id',
+        'repeat' => 'string',
+        'bush' => 'integer',
+        'average' => 'integer',
+        'flowering_completion' => 'date',
+        'gdd_flowering' => 'date',
+        'essence_rate' => 'integer',
+        'bush_weight' => 'integer',
+        'bush_height' => 'integer',
+        'big_bush_diameter' => 'integer',
+        'small_bush_diameter' => 'integer',
+        'flowering_bish_qt' => 'integer',
+        'crown_coverage' => 'integer'
+    ];
     /**
      * The database table used by the model.
      *

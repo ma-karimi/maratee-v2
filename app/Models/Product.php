@@ -58,7 +58,6 @@ class Product extends BaseModel
 
     public static $rules=[
         'organization_id' => 'required|exists:organizations,id',
-        'name' => 'required',
         'registration_status' => 'string',
     ];
     /**

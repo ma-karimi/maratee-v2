@@ -45,8 +45,7 @@ class Method extends BaseModel
 {
 
     public static $rules=[
-        'name' => 'required',
-        'parent_id' => 'integer',
+        'parent_id' => 'integer'
     ];
     /**
      * The database table used by the model.

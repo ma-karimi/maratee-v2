@@ -60,7 +60,6 @@ class SeedMolecular extends BaseModel
         'molecular_id' => 'required|exists:moleculars,id',
         'seed_id' => 'required|exists:seeds,id',
         'location_id' => 'integer',
-        'treatment' => 'required',
         'repeat' => 'required|integer',
     ];
     /**

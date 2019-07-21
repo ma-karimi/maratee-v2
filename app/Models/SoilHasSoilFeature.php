@@ -52,7 +52,6 @@ class SoilHasSoilFeature extends BaseModel
     public static $rules=[
         'soil_id' => 'required|exists:soils,id',
         'soil_feature_id' => 'required|exists:soil_features,id',
-        'value' => 'required',
     ];
     /**
      * The database table used by the model.

@@ -55,7 +55,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Medicine extends BaseModel
 {
     public static $rules=[
-        'name' => 'required',
         'type' => 'required|string',
         'parent_id' => 'integer',
     ];
