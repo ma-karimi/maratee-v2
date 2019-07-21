@@ -283,4 +283,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Connection::class)->latest();
     }
+
+    /**
+     * @return HasMany
+     */
+    public function permission()
+    {
+        return $this->hasMany(User::class)->latest();
+    }
 }

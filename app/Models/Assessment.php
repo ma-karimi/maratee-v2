@@ -41,6 +41,7 @@ use App\Models\Contracts\BaseModel;
 class Assessment extends BaseModel
 {
 
+    public static $linguistically = ['treatment' => true, 'description' => false];
     public static $rules = ['weight_k' => 'required|integer'];
 
     /**

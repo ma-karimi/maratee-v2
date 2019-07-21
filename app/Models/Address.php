@@ -50,7 +50,7 @@ use App\Models\Contracts\BaseModel;
 class Address extends BaseModel
 {
 
-
+    public static $linguistically = ['address' => true];
     /**
      * The database table used by the model.
      *

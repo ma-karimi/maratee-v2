@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @SWG\Definition(
@@ -56,12 +57,18 @@ class Attendance extends BaseModel
     protected $dates = ['created_at', 'deleted_at', 'end_time', 'start_time', 'updated_at'];
 
 
-    public function herbarium()
+    /**
+     * @return BelongsTo
+     */
+    public function herbarium(): BelongsTo
     {
         return $this->belongsTo(Herbarium::class);
     }
 
-    public function user()
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
