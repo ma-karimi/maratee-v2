@@ -112,7 +112,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SeedTechnology extends BaseModel
 {
 
-
+    public static $rules=[
+        'seed_id' => 'required|exists:seeds,id',
+        'husk_average' => 'integer',
+        'husk_weight' => 'integer',
+        'seed_weight' => 'integer',
+        'humidity' => 'integer',
+        'purity' => 'integer',
+        'hard_seed' => 'integer',
+        'abnormality' => 'integer',
+        'sprout' => 'integer',
+        'vigor' => 'integer',
+        'examine' => 'date',
+    ];
     /**
      * The database table used by the model.
      *

@@ -85,6 +85,15 @@ use App\Models\Contracts\BaseModel;
 class Visit extends BaseModel
 {
 
+    public static $rules = [
+        'date' => 'required|date',
+        'user_id' => 'required|exists:users,id',
+        'peoples' => 'integer',
+        'archives_types' => 'string',
+        'archive_no' => 'string',
+        'paleontology_id' => 'integer',
+        'media_id' => 'integer',
+    ];
     /**
      * The database table used by the model.
      *

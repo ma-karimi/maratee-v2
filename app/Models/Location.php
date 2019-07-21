@@ -71,6 +71,11 @@ class Location extends BaseModel
 
     use SpatialTrait;
 
+    public static $rules=[
+        'address_id' => 'required|exists:addresses,id',
+        'region_id' => 'exists:regions,id',
+        'altitude' => 'integer'
+    ];
     /**
      * The database table used by the model.
      *
@@ -99,10 +104,6 @@ class Location extends BaseModel
      */
     protected $casts = ['name' => 'json', 'description' => 'json'];
 
-    /**
-     * @var array
-     */
-    public static $rules = ['address_id'=>'required'];
 
     /**
      * @var array

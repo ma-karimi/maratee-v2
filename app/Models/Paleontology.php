@@ -164,7 +164,20 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Paleontology extends BaseModel
 {
-
+    public static $rules=[
+        'catalog_no' => 'integer',
+        'specimen_no' => 'string',
+        'field_no' => 'string',
+        'barcode_no' => 'string',
+        'move_status' => 'string',
+        'salon' => 'string',
+        'closet' => 'integer',
+        'drawer' => 'integer',
+        'pieces' => 'integer',
+        'geology_age_id' => 'required|integer',
+        'last_update' => 'date',
+        'location_no' => 'integer'
+    ];
     /**
      * The database table used by the model.
      *

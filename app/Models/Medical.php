@@ -127,7 +127,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Medical extends BaseModel
 {
 
-
+    public static $rules=[
+        'herbarium_id' => 'required|exists:herbariums,id',
+        'medicine_side_effect_id' => 'integer',
+        'medicine_effect_id' => 'required|integer',
+        'medicine_therapy_id' => 'integer',
+        'medicine_drug_id' => 'integer',
+        'product_id' => 'required|exists:products,id',
+        'medicine_drug_shape_id' => 'integer',
+        'medicine_medicinal_part_id' => 'required|integer',
+        'medicine_drug_usage_id' => 'integer'
+    ];
     /**
      * The database table used by the model.
      *

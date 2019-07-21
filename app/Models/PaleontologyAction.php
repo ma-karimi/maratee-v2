@@ -55,7 +55,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class PaleontologyAction extends BaseModel
 {
 
-
+    public static $rules=[
+        'paleontology_id' => 'required|exists:paleontologies,id',
+        'user_id' => 'required|exists:users,id',
+        'action_id' => 'required|exists:actions,id',
+        'date' => 'required|date'
+    ];
     /**
      * The database table used by the model.
      *

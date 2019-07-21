@@ -42,8 +42,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Protection extends BaseModel
 {
-
-
     /**
      * The database table used by the model.
      *

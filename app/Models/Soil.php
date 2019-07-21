@@ -44,7 +44,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Soil extends Model
 {
 
-
     /**
      * The database table used by the model.
      *

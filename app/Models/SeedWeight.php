@@ -92,6 +92,17 @@ use App\Models\Contracts\BaseModel;
 class SeedWeight extends BaseModel
 {
 
+    public static $rules=[
+        'seed_technology_id' => 'required|exists:seed_technologies,id',
+        'total' => 'required|integer',
+        'active' => 'integer',
+        'base' => 'integer',
+        'support' => 'integer',
+        'base_revival' => 'integer',
+        'active_revival' => 'integer',
+        'support_revival' => 'integer',
+        'revival_code' => 'string',
+    ];
 
     /**
      * The database table used by the model.

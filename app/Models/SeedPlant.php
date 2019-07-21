@@ -38,7 +38,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SeedPlant extends BaseModel
 {
 
-
+    public static $rules=[
+        'seed_id' => 'required|exists:seeds,id',
+        'plant_id' => 'required|exists:plants,id',
+    ];
     /**
      * The database table used by the model.
      *

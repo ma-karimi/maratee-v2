@@ -42,8 +42,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Molecular extends BaseModel
 {
-
-
     /**
      * The database table used by the model.
      *

@@ -132,8 +132,19 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens,UserScope,UserAccessor,Notifiable;
+    public static $rules=[
+        'national_id' => 'string',
+        'passport_no' => 'string',
+        'birthday' => 'date',
+        'is_author' => 'integer',
+        'mobile' => 'string',
+        'email' => 'required|email',
+        'phone' => 'string',
+        'password' => 'required|string',
+        'work_experience' => 'integer',
+    ];
 
+    use HasApiTokens,UserScope,UserAccessor,Notifiable;
     /**
      * The database table used by the model.
      *

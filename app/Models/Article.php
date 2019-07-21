@@ -77,7 +77,7 @@ use App\Models\Contracts\BaseModel;
 class Article extends BaseModel
 {
 
-
+    public static $linguistically = ['title' => true, 'type' => false, 'authors'=>false, 'journal_name'=>false];
     public static $rules = [
         'year' => 'date',
         'journal_no'=>'integer',

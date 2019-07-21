@@ -42,7 +42,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Map extends BaseModel
 {
 
-
+    public static $rules=[
+        'reference_year' => 'required|date',
+        'scale' => 'required|string'
+    ];
     /**
      * The database table used by the model.
      *

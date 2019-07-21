@@ -43,7 +43,10 @@ use App\Models\Contracts\BaseModel;
 class TechnologyCollection extends BaseModel
 {
 
-
+    public static $rules=[
+        'seed_technology_id' => 'required|exists:seed_technologies,id',
+        'collection_id' => 'required|exists:collections,id',
+    ];
     /**
      * The database table used by the model.
      *

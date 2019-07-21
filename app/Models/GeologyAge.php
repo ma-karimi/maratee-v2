@@ -25,7 +25,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class GeologyAge extends BaseModel
 {
 
-
     /**
      * The database table used by the model.
      *

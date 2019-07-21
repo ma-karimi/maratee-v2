@@ -42,7 +42,6 @@ use App\Models\Contracts\BaseModel;
 class Lighting extends BaseModel
 {
 
-
     /**
      * The database table used by the model.
      *

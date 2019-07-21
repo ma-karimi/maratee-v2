@@ -38,7 +38,6 @@ use App\Models\Contracts\BaseModel;
 class Village extends BaseModel
 {
 
-    public static $rules=[];
     /**
      * The database table used by the model.
      *

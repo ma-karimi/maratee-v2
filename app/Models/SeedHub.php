@@ -81,7 +81,14 @@ use App\Models\Contracts\BaseModel;
 
 class SeedHub extends BaseModel
 {
-
+    public static $rules=[
+        'project_id' => 'exists:projects,id',
+        'user_id' => 'required|exists:seeds,id',
+        'seed_id' => 'required|integer',
+        'location_id' => 'required|integer',
+        'action_id' => 'required|integer',
+        'date' => 'date',
+    ];
 
     /**
      * The database table used by the model.

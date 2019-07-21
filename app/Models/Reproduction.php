@@ -42,8 +42,6 @@ use App\Models\Contracts\BaseModel;
 
 class Reproduction extends BaseModel
 {
-
-
     /**
      * The database table used by the model.
      *

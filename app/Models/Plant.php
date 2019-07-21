@@ -141,7 +141,23 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Plant extends BaseModel
 {
 
-
+    public static $rules=[
+        'user_id' => 'exists:moleculars,id',
+        'article_id' => 'exists:moleculars,id',
+        'author_id' => 'exists:moleculars,id',
+        'location_id' => 'exists:moleculars,id',
+        'plant_general_cotyledon_id' => 'required|integer',
+        'plant_general_genus_id' => 'required|integer',
+        'plant_general_family_id' => 'required|integer',
+        'plant_general_sperm_id' => 'integer',
+        'plant_general_flowering_id' => 'integer',
+        'plant_general_order_id' => 'integer',
+        'plant_general_group_id' => 'integer',
+        'plant_general_class_id' => 'integer',
+        'plant_general_specie_id' => 'integer',
+        'plant_general_variety_id' => 'integer',
+        'plant_general_sub_specie_id' => 'integer',
+    ];
     /**
      * The database table used by the model.
      *

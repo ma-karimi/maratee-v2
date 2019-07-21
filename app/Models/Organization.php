@@ -72,7 +72,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Organization extends BaseModel
 {
-
+    public static $rules=[
+        'domestic_code' => 'string',
+        'international_code' => 'string',
+        'is_herbarium' => 'integer',
+        'phone' => 'required|string',
+        'email' => 'email',
+        'website' => 'string'
+    ];
     /**
      * The database table used by the model.
      *

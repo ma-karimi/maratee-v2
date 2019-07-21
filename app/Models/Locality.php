@@ -85,7 +85,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Locality extends BaseModel
 {
 
-
+    public static $rules=[
+        'paleontology_id' => 'required|exists:paleontologies,id',
+        'location_id' => 'required|exists:locations,id',
+        'map_id' => 'exists:maps,id',
+    ];
     /**
      * The database table used by the model.
      *

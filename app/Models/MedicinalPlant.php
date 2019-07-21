@@ -128,7 +128,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class MedicinalPlant extends BaseModel
 {
 
+    public static $rules=[
+        'plant_origin_id' => 'integer',
+        'code_no' => 'integer',
+        'efficiency' => 'numeric',
+        'herbarium_id' => 'required|exists:herbariums,id',
+        'location_id' => 'required|exists:locations,id',
+        'method_id' => 'required|exists:methods,id',
+        'article_id' => 'exists:methods,id',
+        'soil_id' => 'integer',
+        'media_id' => 'integer',
 
+    ];
     /**
      * The database table used by the model.
      *
