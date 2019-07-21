@@ -5,13 +5,36 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $id
- * @property mixed $name
- * @property int $level
- * @property mixed $description
- * @property string $created_at
- * @property string $updated_at
- * @property Permission[] $permissions
+ * @SWG\Definition(
+ *      definition="Role",
+ *      required={"name","level","description"},
+ *      @SWG\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="name",
+ *          description="name",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="level",
+ *          description="level",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="description",
+ *          description="description",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *          format="array"
+ *      ),
+ * )
  */
 class Role extends Model
 {
@@ -19,13 +42,11 @@ class Role extends Model
      * @var array
      */
     protected $fillable = ['name', 'level', 'description', 'created_at', 'updated_at'];
-
-    /**
-     * The storage format of the model's date columns.
-     * 
-     * @var string
-     */
-    protected $dateFormat = 'U';
+    protected $casts =
+        [
+            'name' => 'json',
+            'description' => 'json'
+        ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

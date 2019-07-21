@@ -200,3 +200,13 @@ Route::resource('morphologies', 'MorphologyAPIController');
 
 
 Route::resource('chemicals', 'ChemicalAPIController');
+
+Route::resource('transitions', 'TransitionAPIController');
+
+Route::resource('roles', 'RoleAPIController');
+
+Route::resource('permissions', 'PermissionAPIController');
+
+Route::resource('tables', 'TableAPIController');
+
+Route::resource('groups', 'GroupAPIController');

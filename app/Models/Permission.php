@@ -4,6 +4,106 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @SWG\Definition(
+ *      definition="Permission",
+ *      required={"user_id","department_id","group_id","role_id","requester_id","responser_id","permission_status","request_date","approval_date","expire_date","owner_crud","same_level_crud","upper_level_crud","lower_level_crud"},
+ *      @SWG\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="user_id",
+ *          description="user_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="department_id",
+ *          description="department_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="group_id",
+ *          description="group_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="role_id",
+ *          description="role_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="requester_id",
+ *          description="requester_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="responser_id",
+ *          description="responser_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="permission_status",
+ *          description="permission_status",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="request_date",
+ *          description="request_date",
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @SWG\Property(
+ *          property="approval_date",
+ *          description="approval_date",
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @SWG\Property(
+ *          property="expire_date",
+ *          description="expire_date",
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @SWG\Property(
+ *          property="owner_crud",
+ *          description="owner_crud",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="same_level_crud",
+ *          description="same_level_crud",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="upper_level_crud",
+ *          description="upper_level_crud",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="lower_level_crud",
+ *          description="lower_level_crud",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *          format="array"
+ *      ),
+ * )
+ */
 class Permission extends Model
 {
     /**
@@ -11,12 +111,13 @@ class Permission extends Model
      */
     protected $fillable = ['user_id', 'department_id', 'group_id', 'role_id', 'requester_id', 'responser_id', 'permission_status', 'request_date', 'approval_date', 'expire_date', 'owner_crud', 'same_level_crud', 'upper_level_crud', 'lower_level_crud', 'created_at', 'updated_at'];
 
-    /**
-     * The storage format of the model's date columns.
-     * 
-     * @var string
-     */
-    protected $dateFormat = 'U';
+   protected $casts =
+       [
+         'owner_crud'=>'json',
+         'same_level_crud'=>'json',
+         'upper_level_crud'=>'json',
+         'lower_level_crud'=>'json',
+       ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
