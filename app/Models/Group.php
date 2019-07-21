@@ -5,15 +5,51 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $id
- * @property mixed $name
- * @property mixed $owner_crud
- * @property mixed $same_level_crud
- * @property mixed $upper_level_crud
- * @property mixed $lower_level_crud
- * @property string $created_at
- * @property string $updated_at
- * @property Permission[] $permissions
+ * @SWG\Definition(
+ *      definition="Group",
+ *      required={"name","owner_crud","same_level_crud","upper_level_crud","lower_level_crud"},
+ *      @SWG\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="name",
+ *          description="name",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="owner_crud",
+ *          description="owner_crud",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="same_level_crud",
+ *          description="same_level_crud",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="upper_level_crud",
+ *          description="upper_level_crud",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="lower_level_crud",
+ *          description="lower_level_crud",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *          format="array"
+ *      ),
+ * )
  */
 class Group extends Model
 {
@@ -21,13 +57,22 @@ class Group extends Model
      * @var array
      */
     protected $fillable = ['name', 'owner_crud', 'same_level_crud', 'upper_level_crud', 'lower_level_crud', 'created_at', 'updated_at'];
-
+    /**
+     * @var array
+     */
+    protected $casts =
+        [
+            'name' => 'json',
+            'owner_crud' => 'json',
+            'same_level_crud' => 'json',
+            'upper_level_crud' => 'json',
+            'lower_level_crud' => 'json'
+        ];
     /**
      * The storage format of the model's date columns.
      * 
      * @var string
      */
-    protected $dateFormat = 'U';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
