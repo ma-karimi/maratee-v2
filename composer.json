@@ -23,6 +23,7 @@
         "laravelcollective/html": "^5.8.0",
         "orangehill/iseed": "^2.6",
         "predis/predis": "^1.1",
+        "react/promise": "^2.7",
         "zircote/swagger-php": "2.*"
     },
     "require-dev": {
