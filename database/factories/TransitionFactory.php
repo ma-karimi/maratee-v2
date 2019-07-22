@@ -10,7 +10,8 @@ $factory->define(App\Models\Transition::class, function (Faker $faker) {
     return [
         'table_name' => $faker->name,
         'field_name' => $faker->name,
-        'table_id' => $tables,
+        'table_id' => $faker->randomNumber(),
+        'tables_id' => $tables,
         'status' => $faker->numberBetween(0,1),
         'crud_type' => $faker->numberBetween(0,1),
         'creator_id' => $users,

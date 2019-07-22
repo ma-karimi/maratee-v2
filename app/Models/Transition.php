@@ -34,6 +34,12 @@ use Illuminate\Database\Eloquent\Model;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="tables_id",
+ *          description="tables_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
  *          property="status",
  *          description="status",
  *          type="integer",
@@ -128,7 +134,7 @@ class Transition extends Model
     /**
      * @var array
      */
-    protected $fillable = ['table_id', 'creator_id', 'requester_id', 'changer_id', 'responser_id', 'table_name', 'field_name', 'status', 'crud_type', 'request_date', 'change_date', 'response_date', 'request_status', 'previous_value', 'next_value', 'description', 'created_at', 'updated_at'];
+    protected $fillable = ['table_id','tables_id', 'creator_id', 'requester_id', 'changer_id', 'responser_id', 'table_name', 'field_name', 'status', 'crud_type', 'request_date', 'change_date', 'response_date', 'request_status', 'previous_value', 'next_value', 'description', 'created_at', 'updated_at'];
 
     /**
      * @var array
@@ -176,6 +182,6 @@ class Transition extends Model
      */
     public function table()
     {
-        return $this->belongsTo('App\Models\Table');
+        return $this->belongsTo('App\Models\Table','tables_id');
     }
 }
