@@ -6,12 +6,18 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Permission::class, function (Faker $faker) {
     $users = \App\Models\User::pluck('id')->random();
-    $departments = \App\Models\Department::pluck('id')->random();
+    $departmentId = \App\Models\Department::pluck('id')->random();
+    $organizationId = \App\Models\Organization::pluck('id')->random();
+    $divisionId= \App\Models\Division::pluck('id')->random();
+    $projectId= \App\Models\Project::pluck('id')->random();
     $groups = \App\Models\Group::pluck('id')->random();
     $roles = \App\Models\Role::pluck('id')->random();
     return [
         'user_id' => $users,
-        'department_id' => $departments,
+        'department_id' => $departmentId,
+        'organization_id' => $organizationId,
+        'project_id' => $projectId,
+        'division_id' => $divisionId,
         'role_id' => $roles,
         'group_id' => $groups,
         'permission_status' => $faker->numberBetween(0,1),

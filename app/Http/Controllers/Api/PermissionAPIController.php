@@ -14,7 +14,6 @@ use Response;
  * Class PermissionController
  * @package App\Http\Controllers\Api
  */
-
 class PermissionAPIController extends AppBaseController
 {
     /** @var  PermissionRepository */
@@ -175,6 +174,27 @@ class PermissionAPIController extends AppBaseController
      *          description="Permission that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Permission")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_id",
+     *          in="body",
+     *          description="Group that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Group")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="division_id",
+     *          in="body",
+     *          description="Group that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Group")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
+     *          description="Group that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Group")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -371,6 +391,27 @@ class PermissionAPIController extends AppBaseController
      *          description="Permission that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Permission")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_id",
+     *          in="body",
+     *          description="Group that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Group")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="division_id",
+     *          in="body",
+     *          description="Group that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Group")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
+     *          description="Group that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Group")
      *      ),
      *      @SWG\Response(
      *          response=200,

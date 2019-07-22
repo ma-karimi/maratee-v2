@@ -210,3 +210,5 @@ Route::resource('permissions', 'PermissionAPIController');
 Route::resource('tables', 'TableAPIController');
 
 Route::resource('groups', 'GroupAPIController');
+
+Route::resource('divisions', 'DivisionAPIController');

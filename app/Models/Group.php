@@ -63,6 +63,7 @@ class Group extends Model
     protected $casts =
         [
             'name' => 'json',
+            'description' => 'json',
             'owner_crud' => 'json',
             'same_level_crud' => 'json',
             'upper_level_crud' => 'json',
