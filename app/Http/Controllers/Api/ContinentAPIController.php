@@ -6,8 +6,10 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateContinentAPIRequest;
 use App\Http\Requests\Api\UpdateContinentAPIRequest;
 use App\Models\Continent;
+use App\Models\Province;
 use App\Repositories\ContinentRepository;
 use Illuminate\Http\Request;
+use PragmaRX\Countries\Package\Countries;
 use Response;
 
 /**
@@ -58,6 +60,13 @@ class ContinentAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+      //  $p=Province::where('name->en','LIKE',"%Ar%")->first();
+        $countries = new Countries();
+        $a=$countries->where('name.common', 'Iran')
+            ->first()->hydrateCities()
+            ->cities;
+        dd($a);
+
         $continents = $this->continentRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
