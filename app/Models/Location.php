@@ -102,7 +102,7 @@ class Location extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['name' => 'json', 'description' => 'json'];
+    protected $casts = ['name' => 'json', 'description' => 'json', 'region_name'=>'json', 'address'=>'json'];
 
 
     /**
@@ -112,21 +112,6 @@ class Location extends BaseModel
         'address_id.required'=>'آدرس الزامی است'
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function address(): BelongsTo
-    {
-        return $this->belongsTo(Address::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function region(): BelongsTo
-    {
-        return $this->belongsTo(Region::class);
-    }
 
     /**
      * @return HasMany

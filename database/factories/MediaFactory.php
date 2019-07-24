@@ -14,7 +14,7 @@ $factory->define(App\Models\Media::class, function (Faker $faker) {
     $products = \App\Models\Product::pluck('id')->toArray();
     $botanicals = \App\Models\Botanical::pluck('id')->toArray();
     return [
-        'name' => $faker->name,
+        'name' => make_json($faker->name),
         'format_type' => $faker->word,
         'date' => $faker->dateTimeBetween(),
         'user_id' => $faker->randomElement($users),

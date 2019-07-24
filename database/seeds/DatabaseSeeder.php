@@ -16,19 +16,12 @@ class DatabaseSeeder extends Seeder
         ini_set('max_execution_time', 3000);
         ini_set('memory_limit', '2000M');
         $this->call([
-            DivisionTableSeeder::class,
-            RoleTableSeeder::class,
-            GroupTableSeeder::class,
-            TableTableSeeder::class,
-            TransitionTableSeeder::class,
-            PermissionTableSeeder::class,
             UserTableSeeder::class,
             ContinentTableSeeder::class,
             CountryTableSeeder::class,
             ProvinceTableSeeder::class,
             CityTableSeeder::class,
             VillageTableSeeder::class,
-            AddressTableSeeder::class,
             ActionTableSeeder::class,
             AssessmentTableSeeder::class,
             AuthorTableSeeder::class,
@@ -42,7 +35,6 @@ class DatabaseSeeder extends Seeder
             EntryTableSeeder::class,
             GeologyAgeTableSeeder::class,
             IrrigationTableSeeder::class,
-            LanguageTableSeeder::class,
             LightingTableSeeder::class,
             MapTableSeeder::class,
             MedicineTableSeeder::class,
@@ -53,7 +45,6 @@ class DatabaseSeeder extends Seeder
             PlantGeneralTableSeeder::class,
             PlantologyTableSeeder::class,
             ProjectTableSeeder::class,
-            RegionTableSeeder::class,
             ReproductionTableSeeder::class,
             SoilTableSeeder::class,
             SoilFeatureTableSeeder::class,
@@ -104,11 +95,15 @@ class DatabaseSeeder extends Seeder
             SeedWeightTableSeeder::class,
             SeedHubSeeder::class,
             SeedMolecularTableSeeder::class,
-            SeedHasPlantTableSeeder::class,
             SoilHasSoilFeatureTableSeeder::class,
             TechnologyCollectionTableSeeder::class,
             VisitTableSeeder::class,
-
+            DivisionTableSeeder::class,
+            RoleTableSeeder::class,
+            GroupTableSeeder::class,
+            TableTableSeeder::class,
+            TransitionTableSeeder::class,
+            PermissionTableSeeder::class,
         ]);
         Model::reguard();
 

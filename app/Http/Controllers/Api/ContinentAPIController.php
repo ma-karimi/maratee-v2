@@ -80,15 +80,7 @@ class ContinentAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="name",
      *          in="body",
-     *          description="Constituent that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Constituent")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          description="Constituent that should be stored",
-     *          required=false,
      *          @SWG\Schema(ref="#/definitions/Constituent")
      *      ),
      *      @SWG\Response(
@@ -192,15 +184,7 @@ class ContinentAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="name",
      *          in="body",
-     *          description="Constituent that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Constituent")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          description="Constituent that should be stored",
-     *          required=false,
      *          @SWG\Schema(ref="#/definitions/Constituent")
      *      ),
      *      @SWG\Response(

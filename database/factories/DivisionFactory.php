@@ -6,10 +6,10 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Division::class, function (Faker $faker) {
 
-    $departmentIds= \App\Models\Department::pluck('id')->random();
+    $departments= \App\Models\Department::pluck('id')->toArray();
 
     return [
         'name' => make_json($faker->name),
-        'department_id' => $departmentIds,
+        'department_id' => $faker->randomElement($departments),
     ];
 });

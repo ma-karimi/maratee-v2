@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class ChangeLocationRelatedTable extends Migration
 {
@@ -19,15 +19,19 @@ class ChangeLocationRelatedTable extends Migration
             $table->unsignedInteger('village_id')->nullable();
             $table->dropForeign(['region_id']);
             $table->dropForeign(['address_id']);
-            $table->dropColumn('region_id');
+            $table->dropColumn('region_id', 'address_id');
         });
-        Schema::table('countries', function (Blueprint $table) {
-            $table->dropForeign(['continent_id']);
-        });
+        try {
+            Schema::table('countries', function (Blueprint $table) {
+                $table->dropForeign(['continent_id']);
+            });
+        } catch (Exception $e) {
+
+        }
         Schema::dropIfExists('continents');
         Schema::create('continents', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',256);
+            $table->string('name', 256);
         });
 
         Schema::dropIfExists('regions');
