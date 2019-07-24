@@ -11,7 +11,7 @@ $factory->define(App\Models\Location::class, function (Faker $faker) {
     return [
         'address_id' => $faker->randomElement($addresses),
         'region_id' => $faker->randomElement($regions),
-        'altitude' => $faker->randomNumber(),
+        'altitude' => $faker->numberBetween(1, 100),
         'point' => new Point($faker->randomFloat(null, 36.5988295, 37.65656), $faker->randomFloat(null, 56.565665, 58.656565)),
         'name' => make_json($faker->name),
         'description' => make_json($faker->text),

@@ -6,8 +6,8 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Chromosome::class, function (Faker $faker) {
     return [
-        'n_no' => $faker->randomNumber(),
-        '2n_no' => $faker->randomNumber(),
+        'n_no' => $faker->numberBetween(1, 100),
+        '2n_no' => $faker->numberBetween(1, 100),
         'notes' => $faker->word,
         'herbarium_id' => function () {
             return factory(App\Models\Herbarium::class)->create()->id;

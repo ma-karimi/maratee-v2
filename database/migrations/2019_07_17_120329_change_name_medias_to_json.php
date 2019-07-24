@@ -14,7 +14,7 @@ class ChangeNameMediasToJson extends Migration
     public function up()
     {
         Schema::table('medias', function (Blueprint $table) {
-            $table->json('name')->change();
+            $table->json('name')->nullable()->change();
         });
     }
 
@@ -26,7 +26,7 @@ class ChangeNameMediasToJson extends Migration
     public function down()
     {
         Schema::table('medias', function (Blueprint $table) {
-            $table->text('name')->change();
+            $table->text('name')->nullable()->change();
         });
     }
 }

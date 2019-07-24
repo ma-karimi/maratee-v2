@@ -9,6 +9,6 @@ $factory->define(App\Models\PlantFactor::class, function (Faker $faker) {
         'name' => make_json($faker->name),
         'description' => make_json($faker->text),
         'type' => $faker->randomKey(['part', 'usage_type', 'application', 'growth', 'industry', 'habitat', 'ecology', 'origin']),
-        'parent_id' => $faker->randomNumber(),
+        'parent_id' => $faker->numberBetween(1, 100),
     ];
 });

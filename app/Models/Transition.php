@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -124,6 +125,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Transition extends Model
 {
+
     /**
      * The "type" of the auto-incrementing ID.
      *
@@ -145,6 +147,7 @@ class Transition extends Model
             'next_value' => 'json',
             'description' => 'json',
         ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

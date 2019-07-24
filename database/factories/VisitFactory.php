@@ -13,7 +13,7 @@ $factory->define(App\Models\Visit::class, function (Faker $faker) {
         'date' => $faker->dateTimeBetween(),
         'description' => make_json($faker->text),
         'purpose' => make_json($faker->word),
-        'peoples' => $faker->randomNumber(),
+        'peoples' => $faker->numberBetween(1, 100),
         'archives_types' => $faker->word,
         'archive_no' => $faker->word,
         'paleontology_id' => $faker->randomElement($paleontologies),

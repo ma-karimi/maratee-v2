@@ -12,6 +12,6 @@ $factory->define(App\Models\Project::class, function (Faker $faker) {
         'plan_number' => make_json($faker->word),
         'approved_id' => $faker->word,
         'registered_id' => $faker->word,
-        'plan_id' => $faker->randomNumber(),
+        'plan_id' => $faker->numberBetween(1, 100),
     ];
 });

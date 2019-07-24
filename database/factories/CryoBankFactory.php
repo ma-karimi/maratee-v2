@@ -14,13 +14,13 @@ $factory->define(App\Models\CryoBank::class, function (Faker $faker) {
         'entry_date' => $faker->dateTimeBetween(),
         'sample_type' => $faker->word,
         'treatment' => make_json($faker->word),
-        'repetition' => $faker->randomNumber(),
+        'repetition' => $faker->numberBetween(1, 100),
         'tank_type' => make_json($faker->word),
-        'layering_no' => $faker->randomNumber(),
-        'tank_no' => $faker->randomNumber(),
-        'row_no' => $faker->randomNumber(),
+        'layering_no' => $faker->numberBetween(1, 100),
+        'tank_no' => $faker->numberBetween(1, 100),
+        'row_no' => $faker->numberBetween(1, 100),
         'rack_no' => $faker->word,
-        'cell_no' => $faker->randomNumber(),
+        'cell_no' => $faker->numberBetween(1, 100),
         'herbarium_id' => $faker->randomElement($herbariums),
     ];
 });

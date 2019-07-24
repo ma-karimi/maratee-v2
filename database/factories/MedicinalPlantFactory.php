@@ -15,7 +15,7 @@ $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
     $medias = \App\Models\Media::pluck('id')->toArray();
     return [
         'plant_origin_id' => $faker->randomElement($origins),
-        'code_no' => $faker->randomNumber(),
+        'code_no' => $faker->numberBetween(1, 100),
         'treatment' => make_json($faker->word),
         'vast_cultivation' => make_json($faker->word),
         'studied_sample' => make_json($faker->word),

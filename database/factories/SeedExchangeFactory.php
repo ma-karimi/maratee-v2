@@ -11,7 +11,7 @@ $factory->define(App\Models\SeedExchange::class, function (Faker $faker) {
         'seed_id' => $faker->randomElement($seeds),
         'collection_id' => $faker->randomElement($collections),
         'type' => $faker->word,
-        'weight' => $faker->randomNumber(),
+        'weight' => $faker->numberBetween(1, 100),
         'date' => $faker->dateTimeBetween(),
         'approval_no' => make_json($faker->word),
         'saved_type' =>make_json($faker->word),

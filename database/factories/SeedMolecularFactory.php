@@ -13,6 +13,6 @@ $factory->define(App\Models\SeedMolecular::class, function (Faker $faker) {
         'seed_id' => $faker->randomElement($seeds),
         'location_id' => $faker->randomElement($locations),
         'treatment' => make_json($faker->word),
-        'repeat' => $faker->randomNumber(),
+        'repeat' => $faker->numberBetween(1, 100),
     ];
 });

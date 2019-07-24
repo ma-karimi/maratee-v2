@@ -12,6 +12,6 @@ $factory->define(App\Models\MedicinalPlantConstituent::class, function (Faker $f
         'constituent_id' => function () {
             return factory(App\Models\Constituent::class)->create()->id;
         },
-        'value' => $faker->randomNumber(),
+        'value' => $faker->numberBetween(1, 100),
     ];
 });
