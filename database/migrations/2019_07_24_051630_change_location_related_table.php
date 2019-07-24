@@ -33,7 +33,6 @@ class ChangeLocationRelatedTable extends Migration
             $table->increments('id');
             $table->string('name', 256);
         });
-
         Schema::dropIfExists('regions');
         Schema::dropIfExists('addresses');
     }

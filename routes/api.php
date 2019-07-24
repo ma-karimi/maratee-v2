@@ -74,8 +74,6 @@ Route::resource('seeds', 'SeedAPIController');
 
 Route::resource('reproductions', 'ReproductionAPIController');
 
-Route::resource('regions', 'RegionAPIController');
-
 Route::resource('provinces', 'ProvinceAPIController');
 
 Route::resource('protections', 'ProtectionAPIController');
@@ -98,14 +96,9 @@ Route::resource('plants', 'PlantAPIController');
 
 Route::resource('organizations', 'OrganizationAPIController');
 
-
-
-
 Route::resource('actions', 'ActionAPIController');
 
 Route::resource('action_hubs', 'ActionHubAPIController');
-
-Route::resource('addresses', 'AddressAPIController');
 
 Route::resource('articles', 'ArticleAPIController');
 
@@ -128,7 +121,6 @@ Route::resource('botanical_garden_actions', 'BotanicalGardenActionAPIController'
 Route::resource('botanical_irrigations', 'BotanicalIrrigationAPIController');
 
 Route::resource('botanical_reproductions', 'BotanicalReproductionAPIController');
-
 
 Route::resource('chromosomes', 'ChromosomeAPIController');
 
@@ -165,7 +157,6 @@ Route::resource('herbarium_appendixes', 'HerbariumAppendixAPIController');
 Route::resource('irrigations', 'IrrigationAPIController');
 
 
-
 Route::resource('lightings', 'LightingAPIController');
 
 Route::resource('localities', 'LocalityAPIController');
@@ -196,7 +187,6 @@ Route::resource('paleontology_actions', 'PaleontologyActionAPIController');
 
 Route::resource('paleontology_citations', 'PaleontologyCitationAPIController');
 Route::resource('morphologies', 'MorphologyAPIController');
-
 
 
 Route::resource('chemicals', 'ChemicalAPIController');
