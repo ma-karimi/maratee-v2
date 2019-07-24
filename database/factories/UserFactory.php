@@ -9,7 +9,7 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'title' => make_json($faker->word),
         'education' => make_json($faker->word),
         'degree' => make_json($faker->word),
-        'national_id' => $faker->randomNumber(),
+        'national_id' => $faker->numberBetween(1, 100),
         'birthday' => $faker->dateTimeBetween(),
         'nationality' => make_json($faker->country),
         'passport_no' => $faker->word,
@@ -20,7 +20,7 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'mobile' => $faker->numberBetween('09100000000','09199999999'),
         'phone' => $faker->phoneNumber,
         'email' => $faker->safeEmail,
-        'work_experience' => $faker->randomNumber(),
+        'work_experience' => $faker->numberBetween(1, 100),
         'password' => 'admin@123',
         'deleted_at' => $faker->dateTimeBetween(),
     ];

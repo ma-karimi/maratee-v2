@@ -99,6 +99,13 @@ class RoleAPIController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Role")
      *      ),
+     *      @SWG\Parameter(
+     *          name="hierarchy",
+     *          in="body",
+     *          description="Group that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Group")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -217,6 +224,13 @@ class RoleAPIController extends AppBaseController
      *          description="Role that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Role")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="hierarchy",
+     *          in="body",
+     *          description="Group that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Group")
      *      ),
      *      @SWG\Response(
      *          response=200,

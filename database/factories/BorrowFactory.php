@@ -13,7 +13,7 @@ $factory->define(App\Models\Borrow::class, function (Faker $faker) {
         'herbarium_id' => $faker->randomElement($herbariums),
         'user_id' => $faker->randomElement($users),
         'borrows_date' => $faker->dateTimeBetween(),
-        'sheets_no' => $faker->randomNumber(),
+        'sheets_no' => $faker->numberBetween(1, 100),
         'deadline' => $faker->dateTimeBetween(),
         'return' => $faker->dateTimeBetween(),
         'media_id' => $faker->randomElement($medias),

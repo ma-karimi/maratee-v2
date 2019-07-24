@@ -26,7 +26,7 @@ $factory->define(App\Models\Botanical::class, function (Faker $faker) {
         'sensitivity_description' => make_json($faker->word),
         'notes' => make_json($faker->word),
         'planting' => $faker->dateTimeBetween(),
-        'scion_rooting_per' => $faker->randomNumber(),
+        'scion_rooting_per' => $faker->numberBetween(1, 100),
         'entry_type' => make_json($faker->word),
     ];
 });

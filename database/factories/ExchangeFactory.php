@@ -15,10 +15,10 @@ $factory->define(App\Models\Exchange::class, function (Faker $faker) {
         'receive_herbarium_id' => function () {
             return factory(App\Models\Herbarium::class)->create()->id;
         },
-        'send_sheet_no' => $faker->randomNumber(),
-        'send_sample_no' => $faker->randomNumber(),
-        'receive_sheet_no' => $faker->randomNumber(),
-        'receive_sample_no' => $faker->randomNumber(),
+        'send_sheet_no' => $faker->numberBetween(1, 100),
+        'send_sample_no' => $faker->numberBetween(1, 100),
+        'receive_sheet_no' => $faker->numberBetween(1, 100),
+        'receive_sample_no' => $faker->numberBetween(1, 100),
         'send_type' => $faker->word,
         'receive_type' => $faker->word,
         'send_paleontology_id' => function () {

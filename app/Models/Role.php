@@ -45,7 +45,8 @@ class Role extends Model
     protected $casts =
         [
             'name' => 'json',
-            'description' => 'json'
+            'description' => 'json',
+            'hierarchy' => 'json',
         ];
 
     /**

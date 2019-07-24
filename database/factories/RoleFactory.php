@@ -10,5 +10,6 @@ $factory->define(App\Models\Role::class, function (Faker $faker) {
         'name' => make_json($faker->name),
         'level' => $faker->numberBetween(0,1),
         'description' => make_json($faker->sentence),
+        'hierarchy' => make_json($faker->name),
     ];
 });

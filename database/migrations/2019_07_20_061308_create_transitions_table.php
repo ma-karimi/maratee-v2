@@ -17,7 +17,8 @@ class CreateTransitionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('table_name');
             $table->string('field_name');
-            $table->integer('table_id')->unsigned()->index();
+            $table->integer('tables_id')->unsigned()->index();
+            $table->integer('table_id');
             $table->integer('status');
             $table->integer('crud_type');
             $table->integer('creator_id')->unsigned()->index();

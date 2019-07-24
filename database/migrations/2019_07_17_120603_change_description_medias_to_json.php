@@ -14,7 +14,7 @@ class ChangeDescriptionMediasToJson extends Migration
     public function up()
     {
         Schema::table('medias', function (Blueprint $table) {
-            $table->json('description')->change();
+            $table->json('description')->nullable()->change();
         });
     }
 
@@ -26,7 +26,7 @@ class ChangeDescriptionMediasToJson extends Migration
     public function down()
     {
         Schema::table('medias', function (Blueprint $table) {
-            $table->text('description')->change();
+            $table->text('description')->nullable()->change();
         });
     }
 }

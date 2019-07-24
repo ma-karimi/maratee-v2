@@ -113,6 +113,13 @@ class GroupAPIController extends AppBaseController
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Group")
      *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="Group that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Group")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -240,7 +247,7 @@ class GroupAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Group")
      *      ),
      *      @SWG\Parameter(
-     *          name="lower_level_crud",
+     *          name="description",
      *          in="body",
      *          description="Group that should be stored",
      *          required=true,

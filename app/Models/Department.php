@@ -91,4 +91,11 @@ class Department extends BaseModel
     {
         return $this->hasMany(Permission::class);
     }
+    /**
+     * @return HasMany
+     */
+    public function divisions()
+    {
+        return $this->hasMany(Division::class);
+    }
 }
