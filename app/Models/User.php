@@ -5,9 +5,9 @@ namespace App\Models;
 use App\Models\Accessor\UserAccessor;
 use App\Models\Scope\UserScope;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * @SWG\Definition(
@@ -23,7 +23,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  *          property="title",
  *          description="title",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -35,14 +35,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  *          property="education",
  *          description="education",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="degree",
  *          description="degree",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -60,7 +60,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  *          property="nationality",
  *          description="nationality",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -72,21 +72,21 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  *          property="first_name",
  *          description="first_name",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="last_name",
  *          description="last_name",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="nickname",
  *          description="nickname",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -132,7 +132,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-    public static $rules=[
+    public static $rules = [
         'national_id' => 'string',
         'passport_no' => 'string',
         'birthday' => 'date',
@@ -144,7 +144,7 @@ class User extends Authenticatable
         'work_experience' => 'integer',
     ];
 
-    use HasApiTokens,UserScope,UserAccessor,Notifiable;
+    use HasApiTokens, UserScope, UserAccessor, Notifiable;
     /**
      * The database table used by the model.
      *
@@ -185,7 +185,7 @@ class User extends Authenticatable
     /**
      * Find the user instance for the given username.
      *
-     * @param  string $username
+     * @param string $username
      * @return \App\Models\User
      */
     public function findForPassport($username)
@@ -198,9 +198,16 @@ class User extends Authenticatable
         }
     }
 
+    /**
+     * @param $value
+     */
+    public function setPasswordAttribute($value): void
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 
     /**
-     * @return $this
+     * @return HasMany
      */
     public function visits()
     {

@@ -14,11 +14,9 @@ use Illuminate\Http\Request;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::post('/register', 'AuthController@register');
     Route::post('password/reset', 'AuthController@resetPassword');
 
     Route::group(['middleware' => ['auth:api']], function () {
-        Route::resource('continents', 'ContinentAPIController');
         Route::resource('treatments', 'TreatmentAPIController');
         Route::resource('paleontologies', 'PaleontologyAPIController');
         Route::apiResource('organizations', 'OrganizationAPIController');
@@ -32,13 +30,7 @@ Route::prefix('v1')->group(function () {
 });
 
 Route::resource('continents', 'ContinentAPIController');
-Route::resource('treatments', 'TreatmentAPIController');
-Route::resource('connections', 'ConnectionAPIController');
-Route::resource('departments', 'DepartmentAPIController');
-Route::resource('locations', 'LocationAPIController');
-Route::resource('organizations', 'OrganizationAPIController');
 
-Route::resource('paleontologies', 'PaleontologyAPIController');
 
 Route::resource('soil_features', 'SoilFeatureAPIController');
 
