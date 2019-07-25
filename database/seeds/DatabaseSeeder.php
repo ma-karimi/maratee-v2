@@ -56,7 +56,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LocationTableSeeder::class,
             LocalityTableSeeder::class,
-            HerbariumTableSeeder::class,
             SeedTableSeeder::class,
             AssessmentCollectionTableSeeder::class,
             ActionHubTableSeeder::class,
@@ -88,6 +87,7 @@ class DatabaseSeeder extends Seeder
             PlantApplicationTableSeeder::class,
             PlantingActionTableSeeder::class,
             PlantTableSeeder::class,
+            HerbariumTableSeeder::class,
             ProductTableSeeder::class,
             SeedChemicalTableSeeder::class,
             SeedExchangeTableSeeder::class,

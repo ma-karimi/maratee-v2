@@ -4,10 +4,11 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+
 /**
  * @SWG\Definition(
  *      definition="Herbarium",
- *      required={"location_id","organization_id"},
+ *      required={"location_id","organization_id", "plant_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -27,8 +28,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="phenology_id",
- *          description="phenology_id",
+ *          property="plantologies_phenology_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -39,8 +39,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="phytogeography_id",
- *          description="phytogeography_id",
+ *          property="plantologies_phytogeography_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -116,8 +115,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="plant_type_id",
- *          description="plant_type_id",
+ *          property="plantologies_type_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -128,8 +126,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="plant_group_id",
- *          description="plant_group_id",
+ *          property="plant_generals_group_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="plant_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -149,12 +151,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Herbarium extends BaseModel
 {
-    public static $rules=[
+    public static $rules = [
         'location_id' => 'required|exists:locations,id',
-        'protection_id' => 'required|exists:protections,id',
+        'protection_id' => 'exists:protections,id',
         'organization_id' => 'required|exists:organizations,id',
-        'phytogeography_id' => 'integer',
-        'phenology_id' => 'integer',
+        'plant_id' => 'required|exists:plants,id',
+        'plantologies_phytogeography_id' => 'exists:plantologies,id',
+        'plantologies_phenology_id' => 'exists:plantologies,id',
         'sheets_no' => 'integer',
         'samples_no' => 'integer',
         'tip_qt' => 'integer',
@@ -163,8 +166,8 @@ class Herbarium extends BaseModel
         'is_flowering' => 'integer',
         'herbarium_tip_location' => 'integer',
         'type_description' => 'string',
-        'plant_type_id' => 'integer',
-        'plant_group_id' => 'integer',
+        'plantologies_type_id' => 'exists:plantologies,id',
+        'plant_generals_group_id' => 'exists:plant_generals,id',
         'number' => 'integer',
 
     ];
@@ -180,7 +183,7 @@ class Herbarium extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'flowering', 'herbarium_tip_location', 'is_flowering', 'location_id', 'name', 'number', 'organization_description', 'organization_id', 'phenology_id', 'physical_tip_qt', 'phytogeography_id', 'plant_group_id', 'plant_type_id', 'protection_id', 'samples_no', 'sheets_no', 'tip_qt', 'tip_type', 'type_description', 'updated_at'];
+    protected $fillable = ['created_at', 'deleted_at', 'description', 'flowering', 'herbarium_tip_location', 'is_flowering', 'location_id', 'name', 'number', 'organization_description', 'organization_id', 'plantologies_phenology_id', 'physical_tip_qt', 'plantologies_phytogeography_id', 'plant_generals_group_id', 'plantologies_type_id', 'protection_id', 'samples_no', 'sheets_no', 'plant_id', 'tip_qt', 'tip_type', 'type_description', 'updated_at'];
 
 
     /**
@@ -300,6 +303,11 @@ class Herbarium extends BaseModel
     public function plantType()
     {
         return $this->belongsTo(Paleontology::class);
+    }
+
+    public function plant()
+    {
+        return $this->belongsTo(Plant::class);
     }
 
     public function plantGroup()

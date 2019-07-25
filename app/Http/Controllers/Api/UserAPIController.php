@@ -342,7 +342,7 @@ class UserAPIController extends AppBaseController
         /** @var User $user */
         $user = $this->userRepository->find($id);
 
-        if (empty($user)) {
+        if ($user === null) {
             return $this->sendError('User not found');
         }
 
@@ -484,7 +484,7 @@ class UserAPIController extends AppBaseController
         /** @var User $user */
         $user = $this->userRepository->find($id);
 
-        if (empty($user)) {
+        if ($user === null) {
             return $this->sendError('User not found');
         }
 
@@ -537,7 +537,7 @@ class UserAPIController extends AppBaseController
         /** @var User $user */
         $user = $this->userRepository->find($id);
 
-        if (empty($user)) {
+        if ($user === null) {
             return $this->sendError('User not found');
         }
 
