@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @SWG\Definition(
  *      definition="Location",
- *      required={"address_id","name"},
+ *      required={"address","name", "city_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -17,16 +17,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="address_id",
- *          description="address_id",
- *          type="integer",
- *          format="int32"
+ *          property="address",
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="region_id",
- *          description="region_id",
- *          type="integer",
- *          format="int32"
+ *          property="region_name",
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="altitude",
@@ -72,9 +70,9 @@ class Location extends BaseModel
     use SpatialTrait;
 
     public static $rules=[
-        'address_id' => 'required|exists:addresses,id',
-        'region_id' => 'exists:regions,id',
-        'altitude' => 'integer'
+        'city_id' => 'required|exists:cities,id',
+        'village_id' => 'exists:villages,id',
+        'altitude' => 'numeric'
     ];
     /**
      * The database table used by the model.
@@ -95,7 +93,7 @@ class Location extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['address_id', 'altitude', 'created_at', 'deleted_at', 'description', 'name', 'point', 'region_id', 'updated_at'];
+    protected $fillable = ['address', 'altitude', 'created_at', 'deleted_at', 'description', 'name', 'point', 'region_name', 'updated_at'];
 
     /**
      * The attributes that should be casted to native types.
@@ -103,14 +101,6 @@ class Location extends BaseModel
      * @var array
      */
     protected $casts = ['name' => 'json', 'description' => 'json', 'region_name'=>'json', 'address'=>'json'];
-
-
-    /**
-     * @var array
-     */
-    public static $messages = [
-        'address_id.required'=>'آدرس الزامی است'
-    ];
 
 
     /**
@@ -215,5 +205,13 @@ class Location extends BaseModel
     public function seedMoleculars(): HasMany
     {
         return $this->hasMany(SeedMolecular::class)->latest();
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function village(): BelongsTo
+    {
+        return $this->belongsTo(Village::class);
     }
 }

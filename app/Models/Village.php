@@ -62,9 +62,9 @@ class Village extends BaseModel
         'name' => 'json',
     ];
 
-    public function addresses()
+    public function locations()
     {
-        return $this->hasMany(Address::class)->latest();
+        return $this->hasMany(Location::class)->latest();
     }
 
 }
