@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\UserRequest;
 use App\Notifications\ResetPassword;
 use App\Services\UserServices;
 use App\Utility;
+use Exception;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\JsonResponse;
 
 /**
  * @property UserServices userServices
  */
-class AuthController extends Controller
+class AuthController extends AppBaseController
 {
     use AuthenticatesUsers;
 
@@ -24,52 +25,26 @@ class AuthController extends Controller
 
     /**
      * @param UserRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function register(UserRequest $request)
-    {
-        $success = [];
-        try {
-
-            DB::beginTransaction();
-            $user = $this->userServices->create($request);
-            $success['token'] = $user->createToken('Laravel Password Grant Client')->accessToken;
-            $success['user'] = $user->toArray();
-
-            $this->userServices->assignDepartmentAndLocation($user->id, $request);
-            DB::commit();
-            return $this->responser($success);
-        } catch (\Exception $exception) {
-            DB::rollBack();
-            report($exception);
-            return response()->json([[], 'وارد کردن مکان و دپارتمان الزامی است']);
-        }
-    }
-
-    /**
-     * @param UserRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function resetPassword(UserRequest $request)
     {
         $user = $this->userServices->findByEmail($request->email);
         if (!$user) {
-            return $this->responser('کاربری با این ایمیل یافت نشد');
-        } else {
-            try{
+            return $this->sendError('User not found');
+        }
+
+        try {
             $newPassword = Utility::randomStringGenerator(6);
             $this->userServices->updateUserWithNewPassword($user, $newPassword);
             $user->notify(new ResetPassword($newPassword));
-            return $this->responser('ایمیل حاوی رمز عبور جدید ارسال شد');
-            }catch(\Exception $exception)
-            {
-                return $this->responser($exception);
-            }
-
+            return $this->sendResponse($user, 'The Password reset token and sent to Email');
+        } catch (Exception $exception) {
+            report($exception);
+            return $this->sendError($exception->getMessage());
         }
 
     }
-
 
 
 }
