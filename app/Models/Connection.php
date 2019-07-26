@@ -8,10 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @SWG\Definition(
  *            definition="Connection",
- *            required={"department_id", "user_id"},
+ *            required={"location_id", "user_id"},
  * 			@SWG\Property(property="id", type="integer"),
  * 			@SWG\Property(property="location_id", type="integer"),
- * 			@SWG\Property(property="department_id", type="integer"),
  * 			@SWG\Property(property="user_id", type="integer"),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
@@ -23,7 +22,6 @@ class Connection extends BaseModel
 
     public static $rules = [
         'location_id' => 'required|exists:locations,id',
-        'department_id' => 'required|exists:departments,id',
         'user_id' => 'required|exists:users,id'
     ];
     /**
