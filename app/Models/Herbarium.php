@@ -312,7 +312,7 @@ class Herbarium extends BaseModel
 
     public function plantGroup()
     {
-        return $this->belongsTo(PlantGeneral::class);
+        return $this->belongsTo(General::class);
     }
 
     public function phytogeography()

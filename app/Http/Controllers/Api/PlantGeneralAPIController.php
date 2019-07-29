@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\CreatePlantGeneralAPIRequest;
 use App\Http\Requests\Api\UpdatePlantGeneralAPIRequest;
-use App\Models\PlantGeneral;
+use App\Models\General;
 use App\Repositories\PlantGeneralRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -176,7 +176,7 @@ class PlantGeneralAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var PlantGeneral $PlantGeneral */
+        /** @var General $PlantGeneral */
         $PlantGeneral = $this->PlantGeneralRepository->find($id);
 
         if (empty($PlantGeneral)) {
@@ -257,7 +257,7 @@ class PlantGeneralAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var PlantGeneral $PlantGeneral */
+        /** @var General $PlantGeneral */
         $PlantGeneral = $this->PlantGeneralRepository->find($id);
 
         if (empty($PlantGeneral)) {
@@ -310,7 +310,7 @@ class PlantGeneralAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var PlantGeneral $PlantGeneral */
+        /** @var General $PlantGeneral */
         $PlantGeneral = $this->PlantGeneralRepository->find($id);
 
         if (empty($PlantGeneral)) {

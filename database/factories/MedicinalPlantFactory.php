@@ -2,11 +2,11 @@
 
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
-use App\Models\PlantFactor;
+use App\Models\General;
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
-    $origins = \App\Models\PlantFactor::whereType('origin')->pluck('id')->toArray();
+    $origins = \App\Models\General::whereType('origin')->pluck('id')->toArray();
     $herbariums = \App\Models\Herbarium::pluck('id')->toArray();
     $locations = \App\Models\Location::pluck('id')->toArray();
     $methods = \App\Models\Method::pluck('id')->toArray();

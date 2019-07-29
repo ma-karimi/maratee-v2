@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\PlantGeneral;
+use App\Models\General;
 
 /**
  * Class PlantGeneralRepository
@@ -16,7 +16,7 @@ class PlantGeneralRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**
@@ -34,6 +34,6 @@ class PlantGeneralRepository extends BaseRepository
      **/
     public function model()
     {
-        return PlantGeneral::class;
+        return General::class;
     }
 }

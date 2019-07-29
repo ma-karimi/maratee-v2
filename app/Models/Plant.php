@@ -221,7 +221,7 @@ class Plant extends BaseModel
      */
     public function plantGeneral(): BelongsTo
     {
-        return $this->belongsTo(PlantGeneral::class,
+        return $this->belongsTo(General::class,
             [
                 'plant_general_class_id',
                 'plant_general_family_id',

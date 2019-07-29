@@ -18,9 +18,9 @@ class CreateHerbariumsTable extends Migration {
 			$table->integer('number')->nullable()->comment('herbarium number
 ');
 			$table->unsignedInteger('location_id');
-			$table->unsignedInteger('phenology_id')->nullable();
+			$table->unsignedInteger('general_phenology_id')->nullable();
 			$table->unsignedInteger('protection_id')->nullable();
-			$table->unsignedInteger('phytogeography_id')->nullable();
+			$table->unsignedInteger('general_phytogeography_id')->nullable();
 			$table->unsignedInteger('organization_id');
 			$table->integer('sheets_no')->nullable()->comment('Number of required sheets per herbarium sample');
 			$table->integer('samples_no')->nullable()->comment('Quantity of samples of each herbarium number
@@ -48,9 +48,9 @@ that is an herbarium organization which we can but its id in this place');
 			$table->string('type_description', 45)->nullable()->comment('plant type description
 
 ');
-			$table->unsignedInteger('plant_type_id')->nullable();
+			$table->unsignedInteger('general_type_id')->nullable();
 			$table->json('flowering')->nullable();
-			$table->unsignedInteger('plant_group_id')->nullable();
+			$table->unsignedInteger('general_group_id')->nullable();
 
 
             $table->timeStampsTz();
