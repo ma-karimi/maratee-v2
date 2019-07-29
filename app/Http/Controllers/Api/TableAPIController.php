@@ -25,38 +25,7 @@ class TableAPIController extends AppBaseController
         $this->tableRepository = $tableRepo;
     }
 
-    /**
-     * @param Request $request
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/roles",
-     *      summary="Get a listing of the Tables.",
-     *      tags={"Table"},
-     *      description="Get all Tables",
-     *      produces={"application/json"},
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/Table")
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
+
     public function index(Request $request)
     {
         $tables = $this->tableRepository->all(
@@ -68,58 +37,7 @@ class TableAPIController extends AppBaseController
         return $this->sendResponse($tables->toArray(), 'Tables retrieved successfully');
     }
 
-    /**
-     * @param CreateTableAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/roles",
-     *      summary="Store a newly created Table in storage",
-     *      tags={"Table"},
-     *      description="Store Table",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="name",
-     *          in="body",
-     *          description="Table that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Table")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          description="Table that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Table")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="level",
-     *          in="body",
-     *          description="Table that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Table")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Table"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
+
     public function store(CreateTableAPIRequest $request)
     {
         $input = $request->all();
@@ -129,44 +47,6 @@ class TableAPIController extends AppBaseController
         return $this->sendResponse($table->toArray(), 'Table saved successfully');
     }
 
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/roles/{id}",
-     *      summary="Display the specified Table",
-     *      tags={"Table"},
-     *      description="Get Table",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Table",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Table"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
     public function show($id)
     {
         /** @var Table $table */
@@ -179,66 +59,7 @@ class TableAPIController extends AppBaseController
         return $this->sendResponse($table->toArray(), 'Table retrieved successfully');
     }
 
-    /**
-     * @param int $id
-     * @param UpdateTableAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Put(
-     *      path="/tables/{id}",
-     *      summary="Update the specified Table in storage",
-     *      tags={"Table"},
-     *      description="Update Table",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Table",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="name",
-     *          in="body",
-     *          description="Table that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Table")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          description="Table that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Table")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="level",
-     *          in="body",
-     *          description="Table that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Table")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Table"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
+
     public function update($id, UpdateTableAPIRequest $request)
     {
         $input = $request->all();

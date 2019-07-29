@@ -4,7 +4,7 @@
         "title": "Laravel Generator APIs",
         "version": "1.0.0"
     },
-    "basePath": "/api/v1",
+    "basePath": "/api",
     "paths": {
         "/actions": {
             "get": {
@@ -532,241 +532,6 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of ActionHub",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/addresses": {
-            "get": {
-                "tags": [
-                    "Address"
-                ],
-                "summary": "Get a listing of the Addresses.",
-                "description": "Get all Addresses",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/Address"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Address"
-                ],
-                "summary": "Store a newly created Address in storage",
-                "description": "Store Address",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "address",
-                        "in": "body",
-                        "description": "Address that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Address"
-                        }
-                    },
-                    {
-                        "name": "city_id",
-                        "in": "body",
-                        "description": "Address that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Address"
-                        }
-                    },
-                    {
-                        "name": "village_id",
-                        "in": "body",
-                        "description": "Address that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Address"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Address"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/addresses/{id}": {
-            "get": {
-                "tags": [
-                    "Address"
-                ],
-                "summary": "Display the specified Address",
-                "description": "Get Address",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Address",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Address"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Address"
-                ],
-                "summary": "Update the specified Address in storage",
-                "description": "Update Address",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Address",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "address",
-                        "in": "body",
-                        "description": "Address that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Address"
-                        }
-                    },
-                    {
-                        "name": "city_id",
-                        "in": "body",
-                        "description": "Address that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Address"
-                        }
-                    },
-                    {
-                        "name": "village_id",
-                        "in": "body",
-                        "description": "Address that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Address"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Address"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Address"
-                ],
-                "summary": "Remove the specified Address from storage",
-                "description": "Delete Address",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Address",
                         "required": true,
                         "type": "integer"
                     }
@@ -5632,17 +5397,7 @@
                     {
                         "name": "name",
                         "in": "body",
-                        "description": "Constituent that should be stored",
                         "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Constituent"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Constituent that should be stored",
-                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/Constituent"
                         }
@@ -5728,17 +5483,7 @@
                     {
                         "name": "name",
                         "in": "body",
-                        "description": "Constituent that should be stored",
                         "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Constituent"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Constituent that should be stored",
-                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/Constituent"
                         }
@@ -7071,6 +6816,205 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of Department",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/divisions": {
+            "get": {
+                "tags": [
+                    "Division"
+                ],
+                "summary": "Get a listing of the Divisions.",
+                "description": "Get all Divisions",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Division"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Division"
+                ],
+                "summary": "Store a newly created Division in storage",
+                "description": "Store Division",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Division that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Division"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Division"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/divisions/{id}": {
+            "get": {
+                "tags": [
+                    "Division"
+                ],
+                "summary": "Display the specified Division",
+                "description": "Get Division",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Division",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Division"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Division"
+                ],
+                "summary": "Update the specified Division in storage",
+                "description": "Update Division",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Division",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Division that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Division"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Division"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Division"
+                ],
+                "summary": "Remove the specified Division from storage",
+                "description": "Delete Division",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Division",
                         "required": true,
                         "type": "integer"
                     }
@@ -8797,6 +8741,286 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of Geramin",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/groups": {
+            "get": {
+                "tags": [
+                    "Group"
+                ],
+                "summary": "Get a listing of the Groups.",
+                "description": "Get all Groups",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Group"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Group"
+                ],
+                "summary": "Store a newly created Group in storage",
+                "description": "Store Group",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    },
+                    {
+                        "name": "owner_crud",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    },
+                    {
+                        "name": "same_level_crud",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    },
+                    {
+                        "name": "upper_level_crud",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    },
+                    {
+                        "name": "lower_level_crud",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Group"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/groups/{id}": {
+            "get": {
+                "tags": [
+                    "Group"
+                ],
+                "summary": "Display the specified Group",
+                "description": "Get Group",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Group",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Group"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Group"
+                ],
+                "summary": "Update the specified Group in storage",
+                "description": "Update Group",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Group",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    },
+                    {
+                        "name": "owner_crud",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    },
+                    {
+                        "name": "same_level_crud",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    },
+                    {
+                        "name": "upper_level_crud",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Group"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Group"
+                ],
+                "summary": "Remove the specified Group from storage",
+                "description": "Delete Group",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Group",
                         "required": true,
                         "type": "integer"
                     }
@@ -15409,6 +15633,493 @@
                 }
             }
         },
+        "/permissions": {
+            "get": {
+                "tags": [
+                    "Permission"
+                ],
+                "summary": "Get a listing of the Permissions.",
+                "description": "Get all Permissions",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Permission"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Permission"
+                ],
+                "summary": "Store a newly created Permission in storage",
+                "description": "Store Permission",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "department_id",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "group_id",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "role_id",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "requester_id",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "responser_id",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "permission_status",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "request_date",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "approval_date",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "expire_date",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "owner_crud",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "same_level_crud",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "upper_level_crud",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "lower_level_crud",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "organization_id",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    },
+                    {
+                        "name": "division_id",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    },
+                    {
+                        "name": "project_id",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Permission"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/permissions/{id}": {
+            "get": {
+                "tags": [
+                    "Permission"
+                ],
+                "summary": "Display the specified Permission",
+                "description": "Get Permission",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Permission",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Permission"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Permission"
+                ],
+                "summary": "Update the specified Permission in storage",
+                "description": "Update Permission",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Permission",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "department_id",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "group_id",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "role_id",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "requester_id",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "responser_id",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "permission_status",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "request_date",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "approval_date",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "expire_date",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "owner_crud",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "same_level_crud",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "upper_level_crud",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "lower_level_crud",
+                        "in": "body",
+                        "description": "Permission that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Permission"
+                        }
+                    },
+                    {
+                        "name": "organization_id",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    },
+                    {
+                        "name": "division_id",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    },
+                    {
+                        "name": "project_id",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Permission"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Permission"
+                ],
+                "summary": "Remove the specified Permission from storage",
+                "description": "Delete Permission",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Permission",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/plants": {
             "get": {
                 "tags": [
@@ -18164,223 +18875,6 @@
                 }
             }
         },
-        "/regions": {
-            "get": {
-                "tags": [
-                    "Region"
-                ],
-                "summary": "Get a listing of the Regions.",
-                "description": "Get all Regions",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/Region"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Region"
-                ],
-                "summary": "Store a newly created Region in storage",
-                "description": "Store Region",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "Reproduction that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Reproduction"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Reproduction that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Reproduction"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Region"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/regions/{id}": {
-            "get": {
-                "tags": [
-                    "Region"
-                ],
-                "summary": "Display the specified Region",
-                "description": "Get Region",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Region",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Region"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Region"
-                ],
-                "summary": "Update the specified Region in storage",
-                "description": "Update Region",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Region",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "Reproduction that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Reproduction"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Reproduction that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Reproduction"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Region"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Region"
-                ],
-                "summary": "Remove the specified Region from storage",
-                "description": "Delete Region",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Region",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
         "/reproductions": {
             "get": {
                 "tags": [
@@ -18573,6 +19067,259 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of Reproduction",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/roles": {
+            "get": {
+                "tags": [
+                    "Role"
+                ],
+                "summary": "Get a listing of the Roles.",
+                "description": "Get all Roles",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Role"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Role"
+                ],
+                "summary": "Store a newly created Role in storage",
+                "description": "Store Role",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "Role that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Role"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Role that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Role"
+                        }
+                    },
+                    {
+                        "name": "level",
+                        "in": "body",
+                        "description": "Role that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Role"
+                        }
+                    },
+                    {
+                        "name": "hierarchy",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Role"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/roles/{id}": {
+            "get": {
+                "tags": [
+                    "Role"
+                ],
+                "summary": "Display the specified Role",
+                "description": "Get Role",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Role",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Role"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Role"
+                ],
+                "summary": "Update the specified Role in storage",
+                "description": "Update Role",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Role",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "Role that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Role"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Role that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Role"
+                        }
+                    },
+                    {
+                        "name": "level",
+                        "in": "body",
+                        "description": "Role that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Role"
+                        }
+                    },
+                    {
+                        "name": "hierarchy",
+                        "in": "body",
+                        "description": "Group that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Role"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Role"
+                ],
+                "summary": "Remove the specified Role from storage",
+                "description": "Delete Role",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Role",
                         "required": true,
                         "type": "integer"
                     }
@@ -22389,6 +23136,46 @@
                 }
             }
         },
+        "/tables/{id}": {
+            "delete": {
+                "tags": [
+                    "Table"
+                ],
+                "summary": "Remove the specified Table from storage",
+                "description": "Delete Table",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Table",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/technologyCollections": {
             "get": {
                 "tags": [
@@ -22592,6 +23379,475 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of TechnologyCollection",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/transitions": {
+            "get": {
+                "tags": [
+                    "Transition"
+                ],
+                "summary": "Get a listing of the Transitions.",
+                "description": "Get all Transitions",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Transition"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Transition"
+                ],
+                "summary": "Store a newly created Transition in storage",
+                "description": "Store Transition",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "table_name",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "field_name",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "table_id",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "crud_type",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "creator_id",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "requester_id",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "changer_id",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "responser_id",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "request_date",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "change_date",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "response_date",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "request_status",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "previous_value",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "next_value",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Transition"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/transitions/{id}": {
+            "get": {
+                "tags": [
+                    "Transition"
+                ],
+                "summary": "Display the specified Transition",
+                "description": "Get Transition",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Transition",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Transition"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Transition"
+                ],
+                "summary": "Update the specified Transition in storage",
+                "description": "Update Transition",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Transition",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "table_name",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "field_name",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "table_id",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "crud_type",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "creator_id",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "requester_id",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "changer_id",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "responser_id",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "request_date",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "change_date",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "response_date",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "request_status",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "previous_value",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "next_value",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Transition that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transition"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Transition"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Transition"
+                ],
+                "summary": "Remove the specified Transition from storage",
+                "description": "Delete Transition",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Transition",
                         "required": true,
                         "type": "integer"
                     }
@@ -22891,7 +24147,6 @@
                     {
                         "name": "title",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -22900,7 +24155,6 @@
                     {
                         "name": "email",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -22909,7 +24163,6 @@
                     {
                         "name": "first_name",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -22918,7 +24171,6 @@
                     {
                         "name": "last_name",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -22927,7 +24179,6 @@
                     {
                         "name": "password",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -22936,7 +24187,6 @@
                     {
                         "name": "education",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -22945,7 +24195,6 @@
                     {
                         "name": "degree",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -22954,7 +24203,6 @@
                     {
                         "name": "national_id",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -22963,7 +24211,6 @@
                     {
                         "name": "birthday",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -22972,7 +24219,6 @@
                     {
                         "name": "nationality",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -22981,7 +24227,6 @@
                     {
                         "name": "passport_no",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -22990,7 +24235,6 @@
                     {
                         "name": "nickname",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -22999,7 +24243,6 @@
                     {
                         "name": "is_author",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23008,7 +24251,6 @@
                     {
                         "name": "mobile",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23017,7 +24259,6 @@
                     {
                         "name": "phone",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23026,7 +24267,6 @@
                     {
                         "name": "work_experience",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23075,7 +24315,6 @@
                     {
                         "name": "title",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23084,7 +24323,6 @@
                     {
                         "name": "email",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23093,7 +24331,6 @@
                     {
                         "name": "first_name",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23102,7 +24339,6 @@
                     {
                         "name": "last_name",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23111,7 +24347,6 @@
                     {
                         "name": "password",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23120,7 +24355,6 @@
                     {
                         "name": "education",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23129,7 +24363,6 @@
                     {
                         "name": "degree",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23138,7 +24371,6 @@
                     {
                         "name": "national_id",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23147,7 +24379,6 @@
                     {
                         "name": "birthday",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23156,7 +24387,6 @@
                     {
                         "name": "nationality",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23165,7 +24395,6 @@
                     {
                         "name": "passport_no",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23174,7 +24403,6 @@
                     {
                         "name": "nickname",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23183,7 +24411,6 @@
                     {
                         "name": "is_author",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23192,7 +24419,6 @@
                     {
                         "name": "mobile",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23201,7 +24427,6 @@
                     {
                         "name": "phone",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23210,7 +24435,6 @@
                     {
                         "name": "work_experience",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23250,7 +24474,6 @@
                     {
                         "name": "title",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23259,7 +24482,6 @@
                     {
                         "name": "email",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23268,7 +24490,6 @@
                     {
                         "name": "first_name",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23277,7 +24498,6 @@
                     {
                         "name": "last_name",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23286,7 +24506,6 @@
                     {
                         "name": "password",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23295,7 +24514,6 @@
                     {
                         "name": "education",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23304,7 +24522,6 @@
                     {
                         "name": "degree",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23313,7 +24530,6 @@
                     {
                         "name": "national_id",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23322,7 +24538,6 @@
                     {
                         "name": "birthday",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23331,7 +24546,6 @@
                     {
                         "name": "nationality",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23340,7 +24554,6 @@
                     {
                         "name": "passport_no",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23349,7 +24562,6 @@
                     {
                         "name": "nickname",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23358,7 +24570,6 @@
                     {
                         "name": "is_author",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23367,7 +24578,6 @@
                     {
                         "name": "mobile",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23376,7 +24586,6 @@
                     {
                         "name": "phone",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -23385,7 +24594,6 @@
                     {
                         "name": "work_experience",
                         "in": "body",
-                        "description": "User that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/User"
@@ -24100,46 +25308,6 @@
                     "description": "date",
                     "type": "string",
                     "format": "date"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
-        },
-        "Address": {
-            "required": [
-                "city_id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "address": {
-                    "description": "address",
-                    "type": "array",
-                    "format": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "city_id": {
-                    "description": "city_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "village_id": {
-                    "description": "village_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
                 },
                 "updated_at": {
                     "description": "updated_at",
@@ -24878,7 +26046,7 @@
         },
         "Connection": {
             "required": [
-                "department_id",
+                "location_id",
                 "user_id"
             ],
             "properties": {
@@ -24886,9 +26054,6 @@
                     "type": "integer"
                 },
                 "location_id": {
-                    "type": "integer"
-                },
-                "department_id": {
                     "type": "integer"
                 },
                 "user_id": {
@@ -24939,18 +26104,6 @@
                     "type": "integer"
                 },
                 "name": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "parent_id": {
-                    "type": "integer"
-                },
-                "created_at": {
-                    "type": "string"
-                },
-                "updated_at": {
                     "type": "string"
                 }
             }
@@ -25143,6 +26296,32 @@
                 },
                 "updated_at": {
                     "type": "string"
+                }
+            }
+        },
+        "Division": {
+            "required": [
+                "name",
+                "department_id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "array",
+                    "format": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "department_id": {
+                    "description": "department_id",
+                    "type": "integer",
+                    "format": "int32"
                 }
             }
         },
@@ -25437,10 +26616,67 @@
                 }
             }
         },
+        "Group": {
+            "required": [
+                "name",
+                "owner_crud",
+                "same_level_crud",
+                "upper_level_crud",
+                "lower_level_crud"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "array",
+                    "format": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "owner_crud": {
+                    "description": "owner_crud",
+                    "type": "array",
+                    "format": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "same_level_crud": {
+                    "description": "same_level_crud",
+                    "type": "array",
+                    "format": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "upper_level_crud": {
+                    "description": "upper_level_crud",
+                    "type": "array",
+                    "format": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "lower_level_crud": {
+                    "description": "lower_level_crud",
+                    "type": "array",
+                    "format": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
         "Herbarium": {
             "required": [
                 "location_id",
-                "organization_id"
+                "organization_id",
+                "plant_id"
             ],
             "properties": {
                 "id": {
@@ -25458,8 +26694,7 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "phenology_id": {
-                    "description": "phenology_id",
+                "plantologies_phenology_id": {
                     "type": "integer",
                     "format": "int32"
                 },
@@ -25468,8 +26703,7 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "phytogeography_id": {
-                    "description": "phytogeography_id",
+                "plantologies_phytogeography_id": {
                     "type": "integer",
                     "format": "int32"
                 },
@@ -25540,8 +26774,7 @@
                         "type": "string"
                     }
                 },
-                "plant_type_id": {
-                    "description": "plant_type_id",
+                "plantologies_type_id": {
                     "type": "integer",
                     "format": "int32"
                 },
@@ -25552,8 +26785,11 @@
                         "type": "string"
                     }
                 },
-                "plant_group_id": {
-                    "description": "plant_group_id",
+                "plant_generals_group_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "plant_id": {
                     "type": "integer",
                     "format": "int32"
                 },
@@ -25761,8 +26997,9 @@
         },
         "Location": {
             "required": [
-                "address_id",
-                "name"
+                "address",
+                "name",
+                "city_id"
             ],
             "properties": {
                 "id": {
@@ -25770,15 +27007,17 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "address_id": {
-                    "description": "address_id",
-                    "type": "integer",
-                    "format": "int32"
+                "address": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
-                "region_id": {
-                    "description": "region_id",
-                    "type": "integer",
-                    "format": "int32"
+                "region_name": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "altitude": {
                     "description": "altitude",
@@ -26793,6 +28032,113 @@
                 }
             }
         },
+        "Permission": {
+            "required": [
+                "user_id",
+                "department_id",
+                "group_id",
+                "role_id",
+                "requester_id",
+                "responser_id",
+                "permission_status",
+                "request_date",
+                "approval_date",
+                "expire_date",
+                "owner_crud",
+                "same_level_crud",
+                "upper_level_crud",
+                "lower_level_crud"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "description": "user_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "department_id": {
+                    "description": "department_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "group_id": {
+                    "description": "group_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "role_id": {
+                    "description": "role_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "requester_id": {
+                    "description": "requester_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "responser_id": {
+                    "description": "responser_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "permission_status": {
+                    "description": "permission_status",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "request_date": {
+                    "description": "request_date",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "approval_date": {
+                    "description": "approval_date",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "expire_date": {
+                    "description": "expire_date",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "owner_crud": {
+                    "description": "owner_crud",
+                    "type": "array",
+                    "format": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "same_level_crud": {
+                    "description": "same_level_crud",
+                    "type": "array",
+                    "format": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "upper_level_crud": {
+                    "description": "upper_level_crud",
+                    "type": "array",
+                    "format": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "lower_level_crud": {
+                    "description": "lower_level_crud",
+                    "type": "array",
+                    "format": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
         "Plant": {
             "required": [
                 "name",
@@ -27320,7 +28666,7 @@
                 }
             }
         },
-        "Region": {
+        "Reproduction": {
             "required": [
                 "name"
             ],
@@ -27356,9 +28702,11 @@
                 }
             }
         },
-        "Reproduction": {
+        "Role": {
             "required": [
-                "name"
+                "name",
+                "level",
+                "description"
             ],
             "properties": {
                 "id": {
@@ -27369,26 +28717,23 @@
                 "name": {
                     "description": "name",
                     "type": "array",
+                    "format": "array",
                     "items": {
                         "type": "string"
                     }
+                },
+                "level": {
+                    "description": "level",
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "description": {
                     "description": "description",
                     "type": "array",
+                    "format": "array",
                     "items": {
                         "type": "string"
                     }
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
                 }
             }
         },
@@ -28214,6 +29559,68 @@
                 }
             }
         },
+        "Table": {
+            "required": [
+                "table_name",
+                "department_id",
+                "ownership",
+                "create",
+                "read",
+                "write",
+                "delete",
+                "copy"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "table_name": {
+                    "description": "table_name",
+                    "type": "string",
+                    "format": "string",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "department_id": {
+                    "description": "department_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "ownership": {
+                    "description": "ownership",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "create": {
+                    "description": "create",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "read": {
+                    "description": "read",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "write": {
+                    "description": "write",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "delete": {
+                    "description": "delete",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "copy": {
+                    "description": "copy",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
         "TechnologyCollection": {
             "required": [
                 "name",
@@ -28244,6 +29651,130 @@
                     "description": "updated_at",
                     "type": "string",
                     "format": "date-time"
+                }
+            }
+        },
+        "Transition": {
+            "required": [
+                "table_name",
+                "field_name",
+                "table_id",
+                "status",
+                "crud_type",
+                "creator_id",
+                "requester_id",
+                "changer_id",
+                "responser_id",
+                "request_date",
+                "change_date",
+                "response_date",
+                "request_status",
+                "previous_value",
+                "next_value",
+                "description"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "table_name": {
+                    "description": "table_name",
+                    "type": "string",
+                    "format": "string",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "field_name": {
+                    "description": "field_name",
+                    "type": "string",
+                    "format": "string"
+                },
+                "table_id": {
+                    "description": "table_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "tables_id": {
+                    "description": "tables_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "status": {
+                    "description": "status",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "crud_type": {
+                    "description": "crud_type",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "creator_id": {
+                    "description": "creator_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "requester_id": {
+                    "description": "requester_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "changer_id": {
+                    "description": "changer_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "responser_id": {
+                    "description": "responser_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "request_date": {
+                    "description": "request_date",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "change_date": {
+                    "description": "change_date",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "response_date": {
+                    "description": "response_date",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "request_status": {
+                    "description": "request_status",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "previous_value": {
+                    "description": "previous_value",
+                    "type": "array",
+                    "format": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "next_value": {
+                    "description": "next_value",
+                    "type": "array",
+                    "format": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "description": {
+                    "description": "description",
+                    "type": "array",
+                    "format": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             }
         },
