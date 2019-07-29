@@ -106,12 +106,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="media_id",
- *          description="media_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -137,7 +131,6 @@ class MedicinalPlant extends BaseModel
         'method_id' => 'required|exists:methods,id',
         'article_id' => 'exists:methods,id',
         'soil_id' => 'integer',
-        'media_id' => 'integer',
 
     ];
     /**
@@ -152,7 +145,7 @@ class MedicinalPlant extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['acidity', 'article_id', 'code_no', 'created_at', 'deleted_at', 'efficiency', 'exclusivity', 'herbarium_id', 'life_cycle', 'location_id', 'media_id', 'method_id', 'plant_origin_id', 'secondary_metabolite', 'soil_id', 'studied_sample', 'treatment', 'updated_at', 'vast_cultivation'];
+    protected $fillable = ['acidity', 'article_id', 'code_no', 'created_at', 'deleted_at', 'efficiency', 'exclusivity', 'herbarium_id', 'life_cycle', 'location_id', 'method_id', 'general_origin_id', 'secondary_metabolite', 'soil_id', 'studied_sample', 'treatment', 'updated_at', 'vast_cultivation'];
 
 
     /**
@@ -198,14 +191,6 @@ class MedicinalPlant extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function media(): BelongsTo
-    {
-        return $this->belongsTo(Media::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
     public function method(): BelongsTo
     {
         return $this->belongsTo(Method::class);
@@ -214,9 +199,9 @@ class MedicinalPlant extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function plantFactor(): BelongsTo
+    public function generalFactor(): BelongsTo
     {
-        return $this->belongsTo(PlantFactor::class, 'plant_origin_id');
+        return $this->belongsTo(General::class, 'general_origin_id');
     }
 
     /**

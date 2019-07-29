@@ -19,7 +19,7 @@ class AddForeignKeysToMedicinalPlantsTable extends Migration {
 			$table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('media_id')->references('id')->on('medias')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('method_id')->references('id')->on('methods')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('plant_origin_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('general_origin_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('soil_id')->references('id')->on('soils')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
@@ -39,7 +39,7 @@ class AddForeignKeysToMedicinalPlantsTable extends Migration {
 			$table->dropForeign(['location_id']);
 			$table->dropForeign(['media_id']);
 			$table->dropForeign(['method_id']);
-			$table->dropForeign(['plant_origin_id']);
+			$table->dropForeign(['general_origin_id']);
 			$table->dropForeign(['soil_id']);
 		});
 	}

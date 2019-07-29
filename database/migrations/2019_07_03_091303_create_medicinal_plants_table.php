@@ -15,7 +15,7 @@ class CreateMedicinalPlantsTable extends Migration {
 		Schema::create('medicinal_plants', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->unsignedInteger('plant_origin_id')->nullable();
+			$table->unsignedInteger('general_origin_id')->nullable();
 			$table->integer('code_no')->nullable();
 			$table->json('treatment')->nullable();
 			$table->json('vast_cultivation')->nullable()->comment('options:

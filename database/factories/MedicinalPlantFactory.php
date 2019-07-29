@@ -12,9 +12,8 @@ $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
     $methods = \App\Models\Method::pluck('id')->toArray();
     $articles = \App\Models\Article::pluck('id')->toArray();
     $soils = \App\Models\Soil::pluck('id')->toArray();
-    $medias = \App\Models\Media::pluck('id')->toArray();
     return [
-        'plant_origin_id' => $faker->randomElement($origins),
+        'general_origin_id' => $faker->randomElement($origins),
         'code_no' => $faker->numberBetween(1, 100),
         'treatment' => make_json($faker->word),
         'vast_cultivation' => make_json($faker->word),
@@ -29,6 +28,5 @@ $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
         'life_cycle' => make_json($faker->word),
         'acidity' => make_json($faker->word),
         'soil_id' => $faker->randomElement($soils),
-        'media_id' => $faker->randomElement($medias),
     ];
 });

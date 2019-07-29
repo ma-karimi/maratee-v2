@@ -28,7 +28,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="plantologies_phenology_id",
+ *          property="general_phenology_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -39,7 +39,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="plantologies_phytogeography_id",
+ *          property="general_phytogeography_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -115,7 +115,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="plantologies_type_id",
+ *          property="general_type_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -156,8 +156,8 @@ class Herbarium extends BaseModel
         'protection_id' => 'exists:protections,id',
         'organization_id' => 'required|exists:organizations,id',
         'plant_id' => 'required|exists:plants,id',
-        'plantologies_phytogeography_id' => 'exists:plantologies,id',
-        'plantologies_phenology_id' => 'exists:plantologies,id',
+        'general_phytogeography_id' => 'exists:generals,id',
+        'general_phenology_id' => 'exists:generals,id',
         'sheets_no' => 'integer',
         'samples_no' => 'integer',
         'tip_qt' => 'integer',
@@ -166,8 +166,8 @@ class Herbarium extends BaseModel
         'is_flowering' => 'integer',
         'herbarium_tip_location' => 'integer',
         'type_description' => 'string',
-        'plantologies_type_id' => 'exists:plantologies,id',
-        'plant_generals_group_id' => 'exists:plant_generals,id',
+        'general_type_id' => 'exists:generals,id',
+        'general_group_id' => 'exists:generals,id',
         'number' => 'integer',
 
     ];
@@ -183,7 +183,7 @@ class Herbarium extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'flowering', 'herbarium_tip_location', 'is_flowering', 'location_id', 'name', 'number', 'organization_description', 'organization_id', 'plantologies_phenology_id', 'physical_tip_qt', 'plantologies_phytogeography_id', 'plant_generals_group_id', 'plantologies_type_id', 'protection_id', 'samples_no', 'sheets_no', 'plant_id', 'tip_qt', 'tip_type', 'type_description', 'updated_at'];
+    protected $fillable = ['created_at', 'deleted_at', 'description', 'flowering', 'herbarium_tip_location', 'is_flowering', 'location_id', 'name', 'number', 'organization_description', 'organization_id', 'general_phenology_id', 'physical_tip_qt', 'general_phytogeography_id', 'general_group_id', 'general_type_id', 'protection_id', 'samples_no', 'sheets_no', 'plant_id', 'tip_qt', 'tip_type', 'type_description', 'updated_at'];
 
 
     /**
@@ -310,7 +310,7 @@ class Herbarium extends BaseModel
         return $this->belongsTo(Plant::class);
     }
 
-    public function plantGroup()
+    public function generalGroup()
     {
         return $this->belongsTo(General::class);
     }
