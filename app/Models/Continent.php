@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *            definition="Continent",
  *            required={"name"},
  * 			@SWG\Property(property="id", type="integer"),
- * 			@SWG\Property(property="name", type="string",
+ * 			@SWG\Property(property="name", type="string")
  *        )
  *
  */

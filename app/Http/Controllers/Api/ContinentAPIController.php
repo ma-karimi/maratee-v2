@@ -60,13 +60,6 @@ class ContinentAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-      //  $p=Province::where('name->en','LIKE',"%Ar%")->first();
-        $countries = new Countries();
-        $a=$countries->where('name.common', 'Iran')
-            ->first()->hydrateCities()
-            ->cities;
-        dd($a);
-
         $continents = $this->continentRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),

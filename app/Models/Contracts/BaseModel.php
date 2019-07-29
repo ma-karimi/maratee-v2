@@ -54,6 +54,7 @@ class BaseModel extends Model
      */
     private function exceptionLanguageHandler($languages)
     {
+
         foreach (request()->all() as $field => $value) {
             if (is_array($value) &&
                 array_key_exists($field, static::$linguistically) &&
