@@ -3,9 +3,10 @@ building:
     script:
       - git reset --hard
       - git pull origin core
+      - exit
       - pwd
       - ls -la
-      - cd /../home/srico
+      - cd /home/srico
       - pwd
       - docker-compose exec workspace bash
       - cd code/maratee
