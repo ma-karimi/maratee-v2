@@ -3,8 +3,8 @@ building:
     script:
       - git reset --hard
       - git pull origin core
-      - sudo mkdir bootstrap/cache
-      - sudo chown -R srico:srico bootstrap/cache
+      - mkdir bootstrap/cache
+      - chown -R srico:srico bootstrap/cache
       - composer install
       - cp .env.testing .env
       - php artisan key:generate
@@ -12,7 +12,7 @@ building:
       - php artisan cache:clear
       - php artisan config:clear
       - php artisan storage:link
-      - sudo chown -R srico:srico storage
+      - chown -R srico:srico storage
 
 testing:
     stage: test
