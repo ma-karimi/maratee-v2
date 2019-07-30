@@ -1,0 +1,37 @@
+before_script:
+  - pwd
+  - cd /home/srico
+  - exit
+
+building:
+    stage: build
+    script:
+      - git reset --hard
+      - git pull origin core
+      - ls -la
+      - php -v
+      - composer install
+      - cp .env.testing .env
+      - php artisan key:generate
+      - php artisan migrate --seed
+      - php artisan cache:clear
+      - php artisan config:clear
+      - php artisan storage:link
+      - chown -R srico:srico storage
+
+testing:
+    stage: test
+    script:
+      - php ./vendor/bin/phpunit
+
+deploying:
+    stage: deploy
+    script:
+      - echo "Deployed"
+      - cd /../home/srico
+      - docker-compose exec workspace bash
+      - cd code/maratee
+      - php artisan cache:clear
+      - composer install
+      - php artisan migrate --seed
+      - php artisan queue:restart #if you use queue

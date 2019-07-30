@@ -4,12 +4,12 @@ use App\Models\PlantingGeneral;
 use App\Repositories\GeneralRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
-use Tests\Traits\MakePlantingGeneralTrait;
+use Tests\Traits\MakeGeneralTrait;
 use Tests\ApiTestTrait;
 
 class PlantingGeneralRepositoryTest extends TestCase
 {
-    use MakePlantingGeneralTrait, ApiTestTrait, DatabaseTransactions;
+    use MakeGeneralTrait, ApiTestTrait, DatabaseTransactions;
 
     /**
      * @var GeneralRepository
