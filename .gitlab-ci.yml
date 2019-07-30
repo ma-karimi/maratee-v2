@@ -1,7 +1,7 @@
 # This is a basic example for a gem or script which doesn't use
 # services such as redis or postgres
 before_script:
-  - cd /var/www/code/maratee #your project path
+  - cd /home/code/maratee #your project path
 
 building:
     stage: build
@@ -15,9 +15,9 @@ building:
       - php artisan cache:clear
       - php artisan config:clear
       - php artisan storage:link
-      - sudo chown -R deployer:www-data /var/www/code/maratee
-      - find /var/www/code/maratee -type f -exec chmod 664 {} \;
-      - find /var/www/code/maratee -type d -exec chmod 775 {} \;
+      - sudo chown -R deployer:www-data /home/code/maratee
+      - find /home/code/maratee -type f -exec chmod 664 {} \;
+      - find /home/code/maratee -type d -exec chmod 775 {} \;
       - chgrp -R www-data storage bootstrap/cache
       - chmod -R ug+rwx storage bootstrap/cache
 
