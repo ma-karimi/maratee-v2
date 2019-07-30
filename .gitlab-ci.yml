@@ -1,6 +1,6 @@
 before_script:
   - pwd
-  - cd ..
+  - cd /home/srico
   - exit
 
 building:
