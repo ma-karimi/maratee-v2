@@ -35,7 +35,7 @@ use App\Models\Contracts\BaseModel;
 class BotanicalGardenAction extends BaseModel
 {
 
-
+    public static $linguistically=['initial_place_type'=>false,'destination_place_type'=>false,'initial_place_condition'=>false,'destination_place_condition'=>false,'treatment'=>false];
     public static $rules = [
         'botanical_id' => 'required|exists:botanicals,id',
         'planting_action_id' => 'required|exists:planting_actions,id',

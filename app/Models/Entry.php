@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Entry extends BaseModel
 {
 
-
+    public static $linguistically=['type'=>true,'description'=>false];
     /**
      * The database table used by the model.
      *

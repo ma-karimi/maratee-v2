@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class GeologyAge extends BaseModel
 {
 
+    public static $linguistically=['era'=>true,'period'=>true,'epoch'=>true,'stage'=>true];
     /**
      * The database table used by the model.
      *

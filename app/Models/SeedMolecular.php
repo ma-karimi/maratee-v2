@@ -56,6 +56,7 @@ use App\Models\Contracts\BaseModel;
 class SeedMolecular extends BaseModel
 {
 
+    public static $linguistically=['treatment'=>true];
     public static $rules=[
         'molecular_id' => 'required|exists:moleculars,id',
         'seed_id' => 'required|exists:seeds,id',

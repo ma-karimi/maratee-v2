@@ -42,6 +42,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Protection extends BaseModel
 {
+    public static $linguistically=['name'=>true,'description'=>false];
     /**
      * The database table used by the model.
      *

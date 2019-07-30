@@ -54,6 +54,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Medicine extends BaseModel
 {
+    public static $linguistically=['name'=>true,'description'=>false];
     public static $rules=[
         'type' => 'required|string',
         'parent_id' => 'integer',

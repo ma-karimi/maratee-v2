@@ -112,6 +112,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SeedTechnology extends BaseModel
 {
 
+    public static $linguistically=['seed_type'=>false,'type'=>false,'description'=>false];
     public static $rules=[
         'seed_id' => 'required|exists:seeds,id',
         'husk_average' => 'integer',

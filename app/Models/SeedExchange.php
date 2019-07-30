@@ -77,6 +77,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class SeedExchange extends BaseModel
 {
+    public static $linguistically=['approval_no'=>false,'saved_type'=>false,'description'=>false];
 
     public static $rules=[
         'seed_id' => 'exists:seeds,id',

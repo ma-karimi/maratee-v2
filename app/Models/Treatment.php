@@ -50,7 +50,7 @@ use App\Models\Contracts\BaseModel;
  */
 class Treatment extends BaseModel
 {
-
+    public static $linguistically=['name'=>true,'description'=>false];
     public static $rules=[
         'paleontology_id' => 'required|exists:paleontologies,id',
     ];

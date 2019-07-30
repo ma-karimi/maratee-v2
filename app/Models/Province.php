@@ -44,7 +44,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Province extends BaseModel
 {
-
+    public static $linguistically=['name'=>true];
     public static $rules=[
         'country_id' => 'exists:countries,id',
     ];

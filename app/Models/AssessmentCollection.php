@@ -21,8 +21,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  **/
 class AssessmentCollection extends BaseModel
 {
-
-
     public static $rules = [
         'collection_id' => 'required|exists:collections,id',
         'department_id' => 'exists:departments,id',

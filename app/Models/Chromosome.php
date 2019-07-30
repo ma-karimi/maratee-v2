@@ -28,7 +28,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Chromosome extends BaseModel
 {
 
-
+    public static $linguistically=['notes'=>false];
 
     public static $rules = [
         'herbarium_id' => 'required|exists:herbariums,id',

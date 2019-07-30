@@ -44,6 +44,7 @@ use App\Models\Contracts\BaseModel;
 class SoilFeature extends BaseModel
 {
 
+    public static $linguistically=['name'=>true,'unit'=>false];
     /**
      * The database table used by the model.
      *

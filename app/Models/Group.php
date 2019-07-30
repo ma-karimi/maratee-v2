@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -51,8 +52,9 @@ use Illuminate\Database\Eloquent\Model;
  *      ),
  * )
  */
-class Group extends Model
+class Group extends BaseModel
 {
+    public static $linguistically=['name'=>true,'owner_crud'=>true,'same_level_crud'=>true,'upper_level_crud'=>true,'lower_level_crud'=>true,'description'=>true];
     /**
      * @var array
      */

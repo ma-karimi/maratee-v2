@@ -67,6 +67,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class PlantApplication extends BaseModel
 {
 
+    public static $linguistically=['presence'=>false];
     public static $rules=[
         'herbarium_id' => 'required|exists:herbariums,id',
         'plant_factor_part_id' => 'integer',

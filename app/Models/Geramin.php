@@ -121,6 +121,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Geramin extends BaseModel
 {
 
+    public static $linguistically=['flower_color'=>false];
     public static $rules=[
         'collection_id' => 'required|exists:collections,id',
         'seed_id' => 'required|exists:seeds,id',

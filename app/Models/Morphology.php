@@ -49,6 +49,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Morphology extends BaseModel
 {
 
+    public static $linguistically=['name'=>true,'description'=>false,'unit'=>true];
     /**
      * The database table used by the model.
      *

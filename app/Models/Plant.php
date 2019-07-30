@@ -142,7 +142,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class Plant extends BaseModel
 {
-   // public static $linguistically=['name'=>'en'];
+    public static $linguistically=['name'=>true,'description'=>false,'domestic_name'=>false];
 
     public static $rules=[
         'user_id' => 'exists:users,id',

@@ -151,6 +151,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Herbarium extends BaseModel
 {
+
+    public static $linguistically=['name'=>false,'description'=>false,'organization_description'=>false,'flowering'=>false];
     public static $rules = [
         'location_id' => 'required|exists:locations,id',
         'protection_id' => 'exists:protections,id',

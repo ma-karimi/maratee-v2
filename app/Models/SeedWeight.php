@@ -92,6 +92,7 @@ use App\Models\Contracts\BaseModel;
 class SeedWeight extends BaseModel
 {
 
+    public static $linguistically=['description'=>false];
     public static $rules=[
         'seed_technology_id' => 'required|exists:seed_technologies,id',
         'total' => 'required|integer',

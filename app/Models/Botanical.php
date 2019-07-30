@@ -52,7 +52,7 @@ use App\Models\Contracts\BaseModel;
  **/
 class Botanical extends BaseModel
 {
-
+    public static $linguistically=['flower_color'=>false,'fruit_color'=>false,'leaf_color'=>false,'sprout'=>false,'treatment'=>false,'growth_rate'=>false,'first_flowering'=>false,'flowering_interval'=>false,'first_seeding'=>false,'seed_value'=>false,'seed_production'=>false,'season_resistance'=>false,'sensitivity'=>false,'sensitivity_description'=>false,'notes'=>false,'entry_type'=>false];
     public static $rules = [
         'year' => 'date',
         'planting'=>'date',

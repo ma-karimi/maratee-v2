@@ -56,6 +56,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Product extends BaseModel
 {
 
+    public static $linguistically=['name'=>true,'description'=>false];
     public static $rules=[
         'organization_id' => 'required|exists:organizations,id',
         'registration_status' => 'string',

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
@@ -41,9 +42,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * )
  */
 
-class Soil extends Model
+class Soil extends BaseModel
 {
-
+    public static $linguistically=['type'=>true,'description'=>false];
     /**
      * The database table used by the model.
      *
