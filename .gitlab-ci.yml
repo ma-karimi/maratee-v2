@@ -1,7 +1,7 @@
 # This file is a template, and might need editing before it works on your project.
 # Official framework image. Look for the different tagged releases at:
 # https://hub.docker.com/r/library/php
-image: registry.gitlab.com/srico.net/maratee
+image: registry.gitlab.com/srico.net/maratee:latest
 
 variables:
   MYSQL_DATABASE: maratee
