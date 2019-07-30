@@ -3,7 +3,8 @@ building:
     script:
       - git reset --hard
       - git pull origin core
-      - cd /home/srico
+      - cd ~
+      - pwd
       - docker-compose exec workspace bash
       - cd code/maratee
       - composer install
@@ -24,7 +25,7 @@ deploying:
     stage: deploy
     script:
       - echo "Deployed"
-      - cd /home/srico
+      - cd ~
       - docker-compose exec workspace bash
       - cd code/maratee
       - php artisan cache:clear
