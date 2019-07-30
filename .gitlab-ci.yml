@@ -3,6 +3,8 @@ building:
     script:
       - git reset --hard
       - git pull origin core
+      - docker-compose exec workspace bash
+      - cd code/maratee
       - composer install
       - cp .env.testing .env
       - php artisan key:generate
@@ -21,6 +23,8 @@ deploying:
     stage: deploy
     script:
       - echo "Deployed"
+      - docker-compose exec workspace bash
+      - cd code/maratee
       - php artisan cache:clear
       - composer install
       - php artisan migrate --seed
