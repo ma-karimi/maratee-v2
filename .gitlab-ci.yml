@@ -4,6 +4,7 @@ building:
       - git reset --hard
       - git pull origin core
       - ls -la
+      - php -v
       - composer install
       - cp .env.testing .env
       - php artisan key:generate
