@@ -3,6 +3,8 @@ building:
     script:
       - git reset --hard
       - git pull origin core
+      - pwd
+      - ls -la
       - cd /../home/srico
       - pwd
       - docker-compose exec workspace bash
