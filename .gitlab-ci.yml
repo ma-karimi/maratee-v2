@@ -3,8 +3,6 @@ building:
     script:
       - git reset --hard
       - git pull origin core
-      - mkdir bootstrap/cache
-      - chown -R srico:srico bootstrap/cache
       - composer install
       - cp .env.testing .env
       - php artisan key:generate
@@ -23,4 +21,7 @@ deploying:
     stage: deploy
     script:
       - echo "Deployed"
+      - php artisan cache:clear
+      - composer install
+      - php artisan migrate --seed
       - php artisan queue:restart #if you use queue
