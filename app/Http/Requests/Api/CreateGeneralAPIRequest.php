@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use App\Models\PlantingGeneral;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreatePlantGeneralAPIRequest extends APIRequest
+class CreateGeneralAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.

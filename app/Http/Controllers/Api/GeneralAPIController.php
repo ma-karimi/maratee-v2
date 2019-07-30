@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreatePlantologyAPIRequest;
-use App\Http\Requests\Api\UpdatePlantologyAPIRequest;
-use App\Models\Plantology;
-use App\Repositories\PlantologyRepository;
+use App\Http\Requests\Api\CreateGeneralAPIRequest;
+use App\Http\Requests\Api\UpdateGeneralAPIRequest;
+use App\Models\General;
+use App\Repositories\GeneralRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class PlantologyController
+ * Class GeneralController
  * @package App\Http\Controllers\Api
  */
 
-class PlantologyAPIController extends AppBaseController
+class GeneralAPIController extends AppBaseController
 {
-    /** @var  PlantologyRepository */
-    private $plantologyRepository;
+    /** @var  GeneralRepository */
+    private $GeneralRepository;
 
-    public function __construct(PlantologyRepository $plantologyRepo)
+    public function __construct(GeneralRepository $GeneralRepo)
     {
-        $this->plantologyRepository = $plantologyRepo;
+        $this->GeneralRepository = $GeneralRepo;
     }
 
     /**
@@ -30,10 +30,10 @@ class PlantologyAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/plantologies",
-     *      summary="Get a listing of the Plantologies.",
-     *      tags={"Plantology"},
-     *      description="Get all Plantologies",
+     *      path="/generals",
+     *      summary="Get a listing of the Generals.",
+     *      tags={"General"},
+     *      description="Get all Generals",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -47,7 +47,7 @@ class PlantologyAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/Plantology")
+     *                  @SWG\Items(ref="#/definitions/General")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -59,45 +59,52 @@ class PlantologyAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $plantologies = $this->plantologyRepository->all(
+        $Generals = $this->GeneralRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
         );
 
-        return $this->sendResponse($plantologies->toArray(), 'Plantologies retrieved successfully');
+        return $this->sendResponse($Generals->toArray(), ' Generals retrieved successfully');
     }
 
     /**
-     * @param CreatePlantologyAPIRequest $request
+     * @param CreateGeneralAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/plantologies",
-     *      summary="Store a newly created Plantology in storage",
-     *      tags={"Plantology"},
-     *      description="Store Plantology",
+     *      path="/generals",
+     *      summary="Store a newly created General in storage",
+     *      tags={"General"},
+     *      description="Store General",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="name",
      *          in="body",
-     *          description="Plantology that should be stored",
+     *          description="General that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plantology")
+     *          @SWG\Schema(ref="#/definitions/General")
      *      ),
      *      @SWG\Parameter(
      *          name="type",
      *          in="body",
-     *          description="Plantology that should be stored",
+     *          description="General that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plantology")
+     *          @SWG\Schema(ref="#/definitions/General")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="parent_id",
+     *          in="body",
+     *          description="General that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/General")
      *      ),
      *      @SWG\Parameter(
      *          name="description",
      *          in="body",
-     *          description="Plantology that should be stored",
+     *          description="General that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plantology")
+     *          @SWG\Schema(ref="#/definitions/General")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -110,7 +117,7 @@ class PlantologyAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Plantology"
+     *                  ref="#/definitions/General"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -120,13 +127,13 @@ class PlantologyAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreatePlantologyAPIRequest $request)
+    public function store(CreateGeneralAPIRequest $request)
     {
         $input = $request->all();
 
-        $plantology = $this->plantologyRepository->create($input);
+        $General = $this->GeneralRepository->create($input);
 
-        return $this->sendResponse($plantology->toArray(), 'Plantology saved successfully');
+        return $this->sendResponse($General->toArray(), ' General saved successfully');
     }
 
     /**
@@ -134,14 +141,14 @@ class PlantologyAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/plantologies/{id}",
-     *      summary="Display the specified Plantology",
-     *      tags={"Plantology"},
-     *      description="Get Plantology",
+     *      path="/generals/{id}",
+     *      summary="Display the specified General",
+     *      tags={"General"},
+     *      description="Get General",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Plantology",
+     *          description="id of General",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -157,7 +164,7 @@ class PlantologyAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Plantology"
+     *                  ref="#/definitions/General"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -169,30 +176,30 @@ class PlantologyAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var Plantology $plantology */
-        $plantology = $this->plantologyRepository->find($id);
+        /** @var General $General */
+        $General = $this->GeneralRepository->find($id);
 
-        if (empty($plantology)) {
-            return $this->sendError('Plantology not found');
+        if (empty($General)) {
+            return $this->sendError(' General not found');
         }
 
-        return $this->sendResponse($plantology->toArray(), 'Plantology retrieved successfully');
+        return $this->sendResponse($General->toArray(), ' General retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdatePlantologyAPIRequest $request
+     * @param UpdateGeneralAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/plantologies/{id}",
-     *      summary="Update the specified Plantology in storage",
-     *      tags={"Plantology"},
-     *      description="Update Plantology",
+     *      path="/generals/{id}",
+     *      summary="Update the specified General in storage",
+     *      tags={"General"},
+     *      description="Update General",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Plantology",
+     *          description="id of General",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -200,23 +207,30 @@ class PlantologyAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="name",
      *          in="body",
-     *          description="Plantology that should be stored",
+     *          description="General that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plantology")
+     *          @SWG\Schema(ref="#/definitions/General")
      *      ),
      *      @SWG\Parameter(
      *          name="type",
      *          in="body",
-     *          description="Plantology that should be stored",
+     *          description="General that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plantology")
+     *          @SWG\Schema(ref="#/definitions/General")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="parent_id",
+     *          in="body",
+     *          description="General that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/General")
      *      ),
      *      @SWG\Parameter(
      *          name="description",
      *          in="body",
-     *          description="Plantology that should be stored",
+     *          description="General that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plantology")
+     *          @SWG\Schema(ref="#/definitions/General")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -229,7 +243,7 @@ class PlantologyAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Plantology"
+     *                  ref="#/definitions/General"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -239,20 +253,20 @@ class PlantologyAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdatePlantologyAPIRequest $request)
+    public function update($id, UpdateGeneralAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var Plantology $plantology */
-        $plantology = $this->plantologyRepository->find($id);
+        /** @var General $General */
+        $General = $this->GeneralRepository->find($id);
 
-        if (empty($plantology)) {
-            return $this->sendError('Plantology not found');
+        if (empty($General)) {
+            return $this->sendError(' General not found');
         }
 
-        $plantology = $this->plantologyRepository->update($input, $id);
+        $General = $this->GeneralRepository->update($input, $id);
 
-        return $this->sendResponse($plantology->toArray(), 'Plantology updated successfully');
+        return $this->sendResponse($General->toArray(), 'General updated successfully');
     }
 
     /**
@@ -261,14 +275,14 @@ class PlantologyAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/plantologies/{id}",
-     *      summary="Remove the specified Plantology from storage",
-     *      tags={"Plantology"},
-     *      description="Delete Plantology",
+     *      path="/generals/{id}",
+     *      summary="Remove the specified General from storage",
+     *      tags={"General"},
+     *      description="Delete General",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Plantology",
+     *          description="id of General",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -296,15 +310,15 @@ class PlantologyAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var Plantology $plantology */
-        $plantology = $this->plantologyRepository->find($id);
+        /** @var General $General */
+        $General = $this->GeneralRepository->find($id);
 
-        if (empty($plantology)) {
-            return $this->sendError('Plantology not found');
+        if (empty($General)) {
+            return $this->sendError(' General not found');
         }
 
-        $plantology->delete();
+        $General->delete();
 
-        return $this->sendResponse($id, 'Plantology deleted successfully');
+        return $this->sendResponse($id, ' General deleted successfully');
     }
 }

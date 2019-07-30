@@ -2,22 +2,21 @@
 
 namespace App\Repositories;
 
-use App\Models\Plantology;
-use App\Repositories\BaseRepository;
+use App\Models\General;
 
 /**
- * Class PlantologyRepository
+ * Class GeneralRepository
  * @package App\Repositories
- * @version July 14, 2019, 11:24 am UTC
+ * @version July 14, 2019, 11:25 am UTC
 */
 
-class PlantologyRepository extends BaseRepository
+class GeneralRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**
@@ -35,6 +34,6 @@ class PlantologyRepository extends BaseRepository
      **/
     public function model()
     {
-        return Plantology::class;
+        return General::class;
     }
 }

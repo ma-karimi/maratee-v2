@@ -2,7 +2,7 @@
 
 use Faker\Factory as Faker;
 use App\Models\PlantingGeneral;
-use App\Repositories\PlantGeneralRepository;
+use App\Repositories\GeneralRepository;
 
 trait MakePlantingGeneralTrait
 {
@@ -14,8 +14,8 @@ trait MakePlantingGeneralTrait
      */
     public function makePlantingGeneral($plantingGeneralFields = [])
     {
-        /** @var PlantGeneralRepository $plantingGeneralRepo */
-        $plantingGeneralRepo = \App::make(PlantGeneralRepository::class);
+        /** @var GeneralRepository $plantingGeneralRepo */
+        $plantingGeneralRepo = \App::make(GeneralRepository::class);
         $theme = $this->fakePlantingGeneralData($plantingGeneralFields);
         return $plantingGeneralRepo->create($theme);
     }

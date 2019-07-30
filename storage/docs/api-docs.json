@@ -8070,6 +8070,259 @@
                 }
             }
         },
+        "/generals": {
+            "get": {
+                "tags": [
+                    "General"
+                ],
+                "summary": "Get a listing of the Generals.",
+                "description": "Get all Generals",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/General"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "General"
+                ],
+                "summary": "Store a newly created General in storage",
+                "description": "Store General",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "General that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/General"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "body",
+                        "description": "General that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/General"
+                        }
+                    },
+                    {
+                        "name": "parent_id",
+                        "in": "body",
+                        "description": "General that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/General"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "General that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/General"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/General"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/generals/{id}": {
+            "get": {
+                "tags": [
+                    "General"
+                ],
+                "summary": "Display the specified General",
+                "description": "Get General",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of General",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/General"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "General"
+                ],
+                "summary": "Update the specified General in storage",
+                "description": "Update General",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of General",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "General that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/General"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "body",
+                        "description": "General that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/General"
+                        }
+                    },
+                    {
+                        "name": "parent_id",
+                        "in": "body",
+                        "description": "General that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/General"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "General that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/General"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/General"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "General"
+                ],
+                "summary": "Remove the specified General from storage",
+                "description": "Delete General",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of General",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/geologyAges": {
             "get": {
                 "tags": [
@@ -16932,512 +17185,6 @@
                 }
             }
         },
-        "/PlantFactors": {
-            "get": {
-                "tags": [
-                    "PlantFactor"
-                ],
-                "summary": "Get a listing of the PlantFactors.",
-                "description": "Get all PlantFactors",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/PlantFactor"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "PlantFactor"
-                ],
-                "summary": "Store a newly created PlantFactor in storage",
-                "description": "Store PlantFactor",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "PlantFactor that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantFactor"
-                        }
-                    },
-                    {
-                        "name": "type",
-                        "in": "body",
-                        "description": "PlantFactor that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantFactor"
-                        }
-                    },
-                    {
-                        "name": "parent_id",
-                        "in": "body",
-                        "description": "PlantFactor that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantFactor"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "PlantFactor that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantFactor"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/PlantFactor"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/PlantFactors/{id}": {
-            "get": {
-                "tags": [
-                    "PlantFactor"
-                ],
-                "summary": "Display the specified PlantFactor",
-                "description": "Get PlantFactor",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of PlantFactor",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/PlantFactor"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "PlantFactor"
-                ],
-                "summary": "Update the specified PlantFactor in storage",
-                "description": "Update PlantFactor",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of PlantFactor",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "PlantFactor that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantFactor"
-                        }
-                    },
-                    {
-                        "name": "type",
-                        "in": "body",
-                        "description": "PlantFactor that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantFactor"
-                        }
-                    },
-                    {
-                        "name": "parent_id",
-                        "in": "body",
-                        "description": "PlantFactor that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantFactor"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "PlantFactor that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantFactor"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/PlantFactor"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "PlantFactor"
-                ],
-                "summary": "Remove the specified PlantFactor from storage",
-                "description": "Delete PlantFactor",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of PlantFactor",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/PlantGenerals": {
-            "get": {
-                "tags": [
-                    "PlantGeneral"
-                ],
-                "summary": "Get a listing of the PlantGenerals.",
-                "description": "Get all PlantGenerals",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/PlantGeneral"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "PlantGeneral"
-                ],
-                "summary": "Store a newly created PlantGeneral in storage",
-                "description": "Store PlantGeneral",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "PlantGeneral that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantGeneral"
-                        }
-                    },
-                    {
-                        "name": "type",
-                        "in": "body",
-                        "description": "PlantGeneral that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantGeneral"
-                        }
-                    },
-                    {
-                        "name": "parent_id",
-                        "in": "body",
-                        "description": "PlantGeneral that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantGeneral"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "PlantGeneral that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantGeneral"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/PlantGeneral"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/PlantGenerals/{id}": {
-            "get": {
-                "tags": [
-                    "PlantGeneral"
-                ],
-                "summary": "Display the specified PlantGeneral",
-                "description": "Get PlantGeneral",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of PlantGeneral",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/PlantGeneral"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "PlantGeneral"
-                ],
-                "summary": "Update the specified PlantGeneral in storage",
-                "description": "Update PlantGeneral",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of PlantGeneral",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "PlantGeneral that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantGeneral"
-                        }
-                    },
-                    {
-                        "name": "type",
-                        "in": "body",
-                        "description": "PlantGeneral that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantGeneral"
-                        }
-                    },
-                    {
-                        "name": "parent_id",
-                        "in": "body",
-                        "description": "PlantGeneral that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantGeneral"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "PlantGeneral that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantGeneral"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/PlantGeneral"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "PlantGeneral"
-                ],
-                "summary": "Remove the specified PlantGeneral from storage",
-                "description": "Delete PlantGeneral",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of PlantGeneral",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
         "/plantingActions": {
             "get": {
                 "tags": [
@@ -17630,241 +17377,6 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of PlantingAction",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/plantologies": {
-            "get": {
-                "tags": [
-                    "Plantology"
-                ],
-                "summary": "Get a listing of the Plantologies.",
-                "description": "Get all Plantologies",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/Plantology"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Plantology"
-                ],
-                "summary": "Store a newly created Plantology in storage",
-                "description": "Store Plantology",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "Plantology that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Plantology"
-                        }
-                    },
-                    {
-                        "name": "type",
-                        "in": "body",
-                        "description": "Plantology that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Plantology"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Plantology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plantology"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Plantology"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/plantologies/{id}": {
-            "get": {
-                "tags": [
-                    "Plantology"
-                ],
-                "summary": "Display the specified Plantology",
-                "description": "Get Plantology",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Plantology",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Plantology"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Plantology"
-                ],
-                "summary": "Update the specified Plantology in storage",
-                "description": "Update Plantology",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Plantology",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "Plantology that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Plantology"
-                        }
-                    },
-                    {
-                        "name": "type",
-                        "in": "body",
-                        "description": "Plantology that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Plantology"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Plantology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plantology"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Plantology"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Plantology"
-                ],
-                "summary": "Remove the specified Plantology from storage",
-                "description": "Delete Plantology",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Plantology",
                         "required": true,
                         "type": "integer"
                     }
@@ -26474,6 +25986,53 @@
                 }
             }
         },
+        "General": {
+            "required": [
+                "name",
+                "type",
+                "parent_id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "description": {
+                    "description": "description",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "type": {
+                    "description": "type",
+                    "type": "string"
+                },
+                "parent_id": {
+                    "description": "parent_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
         "GeologyAge": {
             "required": [
                 "era",
@@ -26694,7 +26253,7 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "plantologies_phenology_id": {
+                "general_phenology_id": {
                     "type": "integer",
                     "format": "int32"
                 },
@@ -26703,7 +26262,7 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "plantologies_phytogeography_id": {
+                "general_phytogeography_id": {
                     "type": "integer",
                     "format": "int32"
                 },
@@ -26774,7 +26333,7 @@
                         "type": "string"
                     }
                 },
-                "plantologies_type_id": {
+                "general_type_id": {
                     "type": "integer",
                     "format": "int32"
                 },
@@ -27396,11 +26955,6 @@
                 },
                 "soil_id": {
                     "description": "soil_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "media_id": {
-                    "description": "media_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -28314,100 +27868,6 @@
                 }
             }
         },
-        "PlantFactor": {
-            "required": [
-                "name",
-                "type",
-                "parent_id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "name": {
-                    "description": "name",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "description": {
-                    "description": "description",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "type": {
-                    "description": "type",
-                    "type": "string"
-                },
-                "parent_id": {
-                    "description": "parent_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
-        },
-        "PlantGeneral": {
-            "required": [
-                "name",
-                "type",
-                "parent_id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "name": {
-                    "description": "name",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "description": {
-                    "description": "description",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "type": {
-                    "description": "type",
-                    "type": "string"
-                },
-                "parent_id": {
-                    "description": "parent_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
-        },
         "PlantingAction": {
             "required": [
                 "name"
@@ -28431,47 +27891,6 @@
                     "items": {
                         "type": "string"
                     }
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
-        },
-        "Plantology": {
-            "required": [
-                "name",
-                "type"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "name": {
-                    "description": "name",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "description": {
-                    "description": "description",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "type": {
-                    "description": "type",
-                    "type": "string"
                 },
                 "created_at": {
                     "description": "created_at",

@@ -74,13 +74,9 @@ Route::resource('projects', 'ProjectAPIController');
 
 Route::resource('products', 'ProductAPIController');
 
-Route::resource('plantologies', 'PlantologyAPIController');
-
 Route::resource('planting_actions', 'PlantingActionAPIController');
 
-Route::resource('planting_generals', 'PlantingGeneralAPIController');
-
-Route::resource('planting_factors', 'PlantFactorAPIController');
+Route::resource('generals', 'GeneralAPIController');
 
 Route::resource('planting_applications', 'PlantingApplicationAPIController');
 
