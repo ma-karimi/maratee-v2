@@ -34,7 +34,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class CryoBank extends BaseModel
 {
 
-
+    public static $linguistically=['treatment'=>false,'tank_type'=>false];
     public static $rules = [
         'voucher_number' => 'required|string',
         'geotype_code' => 'required|string',

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -36,8 +37,9 @@ use Illuminate\Database\Eloquent\Model;
  *      ),
  * )
  */
-class Role extends Model
+class Role extends BaseModel
 {
+    public static $linguistically=['name'=>true,'description'=>true,'hierarchy'=>true];
     /**
      * @var array
      */

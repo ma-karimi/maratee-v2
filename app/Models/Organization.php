@@ -72,6 +72,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Organization extends BaseModel
 {
+    public static $linguistically=['name'=>true,'description'=>false];
     public static $rules=[
         'domestic_code' => 'string',
         'international_code' => 'string',

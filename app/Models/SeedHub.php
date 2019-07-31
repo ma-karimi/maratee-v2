@@ -81,6 +81,7 @@ use App\Models\Contracts\BaseModel;
 
 class SeedHub extends BaseModel
 {
+    public static $linguistically=['action_role'=>false,'action_role_description'=>false];
     public static $rules=[
         'project_id' => 'exists:projects,id',
         'user_id' => 'required|exists:seeds,id',

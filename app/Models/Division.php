@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -29,14 +30,10 @@ use Illuminate\Database\Eloquent\Model;
  *      ),
  * )
  */
-class Division extends Model
+class Division extends BaseModel
 {
-    /**
-     * The "type" of the auto-incrementing ID.
-     *
-     * @var string
-     */
-    protected $keyType = 'integer';
+
+    public static $linguistically=['name'=>true];
 
     protected $casts=['name'=>'json'];
     /**

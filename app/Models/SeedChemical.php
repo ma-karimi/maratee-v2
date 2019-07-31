@@ -55,6 +55,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SeedChemical extends BaseModel
 {
+    public static $linguistically=['treatment'=>true];
 
     public static $rules=[
         'chemical_id' => 'required|exists:chemicals,id',

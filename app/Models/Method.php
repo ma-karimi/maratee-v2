@@ -44,6 +44,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Method extends BaseModel
 {
 
+    public static $linguistically=['name'=>true,'description'=>false];
     public static $rules=[
         'parent_id' => 'integer'
     ];

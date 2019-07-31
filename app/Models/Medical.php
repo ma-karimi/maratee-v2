@@ -127,6 +127,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Medical extends BaseModel
 {
 
+    public static $linguistically=['side_effect_description'=>false,'medicine_effect_description'=>false,'therapy_description'=>false,'drug_description'=>false,'drug_shape_description'=>false,'medicinal_part_description'=>false,'drug_usage_description'=>false];
     public static $rules=[
         'herbarium_id' => 'required|exists:herbariums,id',
         'medicine_side_effect_id' => 'integer',

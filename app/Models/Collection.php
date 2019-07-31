@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Collection extends BaseModel
 {
 
-
+    public static $linguistically=['name'=>true];
     /**
      * The database table used by the model.
      *

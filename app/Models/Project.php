@@ -71,6 +71,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Project extends BaseModel
 {
+    public static $linguistically=['name'=>true,'plan_name'=>true,'plan_description'=>false,'plan_number'=>true];
     public static $rules=[
         'approved_id' => 'string',
         'registered_id' => 'string',

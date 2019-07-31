@@ -32,6 +32,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Exchange extends BaseModel
 {
 
+    public static $linguistically=['description'=>false];
 
     public static $rules = [
         'send_herbarium_id' => 'required|exists:herbariums,id',

@@ -66,9 +66,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Location extends BaseModel
 {
-
     use SpatialTrait;
 
+    public static $linguistically=['name'=>true,'description'=>false,'region_name'=>false,'address'=>true];
     public static $rules=[
         'city_id' => 'required|exists:cities,id',
         'village_id' => 'exists:villages,id',

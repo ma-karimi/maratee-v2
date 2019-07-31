@@ -4,8 +4,6 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-
 /**
  * @SWG\Definition(
  *      definition="General",
@@ -56,7 +54,8 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class General extends BaseModel
 {
 
-    public static $rules = [
+    public static $linguistically=['name'=>true,'description'=>false];
+    public static $rules=[
         'type' => 'required|string',
         'parent_id' => 'integer',
     ];
@@ -108,11 +107,4 @@ class General extends BaseModel
         ])->latest();
     }
 
-    /**
-     * @return MorphToMany
-     */
-    public function authors(): MorphToMany
-    {
-        return $this->morphToMany(Author::class, 'morph_author');
-    }
 }

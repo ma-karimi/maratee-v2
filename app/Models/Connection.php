@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Connection extends BaseModel
 {
 
-
+    public static $linguistically=['name'=>true,'description'=>false];
     public static $rules = [
         'location_id' => 'required|exists:locations,id',
         'user_id' => 'required|exists:users,id'

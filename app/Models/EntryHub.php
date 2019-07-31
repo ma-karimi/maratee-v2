@@ -20,8 +20,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  **/
 class EntryHub extends BaseModel
 {
-
-
     public static $rules = [
         'location_id' => 'required|exists:locations,id',
         'entry_id' => 'required|exists:entries,id',

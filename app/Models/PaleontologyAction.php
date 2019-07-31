@@ -55,6 +55,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class PaleontologyAction extends BaseModel
 {
 
+    public static $linguistically=['description'=>false];
     public static $rules=[
         'paleontology_id' => 'required|exists:paleontologies,id',
         'user_id' => 'required|exists:users,id',

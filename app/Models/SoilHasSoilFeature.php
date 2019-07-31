@@ -48,7 +48,7 @@ use App\Models\Contracts\BaseModel;
  */
 class SoilHasSoilFeature extends BaseModel
 {
-
+    public static $linguistically=['value'=>true];
     public static $rules=[
         'soil_id' => 'required|exists:soils,id',
         'soil_feature_id' => 'required|exists:soil_features,id',

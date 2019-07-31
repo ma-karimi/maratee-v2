@@ -24,8 +24,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  **/
 class Credential extends BaseModel
 {
-    public const PARENT_ID = 'parent_id';
-
+    const PARENT_ID = 'parent_id';
+    public static $linguistically=['name'=>true];
     public static $rules = [
         'parent_id' => 'required|exists:credentials,id',
         'type' => 'required|string',

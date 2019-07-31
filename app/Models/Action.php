@@ -45,6 +45,7 @@ use App\Models\Contracts\BaseModel;
 class Action extends BaseModel
 {
 
+
     public static $linguistically = ['name' => true, 'description' => false];
     /**
      * The database table used by the model.

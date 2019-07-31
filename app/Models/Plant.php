@@ -7,9 +7,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
@@ -25,19 +22,19 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          property="name",
  *          description="name",
  *          type="array",
- *     @SWG\Items(type="string")
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
  *          type="array",
- *     @SWG\Items(type="string")
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="domestic_name",
  *          description="domestic_name",
  *          type="array",
- *     @SWG\Items(type="string")
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="plant_general_sub_specie_id",
@@ -118,6 +115,12 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="author_id",
+ *          description="author_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
  *          property="location_id",
  *          description="location_id",
  *          type="integer",
@@ -140,21 +143,22 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class Plant extends BaseModel
 {
 
-    public static $rules = [
+    public static $rules=[
         'user_id' => 'exists:users,id',
         'article_id' => 'exists:articles,id',
+        'author_id' => 'exists:authors,id',
         'location_id' => 'exists:locations,id',
-        'general_cotyledon_id' => 'required|exists:generals,id',
-        'general_genus_id' => 'required|exists:generals,id',
-        'general_family_id' => 'required|exists:generals,id',
-        'general_sperm_id' => 'exists:generals,id',
-        'general_flowering_id' => 'exists:generals,id',
-        'general_order_id' => 'exists:generals,id',
-        'general_group_id' => 'exists:generals,id',
-        'general_class_id' => 'exists:generals,id',
-        'general_specie_id' => 'exists:generals,id',
-        'general_variety_id' => 'exists:generals,id',
-        'general_sub_specie_id' => 'exists:generals,id',
+        'plant_general_cotyledon_id' => 'required|exists:plant_generals,id',
+        'plant_general_genus_id' => 'required|exists:plant_generals,id',
+        'plant_general_family_id' => 'required|exists:plant_generals,id',
+        'plant_general_sperm_id' => 'exists:plant_generals,id',
+        'plant_general_flowering_id' => 'exists:plant_generals,id',
+        'plant_general_order_id' => 'exists:plant_generals,id',
+        'plant_general_group_id' => 'exists:plant_generals,id',
+        'plant_general_class_id' => 'exists:plant_generals,id',
+        'plant_general_specie_id' => 'exists:plant_generals,id',
+        'plant_general_variety_id' => 'exists:plant_generals,id',
+        'plant_general_sub_specie_id' => 'exists:plant_generals,id',
     ];
     /**
      * The database table used by the model.
@@ -168,7 +172,7 @@ class Plant extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['article_id', 'created_at', 'deleted_at', 'description', 'domestic_name', 'location_id', 'name', 'general_class_id', 'general_cotyledon_id', 'general_family_id', 'general_flowering_id', 'general_genus_id', 'general_group_id', 'general_order_id', 'general_specie_id', 'general_sperm_id', 'general_sub_specie_id', 'general_variety_id', 'updated_at', 'user_id'];
+    protected $fillable = ['article_id', 'author_id', 'created_at', 'deleted_at', 'description', 'domestic_name', 'location_id', 'name', 'plant_general_class_id', 'plant_general_cotyledon_id', 'plant_general_family_id', 'plant_general_flowering_id', 'plant_general_genus_id', 'plant_general_group_id', 'plant_general_order_id', 'plant_general_specie_id', 'plant_general_sperm_id', 'plant_general_sub_specie_id', 'plant_general_variety_id', 'updated_at', 'user_id'];
 
 
     /**
@@ -182,14 +186,10 @@ class Plant extends BaseModel
         'domestic_name' => 'json',
     ];
 
-    protected $with= ['author', 'seeds', 'article', 'location', 'generalFlowering', 'generalVariety', 'generalSpecie', 'generalOrder','generalClass','generalGroup','generalGenus','generalSperm','generalCotyledon','user', 'seedPlants','herbariums'];
 
-    /**
-     * @return MorphToMany
-     */
-    public function authors(): MorphToMany
+    public function author(): BelongsTo
     {
-        return $this->morphToMany(Author::class, 'morph_author');
+        return $this->belongsTo(Author::class);
     }
 
     public function seeds(): BelongsToMany
@@ -219,82 +219,22 @@ class Plant extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function generalFlowering(): BelongsTo
+    public function plantGeneral(): BelongsTo
     {
         return $this->belongsTo(General::class,
-            'general_flowering_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function generalVariety(): BelongsTo
-    {
-        return $this->belongsTo(General::class,
-            'general_variety_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function generalSpecie(): BelongsTo
-    {
-        return $this->belongsTo(General::class,
-            'general_specie_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function generalOrder(): BelongsTo
-    {
-        return $this->belongsTo(General::class,
-            'general_order_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function generalClass(): BelongsTo
-    {
-        return $this->belongsTo(General::class,
-            'general_class_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function generalGroup(): BelongsTo
-    {
-        return $this->belongsTo(General::class,
-            'general_group_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function generalGenus(): BelongsTo
-    {
-        return $this->belongsTo(General::class,
-            'general_genus_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function generalSperm(): BelongsTo
-    {
-        return $this->belongsTo(General::class,
-            'general_sperm_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function generalCotyledon(): BelongsTo
-    {
-        return $this->belongsTo(General::class,
-            'general_cotyledon_id');
+            [
+                'plant_general_class_id',
+                'plant_general_family_id',
+                'plant_general_flowering_id',
+                'plant_general_genus_id',
+                'plant_general_group_id',
+                'plant_general_order_id',
+                'plant_general_specie_id',
+                'plant_general_sperm_id',
+                'plant_general_sub_specie_id',
+                'plant_general_variety_id',
+                'plant_general_cotyledon_id',
+            ]);
     }
 
     /**
@@ -312,12 +252,11 @@ class Plant extends BaseModel
     {
         return $this->hasMany(SeedPlant::class)->latest();
     }
-
     /**
-     * @return HasMany
+     * @return HasOne
      */
-    public function herbariums(): HasMany
+    public function herbarium(): HasOne
     {
-        return $this->hasMany(Herbarium::class);
+        return $this->hasOne(Herbarium::class);
     }
 }

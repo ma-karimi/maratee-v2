@@ -122,6 +122,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class MedicinalPlant extends BaseModel
 {
 
+    public static $linguistically=['treatment'=>false,'vast_cultivation'=>false,'studied_sample'=>false,'secondary_metabolite'=>false,'exclusivity'=>false,'life_cycle'=>false,'acidity'=>false];
     public static $rules=[
         'plant_origin_id' => 'integer',
         'code_no' => 'integer',

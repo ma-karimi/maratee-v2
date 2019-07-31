@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Garden extends BaseModel
 {
 
-
+    public static $linguistically=['section'=>true,'region'=>true,'number'=>false];
     /**
      * The database table used by the model.
      *

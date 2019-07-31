@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class City extends BaseModel
 {
 
-
+    public static $linguistically=['name'=>true];
     public static $rules = [
         'province_id' => 'required|exists:provinces,id',
         'code' => 'string',

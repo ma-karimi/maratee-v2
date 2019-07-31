@@ -270,6 +270,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Seed extends BaseModel
 {
+    public static $linguistically=['transmittance'=>false,'land_form'=>false,'slope_direction'=>false,'landscape'=>false,'soil_depth'=>false,'density'=>false,'drainage'=>false,'soil_ph'=>false,'salinity'=>false,'lime'=>false,'climate'=>false,'extent_population'=>false,'vegetation'=>false,'soil_erosion'=>false,'land_reforming'=>false,'sample_type'=>false,'flowering'=>false,'pollination'=>false,'pollination_agent'=>false,'fruit_type'=>false,'collecting_type'=>false,'seeding_month'=>false,'reproduction'=>false,'vegetative_form'=>false,'mother_health'=>false,'notes'=>false];
     public static $rules=[
         'herbarium_id' => 'required|exists:herbariums,id',
         'protection_id' => 'required|exists:protections,id',

@@ -164,6 +164,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Paleontology extends BaseModel
 {
+    public static $linguistically=['infraspecific'=>false,'typestatus'=>false,'preservation'=>false,'color'=>false,'element'=>false,'treatment'=>false,'additional_info'=>false,'access'=>false,'excavation'=>false,'collection_name'=>false,'common_name'=>false];
     public static $rules=[
         'catalog_no' => 'integer',
         'specimen_no' => 'string',

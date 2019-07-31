@@ -125,13 +125,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Transition extends Model
 {
-
+    public static $linguistically=['previous_value'=>true,'next_value'=>true,'description'=>false];
     /**
      * The "type" of the auto-incrementing ID.
      *
      * @var string
      */
-    protected $keyType = 'integer';
+    //protected $keyType = 'integer';
 
     /**
      * @var array

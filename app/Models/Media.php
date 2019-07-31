@@ -112,6 +112,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Media extends BaseModel
 {
 
+    public static $linguistically=['name'=>false,'description'=>false,'info_type'=>false,'reference'=>false];
     public static $rules=[
         'format_type' => 'required|string',
         'date' => 'date',

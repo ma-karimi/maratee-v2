@@ -84,7 +84,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Locality extends BaseModel
 {
-
+    public static $linguistically=['formation'=>false,'stratigraphy'=>false,'lithology'=>false,'fauna'=>false,'layer'=>false,'description'=>false];
     public static $rules=[
         'paleontology_id' => 'required|exists:paleontologies,id',
         'location_id' => 'required|exists:locations,id',

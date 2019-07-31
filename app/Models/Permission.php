@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -104,8 +105,9 @@ use Illuminate\Database\Eloquent\Model;
  *      ),
  * )
  */
-class Permission extends Model
+class Permission extends BaseModel
 {
+    public static $linguistically=['owner_crud'=>true,'same_level_crud'=>true,'upper_level_crud'=>true,'lower_level_crud'=>true];
     /**
      * @var array
      */

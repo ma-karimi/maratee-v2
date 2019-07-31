@@ -48,6 +48,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class MedicinalPlantMorphology extends BaseModel
 {
+    public static $linguistically=['value'=>true];
     public static $rules=[
         'medicinal_plant_id' => 'required|exists:medicinal_plants,id',
         'morphology_id' => 'required|exists:morphologies,id'

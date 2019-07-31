@@ -19,7 +19,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class CryoBankAction extends BaseModel
 {
 
-
     public static $rules = [
         'cryo_bank_id' => 'required|exists:cryo_banks,id',
         'action_id' => 'required|exists:actions,id',
