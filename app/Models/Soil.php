@@ -44,7 +44,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Soil extends BaseModel
 {
-    public static $linguistically=['type'=>true,'description'=>false];
+//    public static $linguistically=['type'=>true,'description'=>false];
     /**
      * The database table used by the model.
      *

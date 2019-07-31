@@ -3,8 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Awobaz\Compoships\Compoships;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 /**
  * @SWG\Definition(
  *      definition="HerbariumAppendix",
@@ -48,8 +47,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class HerbariumAppendix extends BaseModel
 {
-    use Compoships;
-    public static $rules=[
+    public static $rules = [
         'herbarium_id' => 'required|exists:herbariums,id',
         'destination_herbarium_id' => 'required|exists:herbariums,id',
         'appendix' => 'required|string',

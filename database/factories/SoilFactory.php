@@ -8,6 +8,5 @@ $factory->define(App\Models\Soil::class, function (Faker $faker) {
     return [
         'type' => make_json($faker->word),
         'description' => make_json($faker->text),
-        'deleted_at' => $faker->dateTimeBetween(),
     ];
 });
