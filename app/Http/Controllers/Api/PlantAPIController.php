@@ -31,10 +31,17 @@ class PlantAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/plants",
-     *      summary="Get a listing of the Plants.",
+     *      summary="Get a listing of the Plants & Plant has flowering herbarium",
      *      tags={"Plant"},
      *      description="Get all Plants",
      *      produces={"application/json"},
+     *   @SWG\Parameter(
+     *     name="is_flowering",
+     *     in="query",
+     *     description="0,1",
+     *     required=false,
+     *     type="integer"
+     *   ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
