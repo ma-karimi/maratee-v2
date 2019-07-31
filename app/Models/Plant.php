@@ -139,7 +139,7 @@ class Plant extends BaseModel
 {
     use PlantScope;
 
-    public static $linguistically=['name'=>true,'description'=>false,'domestic_name'=>false];
+    public static $linguistically = ['name' => true, 'description' => false, 'domestic_name' => false];
 
     public static $rules = [
         'user_id' => 'exists:users,id',
@@ -183,7 +183,8 @@ class Plant extends BaseModel
         'domestic_name' => 'json',
     ];
 
-    protected $with = ['author', 'seeds', 'article', 'location', 'generalFlowering', 'generalVariety', 'generalSpecie', 'generalOrder', 'generalClass', 'generalGroup', 'generalGenus', 'generalSperm', 'generalCotyledon', 'user', 'seedPlants', 'herbariums'];
+    protected $with = ['seeds', 'article', 'location', 'generalFlowering', 'generalVariety', 'generalSpecie', 'generalOrder', 'generalClass', 'generalGroup', 'generalGenus', 'generalSperm', 'generalCotyledon', 'user', 'seedPlants', 'herbariums', 'authors'];
+
 
     /**
      * @return MorphToMany

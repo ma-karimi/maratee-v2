@@ -89,18 +89,21 @@ abstract class BaseRepository
         $query = $this->model->newQuery();
         if (count($search)) {
             foreach ($search as $key => $value) {
-//        dd($this->getFieldsSearchable());
-                if (in_array($key, $this->getFieldsSearchable())) {
-                    $query->where($key, $value);
-                }
+                    if(Arr::exists($this->getFieldsSearchable(), $key)){
+                        $scope = $this->getFieldsSearchable()[$key]['scope'];
+                        $query->$scope($value);
+                    }
+//                if (in_array($key, $this->getFieldsSearchable())) {
+//                    $query->where($key, $value);
+//                }
             }
         }
 
-        if (!is_null($skip)) {
+        if ($skip !== null) {
             $query->skip($skip);
         }
 
-        if (!is_null($limit)) {
+        if ($limit !== null) {
             $query->limit($limit);
         }
 

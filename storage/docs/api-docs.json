@@ -16378,10 +16378,19 @@
                 "tags": [
                     "Plant"
                 ],
-                "summary": "Get a listing of the Plants.",
+                "summary": "Get a listing of the Plants & Plant has herbarium flowering",
                 "description": "Get all Plants",
                 "produces": [
                     "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "is_flowering",
+                        "in": "query",
+                        "description": "0,1",
+                        "required": false,
+                        "type": "integer"
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -27696,9 +27705,9 @@
         "Plant": {
             "required": [
                 "name",
-                "plant_general_family_id",
-                "plant_general_genus_id",
-                "plant_general_cotyledon_id"
+                "general_family_id",
+                "general_genus_id",
+                "general_cotyledon_id"
             ],
             "properties": {
                 "id": {
@@ -27727,58 +27736,58 @@
                         "type": "string"
                     }
                 },
-                "plant_general_sub_specie_id": {
-                    "description": "plant_general_sub_specie_id",
+                "general_sub_specie_id": {
+                    "description": "general_sub_specie_id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_general_variety_id": {
-                    "description": "plant_general_variety_id",
+                "general_variety_id": {
+                    "description": "general_variety_id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_general_specie_id": {
-                    "description": "plant_general_specie_id",
+                "general_specie_id": {
+                    "description": "general_specie_id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_general_class_id": {
-                    "description": "plant_general_class_id",
+                "general_class_id": {
+                    "description": "general_class_id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_general_group_id": {
-                    "description": "plant_general_group_id",
+                "general_group_id": {
+                    "description": "general_group_id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_general_order_id": {
-                    "description": "plant_general_order_id",
+                "general_order_id": {
+                    "description": "general_order_id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_general_flowering_id": {
-                    "description": "plant_general_flowering_id",
+                "general_flowering_id": {
+                    "description": "general_flowering_id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_general_sperm_id": {
-                    "description": "plant_general_sperm_id",
+                "general_sperm_id": {
+                    "description": "general_sperm_id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_general_family_id": {
-                    "description": "plant_general_family_id",
+                "general_family_id": {
+                    "description": "general_family_id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_general_genus_id": {
-                    "description": "plant_general_genus_id",
+                "general_genus_id": {
+                    "description": "general_genus_id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_general_cotyledon_id": {
-                    "description": "plant_general_cotyledon_id",
+                "general_cotyledon_id": {
+                    "description": "general_cotyledon_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -27789,11 +27798,6 @@
                 },
                 "article_id": {
                     "description": "article_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "author_id": {
-                    "description": "author_id",
                     "type": "integer",
                     "format": "int32"
                 },

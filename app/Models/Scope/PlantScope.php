@@ -20,9 +20,9 @@ trait PlantScope
      */
     public function scopeOfFloweringHerbariums($query,bool $value=false)
     {
-        return $query->whereHas('herbariums', function (Builder $query) use($value){
-            $query->isFlowering($value);
-        })->get();
+        return $query->whereHas('herbariums', function ($query) use($value){
+             $query->isFlowering($value);
+        });
     }
 
     /**

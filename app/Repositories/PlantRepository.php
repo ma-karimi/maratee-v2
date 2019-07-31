@@ -18,9 +18,7 @@ class PlantRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'is_flowering'=>[
-            'relation'=>true,
-            'scope'=>'isFlower',
-            'operation'=>'LIKE'
+            'scope'=>'ofFloweringHerbariums'
         ]
     ];
 
@@ -41,4 +39,5 @@ class PlantRepository extends BaseRepository
     {
         return Plant::class;
     }
+
 }
