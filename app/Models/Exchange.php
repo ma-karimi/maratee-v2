@@ -81,14 +81,6 @@ class Exchange extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function recieverHerbarium(): BelongsTo
-    {
-        return $this->belongsTo(Herbarium::class, 'receive_herbarium_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
     public function sendHerbarium(): BelongsTo
     {
         return $this->belongsTo(Herbarium::class, 'send_herbarium_id');

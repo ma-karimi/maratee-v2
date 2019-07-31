@@ -78,33 +78,33 @@ class General extends BaseModel
         'name' => 'json',
         'description' => 'json',
     ];
-
-    /**
-     * @return HasMany
-     */
-    public function herbariums(): HasMany
-    {
-        return $this->hasMany(Herbarium::class, 'general_group_id')->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function plants(): HasMany
-    {
-        return $this->hasMany(Plant::class, [
-            'general_class_id',
-            'general_family_id',
-            'general_flowering_id',
-            'general_genus_id',
-            'general_group_id',
-            'general_order_id',
-            'general_specie_id',
-            'general_sperm_id',
-            'general_sub_specie_id',
-            'general_variety_id',
-            'general_cotyledon_id',
-        ])->latest();
-    }
+//
+//    /**
+//     * @return HasMany
+//     */
+//    public function herbariums(): HasMany
+//    {
+//        return $this->hasMany(Herbarium::class, 'general_group_id')->latest();
+//    }
+//
+//    /**
+//     * @return HasMany
+//     */
+//    public function plants(): HasMany
+//    {
+//        return $this->hasMany(Plant::class, [
+//            'general_class_id',
+//            'general_family_id',
+//            'general_flowering_id',
+//            'general_genus_id',
+//            'general_group_id',
+//            'general_order_id',
+//            'general_specie_id',
+//            'general_sperm_id',
+//            'general_sub_specie_id',
+//            'general_variety_id',
+//            'general_cotyledon_id',
+//        ])->latest();
+//    }
 
 }

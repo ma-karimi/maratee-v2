@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use App\Models\Scope\HerbariumScope;
+use Awobaz\Compoships\Compoships;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -152,8 +153,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Herbarium extends BaseModel
 {
-    use HerbariumScope;
-    public static $linguistically=['name'=>false,'description'=>false,'organization_description'=>false,'flowering'=>false];
+    use HerbariumScope, Compoships;
+    public static $linguistically = ['flowering' => false];
     public static $rules = [
         'location_id' => 'required|exists:locations,id',
         'protection_id' => 'exists:protections,id',
@@ -201,6 +202,7 @@ class Herbarium extends BaseModel
         'organization_description' => 'json',
     ];
 
+//    protected $with = ['actionHubs', 'borrows', 'attendances', 'chromosomes', 'cryoBanks', 'sendHerbariumExchanges', 'RecieveHerbariumExchanges','sendHerbariumAppendixes', 'RecieveHerbariumAppendixes', 'seeds', 'medias', 'medicals', 'medicinalPlants', 'organization', 'location', 'protection', 'generalType', 'generalPhenology', 'plant', 'generalGroup', 'generalPhytogeography'];
 
     /**
      * @return HasMany
@@ -245,9 +247,33 @@ class Herbarium extends BaseModel
     /**
      * @return HasMany
      */
-    public function exchanges(): HasMany
+    public function sendHerbariumExchanges(): HasMany
     {
-        return $this->hasMany(Exchange::class, ['send_herbarium_id', 'receive_herbarium_id'])->latest();
+        return $this->hasMany(Exchange::class, 'send_herbarium_id')->latest();
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function recieveHerbariumExchanges(): HasMany
+    {
+        return $this->hasMany(Exchange::class, 'recieve_herbarium_id')->latest();
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function sendHerbariumAppendixes(): HasMany
+    {
+        return $this->hasMany(HerbariumAppendix::class, 'send_appendixes_id')->latest();
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function recieveHerbariumAppendixes(): HasMany
+    {
+        return $this->hasMany(HerbariumAppendix::class, 'recieve_appendixes_id')->latest();
     }
 
     /**
@@ -255,7 +281,7 @@ class Herbarium extends BaseModel
      */
     public function seeds(): HasMany
     {
-        return $this->hasMany(Seed::class, 'herbarium_id')->latest();
+        return $this->hasMany(Seed::class)->latest();
     }
 
 
@@ -283,11 +309,6 @@ class Herbarium extends BaseModel
         return $this->hasMany(MedicinalPlant::class)->latest();
     }
 
-    public function phenology()
-    {
-        return $this->belongsTo(Paleontology::class);
-    }
-
     public function organization()
     {
         return $this->belongsTo(Organization::class);
@@ -303,9 +324,14 @@ class Herbarium extends BaseModel
         return $this->belongsTo(Protection::class);
     }
 
-    public function plantType()
+    public function generalType()
     {
-        return $this->belongsTo(Paleontology::class);
+        return $this->belongsTo(General::class, 'general_type_id');
+    }
+
+    public function generalPhenology()
+    {
+        return $this->belongsTo(General::class, 'general_phenology_id');
     }
 
     public function plant()
@@ -315,11 +341,12 @@ class Herbarium extends BaseModel
 
     public function generalGroup()
     {
-        return $this->belongsTo(General::class);
+        return $this->belongsTo(General::class,
+            'general_group_id');
     }
 
-    public function phytogeography()
+    public function generalPhytogeography()
     {
-        return $this->belongsTo(Paleontology::class);
+        return $this->belongsTo(General::class, 'general_phenology_id');
     }
 }
