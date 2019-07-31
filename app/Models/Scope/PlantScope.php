@@ -1,0 +1,39 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: alireza
+ * Date: 7/13/19
+ * Time: 4:03 PM
+ */
+
+namespace App\Models\Scope;
+
+
+use Illuminate\Database\Eloquent\Builder;
+
+trait PlantScope
+{
+    /**
+     * @param $query
+     * @param bool $value
+     * @return mixed
+     */
+    public function scopeOfFloweringHerbariums($query,bool $value=false)
+    {
+        return $query->whereHas('herbariums', function (Builder $query) use($value){
+            $query->isFlowering($value);
+        })->get();
+    }
+
+    /**
+     * @param $query
+     * @param Boolean $value
+     * @return mixed
+     */
+    /*public function scopeIsFlower($query,Boolean $value)
+    {
+        return $query->whereHas('general', function (Builder $query) {
+            $query->where('type','flowering');
+        })->where('general_flowering_id',$value)->get();
+    }*/
+}

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Scope\HerbariumScope;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -151,7 +152,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Herbarium extends BaseModel
 {
-
+    use HerbariumScope;
     public static $linguistically=['name'=>false,'description'=>false,'organization_description'=>false,'flowering'=>false];
     public static $rules = [
         'location_id' => 'required|exists:locations,id',

@@ -27,7 +27,7 @@ $factory->define(App\Models\Herbarium::class, function (Faker $faker) {
         'tip_type' => $faker->word,
         'name' => make_json($faker->name),
         'description' => make_json($faker->text),
-        'is_flowering' => $faker->numberBetween(1, 100),
+        'is_flowering' => $faker->numberBetween(0, 1),
         'organization_description' => $faker->word,
         'herbarium_tip_location' => $faker->numberBetween(1, 100),
         'type_description' => $faker->word,

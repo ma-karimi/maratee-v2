@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Scope\PlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -142,6 +143,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class Plant extends BaseModel
 {
+    use PlantScope;
+
     public static $linguistically=['name'=>true,'description'=>false,'domestic_name'=>false];
 
     public static $rules=[
