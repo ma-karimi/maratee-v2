@@ -18,13 +18,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          property="name",
  *          description="name",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="type",

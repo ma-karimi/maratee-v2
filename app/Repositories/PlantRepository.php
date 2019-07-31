@@ -17,7 +17,11 @@ class PlantRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        
+        'is_flowering'=>[
+            'relation'=>true,
+            'scope'=>'isFlower',
+            'operation'=>'LIKE'
+        ]
     ];
 
     /**

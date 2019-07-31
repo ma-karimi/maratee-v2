@@ -9,7 +9,7 @@ use App\Models\Contracts\BaseModel;
  *            definition="Author",
  *            required={"name"},
  * 			@SWG\Property(property="name", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
@@ -38,9 +38,19 @@ class Author extends BaseModel
      */
     protected $casts = ['name' => 'json'];
 
-
+    /**
+     * Get all of the posts that are assigned this tag.
+     */
     public function plants()
     {
-        return $this->hasMany(Plant::class, 'author_id')->latest();
+        return $this->morphedByMany(Plant::class, 'morph_author');
+    }
+
+    /**
+     * Get all of the videos that are assigned this tag.
+     */
+    public function generals()
+    {
+        return $this->morphedByMany(General::class, 'morph_author');
     }
 }
