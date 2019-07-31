@@ -5,7 +5,6 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Plant::class, function (Faker $faker) {
-    $authors = \App\Models\Author::pluck('id')->toArray();
     $articles = \App\Models\Article::pluck('id')->toArray();
     $users = \App\Models\User::pluck('id')->toArray();
     $locations = \App\Models\Location::pluck('id')->toArray();
@@ -24,7 +23,6 @@ $factory->define(App\Models\Plant::class, function (Faker $faker) {
         'name' => make_json($faker->word),
         'domestic_name' => make_json($faker->word),
         'description' => make_json($faker->text),
-        'author_id' => $faker->randomElement($authors),
         'article_id' => $faker->randomElement($articles),
         'user_id' => $faker->randomElement($users),
         'location_id' => $faker->randomElement($locations),

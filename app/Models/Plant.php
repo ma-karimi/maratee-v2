@@ -183,16 +183,8 @@ class Plant extends BaseModel
         'domestic_name' => 'json',
     ];
 
-    protected $with = ['seeds', 'article', 'location', 'generalFlowering', 'generalVariety', 'generalSpecie', 'generalOrder', 'generalClass', 'generalGroup', 'generalGenus', 'generalSperm', 'generalCotyledon', 'user', 'seedPlants', 'herbariums', 'authors'];
+    protected $with = ['seeds', 'article', 'location', 'generalFlowering', 'generalVariety', 'generalSpecie', 'generalOrder', 'generalClass', 'generalGroup', 'generalGenus', 'generalSperm', 'generalCotyledon', 'user', 'seedPlants', 'herbariums'];
 
-
-    /**
-     * @return MorphToMany
-     */
-    public function authors(): MorphToMany
-    {
-        return $this->morphToMany(Author::class, 'morph_author');
-    }
 
     public function seeds(): BelongsToMany
     {

@@ -29,13 +29,9 @@ class CreatePlantsTable extends Migration {
             $table->unsignedInteger('general_family_id');
             $table->unsignedInteger('general_genus_id');
             $table->unsignedInteger('general_cotyledon_id');
-
             $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('article_id')->nullable();
-            $table->unsignedInteger('author_id')->nullable();
             $table->unsignedInteger('location_id')->nullable();
-
-
             $table->timeStampsTz();
             $table->dateTimeTz('deleted_at')->nullable();
 		});

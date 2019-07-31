@@ -14,7 +14,6 @@ class AddForeignKeysToPlantsTable extends Migration {
 	{
 		Schema::table('plants', function(Blueprint $table)
 		{
-			$table->foreign('author_id')->references('id')->on('authors')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('general_specie_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('general_sub_specie_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');

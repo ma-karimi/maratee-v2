@@ -46,7 +46,13 @@ class DatabaseSeeder extends Seeder
             ReproductionTableSeeder::class,
             SoilTableSeeder::class,
             SoilFeatureTableSeeder::class,
+
+            PlantTableSeeder::class,
+
             PaleontologyTableSeeder::class,
+
+
+
             TreatmentTableSeeder::class,
             MethodTableSeeder::class,
 
@@ -57,11 +63,10 @@ class DatabaseSeeder extends Seeder
             ActionHubTableSeeder::class,
             ConnectionTableSeeder::class,
 
-
             PaleontologyActionTableSeeder::class,
             PaleontologyCitationTableSeeder::class,
             PlantingActionTableSeeder::class,
-            PlantTableSeeder::class,
+
             HerbariumTableSeeder::class,
             ProductTableSeeder::class,
             SeedTableSeeder::class,

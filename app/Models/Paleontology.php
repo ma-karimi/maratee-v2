@@ -149,6 +149,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
+ *          property="plant_id",
+ *          description="plant_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -176,6 +182,7 @@ class Paleontology extends BaseModel
         'drawer' => 'integer',
         'pieces' => 'integer',
         'geology_age_id' => 'required|integer',
+        'plant_id' => 'required|integer',
         'last_update' => 'date',
         'location_no' => 'integer'
     ];
@@ -191,7 +198,7 @@ class Paleontology extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['access', 'additional_info', 'barcode_no', 'catalog_no', 'closet', 'collection_name', 'color', 'common_name', 'created_at', 'deleted_at', 'drawer', 'element', 'excavation', 'field_no', 'geology_age_id', 'infraspecific', 'last_update', 'location_no', 'move_status', 'pieces', 'preservation', 'salon', 'specimen_no', 'treatment', 'typestatus', 'updated_at'];
+    protected $fillable = ['plant_id','access', 'additional_info', 'barcode_no', 'catalog_no', 'closet', 'collection_name', 'color', 'common_name', 'created_at', 'deleted_at', 'drawer', 'element', 'excavation', 'field_no', 'geology_age_id', 'infraspecific', 'last_update', 'location_no', 'move_status', 'pieces', 'preservation', 'salon', 'specimen_no', 'treatment', 'typestatus', 'updated_at'];
 
 
     /**
@@ -234,6 +241,13 @@ class Paleontology extends BaseModel
     public function geologyAge(): BelongsTo
     {
         return $this->belongsTo(GeologyAge::class);
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function plant(): BelongsTo
+    {
+        return $this->belongsTo(Plant::class);
     }
 
     /**

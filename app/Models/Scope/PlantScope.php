@@ -27,10 +27,10 @@ trait PlantScope
 
     /**
      * @param $query
-     * @param Boolean $value
+     * @param bool $value
      * @return mixed
      */
-    /*public function scopeIsFlower($query,Boolean $value)
+    /*public function scopeIsFlower($query,bool $value)
     {
         return $query->whereHas('general', function (Builder $query) {
             $query->where('type','flowering');
