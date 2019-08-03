@@ -30,8 +30,6 @@ Route::prefix('v1')->group(function () {
 });
 
 Route::resource('continents', 'ContinentAPIController');
-
-
 Route::resource('soil_features', 'SoilFeatureAPIController');
 
 Route::resource('soils', 'SoilAPIController');
