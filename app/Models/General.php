@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+
 /**
  * @SWG\Definition(
  *      definition="General",
@@ -107,4 +109,11 @@ class General extends BaseModel
 //        ])->latest();
 //    }
 
+    /**
+     * @return MorphToMany
+     */
+    public function authors(): MorphToMany
+    {
+        return $this->morphToMany(Author::class, 'morph_author');
+    }
 }
