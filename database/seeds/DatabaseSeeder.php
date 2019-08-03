@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             CredentialTableSeeder::class,
             ProtectionTableSeeder::class,
             DepartmentTableSeeder::class,
+            DivisionTableSeeder::class,
             EntryTableSeeder::class,
             GeologyAgeTableSeeder::class,
             IrrigationTableSeeder::class,
@@ -104,7 +105,6 @@ class DatabaseSeeder extends Seeder
 
             TechnologyCollectionTableSeeder::class,
             VisitTableSeeder::class,
-            DivisionTableSeeder::class,
             RoleTableSeeder::class,
             GroupTableSeeder::class,
             TableTableSeeder::class,

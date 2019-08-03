@@ -10,7 +10,8 @@ $factory->define(App\Models\Herbarium::class, function (Faker $faker) {
     $phytogeographies = \App\Models\General::whereType('phytogeography')->pluck('id')->toArray();
     $protections = \App\Models\Protection::pluck('id')->toArray();
     $plant_groups = \App\Models\General::whereType('group')->pluck('id')->toArray();
-    $organizations = \App\Models\Organization::pluck('id')->toArray();
+    $departments = \App\Models\Department::pluck('id')->toArray();
+    $divisions = \App\Models\Division::pluck('id')->toArray();
     $plant_types = \App\Models\General::whereType('plant_type')->pluck('id')->toArray();
     $plants = \App\Models\Plant::pluck('id')->toArray();
     return [
@@ -19,7 +20,8 @@ $factory->define(App\Models\Herbarium::class, function (Faker $faker) {
         'general_phenology_id' => $faker->randomElement($phenologies),
         'protection_id' => $faker->randomElement($protections),
         'general_phytogeography_id' => $faker->randomElement($phytogeographies),
-        'organization_id' => $faker->randomElement($organizations),
+        'department_id' => $faker->randomElement($departments),
+        'division_id' => $faker->randomElement($divisions),
         'sheets_no' => $faker->numberBetween(1, 100),
         'samples_no' => $faker->numberBetween(1, 100),
         'tip_qt' => $faker->numberBetween(1, 100),

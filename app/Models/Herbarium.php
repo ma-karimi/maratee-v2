@@ -45,8 +45,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="organization_id",
- *          description="organization_id",
+ *          property="department_id",
+ *          description="department_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="division_id",
+ *          description="division_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -157,7 +163,8 @@ class Herbarium extends BaseModel
     public static $rules = [
         'location_id' => 'required|exists:locations,id',
         'protection_id' => 'exists:protections,id',
-        'organization_id' => 'required|exists:organizations,id',
+        'division_id' => 'required|exists:divisions,id',
+        'department_id' => 'required|exists:departments,id',
         'plant_id' => 'required|exists:plants,id',
         'general_phytogeography_id' => 'exists:generals,id',
         'general_phenology_id' => 'exists:generals,id',
@@ -186,7 +193,7 @@ class Herbarium extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'flowering', 'herbarium_tip_location', 'is_flowering', 'location_id', 'name', 'number', 'organization_description', 'organization_id', 'general_phenology_id', 'physical_tip_qt', 'general_phytogeography_id', 'general_group_id', 'general_type_id', 'protection_id', 'samples_no', 'sheets_no', 'plant_id', 'tip_qt', 'tip_type', 'type_description', 'updated_at'];
+    protected $fillable = ['created_at', 'deleted_at', 'description', 'flowering', 'herbarium_tip_location', 'is_flowering', 'location_id', 'name', 'number', 'organization_description', 'department_id','division_id', 'general_phenology_id', 'physical_tip_qt', 'general_phytogeography_id', 'general_group_id', 'general_type_id', 'protection_id', 'samples_no', 'sheets_no', 'plant_id', 'tip_qt', 'tip_type', 'type_description', 'updated_at'];
 
 
     /**
@@ -336,6 +343,16 @@ class Herbarium extends BaseModel
     public function plant()
     {
         return $this->belongsTo(Plant::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function division()
+    {
+        return $this->belongsTo(Division::class);
     }
 
     public function generalGroup()
