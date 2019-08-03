@@ -30,10 +30,10 @@ class HerbariumAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/herbaria",
-     *      summary="Get a listing of the Herbaria.",
+     *      path="/herbarium",
+     *      summary="Get a listing of the Herbarium.",
      *      tags={"Herbarium"},
-     *      description="Get all Herbaria",
+     *      description="Get all Herbarium",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -59,13 +59,13 @@ class HerbariumAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $herbaria = $this->herbariumRepository->all(
+        $herbarium = $this->herbariumRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
         );
 
-        return $this->sendResponse($herbaria->toArray(), 'Herbaria retrieved successfully');
+        return $this->sendResponse($herbarium->toArray(), 'Herbarium retrieved successfully');
     }
 
     /**
@@ -73,7 +73,7 @@ class HerbariumAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/herbaria",
+     *      path="/herbarium",
      *      summary="Store a newly created Herbarium in storage",
      *      tags={"Herbarium"},
      *      description="Store Herbarium",
@@ -267,7 +267,7 @@ class HerbariumAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/herbaria/{id}",
+     *      path="/herbarium/{id}",
      *      summary="Display the specified Herbarium",
      *      tags={"Herbarium"},
      *      description="Get Herbarium",
@@ -318,7 +318,7 @@ class HerbariumAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/herbaria/{id}",
+     *      path="/herbarium/{id}",
      *      summary="Update the specified Herbarium in storage",
      *      tags={"Herbarium"},
      *      description="Update Herbarium",
@@ -527,7 +527,7 @@ class HerbariumAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/herbaria/{id}",
+     *      path="/herbarium/{id}",
      *      summary="Remove the specified Herbarium from storage",
      *      tags={"Herbarium"},
      *      description="Delete Herbarium",
