@@ -110,6 +110,7 @@ class DatabaseSeeder extends Seeder
             TableTableSeeder::class,
             TransitionTableSeeder::class,
             PermissionTableSeeder::class,
+            MorphAuthorTableSeeder::class,
         ]);
         Model::reguard();
 
