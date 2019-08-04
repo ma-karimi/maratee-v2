@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * @SWG\Definition(
@@ -33,14 +32,18 @@ use Illuminate\Database\Eloquent\Model;
 class Division extends BaseModel
 {
 
-    public static $linguistically=['name'=>true];
+    public static $linguistically = ['name' => true];
 
-    protected $casts=['name'=>'json'];
+    protected $casts = ['name' => 'json'];
     /**
      * @var array
      */
     protected $fillable = ['department_id', 'name', 'created_at', 'updated_at'];
 
+    public function scopeOfDepartment($query, $department_id)
+    {
+        return $query->where('department_id', $department_id);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
