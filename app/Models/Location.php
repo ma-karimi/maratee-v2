@@ -214,4 +214,11 @@ class Location extends BaseModel
     {
         return $this->belongsTo(Village::class);
     }
+    /**
+     * @return BelongsTo
+     */
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
 }

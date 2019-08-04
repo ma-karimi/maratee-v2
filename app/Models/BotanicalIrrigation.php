@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class BotanicalIrrigation extends BaseModel
 {
 
-    public static $linguistically=['daytime'=>true,'requirement'=>false,'seasonal_feature'=>false];
+    public static $linguistically=['daytime'=>true,'requirement'=>false];
     public static $rules = [
         'botanical_id' => 'required|exists:botanicals,id',
         'irrigation_id' => 'required|exists:irrigations,id'

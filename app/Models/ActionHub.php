@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Scope\ActionHubScope;
 
 /**
  * @SWG\Definition(
@@ -79,7 +80,7 @@ use App\Models\Contracts\BaseModel;
  */
 class ActionHub extends BaseModel
 {
-
+    use ActionHubScope;
     public static $rules = [
         'action_id' => 'required|exists:actions,id',
         'department_id' => 'exists:departments,id',

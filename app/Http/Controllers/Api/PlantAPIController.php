@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\CreatePlantAPIRequest;
 use App\Http\Requests\Api\UpdatePlantAPIRequest;
+use App\Http\Resources\PlantResource;
+use App\Models\Location;
 use App\Models\Plant;
 use App\Repositories\PlantRepository;
 use Illuminate\Http\Request;
@@ -72,7 +74,9 @@ class PlantAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return $this->sendResponse($plants->toArray(), 'Plants retrieved successfully');
+        $plants=PlantResource::collection($plants);
+
+        return $this->sendResponse($plants, 'Plants retrieved successfully');
     }
 
     /**

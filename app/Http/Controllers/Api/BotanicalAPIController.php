@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\CreateBotanicalAPIRequest;
 use App\Http\Requests\Api\UpdateBotanicalAPIRequest;
+use App\Http\Resources\BotanicalResource;
 use App\Models\Botanical;
 use App\Repositories\BotanicalRepository;
 use Illuminate\Http\Request;
@@ -64,8 +65,8 @@ class BotanicalAPIController extends AppBaseController
             $request->get('skip'),
             $request->get('limit')
         );
-
-        return $this->sendResponse($botanicals->toArray(), 'Botanicals retrieved successfully');
+        $botanicals=BotanicalResource::collection($botanicals);
+        return $this->sendResponse($botanicals, 'Botanicals retrieved successfully');
     }
 
     /**

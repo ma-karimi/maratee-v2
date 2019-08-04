@@ -211,11 +211,26 @@ class Herbarium extends BaseModel
 //    protected $with = ['actionHubs', 'borrows', 'attendances', 'chromosomes', 'cryoBanks', 'sendHerbariumExchanges', 'RecieveHerbariumExchanges','sendHerbariumAppendixes', 'RecieveHerbariumAppendixes', 'seeds', 'medias', 'medicals', 'medicinalPlants', 'organization', 'location', 'protection', 'generalType', 'generalPhenology', 'plant', 'generalGroup', 'generalPhytogeography'];
 
     /**
+     * @param null $parameter
      * @return HasMany
      */
-    public function actionHubs(): HasMany
+    public function actionHubs($parameter=null): HasMany
     {
-        return $this->hasMany(ActionHub::class)->latest();
+        return $this->hasMany(ActionHub::class,'herbarium_id','id')
+            ->when($parameter,function ($query,$parameter){
+               return $query->ofAction($parameter);
+        })->latest();
+    }
+    /**
+     * @param null $parameter
+     * @return HasMany
+     */
+    public function plantApplication($parameter=null): HasMany
+    {
+        return $this->hasMany(PlantApplication::class,'herbarium_id','id')
+            ->when($parameter,function ($query,$parameter){
+               return $query->ofAction($parameter);
+        })->latest();
     }
 
     /**
@@ -340,6 +355,7 @@ class Herbarium extends BaseModel
         return $this->belongsTo(General::class, 'general_phenology_id');
     }
 
+
     public function plant()
     {
         return $this->belongsTo(Plant::class);
@@ -363,6 +379,6 @@ class Herbarium extends BaseModel
 
     public function generalPhytogeography()
     {
-        return $this->belongsTo(General::class, 'general_phenology_id');
+        return $this->belongsTo(General::class, 'general_phytogeography_id');
     }
 }

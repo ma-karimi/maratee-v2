@@ -247,6 +247,15 @@ class Plant extends BaseModel
     /**
      * @return BelongsTo
      */
+    public function generalSubSpecie(): BelongsTo
+    {
+        return $this->belongsTo(General::class,
+            'general_sub_specie_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
     public function generalOrder(): BelongsTo
     {
         return $this->belongsTo(General::class,
@@ -296,6 +305,14 @@ class Plant extends BaseModel
     {
         return $this->belongsTo(General::class,
             'general_cotyledon_id');
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function generalFamily(): BelongsTo
+    {
+        return $this->belongsTo(General::class,
+            'general_family_id');
     }
 
     /**

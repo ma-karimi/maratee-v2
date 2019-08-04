@@ -145,6 +145,8 @@ class User extends Authenticatable
         'work_experience' => 'integer',
     ];
 
+    protected $hidden=['password'];
+
     use HasApiTokens, UserScope, UserAccessor, Notifiable;
     /**
      * The database table used by the model.

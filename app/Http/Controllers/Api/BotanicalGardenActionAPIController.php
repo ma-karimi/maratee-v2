@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\CreateBotanicalGardenActionAPIRequest;
 use App\Http\Requests\Api\UpdateBotanicalGardenActionAPIRequest;
+use App\Http\Resources\BotanicalGardenActionResource;
 use App\Models\BotanicalGardenAction;
 use App\Repositories\BotanicalGardenActionRepository;
 use Illuminate\Http\Request;
@@ -64,8 +65,8 @@ class BotanicalGardenActionAPIController extends AppBaseController
             $request->get('skip'),
             $request->get('limit')
         );
-
-        return $this->sendResponse($botanicalGardenActions->toArray(), 'Botanical Garden Actions retrieved successfully');
+       // $botanicalGardenActions=BotanicalGardenActionResource::collection($botanicalGardenActions);
+        return $this->sendResponse($botanicalGardenActions, 'Botanical Garden Actions retrieved successfully');
     }
 
     /**

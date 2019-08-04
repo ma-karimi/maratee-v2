@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Scope\ActionScope;
 
 /**
  * @SWG\Definition(
@@ -45,7 +46,7 @@ use App\Models\Contracts\BaseModel;
 class Action extends BaseModel
 {
 
-
+    use ActionScope;
     public static $linguistically = ['name' => true, 'description' => false];
     /**
      * The database table used by the model.

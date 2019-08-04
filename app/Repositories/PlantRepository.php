@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Plant;
 use App\Repositories\BaseRepository;
+use Illuminate\Container\Container as Application;
 
 /**
  * Class PlantRepository
@@ -13,6 +14,7 @@ use App\Repositories\BaseRepository;
 
 class PlantRepository extends BaseRepository
 {
+
     /**
      * @var array
      */

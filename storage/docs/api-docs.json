@@ -14459,6 +14459,15 @@
                         }
                     },
                     {
+                        "name": "plant_id",
+                        "in": "body",
+                        "description": "Paleontology that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Paleontology"
+                        }
+                    },
+                    {
                         "name": "catalog_no",
                         "in": "body",
                         "description": "Paleontology that should be stored",
@@ -14736,6 +14745,15 @@
                     },
                     {
                         "name": "geology_age_id",
+                        "in": "body",
+                        "description": "Paleontology that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Paleontology"
+                        }
+                    },
+                    {
+                        "name": "plant_id",
                         "in": "body",
                         "description": "Paleontology that should be stored",
                         "required": true,
@@ -16378,7 +16396,7 @@
                 "tags": [
                     "Plant"
                 ],
-                "summary": "Get a listing of the Plants & Plant has herbarium flowering",
+                "summary": "Get a listing of the Plants & Plant has flowering herbarium",
                 "description": "Get all Plants",
                 "produces": [
                     "application/json"
@@ -26275,8 +26293,13 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "organization_id": {
-                    "description": "organization_id",
+                "department_id": {
+                    "description": "department_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "division_id": {
+                    "description": "division_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -27423,6 +27446,11 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "plant_id": {
+                    "description": "plant_id",
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "created_at": {
                     "description": "created_at",

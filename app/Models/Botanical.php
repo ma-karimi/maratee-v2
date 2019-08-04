@@ -52,7 +52,7 @@ use App\Models\Contracts\BaseModel;
  **/
 class Botanical extends BaseModel
 {
-    public static $linguistically=['flower_color'=>false,'fruit_color'=>false,'leaf_color'=>false,'sprout'=>false,'treatment'=>false,'growth_rate'=>false,'first_flowering'=>false,'flowering_interval'=>false,'first_seeding'=>false,'seed_value'=>false,'seed_production'=>false,'season_resistance'=>false,'sensitivity'=>false,'sensitivity_description'=>false,'notes'=>false,'entry_type'=>false];
+    public static $linguistically=['flower_color'=>false,'fruit_color'=>false,'leaf_color'=>false,'sprout'=>false,'treatment'=>false,'growth_rate'=>false,'first_flowering'=>false,'flowering_interval'=>false,'first_seeding'=>false,'seed_value'=>false,'seed_production'=>false,'sensitivity'=>false,'sensitivity_description'=>false,'notes'=>false,'entry_type'=>false];
     public static $rules = [
         'year' => 'date',
         'planting'=>'date',
@@ -113,9 +113,22 @@ class Botanical extends BaseModel
         return $this->hasMany(BotanicalGardenAction::class)->latest();
     }
 
-    public function botanicalIrrigations()
+    public function botanicalIrrigations($season=null)
     {
-        return $this->hasMany(BotanicalIrrigation::class)->latest();
+        return $this->hasMany(BotanicalIrrigation::class)
+            ->when($season,function ($query,$season){
+                return $query->ofSeason($season);
+            })->latest();
+    }
+
+    public function irrigation()
+    {
+        return $this->belongsToMany(
+            Irrigation::class,
+            'botanical_irrigations',
+            'botanical_id',
+            'irrigation_id')
+            ->withPivot('requirement', 'daytime', 'seasonal_feature');
     }
 
     public function botanicalReproductions()
@@ -127,4 +140,60 @@ class Botanical extends BaseModel
     {
         return $this->hasMany(EntryHub::class)->latest();
     }
+
+    public function herbarium()
+    {
+        return $this->belongsTo(Herbarium::class);
+    }
+    public function medias()
+    {
+        return $this->hasMany(Media::class);
+    }
+
+    public function planting_actions()
+    {
+        return $this->belongsToMany(
+            PlantingAction::class,
+            'botanical_garden_actions',
+            'botanical_id',
+            'planting_action_id'
+        );
+    }
+    public function soil_from()
+    {
+        return $this->belongsToMany(
+            Soil::class,
+            'botanical_garden_actions',
+            'botanical_id',
+            'from_soil_id'
+        )->with('soilFeatures');
+    }
+    public function soil_to()
+    {
+        return $this->belongsToMany(
+            Soil::class,
+            'botanical_garden_actions',
+            'botanical_id',
+            'to_soil_id'
+        )->with('soilFeatures');
+    }
+    public function lighting_from()
+    {
+        return $this->belongsToMany(
+            Lighting::class,
+            'botanical_garden_actions',
+            'botanical_id',
+            'from_lighting_id'
+        );
+    }
+    public function lighting_to()
+    {
+        return $this->belongsToMany(
+            Lighting::class,
+            'botanical_garden_actions',
+            'botanical_id',
+            'to_lighting_id'
+        );
+    }
+
 }
