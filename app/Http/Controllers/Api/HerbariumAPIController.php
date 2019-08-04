@@ -121,7 +121,7 @@ class HerbariumAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Parameter(
-     *          name="phytogeography_id",
+     *          name="general_phytogeography_id",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=false,
@@ -212,7 +212,7 @@ class HerbariumAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_type_id",
+     *          name="general_type_id",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=false,
@@ -226,7 +226,7 @@ class HerbariumAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_group_id",
+     *          name="general_group_id",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=false,
