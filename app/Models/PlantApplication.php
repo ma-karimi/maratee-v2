@@ -16,10 +16,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      @SWG\Property(
  *          property="habitat_description",
  *          type="array",
+ *          @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="ecology_description",
  *          type="array",
+ *          @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="herbarium_id",
