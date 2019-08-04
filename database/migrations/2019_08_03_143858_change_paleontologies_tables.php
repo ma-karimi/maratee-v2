@@ -40,7 +40,7 @@ class ChangePaleontologiesTables extends Migration
             $table->dropColumn('era', 'period', 'epoch', 'stage');
             $table->json('name');
             $table->enum('type', ['era', 'period', 'epoch', 'stage']);
-            $table->unsignedInteger('parent_id');
+            $table->unsignedInteger('parent_id')->nullable();
         });
         Schema::table('plant_applications', function (Blueprint $table){
             $table->json('habitat_description')->nullable();
@@ -50,7 +50,7 @@ class ChangePaleontologiesTables extends Migration
             $table->unsignedInteger('general_origin_id');
             $table->foreign('general_origin_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
             $table->foreign('general_habitat_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('general_ecology_id')->referencespan('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign('general_ecology_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
         });
     }
 

@@ -6,7 +6,9 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Map::class, function (Faker $faker) {
     return [
-        'reference_year' => $faker->dateTimeBetween(),
+        'reference_year' => $faker->year(),
         'scale' => $faker->word,
+        'name' => $faker->word,
+        'url' => $faker->word,
     ];
 });
