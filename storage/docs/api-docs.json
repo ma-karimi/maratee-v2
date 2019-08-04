@@ -5815,6 +5815,30 @@
                         }
                     },
                     {
+                        "name": "url",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Credential"
+                        }
+                    },
+                    {
+                        "name": "division_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Credential"
+                        }
+                    },
+                    {
+                        "name": "department_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Credential"
+                        }
+                    },
+                    {
                         "name": "archive_no",
                         "in": "body",
                         "required": false,
@@ -5944,6 +5968,30 @@
                         "name": "archive_no",
                         "in": "body",
                         "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Credential"
+                        }
+                    },
+                    {
+                        "name": "url",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Credential"
+                        }
+                    },
+                    {
+                        "name": "division_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Credential"
+                        }
+                    },
+                    {
+                        "name": "department_id",
+                        "in": "body",
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/Credential"
                         }
@@ -9299,13 +9347,13 @@
                 }
             }
         },
-        "/herbaria": {
+        "/herbarium": {
             "get": {
                 "tags": [
                     "Herbarium"
                 ],
-                "summary": "Get a listing of the Herbaria.",
-                "description": "Get all Herbaria",
+                "summary": "Get a listing of the Herbarium.",
+                "description": "Get all Herbarium",
                 "produces": [
                     "application/json"
                 ],
@@ -9562,7 +9610,7 @@
                 }
             }
         },
-        "/herbaria/{id}": {
+        "/herbarium/{id}": {
             "get": {
                 "tags": [
                     "Herbarium"
@@ -16951,53 +16999,71 @@
                     {
                         "name": "herbarium_id",
                         "in": "body",
-                        "description": "plantApplication that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/PlantApplication"
                         }
                     },
                     {
-                        "name": "plant_factor_part_id",
+                        "name": "general_part_id",
                         "in": "body",
-                        "description": "plantApplication that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/PlantApplication"
                         }
                     },
                     {
-                        "name": "plant_factor_application_id",
+                        "name": "general_application_id",
                         "in": "body",
-                        "description": "plantApplication that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/PlantApplication"
                         }
                     },
                     {
-                        "name": "plant_factor_growth_id",
+                        "name": "general_growth_id",
                         "in": "body",
-                        "description": "plantApplication that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/PlantApplication"
                         }
                     },
                     {
-                        "name": "plant_factor_usage_type_id",
+                        "name": "general_usage_type_id",
                         "in": "body",
-                        "description": "plantApplication that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/PlantApplication"
                         }
                     },
                     {
-                        "name": "plant_factor_industry_id",
+                        "name": "general_industry_id",
                         "in": "body",
-                        "description": "plantApplication that should be stored",
                         "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PlantApplication"
+                        }
+                    },
+                    {
+                        "name": "general_ecology_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PlantApplication"
+                        }
+                    },
+                    {
+                        "name": "general_habitat_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PlantApplication"
+                        }
+                    },
+                    {
+                        "name": "general_origin_id",
+                        "in": "body",
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/PlantApplication"
                         }
@@ -17005,7 +17071,22 @@
                     {
                         "name": "presence",
                         "in": "body",
-                        "description": "plantApplication that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PlantApplication"
+                        }
+                    },
+                    {
+                        "name": "ecology_description",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PlantApplication"
+                        }
+                    },
+                    {
+                        "name": "habitat_description",
+                        "in": "body",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/PlantApplication"
@@ -17092,53 +17173,71 @@
                     {
                         "name": "herbarium_id",
                         "in": "body",
-                        "description": "plantApplication that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/PlantApplication"
                         }
                     },
                     {
-                        "name": "plant_factor_part_id",
+                        "name": "general_part_id",
                         "in": "body",
-                        "description": "plantApplication that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/PlantApplication"
                         }
                     },
                     {
-                        "name": "plant_factor_application_id",
+                        "name": "general_application_id",
                         "in": "body",
-                        "description": "plantApplication that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/PlantApplication"
                         }
                     },
                     {
-                        "name": "plant_factor_growth_id",
+                        "name": "general_growth_id",
                         "in": "body",
-                        "description": "plantApplication that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/PlantApplication"
                         }
                     },
                     {
-                        "name": "plant_factor_usage_type_id",
+                        "name": "general_usage_type_id",
                         "in": "body",
-                        "description": "plantApplication that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/PlantApplication"
                         }
                     },
                     {
-                        "name": "plant_factor_industry_id",
+                        "name": "general_industry_id",
                         "in": "body",
-                        "description": "plantApplication that should be stored",
                         "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PlantApplication"
+                        }
+                    },
+                    {
+                        "name": "general_ecology_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PlantApplication"
+                        }
+                    },
+                    {
+                        "name": "general_habitat_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PlantApplication"
+                        }
+                    },
+                    {
+                        "name": "general_origin_id",
+                        "in": "body",
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/PlantApplication"
                         }
@@ -17146,7 +17245,22 @@
                     {
                         "name": "presence",
                         "in": "body",
-                        "description": "plantApplication that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PlantApplication"
+                        }
+                    },
+                    {
+                        "name": "ecology_description",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PlantApplication"
+                        }
+                    },
+                    {
+                        "name": "habitat_description",
+                        "in": "body",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/PlantApplication"
@@ -23479,7 +23593,16 @@
                         "description": "Visit that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/Visit"
+                            "$ref": "#/definitions/Treatment"
+                        }
+                    },
+                    {
+                        "name": "date",
+                        "in": "body",
+                        "description": "Visit that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Treatment"
                         }
                     }
                 ],
@@ -23577,7 +23700,16 @@
                         "description": "Visit that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/Visit"
+                            "$ref": "#/definitions/Treatment"
+                        }
+                    },
+                    {
+                        "name": "date",
+                        "in": "body",
+                        "description": "Visit that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Treatment"
                         }
                     }
                 ],
@@ -25703,6 +25835,15 @@
                 "type": {
                     "type": "string"
                 },
+                "division_id": {
+                    "type": "integer"
+                },
+                "department_id": {
+                    "type": "integer"
+                },
+                "url": {
+                    "type": "string"
+                },
                 "date": {
                     "type": "string"
                 },
@@ -26062,38 +26203,25 @@
         },
         "GeologyAge": {
             "required": [
-                "era",
-                "period",
-                "epoch",
-                "stage"
+                "name",
+                "type",
+                "type"
             ],
             "properties": {
                 "id": {
                     "type": "integer"
                 },
-                "era": {
+                "name": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 },
-                "period": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "type": {
+                    "type": "string"
                 },
-                "epoch": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "stage": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "parent_id": {
+                    "type": "integer"
                 },
                 "created_at": {
                     "type": "string"
@@ -26666,6 +26794,14 @@
                 },
                 "scale": {
                     "description": "scale",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "url",
                     "type": "string"
                 },
                 "created_at": {
@@ -27357,8 +27493,8 @@
                         "type": "string"
                     }
                 },
-                "typestatus": {
-                    "description": "typestatus",
+                "type_status": {
+                    "description": "type_status",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -27395,8 +27531,8 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "treatment": {
-                    "description": "treatment",
+                "description": {
+                    "description": "description",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -27439,6 +27575,10 @@
                     "description": "location_no",
                     "type": "integer",
                     "format": "int32"
+                },
+                "update_frequency": {
+                    "description": "update_frequency",
+                    "type": "string"
                 },
                 "common_name": {
                     "description": "common_name",
@@ -27851,33 +27991,56 @@
                 "herbarium_id"
             ],
             "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "habitat_description": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ecology_description": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "herbarium_id": {
                     "description": "herbarium_id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_factor_part_id": {
-                    "description": "plant_factor_part_id",
+                "general_part_id": {
+                    "description": "general_part_id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_factor_application_id": {
-                    "description": "plant_factor_part_id",
+                "general_application_id": {
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_factor_growth_id": {
-                    "description": "plant_factor_part_id",
+                "general_growth_id": {
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_factor_usage_type_id": {
-                    "description": "plant_factor_part_id",
+                "general_usage_type_id": {
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_factor_industry_id": {
-                    "description": "plant_factor_part_id",
+                "general_industry_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "general_ecology_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "general_habitat_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "general_origin_id": {
                     "type": "integer",
                     "format": "int32"
                 },
@@ -29260,6 +29423,11 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "date": {
+                    "description": "datetime",
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "created_at": {
                     "description": "created_at",

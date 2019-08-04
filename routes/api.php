@@ -17,17 +17,19 @@ Route::prefix('v1')->group(function () {
     Route::post('password/reset', 'AuthController@resetPassword');
 
     Route::group(['middleware' => ['auth:api']], function () {
-        Route::resource('treatments', 'TreatmentAPIController');
-        Route::resource('paleontologies', 'PaleontologyAPIController');
-        Route::apiResource('organizations', 'OrganizationAPIController');
-        Route::apiResource('departments', 'DepartmentAPIController');
-        Route::apiResource('locations', 'LocationAPIController');
-        Route::apiResource('connections', 'ConnectionAPIController');
+
         Route::middleware('auth:api')->get('/user', function (Request $request) {
             return $request->user();
         });
     });
 });
+
+Route::resource('treatments', 'TreatmentAPIController');
+Route::resource('paleontologies', 'PaleontologyAPIController');
+Route::apiResource('organizations', 'OrganizationAPIController');
+Route::apiResource('departments', 'DepartmentAPIController');
+Route::apiResource('locations', 'LocationAPIController');
+Route::apiResource('connections', 'ConnectionAPIController');
 
 Route::resource('continents', 'ContinentAPIController');
 Route::resource('soil_features', 'SoilFeatureAPIController');

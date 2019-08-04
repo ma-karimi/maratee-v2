@@ -17,7 +17,9 @@ class DivisionRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        
+        'department'=>[
+            'scope'=>'ofDepartment'
+        ]
     ];
 
     /**
