@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+
 /**
  * @SWG\Definition(
  *      definition="Paleontology",
@@ -62,19 +63,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          property="infraspecific",
  *          description="infraspecific",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="typestatus",
- *          description="typestatus",
+ *          property="type_status",
+ *          description="type_status",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="preservation",
  *          description="preservation",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="pieces",
@@ -86,13 +87,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          property="color",
  *          description="color",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="element",
  *          description="element",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="geology_age_id",
@@ -101,22 +102,22 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="treatment",
- *          description="treatment",
+ *          property="description",
+ *          description="description",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="additional_info",
  *          description="additional_info",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="access",
  *          description="access",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="last_update",
@@ -128,13 +129,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          property="excavation",
  *          description="excavation",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="collection_name",
  *          description="collection_name",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="location_no",
@@ -143,10 +144,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="update_frequency",
+ *          description="update_frequency",
+ *          type="string",
+ *      ),
+ *      @SWG\Property(
  *          property="common_name",
  *          description="common_name",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="plant_id",
@@ -170,14 +176,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Paleontology extends BaseModel
 {
-    public static $linguistically=['infraspecific'=>false,'typestatus'=>false,'preservation'=>false,'color'=>false,'element'=>false,'treatment'=>false,'additional_info'=>false,'access'=>false,'excavation'=>false,'collection_name'=>false,'common_name'=>false];
-    public static $rules=[
+    public static $linguistically = ['infraspecific' => false, 'type_status' => false, 'preservation' => false, 'color' => false, 'element' => false, 'description' => true, 'additional_info' => false, 'access' => false, 'excavation' => false, 'collection_name' => false, 'common_name' => false];
+    public static $rules = [
         'catalog_no' => 'integer',
         'specimen_no' => 'string',
         'field_no' => 'string',
         'barcode_no' => 'string',
         'move_status' => 'string',
         'salon' => 'string',
+        'update_frequency' => 'string',
         'closet' => 'integer',
         'drawer' => 'integer',
         'pieces' => 'integer',
@@ -198,7 +205,7 @@ class Paleontology extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['plant_id','access', 'additional_info', 'barcode_no', 'catalog_no', 'closet', 'collection_name', 'color', 'common_name', 'created_at', 'deleted_at', 'drawer', 'element', 'excavation', 'field_no', 'geology_age_id', 'infraspecific', 'last_update', 'location_no', 'move_status', 'pieces', 'preservation', 'salon', 'specimen_no', 'treatment', 'typestatus', 'updated_at'];
+    protected $fillable = ['plant_id', 'access', 'additional_info', 'barcode_no', 'catalog_no', 'closet', 'collection_name', 'color', 'common_name', 'created_at', 'deleted_at', 'drawer', 'element', 'excavation', 'field_no', 'geology_age_id', 'infraspecific', 'last_update', 'location_no', 'move_status', 'pieces', 'preservation', 'salon', 'specimen_no', 'type_status', 'update_frequency', 'description', 'updated_at'];
 
 
     /**
@@ -208,7 +215,7 @@ class Paleontology extends BaseModel
      */
     protected $casts = [
         'infraspecific' => 'json',
-        'typestatus' => 'json',
+        'type_status' => 'json',
         'preservation' => 'json',
         'color' => 'json',
         'element' => 'json',
@@ -218,6 +225,7 @@ class Paleontology extends BaseModel
         'excavation' => 'json',
         'collection_name' => 'json',
         'common_name' => 'json',
+        'description' => 'json',
     ];
 
     /**
@@ -242,6 +250,7 @@ class Paleontology extends BaseModel
     {
         return $this->belongsTo(GeologyAge::class);
     }
+
     /**
      * @return BelongsTo
      */

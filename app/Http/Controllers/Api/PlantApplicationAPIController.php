@@ -81,49 +81,72 @@ class PlantApplicationAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="herbarium_id",
      *          in="body",
-     *          description="plantApplication that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_factor_part_id",
+     *          name="general_part_id",
      *          in="body",
-     *          description="plantApplication that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_factor_application_id",
+     *          name="general_application_id",
      *          in="body",
-     *          description="plantApplication that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_factor_growth_id",
+     *          name="general_growth_id",
      *          in="body",
-     *          description="plantApplication that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_factor_usage_type_id",
+     *          name="general_usage_type_id",
      *          in="body",
-     *          description="plantApplication that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_factor_industry_id",
+     *          name="general_industry_id",
      *          in="body",
-     *          description="plantApplication that should be stored",
      *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_ecology_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_habitat_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_origin_id",
+     *          in="body",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
      *          name="presence",
      *          in="body",
-     *          description="plantApplication that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="ecology_description",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="habitat_description",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
@@ -200,7 +223,7 @@ class PlantApplicationAPIController extends AppBaseController
         /** @var plantApplication $plantApplication */
         $plantApplication = $this->plantApplicationRepository->find($id);
 
-        if (empty($plantApplication)) {
+        if ($plantApplication === null) {
             return $this->sendError('plant Application not found');
         }
 
@@ -228,49 +251,72 @@ class PlantApplicationAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="herbarium_id",
      *          in="body",
-     *          description="plantApplication that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_factor_part_id",
+     *          name="general_part_id",
      *          in="body",
-     *          description="plantApplication that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_factor_application_id",
+     *          name="general_application_id",
      *          in="body",
-     *          description="plantApplication that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_factor_growth_id",
+     *          name="general_growth_id",
      *          in="body",
-     *          description="plantApplication that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_factor_usage_type_id",
+     *          name="general_usage_type_id",
      *          in="body",
-     *          description="plantApplication that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_factor_industry_id",
+     *          name="general_industry_id",
      *          in="body",
-     *          description="plantApplication that should be stored",
      *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_ecology_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_habitat_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_origin_id",
+     *          in="body",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
      *      @SWG\Parameter(
      *          name="presence",
      *          in="body",
-     *          description="plantApplication that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="ecology_description",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/PlantApplication")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="habitat_description",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),

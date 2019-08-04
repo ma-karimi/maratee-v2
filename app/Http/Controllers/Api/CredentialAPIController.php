@@ -97,6 +97,24 @@ class CredentialAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Credential")
      *      ),
      *      @SWG\Parameter(
+     *          name="url",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Credential")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="division_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Credential")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Credential")
+     *      ),
+     *      @SWG\Parameter(
      *          name="archive_no",
      *          in="body",
      *          required=false,
@@ -234,6 +252,24 @@ class CredentialAPIController extends AppBaseController
      *          name="archive_no",
      *          in="body",
      *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Credential")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="url",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Credential")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="division_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Credential")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
+     *          in="body",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Credential")
      *      ),
      *      @SWG\Parameter(

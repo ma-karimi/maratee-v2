@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
             ReproductionTableSeeder::class,
             SoilTableSeeder::class,
             SoilFeatureTableSeeder::class,
-
+            LocationTableSeeder::class,
             PlantTableSeeder::class,
 
             PaleontologyTableSeeder::class,
@@ -59,7 +59,6 @@ class DatabaseSeeder extends Seeder
 
         ]);
         $this->call([
-            LocationTableSeeder::class,
             LocalityTableSeeder::class,
             ActionHubTableSeeder::class,
             ConnectionTableSeeder::class,

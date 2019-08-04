@@ -26,6 +26,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          type="string"
  *      ),
  *      @SWG\Property(
+ *          property="name",
+ *          description="name",
+ *          type="string",
+ *      ),
+ *      @SWG\Property(
+ *          property="url",
+ *          description="url",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -44,7 +54,8 @@ class Map extends BaseModel
 
     public static $rules=[
         'reference_year' => 'required|date',
-        'scale' => 'required|string'
+        'scale' => 'required|string',
+        'name' =>'required|string'
     ];
     /**
      * The database table used by the model.
@@ -58,7 +69,7 @@ class Map extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'reference_year', 'scale', 'updated_at'];
+    protected $fillable = ['created_at', 'deleted_at', 'reference_year', 'scale', 'name', 'url', 'updated_at'];
 
 
     /**

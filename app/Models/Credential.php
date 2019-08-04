@@ -15,6 +15,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 	 *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="parent_id", type="integer"),
  * 			@SWG\Property(property="type", type="string"),
+ * 			@SWG\Property(property="division_id", type="integer"),
+ * 			@SWG\Property(property="department_id", type="integer"),
+ * 			@SWG\Property(property="url", type="string"),
  * 			@SWG\Property(property="date", type="string"),
  * 			@SWG\Property(property="archive_no", type="string"),
  * 			@SWG\Property(property="place", type="string"),
@@ -28,9 +31,12 @@ class Credential extends BaseModel
     public static $linguistically=['name'=>true];
     public static $rules = [
         'parent_id' => 'required|exists:credentials,id',
+        'division_id' => 'required|exists:divisions,id',
+        'department_id' => 'required|exists:departments,id',
         'type' => 'required|string',
         'archive_no' => 'string',
         'place' => 'string',
+        'url' => 'string',
         'date' => 'required|date',
     ];
 
@@ -78,6 +84,21 @@ class Credential extends BaseModel
     public function parent(): BelongsTo
     {
         return $this->belongsTo(self::class, self::PARENT_ID);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function division(): BelongsTo
+    {
+        return $this->belongsTo(Division::class);
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function department(): BelongsTo
+    {
+        return $this->belongsTo(Department::class);
     }
 
     /**

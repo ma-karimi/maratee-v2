@@ -24,15 +24,21 @@ use App\Models\Contracts\BaseModel;
  *          property="name",
  *          description="name",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
+ *      ),
+ *      @SWG\Property(
+ *          property="date",
+ *          description="datetime",
+ *          type="string",
+ *          format="date-time"
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -50,8 +56,8 @@ use App\Models\Contracts\BaseModel;
  */
 class Treatment extends BaseModel
 {
-    public static $linguistically=['name'=>true,'description'=>false];
-    public static $rules=[
+    public static $linguistically = ['name' => true, 'description' => false];
+    public static $rules = [
         'paleontology_id' => 'required|exists:paleontologies,id',
     ];
     /**
@@ -66,7 +72,8 @@ class Treatment extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'paleontology_id', 'updated_at'];
+    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'date', 'paleontology_id', 'updated_at'];
+    protected $dates = ['created_at', 'deleted_at', 'updated_at', 'date'];
 
 
     /**

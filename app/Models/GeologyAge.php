@@ -3,21 +3,18 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @SWG\Definition(
  *            definition="GeologyAge",
- *            required={"era", "period", "epoch", "stage"},
+ *            required={"name", "type", "type"},
  * 			@SWG\Property(property="id", type="integer"),
- * 			@SWG\Property(property="era", type="array",
+ * 			@SWG\Property(property="name", type="array",
 	 *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="period", type="array",
-	 *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="epoch", type="array",
-	 *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="stage", type="array",
-	 *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="type", type="string"),
+ * 			@SWG\Property(property="parent_id", type="integer"),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
@@ -25,7 +22,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class GeologyAge extends BaseModel
 {
 
-    public static $linguistically=['era'=>true,'period'=>true,'epoch'=>true,'stage'=>true];
+    const PARENT_ID = 'parent_id';
+    public static $linguistically=['name'=>true];
     /**
      * The database table used by the model.
      *
@@ -38,7 +36,7 @@ class GeologyAge extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'epoch', 'era', 'period', 'stage', 'updated_at'];
+    protected $fillable = ['created_at', 'deleted_at', 'name', 'type', 'parent_id', 'updated_at'];
 
 
     /**
@@ -46,7 +44,7 @@ class GeologyAge extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['era' => 'json', 'period' => 'json', 'epoch' => 'json', 'stage' => 'json'];
+    protected $casts = ['name' => 'json'];
 
     /**
      * @return HasMany
@@ -54,5 +52,23 @@ class GeologyAge extends BaseModel
     public function paleontologies()
     {
         return $this->hasMany(Paleontology::class)->latest();
+    }
+
+
+    /**
+     * @return HasMany
+     */
+    public function childs(): HasMany
+    {
+        return $this->hasMany(self::class, self::PARENT_ID)->latest();
+    }
+
+
+    /**
+     * @return BelongsTo
+     */
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(self::class, self::PARENT_ID);
     }
 }

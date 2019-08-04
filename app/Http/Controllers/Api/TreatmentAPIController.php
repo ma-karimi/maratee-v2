@@ -97,7 +97,14 @@ class TreatmentAPIController extends AppBaseController
      *          in="body",
      *          description="Visit that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Visit")
+     *          @SWG\Schema(ref="#/definitions/Treatment")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Treatment")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -172,7 +179,7 @@ class TreatmentAPIController extends AppBaseController
         /** @var Treatment $treatment */
         $treatment = $this->treatmentRepository->find($id);
 
-        if (empty($treatment)) {
+        if ($treatment === null) {
             return $this->sendError('Treatment not found');
         }
 
@@ -209,7 +216,14 @@ class TreatmentAPIController extends AppBaseController
      *          in="body",
      *          description="Visit that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Visit")
+     *          @SWG\Schema(ref="#/definitions/Treatment")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="Visit that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Treatment")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -239,7 +253,7 @@ class TreatmentAPIController extends AppBaseController
         /** @var Treatment $treatment */
         $treatment = $this->treatmentRepository->find($id);
 
-        if (empty($treatment)) {
+        if ($treatment === null) {
             return $this->sendError('Treatment not found');
         }
 
@@ -292,7 +306,7 @@ class TreatmentAPIController extends AppBaseController
         /** @var Treatment $treatment */
         $treatment = $this->treatmentRepository->find($id);
 
-        if (empty($treatment)) {
+        if ($treatment === null) {
             return $this->sendError('Treatment not found');
         }
 
