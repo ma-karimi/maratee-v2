@@ -60,10 +60,34 @@ class BotanicalAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $relations=[
+            'herbarium.plant.generalFamily.authors',
+            'herbarium.plant.generalGenus.authors',
+            'herbarium.plant.generalSpecie.authors',
+            'herbarium.plant.generalSubSpecie.authors',
+            'herbarium.plant.generalVariety.authors',
+            'herbarium.plant.generalFamily.authors',
+            'herbarium.protection',
+            'herbarium.generalType',
+            'herbarium.generalPhytogeography',
+            'botanicalReproductions.reproduction',
+            'lighting_from',
+            'lighting_to',
+            'soil_from',
+            'soil_to',
+            'botanicalGardenActions',
+            'herbarium.plant',
+            'herbarium.medias',
+            'entryHubs.location',
+            'entryHubs.entry',
+            'entryHubs.organization',
+            'botanicalIrrigations',
+            'planting_actions',
+            'irrigation'];
         $botanicals = $this->botanicalRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
-            $request->get('limit')
+            $request->get('limit'),['*'],$relations
         );
         $botanicals=BotanicalResource::collection($botanicals);
         return $this->sendResponse($botanicals, 'Botanicals retrieved successfully');

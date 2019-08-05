@@ -23,6 +23,9 @@ Route::prefix('v1')->group(function () {
         });
     });
 });
+Route::post('register', 'AuthController@register');
+Route::post('login', 'AuthController@login');
+Route::get('logout', 'AuthController@logout');
 
 Route::resource('treatments', 'TreatmentAPIController');
 Route::resource('paleontologies', 'PaleontologyAPIController');
@@ -56,7 +59,7 @@ Route::resource('seed_moleculars', 'SeedMolecularAPIController');
 
 Route::resource('seed_hubs', 'SeedHubAPIController');
 
-Route::resource('seed_has_plants', 'SeedHasPlantAPIController');
+//Route::resource('seed_has_plants', 'SeedHasPlantAPIController');
 
 Route::resource('seed_exchanges', 'SeedExchangeAPIController');
 
@@ -78,7 +81,7 @@ Route::resource('planting_actions', 'PlantingActionAPIController');
 
 Route::resource('generals', 'GeneralAPIController');
 
-Route::resource('planting_applications', 'PlantingApplicationAPIController');
+//Route::resource('planting_applications', 'PlantingApplicationAPIController');
 
 Route::resource('plants', 'PlantAPIController');
 

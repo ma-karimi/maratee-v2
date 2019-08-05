@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BaseModel extends Model
 {
-    use SoftDeletes;
+    //use SoftDeletes;
 
     public static $rules = [];
     public static $messages = [];
@@ -29,7 +29,7 @@ class BaseModel extends Model
      *
      * @var array
      */
-    protected $dates = ['created_at', 'deleted_at', 'updated_at'];
+    protected $dates = ['created_at', 'updated_at'];
 
     /**
      * BaseModel constructor.

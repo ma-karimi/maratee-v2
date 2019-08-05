@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        ini_set('max_execution_time', 3000);
+        ini_set('max_execution_time', 30000);
         ini_set('memory_limit', '2000M');
         $this->call([
             UserTableSeeder::class,

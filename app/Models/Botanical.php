@@ -133,7 +133,7 @@ class Botanical extends BaseModel
 
     public function botanicalReproductions()
     {
-        return $this->hasMany(BotanicalReproduction::class)->latest();
+        return $this->hasMany(BotanicalReproduction::class);
     }
 
     public function entryHubs()
