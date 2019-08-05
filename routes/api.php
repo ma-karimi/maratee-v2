@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::prefix('v1')->group(function () {
+/*Route::prefix('v1')->group(function () {
     Route::post('password/reset', 'AuthController@resetPassword');
 
     Route::group(['middleware' => ['auth:api']], function () {
@@ -22,6 +22,9 @@ Route::prefix('v1')->group(function () {
             return $request->user();
         });
     });
+});*/
+Route::middleware(['auth:api'])->group(function () {
+
 });
 Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
