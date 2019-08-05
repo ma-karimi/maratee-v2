@@ -87,7 +87,8 @@ class BotanicalAPIController extends AppBaseController
         $botanicals = $this->botanicalRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
-            $request->get('limit'),['*'],$relations
+            $request->get('limit'),
+            $relations
         );
         $botanicals=BotanicalResource::collection($botanicals);
         return $this->sendResponse($botanicals, 'Botanicals retrieved successfully');
