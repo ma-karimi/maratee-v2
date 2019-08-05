@@ -79,30 +79,38 @@ class LocationAPIController extends AppBaseController
      *      description="Store Location",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="address_id",
+     *          name="address",
      *          in="body",
-     *          description="Location that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
      *          name="name",
      *          in="body",
-     *          description="Location that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
-     *          name="region_id",
+     *          name="region_name",
      *          in="body",
-     *          description="Location that should be stored",
      *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="village_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="city_id",
+     *          in="body",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
      *          name="altitude",
      *          in="body",
-     *          description="Location that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
@@ -116,7 +124,6 @@ class LocationAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="description",
      *          in="body",
-     *          description="Location that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
@@ -191,7 +198,7 @@ class LocationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Location $location */
-        $location = $this->locationRepository->find($id);
+        $location = $this->locationRepository->find($id)->load(['city', 'village']);
 
         if ($location === null) {
             return $this->sendError('Location not found');
@@ -219,30 +226,38 @@ class LocationAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="address_id",
+     *          name="address",
      *          in="body",
-     *          description="Location that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="village_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="city_id",
+     *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
      *          name="name",
      *          in="body",
-     *          description="Location that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
-     *          name="region_id",
+     *          name="region_name",
      *          in="body",
-     *          description="Location that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
      *          name="altitude",
      *          in="body",
-     *          description="Location that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
@@ -256,7 +271,6 @@ class LocationAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="description",
      *          in="body",
-     *          description="Location that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
