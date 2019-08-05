@@ -10908,9 +10908,8 @@
                 ],
                 "parameters": [
                     {
-                        "name": "address_id",
+                        "name": "address",
                         "in": "body",
-                        "description": "Location that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Location"
@@ -10919,17 +10918,31 @@
                     {
                         "name": "name",
                         "in": "body",
-                        "description": "Location that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Location"
                         }
                     },
                     {
-                        "name": "region_id",
+                        "name": "region_name",
                         "in": "body",
-                        "description": "Location that should be stored",
                         "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "village_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "city_id",
+                        "in": "body",
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/Location"
                         }
@@ -10937,7 +10950,6 @@
                     {
                         "name": "altitude",
                         "in": "body",
-                        "description": "Location that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Location"
@@ -10955,7 +10967,6 @@
                     {
                         "name": "description",
                         "in": "body",
-                        "description": "Location that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Location"
@@ -11040,9 +11051,24 @@
                         "type": "integer"
                     },
                     {
-                        "name": "address_id",
+                        "name": "address",
                         "in": "body",
-                        "description": "Location that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "village_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "city_id",
+                        "in": "body",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Location"
@@ -11051,16 +11077,14 @@
                     {
                         "name": "name",
                         "in": "body",
-                        "description": "Location that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Location"
                         }
                     },
                     {
-                        "name": "region_id",
+                        "name": "region_name",
                         "in": "body",
-                        "description": "Location that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Location"
@@ -11069,7 +11093,6 @@
                     {
                         "name": "altitude",
                         "in": "body",
-                        "description": "Location that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Location"
@@ -11087,7 +11110,6 @@
                     {
                         "name": "description",
                         "in": "body",
-                        "description": "Location that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Location"
@@ -26725,6 +26747,12 @@
                     "description": "id",
                     "type": "integer",
                     "format": "int32"
+                },
+                "village_id": {
+                    "type": "integer"
+                },
+                "city_id": {
+                    "type": "integer"
                 },
                 "address": {
                     "type": "array",

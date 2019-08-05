@@ -17,6 +17,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="village_id",
+ *          type="integer",
+ *      ),
+ *      @SWG\Property(
+ *          property="city_id",
+ *          type="integer",
+ *      ),
+ *      @SWG\Property(
  *          property="address",
  *          type="array",
  *     @SWG\Items(type="string"),

@@ -31,25 +31,11 @@ abstract class BaseRepository
     }
 
     /**
-     * Get searchable fields array
-     *
-     * @return array
-     */
-    abstract public function getFieldsSearchable();
-
-    /**
-     * Configure the Model
-     *
-     * @return string
-     */
-    abstract public function model();
-
-    /**
      * Make Model instance
      *
+     * @return Model
      * @throws \Exception
      *
-     * @return Model
      */
     public function makeModel()
     {
@@ -61,6 +47,13 @@ abstract class BaseRepository
 
         return $this->model = $model;
     }
+
+    /**
+     * Configure the Model
+     *
+     * @return string
+     */
+    abstract public function model();
 
     /**
      * Paginate records for scaffold.
@@ -111,6 +104,13 @@ abstract class BaseRepository
     }
 
     /**
+     * Get searchable fields array
+     *
+     * @return array
+     */
+    abstract public function getFieldsSearchable();
+
+    /**
      * Retrieve all records with given filter criteria
      *
      * @param array $search
@@ -121,7 +121,7 @@ abstract class BaseRepository
      * @param array $with_relations
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function all($search = [], $skip = null, $limit = null, $columns = ['*'], array $with_relations = null)
+    public function all($search = [], $skip = null, $limit = null, array $with_relations = null, $columns = ['*'])
     {
         $query = $this->allQuery($search, $skip, $limit);
         return $query->when($with_relations, function ($query, $with_relations) {
@@ -149,15 +149,18 @@ abstract class BaseRepository
      * Find model record for given id
      *
      * @param int $id
+     * @param array $with_relations
      * @param array $columns
      *
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|Model|null
      */
-    public function find($id, $columns = ['*'])
+    public function find($id, array $with_relations, $columns = ['*'])
     {
         $query = $this->model->newQuery();
 
-        return $query->find($id, $columns);
+        return $query->when($with_relations, function ($query, $with_relations) {
+            return $query->with($with_relations);
+        })->find($id, $columns);
     }
 
     /**
@@ -184,9 +187,9 @@ abstract class BaseRepository
     /**
      * @param int $id
      *
+     * @return bool|mixed|null
      * @throws \Exception
      *
-     * @return bool|mixed|null
      */
     public function delete($id)
     {
