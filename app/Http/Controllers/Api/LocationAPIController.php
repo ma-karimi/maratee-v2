@@ -62,7 +62,8 @@ class LocationAPIController extends AppBaseController
         $locations = $this->locationRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
-            $request->get('limit')
+            $request->get('limit'),
+            ['city', 'village']
         );
 
         return $this->sendResponse($locations->toArray(), 'Locations retrieved successfully');
@@ -198,7 +199,7 @@ class LocationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Location $location */
-        $location = $this->locationRepository->find($id)->load(['city', 'village']);
+        $location = $this->locationRepository->find($id,['city', 'village']);
 
         if ($location === null) {
             return $this->sendError('Location not found');
