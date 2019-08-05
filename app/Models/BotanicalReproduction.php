@@ -19,8 +19,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class BotanicalReproduction extends BaseModel
 {
 
-
-
     public static $rules = [
         'botanical_id' => 'required|exists:botanicals,id',
         'reproduction_id' => 'required|exists:reproductions,id'

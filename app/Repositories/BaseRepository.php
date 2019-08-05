@@ -89,10 +89,10 @@ abstract class BaseRepository
         $query = $this->model->newQuery();
         if (count($search)) {
             foreach ($search as $key => $value) {
-                    if(Arr::exists($this->getFieldsSearchable(), $key)){
-                        $scope = $this->getFieldsSearchable()[$key]['scope'];
-                        $query->$scope($value);
-                    }
+                if (Arr::exists($this->getFieldsSearchable(), $key)) {
+                    $scope = $this->getFieldsSearchable()[$key]['scope'];
+                    $query->$scope($value);
+                }
 //                if (in_array($key, $this->getFieldsSearchable())) {
 //                    $query->where($key, $value);
 //                }
@@ -118,13 +118,15 @@ abstract class BaseRepository
      * @param int|null $limit
      * @param array $columns
      *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     * @param array $with_relations
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function all($search = [], $skip = null, $limit = null, $columns = ['*'])
+    public function all($search = [], $skip = null, $limit = null, $columns = ['*'], array $with_relations = null)
     {
         $query = $this->allQuery($search, $skip, $limit);
-
-        return $query->get($columns);
+        return $query->when($with_relations, function ($query, $with_relations) {
+            return $query->with($with_relations);
+        })->get($columns);
     }
 
     /**

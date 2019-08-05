@@ -47,8 +47,6 @@ class PlantResource extends JsonResource
             'plant_collecting_altitude' => $this->location->altitude,
             'plant_collecting_latitude' => $this->location->point->getLat(),
             'plant_collecting_longitude' => $this->location->point->getLng(),
-
-
         ];
     }
 }

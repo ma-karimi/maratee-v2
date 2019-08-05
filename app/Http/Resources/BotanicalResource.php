@@ -20,7 +20,7 @@ class BotanicalResource extends JsonResource
         $plant_sub_specie_name = $this->herbarium->plant->generalSubSpecie->name ?? null;
         $plant_variety_name = $this->herbarium->plant->generalVariety->name ?? null;
         return [
-            'id'=>$this->id,
+            'id' => $this->id,
             'herbarium_id' => $this->herbarium->id,
             'scientific_name' => [
                 'plant_family' => $plant_family_name,
@@ -81,8 +81,8 @@ class BotanicalResource extends JsonResource
             'initial_place_type' => $this->botanicalGardenActions->pluck('initial_place_type'),
             'initial_condition' => $this->botanicalGardenActions->pluck('initial_place_condition'),
             'transfer_date' => $this->botanicalGardenActions->pluck('date'),
-            'destination_soil' =>  $this->soil_to->pluck('type'),
-            'destination_lighting' =>  $this->lighting_to->pluck('type'),
+            'destination_soil' => $this->soil_to->pluck('type'),
+            'destination_lighting' => $this->lighting_to->pluck('type'),
             'destination_place_type' => $this->botanicalGardenActions->pluck('destination_place_type'),
             'destination_condition' => $this->botanicalGardenActions->pluck('destination_place_condition'),
             'botanical_treatment' => $this->botanicalGardenActions->pluck('treatment'),

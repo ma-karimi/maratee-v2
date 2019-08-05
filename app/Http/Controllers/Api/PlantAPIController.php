@@ -68,14 +68,33 @@ class PlantAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $relations=[
+            'generalFamily.authors',
+            'generalGenus.authors',
+            'generalSpecie.authors',
+            'generalSubSpecie.authors',
+            'generalVariety.authors',
+            'generalSperm',
+            'generalCotyledon',
+            'authors',
+            'location.city.province.country',
+            'location.village',
+            'herbariums.department',
+            'herbariums.division',
+            'herbariums.generalPhytogeography',
+            'herbariums.actionHubs.user',
+            'herbariums.generalPhenology',
+            'herbariums.protection',
+            'herbariums.attendances',
+            'herbariums.borrows.user',
+            'herbariums.borrows.media',
+        ];
         $plants = $this->plantRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
-            $request->get('limit')
+            $request->get('limit'),['*'],$relations
         );
-
         $plants=PlantResource::collection($plants);
-
         return $this->sendResponse($plants, 'Plants retrieved successfully');
     }
 
