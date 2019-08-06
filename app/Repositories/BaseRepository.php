@@ -68,7 +68,7 @@ abstract class BaseRepository
      * @param array $columns
      * @return LengthAwarePaginator
      */
-    public function paginate($perPage,array $search = [], array $with_relations = [], $columns = ['*'])
+    public function paginate($perPage,array $search = [], array $with_relations = null, $columns = ['*'])
     {
         $query = $this->allQuery($search);
         return $query->when($with_relations, function ($query, $with_relations) {

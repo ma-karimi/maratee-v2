@@ -26,6 +26,8 @@ use Illuminate\Http\Request;
 Route::middleware(['auth:api'])->group(function () {
 
 });
+Route::get('relations', 'HelpersAPIController@relations');
+
 Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
 Route::get('logout', 'AuthController@logout');

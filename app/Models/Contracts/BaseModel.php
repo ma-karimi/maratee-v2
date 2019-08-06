@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BaseModel extends Model
 {
-    //use SoftDeletes;
-
     public static $rules = [];
     public static $messages = [];
 

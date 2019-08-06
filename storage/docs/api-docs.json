@@ -9630,6 +9630,52 @@
                 }
             }
         },
+        "/relations": {
+            "get": {
+                "tags": [
+                    "Relation"
+                ],
+                "summary": "Get all RelationShips Of Given Classes.",
+                "description": "Get all RelationShips Of Given Classes",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "classes",
+                        "in": "path",
+                        "description": "class name like plants",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Group"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/herbarium": {
             "get": {
                 "tags": [
@@ -9710,7 +9756,7 @@
                         }
                     },
                     {
-                        "name": "phenology_id",
+                        "name": "general_phenology_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,
@@ -9729,15 +9775,6 @@
                     },
                     {
                         "name": "general_phytogeography_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "organization_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,
@@ -9864,6 +9901,15 @@
                     },
                     {
                         "name": "general_group_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "division_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,
