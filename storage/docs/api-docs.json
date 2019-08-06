@@ -9683,7 +9683,16 @@
                         }
                     },
                     {
-                        "name": "organization_id",
+                        "name": "department_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "plant_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": true,
@@ -9693,15 +9702,6 @@
                     },
                     {
                         "name": "number",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "location_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,

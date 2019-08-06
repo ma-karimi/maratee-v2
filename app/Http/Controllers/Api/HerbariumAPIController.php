@@ -86,7 +86,14 @@ class HerbariumAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Parameter(
-     *          name="organization_id",
+     *          name="department_id",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Herbarium")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plant_id",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=true,
@@ -100,14 +107,7 @@ class HerbariumAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Parameter(
-     *          name="location_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="phenology_id",
+     *          name="general_phenology_id",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=false,
@@ -122,13 +122,6 @@ class HerbariumAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="general_phytogeography_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="organization_id",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=false,
@@ -227,6 +220,13 @@ class HerbariumAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="general_group_id",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Herbarium")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="division_id",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=false,
