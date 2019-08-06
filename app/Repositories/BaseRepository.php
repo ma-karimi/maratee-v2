@@ -161,7 +161,7 @@ abstract class BaseRepository
      *
      * @return Builder|Builder[]|Collection|Model|null
      */
-    public function find($id, array $with_relations = [], $columns = ['*'])
+    public function find($id, array $with_relations = null, $columns = ['*'])
     {
         $query = $this->model->newQuery();
 
