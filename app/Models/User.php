@@ -143,6 +143,8 @@ class User extends Authenticatable
         'phone' => 'string',
         'password' => 'required|string',
         'work_experience' => 'integer',
+        'first_name' => 'required',
+        'last_name' => 'required',
     ];
 
     protected $hidden=['password'];
