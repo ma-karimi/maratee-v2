@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateLocationAPIRequest;
 use App\Http\Requests\Api\UpdateLocationAPIRequest;
 use App\Models\Location;
 use App\Repositories\LocationRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class LocationController
  * @package App\Http\Controllers\Api
  */
-
 class LocationAPIController extends AppBaseController
 {
     /** @var  LocationRepository */
@@ -59,11 +58,10 @@ class LocationAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $locations = $this->locationRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit'),
-            ['city', 'village']
+        $locations = $this->locationRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($locations->toArray(), 'Locations retrieved successfully');
@@ -199,7 +197,7 @@ class LocationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Location $location */
-        $location = $this->locationRepository->find($id,['city', 'village']);
+        $location = $this->locationRepository->find($id, ['city', 'village']);
 
         if ($location === null) {
             return $this->sendError('Location not found');

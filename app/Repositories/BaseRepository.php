@@ -2,7 +2,11 @@
 
 namespace App\Repositories;
 
+use Exception;
 use Illuminate\Container\Container as Application;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
@@ -22,7 +26,7 @@ abstract class BaseRepository
     /**
      * @param Application $app
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct(Application $app)
     {
@@ -34,7 +38,7 @@ abstract class BaseRepository
      * Make Model instance
      *
      * @return Model
-     * @throws \Exception
+     * @throws Exception
      *
      */
     public function makeModel()
@@ -42,7 +46,7 @@ abstract class BaseRepository
         $model = $this->app->make($this->model());
 
         if (!$model instanceof Model) {
-            throw new \Exception("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
+            throw new Exception("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
         }
 
         return $this->model = $model;
@@ -58,15 +62,18 @@ abstract class BaseRepository
     /**
      * Paginate records for scaffold.
      *
+     * @param array $search
      * @param int $perPage
+     * @param array|null $with_relations
      * @param array $columns
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
-    public function paginate($perPage, $columns = ['*'])
+    public function paginate($perPage,$search = [], array $with_relations = [], $columns = ['*'])
     {
-        $query = $this->allQuery();
-
-        return $query->paginate($perPage, $columns);
+        $query = $this->allQuery($search);
+        return $query->when($with_relations, function ($query, $with_relations) {
+            return $query->with($with_relations);
+        })->paginate($perPage ?? 25, $columns);
     }
 
     /**
@@ -75,7 +82,7 @@ abstract class BaseRepository
      * @param array $search
      * @param int|null $skip
      * @param int|null $limit
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function allQuery($search = [], $skip = null, $limit = null)
     {
@@ -119,7 +126,7 @@ abstract class BaseRepository
      * @param array $columns
      *
      * @param array $with_relations
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     * @return Builder[]|Collection
      */
     public function all($search = [], $skip = null, $limit = null, array $with_relations = null, $columns = ['*'])
     {
@@ -152,7 +159,7 @@ abstract class BaseRepository
      * @param array $with_relations
      * @param array $columns
      *
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|Model|null
+     * @return Builder|Builder[]|Collection|Model|null
      */
     public function find($id, array $with_relations, $columns = ['*'])
     {
@@ -169,7 +176,7 @@ abstract class BaseRepository
      * @param array $input
      * @param int $id
      *
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|Model
+     * @return Builder|Builder[]|Collection|Model
      */
     public function update($input, $id)
     {
@@ -188,7 +195,7 @@ abstract class BaseRepository
      * @param int $id
      *
      * @return bool|mixed|null
-     * @throws \Exception
+     * @throws Exception
      *
      */
     public function delete($id)

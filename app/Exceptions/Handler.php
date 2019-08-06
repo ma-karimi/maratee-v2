@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Eloquent\RelationNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
@@ -52,6 +53,13 @@ class Handler extends ExceptionHandler
         if ($exception instanceof ValidationException && $request->is('api/*')) {
             report($exception);
             return response()->json(['errors' => $exception->errors()], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        if ($exception instanceof RelationNotFoundException && $request->is('api/*')) {
+            $model = get_class($exception->model);
+            $relation = $exception->relation;
+            report($exception);
+            return response()->json(['errors' => "Call to undefined relationship [{$model}] on model [{$relation}]."], JsonResponse::HTTP_NOT_ACCEPTABLE);
         }
         if ($exception instanceof ModelNotFoundException && $request->is('api/*')) {
             report($exception);
