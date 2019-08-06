@@ -3,33 +3,168 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\UserLoginRequest;
-use App\Http\Requests\UserRegisterUpdateRequest;
+use App\Http\Requests\Api\UserLoginRequest;
+use App\Http\Requests\Api\UserRegisterRequest;
+use App\Http\Requests\Api\UserUpdateRequest;
 use App\Models\User;
-use App\Services\UserServices;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-/**
- * @property UserServices userServices
- */
+
 class AuthController extends AppBaseController
 {
     /**
-     * Handles Registration Request
+     * @param UserRegisterRequest $request
      *
-     * @param UserRegisterUpdateRequest $request
+     * @SWG\Post(
+     *      path="/register",
+     *      summary="Register New User",
+     *      tags={"Auth"},
+     *      description="Register New User",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="title",
+     *          in="body",
+     *          description="Register that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="first_name",
+     *          in="body",
+     *          description="Register that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="last_name",
+     *          in="body",
+     *          description="Register that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="email",
+     *          in="body",
+     *          description="Register that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="password",
+     *          in="body",
+     *          description="Register that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="education",
+     *          in="body",
+     *          description="Action that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="degree",
+     *          in="body",
+     *          description="Action that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="national_id",
+     *          in="body",
+     *          description="Action that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="birthday",
+     *          in="body",
+     *          description="Action that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="nationality",
+     *          in="body",
+     *          description="Action that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="passport_no",
+     *          in="body",
+     *          description="Action that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="nickname",
+     *          in="body",
+     *          description="Action that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="is_author",
+     *          in="body",
+     *          description="Action that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="mobile",
+     *          in="body",
+     *          description="Action that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="phone",
+     *          in="body",
+     *          description="Action that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="work_experience",
+     *          in="body",
+     *          description="Action that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/User"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      * @return \Illuminate\Http\JsonResponse
      */
-    public function register(UserRegisterUpdateRequest $request)
+    public function register(UserRegisterRequest $request)
     {
         $user = new User([
             'title' => $request->title,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => $request->password
         ]);
         $user->save();
         return response()->json([
@@ -37,31 +172,77 @@ class AuthController extends AppBaseController
         ], 201);
     }
 
-    public function update(UserRegisterUpdateRequest $request)
-    {
-        $user = new User([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password)
-        ]);
-        $user->save();
-        return response()->json([
-            'message' => 'Successfully created user!'
-        ], 201);
-    }
-
+    /**
+     * @param UserLoginRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     * @SWG\Post(
+     *      path="/login",
+     *      summary="Login User",
+     *      tags={"Auth"},
+     *      description="Register New User",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="email",
+     *          in="body",
+     *          description="Register that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="password",
+     *          in="body",
+     *          description="Register that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="remember_me",
+     *          in="body",
+     *          description="Register that should be stored",
+     *          required=false,
+     *          @SWG\Schema(
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              )
+     *          )
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/User"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
     public function login(UserLoginRequest $request)
     {
         $credentials = request(['email', 'password']);
-        if (!Auth::attempt($credentials))
+        if (!Auth::attempt($credentials)) {
             return response()->json([
                 'message' => 'Unauthorized'
             ], 401);
+        }
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
-        if ($request->remember_me)
+        if ($request->remember_me) {
             $token->expires_at = Carbon::now()->addWeeks(1);
+        }
         $token->save();
         return response()->json([
             'access_token' => $tokenResult->accessToken,
@@ -71,6 +252,44 @@ class AuthController extends AppBaseController
             )->toDateTimeString(),
         ]);
     }
+    /**
+     * @param Request $request
+     * @return Response
+     *
+     * @SWG\Get(
+     *      path="/logout",
+     *      summary="Logout User.",
+     *      tags={"Auth"},
+     *      description="Logout User",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="Authorization",
+     *          type="string",
+     *          in="header",
+     *          required=true
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Action")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();

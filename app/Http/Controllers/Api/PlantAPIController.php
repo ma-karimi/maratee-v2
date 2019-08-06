@@ -92,7 +92,8 @@ class PlantAPIController extends AppBaseController
         $plants = $this->plantRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
-            $request->get('limit'),['*'],$relations
+            $request->get('limit'),
+            $relations
         );
         $plants=PlantResource::collection($plants);
         return $this->sendResponse($plants, 'Plants retrieved successfully');
