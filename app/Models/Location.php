@@ -101,7 +101,7 @@ class Location extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['address', 'altitude', 'created_at', 'deleted_at', 'description', 'name', 'point', 'region_name', 'updated_at'];
+    protected $fillable = ['address','city_id', 'village_id', 'altitude', 'created_at', 'deleted_at', 'description', 'name', 'point', 'region_name', 'updated_at'];
 
     /**
      * The attributes that should be casted to native types.
