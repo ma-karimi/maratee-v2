@@ -21,8 +21,7 @@ class PlantRepository extends BaseRepository
     protected $fieldSearchable = [
         'is_flowering'=>[
             'scope'=>'ofFloweringHerbariums'
-        ],
-        'name'=>['scope'=>'logicalScope']
+        ]
     ];
 
     /**
