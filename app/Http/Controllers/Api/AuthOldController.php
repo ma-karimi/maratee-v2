@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\Api\UserRequest;
 use App\Notifications\ResetPassword;
 use App\Services\UserServices;
 use App\Utility;

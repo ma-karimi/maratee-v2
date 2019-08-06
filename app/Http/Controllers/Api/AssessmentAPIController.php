@@ -59,10 +59,10 @@ class AssessmentAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $assessments = $this->assessmentRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $assessments = $this->assessmentRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($assessments->toArray(), 'Assessments retrieved successfully');
@@ -305,7 +305,7 @@ class AssessmentAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Assessment $assessment */
-        $assessment = $this->assessmentRepository->find($id);
+        $assessment = $this->assessmentRepository->find($id, \request()->get('relations'));
 
         if (empty($assessment)) {
             return $this->sendError('Assessment not found');
@@ -514,7 +514,7 @@ class AssessmentAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Assessment $assessment */
-        $assessment = $this->assessmentRepository->find($id);
+        $assessment = $this->assessmentRepository->find($id, \request()->get('relations'));
 
         if ($assessment === null) {
             return $this->sendError('Assessment not found');
@@ -567,7 +567,7 @@ class AssessmentAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Assessment $assessment */
-        $assessment = $this->assessmentRepository->find($id);
+        $assessment = $this->assessmentRepository->find($id, \request()->get('relations'));
 
         if (empty($assessment)) {
             return $this->sendError('Assessment not found');

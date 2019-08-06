@@ -59,10 +59,10 @@ class SoilHasSoilFeatureAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $soilHasSoilFeatures = $this->soilHasSoilFeatureRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $soilHasSoilFeatures = $this->soilHasSoilFeatureRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($soilHasSoilFeatures->toArray(), 'Soil Has Soil Features retrieved successfully');
@@ -170,7 +170,7 @@ class SoilHasSoilFeatureAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SoilHasSoilFeature $soilHasSoilFeature */
-        $soilHasSoilFeature = $this->soilHasSoilFeatureRepository->find($id);
+        $soilHasSoilFeature = $this->soilHasSoilFeatureRepository->find($id, \request()->get('relations'));
 
         if (empty($soilHasSoilFeature)) {
             return $this->sendError('Soil Has Soil Feature not found');
@@ -244,7 +244,7 @@ class SoilHasSoilFeatureAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var SoilHasSoilFeature $soilHasSoilFeature */
-        $soilHasSoilFeature = $this->soilHasSoilFeatureRepository->find($id);
+        $soilHasSoilFeature = $this->soilHasSoilFeatureRepository->find($id, \request()->get('relations'));
 
         if (empty($soilHasSoilFeature)) {
             return $this->sendError('Soil Has Soil Feature not found');
@@ -297,7 +297,7 @@ class SoilHasSoilFeatureAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var SoilHasSoilFeature $soilHasSoilFeature */
-        $soilHasSoilFeature = $this->soilHasSoilFeatureRepository->find($id);
+        $soilHasSoilFeature = $this->soilHasSoilFeatureRepository->find($id, \request()->get('relations'));
 
         if (empty($soilHasSoilFeature)) {
             return $this->sendError('Soil Has Soil Feature not found');

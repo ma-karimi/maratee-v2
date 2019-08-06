@@ -59,10 +59,10 @@ class EntryAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $entries = $this->entryRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $entries = $this->entryRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($entries->toArray(), 'Entries retrieved successfully');
@@ -161,7 +161,7 @@ class EntryAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Entry $entry */
-        $entry = $this->entryRepository->find($id);
+        $entry = $this->entryRepository->find($id, \request()->get('relations'));
 
         if ($entry === null) {
             return $this->sendError('Entry not found');
@@ -226,7 +226,7 @@ class EntryAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Entry $entry */
-        $entry = $this->entryRepository->find($id);
+        $entry = $this->entryRepository->find($id, \request()->get('relations'));
 
         if ($entry === null) {
             return $this->sendError('Entry not found');
@@ -279,7 +279,7 @@ class EntryAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Entry $entry */
-        $entry = $this->entryRepository->find($id);
+        $entry = $this->entryRepository->find($id, \request()->get('relations'));
 
         if (empty($entry)) {
             return $this->sendError('Entry not found');

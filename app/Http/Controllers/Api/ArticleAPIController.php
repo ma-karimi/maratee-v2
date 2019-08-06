@@ -59,10 +59,10 @@ class ArticleAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $articles = $this->articleRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $articles = $this->articleRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($articles->toArray(), 'Articles retrieved successfully');
@@ -198,7 +198,7 @@ class ArticleAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Article $article */
-        $article = $this->articleRepository->find($id);
+        $article = $this->articleRepository->find($id, \request()->get('relations'));
 
         if ($article === null) {
             return $this->sendError('Article not found');
@@ -300,7 +300,7 @@ class ArticleAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Article $article */
-        $article = $this->articleRepository->find($id);
+        $article = $this->articleRepository->find($id, \request()->get('relations'));
 
         if ($article === null) {
             return $this->sendError('Article not found');
@@ -353,7 +353,7 @@ class ArticleAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Article $article */
-        $article = $this->articleRepository->find($id);
+        $article = $this->articleRepository->find($id, \request()->get('relations'));
 
         if ($article === null) {
             return $this->sendError('Article not found');

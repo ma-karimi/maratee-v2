@@ -59,10 +59,10 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $medicinalPlantConstituents = $this->medicinalPlantConstituentRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $medicinalPlantConstituents = $this->medicinalPlantConstituentRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($medicinalPlantConstituents->toArray(), 'Medicinal Plant Constituents retrieved successfully');
@@ -170,7 +170,7 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
     public function show($id)
     {
         /** @var MedicinalPlantConstituent $medicinalPlantConstituent */
-        $medicinalPlantConstituent = $this->medicinalPlantConstituentRepository->find($id);
+        $medicinalPlantConstituent = $this->medicinalPlantConstituentRepository->find($id, \request()->get('relations'));
 
         if ($medicinalPlantConstituent === null) {
             return $this->sendError('Medicinal Plant Constituent not found');
@@ -244,7 +244,7 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var MedicinalPlantConstituent $medicinalPlantConstituent */
-        $medicinalPlantConstituent = $this->medicinalPlantConstituentRepository->find($id);
+        $medicinalPlantConstituent = $this->medicinalPlantConstituentRepository->find($id, \request()->get('relations'));
 
         if ($medicinalPlantConstituent === null) {
             return $this->sendError('Medicinal Plant Constituent not found');
@@ -297,7 +297,7 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var MedicinalPlantConstituent $medicinalPlantConstituent */
-        $medicinalPlantConstituent = $this->medicinalPlantConstituentRepository->find($id);
+        $medicinalPlantConstituent = $this->medicinalPlantConstituentRepository->find($id, \request()->get('relations'));
 
         if (empty($medicinalPlantConstituent)) {
             return $this->sendError('Medicinal Plant Constituent not found');

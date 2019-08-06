@@ -59,10 +59,10 @@ class LightingAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $lightings = $this->lightingRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $lightings = $this->lightingRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($lightings->toArray(), 'Lightings retrieved successfully');
@@ -163,7 +163,7 @@ class LightingAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Lighting $lighting */
-        $lighting = $this->lightingRepository->find($id);
+        $lighting = $this->lightingRepository->find($id, \request()->get('relations'));
 
         if ($lighting === null) {
             return $this->sendError('Lighting not found');
@@ -230,7 +230,7 @@ class LightingAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Lighting $lighting */
-        $lighting = $this->lightingRepository->find($id);
+        $lighting = $this->lightingRepository->find($id, \request()->get('relations'));
 
         if ($lighting === null) {
             return $this->sendError('Lighting not found');
@@ -283,7 +283,7 @@ class LightingAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Lighting $lighting */
-        $lighting = $this->lightingRepository->find($id);
+        $lighting = $this->lightingRepository->find($id, \request()->get('relations'));
 
         if (empty($lighting)) {
             return $this->sendError('Lighting not found');

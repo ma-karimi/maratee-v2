@@ -59,10 +59,10 @@ class HerbariumAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $herbarium = $this->herbariumRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $herbarium = $this->herbariumRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($herbarium->toArray(), 'Herbarium retrieved successfully');
@@ -303,7 +303,7 @@ class HerbariumAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Herbarium $herbarium */
-        $herbarium = $this->herbariumRepository->find($id);
+        $herbarium = $this->herbariumRepository->find($id, \request()->get('relations'));
 
         if ($herbarium === null) {
             return $this->sendError('Herbarium not found');
@@ -510,7 +510,7 @@ class HerbariumAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Herbarium $herbarium */
-        $herbarium = $this->herbariumRepository->find($id);
+        $herbarium = $this->herbariumRepository->find($id, \request()->get('relations'));
 
         if ($herbarium === null) {
             return $this->sendError('Herbarium not found');
@@ -563,7 +563,7 @@ class HerbariumAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Herbarium $herbarium */
-        $herbarium = $this->herbariumRepository->find($id);
+        $herbarium = $this->herbariumRepository->find($id, \request()->get('relations'));
 
         if (empty($herbarium)) {
             return $this->sendError('Herbarium not found');

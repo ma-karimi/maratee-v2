@@ -59,10 +59,10 @@ class PaleontologyMediaAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $paleontologyMedia = $this->paleontologyMediaRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $paleontologyMedia = $this->paleontologyMediaRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($paleontologyMedia->toArray(), 'Paleontology Media retrieved successfully');
@@ -212,7 +212,7 @@ class PaleontologyMediaAPIController extends AppBaseController
     public function show($id)
     {
         /** @var PaleontologyMedia $paleontologyMedia */
-        $paleontologyMedia = $this->paleontologyMediaRepository->find($id);
+        $paleontologyMedia = $this->paleontologyMediaRepository->find($id, \request()->get('relations'));
 
         if (empty($paleontologyMedia)) {
             return $this->sendError('Paleontology Media not found');
@@ -328,7 +328,7 @@ class PaleontologyMediaAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var PaleontologyMedia $paleontologyMedia */
-        $paleontologyMedia = $this->paleontologyMediaRepository->find($id);
+        $paleontologyMedia = $this->paleontologyMediaRepository->find($id, \request()->get('relations'));
 
         if (empty($paleontologyMedia)) {
             return $this->sendError('Paleontology Media not found');
@@ -380,7 +380,7 @@ class PaleontologyMediaAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var PaleontologyMedia $paleontologyMedia */
-        $paleontologyMedia = $this->paleontologyMediaRepository->find($id);
+        $paleontologyMedia = $this->paleontologyMediaRepository->find($id, \request()->get('relations'));
 
         if (empty($paleontologyMedia)) {
             return $this->sendError('Paleontology Media not found');

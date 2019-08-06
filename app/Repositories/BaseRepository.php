@@ -68,7 +68,7 @@ abstract class BaseRepository
      * @param array $columns
      * @return LengthAwarePaginator
      */
-    public function paginate($perPage,$search = [], array $with_relations = [], $columns = ['*'])
+    public function paginate($perPage,array $search = [], array $with_relations = [], $columns = ['*'])
     {
         $query = $this->allQuery($search);
         return $query->when($with_relations, function ($query, $with_relations) {
@@ -161,7 +161,7 @@ abstract class BaseRepository
      *
      * @return Builder|Builder[]|Collection|Model|null
      */
-    public function find($id, array $with_relations, $columns = ['*'])
+    public function find($id, array $with_relations = [], $columns = ['*'])
     {
         $query = $this->model->newQuery();
 

@@ -59,10 +59,10 @@ class SeedMolecularAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $seedMoleculars = $this->seedMolecularRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $seedMoleculars = $this->seedMolecularRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($seedMoleculars->toArray(), 'Seed Moleculars retrieved successfully');
@@ -184,7 +184,7 @@ class SeedMolecularAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedMolecular $seedMolecular */
-        $seedMolecular = $this->seedMolecularRepository->find($id);
+        $seedMolecular = $this->seedMolecularRepository->find($id, \request()->get('relations'));
 
         if (empty($seedMolecular)) {
             return $this->sendError('Seed Molecular not found');
@@ -272,7 +272,7 @@ class SeedMolecularAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var SeedMolecular $seedMolecular */
-        $seedMolecular = $this->seedMolecularRepository->find($id);
+        $seedMolecular = $this->seedMolecularRepository->find($id, \request()->get('relations'));
 
         if (empty($seedMolecular)) {
             return $this->sendError('Seed Molecular not found');
@@ -325,7 +325,7 @@ class SeedMolecularAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var SeedMolecular $seedMolecular */
-        $seedMolecular = $this->seedMolecularRepository->find($id);
+        $seedMolecular = $this->seedMolecularRepository->find($id, \request()->get('relations'));
 
         if (empty($seedMolecular)) {
             return $this->sendError('Seed Molecular not found');

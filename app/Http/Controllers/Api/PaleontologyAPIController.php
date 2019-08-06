@@ -59,10 +59,10 @@ class PaleontologyAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $paleontologies = $this->paleontologyRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $paleontologies = $this->paleontologyRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($paleontologies->toArray(), 'Paleontologies retrieved successfully');
@@ -317,7 +317,7 @@ class PaleontologyAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Paleontology $paleontology */
-        $paleontology = $this->paleontologyRepository->find($id);
+        $paleontology = $this->paleontologyRepository->find($id, \request()->get('relations'));
 
         if (empty($paleontology)) {
             return $this->sendError('Paleontology not found');
@@ -538,7 +538,7 @@ class PaleontologyAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Paleontology $paleontology */
-        $paleontology = $this->paleontologyRepository->find($id);
+        $paleontology = $this->paleontologyRepository->find($id, \request()->get('relations'));
 
         if (empty($paleontology)) {
             return $this->sendError('Paleontology not found');
@@ -591,7 +591,7 @@ class PaleontologyAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Paleontology $paleontology */
-        $paleontology = $this->paleontologyRepository->find($id);
+        $paleontology = $this->paleontologyRepository->find($id, \request()->get('relations'));
 
         if (empty($paleontology)) {
             return $this->sendError('Paleontology not found');

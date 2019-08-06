@@ -60,10 +60,10 @@ class PaleontologyCitationAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $paleontologyCitations = $this->paleontologyCitationRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $paleontologyCitations = $this->paleontologyCitationRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($paleontologyCitations->toArray(), 'Paleontology Citations retrieved successfully');
@@ -185,7 +185,7 @@ class PaleontologyCitationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var PaleontologyCitation $paleontologyCitation */
-        $paleontologyCitation = $this->paleontologyCitationRepository->find($id);
+        $paleontologyCitation = $this->paleontologyCitationRepository->find($id, \request()->get('relations'));
 
         if (empty($paleontologyCitation)) {
             return $this->sendError('Paleontology Citation not found');
@@ -273,7 +273,7 @@ class PaleontologyCitationAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var PaleontologyCitation $paleontologyCitation */
-        $paleontologyCitation = $this->paleontologyCitationRepository->find($id);
+        $paleontologyCitation = $this->paleontologyCitationRepository->find($id, \request()->get('relations'));
 
         if (empty($paleontologyCitation)) {
             return $this->sendError('Paleontology Citation not found');
@@ -326,7 +326,7 @@ class PaleontologyCitationAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var PaleontologyCitation $paleontologyCitation */
-        $paleontologyCitation = $this->paleontologyCitationRepository->find($id);
+        $paleontologyCitation = $this->paleontologyCitationRepository->find($id, \request()->get('relations'));
 
         if (empty($paleontologyCitation)) {
             return $this->sendError('Paleontology Citation not found');

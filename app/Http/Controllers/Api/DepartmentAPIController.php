@@ -59,10 +59,10 @@ class DepartmentAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $departments = $this->departmentRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $departments = $this->departmentRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($departments->toArray(), 'Departments retrieved successfully');
@@ -161,7 +161,7 @@ class DepartmentAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Department $department */
-        $department = $this->departmentRepository->find($id);
+        $department = $this->departmentRepository->find($id, \request()->get('relations'));
 
         if ($department === null) {
             return $this->sendError('Department not found');
@@ -228,7 +228,7 @@ class DepartmentAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Department $department */
-        $department = $this->departmentRepository->find($id);
+        $department = $this->departmentRepository->find($id, \request()->get('relations'));
 
         if ($department === null) {
             return $this->sendError('Department not found');
@@ -281,7 +281,7 @@ class DepartmentAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Department $department */
-        $department = $this->departmentRepository->find($id);
+        $department = $this->departmentRepository->find($id, \request()->get('relations'));
 
         if ($department === null) {
             return $this->sendError('Department not found');

@@ -59,10 +59,10 @@ class PlantApplicationAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $plantApplications = $this->plantApplicationRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $plantApplications = $this->plantApplicationRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($plantApplications->toArray(), 'plant Applications retrieved successfully');
@@ -221,7 +221,7 @@ class PlantApplicationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var plantApplication $plantApplication */
-        $plantApplication = $this->plantApplicationRepository->find($id);
+        $plantApplication = $this->plantApplicationRepository->find($id, \request()->get('relations'));
 
         if ($plantApplication === null) {
             return $this->sendError('plant Application not found');
@@ -346,7 +346,7 @@ class PlantApplicationAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var plantApplication $plantApplication */
-        $plantApplication = $this->plantApplicationRepository->find($id);
+        $plantApplication = $this->plantApplicationRepository->find($id, \request()->get('relations'));
 
         if (empty($plantApplication)) {
             return $this->sendError('plant Application not found');
@@ -399,7 +399,7 @@ class PlantApplicationAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var plantApplication $plantApplication */
-        $plantApplication = $this->plantApplicationRepository->find($id);
+        $plantApplication = $this->plantApplicationRepository->find($id, \request()->get('relations'));
 
         if (empty($plantApplication)) {
             return $this->sendError('plant Application not found');

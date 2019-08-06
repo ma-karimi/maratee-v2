@@ -59,10 +59,10 @@ class BotanicalReproductionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $botanicalReproductions = $this->botanicalReproductionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $botanicalReproductions = $this->botanicalReproductionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($botanicalReproductions->toArray(), 'Botanical Reproductions retrieved successfully');
@@ -161,7 +161,7 @@ class BotanicalReproductionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var BotanicalReproduction $botanicalReproduction */
-        $botanicalReproduction = $this->botanicalReproductionRepository->find($id);
+        $botanicalReproduction = $this->botanicalReproductionRepository->find($id, \request()->get('relations'));
 
         if ($botanicalReproduction === null) {
             return $this->sendError('Botanical Reproduction not found');
@@ -226,7 +226,7 @@ class BotanicalReproductionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var BotanicalReproduction $botanicalReproduction */
-        $botanicalReproduction = $this->botanicalReproductionRepository->find($id);
+        $botanicalReproduction = $this->botanicalReproductionRepository->find($id, \request()->get('relations'));
 
         if ($botanicalReproduction === null) {
             return $this->sendError('Botanical Reproduction not found');
@@ -279,7 +279,7 @@ class BotanicalReproductionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var BotanicalReproduction $botanicalReproduction */
-        $botanicalReproduction = $this->botanicalReproductionRepository->find($id);
+        $botanicalReproduction = $this->botanicalReproductionRepository->find($id, \request()->get('relations'));
 
         if ($botanicalReproduction === null) {
             return $this->sendError('Botanical Reproduction not found');

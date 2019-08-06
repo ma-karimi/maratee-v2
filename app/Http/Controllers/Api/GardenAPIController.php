@@ -59,10 +59,10 @@ class GardenAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $gardens = $this->gardenRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $gardens = $this->gardenRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($gardens->toArray(), 'Gardens retrieved successfully');
@@ -167,7 +167,7 @@ class GardenAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Garden $garden */
-        $garden = $this->gardenRepository->find($id);
+        $garden = $this->gardenRepository->find($id, \request()->get('relations'));
 
         if ($garden === null) {
             return $this->sendError('Garden not found');
@@ -238,7 +238,7 @@ class GardenAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Garden $garden */
-        $garden = $this->gardenRepository->find($id);
+        $garden = $this->gardenRepository->find($id, \request()->get('relations'));
 
         if ($garden === null) {
             return $this->sendError('Garden not found');
@@ -291,7 +291,7 @@ class GardenAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Garden $garden */
-        $garden = $this->gardenRepository->find($id);
+        $garden = $this->gardenRepository->find($id, \request()->get('relations'));
 
         if ($garden === null) {
             return $this->sendError('Garden not found');

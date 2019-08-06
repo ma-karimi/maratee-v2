@@ -59,10 +59,10 @@ class SeedTechnologyAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $seedTechnologies = $this->seedTechnologyRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $seedTechnologies = $this->seedTechnologyRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($seedTechnologies->toArray(), 'Seed Technologies retrieved successfully');
@@ -240,7 +240,7 @@ class SeedTechnologyAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedTechnology $seedTechnology */
-        $seedTechnology = $this->seedTechnologyRepository->find($id);
+        $seedTechnology = $this->seedTechnologyRepository->find($id, \request()->get('relations'));
 
         if (empty($seedTechnology)) {
             return $this->sendError('Seed Technology not found');
@@ -383,7 +383,7 @@ class SeedTechnologyAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var SeedTechnology $seedTechnology */
-        $seedTechnology = $this->seedTechnologyRepository->find($id);
+        $seedTechnology = $this->seedTechnologyRepository->find($id, \request()->get('relations'));
 
         if (empty($seedTechnology)) {
             return $this->sendError('Seed Technology not found');
@@ -436,7 +436,7 @@ class SeedTechnologyAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var SeedTechnology $seedTechnology */
-        $seedTechnology = $this->seedTechnologyRepository->find($id);
+        $seedTechnology = $this->seedTechnologyRepository->find($id, \request()->get('relations'));
 
         if (empty($seedTechnology)) {
             return $this->sendError('Seed Technology not found');

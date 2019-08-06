@@ -59,10 +59,10 @@ class SoilAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $soils = $this->soilRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $soils = $this->soilRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($soils->toArray(), 'Soils retrieved successfully');
@@ -177,7 +177,7 @@ class SoilAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Soil $soil */
-        $soil = $this->soilRepository->find($id);
+        $soil = $this->soilRepository->find($id, \request()->get('relations'));
 
         if (empty($soil)) {
             return $this->sendError('Soil not found');
@@ -244,7 +244,7 @@ class SoilAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Soil $soil */
-        $soil = $this->soilRepository->find($id);
+        $soil = $this->soilRepository->find($id, \request()->get('relations'));
 
         if (empty($soil)) {
             return $this->sendError('Soil not found');
@@ -297,7 +297,7 @@ class SoilAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Soil $soil */
-        $soil = $this->soilRepository->find($id);
+        $soil = $this->soilRepository->find($id, \request()->get('relations'));
 
         if (empty($soil)) {
             return $this->sendError('Soil not found');

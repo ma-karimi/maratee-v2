@@ -59,10 +59,10 @@ class SeedPlantAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $seedPlants = $this->seedPlantRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $seedPlants = $this->seedPlantRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($seedPlants->toArray(), 'Seed Plants retrieved successfully');
@@ -163,7 +163,7 @@ class SeedPlantAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedPlant $seedPlant */
-        $seedPlant = $this->seedPlantRepository->find($id);
+        $seedPlant = $this->seedPlantRepository->find($id, \request()->get('relations'));
 
         if (empty($seedPlant)) {
             return $this->sendError('Seed Plant not found');
@@ -230,7 +230,7 @@ class SeedPlantAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var SeedPlant $seedPlant */
-        $seedPlant = $this->seedPlantRepository->find($id);
+        $seedPlant = $this->seedPlantRepository->find($id, \request()->get('relations'));
 
         if (empty($seedPlant)) {
             return $this->sendError('Seed Plant not found');
@@ -283,7 +283,7 @@ class SeedPlantAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var SeedPlant $seedPlant */
-        $seedPlant = $this->seedPlantRepository->find($id);
+        $seedPlant = $this->seedPlantRepository->find($id, \request()->get('relations'));
 
         if (empty($seedPlant)) {
             return $this->sendError('Seed Plant not found');

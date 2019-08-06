@@ -59,10 +59,10 @@ class SeedAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $seeds = $this->seedRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $seeds = $this->seedRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($seeds->toArray(), 'Seeds retrieved successfully');
@@ -436,7 +436,7 @@ class SeedAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Seed $seed */
-        $seed = $this->seedRepository->find($id);
+        $seed = $this->seedRepository->find($id, \request()->get('relations'));
 
         if (empty($seed)) {
             return $this->sendError('Seed not found');
@@ -776,7 +776,7 @@ class SeedAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Seed $seed */
-        $seed = $this->seedRepository->find($id);
+        $seed = $this->seedRepository->find($id, \request()->get('relations'));
 
         if (empty($seed)) {
             return $this->sendError('Seed not found');
@@ -829,7 +829,7 @@ class SeedAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Seed $seed */
-        $seed = $this->seedRepository->find($id);
+        $seed = $this->seedRepository->find($id, \request()->get('relations'));
 
         if (empty($seed)) {
             return $this->sendError('Seed not found');

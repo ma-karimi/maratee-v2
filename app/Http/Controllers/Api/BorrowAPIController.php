@@ -59,10 +59,10 @@ class BorrowAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $borrows = $this->borrowRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $borrows = $this->borrowRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($borrows->toArray(), 'Borrows retrieved successfully');
@@ -185,7 +185,7 @@ class BorrowAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Borrow $borrow */
-        $borrow = $this->borrowRepository->find($id);
+        $borrow = $this->borrowRepository->find($id, \request()->get('relations'));
 
         if ($borrow === null) {
             return $this->sendError('Borrow not found');
@@ -274,7 +274,7 @@ class BorrowAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Borrow $borrow */
-        $borrow = $this->borrowRepository->find($id);
+        $borrow = $this->borrowRepository->find($id, \request()->get('relations'));
 
         if ($borrow === null) {
             return $this->sendError('Borrow not found');
@@ -327,7 +327,7 @@ class BorrowAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Borrow $borrow */
-        $borrow = $this->borrowRepository->find($id);
+        $borrow = $this->borrowRepository->find($id, \request()->get('relations'));
 
         if ($borrow === null) {
             return $this->sendError('Borrow not found');

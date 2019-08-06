@@ -59,10 +59,10 @@ class AssessmentCollectionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $assessmentCollections = $this->assessmentCollectionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $assessmentCollections = $this->assessmentCollectionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($assessmentCollections->toArray(), 'Assessment Collections retrieved successfully');
@@ -179,7 +179,7 @@ class AssessmentCollectionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var AssessmentCollection $assessmentCollection */
-        $assessmentCollection = $this->assessmentCollectionRepository->find($id);
+        $assessmentCollection = $this->assessmentCollectionRepository->find($id, \request()->get('relations'));
 
         if ($assessmentCollection === null) {
             return $this->sendError('Assessment Collection not found');
@@ -262,7 +262,7 @@ class AssessmentCollectionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var AssessmentCollection $assessmentCollection */
-        $assessmentCollection = $this->assessmentCollectionRepository->find($id);
+        $assessmentCollection = $this->assessmentCollectionRepository->find($id, \request()->get('relations'));
 
         if ($assessmentCollection === null) {
             return $this->sendError('Assessment Collection not found');
@@ -315,7 +315,7 @@ class AssessmentCollectionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var AssessmentCollection $assessmentCollection */
-        $assessmentCollection = $this->assessmentCollectionRepository->find($id);
+        $assessmentCollection = $this->assessmentCollectionRepository->find($id, \request()->get('relations'));
 
         if ($assessmentCollection === null) {
             return $this->sendError('Assessment Collection not found');

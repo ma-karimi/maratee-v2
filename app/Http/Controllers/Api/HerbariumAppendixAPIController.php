@@ -59,10 +59,10 @@ class HerbariumAppendixAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $herbariumAppendixes = $this->herbariumAppendixRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $herbariumAppendixes = $this->herbariumAppendixRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($herbariumAppendixes->toArray(), 'Herbarium Appendixes retrieved successfully');
@@ -170,7 +170,7 @@ class HerbariumAppendixAPIController extends AppBaseController
     public function show($id)
     {
         /** @var HerbariumAppendix $herbariumAppendix */
-        $herbariumAppendix = $this->herbariumAppendixRepository->find($id);
+        $herbariumAppendix = $this->herbariumAppendixRepository->find($id, \request()->get('relations'));
 
         if ($herbariumAppendix === null) {
             return $this->sendError('Herbarium Appendix not found');
@@ -244,7 +244,7 @@ class HerbariumAppendixAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var HerbariumAppendix $herbariumAppendix */
-        $herbariumAppendix = $this->herbariumAppendixRepository->find($id);
+        $herbariumAppendix = $this->herbariumAppendixRepository->find($id, \request()->get('relations'));
 
         if ($herbariumAppendix === null) {
             return $this->sendError('Herbarium Appendix not found');
@@ -297,7 +297,7 @@ class HerbariumAppendixAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var HerbariumAppendix $herbariumAppendix */
-        $herbariumAppendix = $this->herbariumAppendixRepository->find($id);
+        $herbariumAppendix = $this->herbariumAppendixRepository->find($id, \request()->get('relations'));
 
         if (empty($herbariumAppendix)) {
             return $this->sendError('Herbarium Appendix not found');

@@ -59,10 +59,10 @@ class ExchangeAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $exchanges = $this->exchangeRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $exchanges = $this->exchangeRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($exchanges->toArray(), 'Exchanges retrieved successfully');
@@ -227,7 +227,7 @@ class ExchangeAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Exchange $exchange */
-        $exchange = $this->exchangeRepository->find($id);
+        $exchange = $this->exchangeRepository->find($id, \request()->get('relations'));
 
         if ($exchange === null) {
             return $this->sendError('Exchange not found');
@@ -358,7 +358,7 @@ class ExchangeAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Exchange $exchange */
-        $exchange = $this->exchangeRepository->find($id);
+        $exchange = $this->exchangeRepository->find($id, \request()->get('relations'));
 
         if ($exchange === null) {
             return $this->sendError('Exchange not found');
@@ -411,7 +411,7 @@ class ExchangeAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Exchange $exchange */
-        $exchange = $this->exchangeRepository->find($id);
+        $exchange = $this->exchangeRepository->find($id, \request()->get('relations'));
 
         if ($exchange === null) {
             return $this->sendError('Exchange not found');

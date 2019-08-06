@@ -59,10 +59,10 @@ class MedicinalPlantMorphologyAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $medicinalPlantMorphologies = $this->medicinalPlantMorphologyRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $medicinalPlantMorphologies = $this->medicinalPlantMorphologyRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($medicinalPlantMorphologies->toArray(), 'Medicinal Plant Morphologies retrieved successfully');
@@ -170,7 +170,7 @@ class MedicinalPlantMorphologyAPIController extends AppBaseController
     public function show($id)
     {
         /** @var MedicinalPlantMorphology $medicinalPlantMorphology */
-        $medicinalPlantMorphology = $this->medicinalPlantMorphologyRepository->find($id);
+        $medicinalPlantMorphology = $this->medicinalPlantMorphologyRepository->find($id, \request()->get('relations'));
 
         if ($medicinalPlantMorphology === null) {
             return $this->sendError('Medicinal Plant Morphology not found');
@@ -244,7 +244,7 @@ class MedicinalPlantMorphologyAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var MedicinalPlantMorphology $medicinalPlantMorphology */
-        $medicinalPlantMorphology = $this->medicinalPlantMorphologyRepository->find($id);
+        $medicinalPlantMorphology = $this->medicinalPlantMorphologyRepository->find($id, \request()->get('relations'));
 
         if ($medicinalPlantMorphology === null) {
             return $this->sendError('Medicinal Plant Morphology not found');
@@ -297,7 +297,7 @@ class MedicinalPlantMorphologyAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var MedicinalPlantMorphology $medicinalPlantMorphology */
-        $medicinalPlantMorphology = $this->medicinalPlantMorphologyRepository->find($id);
+        $medicinalPlantMorphology = $this->medicinalPlantMorphologyRepository->find($id, \request()->get('relations'));
 
         if ($medicinalPlantMorphology === null) {
             return $this->sendError('Medicinal Plant Morphology not found');

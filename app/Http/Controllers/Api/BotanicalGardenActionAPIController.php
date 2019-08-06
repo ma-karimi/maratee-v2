@@ -60,10 +60,10 @@ class BotanicalGardenActionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $botanicalGardenActions = $this->botanicalGardenActionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $botanicalGardenActions = $this->botanicalGardenActionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
        // $botanicalGardenActions=BotanicalGardenActionResource::collection($botanicalGardenActions);
         return $this->sendResponse($botanicalGardenActions, 'Botanical Garden Actions retrieved successfully');
@@ -234,7 +234,7 @@ class BotanicalGardenActionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var BotanicalGardenAction $botanicalGardenAction */
-        $botanicalGardenAction = $this->botanicalGardenActionRepository->find($id);
+        $botanicalGardenAction = $this->botanicalGardenActionRepository->find($id, \request()->get('relations'));
 
         if ($botanicalGardenAction === null) {
             return $this->sendError('Botanical Garden Action not found');
@@ -294,7 +294,7 @@ class BotanicalGardenActionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var BotanicalGardenAction $botanicalGardenAction */
-        $botanicalGardenAction = $this->botanicalGardenActionRepository->find($id);
+        $botanicalGardenAction = $this->botanicalGardenActionRepository->find($id, \request()->get('relations'));
 
         if ($botanicalGardenAction === null) {
             return $this->sendError('Botanical Garden Action not found');
@@ -347,7 +347,7 @@ class BotanicalGardenActionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var BotanicalGardenAction $botanicalGardenAction */
-        $botanicalGardenAction = $this->botanicalGardenActionRepository->find($id);
+        $botanicalGardenAction = $this->botanicalGardenActionRepository->find($id, \request()->get('relations'));
 
         if (empty($botanicalGardenAction)) {
             return $this->sendError('Botanical Garden Action not found');

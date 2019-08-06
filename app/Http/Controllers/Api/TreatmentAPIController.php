@@ -59,10 +59,10 @@ class TreatmentAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $treatments = $this->treatmentRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $treatments = $this->treatmentRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($treatments->toArray(), 'Treatments retrieved successfully');
@@ -177,7 +177,7 @@ class TreatmentAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Treatment $treatment */
-        $treatment = $this->treatmentRepository->find($id);
+        $treatment = $this->treatmentRepository->find($id, \request()->get('relations'));
 
         if ($treatment === null) {
             return $this->sendError('Treatment not found');
@@ -251,7 +251,7 @@ class TreatmentAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Treatment $treatment */
-        $treatment = $this->treatmentRepository->find($id);
+        $treatment = $this->treatmentRepository->find($id, \request()->get('relations'));
 
         if ($treatment === null) {
             return $this->sendError('Treatment not found');
@@ -304,7 +304,7 @@ class TreatmentAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Treatment $treatment */
-        $treatment = $this->treatmentRepository->find($id);
+        $treatment = $this->treatmentRepository->find($id, \request()->get('relations'));
 
         if ($treatment === null) {
             return $this->sendError('Treatment not found');

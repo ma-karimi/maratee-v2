@@ -59,10 +59,10 @@ class AttendanceAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $attendances = $this->attendanceRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $attendances = $this->attendanceRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($attendances->toArray(), 'Attendances retrieved successfully');
@@ -173,7 +173,7 @@ class AttendanceAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Attendance $attendance */
-        $attendance = $this->attendanceRepository->find($id);
+        $attendance = $this->attendanceRepository->find($id, \request()->get('relations'));
 
         if ($attendance === null) {
             return $this->sendError('Attendance not found');
@@ -250,7 +250,7 @@ class AttendanceAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Attendance $attendance */
-        $attendance = $this->attendanceRepository->find($id);
+        $attendance = $this->attendanceRepository->find($id, \request()->get('relations'));
 
         if ($attendance === null) {
             return $this->sendError('Attendance not found');
@@ -303,7 +303,7 @@ class AttendanceAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Attendance $attendance */
-        $attendance = $this->attendanceRepository->find($id);
+        $attendance = $this->attendanceRepository->find($id, \request()->get('relations'));
 
         if ($attendance === null) {
             return $this->sendError('Attendance not found');

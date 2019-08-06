@@ -59,10 +59,10 @@ class OrganizationAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $organizations = $this->organizationRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $organizations = $this->organizationRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($organizations->toArray(), 'Organizations retrieved successfully');
@@ -205,7 +205,7 @@ class OrganizationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Organization $organization */
-        $organization = $this->organizationRepository->find($id);
+        $organization = $this->organizationRepository->find($id, \request()->get('relations'));
 
         if (empty($organization)) {
             return $this->sendError('Organization not found');
@@ -314,7 +314,7 @@ class OrganizationAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Organization $organization */
-        $organization = $this->organizationRepository->find($id);
+        $organization = $this->organizationRepository->find($id, \request()->get('relations'));
 
         if (empty($organization)) {
             return $this->sendError('Organization not found');
@@ -367,7 +367,7 @@ class OrganizationAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Organization $organization */
-        $organization = $this->organizationRepository->find($id);
+        $organization = $this->organizationRepository->find($id, \request()->get('relations'));
 
         if (empty($organization)) {
             return $this->sendError('Organization not found');

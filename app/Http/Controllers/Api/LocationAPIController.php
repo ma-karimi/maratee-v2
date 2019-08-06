@@ -197,7 +197,7 @@ class LocationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Location $location */
-        $location = $this->locationRepository->find($id, ['city', 'village']);
+        $location = $this->locationRepository->find($id, \request()->get('relations'));
 
         if ($location === null) {
             return $this->sendError('Location not found');
@@ -299,7 +299,7 @@ class LocationAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Location $location */
-        $location = $this->locationRepository->find($id);
+        $location = $this->locationRepository->find($id, \request()->get('relations'));
 
         if ($location === null) {
             return $this->sendError('Location not found');
@@ -352,7 +352,7 @@ class LocationAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Location $location */
-        $location = $this->locationRepository->find($id);
+        $location = $this->locationRepository->find($id, \request()->get('relations'));
 
         if ($location === null) {
             return $this->sendError('Location not found');

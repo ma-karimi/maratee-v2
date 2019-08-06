@@ -59,10 +59,10 @@ class SeedChemicalAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $seedChemicals = $this->seedChemicalRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $seedChemicals = $this->seedChemicalRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($seedChemicals->toArray(), 'Seed Chemicals retrieved successfully');
@@ -184,7 +184,7 @@ class SeedChemicalAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedChemical $seedChemical */
-        $seedChemical = $this->seedChemicalRepository->find($id);
+        $seedChemical = $this->seedChemicalRepository->find($id, \request()->get('relations'));
 
         if (empty($seedChemical)) {
             return $this->sendError('Seed Chemical not found');
@@ -272,7 +272,7 @@ class SeedChemicalAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var SeedChemical $seedChemical */
-        $seedChemical = $this->seedChemicalRepository->find($id);
+        $seedChemical = $this->seedChemicalRepository->find($id, \request()->get('relations'));
 
         if (empty($seedChemical)) {
             return $this->sendError('Seed Chemical not found');
@@ -325,7 +325,7 @@ class SeedChemicalAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var SeedChemical $seedChemical */
-        $seedChemical = $this->seedChemicalRepository->find($id);
+        $seedChemical = $this->seedChemicalRepository->find($id, \request()->get('relations'));
 
         if (empty($seedChemical)) {
             return $this->sendError('Seed Chemical not found');

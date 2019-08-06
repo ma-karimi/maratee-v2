@@ -59,10 +59,10 @@ class DivisionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $divisions = $this->divisionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $divisions = $this->divisionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($divisions->toArray(), 'Divisions retrieved successfully');
@@ -156,7 +156,7 @@ class DivisionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Division $division */
-        $division = $this->divisionRepository->find($id);
+        $division = $this->divisionRepository->find($id, \request()->get('relations'));
 
         if (empty($division)) {
             return $this->sendError('Division not found');
@@ -216,7 +216,7 @@ class DivisionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Division $division */
-        $division = $this->divisionRepository->find($id);
+        $division = $this->divisionRepository->find($id, \request()->get('relations'));
 
         if (empty($division)) {
             return $this->sendError('Division not found');
@@ -268,7 +268,7 @@ class DivisionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Division $division */
-        $division = $this->divisionRepository->find($id);
+        $division = $this->divisionRepository->find($id, \request()->get('relations'));
 
         if (empty($division)) {
             return $this->sendError('Division not found');

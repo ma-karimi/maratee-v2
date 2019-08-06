@@ -60,38 +60,14 @@ class BotanicalAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $relations=[
-            'herbarium.plant.generalFamily.authors',
-            'herbarium.plant.generalGenus.authors',
-            'herbarium.plant.generalSpecie.authors',
-            'herbarium.plant.generalSubSpecie.authors',
-            'herbarium.plant.generalVariety.authors',
-            'herbarium.plant.generalFamily.authors',
-            'herbarium.protection',
-            'herbarium.generalType',
-            'herbarium.generalPhytogeography',
-            'botanicalReproductions.reproduction',
-            'lighting_from',
-            'lighting_to',
-            'soil_from',
-            'soil_to',
-            'botanicalGardenActions',
-            'herbarium.plant',
-            'herbarium.medias',
-            'entryHubs.location',
-            'entryHubs.entry',
-            'entryHubs.organization',
-            'botanicalIrrigations',
-            'planting_actions',
-            'irrigation'];
-        $botanicals = $this->botanicalRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit'),
-            $relations
+
+        $botanicals = $this->botanicalRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
-        $botanicals=BotanicalResource::collection($botanicals);
-        return $this->sendResponse($botanicals, 'Botanicals retrieved successfully');
+
+        return $this->sendResponse($botanicals->toArray(), 'Botanicals retrieved successfully');
     }
 
     /**
@@ -301,7 +277,7 @@ class BotanicalAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Botanical $botanical */
-        $botanical = $this->botanicalRepository->find($id);
+        $botanical = $this->botanicalRepository->find($id, \request()->get('relations'));
 
         if ($botanical === null) {
             return $this->sendError('Botanical not found');
@@ -480,7 +456,7 @@ class BotanicalAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Botanical $botanical */
-        $botanical = $this->botanicalRepository->find($id);
+        $botanical = $this->botanicalRepository->find($id, \request()->get('relations'));
 
         if ($botanical === null) {
             return $this->sendError('Botanical not found');
@@ -533,7 +509,7 @@ class BotanicalAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Botanical $botanical */
-        $botanical = $this->botanicalRepository->find($id);
+        $botanical = $this->botanicalRepository->find($id, \request()->get('relations'));
 
         if ($botanical === null) {
             return $this->sendError('Botanical not found');
@@ -542,5 +518,41 @@ class BotanicalAPIController extends AppBaseController
         $botanical->delete();
 
         return $this->sendResponse($id, 'Botanical deleted successfully');
+    }
+
+    public function exportExcel(Request $request)
+    {
+        $relations=[
+            'herbarium.plant.generalFamily.authors',
+            'herbarium.plant.generalGenus.authors',
+            'herbarium.plant.generalSpecie.authors',
+            'herbarium.plant.generalSubSpecie.authors',
+            'herbarium.plant.generalVariety.authors',
+            'herbarium.plant.generalFamily.authors',
+            'herbarium.protection',
+            'herbarium.generalType',
+            'herbarium.generalPhytogeography',
+            'botanicalReproductions.reproduction',
+            'lighting_from',
+            'lighting_to',
+            'soil_from',
+            'soil_to',
+            'botanicalGardenActions',
+            'herbarium.plant',
+            'herbarium.medias',
+            'entryHubs.location',
+            'entryHubs.entry',
+            'entryHubs.organization',
+            'botanicalIrrigations',
+            'planting_actions',
+            'irrigation'];
+        $botanicals = $this->botanicalRepository->all(
+            $request->except(['skip', 'limit']),
+            $request->get('skip'),
+            $request->get('limit'),
+            $relations
+        );
+        $botanicals=BotanicalResource::collection($botanicals);
+        return $this->sendResponse($botanicals, 'Botanicals retrieved successfully');
     }
 }

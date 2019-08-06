@@ -59,10 +59,10 @@ class GeraminAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $geramins = $this->geraminRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $geramins = $this->geraminRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($geramins->toArray(), 'Geramins retrieved successfully');
@@ -254,7 +254,7 @@ class GeraminAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Geramin $geramin */
-        $geramin = $this->geraminRepository->find($id);
+        $geramin = $this->geraminRepository->find($id, \request()->get('relations'));
 
         if ($geramin === null) {
             return $this->sendError('Geramin not found');
@@ -412,7 +412,7 @@ class GeraminAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Geramin $geramin */
-        $geramin = $this->geraminRepository->find($id);
+        $geramin = $this->geraminRepository->find($id, \request()->get('relations'));
 
         if ($geramin === null) {
             return $this->sendError('Geramin not found');
@@ -465,7 +465,7 @@ class GeraminAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Geramin $geramin */
-        $geramin = $this->geraminRepository->find($id);
+        $geramin = $this->geraminRepository->find($id, \request()->get('relations'));
 
         if ($geramin === null) {
             return $this->sendError('Geramin not found');

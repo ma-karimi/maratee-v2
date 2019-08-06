@@ -59,10 +59,10 @@ class PaleontologyActionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $paleontologyActions = $this->paleontologyActionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $paleontologyActions = $this->paleontologyActionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($paleontologyActions->toArray(), 'Paleontology Actions retrieved successfully');
@@ -184,7 +184,7 @@ class PaleontologyActionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var PaleontologyAction $paleontologyAction */
-        $paleontologyAction = $this->paleontologyActionRepository->find($id);
+        $paleontologyAction = $this->paleontologyActionRepository->find($id, \request()->get('relations'));
 
         if (empty($paleontologyAction)) {
             return $this->sendError('Paleontology Action not found');
@@ -272,7 +272,7 @@ class PaleontologyActionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var PaleontologyAction $paleontologyAction */
-        $paleontologyAction = $this->paleontologyActionRepository->find($id);
+        $paleontologyAction = $this->paleontologyActionRepository->find($id, \request()->get('relations'));
 
         if (empty($paleontologyAction)) {
             return $this->sendError('Paleontology Action not found');
@@ -325,7 +325,7 @@ class PaleontologyActionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var PaleontologyAction $paleontologyAction */
-        $paleontologyAction = $this->paleontologyActionRepository->find($id);
+        $paleontologyAction = $this->paleontologyActionRepository->find($id, \request()->get('relations'));
 
         if (empty($paleontologyAction)) {
             return $this->sendError('Paleontology Action not found');

@@ -59,10 +59,10 @@ class IrrigationAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $irrigations = $this->irrigationRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $irrigations = $this->irrigationRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($irrigations->toArray(), 'Irrigations retrieved successfully');
@@ -163,7 +163,7 @@ class IrrigationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Irrigation $irrigation */
-        $irrigation = $this->irrigationRepository->find($id);
+        $irrigation = $this->irrigationRepository->find($id, \request()->get('relations'));
 
         if ($irrigation === null) {
             return $this->sendError('Irrigation not found');
@@ -230,7 +230,7 @@ class IrrigationAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Irrigation $irrigation */
-        $irrigation = $this->irrigationRepository->find($id);
+        $irrigation = $this->irrigationRepository->find($id, \request()->get('relations'));
 
         if ($irrigation === null) {
             return $this->sendError('Irrigation not found');
@@ -283,7 +283,7 @@ class IrrigationAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Irrigation $irrigation */
-        $irrigation = $this->irrigationRepository->find($id);
+        $irrigation = $this->irrigationRepository->find($id, \request()->get('relations'));
 
         if (empty($irrigation)) {
             return $this->sendError('Irrigation not found');

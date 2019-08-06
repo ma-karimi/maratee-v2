@@ -59,10 +59,10 @@ class SoilFeatureAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $soilFeatures = $this->soilFeatureRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $soilFeatures = $this->soilFeatureRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($soilFeatures->toArray(), 'Soil Features retrieved successfully');
@@ -163,7 +163,7 @@ class SoilFeatureAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SoilFeature $soilFeature */
-        $soilFeature = $this->soilFeatureRepository->find($id);
+        $soilFeature = $this->soilFeatureRepository->find($id, \request()->get('relations'));
 
         if (empty($soilFeature)) {
             return $this->sendError('Soil Feature not found');
@@ -230,7 +230,7 @@ class SoilFeatureAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var SoilFeature $soilFeature */
-        $soilFeature = $this->soilFeatureRepository->find($id);
+        $soilFeature = $this->soilFeatureRepository->find($id, \request()->get('relations'));
 
         if (empty($soilFeature)) {
             return $this->sendError('Soil Feature not found');
@@ -283,7 +283,7 @@ class SoilFeatureAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var SoilFeature $soilFeature */
-        $soilFeature = $this->soilFeatureRepository->find($id);
+        $soilFeature = $this->soilFeatureRepository->find($id, \request()->get('relations'));
 
         if (empty($soilFeature)) {
             return $this->sendError('Soil Feature not found');

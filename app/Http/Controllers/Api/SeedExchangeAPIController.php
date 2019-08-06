@@ -59,10 +59,10 @@ class SeedExchangeAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $seedExchanges = $this->seedExchangeRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $seedExchanges = $this->seedExchangeRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($seedExchanges->toArray(), 'Seed Exchanges retrieved successfully');
@@ -205,7 +205,7 @@ class SeedExchangeAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedExchange $seedExchange */
-        $seedExchange = $this->seedExchangeRepository->find($id);
+        $seedExchange = $this->seedExchangeRepository->find($id, \request()->get('relations'));
 
         if (empty($seedExchange)) {
             return $this->sendError('Seed Exchange not found');
@@ -314,7 +314,7 @@ class SeedExchangeAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var SeedExchange $seedExchange */
-        $seedExchange = $this->seedExchangeRepository->find($id);
+        $seedExchange = $this->seedExchangeRepository->find($id, \request()->get('relations'));
 
         if (empty($seedExchange)) {
             return $this->sendError('Seed Exchange not found');
@@ -367,7 +367,7 @@ class SeedExchangeAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var SeedExchange $seedExchange */
-        $seedExchange = $this->seedExchangeRepository->find($id);
+        $seedExchange = $this->seedExchangeRepository->find($id, \request()->get('relations'));
 
         if (empty($seedExchange)) {
             return $this->sendError('Seed Exchange not found');

@@ -59,10 +59,10 @@ class MedicinalPlantAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $medicinalPlants = $this->medicinalPlantRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $medicinalPlants = $this->medicinalPlantRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($medicinalPlants->toArray(), 'Medicinal Plants retrieved successfully');
@@ -261,7 +261,7 @@ class MedicinalPlantAPIController extends AppBaseController
     public function show($id)
     {
         /** @var MedicinalPlant $medicinalPlant */
-        $medicinalPlant = $this->medicinalPlantRepository->find($id);
+        $medicinalPlant = $this->medicinalPlantRepository->find($id, \request()->get('relations'));
 
         if ($medicinalPlant === null) {
             return $this->sendError('Medicinal Plant not found');
@@ -426,7 +426,7 @@ class MedicinalPlantAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var MedicinalPlant $medicinalPlant */
-        $medicinalPlant = $this->medicinalPlantRepository->find($id);
+        $medicinalPlant = $this->medicinalPlantRepository->find($id, \request()->get('relations'));
 
         if ($medicinalPlant === null) {
             return $this->sendError('Medicinal Plant not found');
@@ -479,7 +479,7 @@ class MedicinalPlantAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var MedicinalPlant $medicinalPlant */
-        $medicinalPlant = $this->medicinalPlantRepository->find($id);
+        $medicinalPlant = $this->medicinalPlantRepository->find($id, \request()->get('relations'));
 
         if ($medicinalPlant === null) {
             return $this->sendError('Medicinal Plant not found');

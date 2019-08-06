@@ -59,10 +59,10 @@ class TechnologyCollectionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $technologyCollections = $this->technologyCollectionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $technologyCollections = $this->technologyCollectionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($technologyCollections->toArray(), 'Technology Collections retrieved successfully');
@@ -170,7 +170,7 @@ class TechnologyCollectionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var TechnologyCollection $technologyCollection */
-        $technologyCollection = $this->technologyCollectionRepository->find($id);
+        $technologyCollection = $this->technologyCollectionRepository->find($id, \request()->get('relations'));
 
         if (empty($technologyCollection)) {
             return $this->sendError('Technology Collection not found');
@@ -237,7 +237,7 @@ class TechnologyCollectionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var TechnologyCollection $technologyCollection */
-        $technologyCollection = $this->technologyCollectionRepository->find($id);
+        $technologyCollection = $this->technologyCollectionRepository->find($id, \request()->get('relations'));
 
         if (empty($technologyCollection)) {
             return $this->sendError('Technology Collection not found');
@@ -290,7 +290,7 @@ class TechnologyCollectionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var TechnologyCollection $technologyCollection */
-        $technologyCollection = $this->technologyCollectionRepository->find($id);
+        $technologyCollection = $this->technologyCollectionRepository->find($id, \request()->get('relations'));
 
         if (empty($technologyCollection)) {
             return $this->sendError('Technology Collection not found');

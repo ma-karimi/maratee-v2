@@ -59,10 +59,10 @@ class ProjectAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $projects = $this->projectRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $projects = $this->projectRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($projects->toArray(), 'Projects retrieved successfully');
@@ -198,7 +198,7 @@ class ProjectAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Project $project */
-        $project = $this->projectRepository->find($id);
+        $project = $this->projectRepository->find($id, \request()->get('relations'));
 
         if (empty($project)) {
             return $this->sendError('Project not found');
@@ -293,7 +293,7 @@ class ProjectAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Project $project */
-        $project = $this->projectRepository->find($id);
+        $project = $this->projectRepository->find($id, \request()->get('relations'));
 
         if (empty($project)) {
             return $this->sendError('Project not found');
@@ -346,7 +346,7 @@ class ProjectAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Project $project */
-        $project = $this->projectRepository->find($id);
+        $project = $this->projectRepository->find($id, \request()->get('relations'));
 
         if (empty($project)) {
             return $this->sendError('Project not found');

@@ -59,10 +59,10 @@ class GroupAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $groups = $this->groupRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $groups = $this->groupRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($groups->toArray(), 'Groups retrieved successfully');
@@ -191,7 +191,7 @@ class GroupAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Group $group */
-        $group = $this->groupRepository->find($id);
+        $group = $this->groupRepository->find($id, \request()->get('relations'));
 
         if (empty($group)) {
             return $this->sendError('Group not found');
@@ -279,7 +279,7 @@ class GroupAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Group $group */
-        $group = $this->groupRepository->find($id);
+        $group = $this->groupRepository->find($id, \request()->get('relations'));
 
         if (empty($group)) {
             return $this->sendError('Group not found');
@@ -332,7 +332,7 @@ class GroupAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Group $group */
-        $group = $this->groupRepository->find($id);
+        $group = $this->groupRepository->find($id, \request()->get('relations'));
 
         if (empty($group)) {
             return $this->sendError('Group not found');

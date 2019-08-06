@@ -59,10 +59,10 @@ class CountryAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $countries = $this->countryRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $countries = $this->countryRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($countries->toArray(), 'Countries retrieved successfully');
@@ -156,7 +156,7 @@ class CountryAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Country $country */
-        $country = $this->countryRepository->find($id);
+        $country = $this->countryRepository->find($id, \request()->get('relations'));
 
         if (empty($country)) {
             return $this->sendError('Country not found');
@@ -216,7 +216,7 @@ class CountryAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Country $country */
-        $country = $this->countryRepository->find($id);
+        $country = $this->countryRepository->find($id, \request()->get('relations'));
 
         if (empty($country)) {
             return $this->sendError('Country not found');
@@ -268,7 +268,7 @@ class CountryAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Country $country */
-        $country = $this->countryRepository->find($id);
+        $country = $this->countryRepository->find($id, \request()->get('relations'));
 
         if (empty($country)) {
             return $this->sendError('Country not found');

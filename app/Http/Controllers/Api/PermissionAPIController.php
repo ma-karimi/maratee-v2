@@ -58,10 +58,10 @@ class PermissionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $permissions = $this->permissionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $permissions = $this->permissionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($permissions->toArray(), 'Permissions retrieved successfully');
@@ -267,7 +267,7 @@ class PermissionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Permission $permission */
-        $permission = $this->permissionRepository->find($id);
+        $permission = $this->permissionRepository->find($id, \request()->get('relations'));
 
         if (empty($permission)) {
             return $this->sendError('Permission not found');
@@ -439,7 +439,7 @@ class PermissionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Permission $permission */
-        $permission = $this->permissionRepository->find($id);
+        $permission = $this->permissionRepository->find($id, \request()->get('relations'));
 
         if (empty($permission)) {
             return $this->sendError('Permission not found');
@@ -492,7 +492,7 @@ class PermissionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Permission $permission */
-        $permission = $this->permissionRepository->find($id);
+        $permission = $this->permissionRepository->find($id, \request()->get('relations'));
 
         if (empty($permission)) {
             return $this->sendError('Permission not found');

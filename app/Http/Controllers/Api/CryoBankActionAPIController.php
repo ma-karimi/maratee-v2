@@ -59,10 +59,10 @@ class CryoBankActionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $cryoBankActions = $this->cryoBankActionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $cryoBankActions = $this->cryoBankActionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($cryoBankActions->toArray(), 'Cryo Bank Actions retrieved successfully');
@@ -161,7 +161,7 @@ class CryoBankActionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var CryoBankAction $cryoBankAction */
-        $cryoBankAction = $this->cryoBankActionRepository->find($id);
+        $cryoBankAction = $this->cryoBankActionRepository->find($id, \request()->get('relations'));
 
         if ($cryoBankAction === null) {
             return $this->sendError('Cryo Bank Action not found');
@@ -226,7 +226,7 @@ class CryoBankActionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var CryoBankAction $cryoBankAction */
-        $cryoBankAction = $this->cryoBankActionRepository->find($id);
+        $cryoBankAction = $this->cryoBankActionRepository->find($id, \request()->get('relations'));
 
         if ($cryoBankAction === null) {
             return $this->sendError('Cryo Bank Action not found');
@@ -279,7 +279,7 @@ class CryoBankActionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var CryoBankAction $cryoBankAction */
-        $cryoBankAction = $this->cryoBankActionRepository->find($id);
+        $cryoBankAction = $this->cryoBankActionRepository->find($id, \request()->get('relations'));
 
         if ($cryoBankAction === null) {
             return $this->sendError('Cryo Bank Action not found');

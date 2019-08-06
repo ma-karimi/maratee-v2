@@ -68,35 +68,13 @@ class PlantAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $relations=[
-            'generalFamily.authors',
-            'generalGenus.authors',
-            'generalSpecie.authors',
-            'generalSubSpecie.authors',
-            'generalVariety.authors',
-            'generalSperm',
-            'generalCotyledon',
-            'authors',
-            'location.city.province.country',
-            'location.village',
-            'herbariums.department',
-            'herbariums.division',
-            'herbariums.generalPhytogeography',
-            'herbariums.actionHubs.user',
-            'herbariums.generalPhenology',
-            'herbariums.protection',
-            'herbariums.attendances',
-            'herbariums.borrows.user',
-            'herbariums.borrows.media',
-        ];
-        $plants = $this->plantRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit'),
-            $relations
+        $plants = $this->plantRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
-        $plants=PlantResource::collection($plants);
-        return $this->sendResponse($plants, 'Plants retrieved successfully');
+
+        return $this->sendResponse($plants->toArray(), 'Plants retrieved successfully');
     }
 
     /**
@@ -306,7 +284,7 @@ class PlantAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Plant $plant */
-        $plant = $this->plantRepository->find($id);
+        $plant = $this->plantRepository->find($id, \request()->get('relations'));
 
         if (empty($plant)) {
             return $this->sendError('Plant not found');
@@ -485,7 +463,7 @@ class PlantAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Plant $plant */
-        $plant = $this->plantRepository->find($id);
+        $plant = $this->plantRepository->find($id, \request()->get('relations'));
 
         if (empty($plant)) {
             return $this->sendError('Plant not found');
@@ -538,7 +516,7 @@ class PlantAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Plant $plant */
-        $plant = $this->plantRepository->find($id);
+        $plant = $this->plantRepository->find($id, \request()->get('relations'));
 
         if (empty($plant)) {
             return $this->sendError('Plant not found');
@@ -547,5 +525,38 @@ class PlantAPIController extends AppBaseController
         $plant->delete();
 
         return $this->sendResponse($id, 'Plant deleted successfully');
+    }
+
+    public function exportExcel(Request $request)
+    {
+        $relations=[
+            'generalFamily.authors',
+            'generalGenus.authors',
+            'generalSpecie.authors',
+            'generalSubSpecie.authors',
+            'generalVariety.authors',
+            'generalSperm',
+            'generalCotyledon',
+            'authors',
+            'location.city.province.country',
+            'location.village',
+            'herbariums.department',
+            'herbariums.division',
+            'herbariums.generalPhytogeography',
+            'herbariums.actionHubs.user',
+            'herbariums.generalPhenology',
+            'herbariums.protection',
+            'herbariums.attendances',
+            'herbariums.borrows.user',
+            'herbariums.borrows.media',
+        ];
+        $plants = $this->plantRepository->all(
+            $request->except(['skip', 'limit']),
+            $request->get('skip'),
+            $request->get('limit'),
+            $relations
+        );
+        $plants=PlantResource::collection($plants);
+        return $this->sendResponse($plants, 'Plants retrieved successfully');
     }
 }

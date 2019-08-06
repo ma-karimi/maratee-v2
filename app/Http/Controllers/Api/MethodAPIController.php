@@ -59,10 +59,10 @@ class MethodAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $methods = $this->methodRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $methods = $this->methodRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($methods->toArray(), 'Methods retrieved successfully');
@@ -163,7 +163,7 @@ class MethodAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Method $method */
-        $method = $this->methodRepository->find($id);
+        $method = $this->methodRepository->find($id, \request()->get('relations'));
 
         if ($method === null) {
             return $this->sendError('Method not found');
@@ -230,7 +230,7 @@ class MethodAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Method $method */
-        $method = $this->methodRepository->find($id);
+        $method = $this->methodRepository->find($id, \request()->get('relations'));
 
         if ($method === null) {
             return $this->sendError('Method not found');
@@ -283,7 +283,7 @@ class MethodAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Method $method */
-        $method = $this->methodRepository->find($id);
+        $method = $this->methodRepository->find($id, \request()->get('relations'));
 
         if ($method === null) {
             return $this->sendError('Method not found');

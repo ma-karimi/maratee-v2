@@ -28,10 +28,10 @@ class TableAPIController extends AppBaseController
 
     public function index(Request $request)
     {
-        $tables = $this->tableRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $tables = $this->tableRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($tables->toArray(), 'Tables retrieved successfully');
@@ -50,7 +50,7 @@ class TableAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Table $table */
-        $table = $this->tableRepository->find($id);
+        $table = $this->tableRepository->find($id, \request()->get('relations'));
 
         if (empty($table)) {
             return $this->sendError('Table not found');
@@ -65,7 +65,7 @@ class TableAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Table $table */
-        $table = $this->tableRepository->find($id);
+        $table = $this->tableRepository->find($id, \request()->get('relations'));
 
         if (empty($table)) {
             return $this->sendError('Table not found');
@@ -118,7 +118,7 @@ class TableAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Table $table */
-        $table = $this->tableRepository->find($id);
+        $table = $this->tableRepository->find($id, \request()->get('relations'));
 
         if (empty($table)) {
             return $this->sendError('Table not found');

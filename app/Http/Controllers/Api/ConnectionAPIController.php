@@ -59,10 +59,10 @@ class ConnectionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $connections = $this->connectionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $connections = $this->connectionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($connections->toArray(), 'Connections retrieved successfully');
@@ -155,7 +155,7 @@ class ConnectionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Connection $connection */
-        $connection = $this->connectionRepository->find($id);
+        $connection = $this->connectionRepository->find($id, \request()->get('relations'));
 
         if ($connection === null) {
             return $this->sendError('Connection not found');
@@ -214,7 +214,7 @@ class ConnectionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Connection $connection */
-        $connection = $this->connectionRepository->find($id);
+        $connection = $this->connectionRepository->find($id, \request()->get('relations'));
 
         if ($connection === null) {
             return $this->sendError('Connection not found');
@@ -267,7 +267,7 @@ class ConnectionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Connection $connection */
-        $connection = $this->connectionRepository->find($id);
+        $connection = $this->connectionRepository->find($id, \request()->get('relations'));
 
         if ($connection === null) {
             return $this->sendError('Connection not found');

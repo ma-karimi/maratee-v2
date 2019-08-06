@@ -59,10 +59,10 @@ class ChemicalAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $chemicals = $this->chemicalRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $chemicals = $this->chemicalRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($chemicals->toArray(), 'Chemicals retrieved successfully');
@@ -161,7 +161,7 @@ class ChemicalAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Chemical $chemical */
-        $chemical = $this->chemicalRepository->find($id);
+        $chemical = $this->chemicalRepository->find($id, \request()->get('relations'));
 
         if (empty($chemical)) {
             return $this->sendError('Chemical not found');
@@ -226,7 +226,7 @@ class ChemicalAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Chemical $chemical */
-        $chemical = $this->chemicalRepository->find($id);
+        $chemical = $this->chemicalRepository->find($id, \request()->get('relations'));
 
         if ($chemical === null) {
             return $this->sendError('Chemical not found');
@@ -279,7 +279,7 @@ class ChemicalAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Chemical $chemical */
-        $chemical = $this->chemicalRepository->find($id);
+        $chemical = $this->chemicalRepository->find($id, \request()->get('relations'));
 
         if ($chemical === null) {
             return $this->sendError('Chemical not found');

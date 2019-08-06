@@ -59,10 +59,10 @@ class CityAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $cities = $this->cityRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $cities = $this->cityRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($cities->toArray(), 'Cities retrieved successfully');
@@ -167,7 +167,7 @@ class CityAPIController extends AppBaseController
     public function show($id)
     {
         /** @var City $city */
-        $city = $this->cityRepository->find($id);
+        $city = $this->cityRepository->find($id, \request()->get('relations'));
 
         if ($city === null) {
             return $this->sendError('City not found');
@@ -238,7 +238,7 @@ class CityAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var City $city */
-        $city = $this->cityRepository->find($id);
+        $city = $this->cityRepository->find($id, \request()->get('relations'));
 
         if ($city === null) {
             return $this->sendError('City not found');
@@ -291,7 +291,7 @@ class CityAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var City $city */
-        $city = $this->cityRepository->find($id);
+        $city = $this->cityRepository->find($id, \request()->get('relations'));
 
         if ($city === null) {
             return $this->sendError('City not found');

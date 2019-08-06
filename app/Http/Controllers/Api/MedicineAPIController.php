@@ -59,10 +59,10 @@ class MedicineAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $medicines = $this->medicineRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $medicines = $this->medicineRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($medicines->toArray(), 'Medicines retrieved successfully');
@@ -177,7 +177,7 @@ class MedicineAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Medicine $medicine */
-        $medicine = $this->medicineRepository->find($id);
+        $medicine = $this->medicineRepository->find($id, \request()->get('relations'));
 
         if ($medicine === null) {
             return $this->sendError('Medicine not found');
@@ -258,7 +258,7 @@ class MedicineAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Medicine $medicine */
-        $medicine = $this->medicineRepository->find($id);
+        $medicine = $this->medicineRepository->find($id, \request()->get('relations'));
 
         if ($medicine === null) {
             return $this->sendError('Medicine not found');
@@ -311,7 +311,7 @@ class MedicineAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Medicine $medicine */
-        $medicine = $this->medicineRepository->find($id);
+        $medicine = $this->medicineRepository->find($id, \request()->get('relations'));
 
         if (empty($medicine)) {
             return $this->sendError('Medicine not found');

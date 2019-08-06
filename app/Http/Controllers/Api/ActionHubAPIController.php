@@ -59,10 +59,10 @@ class ActionHubAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $actionHubs = $this->actionHubRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $actionHubs = $this->actionHubRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($actionHubs->toArray(), 'Action Hubs retrieved successfully');
@@ -261,7 +261,7 @@ class ActionHubAPIController extends AppBaseController
     public function show($id)
     {
         /** @var ActionHub $actionHub */
-        $actionHub = $this->actionHubRepository->find($id);
+        $actionHub = $this->actionHubRepository->find($id, \request()->get('relations'));
 
         if (empty($actionHub)) {
             return $this->sendError('Action Hub not found');
@@ -321,7 +321,7 @@ class ActionHubAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var ActionHub $actionHub */
-        $actionHub = $this->actionHubRepository->find($id);
+        $actionHub = $this->actionHubRepository->find($id, \request()->get('relations'));
 
         if (empty($actionHub)) {
             return $this->sendError('Action Hub not found');
@@ -374,7 +374,7 @@ class ActionHubAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var ActionHub $actionHub */
-        $actionHub = $this->actionHubRepository->find($id);
+        $actionHub = $this->actionHubRepository->find($id, \request()->get('relations'));
 
         if (empty($actionHub)) {
             return $this->sendError('Action Hub not found');

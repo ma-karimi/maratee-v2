@@ -59,10 +59,10 @@ class EntryHubAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $entryHubs = $this->entryHubRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $entryHubs = $this->entryHubRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($entryHubs->toArray(), 'Entry Hubs retrieved successfully');
@@ -156,7 +156,7 @@ class EntryHubAPIController extends AppBaseController
     public function show($id)
     {
         /** @var EntryHub $entryHub */
-        $entryHub = $this->entryHubRepository->find($id);
+        $entryHub = $this->entryHubRepository->find($id, \request()->get('relations'));
 
         if (empty($entryHub)) {
             return $this->sendError('Entry Hub not found');
@@ -216,7 +216,7 @@ class EntryHubAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var EntryHub $entryHub */
-        $entryHub = $this->entryHubRepository->find($id);
+        $entryHub = $this->entryHubRepository->find($id, \request()->get('relations'));
 
         if (empty($entryHub)) {
             return $this->sendError('Entry Hub not found');
@@ -268,7 +268,7 @@ class EntryHubAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var EntryHub $entryHub */
-        $entryHub = $this->entryHubRepository->find($id);
+        $entryHub = $this->entryHubRepository->find($id, \request()->get('relations'));
 
         if (empty($entryHub)) {
             return $this->sendError('Entry Hub not found');

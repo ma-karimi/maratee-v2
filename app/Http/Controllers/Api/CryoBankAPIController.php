@@ -59,10 +59,10 @@ class CryoBankAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $cryoBanks = $this->cryoBankRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $cryoBanks = $this->cryoBankRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($cryoBanks->toArray(), 'Cryo Banks retrieved successfully');
@@ -227,7 +227,7 @@ class CryoBankAPIController extends AppBaseController
     public function show($id)
     {
         /** @var CryoBank $cryoBank */
-        $cryoBank = $this->cryoBankRepository->find($id);
+        $cryoBank = $this->cryoBankRepository->find($id, \request()->get('relations'));
 
         if ($cryoBank === null) {
             return $this->sendError('Cryo Bank not found');
@@ -358,7 +358,7 @@ class CryoBankAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var CryoBank $cryoBank */
-        $cryoBank = $this->cryoBankRepository->find($id);
+        $cryoBank = $this->cryoBankRepository->find($id, \request()->get('relations'));
 
         if ($cryoBank === null) {
             return $this->sendError('Cryo Bank not found');
@@ -411,7 +411,7 @@ class CryoBankAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var CryoBank $cryoBank */
-        $cryoBank = $this->cryoBankRepository->find($id);
+        $cryoBank = $this->cryoBankRepository->find($id, \request()->get('relations'));
 
         if ($cryoBank === null) {
             return $this->sendError('Cryo Bank not found');

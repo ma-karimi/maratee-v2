@@ -59,10 +59,10 @@ class MolecularAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $moleculars = $this->molecularRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $moleculars = $this->molecularRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($moleculars->toArray(), 'Moleculars retrieved successfully');
@@ -163,7 +163,7 @@ class MolecularAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Molecular $molecular */
-        $molecular = $this->molecularRepository->find($id);
+        $molecular = $this->molecularRepository->find($id, \request()->get('relations'));
 
         if ($molecular === null) {
             return $this->sendError('Molecular not found');
@@ -230,7 +230,7 @@ class MolecularAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Molecular $molecular */
-        $molecular = $this->molecularRepository->find($id);
+        $molecular = $this->molecularRepository->find($id, \request()->get('relations'));
 
         if ($molecular === null) {
             return $this->sendError('Molecular not found');
@@ -283,7 +283,7 @@ class MolecularAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Molecular $molecular */
-        $molecular = $this->molecularRepository->find($id);
+        $molecular = $this->molecularRepository->find($id, \request()->get('relations'));
 
         if ($molecular === null) {
             return $this->sendError('Molecular not found');

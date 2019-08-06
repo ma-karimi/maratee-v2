@@ -59,10 +59,10 @@ class ChromosomeAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $chromosomes = $this->chromosomeRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $chromosomes = $this->chromosomeRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($chromosomes->toArray(), 'Chromosomes retrieved successfully');
@@ -191,7 +191,7 @@ class ChromosomeAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Chromosome $chromosome */
-        $chromosome = $this->chromosomeRepository->find($id);
+        $chromosome = $this->chromosomeRepository->find($id, \request()->get('relations'));
 
         if ($chromosome === null) {
             return $this->sendError('Chromosome not found');
@@ -286,7 +286,7 @@ class ChromosomeAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Chromosome $chromosome */
-        $chromosome = $this->chromosomeRepository->find($id);
+        $chromosome = $this->chromosomeRepository->find($id, \request()->get('relations'));
 
         if ($chromosome === null) {
             return $this->sendError('Chromosome not found');
@@ -339,7 +339,7 @@ class ChromosomeAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Chromosome $chromosome */
-        $chromosome = $this->chromosomeRepository->find($id);
+        $chromosome = $this->chromosomeRepository->find($id, \request()->get('relations'));
 
         if ($chromosome === null) {
             return $this->sendError('Chromosome not found');

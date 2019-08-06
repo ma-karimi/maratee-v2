@@ -59,10 +59,10 @@ class LocalityAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $localities = $this->localityRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $localities = $this->localityRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($localities->toArray(), 'Localities retrieved successfully');
@@ -212,7 +212,7 @@ class LocalityAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Locality $locality */
-        $locality = $this->localityRepository->find($id);
+        $locality = $this->localityRepository->find($id, \request()->get('relations'));
 
         if (empty($locality)) {
             return $this->sendError('Locality not found');
@@ -272,7 +272,7 @@ class LocalityAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Locality $locality */
-        $locality = $this->localityRepository->find($id);
+        $locality = $this->localityRepository->find($id, \request()->get('relations'));
 
         if (empty($locality)) {
             return $this->sendError('Locality not found');
@@ -324,7 +324,7 @@ class LocalityAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Locality $locality */
-        $locality = $this->localityRepository->find($id);
+        $locality = $this->localityRepository->find($id, \request()->get('relations'));
 
         if (empty($locality)) {
             return $this->sendError('Locality not found');

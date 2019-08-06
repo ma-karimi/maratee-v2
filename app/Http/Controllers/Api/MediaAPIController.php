@@ -59,10 +59,10 @@ class MediaAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $media = $this->mediaRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $media = $this->mediaRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($media->toArray(), 'Media retrieved successfully');
@@ -247,7 +247,7 @@ class MediaAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Media $media */
-        $media = $this->mediaRepository->find($id);
+        $media = $this->mediaRepository->find($id, \request()->get('relations'));
 
         if ($media === null) {
             return $this->sendError('Media not found');
@@ -398,7 +398,7 @@ class MediaAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Media $media */
-        $media = $this->mediaRepository->find($id);
+        $media = $this->mediaRepository->find($id, \request()->get('relations'));
 
         if ($media === null) {
             return $this->sendError('Media not found');
@@ -451,7 +451,7 @@ class MediaAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Media $media */
-        $media = $this->mediaRepository->find($id);
+        $media = $this->mediaRepository->find($id, \request()->get('relations'));
 
         if ($media === null) {
             return $this->sendError('Media not found');

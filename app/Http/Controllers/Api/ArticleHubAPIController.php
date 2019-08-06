@@ -59,10 +59,10 @@ class ArticleHubAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $articleHubs = $this->articleHubRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $articleHubs = $this->articleHubRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($articleHubs->toArray(), 'Article Hubs retrieved successfully');
@@ -184,7 +184,7 @@ class ArticleHubAPIController extends AppBaseController
     public function show($id)
     {
         /** @var ArticleHub $articleHub */
-        $articleHub = $this->articleHubRepository->find($id);
+        $articleHub = $this->articleHubRepository->find($id, \request()->get('relations'));
 
         if ($articleHub === null) {
             return $this->sendError('Article Hub not found');
@@ -272,7 +272,7 @@ class ArticleHubAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var ArticleHub $articleHub */
-        $articleHub = $this->articleHubRepository->find($id);
+        $articleHub = $this->articleHubRepository->find($id, \request()->get('relations'));
 
         if ($articleHub === null) {
             return $this->sendError('Article Hub not found');
@@ -325,7 +325,7 @@ class ArticleHubAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var ArticleHub $articleHub */
-        $articleHub = $this->articleHubRepository->find($id);
+        $articleHub = $this->articleHubRepository->find($id, \request()->get('relations'));
 
         if ($articleHub === null) {
             return $this->sendError('Article Hub not found');

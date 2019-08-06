@@ -59,10 +59,10 @@ class BotanicalIrrigationAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $botanicalIrrigations = $this->botanicalIrrigationRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $botanicalIrrigations = $this->botanicalIrrigationRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($botanicalIrrigations->toArray(), 'Botanical Irrigations retrieved successfully');
@@ -179,7 +179,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var BotanicalIrrigation $botanicalIrrigation */
-        $botanicalIrrigation = $this->botanicalIrrigationRepository->find($id);
+        $botanicalIrrigation = $this->botanicalIrrigationRepository->find($id, \request()->get('relations'));
 
         if ($botanicalIrrigation === null) {
             return $this->sendError('Botanical Irrigation not found');
@@ -262,7 +262,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var BotanicalIrrigation $botanicalIrrigation */
-        $botanicalIrrigation = $this->botanicalIrrigationRepository->find($id);
+        $botanicalIrrigation = $this->botanicalIrrigationRepository->find($id, \request()->get('relations'));
 
         if ($botanicalIrrigation === null) {
             return $this->sendError('Botanical Irrigation not found');
@@ -315,7 +315,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var BotanicalIrrigation $botanicalIrrigation */
-        $botanicalIrrigation = $this->botanicalIrrigationRepository->find($id);
+        $botanicalIrrigation = $this->botanicalIrrigationRepository->find($id, \request()->get('relations'));
 
         if ($botanicalIrrigation === null) {
             return $this->sendError('Botanical Irrigation not found');

@@ -59,10 +59,10 @@ class PlantingActionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $plantingActions = $this->plantingActionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $plantingActions = $this->plantingActionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($plantingActions->toArray(), 'Planting Actions retrieved successfully');
@@ -163,7 +163,7 @@ class PlantingActionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var PlantingAction $plantingAction */
-        $plantingAction = $this->plantingActionRepository->find($id);
+        $plantingAction = $this->plantingActionRepository->find($id, \request()->get('relations'));
 
         if (empty($plantingAction)) {
             return $this->sendError('Planting Action not found');
@@ -230,7 +230,7 @@ class PlantingActionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var PlantingAction $plantingAction */
-        $plantingAction = $this->plantingActionRepository->find($id);
+        $plantingAction = $this->plantingActionRepository->find($id, \request()->get('relations'));
 
         if (empty($plantingAction)) {
             return $this->sendError('Planting Action not found');
@@ -283,7 +283,7 @@ class PlantingActionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var PlantingAction $plantingAction */
-        $plantingAction = $this->plantingActionRepository->find($id);
+        $plantingAction = $this->plantingActionRepository->find($id, \request()->get('relations'));
 
         if (empty($plantingAction)) {
             return $this->sendError('Planting Action not found');

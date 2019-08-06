@@ -59,10 +59,10 @@ class VisitAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $visits = $this->visitRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $visits = $this->visitRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($visits->toArray(), 'Visits retrieved successfully');
@@ -275,7 +275,7 @@ class VisitAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Visit $visit */
-        $visit = $this->visitRepository->find($id);
+        $visit = $this->visitRepository->find($id, \request()->get('relations'));
 
         if (empty($visit)) {
             return $this->sendError('Visit not found');
@@ -335,7 +335,7 @@ class VisitAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Visit $visit */
-        $visit = $this->visitRepository->find($id);
+        $visit = $this->visitRepository->find($id, \request()->get('relations'));
 
         if (empty($visit)) {
             return $this->sendError('Visit not found');
@@ -388,7 +388,7 @@ class VisitAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Visit $visit */
-        $visit = $this->visitRepository->find($id);
+        $visit = $this->visitRepository->find($id, \request()->get('relations'));
 
         if (empty($visit)) {
             return $this->sendError('Visit not found');

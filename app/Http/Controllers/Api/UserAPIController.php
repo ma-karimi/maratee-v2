@@ -58,10 +58,10 @@ class UserAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $users = $this->userRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $users = $this->userRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($users->toArray(), 'Users retrieved successfully');
@@ -340,7 +340,7 @@ class UserAPIController extends AppBaseController
     public function show($id)
     {
         /** @var User $user */
-        $user = $this->userRepository->find($id);
+        $user = $this->userRepository->find($id, \request()->get('relations'));
 
         if ($user === null) {
             return $this->sendError('User not found');
@@ -482,7 +482,7 @@ class UserAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var User $user */
-        $user = $this->userRepository->find($id);
+        $user = $this->userRepository->find($id, \request()->get('relations'));
 
         if ($user === null) {
             return $this->sendError('User not found');
@@ -535,7 +535,7 @@ class UserAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var User $user */
-        $user = $this->userRepository->find($id);
+        $user = $this->userRepository->find($id, \request()->get('relations'));
 
         if ($user === null) {
             return $this->sendError('User not found');

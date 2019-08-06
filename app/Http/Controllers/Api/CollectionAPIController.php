@@ -59,10 +59,10 @@ class CollectionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $collections = $this->collectionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $collections = $this->collectionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($collections->toArray(), 'Collections retrieved successfully');
@@ -155,7 +155,7 @@ class CollectionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Collection $collection */
-        $collection = $this->collectionRepository->find($id);
+        $collection = $this->collectionRepository->find($id, \request()->get('relations'));
 
         if ($collection === null) {
             return $this->sendError('Collection not found');
@@ -214,7 +214,7 @@ class CollectionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Collection $collection */
-        $collection = $this->collectionRepository->find($id);
+        $collection = $this->collectionRepository->find($id, \request()->get('relations'));
 
         if ($collection === null) {
             return $this->sendError('Collection not found');
@@ -267,7 +267,7 @@ class CollectionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Collection $collection */
-        $collection = $this->collectionRepository->find($id);
+        $collection = $this->collectionRepository->find($id, \request()->get('relations'));
 
         if ($collection === null) {
             return $this->sendError('Collection not found');

@@ -59,10 +59,10 @@ class VillageAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $villages = $this->villageRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $villages = $this->villageRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($villages->toArray(), 'Villages retrieved successfully');
@@ -156,7 +156,7 @@ class VillageAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Village $village */
-        $village = $this->villageRepository->find($id);
+        $village = $this->villageRepository->find($id, \request()->get('relations'));
 
         if (empty($village)) {
             return $this->sendError('Village not found');
@@ -216,7 +216,7 @@ class VillageAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Village $village */
-        $village = $this->villageRepository->find($id);
+        $village = $this->villageRepository->find($id, \request()->get('relations'));
 
         if (empty($village)) {
             return $this->sendError('Village not found');
@@ -269,7 +269,7 @@ class VillageAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Village $village */
-        $village = $this->villageRepository->find($id);
+        $village = $this->villageRepository->find($id, \request()->get('relations'));
 
         if (empty($village)) {
             return $this->sendError('Village not found');

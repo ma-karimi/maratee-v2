@@ -59,10 +59,10 @@ class MapAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $maps = $this->mapRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $maps = $this->mapRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($maps->toArray(), 'Maps retrieved successfully');
@@ -163,7 +163,7 @@ class MapAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Map $map */
-        $map = $this->mapRepository->find($id);
+        $map = $this->mapRepository->find($id, \request()->get('relations'));
 
         if ($map === null) {
             return $this->sendError('Map not found');
@@ -230,7 +230,7 @@ class MapAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Map $map */
-        $map = $this->mapRepository->find($id);
+        $map = $this->mapRepository->find($id, \request()->get('relations'));
 
         if ($map === null) {
             return $this->sendError('Map not found');
@@ -283,7 +283,7 @@ class MapAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Map $map */
-        $map = $this->mapRepository->find($id);
+        $map = $this->mapRepository->find($id, \request()->get('relations'));
 
         if ($map === null) {
             return $this->sendError('Map not found');

@@ -59,10 +59,10 @@ class ProtectionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $protections = $this->protectionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $protections = $this->protectionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($protections->toArray(), 'Protections retrieved successfully');
@@ -163,7 +163,7 @@ class ProtectionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Protection $protection */
-        $protection = $this->protectionRepository->find($id);
+        $protection = $this->protectionRepository->find($id, \request()->get('relations'));
 
         if (empty($protection)) {
             return $this->sendError('Protection not found');
@@ -230,7 +230,7 @@ class ProtectionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Protection $protection */
-        $protection = $this->protectionRepository->find($id);
+        $protection = $this->protectionRepository->find($id, \request()->get('relations'));
 
         if (empty($protection)) {
             return $this->sendError('Protection not found');
@@ -283,7 +283,7 @@ class ProtectionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Protection $protection */
-        $protection = $this->protectionRepository->find($id);
+        $protection = $this->protectionRepository->find($id, \request()->get('relations'));
 
         if (empty($protection)) {
             return $this->sendError('Protection not found');

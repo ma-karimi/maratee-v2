@@ -59,10 +59,10 @@ class TransitionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $transitions = $this->transitionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $transitions = $this->transitionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($transitions->toArray(), 'Transitions retrieved successfully');
@@ -261,7 +261,7 @@ class TransitionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Transition $transition */
-        $transition = $this->transitionRepository->find($id);
+        $transition = $this->transitionRepository->find($id, \request()->get('relations'));
 
         if (empty($transition)) {
             return $this->sendError('Transition not found');
@@ -426,7 +426,7 @@ class TransitionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Transition $transition */
-        $transition = $this->transitionRepository->find($id);
+        $transition = $this->transitionRepository->find($id, \request()->get('relations'));
 
         if (empty($transition)) {
             return $this->sendError('Transition not found');
@@ -479,7 +479,7 @@ class TransitionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Transition $transition */
-        $transition = $this->transitionRepository->find($id);
+        $transition = $this->transitionRepository->find($id, \request()->get('relations'));
 
         if (empty($transition)) {
             return $this->sendError('Transition not found');

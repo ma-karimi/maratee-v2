@@ -59,10 +59,10 @@ class CredentialAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $credentials = $this->credentialRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $credentials = $this->credentialRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($credentials->toArray(), 'Credentials retrieved successfully');
@@ -203,7 +203,7 @@ class CredentialAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Credential $credential */
-        $credential = $this->credentialRepository->find($id);
+        $credential = $this->credentialRepository->find($id, \request()->get('relations'));
 
         if ($credential === null) {
             return $this->sendError('Credential not found');
@@ -310,7 +310,7 @@ class CredentialAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Credential $credential */
-        $credential = $this->credentialRepository->find($id);
+        $credential = $this->credentialRepository->find($id, \request()->get('relations'));
 
         if ($credential === null) {
             return $this->sendError('Credential not found');
@@ -363,7 +363,7 @@ class CredentialAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Credential $credential */
-        $credential = $this->credentialRepository->find($id);
+        $credential = $this->credentialRepository->find($id, \request()->get('relations'));
 
         if ($credential === null) {
             return $this->sendError('Credential not found');

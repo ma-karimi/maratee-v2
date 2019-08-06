@@ -59,10 +59,10 @@ class SeedHubAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $seedHubs = $this->seedHubRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $seedHubs = $this->seedHubRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($seedHubs->toArray(), 'Seed Hubs retrieved successfully');
@@ -205,7 +205,7 @@ class SeedHubAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedHub $seedHub */
-        $seedHub = $this->seedHubRepository->find($id);
+        $seedHub = $this->seedHubRepository->find($id, \request()->get('relations'));
 
         if (empty($seedHub)) {
             return $this->sendError('Seed Hub not found');
@@ -314,7 +314,7 @@ class SeedHubAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var SeedHub $seedHub */
-        $seedHub = $this->seedHubRepository->find($id);
+        $seedHub = $this->seedHubRepository->find($id, \request()->get('relations'));
 
         if (empty($seedHub)) {
             return $this->sendError('Seed Hub not found');
@@ -367,7 +367,7 @@ class SeedHubAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var SeedHub $seedHub */
-        $seedHub = $this->seedHubRepository->find($id);
+        $seedHub = $this->seedHubRepository->find($id, \request()->get('relations'));
 
         if (empty($seedHub)) {
             return $this->sendError('Seed Hub not found');

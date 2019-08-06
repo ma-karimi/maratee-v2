@@ -59,10 +59,10 @@ class MedicalAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $medicals = $this->medicalRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $medicals = $this->medicalRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($medicals->toArray(), 'Medicals retrieved successfully');
@@ -261,7 +261,7 @@ class MedicalAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Medical $medical */
-        $medical = $this->medicalRepository->find($id);
+        $medical = $this->medicalRepository->find($id, \request()->get('relations'));
 
         if ($medical === null) {
             return $this->sendError('Medical not found');
@@ -426,7 +426,7 @@ class MedicalAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Medical $medical */
-        $medical = $this->medicalRepository->find($id);
+        $medical = $this->medicalRepository->find($id, \request()->get('relations'));
 
         if ($medical === null) {
             return $this->sendError('Medical not found');
@@ -479,7 +479,7 @@ class MedicalAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Medical $medical */
-        $medical = $this->medicalRepository->find($id);
+        $medical = $this->medicalRepository->find($id, \request()->get('relations'));
 
         if ($medical === null) {
             return $this->sendError('Medical not found');

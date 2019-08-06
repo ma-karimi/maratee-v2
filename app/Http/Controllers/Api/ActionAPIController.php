@@ -59,10 +59,10 @@ class ActionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $actions = $this->actionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $actions = $this->actionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($actions->toArray(), 'Actions retrieved successfully');
@@ -163,7 +163,7 @@ class ActionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Action $action */
-        $action = $this->actionRepository->find($id);
+        $action = $this->actionRepository->find($id, \request()->get('relations'));
 
         if ($action === null) {
             return $this->sendError('Action not found');
@@ -230,7 +230,7 @@ class ActionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Action $action */
-        $action = $this->actionRepository->find($id);
+        $action = $this->actionRepository->find($id, \request()->get('relations'));
 
         if ($action === null) {
             return $this->sendError('Action not found');
@@ -283,7 +283,7 @@ class ActionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Action $action */
-        $action = $this->actionRepository->find($id);
+        $action = $this->actionRepository->find($id, \request()->get('relations'));
 
         if ($action === null) {
             return $this->sendError('Action not found');

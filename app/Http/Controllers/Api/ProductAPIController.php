@@ -59,10 +59,10 @@ class ProductAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $products = $this->productRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $products = $this->productRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($products->toArray(), 'Products retrieved successfully');
@@ -177,7 +177,7 @@ class ProductAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Product $product */
-        $product = $this->productRepository->find($id);
+        $product = $this->productRepository->find($id, \request()->get('relations'));
 
         if (empty($product)) {
             return $this->sendError('Product not found');
@@ -258,7 +258,7 @@ class ProductAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Product $product */
-        $product = $this->productRepository->find($id);
+        $product = $this->productRepository->find($id, \request()->get('relations'));
 
         if (empty($product)) {
             return $this->sendError('Product not found');
@@ -311,7 +311,7 @@ class ProductAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Product $product */
-        $product = $this->productRepository->find($id);
+        $product = $this->productRepository->find($id, \request()->get('relations'));
 
         if (empty($product)) {
             return $this->sendError('Product not found');

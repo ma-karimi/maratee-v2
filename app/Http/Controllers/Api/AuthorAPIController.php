@@ -59,10 +59,10 @@ class AuthorAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $authors = $this->authorRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $authors = $this->authorRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($authors->toArray(), 'Authors retrieved successfully');
@@ -155,7 +155,7 @@ class AuthorAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Author $author */
-        $author = $this->authorRepository->find($id);
+        $author = $this->authorRepository->find($id, \request()->get('relations'));
 
         if ($author === null) {
             return $this->sendError('Author not found');
@@ -214,7 +214,7 @@ class AuthorAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Author $author */
-        $author = $this->authorRepository->find($id);
+        $author = $this->authorRepository->find($id, \request()->get('relations'));
 
         if ($author === null) {
             return $this->sendError('Author not found');
@@ -267,7 +267,7 @@ class AuthorAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Author $author */
-        $author = $this->authorRepository->find($id);
+        $author = $this->authorRepository->find($id, \request()->get('relations'));
 
         if ($author === null) {
             return $this->sendError('Author not found');

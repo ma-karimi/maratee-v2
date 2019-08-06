@@ -59,10 +59,10 @@ class ConstituentAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $constituents = $this->constituentRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $constituents = $this->constituentRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($constituents->toArray(), 'Constituents retrieved successfully');
@@ -163,7 +163,7 @@ class ConstituentAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Constituent $constituent */
-        $constituent = $this->constituentRepository->find($id);
+        $constituent = $this->constituentRepository->find($id, \request()->get('relations'));
 
         if ($constituent === null) {
             return $this->sendError('Constituent not found');
@@ -230,7 +230,7 @@ class ConstituentAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Constituent $constituent */
-        $constituent = $this->constituentRepository->find($id);
+        $constituent = $this->constituentRepository->find($id, \request()->get('relations'));
 
         if ($constituent === null) {
             return $this->sendError('Constituent not found');
@@ -283,7 +283,7 @@ class ConstituentAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Constituent $constituent */
-        $constituent = $this->constituentRepository->find($id);
+        $constituent = $this->constituentRepository->find($id, \request()->get('relations'));
 
         if ($constituent === null) {
             return $this->sendError('Constituent not found');

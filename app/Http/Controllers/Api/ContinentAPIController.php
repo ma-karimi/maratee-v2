@@ -60,10 +60,10 @@ class ContinentAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $continents = $this->continentRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $continents = $this->continentRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($continents->toArray(), 'Continents retrieved successfully');
@@ -156,7 +156,7 @@ class ContinentAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Continent $continent */
-        $continent = $this->continentRepository->find($id);
+        $continent = $this->continentRepository->find($id, \request()->get('relations'));
 
         if ($continent === null) {
             return $this->sendError('Continent not found');
@@ -215,7 +215,7 @@ class ContinentAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Continent $continent */
-        $continent = $this->continentRepository->find($id);
+        $continent = $this->continentRepository->find($id, \request()->get('relations'));
 
         if ($continent === null) {
             return $this->sendError('Continent not found');
@@ -268,7 +268,7 @@ class ContinentAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Continent $continent */
-        $continent = $this->continentRepository->find($id);
+        $continent = $this->continentRepository->find($id, \request()->get('relations'));
 
         if ($continent === null) {
             return $this->sendError('Continent not found');

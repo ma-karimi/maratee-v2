@@ -59,10 +59,10 @@ class SeedWeightAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $seedWeights = $this->seedWeightRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $seedWeights = $this->seedWeightRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($seedWeights->toArray(), 'Seed Weights retrieved successfully');
@@ -219,7 +219,7 @@ class SeedWeightAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedWeight $seedWeight */
-        $seedWeight = $this->seedWeightRepository->find($id);
+        $seedWeight = $this->seedWeightRepository->find($id, \request()->get('relations'));
 
         if (empty($seedWeight)) {
             return $this->sendError('Seed Weight not found');
@@ -341,7 +341,7 @@ class SeedWeightAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var SeedWeight $seedWeight */
-        $seedWeight = $this->seedWeightRepository->find($id);
+        $seedWeight = $this->seedWeightRepository->find($id, \request()->get('relations'));
 
         if (empty($seedWeight)) {
             return $this->sendError('Seed Weight not found');
@@ -394,7 +394,7 @@ class SeedWeightAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var SeedWeight $seedWeight */
-        $seedWeight = $this->seedWeightRepository->find($id);
+        $seedWeight = $this->seedWeightRepository->find($id, \request()->get('relations'));
 
         if (empty($seedWeight)) {
             return $this->sendError('Seed Weight not found');

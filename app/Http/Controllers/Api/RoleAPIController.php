@@ -59,10 +59,10 @@ class RoleAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $roles = $this->roleRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $roles = $this->roleRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($roles->toArray(), 'Roles retrieved successfully');
@@ -177,7 +177,7 @@ class RoleAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Role $role */
-        $role = $this->roleRepository->find($id);
+        $role = $this->roleRepository->find($id, \request()->get('relations'));
 
         if (empty($role)) {
             return $this->sendError('Role not found');
@@ -258,7 +258,7 @@ class RoleAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Role $role */
-        $role = $this->roleRepository->find($id);
+        $role = $this->roleRepository->find($id, \request()->get('relations'));
 
         if (empty($role)) {
             return $this->sendError('Role not found');
@@ -311,7 +311,7 @@ class RoleAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Role $role */
-        $role = $this->roleRepository->find($id);
+        $role = $this->roleRepository->find($id, \request()->get('relations'));
 
         if (empty($role)) {
             return $this->sendError('Role not found');

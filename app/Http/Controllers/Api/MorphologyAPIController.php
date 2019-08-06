@@ -59,10 +59,10 @@ class MorphologyAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $morphologies = $this->morphologyRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $morphologies = $this->morphologyRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($morphologies->toArray(), 'Morphologies retrieved successfully');
@@ -170,7 +170,7 @@ class MorphologyAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Morphology $morphology */
-        $morphology = $this->morphologyRepository->find($id);
+        $morphology = $this->morphologyRepository->find($id, \request()->get('relations'));
 
         if ($morphology === null) {
             return $this->sendError('Morphology not found');
@@ -244,7 +244,7 @@ class MorphologyAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Morphology $morphology */
-        $morphology = $this->morphologyRepository->find($id);
+        $morphology = $this->morphologyRepository->find($id, \request()->get('relations'));
 
         if ($morphology === null) {
             return $this->sendError('Morphology not found');
@@ -297,7 +297,7 @@ class MorphologyAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Morphology $morphology */
-        $morphology = $this->morphologyRepository->find($id);
+        $morphology = $this->morphologyRepository->find($id, \request()->get('relations'));
 
         if (empty($morphology)) {
             return $this->sendError('Morphology not found');

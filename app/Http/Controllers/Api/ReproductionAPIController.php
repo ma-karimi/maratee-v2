@@ -59,10 +59,10 @@ class ReproductionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $reproductions = $this->reproductionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $reproductions = $this->reproductionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($reproductions->toArray(), 'Reproductions retrieved successfully');
@@ -163,7 +163,7 @@ class ReproductionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Reproduction $reproduction */
-        $reproduction = $this->reproductionRepository->find($id);
+        $reproduction = $this->reproductionRepository->find($id, \request()->get('relations'));
 
         if (empty($reproduction)) {
             return $this->sendError('Reproduction not found');
@@ -230,7 +230,7 @@ class ReproductionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Reproduction $reproduction */
-        $reproduction = $this->reproductionRepository->find($id);
+        $reproduction = $this->reproductionRepository->find($id, \request()->get('relations'));
 
         if (empty($reproduction)) {
             return $this->sendError('Reproduction not found');
@@ -283,7 +283,7 @@ class ReproductionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Reproduction $reproduction */
-        $reproduction = $this->reproductionRepository->find($id);
+        $reproduction = $this->reproductionRepository->find($id, \request()->get('relations'));
 
         if (empty($reproduction)) {
             return $this->sendError('Reproduction not found');

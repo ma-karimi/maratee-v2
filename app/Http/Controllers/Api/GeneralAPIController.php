@@ -59,10 +59,10 @@ class GeneralAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $Generals = $this->GeneralRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $Generals = $this->GeneralRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($Generals->toArray(), ' Generals retrieved successfully');
@@ -177,7 +177,7 @@ class GeneralAPIController extends AppBaseController
     public function show($id)
     {
         /** @var General $General */
-        $General = $this->GeneralRepository->find($id);
+        $General = $this->GeneralRepository->find($id, \request()->get('relations'));
 
         if (empty($General)) {
             return $this->sendError(' General not found');
@@ -258,7 +258,7 @@ class GeneralAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var General $General */
-        $General = $this->GeneralRepository->find($id);
+        $General = $this->GeneralRepository->find($id, \request()->get('relations'));
 
         if (empty($General)) {
             return $this->sendError(' General not found');
@@ -311,7 +311,7 @@ class GeneralAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var General $General */
-        $General = $this->GeneralRepository->find($id);
+        $General = $this->GeneralRepository->find($id, \request()->get('relations'));
 
         if (empty($General)) {
             return $this->sendError(' General not found');
