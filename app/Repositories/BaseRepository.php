@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 
 abstract class BaseRepository
@@ -145,10 +146,10 @@ abstract class BaseRepository
      */
     public function create($input)
     {
+        DB::beginTransaction();
         $model = $this->model->newInstance($input);
-
         $model->save();
-
+        DB::commit();
         return $model;
     }
 
