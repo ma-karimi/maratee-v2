@@ -32,6 +32,10 @@ Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
 Route::get('logout', 'AuthController@logout');
 
+Route::delete('/{class}/multiple_delete','APIController@multipleDestroy');
+
+
+
 Route::resource('treatments', 'TreatmentAPIController');
 Route::resource('paleontologies', 'PaleontologyAPIController');
 Route::apiResource('organizations', 'OrganizationAPIController');

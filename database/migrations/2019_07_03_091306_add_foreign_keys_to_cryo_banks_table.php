@@ -14,8 +14,8 @@ class AddForeignKeysToCryoBanksTable extends Migration {
 	{
 		Schema::table('cryo_banks', function(Blueprint $table)
 		{
-			$table->foreign('herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('protection_id')->references('id')->on('protections')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('protection_id')->references('id')->on('protections')->onUpdate('NO ACTION')->onDelete('cascade');
 		});
 	}
 

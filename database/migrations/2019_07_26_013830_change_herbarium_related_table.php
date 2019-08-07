@@ -15,7 +15,7 @@ class ChangeHerbariumRelatedTable extends Migration
     {
         Schema::table('herbariums', function (Blueprint $table) {
             $table->unsignedInteger('plant_id');
-            $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('NO ACTION')->onDelete('cascade');
 
         });
     }

@@ -22,8 +22,8 @@ class ChangePaleontologiesTables extends Migration
             $table->string('url')->nullable();
             $table->unsignedInteger('division_id')->nullable();
             $table->unsignedInteger('department_id');
-            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('division_id')->references('id')->on('divisions')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('division_id')->references('id')->on('divisions')->onUpdate('NO ACTION')->onDelete('cascade');
 
         });
         Schema::table('maps', function (Blueprint $table){
@@ -48,9 +48,9 @@ class ChangePaleontologiesTables extends Migration
             $table->unsignedInteger('general_ecology_id');
             $table->unsignedInteger('general_habitat_id');
             $table->unsignedInteger('general_origin_id');
-            $table->foreign('general_origin_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('general_habitat_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('general_ecology_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign('general_origin_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('general_habitat_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('general_ecology_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
         });
     }
 

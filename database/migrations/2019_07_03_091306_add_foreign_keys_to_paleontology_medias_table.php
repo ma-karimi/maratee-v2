@@ -14,16 +14,16 @@ class AddForeignKeysToPaleontologyMediasTable extends Migration {
 	{
 		Schema::table('paleontology_medias', function(Blueprint $table)
 		{
-			$table->foreign('exchange_id')->references('id')->on('exchanges')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('credential_fair_id')->references('id')->on('credentials')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('media_id')->references('id')->on('medias')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('exchange_id')->references('id')->on('exchanges')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('credential_fair_id')->references('id')->on('credentials')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('media_id')->references('id')->on('medias')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('cascade');
 
-			$table->foreign('credential_correspondence_id')->references('id')->on('credentials')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('credential_expense_id')->references('id')->on('credentials')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('credential_gift_id')->references('id')->on('credentials')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('paleontology_id')->references('id')->on('paleontologies')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('credential_purchase_id')->references('id')->on('credentials')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('credential_correspondence_id')->references('id')->on('credentials')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('credential_expense_id')->references('id')->on('credentials')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('credential_gift_id')->references('id')->on('credentials')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('paleontology_id')->references('id')->on('paleontologies')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('credential_purchase_id')->references('id')->on('credentials')->onUpdate('NO ACTION')->onDelete('cascade');
 		});
 	}
 

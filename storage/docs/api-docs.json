@@ -6,6 +6,56 @@
     },
     "basePath": "/api",
     "paths": {
+        "/{class}/multiple_delete": {
+            "delete": {
+                "tags": [
+                    "API"
+                ],
+                "summary": "Remove Multiple Records of Given Class Model",
+                "description": "Remove Multiple Records",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "class",
+                        "in": "path",
+                        "description": "class name (like plants)",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "ids",
+                        "in": "path",
+                        "description": "ids of model",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/actions": {
             "get": {
                 "tags": [

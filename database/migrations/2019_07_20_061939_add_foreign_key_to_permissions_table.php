@@ -14,12 +14,12 @@ class AddForeignKeyToPermissionsTable extends Migration
     public function up()
     {
         Schema::table('permissions', function (Blueprint $table) {
-            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('group_id')->references('id')->on('groups')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('role_id')->references('id')->on('roles')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('requester_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('responser_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('group_id')->references('id')->on('groups')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('roles')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('requester_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('responser_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('cascade');
 
         });
     }

@@ -14,9 +14,9 @@ class AddForeignKeysToSeedExchangesTable extends Migration {
 	{
 		Schema::table('seed_exchanges', function(Blueprint $table)
 		{
-			$table->foreign('collection_id')->references('id')->on('collections')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('collection_id')->references('id')->on('collections')->onUpdate('NO ACTION')->onDelete('cascade');
 
-			$table->foreign('seed_id')->references('id')->on('seeds')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('seed_id')->references('id')->on('seeds')->onUpdate('NO ACTION')->onDelete('cascade');
 		});
 	}
 

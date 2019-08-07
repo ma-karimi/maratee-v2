@@ -14,15 +14,15 @@ class AddForeignKeysToMedicalsTable extends Migration {
 	{
 		Schema::table('medicals', function(Blueprint $table)
 		{
-			$table->foreign('herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('medicine_side_effect_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('medicine_drug_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('medicine_drug_shape_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('medicine_drug_usage_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('medicine_medicinal_part_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('medicine_effect_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('product_id')->references('id')->on('products')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('medicine_therapy_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('medicine_side_effect_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('medicine_drug_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('medicine_drug_shape_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('medicine_drug_usage_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('medicine_medicinal_part_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('medicine_effect_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('product_id')->references('id')->on('products')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('medicine_therapy_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('cascade');
 		});
 	}
 

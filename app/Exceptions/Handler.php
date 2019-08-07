@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\RelationNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 class Handler extends ExceptionHandler
 {
@@ -53,6 +54,11 @@ class Handler extends ExceptionHandler
         if ($exception instanceof ValidationException && $request->is('api/*')) {
             report($exception);
             return response()->json(['errors' => $exception->errors()], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        if ($exception instanceof FatalThrowableError && $request->is('api/*')) {
+            report($exception);
+            return response()->json(['errors' => 'Entry Class Not Found !!!'], JsonResponse::HTTP_BAD_REQUEST);
         }
 
         if ($exception instanceof RelationNotFoundException && $request->is('api/*')) {

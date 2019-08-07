@@ -14,10 +14,10 @@ class AddForeignKeysToExchangesTable extends Migration {
 	{
 		Schema::table('exchanges', function(Blueprint $table)
 		{
-			$table->foreign('send_herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('receive_herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('send_paleontology_id')->references('id')->on('paleontologies')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('receive_paleontology_id')->references('id')->on('paleontologies')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('send_herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('receive_herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('send_paleontology_id')->references('id')->on('paleontologies')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('receive_paleontology_id')->references('id')->on('paleontologies')->onUpdate('NO ACTION')->onDelete('cascade');
 		});
 	}
 

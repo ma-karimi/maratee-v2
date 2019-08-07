@@ -14,9 +14,9 @@ class AddForeignKeysToLocalitiesTable extends Migration {
 	{
 		Schema::table('localities', function(Blueprint $table)
 		{
-			$table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('map_id')->references('id')->on('maps')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('paleontology_id')->references('id')->on('paleontologies')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('map_id')->references('id')->on('maps')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('paleontology_id')->references('id')->on('paleontologies')->onUpdate('NO ACTION')->onDelete('cascade');
 		});
 	}
 

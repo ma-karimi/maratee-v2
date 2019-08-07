@@ -14,10 +14,10 @@ class AddForeignKeysToEntryHubsTable extends Migration {
 	{
 		Schema::table('entry_hubs', function(Blueprint $table)
 		{
-			$table->foreign('botanical_id')->references('id')->on('botanicals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('entry_id')->references('id')->on('entries')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('botanical_id')->references('id')->on('botanicals')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('entry_id')->references('id')->on('entries')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('cascade');
 		});
 	}
 

@@ -14,12 +14,12 @@ class AddForeignKeysToPlantApplicationsTable extends Migration
     public function up()
     {
         Schema::table('plant_applications', function (Blueprint $table) {
-            $table->foreign('general_application_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('general_growth_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('general_industry_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('general_part_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('general_usage_type_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign('general_application_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('general_growth_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('general_industry_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('general_part_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('general_usage_type_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
         });
     }
 

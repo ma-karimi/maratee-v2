@@ -14,11 +14,11 @@ class AddForeignKeyToTransitionsTable extends Migration
     public function up()
     {
         Schema::table('transitions', function (Blueprint $table) {
-            $table->foreign('tables_id')->references('id')->on('tables')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('creator_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('changer_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('requester_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('responser_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign('tables_id')->references('id')->on('tables')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('creator_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('changer_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('requester_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('responser_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('cascade');
         });
     }
 
