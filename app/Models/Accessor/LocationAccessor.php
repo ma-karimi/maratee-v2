@@ -9,10 +9,18 @@
 namespace App\Models\Accessor;
 
 
+use League\Geotools\Coordinate\Coordinate;
+use League\Geotools\Geotools;
+
 trait LocationAccessor
 {
     public function getPointAttribute($value)
     {
-        return [$value->getLng(),$value->getLat()];
+        $coordinate = new Coordinate($value->getLat(), $value->getLng());
+        $DMS = (new Geotools())->convert($coordinate)->toDMS();
+        return [
+            'UTM' => $value->getLng(), $value->getLat(),
+            'DMS' => $DMS
+        ];
     }
 }

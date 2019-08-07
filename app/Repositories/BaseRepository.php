@@ -8,6 +8,8 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
@@ -69,7 +71,7 @@ abstract class BaseRepository
      * @param array $columns
      * @return LengthAwarePaginator
      */
-    public function paginate($perPage,array $search = [], array $with_relations = null, $columns = ['*'])
+    public function paginate($perPage, array $search = [], array $with_relations = null, $columns = ['*'])
     {
         $query = $this->allQuery($search);
         return $query->when($with_relations, function ($query, $with_relations) {
@@ -146,10 +148,17 @@ abstract class BaseRepository
      */
     public function create($input)
     {
-        DB::beginTransaction();
-        $model = $this->model->newInstance($input);
-        $model->save();
-        DB::commit();
+        try{
+            DB::beginTransaction();
+            $model = $this->model->newInstance($input);
+            $model->save();
+            DB::commit();
+        }
+        catch (\Exception $e){
+            DB::rollBack();
+            report($e);
+            abort(JsonResponse::HTTP_BAD_REQUEST,'Operation Failed!');
+        }
         return $model;
     }
 
