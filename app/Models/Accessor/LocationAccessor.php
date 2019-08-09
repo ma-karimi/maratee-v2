@@ -16,10 +16,12 @@ trait LocationAccessor
 {
     public function getPointAttribute($value)
     {
-        $coordinate = new Coordinate($value->getLat(), $value->getLng());
+        $lat=$value->getLat();
+        $lng=$value->getLng();
+        $coordinate = new Coordinate("$lat, $lng");
         $DMS = (new Geotools())->convert($coordinate)->toDMS();
         return [
-            'UTM' => $value->getLng(), $value->getLat(),
+            'UTM' => [$value->getLng(), $value->getLat()],
             'DMS' => $DMS
         ];
     }
