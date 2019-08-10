@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\LocationAccessor;
 use App\Models\Contracts\BaseModel;
+use App\Models\Mutator\LocationMutator;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -74,7 +76,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Location extends BaseModel
 {
-    use SpatialTrait;
+    use SpatialTrait,LocationAccessor,LocationMutator;
 
     public static $linguistically=['name'=>true,'description'=>false,'region_name'=>false,'address'=>true];
     public static $rules=[
@@ -95,7 +97,6 @@ class Location extends BaseModel
     protected $spatialFields = [
         'point'
     ];
-
     /**
      * Attributes that should be mass-assignable.
      *

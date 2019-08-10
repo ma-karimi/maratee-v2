@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\CreateActionAPIRequest;
 use App\Http\Requests\Api\UpdateActionAPIRequest;
+use App\Http\Requests\BaseDeleteAPIRequest;
 use App\Models\Action;
 use App\Repositories\ActionRepository;
 use Illuminate\Http\Request;
@@ -242,7 +243,7 @@ class ActionAPIController extends AppBaseController
     }
 
     /**
-     * @param int $id
+     * @param Request $request
      * @return Response
      *
      * @throws \Exception
@@ -293,4 +294,5 @@ class ActionAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Action deleted successfully');
     }
+
 }

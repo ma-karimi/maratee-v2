@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BaseDeleteAPIRequest;
 use InfyOm\Generator\Utils\ResponseUtil;
 use Response;
 

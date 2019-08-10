@@ -9,7 +9,7 @@
 namespace App\Models\Mutator;
 
 
-class UserMutator
+trait UserMutator
 {
 
 

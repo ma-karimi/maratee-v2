@@ -8,6 +8,8 @@ use App\Http\Requests\Api\UpdateLocationAPIRequest;
 use App\Models\Location;
 use App\Repositories\LocationRepository;
 use Illuminate\Http\Request;
+use League\Geotools\Coordinate\Coordinate;
+use League\Geotools\Geotools;
 use Response;
 
 /**
@@ -116,7 +118,7 @@ class LocationAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="point",
      *          in="body",
-     *          description="Lat and Lng",
+     *          description="Lat and Lng BY DMS system (Example: [48°49′24″N,2°18′26″E])",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
@@ -263,7 +265,7 @@ class LocationAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="point",
      *          in="body",
-     *          description="Lat and Lng",
+     *          description="Lat and Lng BY DMS system (Example: [48°49′24″N,2°18′26″E])",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),

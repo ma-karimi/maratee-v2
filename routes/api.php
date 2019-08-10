@@ -23,23 +23,30 @@ use Illuminate\Http\Request;
         });
     });
 });*/
+Route::delete('/{class}/multiple_delete', 'APIController@multipleDestroy');
 Route::middleware(['auth:api'])->group(function () {
 
 });
 Route::get('relations', 'HelpersAPIController@relations');
-
 Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
 Route::get('logout', 'AuthController@logout');
 
+
 Route::resource('treatments', 'TreatmentAPIController');
+
 Route::resource('paleontologies', 'PaleontologyAPIController');
+
 Route::apiResource('organizations', 'OrganizationAPIController');
+
 Route::apiResource('departments', 'DepartmentAPIController');
+
 Route::apiResource('locations', 'LocationAPIController');
+
 Route::apiResource('connections', 'ConnectionAPIController');
 
 Route::resource('continents', 'ContinentAPIController');
+
 Route::resource('soil_features', 'SoilFeatureAPIController');
 
 Route::resource('soils', 'SoilAPIController');
