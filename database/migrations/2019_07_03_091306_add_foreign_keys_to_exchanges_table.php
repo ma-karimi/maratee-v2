@@ -14,10 +14,10 @@ class AddForeignKeysToExchangesTable extends Migration {
 	{
 		Schema::table('exchanges', function(Blueprint $table)
 		{
-			$table->foreign('send_herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('receive_herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('send_paleontology_id')->references('id')->on('paleontologies')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('receive_paleontology_id')->references('id')->on('paleontologies')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('send_department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('receive_department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
+
+
 		});
 	}
 
@@ -31,10 +31,9 @@ class AddForeignKeysToExchangesTable extends Migration {
 	{
 		Schema::table('exchanges', function(Blueprint $table)
 		{
-			$table->dropForeign(['send_herbarium_id']);
-			$table->dropForeign(['receive_herbarium_id']);
-			$table->dropForeign(['send_paleontology_id']);
-			$table->dropForeign(['receive_paleontology_id']);
+			$table->dropForeign(['send_department_id']);
+			$table->dropForeign(['receive_department_id']);
+
 		});
 	}
 

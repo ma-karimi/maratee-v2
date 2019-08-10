@@ -35,10 +35,11 @@ class Exchange extends BaseModel
     public static $linguistically=['description'=>false];
 
     public static $rules = [
-        'send_herbarium_id' => 'required|exists:herbariums,id',
-        'send_paleontology_id' => 'required|exists:paleontologies,id',
-        'receive_herbarium_id' => 'required|exists:herbariums,id',
-        'receive_paleontology_id' => 'required|exists:paleontologies,id',
+        'send_department_id' => 'required|exists:departments,id',
+        'receive_department_id' => 'required|exists:departments,id',
+        'send_id' => 'required|integer',
+        'receive_id' => 'integer',
+        'exchange_type' => 'required|string',
         'send_date' => 'datetime',
         'receive_date' => 'datetime',
         'send_sheet_no' => 'integer',
@@ -61,7 +62,7 @@ class Exchange extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'receive_date', 'receive_herbarium_id', 'receive_paleontology_id', 'receive_sample_no', 'receive_sheet_no', 'receive_type', 'send_date', 'send_herbarium_id', 'send_paleontology_id', 'send_sample_no', 'send_sheet_no', 'send_type', 'updated_at'];
+    protected $fillable = ['created_at', 'deleted_at', 'description', 'receive_date', 'send_department_id', 'receive_department_id', 'receive_sample_no', 'receive_sheet_no', 'receive_type', 'send_date', 'receive_id', 'send_id', 'exchange_type', 'send_sample_no', 'send_sheet_no', 'send_type', 'updated_at'];
 
 
     /**

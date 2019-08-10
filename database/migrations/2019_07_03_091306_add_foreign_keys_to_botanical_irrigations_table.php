@@ -14,8 +14,8 @@ class AddForeignKeysToBotanicalIrrigationsTable extends Migration {
 	{
 		Schema::table('botanical_irrigations', function(Blueprint $table)
 		{
-			$table->foreign('botanical_id')->references('id')->on('botanicals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('irrigation_id')->references('id')->on('irrigations')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('botanical_id')->references('id')->on('botanicals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('irrigation_id')->references('id')->on('irrigations')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

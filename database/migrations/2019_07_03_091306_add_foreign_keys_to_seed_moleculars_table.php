@@ -14,9 +14,9 @@ class AddForeignKeysToSeedMolecularsTable extends Migration {
 	{
 		Schema::table('seed_moleculars', function(Blueprint $table)
 		{
-			$table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('molecular_id')->references('id')->on('moleculars')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('seed_id')->references('id')->on('seeds')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('molecular_id')->references('id')->on('moleculars')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('seed_id')->references('id')->on('seeds')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

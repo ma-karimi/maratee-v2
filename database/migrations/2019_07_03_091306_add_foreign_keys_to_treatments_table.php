@@ -14,7 +14,7 @@ class AddForeignKeysToTreatmentsTable extends Migration {
 	{
 		Schema::table('treatments', function(Blueprint $table)
 		{
-			$table->foreign('paleontology_id')->references('id')->on('paleontologies')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('paleontology_id')->references('id')->on('paleontologies')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

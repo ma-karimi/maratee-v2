@@ -113,6 +113,7 @@ Route::resource('borrows', 'BorrowAPIController');
 Route::resource('botanicals', 'BotanicalAPIController');
 
 Route::resource('botanical_garden_actions', 'BotanicalGardenActionAPIController');
+Route::resource('transfer_credentials', 'TransferCredentialAPIController');
 
 Route::resource('botanical_irrigations', 'BotanicalIrrigationAPIController');
 

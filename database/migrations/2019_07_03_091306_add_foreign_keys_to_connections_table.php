@@ -14,8 +14,8 @@ class AddForeignKeysToConnectionsTable extends Migration {
 	{
 		Schema::table('connections', function(Blueprint $table)
 		{
-			$table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
 		});
 	}

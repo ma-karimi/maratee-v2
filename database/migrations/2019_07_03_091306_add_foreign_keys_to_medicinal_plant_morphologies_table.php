@@ -14,8 +14,8 @@ class AddForeignKeysToMedicinalPlantMorphologiesTable extends Migration {
 	{
 		Schema::table('medicinal_plant_morphologies', function(Blueprint $table)
 		{
-			$table->foreign('medicinal_plant_id')->references('id')->on('medicinal_plants')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('morphology_id')->references('id')->on('morphologies')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('medicinal_plant_id')->references('id')->on('medicinal_plants')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('morphology_id')->references('id')->on('morphologies')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

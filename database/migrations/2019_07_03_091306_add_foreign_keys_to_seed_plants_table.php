@@ -14,8 +14,8 @@ class AddForeignKeysToSeedPlantsTable extends Migration {
 	{
 		Schema::table('seed_plants', function(Blueprint $table)
 		{
-			$table->foreign('plant_id')->references('id')->on('plants')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('seed_id')->references('id')->on('seeds')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('plant_id')->references('id')->on('plants')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('seed_id')->references('id')->on('seeds')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

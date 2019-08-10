@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * @SWG\Definition(
@@ -294,24 +295,18 @@ class Paleontology extends BaseModel
     /**
      * @return HasMany
      */
-    public function paleontologyMedias(): HasMany
-    {
-        return $this->hasMany(PaleontologyMedia::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
     public function treatments(): HasMany
     {
         return $this->hasMany(Treatment::class)->latest();
     }
 
-    /**
-     * @return HasMany
-     */
-    public function visits(): HasMany
+    public function visits()
     {
-        return $this->hasMany(Visit::class)->latest();
+        return $this->morphMany(Visit::class, 'visitable');
+    }
+
+    public function borrows(): MorphMany
+    {
+        return $this->morphMany(Borrow::class, 'borrowable');
     }
 }

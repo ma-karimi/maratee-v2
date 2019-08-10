@@ -14,7 +14,7 @@ class AddForeignKeysToBotanicalsTable extends Migration {
 	{
 		Schema::table('botanicals', function(Blueprint $table)
 		{
-			$table->foreign('herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

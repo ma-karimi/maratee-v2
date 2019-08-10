@@ -14,7 +14,7 @@ class AddForeignKeysToPaleontologiesTable extends Migration {
 	{
 		Schema::table('paleontologies', function(Blueprint $table)
 		{
-			$table->foreign('geology_age_id')->references('id')->on('geology_ages')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('geology_age_id')->references('id')->on('geology_ages')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

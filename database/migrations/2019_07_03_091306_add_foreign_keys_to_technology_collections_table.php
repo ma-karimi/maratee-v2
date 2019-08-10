@@ -14,8 +14,8 @@ class AddForeignKeysToTechnologyCollectionsTable extends Migration {
 	{
 		Schema::table('technology_collections', function(Blueprint $table)
 		{
-			$table->foreign('collection_id')->references('id')->on('collections')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('seed_technology_id')->references('id')->on('seed_technologies')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('collection_id')->references('id')->on('collections')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('seed_technology_id')->references('id')->on('seed_technologies')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

@@ -15,8 +15,8 @@ class AddCityIdToLocationTable extends Migration
     {
         Schema::table('locations', function (Blueprint $table) {
             $table->unsignedInteger('city_id');
-            $table->foreign('city_id')->references('id')->on('cities')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('village_id')->references('id')->on('villages')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign('city_id')->references('id')->on('cities')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('village_id')->references('id')->on('villages')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->json('address')->nullable(false)->change();
         });
     }

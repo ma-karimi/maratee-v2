@@ -4,37 +4,14 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 /**
  * @SWG\Definition(
  *      definition="PaleontologyMedia",
- *      required={"paleontology_id","media_id","user_id"},
+ *      required={"media_id","user_id"},
  *      @SWG\Property(
- *          property="credential_gift_id",
- *          description="credential_gift_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *       @SWG\Property(
- *          property="credential_expense_id",
- *          description="credential_expense_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *       @SWG\Property(
- *          property="credential_purchase_id",
- *          description="credential_purchase_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *       @SWG\Property(
- *          property="credential_correspondence_id",
- *          description="credential_correspondence_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *       @SWG\Property(
- *          property="paleontology_id",
- *          description="paleontology_id",
+ *          property="credential_id",
+ *          description="credential_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -56,12 +33,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          type="integer",
  *          format="int32"
  *      ),
- *       @SWG\Property(
- *          property="credential_fair_id",
- *          description="credential_fair_id",
- *          type="integer",
- *          format="int32"
- *      ),
  *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
@@ -79,16 +50,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class PaleontologyMedia extends BaseModel
 {
 
-    public static $rules=[
-        'credential_gift_id' => 'integer',
-        'credential_expense_id' => 'integer',
-        'credential_purchase_id' => 'integer',
-        'credential_correspondence_id' => 'integer',
-        'paleontology_id' => 'required|exists:paleontologies,id',
+    public static $rules = [
+        'credential_id' => 'exists:credentials,id',
         'media_id' => 'required|exists:medias,id',
         'user_id' => 'required|exists:users,id',
         'exchange_id' => 'exists:users,id',
-        'credential_fair_id' => 'integer',
 
 
     ];
@@ -104,20 +70,14 @@ class PaleontologyMedia extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'credential_correspondence_id', 'credential_expense_id', 'credential_fair_id', 'credential_gift_id', 'credential_purchase_id', 'deleted_at', 'exchange_id', 'media_id', 'paleontology_id', 'updated_at', 'user_id'];
+    protected $fillable = ['created_at', 'credential_id', 'deleted_at', 'exchange_id', 'media_id', 'updated_at', 'user_id'];
 
     /**
      * @return BelongsTo
      */
     public function credential(): BelongsTo
     {
-        return $this->belongsTo(Credential::class, [
-            'credential_correspondence_id',
-            'credential_expense_id',
-            'credential_fair_id',
-            'credential_gift_id',
-            'credential_purchase_id',
-        ]);
+        return $this->belongsTo(Credential::class,'credential_id');
     }
 
     /**
@@ -134,14 +94,6 @@ class PaleontologyMedia extends BaseModel
     public function media(): BelongsTo
     {
         return $this->belongsTo(Media::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function paleontology(): BelongsTo
-    {
-        return $this->belongsTo(Paleontology::class);
     }
 
     /**

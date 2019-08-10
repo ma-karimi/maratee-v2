@@ -14,21 +14,21 @@ class AddForeignKeysToPlantsTable extends Migration {
 	{
 		Schema::table('plants', function(Blueprint $table)
 		{
-			$table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('general_specie_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('general_sub_specie_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('general_variety_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('article_id')->references('id')->on('articles')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('general_specie_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('general_sub_specie_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('general_variety_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('article_id')->references('id')->on('articles')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
-			$table->foreign('general_class_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('general_family_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('general_genus_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('general_sperm_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('general_flowering_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('general_order_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('general_group_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('general_cotyledon_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('general_class_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('general_family_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('general_genus_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('general_sperm_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('general_flowering_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('general_order_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('general_group_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('general_cotyledon_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

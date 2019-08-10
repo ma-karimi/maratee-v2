@@ -87,13 +87,15 @@ class Visit extends BaseModel
     public static $linguistically = ['description' => false, 'purpose' => false];
 
     public static $rules = [
-        'date' => 'required|date',
+        'start_date' => 'required',
+        'end_date' => 'required|datetime',
         'user_id' => 'required|exists:users,id',
-        'peoples' => 'integer',
+        'peoples_no' => 'integer',
+        'person_position' => 'string',
         'archives_types' => 'string',
         'archive_no' => 'string',
-        'paleontology_id' => 'integer',
-        'media_id' => 'integer',
+        'visitable_id' => 'required|integer',
+        'visitable_type' => 'required|string',
     ];
     /**
      * The database table used by the model.
@@ -127,14 +129,12 @@ class Visit extends BaseModel
      */
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
 
-    public function media()
+    /**
+     * Get the owning visitable model.
+     */
+    public function visitable()
     {
-        return $this->belongsTo(Media::class, 'media_id');
-    }
-
-    public function paleontology()
-    {
-        return $this->belongsTo(Paleontology::class, 'paleontology_id');
+        return $this->morphTo();
     }
 
     public function user()

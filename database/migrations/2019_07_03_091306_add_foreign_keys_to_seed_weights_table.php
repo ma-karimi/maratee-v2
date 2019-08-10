@@ -14,7 +14,7 @@ class AddForeignKeysToSeedWeightsTable extends Migration {
 	{
 		Schema::table('seed_weights', function(Blueprint $table)
 		{
-			$table->foreign('seed_technology_id')->references('id')->on('seed_technologies')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('seed_technology_id')->references('id')->on('seed_technologies')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

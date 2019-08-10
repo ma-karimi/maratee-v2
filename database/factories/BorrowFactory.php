@@ -5,17 +5,20 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Borrow::class, function (Faker $faker) {
-    $users = \App\Models\User::pluck('id')->toArray();
+
+    $borrowables = [\App\Models\Herbarium::class, \App\Models\Paleontology::class];
     $herbariums = \App\Models\Herbarium::pluck('id')->toArray();
-    $medias = \App\Models\Media::pluck('id')->toArray();
+    $departments = \App\Models\Department::pluck('id')->toArray();
+
 
     return [
-        'herbarium_id' => $faker->randomElement($herbariums),
-        'user_id' => $faker->randomElement($users),
+        'borrowable_type' => $faker->randomElement($borrowables),
+        'borrowable_id' => $faker->randomElement($herbariums),
         'borrows_date' => $faker->dateTimeBetween(),
         'sheets_no' => $faker->numberBetween(1, 100),
         'deadline' => $faker->dateTimeBetween(),
         'return' => $faker->dateTimeBetween(),
-        'media_id' => $faker->randomElement($medias),
+        'send_department_id' => $faker->randomElement($departments),
+        'receive_department_id' => $faker->randomElement($departments),
     ];
 });
