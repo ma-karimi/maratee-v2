@@ -79,10 +79,15 @@ class VisitAPIController extends AppBaseController
      *      description="Store Visit",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="date",
+     *          name="start_time",
      *          in="body",
-     *          description="Visit that should be stored",
      *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="end_time",
+     *          in="body",
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/Visit")
      *      ),
      *     @SWG\Parameter(
@@ -100,7 +105,7 @@ class VisitAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Visit")
      *      ),
      *     @SWG\Parameter(
-     *          name="peoples",
+     *          name="peoples_no",
      *          in="body",
      *          description="Visit that should be stored",
      *          required=false,
@@ -121,16 +126,16 @@ class VisitAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Visit")
      *      ),
      *     @SWG\Parameter(
-     *          name="plantology_id",
+     *          name="visitable_id",
      *          in="body",
-     *          description="Visit that should be stored",
+     *          description="paleontology_id, herbarium_id",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Visit")
      *      ),
      *     @SWG\Parameter(
-     *          name="media_id",
+     *          name="visitable_type",
      *          in="body",
-     *          description="Visit that should be stored",
+     *          description="paleontology, herbarium",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Visit")
      *      ),
@@ -189,9 +194,14 @@ class VisitAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="date",
+     *          name="start_time",
      *          in="body",
-     *          description="Visit that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Visit")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="end_time",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Visit")
      *      ),
@@ -199,7 +209,7 @@ class VisitAPIController extends AppBaseController
      *          name="user_id",
      *          in="body",
      *          description="Visit that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Visit")
      *      ),
      *     @SWG\Parameter(
@@ -210,7 +220,7 @@ class VisitAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Visit")
      *      ),
      *     @SWG\Parameter(
-     *          name="peoples",
+     *          name="peoples_no",
      *          in="body",
      *          description="Visit that should be stored",
      *          required=false,
@@ -231,16 +241,16 @@ class VisitAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Visit")
      *      ),
      *     @SWG\Parameter(
-     *          name="plantology_id",
+     *          name="visitable_id",
      *          in="body",
-     *          description="Visit that should be stored",
+     *          description="paleontology_id, herbarium_id",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Visit")
      *      ),
      *     @SWG\Parameter(
-     *          name="media_id",
+     *          name="visitable_type",
      *          in="body",
-     *          description="Visit that should be stored",
+     *          description="paleontology, herbarium",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Visit")
      *      ),

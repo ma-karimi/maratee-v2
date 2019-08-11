@@ -4627,6 +4627,14 @@
                         }
                     },
                     {
+                        "name": "url",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Chromosome"
+                        }
+                    },
+                    {
                         "name": "cryo_bank_id",
                         "in": "body",
                         "required": true,
@@ -4646,6 +4654,22 @@
                         "name": "location_id",
                         "in": "body",
                         "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Chromosome"
+                        }
+                    },
+                    {
+                        "name": "general_class_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Chromosome"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/Chromosome"
                         }
@@ -4761,6 +4785,14 @@
                         }
                     },
                     {
+                        "name": "url",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Chromosome"
+                        }
+                    },
+                    {
                         "name": "cryo_bank_id",
                         "in": "body",
                         "required": true,
@@ -4780,6 +4812,22 @@
                         "name": "location_id",
                         "in": "body",
                         "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Chromosome"
+                        }
+                    },
+                    {
+                        "name": "general_class_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Chromosome"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/Chromosome"
                         }
@@ -5245,6 +5293,219 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of Collection",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/components": {
+            "get": {
+                "tags": [
+                    "Component"
+                ],
+                "summary": "Get a listing of the Components.",
+                "description": "Get all Components",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Component"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Component"
+                ],
+                "summary": "Store a newly created Component in storage",
+                "description": "Store Component",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Component"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Component"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Component"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/components/{id}": {
+            "get": {
+                "tags": [
+                    "Component"
+                ],
+                "summary": "Display the specified Component",
+                "description": "Get Component",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Component",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Component"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Component"
+                ],
+                "summary": "Update the specified Component in storage",
+                "description": "Update Component",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Component",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Component"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Component"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Component"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Component"
+                ],
+                "summary": "Remove the specified Component from storage",
+                "description": "Delete Component",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Component",
                         "required": true,
                         "type": "integer"
                     }
@@ -6473,7 +6734,23 @@
                         }
                     },
                     {
+                        "name": "proposal_name",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
                         "name": "herbarium_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "user_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -6655,7 +6932,23 @@
                         }
                     },
                     {
+                        "name": "proposal_name",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
                         "name": "herbarium_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "user_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -6852,6 +7145,14 @@
                         "schema": {
                             "$ref": "#/definitions/CryoBankAction"
                         }
+                    },
+                    {
+                        "name": "location_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBankAction"
+                        }
                     }
                 ],
                 "responses": {
@@ -6941,6 +7242,14 @@
                     },
                     {
                         "name": "action_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBankAction"
+                        }
+                    },
+                    {
+                        "name": "location_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -11337,7 +11646,7 @@
                     {
                         "name": "point",
                         "in": "body",
-                        "description": "Lat and Lng",
+                        "description": "Lat and Lng BY DMS system (Example: [48\u00b049\u203224\u2033N,2\u00b018\u203226\u2033E])",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Location"
@@ -11480,7 +11789,7 @@
                     {
                         "name": "point",
                         "in": "body",
-                        "description": "Lat and Lng",
+                        "description": "Lat and Lng BY DMS system (Example: [48\u00b049\u203224\u2033N,2\u00b018\u203226\u2033E])",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Location"
@@ -12248,7 +12557,7 @@
                 ],
                 "parameters": [
                     {
-                        "name": "herbarium_id",
+                        "name": "plant_application_id",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": true,
@@ -12266,7 +12575,7 @@
                         }
                     },
                     {
-                        "name": "medicine_medicinal_part_id",
+                        "name": "medicine_part_id",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": true,
@@ -12311,7 +12620,7 @@
                         }
                     },
                     {
-                        "name": "medicine_drug_shape_id",
+                        "name": "medicine_shape_id",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": false,
@@ -12320,7 +12629,7 @@
                         }
                     },
                     {
-                        "name": "medicine_drug_usage_id",
+                        "name": "medicine_usage_id",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": false,
@@ -12338,7 +12647,7 @@
                         }
                     },
                     {
-                        "name": "drug_usage_description",
+                        "name": "usage_description",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": false,
@@ -12347,7 +12656,7 @@
                         }
                     },
                     {
-                        "name": "medicinal_part_description",
+                        "name": "part_description",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": false,
@@ -12356,7 +12665,7 @@
                         }
                     },
                     {
-                        "name": "drug_shape_description",
+                        "name": "shape_description",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": false,
@@ -12383,7 +12692,7 @@
                         }
                     },
                     {
-                        "name": "medicine_effect_description",
+                        "name": "effect_description",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": false,
@@ -12470,7 +12779,7 @@
                         "type": "integer"
                     },
                     {
-                        "name": "herbarium_id",
+                        "name": "plant_application_id",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": true,
@@ -12488,7 +12797,7 @@
                         }
                     },
                     {
-                        "name": "medicine_medicinal_part_id",
+                        "name": "medicine_part_id",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": true,
@@ -12533,7 +12842,7 @@
                         }
                     },
                     {
-                        "name": "medicine_drug_shape_id",
+                        "name": "medicine_shape_id",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": false,
@@ -12542,7 +12851,7 @@
                         }
                     },
                     {
-                        "name": "medicine_drug_usage_id",
+                        "name": "medicine_usage_id",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": false,
@@ -12560,7 +12869,7 @@
                         }
                     },
                     {
-                        "name": "drug_usage_description",
+                        "name": "usage_description",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": false,
@@ -12569,7 +12878,7 @@
                         }
                     },
                     {
-                        "name": "medicinal_part_description",
+                        "name": "part_description",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": false,
@@ -12578,7 +12887,7 @@
                         }
                     },
                     {
-                        "name": "drug_shape_description",
+                        "name": "shape_description",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": false,
@@ -12605,7 +12914,7 @@
                         }
                     },
                     {
-                        "name": "medicine_effect_description",
+                        "name": "effect_description",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": false,
@@ -12673,7 +12982,242 @@
                 }
             }
         },
-        "/medicinalPlants": {
+        "/medical_components": {
+            "get": {
+                "tags": [
+                    "MedicalComponent"
+                ],
+                "summary": "Get a listing of the MedicalComponents.",
+                "description": "Get all MedicalComponents",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/MedicalComponent"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "MedicalComponent"
+                ],
+                "summary": "Store a newly created MedicalComponent in storage",
+                "description": "Store MedicalComponent",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "medicinal_plant_id",
+                        "in": "body",
+                        "description": "MedicalComponent that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicalComponent"
+                        }
+                    },
+                    {
+                        "name": "constituent_id",
+                        "in": "body",
+                        "description": "MedicalComponent that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicalComponent"
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "in": "body",
+                        "description": "MedicalComponent that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicalComponent"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/MedicalComponent"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/medical_components/{id}": {
+            "get": {
+                "tags": [
+                    "MedicalComponent"
+                ],
+                "summary": "Display the specified MedicalComponent",
+                "description": "Get MedicalComponent",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of MedicalComponent",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/MedicalComponent"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "MedicalComponent"
+                ],
+                "summary": "Update the specified MedicalComponent in storage",
+                "description": "Update MedicalComponent",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of MedicalComponent",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "medicinal_plant_id",
+                        "in": "body",
+                        "description": "MedicalComponent that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicalComponent"
+                        }
+                    },
+                    {
+                        "name": "constituent_id",
+                        "in": "body",
+                        "description": "MedicalComponent that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicalComponent"
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "in": "body",
+                        "description": "MedicalComponent that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicalComponent"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/MedicalComponent"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "MedicalComponent"
+                ],
+                "summary": "Remove the specified MedicalComponent from storage",
+                "description": "Delete MedicalComponent",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of MedicalComponent",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/medicinal_plants": {
             "get": {
                 "tags": [
                     "MedicinalPlant"
@@ -12717,14 +13261,7 @@
                 ],
                 "parameters": [
                     {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of MedicinalPlantMorphology",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "herbarium_id",
+                        "name": "plant_application_id",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": true,
@@ -12734,15 +13271,6 @@
                     },
                     {
                         "name": "location_id",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
-                        "name": "method_id",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": true,
@@ -12779,6 +13307,15 @@
                     },
                     {
                         "name": "vast_cultivation",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "cultivated_area",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": false,
@@ -12832,7 +13369,7 @@
                         }
                     },
                     {
-                        "name": "acidity",
+                        "name": "phenology_stage",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": false,
@@ -12850,7 +13387,16 @@
                         }
                     },
                     {
-                        "name": "soil_id",
+                        "name": "used_origin",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "used_type",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": false,
@@ -12880,7 +13426,7 @@
                 }
             }
         },
-        "/medicinalPlants/{id}": {
+        "/medicinal_plants/{id}": {
             "get": {
                 "tags": [
                     "MedicinalPlant"
@@ -12937,14 +13483,7 @@
                         "type": "integer"
                     },
                     {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of MedicinalPlantMorphology",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "herbarium_id",
+                        "name": "plant_application_id",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": true,
@@ -12954,15 +13493,6 @@
                     },
                     {
                         "name": "location_id",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
-                        "name": "method_id",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": true,
@@ -12999,6 +13529,15 @@
                     },
                     {
                         "name": "vast_cultivation",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "cultivated_area",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": false,
@@ -13052,7 +13591,7 @@
                         }
                     },
                     {
-                        "name": "acidity",
+                        "name": "phenology_stage",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": false,
@@ -13070,7 +13609,16 @@
                         }
                     },
                     {
-                        "name": "soil_id",
+                        "name": "used_origin",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "used_type",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": false,
@@ -13348,6 +13896,241 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of MedicinalPlantConstituent",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/medicinal_plant_methods": {
+            "get": {
+                "tags": [
+                    "MedicinalPlantMethod"
+                ],
+                "summary": "Get a listing of the MedicinalPlantMethods.",
+                "description": "Get all MedicinalPlantMethods",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/MedicinalPlantMethod"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "MedicinalPlantMethod"
+                ],
+                "summary": "Store a newly created MedicinalPlantMethod in storage",
+                "description": "Store MedicinalPlantMethod",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "medicinal_plant_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMethod that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMethod"
+                        }
+                    },
+                    {
+                        "name": "constituent_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMethod that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMethod"
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "in": "body",
+                        "description": "MedicinalPlantMethod that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMethod"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/MedicinalPlantMethod"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/medicinal_plant_methods/{id}": {
+            "get": {
+                "tags": [
+                    "MedicinalPlantMethod"
+                ],
+                "summary": "Display the specified MedicinalPlantMethod",
+                "description": "Get MedicinalPlantMethod",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of MedicinalPlantMethod",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/MedicinalPlantMethod"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "MedicinalPlantMethod"
+                ],
+                "summary": "Update the specified MedicinalPlantMethod in storage",
+                "description": "Update MedicinalPlantMethod",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of MedicinalPlantMethod",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "medicinal_plant_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMethod that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMethod"
+                        }
+                    },
+                    {
+                        "name": "constituent_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMethod that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMethod"
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "in": "body",
+                        "description": "MedicinalPlantMethod that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMethod"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/MedicinalPlantMethod"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "MedicinalPlantMethod"
+                ],
+                "summary": "Remove the specified MedicinalPlantMethod from storage",
+                "description": "Delete MedicinalPlantMethod",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of MedicinalPlantMethod",
                         "required": true,
                         "type": "integer"
                     }
@@ -16054,15 +16837,6 @@
                 ],
                 "parameters": [
                     {
-                        "name": "paleontology_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    },
-                    {
                         "name": "media_id",
                         "in": "body",
                         "description": "PaleontologyMedia that should be stored",
@@ -16081,42 +16855,6 @@
                         }
                     },
                     {
-                        "name": "credential_gift_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    },
-                    {
-                        "name": "credential_expense_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    },
-                    {
-                        "name": "credential_purchase_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    },
-                    {
-                        "name": "credential_correspondence_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    },
-                    {
                         "name": "exchange_id",
                         "in": "body",
                         "description": "PaleontologyMedia that should be stored",
@@ -16126,7 +16864,7 @@
                         }
                     },
                     {
-                        "name": "credential_fair_id",
+                        "name": "credential_id",
                         "in": "body",
                         "description": "PaleontologyMedia that should be stored",
                         "required": false,
@@ -16213,15 +16951,6 @@
                         "type": "integer"
                     },
                     {
-                        "name": "paleontology_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    },
-                    {
                         "name": "media_id",
                         "in": "body",
                         "description": "PaleontologyMedia that should be stored",
@@ -16240,42 +16969,6 @@
                         }
                     },
                     {
-                        "name": "credential_gift_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    },
-                    {
-                        "name": "credential_expense_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    },
-                    {
-                        "name": "credential_purchase_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    },
-                    {
-                        "name": "credential_correspondence_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    },
-                    {
                         "name": "exchange_id",
                         "in": "body",
                         "description": "PaleontologyMedia that should be stored",
@@ -16285,7 +16978,7 @@
                         }
                     },
                     {
-                        "name": "credential_fair_id",
+                        "name": "credential_id",
                         "in": "body",
                         "description": "PaleontologyMedia that should be stored",
                         "required": false,
@@ -23458,6 +24151,283 @@
                 }
             }
         },
+        "/transfer_credentials": {
+            "get": {
+                "tags": [
+                    "TransferCredential"
+                ],
+                "summary": "Get a listing of the TransferCredentials.",
+                "description": "Get all TransferCredentials",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/TransferCredential"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "TransferCredential"
+                ],
+                "summary": "Store a newly created TransferCredential in storage",
+                "description": "Store TransferCredential",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "entitiable_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransferCredential"
+                        }
+                    },
+                    {
+                        "name": "entitiable_type",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransferCredential"
+                        }
+                    },
+                    {
+                        "name": "transferable_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransferCredential"
+                        }
+                    },
+                    {
+                        "name": "transferable_type",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/TransferCredential"
+                        }
+                    },
+                    {
+                        "name": "media_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransferCredential"
+                        }
+                    },
+                    {
+                        "name": "credential_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/TransferCredential"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/TransferCredential"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/transfer_credentials/{id}": {
+            "get": {
+                "tags": [
+                    "TransferCredential"
+                ],
+                "summary": "Display the specified TransferCredential",
+                "description": "Get TransferCredential",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of TransferCredential",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/TransferCredential"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "TransferCredential"
+                ],
+                "summary": "Update the specified TransferCredential in storage",
+                "description": "Update TransferCredential",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of TransferCredential",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "entitiable_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransferCredential"
+                        }
+                    },
+                    {
+                        "name": "entitiable_type",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransferCredential"
+                        }
+                    },
+                    {
+                        "name": "transferable_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransferCredential"
+                        }
+                    },
+                    {
+                        "name": "transferable_type",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/TransferCredential"
+                        }
+                    },
+                    {
+                        "name": "media_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransferCredential"
+                        }
+                    },
+                    {
+                        "name": "credential_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/TransferCredential"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/TransferCredential"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "TransferCredential"
+                ],
+                "summary": "Remove the specified TransferCredential from storage",
+                "description": "Delete TransferCredential",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of TransferCredential",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/transitions": {
             "get": {
                 "tags": [
@@ -24974,10 +25944,17 @@
                 ],
                 "parameters": [
                     {
-                        "name": "date",
+                        "name": "start_time",
                         "in": "body",
-                        "description": "Visit that should be stored",
                         "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Visit"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "in": "body",
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/Visit"
                         }
@@ -25001,7 +25978,7 @@
                         }
                     },
                     {
-                        "name": "peoples",
+                        "name": "peoples_no",
                         "in": "body",
                         "description": "Visit that should be stored",
                         "required": false,
@@ -25028,18 +26005,18 @@
                         }
                     },
                     {
-                        "name": "plantology_id",
+                        "name": "visitable_id",
                         "in": "body",
-                        "description": "Visit that should be stored",
+                        "description": "paleontology_id, herbarium_id",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Visit"
                         }
                     },
                     {
-                        "name": "media_id",
+                        "name": "visitable_type",
                         "in": "body",
-                        "description": "Visit that should be stored",
+                        "description": "paleontology, herbarium",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Visit"
@@ -25095,9 +26072,16 @@
                         "type": "integer"
                     },
                     {
-                        "name": "date",
+                        "name": "start_time",
                         "in": "body",
-                        "description": "Visit that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Visit"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "in": "body",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Visit"
@@ -25107,7 +26091,7 @@
                         "name": "user_id",
                         "in": "body",
                         "description": "Visit that should be stored",
-                        "required": false,
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/Visit"
                         }
@@ -25122,7 +26106,7 @@
                         }
                     },
                     {
-                        "name": "peoples",
+                        "name": "peoples_no",
                         "in": "body",
                         "description": "Visit that should be stored",
                         "required": false,
@@ -25149,18 +26133,18 @@
                         }
                     },
                     {
-                        "name": "plantology_id",
+                        "name": "visitable_id",
                         "in": "body",
-                        "description": "Visit that should be stored",
+                        "description": "paleontology_id, herbarium_id",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Visit"
                         }
                     },
                     {
-                        "name": "media_id",
+                        "name": "visitable_type",
                         "in": "body",
-                        "description": "Visit that should be stored",
+                        "description": "paleontology, herbarium",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Visit"
@@ -26042,6 +27026,9 @@
                 "herbarium_id": {
                     "type": "integer"
                 },
+                "url": {
+                    "type": "string"
+                },
                 "cryo_bank_id": {
                     "type": "integer"
                 },
@@ -26049,6 +27036,9 @@
                     "type": "integer"
                 },
                 "location_id": {
+                    "type": "integer"
+                },
+                "general_class_id": {
                     "type": "integer"
                 },
                 "description": {
@@ -26103,6 +27093,34 @@
                     "type": "integer"
                 },
                 "name": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "Component": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "description": {
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -26282,6 +27300,9 @@
                 "protection_id": {
                     "type": "integer"
                 },
+                "proposal_name": {
+                    "type": "string"
+                },
                 "entry_date": {
                     "type": "string"
                 },
@@ -26321,6 +27342,9 @@
                 "herbarium_id": {
                     "type": "integer"
                 },
+                "user_id": {
+                    "type": "integer"
+                },
                 "created_at": {
                     "type": "string"
                 },
@@ -26339,6 +27363,9 @@
                     "type": "integer"
                 },
                 "cryo_bank_id": {
+                    "type": "integer"
+                },
+                "location_id": {
                     "type": "integer"
                 },
                 "action_id": {
@@ -27316,60 +28343,50 @@
         },
         "Medical": {
             "required": [
-                "herbarium_id",
+                "plant_application_id",
                 "medicine_effect_id",
                 "medicine_medicinal_part_id"
             ],
             "properties": {
                 "id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
-                "herbarium_id": {
-                    "description": "herbarium_id",
-                    "type": "integer",
-                    "format": "int32"
+                "plant_application_id": {
+                    "description": "plant_application_id",
+                    "type": "integer"
                 },
                 "medicine_side_effect_id": {
                     "description": "medicine_side_effect_id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "medicine_therapy_id": {
                     "description": "medicine_therapy_id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "medicine_drug_id": {
                     "description": "medicine_drug_id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "medicine_effect_id": {
                     "description": "medicine_effect_id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "product_id": {
                     "description": "product_id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
-                "medicine_drug_shape_id": {
-                    "description": "medicine_drug_shape_id",
-                    "type": "integer",
-                    "format": "int32"
+                "medicine_shape_id": {
+                    "description": "medicine_shape_id",
+                    "type": "integer"
                 },
-                "medicine_medicinal_part_id": {
-                    "description": "medicine_medicinal_part_id",
-                    "type": "integer",
-                    "format": "int32"
+                "medicine_part_id": {
+                    "description": "medicine_part_id",
+                    "type": "integer"
                 },
-                "medicine_drug_usage_id": {
-                    "description": "medicine_drug_usage_id",
-                    "type": "integer",
-                    "format": "int32"
+                "medicine_usage_id": {
+                    "description": "medicine_usage_id",
+                    "type": "integer"
                 },
                 "side_effect_description": {
                     "description": "side_effect_description",
@@ -27378,22 +28395,22 @@
                         "type": "string"
                     }
                 },
-                "drug_usage_description": {
-                    "description": "drug_usage_description",
+                "usage_description": {
+                    "description": "usage_description",
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 },
-                "medicinal_part_description": {
-                    "description": "medicinal_part_description",
+                "part_description": {
+                    "description": "part_description",
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 },
-                "drug_shape_description": {
-                    "description": "drug_shape_description",
+                "shape_description": {
+                    "description": "shape_description",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -27413,8 +28430,8 @@
                         "type": "string"
                     }
                 },
-                "medicine_effect_description": {
-                    "description": "medicine_effect_description",
+                "effect_description": {
+                    "description": "effect_description",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -27432,6 +28449,33 @@
                 }
             }
         },
+        "MedicalComponent": {
+            "required": [
+                "medical_id",
+                "component_id",
+                "is_active"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "medical_id": {
+                    "type": "integer"
+                },
+                "component_id": {
+                    "type": "integer"
+                },
+                "is_active": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
         "MedicinalPlant": {
             "required": [
                 "herbarium_id",
@@ -27444,8 +28488,8 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_origin_id": {
-                    "description": "plant_origin_id",
+                "plant_application_id": {
+                    "description": "plant_application_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -27463,6 +28507,13 @@
                 },
                 "vast_cultivation": {
                     "description": "vast_cultivation",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "cultivated_area": {
+                    "description": "cultivated_area",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -27501,15 +28552,8 @@
                         "type": "string"
                     }
                 },
-                "acidity": {
-                    "description": "acidity",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "herbarium_id": {
-                    "description": "herbarium_id",
+                "phenology_stage": {
+                    "description": "phenology_stage",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -27518,8 +28562,8 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "method_id": {
-                    "description": "method_id",
+                "used_origin": {
+                    "description": "used_origin",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -27528,8 +28572,8 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "soil_id": {
-                    "description": "soil_id",
+                "used_type": {
+                    "description": "used_type",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -27569,6 +28613,39 @@
                 },
                 "value": {
                     "description": "value",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "MedicinalPlantMethod": {
+            "required": [
+                "medicinal_plant_id",
+                "method_id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "medicinal_plant_id": {
+                    "description": "medicinal_plant_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "method_id": {
+                    "description": "method_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -28108,33 +29185,12 @@
         },
         "PaleontologyMedia": {
             "required": [
-                "paleontology_id",
                 "media_id",
                 "user_id"
             ],
             "properties": {
-                "credential_gift_id": {
-                    "description": "credential_gift_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "credential_expense_id": {
-                    "description": "credential_expense_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "credential_purchase_id": {
-                    "description": "credential_purchase_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "credential_correspondence_id": {
-                    "description": "credential_correspondence_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "paleontology_id": {
-                    "description": "paleontology_id",
+                "credential_id": {
+                    "description": "credential_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -28150,11 +29206,6 @@
                 },
                 "exchange_id": {
                     "description": "exchange_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "credential_fair_id": {
-                    "description": "credential_fair_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -29662,6 +30713,55 @@
                     "description": "collection_id",
                     "type": "integer",
                     "format": "int32"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "TransferCredential": {
+            "required": [
+                "entitiable_id",
+                "transferable_id",
+                "entitiable_type",
+                "transferable_type"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "entitiable_id": {
+                    "description": "entitiables as herbarium,paleontology",
+                    "type": "integer"
+                },
+                "entitiable_type": {
+                    "description": "herbarium,paleontology",
+                    "type": "string"
+                },
+                "transferable_id": {
+                    "description": "transferables as visit, borrow, exchange",
+                    "type": "integer"
+                },
+                "transferable_type": {
+                    "description": "visit, borrow, exchange",
+                    "type": "string"
+                },
+                "media_id": {
+                    "description": "media_id",
+                    "type": "integer"
+                },
+                "credential_id": {
+                    "description": "credential_id",
+                    "type": "integer"
                 },
                 "created_at": {
                     "description": "created_at",

@@ -15,9 +15,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * 			@SWG\Property(property="notes", type="array",
 	 *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="herbarium_id", type="integer"),
+ * 			@SWG\Property(property="url", type="string"),
  * 			@SWG\Property(property="cryo_bank_id", type="integer"),
  * 			@SWG\Property(property="article_id", type="integer"),
  * 			@SWG\Property(property="location_id", type="integer"),
+ * 			@SWG\Property(property="general_class_id", type="integer"),
  * 			@SWG\Property(property="description", type="array",
 	 *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="created_at", type="string"),
@@ -34,6 +36,7 @@ class Chromosome extends BaseModel
         'herbarium_id' => 'required|exists:herbariums,id',
         'cryo_bank_id' => 'required|exists:cryo_banks,id',
         'article_id' => 'required|exists:articles,id',
+        'general_class_id' => 'required|exists:generals,id',
         'location_id' => 'required|exists:locations,id',
         'n_no' => 'required|integer',
         '2n_no' => 'integer',
@@ -50,7 +53,7 @@ class Chromosome extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['2n_no', 'article_id', 'created_at', 'cryo_bank_id', 'deleted_at', 'herbarium_id', 'location_id', 'n_no', 'notes', 'updated_at'];
+    protected $fillable = ['2n_no', 'article_id', 'created_at', 'cryo_bank_id', 'url', 'general_class_id','deleted_at', 'herbarium_id', 'location_id', 'n_no', 'notes', 'updated_at'];
 
 
     /**

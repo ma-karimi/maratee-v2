@@ -111,6 +111,9 @@ class DatabaseSeeder extends Seeder
             PermissionTableSeeder::class,
             MorphAuthorTableSeeder::class,
             TransitionTableSeeder::class,
+            ComponentTableSeeder::class,
+            MedicalComponentTableSeeder::class,
+            MedicinalPlantMethodTableSeeder::class,
         ]);
         Model::reguard();
 

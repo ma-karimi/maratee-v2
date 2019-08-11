@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * 			@SWG\Property(property="voucher_number", type="string"),
  * 			@SWG\Property(property="geotype_code", type="string"),
  * 			@SWG\Property(property="protection_id", type="integer"),
+ * 			@SWG\Property(property="proposal_name", type="string"),
  * 			@SWG\Property(property="entry_date", type="string"),
  * 			@SWG\Property(property="sample_type", type="string"),
  * 			@SWG\Property(property="treatment", type="array",
@@ -27,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * 			@SWG\Property(property="rack_no", type="string"),
  * 			@SWG\Property(property="cell_no", type="integer"),
  * 			@SWG\Property(property="herbarium_id", type="integer"),
+ * 			@SWG\Property(property="user_id", type="integer"),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
@@ -34,14 +36,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class CryoBank extends BaseModel
 {
 
-    public static $linguistically=['treatment'=>false,'tank_type'=>false];
+    public static $linguistically=['treatment'=>true,'tank_type'=>true];
     public static $rules = [
         'voucher_number' => 'required|string',
         'geotype_code' => 'required|string',
         'protection_id' => 'required|exists:protections,id',
         'herbarium_id' => 'required|exists:herbariums,id',
+        'user_id' => 'required|exists:users,id',
         'entry_date' => 'date',
         'sample_type' => 'string',
+        'proposal_name' => 'string',
         'rack_no' => 'string',
         'repetition' => 'integer',
         'layering_no' => 'integer',
@@ -61,7 +65,7 @@ class CryoBank extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['cell_no', 'created_at', 'deleted_at', 'entry_date', 'geotype_code', 'herbarium_id', 'layering_no', 'protection_id', 'rack_no', 'repetition', 'row_no', 'sample_type', 'tank_no', 'tank_type', 'treatment', 'updated_at', 'voucher_number'];
+    protected $fillable = ['cell_no', 'created_at', 'deleted_at', 'entry_date', 'geotype_code', 'herbarium_id', 'layering_no', 'protection_id', 'rack_no', 'repetition', 'row_no', 'sample_type', 'tank_no', 'tank_type', 'treatment','user_id', 'proposal_name', 'updated_at', 'voucher_number'];
 
 
     /**
@@ -122,5 +126,13 @@ class CryoBank extends BaseModel
     public function herbarium(): BelongsTo
     {
         return $this->belongsTo(Herbarium::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

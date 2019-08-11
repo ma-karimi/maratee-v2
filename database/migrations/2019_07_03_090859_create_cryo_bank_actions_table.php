@@ -16,6 +16,7 @@ class CreateCryoBankActionsTable extends Migration {
 		{
 			$table->unsignedInteger('cryo_bank_id');
 			$table->unsignedInteger('action_id');
+			$table->unsignedInteger('location_id');
 
 
             $table->timeStampsTz();

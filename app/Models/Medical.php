@@ -4,69 +4,61 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 /**
  * @SWG\Definition(
  *      definition="Medical",
- *      required={"herbarium_id","medicine_effect_id","medicine_medicinal_part_id"},
+ *      required={"plant_application_id","medicine_effect_id","medicine_medicinal_part_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="herbarium_id",
- *          description="herbarium_id",
+ *          property="plant_application_id",
+ *          description="plant_application_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="medicine_side_effect_id",
  *          description="medicine_side_effect_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="medicine_therapy_id",
  *          description="medicine_therapy_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="medicine_drug_id",
  *          description="medicine_drug_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="medicine_effect_id",
  *          description="medicine_effect_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="product_id",
  *          description="product_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="medicine_drug_shape_id",
- *          description="medicine_drug_shape_id",
+ *          property="medicine_shape_id",
+ *          description="medicine_shape_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="medicine_medicinal_part_id",
- *          description="medicine_medicinal_part_id",
+ *          property="medicine_part_id",
+ *          description="medicine_part_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="medicine_drug_usage_id",
- *          description="medicine_drug_usage_id",
+ *          property="medicine_usage_id",
+ *          description="medicine_usage_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="side_effect_description",
@@ -75,20 +67,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="drug_usage_description",
- *          description="drug_usage_description",
+ *          property="usage_description",
+ *          description="usage_description",
  *          type="array",
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="medicinal_part_description",
- *          description="medicinal_part_description",
+ *          property="part_description",
+ *          description="part_description",
  *          type="array",
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="drug_shape_description",
- *          description="drug_shape_description",
+ *          property="shape_description",
+ *          description="shape_description",
  *          type="array",
  *     @SWG\Items(type="string"),
  *      ),
@@ -105,8 +97,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="medicine_effect_description",
- *          description="medicine_effect_description",
+ *          property="effect_description",
+ *          description="effect_description",
  *          type="array",
  *     @SWG\Items(type="string"),
  *      ),
@@ -127,17 +119,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Medical extends BaseModel
 {
 
-    public static $linguistically=['side_effect_description'=>false,'medicine_effect_description'=>false,'therapy_description'=>false,'drug_description'=>false,'drug_shape_description'=>false,'medicinal_part_description'=>false,'drug_usage_description'=>false];
+    public static $linguistically=['effect_description'=>true,'therapy_description'=>true,'drug_description'=>true,'shape_description'=>true,'part_description'=>true,'usage_description'=>true];
     public static $rules=[
-        'herbarium_id' => 'required|exists:herbariums,id',
-        'medicine_side_effect_id' => 'integer',
-        'medicine_effect_id' => 'required|integer',
-        'medicine_therapy_id' => 'integer',
-        'medicine_drug_id' => 'integer',
+        'plant_application_id' => 'required|exists:plant_applications,id',
+        'medicine_side_effect_id' => 'required|exists:medicines,id',
+        'medicine_effect_id' => 'required|exists:medicines,id',
+        'medicine_therapy_id' => 'required|exists:medicines,id',
+        'medicine_drug_id' => 'required|exists:medicines,id',
         'product_id' => 'required|exists:products,id',
-        'medicine_drug_shape_id' => 'integer',
-        'medicine_medicinal_part_id' => 'required|integer',
-        'medicine_drug_usage_id' => 'integer'
+        'medicine_shape_id' => 'required|exists:medicines,id',
+        'medicine_part_id' => 'required|exists:medicines,id',
+        'medicine_usage_id' => 'required|exists:medicines,id'
     ];
     /**
      * The database table used by the model.
@@ -151,7 +143,7 @@ class Medical extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'drug_description', 'drug_shape_description', 'drug_usage_description', 'herbarium_id', 'medicinal_part_description', 'medicine_drug_id', 'medicine_drug_shape_id', 'medicine_drug_usage_id', 'medicine_effect_description', 'medicine_effect_id', 'medicine_medicinal_part_id', 'medicine_side_effect_id', 'medicine_therapy_id', 'product_id', 'side_effect_description', 'therapy_description', 'updated_at'];
+    protected $fillable = ['created_at', 'deleted_at', 'drug_description', 'shape_description', 'usage_description', 'plant_application_id', 'part_description', 'medicine_drug_id', 'medicine_shape_id', 'medicine_usage_id', 'effect_description', 'medicine_effect_id', 'medicine_part_id', 'medicine_side_effect_id', 'medicine_therapy_id', 'product_id', 'side_effect_description', 'therapy_description', 'updated_at'];
 
 
     /**
@@ -161,21 +153,21 @@ class Medical extends BaseModel
      */
     protected $casts = [
         'side_effect_description' => 'json',
-        'medicine_effect_description' => 'json',
+        'effect_description' => 'json',
         'therapy_description' => 'json',
         'drug_description' => 'json',
-        'drug_shape_description' => 'json',
-        'medicinal_part_description' => 'json',
-        'drug_usage_description' => 'json',
+        'shape_description' => 'json',
+        'part_description' => 'json',
+        'usage_description' => 'json',
     ];
 
 
     /**
      * @return BelongsTo
      */
-    public function herbarium(): BelongsTo
+    public function plantApplication(): BelongsTo
     {
-        return $this->belongsTo(Herbarium::class);
+        return $this->belongsTo(PlantApplication::class);
     }
 
     /**
@@ -191,7 +183,7 @@ class Medical extends BaseModel
      */
     public function medicineDrugShape(): BelongsTo
     {
-        return $this->belongsTo(Medicine::class, 'medicine_drug_shape_id');
+        return $this->belongsTo(Medicine::class, 'medicine_shape_id');
     }
 
     /**
@@ -199,7 +191,7 @@ class Medical extends BaseModel
      */
     public function medicineDrugUsage(): BelongsTo
     {
-        return $this->belongsTo(Medicine::class, 'medicine_drug_usage_id');
+        return $this->belongsTo(Medicine::class, 'medicine_usage_id');
     }
 
     /**
@@ -215,7 +207,7 @@ class Medical extends BaseModel
      */
     public function medicineMedicinalPart(): BelongsTo
     {
-        return $this->belongsTo(Medicine::class, 'medicine_medicinal_part_id');
+        return $this->belongsTo(Medicine::class, 'medicine_part_id');
     }
 
     /**
@@ -240,5 +232,14 @@ class Medical extends BaseModel
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+
+    /**
+     * @return BelongsToMany
+     */
+    public function components(): BelongsToMany
+    {
+        return $this->belongsToMany(Component::class, 'medical_components');
     }
 }

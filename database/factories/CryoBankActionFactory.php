@@ -12,5 +12,8 @@ $factory->define(App\Models\CryoBankAction::class, function (Faker $faker) {
         'action_id' => function () {
             return factory(App\Models\Action::class)->create()->id;
         },
+        'location_id' => function () {
+            return factory(App\Models\Location::class)->create()->id;
+        },
     ];
 });
