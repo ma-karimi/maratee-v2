@@ -11,6 +11,7 @@ namespace App\Models\Contracts;
 
 use ErrorException;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Arr;
 use ReflectionClass;
 use ReflectionMethod;
 
@@ -36,7 +37,8 @@ trait RelationshipsTrait
                 if ($return instanceof Relation) {
                     $relationships[$method->getName()] = [
                         'type' => (new ReflectionClass($return))->getShortName(),
-                        'model' => (new ReflectionClass($return->getRelated()))->getName()
+                        'model' => (new ReflectionClass($return->getRelated()))->getName(),
+                        'name'=>$method->getName()
                     ];
                 }
             } catch(ErrorException $e) {}
@@ -47,5 +49,12 @@ trait RelationshipsTrait
 
     public static function relationshipsText($model){
       return implode(',',array_keys(self::relationships($model)));
+    }
+
+    public static function relationshipsWithType($model)
+    {
+        return collect(self::relationships($model))->mapToGroups(function ($item, $key) {
+            return [$item['type'] => $item['name']];
+        });
     }
 }
