@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder
             MediaTableSeeder::class,
             MedicinalPlantTableSeeder::class,
 
-            AttendanceTableSeeder::class,
+//            AttendanceTableSeeder::class,
             BorrowTableSeeder::class,
 
             CryoBankActionTableSeeder::class,
@@ -99,7 +99,7 @@ class DatabaseSeeder extends Seeder
             MedicalTableSeeder::class,
             MedicinalPlantConstituentTableSeeder::class,
             MedicinalPlantMorphologyTableSeeder::class,
-            PaleontologyMediaTableSeeder::class,
+//            PaleontologyMediaTableSeeder::class,
             PlantApplicationTableSeeder::class,
 
             TechnologyCollectionTableSeeder::class,
@@ -110,6 +110,10 @@ class DatabaseSeeder extends Seeder
             TransitionTableSeeder::class,
             PermissionTableSeeder::class,
             MorphAuthorTableSeeder::class,
+            TransitionTableSeeder::class,
+            ComponentTableSeeder::class,
+            MedicalComponentTableSeeder::class,
+            MedicinalPlantMethodTableSeeder::class,
         ]);
         Model::reguard();
 

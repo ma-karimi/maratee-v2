@@ -15,7 +15,7 @@ class AddPlantIdPaleontologies extends Migration
     {
         Schema::table('paleontologies', function (Blueprint $table) {
             $table->unsignedInteger('plant_id');
-            $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
     }
 

@@ -14,25 +14,25 @@ class CreateMedicalsTable extends Migration
     public function up()
     {
         Schema::create('medicals', function (Blueprint $table) {
-            $table->unsignedInteger('herbarium_id');
-            $table->unsignedInteger('medicine_side_effect_id')->nullable();
+            $table->unsignedInteger('medicine_side_effect_id');
             $table->json('side_effect_description')->nullable();
             $table->unsignedInteger('medicine_effect_id');
-            $table->json('medicine_effect_description')->nullable();
-            $table->unsignedInteger('medicine_therapy_id')->nullable();
+            $table->json('effect_description')->nullable();
+            $table->unsignedInteger('medicine_therapy_id');
             $table->json('therapy_description')->nullable();
-            $table->unsignedInteger('medicine_drug_id')->nullable();
+            $table->unsignedInteger('medicine_drug_id');
             $table->json('drug_description')->nullable();
+            $table->unsignedInteger('medicine_shape_id');
+            $table->json('shape_description')->nullable();
+
+            $table->unsignedInteger('medicine_part_id');
+            $table->json('part_description')->nullable();
+
+            $table->unsignedInteger('medicine_usage_id');
+            $table->json('usage_description')->nullable();
+
+            $table->unsignedInteger('plant_application_id');
             $table->unsignedInteger('product_id')->nullable();
-            $table->unsignedInteger('medicine_drug_shape_id')->nullable();
-            $table->json('drug_shape_description')->nullable();
-
-            $table->unsignedInteger('medicine_medicinal_part_id');
-            $table->json('medicinal_part_description')->nullable();
-
-            $table->unsignedInteger('medicine_drug_usage_id')->nullable();
-            $table->json('drug_usage_description')->nullable();
-
 
 
             $table->timeStampsTz();

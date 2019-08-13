@@ -79,7 +79,7 @@ class MedicalAPIController extends AppBaseController
      *      description="Store Medical",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="herbarium_id",
+     *          name="plant_application_id",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=true,
@@ -93,7 +93,7 @@ class MedicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Medical")
      *      ),
      *      @SWG\Parameter(
-     *          name="medicine_medicinal_part_id",
+     *          name="medicine_part_id",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=true,
@@ -128,14 +128,14 @@ class MedicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Medical")
      *      ),
      *      @SWG\Parameter(
-     *          name="medicine_drug_shape_id",
+     *          name="medicine_shape_id",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Medical")
      *      ),
      *      @SWG\Parameter(
-     *          name="medicine_drug_usage_id",
+     *          name="medicine_usage_id",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=false,
@@ -149,21 +149,21 @@ class MedicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Medical")
      *      ),
      *      @SWG\Parameter(
-     *          name="drug_usage_description",
+     *          name="usage_description",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Medical")
      *      ),
      *      @SWG\Parameter(
-     *          name="medicinal_part_description",
+     *          name="part_description",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Medical")
      *      ),
      *      @SWG\Parameter(
-     *          name="drug_shape_description",
+     *          name="shape_description",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=false,
@@ -184,7 +184,7 @@ class MedicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Medical")
      *      ),
      *      @SWG\Parameter(
-     *          name="medicine_effect_description",
+     *          name="effect_description",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=false,
@@ -289,7 +289,7 @@ class MedicalAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="herbarium_id",
+     *          name="plant_application_id",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=true,
@@ -303,7 +303,7 @@ class MedicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Medical")
      *      ),
      *      @SWG\Parameter(
-     *          name="medicine_medicinal_part_id",
+     *          name="medicine_part_id",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=true,
@@ -338,14 +338,14 @@ class MedicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Medical")
      *      ),
      *      @SWG\Parameter(
-     *          name="medicine_drug_shape_id",
+     *          name="medicine_shape_id",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Medical")
      *      ),
      *      @SWG\Parameter(
-     *          name="medicine_drug_usage_id",
+     *          name="medicine_usage_id",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=false,
@@ -359,21 +359,21 @@ class MedicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Medical")
      *      ),
      *      @SWG\Parameter(
-     *          name="drug_usage_description",
+     *          name="usage_description",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Medical")
      *      ),
      *      @SWG\Parameter(
-     *          name="medicinal_part_description",
+     *          name="part_description",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Medical")
      *      ),
      *      @SWG\Parameter(
-     *          name="drug_shape_description",
+     *          name="shape_description",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=false,
@@ -394,7 +394,7 @@ class MedicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Medical")
      *      ),
      *      @SWG\Parameter(
-     *          name="medicine_effect_description",
+     *          name="effect_description",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=false,

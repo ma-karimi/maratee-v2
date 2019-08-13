@@ -14,15 +14,15 @@ class AddForeignKeysToMedicalsTable extends Migration {
 	{
 		Schema::table('medicals', function(Blueprint $table)
 		{
-			$table->foreign('herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('medicine_side_effect_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('medicine_drug_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('medicine_drug_shape_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('medicine_drug_usage_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('medicine_medicinal_part_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('medicine_effect_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('product_id')->references('id')->on('products')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('medicine_therapy_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('plant_application_id')->references('id')->on('plant_applications')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('medicine_side_effect_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('medicine_drug_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('medicine_shape_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('medicine_usage_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('medicine_part_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('medicine_effect_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('product_id')->references('id')->on('products')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('medicine_therapy_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 
@@ -36,12 +36,12 @@ class AddForeignKeysToMedicalsTable extends Migration {
 	{
 		Schema::table('medicals', function(Blueprint $table)
 		{
-			$table->dropForeign(['herbarium_id']);
+			$table->dropForeign(['plant_application_id']);
 			$table->dropForeign(['medicine_side_effect_id']);
 			$table->dropForeign(['medicine_drug_id']);
-			$table->dropForeign(['medicine_drug_shape_id']);
-			$table->dropForeign(['medicine_drug_usage_id']);
-			$table->dropForeign(['medicine_medicinal_part_id']);
+			$table->dropForeign(['medicine_shape_id']);
+			$table->dropForeign(['medicine_usage_id']);
+			$table->dropForeign(['medicine_part_id']);
 			$table->dropForeign(['medicine_effect_id']);
 			$table->dropForeign(['product_id']);
 			$table->dropForeign(['medicine_therapy_id']);

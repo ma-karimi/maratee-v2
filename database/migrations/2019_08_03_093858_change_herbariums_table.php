@@ -23,8 +23,8 @@ class ChangeHerbariumsTable extends Migration
             $table->dropColumn('organization_id');
             $table->unsignedInteger('division_id')->nullable();
             $table->unsignedInteger('department_id');
-            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('division_id')->references('id')->on('divisions')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('division_id')->references('id')->on('divisions')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
         });
     }
@@ -42,7 +42,7 @@ class ChangeHerbariumsTable extends Migration
             $table->dropForeign(['department_id']);
             $table->dropColumn('division_id', 'department_id');
             $table->unsignedInteger('organization_id');
-            $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
     }
 

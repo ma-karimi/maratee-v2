@@ -14,13 +14,13 @@ class AddForeignKeysToHerbariumsTable extends Migration {
 	{
 		Schema::table('herbariums', function(Blueprint $table)
 		{
-			$table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('general_phenology_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('general_phytogeography_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('general_group_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('general_type_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('protection_id')->references('id')->on('protections')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('general_phenology_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('general_phytogeography_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('general_group_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('general_type_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('protection_id')->references('id')->on('protections')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

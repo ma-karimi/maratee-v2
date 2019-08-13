@@ -69,4 +69,8 @@ class Borrow extends BaseModel
     {
         return $this->belongsTo(User::class);
     }
+    public function borrowable()
+    {
+        return $this->morphTo();
+    }
 }

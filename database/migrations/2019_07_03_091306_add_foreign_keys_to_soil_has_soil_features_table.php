@@ -14,8 +14,8 @@ class AddForeignKeysToSoilHasSoilFeaturesTable extends Migration {
 	{
 		Schema::table('soil_has_soil_features', function(Blueprint $table)
 		{
-			$table->foreign('soil_id')->references('id')->on('soils')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('soil_feature_id')->references('id')->on('soil_features')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('soil_id')->references('id')->on('soils')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('soil_feature_id')->references('id')->on('soil_features')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

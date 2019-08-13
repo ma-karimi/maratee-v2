@@ -14,7 +14,7 @@ class AddForeignKeyToTablesTable extends Migration
     public function up()
     {
         Schema::table('tables', function (Blueprint $table) {
-            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
     }
 

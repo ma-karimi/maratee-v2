@@ -90,6 +90,12 @@ class CryoBankActionAPIController extends AppBaseController
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/CryoBankAction")
      *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/CryoBankAction")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -196,6 +202,12 @@ class CryoBankActionAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="action_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/CryoBankAction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/CryoBankAction")

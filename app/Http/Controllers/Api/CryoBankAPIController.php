@@ -97,7 +97,19 @@ class CryoBankAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
+     *          name="proposal_name",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
      *          name="herbarium_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
@@ -279,7 +291,19 @@ class CryoBankAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
+     *          name="proposal_name",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
      *          name="herbarium_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/CryoBank")

@@ -17,7 +17,7 @@ class CreateLocationsTable extends Migration {
 			$table->increments('id');
 			$table->unsignedInteger('address_id');
 			$table->unsignedInteger('region_id')->nullable();
-			$table->integer('altitude')->nullable();
+			$table->string('altitude')->nullable();
 			$table->point('point')->nullable();
 			$table->json('name');
 			$table->json('description')->nullable();

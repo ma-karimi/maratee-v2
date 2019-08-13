@@ -103,6 +103,12 @@ class ChromosomeAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Chromosome")
      *      ),
      *      @SWG\Parameter(
+     *          name="url",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
      *          name="cryo_bank_id",
      *          in="body",
      *          required=true,
@@ -118,6 +124,18 @@ class ChromosomeAPIController extends AppBaseController
      *          name="location_id",
      *          in="body",
      *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_class_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/Chromosome")
      *      ),
      *      @SWG\Response(
@@ -243,6 +261,12 @@ class ChromosomeAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Chromosome")
      *      ),
      *      @SWG\Parameter(
+     *          name="url",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
      *          name="cryo_bank_id",
      *          in="body",
      *          required=true,
@@ -258,6 +282,18 @@ class ChromosomeAPIController extends AppBaseController
      *          name="location_id",
      *          in="body",
      *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_class_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/Chromosome")
      *      ),
      *      @SWG\Response(

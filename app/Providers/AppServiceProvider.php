@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Plant;
+use App\Models\TransferCredential;
 use App\Observers\PlantObserver;
+use App\Observers\TransferCredentialObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,5 +30,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Plant::observe(PlantObserver::class);
+
     }
 }

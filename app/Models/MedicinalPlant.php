@@ -16,8 +16,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="plant_origin_id",
- *          description="plant_origin_id",
+ *          property="plant_application_id",
+ *          description="plant_application_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -36,6 +36,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="vast_cultivation",
  *          description="vast_cultivation",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *      ),
+ *      @SWG\Property(
+ *          property="cultivated_area",
+ *          description="cultivated_area",
  *          type="array",
  *     @SWG\Items(type="string"),
  *      ),
@@ -70,14 +76,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="acidity",
- *          description="acidity",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="herbarium_id",
- *          description="herbarium_id",
+ *          property="phenology_stage",
+ *          description="phenology_stage",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -88,8 +88,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="method_id",
- *          description="method_id",
+ *          property="used_origin",
+ *          description="used_origin",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -100,8 +100,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="soil_id",
- *          description="soil_id",
+ *          property="used_type",
+ *          description="used_type",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -121,17 +121,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class MedicinalPlant extends BaseModel
 {
-
-    public static $linguistically=['treatment'=>false,'vast_cultivation'=>false,'studied_sample'=>false,'secondary_metabolite'=>false,'exclusivity'=>false,'life_cycle'=>false,'acidity'=>false];
     public static $rules=[
         'plant_origin_id' => 'integer',
         'code_no' => 'integer',
         'efficiency' => 'numeric',
-        'herbarium_id' => 'required|exists:herbariums,id',
         'location_id' => 'required|exists:locations,id',
-        'method_id' => 'required|exists:methods,id',
         'article_id' => 'exists:methods,id',
-        'soil_id' => 'integer',
 
     ];
     /**
@@ -146,7 +141,7 @@ class MedicinalPlant extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['acidity', 'article_id', 'code_no', 'created_at', 'deleted_at', 'efficiency', 'exclusivity', 'herbarium_id', 'life_cycle', 'location_id', 'method_id', 'general_origin_id', 'secondary_metabolite', 'soil_id', 'studied_sample', 'treatment', 'updated_at', 'vast_cultivation'];
+    protected $fillable = ['article_id', 'code_no', 'created_at', 'deleted_at', 'efficiency', 'exclusivity', 'life_cycle', 'location_id', 'plant_application_id', 'secondary_metabolite', 'studied_sample', 'phenology_stage', 'used_origin','used_type', 'treatment', 'updated_at', 'vast_cultivation'];
 
 
     /**
@@ -157,12 +152,15 @@ class MedicinalPlant extends BaseModel
     protected $casts = [
         'treatment' => 'json',
         'vast_cultivation' => 'json',
+        'cultivated_area' => 'json',
         'studied_sample' => 'json',
         'efficiency' => 'double',
         'secondary_metabolite' => 'json',
         'exclusivity' => 'json',
         'life_cycle' => 'json',
-        'acidity' => 'json',
+        'phenology_stage' => 'json',
+        'used_origin' => 'json',
+        'used_type' => 'json',
     ];
 
     /**
@@ -176,9 +174,9 @@ class MedicinalPlant extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function herbarium(): BelongsTo
+    public function plantApplication(): BelongsTo
     {
-        return $this->belongsTo(Herbarium::class);
+        return $this->belongsTo(PlantApplication::class);
     }
 
     /**
@@ -189,29 +187,6 @@ class MedicinalPlant extends BaseModel
         return $this->belongsTo(Location::class);
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function method(): BelongsTo
-    {
-        return $this->belongsTo(Method::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function generalFactor(): BelongsTo
-    {
-        return $this->belongsTo(General::class, 'general_origin_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function soil(): BelongsTo
-    {
-        return $this->belongsTo(Soil::class);
-    }
 
     /**
      * @return HasMany

@@ -14,11 +14,11 @@ class AddForeignKeysToPaleontologyCitationsTable extends Migration {
 	{
 		Schema::table('paleontology_citations', function(Blueprint $table)
 		{
-			$table->foreign('article_id')->references('id')->on('articles')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('paleontology_id')->references('id')->on('paleontologies')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('article_id')->references('id')->on('articles')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('paleontology_id')->references('id')->on('paleontologies')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
-			$table->foreign('media_id')->references('id')->on('medias')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('media_id')->references('id')->on('medias')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

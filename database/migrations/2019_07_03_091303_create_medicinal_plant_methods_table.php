@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateAttendancesTable extends Migration {
+class CreateMedicinalPlantMethodsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,15 +12,11 @@ class CreateAttendancesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('attendances', function(Blueprint $table)
+		Schema::create('medicinal_plant_methods', function(Blueprint $table)
 		{
-			$table->increments('id');
-
-			$table->dateTime('start_time');
-			$table->dateTime('end_time');
-			$table->unsignedInteger('herbarium_id')->nullable();
-			$table->unsignedInteger('user_id');
-
+            $table->increments('id');
+            $table->unsignedInteger('medicinal_plant_id');
+			$table->unsignedInteger('method_id');
 
             $table->timeStampsTz();
             $table->dateTimeTz('deleted_at')->nullable();
@@ -35,7 +31,7 @@ class CreateAttendancesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('attendance');
+		Schema::drop('medicinal_plant_methods');
 	}
 
 }

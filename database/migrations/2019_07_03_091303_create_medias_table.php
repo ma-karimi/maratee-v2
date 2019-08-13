@@ -15,20 +15,17 @@ class CreateMediasTable extends Migration
     {
         Schema::create('medias', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('name');
+            $table->json('name');
+            $table->string('src');
             $table->string('format_type', 45);
             $table->dateTime('date')->nullable();
             $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('location_id')->nullable();
             $table->json('description')->nullable();
-            $table->unsignedInteger('herbarium_id')->nullable();
-            $table->unsignedInteger('seed_id')->nullable();
-            $table->unsignedInteger('paleontology_id')->nullable();
             $table->json('info_type')->nullable();
             $table->json('reference')->nullable();
-            $table->unsignedInteger('medicinal_plant_id')->nullable();
-            $table->unsignedInteger('product_id')->nullable();
-            $table->unsignedInteger('botanical_id')->nullable();
+//            'plant, herbarium, paleontology, product, botanical, user, article, action, chromosome, cryo, seed, garden'
+            $table->morphs('mediable');
 
             $table->timeStampsTz();
             $table->dateTimeTz('deleted_at')->nullable();

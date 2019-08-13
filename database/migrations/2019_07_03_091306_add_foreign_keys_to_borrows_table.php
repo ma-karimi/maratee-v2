@@ -14,9 +14,10 @@ class AddForeignKeysToBorrowsTable extends Migration {
 	{
 		Schema::table('borrows', function(Blueprint $table)
 		{
-			$table->foreign('herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('media_id')->references('id')->on('medias')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('send_department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('receive_department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('CASCADE');
+
 
 		});
 	}
@@ -31,8 +32,8 @@ class AddForeignKeysToBorrowsTable extends Migration {
 	{
 		Schema::table('borrows', function(Blueprint $table)
 		{
-			$table->dropForeign(['herbarium_id']);
-			$table->dropForeign(['media_id']);
+			$table->dropForeign(['send_department_id']);
+			$table->dropForeign(['receive_department_id']);
 			$table->dropForeign(['user_id']);
 
 		});

@@ -14,8 +14,8 @@ class AddForeignKeysToHerbariumAppendixesTable extends Migration {
 	{
 		Schema::table('herbarium_appendixes', function(Blueprint $table)
 		{
-			$table->foreign('herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('destination_herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('destination_herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
 		});
 	}

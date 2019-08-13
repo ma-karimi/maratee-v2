@@ -14,8 +14,8 @@ class AddForeignKeysToMedicinalPlantConstituentsTable extends Migration {
 	{
 		Schema::table('medicinal_plant_constituents', function(Blueprint $table)
 		{
-			$table->foreign('constituent_id')->references('id')->on('constituents')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('medicinal_plant_id')->references('id')->on('medicinal_plants')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('constituent_id')->references('id')->on('constituents')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('medicinal_plant_id')->references('id')->on('medicinal_plants')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

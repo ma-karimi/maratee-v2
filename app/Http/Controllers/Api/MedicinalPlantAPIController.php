@@ -30,7 +30,7 @@ class MedicinalPlantAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/medicinalPlants",
+     *      path="/medicinal_plants",
      *      summary="Get a listing of the MedicinalPlants.",
      *      tags={"MedicinalPlant"},
      *      description="Get all MedicinalPlants",
@@ -73,20 +73,13 @@ class MedicinalPlantAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/medicinalPlants",
+     *      path="/medicinal_plants",
      *      summary="Store a newly created MedicinalPlant in storage",
      *      tags={"MedicinalPlant"},
      *      description="Store MedicinalPlant",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of MedicinalPlantMorphology",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="herbarium_id",
+     *          name="plant_application_id",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=true,
@@ -94,13 +87,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="location_id",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="method_id",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=true,
@@ -129,6 +115,13 @@ class MedicinalPlantAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="vast_cultivation",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="cultivated_area",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=false,
@@ -170,7 +163,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
-     *          name="acidity",
+     *          name="phenology_stage",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=false,
@@ -184,7 +177,14 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
-     *          name="soil_id",
+     *          name="used_origin",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="used_type",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=false,
@@ -225,7 +225,7 @@ class MedicinalPlantAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/medicinalPlants/{id}",
+     *      path="/medicinal_plants/{id}",
      *      summary="Display the specified MedicinalPlant",
      *      tags={"MedicinalPlant"},
      *      description="Get MedicinalPlant",
@@ -276,7 +276,7 @@ class MedicinalPlantAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/medicinalPlants/{id}",
+     *      path="/medicinal_plants/{id}",
      *      summary="Update the specified MedicinalPlant in storage",
      *      tags={"MedicinalPlant"},
      *      description="Update MedicinalPlant",
@@ -289,14 +289,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of MedicinalPlantMorphology",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="herbarium_id",
+     *          name="plant_application_id",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=true,
@@ -304,13 +297,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="location_id",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="method_id",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=true,
@@ -339,6 +325,13 @@ class MedicinalPlantAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="vast_cultivation",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="cultivated_area",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=false,
@@ -380,7 +373,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
-     *          name="acidity",
+     *          name="phenology_stage",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=false,
@@ -394,7 +387,14 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
-     *          name="soil_id",
+     *          name="used_origin",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="used_type",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=false,
@@ -443,7 +443,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/medicinalPlants/{id}",
+     *      path="/medicinal_plants/{id}",
      *      summary="Remove the specified MedicinalPlant from storage",
      *      tags={"MedicinalPlant"},
      *      description="Delete MedicinalPlant",

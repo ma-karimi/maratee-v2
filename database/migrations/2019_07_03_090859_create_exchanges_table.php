@@ -15,19 +15,21 @@ class CreateExchangesTable extends Migration {
 		Schema::create('exchanges', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->unsignedInteger('send_herbarium_id');
+			$table->unsignedInteger('send_id');
+			$table->unsignedInteger('receive_id')->nullable();
+			//paleontology, herbarium
+			$table->string('exchange_type');
 			$table->dateTime('send_date')->nullable();
 			$table->dateTime('receive_date')->nullable();
 			$table->json('description')->nullable();
-			$table->unsignedInteger('receive_herbarium_id')->nullable();
 			$table->integer('send_sheet_no')->nullable();
 			$table->integer('send_sample_no')->nullable();
 			$table->integer('receive_sheet_no')->nullable();
 			$table->integer('receive_sample_no')->nullable();
-			$table->string('send_type', 45)->nullable();
-			$table->string('receive_type', 45)->nullable();
-			$table->unsignedInteger('send_paleontology_id')->nullable();
-			$table->unsignedInteger('receive_paleontology_id')->nullable();
+			$table->string('send_type')->nullable()->comment('image, physical, sample');
+			$table->string('receive_type')->nullable()->comment('image, physical, sample');
+			$table->unsignedInteger('send_department_id')->nullable();
+			$table->unsignedInteger('receive_department_id')->nullable();
 
 
             $table->timeStampsTz();

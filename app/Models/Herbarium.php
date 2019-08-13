@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use App\Models\Scope\HerbariumScope;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * @SWG\Definition(
@@ -251,11 +252,16 @@ class Herbarium extends BaseModel
     }
 
     /**
-     * @return HasMany
+     * @return MorphMany
      */
-    public function borrows(): HasMany
+    public function borrows(): MorphMany
     {
-        return $this->hasMany(Borrow::class)->latest();
+        return $this->morphMany(Borrow::class, 'borrowable');
+    }
+
+    public function visits()
+    {
+        return $this->morphMany(Visit::class, 'visitable');
     }
 
     /**
@@ -408,4 +414,5 @@ class Herbarium extends BaseModel
     {
         return $this->belongsTo(General::class, 'general_phytogeography_id');
     }
+
 }

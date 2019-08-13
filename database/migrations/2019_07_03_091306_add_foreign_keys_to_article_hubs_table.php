@@ -14,11 +14,11 @@ class AddForeignKeysToArticleHubsTable extends Migration
     public function up()
     {
         Schema::table('article_hubs', function (Blueprint $table) {
-            $table->foreign('cryo_bank_id')->references('id')->on('cryo_banks')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('action_id')->references('id')->on('actions')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('article_id')->references('id')->on('articles')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('cryo_bank_id')->references('id')->on('cryo_banks')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('action_id')->references('id')->on('actions')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('article_id')->references('id')->on('articles')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
     }
 

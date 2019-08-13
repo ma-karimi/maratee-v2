@@ -5,6 +5,7 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Chromosome::class, function (Faker $faker) {
+    $classes = \App\Models\General::where('type', 'class')->pluck('id')->toArray();
     return [
         'n_no' => $faker->numberBetween(1, 100),
         '2n_no' => $faker->numberBetween(1, 100),
@@ -21,5 +22,6 @@ $factory->define(App\Models\Chromosome::class, function (Faker $faker) {
         'location_id' => function () {
             return factory(App\Models\Location::class)->create()->id;
         },
+        'general_class_id' => $faker->randomElement($classes),
     ];
 });

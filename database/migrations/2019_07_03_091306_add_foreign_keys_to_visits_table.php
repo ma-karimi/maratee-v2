@@ -14,9 +14,7 @@ class AddForeignKeysToVisitsTable extends Migration {
 	{
 		Schema::table('visits', function(Blueprint $table)
 		{
-			$table->foreign('media_id')->references('id')->on('medias')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('paleontology_id')->references('id')->on('paleontologies')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
 		});
 	}
@@ -31,9 +29,7 @@ class AddForeignKeysToVisitsTable extends Migration {
 	{
 		Schema::table('visits', function(Blueprint $table)
 		{
-			$table->dropForeign(['media_id']);
 			$table->dropForeign(['user_id']);
-			$table->dropForeign(['paleontology_id']);
 
 		});
 	}
