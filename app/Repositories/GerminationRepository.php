@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\AssessmentCollection;
+use App\Models\Germination;
 use App\Repositories\BaseRepository;
 
 /**
- * Class AssessmentCollectionRepository
+ * Class GerminationRepository
  * @package App\Repositories
- * @version July 14, 2019, 10:36 am UTC
+ * @version August 13, 2019, 5:33 am UTC
 */
 
-class AssessmentCollectionRepository extends BaseRepository
+class GerminationRepository extends BaseRepository
 {
     /**
      * @var array
@@ -35,6 +35,6 @@ class AssessmentCollectionRepository extends BaseRepository
      **/
     public function model()
     {
-        return AssessmentCollection::class;
+        return Germination::class;
     }
 }
