@@ -107,9 +107,9 @@ Route::resource('articles', 'ArticleAPIController');
 
 Route::resource('article_hubs', 'ArticleHubAPIController');
 
-Route::resource('assessments', 'AssessmentAPIController');
+Route::resource('evaluations', 'EvaluationAPIController');
 
-Route::resource('assessment_collections', 'AssessmentCollectionAPIController');
+Route::resource('evaluation_collections', 'EvaluationCollectionAPIController');
 
 Route::resource('attendances', 'AttendanceAPIController');
 
@@ -206,3 +206,12 @@ Route::resource('tables', 'TableAPIController');
 Route::resource('groups', 'GroupAPIController');
 
 Route::resource('divisions', 'DivisionAPIController');
+
+
+Route::resource('germinations', 'GerminationAPIController');
+
+Route::resource('germinations', 'GerminationAPIController');
+
+Route::resource('taxonomies', 'TaxonomyAPIController');
+
+Route::resource('classifications', 'ClassificationAPIController');

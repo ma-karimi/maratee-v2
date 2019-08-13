@@ -3,58 +3,58 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
-use Tests\Traits\MakeAssessmentTrait;
+use Tests\Traits\MakeevaluationTrait;
 use Tests\ApiTestTrait;
 
-class AssessmentApiTest extends TestCase
+class evaluationApiTest extends TestCase
 {
-    use MakeAssessmentTrait, ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
+    use MakeevaluationTrait, ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
 
     /**
      * @test
      */
-    public function test_create_assessment()
+    public function test_create_evaluation()
     {
-        $assessment = $this->fakeAssessmentData();
-        $this->response = $this->json('POST', '/api/assessments', $assessment);
+        $evaluation = $this->fakeevaluationData();
+        $this->response = $this->json('POST', '/api/evaluations', $evaluation);
 
-        $this->assertApiResponse($assessment);
+        $this->assertApiResponse($evaluation);
     }
 
     /**
      * @test
      */
-    public function test_read_assessment()
+    public function test_read_evaluation()
     {
-        $assessment = $this->makeAssessment();
-        $this->response = $this->json('GET', '/api/assessments/'.$assessment->id);
+        $evaluation = $this->makeevaluation();
+        $this->response = $this->json('GET', '/api/evaluations/'.$evaluation->id);
 
-        $this->assertApiResponse($assessment->toArray());
+        $this->assertApiResponse($evaluation->toArray());
     }
 
     /**
      * @test
      */
-    public function test_update_assessment()
+    public function test_update_evaluation()
     {
-        $assessment = $this->makeAssessment();
-        $editedAssessment = $this->fakeAssessmentData();
+        $evaluation = $this->makeevaluation();
+        $editedevaluation = $this->fakeevaluationData();
 
-        $this->response = $this->json('PUT', '/api/assessments/'.$assessment->id, $editedAssessment);
+        $this->response = $this->json('PUT', '/api/evaluations/'.$evaluation->id, $editedevaluation);
 
-        $this->assertApiResponse($editedAssessment);
+        $this->assertApiResponse($editedevaluation);
     }
 
     /**
      * @test
      */
-    public function test_delete_assessment()
+    public function test_delete_evaluation()
     {
-        $assessment = $this->makeAssessment();
-        $this->response = $this->json('DELETE', '/api/assessments/'.$assessment->id);
+        $evaluation = $this->makeevaluation();
+        $this->response = $this->json('DELETE', '/api/evaluations/'.$evaluation->id);
 
         $this->assertApiSuccess();
-        $this->response = $this->json('GET', '/api/assessments/'.$assessment->id);
+        $this->response = $this->json('GET', '/api/evaluations/'.$evaluation->id);
 
         $this->response->assertStatus(404);
     }

@@ -99,6 +99,18 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
+ *          property="habitat_description",
+ *          description="description",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *      ),
+ *      @SWG\Property(
+ *          property="ecology_description",
+ *          description="description",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *      ),
+ *      @SWG\Property(
  *          property="is_flowering",
  *          description="is_flowering",
  *          type="integer",
@@ -128,8 +140,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="flowering",
- *          description="flowering",
+ *          property="flowering_time",
+ *          description="flowering_time",
  *          type="array",
  *     @SWG\Items(type="string"),
  *      ),
@@ -160,7 +172,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 class Herbarium extends BaseModel
 {
     use HerbariumScope;
-    public static $linguistically = ['flowering' => false];
+    public static $linguistically = ['flowering' => false,'habitat_description' => false,'ecology_description' => false,];
     public static $rules = [
         'location_id' => 'required|exists:locations,id',
         'protection_id' => 'exists:protections,id',
@@ -179,6 +191,9 @@ class Herbarium extends BaseModel
         'type_description' => 'string',
         'general_type_id' => 'exists:generals,id',
         'general_group_id' => 'exists:generals,id',
+        'general_ecology_id' => 'exists:generals,id',
+        'general_habitat_id' => 'exists:generals,id',
+        'general_origin_id' => 'exists:generals,id',
         'number' => 'integer',
 
     ];
@@ -194,7 +209,7 @@ class Herbarium extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'flowering', 'herbarium_tip_location', 'is_flowering', 'location_id', 'name', 'number', 'organization_description', 'department_id','division_id', 'general_phenology_id', 'physical_tip_qt', 'general_phytogeography_id', 'general_group_id', 'general_type_id', 'protection_id', 'samples_no', 'sheets_no', 'plant_id', 'tip_qt', 'tip_type', 'type_description', 'updated_at'];
+    protected $guarded=['id'];
 
 
     /**
@@ -207,6 +222,8 @@ class Herbarium extends BaseModel
         'description' => 'json',
         'flowering' => 'json',
         'organization_description' => 'json',
+        'habitat_description' => 'json',
+        'ecology_description' => 'json',
     ];
 
 //    protected $with = ['actionHubs', 'borrows', 'attendances', 'chromosomes', 'cryoBanks', 'sendHerbariumExchanges', 'RecieveHerbariumExchanges','sendHerbariumAppendixes', 'RecieveHerbariumAppendixes', 'seeds', 'medias', 'medicals', 'medicinalPlants', 'organization', 'location', 'protection', 'generalType', 'generalPhenology', 'plant', 'generalGroup', 'generalPhytogeography'];
@@ -356,9 +373,19 @@ class Herbarium extends BaseModel
         return $this->belongsTo(General::class, 'general_type_id');
     }
 
-    public function generalPhenology()
+    public function generalEcology()
     {
-        return $this->belongsTo(General::class, 'general_phenology_id');
+        return $this->belongsTo(General::class, 'general_ecology_id');
+    }
+
+    public function generalHabitat()
+    {
+        return $this->belongsTo(General::class, 'general_habitat_id');
+    }
+
+    public function generalOrigin()
+    {
+        return $this->belongsTo(General::class, 'general_origin_id');
     }
 
 

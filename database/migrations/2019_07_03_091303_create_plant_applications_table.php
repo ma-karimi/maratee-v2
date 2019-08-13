@@ -14,7 +14,7 @@ class CreatePlantApplicationsTable extends Migration {
 	{
 		Schema::create('plant_applications', function(Blueprint $table)
 		{
-			$table->increments('id');
+		    $table->increments('id');
 			$table->unsignedInteger('herbarium_id');
 			$table->unsignedInteger('general_part_id')->nullable();
 			$table->unsignedInteger('general_application_id')->nullable();

@@ -121,6 +121,13 @@ class OrganizationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Organization")
      *      ),
      *      @SWG\Parameter(
+     *          name="fax",
+     *          in="body",
+     *          description="Organization that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Organization")
+     *      ),
+     *      @SWG\Parameter(
      *          name="website",
      *          in="body",
      *          description="Organization that should be stored",
@@ -269,6 +276,13 @@ class OrganizationAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="email",
+     *          in="body",
+     *          description="Organization that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Organization")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="fax",
      *          in="body",
      *          description="Organization that should be stored",
      *          required=false,

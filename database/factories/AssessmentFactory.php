@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\Assessment::class, function (Faker $faker) {
+$factory->define(App\Models\evaluation::class, function (Faker $faker) {
     return [
         'date' => $faker->dateTimeBetween(),
         'seed_qt' => $faker->numberBetween(1, 100),

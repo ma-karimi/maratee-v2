@@ -6,9 +6,11 @@ use App\Models\Contracts\BaseModel;
 
 /**
  * @SWG\Definition(
- *            definition="Assessment",
+ *            definition="evaluation",
  *            required={"weight_k"},
  * 			@SWG\Property(property="date", type="string"),
+ * 			@SWG\Property(property="accession", type="string"),
+ * 			@SWG\Property(property="regeneration_evaluation", type="string"),
  * 			@SWG\Property(property="seed_qt", type="integer"),
  * 			@SWG\Property(property="weight_k", type="integer"),
  * 			@SWG\Property(property="purity", type="integer"),
@@ -38,7 +40,7 @@ use App\Models\Contracts\BaseModel;
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
-class Assessment extends BaseModel
+class Evaluation extends BaseModel
 {
 
     public static $linguistically = ['treatment' => true, 'description' => false];
@@ -49,14 +51,14 @@ class Assessment extends BaseModel
      *
      * @var string
      */
-    protected $table = 'assessments';
+    protected $table = 'evaluations';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['abnormality', 'created_at', 'date', 'deleted_at', 'description', 'dropped', 'dry_material_rate', 'dry_unit_weight', 'hard_seed', 'hollow', 'losses', 'purity', 'repeat', 'root_length', 'root_stem_rate', 'seed_length', 'seed_qt', 'seed_width', 'seedling_length', 'sprout', 'sprout_index', 'sprout_rate', 'stem_length', 'treatment', 'updated_at', 'vigor', 'vigor_index', 'weight_k', 'wet_uint_weight'];
+    protected $fillable = ['regeneration_evaluation','accession','abnormality', 'created_at', 'date', 'deleted_at', 'description', 'dropped', 'dry_material_rate', 'dry_unit_weight', 'hard_seed', 'hollow', 'losses', 'purity', 'repeat', 'root_length', 'root_stem_rate', 'seed_length', 'seed_qt', 'seed_width', 'seedling_length', 'sprout', 'sprout_index', 'sprout_rate', 'stem_length', 'treatment', 'updated_at', 'vigor', 'vigor_index', 'weight_k', 'wet_uint_weight'];
 
 
     /**
@@ -74,8 +76,8 @@ class Assessment extends BaseModel
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
 
 
-    public function assessmentCollections()
+    public function evaluationCollections()
     {
-        return $this->hasMany(AssessmentCollection::class, 'assessment_id')->latest();
+        return $this->hasMany(evaluationCollection::class, 'evaluation_id')->latest();
     }
 }

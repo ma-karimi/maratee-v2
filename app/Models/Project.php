@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @SWG\Definition(
@@ -15,8 +16,26 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="name",
- *          description="name",
+ *          property="project_leader_id",
+ *          description="project_leader_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="research_leader_id",
+ *          description="research_leader_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="title",
+ *          description="title",
+ *          type="array",
+	 *     @SWG\Items(type="string")
+ *      ),
+ *      @SWG\Property(
+ *          property="research_title",
+ *          description="research_title",
  *          type="array",
 	 *     @SWG\Items(type="string")
  *      ),
@@ -39,13 +58,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="approved_id",
- *          description="approved_id",
+ *          property="project_no",
+ *          description="project_no",
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="registered_id",
- *          description="registered_id",
+ *          property="research_no",
+ *          description="research_no",
  *          type="string"
  *      ),
  *       @SWG\Property(
@@ -71,11 +90,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Project extends BaseModel
 {
-    public static $linguistically=['name'=>true,'plan_name'=>true,'plan_description'=>false,'plan_number'=>true];
+    public static $linguistically=['title'=>true,'plan_name'=>true,'research_title'=>false];
     public static $rules=[
         'approved_id' => 'string',
         'registered_id' => 'string',
         'plan_id' => 'integer',
+        'project_leader_id' => 'integer',
+        'research_leader_id' => 'integer',
     ];
 
     /**
@@ -90,7 +111,7 @@ class Project extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['approved_id', 'created_at', 'deleted_at', 'name', 'plan_description', 'plan_id', 'plan_name', 'plan_number', 'registered_id', 'updated_at'];
+    protected $guarded=['id'];
 
 
     /**
@@ -99,10 +120,9 @@ class Project extends BaseModel
      * @var array
      */
     protected $casts = [
-        'name' => 'json',
+        'title' => 'json',
         'plan_name' => 'json',
-        'plan_description' => 'json',
-        'plan_number' => 'json',
+        'research_title' => 'json'
     ];
 
 
@@ -118,9 +138,9 @@ class Project extends BaseModel
     /**
      * @return HasMany
      */
-    public function assessmentCollections(): HasMany
+    public function evaluationCollections(): HasMany
     {
-        return $this->hasMany(AssessmentCollection::class, 'project_id')->latest();
+        return $this->hasMany(evaluationCollection::class, 'project_id')->latest();
     }
 
     /**
@@ -129,5 +149,19 @@ class Project extends BaseModel
     public function seedHubs(): HasMany
     {
         return $this->hasMany(SeedHub::class)->latest();
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function projectLeader(): BelongsTo
+    {
+        return $this->belongsTo(User::class,'project_leader_id');
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function researchLeader(): BelongsTo
+    {
+        return $this->belongsTo(User::class,'research_leader_id');
     }
 }

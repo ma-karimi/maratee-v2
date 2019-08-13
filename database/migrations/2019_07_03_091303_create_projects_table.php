@@ -15,14 +15,11 @@ class CreateProjectsTable extends Migration {
 		Schema::create('projects', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->json('name');
-			$table->json('plan_name');
-			$table->json('plan_description')->nullable();
-			$table->json('plan_number');
-			$table->string('approved_id', 45)->nullable();
-			$table->string('registered_id', 45)->nullable();
+			$table->json('title');
+			$table->string('project_no', 128)->nullable();
+			$table->string('research_no', 128)->nullable();
 			$table->unsignedInteger('plan_id')->nullable();
-
+			$table->json('research_title')->nullable();
             $table->timeStampsTz();
             $table->dateTimeTz('deleted_at')->nullable();
 		});

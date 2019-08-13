@@ -55,9 +55,9 @@ class Department extends BaseModel
     /**
      * @return HasMany
      */
-    public function assessmentCollections(): HasMany
+    public function evaluationCollections(): HasMany
     {
-        return $this->hasMany(AssessmentCollection::class)->latest();
+        return $this->hasMany(evaluationCollection::class)->latest();
     }
 
     /**

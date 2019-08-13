@@ -8,10 +8,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @SWG\Definition(
  *            definition="Collection",
- *            required={"name"},
+ *            required={"name","type"},
  * 			@SWG\Property(property="id", type="integer"),
  * 			@SWG\Property(property="name", type="array",
-	 *     @SWG\Items(type="string")),
+ *          @SWG\Items(type="string")),
+ * 			@SWG\Property(property="type", type="string"),
+ * 			@SWG\Property(property="description", type="array",
+ *          @SWG\Items(type="string")),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
@@ -19,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Collection extends BaseModel
 {
 
-    public static $linguistically=['name'=>true];
+    public static $linguistically=['name'=>true,'description'=>false];
     /**
      * The database table used by the model.
      *
@@ -32,7 +35,7 @@ class Collection extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'name', 'updated_at'];
+    protected $fillable = ['created_at', 'deleted_at', 'name','type','description','updated_at'];
 
 
     /**
@@ -40,14 +43,14 @@ class Collection extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['name' => 'json'];
+    protected $casts = ['name' => 'json','description' => 'json'];
 
     /**
      * @return HasMany
      */
-    public function assessmentCollections(): HasMany
+    public function evaluationCollections(): HasMany
     {
-        return $this->hasMany(AssessmentCollection::class)->latest();
+        return $this->hasMany(EvaluationCollection::class)->latest();
     }
 
     /**

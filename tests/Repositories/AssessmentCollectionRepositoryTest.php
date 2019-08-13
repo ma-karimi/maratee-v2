@@ -1,73 +1,73 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\AssessmentCollection;
-use App\Repositories\AssessmentCollectionRepository;
+use App\Models\evaluationCollection;
+use App\Repositories\evaluationCollectionRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
-use Tests\Traits\MakeAssessmentCollectionTrait;
+use Tests\Traits\MakeevaluationCollectionTrait;
 use Tests\ApiTestTrait;
 
-class AssessmentCollectionRepositoryTest extends TestCase
+class evaluationCollectionRepositoryTest extends TestCase
 {
-    use MakeAssessmentCollectionTrait, ApiTestTrait, DatabaseTransactions;
+    use MakeevaluationCollectionTrait, ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var AssessmentCollectionRepository
+     * @var evaluationCollectionRepository
      */
-    protected $assessmentCollectionRepo;
+    protected $evaluationCollectionRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->assessmentCollectionRepo = \App::make(AssessmentCollectionRepository::class);
+        $this->evaluationCollectionRepo = \App::make(evaluationCollectionRepository::class);
     }
 
     /**
      * @test create
      */
-    public function test_create_assessment_collection()
+    public function test_create_evaluation_collection()
     {
-        $assessmentCollection = $this->fakeAssessmentCollectionData();
-        $createdAssessmentCollection = $this->assessmentCollectionRepo->create($assessmentCollection);
-        $createdAssessmentCollection = $createdAssessmentCollection->toArray();
-        $this->assertArrayHasKey('id', $createdAssessmentCollection);
-        $this->assertNotNull($createdAssessmentCollection['id'], 'Created AssessmentCollection must have id specified');
-        $this->assertNotNull(AssessmentCollection::find($createdAssessmentCollection['id']), 'AssessmentCollection with given id must be in DB');
-        $this->assertModelData($assessmentCollection, $createdAssessmentCollection);
+        $evaluationCollection = $this->fakeevaluationCollectionData();
+        $createdevaluationCollection = $this->evaluationCollectionRepo->create($evaluationCollection);
+        $createdevaluationCollection = $createdevaluationCollection->toArray();
+        $this->assertArrayHasKey('id', $createdevaluationCollection);
+        $this->assertNotNull($createdevaluationCollection['id'], 'Created evaluationCollection must have id specified');
+        $this->assertNotNull(evaluationCollection::find($createdevaluationCollection['id']), 'evaluationCollection with given id must be in DB');
+        $this->assertModelData($evaluationCollection, $createdevaluationCollection);
     }
 
     /**
      * @test read
      */
-    public function test_read_assessment_collection()
+    public function test_read_evaluation_collection()
     {
-        $assessmentCollection = $this->makeAssessmentCollection();
-        $dbAssessmentCollection = $this->assessmentCollectionRepo->find($assessmentCollection->id);
-        $dbAssessmentCollection = $dbAssessmentCollection->toArray();
-        $this->assertModelData($assessmentCollection->toArray(), $dbAssessmentCollection);
+        $evaluationCollection = $this->makeevaluationCollection();
+        $dbevaluationCollection = $this->evaluationCollectionRepo->find($evaluationCollection->id);
+        $dbevaluationCollection = $dbevaluationCollection->toArray();
+        $this->assertModelData($evaluationCollection->toArray(), $dbevaluationCollection);
     }
 
     /**
      * @test update
      */
-    public function test_update_assessment_collection()
+    public function test_update_evaluation_collection()
     {
-        $assessmentCollection = $this->makeAssessmentCollection();
-        $fakeAssessmentCollection = $this->fakeAssessmentCollectionData();
-        $updatedAssessmentCollection = $this->assessmentCollectionRepo->update($fakeAssessmentCollection, $assessmentCollection->id);
-        $this->assertModelData($fakeAssessmentCollection, $updatedAssessmentCollection->toArray());
-        $dbAssessmentCollection = $this->assessmentCollectionRepo->find($assessmentCollection->id);
-        $this->assertModelData($fakeAssessmentCollection, $dbAssessmentCollection->toArray());
+        $evaluationCollection = $this->makeevaluationCollection();
+        $fakeevaluationCollection = $this->fakeevaluationCollectionData();
+        $updatedevaluationCollection = $this->evaluationCollectionRepo->update($fakeevaluationCollection, $evaluationCollection->id);
+        $this->assertModelData($fakeevaluationCollection, $updatedevaluationCollection->toArray());
+        $dbevaluationCollection = $this->evaluationCollectionRepo->find($evaluationCollection->id);
+        $this->assertModelData($fakeevaluationCollection, $dbevaluationCollection->toArray());
     }
 
     /**
      * @test delete
      */
-    public function test_delete_assessment_collection()
+    public function test_delete_evaluation_collection()
     {
-        $assessmentCollection = $this->makeAssessmentCollection();
-        $resp = $this->assessmentCollectionRepo->delete($assessmentCollection->id);
+        $evaluationCollection = $this->makeevaluationCollection();
+        $resp = $this->evaluationCollectionRepo->delete($evaluationCollection->id);
         $this->assertTrue($resp);
-        $this->assertNull(AssessmentCollection::find($assessmentCollection->id), 'AssessmentCollection should not exist in DB');
+        $this->assertNull(evaluationCollection::find($evaluationCollection->id), 'evaluationCollection should not exist in DB');
     }
 }

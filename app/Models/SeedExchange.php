@@ -21,33 +21,39 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="department_id",
+ *          description="department_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="project_id",
+ *          description="project_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
  *          property="collection_id",
  *          description="collection_id",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="type",
- *          description="type",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="weight",
+ *          property="seed_weight",
  *          description="weight",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="date",
- *          description="date",
+ *          property="delivery_date",
+ *          description="delivery_date",
  *          type="string",
  *          format="date"
  *      ),
  *      @SWG\Property(
- *          property="approval_no",
- *          description="approval_no",
- *          type="array",
-	 *     @SWG\Items(type="string")
+ *          property="request_no",
+ *          description="request_no",
+ *          type="string"
  *      ),
  *      @SWG\Property(
  *          property="saved_type",
@@ -60,6 +66,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          description="description",
  *          type="array",
 	 *     @SWG\Items(type="string")
+ *      ),
+ *      @SWG\Property(
+ *          property="accession",
+ *          description="accession",
+ *          type="string",
+ *      ),
+ *      @SWG\Property(
+ *          property="regeneration_evaluation",
+ *          description="regeneration_evaluation",
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -82,9 +98,10 @@ class SeedExchange extends BaseModel
     public static $rules=[
         'seed_id' => 'exists:seeds,id',
         'collection_id' => 'required|exists:collections,id',
-        'type' => 'string',
+        'project_id' => 'exists:projects,id',
+        'department_id' => 'exists:departments,id',
         'weight' => 'integer',
-        'date' => 'date',
+        'delivery_date' => 'date',
     ];
     /**
      * The database table used by the model.
@@ -98,7 +115,7 @@ class SeedExchange extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['approval_no', 'collection_id', 'created_at', 'date', 'deleted_at', 'description', 'saved_type', 'seed_id', 'type', 'updated_at', 'weight'];
+    protected $guarded=['id'];
 
 
     /**
@@ -117,7 +134,7 @@ class SeedExchange extends BaseModel
      *
      * @var array
      */
-    protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
+    protected $dates = ['created_at', 'delivery_date', 'deleted_at', 'updated_at'];
 
     /**
      * @return BelongsTo
@@ -125,6 +142,20 @@ class SeedExchange extends BaseModel
     public function collection()
     {
         return $this->belongsTo('App\Models\Collection');
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 
     /**

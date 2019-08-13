@@ -168,6 +168,12 @@ class CryoBankAPIController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
+     *      @SWG\Parameter(
+     *          name="class_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -352,6 +358,12 @@ class CryoBankAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="cell_no",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="class_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/CryoBank")

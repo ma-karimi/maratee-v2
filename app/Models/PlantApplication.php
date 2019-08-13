@@ -14,16 +14,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          type="integer",
  *      ),
  *      @SWG\Property(
- *          property="habitat_description",
- *          type="array",
- *          @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="ecology_description",
- *          type="array",
- *          @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
  *          property="herbarium_id",
  *          description="herbarium_id",
  *          type="integer",
@@ -71,8 +61,43 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="department_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
  *          property="presence",
  *          description="presence",
+ *          type="array",
+ *     @SWG\Items(type="string")
+ *      ),
+ *      @SWG\Property(
+ *          property="part_description",
+ *          description="part_description",
+ *          type="array",
+ *     @SWG\Items(type="string")
+ *      ),
+ *      @SWG\Property(
+ *          property="usage_description",
+ *          description="usage_description",
+ *          type="array",
+ *     @SWG\Items(type="string")
+ *      ),
+ *      @SWG\Property(
+ *          property="industry_description",
+ *          description="industry_description",
+ *          type="array",
+ *     @SWG\Items(type="string")
+ *      ),
+ *      @SWG\Property(
+ *          property="application_description",
+ *          description="application_description",
+ *          type="array",
+ *     @SWG\Items(type="string")
+ *      ),
+ *      @SWG\Property(
+ *          property="potential",
+ *          description="potential",
  *          type="array",
  *     @SWG\Items(type="string")
  *      ),
@@ -93,7 +118,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class PlantApplication extends BaseModel
 {
 
-    public static $linguistically = ['presence' => false];
+    public static $linguistically = ['presence' => false,'part_description' => false,'usage_description' => false,'industry_description' => false,'application_description' => false,'potential' => false,];
     public static $rules = [
         'herbarium_id' => 'required|exists:herbariums,id',
         'general_part_id' => 'required|exists:generals,id',
@@ -104,6 +129,12 @@ class PlantApplication extends BaseModel
         'general_ecology_id' => 'required|exists:generals,id',
         'general_habitat_id' => 'required|exists:generals,id',
         'general_origin_id' => 'required|exists:generals,id',
+        'department_id' => 'required|exists:departments,id',
+        'part_description' => 'array',
+        'usage_description' => 'array',
+        'industry_description' => 'array',
+        'application_description' => 'array',
+        'potential' => 'array',
     ];
     /**
      * The database table used by the model.
@@ -117,7 +148,7 @@ class PlantApplication extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['general_application_id', 'created_at', 'deleted_at', 'herbarium_id', 'general_growth_id', 'general_industry_id', 'general_part_id', 'general_usage_type_id', 'general_ecology_id', 'general_habitat_id', 'general_origin_id', 'presence', 'updated_at', 'habitat_description', 'ecology_description'];
+    protected $guarded=['id'];
 
 
     /**
@@ -127,8 +158,11 @@ class PlantApplication extends BaseModel
      */
     protected $casts = [
         'presence' => 'json',
-        'habitat_description'=>'json',
-        'ecology_description'=>'json'
+        'potential' => 'json',
+        'application_description' => 'json',
+        'industry_description' => 'json',
+        'usage_description' => 'json',
+        'part_description' => 'json',
     ];
 
     /**
@@ -201,6 +235,14 @@ class PlantApplication extends BaseModel
     public function generalOrigin(): BelongsTo
     {
         return $this->belongsTo(General::class, 'general_origin_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function department(): BelongsTo
+    {
+        return $this->belongsTo(Department::class, 'department_id');
     }
 
 }

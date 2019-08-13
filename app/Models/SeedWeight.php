@@ -6,7 +6,7 @@ use App\Models\Contracts\BaseModel;
 /**
  * @SWG\Definition(
  *      definition="SeedWeight",
- *      required={"total","seed_technology_id"},
+ *      required={"total_seed_weight"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -14,20 +14,20 @@ use App\Models\Contracts\BaseModel;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="seed_technology_id",
- *          description="soil_technology_id",
+ *          property="seed_id",
+ *          description="seed_id",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="total",
- *          description="total",
+ *          property="total_seed_weight",
+ *          description="total_seed_weight",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="active",
- *          description="active",
+ *          property="total_fruit_weight",
+ *          description="total_fruit_weight",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -38,38 +38,42 @@ use App\Models\Contracts\BaseModel;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="support",
- *          description="support",
+ *          property="total_fruit_weight_revival",
+ *          description="total_fruit_weight_revival",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="base_revival",
- *          description="base_revival",
+ *          property="accession",
+ *          description="accession",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="regeneration_evaluation",
+ *          description="regeneration_evaluation",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="fruit_mean_seeds_no",
+ *          description="fruit_mean_seeds_no",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="active_revival",
- *          description="active_revival",
+ *          property="thousand_fruit_weight",
+ *          description="fruit_mean_seeds_no",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="support_revival",
- *          description="support_revival",
+ *          property="thousand_seed_weight",
+ *          description="fruit_mean_seeds_no",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="revival_code",
- *          description="revival_code",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="description",
- *          description="description",
+ *          property="other_detail",
+ *          description="other_detail",
  *          type="array",
 	 *     @SWG\Items(type="string"),
  *          format="array"
@@ -92,17 +96,17 @@ use App\Models\Contracts\BaseModel;
 class SeedWeight extends BaseModel
 {
 
-    public static $linguistically=['description'=>false];
+    public static $linguistically=['other_detail'=>false];
     public static $rules=[
-        'seed_technology_id' => 'required|exists:seed_technologies,id',
-        'total' => 'required|integer',
-        'active' => 'integer',
-        'base' => 'integer',
-        'support' => 'integer',
-        'base_revival' => 'integer',
-        'active_revival' => 'integer',
-        'support_revival' => 'integer',
-        'revival_code' => 'string',
+        'seed_id' => 'exists:seeds,id',
+        'total_seed_weight' => 'required|integer',
+        'total_fruit_weight' => 'integer',
+        'collected_seeds_no' => 'integer',
+        'total_fruit_weight_revival' => 'integer',
+        'fruit_mean_seeds_no' => 'string',
+        'thousand_seed_weight' => 'string',
+        'accession' => 'string',
+        'regeneration_evaluation' => 'string',
     ];
 
     /**
@@ -117,7 +121,7 @@ class SeedWeight extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['active', 'active_revival', 'base', 'base_revival', 'created_at', 'deleted_at', 'description', 'revival_code', 'seed_technology_id', 'support', 'support_revival', 'total', 'updated_at'];
+    protected $guarded = ['id'];
 
 
     /**
@@ -126,13 +130,13 @@ class SeedWeight extends BaseModel
      * @var array
      */
     protected $casts = [
-        'description' => 'json'
+        'other_detail' => 'json'
     ];
 
 
-    public function seedTechnology()
+    public function Seed()
     {
-        return $this->belongsTo(SeedTechnology::class, 'seed_technology_id');
+        return $this->belongsTo(Seed::class, 'seed_id');
     }
 
 }

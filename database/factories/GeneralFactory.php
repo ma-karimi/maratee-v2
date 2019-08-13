@@ -12,6 +12,5 @@ $factory->define(App\Models\General::class, function (Faker $faker) {
         'name' => make_json($faker->name),
         'description' => make_json($faker->text),
         'type' => $faker->randomElement(['phytogeography, phenology, plant_type','species, sub_species, variety, family, genus, class, group, order, flowering, sperm, cotyledon','growth, usage, part, industry, application, habitat, ecology, origin']),
-        'parent_id' =>  ($parent % 2) ? $parent : null,
     ];
 });

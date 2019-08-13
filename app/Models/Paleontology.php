@@ -18,6 +18,18 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="general_class_id",
+ *          description="general_class_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="general_order_id",
+ *          description="general_order_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
  *          property="catalog_no",
  *          description="catalog_no",
  *          type="integer",
@@ -192,7 +204,9 @@ class Paleontology extends BaseModel
         'geology_age_id' => 'required|integer',
         'plant_id' => 'required|integer',
         'last_update' => 'date',
-        'location_no' => 'integer'
+        'location_no' => 'integer',
+        'general_class_id' => 'integer',
+        'general_order_id' => 'integer',
     ];
     /**
      * The database table used by the model.
@@ -206,7 +220,7 @@ class Paleontology extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['plant_id', 'access', 'additional_info', 'barcode_no', 'catalog_no', 'closet', 'collection_name', 'color', 'common_name', 'created_at', 'deleted_at', 'drawer', 'element', 'excavation', 'field_no', 'geology_age_id', 'infraspecific', 'last_update', 'location_no', 'move_status', 'pieces', 'preservation', 'salon', 'specimen_no', 'type_status', 'update_frequency', 'description', 'updated_at'];
+    protected $guarded=['id'];
 
 
     /**
@@ -258,6 +272,20 @@ class Paleontology extends BaseModel
     public function plant(): BelongsTo
     {
         return $this->belongsTo(Plant::class);
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function generalClass(): BelongsTo
+    {
+        return $this->belongsTo(General::class,'general_class_id');
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function generalOrder(): BelongsTo
+    {
+        return $this->belongsTo(General::class,'general_order_id');
     }
 
     /**
