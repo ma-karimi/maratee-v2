@@ -114,7 +114,7 @@ class SeedAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="sample_code",
+     *          name="accession_code",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
@@ -142,7 +142,7 @@ class SeedAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="slope_direction",
+     *          name="slope_action",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
@@ -170,7 +170,7 @@ class SeedAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="density",
+     *          name="soil_texture",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
@@ -212,14 +212,14 @@ class SeedAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="extent_population",
+     *          name="community_type",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="vegetation",
+     *          name="associated_species",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
@@ -233,28 +233,28 @@ class SeedAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="land_reforming",
+     *          name="area_sampled",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="sample_type",
+     *          name="specimen_type",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="flowering",
+     *          name="date_flowering",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="pollination",
+     *          name="pollination_type",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
@@ -275,42 +275,35 @@ class SeedAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="seeding_bush_qt",
+     *          name="seed_collected_from",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="collecting_type",
+     *          name="date_harvesting",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="seeding_month",
+     *          name="life_span",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="reproduction",
+     *          name="growth_form",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="vegetative_form",
-     *          in="body",
-     *          description="Seed that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Seed")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="height",
+     *          name="plant_height",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
@@ -331,35 +324,35 @@ class SeedAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="send_date",
+     *          name="plant_application_id",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="collected_qt",
+     *          name="plants_sampled_no",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="must_collected_qt",
+     *          name="plants_found_no",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="critical_extensions_qt",
+     *          name="seed_advise",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="notes",
+     *          name="other_detail",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
@@ -499,7 +492,7 @@ class SeedAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="sample_code",
+     *          name="accession_code",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
@@ -527,7 +520,7 @@ class SeedAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="slope_direction",
+     *          name="slope_action",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
@@ -555,7 +548,7 @@ class SeedAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="density",
+     *          name="soil_texture",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
@@ -597,14 +590,14 @@ class SeedAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="extent_population",
+     *          name="community_type",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="vegetation",
+     *          name="associated_species",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
@@ -618,28 +611,28 @@ class SeedAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="land_reforming",
+     *          name="area_sampled",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="sample_type",
+     *          name="specimen_type",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="flowering",
+     *          name="date_flowering",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="pollination",
+     *          name="pollination_type",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
@@ -660,42 +653,35 @@ class SeedAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="seeding_bush_qt",
+     *          name="seed_collected_from",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="collecting_type",
+     *          name="date_harvesting",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="seeding_month",
+     *          name="life_span",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="reproduction",
+     *          name="growth_form",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="vegetative_form",
-     *          in="body",
-     *          description="Seed that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Seed")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="height",
+     *          name="plant_height",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,
@@ -716,35 +702,7 @@ class SeedAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="send_date",
-     *          in="body",
-     *          description="Seed that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Seed")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="collected_qt",
-     *          in="body",
-     *          description="Seed that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Seed")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="must_collected_qt",
-     *          in="body",
-     *          description="Seed that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Seed")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="critical_extensions_qt",
-     *          in="body",
-     *          description="Seed that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Seed")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="notes",
+     *          name="other_detail",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,

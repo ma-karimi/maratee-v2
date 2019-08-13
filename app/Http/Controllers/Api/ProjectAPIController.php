@@ -79,42 +79,49 @@ class ProjectAPIController extends AppBaseController
      *      description="Store Project",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="name",
+     *          name="title",
      *          in="body",
      *          description="Project that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Project")
      *      ),
      *      @SWG\Parameter(
-     *          name="plan_name",
-     *          in="body",
-     *          description="Project that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Project")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plan_number",
-     *          in="body",
-     *          description="Project that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Project")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plan_description",
+     *          name="project_leader_id",
      *          in="body",
      *          description="Project that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Project")
      *      ),
      *      @SWG\Parameter(
-     *          name="approved_id",
+     *          name="research_leader_id",
      *          in="body",
      *          description="Project that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Project")
      *      ),
      *      @SWG\Parameter(
-     *          name="registered_id",
+     *          name="research_title",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_no",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="research_no",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_leader",
      *          in="body",
      *          description="Project that should be stored",
      *          required=false,
@@ -122,6 +129,13 @@ class ProjectAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="plan_id",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="research_leader",
      *          in="body",
      *          description="Project that should be stored",
      *          required=false,
@@ -226,35 +240,42 @@ class ProjectAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="plan_name",
+     *          name="title",
      *          in="body",
      *          description="Project that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Project")
      *      ),
      *      @SWG\Parameter(
-     *          name="plan_number",
-     *          in="body",
-     *          description="Project that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Project")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plan_description",
+     *          name="project_leader_id",
      *          in="body",
      *          description="Project that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Project")
      *      ),
      *      @SWG\Parameter(
-     *          name="approved_id",
+     *          name="research_leader_id",
      *          in="body",
      *          description="Project that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Project")
      *      ),
      *      @SWG\Parameter(
-     *          name="registered_id",
+     *          name="research_title",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_no",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="research_no",
      *          in="body",
      *          description="Project that should be stored",
      *          required=false,
@@ -262,6 +283,20 @@ class ProjectAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="plan_id",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_leader",
+     *          in="body",
+     *          description="Project that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Project")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="research_leader",
      *          in="body",
      *          description="Project that should be stored",
      *          required=false,

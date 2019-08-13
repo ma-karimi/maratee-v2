@@ -93,13 +93,6 @@ class GeneralAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/General")
      *      ),
      *      @SWG\Parameter(
-     *          name="parent_id",
-     *          in="body",
-     *          description="General that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/General")
-     *      ),
-     *      @SWG\Parameter(
      *          name="description",
      *          in="body",
      *          description="General that should be stored",
@@ -213,13 +206,6 @@ class GeneralAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="type",
-     *          in="body",
-     *          description="General that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/General")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="parent_id",
      *          in="body",
      *          description="General that should be stored",
      *          required=true,

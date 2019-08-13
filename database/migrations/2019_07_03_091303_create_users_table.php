@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration {
 			$table->string('email');
 			$table->string('password');
 			$table->integer('work_experience')->nullable();
+			$table->tinyInteger('status')->nullable();
             $table->timeStampsTz();
             $table->dateTimeTz('deleted_at')->nullable();
 		});

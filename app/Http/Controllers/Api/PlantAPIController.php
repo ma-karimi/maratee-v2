@@ -123,6 +123,13 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
+     *          name="exclusivity",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
      *          name="domestic_name",
      *          in="body",
      *          description="Plant that should be stored",
@@ -208,6 +215,20 @@ class PlantAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="location_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="taxonomies_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="classification_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
@@ -432,6 +453,27 @@ class PlantAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="location_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="taxonomies_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="classification_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="exclusivity",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,

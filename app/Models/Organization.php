@@ -47,6 +47,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          type="string"
  *      ),
  *      @SWG\Property(
+ *          property="fax",
+ *          description="fax",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
  *          property="email",
  *          description="email",
  *          type="string"
@@ -93,7 +98,7 @@ class Organization extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'domestic_code', 'email', 'international_code', 'is_herbarium', 'name', 'phone', 'updated_at', 'website'];
+    protected $fillable = ['created_at', 'deleted_at','fax','description', 'domestic_code', 'email', 'international_code', 'is_herbarium', 'name', 'phone', 'updated_at', 'website'];
 
     /**
      * The attributes that should be casted to native types.

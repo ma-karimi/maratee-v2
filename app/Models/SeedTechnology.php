@@ -28,21 +28,25 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          format="array"
  *      ),
  *      @SWG\Property(
- *          property="type",
- *          description="type",
- *          type="array",
-	 *     @SWG\Items(type="string"),
- *          format="array"
+ *          property="conserved_content",
+ *          description="conserved_content",
+ *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="husk_average",
- *          description="husk_average",
+ *          property="mean_seed_per_fruit",
+ *          description="mean_seed_per_fruit",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="husk_weight",
- *          description="husk_weight",
+ *          property="thousand_seed_weight",
+ *          description="thousand_seed_weight",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="thousand_fruit_weight",
+ *          description="thousand_fruit_weight",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -59,38 +63,65 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="hard_seed",
- *          description="hard_seed",
+ *          property="empty_impurity_seeds",
+ *          description="empty_impurity_seeds",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="abnormality",
- *          description="abnormality",
+ *          property="abnormal_seeding",
+ *          description="abnormal_seeding",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="sprout",
- *          description="sprout",
+ *          property="rotten_seed",
+ *          description="rotten_seed",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="vigor",
+ *          property="fresh_none_germinated",
  *          description="vigor",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="examine",
+ *          property="viability",
+ *          description="viability",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="accession",
+ *          description="examine",
+ *          type="string",
+ *      ),
+ *      @SWG\Property(
+ *          property="regeneration_evaluation",
+ *          description="examine",
+ *          type="string",
+ *      ),
+ *      @SWG\Property(
+ *          property="seed_origin",
+ *          description="seed_origin",
+ *          type="string",
+ *      ),
+ *      @SWG\Property(
+ *          property="received_date",
  *          description="examine",
  *          type="string",
  *          format="date"
  *      ),
  *      @SWG\Property(
- *          property="description",
- *          description="description",
+ *          property="banked_date",
+ *          description="examine",
+ *          type="string",
+ *          format="date"
+ *      ),
+ *      @SWG\Property(
+ *          property="other_detail",
+ *          description="other_detail",
  *          type="array",
 	 *     @SWG\Items(type="string"),
  *      ),
@@ -112,19 +143,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SeedTechnology extends BaseModel
 {
 
-    public static $linguistically=['seed_type'=>false,'type'=>false,'description'=>false];
+    public static $linguistically=['seed_type'=>false,'other_detail'=>false];
     public static $rules=[
         'seed_id' => 'required|exists:seeds,id',
-        'husk_average' => 'integer',
-        'husk_weight' => 'integer',
-        'seed_weight' => 'integer',
+        'conserved_content' => 'integer',
+        'mean_seed_per_fruit' => 'integer',
+        'thousand_seed_weight' => 'integer',
+        'thousand_fruit_weight' => 'integer',
         'humidity' => 'integer',
         'purity' => 'integer',
-        'hard_seed' => 'integer',
-        'abnormality' => 'integer',
-        'sprout' => 'integer',
-        'vigor' => 'integer',
-        'examine' => 'date',
+        'empty_impurity_seeds' => 'integer',
+        'abnormal_seeding' => 'integer',
+        'rotten_seed' => 'integer',
+        'fresh_none_germinated' => 'integer',
+        'seed_origin' => 'string',
+        'viability' => 'integer',
     ];
     /**
      * The database table used by the model.
@@ -138,8 +171,15 @@ class SeedTechnology extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['abnormality', 'created_at', 'deleted_at', 'description', 'examine', 'hard_seed', 'humidity', 'husk_average', 'husk_weight', 'purity', 'seed_id', 'seed_type', 'seed_weight', 'sprout', 'type', 'updated_at', 'vigor'];
+    protected $guarded=['id'];
 
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['created_at', 'received_date','banked_date', 'deleted_at', 'updated_at'];
 
     /**
      * The attributes that should be casted to native types.
@@ -148,8 +188,7 @@ class SeedTechnology extends BaseModel
      */
     protected $casts = [
         'seed_type' => 'json',
-        'type' => 'json',
-        'description' => 'json',
+        'other_detail' => 'json'
     ];
 
     public function technologyCollections()

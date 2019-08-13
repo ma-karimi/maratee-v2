@@ -1,49 +1,49 @@
 <?php namespace Tests\Traits;
 
 use Faker\Factory as Faker;
-use App\Models\Assessment;
-use App\Repositories\AssessmentRepository;
+use App\Models\evaluation;
+use App\Repositories\evaluationRepository;
 
-trait MakeAssessmentTrait
+trait MakeevaluationTrait
 {
     /**
-     * Create fake instance of Assessment and save it in database
+     * Create fake instance of evaluation and save it in database
      *
-     * @param array $assessmentFields
-     * @return Assessment
+     * @param array $evaluationFields
+     * @return evaluation
      */
-    public function makeAssessment($assessmentFields = [])
+    public function makeevaluation($evaluationFields = [])
     {
-        /** @var AssessmentRepository $assessmentRepo */
-        $assessmentRepo = \App::make(AssessmentRepository::class);
-        $theme = $this->fakeAssessmentData($assessmentFields);
-        return $assessmentRepo->create($theme);
+        /** @var evaluationRepository $evaluationRepo */
+        $evaluationRepo = \App::make(evaluationRepository::class);
+        $theme = $this->fakeevaluationData($evaluationFields);
+        return $evaluationRepo->create($theme);
     }
 
     /**
-     * Get fake instance of Assessment
+     * Get fake instance of evaluation
      *
-     * @param array $assessmentFields
-     * @return Assessment
+     * @param array $evaluationFields
+     * @return evaluation
      */
-    public function fakeAssessment($assessmentFields = [])
+    public function fakeevaluation($evaluationFields = [])
     {
-        return new Assessment($this->fakeAssessmentData($assessmentFields));
+        return new evaluation($this->fakeevaluationData($evaluationFields));
     }
 
     /**
-     * Get fake data of Assessment
+     * Get fake data of evaluation
      *
-     * @param array $assessmentFields
+     * @param array $evaluationFields
      * @return array
      */
-    public function fakeAssessmentData($assessmentFields = [])
+    public function fakeevaluationData($evaluationFields = [])
     {
         $fake = Faker::create();
 
         return array_merge([
             'created_at' => $fake->date('Y-m-d H:i:s'),
             'updated_at' => $fake->date('Y-m-d H:i:s')
-        ], $assessmentFields);
+        ], $evaluationFields);
     }
 }

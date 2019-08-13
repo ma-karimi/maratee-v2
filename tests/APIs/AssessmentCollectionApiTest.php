@@ -3,58 +3,58 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
-use Tests\Traits\MakeAssessmentCollectionTrait;
+use Tests\Traits\MakeevaluationCollectionTrait;
 use Tests\ApiTestTrait;
 
-class AssessmentCollectionApiTest extends TestCase
+class evaluationCollectionApiTest extends TestCase
 {
-    use MakeAssessmentCollectionTrait, ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
+    use MakeevaluationCollectionTrait, ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
 
     /**
      * @test
      */
-    public function test_create_assessment_collection()
+    public function test_create_evaluation_collection()
     {
-        $assessmentCollection = $this->fakeAssessmentCollectionData();
-        $this->response = $this->json('POST', '/api/assessmentCollections', $assessmentCollection);
+        $evaluationCollection = $this->fakeevaluationCollectionData();
+        $this->response = $this->json('POST', '/api/evaluationCollections', $evaluationCollection);
 
-        $this->assertApiResponse($assessmentCollection);
+        $this->assertApiResponse($evaluationCollection);
     }
 
     /**
      * @test
      */
-    public function test_read_assessment_collection()
+    public function test_read_evaluation_collection()
     {
-        $assessmentCollection = $this->makeAssessmentCollection();
-        $this->response = $this->json('GET', '/api/assessmentCollections/'.$assessmentCollection->id);
+        $evaluationCollection = $this->makeevaluationCollection();
+        $this->response = $this->json('GET', '/api/evaluationCollections/'.$evaluationCollection->id);
 
-        $this->assertApiResponse($assessmentCollection->toArray());
+        $this->assertApiResponse($evaluationCollection->toArray());
     }
 
     /**
      * @test
      */
-    public function test_update_assessment_collection()
+    public function test_update_evaluation_collection()
     {
-        $assessmentCollection = $this->makeAssessmentCollection();
-        $editedAssessmentCollection = $this->fakeAssessmentCollectionData();
+        $evaluationCollection = $this->makeevaluationCollection();
+        $editedevaluationCollection = $this->fakeevaluationCollectionData();
 
-        $this->response = $this->json('PUT', '/api/assessmentCollections/'.$assessmentCollection->id, $editedAssessmentCollection);
+        $this->response = $this->json('PUT', '/api/evaluationCollections/'.$evaluationCollection->id, $editedevaluationCollection);
 
-        $this->assertApiResponse($editedAssessmentCollection);
+        $this->assertApiResponse($editedevaluationCollection);
     }
 
     /**
      * @test
      */
-    public function test_delete_assessment_collection()
+    public function test_delete_evaluation_collection()
     {
-        $assessmentCollection = $this->makeAssessmentCollection();
-        $this->response = $this->json('DELETE', '/api/assessmentCollections/'.$assessmentCollection->id);
+        $evaluationCollection = $this->makeevaluationCollection();
+        $this->response = $this->json('DELETE', '/api/evaluationCollections/'.$evaluationCollection->id);
 
         $this->assertApiSuccess();
-        $this->response = $this->json('GET', '/api/assessmentCollections/'.$assessmentCollection->id);
+        $this->response = $this->json('GET', '/api/evaluationCollections/'.$evaluationCollection->id);
 
         $this->response->assertStatus(404);
     }

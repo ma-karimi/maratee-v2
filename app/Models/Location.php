@@ -61,6 +61,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
+ *          property="gps_used",
+ *          description="gps_used",
+ *          type="string",
+ *      ),
+ *      @SWG\Property(
+ *          property="gps_datum",
+ *          description="gps_datum",
+ *          type="string",
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -102,7 +112,7 @@ class Location extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['address','city_id', 'village_id', 'altitude', 'created_at', 'deleted_at', 'description', 'name', 'point', 'region_name', 'updated_at'];
+    protected $fillable = ['gps_used','gps_datum','address','city_id', 'village_id', 'altitude', 'created_at', 'deleted_at', 'description', 'name', 'point', 'region_name', 'updated_at'];
 
     /**
      * The attributes that should be casted to native types.

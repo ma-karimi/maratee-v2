@@ -138,18 +138,6 @@ class PlantApplicationAPIController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantApplication")
      *      ),
-     *      @SWG\Parameter(
-     *          name="ecology_description",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/PlantApplication")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="habitat_description",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/PlantApplication")
-     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -304,18 +292,6 @@ class PlantApplicationAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="presence",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/PlantApplication")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="ecology_description",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/PlantApplication")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="habitat_description",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantApplication")

@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateAssessmentAPIRequest;
-use App\Http\Requests\Api\UpdateAssessmentAPIRequest;
-use App\Models\Assessment;
-use App\Repositories\AssessmentRepository;
+use App\Http\Requests\Api\CreateEvaluationAPIRequest;
+use App\Http\Requests\Api\UpdateEvaluationAPIRequest;
+use App\Models\evaluation;
+use App\Repositories\EvaluationRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class AssessmentController
+ * Class evaluationController
  * @package App\Http\Controllers\Api
  */
 
-class AssessmentAPIController extends AppBaseController
+class EvaluationAPIController extends AppBaseController
 {
-    /** @var  AssessmentRepository */
-    private $assessmentRepository;
+    /** @var  EvaluationRepository */
+    private $evaluationRepository;
 
-    public function __construct(AssessmentRepository $assessmentRepo)
+    public function __construct(EvaluationRepository $evaluationRepo)
     {
-        $this->assessmentRepository = $assessmentRepo;
+        $this->evaluationRepository = $evaluationRepo;
     }
 
     /**
@@ -30,10 +30,10 @@ class AssessmentAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/assessments",
-     *      summary="Get a listing of the Assessments.",
-     *      tags={"Assessment"},
-     *      description="Get all Assessments",
+     *      path="/evaluations",
+     *      summary="Get a listing of the evaluations.",
+     *      tags={"evaluation"},
+     *      description="Get all evaluations",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -47,7 +47,7 @@ class AssessmentAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/Assessment")
+     *                  @SWG\Items(ref="#/definitions/evaluation")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -59,180 +59,192 @@ class AssessmentAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $assessments = $this->assessmentRepository->paginate(
+        $evaluations = $this->evaluationRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
             $request->get('relations')
         );
 
-        return $this->sendResponse($assessments->toArray(), 'Assessments retrieved successfully');
+        return $this->sendResponse($evaluations->toArray(), 'evaluations retrieved successfully');
     }
 
     /**
-     * @param CreateAssessmentAPIRequest $request
+     * @param CreateEvaluationAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/assessments",
-     *      summary="Store a newly created Assessment in storage",
-     *      tags={"Assessment"},
-     *      description="Store Assessment",
+     *      path="/evaluations",
+     *      summary="Store a newly created evaluation in storage",
+     *      tags={"evaluation"},
+     *      description="Store evaluation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="date",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="accession",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/evaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="regeneration_evaluation",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="seed_qt",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="purity",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="hollow",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="repeat",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="treatment",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="abnormality",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="hard_seed",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="vigor",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="losses",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="sprout",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="sprout_rate",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="sprout_index",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="vigor_index",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="root_length",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="stem_length",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="seedling_length",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="root_stem_rate",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="wet_unit_weight",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="dry_unit_weight",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="dry_material_rate",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="seed_length",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="seed_width",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="description",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="description",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="weight_k",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -245,7 +257,7 @@ class AssessmentAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Assessment"
+     *                  ref="#/definitions/evaluation"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -255,13 +267,13 @@ class AssessmentAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateAssessmentAPIRequest $request)
+    public function store(CreateEvaluationAPIRequest $request)
     {
         $input = $request->all();
 
-        $assessment = $this->assessmentRepository->create($input);
+        $evaluation = $this->evaluationRepository->create($input);
 
-        return $this->sendResponse($assessment->toArray(), 'Assessment saved successfully');
+        return $this->sendResponse($evaluation->toArray(), 'evaluation saved successfully');
     }
 
     /**
@@ -269,14 +281,14 @@ class AssessmentAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/assessments/{id}",
-     *      summary="Display the specified Assessment",
-     *      tags={"Assessment"},
-     *      description="Get Assessment",
+     *      path="/evaluations/{id}",
+     *      summary="Display the specified evaluation",
+     *      tags={"evaluation"},
+     *      description="Get evaluation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Assessment",
+     *          description="id of evaluation",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -292,7 +304,7 @@ class AssessmentAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Assessment"
+     *                  ref="#/definitions/evaluation"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -304,189 +316,201 @@ class AssessmentAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var Assessment $assessment */
-        $assessment = $this->assessmentRepository->find($id, \request()->get('relations'));
+        /** @var evaluation $evaluation */
+        $evaluation = $this->evaluationRepository->find($id, \request()->get('relations'));
 
-        if (empty($assessment)) {
-            return $this->sendError('Assessment not found');
+        if (empty($evaluation)) {
+            return $this->sendError('evaluation not found');
         }
 
-        return $this->sendResponse($assessment->toArray(), 'Assessment retrieved successfully');
+        return $this->sendResponse($evaluation->toArray(), 'evaluation retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdateAssessmentAPIRequest $request
+     * @param UpdateEvaluationAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/assessments/{id}",
-     *      summary="Update the specified Assessment in storage",
-     *      tags={"Assessment"},
-     *      description="Update Assessment",
+     *      path="/evaluations/{id}",
+     *      summary="Update the specified evaluation in storage",
+     *      tags={"evaluation"},
+     *      description="Update evaluation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Assessment",
+     *          description="id of evaluation",
      *          type="integer",
      *          required=true,
      *          in="path"
      *      ),
      *      @SWG\Parameter(
+     *          name="accession",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/evaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="regeneration_evaluation",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/evaluation")
+     *      ),
+     *      @SWG\Parameter(
      *          name="date",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="seed_qt",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="purity",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="hollow",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="repeat",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="treatment",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="abnormality",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="hard_seed",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="vigor",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="losses",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="sprout",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="sprout_rate",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="sprout_index",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="vigor_index",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="root_length",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="stem_length",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="seedling_length",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="root_stem_rate",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="wet_unit_weight",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="dry_unit_weight",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="dry_material_rate",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="seed_length",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="seed_width",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="description",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="description",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
      *          name="weight_k",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Assessment")
+     *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -499,7 +523,7 @@ class AssessmentAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Assessment"
+     *                  ref="#/definitions/evaluation"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -509,20 +533,20 @@ class AssessmentAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateAssessmentAPIRequest $request)
+    public function update($id, UpdateEvaluationAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var Assessment $assessment */
-        $assessment = $this->assessmentRepository->find($id, \request()->get('relations'));
+        /** @var evaluation $evaluation */
+        $evaluation = $this->evaluationRepository->find($id, \request()->get('relations'));
 
-        if ($assessment === null) {
-            return $this->sendError('Assessment not found');
+        if ($evaluation === null) {
+            return $this->sendError('evaluation not found');
         }
 
-        $assessment = $this->assessmentRepository->update($input, $id);
+        $evaluation = $this->evaluationRepository->update($input, $id);
 
-        return $this->sendResponse($assessment->toArray(), 'Assessment updated successfully');
+        return $this->sendResponse($evaluation->toArray(), 'evaluation updated successfully');
     }
 
     /**
@@ -531,14 +555,14 @@ class AssessmentAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/assessments/{id}",
-     *      summary="Remove the specified Assessment from storage",
-     *      tags={"Assessment"},
-     *      description="Delete Assessment",
+     *      path="/evaluations/{id}",
+     *      summary="Remove the specified evaluation from storage",
+     *      tags={"evaluation"},
+     *      description="Delete evaluation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Assessment",
+     *          description="id of evaluation",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -566,15 +590,15 @@ class AssessmentAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var Assessment $assessment */
-        $assessment = $this->assessmentRepository->find($id, \request()->get('relations'));
+        /** @var evaluation $evaluation */
+        $evaluation = $this->evaluationRepository->find($id, \request()->get('relations'));
 
-        if (empty($assessment)) {
-            return $this->sendError('Assessment not found');
+        if (empty($evaluation)) {
+            return $this->sendError('evaluation not found');
         }
 
-        $assessment->delete();
+        $evaluation->delete();
 
-        return $this->sendResponse($id, 'Assessment deleted successfully');
+        return $this->sendResponse($id, 'evaluation deleted successfully');
     }
 }

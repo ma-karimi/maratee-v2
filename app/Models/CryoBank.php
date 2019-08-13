@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *            definition="CryoBank",
  *            required={"voucher_number", "geotype_code", "protection_id", "herbarium_id"},
  * 			@SWG\Property(property="id", type="integer"),
+ * 			@SWG\Property(property="class_id", type="integer"),
  * 			@SWG\Property(property="voucher_number", type="string"),
  * 			@SWG\Property(property="geotype_code", type="string"),
  * 			@SWG\Property(property="protection_id", type="integer"),
@@ -40,6 +41,7 @@ class CryoBank extends BaseModel
         'geotype_code' => 'required|string',
         'protection_id' => 'required|exists:protections,id',
         'herbarium_id' => 'required|exists:herbariums,id',
+        'class_id' => 'exists:generals,id',
         'entry_date' => 'date',
         'sample_type' => 'string',
         'rack_no' => 'string',
@@ -122,5 +124,13 @@ class CryoBank extends BaseModel
     public function herbarium(): BelongsTo
     {
         return $this->belongsTo(Herbarium::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function class(): BelongsTo
+    {
+        return $this->belongsTo(General::class,'class_id');
     }
 }

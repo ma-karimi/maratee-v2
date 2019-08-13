@@ -15,17 +15,10 @@ class CreateSeedWeightsTable extends Migration {
 		Schema::create('seed_weights', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->unsignedInteger('seed_technology_id');
-			$table->integer('total');
-			$table->integer('active')->nullable();
-			$table->integer('base')->nullable();
-			$table->integer('support')->nullable();
-			$table->integer('base_revival')->nullable();
-			$table->integer('active_revival')->nullable();
-			$table->integer('support_revival')->nullable();
-			$table->string('revival_code', 45)->nullable();
-			$table->json('description')->nullable();
-
+			$table->integer('total_seed_weight');
+			$table->integer('total_fruit_weight')->nullable();
+			$table->integer('collected_seeds_no')->nullable();
+			$table->json('other_detail')->nullable();
             $table->timeStampsTz();
             $table->dateTimeTz('deleted_at')->nullable();
 		});

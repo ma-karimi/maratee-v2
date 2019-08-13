@@ -84,6 +84,18 @@ class CollectionAPIController extends AppBaseController
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Collection")
      *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Collection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Collection")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -186,6 +198,18 @@ class CollectionAPIController extends AppBaseController
      *          name="name",
      *          in="body",
      *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Collection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Collection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/Collection")
      *      ),
      *      @SWG\Response(

@@ -97,7 +97,6 @@ class ActionHub extends BaseModel
      * @var string
      */
     protected $table = 'action_hubs';
-
     /**
      * Attributes that should be mass-assignable.
      *

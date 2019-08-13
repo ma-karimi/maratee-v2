@@ -86,6 +86,20 @@ class PaleontologyAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
      *      @SWG\Parameter(
+     *          name="general_class_id",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_order_id",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
      *          name="plant_id",
      *          in="body",
      *          description="Paleontology that should be stored",
@@ -349,6 +363,20 @@ class PaleontologyAPIController extends AppBaseController
      *          in="body",
      *          description="Paleontology that should be stored",
      *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_class_id",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_order_id",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
      *      @SWG\Parameter(

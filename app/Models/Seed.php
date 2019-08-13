@@ -28,26 +28,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      ),
  *      @SWG\Property(
  *          property="field_code",
- *          description="field_code",
- *          type="integer",
- *          format="int32"
+ *          description="correct_field_code",
+ *         type="string",
  *      ),
  *      @SWG\Property(
  *          property="correct_field_code",
  *          description="correct_field_code",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="sample_code",
- *          description="sample_code",
- *          type="integer",
- *          format="int32"
+ *         type="string",
  *      ),
  *      @SWG\Property(
  *          property="voucher_no",
  *          description="voucher_no",
- *          type="integer",
- *          format="int32"
+ *          type="string"
  *      ),
  *      @SWG\Property(
  *          property="transmittance",
@@ -62,8 +54,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="slope_direction",
- *          description="slope_direction",
+ *          property="slope_action",
+ *          description="slope_action",
  *          type="array",
 	 *     @SWG\Items(type="string")
  *      ),
@@ -86,8 +78,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="density",
- *          description="density",
+ *          property="soil_texture",
+ *          description="soil_texture",
  *          type="array",
 	 *     @SWG\Items(type="string"),
  *      ),
@@ -122,14 +114,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="extent_population",
- *          description="extent_population",
+ *          property="community_type",
+ *          description="community_type",
  *          type="array",
 	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="vegetation",
- *          description="vegetation",
+ *          property="associated_species",
+ *          description="associated_species",
  *          type="array",
 	 *     @SWG\Items(type="string"),
  *      ),
@@ -140,26 +132,34 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="land_reforming",
- *          description="land_reforming",
+ *          property="area_sampled",
+ *          description="area_sampled",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="plants_sampled_no",
+ *          description="area_sampled",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="plants_found_no",
+ *          description="area_sampled",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="specimen_type",
+ *          description="specimen_type",
  *          type="array",
 	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="sample_type",
- *          description="sample_type",
- *          type="array",
-	 *     @SWG\Items(type="string"),
+ *          property="date_flowering",
+ *          description="date_flowering",
+ *          type="string",
  *      ),
  *      @SWG\Property(
- *          property="flowering",
- *          description="flowering",
- *          type="array",
-	 *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="pollination",
- *          description="pollination",
+ *          property="pollination_type",
+ *          description="pollination_type",
  *          type="array",
 	 *     @SWG\Items(type="string"),
  *      ),
@@ -176,38 +176,33 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 	 *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="seeding_bush_qt",
- *          description="seeding_bush_qt",
- *          type="integer",
- *          format="int32"
+ *          property="seed_collected_from",
+ *          description="seed_collected_from",
+ *          type="string",
  *      ),
  *      @SWG\Property(
- *          property="collecting_type",
- *          description="collecting_type",
- *          type="array",
-	 *     @SWG\Items(type="string"),
+ *          property="date_harvesting",
+ *          description="date_harvesting",
+ *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="seeding_month",
- *          description="seeding_month",
- *          type="array",
-	 *     @SWG\Items(type="string"),
+ *          property="accession_code",
+ *          description="accession_code",
+ *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="reproduction",
- *          description="reproduction",
- *          type="array",
-	 *     @SWG\Items(type="string"),
+ *          property="life_span",
+ *          description="life_span",
+ *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="vegetative_form",
- *          description="vegetative_form",
- *          type="array",
-	 *     @SWG\Items(type="string"),
+ *          property="growth_form",
+ *          description="growth_form",
+ *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="height",
- *          description="height",
+ *          property="plant_height",
+ *          description="plant_height",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -224,32 +219,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="send_date",
- *          description="send_date",
- *          type="string",
- *          format="date"
+ *          property="seed_advise",
+ *          description="seed_advise",
+ *          type="array",
+	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="collected_qt",
- *          description="collected_qt",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="must_collected_qt",
- *          description="must_collected_qt",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="critical_extensions_qt",
- *          description="critical_extensions_qt",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="notes",
- *          description="notes",
+ *          property="other_detail",
+ *          description="other_detail",
  *          type="array",
 	 *     @SWG\Items(type="string")
  *      ),
@@ -270,21 +247,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Seed extends BaseModel
 {
-    public static $linguistically=['transmittance'=>false,'land_form'=>false,'slope_direction'=>false,'landscape'=>false,'soil_depth'=>false,'density'=>false,'drainage'=>false,'soil_ph'=>false,'salinity'=>false,'lime'=>false,'climate'=>false,'extent_population'=>false,'vegetation'=>false,'soil_erosion'=>false,'land_reforming'=>false,'sample_type'=>false,'flowering'=>false,'pollination'=>false,'pollination_agent'=>false,'fruit_type'=>false,'collecting_type'=>false,'seeding_month'=>false,'reproduction'=>false,'vegetative_form'=>false,'mother_health'=>false,'notes'=>false];
+    public static $linguistically=['seed_advise'=>false,'transmittance'=>false,'land_form'=>false,'slope_action'=>false,'landscape'=>false,'soil_depth'=>false,'soil_texture'=>false,'drainage'=>false,'soil_ph'=>false,'salinity'=>false,'lime'=>false,'climate'=>false,'community_type'=>false,'associated_species'=>false,'soil_erosion'=>false,'area_sampled'=>false,'specimen_type'=>false,'date_flowering'=>false,'pollination_type'=>false,'pollination_agent'=>false,'fruit_type'=>false,'seed_collected_from'=>false,'date_harvesting'=>false,'life_span'=>false,'growth_form'=>false,'mother_health'=>false,'other_detail'=>false];
     public static $rules=[
         'herbarium_id' => 'required|exists:herbariums,id',
         'protection_id' => 'required|exists:protections,id',
         'department_id' => 'required|exists:departments,id',
-        'field_code' => 'integer',
-        'sample_code' => 'integer',
+        'plant_application_id' => 'exists:plant_applications,id',
+        'field_code' => 'string',
+        'correct_field_code' => 'string',
+        'accession_code' => 'string',
         'voucher_no' => 'integer',
         'slope_degree' => 'integer',
-        'seeding_bush_qt' => 'integer',
-        'height' => 'integer',
-        'collected_qt' => 'integer',
-        'must_collected_qt' => 'integer',
-        'critical_extensions_qt' => 'integer',
-        'send_date' => 'date',
+        'plant_height' => 'integer'
     ];
 
     /**
@@ -299,7 +273,7 @@ class Seed extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['climate', 'collected_qt', 'collecting_type', 'correct_field_code', 'created_at', 'critical_extensions_qt', 'deleted_at', 'density', 'department_id', 'drainage', 'extent_population', 'field_code', 'flowering', 'fruit_type', 'height', 'herbarium_id', 'land_form', 'land_reforming', 'landscape', 'lime', 'mother_health', 'must_collected_qt', 'notes', 'pollination', 'pollination_agent', 'protection_id', 'reproduction', 'salinity', 'sample_code', 'sample_type', 'seeding_bush_qt', 'seeding_month', 'send_date', 'slope_degree', 'slope_direction', 'soil_depth', 'soil_erosion', 'soil_ph', 'transmittance', 'updated_at', 'vegetation', 'vegetative_form', 'voucher_no'];
+    protected $guarded=['id'];
 
 
     /**
@@ -308,37 +282,36 @@ class Seed extends BaseModel
      * @var array
      */
     protected $casts = [
+        'seed_advise'=>'json',
         'transmittance' => 'json',
         'land_form' => 'json',
-        'slope_direction' => 'json',
+        'slope_action' => 'json',
         'landscape' => 'json',
         'soil_depth' => 'json',
-        'density' => 'json',
+        'soil_texture' => 'json',
         'drainage' => 'json',
         'soil_ph' => 'json',
         'salinity' => 'json',
         'lime' => 'json',
         'climate' => 'json',
-        'extent_population' => 'json',
-        'vegetation' => 'json',
+        'community_type' => 'json',
+        'associated_species' => 'json',
         'soil_erosion' => 'json',
-        'land_reforming' => 'json',
-        'sample_type' => 'json',
-        'flowering' => 'json',
-        'pollination' => 'json',
+        'area_sampled' => 'json',
+        'specimen_type' => 'json',
+        'pollination_type' => 'json',
         'pollination_agent' => 'json',
         'fruit_type' => 'json',
-        'collecting_type' => 'json',
-        'seeding_month' => 'json',
-        'reproduction' => 'json',
-        'vegetative_form' => 'json',
+        'date_harvesting' => 'json',
+        'life_span' => 'json',
+        'growth_form' => 'json',
         'mother_health' => 'json',
-        'notes' => 'json',
+        'other_detail' => 'json',
     ];
 
-    public function assessmentCollections()
+    public function evaluationCollections()
     {
-        return $this->hasMany(AssessmentCollection::class)->latest();
+        return $this->hasMany(evaluationCollection::class)->latest();
     }
 
     /**
@@ -407,6 +380,11 @@ class Seed extends BaseModel
     public function department()
     {
         return $this->belongsTo(Department::class, 'department_id');
+    }
+
+    public function plantApplication()
+    {
+        return $this->belongsTo(PlantApplication::class, 'plant_application_id');
     }
 
     public function plants()

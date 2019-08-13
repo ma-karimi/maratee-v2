@@ -49,7 +49,7 @@ that is an herbarium organization which we can but its id in this place');
 
 ');
 			$table->unsignedInteger('general_type_id')->nullable();
-			$table->json('flowering')->nullable();
+			$table->string('flowering_time')->nullable();
 			$table->unsignedInteger('general_group_id')->nullable();
 
 

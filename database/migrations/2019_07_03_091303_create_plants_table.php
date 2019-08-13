@@ -32,6 +32,7 @@ class CreatePlantsTable extends Migration {
             $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('article_id')->nullable();
             $table->unsignedInteger('location_id')->nullable();
+            $table->string('exclusivity')->nullable();
             $table->timeStampsTz();
             $table->dateTimeTz('deleted_at')->nullable();
 		});

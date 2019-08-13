@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateAssessmentsTable extends Migration {
+class CreateEvaluationsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateAssessmentsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('assessments', function(Blueprint $table)
+		Schema::create('evaluations', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->date('date')->nullable();
@@ -40,6 +40,8 @@ class CreateAssessmentsTable extends Migration {
 			$table->integer('dry_material_rate')->nullable();
 			$table->integer('seed_length')->nullable();
 			$table->integer('seed_width')->nullable();
+			$table->string('accession')->nullable();
+			$table->string('regeneration_evaluation')->nullable();
 			$table->json('description')->nullable();
 
 
@@ -56,7 +58,7 @@ class CreateAssessmentsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('assessments');
+		Schema::drop('evaluations');
 	}
 
 }

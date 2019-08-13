@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\Assessment;
+use App\Models\evaluation;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateAssessmentAPIRequest extends APIRequest
+class UpdateEvaluationAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class UpdateAssessmentAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return Assessment::$rules;
+        return evaluation::$rules;
     }
 }

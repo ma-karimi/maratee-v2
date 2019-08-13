@@ -34,12 +34,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="parent_id",
- *          description="parent_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -68,7 +62,7 @@ class General extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'parent_id', 'type', 'updated_at'];
+    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'type', 'updated_at'];
 
 
     /**

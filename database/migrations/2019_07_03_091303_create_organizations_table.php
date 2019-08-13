@@ -21,6 +21,7 @@ class CreateOrganizationsTable extends Migration
             $table->json('name');
             $table->json('description')->nullable();
             $table->string('phone');
+            $table->string('fax')->nullable();
             $table->string('email', 45)->nullable();
             $table->string('website', 45)->nullable();
 

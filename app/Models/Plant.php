@@ -39,6 +39,18 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
+ *          property="taxonomies_id",
+ *          description="taxonomies_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="classification_id",
+ *          description="classification_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
  *          property="general_sub_specie_id",
  *          description="general_sub_specie_id",
  *          type="integer",
@@ -123,6 +135,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="exclusivity",
+ *          description="exclusivity",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -157,6 +174,8 @@ class Plant extends BaseModel
         'general_specie_id' => 'exists:generals,id',
         'general_variety_id' => 'exists:generals,id',
         'general_sub_specie_id' => 'exists:generals,id',
+        'taxonomies_id' => 'exists:taxonomies,id',
+        'classification_id' => 'exists:classification,id',
     ];
     /**
      * The database table used by the model.
@@ -170,7 +189,7 @@ class Plant extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['article_id', 'created_at', 'deleted_at', 'description', 'domestic_name', 'location_id', 'name', 'general_class_id', 'general_cotyledon_id', 'general_family_id', 'general_flowering_id', 'general_genus_id', 'general_group_id', 'general_order_id', 'general_specie_id', 'general_sperm_id', 'general_sub_specie_id', 'general_variety_id', 'updated_at', 'user_id'];
+    protected $guarded=['id'];
 
 
     /**
@@ -184,7 +203,6 @@ class Plant extends BaseModel
         'domestic_name' => 'json',
     ];
 
-    protected $with = ['seeds', 'article', 'location', 'generalFlowering', 'generalVariety', 'generalSpecie', 'generalOrder', 'generalClass', 'generalGroup', 'generalGenus', 'generalSperm', 'generalCotyledon', 'user', 'seedPlants', 'herbariums'];
 
     /**
      * @return MorphToMany
@@ -322,6 +340,20 @@ class Plant extends BaseModel
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function taxonomy(): BelongsTo
+    {
+        return $this->belongsTo(Taxonomy::class,'taxonomies_id');
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function classification(): BelongsTo
+    {
+        return $this->belongsTo(Classification::class,'classification_id');
     }
 
     /**

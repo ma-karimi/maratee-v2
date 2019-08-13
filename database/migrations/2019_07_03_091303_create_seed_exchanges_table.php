@@ -17,17 +17,13 @@ class CreateSeedExchangesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('seed_id');
             $table->unsignedInteger('collection_id');
-            $table->string('type', 45)->nullable()->comment('send
-receive
-');
-            $table->integer('weight')->nullable();
-            $table->date('date')->nullable();
-
-
-            $table->json('approval_no')->nullable();
+            $table->integer('seed_weight')->nullable();
+            $table->date('delivery_date')->nullable();
+            $table->string('accession')->nullable();
+            $table->string('regeneration_evaluation')->nullable();
+            $table->string('request_no')->nullable();
             $table->json('saved_type')->nullable();
             $table->json('description')->nullable();
-
             $table->timeStampsTz();
             $table->dateTimeTz('deleted_at')->nullable();
         });

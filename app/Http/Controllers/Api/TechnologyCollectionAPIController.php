@@ -92,6 +92,34 @@ class TechnologyCollectionAPIController extends AppBaseController
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/TechnologyCollection")
      *      ),
+     *      @SWG\Parameter(
+     *          name="germination_id",
+     *          in="body",
+     *          description="TechnologyCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/TechnologyCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="TechnologyCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/TechnologyCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
+     *          description="TechnologyCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/TechnologyCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
+     *          in="body",
+     *          description="TechnologyCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/TechnologyCollection")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -209,6 +237,34 @@ class TechnologyCollectionAPIController extends AppBaseController
      *          in="body",
      *          description="TechnologyCollection that should be stored",
      *          required=true,
+     *          @SWG\Schema(ref="#/definitions/TechnologyCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="germination_id",
+     *          in="body",
+     *          description="TechnologyCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/TechnologyCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          description="TechnologyCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/TechnologyCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
+     *          description="TechnologyCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/TechnologyCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
+     *          in="body",
+     *          description="TechnologyCollection that should be stored",
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/TechnologyCollection")
      *      ),
      *      @SWG\Response(
