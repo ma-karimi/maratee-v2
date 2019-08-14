@@ -71,6 +71,21 @@ class PlantRepository extends BaseRepository
         return parent::create($input->toArray());
     }
 
+    /**
+     * @param array $input
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Model|void
+     */
+    public function update($input,$id)
+    {
+        [$taxonomy_input, $taxonomy_record] = $this->findTaxonomy($input);
+        [$classification_input, $classification_record] = $this->findClassification($input);
+
+        $input = $this->createTaxonomyAndClassificationAndChangeRequest($input, $taxonomy_record, $taxonomy_input, $classification_input, $classification_record);
+
+        return parent::update($input->toArray(),$id);
+    }
+
 
     /**
      * @param $input
