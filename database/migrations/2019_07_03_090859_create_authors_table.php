@@ -16,8 +16,7 @@ class CreateAuthorsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->json('name');
-
-            $table->timeStampsTz();
+			$table->timeStampsTz();
             $table->softDeletesTz();
 		});
 	}
