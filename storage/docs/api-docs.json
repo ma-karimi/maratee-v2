@@ -18258,7 +18258,7 @@
                         "name": "taxonomy_id",
                         "in": "body",
                         "description": "Plant that should be stored",
-                        "required": false,
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/Plant"
                         }
@@ -18267,7 +18267,7 @@
                         "name": "classification_id",
                         "in": "body",
                         "description": "Plant that should be stored",
-                        "required": false,
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/Plant"
                         }
@@ -18417,7 +18417,7 @@
                         "name": "taxonomy_id",
                         "in": "body",
                         "description": "Plant that should be stored",
-                        "required": false,
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/Plant"
                         }
@@ -18426,7 +18426,7 @@
                         "name": "classification_id",
                         "in": "body",
                         "description": "Plant that should be stored",
-                        "required": false,
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/Plant"
                         }

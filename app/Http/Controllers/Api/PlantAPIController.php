@@ -147,14 +147,14 @@ class PlantAPIController extends AppBaseController
      *          name="taxonomy_id",
      *          in="body",
      *          description="Plant that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
      *          name="classification_id",
      *          in="body",
      *          description="Plant that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Response(
@@ -308,14 +308,14 @@ class PlantAPIController extends AppBaseController
      *          name="taxonomy_id",
      *          in="body",
      *          description="Plant that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
      *          name="classification_id",
      *          in="body",
      *          description="Plant that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
