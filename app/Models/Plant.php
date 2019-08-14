@@ -51,6 +51,29 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="user_id",
+ *          description="user_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="article_id",
+ *          description="article_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="location_id",
+ *          description="location_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="exclusivity",
+ *          description="exclusivity",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -71,7 +94,10 @@ class Plant extends BaseModel
     public static $linguistically = ['name' => true, 'description' => false, 'domestic_name' => false];
 
     public static $rules = [
-        'taxonomy_id' => 'exists:taxonomies,id',
+        'user_id' => 'exists:users,id',
+        'article_id' => 'exists:articles,id',
+        'location_id' => 'exists:locations,id',
+        'taxonomies_id' => 'exists:taxonomies,id',
         'classification_id' => 'exists:classification,id',
     ];
     /**
