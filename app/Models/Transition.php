@@ -123,7 +123,7 @@ use Illuminate\Database\Eloquent\Model;
  *      ),
  * )
  */
-class Transition extends Model
+class Transition extends BaseModel
 {
     public static $linguistically=['previous_value'=>true,'next_value'=>true,'description'=>false];
     /**

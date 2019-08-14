@@ -1,0 +1,73 @@
+<?php namespace Tests\Repositories;
+
+use App\Models\Character;
+use App\Repositories\CharacterRepository;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
+use Tests\Traits\MakeCharacterTrait;
+use Tests\ApiTestTrait;
+
+class CharacterRepositoryTest extends TestCase
+{
+    use MakeCharacterTrait, ApiTestTrait, DatabaseTransactions;
+
+    /**
+     * @var CharacterRepository
+     */
+    protected $characterRepo;
+
+    public function setUp() : void
+    {
+        parent::setUp();
+        $this->characterRepo = \App::make(CharacterRepository::class);
+    }
+
+    /**
+     * @test create
+     */
+    public function test_create_character()
+    {
+        $character = $this->fakeCharacterData();
+        $createdCharacter = $this->characterRepo->create($character);
+        $createdCharacter = $createdCharacter->toArray();
+        $this->assertArrayHasKey('id', $createdCharacter);
+        $this->assertNotNull($createdCharacter['id'], 'Created Character must have id specified');
+        $this->assertNotNull(Character::find($createdCharacter['id']), 'Character with given id must be in DB');
+        $this->assertModelData($character, $createdCharacter);
+    }
+
+    /**
+     * @test read
+     */
+    public function test_read_character()
+    {
+        $character = $this->makeCharacter();
+        $dbCharacter = $this->characterRepo->find($character->id);
+        $dbCharacter = $dbCharacter->toArray();
+        $this->assertModelData($character->toArray(), $dbCharacter);
+    }
+
+    /**
+     * @test update
+     */
+    public function test_update_character()
+    {
+        $character = $this->makeCharacter();
+        $fakeCharacter = $this->fakeCharacterData();
+        $updatedCharacter = $this->characterRepo->update($fakeCharacter, $character->id);
+        $this->assertModelData($fakeCharacter, $updatedCharacter->toArray());
+        $dbCharacter = $this->characterRepo->find($character->id);
+        $this->assertModelData($fakeCharacter, $dbCharacter->toArray());
+    }
+
+    /**
+     * @test delete
+     */
+    public function test_delete_character()
+    {
+        $character = $this->makeCharacter();
+        $resp = $this->characterRepo->delete($character->id);
+        $this->assertTrue($resp);
+        $this->assertNull(Character::find($character->id), 'Character should not exist in DB');
+    }
+}

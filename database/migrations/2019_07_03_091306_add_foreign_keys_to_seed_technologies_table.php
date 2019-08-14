@@ -14,7 +14,7 @@ class AddForeignKeysToSeedTechnologiesTable extends Migration {
 	{
 		Schema::table('seed_technologies', function(Blueprint $table)
 		{
-			$table->foreign('seed_id')->references('id')->on('seeds')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('')->references('id')->on('seeds')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 
@@ -28,7 +28,7 @@ class AddForeignKeysToSeedTechnologiesTable extends Migration {
 	{
 		Schema::table('seed_technologies', function(Blueprint $table)
 		{
-			$table->dropForeign(['seed_id']);
+			$table->dropForeign(['']);
 		});
 	}
 

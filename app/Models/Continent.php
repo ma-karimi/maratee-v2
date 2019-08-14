@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *        )
  *
  */
-class Continent extends Model
+class Continent extends BaseModel
 {
     public static $rules = [
         'code' => 'string',

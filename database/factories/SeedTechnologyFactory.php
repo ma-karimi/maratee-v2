@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Models\SeedTechnology::class, function (Faker $faker) {
     $seeds = \App\Models\Seed::pluck('id')->toArray();
     return [
-        'seed_id' => $faker->randomElement($seeds),
+        '' => $faker->randomElement($seeds),
         'seed_type' => make_json($faker->word),
         'type' => make_json($faker->word),
         'husk_average' => $faker->numberBetween(1, 100),

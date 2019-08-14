@@ -59,10 +59,10 @@ class TaxonomyAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $taxonomies = $this->taxonomyRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $taxonomies = $this->taxonomyRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($taxonomies->toArray(), 'Taxonomies retrieved successfully');

@@ -19,8 +19,8 @@ class AlterPrimaryKeysTables extends Migration
         'medicinal_plant_morphologies',
         'paleontology_actions',
         'paleontology_medias',
-        'seed_chemicals',
-        'seed_moleculars',
+        'bio_moleculars',
+        'seed_seedFeatures',
         'seed_plants'
     ];
 

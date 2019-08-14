@@ -15,7 +15,7 @@ class CreateSeedTechnologiesTable extends Migration
     {
         Schema::create('seed_technologies', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('seed_id');
+            $table->unsignedInteger('');
             $table->json('seed_type')->nullable();
             $table->integer('conserved_content')->nullable();
             $table->integer('mean_seed_per_fruit')->nullable();
@@ -26,9 +26,9 @@ class CreateSeedTechnologiesTable extends Migration
             $table->integer('abnormal_seeding')->nullable();
             $table->integer('rotten_seed')->nullable();
             $table->integer('fresh_none_germinated')->nullable();
-            $table->string('accession')->nullable();
+            $table->string('')->nullable();
             $table->string('seed_origin')->nullable();
-            $table->string('regeneration_evaluation')->nullable();
+            $table->string('')->nullable();
             $table->date('received_date')->nullable();
             $table->date('banked_date')->nullable();
             $table->integer('thousand_fruit_weight')->nullable();

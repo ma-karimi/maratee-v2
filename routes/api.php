@@ -67,7 +67,9 @@ Route::resource('seed_technologies', 'SeedTechnologyAPIController');
 
 Route::resource('seed_plants', 'SeedPlantAPIController');
 
-Route::resource('seed_moleculars', 'SeedMolecularAPIController');
+
+Route::resource('seed_features', 'SeedFeatureAPIController');
+
 
 Route::resource('seed_hubs', 'SeedHubAPIController');
 
@@ -75,7 +77,7 @@ Route::resource('seed_hubs', 'SeedHubAPIController');
 
 Route::resource('seed_exchanges', 'SeedExchangeAPIController');
 
-Route::resource('seed_chemicals', 'SeedChemicalAPIController');
+Route::resource('bio_moleculars', 'BioMolecularAPIController');
 
 Route::resource('seeds', 'SeedAPIController');
 
@@ -181,7 +183,7 @@ Route::resource('medicines', 'MedicineAPIController');
 
 Route::resource('methods', 'MethodAPIController');
 
-Route::resource('moleculars', 'MolecularAPIController');
+Route::resource('seedFeatures', 'seedFeatureAPIController');
 
 Route::resource('morphologies', 'MorphologyAPIController');
 
@@ -215,3 +217,21 @@ Route::resource('germinations', 'GerminationAPIController');
 Route::resource('taxonomies', 'TaxonomyAPIController');
 
 Route::resource('classifications', 'ClassificationAPIController');
+
+Route::resource('repeats', 'RepeatAPIController');
+
+Route::resource('stations', 'StationAPIController');
+
+Route::resource('blocks', 'BlockAPIController');
+
+Route::resource('characters', 'CharacterAPIController');
+
+Route::resource('character_traits', 'CharacterTraitAPIController');
+
+Route::resource('trait_values', 'TraitValueAPIController');
+
+Route::resource('block_traits', 'BlockTraitAPIController');
+
+Route::resource('dimensions', 'DimensionAPIController');
+
+Route::resource('evaluation_dimensions', 'EvaluationDimensionAPIController');

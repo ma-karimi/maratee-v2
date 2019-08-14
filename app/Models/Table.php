@@ -66,7 +66,7 @@ use Illuminate\Database\Eloquent\Model;
  *      ),
  * )
  */
-class Table extends Model
+class Table extends BaseModel
 {
     /**
      * @var array
