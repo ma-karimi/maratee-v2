@@ -68,8 +68,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="accession",
- *          description="accession",
+ *          property="",
+ *          description="",
  *          type="string",
  *      ),
  *      @SWG\Property(

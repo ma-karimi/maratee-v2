@@ -114,7 +114,7 @@ class SeedWeightAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/SeedWeight")
      *      ),
      *      @SWG\Parameter(
-     *          name="accession",
+     *          name="",
      *          in="body",
      *          description="SeedWeight that should be stored",
      *          required=false,
@@ -288,7 +288,7 @@ class SeedWeightAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/SeedWeight")
      *      ),
      *      @SWG\Parameter(
-     *          name="accession",
+     *          name="",
      *          in="body",
      *          description="SeedWeight that should be stored",
      *          required=false,

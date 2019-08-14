@@ -79,7 +79,7 @@ class SeedTechnologyAPIController extends AppBaseController
      *      description="Store SeedTechnology",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="seed_id",
+     *          name="",
      *          in="body",
      *          description="SeedTechnology that should be stored",
      *          required=true,
@@ -107,7 +107,7 @@ class SeedTechnologyAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/SeedTechnology")
      *      ),
      *      @SWG\Parameter(
-     *          name="accession",
+     *          name="",
      *          in="body",
      *          description="SeedTechnology that should be stored",
      *          required=false,
@@ -289,14 +289,14 @@ class SeedTechnologyAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="seed_id",
+     *          name="",
      *          in="body",
      *          description="SeedTechnology that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/SeedTechnology")
      *      ),
      *      @SWG\Parameter(
-     *          name="accession",
+     *          name="",
      *          in="body",
      *          description="SeedTechnology that should be stored",
      *          required=false,

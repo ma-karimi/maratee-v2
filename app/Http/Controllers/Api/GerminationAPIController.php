@@ -59,10 +59,10 @@ class GerminationAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $germinations = $this->germinationRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $germinations = $this->germinationRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($germinations->toArray(), 'Germinations retrieved successfully');

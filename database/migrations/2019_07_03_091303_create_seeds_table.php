@@ -16,6 +16,7 @@ class CreateSeedsTable extends Migration
         Schema::create('seeds', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('herbarium_id');
+            $table->unsignedInteger('collection_id');
             $table->unsignedInteger('protection_id');
             $table->string('field_code')->nullable();
             $table->string('correct_field_code')->nullable();

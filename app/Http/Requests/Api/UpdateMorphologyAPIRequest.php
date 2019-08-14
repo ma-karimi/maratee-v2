@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api;
 
 use App\Models\Morphology;
-use App\Models\SeedChemical;
+use App\Models\BioMolecular;
 use InfyOm\Generator\Request\APIRequest;
 
 class UpdateMorphologyAPIRequest extends APIRequest

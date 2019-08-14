@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @SWG\Definition(
  *      definition="SeedTechnology",
- *      required={"seed_id"},
+ *      required={""},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -15,8 +15,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="seed_id",
- *          description="seed_id",
+ *          property="",
+ *          description="",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -93,12 +93,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="accession",
+ *          property="",
  *          description="examine",
  *          type="string",
  *      ),
  *      @SWG\Property(
- *          property="regeneration_evaluation",
+ *          property="",
  *          description="examine",
  *          type="string",
  *      ),
@@ -145,7 +145,7 @@ class SeedTechnology extends BaseModel
 
     public static $linguistically=['seed_type'=>false,'other_detail'=>false];
     public static $rules=[
-        'seed_id' => 'required|exists:seeds,id',
+        '' => 'required|exists:seeds,id',
         'conserved_content' => 'integer',
         'mean_seed_per_fruit' => 'integer',
         'thousand_seed_weight' => 'integer',

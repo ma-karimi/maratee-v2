@@ -85,145 +85,61 @@ class EvaluationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="accession",
+     *          name="exchange_seeds_no",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="regeneration_evaluation",
+     *          name="planted_seeds_no",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="seed_qt",
+     *          name="fresh_none_germinated_seeds",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="purity",
+     *          name="rotten_seeds",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="hollow",
+     *          name="abnormal_seedling",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="repeat",
+     *          name="viability_percentage",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="treatment",
+     *          name="seedling_morality_no",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="abnormality",
+     *          name="mean_fresh_seedling_weight",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="hard_seed",
+     *          name="mean_dry_seedling_weight",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="vigor",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="losses",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="sprout",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="sprout_rate",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="sprout_index",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="vigor_index",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="root_length",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="stem_length",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="seedling_length",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="root_stem_rate",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="wet_unit_weight",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="dry_unit_weight",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="dry_material_rate",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="seed_length",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="seed_width",
+     *          name="dry_matter_percentage",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
@@ -232,18 +148,6 @@ class EvaluationAPIController extends AppBaseController
      *          name="description",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="weight_k",
-     *          in="body",
-     *          required=true,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Response(
@@ -345,151 +249,67 @@ class EvaluationAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="accession",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="regeneration_evaluation",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
      *          name="date",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="seed_qt",
+     *          name="exchange_seeds_no",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="purity",
+     *          name="planted_seeds_no",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="hollow",
+     *          name="fresh_none_germinated_seeds",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="repeat",
+     *          name="rotten_seeds",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="treatment",
+     *          name="abnormal_seedling",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="abnormality",
+     *          name="viability_percentage",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="hard_seed",
+     *          name="seedling_morality_no",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="vigor",
+     *          name="mean_fresh_seedling_weight",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="losses",
+     *          name="mean_dry_seedling_weight",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="sprout",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="sprout_rate",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="sprout_index",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="vigor_index",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="root_length",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="stem_length",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="seedling_length",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="root_stem_rate",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="wet_unit_weight",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="dry_unit_weight",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="dry_material_rate",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="seed_length",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="seed_width",
+     *          name="dry_matter_percentage",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/evaluation")
@@ -498,18 +318,6 @@ class EvaluationAPIController extends AppBaseController
      *          name="description",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/evaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="weight_k",
-     *          in="body",
-     *          required=true,
      *          @SWG\Schema(ref="#/definitions/evaluation")
      *      ),
      *      @SWG\Response(

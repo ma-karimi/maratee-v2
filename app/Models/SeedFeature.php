@@ -6,8 +6,8 @@ use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @SWG\Definition(
- *      definition="Molecular",
- *      required={"name"},
+ *      definition="SeedFeature",
+ *      required={"name","type","unit"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -27,6 +27,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
+ *          property="type",
+ *          description="type",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="unit",
+ *          description="unit",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -40,7 +50,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      )
  * )
  */
-class Molecular extends BaseModel
+class SeedFeature extends BaseModel
 {
     public static $linguistically=['name'=>true,'description'=>false];
     /**
@@ -48,14 +58,14 @@ class Molecular extends BaseModel
      *
      * @var string
      */
-    protected $table = 'moleculars';
+    protected $table = 'seed_features';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'updated_at'];
+    protected $guarded=['id'];
 
 
     /**
@@ -65,13 +75,5 @@ class Molecular extends BaseModel
      */
     protected $casts = ['name' => 'json', 'description' => 'json'];
 
-
-    /**
-     * @return HasMany
-     */
-    public function seedMoleculars(): HasMany
-    {
-        return $this->hasMany(SeedMolecular::class)->latest();
-    }
 
 }

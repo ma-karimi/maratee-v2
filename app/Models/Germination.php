@@ -88,7 +88,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      )
  * )
  */
-class Germination extends Model
+class Germination extends BaseModel
 {
     use SoftDeletes;
 

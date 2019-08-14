@@ -44,8 +44,8 @@ use App\Models\Contracts\BaseModel;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="accession",
- *          description="accession",
+ *          property="",
+ *          description="",
  *          type="string"
  *      ),
  *      @SWG\Property(
@@ -105,7 +105,7 @@ class SeedWeight extends BaseModel
         'total_fruit_weight_revival' => 'integer',
         'fruit_mean_seeds_no' => 'string',
         'thousand_seed_weight' => 'string',
-        'accession' => 'string',
+        '' => 'string',
         'regeneration_evaluation' => 'string',
     ];
 

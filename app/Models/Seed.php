@@ -341,17 +341,17 @@ class Seed extends BaseModel
     /**
      * @return HasMany
      */
-    public function seedMoleculars()
+    public function seedMolecular()
     {
-        return $this->hasMany(SeedMolecular::class)->latest();
+        return $this->hasMany(seedMolecular::class)->latest();
     }
 
     /**
      * @return HasMany
      */
-    public function seedChemicals()
+    public function bioMoleculars()
     {
-        return $this->hasMany(SeedChemical::class)->latest();
+        return $this->hasMany(BioMolecular::class)->latest();
     }
 
     /**

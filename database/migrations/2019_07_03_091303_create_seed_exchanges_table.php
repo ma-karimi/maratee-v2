@@ -19,7 +19,7 @@ class CreateSeedExchangesTable extends Migration
             $table->unsignedInteger('collection_id');
             $table->integer('seed_weight')->nullable();
             $table->date('delivery_date')->nullable();
-            $table->string('accession')->nullable();
+            $table->string('')->nullable();
             $table->string('regeneration_evaluation')->nullable();
             $table->string('request_no')->nullable();
             $table->json('saved_type')->nullable();

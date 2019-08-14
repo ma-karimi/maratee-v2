@@ -205,9 +205,9 @@ class Location extends BaseModel
     /**
      * @return HasMany
      */
-    public function seedChemicals(): HasMany
+    public function bioMoleculars(): HasMany
     {
-        return $this->hasMany(SeedChemical::class)->latest();
+        return $this->hasMany(BioMolecular::class)->latest();
     }
 
     /**
@@ -221,9 +221,9 @@ class Location extends BaseModel
     /**
      * @return HasMany
      */
-    public function seedMoleculars(): HasMany
+    public function seedMolecular(): HasMany
     {
-        return $this->hasMany(SeedMolecular::class)->latest();
+        return $this->hasMany(seedMolecular::class)->latest();
     }
 
     /**

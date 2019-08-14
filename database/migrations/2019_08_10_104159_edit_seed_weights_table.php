@@ -15,7 +15,7 @@ class EditSeedWeightsTable extends Migration
     {
         Schema::table('seed_weights', function (Blueprint $table) {
             $table->unsignedInteger('seed_id')->nullable();
-            $table->string('accession')->nullable();
+            $table->string('')->nullable();
             $table->string('regeneration_evaluation')->nullable();
             $table->integer('fruit_mean_seeds_no')->nullable();
             $table->double('thousand_fruit_weight')->nullable();
@@ -35,7 +35,7 @@ class EditSeedWeightsTable extends Migration
             $table->dropForeign('seed_id');
             $table->dropColumn(
                 'seed_id',
-                'accession',
+                '',
                 'regeneration_evaluation',
                 'fruit_mean_seeds_no',
                 'thousand_fruit_weight',

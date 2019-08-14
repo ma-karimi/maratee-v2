@@ -59,10 +59,10 @@ class ClassificationAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $classifications = $this->classificationRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $classifications = $this->classificationRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($classifications->toArray(), 'Classifications retrieved successfully');

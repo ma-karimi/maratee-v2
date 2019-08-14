@@ -128,7 +128,7 @@ class SeedExchangeAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/SeedExchange")
      *      ),
      *      @SWG\Parameter(
-     *          name="accession",
+     *          name="",
      *          in="body",
      *          description="SeedExchange that should be stored",
      *          required=false,
@@ -296,7 +296,7 @@ class SeedExchangeAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/SeedExchange")
      *      ),
      *      @SWG\Parameter(
-     *          name="accession",
+     *          name="",
      *          in="body",
      *          description="SeedExchange that should be stored",
      *          required=false,
