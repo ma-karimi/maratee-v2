@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @SWG\Definition(
  *            definition="Dimension",
+ *           required={"name","type"},
  * 			@SWG\Property(property="id", type="integer"),
  * 			@SWG\Property(property="name", type="string"),
  * 			@SWG\Property(property="type", type="string"),
@@ -19,8 +20,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Dimension extends BaseModel
 {
     public static $rules = [
-        'name' => 'string',
-        'type' => 'string',
+        'name' => 'required|string',
+        'type' => 'required|string',
         'index' => 'integer',
     ];
 

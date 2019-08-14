@@ -95,27 +95,6 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_general_family_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_genus_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_cotyledon_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
      *          name="description",
      *          in="body",
      *          description="Plant that should be stored",
@@ -131,62 +110,6 @@ class PlantAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="domestic_name",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_sub_specie_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_variety_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_specie_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_class_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_group_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_order_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_flowering_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_sperm_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
@@ -224,14 +147,14 @@ class PlantAPIController extends AppBaseController
      *          name="taxonomy_id",
      *          in="body",
      *          description="Plant that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
      *          name="classification_id",
      *          in="body",
      *          description="Plant that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Response(
@@ -340,27 +263,6 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_general_family_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_genus_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_cotyledon_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
      *          name="description",
      *          in="body",
      *          description="Plant that should be stored",
@@ -369,62 +271,6 @@ class PlantAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="domestic_name",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_sub_specie_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_variety_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_specie_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_class_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_group_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_order_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_flowering_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_general_sperm_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
@@ -462,14 +308,14 @@ class PlantAPIController extends AppBaseController
      *          name="taxonomy_id",
      *          in="body",
      *          description="Plant that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
      *          name="classification_id",
      *          in="body",
      *          description="Plant that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(

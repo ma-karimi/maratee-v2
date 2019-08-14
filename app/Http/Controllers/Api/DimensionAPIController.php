@@ -82,14 +82,14 @@ class DimensionAPIController extends AppBaseController
      *          name="name",
      *          in="body",
      *          description="Dimension that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Dimension")
      *      ),
      *      @SWG\Parameter(
      *          name="type",
      *          in="body",
      *          description="Dimension that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Dimension")
      *      ),
      *      @SWG\Parameter(
@@ -201,14 +201,14 @@ class DimensionAPIController extends AppBaseController
      *          name="name",
      *          in="body",
      *          description="Dimension that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Dimension")
      *      ),
      *      @SWG\Parameter(
      *          name="type",
      *          in="body",
      *          description="Dimension that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Dimension")
      *      ),
      *      @SWG\Parameter(
