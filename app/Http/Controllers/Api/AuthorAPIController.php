@@ -84,6 +84,12 @@ class AuthorAPIController extends AppBaseController
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Author")
      *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Author")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -186,6 +192,12 @@ class AuthorAPIController extends AppBaseController
      *          name="name",
      *          in="body",
      *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Author")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="user_id",
+     *          in="body",
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/Author")
      *      ),
      *      @SWG\Response(
