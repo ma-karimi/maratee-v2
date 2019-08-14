@@ -13,7 +13,7 @@ class CreateUserHubsTable extends Migration
      */
     public function up()
     {
-        Schema::table('user_hubs', function (Blueprint $table) {
+        Schema::create('user_hubs', function (Blueprint $table) {
             $table->increments('id');
 //            plants, cryo-bank, media, seed_hub, technology, article
             $table->morphs('userable');

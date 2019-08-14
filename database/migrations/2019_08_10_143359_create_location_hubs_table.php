@@ -13,7 +13,7 @@ class CreateLocationHubsTable extends Migration
      */
     public function up()
     {
-        Schema::table('location_hubs', function (Blueprint $table) {
+        Schema::create('location_hubs', function (Blueprint $table) {
             $table->increments('id');
             $table->morphs('locationable');
             $table->unsignedInteger('location_id');

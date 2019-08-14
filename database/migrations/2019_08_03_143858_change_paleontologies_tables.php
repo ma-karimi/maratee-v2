@@ -30,12 +30,6 @@ class ChangePaleontologiesTables extends Migration
             $table->string('name');
             $table->string('url')->nullable();
         });
-        Schema::table('paleontologies', function (Blueprint $table){
-            $table->string('update_frequency');
-            $table->dropColumn('typestatus', 'treatment');
-            $table->json('type_status')->nullable();
-            $table->json('description')->nullable();
-        });
         Schema::table('geology_ages', function (Blueprint $table){
             $table->dropColumn('era', 'period', 'epoch', 'stage');
             $table->json('name');
@@ -72,11 +66,6 @@ class ChangePaleontologiesTables extends Migration
         });
         Schema::table('maps', function (Blueprint $table){
             $table->dropColumn('name', 'url');
-        });
-        Schema::table('paleontologies', function (Blueprint $table){
-            $table->dropColumn('type_status', 'description', 'update_frequency');
-            $table->json('treatment')->nullable();
-            $table->json('typestatus')->nullable();
         });
         Schema::table('geology_ages', function (Blueprint $table){
             $table->dropColumn('name', 'type', 'parent_id');

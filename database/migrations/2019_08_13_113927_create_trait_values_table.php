@@ -19,7 +19,7 @@ class CreateTraitValuesTable extends Migration
             $table->unsignedInteger('character_trait_id');
             $table->double('value')->nullable();
             $table->foreign('seed_feature_id')->references('id')->on('seed_features')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('character_trait_id')->references('id')->on('character_trait')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('character_trait_id')->references('id')->on('character_traits')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->softDeletesTz();
             $table->timestamps();
         });
