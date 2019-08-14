@@ -18192,33 +18192,6 @@
                         }
                     },
                     {
-                        "name": "plant_general_family_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_genus_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_cotyledon_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
                         "name": "description",
                         "in": "body",
                         "description": "Plant that should be stored",
@@ -18238,78 +18211,6 @@
                     },
                     {
                         "name": "domestic_name",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_sub_specie_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_variety_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_specie_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_class_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_group_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_order_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_flowering_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_sperm_id",
                         "in": "body",
                         "description": "Plant that should be stored",
                         "required": false,
@@ -18459,33 +18360,6 @@
                         }
                     },
                     {
-                        "name": "plant_general_family_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_genus_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_cotyledon_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
                         "name": "description",
                         "in": "body",
                         "description": "Plant that should be stored",
@@ -18496,78 +18370,6 @@
                     },
                     {
                         "name": "domestic_name",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_sub_specie_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_variety_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_specie_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_class_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_group_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_order_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_flowering_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "plant_general_sperm_id",
                         "in": "body",
                         "description": "Plant that should be stored",
                         "required": false,
