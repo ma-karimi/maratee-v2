@@ -58,11 +58,4 @@ class City extends BaseModel
         return $this->belongsTo(Province::class);
     }
 
-    /**
-     * @return HasMany
-     */
-    public function addresses(): HasMany
-    {
-        return $this->hasMany(Address::class)->latest();
-    }
 }
