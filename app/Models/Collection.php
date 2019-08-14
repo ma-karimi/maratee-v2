@@ -74,6 +74,6 @@ class Collection extends BaseModel
      */
     public function technologyCollections(): HasMany
     {
-        return $this->hasMany(TechnologyCollection::class)->latest();
+        return $this->hasMany(Technology::class)->latest();
     }
 }

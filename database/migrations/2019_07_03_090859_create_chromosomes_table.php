@@ -21,12 +21,10 @@ class   CreateChromosomesTable extends Migration
             $table->string('url')->nullable();
             $table->unsignedInteger('herbarium_id');
             $table->unsignedInteger('cryo_bank_id')->nullable();
-            $table->unsignedInteger('article_id')->nullable();
-            $table->unsignedInteger('location_id')->nullable();
             $table->unsignedInteger('general_class_id');
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
         });
     }
 

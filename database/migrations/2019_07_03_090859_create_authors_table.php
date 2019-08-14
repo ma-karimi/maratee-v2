@@ -18,7 +18,7 @@ class CreateAuthorsTable extends Migration {
 			$table->json('name');
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

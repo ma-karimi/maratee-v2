@@ -28,7 +28,7 @@ class CreateMediasTable extends Migration
             $table->morphs('mediable');
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
         });
     }
 

@@ -6,6 +6,7 @@ use App\Models\Contracts\BaseModel;
 use App\Models\Scope\HerbariumScope;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
@@ -415,4 +416,11 @@ class Herbarium extends BaseModel
         return $this->belongsTo(General::class, 'general_phytogeography_id');
     }
 
+    /**
+     * @return MorphToMany
+     */
+    public function actions(): MorphToMany
+    {
+        return $this->morphToMany(ActionHub::class, 'actionable');
+    }
 }

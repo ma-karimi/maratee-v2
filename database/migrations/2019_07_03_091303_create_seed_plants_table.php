@@ -18,7 +18,7 @@ class CreateSeedPlantsTable extends Migration {
 			$table->unsignedInteger('plant_id');
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

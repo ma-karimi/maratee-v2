@@ -16,7 +16,6 @@ class CreateSeedHubsTable extends Migration
         Schema::create('seed_hubs', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('project_id')->nullable();
-            $table->unsignedInteger('user_id');
 
 
             $table->json('action_role')->nullable();
@@ -27,7 +26,7 @@ class CreateSeedHubsTable extends Migration
             $table->date('date')->nullable();
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
         });
     }
 

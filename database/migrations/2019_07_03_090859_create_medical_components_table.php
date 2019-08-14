@@ -20,7 +20,7 @@ class CreateMedicalComponentsTable extends Migration {
 			$table->boolean('is_active');
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
@@ -101,14 +102,6 @@ class CryoBank extends BaseModel
         return $this->hasMany(Chromosome::class)->latest();
     }
 
-    /**
-     * @return HasMany
-     */
-    public function cryoBankActions(): HasMany
-    {
-        return $this->hasMany(CryoBankAction::class)->latest();
-    }
-
 
     /**
      * @return BelongsTo
@@ -132,5 +125,30 @@ class CryoBank extends BaseModel
     public function class(): BelongsTo
     {
         return $this->belongsTo(General::class,'class_id');
+    }
+
+    /**
+     * @return MorphToMany
+     */
+    public function articles(): MorphToMany
+    {
+        return $this->morphToMany(ArticleHub::class, 'articleable')->withTimestamps();
+    }
+
+
+    /**
+     * @return MorphToMany
+     */
+    public function actions(): MorphToMany
+    {
+        return $this->morphToMany(ActionHub::class, 'actionable')->withTimestamps();
+    }
+
+    /**
+     * @return MorphToMany
+     */
+    public function users(): MorphToMany
+    {
+        return $this->morphToMany(UserHub::class, 'userable')->withTimestamps();
     }
 }

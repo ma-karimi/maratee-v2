@@ -20,7 +20,7 @@ class CreateTreatmentsTable extends Migration {
 			$table->json('description')->nullable();
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

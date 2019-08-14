@@ -23,7 +23,7 @@ class CreateEntryHubsTable extends Migration {
 			$table->unsignedInteger('organization_id')->nullable()->comment('سازمان یا باغ گیاه شناسی که نمونه از انجا می باشد.');
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

@@ -18,23 +18,10 @@ class CreatePlantsTable extends Migration {
 			$table->json('name');
 			$table->json('description')->nullable();
 			$table->json('domestic_name')->nullable();
-            $table->unsignedInteger('general_sub_specie_id')->nullable();
-            $table->unsignedInteger('general_variety_id')->nullable();
-            $table->unsignedInteger('general_specie_id')->nullable();
-            $table->unsignedInteger('general_class_id')->nullable();
-            $table->unsignedInteger('general_group_id')->nullable();
-            $table->unsignedInteger('general_order_id')->nullable();
-            $table->unsignedInteger('general_flowering_id')->nullable();
-            $table->unsignedInteger('general_sperm_id')->nullable();
-            $table->unsignedInteger('general_family_id');
-            $table->unsignedInteger('general_genus_id');
-            $table->unsignedInteger('general_cotyledon_id');
-            $table->unsignedInteger('user_id')->nullable();
-            $table->unsignedInteger('article_id')->nullable();
-            $table->unsignedInteger('location_id')->nullable();
-            $table->string('exclusivity')->nullable();
+            $table->unsignedInteger('taxonomy_id');
+            $table->unsignedInteger('classification_id');
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

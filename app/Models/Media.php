@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+
 /**
  * @SWG\Definition(
  *      definition="Media",
@@ -154,6 +156,15 @@ class Media extends BaseModel
      */
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
 
+
+    /**
+     * @return MorphToMany
+     */
+    public function articles(): MorphToMany
+    {
+        return $this->morphToMany(ArticleHub::class, 'articleable')->withTimestamps();
+    }
+
     /**
      * @return BelongsTo
      */
@@ -237,14 +248,6 @@ class Media extends BaseModel
     /**
      * @return HasMany
      */
-    public function paleontologyCitations(): HasMany
-    {
-        return $this->hasMany(PaleontologyCitation::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
     public function paleontologyMedias(): HasMany
     {
         return $this->hasMany(PaleontologyMedia::class)->latest();
@@ -256,5 +259,23 @@ class Media extends BaseModel
     public function visits(): HasMany
     {
         return $this->hasMany(Visit::class)->latest();
+    }
+
+
+    /**
+     * @return MorphToMany
+     */
+    public function locations(): MorphToMany
+    {
+        return $this->morphToMany(LocationHub::class, 'locationable')->withTimestamps();
+    }
+
+
+    /**
+     * @return MorphToMany
+     */
+    public function users(): MorphToMany
+    {
+        return $this->morphToMany(UserHub::class, 'userable')->withTimestamps();
     }
 }

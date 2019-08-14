@@ -55,7 +55,7 @@ class CreateSeedsTable extends Migration
             $table->integer('plants_found_no')->nullable();
             $table->json('seed_advise')->nullable();
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
         });
     }
 

@@ -26,14 +26,16 @@ class CreatePaleontologiesTable extends Migration
             $table->string('salon')->nullable();
             $table->integer('closet')->nullable();
             $table->integer('drawer')->nullable();
-            $table->json('infraspecific')->nullable();
-            $table->json('typestatus')->nullable();
+            $table->json('infra_specific')->nullable();
+            $table->json('type_status')->nullable();
             $table->json('preservation')->nullable();
             $table->integer('pieces')->nullable();
             $table->json('color')->nullable();
             $table->json('element')->nullable();
             $table->unsignedInteger('geology_age_id');
+            $table->unsignedInteger('plant_id');
             $table->json('treatment')->nullable();
+            $table->integer('plates_no')->nullable();
             $table->json('additional_info')->nullable();
             $table->json('access')->nullable();
             $table->date('last_update')->nullable();
@@ -43,7 +45,7 @@ class CreatePaleontologiesTable extends Migration
             $table->json('common_name')->nullable();
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
         });
     }
 

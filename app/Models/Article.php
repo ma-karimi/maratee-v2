@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
@@ -108,11 +109,21 @@ class Article extends BaseModel
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at', 'year'];
 
+
     public function articleHubs()
     {
-        return $this->hasMany(ArticleHub::class, 'article_id')->latest();
+        return $this->morphedByMany(ArticleHub::class, 'articleable')->withTimestamps();
     }
 
+
+
+    /**
+     * @return MorphToMany
+     */
+    public function users(): MorphToMany
+    {
+        return $this->morphToMany(UserHub::class, 'userable')->withTimestamps();
+    }
 
     public function chromosomes()
     {

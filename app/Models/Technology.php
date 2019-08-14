@@ -3,52 +3,61 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
- *      definition="TechnologyCollection",
- *      required={"name","paleontology_id"},
+ *      definition="Technology",
+ *      required={"project_id","seed_technology_id", "seed_id", "department_id", "evaluation_id", "germination_id", "seed_weight_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="germination_id",
  *          description="germination_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="user_id",
+ *          property="seed_technology_id",
  *          description="germination_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="project_id",
  *          description="germination_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="department_id",
  *          description="germination_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="seed_technology_id_id",
- *          description="seed_technology_id_id",
+ *          property="seed_id",
+ *          description="seed_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="collection_id",
- *          description="collection_id",
+ *          property="evaluation_id",
+ *          description="evaluation_id",
  *          type="integer",
- *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="seed_weight_id",
+ *          description="seed_weight_id",
+ *          type="integer",
+ *      ),
+ *      @SWG\Property(
+ *          property="fridge_type",
+ *          description="fridge_type",
+ *          type="integer",
+ *      ),
+ *      @SWG\Property(
+ *          property="regeneration_evaluation",
+ *          description="regeneration_evaluation",
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -64,23 +73,26 @@ use App\Models\Contracts\BaseModel;
  *      )
  * )
  */
-class TechnologyCollection extends BaseModel
+class Technology extends BaseModel
 {
 
     public static $rules=[
         'seed_technology_id' => 'required|exists:seed_technologies,id',
-        'collection_id' => 'required|exists:collections,id',
-        'germination_id' => 'exists:germinations,id',
-        'user_id' => 'exists:users,id',
-        'department_id' => 'exists:departments,id',
-        'project_id' => 'exists:projects,id',
+        'evaluation_id' => 'required|exists:evaluations,id',
+        'seed_weight_id' => 'required|exists:seed_weights,id',
+        'germination_id' => 'required|exists:germinations,id',
+        'seed_id' => 'required|exists:seeds,id',
+        'department_id' => 'required|exists:departments,id',
+        'project_id' => 'required|exists:projects,id',
+        'fridge_type' => 'integer',
+        'regeneration_evaluation' => 'string',
     ];
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'technology_collections';
+    protected $table = 'technologies';
 
     /**
      * Attributes that should be mass-assignable.
@@ -106,22 +118,32 @@ class TechnologyCollection extends BaseModel
     {
         return $this->belongsTo(Germination::class, 'germination_id');
     }
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+
     public function department()
     {
         return $this->belongsTo(Department::class, 'department_id');
+    }
+    public function evaluation()
+    {
+        return $this->belongsTo(Evaluation::class);
     }
     public function project()
     {
         return $this->belongsTo(Project::class, 'project_id');
     }
 
-    public function collection()
+    public function seedWeight()
     {
-        return $this->belongsTo(Collection::class, 'collection_id');
+        return $this->belongsTo(SeedWeight::class, 'seed_weight_id');
     }
 
+
+
+    /**
+     * @return MorphToMany
+     */
+    public function users(): MorphToMany
+    {
+        return $this->morphToMany(UserHub::class, 'userable')->withTimestamps();
+    }
 }

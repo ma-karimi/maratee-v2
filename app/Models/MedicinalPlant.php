@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+
 /**
  * @SWG\Definition(
  *      definition="MedicinalPlant",
@@ -212,4 +214,21 @@ class MedicinalPlant extends BaseModel
         return $this->hasMany(MedicinalPlantMorphology::class)->latest();
     }
 
+
+    /**
+     * @return MorphToMany
+     */
+    public function articles(): MorphToMany
+    {
+        return $this->morphToMany(ArticleHub::class, 'articleable');
+    }
+
+
+    /**
+     * @return MorphToMany
+     */
+    public function locations(): MorphToMany
+    {
+        return $this->morphToMany(LocationHub::class, 'locationable');
+    }
 }

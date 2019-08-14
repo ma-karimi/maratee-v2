@@ -19,7 +19,7 @@ class CreateMedicinalPlantMethodsTable extends Migration {
 			$table->unsignedInteger('method_id');
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

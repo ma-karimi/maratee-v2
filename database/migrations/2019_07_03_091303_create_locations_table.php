@@ -15,9 +15,12 @@ class CreateLocationsTable extends Migration {
 		Schema::create('locations', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->unsignedInteger('address_id');
-			$table->unsignedInteger('region_id')->nullable();
-			$table->string('altitude')->nullable();
+            $table->unsignedInteger('city_id');
+            $table->json('region_name')->nullable();
+            $table->json('address')->nullable();
+            $table->unsignedInteger('village_id')->nullable();
+
+            $table->string('altitude')->nullable();
 			$table->point('point')->nullable();
 			$table->json('name');
 			$table->json('description')->nullable();
@@ -26,7 +29,7 @@ class CreateLocationsTable extends Migration {
 
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

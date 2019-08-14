@@ -33,7 +33,7 @@ transfer to garden location garden_id1
 
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

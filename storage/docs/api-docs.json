@@ -16981,7 +16981,7 @@
                         }
                     },
                     {
-                        "name": "taxonomies_id",
+                        "name": "taxonomy_id",
                         "in": "body",
                         "description": "Plant that should be stored",
                         "required": false,
@@ -17239,7 +17239,7 @@
                         }
                     },
                     {
-                        "name": "taxonomies_id",
+                        "name": "taxonomy_id",
                         "in": "body",
                         "description": "Plant that should be stored",
                         "required": false,
@@ -28409,8 +28409,8 @@
                         "type": "string"
                     }
                 },
-                "taxonomies_id": {
-                    "description": "taxonomies_id",
+                "taxonomy_id": {
+                    "description": "taxonomy_id",
                     "type": "integer",
                     "format": "int32"
                 },

@@ -20,7 +20,7 @@ class CreateMethodsTable extends Migration {
 			$table->integer('parent_id')->nullable();
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

@@ -23,7 +23,7 @@ class CreateTransferCredentialsTable extends Migration {
             $table->morphs('transferable');
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

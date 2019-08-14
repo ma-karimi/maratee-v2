@@ -20,7 +20,7 @@ class CreateMorphologiesTable extends Migration
             $table->json('unit');
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
         });
     }
 

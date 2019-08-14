@@ -33,7 +33,7 @@ class CreateUsersTable extends Migration {
 			$table->integer('work_experience')->nullable();
 			$table->tinyInteger('status')->nullable();
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

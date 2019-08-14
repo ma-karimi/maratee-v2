@@ -8,6 +8,8 @@ use App\Models\Mutator\LocationMutator;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+
 /**
  * @SWG\Definition(
  *      definition="Location",
@@ -131,11 +133,11 @@ class Location extends BaseModel
     }
 
     /**
-     * @return HasMany
+     * @return MorphToMany
      */
-    public function articleHubs(): HasMany
+    public function articles(): MorphToMany
     {
-        return $this->hasMany(ArticleHub::class)->latest();
+        return $this->morphToMany(ArticleHub::class, 'articleable');
     }
 
     /**
@@ -219,14 +221,6 @@ class Location extends BaseModel
     }
 
     /**
-     * @return HasMany
-     */
-    public function seedMoleculars(): HasMany
-    {
-        return $this->hasMany(SeedMolecular::class)->latest();
-    }
-
-    /**
      * @return BelongsTo
      */
     public function village(): BelongsTo
@@ -239,5 +233,11 @@ class Location extends BaseModel
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
+    }
+
+
+    public function locationHubs()
+    {
+        return $this->morphedByMany(ActionHub::class, 'actionable');
     }
 }

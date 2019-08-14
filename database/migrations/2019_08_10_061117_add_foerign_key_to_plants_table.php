@@ -14,10 +14,8 @@ class AddFoerignKeyToPlantsTable extends Migration
     public function up()
     {
         Schema::table('plants', function (Blueprint $table) {
-            $table->unsignedInteger('taxonomies_id')->nullable();
-            $table->unsignedInteger('classification_id')->nullable();
-            $table->foreign('taxonomies_id')->references('id')->on('taxonomies')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('classification_id')->references('id')->on('classification')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('classification_id')->references('id')->on('classifications')->onUpdate('NO ACTION')->onDelete('cascade');
         });
     }
 
@@ -30,8 +28,7 @@ class AddFoerignKeyToPlantsTable extends Migration
     {
         Schema::table('plants', function (Blueprint $table) {
             $table->dropForeign('classification_id');
-            $table->dropForeign('taxonomies_id');
-            $table->dropColumn('taxonomies_id','classification_id');
+            $table->dropForeign('taxonomy_id');
         });
     }
 }

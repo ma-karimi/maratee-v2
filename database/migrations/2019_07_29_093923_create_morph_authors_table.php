@@ -18,7 +18,7 @@ class CreateMorphAuthorsTable extends Migration
             $table->morphs('morph_author');
             $table->unsignedInteger('author_id');
             $table->timestamps();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
         });
     }
 

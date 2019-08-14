@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\TechnologyCollection;
+use App\Models\Technology;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreateTechnologyCollectionAPIRequest extends APIRequest
+class CreateTechnologyAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class CreateTechnologyCollectionAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return TechnologyCollection::$rules;
+        return Technology::$rules;
     }
 }

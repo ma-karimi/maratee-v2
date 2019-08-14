@@ -54,7 +54,7 @@ that is an herbarium organization which we can but its id in this place');
 
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

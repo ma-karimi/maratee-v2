@@ -11,6 +11,6 @@ class TechnologyCollectionTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\TechnologyCollection::class, 50)->create();
+        factory(App\Models\Technology::class, 50)->create();
     }
 }

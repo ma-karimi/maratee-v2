@@ -1,7 +1,7 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\TechnologyCollection;
-use App\Repositories\TechnologyCollectionRepository;
+use App\Models\Technology;
+use App\Repositories\TechnologyRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\Traits\MakeTechnologyCollectionTrait;
@@ -12,14 +12,14 @@ class TechnologyCollectionRepositoryTest extends TestCase
     use MakeTechnologyCollectionTrait, ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var TechnologyCollectionRepository
+     * @var TechnologyRepository
      */
     protected $technologyCollectionRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->technologyCollectionRepo = \App::make(TechnologyCollectionRepository::class);
+        $this->technologyCollectionRepo = \App::make(TechnologyRepository::class);
     }
 
     /**
@@ -32,7 +32,7 @@ class TechnologyCollectionRepositoryTest extends TestCase
         $createdTechnologyCollection = $createdTechnologyCollection->toArray();
         $this->assertArrayHasKey('id', $createdTechnologyCollection);
         $this->assertNotNull($createdTechnologyCollection['id'], 'Created TechnologyCollection must have id specified');
-        $this->assertNotNull(TechnologyCollection::find($createdTechnologyCollection['id']), 'TechnologyCollection with given id must be in DB');
+        $this->assertNotNull(Technology::find($createdTechnologyCollection['id']), 'TechnologyCollection with given id must be in DB');
         $this->assertModelData($technologyCollection, $createdTechnologyCollection);
     }
 
@@ -68,6 +68,6 @@ class TechnologyCollectionRepositoryTest extends TestCase
         $technologyCollection = $this->makeTechnologyCollection();
         $resp = $this->technologyCollectionRepo->delete($technologyCollection->id);
         $this->assertTrue($resp);
-        $this->assertNull(TechnologyCollection::find($technologyCollection->id), 'TechnologyCollection should not exist in DB');
+        $this->assertNull(Technology::find($technologyCollection->id), 'TechnologyCollection should not exist in DB');
     }
 }

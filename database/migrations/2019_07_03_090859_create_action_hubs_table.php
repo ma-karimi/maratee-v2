@@ -16,17 +16,19 @@ class CreateActionHubsTable extends Migration {
 		{
 		    $table->increments('id');
 
-			$table->unsignedInteger('action_id');
 			$table->unsignedInteger('user_id');
-			$table->unsignedInteger('location_id')->nullable();
-			$table->unsignedInteger('herbarium_id')->nullable();
-			$table->date('date')->nullable();
+			$table->unsignedInteger('action_id');
+            //herbarium, cryo_bank, paleontology
+            $table->morphs('actionable');
+
+            $table->date('date')->nullable();
 			$table->json('description')->nullable();
 			$table->unsignedInteger('project_id')->nullable();
+			$table->unsignedInteger('location_id')->nullable();
 			$table->unsignedInteger('department_id')->nullable();
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 
 		});
 	}

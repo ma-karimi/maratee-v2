@@ -33,16 +33,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="collection_id",
- *          description="collection_id",
+ *          property="user_id",
+ *          description="user_id",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="seed_weight",
- *          description="weight",
- *          type="integer",
- *          format="int32"
+ *          description="seed_weight",
+ *          type="float",
  *      ),
  *      @SWG\Property(
  *          property="delivery_date",
@@ -56,20 +55,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="saved_type",
- *          description="saved_type",
- *          type="array",
-	 *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
  *          property="description",
  *          description="description",
  *          type="array",
 	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="accession",
- *          description="accession",
+ *          property="exchange_type",
+ *          description="exchange_type",
  *          type="string",
  *      ),
  *      @SWG\Property(
@@ -93,15 +86,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class SeedExchange extends BaseModel
 {
-    public static $linguistically=['approval_no'=>false,'saved_type'=>false,'description'=>false];
+    public static $linguistically=['description'=>true];
 
     public static $rules=[
         'seed_id' => 'exists:seeds,id',
-        'collection_id' => 'required|exists:collections,id',
+        'user_id' => 'required|exists:users,id',
         'project_id' => 'exists:projects,id',
         'department_id' => 'exists:departments,id',
-        'weight' => 'integer',
+        'seed_weight' => 'integer',
         'delivery_date' => 'date',
+        'request_no' => 'string',
+        'regeneration_evaluation' => 'string',
+        'exchange_type' => 'string',
     ];
     /**
      * The database table used by the model.
@@ -124,8 +120,6 @@ class SeedExchange extends BaseModel
      * @var array
      */
     protected $casts = [
-        'approval_no' => 'json',
-        'saved_type' => 'json',
         'description' => 'json',
     ];
 
@@ -139,9 +133,9 @@ class SeedExchange extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function collection()
+    public function user()
     {
-        return $this->belongsTo('App\Models\Collection');
+        return $this->belongsTo(User::class);
     }
     /**
      * @return BelongsTo

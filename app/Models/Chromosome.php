@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
@@ -35,9 +36,7 @@ class Chromosome extends BaseModel
     public static $rules = [
         'herbarium_id' => 'required|exists:herbariums,id',
         'cryo_bank_id' => 'required|exists:cryo_banks,id',
-        'article_id' => 'required|exists:articles,id',
         'general_class_id' => 'required|exists:generals,id',
-        'location_id' => 'required|exists:locations,id',
         'n_no' => 'required|integer',
         '2n_no' => 'integer',
     ];
@@ -53,7 +52,7 @@ class Chromosome extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['2n_no', 'article_id', 'created_at', 'cryo_bank_id', 'url', 'general_class_id','deleted_at', 'herbarium_id', 'location_id', 'n_no', 'notes', 'updated_at'];
+    protected $fillable = ['2n_no', 'created_at', 'cryo_bank_id', 'url', 'general_class_id','deleted_at', 'herbarium_id',  'n_no', 'notes', 'updated_at'];
 
 
     /**
@@ -63,14 +62,6 @@ class Chromosome extends BaseModel
      */
     protected $casts = ['notes' => 'json'];
 
-
-    /**
-     * @return BelongsTo
-     */
-    public function article(): BelongsTo
-    {
-        return $this->belongsTo(Article::class);
-    }
 
     /**
      * @return BelongsTo
@@ -88,13 +79,21 @@ class Chromosome extends BaseModel
         return $this->belongsTo(Herbarium::class);
     }
 
+
     /**
-     * @return BelongsTo
+     * @return MorphToMany
      */
-    public function location(): BelongsTo
+    public function articles(): MorphToMany
     {
-        return $this->belongsTo(Location::class);
+        return $this->morphToMany(ArticleHub::class, 'articleable');
     }
 
 
+    /**
+     * @return MorphToMany
+     */
+    public function locations(): MorphToMany
+    {
+        return $this->morphToMany(LocationHub::class, 'locationable');
+    }
 }

@@ -62,9 +62,13 @@ class HelpersAPIController extends AppBaseController
     {
         $models=[];
         $classes=$request->classes;
+//        foreach ($classes as $index => $class) {
+//            $model='App\\Models\\'.ucfirst(rtrim($class,'s'));
+//            $models[$class]= self::relationshipsText( $model);
+//        }
         foreach ($classes as $index => $class) {
             $model='App\\Models\\'.ucfirst(rtrim($class,'s'));
-            $models[$class]= self::relationshipsText( $model);
+            $models[$class]= self::relationshipsWithType($model);
         }
         return $this->sendResponse($models,'Relations retrieved successfully');
     }

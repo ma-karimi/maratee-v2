@@ -221,7 +221,7 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="taxonomies_id",
+     *          name="taxonomy_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
@@ -459,7 +459,7 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="taxonomies_id",
+     *          name="taxonomy_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,

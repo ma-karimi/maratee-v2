@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\TechnologyCollection::class, function (Faker $faker) {
+$factory->define(App\Models\Technology::class, function (Faker $faker) {
     $seed_techs=\App\Models\SeedTechnology::pluck('id')->toArray();
     $collections=\App\Models\Collection::pluck('id')->toArray();
     return [

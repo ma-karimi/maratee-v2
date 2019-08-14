@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Accessor\UserAccessor;
 use App\Models\Scope\UserScope;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -195,7 +196,7 @@ class User extends Authenticatable
      */
     public function findForPassport($username)
     {
-        $request = \Request::all();
+        $request = request()->all();
         if (strpos($request['username'], '@')) {
             return $this->where('email', $username)->first();
         } else {
@@ -233,11 +234,17 @@ class User extends Authenticatable
     }
 
     /**
-     * @return HasMany
+     * @return MorphToMany
      */
-    public function articleHubs()
+    public function articles(): MorphToMany
     {
-        return $this->hasMany(ArticleHub::class)->latest();
+        return $this->morphToMany(ArticleHub::class, 'articleable');
+    }
+
+
+    public function userHubs()
+    {
+        return $this->morphedByMany(UserHub::class, 'userable');
     }
 
     /**
@@ -246,22 +253,6 @@ class User extends Authenticatable
     public function attendances()
     {
         return $this->hasMany(Attendance::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function paleontologyActions()
-    {
-        return $this->hasMany(PaleontologyAction::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function paleontologyCitations()
-    {
-        return $this->hasMany(PaleontologyCitation::class)->latest();
     }
 
     /**

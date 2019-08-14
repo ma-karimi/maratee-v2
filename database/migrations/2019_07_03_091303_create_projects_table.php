@@ -21,7 +21,7 @@ class CreateProjectsTable extends Migration {
 			$table->unsignedInteger('plan_id')->nullable();
 			$table->json('research_title')->nullable();
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

@@ -19,7 +19,7 @@ class CreateBotanicalReproductionsTable extends Migration {
 
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use App\Models\Scope\ActionHubScope;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
@@ -120,24 +121,17 @@ class ActionHub extends BaseModel
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
 
 
-    public function department()
+    /**
+     * @return MorphToMany
+     */
+    public function articles(): MorphToMany
     {
-        return $this->belongsTo(Department::class);
-    }
-
-    public function action()
-    {
-        return $this->belongsTo(Action::class);
+        return $this->morphToMany(ArticleHub::class, 'articleable');
     }
 
     public function project()
     {
         return $this->belongsTo(Project::class);
-    }
-
-    public function herbarium()
-    {
-        return $this->belongsTo(Herbarium::class);
     }
 
     public function location()

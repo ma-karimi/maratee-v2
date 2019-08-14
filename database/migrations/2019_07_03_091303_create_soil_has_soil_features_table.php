@@ -20,7 +20,7 @@ class CreateSoilHasSoilFeaturesTable extends Migration {
 			$table->json('value');
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

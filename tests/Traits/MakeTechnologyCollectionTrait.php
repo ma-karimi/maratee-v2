@@ -1,8 +1,8 @@
 <?php namespace Tests\Traits;
 
 use Faker\Factory as Faker;
-use App\Models\TechnologyCollection;
-use App\Repositories\TechnologyCollectionRepository;
+use App\Models\Technology;
+use App\Repositories\TechnologyRepository;
 
 trait MakeTechnologyCollectionTrait
 {
@@ -10,12 +10,12 @@ trait MakeTechnologyCollectionTrait
      * Create fake instance of TechnologyCollection and save it in database
      *
      * @param array $technologyCollectionFields
-     * @return TechnologyCollection
+     * @return Technology
      */
     public function makeTechnologyCollection($technologyCollectionFields = [])
     {
-        /** @var TechnologyCollectionRepository $technologyCollectionRepo */
-        $technologyCollectionRepo = \App::make(TechnologyCollectionRepository::class);
+        /** @var TechnologyRepository $technologyCollectionRepo */
+        $technologyCollectionRepo = \App::make(TechnologyRepository::class);
         $theme = $this->fakeTechnologyCollectionData($technologyCollectionFields);
         return $technologyCollectionRepo->create($theme);
     }
@@ -24,11 +24,11 @@ trait MakeTechnologyCollectionTrait
      * Get fake instance of TechnologyCollection
      *
      * @param array $technologyCollectionFields
-     * @return TechnologyCollection
+     * @return Technology
      */
     public function fakeTechnologyCollection($technologyCollectionFields = [])
     {
-        return new TechnologyCollection($this->fakeTechnologyCollectionData($technologyCollectionFields));
+        return new Technology($this->fakeTechnologyCollectionData($technologyCollectionFields));
     }
 
     /**

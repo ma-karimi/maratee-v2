@@ -19,7 +19,7 @@ class CreateHerbariumAppendixesTable extends Migration {
 			$table->string('appendix');
 			$table->unsignedInteger('destination_herbarium_id');
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

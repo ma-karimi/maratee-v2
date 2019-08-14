@@ -26,7 +26,7 @@ class CreateOrganizationsTable extends Migration
             $table->string('website', 45)->nullable();
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
         });
     }
 

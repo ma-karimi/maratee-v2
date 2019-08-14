@@ -15,6 +15,7 @@ class CreateTaxonomiesTable extends Migration
     {
         Schema::create('taxonomies', function (Blueprint $table) {
             $table->increments('id');
+            //generals
             $table->unsignedInteger('genus_id')->nullable();
             $table->unsignedInteger('species_id')->nullable();
             $table->unsignedInteger('subspecies_id')->nullable();

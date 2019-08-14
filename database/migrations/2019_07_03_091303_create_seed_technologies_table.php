@@ -38,7 +38,7 @@ class CreateSeedTechnologiesTable extends Migration
             $table->json('other_detail')->nullable();
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
         });
     }
 

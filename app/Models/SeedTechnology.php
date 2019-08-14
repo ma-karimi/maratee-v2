@@ -193,7 +193,7 @@ class SeedTechnology extends BaseModel
 
     public function technologyCollections()
     {
-        return $this->hasMany(TechnologyCollection::class, 'seed_technology_id')->latest();
+        return $this->hasMany(Technology::class, 'seed_technology_id')->latest();
     }
 
     public function seedWeights()

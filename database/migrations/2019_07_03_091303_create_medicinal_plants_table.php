@@ -29,8 +29,7 @@ cultivated
 ');
 			$table->float('efficiency', 2, 0)->nullable();
 			$table->json('secondary_metabolite')->nullable();
-			$table->unsignedInteger('location_id');
-			$table->unsignedInteger('article_id')->nullable();
+
 			$table->json('exclusivity')->nullable();
 			$table->json('life_cycle')->nullable();
 			$table->json('phenology_stage')->nullable();
@@ -38,7 +37,7 @@ cultivated
 			$table->json('used_type')->nullable();
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

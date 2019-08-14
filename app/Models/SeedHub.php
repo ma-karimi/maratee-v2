@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
@@ -148,5 +149,13 @@ class SeedHub extends BaseModel
         return $this->belongsTo(Location::class, 'location_id');
     }
 
+
+    /**
+     * @return MorphToMany
+     */
+    public function users(): MorphToMany
+    {
+        return $this->morphToMany(UserHub::class, 'userable')->withTimestamps();
+    }
 
 }

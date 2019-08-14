@@ -18,7 +18,7 @@ class CreatePlantingActionsTable extends Migration {
 			$table->json('name');
 			$table->json('description')->nullable();
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

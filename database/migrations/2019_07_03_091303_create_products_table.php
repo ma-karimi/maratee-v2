@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration {
 			$table->unsignedInteger('organization_id');
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

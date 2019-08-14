@@ -30,10 +30,9 @@ class CreateCryoBanksTable extends Migration
             $table->string('rack_no')->nullable();
             $table->string('proposal_name')->nullable();
             $table->unsignedInteger('herbarium_id');
-            $table->unsignedInteger('user_id');
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
         });
     }
 

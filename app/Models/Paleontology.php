@@ -6,6 +6,7 @@ use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
@@ -189,7 +190,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  */
 class Paleontology extends BaseModel
 {
-    public static $linguistically = ['infraspecific' => false, 'type_status' => false, 'preservation' => false, 'color' => false, 'element' => false, 'description' => true, 'additional_info' => false, 'access' => false, 'excavation' => false, 'collection_name' => false, 'common_name' => false];
+    public static $linguistically = ['infra_specific' => false, 'type_status' => false, 'preservation' => false, 'color' => false, 'element' => false, 'description' => true, 'additional_info' => false, 'access' => false, 'excavation' => false, 'collection_name' => false, 'common_name' => false];
     public static $rules = [
         'catalog_no' => 'integer',
         'specimen_no' => 'string',
@@ -229,7 +230,7 @@ class Paleontology extends BaseModel
      * @var array
      */
     protected $casts = [
-        'infraspecific' => 'json',
+        'infra_specific' => 'json',
         'type_status' => 'json',
         'preservation' => 'json',
         'color' => 'json',
@@ -307,22 +308,6 @@ class Paleontology extends BaseModel
     /**
      * @return HasMany
      */
-    public function paleontologyActions(): HasMany
-    {
-        return $this->hasMany(PaleontologyAction::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function paleontologyCitations(): HasMany
-    {
-        return $this->hasMany(PaleontologyCitation::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
     public function treatments(): HasMany
     {
         return $this->hasMany(Treatment::class)->latest();
@@ -337,4 +322,22 @@ class Paleontology extends BaseModel
     {
         return $this->morphMany(Borrow::class, 'borrowable');
     }
+
+
+    /**
+     * @return MorphToMany
+     */
+    public function articles(): MorphToMany
+    {
+        return $this->morphToMany(ArticleHub::class, 'articleable');
+    }
+
+    /**
+     * @return MorphToMany
+     */
+    public function actions(): MorphToMany
+    {
+        return $this->morphToMany(ActionHub::class, 'actionable');
+    }
+
 }

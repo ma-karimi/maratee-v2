@@ -28,7 +28,7 @@ class CreateBorrowsTable extends Migration {
 			$table->date('return')->nullable();
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

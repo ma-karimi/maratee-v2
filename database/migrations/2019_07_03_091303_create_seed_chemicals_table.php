@@ -21,7 +21,7 @@ class CreateSeedChemicalsTable extends Migration
             $table->unsignedInteger('location_id')->nullable();
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
         });
     }
 

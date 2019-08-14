@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClassificationTable extends Migration
+class CreateClassificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateClassificationTable extends Migration
      */
     public function up()
     {
-        Schema::create('classification', function (Blueprint $table) {
+        Schema::create('classifications', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('flowering_id');
             $table->unsignedInteger('cotyledon_id')->nullable();
@@ -33,6 +33,6 @@ class CreateClassificationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classification');
+        Schema::dropIfExists('classifications');
     }
 }

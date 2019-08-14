@@ -29,7 +29,7 @@ class CreateVisitsTable extends Migration {
 			$table->unsignedInteger('user_id');
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

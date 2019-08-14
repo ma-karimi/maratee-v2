@@ -57,7 +57,7 @@ Route::resource('villages', 'VillageAPIController');
 
 Route::resource('users', 'UserAPIController');
 
-Route::resource('technology_collections', 'TechnologyCollectionAPIController');
+Route::resource('technology', 'TechnologyAPIController');
 
 Route::resource('soil_has_soil_features', 'SoilHasSoilFeatureAPIController');
 

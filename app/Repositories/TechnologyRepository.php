@@ -2,22 +2,20 @@
 
 namespace App\Repositories;
 
-use App\Models\TechnologyCollection;
-use App\Repositories\BaseRepository;
+use App\Models\Technology;
 
 /**
  * Class TechnologyCollectionRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:10 am UTC
-*/
-
-class TechnologyCollectionRepository extends BaseRepository
+ */
+class TechnologyRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**
@@ -35,6 +33,6 @@ class TechnologyCollectionRepository extends BaseRepository
      **/
     public function model()
     {
-        return TechnologyCollection::class;
+        return Technology::class;
     }
 }

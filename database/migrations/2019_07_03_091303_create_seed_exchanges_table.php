@@ -16,16 +16,17 @@ class CreateSeedExchangesTable extends Migration
         Schema::create('seed_exchanges', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('seed_id');
-            $table->unsignedInteger('collection_id');
-            $table->integer('seed_weight')->nullable();
+            $table->float('seed_weight',4)->nullable();
             $table->date('delivery_date')->nullable();
-            $table->string('accession')->nullable();
+            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('project_id');
+            $table->unsignedInteger('department_id');
             $table->string('regeneration_evaluation')->nullable();
             $table->string('request_no')->nullable();
-            $table->json('saved_type')->nullable();
+            $table->string('exchange_type')->nullable();
             $table->json('description')->nullable();
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
         });
     }
 

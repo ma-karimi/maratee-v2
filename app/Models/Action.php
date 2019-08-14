@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use App\Models\Scope\ActionScope;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
@@ -47,7 +48,7 @@ class Action extends BaseModel
 {
 
     use ActionScope;
-    public static $linguistically = ['name' => true, 'description' => false];
+    public static $linguistically = ['name' => true, 'description' => true];
     /**
      * The database table used by the model.
      *
@@ -69,16 +70,6 @@ class Action extends BaseModel
 
     public function actionHubs()
     {
-        return $this->hasMany(ActionHub::class)->latest();
-    }
-
-    public function articleHubs()
-    {
-        return $this->hasMany(ArticleHub::class)->latest();
-    }
-
-    public function cryoBankActions()
-    {
-        return $this->hasMany(CryoBankAction::class)->latest();
+        return $this->morphedByMany(ActionHub::class, 'actionable');
     }
 }

@@ -15,16 +15,12 @@ class CreateArticleHubsTable extends Migration {
 		Schema::create('article_hubs', function(Blueprint $table)
 		{
 		    $table->increments('id');
-
-			$table->unsignedInteger('article_id');
-			$table->unsignedInteger('user_id');
-			$table->unsignedInteger('action_id')->nullable();
-			$table->unsignedInteger('location_id')->nullable();
-			$table->unsignedInteger('cryo_bank_id')->nullable();
-			$table->date('date')->nullable();
+		    $table->unsignedInteger('article_id');
+		    //cryo_bank, media, action_hub, plants, chromosome, medicinal_plant, paleontology
+		    $table->morphs('articleable');
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 

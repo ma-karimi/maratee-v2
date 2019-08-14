@@ -27,7 +27,7 @@ future
 to descirbe if that plant is used or could be used in the specific industry now or in future.');
 
             $table->timeStampsTz();
-            $table->dateTimeTz('deleted_at')->nullable();
+            $table->softDeletesTz();
 		});
 	}
 
