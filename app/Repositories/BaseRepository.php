@@ -80,6 +80,21 @@ abstract class BaseRepository
     }
 
     /**
+     * @param array $criteria
+     * @param array $columns
+     * @return Builder|Builder[]|Collection
+     */
+    public function getByCriteria(array $criteria, $columns = ['*'])
+    {
+        $query = $this->model->newQuery();
+        foreach ($criteria as $index => $criterion) {
+            if ($criterion!=null)
+                $query= $query->where($index, $criterion);
+        }
+        return $query->get($columns);
+    }
+
+    /**
      * Build a query for retrieving all records.
      *
      * @param array $search
@@ -148,18 +163,20 @@ abstract class BaseRepository
      */
     public function create($input)
     {
+
         try{
             DB::beginTransaction();
             $model = $this->model->newInstance($input);
             $model->save();
             DB::commit();
+            return $model;
         }
         catch (\Exception $e){
             DB::rollBack();
             report($e);
             abort(JsonResponse::HTTP_BAD_REQUEST,'Operation Failed!');
         }
-        return $model;
+
     }
 
     /**

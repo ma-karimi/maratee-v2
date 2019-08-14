@@ -144,18 +144,60 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="taxonomy_id",
+     *          name="family_id",
      *          in="body",
-     *          description="Plant that should be stored",
+     *          description="Taxonomy that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
-     *          name="classification_id",
+     *          name="genus_id",
      *          in="body",
-     *          description="Plant that should be stored",
+     *          description="Taxonomy that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="species_id",
+     *          in="body",
+     *          description="Taxonomy that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="subspecies_id",
+     *          in="body",
+     *          description="Taxonomy that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="variety_id",
+     *          in="body",
+     *          description="Taxonomy that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="flowering_id",
+     *          in="body",
+     *          description="Classification that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/Classification")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="cotyledon_id",
+     *          in="body",
+     *          description="Classification that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Classification")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="sperm_id",
+     *          in="body",
+     *          description="Classification that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Classification")
      *      ),
      *      @SWG\Response(
      *          response=200,

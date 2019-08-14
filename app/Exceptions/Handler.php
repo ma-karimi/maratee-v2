@@ -56,10 +56,10 @@ class Handler extends ExceptionHandler
             return response()->json(['errors' => $exception->errors()], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        if ($exception instanceof FatalThrowableError && $request->is('api/*')) {
+        /*if ($exception instanceof FatalThrowableError && $request->is('api/*')) {
             report($exception);
             return response()->json(['errors' => 'Entry Class Not Found !!!'], JsonResponse::HTTP_BAD_REQUEST);
-        }
+        }*/
 
         if ($exception instanceof RelationNotFoundException && $request->is('api/*')) {
             $model = get_class($exception->model);

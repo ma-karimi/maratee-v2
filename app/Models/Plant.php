@@ -99,6 +99,16 @@ class Plant extends BaseModel
         'location_id' => 'exists:locations,id',
         'taxonomies_id' => 'exists:taxonomies,id',
         'classification_id' => 'exists:classification,id',
+        //taxonomy
+        'family_id' => 'required|exists:generals,id',
+        'genus_id' => 'exists:generals,id',
+        'species_id' => 'exists:generals,id',
+        'variety_id' => 'exists:generals,id',
+        'subspecies_id' => 'exists:generals,id',
+        //classification
+        'flowering_id' => 'required|exists:generals,id',
+        'cotyledon_id' => 'exists:generals,id',
+        'sperm_id' => 'exists:generals,id',
     ];
     /**
      * The database table used by the model.
