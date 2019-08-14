@@ -18,7 +18,7 @@ class CreateStationsTable extends Migration
             $table->json('name')->nullable();
             $table->json('code')->nullable();
             $table->json('type')->nullable();
-            $table->json('location_id');
+            $table->unsignedInteger('location_id');
             $table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->timestamps();
         });

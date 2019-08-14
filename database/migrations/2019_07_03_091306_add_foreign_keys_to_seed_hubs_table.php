@@ -17,7 +17,6 @@ class AddForeignKeysToSeedHubsTable extends Migration {
 			$table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
 			$table->foreign('project_id')->references('id')->on('projects')->onUpdate('NO ACTION')->onDelete('CASCADE');
-			$table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('seed_id')->references('id')->on('seeds')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('action_id')->references('id')->on('actions')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
@@ -35,7 +34,6 @@ class AddForeignKeysToSeedHubsTable extends Migration {
 		{
 			$table->dropForeign(['location_id']);
 
-			$table->dropForeign(['user_id']);
 			$table->dropForeign(['project_id']);
 			$table->dropForeign(['seed_id']);
 			$table->dropForeign(['action_id']);

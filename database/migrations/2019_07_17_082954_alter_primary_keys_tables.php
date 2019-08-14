@@ -8,20 +8,14 @@ class AlterPrimaryKeysTables extends Migration
 {
 
     protected $tables = [
-        'evaluation_collections',
         'botanical_garden_actions',
         'botanical_irrigations',
         'botanical_reproductions',
-        'cryo_bank_actions',
         'herbarium_appendixes',
         'medicals',
         'medicinal_plant_constituents',
         'medicinal_plant_morphologies',
-        'paleontology_actions',
-        'paleontology_medias',
         'bio_moleculars',
-        'seed_seedFeatures',
-        'seed_plants'
     ];
 
     /**

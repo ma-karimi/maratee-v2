@@ -126,10 +126,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SeedTechnology extends BaseModel
 {
 
-    public static $linguistically=['seed_type'=>false,'other_detail'=>false];
+    public static $linguistically=['type'=>false,'other_detail'=>false];
     public static $rules=[
-        '' => 'required|exists:seeds,id',
-        'conserved_content' => 'integer',
+        'conserved_content' => 'string',
         'mean_seed_per_fruit' => 'integer',
         'thousand_seed_weight' => 'integer',
         'thousand_fruit_weight' => 'integer',
@@ -141,6 +140,9 @@ class SeedTechnology extends BaseModel
         'fresh_none_germinated' => 'integer',
         'seed_origin' => 'string',
         'viability' => 'integer',
+        'receive_date' => 'date',
+        'banked_date' => 'date',
+        'visibility' => 'integer',
     ];
     /**
      * The database table used by the model.
@@ -170,25 +172,7 @@ class SeedTechnology extends BaseModel
      * @var array
      */
     protected $casts = [
-        'seed_type' => 'json',
+        'type' => 'json',
         'other_detail' => 'json'
     ];
-
-    public function technologyCollections()
-    {
-        return $this->hasMany(Technology::class, 'seed_technology_id')->latest();
-    }
-
-    public function seedWeights()
-    {
-        return $this->hasMany(SeedWeight::class, 'seed_technology_id')->latest();
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function seed()
-    {
-        return $this->belongsTo('App\Models\Seed');
-    }
 }
