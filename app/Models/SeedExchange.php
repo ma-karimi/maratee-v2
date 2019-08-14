@@ -68,11 +68,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="",
- *          description="",
- *          type="string",
- *      ),
- *      @SWG\Property(
  *          property="regeneration_evaluation",
  *          description="regeneration_evaluation",
  *          type="string",

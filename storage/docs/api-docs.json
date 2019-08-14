@@ -1910,6 +1910,295 @@
                 }
             }
         },
+        "/bio_moleculars": {
+            "get": {
+                "tags": [
+                    "BioMolecular"
+                ],
+                "summary": "Get a listing of the BioMoleculars.",
+                "description": "Get all BioMoleculars",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BioMolecular"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "BioMolecular"
+                ],
+                "summary": "Store a newly created BioMolecular in storage",
+                "description": "Store BioMolecular",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "technology_id",
+                        "in": "body",
+                        "description": "BioMolecular that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BioMolecular"
+                        }
+                    },
+                    {
+                        "name": "seed_feature_id",
+                        "in": "body",
+                        "description": "BioMolecular that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BioMolecular"
+                        }
+                    },
+                    {
+                        "name": "block_id",
+                        "in": "body",
+                        "description": "BioMolecular that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/BioMolecular"
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "in": "body",
+                        "description": "BioMolecular that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BioMolecular"
+                        }
+                    },
+                    {
+                        "name": "repeat",
+                        "in": "body",
+                        "description": "BioMolecular that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BioMolecular"
+                        }
+                    },
+                    {
+                        "name": "treatment",
+                        "in": "body",
+                        "description": "BioMolecular that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BioMolecular"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/BioMolecular"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/bio_moleculars/{id}": {
+            "get": {
+                "tags": [
+                    "BioMolecular"
+                ],
+                "summary": "Display the specified BioMolecular",
+                "description": "Get BioMolecular",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of BioMolecular",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/BioMolecular"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "BioMolecular"
+                ],
+                "summary": "Update the specified BioMolecular in storage",
+                "description": "Update BioMolecular",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of BioMolecular",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "technology_id",
+                        "in": "body",
+                        "description": "BioMolecular that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BioMolecular"
+                        }
+                    },
+                    {
+                        "name": "seed_feature_id",
+                        "in": "body",
+                        "description": "BioMolecular that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BioMolecular"
+                        }
+                    },
+                    {
+                        "name": "block_id",
+                        "in": "body",
+                        "description": "BioMolecular that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/BioMolecular"
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "in": "body",
+                        "description": "BioMolecular that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BioMolecular"
+                        }
+                    },
+                    {
+                        "name": "repeat",
+                        "in": "body",
+                        "description": "BioMolecular that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BioMolecular"
+                        }
+                    },
+                    {
+                        "name": "treatment",
+                        "in": "body",
+                        "description": "BioMolecular that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BioMolecular"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/BioMolecular"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "BioMolecular"
+                ],
+                "summary": "Remove the specified BioMolecular from storage",
+                "description": "Delete BioMolecular",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of BioMolecular",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/blocks": {
             "get": {
                 "tags": [
@@ -9127,6 +9416,241 @@
                 }
             }
         },
+        "/evaluationDimensions": {
+            "get": {
+                "tags": [
+                    "EvaluationDimension"
+                ],
+                "summary": "Get a listing of the EvaluationDimensions.",
+                "description": "Get all EvaluationDimensions",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/EvaluationDimension"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "EvaluationDimension"
+                ],
+                "summary": "Store a newly created EvaluationDimension in storage",
+                "description": "Store EvaluationDimension",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "evaluation_id",
+                        "in": "body",
+                        "description": "EvaluationDimension that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/EvaluationDimension"
+                        }
+                    },
+                    {
+                        "name": "dimension_id",
+                        "in": "body",
+                        "description": "EvaluationDimension that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/EvaluationDimension"
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "in": "body",
+                        "description": "EvaluationDimension that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/EvaluationDimension"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/EvaluationDimension"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/evaluationDimensions/{id}": {
+            "get": {
+                "tags": [
+                    "EvaluationDimension"
+                ],
+                "summary": "Display the specified EvaluationDimension",
+                "description": "Get EvaluationDimension",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of EvaluationDimension",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/EvaluationDimension"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "EvaluationDimension"
+                ],
+                "summary": "Update the specified EvaluationDimension in storage",
+                "description": "Update EvaluationDimension",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of EvaluationDimension",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "evaluation_id",
+                        "in": "body",
+                        "description": "EvaluationDimension that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/EvaluationDimension"
+                        }
+                    },
+                    {
+                        "name": "dimension_id",
+                        "in": "body",
+                        "description": "EvaluationDimension that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/EvaluationDimension"
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "in": "body",
+                        "description": "EvaluationDimension that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/EvaluationDimension"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/EvaluationDimension"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "EvaluationDimension"
+                ],
+                "summary": "Remove the specified EvaluationDimension from storage",
+                "description": "Delete EvaluationDimension",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of EvaluationDimension",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/exchanges": {
             "get": {
                 "tags": [
@@ -15868,223 +16392,6 @@
                 }
             }
         },
-        "/seedFeatures": {
-            "get": {
-                "tags": [
-                    "seedFeature"
-                ],
-                "summary": "Get a listing of the seedFeatures.",
-                "description": "Get all seedFeatures",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/seedFeature"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "seedFeature"
-                ],
-                "summary": "Store a newly created seedFeature in storage",
-                "description": "Store seedFeature",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "seedFeature that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/seedFeature"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "seedFeature that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/seedFeature"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/seedFeature"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/seedFeatures/{id}": {
-            "get": {
-                "tags": [
-                    "seedFeature"
-                ],
-                "summary": "Display the specified seedFeature",
-                "description": "Get seedFeature",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of seedFeature",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/seedFeature"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "seedFeature"
-                ],
-                "summary": "Update the specified seedFeature in storage",
-                "description": "Update seedFeature",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of seedFeature",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "seedFeature that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/seedFeature"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "seedFeature that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/seedFeature"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/seedFeature"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "seedFeature"
-                ],
-                "summary": "Remove the specified seedFeature from storage",
-                "description": "Delete seedFeature",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of seedFeature",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
         "/morphologies": {
             "get": {
                 "tags": [
@@ -22356,277 +22663,6 @@
                 }
             }
         },
-        "/bioMoleculars": {
-            "get": {
-                "tags": [
-                    "BioMolecular"
-                ],
-                "summary": "Get a listing of the BioMoleculars.",
-                "description": "Get all BioMoleculars",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/BioMolecular"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "BioMolecular"
-                ],
-                "summary": "Store a newly created BioMolecular in storage",
-                "description": "Store BioMolecular",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "chemical_id",
-                        "in": "body",
-                        "description": "BioMolecular that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BioMolecular"
-                        }
-                    },
-                    {
-                        "name": "seed_id",
-                        "in": "body",
-                        "description": "BioMolecular that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BioMolecular"
-                        }
-                    },
-                    {
-                        "name": "treatment",
-                        "in": "body",
-                        "description": "BioMolecular that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BioMolecular"
-                        }
-                    },
-                    {
-                        "name": "repeat",
-                        "in": "body",
-                        "description": "BioMolecular that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BioMolecular"
-                        }
-                    },
-                    {
-                        "name": "location_id",
-                        "in": "body",
-                        "description": "BioMolecular that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/BioMolecular"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/BioMolecular"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/bioMoleculars/{id}": {
-            "get": {
-                "tags": [
-                    "BioMolecular"
-                ],
-                "summary": "Display the specified BioMolecular",
-                "description": "Get BioMolecular",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of BioMolecular",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/BioMolecular"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "BioMolecular"
-                ],
-                "summary": "Update the specified BioMolecular in storage",
-                "description": "Update BioMolecular",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of BioMolecular",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "chemical_id",
-                        "in": "body",
-                        "description": "BioMolecular that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BioMolecular"
-                        }
-                    },
-                    {
-                        "name": "seed_id",
-                        "in": "body",
-                        "description": "BioMolecular that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BioMolecular"
-                        }
-                    },
-                    {
-                        "name": "treatment",
-                        "in": "body",
-                        "description": "BioMolecular that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BioMolecular"
-                        }
-                    },
-                    {
-                        "name": "repeat",
-                        "in": "body",
-                        "description": "BioMolecular that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BioMolecular"
-                        }
-                    },
-                    {
-                        "name": "location_id",
-                        "in": "body",
-                        "description": "BioMolecular that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/BioMolecular"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/BioMolecular"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "BioMolecular"
-                ],
-                "summary": "Remove the specified BioMolecular from storage",
-                "description": "Delete BioMolecular",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of BioMolecular",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
         "/seedExchanges": {
             "get": {
                 "tags": [
@@ -22734,7 +22770,7 @@
                         }
                     },
                     {
-                        "name": "accession",
+                        "name": "",
                         "in": "body",
                         "description": "SeedExchange that should be stored",
                         "required": false,
@@ -22902,7 +22938,7 @@
                         }
                     },
                     {
-                        "name": "accession",
+                        "name": "",
                         "in": "body",
                         "description": "SeedExchange that should be stored",
                         "required": false,
@@ -22981,6 +23017,259 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of SeedExchange",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/seed_features": {
+            "get": {
+                "tags": [
+                    "seedFeature"
+                ],
+                "summary": "Get a listing of the seedFeatures.",
+                "description": "Get all seedFeatures",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/SeedFeature"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "seedFeature"
+                ],
+                "summary": "Store a newly created seedFeature in storage",
+                "description": "Store seedFeature",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "seedFeature that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SeedFeature"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "body",
+                        "description": "seedFeature that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/SeedFeature"
+                        }
+                    },
+                    {
+                        "name": "unit",
+                        "in": "body",
+                        "description": "seedFeature that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/SeedFeature"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "seedFeature that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/SeedFeature"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/SeedFeature"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/seedFeatures/{id}": {
+            "get": {
+                "tags": [
+                    "seedFeature"
+                ],
+                "summary": "Display the specified seedFeature",
+                "description": "Get seedFeature",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of seedFeature",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/SeedFeature"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "seedFeature"
+                ],
+                "summary": "Update the specified seedFeature in storage",
+                "description": "Update seedFeature",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of seedFeature",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "seedFeature that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SeedFeature"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "body",
+                        "description": "seedFeature that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/SeedFeature"
+                        }
+                    },
+                    {
+                        "name": "unit",
+                        "in": "body",
+                        "description": "seedFeature that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/SeedFeature"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "seedFeature that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/SeedFeature"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/SeedFeature"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "seedFeature"
+                ],
+                "summary": "Remove the specified seedFeature from storage",
+                "description": "Delete seedFeature",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of seedFeature",
                         "required": true,
                         "type": "integer"
                     }
@@ -23592,7 +23881,7 @@
                 ],
                 "parameters": [
                     {
-                        "name": "seed_id",
+                        "name": "",
                         "in": "body",
                         "description": "SeedTechnology that should be stored",
                         "required": true,
@@ -23628,7 +23917,7 @@
                         }
                     },
                     {
-                        "name": "accession",
+                        "name": "",
                         "in": "body",
                         "description": "SeedTechnology that should be stored",
                         "required": false,
@@ -23814,7 +24103,7 @@
                         "type": "integer"
                     },
                     {
-                        "name": "seed_id",
+                        "name": "",
                         "in": "body",
                         "description": "SeedTechnology that should be stored",
                         "required": true,
@@ -23823,7 +24112,7 @@
                         }
                     },
                     {
-                        "name": "accession",
+                        "name": "",
                         "in": "body",
                         "description": "SeedTechnology that should be stored",
                         "required": false,
@@ -24106,7 +24395,7 @@
                         }
                     },
                     {
-                        "name": "accession",
+                        "name": "",
                         "in": "body",
                         "description": "SeedWeight that should be stored",
                         "required": false,
@@ -24283,7 +24572,7 @@
                         }
                     },
                     {
-                        "name": "accession",
+                        "name": "",
                         "in": "body",
                         "description": "SeedWeight that should be stored",
                         "required": false,
@@ -28585,6 +28874,55 @@
                 }
             }
         },
+        "BioMolecular": {
+            "required": [
+                "treatment",
+                "repeat",
+                "value",
+                "technology_id",
+                "seed_feature_id"
+            ],
+            "properties": {
+                "technology_id": {
+                    "description": "technology_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "block_id": {
+                    "description": "block_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "seed_feature_id": {
+                    "description": "seed_feature_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "treatment": {
+                    "description": "treatment",
+                    "type": "string"
+                },
+                "repeat": {
+                    "description": "repeat",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "value": {
+                    "description": "value",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
         "Block": {
             "required": [
                 "station_id"
@@ -30947,42 +31285,6 @@
                 }
             }
         },
-        "seedFeature": {
-            "required": [
-                "name"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "name": {
-                    "description": "name",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "description": {
-                    "description": "description",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
-        },
         "Morphology": {
             "required": [
                 "name",
@@ -32333,53 +32635,6 @@
                 }
             }
         },
-        "BioMolecular": {
-            "required": [
-                "chemical_id",
-                "seed_id",
-                "treatment",
-                "repeat"
-            ],
-            "properties": {
-                "chemical_id": {
-                    "description": "chemical_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "seed_id": {
-                    "description": "seed_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "treatment": {
-                    "description": "treatment",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "repeat": {
-                    "description": "repeat",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "location_id": {
-                    "description": "location_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
-        },
         "SeedExchange": {
             "required": [
                 "seed_id",
@@ -32439,12 +32694,54 @@
                         "type": "string"
                     }
                 },
-                "accession": {
-                    "description": "accession",
-                    "type": "string"
-                },
                 "regeneration_evaluation": {
                     "description": "regeneration_evaluation",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "SeedFeature": {
+            "required": [
+                "name",
+                "type",
+                "unit"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "description": {
+                    "description": "description",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "type": {
+                    "description": "type",
+                    "type": "string"
+                },
+                "unit": {
+                    "description": "unit",
                     "type": "string"
                 },
                 "created_at": {
@@ -32559,17 +32856,9 @@
             }
         },
         "SeedTechnology": {
-            "required": [
-                "seed_id"
-            ],
             "properties": {
                 "id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "seed_id": {
-                    "description": "seed_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -32634,14 +32923,6 @@
                     "description": "viability",
                     "type": "integer",
                     "format": "int32"
-                },
-                "accession": {
-                    "description": "examine",
-                    "type": "string"
-                },
-                "regeneration_evaluation": {
-                    "description": "examine",
-                    "type": "string"
                 },
                 "seed_origin": {
                     "description": "seed_origin",
@@ -32710,10 +32991,6 @@
                     "description": "total_fruit_weight_revival",
                     "type": "integer",
                     "format": "int32"
-                },
-                "accession": {
-                    "description": "accession",
-                    "type": "string"
                 },
                 "regeneration_evaluation": {
                     "description": "regeneration_evaluation",

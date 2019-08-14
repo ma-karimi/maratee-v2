@@ -44,11 +44,6 @@ use App\Models\Contracts\BaseModel;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="",
- *          description="",
- *          type="string"
- *      ),
- *      @SWG\Property(
  *          property="regeneration_evaluation",
  *          description="regeneration_evaluation",
  *          type="string"

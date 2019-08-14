@@ -7,16 +7,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @SWG\Definition(
  *      definition="SeedTechnology",
- *      required={""},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="",
- *          description="",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -91,16 +84,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          description="viability",
  *          type="integer",
  *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="",
- *          description="examine",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="",
- *          description="examine",
- *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="seed_origin",
