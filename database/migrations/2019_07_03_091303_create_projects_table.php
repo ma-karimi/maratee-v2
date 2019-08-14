@@ -16,10 +16,12 @@ class CreateProjectsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->json('title');
-			$table->string('project_no', 128)->nullable();
-			$table->string('research_no', 128)->nullable();
-			$table->unsignedInteger('plan_id')->nullable();
+			$table->string('project_no')->nullable();
+			$table->string('research_no')->nullable();
 			$table->json('research_title')->nullable();
+            $table->unsignedInteger('project_leader_id')->nullable();
+            $table->unsignedInteger('research_leader_id')->nullable();
+
             $table->timeStampsTz();
             $table->softDeletesTz();
 		});
@@ -33,6 +35,7 @@ class CreateProjectsTable extends Migration {
 	 */
 	public function down()
 	{
+
 		Schema::drop('projects');
 	}
 

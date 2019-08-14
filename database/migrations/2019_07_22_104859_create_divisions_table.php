@@ -14,9 +14,9 @@ class CreateDivisionsTable extends Migration
     public function up()
     {
         Schema::create('divisions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->json('name');
-            $table->integer('department_id')->unsigned()->index();
+            $table->unsignedInteger('department_id')->nullable();
             $table->timestamps();
         });
     }

@@ -3,12 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use App\Models\Contracts\RelationshipsTrait;
-use App\Models\Scope\PlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
@@ -61,21 +56,15 @@ class Classification extends BaseModel
         'cotyledon_id' => 'exists:generals,id',
         'sperm_id' => 'exists:generals,id',
     ];
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'classification';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $guarded=['id'];
+    protected $guarded = ['id'];
 
-    protected $dates=['deleted_at'];
+    protected $dates = ['deleted_at'];
 
 
     /**
@@ -83,20 +72,22 @@ class Classification extends BaseModel
      */
     public function flowering(): BelongsTo
     {
-        return $this->belongsTo(General::class,'flowering_id');
+        return $this->belongsTo(General::class, 'flowering_id');
     }
+
     /**
      * @return BelongsTo
      */
     public function cotyledon(): BelongsTo
     {
-        return $this->belongsTo(General::class,'cotyledon_id');
+        return $this->belongsTo(General::class, 'cotyledon_id');
     }
+
     /**
      * @return BelongsTo
      */
     public function sperm(): BelongsTo
     {
-        return $this->belongsTo(General::class,'sperm_id');
+        return $this->belongsTo(General::class, 'sperm_id');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMorphAuthorsTable extends Migration
+class CreateAuthorHubsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateMorphAuthorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('morph_authors', function (Blueprint $table) {
+        Schema::create('author_hubs', function (Blueprint $table) {
             $table->increments('id');
-            $table->morphs('morph_author');
+            $table->morphs('authorable');
             $table->unsignedInteger('author_id');
+            $table->foreign('author_id')->references('id')->on('authors')->onUpdate('NO ACTION')->onDelete('cascade');
+
             $table->timestamps();
             $table->softDeletesTz();
         });
@@ -29,6 +31,9 @@ class CreateMorphAuthorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('morph_authors');
+        Schema::table('author_hubs', function (Blueprint $table) {
+            $table->dropForeign(['author_id']);
+        });
+        Schema::dropIfExists('author_hubs');
     }
 }

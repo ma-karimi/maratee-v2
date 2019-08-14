@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class evaluationTableSeeder extends Seeder
+class AuthorHubTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class evaluationTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\evaluation::class, 50)->create();
+        factory(App\Models\AuthorHub::class, 50)->create();
     }
 }

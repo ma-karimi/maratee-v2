@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Collection extends BaseModel
 {
 
-    public static $linguistically=['name'=>true,'description'=>false];
+    public static $linguistically=['name'=>true,'description'=>true];
     /**
      * The database table used by the model.
      *
@@ -45,21 +45,6 @@ class Collection extends BaseModel
      */
     protected $casts = ['name' => 'json','description' => 'json'];
 
-    /**
-     * @return HasMany
-     */
-    public function evaluationCollections(): HasMany
-    {
-        return $this->hasMany(EvaluationCollection::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function geramins(): HasMany
-    {
-        return $this->hasMany(Geramin::class)->latest();
-    }
 
     /**
      * @return HasMany

@@ -39,12 +39,14 @@ class Author extends BaseModel
      */
     protected $casts = ['name' => 'json'];
 
+
+
     /**
      * Get all of the posts that are assigned this tag.
      */
     public function plants()
     {
-        return $this->morphedByMany(Plant::class, 'morph_author');
+        return $this->morphedByMany(Plant::class, 'authorable')->withTimestamps();
     }
 
     /**
@@ -52,8 +54,11 @@ class Author extends BaseModel
      */
     public function generals()
     {
-        return $this->morphedByMany(General::class, 'morph_author');
+        return $this->morphedByMany(General::class, 'authorable')->withTimestamps();
     }
+
+
+
     /**
      * Get all of the videos that are assigned this tag.
      */

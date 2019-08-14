@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PaleontologyActionTableSeeder extends Seeder
+class EvaluationTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class PaleontologyActionTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\PaleontologyAction::class, 50)->create();
+        factory(App\Models\Evaluation::class, 50)->create();
     }
 }

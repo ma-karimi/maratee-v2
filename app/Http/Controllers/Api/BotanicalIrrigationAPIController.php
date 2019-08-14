@@ -97,7 +97,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
      *      ),
      *      @SWG\Parameter(
-     *          name="daytime",
+     *          name="irrigation_time",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
@@ -225,7 +225,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
      *      ),
      *      @SWG\Parameter(
-     *          name="daytime",
+     *          name="irrigation_time",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")

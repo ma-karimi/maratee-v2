@@ -8,24 +8,21 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @SWG\Definition(
  *      definition="Project",
- *      required={"name","plan_name","plan_number"},
+ *      required={"title"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="project_leader_id",
  *          description="project_leader_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="research_leader_id",
  *          description="research_leader_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="title",
@@ -40,24 +37,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="plan_name",
- *          description="name",
- *          type="array",
-	 *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="plan_description",
- *          description="plan_description",
- *          type="array",
-	 *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="plan_number",
- *          description="plan_number",
- *          type="array",
-	 *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
  *          property="project_no",
  *          description="project_no",
  *          type="string"
@@ -66,12 +45,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          property="research_no",
  *          description="research_no",
  *          type="string"
- *      ),
- *       @SWG\Property(
- *          property="plan_id",
- *          description="plan_id",
- *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -90,13 +63,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Project extends BaseModel
 {
-    public static $linguistically=['title'=>true,'plan_name'=>true,'research_title'=>false];
+    public static $linguistically=['title'=>true,'research_title'=>true];
     public static $rules=[
-        'approved_id' => 'string',
-        'registered_id' => 'string',
+        'project_no' => 'string',
+        'research_no' => 'string',
         'plan_id' => 'integer',
-        'project_leader_id' => 'integer',
-        'research_leader_id' => 'integer',
+        'project_leader_id' => 'integer|exists:users,id',
+        'research_leader_id' => 'integer|exists:users,id',
     ];
 
     /**
@@ -121,7 +94,6 @@ class Project extends BaseModel
      */
     protected $casts = [
         'title' => 'json',
-        'plan_name' => 'json',
         'research_title' => 'json'
     ];
 
@@ -132,15 +104,6 @@ class Project extends BaseModel
     public function actionHubs(): HasMany
     {
         return $this->hasMany(ActionHub::class, 'project_id')->latest();
-    }
-
-
-    /**
-     * @return HasMany
-     */
-    public function evaluationCollections(): HasMany
-    {
-        return $this->hasMany(evaluationCollection::class, 'project_id')->latest();
     }
 
     /**

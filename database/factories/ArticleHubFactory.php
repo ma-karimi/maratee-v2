@@ -5,22 +5,10 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\ArticleHub::class, function (Faker $faker) {
+    $articles = \App\Models\Article::pluck('id')->toArray();
     return [
-        'article_id' => function () {
-            return factory(App\Models\Article::class)->create()->id;
-        },
-        'user_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
-        'action_id' => function () {
-            return factory(App\Models\Action::class)->create()->id;
-        },
-        'location_id' => function () {
-            return factory(App\Models\Location::class)->create()->id;
-        },
-        'cryo_bank_id' => function () {
-            return factory(App\Models\CryoBank::class)->create()->id;
-        },
-        'date' => $faker->dateTimeBetween(),
+        'article_id' => $faker->randomElement($articles),
+        'articleable_id' => $faker->randomElement($articles),
+        'articleable_type' => $faker->randomElement([\App\Models\CryoBank::class, \App\Models\Media::class, \App\Models\ActionHub::class, \App\Models\Plant::class, \App\Models\Chromosome::class, \App\Models\MedicinalPlant::class, \App\Models\Paleontology::class]),
     ];
 });

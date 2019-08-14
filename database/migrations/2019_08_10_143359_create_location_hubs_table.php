@@ -15,6 +15,7 @@ class CreateLocationHubsTable extends Migration
     {
         Schema::create('location_hubs', function (Blueprint $table) {
             $table->increments('id');
+//            plants, chromosome, medicinal_plants, media
             $table->morphs('locationable');
             $table->unsignedInteger('location_id');
             $table->timestampsTz();

@@ -155,7 +155,7 @@ class Plant extends BaseModel
      */
     public function authors(): MorphToMany
     {
-        return $this->morphToMany(Author::class, 'morph_author')->withTimestamps();
+        return $this->morphToMany(Author::class, 'authorable')->withTimestamps();
     }
 
     public function seeds(): BelongsToMany

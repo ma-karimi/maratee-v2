@@ -14,10 +14,11 @@ $factory->define(App\Models\ActionHub::class, function (Faker $faker) {
         'action_id' => $faker->randomElement($actions),
         'user_id' => $faker->randomElement($users),
         'location_id' => $faker->randomElement($locations),
-        'herbarium_id' => $faker->numberBetween(1, 50),
         'date' => $faker->dateTimeBetween(),
         'description' => make_json($faker->text),
         'project_id' => $faker->randomElement($projects),
         'department_id' => $faker->randomElement($departments),
+        'actionable_type'=>$faker->randomElement([\App\Models\Herbarium::class, \App\Models\CryoBank::class, \App\Models\Paleontology::class]),
+        'actionable_id'=>$faker->randomElement($actions)
     ];
 });

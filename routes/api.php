@@ -185,13 +185,9 @@ Route::resource('methods', 'MethodAPIController');
 
 Route::resource('seedFeatures', 'seedFeatureAPIController');
 
-Route::resource('morphologies', 'MorphologyAPIController');
 
 Route::resource('paleontologies', 'PaleontologyAPIController');
 
-Route::resource('paleontology_actions', 'PaleontologyActionAPIController');
-
-Route::resource('paleontology_citations', 'PaleontologyCitationAPIController');
 Route::resource('morphologies', 'MorphologyAPIController');
 
 
@@ -235,3 +231,6 @@ Route::resource('block_traits', 'BlockTraitAPIController');
 Route::resource('dimensions', 'DimensionAPIController');
 
 Route::resource('evaluation_dimensions', 'EvaluationDimensionAPIController');
+Route::resource('author_hubs', 'AuthorHubAPIController');
+Route::resource('location_hubs', 'LocationHubAPIController');
+Route::resource('user_hubs', 'UserHubAPIController');

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class evaluationCollectionTableSeeder extends Seeder
+class TaxonomyTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class evaluationCollectionTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\evaluationCollection::class, 50)->create();
+        factory(App\Models\Taxonomy::class, 50)->create();
     }
 }

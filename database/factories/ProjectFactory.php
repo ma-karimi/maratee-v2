@@ -5,13 +5,13 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Project::class, function (Faker $faker) {
+    $users  =\App\Models\User::pluck('id')->toArray();
     return [
-        'name' => make_json($faker->name),
-        'plan_name' => make_json($faker->word),
-        'plan_description' => make_json($faker->word),
-        'plan_number' => make_json($faker->word),
-        'approved_id' => $faker->word,
-        'registered_id' => $faker->word,
-        'plan_id' => $faker->numberBetween(1, 100),
+        'title' => make_json($faker->name),
+        'project_no' => $faker->word,
+        'research_no' => $faker->word,
+        'research_title' => make_json($faker->word),
+        'project_leader_id'=>$faker->randomElement($users),
+        'research_leader_id'=>$faker->randomElement($users),
     ];
 });

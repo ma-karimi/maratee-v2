@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Propagation::class, function (Faker $faker) {
     return [
-        'name' => make_json($faker->name),
+        'method' => make_json($faker->name),
         'description' => make_json($faker->text),
     ];
 });
