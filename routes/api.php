@@ -81,7 +81,7 @@ Route::resource('bio_moleculars', 'BioMolecularAPIController');
 
 Route::resource('seeds', 'SeedAPIController');
 
-Route::resource('reproductions', 'ReproductionAPIController');
+Route::resource('propagations', 'PropagationAPIController');
 
 Route::resource('provinces', 'ProvinceAPIController');
 
@@ -126,7 +126,7 @@ Route::resource('transfer_credentials', 'TransferCredentialAPIController');
 
 Route::resource('botanical_irrigations', 'BotanicalIrrigationAPIController');
 
-Route::resource('botanical_reproductions', 'BotanicalReproductionAPIController');
+Route::resource('botanical_propagations', 'BotanicalPropagationAPIController');
 
 Route::resource('chromosomes', 'ChromosomeAPIController');
 

@@ -2,22 +2,22 @@
 
 namespace App\Repositories;
 
-use App\Models\BotanicalReproduction;
+use App\Models\BotanicalPropagation;
 use App\Repositories\BaseRepository;
 
 /**
- * Class BotanicalReproductionRepository
+ * Class BotanicalPropagationRepository
  * @package App\Repositories
  * @version July 14, 2019, 10:58 am UTC
 */
 
-class BotanicalReproductionRepository extends BaseRepository
+class BotanicalPropagationRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**
@@ -35,6 +35,6 @@ class BotanicalReproductionRepository extends BaseRepository
      **/
     public function model()
     {
-        return BotanicalReproduction::class;
+        return BotanicalPropagation::class;
     }
 }

@@ -1,49 +1,49 @@
 <?php namespace Tests\Traits;
 
 use Faker\Factory as Faker;
-use App\Models\BotanicalReproduction;
-use App\Repositories\BotanicalReproductionRepository;
+use App\Models\BotanicalPropagation;
+use App\Repositories\BotanicalPropagationRepository;
 
-trait MakeBotanicalReproductionTrait
+trait MakeBotanicalPropagationTrait
 {
     /**
-     * Create fake instance of BotanicalReproduction and save it in database
+     * Create fake instance of BotanicalPropagation and save it in database
      *
-     * @param array $botanicalReproductionFields
-     * @return BotanicalReproduction
+     * @param array $botanicalPropagationFields
+     * @return BotanicalPropagation
      */
-    public function makeBotanicalReproduction($botanicalReproductionFields = [])
+    public function makeBotanicalPropagation($botanicalPropagationFields = [])
     {
-        /** @var BotanicalReproductionRepository $botanicalReproductionRepo */
-        $botanicalReproductionRepo = \App::make(BotanicalReproductionRepository::class);
-        $theme = $this->fakeBotanicalReproductionData($botanicalReproductionFields);
-        return $botanicalReproductionRepo->create($theme);
+        /** @var BotanicalPropagationRepository $botanicalPropagationRepo */
+        $botanicalPropagationRepo = \App::make(BotanicalPropagationRepository::class);
+        $theme = $this->fakeBotanicalPropagationData($botanicalPropagationFields);
+        return $botanicalPropagationRepo->create($theme);
     }
 
     /**
-     * Get fake instance of BotanicalReproduction
+     * Get fake instance of BotanicalPropagation
      *
-     * @param array $botanicalReproductionFields
-     * @return BotanicalReproduction
+     * @param array $botanicalPropagationFields
+     * @return BotanicalPropagation
      */
-    public function fakeBotanicalReproduction($botanicalReproductionFields = [])
+    public function fakeBotanicalPropagation($botanicalPropagationFields = [])
     {
-        return new BotanicalReproduction($this->fakeBotanicalReproductionData($botanicalReproductionFields));
+        return new BotanicalPropagation($this->fakeBotanicalPropagationData($botanicalPropagationFields));
     }
 
     /**
-     * Get fake data of BotanicalReproduction
+     * Get fake data of BotanicalPropagation
      *
-     * @param array $botanicalReproductionFields
+     * @param array $botanicalPropagationFields
      * @return array
      */
-    public function fakeBotanicalReproductionData($botanicalReproductionFields = [])
+    public function fakeBotanicalPropagationData($botanicalPropagationFields = [])
     {
         $fake = Faker::create();
 
         return array_merge([
             'created_at' => $fake->date('Y-m-d H:i:s'),
             'updated_at' => $fake->date('Y-m-d H:i:s')
-        ], $botanicalReproductionFields);
+        ], $botanicalPropagationFields);
     }
 }

@@ -81,16 +81,16 @@ class ProtectionAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="name",
      *          in="body",
-     *          description="Reproduction that should be stored",
+     *          description="Propagation that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Reproduction")
+     *          @SWG\Schema(ref="#/definitions/Propagation")
      *      ),
      *      @SWG\Parameter(
      *          name="description",
      *          in="body",
-     *          description="Reproduction that should be stored",
+     *          description="Propagation that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Reproduction")
+     *          @SWG\Schema(ref="#/definitions/Propagation")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -193,16 +193,16 @@ class ProtectionAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="name",
      *          in="body",
-     *          description="Reproduction that should be stored",
+     *          description="Propagation that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Reproduction")
+     *          @SWG\Schema(ref="#/definitions/Propagation")
      *      ),
      *      @SWG\Parameter(
      *          name="description",
      *          in="body",
-     *          description="Reproduction that should be stored",
+     *          description="Propagation that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Reproduction")
+     *          @SWG\Schema(ref="#/definitions/Propagation")
      *      ),
      *      @SWG\Response(
      *          response=200,

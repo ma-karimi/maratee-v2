@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateBotanicalReproductionAPIRequest;
-use App\Http\Requests\Api\UpdateBotanicalReproductionAPIRequest;
-use App\Models\BotanicalReproduction;
-use App\Repositories\BotanicalReproductionRepository;
+use App\Http\Requests\Api\CreateBotanicalPropagationAPIRequest;
+use App\Http\Requests\Api\UpdateBotanicalPropagationAPIRequest;
+use App\Models\BotanicalPropagation;
+use App\Repositories\BotanicalPropagationRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class BotanicalReproductionController
+ * Class BotanicalPropagationController
  * @package App\Http\Controllers\Api
  */
 
-class BotanicalReproductionAPIController extends AppBaseController
+class BotanicalPropagationAPIController extends AppBaseController
 {
-    /** @var  BotanicalReproductionRepository */
-    private $botanicalReproductionRepository;
+    /** @var  BotanicalPropagationRepository */
+    private $botanicalPropagationRepository;
 
-    public function __construct(BotanicalReproductionRepository $botanicalReproductionRepo)
+    public function __construct(BotanicalPropagationRepository $botanicalPropagationRepo)
     {
-        $this->botanicalReproductionRepository = $botanicalReproductionRepo;
+        $this->botanicalPropagationRepository = $botanicalPropagationRepo;
     }
 
     /**
@@ -30,10 +30,10 @@ class BotanicalReproductionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/botanical_reproductions",
-     *      summary="Get a listing of the BotanicalReproductions.",
-     *      tags={"BotanicalReproduction"},
-     *      description="Get all BotanicalReproductions",
+     *      path="/botanical_propagations",
+     *      summary="Get a listing of the BotanicalPropagations.",
+     *      tags={"BotanicalPropagation"},
+     *      description="Get all BotanicalPropagations",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -47,7 +47,7 @@ class BotanicalReproductionAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/BotanicalReproduction")
+     *                  @SWG\Items(ref="#/definitions/BotanicalPropagation")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -59,36 +59,36 @@ class BotanicalReproductionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $botanicalReproductions = $this->botanicalReproductionRepository->paginate(
+        $botanicalPropagations = $this->botanicalPropagationRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
             $request->get('relations')
         );
 
-        return $this->sendResponse($botanicalReproductions->toArray(), 'Botanical Reproductions retrieved successfully');
+        return $this->sendResponse($botanicalPropagations->toArray(), 'Botanical Propagations retrieved successfully');
     }
 
     /**
-     * @param CreateBotanicalReproductionAPIRequest $request
+     * @param CreateBotanicalPropagationAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/botanical_reproductions",
-     *      summary="Store a newly created BotanicalReproduction in storage",
-     *      tags={"BotanicalReproduction"},
-     *      description="Store BotanicalReproduction",
+     *      path="/botanical_propagations",
+     *      summary="Store a newly created BotanicalPropagation in storage",
+     *      tags={"BotanicalPropagation"},
+     *      description="Store BotanicalPropagation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="botanical_id",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/BotanicalReproduction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalPropagation")
      *      ),
      *      @SWG\Parameter(
-     *          name="reproduction_id",
+     *          name="propagation_id",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/BotanicalReproduction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalPropagation")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -101,7 +101,7 @@ class BotanicalReproductionAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/BotanicalReproduction"
+     *                  ref="#/definitions/BotanicalPropagation"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -111,13 +111,13 @@ class BotanicalReproductionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateBotanicalReproductionAPIRequest $request)
+    public function store(CreateBotanicalPropagationAPIRequest $request)
     {
         $input = $request->all();
 
-        $botanicalReproduction = $this->botanicalReproductionRepository->create($input);
+        $botanicalPropagation = $this->botanicalPropagationRepository->create($input);
 
-        return $this->sendResponse($botanicalReproduction->toArray(), 'Botanical Reproduction saved successfully');
+        return $this->sendResponse($botanicalPropagation->toArray(), 'Botanical Propagation saved successfully');
     }
 
     /**
@@ -125,14 +125,14 @@ class BotanicalReproductionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/botanical_reproductions/{id}",
-     *      summary="Display the specified BotanicalReproduction",
-     *      tags={"BotanicalReproduction"},
-     *      description="Get BotanicalReproduction",
+     *      path="/botanical_propagations/{id}",
+     *      summary="Display the specified BotanicalPropagation",
+     *      tags={"BotanicalPropagation"},
+     *      description="Get BotanicalPropagation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of BotanicalReproduction",
+     *          description="id of BotanicalPropagation",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -148,7 +148,7 @@ class BotanicalReproductionAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/BotanicalReproduction"
+     *                  ref="#/definitions/BotanicalPropagation"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -160,30 +160,30 @@ class BotanicalReproductionAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var BotanicalReproduction $botanicalReproduction */
-        $botanicalReproduction = $this->botanicalReproductionRepository->find($id, \request()->get('relations'));
+        /** @var BotanicalPropagation $botanicalPropagation */
+        $botanicalPropagation = $this->botanicalPropagationRepository->find($id, \request()->get('relations'));
 
-        if ($botanicalReproduction === null) {
-            return $this->sendError('Botanical Reproduction not found');
+        if ($botanicalPropagation === null) {
+            return $this->sendError('Botanical Propagation not found');
         }
 
-        return $this->sendResponse($botanicalReproduction->toArray(), 'Botanical Reproduction retrieved successfully');
+        return $this->sendResponse($botanicalPropagation->toArray(), 'Botanical Propagation retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdateBotanicalReproductionAPIRequest $request
+     * @param UpdateBotanicalPropagationAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/botanical_reproductions/{id}",
-     *      summary="Update the specified BotanicalReproduction in storage",
-     *      tags={"BotanicalReproduction"},
-     *      description="Update BotanicalReproduction",
+     *      path="/botanical_propagations/{id}",
+     *      summary="Update the specified BotanicalPropagation in storage",
+     *      tags={"BotanicalPropagation"},
+     *      description="Update BotanicalPropagation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of BotanicalReproduction",
+     *          description="id of BotanicalPropagation",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -192,13 +192,13 @@ class BotanicalReproductionAPIController extends AppBaseController
      *          name="botanical_id",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/BotanicalReproduction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalPropagation")
      *      ),
      *      @SWG\Parameter(
-     *          name="reproduction_id",
+     *          name="propagation_id",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/BotanicalReproduction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalPropagation")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -211,7 +211,7 @@ class BotanicalReproductionAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/BotanicalReproduction"
+     *                  ref="#/definitions/BotanicalPropagation"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -221,20 +221,20 @@ class BotanicalReproductionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateBotanicalReproductionAPIRequest $request)
+    public function update($id, UpdateBotanicalPropagationAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var BotanicalReproduction $botanicalReproduction */
-        $botanicalReproduction = $this->botanicalReproductionRepository->find($id, \request()->get('relations'));
+        /** @var BotanicalPropagation $botanicalPropagation */
+        $botanicalPropagation = $this->botanicalPropagationRepository->find($id, \request()->get('relations'));
 
-        if ($botanicalReproduction === null) {
-            return $this->sendError('Botanical Reproduction not found');
+        if ($botanicalPropagation === null) {
+            return $this->sendError('Botanical Propagation not found');
         }
 
-        $botanicalReproduction = $this->botanicalReproductionRepository->update($input, $id);
+        $botanicalPropagation = $this->botanicalPropagationRepository->update($input, $id);
 
-        return $this->sendResponse($botanicalReproduction->toArray(), 'BotanicalReproduction updated successfully');
+        return $this->sendResponse($botanicalPropagation->toArray(), 'BotanicalPropagation updated successfully');
     }
 
     /**
@@ -243,14 +243,14 @@ class BotanicalReproductionAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/botanical_reproductions/{id}",
-     *      summary="Remove the specified BotanicalReproduction from storage",
-     *      tags={"BotanicalReproduction"},
-     *      description="Delete BotanicalReproduction",
+     *      path="/botanical_propagations/{id}",
+     *      summary="Remove the specified BotanicalPropagation from storage",
+     *      tags={"BotanicalPropagation"},
+     *      description="Delete BotanicalPropagation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of BotanicalReproduction",
+     *          description="id of BotanicalPropagation",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -278,15 +278,15 @@ class BotanicalReproductionAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var BotanicalReproduction $botanicalReproduction */
-        $botanicalReproduction = $this->botanicalReproductionRepository->find($id, \request()->get('relations'));
+        /** @var BotanicalPropagation $botanicalPropagation */
+        $botanicalPropagation = $this->botanicalPropagationRepository->find($id, \request()->get('relations'));
 
-        if ($botanicalReproduction === null) {
-            return $this->sendError('Botanical Reproduction not found');
+        if ($botanicalPropagation === null) {
+            return $this->sendError('Botanical Propagation not found');
         }
 
-        $botanicalReproduction->delete();
+        $botanicalPropagation->delete();
 
-        return $this->sendResponse($id, 'Botanical Reproduction deleted successfully');
+        return $this->sendResponse($id, 'Botanical Propagation deleted successfully');
     }
 }

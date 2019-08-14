@@ -1,49 +1,49 @@
 <?php namespace Tests\Traits;
 
 use Faker\Factory as Faker;
-use App\Models\Reproduction;
-use App\Repositories\ReproductionRepository;
+use App\Models\Propagation;
+use App\Repositories\PropagationRepository;
 
-trait MakeReproductionTrait
+trait MakePropagationTrait
 {
     /**
-     * Create fake instance of Reproduction and save it in database
+     * Create fake instance of Propagation and save it in database
      *
-     * @param array $reproductionFields
-     * @return Reproduction
+     * @param array $propagationFields
+     * @return Propagation
      */
-    public function makeReproduction($reproductionFields = [])
+    public function makePropagation($propagationFields = [])
     {
-        /** @var ReproductionRepository $reproductionRepo */
-        $reproductionRepo = \App::make(ReproductionRepository::class);
-        $theme = $this->fakeReproductionData($reproductionFields);
-        return $reproductionRepo->create($theme);
+        /** @var PropagationRepository $propagationRepo */
+        $propagationRepo = \App::make(PropagationRepository::class);
+        $theme = $this->fakePropagationData($propagationFields);
+        return $propagationRepo->create($theme);
     }
 
     /**
-     * Get fake instance of Reproduction
+     * Get fake instance of Propagation
      *
-     * @param array $reproductionFields
-     * @return Reproduction
+     * @param array $propagationFields
+     * @return Propagation
      */
-    public function fakeReproduction($reproductionFields = [])
+    public function fakePropagation($propagationFields = [])
     {
-        return new Reproduction($this->fakeReproductionData($reproductionFields));
+        return new Propagation($this->fakePropagationData($propagationFields));
     }
 
     /**
-     * Get fake data of Reproduction
+     * Get fake data of Propagation
      *
-     * @param array $reproductionFields
+     * @param array $propagationFields
      * @return array
      */
-    public function fakeReproductionData($reproductionFields = [])
+    public function fakePropagationData($propagationFields = [])
     {
         $fake = Faker::create();
 
         return array_merge([
             'created_at' => $fake->date('Y-m-d H:i:s'),
             'updated_at' => $fake->date('Y-m-d H:i:s')
-        ], $reproductionFields);
+        ], $propagationFields);
     }
 }

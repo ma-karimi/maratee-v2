@@ -17,7 +17,7 @@ class CreateBotanicalIrrigationsTable extends Migration {
 			$table->unsignedInteger('botanical_id');
 			$table->unsignedInteger('irrigation_id');
 			$table->json('requirement')->nullable();
-			$table->json('daytime');
+			$table->json('irrigation_time');
 			$table->json('seasonal_feature')->nullable()->comment('features are :
 value
 description

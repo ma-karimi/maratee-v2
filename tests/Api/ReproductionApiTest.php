@@ -3,30 +3,30 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
-use Tests\Traits\MakeReproductionTrait;
+use Tests\Traits\MakePropagationTrait;
 use Tests\ApiTestTrait;
 
-class ReproductionApiTest extends TestCase
+class PropagationApiTest extends TestCase
 {
-    use MakeReproductionTrait, ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
+    use MakePropagationTrait, ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
 
     /**
      * @test
      */
-    public function test_create_reproduction()
+    public function test_create_propagation()
     {
-        $reproduction = $this->fakeReproductionData();
-        $this->response = $this->json('POST', '/api/reproductions', $reproduction);
+        $propagation = $this->fakePropagationData();
+        $this->response = $this->json('POST', '/api/propagations', $propagation);
 
-        $this->assertApiResponse($reproduction);
+        $this->assertApiResponse($propagation);
     }
 
     /**
      * @test
      */
-    public function test_read_reproduction()
+    public function test_read_propagation()
     {
-        $reproduction = $this->makeReproduction();
+        $reproduction = $this->makePropagation();
         $this->response = $this->json('GET', '/api/reproductions/'.$reproduction->id);
 
         $this->assertApiResponse($reproduction->toArray());
@@ -37,12 +37,12 @@ class ReproductionApiTest extends TestCase
      */
     public function test_update_reproduction()
     {
-        $reproduction = $this->makeReproduction();
-        $editedReproduction = $this->fakeReproductionData();
+        $reproduction = $this->makePropagation();
+        $editedPropagation = $this->fakePropagationData();
 
-        $this->response = $this->json('PUT', '/api/reproductions/'.$reproduction->id, $editedReproduction);
+        $this->response = $this->json('PUT', '/api/reproductions/'.$reproduction->id, $editedPropagation);
 
-        $this->assertApiResponse($editedReproduction);
+        $this->assertApiResponse($editedPropagation);
     }
 
     /**
@@ -50,7 +50,7 @@ class ReproductionApiTest extends TestCase
      */
     public function test_delete_reproduction()
     {
-        $reproduction = $this->makeReproduction();
+        $reproduction = $this->makePropagation();
         $this->response = $this->json('DELETE', '/api/reproductions/'.$reproduction->id);
 
         $this->assertApiSuccess();

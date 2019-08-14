@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateBotanicalReproductionsTable extends Migration {
+class CreateBotanicalPropagationsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,10 @@ class CreateBotanicalReproductionsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('botanical_reproductions', function(Blueprint $table)
+		Schema::create('botanical_propagations', function(Blueprint $table)
 		{
 			$table->unsignedInteger('botanical_id');
-			$table->unsignedInteger('reproduction_id');
+			$table->unsignedInteger('propagation_id');
 
 
             $table->timeStampsTz();
@@ -31,7 +31,7 @@ class CreateBotanicalReproductionsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('botanical_reproductions');
+		Schema::drop('botanical_propagations');
 	}
 
 }

@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class AddForeignKeysToBotanicalReproductionsTable extends Migration {
+class AddForeignKeysToBotanicalPropagationsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,10 @@ class AddForeignKeysToBotanicalReproductionsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('botanical_reproductions', function(Blueprint $table)
+		Schema::table('botanical_propagations', function(Blueprint $table)
 		{
 			$table->foreign('botanical_id')->references('id')->on('botanicals')->onUpdate('NO ACTION')->onDelete('CASCADE');
-			$table->foreign('reproduction_id')->references('id')->on('reproductions')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('propagation_id')->references('id')->on('propagations')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 
@@ -27,10 +27,10 @@ class AddForeignKeysToBotanicalReproductionsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('botanical_reproductions', function(Blueprint $table)
+		Schema::table('botanical_propagations', function(Blueprint $table)
 		{
 			$table->dropForeign(['botanical_id']);
-			$table->dropForeign(['reproduction_id']);
+			$table->dropForeign(['propagation_id']);
 		});
 	}
 

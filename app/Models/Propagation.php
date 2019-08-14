@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 /**
  * @SWG\Definition(
- *      definition="Reproduction",
+ *      definition="Propagation",
  *      required={"name"},
  *      @SWG\Property(
  *          property="id",
@@ -14,8 +14,8 @@ use App\Models\Contracts\BaseModel;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="name",
- *          description="name",
+ *          property="method",
+ *          description="method",
  *          type="array",
 	 *     @SWG\Items(type="string")
  *      ),
@@ -40,22 +40,22 @@ use App\Models\Contracts\BaseModel;
  * )
  */
 
-class Reproduction extends BaseModel
+class Propagation extends BaseModel
 {
-    public static $linguistically=['name'=>true,'description'=>false];
+    public static $linguistically=['method'=>true,'description'=>true];
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'reproductions';
+    protected $table = 'propagations';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'updated_at'];
+    protected $fillable = ['created_at', 'deleted_at', 'description', 'method', 'updated_at'];
 
 
     /**
@@ -64,13 +64,13 @@ class Reproduction extends BaseModel
      * @var array
      */
     protected $casts = [
-        'name' => 'json',
+        'method' => 'json',
         'description' => 'json',
     ];
 
 
-    public function botanicalReproductions()
+    public function botanicalPropagations()
     {
-        return $this->hasMany(BotanicalReproduction::class)->latest();
+        return $this->hasMany(BotanicalPropagation::class)->latest();
     }
 }

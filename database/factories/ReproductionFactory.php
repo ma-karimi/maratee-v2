@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\Reproduction::class, function (Faker $faker) {
+$factory->define(App\Models\Propagation::class, function (Faker $faker) {
     return [
         'name' => make_json($faker->name),
         'description' => make_json($faker->text),

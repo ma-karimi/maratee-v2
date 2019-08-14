@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * 			@SWG\Property(property="id", type="integer"),
  * 			@SWG\Property(property="botanical_id", type="integer"),
  * 			@SWG\Property(property="irrigation_id", type="integer"),
- * 			@SWG\Property(property="daytime", type="array",
+ * 			@SWG\Property(property="irrigation_time", type="array",
 	 *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="requirement", type="array",
 	 *     @SWG\Items(type="string")),
@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class BotanicalIrrigation extends BaseModel
 {
 
-    public static $linguistically=['daytime'=>true,'requirement'=>false];
+    public static $linguistically=['irrigation_time'=>true,'requirement'=>false];
     public static $rules = [
         'botanical_id' => 'required|exists:botanicals,id',
         'irrigation_id' => 'required|exists:irrigations,id'
@@ -44,7 +44,7 @@ class BotanicalIrrigation extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['botanical_id', 'created_at', 'daytime', 'deleted_at', 'irrigation_id', 'requirement', 'seasonal_feature', 'updated_at'];
+    protected $fillable = ['botanical_id', 'created_at', 'irrigation_time', 'deleted_at', 'irrigation_id', 'requirement', 'seasonal_feature', 'updated_at'];
 
 
     /**
@@ -52,7 +52,7 @@ class BotanicalIrrigation extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['requirement' => 'json', 'daytime' => 'json', 'seasonal_feature' => 'json'];
+    protected $casts = ['requirement' => 'json', 'irrigation_time' => 'json', 'seasonal_feature' => 'json'];
 
 
     /**

@@ -3,22 +3,22 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
-use Tests\Traits\MakeBotanicalReproductionTrait;
+use Tests\Traits\MakeBotanicalPropagationTrait;
 use Tests\ApiTestTrait;
 
-class BotanicalReproductionApiTest extends TestCase
+class BotanicalPropagationApiTest extends TestCase
 {
-    use MakeBotanicalReproductionTrait, ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
+    use MakeBotanicalPropagationTrait, ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
 
     /**
      * @test
      */
     public function test_create_botanical_reproduction()
     {
-        $botanicalReproduction = $this->fakeBotanicalReproductionData();
-        $this->response = $this->json('POST', '/api/botanicalReproductions', $botanicalReproduction);
+        $botanicalPropagation = $this->fakeBotanicalPropagationData();
+        $this->response = $this->json('POST', '/api/botanicalPropagations', $botanicalPropagation);
 
-        $this->assertApiResponse($botanicalReproduction);
+        $this->assertApiResponse($botanicalPropagation);
     }
 
     /**
@@ -26,10 +26,10 @@ class BotanicalReproductionApiTest extends TestCase
      */
     public function test_read_botanical_reproduction()
     {
-        $botanicalReproduction = $this->makeBotanicalReproduction();
-        $this->response = $this->json('GET', '/api/botanicalReproductions/'.$botanicalReproduction->id);
+        $botanicalPropagation = $this->makeBotanicalPropagation();
+        $this->response = $this->json('GET', '/api/botanicalPropagations/'.$botanicalPropagation->id);
 
-        $this->assertApiResponse($botanicalReproduction->toArray());
+        $this->assertApiResponse($botanicalPropagation->toArray());
     }
 
     /**
@@ -37,12 +37,12 @@ class BotanicalReproductionApiTest extends TestCase
      */
     public function test_update_botanical_reproduction()
     {
-        $botanicalReproduction = $this->makeBotanicalReproduction();
-        $editedBotanicalReproduction = $this->fakeBotanicalReproductionData();
+        $botanicalPropagation = $this->makeBotanicalPropagation();
+        $editedBotanicalPropagation = $this->fakeBotanicalPropagationData();
 
-        $this->response = $this->json('PUT', '/api/botanicalReproductions/'.$botanicalReproduction->id, $editedBotanicalReproduction);
+        $this->response = $this->json('PUT', '/api/botanicalPropagations/'.$botanicalPropagation->id, $editedBotanicalPropagation);
 
-        $this->assertApiResponse($editedBotanicalReproduction);
+        $this->assertApiResponse($editedBotanicalPropagation);
     }
 
     /**
@@ -50,11 +50,11 @@ class BotanicalReproductionApiTest extends TestCase
      */
     public function test_delete_botanical_reproduction()
     {
-        $botanicalReproduction = $this->makeBotanicalReproduction();
-        $this->response = $this->json('DELETE', '/api/botanicalReproductions/'.$botanicalReproduction->id);
+        $botanicalPropagation = $this->makeBotanicalPropagation();
+        $this->response = $this->json('DELETE', '/api/botanicalPropagations/'.$botanicalPropagation->id);
 
         $this->assertApiSuccess();
-        $this->response = $this->json('GET', '/api/botanicalReproductions/'.$botanicalReproduction->id);
+        $this->response = $this->json('GET', '/api/botanicalPropagations/'.$botanicalPropagation->id);
 
         $this->response->assertStatus(404);
     }

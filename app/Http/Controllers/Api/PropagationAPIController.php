@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateReproductionAPIRequest;
-use App\Http\Requests\Api\UpdateReproductionAPIRequest;
-use App\Models\Reproduction;
-use App\Repositories\ReproductionRepository;
+use App\Http\Requests\Api\CreatePropagationAPIRequest;
+use App\Http\Requests\Api\UpdatePropagationAPIRequest;
+use App\Models\Propagation;
+use App\Repositories\PropagationRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class ReproductionController
+ * Class PropagationController
  * @package App\Http\Controllers\Api
  */
 
-class ReproductionAPIController extends AppBaseController
+class PropagationAPIController extends AppBaseController
 {
-    /** @var  ReproductionRepository */
-    private $reproductionRepository;
+    /** @var  PropagationRepository */
+    private $propagationRepository;
 
-    public function __construct(ReproductionRepository $reproductionRepo)
+    public function __construct(PropagationRepository $propagationRepo)
     {
-        $this->reproductionRepository = $reproductionRepo;
+        $this->propagationRepository = $propagationRepo;
     }
 
     /**
@@ -30,10 +30,10 @@ class ReproductionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/reproductions",
-     *      summary="Get a listing of the Reproductions.",
-     *      tags={"Reproduction"},
-     *      description="Get all Reproductions",
+     *      path="/propagations",
+     *      summary="Get a listing of the Propagations.",
+     *      tags={"Propagation"},
+     *      description="Get all Propagations",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -47,7 +47,7 @@ class ReproductionAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/Reproduction")
+     *                  @SWG\Items(ref="#/definitions/Propagation")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -59,38 +59,38 @@ class ReproductionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $reproductions = $this->reproductionRepository->paginate(
+        $propagations = $this->propagationRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
             $request->get('relations')
         );
 
-        return $this->sendResponse($reproductions->toArray(), 'Reproductions retrieved successfully');
+        return $this->sendResponse($propagations->toArray(), 'Propagations retrieved successfully');
     }
 
     /**
-     * @param CreateReproductionAPIRequest $request
+     * @param CreatePropagationAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/reproductions",
-     *      summary="Store a newly created Reproduction in storage",
-     *      tags={"Reproduction"},
-     *      description="Store Reproduction",
+     *      path="/propagations",
+     *      summary="Store a newly created Propagation in storage",
+     *      tags={"Propagation"},
+     *      description="Store Propagation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="name",
      *          in="body",
-     *          description="Reproduction that should be stored",
+     *          description="Propagation that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Reproduction")
+     *          @SWG\Schema(ref="#/definitions/Propagation")
      *      ),
      *      @SWG\Parameter(
      *          name="description",
      *          in="body",
-     *          description="Reproduction that should be stored",
+     *          description="Propagation that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Reproduction")
+     *          @SWG\Schema(ref="#/definitions/Propagation")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -103,7 +103,7 @@ class ReproductionAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Reproduction"
+     *                  ref="#/definitions/Propagation"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -113,13 +113,13 @@ class ReproductionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateReproductionAPIRequest $request)
+    public function store(CreatePropagationAPIRequest $request)
     {
         $input = $request->all();
 
-        $reproduction = $this->reproductionRepository->create($input);
+        $propagation = $this->propagationRepository->create($input);
 
-        return $this->sendResponse($reproduction->toArray(), 'Reproduction saved successfully');
+        return $this->sendResponse($propagation->toArray(), 'Propagation saved successfully');
     }
 
     /**
@@ -127,14 +127,14 @@ class ReproductionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/reproductions/{id}",
-     *      summary="Display the specified Reproduction",
-     *      tags={"Reproduction"},
-     *      description="Get Reproduction",
+     *      path="/propagations/{id}",
+     *      summary="Display the specified Propagation",
+     *      tags={"Propagation"},
+     *      description="Get Propagation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Reproduction",
+     *          description="id of Propagation",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -150,7 +150,7 @@ class ReproductionAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Reproduction"
+     *                  ref="#/definitions/Propagation"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -162,30 +162,30 @@ class ReproductionAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var Reproduction $reproduction */
-        $reproduction = $this->reproductionRepository->find($id, \request()->get('relations'));
+        /** @var Propagation $propagation */
+        $propagation = $this->propagationRepository->find($id, \request()->get('relations'));
 
-        if (empty($reproduction)) {
-            return $this->sendError('Reproduction not found');
+        if (empty($propagation)) {
+            return $this->sendError('Propagation not found');
         }
 
-        return $this->sendResponse($reproduction->toArray(), 'Reproduction retrieved successfully');
+        return $this->sendResponse($propagation->toArray(), 'Propagation retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdateReproductionAPIRequest $request
+     * @param UpdatePropagationAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/reproductions/{id}",
-     *      summary="Update the specified Reproduction in storage",
-     *      tags={"Reproduction"},
-     *      description="Update Reproduction",
+     *      path="/propagations/{id}",
+     *      summary="Update the specified Propagation in storage",
+     *      tags={"Propagation"},
+     *      description="Update Propagation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Reproduction",
+     *          description="id of Propagation",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -193,16 +193,16 @@ class ReproductionAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="name",
      *          in="body",
-     *          description="Reproduction that should be stored",
+     *          description="Propagation that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Reproduction")
+     *          @SWG\Schema(ref="#/definitions/Propagation")
      *      ),
      *      @SWG\Parameter(
      *          name="description",
      *          in="body",
-     *          description="Reproduction that should be stored",
+     *          description="Propagation that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Reproduction")
+     *          @SWG\Schema(ref="#/definitions/Propagation")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -215,7 +215,7 @@ class ReproductionAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Reproduction"
+     *                  ref="#/definitions/Propagation"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -225,20 +225,20 @@ class ReproductionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateReproductionAPIRequest $request)
+    public function update($id, UpdatePropagationAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var Reproduction $reproduction */
-        $reproduction = $this->reproductionRepository->find($id, \request()->get('relations'));
+        /** @var Propagation $propagation */
+        $propagation = $this->propagationRepository->find($id, \request()->get('relations'));
 
-        if (empty($reproduction)) {
-            return $this->sendError('Reproduction not found');
+        if (empty($propagation)) {
+            return $this->sendError('Propagation not found');
         }
 
-        $reproduction = $this->reproductionRepository->update($input, $id);
+        $propagation = $this->propagationRepository->update($input, $id);
 
-        return $this->sendResponse($reproduction->toArray(), 'Reproduction updated successfully');
+        return $this->sendResponse($propagation->toArray(), 'Propagation updated successfully');
     }
 
     /**
@@ -247,14 +247,14 @@ class ReproductionAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/reproductions/{id}",
-     *      summary="Remove the specified Reproduction from storage",
-     *      tags={"Reproduction"},
-     *      description="Delete Reproduction",
+     *      path="/propagations/{id}",
+     *      summary="Remove the specified Propagation from storage",
+     *      tags={"Propagation"},
+     *      description="Delete Propagation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Reproduction",
+     *          description="id of Propagation",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -282,15 +282,15 @@ class ReproductionAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var Reproduction $reproduction */
-        $reproduction = $this->reproductionRepository->find($id, \request()->get('relations'));
+        /** @var Propagation $propagation */
+        $propagation = $this->propagationRepository->find($id, \request()->get('relations'));
 
-        if (empty($reproduction)) {
-            return $this->sendError('Reproduction not found');
+        if (empty($propagation)) {
+            return $this->sendError('Propagation not found');
         }
 
-        $reproduction->delete();
+        $propagation->delete();
 
-        return $this->sendResponse($id, 'Reproduction deleted successfully');
+        return $this->sendResponse($id, 'Propagation deleted successfully');
     }
 }

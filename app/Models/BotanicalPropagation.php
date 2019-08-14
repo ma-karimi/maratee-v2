@@ -7,21 +7,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @SWG\Definition(
- *            definition="BotanicalReproduction",
- *            required={"botanical_id", "reproduction_id"},
+ *            definition="BotanicalPropagation",
+ *            required={"botanical_id", "propagation_id"},
  * 			@SWG\Property(property="id", type="integer"),
  * 			@SWG\Property(property="botanical_id", type="integer"),
- * 			@SWG\Property(property="reproduction_id", type="integer"),
+ * 			@SWG\Property(property="propagation_id", type="integer"),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
-class BotanicalReproduction extends BaseModel
+class BotanicalPropagation extends BaseModel
 {
 
     public static $rules = [
         'botanical_id' => 'required|exists:botanicals,id',
-        'reproduction_id' => 'required|exists:reproductions,id'
+        'propagation_id' => 'required|exists:propagations,id'
     ];
 
     /**
@@ -29,14 +29,14 @@ class BotanicalReproduction extends BaseModel
      *
      * @var string
      */
-    protected $table = 'botanical_reproductions';
+    protected $table = 'botanical_propagations';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['botanical_id', 'created_at', 'deleted_at', 'reproduction_id', 'updated_at'];
+    protected $fillable = ['botanical_id', 'created_at', 'deleted_at', 'propagation_id', 'updated_at'];
 
 
     /**
@@ -50,9 +50,9 @@ class BotanicalReproduction extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function reproduction(): BelongsTo
+    public function propagation(): BelongsTo
     {
-        return $this->belongsTo(Reproduction::class);
+        return $this->belongsTo(Propagation::class);
     }
 
 }

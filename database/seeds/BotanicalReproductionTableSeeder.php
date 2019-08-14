@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class BotanicalReproductionTableSeeder extends Seeder
+class BotanicalPropagationTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class BotanicalReproductionTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\BotanicalReproduction::class, 50)->create();
+        factory(App\Models\BotanicalPropagation::class, 50)->create();
     }
 }

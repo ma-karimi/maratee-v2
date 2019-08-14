@@ -111,7 +111,7 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="sprout",
+     *          name="seed_germination",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -135,7 +135,7 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="flowering_interval",
+     *          name="flowering_period",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -147,7 +147,7 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="seed_value",
+     *          name="seed_rate",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -159,7 +159,7 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="season_resistance",
+     *          name="season_tolerance",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -195,7 +195,7 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="scion_rooting_per",
+     *          name="cutting_rooting_per",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -335,7 +335,7 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="sprout",
+     *          name="seed_germination",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -359,7 +359,7 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="flowering_interval",
+     *          name="flowering_period",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -371,7 +371,7 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="seed_value",
+     *          name="seed_rate",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -383,7 +383,7 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="season_resistance",
+     *          name="season_tolerance",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -419,7 +419,7 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="scion_rooting_per",
+     *          name="cutting_rooting_per",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -532,7 +532,7 @@ class BotanicalAPIController extends AppBaseController
             'herbarium.protection',
             'herbarium.generalType',
             'herbarium.generalPhytogeography',
-            'botanicalReproductions.reproduction',
+            'botanicalPropagations.propagation',
             'lighting_from',
             'lighting_to',
             'soil_from',

@@ -1,73 +1,73 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\BotanicalReproduction;
-use App\Repositories\BotanicalReproductionRepository;
+use App\Models\BotanicalPropagation;
+use App\Repositories\BotanicalPropagationRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
-use Tests\Traits\MakeBotanicalReproductionTrait;
+use Tests\Traits\MakeBotanicalPropagationTrait;
 use Tests\ApiTestTrait;
 
-class BotanicalReproductionRepositoryTest extends TestCase
+class BotanicalPropagationRepositoryTest extends TestCase
 {
-    use MakeBotanicalReproductionTrait, ApiTestTrait, DatabaseTransactions;
+    use MakeBotanicalPropagationTrait, ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var BotanicalReproductionRepository
+     * @var BotanicalPropagationRepository
      */
-    protected $botanicalReproductionRepo;
+    protected $botanicalPropagationRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->botanicalReproductionRepo = \App::make(BotanicalReproductionRepository::class);
+        $this->botanicalPropagationRepo = \App::make(BotanicalPropagationRepository::class);
     }
 
     /**
      * @test create
      */
-    public function test_create_botanical_reproduction()
+    public function test_create_botanical_propagation()
     {
-        $botanicalReproduction = $this->fakeBotanicalReproductionData();
-        $createdBotanicalReproduction = $this->botanicalReproductionRepo->create($botanicalReproduction);
-        $createdBotanicalReproduction = $createdBotanicalReproduction->toArray();
-        $this->assertArrayHasKey('id', $createdBotanicalReproduction);
-        $this->assertNotNull($createdBotanicalReproduction['id'], 'Created BotanicalReproduction must have id specified');
-        $this->assertNotNull(BotanicalReproduction::find($createdBotanicalReproduction['id']), 'BotanicalReproduction with given id must be in DB');
-        $this->assertModelData($botanicalReproduction, $createdBotanicalReproduction);
+        $botanicalPropagation = $this->fakeBotanicalPropagationData();
+        $createdBotanicalPropagation = $this->botanicalPropagationRepo->create($botanicalPropagation);
+        $createdBotanicalPropagation = $createdBotanicalPropagation->toArray();
+        $this->assertArrayHasKey('id', $createdBotanicalPropagation);
+        $this->assertNotNull($createdBotanicalPropagation['id'], 'Created BotanicalPropagation must have id specified');
+        $this->assertNotNull(BotanicalPropagation::find($createdBotanicalPropagation['id']), 'BotanicalPropagation with given id must be in DB');
+        $this->assertModelData($botanicalPropagation, $createdBotanicalPropagation);
     }
 
     /**
      * @test read
      */
-    public function test_read_botanical_reproduction()
+    public function test_read_botanical_propagation()
     {
-        $botanicalReproduction = $this->makeBotanicalReproduction();
-        $dbBotanicalReproduction = $this->botanicalReproductionRepo->find($botanicalReproduction->id);
-        $dbBotanicalReproduction = $dbBotanicalReproduction->toArray();
-        $this->assertModelData($botanicalReproduction->toArray(), $dbBotanicalReproduction);
+        $botanicalPropagation = $this->makeBotanicalPropagation();
+        $dbBotanicalPropagation = $this->botanicalPropagationRepo->find($botanicalPropagation->id);
+        $dbBotanicalPropagation = $dbBotanicalPropagation->toArray();
+        $this->assertModelData($botanicalPropagation->toArray(), $dbBotanicalPropagation);
     }
 
     /**
      * @test update
      */
-    public function test_update_botanical_reproduction()
+    public function test_update_botanical_propagation()
     {
-        $botanicalReproduction = $this->makeBotanicalReproduction();
-        $fakeBotanicalReproduction = $this->fakeBotanicalReproductionData();
-        $updatedBotanicalReproduction = $this->botanicalReproductionRepo->update($fakeBotanicalReproduction, $botanicalReproduction->id);
-        $this->assertModelData($fakeBotanicalReproduction, $updatedBotanicalReproduction->toArray());
-        $dbBotanicalReproduction = $this->botanicalReproductionRepo->find($botanicalReproduction->id);
-        $this->assertModelData($fakeBotanicalReproduction, $dbBotanicalReproduction->toArray());
+        $botanicalPropagation = $this->makeBotanicalPropagation();
+        $fakeBotanicalPropagation = $this->fakeBotanicalPropagationData();
+        $updatedBotanicalPropagation = $this->botanicalPropagationRepo->update($fakeBotanicalPropagation, $botanicalPropagation->id);
+        $this->assertModelData($fakeBotanicalPropagation, $updatedBotanicalPropagation->toArray());
+        $dbBotanicalPropagation = $this->botanicalPropagationRepo->find($botanicalPropagation->id);
+        $this->assertModelData($fakeBotanicalPropagation, $dbBotanicalPropagation->toArray());
     }
 
     /**
      * @test delete
      */
-    public function test_delete_botanical_reproduction()
+    public function test_delete_botanical_propagation()
     {
-        $botanicalReproduction = $this->makeBotanicalReproduction();
-        $resp = $this->botanicalReproductionRepo->delete($botanicalReproduction->id);
+        $botanicalPropagation = $this->makeBotanicalPropagation();
+        $resp = $this->botanicalPropagationRepo->delete($botanicalPropagation->id);
         $this->assertTrue($resp);
-        $this->assertNull(BotanicalReproduction::find($botanicalReproduction->id), 'BotanicalReproduction should not exist in DB');
+        $this->assertNull(BotanicalPropagation::find($botanicalPropagation->id), 'BotanicalPropagation should not exist in DB');
     }
 }

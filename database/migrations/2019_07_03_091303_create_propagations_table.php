@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateReproductionsTable extends Migration {
+class CreatePropagationsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,10 @@ class CreateReproductionsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('reproductions', function(Blueprint $table)
+		Schema::create('propagations', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->json('name');
+			$table->json('method');
 			$table->json('description')->nullable();
 
             $table->timeStampsTz();
@@ -31,7 +31,7 @@ class CreateReproductionsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('reproductions');
+		Schema::drop('propagations');
 	}
 
 }

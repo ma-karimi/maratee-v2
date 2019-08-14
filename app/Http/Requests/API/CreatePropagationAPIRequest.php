@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\BotanicalReproduction;
+use App\Models\Propagation;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateBotanicalReproductionAPIRequest extends APIRequest
+class CreatePropagationAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class UpdateBotanicalReproductionAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return BotanicalReproduction::$rules;
+        return Propagation::$rules;
     }
 }

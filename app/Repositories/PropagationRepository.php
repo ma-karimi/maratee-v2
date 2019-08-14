@@ -2,22 +2,22 @@
 
 namespace App\Repositories;
 
-use App\Models\Reproduction;
+use App\Models\Propagation;
 use App\Repositories\BaseRepository;
 
 /**
- * Class ReproductionRepository
+ * Class PropagationRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:22 am UTC
 */
 
-class ReproductionRepository extends BaseRepository
+class PropagationRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**
@@ -35,6 +35,6 @@ class ReproductionRepository extends BaseRepository
      **/
     public function model()
     {
-        return Reproduction::class;
+        return Propagation::class;
     }
 }

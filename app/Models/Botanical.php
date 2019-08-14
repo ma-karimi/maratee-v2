@@ -17,7 +17,7 @@ use App\Models\Contracts\BaseModel;
 	 *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="leaf_color", type="array",
 	 *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="sprout", type="array",
+ * 			@SWG\Property(property="seed_germination", type="array",
 	 *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="treatment", type="array",
 	 *     @SWG\Items(type="string")),
@@ -25,15 +25,15 @@ use App\Models\Contracts\BaseModel;
 	 *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="first_flowering", type="array",
 	 *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="flowering_interval", type="array",
+ * 			@SWG\Property(property="flowering_period", type="array",
 	 *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="first_seeding", type="array",
 	 *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="seed_value", type="array",
+ * 			@SWG\Property(property="seed_rate", type="array",
 	 *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="seed_production", type="array",
 	 *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="season_resistance", type="array",
+ * 			@SWG\Property(property="season_tolerance", type="array",
 	 *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="year", type="string"),
  * 			@SWG\Property(property="sensitivity", type="array",
@@ -43,7 +43,7 @@ use App\Models\Contracts\BaseModel;
  * 			@SWG\Property(property="notes", type="array",
 	 *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="planting", type="string"),
- * 			@SWG\Property(property="scion_rooting_per", type="integer"),
+ * 			@SWG\Property(property="cutting_rooting_per", type="integer"),
  * 			@SWG\Property(property="entry_type", type="array",
 	 *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="created_at", type="string"),
@@ -52,11 +52,11 @@ use App\Models\Contracts\BaseModel;
  **/
 class Botanical extends BaseModel
 {
-    public static $linguistically=['flower_color'=>false,'fruit_color'=>false,'leaf_color'=>false,'sprout'=>false,'treatment'=>false,'growth_rate'=>false,'first_flowering'=>false,'flowering_interval'=>false,'first_seeding'=>false,'seed_value'=>false,'seed_production'=>false,'sensitivity'=>false,'sensitivity_description'=>false,'notes'=>false,'entry_type'=>false];
+    public static $linguistically=['flower_color'=>false,'fruit_color'=>false,'leaf_color'=>false,'seed_germination'=>false,'treatment'=>false,'growth_rate'=>false,'first_flowering'=>false,'flowering_period'=>false,'first_seeding'=>false,'seed_rate'=>false,'seed_production'=>false,'sensitivity'=>false,'sensitivity_description'=>false,'notes'=>false,'entry_type'=>false];
     public static $rules = [
         'year' => 'date',
         'planting'=>'date',
-        'scion_rooting_per'=>'integer',
+        'cutting_rooting_per'=>'integer',
     ];
 
 
@@ -72,7 +72,7 @@ class Botanical extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'entry_type', 'first_flowering', 'first_seeding', 'flower_color', 'flowering_interval', 'fruit_color', 'growth_rate', 'height', 'herbarium_id', 'leaf_color', 'notes', 'planting', 'scion_rooting_per', 'season_resistance', 'seed_production', 'seed_value', 'sensitivity', 'sensitivity_description', 'sprout', 'treatment', 'updated_at', 'year'];
+    protected $fillable = ['created_at', 'deleted_at', 'entry_type', 'first_flowering', 'first_seeding', 'flower_color', 'flowering_period', 'fruit_color', 'growth_rate', 'height', 'herbarium_id', 'leaf_color', 'notes', 'planting', 'cutting_rooting_per', 'season_tolerance', 'seed_production', 'seed_rate', 'sensitivity', 'sensitivity_description', 'seed_germination', 'treatment', 'updated_at', 'year'];
 
 
     /**
@@ -85,15 +85,15 @@ class Botanical extends BaseModel
         'flower_color' => 'json',
         'fruit_color' => 'json',
         'leaf_color' => 'json',
-        'sprout' => 'json',
+        'seed_germination' => 'json',
         'treatment' => 'json',
         'growth_rate' => 'json',
         'first_flowering' => 'json',
-        'flowering_interval' => 'json',
+        'flowering_period' => 'json',
         'first_seeding' => 'json',
-        'seed_value' => 'json',
+        'seed_rate' => 'json',
         'seed_production' => 'json',
-        'season_resistance' => 'json',
+        'season_tolerance' => 'json',
         'sensitivity' => 'json',
         'sensitivity_description' => 'json',
         'notes' => 'json',
@@ -131,9 +131,9 @@ class Botanical extends BaseModel
             ->withPivot('requirement', 'daytime', 'seasonal_feature');
     }
 
-    public function botanicalReproductions()
+    public function botanicalPropagations()
     {
-        return $this->hasMany(BotanicalReproduction::class);
+        return $this->hasMany(BotanicalPropagation::class);
     }
 
     public function entryHubs()

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ReproductionTableSeeder extends Seeder
+class PropagationTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class ReproductionTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Reproduction::class, 50)->create();
+        factory(App\Models\Propagation::class, 50)->create();
     }
 }

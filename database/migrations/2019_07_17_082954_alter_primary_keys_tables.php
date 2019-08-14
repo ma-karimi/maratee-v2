@@ -10,7 +10,7 @@ class AlterPrimaryKeysTables extends Migration
     protected $tables = [
         'botanical_garden_actions',
         'botanical_irrigations',
-        'botanical_reproductions',
+        'botanical_propagations',
         'herbarium_appendixes',
         'medicals',
         'medicinal_plant_constituents',
