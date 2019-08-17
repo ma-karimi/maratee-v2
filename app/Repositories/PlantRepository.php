@@ -63,38 +63,40 @@ class PlantRepository extends BaseRepository
      */
     public function create($input)
     {
-        [$taxonomy_input, $taxonomy_record] = $this->createAndFirstTaxonomy($input);
+        [$taxonomy_input, $taxonomy_record] = $this->findTaxonomy($input);
         $input['taxonomy_id']=$taxonomy_record->id??$this->taxonomyRepository->create($taxonomy_input)->id;
         $input = collect($input)->forget(collect($taxonomy_input)->keys()->toArray());
 
-        [$classification_input, $classification_record] = $this->createAndFirstClassification($input);
+        [$classification_input, $classification_record] = $this->findClassification($input);
         $input = collect($input)->forget(collect($classification_input)->keys()->toArray());
         $input['classification_id']= $classification_record->id??$this->classificationRepository->create($taxonomy_input)->id;
 
        return parent::create($input->toArray());
     }
+
     /**
      * @param array $input
+     * @param $id
      * @return \Illuminate\Database\Eloquent\Model|void
      */
-    public function update($id,$input)
+    public function update($input,$id)
     {
-        [$taxonomy_input, $taxonomy_record] = $this->createAndFirstTaxonomy($input);
+        [$taxonomy_input, $taxonomy_record] = $this->findTaxonomy($input);
         $input['taxonomy_id']=$taxonomy_record->id??$this->taxonomyRepository->create($taxonomy_input)->id;
         $input = collect($input)->forget(collect($taxonomy_input)->keys()->toArray());
 
-        [$classification_input, $classification_record] = $this->createAndFirstClassification($input);
+        [$classification_input, $classification_record] = $this->findClassification($input);
         $input = collect($input)->forget(collect($classification_input)->keys()->toArray());
         $input['classification_id']= $classification_record->id??$this->classificationRepository->create($taxonomy_input)->id;
 
-       return parent::update($id,$input->toArray());
+       return parent::update($input->toArray(), $id);
     }
 
     /**
      * @param $input
      * @return array
      */
-    public function createAndFirstTaxonomy($input): array
+    public function findTaxonomy($input): array
     {
         $taxonomy_input = [
             'family_id' => $input['family_id'],
@@ -111,7 +113,7 @@ class PlantRepository extends BaseRepository
      * @param $input
      * @return array
      */
-    public function createAndFirstClassification($input): array
+    public function findClassification($input): array
     {
         $classification_input = [
             'flowering_id' => $input['flowering_id'],
