@@ -16,6 +16,7 @@ class BaseModel extends Model
     public static $rules = [];
     public static $messages = [];
     public $searchable = ['*'];
+    public $notSearchable  = ['per_page', 'limit', 'skip', 'relations'];
 
     /**
      * The attributes that have en,fa languages.
