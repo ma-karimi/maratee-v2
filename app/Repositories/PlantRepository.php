@@ -69,7 +69,7 @@ class PlantRepository extends BaseRepository
 
         [$classification_input, $classification_record] = $this->findClassification($input);
         $input = collect($input)->forget(collect($classification_input)->keys()->toArray());
-        $input['classification_id']= $classification_record->id??$this->classificationRepository->create($taxonomy_input)->id;
+        $input['classification_id']= $classification_record->id??$this->classificationRepository->create($classification_input)->id;
 
        return parent::create($input->toArray());
     }
