@@ -152,6 +152,8 @@ class User extends Authenticatable
     protected $hidden=['password'];
 
     use HasApiTokens, UserScope, UserAccessor, Notifiable , SearchableTrait;
+    public $searchable = ['*'];
+
     public $notSearchable  = ['per_page', 'limit', 'skip', 'relations'];
     /**
      * The database table used by the model.
