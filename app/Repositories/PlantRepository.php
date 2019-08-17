@@ -63,35 +63,38 @@ class PlantRepository extends BaseRepository
      */
     public function create($input)
     {
-        [$taxonomy_input, $taxonomy_record] = $this->findTaxonomy($input);
-        [$classification_input, $classification_record] = $this->findClassification($input);
+        [$taxonomy_input, $taxonomy_record] = $this->createAndFirstTaxonomy($input);
+        $input['taxonomy_id']=$taxonomy_record->id??$this->taxonomyRepository->create($taxonomy_input)->id;
+        $input = collect($input)->forget(collect($taxonomy_input)->keys()->toArray());
 
-        $input = $this->createTaxonomyAndClassificationAndChangeRequest($input, $taxonomy_record, $taxonomy_input, $classification_input, $classification_record);
+        [$classification_input, $classification_record] = $this->createAndFirstClassification($input);
+        $input = collect($input)->forget(collect($classification_input)->keys()->toArray());
+        $input['classification_id']= $classification_record->id??$this->classificationRepository->create($taxonomy_input)->id;
 
-        return parent::create($input->toArray());
+       return parent::create($input->toArray());
     }
-
     /**
      * @param array $input
-     * @param $id
      * @return \Illuminate\Database\Eloquent\Model|void
      */
-    public function update($input,$id)
+    public function update($id,$input)
     {
-        [$taxonomy_input, $taxonomy_record] = $this->findTaxonomy($input);
-        [$classification_input, $classification_record] = $this->findClassification($input);
+        [$taxonomy_input, $taxonomy_record] = $this->createAndFirstTaxonomy($input);
+        $input['taxonomy_id']=$taxonomy_record->id??$this->taxonomyRepository->create($taxonomy_input)->id;
+        $input = collect($input)->forget(collect($taxonomy_input)->keys()->toArray());
 
-        $input = $this->createTaxonomyAndClassificationAndChangeRequest($input, $taxonomy_record, $taxonomy_input, $classification_input, $classification_record);
+        [$classification_input, $classification_record] = $this->createAndFirstClassification($input);
+        $input = collect($input)->forget(collect($classification_input)->keys()->toArray());
+        $input['classification_id']= $classification_record->id??$this->classificationRepository->create($taxonomy_input)->id;
 
-        return parent::update($input->toArray(),$id);
+       return parent::update($id,$input->toArray());
     }
-
 
     /**
      * @param $input
      * @return array
      */
-    public function findTaxonomy($input): array
+    public function createAndFirstTaxonomy($input): array
     {
         $taxonomy_input = [
             'family_id' => $input['family_id'],
@@ -108,7 +111,7 @@ class PlantRepository extends BaseRepository
      * @param $input
      * @return array
      */
-    public function findClassification($input): array
+    public function createAndFirstClassification($input): array
     {
         $classification_input = [
             'flowering_id' => $input['flowering_id'],
@@ -117,27 +120,6 @@ class PlantRepository extends BaseRepository
         ];
         $classification_record = $this->classificationRepository->getByCriteria($classification_input)->first();
         return array($classification_input, $classification_record);
-    }
-
-    /**
-     * @param $input
-     * @param $taxonomy_record
-     * @param $taxonomy_input
-     * @param $classification_input
-     * @param $classification_record
-     * @return \Illuminate\Support\Collection|\IlluminateAgnostic\Arr\Support\Collection|\IlluminateAgnostic\Collection\Support\Collection|\IlluminateAgnostic\Str\Support\Collection|\Vanilla\Support\Collection
-     */
-    public function createTaxonomyAndClassificationAndChangeRequest($input, $taxonomy_record, $taxonomy_input, $classification_input, $classification_record)
-    {
-        $classification = collect($input)->forget(collect($taxonomy_input)->keys()->toArray());
-        $taxonomy = collect($input)->forget(collect($classification_input)->keys()->toArray());
-
-
-
-
-        $input['classification_id'] = $classification_record->id ?? $this->classificationRepository->create($classification)->id;
-        $input['taxonomy_id'] = $taxonomy_record->id ?? $this->taxonomyRepository->create($taxonomy)->id;
-        return $input;
     }
 
 }
