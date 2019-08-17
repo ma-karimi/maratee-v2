@@ -25,12 +25,12 @@ use Illuminate\Http\Request;
 });*/
 Route::delete('/{class}/multiple_delete', 'APIController@multipleDestroy');
 Route::middleware(['auth:api'])->group(function () {
-
+    Route::get('logout', 'AuthController@logout');
 });
 Route::get('relations', 'HelpersAPIController@relations');
 Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
-Route::get('logout', 'AuthController@logout');
+
 
 
 Route::resource('treatments', 'TreatmentAPIController');
