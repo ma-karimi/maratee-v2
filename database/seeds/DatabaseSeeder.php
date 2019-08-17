@@ -42,6 +42,8 @@ class DatabaseSeeder extends Seeder
             MorphologyTableSeeder::class,
             OrganizationTableSeeder::class,
             GeneralTableSeeder::class,
+            OriginalGeneralTableSeeder::class,
+            OriginalPropagationTableSeeder::class,
             ProjectTableSeeder::class,
             PropagationTableSeeder::class,
             SoilTableSeeder::class,

@@ -4,14 +4,18 @@
 namespace App\Models\Contracts;
 
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Jedrzej\Searchable\Constraint;
+use Jedrzej\Searchable\SearchableTrait;
 
 class BaseModel extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SearchableTrait;
     public static $rules = [];
     public static $messages = [];
+    public $searchable = ['*'];
 
     /**
      * The attributes that have en,fa languages.
@@ -91,5 +95,4 @@ class BaseModel extends Model
     {
         return static::$linguistically;
     }
-
 }
