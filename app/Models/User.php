@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Jedrzej\Searchable\SearchableTrait;
 use Laravel\Passport\HasApiTokens;
 
 /**
@@ -150,7 +151,8 @@ class User extends Authenticatable
 
     protected $hidden=['password'];
 
-    use HasApiTokens, UserScope, UserAccessor, Notifiable;
+    use HasApiTokens, UserScope, UserAccessor, Notifiable , SearchableTrait;
+    public $notSearchable  = ['per_page', 'limit', 'skip', 'relations'];
     /**
      * The database table used by the model.
      *

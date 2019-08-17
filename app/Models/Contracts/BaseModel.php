@@ -96,4 +96,22 @@ class BaseModel extends Model
     {
         return static::$linguistically;
     }
+//
+//    //
+//    // use one filter to search in multiple columns
+//    protected function processNameFilter(Builder $builder, Constraint $constraint)
+//    {
+//        // this logic should happen for LIKE/EQUAL operators only
+//        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+//            $builder->where(function ($query) use ($constraint) {
+//                $query->where('first_name', $constraint->getOperator(), $constraint->getValue())
+//                    ->orWhere('last_name', $constraint->getOperator(), $constraint->getValue());
+//            });
+//
+//            return true;
+//        }
+//
+//        // default logic should be executed otherwise
+//        return false;
+//    }
 }
