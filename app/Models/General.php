@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Scope\GeneralScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Validation\Rule;
 
 /**
  * @SWG\Definition(
@@ -56,12 +58,12 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class General extends BaseModel
 {
-
+    use GeneralScope;
     public static $linguistically=['name'=>true,'description'=>false];
-    public static $rules=[
+    public static $rules= array(
         'type' => 'required|string',
         'parent_id' => 'integer',
-    ];
+    );
 
 
     /**
@@ -123,28 +125,28 @@ class General extends BaseModel
      */
     public function genusParent(): BelongsTo
     {
-        return $this->belongsTo(__CLASS__, 'parent_id');
+        return $this->belongsTo(__CLASS__, 'parent_id')->withDefault();
     }
     /**
      * @return BelongsTo
      */
     public function speciesParent(): BelongsTo
     {
-        return $this->belongsTo(__CLASS__, 'parent_id');
+        return $this->belongsTo(__CLASS__, 'parent_id')->withDefault();
     }
     /**
      * @return BelongsTo
      */
     public function subspeciesParent(): BelongsTo
     {
-        return $this->belongsTo(__CLASS__, 'parent_id');
+        return $this->belongsTo(__CLASS__, 'parent_id')->withDefault();
     }
     /**
      * @return BelongsTo
      */
     public function varietyParent(): BelongsTo
     {
-        return $this->belongsTo(__CLASS__, 'parent_id');
+        return $this->belongsTo(__CLASS__, 'parent_id')->withDefault();
     }
     /**
      * @return HasMany

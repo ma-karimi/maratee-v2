@@ -64,11 +64,14 @@ class PlantRepository extends BaseRepository
     public function create($input)
     {
         [$taxonomy_input, $taxonomy_record] = $this->findTaxonomy($input);
+        $input['taxonomy_id']=$taxonomy_record->id??$this->taxonomyRepository->create($taxonomy_input)->id;
+        $input = collect($input)->forget(collect($taxonomy_input)->keys()->toArray());
+
         [$classification_input, $classification_record] = $this->findClassification($input);
+        $input = collect($input)->forget(collect($classification_input)->keys()->toArray());
+        $input['classification_id']= $classification_record->id??$this->classificationRepository->create($taxonomy_input)->id;
 
-        $input = $this->createTaxonomyAndClassificationAndChangeRequest($input, $taxonomy_record, $taxonomy_input, $classification_input, $classification_record);
-
-        return parent::create($input->toArray());
+       return parent::create($input->toArray());
     }
 
     /**
@@ -79,13 +82,15 @@ class PlantRepository extends BaseRepository
     public function update($input,$id)
     {
         [$taxonomy_input, $taxonomy_record] = $this->findTaxonomy($input);
+        $input['taxonomy_id']=$taxonomy_record->id??$this->taxonomyRepository->create($taxonomy_input)->id;
+        $input = collect($input)->forget(collect($taxonomy_input)->keys()->toArray());
+
         [$classification_input, $classification_record] = $this->findClassification($input);
+        $input = collect($input)->forget(collect($classification_input)->keys()->toArray());
+        $input['classification_id']= $classification_record->id??$this->classificationRepository->create($taxonomy_input)->id;
 
-        $input = $this->createTaxonomyAndClassificationAndChangeRequest($input, $taxonomy_record, $taxonomy_input, $classification_input, $classification_record);
-
-        return parent::update($input->toArray(),$id);
+       return parent::update($input->toArray(), $id);
     }
-
 
     /**
      * @param $input
@@ -117,23 +122,6 @@ class PlantRepository extends BaseRepository
         ];
         $classification_record = $this->classificationRepository->getByCriteria($classification_input)->first();
         return array($classification_input, $classification_record);
-    }
-
-    /**
-     * @param $input
-     * @param $taxonomy_record
-     * @param $taxonomy_input
-     * @param $classification_input
-     * @param $classification_record
-     * @return \Illuminate\Support\Collection|\IlluminateAgnostic\Arr\Support\Collection|\IlluminateAgnostic\Collection\Support\Collection|\IlluminateAgnostic\Str\Support\Collection|\Vanilla\Support\Collection
-     */
-    public function createTaxonomyAndClassificationAndChangeRequest($input, $taxonomy_record, $taxonomy_input, $classification_input, $classification_record)
-    {
-        $input = collect($input)->forget(collect($taxonomy_input)->keys()->toArray());
-        $input = collect($input)->forget(collect($classification_input)->keys()->toArray());
-        $input['taxonomy_id'] = $taxonomy_record->id ?? $this->taxonomyRepository->create($taxonomy_input)->id;
-        $input['classification_id'] = $classification_record->id ?? $this->classificationRepository->create($taxonomy_input)->id;
-        return $input;
     }
 
 }

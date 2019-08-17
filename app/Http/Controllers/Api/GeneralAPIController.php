@@ -8,6 +8,8 @@ use App\Models\General;
 use App\Repositories\GeneralRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Response;
 
 /**
@@ -129,6 +131,7 @@ class GeneralAPIController extends AppBaseController
      */
     public function store(CreateGeneralAPIRequest $request)
     {
+
         $input = $request->all();
 
         $General = $this->GeneralRepository->create($input);
