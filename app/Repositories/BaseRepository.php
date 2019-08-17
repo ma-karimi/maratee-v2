@@ -125,7 +125,7 @@ abstract class BaseRepository
             $query->limit($limit);
         }
 
-        return $query->filtered();
+        return $query->filtered([]);
     }
 
     /**

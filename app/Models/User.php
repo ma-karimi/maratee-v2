@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Accessor\UserAccessor;
 use App\Models\Scope\UserScope;
+use Exception;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -152,9 +153,10 @@ class User extends Authenticatable
     protected $hidden=['password'];
 
     use HasApiTokens, UserScope, UserAccessor, Notifiable , SearchableTrait;
-    public $searchable = ['*'];
+    public static $messages = [];
+    public static $searchable = ['*'];
+    public static $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations'];
 
-    public $notSearchable  = ['page','per_page', 'limit', 'skip', 'relations'];
     /**
      * The database table used by the model.
      *
@@ -297,5 +299,67 @@ class User extends Authenticatable
     public function permission()
     {
         return $this->hasMany(User::class)->latest();
+    }
+
+    /**
+     * BaseModel constructor.
+     * @param array $attributes
+     * @throws Exception
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $languages = config('settings.languages');
+        $this->exceptionLanguageHandler($languages);
+
+        $this->validateJsonRequestHandler($languages);
+
+        static::$notSearchable = array_merge(static::$notSearchable, array_keys($this->getLinguistically()));
+    }
+
+    /**
+     * @param $languages
+     * @return mixed
+     * @throws Exception
+     */
+    private function exceptionLanguageHandler($languages)
+    {
+
+        foreach (request()->all() as $field => $value) {
+            if (is_array($value) &&
+                array_key_exists($field, static::$linguistically) &&
+                count(array_intersect($languages, array_keys($value))) === 0) {
+                throw new Exception('Language doesnt supported. [' . implode(',', $languages) . ']');
+            }
+        }
+    }
+
+    /**
+     * @param $languages
+     */
+    private function validateJsonRequestHandler($languages): void
+    {
+        foreach ($this->getLinguistically() as $key => $value) {
+            if ($value) {
+                static::$rules[$key] = 'required|array';
+            } else {
+                static::$rules[$key] = 'sometimes|required|array';
+            }
+            foreach ($languages as $language) {
+                if (is_array(request()->get($key)) && array_key_exists($language, request()->$key)) {
+                    static::$rules[$key . '.' . $language] = 'sometimes|required|min:3';
+                    static::$messages[$key . '.' . $language . '.' . 'required'] = ' الزامی است' . $key . 'فیلد';
+                    static::$messages[$key . '.' . $language . '.' . 'min'] = 'حداقل ۳ کاراکتر الزامی است';
+                }
+            }
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getLinguistically(): array
+    {
+        return static::$linguistically;
     }
 }

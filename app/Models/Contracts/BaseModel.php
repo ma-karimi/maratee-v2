@@ -4,19 +4,22 @@
 namespace App\Models\Contracts;
 
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 use Jedrzej\Searchable\SearchableTrait;
 
 
 class BaseModel extends Model
 
 {
-    use SoftDeletes , SearchableTrait;
+    use SoftDeletes, SearchableTrait;
     public static $rules = [];
+    public static $jsons = [];
     public static $messages = [];
     public $searchable = ['*'];
-    public $notSearchable  = ['page','per_page', 'limit', 'skip', 'relations'];
+    public $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations'];
 
     /**
      * The attributes that have en,fa languages.
@@ -48,6 +51,9 @@ class BaseModel extends Model
 
         $this->validateJsonRequestHandler($languages);
 
+        $this->notSearchable = array_merge($this->notSearchable, array_keys($this->getLinguistically()));
+
+        $this->setJsonSearchables();
 
     }
 
@@ -96,22 +102,45 @@ class BaseModel extends Model
     {
         return static::$linguistically;
     }
-//
-//    //
-//    // use one filter to search in multiple columns
-//    protected function processNameFilter(Builder $builder, Constraint $constraint)
-//    {
-//        // this logic should happen for LIKE/EQUAL operators only
-//        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
-//            $builder->where(function ($query) use ($constraint) {
-//                $query->where('first_name', $constraint->getOperator(), $constraint->getValue())
-//                    ->orWhere('last_name', $constraint->getOperator(), $constraint->getValue());
-//            });
-//
-//            return true;
-//        }
-//
-//        // default logic should be executed otherwise
-//        return false;
-//    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        if (count(request()->keys())) {
+            foreach (request()->all() as $index => $item) {
+                if (is_array($item) && collect(parent::getLinguistically())->has($index)) {
+                    foreach (parent::getJsons() as $key => $value) {
+                        static::addGlobalScope('json:' . $key, function (Builder $builder) use ($value, $key) {
+                            $builder->where($key, $value['operator'], $value['value']);
+                        });
+                    }
+                }
+            }
+        }
+
+    }
+
+    /**
+     * @return array
+     */
+    public static function getJsons(): array
+    {
+        return static::$jsons;
+    }
+
+    protected function setJsonSearchables(): void
+    {
+        if (count(request()->keys())) {
+            foreach (request()->all() as $index => $item) {
+                if (is_array($item) && collect($this->getLinguistically())->has($index)) {
+                    $param = array_keys($item)[0];
+                    $value = array_values($item)[0];
+                    static::$jsons[$index . '->' . $param]['operator'] = Str::startsWith($value, '%') && Str::endsWith($value, '%') ? 'like' : '=';
+                    static::$jsons[$index . '->' . $param]['value'] = $value;
+
+
+                }
+            }
+        }
+    }
 }
