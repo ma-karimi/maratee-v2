@@ -154,7 +154,7 @@ class User extends Authenticatable
     use HasApiTokens, UserScope, UserAccessor, Notifiable , SearchableTrait;
     public $searchable = ['*'];
 
-    public $notSearchable  = ['per_page', 'limit', 'skip', 'relations'];
+    public $notSearchable  = ['page','per_page', 'limit', 'skip', 'relations'];
     /**
      * The database table used by the model.
      *
