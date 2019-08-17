@@ -5,7 +5,6 @@ use Illuminate\Database\Seeder;
 
 class GeneralTableSeeder extends Seeder
 {
-    //public $types = ['phytogeography', 'phenology', 'plant_type', 'species', 'sub_species', 'variety', 'family', 'genus', 'class', 'group', 'order', 'flowering', 'sperm', 'cotyledon', 'growth', 'usage', 'part', 'industry', 'application', 'habitat', 'ecology', 'origin'];
 
     /**
      * Run the database seeds.
@@ -15,12 +14,8 @@ class GeneralTableSeeder extends Seeder
     public function run()
     {
 
-        factory(General::class,50)->create();
 
-        /*foreach ($this->types as $type) {
-            General::create(
-                ['name' => make_json('www'), 'description' => make_json('qqqq'), 'type' => $type]
-            );
-        }*/
+        factory(General::class, 50)->create();
+
     }
 }
