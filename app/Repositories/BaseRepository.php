@@ -163,7 +163,6 @@ abstract class BaseRepository
      */
     public function create($input)
     {
-
         try{
             DB::beginTransaction();
             $model = $this->model->newInstance($input);

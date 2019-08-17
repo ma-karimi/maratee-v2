@@ -71,7 +71,6 @@ class PlantRepository extends BaseRepository
         $input = collect($input)->forget(collect($classification_input)->keys()->toArray());
         $input['classification_id']= $classification_record->id??$this->classificationRepository->create($classification_input)->id;
 
-        dd($input);
        return parent::create($input->toArray());
     }
 

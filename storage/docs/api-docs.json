@@ -3145,7 +3145,7 @@
                         }
                     },
                     {
-                        "name": "sprout",
+                        "name": "seed_germination",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3177,7 +3177,7 @@
                         }
                     },
                     {
-                        "name": "flowering_interval",
+                        "name": "flowering_period",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3193,7 +3193,7 @@
                         }
                     },
                     {
-                        "name": "seed_value",
+                        "name": "seed_rate",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3209,7 +3209,7 @@
                         }
                     },
                     {
-                        "name": "season_resistance",
+                        "name": "season_tolerance",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3257,7 +3257,7 @@
                         }
                     },
                     {
-                        "name": "scion_rooting_per",
+                        "name": "cutting_rooting_per",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3391,7 +3391,7 @@
                         }
                     },
                     {
-                        "name": "sprout",
+                        "name": "seed_germination",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3423,7 +3423,7 @@
                         }
                     },
                     {
-                        "name": "flowering_interval",
+                        "name": "flowering_period",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3439,7 +3439,7 @@
                         }
                     },
                     {
-                        "name": "seed_value",
+                        "name": "seed_rate",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3455,7 +3455,7 @@
                         }
                     },
                     {
-                        "name": "season_resistance",
+                        "name": "season_tolerance",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3503,7 +3503,7 @@
                         }
                     },
                     {
-                        "name": "scion_rooting_per",
+                        "name": "cutting_rooting_per",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3948,7 +3948,7 @@
                         }
                     },
                     {
-                        "name": "daytime",
+                        "name": "irrigation_time",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -4066,7 +4066,7 @@
                         }
                     },
                     {
-                        "name": "daytime",
+                        "name": "irrigation_time",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -4141,13 +4141,13 @@
                 }
             }
         },
-        "/botanical_reproductions": {
+        "/botanical_propagations": {
             "get": {
                 "tags": [
-                    "BotanicalReproduction"
+                    "BotanicalPropagation"
                 ],
-                "summary": "Get a listing of the BotanicalReproductions.",
-                "description": "Get all BotanicalReproductions",
+                "summary": "Get a listing of the BotanicalPropagations.",
+                "description": "Get all BotanicalPropagations",
                 "produces": [
                     "application/json"
                 ],
@@ -4162,7 +4162,7 @@
                                 "data": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/BotanicalReproduction"
+                                        "$ref": "#/definitions/BotanicalPropagation"
                                     }
                                 },
                                 "message": {
@@ -4176,10 +4176,10 @@
             },
             "post": {
                 "tags": [
-                    "BotanicalReproduction"
+                    "BotanicalPropagation"
                 ],
-                "summary": "Store a newly created BotanicalReproduction in storage",
-                "description": "Store BotanicalReproduction",
+                "summary": "Store a newly created BotanicalPropagation in storage",
+                "description": "Store BotanicalPropagation",
                 "produces": [
                     "application/json"
                 ],
@@ -4189,15 +4189,15 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/BotanicalReproduction"
+                            "$ref": "#/definitions/BotanicalPropagation"
                         }
                     },
                     {
-                        "name": "reproduction_id",
+                        "name": "propagation_id",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/BotanicalReproduction"
+                            "$ref": "#/definitions/BotanicalPropagation"
                         }
                     }
                 ],
@@ -4210,7 +4210,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/BotanicalReproduction"
+                                    "$ref": "#/definitions/BotanicalPropagation"
                                 },
                                 "message": {
                                     "type": "string"
@@ -4222,13 +4222,13 @@
                 }
             }
         },
-        "/botanical_reproductions/{id}": {
+        "/botanical_propagations/{id}": {
             "get": {
                 "tags": [
-                    "BotanicalReproduction"
+                    "BotanicalPropagation"
                 ],
-                "summary": "Display the specified BotanicalReproduction",
-                "description": "Get BotanicalReproduction",
+                "summary": "Display the specified BotanicalPropagation",
+                "description": "Get BotanicalPropagation",
                 "produces": [
                     "application/json"
                 ],
@@ -4236,7 +4236,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of BotanicalReproduction",
+                        "description": "id of BotanicalPropagation",
                         "required": true,
                         "type": "integer"
                     }
@@ -4250,7 +4250,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/BotanicalReproduction"
+                                    "$ref": "#/definitions/BotanicalPropagation"
                                 },
                                 "message": {
                                     "type": "string"
@@ -4263,10 +4263,10 @@
             },
             "put": {
                 "tags": [
-                    "BotanicalReproduction"
+                    "BotanicalPropagation"
                 ],
-                "summary": "Update the specified BotanicalReproduction in storage",
-                "description": "Update BotanicalReproduction",
+                "summary": "Update the specified BotanicalPropagation in storage",
+                "description": "Update BotanicalPropagation",
                 "produces": [
                     "application/json"
                 ],
@@ -4274,7 +4274,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of BotanicalReproduction",
+                        "description": "id of BotanicalPropagation",
                         "required": true,
                         "type": "integer"
                     },
@@ -4283,15 +4283,15 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/BotanicalReproduction"
+                            "$ref": "#/definitions/BotanicalPropagation"
                         }
                     },
                     {
-                        "name": "reproduction_id",
+                        "name": "propagation_id",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/BotanicalReproduction"
+                            "$ref": "#/definitions/BotanicalPropagation"
                         }
                     }
                 ],
@@ -4304,7 +4304,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/BotanicalReproduction"
+                                    "$ref": "#/definitions/BotanicalPropagation"
                                 },
                                 "message": {
                                     "type": "string"
@@ -4317,10 +4317,10 @@
             },
             "delete": {
                 "tags": [
-                    "BotanicalReproduction"
+                    "BotanicalPropagation"
                 ],
-                "summary": "Remove the specified BotanicalReproduction from storage",
-                "description": "Delete BotanicalReproduction",
+                "summary": "Remove the specified BotanicalPropagation from storage",
+                "description": "Delete BotanicalPropagation",
                 "produces": [
                     "application/json"
                 ],
@@ -4328,7 +4328,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of BotanicalReproduction",
+                        "description": "id of BotanicalPropagation",
                         "required": true,
                         "type": "integer"
                     }
@@ -10118,6 +10118,15 @@
                         }
                     },
                     {
+                        "name": "parent_id",
+                        "in": "body",
+                        "description": "General that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/General"
+                        }
+                    },
+                    {
                         "name": "description",
                         "in": "body",
                         "description": "General that should be stored",
@@ -10218,6 +10227,15 @@
                         "in": "body",
                         "description": "General that should be stored",
                         "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/General"
+                        }
+                    },
+                    {
+                        "name": "parent_id",
+                        "in": "body",
+                        "description": "General that should be stored",
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/General"
                         }
@@ -18217,15 +18235,6 @@
                         }
                     },
                     {
-                        "name": "exclusivity",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
                         "name": "domestic_name",
                         "in": "body",
                         "description": "Plant that should be stored",
@@ -18235,7 +18244,16 @@
                         }
                     },
                     {
-                        "name": "user_id",
+                        "name": "flowering_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "cotyledon_id",
                         "in": "body",
                         "description": "Plant that should be stored",
                         "required": false,
@@ -18244,7 +18262,7 @@
                         }
                     },
                     {
-                        "name": "article_id",
+                        "name": "sperm_id",
                         "in": "body",
                         "description": "Plant that should be stored",
                         "required": false,
@@ -18253,7 +18271,7 @@
                         }
                     },
                     {
-                        "name": "author_id",
+                        "name": "genus_id",
                         "in": "body",
                         "description": "Plant that should be stored",
                         "required": false,
@@ -18262,7 +18280,25 @@
                         }
                     },
                     {
-                        "name": "location_id",
+                        "name": "species_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "subspecies_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "variety_id",
                         "in": "body",
                         "description": "Plant that should be stored",
                         "required": false,
@@ -18273,73 +18309,10 @@
                     {
                         "name": "family_id",
                         "in": "body",
-                        "description": "Taxonomy that should be stored",
+                        "description": "Plant that should be stored",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "genus_id",
-                        "in": "body",
-                        "description": "Taxonomy that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "species_id",
-                        "in": "body",
-                        "description": "Taxonomy that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "subspecies_id",
-                        "in": "body",
-                        "description": "Taxonomy that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "variety_id",
-                        "in": "body",
-                        "description": "Taxonomy that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "flowering_id",
-                        "in": "body",
-                        "description": "Classification that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Classification"
-                        }
-                    },
-                    {
-                        "name": "cotyledon_id",
-                        "in": "body",
-                        "description": "Classification that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Classification"
-                        }
-                    },
-                    {
-                        "name": "sperm_id",
-                        "in": "body",
-                        "description": "Classification that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Classification"
+                            "$ref": "#/definitions/Plant"
                         }
                     }
                 ],
@@ -18448,43 +18421,7 @@
                         }
                     },
                     {
-                        "name": "user_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "article_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "author_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "location_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "taxonomy_id",
+                        "name": "flowering_id",
                         "in": "body",
                         "description": "Plant that should be stored",
                         "required": true,
@@ -18493,19 +18430,64 @@
                         }
                     },
                     {
-                        "name": "classification_id",
+                        "name": "cotyledon_id",
                         "in": "body",
                         "description": "Plant that should be stored",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
                         }
                     },
                     {
-                        "name": "exclusivity",
+                        "name": "sperm_id",
                         "in": "body",
                         "description": "Plant that should be stored",
                         "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "genus_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "species_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "subspecies_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "variety_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "family_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/Plant"
                         }
@@ -19724,6 +19706,223 @@
                 }
             }
         },
+        "/propagations": {
+            "get": {
+                "tags": [
+                    "Propagation"
+                ],
+                "summary": "Get a listing of the Propagations.",
+                "description": "Get all Propagations",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Propagation"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Propagation"
+                ],
+                "summary": "Store a newly created Propagation in storage",
+                "description": "Store Propagation",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "Propagation that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Propagation"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Propagation that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Propagation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Propagation"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/propagations/{id}": {
+            "get": {
+                "tags": [
+                    "Propagation"
+                ],
+                "summary": "Display the specified Propagation",
+                "description": "Get Propagation",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Propagation",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Propagation"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Propagation"
+                ],
+                "summary": "Update the specified Propagation in storage",
+                "description": "Update Propagation",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Propagation",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "Propagation that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Propagation"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Propagation that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Propagation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Propagation"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Propagation"
+                ],
+                "summary": "Remove the specified Propagation from storage",
+                "description": "Delete Propagation",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Propagation",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/protections": {
             "get": {
                 "tags": [
@@ -19770,19 +19969,19 @@
                     {
                         "name": "name",
                         "in": "body",
-                        "description": "Reproduction that should be stored",
+                        "description": "Propagation that should be stored",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Reproduction"
+                            "$ref": "#/definitions/Propagation"
                         }
                     },
                     {
                         "name": "description",
                         "in": "body",
-                        "description": "Reproduction that should be stored",
+                        "description": "Propagation that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/Reproduction"
+                            "$ref": "#/definitions/Propagation"
                         }
                     }
                 ],
@@ -19866,19 +20065,19 @@
                     {
                         "name": "name",
                         "in": "body",
-                        "description": "Reproduction that should be stored",
+                        "description": "Propagation that should be stored",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Reproduction"
+                            "$ref": "#/definitions/Propagation"
                         }
                     },
                     {
                         "name": "description",
                         "in": "body",
-                        "description": "Reproduction that should be stored",
+                        "description": "Propagation that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/Reproduction"
+                            "$ref": "#/definitions/Propagation"
                         }
                     }
                 ],
@@ -20404,223 +20603,6 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of Repeat",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/reproductions": {
-            "get": {
-                "tags": [
-                    "Reproduction"
-                ],
-                "summary": "Get a listing of the Reproductions.",
-                "description": "Get all Reproductions",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/Reproduction"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Reproduction"
-                ],
-                "summary": "Store a newly created Reproduction in storage",
-                "description": "Store Reproduction",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "Reproduction that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Reproduction"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Reproduction that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Reproduction"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Reproduction"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/reproductions/{id}": {
-            "get": {
-                "tags": [
-                    "Reproduction"
-                ],
-                "summary": "Display the specified Reproduction",
-                "description": "Get Reproduction",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Reproduction",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Reproduction"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Reproduction"
-                ],
-                "summary": "Update the specified Reproduction in storage",
-                "description": "Update Reproduction",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Reproduction",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "Reproduction that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Reproduction"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Reproduction that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Reproduction"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Reproduction"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Reproduction"
-                ],
-                "summary": "Remove the specified Reproduction from storage",
-                "description": "Delete Reproduction",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Reproduction",
                         "required": true,
                         "type": "integer"
                     }
@@ -27622,6 +27604,28 @@
                 }
             }
         },
+        "AuthorHub": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "authorable_type": {
+                    "type": "string"
+                },
+                "authorable_id": {
+                    "type": "integer"
+                },
+                "author_id": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
         "BioMolecular": {
             "required": [
                 "treatment",
@@ -27790,7 +27794,7 @@
                         "type": "string"
                     }
                 },
-                "sprout": {
+                "seed_germination": {
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -27814,7 +27818,7 @@
                         "type": "string"
                     }
                 },
-                "flowering_interval": {
+                "flowering_period": {
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -27826,7 +27830,7 @@
                         "type": "string"
                     }
                 },
-                "seed_value": {
+                "seed_rate": {
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -27838,7 +27842,7 @@
                         "type": "string"
                     }
                 },
-                "season_resistance": {
+                "season_tolerance": {
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -27868,7 +27872,7 @@
                 "planting": {
                     "type": "string"
                 },
-                "scion_rooting_per": {
+                "cutting_rooting_per": {
                     "type": "integer"
                 },
                 "entry_type": {
@@ -27978,7 +27982,7 @@
                 "irrigation_id": {
                     "type": "integer"
                 },
-                "daytime": {
+                "irrigation_time": {
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -28004,10 +28008,10 @@
                 }
             }
         },
-        "BotanicalReproduction": {
+        "BotanicalPropagation": {
             "required": [
                 "botanical_id",
-                "reproduction_id"
+                "propagation_id"
             ],
             "properties": {
                 "id": {
@@ -28016,7 +28020,7 @@
                 "botanical_id": {
                     "type": "integer"
                 },
-                "reproduction_id": {
+                "propagation_id": {
                     "type": "integer"
                 },
                 "created_at": {
@@ -28824,12 +28828,16 @@
         "General": {
             "required": [
                 "name",
-                "type",
-                "parent_id"
+                "type"
             ],
             "properties": {
                 "id": {
                     "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "parent_id": {
+                    "description": "parent_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -30732,25 +30740,20 @@
         },
         "Project": {
             "required": [
-                "name",
-                "plan_name",
-                "plan_number"
+                "title"
             ],
             "properties": {
                 "id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "project_leader_id": {
                     "description": "project_leader_id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "research_leader_id": {
                     "description": "research_leader_id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "title": {
                     "description": "title",
@@ -30766,27 +30769,6 @@
                         "type": "string"
                     }
                 },
-                "plan_name": {
-                    "description": "name",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "plan_description": {
-                    "description": "plan_description",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "plan_number": {
-                    "description": "plan_number",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
                 "project_no": {
                     "description": "project_no",
                     "type": "string"
@@ -30795,10 +30777,41 @@
                     "description": "research_no",
                     "type": "string"
                 },
-                "plan_id": {
-                    "description": "plan_id",
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "Propagation": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
                     "type": "integer",
                     "format": "int32"
+                },
+                "method": {
+                    "description": "method",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "description": {
+                    "description": "description",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "created_at": {
                     "description": "created_at",
@@ -30914,42 +30927,6 @@
                     "description": "date",
                     "type": "string",
                     "format": "date"
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
-        },
-        "Reproduction": {
-            "required": [
-                "name"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "name": {
-                    "description": "name",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "description": {
-                    "description": "description",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
                 },
                 "created_at": {
                     "description": "created_at",
