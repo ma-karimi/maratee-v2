@@ -129,10 +129,14 @@ class PlantRepository extends BaseRepository
      */
     public function createTaxonomyAndClassificationAndChangeRequest($input, $taxonomy_record, $taxonomy_input, $classification_input, $classification_record)
     {
-        $input = collect($input)->forget(collect($taxonomy_input)->keys()->toArray());
-        $input = collect($input)->forget(collect($classification_input)->keys()->toArray());
-        $input['taxonomy_id'] = $taxonomy_record->id ?? $this->taxonomyRepository->create($taxonomy_input)->id;
-        $input['classification_id'] = $classification_record->id ?? $this->classificationRepository->create($taxonomy_input)->id;
+        $classification = collect($input)->forget(collect($taxonomy_input)->keys()->toArray());
+        $taxonomy = collect($input)->forget(collect($classification_input)->keys()->toArray());
+
+
+
+
+        $input['classification_id'] = $classification_record->id ?? $this->classificationRepository->create($classification)->id;
+        $input['taxonomy_id'] = $taxonomy_record->id ?? $this->taxonomyRepository->create($taxonomy)->id;
         return $input;
     }
 
