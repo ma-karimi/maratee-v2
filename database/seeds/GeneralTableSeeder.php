@@ -15,7 +15,7 @@ class GeneralTableSeeder extends Seeder
     {
 
 
-        factory(General::class, 50)->create();
+        factory(General::class, 500)->create();
 
     }
 }
