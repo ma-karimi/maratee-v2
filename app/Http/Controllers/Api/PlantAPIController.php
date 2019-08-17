@@ -6,6 +6,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreatePlantAPIRequest;
 use App\Http\Requests\Api\UpdatePlantAPIRequest;
 use App\Http\Resources\PlantResource;
+use App\Models\General;
 use App\Models\Plant;
 use App\Repositories\PlantRepository;
 use Illuminate\Http\Request;

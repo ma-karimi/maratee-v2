@@ -2,11 +2,16 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\PlantingGeneral;
+use App\Models\General;
+use Illuminate\Http\JsonResponse;
 use InfyOm\Generator\Request\APIRequest;
 
 class CreateGeneralAPIRequest extends APIRequest
 {
+    private function validateParentId(string $type, array $parentArrayCollection): bool
+    {
+        return $this->request->get('type') === $type and in_array($this->request->get('parent_id'), $parentArrayCollection);
+    }
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -14,6 +19,16 @@ class CreateGeneralAPIRequest extends APIRequest
      */
     public function authorize()
     {
+        $family = General::ofType('family')->pluck('id')->toArray();
+        $genus = General::ofType('genus')->pluck('id')->toArray();
+        $species = General::ofType('species')->pluck('id')->toArray();
+
+        if (($this->validateParentId('genus', $family) or
+                $this->validateParentId('species', $genus) or
+                $this->validateParentId('subspecies', $species)
+        ) === false) {
+            abort(JsonResponse::HTTP_BAD_REQUEST, 'parent_id does not valid');
+        }
         return true;
     }
 
@@ -24,6 +39,6 @@ class CreateGeneralAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return PlantingGeneral::$rules;
+        return General::$rules;
     }
 }
