@@ -15,7 +15,7 @@ class GeneralTableSeeder extends Seeder
     public function run()
     {
 
-        factory(General::class,50)->create();
+        factory(General::class,500)->create();
 
         /*foreach ($this->types as $type) {
             General::create(

@@ -3,16 +3,23 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
  *      definition="General",
- *      required={"name","type","parent_id"},
+ *      required={"name","type"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="parent_id",
+ *          description="parent_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -109,5 +116,62 @@ class General extends BaseModel
     public function authors(): MorphToMany
     {
         return $this->morphToMany(Author::class, 'morph_author')->withTimestamps();
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function genusParent(): BelongsTo
+    {
+        return $this->belongsTo(__CLASS__, 'parent_id');
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function speciesParent(): BelongsTo
+    {
+        return $this->belongsTo(__CLASS__, 'parent_id');
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function subspeciesParent(): BelongsTo
+    {
+        return $this->belongsTo(__CLASS__, 'parent_id');
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function varietyParent(): BelongsTo
+    {
+        return $this->belongsTo(__CLASS__, 'parent_id');
+    }
+    /**
+     * @return HasMany
+     */
+    public function familyChildren(): HasMany
+    {
+        return $this->hasMany(__CLASS__, 'parent_id')->where('type','genus');
+    }
+    /**
+     * @return HasMany
+     */
+    public function genusChildren(): HasMany
+    {
+        return $this->hasMany(__CLASS__, 'parent_id')->where('type','genus');
+    }
+    /**
+     * @return HasMany
+     */
+    public function speciesChildren(): HasMany
+    {
+        return $this->hasMany(__CLASS__, 'parent_id')->where('type','genus');
+    }
+    /**
+     * @return HasMany
+     */
+    public function subspeciesChildren(): HasMany
+    {
+        return $this->hasMany(__CLASS__, 'parent_id')->where('type','genus');
     }
 }
