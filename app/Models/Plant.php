@@ -71,7 +71,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      @SWG\Property(
  *          property="exclusivity",
  *          description="exclusivity",
- *          type="string"
+ *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="created_at",
