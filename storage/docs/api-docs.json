@@ -18359,6 +18359,15 @@
                         "schema": {
                             "$ref": "#/definitions/Plant"
                         }
+                    },
+                    {
+                        "name": "exclusivity",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
                     }
                 ],
                 "responses": {
@@ -18533,6 +18542,15 @@
                         "in": "body",
                         "description": "Plant that should be stored",
                         "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "exclusivity",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
                         }
