@@ -20,7 +20,6 @@ class CreateCryoBanksTable extends Migration
             $table->unsignedInteger('protection_id');
             $table->date('entry_date')->nullable();
             $table->string('sample_type', 45)->nullable();
-            $table->json('treatment')->nullable();
             $table->integer('repetition')->nullable();
             $table->json('tank_type')->nullable();
             $table->integer('layering_no')->nullable();

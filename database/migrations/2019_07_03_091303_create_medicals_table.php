@@ -25,9 +25,6 @@ class CreateMedicalsTable extends Migration
             $table->unsignedInteger('medicine_shape_id');
             $table->json('shape_description')->nullable();
 
-            $table->unsignedInteger('medicine_part_id');
-            $table->json('part_description')->nullable();
-
             $table->unsignedInteger('medicine_usage_id');
             $table->json('usage_description')->nullable();
 

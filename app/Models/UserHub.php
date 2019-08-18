@@ -26,6 +26,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          type="integer",
  *      ),
  *      @SWG\Property(
+ *          property="userable_id",
+ *          type="integer",
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",

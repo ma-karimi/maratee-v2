@@ -19,9 +19,8 @@ class CreateBotanicalsTable extends Migration
             $table->float('height', 4)->nullable();
             $table->json('flower_color')->nullable();
             $table->json('fruit_color')->nullable();
-            $table->json('leaf_color')->nullable();
+            $table->json('foliage_color')->nullable();
             $table->json('seed_germination')->nullable();
-            $table->json('treatment')->nullable();
             $table->json('growth_rate')->nullable();
             $table->json('first_flowering')->nullable();
             $table->json('flowering_period')->nullable()->comment('based on the number of days

@@ -105,19 +105,13 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="leaf_color",
+     *          name="foliage_color",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
      *          name="seed_germination",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Botanical")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="treatment",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -329,19 +323,13 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="leaf_color",
+     *          name="foliage_color",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
      *          name="seed_germination",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Botanical")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="treatment",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")

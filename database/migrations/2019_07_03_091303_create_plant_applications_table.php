@@ -26,6 +26,8 @@ now
 future
 to descirbe if that plant is used or could be used in the specific industry now or in future.');
 
+			$table->string('trade_type')->nullable();
+			$table->string('trade_process')->nullable();
             $table->timeStampsTz();
             $table->softDeletesTz();
 		});

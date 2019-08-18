@@ -21,6 +21,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          type="string",
  *      ),
  *      @SWG\Property(
+ *          property="locationable_id",
+ *          type="integer",
+ *      ),
+ *      @SWG\Property(
  *          property="location_id",
  *          description="location_id",
  *          type="integer",

@@ -14,7 +14,10 @@ class AddForeignKeysToPaleontologiesTable extends Migration {
 	{
 		Schema::table('paleontologies', function(Blueprint $table)
 		{
-			$table->foreign('geology_age_id')->references('id')->on('geology_ages')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('geology_age_era_id')->references('id')->on('geology_ages')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('geology_age_epoch_id')->references('id')->on('geology_ages')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('geology_age_stage_id')->references('id')->on('geology_ages')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('geology_age_period_id')->references('id')->on('geology_ages')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
         });
@@ -30,7 +33,10 @@ class AddForeignKeysToPaleontologiesTable extends Migration {
 	{
 		Schema::table('paleontologies', function(Blueprint $table)
 		{
-			$table->dropForeign(['geology_age_id']);
+			$table->dropForeign(['geology_age_era_id']);
+			$table->dropForeign(['geology_age_epoch_id']);
+			$table->dropForeign(['geology_age_stage_id']);
+			$table->dropForeign(['geology_age_period_id']);
 			$table->dropForeign(['plant_id']);
 		});
 	}

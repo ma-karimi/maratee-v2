@@ -15,9 +15,7 @@ class ChangePaleontologiesTables extends Migration
     public function up()
     {
         \App\Utility::truncateTables();
-        Schema::table('treatments', function (Blueprint $table){
-           $table->dateTimeTz('date');
-        });
+
         Schema::table('credentials', function (Blueprint $table) {
             $table->string('url')->nullable();
             $table->unsignedInteger('division_id')->nullable();
@@ -56,9 +54,6 @@ class ChangePaleontologiesTables extends Migration
     public function down()
     {
         \App\Utility::truncateTables();
-        Schema::table('treatments', function (Blueprint $table){
-            $table->dropColumn('date');
-        });
         Schema::table('credentials', function (Blueprint $table) {
             $table->dropForeign(['division_id']);
             $table->dropForeign(['department_id']);

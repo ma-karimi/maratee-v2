@@ -19,7 +19,6 @@ class AddForeignKeysToMedicalsTable extends Migration {
 			$table->foreign('medicine_drug_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('medicine_shape_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('medicine_usage_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
-			$table->foreign('medicine_part_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('medicine_effect_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('product_id')->references('id')->on('products')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('medicine_therapy_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
@@ -41,7 +40,6 @@ class AddForeignKeysToMedicalsTable extends Migration {
 			$table->dropForeign(['medicine_drug_id']);
 			$table->dropForeign(['medicine_shape_id']);
 			$table->dropForeign(['medicine_usage_id']);
-			$table->dropForeign(['medicine_part_id']);
 			$table->dropForeign(['medicine_effect_id']);
 			$table->dropForeign(['product_id']);
 			$table->dropForeign(['medicine_therapy_id']);

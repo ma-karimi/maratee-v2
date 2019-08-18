@@ -65,7 +65,7 @@ class BioMolecularAPIController extends AppBaseController
             $request->get('relations')
         );
 
-        return $this->sendResponse($bioMoleculars->toArray(), 'Seed Chemicals retrieved successfully');
+        return $this->sendResponse($bioMoleculars->toArray(), 'Bio Moleculars retrieved successfully');
     }
 
     /**
@@ -113,13 +113,6 @@ class BioMolecularAPIController extends AppBaseController
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/BioMolecular")
      *      ),
-     *      @SWG\Parameter(
-     *          name="treatment",
-     *          in="body",
-     *          description="BioMolecular that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/BioMolecular")
-     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -147,7 +140,7 @@ class BioMolecularAPIController extends AppBaseController
 
         $bioMolecular = $this->bioMolecularRepository->create($input);
 
-        return $this->sendResponse($bioMolecular->toArray(), 'Seed Chemical saved successfully');
+        return $this->sendResponse($bioMolecular->toArray(), 'Bio Molecular saved successfully');
     }
 
     /**
@@ -193,11 +186,11 @@ class BioMolecularAPIController extends AppBaseController
         /** @var BioMolecular $bioMolecular */
         $bioMolecular = $this->bioMolecularRepository->find($id, \request()->get('relations'));
 
-        if (empty($bioMolecular)) {
-            return $this->sendError('Seed Chemical not found');
+        if ($bioMolecular === null) {
+            return $this->sendError('Bio Molecular not found');
         }
 
-        return $this->sendResponse($bioMolecular->toArray(), 'Seed Chemical retrieved successfully');
+        return $this->sendResponse($bioMolecular->toArray(), 'Bio Molecular retrieved successfully');
     }
 
     /**
@@ -253,13 +246,6 @@ class BioMolecularAPIController extends AppBaseController
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/BioMolecular")
      *      ),
-     *      @SWG\Parameter(
-     *          name="treatment",
-     *          in="body",
-     *          description="BioMolecular that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/BioMolecular")
-     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -288,8 +274,8 @@ class BioMolecularAPIController extends AppBaseController
         /** @var BioMolecular $bioMolecular */
         $bioMolecular = $this->bioMolecularRepository->find($id, \request()->get('relations'));
 
-        if (empty($bioMolecular)) {
-            return $this->sendError('Seed Chemical not found');
+        if ($bioMolecular === null) {
+            return $this->sendError('Bio Molecular not found');
         }
 
         $bioMolecular = $this->bioMolecularRepository->update($input, $id);
@@ -341,12 +327,12 @@ class BioMolecularAPIController extends AppBaseController
         /** @var BioMolecular $bioMolecular */
         $bioMolecular = $this->bioMolecularRepository->find($id, \request()->get('relations'));
 
-        if (empty($bioMolecular)) {
-            return $this->sendError('Seed Chemical not found');
+        if ($bioMolecular === null) {
+            return $this->sendError('Bio Molecular not found');
         }
 
         $bioMolecular->delete();
 
-        return $this->sendResponse($id, 'Seed Chemical deleted successfully');
+        return $this->sendResponse($id, 'Bio Molecular deleted successfully');
     }
 }

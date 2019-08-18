@@ -15,7 +15,6 @@ class AlterPrimaryKeysTables extends Migration
         'medicals',
         'medicinal_plant_constituents',
         'medicinal_plant_morphologies',
-        'bio_moleculars',
     ];
 
     /**

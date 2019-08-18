@@ -108,6 +108,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="store_type",
+ *          description="store_type",
+ *          type="string",
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -127,6 +132,7 @@ class MedicinalPlant extends BaseModel
         'plant_origin_id' => 'integer',
         'code_no' => 'integer',
         'efficiency' => 'numeric',
+        'store_type' => 'string',
         'location_id' => 'required|exists:locations,id',
         'article_id' => 'exists:methods,id',
 
@@ -143,7 +149,7 @@ class MedicinalPlant extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['article_id', 'code_no', 'created_at', 'deleted_at', 'efficiency', 'exclusivity', 'life_cycle', 'location_id', 'plant_application_id', 'secondary_metabolite', 'studied_sample', 'phenology_stage', 'used_origin','used_type', 'treatment', 'updated_at', 'vast_cultivation'];
+    protected $fillable = ['code_no', 'created_at', 'deleted_at', 'efficiency', 'exclusivity', 'life_cycle', 'plant_application_id', 'secondary_metabolite', 'studied_sample', 'phenology_stage', 'used_origin','used_type','store_type', 'updated_at', 'vast_cultivation'];
 
 
     /**
@@ -168,25 +174,9 @@ class MedicinalPlant extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function article(): BelongsTo
-    {
-        return $this->belongsTo(Article::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
     public function plantApplication(): BelongsTo
     {
         return $this->belongsTo(PlantApplication::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function location(): BelongsTo
-    {
-        return $this->belongsTo(Location::class);
     }
 
 
@@ -230,5 +220,13 @@ class MedicinalPlant extends BaseModel
     public function locations(): MorphToMany
     {
         return $this->morphToMany(LocationHub::class, 'locationable');
+    }
+
+    /**
+     * @return MorphToMany
+     */
+    public function treatments(): MorphToMany
+    {
+        return $this->morphToMany(TreatmentHub::class, 'treamentable');
     }
 }

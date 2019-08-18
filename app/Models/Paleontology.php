@@ -306,11 +306,11 @@ class Paleontology extends BaseModel
     }
 
     /**
-     * @return HasMany
+     * @return MorphToMany
      */
-    public function treatments(): HasMany
+    public function treatments(): MorphToMany
     {
-        return $this->hasMany(Treatment::class)->latest();
+        return $this->morphToMany(TreatmentHub::class, 'treamentable');
     }
 
     public function visits()

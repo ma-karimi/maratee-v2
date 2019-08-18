@@ -14,7 +14,7 @@ class CreateBioMolecularsTable extends Migration
     public function up()
     {
         Schema::create('bio_moleculars', function (Blueprint $table) {
-            $table->string('treatment');
+            $table->increments('id');
             $table->integer('repeat');
             $table->string('value');
             $table->unsignedInteger('technology_id');
