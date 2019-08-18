@@ -116,10 +116,12 @@ class BaseModel extends Model
     protected static function boot()
     {
         parent::boot();
-      //  dd(parent::getCastFields(),parent::getLinguistically());
+        $json_casts=array_filter(parent::getCastFields(),function ($value){
+            return $value ==='json';
+        });
         if (count(request()->keys())) {
             foreach (request()->all() as $index => $item) {
-                if (is_array($item) && collect(parent::getLinguistically())->has($index)) {
+                if (is_array($item) && collect($json_casts)->has($index)) {
                     foreach (parent::getJsons() as $key => $value) {
                         static::addGlobalScope('json:' . $key, function (Builder $builder) use ($value, $key) {
                             $builder->where($key, $value['operator'], $value['value']);
