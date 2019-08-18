@@ -164,6 +164,13 @@ class PlantAPIController extends AppBaseController
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
+     *      @SWG\Parameter(
+     *          name="exclusivity",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -337,6 +344,13 @@ class PlantAPIController extends AppBaseController
      *          in="body",
      *          description="Plant that should be stored",
      *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="exclusivity",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Response(

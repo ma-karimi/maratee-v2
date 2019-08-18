@@ -71,7 +71,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      @SWG\Property(
  *          property="exclusivity",
  *          description="exclusivity",
- *          type="string"
+ *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -99,6 +99,7 @@ class Plant extends BaseModel
         'location_id' => 'exists:locations,id',
         'taxonomies_id' => 'exists:taxonomies,id',
         'classification_id' => 'exists:classification,id',
+        'exclusivity' => 'integer',
         //taxonomy
         'family_id' => 'required|exists:generals,id',
         'genus_id' => 'exists:generals,id',

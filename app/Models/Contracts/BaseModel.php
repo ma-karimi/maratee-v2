@@ -12,7 +12,6 @@ use Jedrzej\Searchable\SearchableTrait;
 
 
 class BaseModel extends Model
-
 {
     use SoftDeletes, SearchableTrait;
     public static $rules = [];
@@ -50,13 +49,18 @@ class BaseModel extends Model
         $this->exceptionLanguageHandler($languages);
 
         $this->validateJsonRequestHandler($languages);
-
-        $this->notSearchable = array_merge($this->notSearchable, array_keys($this->getLinguistically()));
-
-        $this->setJsonSearchables();
+        $this->setNotSearchable($this->getLinguistically());
+        $this->setJsonSelectables();
 
     }
 
+    /**
+     * @param array $fields
+     */
+    public function setNotSearchable(array $fields): void
+    {
+        $this->notSearchable = array_merge($this->notSearchable, array_keys($fields));
+    }
     /**
      * @param $languages
      * @return mixed
@@ -103,12 +107,20 @@ class BaseModel extends Model
         return static::$linguistically;
     }
 
+    public function getCastFields(): array
+    {
+        return $this->getCasts();
+    }
+
     protected static function boot()
     {
         parent::boot();
+        $json_casts=array_filter(parent::getCastFields(),function ($value){
+            return $value ==='json';
+        });
         if (count(request()->keys())) {
             foreach (request()->all() as $index => $item) {
-                if (is_array($item) && collect(parent::getLinguistically())->has($index)) {
+                if (is_array($item) && collect($json_casts)->has($index)) {
                     foreach (parent::getJsons() as $key => $value) {
                         static::addGlobalScope('json:' . $key, function (Builder $builder) use ($value, $key) {
                             $builder->where($key, $value['operator'], $value['value']);
@@ -128,19 +140,26 @@ class BaseModel extends Model
         return static::$jsons;
     }
 
-    protected function setJsonSearchables(): void
+    protected function setJsonSelectables(): void
     {
         if (count(request()->keys())) {
             foreach (request()->all() as $index => $item) {
                 if (is_array($item) && collect($this->getLinguistically())->has($index)) {
                     $param = array_keys($item)[0];
                     $value = array_values($item)[0];
-                    static::$jsons[$index . '->' . $param]['operator'] = Str::startsWith($value, '%') && Str::endsWith($value, '%') ? 'like' : '=';
+                    static::$jsons[$index . '->' . $param]['operator'] = Str::startsWith($value, '%') || Str::endsWith($value, '%') ? 'like' : '=';
                     static::$jsons[$index . '->' . $param]['value'] = $value;
-
-
                 }
             }
         }
     }
+
+    /**
+     * @return array
+     */
+    public function getNotSearchable(): array
+    {
+        return $this->notSearchable;
+    }
+
 }

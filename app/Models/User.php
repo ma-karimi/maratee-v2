@@ -135,6 +135,7 @@ use Laravel\Passport\HasApiTokens;
  */
 class User extends Authenticatable
 {
+    use Notifiable;
     public static $linguistically=['title'=>true,'education'=>false,'degree'=>false,'nationality'=>false,'first_name'=>true,'last_name'=>true,'nickname'=>false];
     public static $rules = [
         'national_id' => 'string',
