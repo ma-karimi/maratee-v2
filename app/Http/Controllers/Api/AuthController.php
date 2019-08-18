@@ -365,7 +365,7 @@ class AuthController extends AppBaseController
             $newPassword = Utility::randomStringGenerator(6);
             $this->userServices->updateUserWithNewPassword($user, $newPassword);
             $user->notify(new ResetPassword($newPassword));
-            return $this->sendResponse($user, 'The Password reset token and sent to Email');
+            return $this->sendResponse(null, 'The Password reset token and sent to Email');
         } catch (\Exception $exception) {
             report($exception);
             return $this->sendError($exception->getMessage());
