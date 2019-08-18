@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Jedrzej\Searchable\SearchableTrait;
+use phpDocumentor\Reflection\Types\Parent_;
 
 
 class BaseModel extends Model
-
 {
     use SoftDeletes, SearchableTrait;
     public static $rules = [];
@@ -51,7 +51,7 @@ class BaseModel extends Model
 
         $this->validateJsonRequestHandler($languages);
         $this->setNotSearchable($this->getLinguistically());
-        $this->setJsonSearchables();
+        $this->setJsonSelectables();
 
     }
 
@@ -108,9 +108,15 @@ class BaseModel extends Model
         return static::$linguistically;
     }
 
+    public function getCastFields(): array
+    {
+        return $this->getCasts();
+    }
+
     protected static function boot()
     {
         parent::boot();
+      //  dd(parent::getCastFields(),parent::getLinguistically());
         if (count(request()->keys())) {
             foreach (request()->all() as $index => $item) {
                 if (is_array($item) && collect(parent::getLinguistically())->has($index)) {
@@ -133,7 +139,7 @@ class BaseModel extends Model
         return static::$jsons;
     }
 
-    protected function setJsonSearchables(): void
+    protected function setJsonSelectables(): void
     {
         if (count(request()->keys())) {
             foreach (request()->all() as $index => $item) {
@@ -154,4 +160,5 @@ class BaseModel extends Model
     {
         return $this->notSearchable;
     }
+
 }

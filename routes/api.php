@@ -30,8 +30,7 @@ Route::middleware(['auth:api'])->group(function () {
 Route::get('relations', 'HelpersAPIController@relations');
 Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
-
-
+Route::post('reset_password', 'AuthController@resetPassword');
 
 Route::resource('treatments', 'TreatmentAPIController');
 

@@ -3,17 +3,31 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\ResetPasswordRequest;
 use App\Http\Requests\Api\UserLoginRequest;
 use App\Http\Requests\Api\UserRegisterRequest;
-use App\Http\Requests\Api\UserUpdateRequest;
+use App\Http\Requests\Api\UserRequest;
 use App\Models\User;
+use App\Notifications\ResetPassword;
+use App\Services\UserServices;
+use App\Utility;
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
 class AuthController extends AppBaseController
 {
+    use AuthenticatesUsers;
+
+    private $userServices;
+
+    public function __construct(UserServices $userServices)
+    {
+        $this->userServices = $userServices;
+    }
+
     /**
      * @param UserRegisterRequest $request
      *
@@ -156,6 +170,7 @@ class AuthController extends AppBaseController
      *      )
      * )
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function register(UserRegisterRequest $request)
     {
@@ -252,6 +267,7 @@ class AuthController extends AppBaseController
             )->toDateTimeString(),
         ]);
     }
+
     /**
      * @param Request $request
      * @return Response
@@ -296,5 +312,63 @@ class AuthController extends AppBaseController
         return response()->json([
             'message' => 'Successfully logged out'
         ]);
+    }
+
+
+    /**
+     * @param Request $request
+     * @return Response
+     *
+     * @SWG\Post(
+     *      path="/reset_password",
+     *      summary="Reset User Password By Email.",
+     *      tags={"Auth"},
+     *      description="Reset User Password By Email",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="email",
+     *          in="body",
+     *          description="Register that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/User")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Action")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function resetPassword(ResetPasswordRequest $request)
+    {
+        $user = $this->userServices->findByEmail($request->email);
+        if (!$user) {
+            return $this->sendError('User not found');
+        }
+
+        try {
+            $newPassword = Utility::randomStringGenerator(6);
+            $this->userServices->updateUserWithNewPassword($user, $newPassword);
+            $user->notify(new ResetPassword($newPassword));
+            return $this->sendResponse($user, 'The Password reset token and sent to Email');
+        } catch (\Exception $exception) {
+            report($exception);
+            return $this->sendError($exception->getMessage());
+        }
     }
 }

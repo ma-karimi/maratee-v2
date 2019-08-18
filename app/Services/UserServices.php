@@ -43,7 +43,7 @@ class UserServices
      */
     public function updateUserWithNewPassword($user, $newPassword)
     {
-        $user->password = Hash::make($newPassword);
+        $user->password = $newPassword;
         $user->save();
     }
 
