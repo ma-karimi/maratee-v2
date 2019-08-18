@@ -50,13 +50,18 @@ class BaseModel extends Model
         $this->exceptionLanguageHandler($languages);
 
         $this->validateJsonRequestHandler($languages);
-
-        $this->notSearchable = array_merge($this->notSearchable, array_keys($this->getLinguistically()));
-
+        $this->setNotSearchable($this->getLinguistically());
         $this->setJsonSearchables();
 
     }
 
+    /**
+     * @param array $fields
+     */
+    public function setNotSearchable(array $fields): void
+    {
+        $this->notSearchable = array_merge($this->notSearchable, array_keys($fields));
+    }
     /**
      * @param $languages
      * @return mixed
@@ -135,12 +140,18 @@ class BaseModel extends Model
                 if (is_array($item) && collect($this->getLinguistically())->has($index)) {
                     $param = array_keys($item)[0];
                     $value = array_values($item)[0];
-                    static::$jsons[$index . '->' . $param]['operator'] = Str::startsWith($value, '%') && Str::endsWith($value, '%') ? 'like' : '=';
+                    static::$jsons[$index . '->' . $param]['operator'] = Str::startsWith($value, '%') || Str::endsWith($value, '%') ? 'like' : '=';
                     static::$jsons[$index . '->' . $param]['value'] = $value;
-
-
                 }
             }
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getNotSearchable(): array
+    {
+        return $this->notSearchable;
     }
 }

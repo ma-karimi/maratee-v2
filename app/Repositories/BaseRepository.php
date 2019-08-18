@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Contracts\BaseModel;
 use Exception;
 use Illuminate\Container\Container as Application;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -35,6 +36,10 @@ abstract class BaseRepository
     {
         $this->app = $app;
         $this->makeModel();
+
+        if (count($this->getFieldsSearchable())){
+            $this->model->setNotSearchable($this->getFieldsSearchable());
+        }
     }
 
     /**
@@ -70,6 +75,7 @@ abstract class BaseRepository
      * @param array|null $with_relations
      * @param array $columns
      * @return LengthAwarePaginator
+     * @throws Exception
      */
     public function paginate($perPage, array $search = [], array $with_relations = null, $columns = ['*'])
     {
@@ -101,9 +107,11 @@ abstract class BaseRepository
      * @param int|null $skip
      * @param int|null $limit
      * @return Builder
+     * @throws Exception
      */
     public function allQuery($search = [], $skip = null, $limit = null)
     {
+
         $query = $this->model->newQuery();
         if (count($search)) {
             foreach ($search as $key => $value) {
