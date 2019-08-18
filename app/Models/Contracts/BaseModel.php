@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Jedrzej\Searchable\SearchableTrait;
-use phpDocumentor\Reflection\Types\Parent_;
 
 
 class BaseModel extends Model

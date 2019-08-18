@@ -18,6 +18,7 @@ class CreatePlantsTable extends Migration {
 			$table->json('name');
 			$table->json('description')->nullable();
 			$table->json('domestic_name')->nullable();
+			$table->tinyInteger('exclusivity')->nullable();
             $table->unsignedInteger('taxonomy_id');
             $table->unsignedInteger('classification_id');
             $table->timeStampsTz();

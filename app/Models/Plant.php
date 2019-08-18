@@ -99,6 +99,7 @@ class Plant extends BaseModel
         'location_id' => 'exists:locations,id',
         'taxonomies_id' => 'exists:taxonomies,id',
         'classification_id' => 'exists:classification,id',
+        'exclusivity' => 'integer',
         //taxonomy
         'family_id' => 'required|exists:generals,id',
         'genus_id' => 'exists:generals,id',
