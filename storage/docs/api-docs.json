@@ -20,7 +20,7 @@
                     {
                         "name": "class",
                         "in": "path",
-                        "description": "class name (like plants)",
+                        "description": "class name e.g. plants",
                         "required": true,
                         "type": "string"
                     },
@@ -31,7 +31,119 @@
                         "required": true,
                         "type": "array",
                         "items": {
-                            "type": "string"
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/{class}/hub": {
+            "post": {
+                "tags": [
+                    "API"
+                ],
+                "summary": "Store Related Models to a record",
+                "description": "Store Related Models to a record",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "class_id",
+                        "in": "path",
+                        "description": "id of record",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "relation",
+                        "in": "path",
+                        "description": "realtion name e.g. locations",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "ids",
+                        "in": "path",
+                        "description": "ids of related model",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "API"
+                ],
+                "summary": "Remove Related Models to a record",
+                "description": "Remove Related Models to a record",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "class_id",
+                        "in": "path",
+                        "description": "id of record",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "relation",
+                        "in": "path",
+                        "description": "realtion name e.g. locations",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "ids",
+                        "in": "path",
+                        "description": "ids of related model",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
                         }
                     }
                 ],
@@ -30601,7 +30713,7 @@
                 },
                 "exclusivity": {
                     "description": "exclusivity",
-                    "type": "string"
+                    "type": "integer"
                 },
                 "created_at": {
                     "description": "created_at",
