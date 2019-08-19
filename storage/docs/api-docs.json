@@ -116,8 +116,8 @@
                 "tags": [
                     "API"
                 ],
-                "summary": "Remove Related Models to a record",
-                "description": "Remove Related Models to a record",
+                "summary": "Remove Related Models from a record",
+                "description": "Remove Related Models from a record",
                 "produces": [
                     "application/json"
                 ],
@@ -2170,15 +2170,6 @@
                         "schema": {
                             "$ref": "#/definitions/BioMolecular"
                         }
-                    },
-                    {
-                        "name": "treatment",
-                        "in": "body",
-                        "description": "BioMolecular that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BioMolecular"
-                        }
                     }
                 ],
                 "responses": {
@@ -2296,15 +2287,6 @@
                     },
                     {
                         "name": "repeat",
-                        "in": "body",
-                        "description": "BioMolecular that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BioMolecular"
-                        }
-                    },
-                    {
-                        "name": "treatment",
                         "in": "body",
                         "description": "BioMolecular that should be stored",
                         "required": true,
@@ -3310,14 +3292,6 @@
                         }
                     },
                     {
-                        "name": "treatment",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Botanical"
-                        }
-                    },
-                    {
                         "name": "growth_rate",
                         "in": "body",
                         "required": false,
@@ -3549,14 +3523,6 @@
                     },
                     {
                         "name": "seed_germination",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Botanical"
-                        }
-                    },
-                    {
-                        "name": "treatment",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -7573,14 +7539,6 @@
                         }
                     },
                     {
-                        "name": "user_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
                         "name": "entry_date",
                         "in": "body",
                         "required": false,
@@ -7590,14 +7548,6 @@
                     },
                     {
                         "name": "sample_type",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "treatment",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -7646,14 +7596,6 @@
                     },
                     {
                         "name": "cell_no",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "class_id",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -7779,14 +7721,6 @@
                         }
                     },
                     {
-                        "name": "user_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
                         "name": "entry_date",
                         "in": "body",
                         "required": false,
@@ -7796,14 +7730,6 @@
                     },
                     {
                         "name": "sample_type",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "treatment",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -7852,14 +7778,6 @@
                     },
                     {
                         "name": "cell_no",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "class_id",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -11451,7 +11369,7 @@
                         }
                     },
                     {
-                        "name": "department_id",
+                        "name": "organization_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": true,
@@ -14763,34 +14681,7 @@
                         }
                     },
                     {
-                        "name": "location_id",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
-                        "name": "plant_origin_id",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
                         "name": "code_no",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
-                        "name": "treatment",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": false,
@@ -14871,15 +14762,6 @@
                         }
                     },
                     {
-                        "name": "article_id",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
                         "name": "used_origin",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
@@ -14890,6 +14772,15 @@
                     },
                     {
                         "name": "used_type",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "store_type",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": false,
@@ -14985,34 +14876,7 @@
                         }
                     },
                     {
-                        "name": "location_id",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
-                        "name": "plant_origin_id",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
                         "name": "code_no",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
-                        "name": "treatment",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": false,
@@ -15093,15 +14957,6 @@
                         }
                     },
                     {
-                        "name": "article_id",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
                         "name": "used_origin",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
@@ -15112,6 +14967,15 @@
                     },
                     {
                         "name": "used_type",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "store_type",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": false,
@@ -26198,15 +26062,6 @@
                 ],
                 "parameters": [
                     {
-                        "name": "paleontology_id",
-                        "in": "body",
-                        "description": "Treatment that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Treatment"
-                        }
-                    },
-                    {
                         "name": "name",
                         "in": "body",
                         "description": "Treatment that should be stored",
@@ -26304,15 +26159,6 @@
                     "application/json"
                 ],
                 "parameters": [
-                    {
-                        "name": "paleontology_id",
-                        "in": "body",
-                        "description": "Treatment that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Treatment"
-                        }
-                    },
                     {
                         "name": "name",
                         "in": "body",
@@ -27714,6 +27560,9 @@
                     "description": "cryo_bank, action, location, user, media",
                     "type": "string"
                 },
+                "articleable_id": {
+                    "type": "integer"
+                },
                 "article_id": {
                     "description": "article_id",
                     "type": "integer"
@@ -27785,6 +27634,7 @@
             ],
             "properties": {
                 "authorable_type": {
+                    "description": "plant, general",
                     "type": "string"
                 },
                 "authorable_id": {
@@ -27803,7 +27653,6 @@
         },
         "BioMolecular": {
             "required": [
-                "treatment",
                 "repeat",
                 "value",
                 "technology_id",
@@ -27824,10 +27673,6 @@
                     "description": "seed_feature_id",
                     "type": "integer",
                     "format": "int32"
-                },
-                "treatment": {
-                    "description": "treatment",
-                    "type": "string"
                 },
                 "repeat": {
                     "description": "repeat",
@@ -27970,12 +27815,6 @@
                     }
                 },
                 "seed_germination": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "treatment": {
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -28652,9 +28491,6 @@
                 "id": {
                     "type": "integer"
                 },
-                "class_id": {
-                    "type": "integer"
-                },
                 "voucher_number": {
                     "type": "string"
                 },
@@ -28669,12 +28505,6 @@
                 },
                 "sample_type": {
                     "type": "string"
-                },
-                "treatment": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
                 },
                 "repetition": {
                     "type": "integer"
@@ -28736,6 +28566,41 @@
                 },
                 "updated_at": {
                     "type": "string"
+                }
+            }
+        },
+        "DepartmentHub": {
+            "required": [
+                "department_id",
+                "departmentable_id",
+                "departmentable_type"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "departmentable_type": {
+                    "description": "herbarium,plant",
+                    "type": "string"
+                },
+                "departmentable_id": {
+                    "type": "integer"
+                },
+                "department_id": {
+                    "description": "department_id",
+                    "type": "integer"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
                 }
             }
         },
@@ -29233,12 +29098,12 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "general_phytogeography_id": {
+                "organization_id": {
+                    "description": "organization_id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "department_id": {
-                    "description": "department_id",
+                "general_phytogeography_id": {
                     "type": "integer",
                     "format": "int32"
                 },
@@ -29636,6 +29501,9 @@
                     "description": "cryo_bank, action, location, user, media",
                     "type": "string"
                 },
+                "locationable_id": {
+                    "type": "integer"
+                },
                 "location_id": {
                     "description": "location_id",
                     "type": "integer"
@@ -30018,6 +29886,10 @@
                     "description": "used_type",
                     "type": "integer",
                     "format": "int32"
+                },
+                "store_type": {
+                    "description": "store_type",
+                    "type": "string"
                 },
                 "created_at": {
                     "description": "created_at",
@@ -32340,11 +32212,6 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "paleontology_id": {
-                    "description": "paleontology_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
                 "name": {
                     "description": "name",
                     "type": "array",
@@ -32365,6 +32232,41 @@
                     "description": "datetime",
                     "type": "string",
                     "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "TreatmentHub": {
+            "required": [
+                "treatment_id",
+                "treatmentable_id",
+                "treatmentable_type"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "treatmentable_type": {
+                    "description": "medicinal_plant, paleontology, botanical, cryo_bank, bio_molecular",
+                    "type": "string"
+                },
+                "treatmentable_id": {
+                    "type": "integer"
+                },
+                "treatment_id": {
+                    "description": "treatment_id",
+                    "type": "integer"
                 },
                 "created_at": {
                     "description": "created_at",
@@ -32517,6 +32419,9 @@
                 },
                 "user_id": {
                     "description": "user_id",
+                    "type": "integer"
+                },
+                "userable_id": {
                     "type": "integer"
                 },
                 "created_at": {

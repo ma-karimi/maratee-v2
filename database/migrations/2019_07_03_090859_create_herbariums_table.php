@@ -34,7 +34,8 @@ if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >
 پاراتیپ
 لکتوتیپ
 ');
-			$table->json('name')->nullable();
+			//$table->json('name')->nullable();
+
 			$table->json('description')->nullable();
 			$table->integer('is_flowering')->nullable()->comment('options:
 yes or no
@@ -47,7 +48,7 @@ that is an herbarium organization which we can but its id in this place');
 ');
 			$table->string('flowering_time')->nullable();
             $table->unsignedInteger('protection_id')->nullable();
-            $table->unsignedInteger('department_id');
+          //  $table->unsignedInteger('department_id');
 
             //from generals table
 			$table->unsignedInteger('general_ecology_id')->nullable();
@@ -61,6 +62,9 @@ that is an herbarium organization which we can but its id in this place');
 
             $table->json('habitat_description')->nullable();
             $table->json('ecology_description')->nullable();
+
+
+            $table->unsignedInteger('organization_id');
 
             $table->timeStampsTz();
             $table->softDeletesTz();

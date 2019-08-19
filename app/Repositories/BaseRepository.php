@@ -2,22 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Http\Controllers\AppBaseController;
-use App\Models\Contracts\BaseModel;
-use App\Models\Plant;
 use Exception;
 use Illuminate\Container\Container as Application;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use InfyOm\Generator\Utils\ResponseUtil;
 
 
 abstract class BaseRepository
@@ -265,15 +259,13 @@ abstract class BaseRepository
     {
         $record = $this->model->find($class_id);
         abort_if(empty($record), JsonResponse::HTTP_NOT_FOUND, 'record not found');
-        $related_model_table=$record->$related_model()->getTable();
-        $related_model_class=resolve('App\\Models\\'.Str::studly(Str::singular($related_model_table)));
-        $related_key = $record->$related_model()->getRelatedPivotKeyName();
-        $foreign_key = $record->$related_model()->getForeignPivotKeyName();
+        [$related_model_table, $related_model_class, $related_key, $foreign_key] = $this->getRelatedModelAndClass($related_model, $record);
 
         foreach ($ids as $index => $id) {
             $found_record = $related_model_class::where($related_key, $id)->where($foreign_key, $class_id)->first();
             abort_if($found_record, JsonResponse::HTTP_BAD_REQUEST, "record with id $id already exist!");
         }
+
         $record->$related_model()->attach($ids);
         return $record->$related_model;
     }
@@ -282,14 +274,23 @@ abstract class BaseRepository
     {
         $record = $this->model->find($class_id);
         abort_if(empty($record), JsonResponse::HTTP_NOT_FOUND, 'record not found');
-        $related_model_table=$record->$related_model()->getTable();
-        $related_model_class=resolve('App\\Models\\'.Str::studly(Str::singular($related_model_table)));
-        $related_key = $record->$related_model()->getRelatedPivotKeyName();
-        $foreign_key = $record->$related_model()->getForeignPivotKeyName();
-
+        [$related_model_table, $related_model_class, $related_key, $foreign_key] = $this->getRelatedModelAndClass($related_model, $record);
         $hub_collection=DB::table($related_model_table)->whereIn($related_key,$ids)
             ->where($foreign_key, $class_id)->get();
-
         return $related_model_class::whereIn('id',$hub_collection->pluck('id'))->delete();
+    }
+
+    /**
+     * @param $related_model
+     * @param $record
+     * @return array
+     */
+    private function getRelatedModelAndClass($related_model, $record): array
+    {
+        $related_model_table = $record->$related_model()->getTable();
+        $related_model_class = resolve('App\\Models\\' . Str::studly(Str::singular($related_model_table)));
+        $related_key = $record->$related_model()->getRelatedPivotKeyName();
+        $foreign_key = $record->$related_model()->getForeignPivotKeyName();
+        return [$related_model_table, $related_model_class, $related_key, $foreign_key];
     }
 }

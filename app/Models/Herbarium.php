@@ -42,13 +42,13 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="general_phytogeography_id",
+ *          property="organization_id",
+ *          description="organization_id",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="department_id",
- *          description="department_id",
+ *          property="general_phytogeography_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -178,7 +178,7 @@ class Herbarium extends BaseModel
         'location_id' => 'required|exists:locations,id',
         'protection_id' => 'exists:protections,id',
         'division_id' => 'required|exists:divisions,id',
-        'department_id' => 'required|exists:departments,id',
+        'organization_id' => 'required|exists:departments,id',
         'plant_id' => 'required|exists:plants,id',
         'general_phytogeography_id' => 'exists:generals,id',
         'general_phenology_id' => 'exists:generals,id',
@@ -253,6 +253,14 @@ class Herbarium extends BaseModel
     }
 
     /**
+     * @return MorphToMany
+     */
+    public function action(): MorphToMany
+    {
+        return $this->morphToMany(Action::class, 'actionable','action_hubs');
+    }
+
+    /**
      * @return MorphMany
      */
     public function borrows(): MorphMany
@@ -265,6 +273,10 @@ class Herbarium extends BaseModel
         return $this->morphMany(Visit::class, 'visitable');
     }
 
+    public function actions(): MorphToMany
+    {
+        return $this->morphToMany(Action::class, 'actionable','action_hubs');
+    }
     /**
      * @return HasMany
      */
@@ -290,6 +302,13 @@ class Herbarium extends BaseModel
     }
 
     /**
+     * @return MorphMany
+     */
+    public function exchange(): MorphMany
+    {
+        return $this->morphMany(Exchange::class, 'exchangeable')->latest();
+    }
+    /**
      * @return HasMany
      */
     public function sendHerbariumExchanges(): HasMany
@@ -308,17 +327,17 @@ class Herbarium extends BaseModel
     /**
      * @return HasMany
      */
-    public function sendHerbariumAppendixes(): HasMany
+    public function sourceHerbariumAppendixes(): HasMany
     {
-        return $this->hasMany(HerbariumAppendix::class, 'send_appendixes_id')->latest();
+        return $this->hasMany(HerbariumAppendix::class, 'herbarium_id')->latest();
     }
 
     /**
      * @return HasMany
      */
-    public function recieveHerbariumAppendixes(): HasMany
+    public function destinationHerbariumAppendixes(): HasMany
     {
-        return $this->hasMany(HerbariumAppendix::class, 'recieve_appendixes_id')->latest();
+        return $this->hasMany(HerbariumAppendix::class, 'destination_herbarium_id')->latest();
     }
 
     /**
@@ -331,11 +350,11 @@ class Herbarium extends BaseModel
 
 
     /**
-     * @return HasMany
+     * @return MorphMany
      */
-    public function medias(): HasMany
+    public function medias(): MorphMany
     {
-        return $this->hasMany(Media::class)->latest();
+        return $this->morphMany(Media::class,'mediable')->latest();
     }
 
     /**
@@ -397,7 +416,7 @@ class Herbarium extends BaseModel
 
     public function department()
     {
-        return $this->belongsTo(Department::class);
+        return $this->morphToMany(Department::class,'departmentable','department_hubs');
     }
 
     public function division()
@@ -416,11 +435,4 @@ class Herbarium extends BaseModel
         return $this->belongsTo(General::class, 'general_phytogeography_id');
     }
 
-    /**
-     * @return MorphToMany
-     */
-    public function actions(): MorphToMany
-    {
-        return $this->morphToMany(ActionHub::class, 'actionable');
-    }
 }

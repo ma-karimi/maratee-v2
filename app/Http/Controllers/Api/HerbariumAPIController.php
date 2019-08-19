@@ -56,6 +56,7 @@ class HerbariumAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -86,7 +87,7 @@ class HerbariumAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Parameter(
-     *          name="department_id",
+     *          name="organization_id",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=true,
