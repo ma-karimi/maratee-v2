@@ -148,9 +148,9 @@ class APIController extends AppBaseController
      *
      * @SWG\Delete(
      *      path="/{class}/hub",
-     *      summary="Remove Related Models to a record",
+     *      summary="Remove Related Models from a record",
      *      tags={"API"},
-     *      description="Remove Related Models to a record",
+     *      description="Remove Related Models from a record",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="class_id",
