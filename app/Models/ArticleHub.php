@@ -21,6 +21,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          type="string",
  *      ),
  *      @SWG\Property(
+ *          property="articleable_id",
+ *          type="integer",
+ *      ),
+ *      @SWG\Property(
  *          property="article_id",
  *          description="article_id",
  *          type="integer",

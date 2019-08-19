@@ -32,7 +32,10 @@ class CreatePaleontologiesTable extends Migration
             $table->integer('pieces')->nullable();
             $table->json('color')->nullable();
             $table->json('element')->nullable();
-            $table->unsignedInteger('geology_age_id');
+            $table->unsignedInteger('geology_age_era_id')->nullable();
+            $table->unsignedInteger('geology_age_period_id')->nullable();
+            $table->unsignedInteger('geology_age_epoch_id')->nullable();
+            $table->unsignedInteger('geology_age_stage_id')->nullable();
             $table->unsignedInteger('plant_id');
             $table->integer('plates_no')->nullable();
             $table->json('additional_info')->nullable();

@@ -7,7 +7,6 @@ use Faker\Generator as Faker;
 $factory->define(App\Models\CryoBank::class, function (Faker $faker) {
     $protections = \App\Models\Protection::pluck('id')->toArray();
     $herbariums = \App\Models\Herbarium::pluck('id')->toArray();
-    $users = \App\Models\User::pluck('id')->toArray();
     return [
         'voucher_number' => $faker->word,
         'geotype_code' => $faker->word,
@@ -15,7 +14,6 @@ $factory->define(App\Models\CryoBank::class, function (Faker $faker) {
         'entry_date' => $faker->dateTimeBetween(),
         'sample_type' => $faker->word,
         'proposal_name' => $faker->word,
-        'treatment' => make_json($faker->word),
         'repetition' => $faker->numberBetween(1, 100),
         'tank_type' => make_json($faker->word),
         'layering_no' => $faker->numberBetween(1, 100),
@@ -24,6 +22,5 @@ $factory->define(App\Models\CryoBank::class, function (Faker $faker) {
         'rack_no' => $faker->word,
         'cell_no' => $faker->numberBetween(1, 100),
         'herbarium_id' => $faker->randomElement($herbariums),
-        'user_id' => $faker->randomElement($herbariums),
     ];
 });

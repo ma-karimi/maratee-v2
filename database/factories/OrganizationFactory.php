@@ -14,5 +14,6 @@ $factory->define(App\Models\Organization::class, function (Faker $faker) {
         'phone' => $faker->phoneNumber,
         'email' => $faker->safeEmail,
         'website' => $faker->word,
+        'fax' => $faker->phoneNumber,
     ];
 });

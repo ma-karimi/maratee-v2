@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
@@ -15,11 +16,9 @@ use App\Models\Contracts\BaseModel;
 	 *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="fruit_color", type="array",
 	 *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="leaf_color", type="array",
+ * 			@SWG\Property(property="foliage_color", type="array",
 	 *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="seed_germination", type="array",
-	 *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="treatment", type="array",
 	 *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="growth_rate", type="array",
 	 *     @SWG\Items(type="string")),
@@ -52,7 +51,7 @@ use App\Models\Contracts\BaseModel;
  **/
 class Botanical extends BaseModel
 {
-    public static $linguistically=['flower_color'=>false,'fruit_color'=>false,'leaf_color'=>false,'seed_germination'=>false,'treatment'=>false,'growth_rate'=>false,'first_flowering'=>false,'flowering_period'=>false,'first_seeding'=>false,'seed_rate'=>false,'seed_production'=>false,'sensitivity'=>false,'sensitivity_description'=>false,'notes'=>false,'entry_type'=>false];
+    public static $linguistically=['flower_color'=>false,'fruit_color'=>false,'foliage_color'=>false,'seed_germination'=>false,'growth_rate'=>false,'first_flowering'=>false,'flowering_period'=>false,'first_seeding'=>false,'seed_rate'=>false,'seed_production'=>false,'sensitivity'=>false,'sensitivity_description'=>false,'notes'=>false,'entry_type'=>false];
     public static $rules = [
         'year' => 'date',
         'planting'=>'date',
@@ -72,7 +71,7 @@ class Botanical extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'entry_type', 'first_flowering', 'first_seeding', 'flower_color', 'flowering_period', 'fruit_color', 'growth_rate', 'height', 'herbarium_id', 'leaf_color', 'notes', 'planting', 'cutting_rooting_per', 'season_tolerance', 'seed_production', 'seed_rate', 'sensitivity', 'sensitivity_description', 'seed_germination', 'treatment', 'updated_at', 'year'];
+    protected $fillable = ['created_at', 'deleted_at', 'entry_type', 'first_flowering', 'first_seeding', 'flower_color', 'flowering_period', 'fruit_color', 'growth_rate', 'height', 'herbarium_id', 'foliage_color', 'notes', 'planting', 'cutting_rooting_per', 'season_tolerance', 'seed_production', 'seed_rate', 'sensitivity', 'sensitivity_description', 'seed_germination', 'treatment', 'updated_at', 'year'];
 
 
     /**
@@ -84,7 +83,7 @@ class Botanical extends BaseModel
         'height' => 'float',
         'flower_color' => 'json',
         'fruit_color' => 'json',
-        'leaf_color' => 'json',
+        'foliage_color' => 'json',
         'seed_germination' => 'json',
         'treatment' => 'json',
         'growth_rate' => 'json',
@@ -196,4 +195,12 @@ class Botanical extends BaseModel
         );
     }
 
+
+    /**
+     * @return MorphToMany
+     */
+    public function treatments(): MorphToMany
+    {
+        return $this->morphToMany(TreatmentHub::class, 'treamentable');
+    }
 }

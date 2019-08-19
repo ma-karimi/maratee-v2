@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Treatment;
-use App\Repositories\BaseRepository;
 
 /**
  * Class TreatmentRepository
  * @package App\Repositories
  * @version July 14, 2019, 9:41 am UTC
-*/
-
+ */
 class TreatmentRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

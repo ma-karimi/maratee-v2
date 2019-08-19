@@ -3294,7 +3294,7 @@
                         }
                     },
                     {
-                        "name": "leaf_color",
+                        "name": "foliage_color",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3540,7 +3540,7 @@
                         }
                     },
                     {
-                        "name": "leaf_color",
+                        "name": "foliage_color",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -27963,7 +27963,7 @@
                         "type": "string"
                     }
                 },
-                "leaf_color": {
+                "foliage_color": {
                     "type": "array",
                     "items": {
                         "type": "string"

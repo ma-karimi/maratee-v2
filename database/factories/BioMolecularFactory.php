@@ -5,14 +5,14 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\BioMolecular::class, function (Faker $faker) {
-    $seeds = \App\Models\Seed::pluck('id')->toArray();
-    $chemicals = \App\Models\Chemical::pluck('id')->toArray();
-    $locations = \App\Models\Location::pluck('id')->toArray();
+    $seed_features = \App\Models\SeedFeature::pluck('id')->toArray();
+    $blocks = \App\Models\Block::pluck('id')->toArray();
+    $technologies = \App\Models\Technology::pluck('id')->toArray();
     return [
-        'chemical_id' => $faker->randomElement($chemicals),
-        'seed_id' => $faker->randomElement($seeds),
-        'treatment' => make_json($faker->word),
+        'block_id' => $faker->randomElement($blocks),
+        'technology_id' => $faker->randomElement($technologies),
+        'seed_feature_id' => $faker->randomElement($seed_features),
         'repeat' => $faker->numberBetween(1, 100),
-        'location_id' =>$faker->randomElement($locations),
+        'value' =>$faker->word,
     ];
 });

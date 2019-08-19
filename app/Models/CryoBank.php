@@ -12,14 +12,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *            definition="CryoBank",
  *            required={"voucher_number", "geotype_code", "protection_id", "herbarium_id"},
  * 			@SWG\Property(property="id", type="integer"),
- * 			@SWG\Property(property="class_id", type="integer"),
  * 			@SWG\Property(property="voucher_number", type="string"),
  * 			@SWG\Property(property="geotype_code", type="string"),
  * 			@SWG\Property(property="protection_id", type="integer"),
  * 			@SWG\Property(property="entry_date", type="string"),
  * 			@SWG\Property(property="sample_type", type="string"),
- * 			@SWG\Property(property="treatment", type="array",
-	 *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="repetition", type="integer"),
  * 			@SWG\Property(property="tank_type", type="array",
 	 *     @SWG\Items(type="string")),
@@ -36,13 +33,12 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class CryoBank extends BaseModel
 {
 
-    public static $linguistically=['treatment'=>false,'tank_type'=>false];
+    public static $linguistically=['tank_type'=>false];
     public static $rules = [
         'voucher_number' => 'required|string',
         'geotype_code' => 'required|string',
         'protection_id' => 'required|exists:protections,id',
         'herbarium_id' => 'required|exists:herbariums,id',
-        'class_id' => 'exists:generals,id',
         'entry_date' => 'date',
         'sample_type' => 'string',
         'rack_no' => 'string',
@@ -64,7 +60,7 @@ class CryoBank extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['cell_no', 'created_at', 'deleted_at', 'entry_date', 'geotype_code', 'herbarium_id', 'layering_no', 'protection_id', 'rack_no', 'repetition', 'row_no', 'sample_type', 'tank_no', 'tank_type', 'treatment', 'updated_at', 'voucher_number'];
+    protected $fillable = ['cell_no', 'created_at', 'deleted_at', 'entry_date', 'geotype_code', 'herbarium_id', 'layering_no', 'protection_id', 'rack_no', 'repetition', 'row_no', 'sample_type', 'tank_no', 'tank_type', 'updated_at', 'voucher_number'];
 
 
     /**
@@ -73,7 +69,6 @@ class CryoBank extends BaseModel
      * @var array
      */
     protected $casts = [
-        'treatment' => 'json',
         'tank_type' => 'json',
     ];
 
@@ -83,15 +78,6 @@ class CryoBank extends BaseModel
      * @var array
      */
     protected $dates = ['created_at', 'deleted_at', 'entry_date', 'updated_at'];
-
-
-    /**
-     * @return HasMany
-     */
-    public function articleHubs(): HasMany
-    {
-        return $this->hasMany(ArticleHub::class)->latest();
-    }
 
 
     /**
@@ -120,14 +106,6 @@ class CryoBank extends BaseModel
     }
 
     /**
-     * @return BelongsTo
-     */
-    public function class(): BelongsTo
-    {
-        return $this->belongsTo(General::class,'class_id');
-    }
-
-    /**
      * @return MorphToMany
      */
     public function articles(): MorphToMany
@@ -150,5 +128,14 @@ class CryoBank extends BaseModel
     public function users(): MorphToMany
     {
         return $this->morphToMany(UserHub::class, 'userable')->withTimestamps();
+    }
+
+
+    /**
+     * @return MorphToMany
+     */
+    public function treatments(): MorphToMany
+    {
+        return $this->morphToMany(TreatmentHub::class, 'treamentable');
     }
 }

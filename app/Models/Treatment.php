@@ -15,12 +15,6 @@ use App\Models\Contracts\BaseModel;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="paleontology_id",
- *          description="paleontology_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
  *          property="name",
  *          description="name",
  *          type="array",
@@ -57,9 +51,7 @@ use App\Models\Contracts\BaseModel;
 class Treatment extends BaseModel
 {
     public static $linguistically = ['name' => true, 'description' => false];
-    public static $rules = [
-        'paleontology_id' => 'required|exists:paleontologies,id',
-    ];
+
     /**
      * The database table used by the model.
      *
@@ -72,7 +64,7 @@ class Treatment extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'date', 'paleontology_id', 'updated_at'];
+    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'date', 'updated_at'];
     protected $dates = ['created_at', 'deleted_at', 'updated_at', 'date'];
 
 
@@ -86,17 +78,17 @@ class Treatment extends BaseModel
         'description' => 'json'
     ];
 
-
-    public function paleontology()
-    {
-        return $this->belongsTo(Paleontology::class, 'paleontology_id');
-    }
-
     public function soilFeatures()
     {
         return $this->belongsToMany(SoilFeature::class,
             'soil_has_soil_features',
             'soil_id',
             'soil_feature_id');
+    }
+
+
+    public function treatmentHubs()
+    {
+        return $this->morphedByMany(TreatmentHub::class, 'treatmentable');
     }
 }

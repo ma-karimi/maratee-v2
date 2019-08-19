@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\BioMolecular;
-use App\Repositories\BaseRepository;
 
 /**
  * Class BioMolecularRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:22 am UTC
-*/
-
+ */
 class BioMolecularRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

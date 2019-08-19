@@ -109,12 +109,6 @@ class CryoBankAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
-     *          name="user_id",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
      *          name="entry_date",
      *          in="body",
      *          required=false,
@@ -122,12 +116,6 @@ class CryoBankAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="sample_type",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="treatment",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
@@ -164,12 +152,6 @@ class CryoBankAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="cell_no",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="class_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
@@ -303,12 +285,6 @@ class CryoBankAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
-     *          name="user_id",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
      *          name="entry_date",
      *          in="body",
      *          required=false,
@@ -316,12 +292,6 @@ class CryoBankAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="sample_type",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="treatment",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
@@ -358,12 +328,6 @@ class CryoBankAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="cell_no",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="class_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/CryoBank")

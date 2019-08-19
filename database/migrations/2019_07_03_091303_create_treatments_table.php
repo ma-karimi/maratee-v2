@@ -15,10 +15,9 @@ class CreateTreatmentsTable extends Migration {
 		Schema::create('treatments', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->unsignedInteger('paleontology_id');
 			$table->json('name');
 			$table->json('description')->nullable();
-
+            $table->dateTimeTz('date');
             $table->timeStampsTz();
             $table->softDeletesTz();
 		});

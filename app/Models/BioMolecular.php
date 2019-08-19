@@ -5,11 +5,13 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\SeedFeature;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use App\Models\Technology;
 
 /**
  * @SWG\Definition(
  *      definition="BioMolecular",
- *      required={"treatment","repeat","value","technology_id","seed_feature_id"},
+ *      required={"repeat","value","technology_id","seed_feature_id"},
  *      @SWG\Property(
  *          property="technology_id",
  *          description="technology_id",
@@ -28,11 +30,6 @@ use App\Models\SeedFeature;
  *          type="integer",
  *          format="int32"
  *      ),
- *      @SWG\Property(
- *          property="treatment",
- *          description="treatment",
- *          type="string",
- *     ),
  *      @SWG\Property(
  *          property="repeat",
  *          description="repeat",
@@ -66,7 +63,6 @@ class BioMolecular extends BaseModel
         'technology_id' => 'required|exists:technologies,id',
         'seed_feature_id' => 'required|exists:seed_features,id',
         'block_id' => 'exists:blocks,id',
-        'treatment' => 'required|string',
         'repeat' => 'required|integer',
         'value' => 'required|string',
     ];
@@ -90,7 +86,7 @@ class BioMolecular extends BaseModel
      */
     public function technology()
     {
-        return $this->belongsTo('App\Models\Technology');
+        return $this->belongsTo(Technology::class);
     }
     /**
      * @return BelongsTo
@@ -107,4 +103,12 @@ class BioMolecular extends BaseModel
         return $this->belongsTo(Block::class);
     }
 
+
+    /**
+     * @return MorphToMany
+     */
+    public function treatments(): MorphToMany
+    {
+        return $this->morphToMany(TreatmentHub::class, 'treamentable');
+    }
 }

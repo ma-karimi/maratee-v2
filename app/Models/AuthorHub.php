@@ -8,7 +8,7 @@ use App\Models\Contracts\BaseModel;
  * @SWG\Definition(
  *            definition="AuthorHub",
  *            required={"name"},
- * 			@SWG\Property(property="authorable_type", type="string"),
+ * 			@SWG\Property(property="authorable_type", type="string", description="plant, general"),
  * 			@SWG\Property(property="authorable_id", type="integer"),
  * 			@SWG\Property(property="author_id", type="integer"),
  * 			@SWG\Property(property="created_at", type="string"),
@@ -20,26 +20,22 @@ class AuthorHub extends BaseModel
 
 
     /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'author_hubs';
+
+    /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $guarded=['id'];
+    protected $fillable = ['authorable_id', 'authorable_type', 'author_id', 'created_at', 'deleted_at',  'updated_at', ];
 
-
-    /**
-     * Get all of the posts that are assigned this tag.
-     */
-    public function plants()
-    {
-        return $this->morphedByMany(Plant::class, 'author_hubs');
-    }
-
-    /**
-     * Get all of the videos that are assigned this tag.
-     */
-    public function generals()
-    {
-        return $this->morphedByMany(General::class, 'author_hubs');
-    }
+    public static $rules = [
+        'author_id'=>'required|exists:authors,id',
+        'authorable_id'=>'required|integer',
+        'authorable_type'=>'required|string'
+    ];
 }

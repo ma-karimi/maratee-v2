@@ -7,19 +7,14 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
     $applications = \App\Models\PlantApplication::pluck('id')->toArray();
-    $locations = \App\Models\Location::pluck('id')->toArray();
-    $articles = \App\Models\Article::pluck('id')->toArray();
     return [
         'plant_application_id' => $faker->randomElement($applications),
         'code_no' => $faker->numberBetween(1, 100),
-        'treatment' => make_json($faker->word),
         'cultivated_area' => make_json($faker->word),
         'vast_cultivation' => make_json($faker->randomElement(['raw','processed'])),
         'studied_sample' => make_json($faker->randomElement(['wild','cultivated'])),
         'efficiency' => $faker->randomFloat(),
         'secondary_metabolite' => $faker->word,
-        'location_id' => $faker->randomElement($locations),
-        'article_id' => $faker->randomElement($articles),
         'exclusivity' => make_json($faker->word),
         'life_cycle' => make_json($faker->word),
         'phenology_stage' => make_json($faker->word),

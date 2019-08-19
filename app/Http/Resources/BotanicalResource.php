@@ -49,7 +49,7 @@ class BotanicalResource extends JsonResource
             'industry' => 'NOT IMPLEMENT',
             'flower_color' => $this->flower_color,
             'fruit_color' => $this->fruit_color,
-            'leaf_color' => $this->leaf_color,
+            'foliage_color' => $this->foliage_color,
             'entrance_form' => EntryHubResource::collection($this->entryHubs),
             'seed_germination' => $this->seed_germination,
             'propagation_methods' => BotanicalPropagationResource::collection($this->botanicalPropagations),

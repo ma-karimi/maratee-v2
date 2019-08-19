@@ -86,28 +86,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
-     *          name="location_id",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_origin_id",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
      *          name="code_no",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="treatment",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=false,
@@ -170,13 +149,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
-     *          name="article_id",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
      *          name="used_origin",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
@@ -185,6 +157,13 @@ class MedicinalPlantAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="used_type",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="store_type",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=false,
@@ -296,28 +275,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
-     *          name="location_id",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_origin_id",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
      *          name="code_no",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="treatment",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=false,
@@ -380,13 +338,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
-     *          name="article_id",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
      *          name="used_origin",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
@@ -395,6 +346,13 @@ class MedicinalPlantAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="used_type",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="store_type",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=false,
