@@ -143,7 +143,7 @@ class Plant extends BaseModel
      */
     public function articles(): MorphToMany
     {
-        return $this->morphToMany(ArticleHub::class, 'articleable')->withTimestamps();
+        return $this->morphToMany(Article::class, 'articleable','article_hubs')->withTimestamps();
     }
 
     /**
@@ -151,14 +151,14 @@ class Plant extends BaseModel
      */
     public function locations(): MorphToMany
     {
-        return $this->morphToMany(LocationHub::class, 'locationable')->withTimestamps();
+        return $this->morphToMany(Location::class, 'locationable','location_hubs')->withTimestamps();
     }
     /**
      * @return MorphToMany
      */
     public function users(): MorphToMany
     {
-        return $this->morphToMany(UserHub::class, 'userable')->withTimestamps();
+        return $this->morphToMany(User::class, 'userable','user_hubs')->withTimestamps();
     }
 
     /**
@@ -166,7 +166,7 @@ class Plant extends BaseModel
      */
     public function authors(): MorphToMany
     {
-        return $this->morphToMany(Author::class, 'authorable')->withTimestamps();
+        return $this->morphToMany(Author::class, 'authorable','author_hubs')->withTimestamps();
     }
 
     public function seeds(): BelongsToMany

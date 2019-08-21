@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\CreateHubRequest;
+use App\Http\Requests\Api\DeleteHubRequest;
+use App\Http\Requests\Api\StoreHubRequest;
 use App\Http\Requests\BaseDeleteAPIRequest;
 use Illuminate\Container\Container as Application;
+use Illuminate\Http\Request;
 use Response;
 
 /**
@@ -26,7 +30,7 @@ class APIController extends AppBaseController
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="class",
-     *          description="class name (like plants)",
+     *          description="class name e.g. plants",
      *          type="string",
      *          required=true,
      *          in="path"
@@ -37,7 +41,7 @@ class APIController extends AppBaseController
      *           type="array",
      *          required=true,
      *          in="path",
-     *      @SWG\Items(type="string")
+     *      @SWG\Items(type="integer")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -74,4 +78,130 @@ class APIController extends AppBaseController
 
         return $this->sendResponse($request->ids, 'Record(s) deleted successfully');
     }
+
+    /**
+     * @param CreateHubRequest $request
+     * @param $class
+     * @return Response
+     *
+     * @SWG\Post(
+     *      path="/{class}/hub",
+     *      summary="Store Related Models to a record",
+     *      tags={"API"},
+     *      description="Store Related Models to a record",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="class_id",
+     *          description="id of record",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="relation",
+     *          description="realtion name e.g. locations",
+     *           type="string",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="ids",
+     *          description="ids of related model",
+     *           type="array",
+     *          required=true,
+     *          in="path",
+     *      @SWG\Items(type="integer")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function storeHub(CreateHubRequest $request, $class)
+    {
+        $repo = 'App\\Repositories\\' . ucfirst(rtrim($class, 's') . 'Repository');
+        $repo = resolve($repo);
+        $result = $repo->createHub($request->class_id, $request->relation, $request->ids);
+        return $this->sendResponse($result, 'Record(s) added successfully');
+    }
+
+    /**
+     * @param DeleteHubRequest $request
+     * @param $class
+     * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/{class}/hub",
+     *      summary="Remove Related Models from a record",
+     *      tags={"API"},
+     *      description="Remove Related Models from a record",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="class_id",
+     *          description="id of record",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="relation",
+     *          description="realtion name e.g. locations",
+     *           type="string",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="ids",
+     *          description="ids of related model",
+     *           type="array",
+     *          required=true,
+     *          in="path",
+     *      @SWG\Items(type="integer")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function DestroyHub(DeleteHubRequest $request, $class)
+    {
+        $repo = 'App\\Repositories\\' . ucfirst(rtrim($class, 's') . 'Repository');
+        $repo = resolve($repo);
+        $result = $repo->deleteHub($request->class_id, $request->relation, $request->ids);
+        return $this->sendResponse($result, 'Record(s) deleted successfully');
+    }
+
+
 }

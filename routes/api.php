@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,6 +22,10 @@ use Illuminate\Http\Request;
     });
 });*/
 Route::delete('/{class}/multiple_delete', 'APIController@multipleDestroy');
+
+Route::post('/{class}/hub', 'APIController@storeHub');
+Route::delete('/{class}/hub', 'APIController@DestroyHub');
+
 Route::middleware(['auth:api'])->group(function () {
     Route::get('logout', 'AuthController@logout');
 });
