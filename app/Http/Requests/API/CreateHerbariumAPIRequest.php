@@ -4,6 +4,8 @@ namespace App\Http\Requests\Api;
 
 use App\Models\General;
 use App\Models\Herbarium;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use InfyOm\Generator\Request\APIRequest;
 
@@ -28,11 +30,10 @@ class CreateHerbariumAPIRequest extends APIRequest
         ];
         foreach ($array_id_types as $index => $value) {
             if (request()->get($index) !== null) {
-                $record = General::where('id', request()->get($index))->where('type', $value)->first();
+                $record = General::ofIdType($index,$value)->first();
                 abort_if(!isset($record), JsonResponse::HTTP_BAD_REQUEST, "$index not exists");
             }
         }
-
         return true;
     }
 
