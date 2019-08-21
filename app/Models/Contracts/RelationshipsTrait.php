@@ -12,6 +12,7 @@ namespace App\Models\Contracts;
 use ErrorException;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Arr;
+use mysql_xdevapi\Exception;
 use ReflectionClass;
 use ReflectionMethod;
 
@@ -41,8 +42,9 @@ trait RelationshipsTrait
                         'name'=>$method->getName()
                     ];
                 }
-            } catch(ErrorException $e) {}
+            } catch(\Exception $e) {$e->getMessage();}
         }
+
 
         return $relationships;
     }

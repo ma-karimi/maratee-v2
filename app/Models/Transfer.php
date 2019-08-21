@@ -8,7 +8,7 @@ use App\Models\Mutator\TransferCredentialMutator;
 
 /**
  * @SWG\Definition(
- *      definition="TransferCredential",
+ *      definition="Transfer",
  *      required={"entitiable_id", "transferable_id", "entitiable_type", "transferable_type"},
  *      @SWG\Property(
  *          property="id",

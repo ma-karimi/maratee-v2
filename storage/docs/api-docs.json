@@ -11387,6 +11387,15 @@
                         }
                     },
                     {
+                        "name": "parent_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
                         "name": "number",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11699,6 +11708,15 @@
                         }
                     },
                     {
+                        "name": "parent_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
                         "name": "habitat_description",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11958,241 +11976,6 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of Herbarium",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/herbariumAppendixes": {
-            "get": {
-                "tags": [
-                    "HerbariumAppendix"
-                ],
-                "summary": "Get a listing of the HerbariumAppendixes.",
-                "description": "Get all HerbariumAppendixes",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/HerbariumAppendix"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "HerbariumAppendix"
-                ],
-                "summary": "Store a newly created HerbariumAppendix in storage",
-                "description": "Store HerbariumAppendix",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "herbarium_id",
-                        "in": "body",
-                        "description": "HerbariumAppendix that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/HerbariumAppendix"
-                        }
-                    },
-                    {
-                        "name": "appendix",
-                        "in": "body",
-                        "description": "HerbariumAppendix that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/HerbariumAppendix"
-                        }
-                    },
-                    {
-                        "name": "destination_herbarium_id",
-                        "in": "body",
-                        "description": "HerbariumAppendix that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/HerbariumAppendix"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/HerbariumAppendix"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/herbariumAppendixes/{id}": {
-            "get": {
-                "tags": [
-                    "HerbariumAppendix"
-                ],
-                "summary": "Display the specified HerbariumAppendix",
-                "description": "Get HerbariumAppendix",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of HerbariumAppendix",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/HerbariumAppendix"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "HerbariumAppendix"
-                ],
-                "summary": "Update the specified HerbariumAppendix in storage",
-                "description": "Update HerbariumAppendix",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of HerbariumAppendix",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "herbarium_id",
-                        "in": "body",
-                        "description": "HerbariumAppendix that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/HerbariumAppendix"
-                        }
-                    },
-                    {
-                        "name": "appendix",
-                        "in": "body",
-                        "description": "HerbariumAppendix that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/HerbariumAppendix"
-                        }
-                    },
-                    {
-                        "name": "destination_herbarium_id",
-                        "in": "body",
-                        "description": "HerbariumAppendix that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/HerbariumAppendix"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/HerbariumAppendix"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "HerbariumAppendix"
-                ],
-                "summary": "Remove the specified HerbariumAppendix from storage",
-                "description": "Delete HerbariumAppendix",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of HerbariumAppendix",
                         "required": true,
                         "type": "integer"
                     }
@@ -25272,13 +25055,13 @@
                 }
             }
         },
-        "/transfer_credentials": {
+        "/transfers": {
             "get": {
                 "tags": [
-                    "TransferCredential"
+                    "Transfer"
                 ],
-                "summary": "Get a listing of the TransferCredentials.",
-                "description": "Get all TransferCredentials",
+                "summary": "Get a listing of the Transfers.",
+                "description": "Get all Transfers",
                 "produces": [
                     "application/json"
                 ],
@@ -25293,7 +25076,7 @@
                                 "data": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/TransferCredential"
+                                        "$ref": "#/definitions/Transfer"
                                     }
                                 },
                                 "message": {
@@ -25307,10 +25090,10 @@
             },
             "post": {
                 "tags": [
-                    "TransferCredential"
+                    "Transfer"
                 ],
-                "summary": "Store a newly created TransferCredential in storage",
-                "description": "Store TransferCredential",
+                "summary": "Store a newly created Transfer in storage",
+                "description": "Store Transfer",
                 "produces": [
                     "application/json"
                 ],
@@ -25320,7 +25103,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/TransferCredential"
+                            "$ref": "#/definitions/Transfer"
                         }
                     },
                     {
@@ -25328,7 +25111,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/TransferCredential"
+                            "$ref": "#/definitions/Transfer"
                         }
                     },
                     {
@@ -25336,7 +25119,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/TransferCredential"
+                            "$ref": "#/definitions/Transfer"
                         }
                     },
                     {
@@ -25344,7 +25127,7 @@
                         "in": "body",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/TransferCredential"
+                            "$ref": "#/definitions/Transfer"
                         }
                     },
                     {
@@ -25352,7 +25135,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/TransferCredential"
+                            "$ref": "#/definitions/Transfer"
                         }
                     },
                     {
@@ -25360,7 +25143,7 @@
                         "in": "body",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/TransferCredential"
+                            "$ref": "#/definitions/Transfer"
                         }
                     }
                 ],
@@ -25373,7 +25156,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/TransferCredential"
+                                    "$ref": "#/definitions/Transfer"
                                 },
                                 "message": {
                                     "type": "string"
@@ -25385,13 +25168,13 @@
                 }
             }
         },
-        "/transfer_credentials/{id}": {
+        "/transfers/{id}": {
             "get": {
                 "tags": [
-                    "TransferCredential"
+                    "Transfer"
                 ],
-                "summary": "Display the specified TransferCredential",
-                "description": "Get TransferCredential",
+                "summary": "Display the specified Transfer",
+                "description": "Get Transfer",
                 "produces": [
                     "application/json"
                 ],
@@ -25399,7 +25182,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of TransferCredential",
+                        "description": "id of Transfer",
                         "required": true,
                         "type": "integer"
                     }
@@ -25413,7 +25196,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/TransferCredential"
+                                    "$ref": "#/definitions/Transfer"
                                 },
                                 "message": {
                                     "type": "string"
@@ -25426,10 +25209,10 @@
             },
             "put": {
                 "tags": [
-                    "TransferCredential"
+                    "Transfer"
                 ],
-                "summary": "Update the specified TransferCredential in storage",
-                "description": "Update TransferCredential",
+                "summary": "Update the specified Transfer in storage",
+                "description": "Update Transfer",
                 "produces": [
                     "application/json"
                 ],
@@ -25437,7 +25220,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of TransferCredential",
+                        "description": "id of Transfer",
                         "required": true,
                         "type": "integer"
                     },
@@ -25446,7 +25229,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/TransferCredential"
+                            "$ref": "#/definitions/Transfer"
                         }
                     },
                     {
@@ -25454,7 +25237,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/TransferCredential"
+                            "$ref": "#/definitions/Transfer"
                         }
                     },
                     {
@@ -25462,7 +25245,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/TransferCredential"
+                            "$ref": "#/definitions/Transfer"
                         }
                     },
                     {
@@ -25470,7 +25253,7 @@
                         "in": "body",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/TransferCredential"
+                            "$ref": "#/definitions/Transfer"
                         }
                     },
                     {
@@ -25478,7 +25261,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/TransferCredential"
+                            "$ref": "#/definitions/Transfer"
                         }
                     },
                     {
@@ -25486,7 +25269,7 @@
                         "in": "body",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/TransferCredential"
+                            "$ref": "#/definitions/Transfer"
                         }
                     }
                 ],
@@ -25499,7 +25282,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/TransferCredential"
+                                    "$ref": "#/definitions/Transfer"
                                 },
                                 "message": {
                                     "type": "string"
@@ -25512,10 +25295,10 @@
             },
             "delete": {
                 "tags": [
-                    "TransferCredential"
+                    "Transfer"
                 ],
-                "summary": "Remove the specified TransferCredential from storage",
-                "description": "Delete TransferCredential",
+                "summary": "Remove the specified Transfer from storage",
+                "description": "Delete Transfer",
                 "produces": [
                     "application/json"
                 ],
@@ -25523,7 +25306,284 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of TransferCredential",
+                        "description": "id of Transfer",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/transfer_medias": {
+            "get": {
+                "tags": [
+                    "TransferMedia"
+                ],
+                "summary": "Get a listing of the TransferMedias.",
+                "description": "Get all TransferMedias",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/TransferMedia"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "TransferMedia"
+                ],
+                "summary": "Store a newly created TransferMedia in storage",
+                "description": "Store TransferMedia",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "entitiable_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransferMedia"
+                        }
+                    },
+                    {
+                        "name": "entitiable_type",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransferMedia"
+                        }
+                    },
+                    {
+                        "name": "transferable_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransferMedia"
+                        }
+                    },
+                    {
+                        "name": "transferable_type",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/TransferMedia"
+                        }
+                    },
+                    {
+                        "name": "media_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransferMedia"
+                        }
+                    },
+                    {
+                        "name": "credential_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/TransferMedia"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/TransferMedia"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/transfer_medias/{id}": {
+            "get": {
+                "tags": [
+                    "TransferMedia"
+                ],
+                "summary": "Display the specified TransferMedia",
+                "description": "Get TransferMedia",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of TransferMedia",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/TransferMedia"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "TransferMedia"
+                ],
+                "summary": "Update the specified TransferMedia in storage",
+                "description": "Update TransferMedia",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of TransferMedia",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "entitiable_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransferMedia"
+                        }
+                    },
+                    {
+                        "name": "entitiable_type",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransferMedia"
+                        }
+                    },
+                    {
+                        "name": "transferable_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransferMedia"
+                        }
+                    },
+                    {
+                        "name": "transferable_type",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/TransferMedia"
+                        }
+                    },
+                    {
+                        "name": "media_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransferMedia"
+                        }
+                    },
+                    {
+                        "name": "credential_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/TransferMedia"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/TransferMedia"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "TransferMedia"
+                ],
+                "summary": "Remove the specified TransferMedia from storage",
+                "description": "Delete TransferMedia",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of TransferMedia",
                         "required": true,
                         "type": "integer"
                     }
@@ -29079,6 +29139,11 @@
                     "type": "integer",
                     "format": "int32"
                 },
+                "parent_id": {
+                    "description": "parent_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
                 "number": {
                     "description": "number",
                     "type": "integer",
@@ -29204,44 +29269,6 @@
                     "format": "int32"
                 },
                 "plant_id": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
-        },
-        "HerbariumAppendix": {
-            "required": [
-                "herbarium_id",
-                "appendix",
-                "destination_herbarium_id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "herbarium_id": {
-                    "description": "herbarium_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "appendix": {
-                    "description": "appendix",
-                    "type": "string"
-                },
-                "destination_herbarium_id": {
-                    "description": "destination_herbarium_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -30347,8 +30374,8 @@
                         "type": "string"
                     }
                 },
-                "location_no": {
-                    "description": "location_no",
+                "location_id": {
+                    "description": "location_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -32028,7 +32055,7 @@
                 }
             }
         },
-        "TransferCredential": {
+        "Transfer": {
             "required": [
                 "entitiable_id",
                 "transferable_id",
@@ -32057,12 +32084,39 @@
                     "description": "visit, borrow, exchange",
                     "type": "string"
                 },
+                "credential_id": {
+                    "description": "credential_id",
+                    "type": "integer"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "TransferMedia": {
+            "required": [
+                "media_id",
+                "transfer_id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
                 "media_id": {
                     "description": "media_id",
                     "type": "integer"
                 },
-                "credential_id": {
-                    "description": "credential_id",
+                "transfer_id": {
+                    "description": "transfer_id",
                     "type": "integer"
                 },
                 "created_at": {

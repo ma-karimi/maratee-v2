@@ -66,6 +66,8 @@ that is an herbarium organization which we can but its id in this place');
 
             $table->unsignedInteger('organization_id');
 
+            $table->nestedSet();
+
             $table->timeStampsTz();
             $table->softDeletesTz();
 		});
@@ -79,6 +81,9 @@ that is an herbarium organization which we can but its id in this place');
 	 */
 	public function down()
 	{
+        Schema::table('herbariums', function (Blueprint $table) {
+            $table->dropNestedSet();
+        });
 		Schema::drop('herbariums');
 	}
 

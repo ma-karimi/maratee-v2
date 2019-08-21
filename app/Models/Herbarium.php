@@ -7,6 +7,7 @@ use App\Models\Scope\HerbariumScope;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Kalnoy\Nestedset\NodeTrait;
 
 /**
  * @SWG\Definition(
@@ -15,6 +16,12 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      @SWG\Property(
  *          property="id",
  *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="parent_id",
+ *          description="parent_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -49,12 +56,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      ),
  *      @SWG\Property(
  *          property="general_phytogeography_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="division_id",
- *          description="division_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -172,12 +173,12 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class Herbarium extends BaseModel
 {
-    use HerbariumScope;
+    use HerbariumScope,NodeTrait;
+
     public static $linguistically = ['flowering' => false,'habitat_description' => false,'ecology_description' => false,];
     public static $rules = [
         'location_id' => 'required|exists:locations,id',
         'protection_id' => 'exists:protections,id',
-        'division_id' => 'required|exists:divisions,id',
         'organization_id' => 'required|exists:departments,id',
         'plant_id' => 'required|exists:plants,id',
         'general_phytogeography_id' => 'exists:generals,id',
@@ -227,7 +228,7 @@ class Herbarium extends BaseModel
         'ecology_description' => 'json',
     ];
 
-//    protected $with = ['actionHubs', 'borrows', 'attendances', 'chromosomes', 'cryoBanks', 'sendHerbariumExchanges', 'RecieveHerbariumExchanges','sendHerbariumAppendixes', 'RecieveHerbariumAppendixes', 'seeds', 'medias', 'medicals', 'medicinalPlants', 'organization', 'location', 'protection', 'generalType', 'generalPhenology', 'plant', 'generalGroup', 'generalPhytogeography'];
+//    protected $with = ['actionHubs', 'borrows', 'attendances', 'chromosomes', 'cryoBanks', 'sendHerbariumExchanges', 'RecieveHerbariumExchanges', 'seeds', 'medias', 'medicals', 'medicinalPlants', 'organization', 'location', 'protection', 'generalType', 'generalPhenology', 'plant', 'generalGroup', 'generalPhytogeography'];
 
     /**
      * @param null $parameter
@@ -324,21 +325,6 @@ class Herbarium extends BaseModel
         return $this->hasMany(Exchange::class, 'recieve_herbarium_id')->latest();
     }
 
-    /**
-     * @return HasMany
-     */
-    public function sourceHerbariumAppendixes(): HasMany
-    {
-        return $this->hasMany(HerbariumAppendix::class, 'herbarium_id')->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function destinationHerbariumAppendixes(): HasMany
-    {
-        return $this->hasMany(HerbariumAppendix::class, 'destination_herbarium_id')->latest();
-    }
 
     /**
      * @return HasMany
@@ -417,11 +403,6 @@ class Herbarium extends BaseModel
     public function department()
     {
         return $this->morphToMany(Department::class,'departmentable','department_hubs');
-    }
-
-    public function division()
-    {
-        return $this->belongsTo(Division::class);
     }
 
     public function generalGroup()

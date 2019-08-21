@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Plant;
-use App\Models\Taxonomy;
 use Illuminate\Container\Container as Application;
 
 /**

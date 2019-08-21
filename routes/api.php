@@ -157,9 +157,7 @@ Route::resource('geology_ages', 'GeologyAgeAPIController');
 
 Route::resource('geramins', 'GeraminAPIController');
 
-Route::resource('herbarium', 'HerbariumAPIController');
-
-Route::resource('herbarium_appendixes', 'HerbariumAppendixAPIController');
+Route::resource('herbariums', 'HerbariumAPIController');
 
 Route::resource('irrigations', 'IrrigationAPIController');
 
