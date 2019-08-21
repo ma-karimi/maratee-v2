@@ -42,7 +42,7 @@ trait RelationshipsTrait
                         'name'=>$method->getName()
                     ];
                 }
-            } catch(\Exception $e) {$e->getMessage();}
+            } catch(\Exception $e) {report($e);}
         }
 
 
