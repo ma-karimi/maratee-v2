@@ -2,17 +2,14 @@
 
 namespace App\Repositories;
 
-use App\Models\Attendance;
-use App\Models\TransferCredential;
-use App\Repositories\BaseRepository;
+use App\Models\Transfer;
 
 /**
- * Class TransferCredentialRepository
+ * Class TransferRepository
  * @package App\Repositories
  * @version July 14, 2019, 10:36 am UTC
-*/
-
-class TransferCredentialRepository extends BaseRepository
+ */
+class TransferRepository extends BaseRepository
 {
     /**
      * @var array
@@ -36,6 +33,6 @@ class TransferCredentialRepository extends BaseRepository
      **/
     public function model()
     {
-        return TransferCredential::class;
+        return Transfer::class;
     }
 }

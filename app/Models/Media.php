@@ -278,4 +278,10 @@ class Media extends BaseModel
     {
         return $this->morphToMany(UserHub::class, 'userable')->withTimestamps();
     }
+
+    public function transfers()
+    {
+        return $this->belongsToMany(Transfer::class, 'transfer_medias');
+    }
+
 }

@@ -18,7 +18,7 @@ class CreateGeneralsTable extends Migration
             $table->unsignedInteger('parent_id')->nullable();
             $table->json('name');
             $table->json('description')->nullable();
-            $table->enum('type', ['phytogeography', 'phenology', 'plant_type', 'species', 'sub_species', 'variety', 'family', 'genus', 'class', 'group', 'order', 'flowering', 'sperm', 'cotyledon', 'growth', 'usage', 'part', 'industry', 'application', 'habitat', 'ecology', 'origin']);
+            $table->enum('type', ['phytogeography', 'phenology', 'plant_type', 'species', 'sub_species', 'variety', 'family', 'genus', 'class', 'group', 'order', 'flowering', 'sperm', 'cotyledon', 'growth', 'usage', 'part', 'industry', 'application', 'habitat', 'ecology', 'origin', 'lichen', 'moss', 'diatom', 'substrate']);
             $table->timestamps();
             $table->softDeletesTz();
         });

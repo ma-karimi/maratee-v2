@@ -37,11 +37,6 @@ use App\Models\Mutator\TransferCredentialMutator;
  *          type="string",
  *      ),
  *      @SWG\Property(
- *          property="media_id",
- *          description="media_id",
- *          type="integer",
- *      ),
- *      @SWG\Property(
  *          property="credential_id",
  *          description="credential_id",
  *          type="integer",
@@ -60,11 +55,10 @@ use App\Models\Mutator\TransferCredentialMutator;
  *      )
  * )
  */
-class TransferCredential extends BaseModel
+class Transfer extends BaseModel
 {
 
     public static $rules = [
-        'media_id' => 'exists:medias,id',
         'credential_id' => 'exists:credentials,id',
         'entitiable_id' => 'required|integer',
         'entitiable_type' => 'required|string',
@@ -78,11 +72,11 @@ class TransferCredential extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['media_id', 'created_at', 'deleted_at', 'credential_id', 'updated_at', 'entitiable_id', 'entitiable_type', 'transferable_id', 'transferable_type'];
+    protected $fillable = ['created_at', 'deleted_at', 'credential_id', 'updated_at', 'entitiable_id', 'entitiable_type', 'transferable_id', 'transferable_type'];
 
-    public function media()
+    public function medias()
     {
-        return $this->belongsTo(Media::class);
+        return $this->belongsToMany(Media::class, 'transfer_medias');
     }
 
     public function credential()

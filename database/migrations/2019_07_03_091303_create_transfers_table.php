@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTransferCredentialsTable extends Migration {
+class CreateTransfersTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,11 @@ class CreateTransferCredentialsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('transfer_credentials', function(Blueprint $table)
+		Schema::create('transfers', function(Blueprint $table)
 		{
 			$table->increments('id');
 //            'herbarium, paleontology'
 			$table->morphs('entitiable');
-			$table->unsignedInteger('media_id')->nullable();
 			$table->unsignedInteger('credential_id')->nullable();
             //            'visit, borrow, exchange'
             $table->morphs('transferable');
@@ -35,7 +34,7 @@ class CreateTransferCredentialsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('transfer_credentials');
+		Schema::drop('transfers');
 	}
 
 }

@@ -152,8 +152,8 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="location_no",
- *          description="location_no",
+ *          property="location_id",
+ *          description="location_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -205,7 +205,7 @@ class Paleontology extends BaseModel
         'geology_age_id' => 'required|integer',
         'plant_id' => 'required|integer',
         'last_update' => 'date',
-        'location_no' => 'integer',
+        'location_id' => 'integer|exists:locations,id',
         'general_class_id' => 'integer',
         'general_order_id' => 'integer',
     ];

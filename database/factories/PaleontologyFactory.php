@@ -10,6 +10,7 @@ $factory->define(App\Models\Paleontology::class, function (Faker $faker) {
     $periods = \App\Models\GeologyAge::whereType('period')->pluck('id')->toArray();
     $stages = \App\Models\GeologyAge::whereType('stage')->pluck('id')->toArray();
     $plants = \App\Models\Plant::pluck('id')->toArray();
+    $locations = \App\Models\Location::pluck('id')->toArray();
 
     return [
         'catalog_no' => $faker->numberBetween(1, 100),
@@ -37,8 +38,10 @@ $factory->define(App\Models\Paleontology::class, function (Faker $faker) {
         'last_update' => $faker->dateTimeBetween(),
         'excavation' => make_json($faker->word),
         'collection_name' => make_json($faker->word),
-        'location_no' => $faker->numberBetween(1, 100),
+        'location_id' => $faker->randomElement($locations),
         'common_name' => make_json($faker->word),
-        'plant_id' => $faker->randomElement($plants)
+        'plant_id' => $faker->randomElement($plants),
+        'general_class_id' => $faker->randomElement($plants),
+        'general_order_id' => $faker->randomElement($plants),
     ];
 });

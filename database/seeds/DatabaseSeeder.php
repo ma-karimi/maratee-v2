@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             LightingTableSeeder::class,
             MapTableSeeder::class,
             MedicineTableSeeder::class,
-//            SeedFeatureTableSeeder::class,
+            SeedFeatureTableSeeder::class,
             MorphologyTableSeeder::class,
             OrganizationTableSeeder::class,
             GeneralTableSeeder::class,
@@ -53,24 +53,18 @@ class DatabaseSeeder extends Seeder
             AuthorHubTableSeeder::class,
             ClassificationTableSeeder::class,
             PlantTableSeeder::class,
-//
-//            PaleontologyTableSeeder::class,
-//
-//
-//
-//            TreatmentTableSeeder::class,
-//            MethodTableSeeder::class,
+            PaleontologyTableSeeder::class,
+            TreatmentTableSeeder::class,
+            TreatmentHubTableSeeder::class,
+            MethodTableSeeder::class,
 
         ]);
         $this->call([
-//            LocalityTableSeeder::class,
-//            ActionHubTableSeeder::class,
-//            ConnectionTableSeeder::class,
-//
-//            PlantingActionTableSeeder::class,
-//
+            LocalityTableSeeder::class,
+            ActionHubTableSeeder::class,
+            PlantingActionTableSeeder::class,
+            ProductTableSeeder::class,
 //            HerbariumTableSeeder::class,
-//            ProductTableSeeder::class,
 //            SeedTableSeeder::class,
 //            BioMolecularTableSeeder::class,
 //            SeedExchangeTableSeeder::class,

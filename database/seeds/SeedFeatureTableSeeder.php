@@ -11,6 +11,6 @@ class SeedFeatureTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\seedFeature::class, 50)->create();
+        factory(App\Models\SeedFeature::class, 50)->create();
     }
 }

@@ -5,7 +5,7 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Method::class, function (Faker $faker) {
-    $methods = \App\Models\Continent::pluck('id')->toArray();
+    $methods = \App\Models\Method::pluck('id')->toArray();
     $parent = $faker->randomElement($methods);
 
     return [

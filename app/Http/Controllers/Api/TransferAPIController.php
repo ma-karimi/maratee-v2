@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateTransferCredentialAPIRequest;
-use App\Http\Requests\Api\UpdateTransferCredentialAPIRequest;
-use App\Models\TransferCredential;
-use App\Repositories\TransferCredentialRepository;
+use App\Http\Requests\Api\CreateTransferAPIRequest;
+use App\Http\Requests\Api\UpdateTransferAPIRequest;
+use App\Models\Transfer;
+use App\Repositories\TransferRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class TransferCredentialAPIController
+ * Class TransferAPIController
  * @package App\Http\Controllers\Api
  */
 
-class TransferCredentialAPIController extends AppBaseController
+class TransferAPIController extends AppBaseController
 {
-    /** @var  TransferCredentialRepository */
-    private $transferCredentialRepository;
+    /** @var  TransferRepository */
+    private $transferRepository;
 
-    public function __construct(TransferCredentialRepository $transferCredentialRepo)
+    public function __construct(TransferRepository $transferRepo)
     {
-        $this->transferCredentialRepository = $transferCredentialRepo;
+        $this->transferRepository = $transferRepo;
     }
 
     /**
@@ -30,10 +30,10 @@ class TransferCredentialAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/transfer_credentials",
-     *      summary="Get a listing of the TransferCredentials.",
-     *      tags={"TransferCredential"},
-     *      description="Get all TransferCredentials",
+     *      path="/transfers",
+     *      summary="Get a listing of the Transfers.",
+     *      tags={"Transfer"},
+     *      description="Get all Transfers",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -47,7 +47,7 @@ class TransferCredentialAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/TransferCredential")
+     *                  @SWG\Items(ref="#/definitions/Transfer")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -59,60 +59,60 @@ class TransferCredentialAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $transferCredentials = $this->transferCredentialRepository->paginate(
+        $transfers = $this->transferRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
             $request->get('relations')
         );
 
-        return $this->sendResponse($transferCredentials->toArray(), 'TransferCredentials retrieved successfully');
+        return $this->sendResponse($transfers->toArray(), 'Transfers retrieved successfully');
     }
 
     /**
-     * @param CreateTransferCredentialAPIRequest $request
+     * @param CreateTransferAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/transfer_credentials",
-     *      summary="Store a newly created TransferCredential in storage",
-     *      tags={"TransferCredential"},
-     *      description="Store TransferCredential",
+     *      path="/transfers",
+     *      summary="Store a newly created Transfer in storage",
+     *      tags={"Transfer"},
+     *      description="Store Transfer",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="entitiable_id",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/TransferCredential")
+     *          @SWG\Schema(ref="#/definitions/Transfer")
      *      ),
      *      @SWG\Parameter(
      *          name="entitiable_type",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/TransferCredential")
+     *          @SWG\Schema(ref="#/definitions/Transfer")
      *      ),
      *      @SWG\Parameter(
      *          name="transferable_id",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/TransferCredential")
+     *          @SWG\Schema(ref="#/definitions/Transfer")
      *      ),
      *      @SWG\Parameter(
      *          name="transferable_type",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/TransferCredential")
+     *          @SWG\Schema(ref="#/definitions/Transfer")
      *      ),
      *      @SWG\Parameter(
      *          name="media_id",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/TransferCredential")
+     *          @SWG\Schema(ref="#/definitions/Transfer")
      *      ),
      *      @SWG\Parameter(
      *          name="credential_id",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/TransferCredential")
+     *          @SWG\Schema(ref="#/definitions/Transfer")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -125,7 +125,7 @@ class TransferCredentialAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/TransferCredential"
+     *                  ref="#/definitions/Transfer"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -135,13 +135,13 @@ class TransferCredentialAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateTransferCredentialAPIRequest $request)
+    public function store(CreateTransferAPIRequest $request)
     {
         $input = $request->all();
 
-        $transferCredential = $this->transferCredentialRepository->create($input);
+        $transfer = $this->transferRepository->create($input);
 
-        return $this->sendResponse($transferCredential->toArray(), 'TransferCredential saved successfully');
+        return $this->sendResponse($transfer->toArray(), 'Transfer saved successfully');
     }
 
     /**
@@ -149,14 +149,14 @@ class TransferCredentialAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/transfer_credentials/{id}",
-     *      summary="Display the specified TransferCredential",
-     *      tags={"TransferCredential"},
-     *      description="Get TransferCredential",
+     *      path="/transfers/{id}",
+     *      summary="Display the specified Transfer",
+     *      tags={"Transfer"},
+     *      description="Get Transfer",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of TransferCredential",
+     *          description="id of Transfer",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -172,7 +172,7 @@ class TransferCredentialAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/TransferCredential"
+     *                  ref="#/definitions/Transfer"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -184,30 +184,30 @@ class TransferCredentialAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var TransferCredential $transferCredential */
-        $transferCredential = $this->transferCredentialRepository->find($id, \request()->get('relations'));
+        /** @var Transfer $transfer */
+        $transfer = $this->transferRepository->find($id, \request()->get('relations'));
 
-        if ($transferCredential === null) {
-            return $this->sendError('TransferCredential not found');
+        if ($transfer === null) {
+            return $this->sendError('Transfer not found');
         }
 
-        return $this->sendResponse($transferCredential->toArray(), 'TransferCredential retrieved successfully');
+        return $this->sendResponse($transfer->toArray(), 'Transfer retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdateTransferCredentialAPIRequest $request
+     * @param UpdateTransferAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/transfer_credentials/{id}",
-     *      summary="Update the specified TransferCredential in storage",
-     *      tags={"TransferCredential"},
-     *      description="Update TransferCredential",
+     *      path="/transfers/{id}",
+     *      summary="Update the specified Transfer in storage",
+     *      tags={"Transfer"},
+     *      description="Update Transfer",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of TransferCredential",
+     *          description="id of Transfer",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -216,37 +216,37 @@ class TransferCredentialAPIController extends AppBaseController
      *          name="entitiable_id",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/TransferCredential")
+     *          @SWG\Schema(ref="#/definitions/Transfer")
      *      ),
      *      @SWG\Parameter(
      *          name="entitiable_type",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/TransferCredential")
+     *          @SWG\Schema(ref="#/definitions/Transfer")
      *      ),
      *      @SWG\Parameter(
      *          name="transferable_id",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/TransferCredential")
+     *          @SWG\Schema(ref="#/definitions/Transfer")
      *      ),
      *      @SWG\Parameter(
      *          name="transferable_type",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/TransferCredential")
+     *          @SWG\Schema(ref="#/definitions/Transfer")
      *      ),
      *      @SWG\Parameter(
      *          name="media_id",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/TransferCredential")
+     *          @SWG\Schema(ref="#/definitions/Transfer")
      *      ),
      *      @SWG\Parameter(
      *          name="credential_id",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/TransferCredential")
+     *          @SWG\Schema(ref="#/definitions/Transfer")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -259,7 +259,7 @@ class TransferCredentialAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/TransferCredential"
+     *                  ref="#/definitions/Transfer"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -269,20 +269,20 @@ class TransferCredentialAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateTransferCredentialAPIRequest $request)
+    public function update($id, UpdateTransferAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var TransferCredential $transferCredential */
-        $transferCredential = $this->transferCredentialRepository->find($id, \request()->get('relations'));
+        /** @var Transfer $transfer */
+        $transfer = $this->transferRepository->find($id, \request()->get('relations'));
 
-        if ($transferCredential === null) {
-            return $this->sendError('TransferCredential not found');
+        if ($transfer === null) {
+            return $this->sendError('Transfer not found');
         }
 
-        $transferCredential = $this->transferCredentialRepository->update($input, $id);
+        $transfer = $this->transferRepository->update($input, $id);
 
-        return $this->sendResponse($transferCredential->toArray(), 'TransferCredential updated successfully');
+        return $this->sendResponse($transfer->toArray(), 'Transfer updated successfully');
     }
 
     /**
@@ -291,14 +291,14 @@ class TransferCredentialAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/transfer_credentials/{id}",
-     *      summary="Remove the specified TransferCredential from storage",
-     *      tags={"TransferCredential"},
-     *      description="Delete TransferCredential",
+     *      path="/transfers/{id}",
+     *      summary="Remove the specified Transfer from storage",
+     *      tags={"Transfer"},
+     *      description="Delete Transfer",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of TransferCredential",
+     *          description="id of Transfer",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -326,15 +326,15 @@ class TransferCredentialAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var TransferCredential $transferCredential */
-        $transferCredential = $this->transferCredentialRepository->find($id, \request()->get('relations'));
+        /** @var Transfer $transfer */
+        $transfer = $this->transferRepository->find($id, \request()->get('relations'));
 
-        if ($transferCredential === null) {
-            return $this->sendError('TransferCredential not found');
+        if ($transfer === null) {
+            return $this->sendError('Transfer not found');
         }
 
-        $transferCredential->delete();
+        $transfer->delete();
 
-        return $this->sendResponse($id, 'TransferCredential deleted successfully');
+        return $this->sendResponse($id, 'Transfer deleted successfully');
     }
 }

@@ -3,10 +3,10 @@
 namespace App\Http\Requests\Api;
 
 use App\Models\Borrow;
-use App\Models\TransferCredential;
+use App\Models\Transfer;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateTransferCredentialAPIRequest extends APIRequest
+class CreateTransferAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +25,6 @@ class UpdateTransferCredentialAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return TransferCredential::$rules;
+        return Transfer::$rules;
     }
 }

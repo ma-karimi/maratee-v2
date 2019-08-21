@@ -14,34 +14,42 @@ class OriginalGeneralTableSeeder extends Seeder
         ['fa' => 'مدیترانه ای', 'en' => 'Mediterranean'],
 
     ];
-    public $origins = [
+    public $habitats = [
         ['fa' => 'جنگل', 'en' => 'Forest'],
         ['fa' => 'مناطق بیابانی', 'en' => 'Rangeland'],
+        ['fa' => 'تپه های شنی', 'en' => 'Sandy hills'],
         ['fa' => 'مرتع', 'en' => 'Desert'],
 
     ];
-    public $habitats = [
-        ['name' => ['fa' => 'بستر گیاه- گلسنگ', 'en' => 'Substrate of Lichen'], 'type' => 'habitat',
+    public $origins = [
+        ['en' => 'Endemic'],
+        ['en' => 'Native'],
+        ['en' => 'Cultivated'],
+        ['en' => 'Commercial imports']
+
+    ];
+    public $substrates = [
+        ['name' => ['fa' => 'بستر گیاه- گلسنگ', 'en' => 'lichen'], 'type' => 'lichen',
             'children' => [
-                ['name' => ['fa' => 'درخت', 'en' => 'Tree'], 'type' => 'ecology'],
-                ['name' => ['fa' => 'چوب', 'en' => 'Wood'], 'type' => 'ecology'],
-                ['name' => ['fa' => 'سنگ', 'en' => 'Stone'], 'type' => 'ecology'],
-                ['name' => ['fa' => 'صخره', 'en' => 'Rock'], 'type' => 'ecology'],
-                ['name' => ['fa' => 'خاک', 'en' => 'Soil'], 'type' => 'ecology'],
-                ['name' => ['fa' => 'خزه', 'en' => 'Moss'], 'type' => 'ecology'],
-                ['name' => ['fa' => 'ابنیه', 'en' => 'Building'], 'type' => 'ecology'],
+                ['name' => ['fa' => 'درخت', 'en' => 'Tree'], 'type' => 'substrate'],
+                ['name' => ['fa' => 'چوب', 'en' => 'Wood'], 'type' => 'substrate'],
+                ['name' => ['fa' => 'سنگ', 'en' => 'Stone'], 'type' => 'substrate'],
+                ['name' => ['fa' => 'صخره', 'en' => 'Rock'], 'type' => 'substrate'],
+                ['name' => ['fa' => 'خاک', 'en' => 'Soil'], 'type' => 'substrate'],
+                ['name' => ['fa' => 'خزه', 'en' => 'Moss'], 'type' => 'substrate'],
+                ['name' => ['fa' => 'ابنیه', 'en' => 'Building'], 'type' => 'substrate'],
             ]
         ],
-        ['name' => ['fa' => 'بستر گیاه- خزه', 'en' => 'Substrate of Moss'], 'type' => 'habitat',
+        ['name' => ['fa' => 'بستر گیاه- خزه', 'en' => 'Moss'], 'type' => 'moss',
             'children' => [
-                ['name' => ['fa' => 'درخت', 'en' => 'Tree'], 'type' => 'ecology'],
-                ['name' => ['fa' => 'خاک', 'en' => 'Soil'], 'type' => 'ecology'],
+                ['name' => ['fa' => 'درخت', 'en' => 'Tree'], 'type' => 'substrate'],
+                ['name' => ['fa' => 'خاک', 'en' => 'Soil'], 'type' => 'substrate'],
             ]
         ],
-        ['name' => ['fa' => 'زیستگاه جلبک- دیاتومه', 'en' => 'Substrate of Diatom'], 'type' => 'habitat',
+        ['name' => ['fa' => 'زیستگاه جلبک- دیاتومه', 'en' => 'Diatom'], 'type' => 'diatom',
             'children' => [
-                ['name' => ['fa' => 'اب شیرین', 'en' => 'Sweet water'], 'type' => 'ecology'],
-                ['name' => ['fa' => 'اب شور', 'en' => 'Salty water'], 'type' => 'ecology'],
+                ['name' => ['fa' => 'اب شیرین', 'en' => 'Sweet water'], 'type' => 'substrate'],
+                ['name' => ['fa' => 'اب شور', 'en' => 'Salty water'], 'type' => 'substrate'],
             ]
         ]
     ];
@@ -56,21 +64,26 @@ class OriginalGeneralTableSeeder extends Seeder
 
         foreach ($this->getPhytogeographies() as $type) {
             General::create(
-                ['name' => ['fa'=>$type['fa'], 'en'=>$type['en']], 'description' => make_json('qqqq'), 'type' => 'phytogeography']
+                ['name' => ['fa'=>$type['fa'], 'en'=>$type['en']], 'type' => 'phytogeography']
             );
         }
         foreach ($this->getOrigins() as $type) {
             General::create(
-                ['name' => ['fa'=>$type['fa'], 'en'=>$type['en']], 'description' => make_json('qqqq'), 'type' => 'origin']
+                ['name' => $type, 'type' => 'origin']
             );
         }
         foreach ($this->getHabitats() as $type) {
+            General::create(
+                ['name' => $type, 'type' => 'habitat']
+            );
+        }
+        foreach ($this->getSubstrates() as $type) {
             $general = General::create(
-                ['name' => $type['name'], 'description' => make_json('qqqq'), 'type' => $type['type']]
+                ['name' => $type['name'], 'type' => $type['type']]
             );
             foreach ($type['children'] as $chid){
                 General::create(
-                    ['name' => $chid['name'], 'description' => make_json('qqqq'), 'type' => $chid['type'], 'parent_id'=>$general->id]
+                    ['name' => $chid['name'], 'type' => $chid['type'], 'parent_id'=>$general->id]
                 );
             }
         }
@@ -99,5 +112,13 @@ class OriginalGeneralTableSeeder extends Seeder
     public function getHabitats(): array
     {
         return $this->habitats;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSubstrates(): array
+    {
+        return $this->substrates;
     }
 }

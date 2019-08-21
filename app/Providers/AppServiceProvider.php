@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Plant;
-use App\Models\TransferCredential;
+use App\Models\Transfer;
 use App\Observers\PlantObserver;
 use App\Observers\TransferCredentialObserver;
 use Illuminate\Support\ServiceProvider;

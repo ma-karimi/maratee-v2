@@ -4,9 +4,11 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\seedFeature::class, function (Faker $faker) {
+$factory->define(App\Models\SeedFeature::class, function (Faker $faker) {
     return [
         'name' => make_json($faker->name),
         'description' => make_json($faker->text),
+        'unit' => $faker->name,
+        'type' => $faker->name,
     ];
 });
