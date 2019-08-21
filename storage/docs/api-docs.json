@@ -11558,15 +11558,6 @@
                         }
                     },
                     {
-                        "name": "division_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
                         "name": "habitat_description",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11604,6 +11595,15 @@
                     },
                     {
                         "name": "general_origin_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "general_growth_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,
@@ -11717,6 +11717,24 @@
                         }
                     },
                     {
+                        "name": "general_type_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "general_group_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
                         "name": "habitat_description",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11744,6 +11762,24 @@
                         }
                     },
                     {
+                        "name": "general_phenology_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "general_phytogeography_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
                         "name": "general_habitat_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11754,6 +11790,15 @@
                     },
                     {
                         "name": "general_origin_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "general_growth_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,
@@ -29158,6 +29203,10 @@
                     "type": "integer",
                     "format": "int32"
                 },
+                "general_origin_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
                 "protection_id": {
                     "description": "protection_id",
                     "type": "integer",
@@ -29169,11 +29218,6 @@
                     "format": "int32"
                 },
                 "general_phytogeography_id": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "division_id": {
-                    "description": "division_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -29264,7 +29308,11 @@
                         "type": "string"
                     }
                 },
-                "plant_generals_group_id": {
+                "general_group_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "general_growth_id": {
                     "type": "integer",
                     "format": "int32"
                 },
