@@ -23,6 +23,17 @@ trait GeneralScope
 
     /**
      * @param $query
+     * @param $id
+     * @param $type
+     * @return mixed
+     */
+    public function scopeOfIdType($query, $id,$type)
+    {
+        return $query->where('id', request()->get($id))->where('type', $type);
+    }
+
+    /**
+     * @param $query
      * @param bool $value
      * @return mixed
      */

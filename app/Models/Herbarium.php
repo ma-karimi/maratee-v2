@@ -43,6 +43,11 @@ use Kalnoy\Nestedset\NodeTrait;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="general_origin_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
  *          property="protection_id",
  *          description="protection_id",
  *          type="integer",
@@ -148,7 +153,12 @@ use Kalnoy\Nestedset\NodeTrait;
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="plant_generals_group_id",
+ *          property="general_group_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="general_growth_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -181,8 +191,6 @@ class Herbarium extends BaseModel
         'protection_id' => 'exists:protections,id',
         'organization_id' => 'required|exists:departments,id',
         'plant_id' => 'required|exists:plants,id',
-        'general_phytogeography_id' => 'exists:generals,id',
-        'general_phenology_id' => 'exists:generals,id',
         'sheets_no' => 'integer',
         'samples_no' => 'integer',
         'tip_qt' => 'integer',
@@ -196,6 +204,9 @@ class Herbarium extends BaseModel
         'general_ecology_id' => 'exists:generals,id',
         'general_habitat_id' => 'exists:generals,id',
         'general_origin_id' => 'exists:generals,id',
+        'general_growth_id' => 'exists:generals,id',
+        'general_phytogeography_id' => 'exists:generals,id',
+        'general_phenology_id' => 'exists:generals,id',
         'number' => 'integer',
 
     ];
