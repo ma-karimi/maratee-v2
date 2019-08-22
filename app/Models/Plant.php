@@ -39,32 +39,14 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="taxonomy_id",
- *          description="taxonomy_id",
+ *          property="life_form_cycle_id",
+ *          description="life_form_cycle_id",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="classification_id",
- *          description="classification_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="user_id",
- *          description="user_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="article_id",
- *          description="article_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="location_id",
- *          description="location_id",
+ *          property="life_form_leaf_id",
+ *          description="life_form_leaf_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -94,11 +76,8 @@ class Plant extends BaseModel
     public static $linguistically = ['name' => true, 'description' => false, 'domestic_name' => false];
 
     public static $rules = [
-        'user_id' => 'exists:users,id',
-        'article_id' => 'exists:articles,id',
-        'location_id' => 'exists:locations,id',
-        'taxonomies_id' => 'exists:taxonomies,id',
-        'classification_id' => 'exists:classification,id',
+        'life_form_leaf_id'=>'required|exists:life_forms,id',
+        'life_form_cycle_id'=>'required|exists:life_forms,id',
         'exclusivity' => 'integer',
         //taxonomy
         'family_id' => 'required|exists:generals,id',

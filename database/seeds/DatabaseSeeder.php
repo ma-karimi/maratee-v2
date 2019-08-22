@@ -54,12 +54,13 @@ class DatabaseSeeder extends Seeder
             TaxonomyTableSeeder::class,
             AuthorHubTableSeeder::class,
             ClassificationTableSeeder::class,
+            LifeFormTableSeeder::class,
             PlantTableSeeder::class,
+            PlantLifeFormTableSeeder::class,
             PaleontologyTableSeeder::class,
             TreatmentTableSeeder::class,
             TreatmentHubTableSeeder::class,
             MethodTableSeeder::class,
-            LifeFormTableSeeder::class
         ]);
         $this->call([
             LocalityTableSeeder::class,
