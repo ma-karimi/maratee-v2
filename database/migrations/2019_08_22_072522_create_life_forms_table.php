@@ -16,7 +16,7 @@ class CreateLifeFormsTable extends Migration
         Schema::create('life_forms', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->json('name');
-            $table->enum('type', ['wooden','leaf', 'herbaceos', 'life_cycle']);
+            $table->enum('type', ['wooden','leaf', 'herbaceous', 'life_cycle']);
             $table->timestamps();
             $table->softDeletesTz();
         });

@@ -59,7 +59,8 @@ class DatabaseSeeder extends Seeder
             TreatmentTableSeeder::class,
             TreatmentHubTableSeeder::class,
             MethodTableSeeder::class,
-            LifeFormTableSeeder::class
+            LifeFormTableSeeder::class,
+            PlantLifeFormTableSeeder::class
         ]);
         $this->call([
             LocalityTableSeeder::class,

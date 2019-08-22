@@ -189,7 +189,7 @@ class Herbarium extends BaseModel
     public static $rules = [
         'location_id' => 'required|exists:locations,id',
         'protection_id' => 'exists:protections,id',
-        'organization_id' => 'required|exists:departments,id',
+        'organization_id' => 'required|exists:organizations,id',
         'plant_id' => 'required|exists:plants,id',
         'sheets_no' => 'integer',
         'samples_no' => 'integer',

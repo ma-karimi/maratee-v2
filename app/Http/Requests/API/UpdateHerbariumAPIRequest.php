@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
+use App\Models\General;
 use App\Models\Herbarium;
 use Illuminate\Http\JsonResponse;
 use InfyOm\Generator\Request\APIRequest;
@@ -26,9 +27,10 @@ class UpdateHerbariumAPIRequest extends APIRequest
             'general_phytogeography_id' => 'phytogeography',
         ];
         foreach ($array_id_types as $index => $value) {
-            if (request()->get($index) !== null) {
+
+            if ($this->request->get($index) !== null) {
                 $record = General::ofIdType($index,$value)->first();
-                abort_if(!isset($record), JsonResponse::HTTP_BAD_REQUEST, "$index not exists");
+                return Response::json();
             }
         }
         return true;
