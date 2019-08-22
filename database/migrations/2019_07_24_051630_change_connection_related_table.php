@@ -22,7 +22,7 @@ class ChangeConnectionRelatedTable extends Migration
         }
         Schema::dropIfExists('continents');
         Schema::create('continents', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name', 256);
         });
     }

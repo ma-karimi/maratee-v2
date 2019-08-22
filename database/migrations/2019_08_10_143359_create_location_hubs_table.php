@@ -14,10 +14,10 @@ class CreateLocationHubsTable extends Migration
     public function up()
     {
         Schema::create('location_hubs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
 //            plants, chromosome, medicinal_plants, media
             $table->morphs('locationable');
-            $table->unsignedInteger('location_id');
+            $table->unsignedBigInteger('location_id');
             $table->timestampsTz();
             $table->softDeletesTz();
             $table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('cascade');

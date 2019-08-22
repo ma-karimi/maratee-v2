@@ -14,7 +14,7 @@ class CreateSeedFeaturesTable extends Migration
     public function up()
     {
         Schema::create('seed_features', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->json('name');
             $table->string('unit');
             $table->string('type');

@@ -14,9 +14,9 @@ class CreateAuthorHubsTable extends Migration
     public function up()
     {
         Schema::create('author_hubs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->morphs('authorable');
-            $table->unsignedInteger('author_id');
+            $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('authors')->onUpdate('NO ACTION')->onDelete('cascade');
 
             $table->timestamps();

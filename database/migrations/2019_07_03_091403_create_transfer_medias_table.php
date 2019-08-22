@@ -14,9 +14,9 @@ class CreateTransferMediasTable extends Migration {
 	{
 		Schema::create('transfer_medias', function(Blueprint $table)
 		{
-			$table->increments('id');
-            $table->unsignedInteger('media_id');
-            $table->unsignedInteger('transfer_id');
+			$table->bigIncrements('id');
+            $table->unsignedBigInteger('media_id');
+            $table->unsignedBigInteger('transfer_id');
             $table->timeStampsTz();
             $table->softDeletesTz();
 

@@ -14,8 +14,8 @@ class CreateRepeatsTable extends Migration
     public function up()
     {
         Schema::create('repeats', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('germination_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('germination_id');
             $table->foreign('germination_id')->references('id')->on('germinations')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->integer('repeat');
             $table->date('date');

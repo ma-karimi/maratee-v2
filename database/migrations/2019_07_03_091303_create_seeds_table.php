@@ -14,10 +14,10 @@ class CreateSeedsTable extends Migration
     public function up()
     {
         Schema::create('seeds', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('herbarium_id');
-            $table->unsignedInteger('collection_id');
-            $table->unsignedInteger('protection_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('herbarium_id');
+            $table->unsignedBigInteger('collection_id');
+            $table->unsignedBigInteger('protection_id');
             $table->string('field_code')->nullable();
             $table->string('correct_field_code')->nullable();
             $table->string('accession_code')->nullable();
@@ -49,8 +49,8 @@ class CreateSeedsTable extends Migration
             $table->string('growth_form')->nullable();
             $table->integer('plant_height')->nullable();
             $table->json('mother_health')->nullable();
-            $table->unsignedInteger('department_id');
-            $table->unsignedInteger('plant_application_id');
+            $table->unsignedBigInteger('department_id');
+            $table->unsignedBigInteger('plant_application_id');
             $table->json('other_detail')->nullable();
             $table->integer('plants_sampled_no')->nullable();
             $table->integer('plants_found_no')->nullable();

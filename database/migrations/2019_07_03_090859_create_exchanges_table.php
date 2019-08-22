@@ -14,9 +14,9 @@ class CreateExchangesTable extends Migration {
 	{
 		Schema::create('exchanges', function(Blueprint $table)
 		{
-			$table->increments('id');
-			$table->unsignedInteger('send_id');
-			$table->unsignedInteger('receive_id')->nullable();
+			$table->bigIncrements('id');
+			$table->unsignedBigInteger('send_id');
+			$table->unsignedBigInteger('receive_id')->nullable();
 			//paleontology, herbarium
 			$table->string('exchange_type');
 			$table->dateTime('send_date')->nullable();
@@ -28,8 +28,8 @@ class CreateExchangesTable extends Migration {
 			$table->integer('receive_sample_no')->nullable();
 			$table->string('send_type')->nullable()->comment('image, physical, sample');
 			$table->string('receive_type')->nullable()->comment('image, physical, sample');
-			$table->unsignedInteger('send_department_id')->nullable();
-			$table->unsignedInteger('receive_department_id')->nullable();
+			$table->unsignedBigInteger('send_department_id')->nullable();
+			$table->unsignedBigInteger('receive_department_id')->nullable();
 
 
             $table->timeStampsTz();

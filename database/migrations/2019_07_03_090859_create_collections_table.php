@@ -14,7 +14,7 @@ class CreateCollectionsTable extends Migration {
 	{
 		Schema::create('collections', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->string('type');
 			$table->json('name')->nullable();
 			$table->json('description')->nullable();

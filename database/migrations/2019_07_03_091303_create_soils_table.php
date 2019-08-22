@@ -14,7 +14,7 @@ class CreateSoilsTable extends Migration {
 	{
 		Schema::create('soils', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('type');
 			$table->json('description')->nullable();
 

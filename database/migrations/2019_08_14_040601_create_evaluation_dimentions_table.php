@@ -14,9 +14,9 @@ class CreateEvaluationDimentionsTable extends Migration
     public function up()
     {
         Schema::create('evaluation_dimensions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('evaluation_id');
-            $table->unsignedInteger('dimension_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('evaluation_id');
+            $table->unsignedBigInteger('dimension_id');
             $table->integer('value')->nullable();
             $table->foreign('evaluation_id')->references('id')->on('evaluations')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('dimension_id')->references('id')->on('dimensions')->onUpdate('NO ACTION')->onDelete('cascade');

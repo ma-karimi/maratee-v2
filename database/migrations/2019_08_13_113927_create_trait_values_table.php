@@ -14,9 +14,9 @@ class CreateTraitValuesTable extends Migration
     public function up()
     {
         Schema::create('trait_values', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('seed_feature_id');
-            $table->unsignedInteger('character_trait_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('seed_feature_id');
+            $table->unsignedBigInteger('character_trait_id');
             $table->double('value')->nullable();
             $table->foreign('seed_feature_id')->references('id')->on('seed_features')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('character_trait_id')->references('id')->on('character_traits')->onUpdate('NO ACTION')->onDelete('cascade');

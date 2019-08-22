@@ -11558,15 +11558,6 @@
                         }
                     },
                     {
-                        "name": "division_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
                         "name": "habitat_description",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -16839,7 +16830,7 @@
                         }
                     },
                     {
-                        "name": "location_no",
+                        "name": "location_id",
                         "in": "body",
                         "description": "Paleontology that should be stored",
                         "required": false,
@@ -17151,7 +17142,7 @@
                         }
                     },
                     {
-                        "name": "location_no",
+                        "name": "location_id",
                         "in": "body",
                         "description": "Paleontology that should be stored",
                         "required": false,
@@ -29169,11 +29160,6 @@
                     "format": "int32"
                 },
                 "general_phytogeography_id": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "division_id": {
-                    "description": "division_id",
                     "type": "integer",
                     "format": "int32"
                 },

@@ -14,7 +14,7 @@ class CreateConstituentsTable extends Migration {
 	{
 		Schema::create('constituents', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('name');
 			$table->json('description')->nullable();
 

@@ -14,7 +14,7 @@ class CreateVisitsTable extends Migration {
 	{
 		Schema::create('visits', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 
 
             $table->dateTimeTz('start_time');
@@ -26,7 +26,7 @@ class CreateVisitsTable extends Migration {
 			$table->string('archives_types')->nullable();
 			$table->string('archive_no')->nullable();
 			$table->morphs('visitable');
-			$table->unsignedInteger('user_id');
+			$table->unsignedBigInteger('user_id');
 
             $table->timeStampsTz();
             $table->softDeletesTz();

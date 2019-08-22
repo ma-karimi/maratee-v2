@@ -14,8 +14,8 @@ class CreateMedicinalPlantConstituentsTable extends Migration {
 	{
 		Schema::create('medicinal_plant_constituents', function(Blueprint $table)
 		{
-			$table->unsignedInteger('medicinal_plant_id');
-			$table->unsignedInteger('constituent_id');
+			$table->unsignedBigInteger('medicinal_plant_id');
+			$table->unsignedBigInteger('constituent_id');
 			$table->integer('value');
 
 

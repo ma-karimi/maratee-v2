@@ -21,7 +21,7 @@ class EditPlantApplicationsTable extends Migration
             $table->json('industry_description')->nullable();
             $table->json('application_description')->nullable();
             $table->json('potential')->nullable();
-            $table->unsignedInteger('department_id')->nullable();
+            $table->unsignedBigInteger('department_id')->nullable();
             $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('cascade');
         });
     }

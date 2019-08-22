@@ -14,8 +14,8 @@ class CreateBotanicalIrrigationsTable extends Migration {
 	{
 		Schema::create('botanical_irrigations', function(Blueprint $table)
 		{
-			$table->unsignedInteger('botanical_id');
-			$table->unsignedInteger('irrigation_id');
+			$table->unsignedBigInteger('botanical_id');
+			$table->unsignedBigInteger('irrigation_id');
 			$table->json('requirement')->nullable();
 			$table->json('irrigation_time');
 			$table->json('seasonal_feature')->nullable()->comment('features are :

@@ -14,7 +14,7 @@ class CreateAuthorsTable extends Migration {
 	{
 		Schema::create('authors', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('name');
 			$table->timeStampsTz();
             $table->softDeletesTz();

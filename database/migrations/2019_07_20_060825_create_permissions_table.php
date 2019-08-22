@@ -14,13 +14,13 @@ class CreatePermissionsTable extends Migration
     public function up()
     {
         Schema::create('permissions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->integer('department_id')->unsigned()->index();
-            $table->integer('group_id')->unsigned()->index();
-            $table->integer('role_id')->unsigned()->index();
-            $table->integer('requester_id')->unsigned()->index();
-            $table->integer('responser_id')->unsigned()->index();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('department_id');
+            $table->unsignedBigInteger('group_id');
+            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('requester_id');
+            $table->unsignedBigInteger('responser_id');
             $table->integer('permission_status');
             $table->dateTime('request_date');
             $table->dateTime('approval_date');

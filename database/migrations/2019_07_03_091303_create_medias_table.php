@@ -14,13 +14,13 @@ class CreateMediasTable extends Migration
     public function up()
     {
         Schema::create('medias', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->json('name');
             $table->string('src');
             $table->string('format_type', 45);
             $table->dateTime('date')->nullable();
-            $table->unsignedInteger('user_id')->nullable();
-            $table->unsignedInteger('location_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('location_id')->nullable();
             $table->json('description')->nullable();
             $table->json('info_type')->nullable();
             $table->json('reference')->nullable();

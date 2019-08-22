@@ -14,8 +14,8 @@ class CreateBotanicalPropagationsTable extends Migration {
 	{
 		Schema::create('botanical_propagations', function(Blueprint $table)
 		{
-			$table->unsignedInteger('botanical_id');
-			$table->unsignedInteger('propagation_id');
+			$table->unsignedBigInteger('botanical_id');
+			$table->unsignedBigInteger('propagation_id');
 
 
             $table->timeStampsTz();

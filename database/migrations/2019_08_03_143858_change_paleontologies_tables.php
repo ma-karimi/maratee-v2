@@ -18,8 +18,8 @@ class ChangePaleontologiesTables extends Migration
 
         Schema::table('credentials', function (Blueprint $table) {
             $table->string('url')->nullable();
-            $table->unsignedInteger('division_id')->nullable();
-            $table->unsignedInteger('department_id');
+            $table->unsignedBigInteger('division_id')->nullable();
+            $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('division_id')->references('id')->on('divisions')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
@@ -32,14 +32,14 @@ class ChangePaleontologiesTables extends Migration
             $table->dropColumn('era', 'period', 'epoch', 'stage');
             $table->json('name');
             $table->enum('type', ['era', 'period', 'epoch', 'stage']);
-            $table->unsignedInteger('parent_id')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
         });
         Schema::table('plant_applications', function (Blueprint $table){
             $table->json('habitat_description')->nullable();
             $table->json('ecology_description')->nullable();
-            $table->unsignedInteger('general_ecology_id');
-            $table->unsignedInteger('general_habitat_id');
-            $table->unsignedInteger('general_origin_id');
+            $table->unsignedBigInteger('general_ecology_id');
+            $table->unsignedBigInteger('general_habitat_id');
+            $table->unsignedBigInteger('general_origin_id');
             $table->foreign('general_origin_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('general_habitat_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('general_ecology_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');

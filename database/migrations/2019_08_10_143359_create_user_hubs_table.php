@@ -14,10 +14,10 @@ class CreateUserHubsTable extends Migration
     public function up()
     {
         Schema::create('user_hubs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
 //            plants, cryo-bank, media, seed_hub, technology, article
             $table->morphs('userable');
-            $table->unsignedInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestampsTz();
             $table->softDeletesTz();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('cascade');

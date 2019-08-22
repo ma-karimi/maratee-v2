@@ -14,13 +14,13 @@ class CreateBorrowsTable extends Migration {
 	{
 		Schema::create('borrows', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 
             $table->morphs('borrowable');
             //comment('herbarium, paleontology')
-            $table->unsignedInteger('send_department_id');
-            $table->unsignedInteger('receive_department_id');
-            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedBigInteger('send_department_id');
+            $table->unsignedBigInteger('receive_department_id');
+            $table->unsignedBigInteger('user_id')->nullable();
 
 			$table->dateTime('borrows_date');
 			$table->integer('sheets_no')->nullable()->comment('total number of sheets ');

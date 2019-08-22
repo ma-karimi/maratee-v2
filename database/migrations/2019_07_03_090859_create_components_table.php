@@ -14,7 +14,7 @@ class CreateComponentsTable extends Migration {
 	{
 		Schema::create('components', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('name');
 			$table->json('description')->nullable();
 

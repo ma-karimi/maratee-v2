@@ -14,10 +14,10 @@ class CreateTreatmentHubsTable extends Migration
     public function up()
     {
         Schema::create('treatment_hubs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
 //            medicinal_plant, paleontology, botanical, cryo_bank, bio_molecular
             $table->morphs('treatmentable');
-            $table->unsignedInteger('treatment_id');
+            $table->unsignedBigInteger('treatment_id');
             $table->timestampsTz();
             $table->softDeletesTz();
             $table->foreign('treatment_id')->references('id')->on('treatments')->onUpdate('NO ACTION')->onDelete('cascade');

@@ -14,7 +14,7 @@ class CreateGardensTable extends Migration {
 	{
 		Schema::create('gardens', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('region');
 			$table->json('section');
 			$table->json('number')->nullable();

@@ -14,9 +14,9 @@ class CreateBlockTraitsTable extends Migration
     public function up()
     {
         Schema::create('block_traits', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('block_id');
-            $table->unsignedInteger('soil_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('block_id');
+            $table->unsignedBigInteger('soil_id');
             $table->string('water_source')->nullable();
             $table->string('irrigation_system')->nullable();
             $table->string('irrigation_circuit')->nullable();

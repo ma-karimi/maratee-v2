@@ -14,7 +14,7 @@ class CreateMethodsTable extends Migration {
 	{
 		Schema::create('methods', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('name');
 			$table->json('description')->nullable();
 			$table->integer('parent_id')->nullable();

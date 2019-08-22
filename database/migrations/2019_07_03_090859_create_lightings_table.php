@@ -14,7 +14,7 @@ class CreateLightingsTable extends Migration {
 	{
 		Schema::create('lightings', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('type');
 			$table->json('description')->nullable();
 

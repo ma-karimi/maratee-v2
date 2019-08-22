@@ -14,11 +14,11 @@ class CreateStationsTable extends Migration
     public function up()
     {
         Schema::create('stations', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->json('name')->nullable();
             $table->json('code')->nullable();
             $table->json('type')->nullable();
-            $table->unsignedInteger('location_id');
+            $table->unsignedBigInteger('location_id');
             $table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->timestamps();
         });

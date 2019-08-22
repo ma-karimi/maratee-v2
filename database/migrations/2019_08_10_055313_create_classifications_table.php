@@ -14,10 +14,10 @@ class CreateClassificationsTable extends Migration
     public function up()
     {
         Schema::create('classifications', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('flowering_id');
-            $table->unsignedInteger('cotyledon_id')->nullable();
-            $table->unsignedInteger('sperm_id')->nullable();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('flowering_id');
+            $table->unsignedBigInteger('cotyledon_id')->nullable();
+            $table->unsignedBigInteger('sperm_id')->nullable();
             $table->foreign('flowering_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('cotyledon_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('sperm_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');

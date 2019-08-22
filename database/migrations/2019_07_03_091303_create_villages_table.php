@@ -14,7 +14,7 @@ class CreateVillagesTable extends Migration {
 	{
 		Schema::create('villages', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('name');
 
             $table->timeStampsTz();

@@ -14,13 +14,13 @@ class CreateCredentialsTable extends Migration
     public function up()
     {
         Schema::create('credentials', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->json('name');
             $table->string('type')->comment('gift, fair, purchase, correspondence, expense');
             $table->date('date');
             $table->string('archive_no', 45)->nullable();
             $table->string('place')->nullable();
-            $table->unsignedInteger('parent_id')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
 
 
             $table->timeStampsTz();

@@ -14,12 +14,12 @@ class CreateBioMolecularsTable extends Migration
     public function up()
     {
         Schema::create('bio_moleculars', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->integer('repeat');
             $table->string('value');
-            $table->unsignedInteger('technology_id');
-            $table->unsignedInteger('block_id')->nullable();
-            $table->unsignedInteger('seed_feature_id');
+            $table->unsignedBigInteger('technology_id');
+            $table->unsignedBigInteger('block_id')->nullable();
+            $table->unsignedBigInteger('seed_feature_id');
             $table->timeStampsTz();
             $table->softDeletesTz();
         });

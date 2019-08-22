@@ -14,8 +14,8 @@ class CreateBlocksTable extends Migration
     public function up()
     {
         Schema::create('blocks', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('station_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('station_id');
             $table->foreign('station_id')->references('id')->on('stations')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->string('number')->nullable();
             $table->softDeletesTz();

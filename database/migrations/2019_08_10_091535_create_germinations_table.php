@@ -14,7 +14,7 @@ class CreateGerminationsTable extends Migration
     public function up()
     {
         Schema::create('germinations', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('dormancy_breaking_treatments')->nullable();
             $table->date('light_date')->nullable();
             $table->date('dark_date')->nullable();

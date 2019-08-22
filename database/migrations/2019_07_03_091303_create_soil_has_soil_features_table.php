@@ -14,9 +14,9 @@ class CreateSoilHasSoilFeaturesTable extends Migration {
 	{
 		Schema::create('soil_has_soil_features', function(Blueprint $table)
 		{
-		    $table->increments('id');
-			$table->unsignedInteger('soil_id');
-			$table->unsignedInteger('soil_feature_id');
+		    $table->bigIncrements('id');
+			$table->unsignedBigInteger('soil_id');
+			$table->unsignedBigInteger('soil_feature_id');
 			$table->json('value');
 
             $table->timeStampsTz();

@@ -14,7 +14,7 @@ class CreateSeedWeightsTable extends Migration {
 	{
 		Schema::create('seed_weights', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->float('total_seed_weight', 4)->nullable();
 			$table->float('total_fruit_weight', 4)->nullable();
 			$table->integer('collected_seeds_no')->nullable();

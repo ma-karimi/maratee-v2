@@ -14,13 +14,13 @@ class CreateSeedExchangesTable extends Migration
     public function up()
     {
         Schema::create('seed_exchanges', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('seed_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('seed_id');
             $table->float('seed_weight',4)->nullable();
             $table->date('delivery_date')->nullable();
-            $table->unsignedInteger('user_id')->nullable();
-            $table->unsignedInteger('project_id');
-            $table->unsignedInteger('department_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('department_id');
             $table->string('regeneration_evaluation')->nullable();
             $table->string('request_no')->nullable();
             $table->string('exchange_type')->nullable();

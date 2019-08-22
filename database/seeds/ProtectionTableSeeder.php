@@ -4,6 +4,16 @@ use Illuminate\Database\Seeder;
 
 class ProtectionTableSeeder extends Seeder
 {
+    public $protections = [
+        ['name' => ['fa' => 'در بحران انقراض', 'en' => 'CR']],
+        ['name' => ['fa' => 'آسیب پذیر', 'en' => 'VU']],
+        ['name' => ['fa' => 'در معرض خطر', 'en' => 'EN']],
+        ['name' => ['fa' => 'نزدیک به تهدید', 'en' => 'NT']],
+        ['name' => ['fa' => 'ارزیابی نشده', 'en' => 'NE']],
+        ['name' => ['fa' => 'با نگرانی کم', 'en' => 'LC']],
+        ['name' => ['fa' => 'فاقد اطلاعات', 'en' => 'DD']],
+    ];
+
     /**
      * Run the database seeds.
      *
@@ -11,6 +21,8 @@ class ProtectionTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Protection::class, 50)->create();
+        foreach ($this->protections as $protect) {
+            \App\Models\Protection::create($protect);
+        }
     }
 }

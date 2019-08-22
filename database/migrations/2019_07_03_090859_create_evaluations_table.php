@@ -14,7 +14,7 @@ class CreateEvaluationsTable extends Migration {
 	{
 		Schema::create('evaluations', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->date('date')->nullable();
 			$table->integer('exchange_seeds_no')->nullable();
 			$table->integer('planted_seeds_no')->nullable();

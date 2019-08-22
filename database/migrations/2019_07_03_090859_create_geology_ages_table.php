@@ -14,7 +14,7 @@ class CreateGeologyAgesTable extends Migration {
 	{
 		Schema::create('geology_ages', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('era');
 			$table->json('period');
 			$table->json('epoch');

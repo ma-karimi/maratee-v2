@@ -14,10 +14,10 @@ class CreateCryoBanksTable extends Migration
     public function up()
     {
         Schema::create('cryo_banks', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('voucher_number');
             $table->string('geotype_code');
-            $table->unsignedInteger('protection_id');
+            $table->unsignedBigInteger('protection_id');
             $table->date('entry_date')->nullable();
             $table->string('sample_type', 45)->nullable();
             $table->integer('repetition')->nullable();
@@ -28,7 +28,7 @@ class CreateCryoBanksTable extends Migration
             $table->integer('row_no')->nullable();
             $table->string('rack_no')->nullable();
             $table->string('proposal_name')->nullable();
-            $table->unsignedInteger('herbarium_id');
+            $table->unsignedBigInteger('herbarium_id');
 
             $table->timeStampsTz();
             $table->softDeletesTz();

@@ -14,11 +14,11 @@ class CreateLocationsTable extends Migration {
 	{
 		Schema::create('locations', function(Blueprint $table)
 		{
-			$table->increments('id');
-            $table->unsignedInteger('city_id');
+			$table->bigIncrements('id');
+            $table->unsignedBigInteger('city_id');
             $table->json('region_name')->nullable();
             $table->json('address')->nullable();
-            $table->unsignedInteger('village_id')->nullable();
+            $table->unsignedBigInteger('village_id')->nullable();
 
             $table->string('altitude')->nullable();
 			$table->point('point')->nullable();

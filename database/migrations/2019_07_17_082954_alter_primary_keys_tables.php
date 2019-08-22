@@ -25,7 +25,7 @@ class AlterPrimaryKeysTables extends Migration
     {
         foreach ($this->tables as $table) {
             Schema::table($table, function (Blueprint $table) {
-                $table->increments('id')->first();
+                $table->bigIncrements('id')->first();
             });
         }
     }

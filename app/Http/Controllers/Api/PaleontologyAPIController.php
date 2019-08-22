@@ -247,7 +247,7 @@ class PaleontologyAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
      *      @SWG\Parameter(
-     *          name="location_no",
+     *          name="location_id",
      *          in="body",
      *          description="Paleontology that should be stored",
      *          required=false,
@@ -527,7 +527,7 @@ class PaleontologyAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
      *      @SWG\Parameter(
-     *          name="location_no",
+     *          name="location_id",
      *          in="body",
      *          description="Paleontology that should be stored",
      *          required=false,

@@ -14,13 +14,13 @@ class CreateProjectsTable extends Migration {
 	{
 		Schema::create('projects', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('title');
 			$table->string('project_no')->nullable();
 			$table->string('research_no')->nullable();
 			$table->json('research_title')->nullable();
-            $table->unsignedInteger('project_leader_id')->nullable();
-            $table->unsignedInteger('research_leader_id')->nullable();
+            $table->unsignedBigInteger('project_leader_id')->nullable();
+            $table->unsignedBigInteger('research_leader_id')->nullable();
 
             $table->timeStampsTz();
             $table->softDeletesTz();

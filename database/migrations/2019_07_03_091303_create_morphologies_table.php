@@ -14,7 +14,7 @@ class CreateMorphologiesTable extends Migration
     public function up()
     {
         Schema::create('morphologies', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->json('name');
             $table->json('description')->nullable();
             $table->json('unit');

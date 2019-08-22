@@ -15,8 +15,8 @@ class CreateMedicinalPlantMorphologiesTable extends Migration {
 		Schema::create('medicinal_plant_morphologies', function(Blueprint $table)
 		{
 
-            $table->unsignedInteger('medicinal_plant_id');
-			$table->unsignedInteger('morphology_id');
+            $table->unsignedBigInteger('medicinal_plant_id');
+			$table->unsignedBigInteger('morphology_id');
 			$table->json('value');
 
             $table->timeStampsTz();

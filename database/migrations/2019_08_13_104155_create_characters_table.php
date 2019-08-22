@@ -14,10 +14,10 @@ class CreateCharactersTable extends Migration
     public function up()
     {
         Schema::create('characters', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('seed_id');
-            $table->unsignedInteger('department_id');
-            $table->unsignedInteger('project_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('seed_id');
+            $table->unsignedBigInteger('department_id');
+            $table->unsignedBigInteger('project_id');
             $table->foreign('seed_id')->references('id')->on('seeds')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('project_id')->references('id')->on('projects')->onUpdate('NO ACTION')->onDelete('CASCADE');

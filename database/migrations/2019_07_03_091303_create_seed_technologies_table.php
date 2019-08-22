@@ -14,7 +14,7 @@ class CreateSeedTechnologiesTable extends Migration
     public function up()
     {
         Schema::create('seed_technologies', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->json('type')->nullable();
             $table->integer('conserved_content')->nullable();
             $table->integer('mean_seed_per_fruit')->nullable();

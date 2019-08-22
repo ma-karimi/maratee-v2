@@ -14,10 +14,10 @@ class CreateCitiesTable extends Migration {
 	{
 		Schema::create('cities', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('name');
 			$table->string('code', 45)->nullable();
-			$table->unsignedInteger('province_id')->nullable();
+			$table->unsignedBigInteger('province_id')->nullable();
 
 
             $table->timeStampsTz();

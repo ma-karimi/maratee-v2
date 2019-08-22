@@ -14,13 +14,13 @@ class CreatePlantsTable extends Migration {
 	{
 		Schema::create('plants', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('name');
 			$table->json('description')->nullable();
 			$table->json('domestic_name')->nullable();
 			$table->tinyInteger('exclusivity')->nullable();
-            $table->unsignedInteger('taxonomy_id');
-            $table->unsignedInteger('classification_id');
+            $table->unsignedBigInteger('taxonomy_id');
+            $table->unsignedBigInteger('classification_id');
             $table->timeStampsTz();
             $table->softDeletesTz();
 		});

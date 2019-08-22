@@ -14,10 +14,10 @@ class CreateTransfersTable extends Migration {
 	{
 		Schema::create('transfers', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 //            'herbarium, paleontology'
 			$table->morphs('entitiable');
-			$table->unsignedInteger('credential_id')->nullable();
+			$table->unsignedBigInteger('credential_id')->nullable();
             //            'visit, borrow, exchange'
             $table->morphs('transferable');
 

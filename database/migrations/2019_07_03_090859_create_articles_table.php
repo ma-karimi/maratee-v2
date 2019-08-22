@@ -14,7 +14,7 @@ class CreateArticlesTable extends Migration {
 	{
 		Schema::create('articles', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('title');
 			$table->date('year')->nullable();
 			$table->json('journal_name')->nullable();

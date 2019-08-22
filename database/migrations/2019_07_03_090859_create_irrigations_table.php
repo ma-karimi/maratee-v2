@@ -14,7 +14,7 @@ class CreateIrrigationsTable extends Migration {
 	{
 		Schema::create('irrigations', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('type');
 			$table->json('description')->nullable();
 

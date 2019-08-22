@@ -14,8 +14,8 @@ class EditPaleontologiesTable extends Migration
     public function up()
     {
         Schema::table('paleontologies', function (Blueprint $table) {
-            $table->unsignedInteger('general_class_id');
-            $table->unsignedInteger('general_order_id');
+            $table->unsignedBigInteger('general_class_id');
+            $table->unsignedBigInteger('general_order_id');
             $table->foreign('general_class_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('general_order_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
         });

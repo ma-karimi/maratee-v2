@@ -14,10 +14,10 @@ class CreateCountriesTable extends Migration {
 	{
 		Schema::create('countries', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->string('code', 45)->nullable();
 			$table->json('name');
-			$table->unsignedInteger('continent_id')->nullable();
+			$table->unsignedBigInteger('continent_id')->nullable();
 
 
             $table->timeStampsTz();

@@ -14,11 +14,11 @@ class CreateMedicinesTable extends Migration {
 	{
 		Schema::create('medicines', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('name');
 			$table->json('description')->nullable();
 			$table->string('type')->comment('medicinal_parts, drug_usage, drug_shape, medicine_side_effects, therapies, medicine_effects', 'drug');
-			$table->unsignedInteger('parent_id')->nullable();
+			$table->unsignedBigInteger('parent_id')->nullable();
 
 
             $table->timeStampsTz();

@@ -14,13 +14,13 @@ class CreatePlantApplicationsTable extends Migration {
 	{
 		Schema::create('plant_applications', function(Blueprint $table)
 		{
-		    $table->increments('id');
-			$table->unsignedInteger('herbarium_id');
-			$table->unsignedInteger('general_part_id')->nullable();
-			$table->unsignedInteger('general_application_id')->nullable();
-			$table->unsignedInteger('general_growth_id')->nullable();
-			$table->unsignedInteger('general_usage_type_id')->nullable();
-			$table->unsignedInteger('general_industry_id')->nullable();
+		    $table->bigIncrements('id');
+			$table->unsignedBigInteger('herbarium_id');
+			$table->unsignedBigInteger('general_part_id')->nullable();
+			$table->unsignedBigInteger('general_application_id')->nullable();
+			$table->unsignedBigInteger('general_growth_id')->nullable();
+			$table->unsignedBigInteger('general_usage_type_id')->nullable();
+			$table->unsignedBigInteger('general_industry_id')->nullable();
 			$table->json('presence')->nullable()->comment('options: 
 now
 future

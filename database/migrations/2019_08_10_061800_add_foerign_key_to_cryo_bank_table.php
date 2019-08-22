@@ -14,7 +14,7 @@ class AddFoerignKeyToCryoBankTable extends Migration
     public function up()
     {
         Schema::table('cryo_banks', function (Blueprint $table) {
-            $table->unsignedInteger('class_id')->nullable();
+            $table->unsignedBigInteger('class_id')->nullable();
             $table->foreign('class_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
         });
     }

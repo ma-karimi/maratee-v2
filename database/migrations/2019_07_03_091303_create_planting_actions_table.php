@@ -14,7 +14,7 @@ class CreatePlantingActionsTable extends Migration {
 	{
 		Schema::create('planting_actions', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('name');
 			$table->json('description')->nullable();
             $table->timeStampsTz();

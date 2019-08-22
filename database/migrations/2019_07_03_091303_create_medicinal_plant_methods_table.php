@@ -14,9 +14,9 @@ class CreateMedicinalPlantMethodsTable extends Migration {
 	{
 		Schema::create('medicinal_plant_methods', function(Blueprint $table)
 		{
-            $table->increments('id');
-            $table->unsignedInteger('medicinal_plant_id');
-			$table->unsignedInteger('method_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('medicinal_plant_id');
+			$table->unsignedBigInteger('method_id');
 
             $table->timeStampsTz();
             $table->softDeletesTz();

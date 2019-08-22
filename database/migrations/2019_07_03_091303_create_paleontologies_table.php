@@ -14,7 +14,7 @@ class CreatePaleontologiesTable extends Migration
     public function up()
     {
         Schema::create('paleontologies', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->integer('catalog_no')->nullable()->comment('catalog Number
 ');
             $table->string('specimen_no')->nullable()->comment('Specimen Number
@@ -32,18 +32,18 @@ class CreatePaleontologiesTable extends Migration
             $table->integer('pieces')->nullable();
             $table->json('color')->nullable();
             $table->json('element')->nullable();
-            $table->unsignedInteger('geology_age_era_id')->nullable();
-            $table->unsignedInteger('geology_age_period_id')->nullable();
-            $table->unsignedInteger('geology_age_epoch_id')->nullable();
-            $table->unsignedInteger('geology_age_stage_id')->nullable();
-            $table->unsignedInteger('plant_id');
+            $table->unsignedBigInteger('geology_age_era_id')->nullable();
+            $table->unsignedBigInteger('geology_age_period_id')->nullable();
+            $table->unsignedBigInteger('geology_age_epoch_id')->nullable();
+            $table->unsignedBigInteger('geology_age_stage_id')->nullable();
+            $table->unsignedBigInteger('plant_id');
             $table->integer('plates_no')->nullable();
             $table->json('additional_info')->nullable();
             $table->json('access')->nullable();
             $table->date('last_update')->nullable();
             $table->json('excavation')->nullable();
             $table->json('collection_name')->nullable();
-            $table->unsignedInteger('location_id');
+            $table->unsignedBigInteger('location_id');
             $table->json('common_name')->nullable();
             $table->string('update_frequency');
             $table->json('description')->nullable();

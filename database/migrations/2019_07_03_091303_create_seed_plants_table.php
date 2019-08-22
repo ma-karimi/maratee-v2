@@ -14,8 +14,8 @@ class CreateSeedPlantsTable extends Migration {
 	{
 		Schema::create('seed_plants', function(Blueprint $table)
 		{
-			$table->unsignedInteger('seed_id');
-			$table->unsignedInteger('plant_id');
+			$table->unsignedBigInteger('seed_id');
+			$table->unsignedBigInteger('plant_id');
 
             $table->timeStampsTz();
             $table->softDeletesTz();

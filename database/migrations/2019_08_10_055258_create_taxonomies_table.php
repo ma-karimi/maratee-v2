@@ -14,13 +14,13 @@ class CreateTaxonomiesTable extends Migration
     public function up()
     {
         Schema::create('taxonomies', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             //generals
-            $table->unsignedInteger('genus_id')->nullable();
-            $table->unsignedInteger('species_id')->nullable();
-            $table->unsignedInteger('subspecies_id')->nullable();
-            $table->unsignedInteger('variety_id')->nullable();
-            $table->unsignedInteger('family_id');
+            $table->unsignedBigInteger('genus_id')->nullable();
+            $table->unsignedBigInteger('species_id')->nullable();
+            $table->unsignedBigInteger('subspecies_id')->nullable();
+            $table->unsignedBigInteger('variety_id')->nullable();
+            $table->unsignedBigInteger('family_id');
             $table->foreign('genus_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('species_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('subspecies_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');

@@ -14,7 +14,7 @@ class CreateProtectionsTable extends Migration {
 	{
 		Schema::create('protections', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('name');
 			$table->json('description')->nullable();
 

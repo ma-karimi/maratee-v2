@@ -14,7 +14,7 @@ class CreateOrganizationsTable extends Migration
     public function up()
     {
         Schema::create('organizations', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('domestic_code', 45)->nullable();
             $table->string('international_code', 45)->nullable();
             $table->tinyInteger('is_herbarium')->default(1)->comment('0:disable , 1:enable');

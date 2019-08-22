@@ -14,13 +14,13 @@ class CreateEntryHubsTable extends Migration {
 	{
 		Schema::create('entry_hubs', function(Blueprint $table)
 		{
-		    $table->increments('id');
-			$table->unsignedInteger('location_id')->nullable()->comment(' برای بررسی رویشگاه ان
+		    $table->bigIncrements('id');
+			$table->unsignedBigInteger('location_id')->nullable()->comment(' برای بررسی رویشگاه ان
 ');
-			$table->unsignedInteger('entry_id')->comment('براس نوع ورود به باغ
+			$table->unsignedBigInteger('entry_id')->comment('براس نوع ورود به باغ
 ');
-			$table->unsignedInteger('botanical_id')->comment('گیاه در باغ');
-			$table->unsignedInteger('organization_id')->nullable()->comment('سازمان یا باغ گیاه شناسی که نمونه از انجا می باشد.');
+			$table->unsignedBigInteger('botanical_id')->comment('گیاه در باغ');
+			$table->unsignedBigInteger('organization_id')->nullable()->comment('سازمان یا باغ گیاه شناسی که نمونه از انجا می باشد.');
 
             $table->timeStampsTz();
             $table->softDeletesTz();

@@ -14,18 +14,18 @@ class CreateActionHubsTable extends Migration {
 	{
 		Schema::create('action_hubs', function(Blueprint $table)
 		{
-		    $table->increments('id');
+		    $table->bigIncrements('id');
 
-			$table->unsignedInteger('user_id');
-			$table->unsignedInteger('action_id');
+			$table->unsignedBigInteger('user_id');
+			$table->unsignedBigInteger('action_id');
             //herbarium, cryo_bank, paleontology
             $table->morphs('actionable');
 
             $table->date('date')->nullable();
 			$table->json('description')->nullable();
-			$table->unsignedInteger('project_id')->nullable();
-			$table->unsignedInteger('location_id')->nullable();
-			$table->unsignedInteger('department_id')->nullable();
+			$table->unsignedBigInteger('project_id')->nullable();
+			$table->unsignedBigInteger('location_id')->nullable();
+			$table->unsignedBigInteger('department_id')->nullable();
 
             $table->timeStampsTz();
             $table->softDeletesTz();

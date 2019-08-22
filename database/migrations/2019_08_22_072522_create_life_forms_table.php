@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDeletedAtToGroupsTable extends Migration
+class CreateLifeFormsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,11 @@ class AddDeletedAtToGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::table('groups', function (Blueprint $table) {
+        Schema::create('life_forms', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->json('name');
+            $table->enum('type', ['wooden','leaf', 'herbaceos', 'life_cycle']);
+            $table->timestamps();
             $table->softDeletesTz();
         });
     }
@@ -25,8 +29,6 @@ class AddDeletedAtToGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::table('groups', function (Blueprint $table) {
-            $table->dropSoftDeletesTz();
-        });
+        Schema::dropIfExists('life_forms');
     }
 }

@@ -14,7 +14,7 @@ class CreateEntriesTable extends Migration {
 	{
 		Schema::create('entries', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('type');
 			$table->json('description')->nullable();
 

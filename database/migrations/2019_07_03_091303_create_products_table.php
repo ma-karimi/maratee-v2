@@ -14,11 +14,11 @@ class CreateProductsTable extends Migration {
 	{
 		Schema::create('products', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('name');
 			$table->json('description')->nullable();
 			$table->string('registration_status', 45)->nullable();
-			$table->unsignedInteger('organization_id');
+			$table->unsignedBigInteger('organization_id');
 
             $table->timeStampsTz();
             $table->softDeletesTz();

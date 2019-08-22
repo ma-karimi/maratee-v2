@@ -14,7 +14,7 @@ class CreateActionsTable extends Migration {
 	{
 		Schema::create('actions', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('name')->comment('مقادیر تعریف شده:
 جمع واری
 تحقیق (محقق)

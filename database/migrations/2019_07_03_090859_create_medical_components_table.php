@@ -14,9 +14,9 @@ class CreateMedicalComponentsTable extends Migration {
 	{
 		Schema::create('medical_components', function(Blueprint $table)
 		{
-			$table->increments('id');
-			$table->unsignedInteger('component_id');
-			$table->unsignedInteger('medical_id');
+			$table->bigIncrements('id');
+			$table->unsignedBigInteger('component_id');
+			$table->unsignedBigInteger('medical_id');
 			$table->boolean('is_active');
 
             $table->timeStampsTz();

@@ -14,8 +14,8 @@ class CreateBotanicalsTable extends Migration
     public function up()
     {
         Schema::create('botanicals', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('herbarium_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('herbarium_id');
             $table->float('height', 4)->nullable();
             $table->json('flower_color')->nullable();
             $table->json('fruit_color')->nullable();

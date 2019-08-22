@@ -14,8 +14,8 @@ class CreateDepartmentHubsTable extends Migration
     public function up()
     {
         Schema::create('department_hubs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('department_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
             //herbarium , plant
             $table->morphs('departmentable');
@@ -31,6 +31,10 @@ class CreateDepartmentHubsTable extends Migration
      */
     public function down()
     {
+        Schema::table('department_hubs', function(Blueprint $table)
+        {
+            $table->dropForeign(['department_id']);
+        });
         Schema::dropIfExists('department_hubs');
     }
 }

@@ -14,11 +14,11 @@ class CreateGeneralsTable extends Migration
     public function up()
     {
         Schema::create('generals', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('parent_id')->nullable();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->json('name');
             $table->json('description')->nullable();
-            $table->enum('type', ['phytogeography', 'phenology', 'plant_type', 'species', 'sub_species', 'variety', 'family', 'genus', 'class', 'group', 'order', 'flowering', 'sperm', 'cotyledon', 'growth', 'usage', 'part', 'industry', 'application', 'habitat', 'ecology', 'origin', 'lichen', 'moss', 'diatom', 'substrate']);
+            $table->enum('type', ['phytogeography', 'phenology', 'plant_type', 'species', 'sub_species', 'variety', 'family', 'genus', 'class', 'group', 'order', 'flowering', 'sperm', 'cotyledon', 'growth', 'usage', 'part', 'industry', 'application', 'habitat', 'ecology', 'origin', 'lichen', 'moss', 'diatom', 'substrate', 'biological']);
             $table->timestamps();
             $table->softDeletesTz();
         });

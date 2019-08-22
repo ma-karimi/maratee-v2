@@ -14,8 +14,8 @@ class CreateArticleHubsTable extends Migration {
 	{
 		Schema::create('article_hubs', function(Blueprint $table)
 		{
-		    $table->increments('id');
-		    $table->unsignedInteger('article_id');
+		    $table->bigIncrements('id');
+		    $table->unsignedBigInteger('article_id');
 		    //cryo_bank, media, action_hub, plants, chromosome, medicinal_plant, paleontology
 		    $table->morphs('articleable');
 

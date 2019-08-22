@@ -14,15 +14,15 @@ class CreateSeedHubsTable extends Migration
     public function up()
     {
         Schema::create('seed_hubs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('project_id')->nullable();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('project_id')->nullable();
 
 
             $table->json('action_role')->nullable();
             $table->json('action_role_description')->nullable();
-            $table->unsignedInteger('seed_id');
-            $table->unsignedInteger('location_id');
-            $table->unsignedInteger('action_id');
+            $table->unsignedBigInteger('seed_id');
+            $table->unsignedBigInteger('location_id');
+            $table->unsignedBigInteger('action_id');
             $table->date('date')->nullable();
 
             $table->timeStampsTz();

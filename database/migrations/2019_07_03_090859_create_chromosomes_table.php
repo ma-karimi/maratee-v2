@@ -14,14 +14,14 @@ class   CreateChromosomesTable extends Migration
     public function up()
     {
         Schema::create('chromosomes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->integer('n_no');
             $table->integer('2n_no')->nullable();
             $table->json('notes')->nullable();
             $table->string('url')->nullable();
-            $table->unsignedInteger('herbarium_id');
-            $table->unsignedInteger('cryo_bank_id')->nullable();
-            $table->unsignedInteger('general_class_id');
+            $table->unsignedBigInteger('herbarium_id');
+            $table->unsignedBigInteger('cryo_bank_id')->nullable();
+            $table->unsignedBigInteger('general_class_id');
 
             $table->timeStampsTz();
             $table->softDeletesTz();

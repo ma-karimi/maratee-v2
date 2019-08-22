@@ -14,7 +14,7 @@ class CreateSoilFeaturesTable extends Migration {
 	{
 		Schema::create('soil_features', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('name');
 			$table->json('unit')->nullable();
 

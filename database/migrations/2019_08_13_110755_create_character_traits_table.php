@@ -14,9 +14,9 @@ class CreateCharacterTraitsTable extends Migration
     public function up()
     {
         Schema::create('character_traits', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('character_id');
-            $table->unsignedInteger('block_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('character_id');
+            $table->unsignedBigInteger('block_id');
             $table->string('observation_no')->nullable();
             $table->date('planting_date')->nullable();
             $table->date('observation_date')->nullable();

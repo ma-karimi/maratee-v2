@@ -14,7 +14,7 @@ class CreatePropagationsTable extends Migration {
 	{
 		Schema::create('propagations', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->json('method');
 			$table->json('description')->nullable();
 
