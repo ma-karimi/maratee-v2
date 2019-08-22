@@ -63,7 +63,7 @@ class LifeForm extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['name' => 'json', 'type' => 'enum'];
+    protected $casts = ['name' => 'json'];
 
 
     /**
