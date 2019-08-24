@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
             ActionHubTableSeeder::class,
             PlantingActionTableSeeder::class,
             ProductTableSeeder::class,
-//            HerbariumTableSeeder::class,
+            HerbariumTableSeeder::class,
 //            SeedTableSeeder::class,
 //            BioMolecularTableSeeder::class,
 //            SeedExchangeTableSeeder::class,

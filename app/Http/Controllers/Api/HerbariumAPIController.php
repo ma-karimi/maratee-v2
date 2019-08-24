@@ -8,6 +8,8 @@ use App\Models\Herbarium;
 use App\Repositories\HerbariumRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Response;
 
 /**
@@ -80,14 +82,14 @@ class HerbariumAPIController extends AppBaseController
      *      description="Store Herbarium",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="location_id",
+     *          name="organization_id",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Parameter(
-     *          name="organization_id",
+     *          name="protection_id",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=true,
@@ -298,9 +300,7 @@ class HerbariumAPIController extends AppBaseController
      */
     public function store(CreateHerbariumAPIRequest $request)
     {
-        $input = $request->all();
-
-        $herbarium = $this->herbariumRepository->create($input);
+        $herbarium = $this->herbariumRepository->create($request);
 
         return $this->sendResponse($herbarium->toArray(), 'Herbarium saved successfully');
     }
@@ -374,7 +374,7 @@ class HerbariumAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="location_id",
+     *          name="protection_id",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=true,
@@ -466,13 +466,6 @@ class HerbariumAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="number",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="location_id",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=false,

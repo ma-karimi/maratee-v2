@@ -12,7 +12,7 @@ use Kalnoy\Nestedset\NodeTrait;
 /**
  * @SWG\Definition(
  *      definition="Herbarium",
- *      required={"location_id","organization_id", "plant_id"},
+ *      required={"protection_id","organization_id", "plant_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -26,14 +26,14 @@ use Kalnoy\Nestedset\NodeTrait;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="number",
- *          description="number",
+ *          property="protection_id",
+ *          description="protection_id",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="location_id",
- *          description="location_id",
+ *          property="number",
+ *          description="number",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -184,10 +184,8 @@ use Kalnoy\Nestedset\NodeTrait;
 class Herbarium extends BaseModel
 {
     use HerbariumScope,NodeTrait;
-
     public static $linguistically = ['flowering' => false,'habitat_description' => false,'ecology_description' => false,];
     public static $rules = [
-        'location_id' => 'required|exists:locations,id',
         'protection_id' => 'exists:protections,id',
         'organization_id' => 'required|exists:organizations,id',
         'plant_id' => 'required|exists:plants,id',
@@ -207,8 +205,7 @@ class Herbarium extends BaseModel
         'general_growth_id' => 'exists:generals,id',
         'general_phytogeography_id' => 'exists:generals,id',
         'general_phenology_id' => 'exists:generals,id',
-        'number' => 'integer',
-
+        'number' => 'integer|unique_with:herbariums,organization_id',
     ];
     /**
      * The database table used by the model.
@@ -373,11 +370,6 @@ class Herbarium extends BaseModel
     public function organization()
     {
         return $this->belongsTo(Organization::class);
-    }
-
-    public function location()
-    {
-        return $this->belongsTo(Location::class);
     }
 
     public function protection()
