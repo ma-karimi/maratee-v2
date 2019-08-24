@@ -11360,15 +11360,6 @@
                 ],
                 "parameters": [
                     {
-                        "name": "location_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
                         "name": "organization_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11690,15 +11681,6 @@
                         "type": "integer"
                     },
                     {
-                        "name": "location_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
                         "name": "organization_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11808,15 +11790,6 @@
                     },
                     {
                         "name": "number",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "location_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,
@@ -16884,7 +16857,7 @@
                         }
                     },
                     {
-                        "name": "location_no",
+                        "name": "location_id",
                         "in": "body",
                         "description": "Paleontology that should be stored",
                         "required": false,
@@ -17196,7 +17169,7 @@
                         }
                     },
                     {
-                        "name": "location_no",
+                        "name": "location_id",
                         "in": "body",
                         "description": "Paleontology that should be stored",
                         "required": false,
@@ -29174,7 +29147,6 @@
         },
         "Herbarium": {
             "required": [
-                "location_id",
                 "organization_id",
                 "plant_id"
             ],
@@ -29191,11 +29163,6 @@
                 },
                 "number": {
                     "description": "number",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "location_id": {
-                    "description": "location_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -29355,6 +29322,40 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "LifeForm": {
+            "required": [
+                "name",
+                "type"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "type": {
+                    "description": "type",
+                    "type": "string"
                 },
                 "created_at": {
                     "description": "created_at",
@@ -30765,6 +30766,41 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "PlantLifeForm": {
+            "required": [
+                "name",
+                "type"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "plant_id": {
+                    "description": "plant_id",
+                    "type": "integer"
+                },
+                "life_form_id": {
+                    "description": "life_form_id",
+                    "type": "integer"
+                },
+                "type": {
+                    "description": "type",
+                    "type": "string"
                 },
                 "created_at": {
                     "description": "created_at",

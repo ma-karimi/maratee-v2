@@ -8,9 +8,17 @@ use InfyOm\Generator\Request\APIRequest;
 
 class CreateGeneralAPIRequest extends APIRequest
 {
-    private function validateParentId(string $type, array $parentArrayCollection): bool
+    private function validateParentId($type): bool
     {
-        return $this->request->get('type') === $type and in_array($this->request->get('parent_id'), $parentArrayCollection);
+        $childParents=[
+            'genus'=>'family',
+            'species'=>'genus',
+            'subspecies'=>'species',
+            'variety'=>'subspecies',
+        ];
+        foreach ($childParents as $index => $item) {
+            return ($index===$type) and  in_array($this->input('parent_id'), General::ofType($item)->pluck('id')->toArray());
+        }
     }
     /**
      * Determine if the user is authorized to make this request.
@@ -19,16 +27,8 @@ class CreateGeneralAPIRequest extends APIRequest
      */
     public function authorize()
     {
-        $family = General::ofType('family')->pluck('id')->toArray();
-        $genus = General::ofType('genus')->pluck('id')->toArray();
-        $species = General::ofType('species')->pluck('id')->toArray();
-
-        if (($this->validateParentId('genus', $family) or
-                $this->validateParentId('species', $genus) or
-                $this->validateParentId('subspecies', $species)
-        ) === false) {
-            abort(JsonResponse::HTTP_BAD_REQUEST, 'parent_id does not valid');
-        }
+        $condition=$this->validateParentId($this->input('type'));
+        abort_if(!$condition,JsonResponse::HTTP_BAD_REQUEST, 'parent_id does not valid');
         return true;
     }
 

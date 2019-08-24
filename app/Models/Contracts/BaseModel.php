@@ -142,7 +142,7 @@ class BaseModel extends Model
 
     protected function setJsonSelectables(): void
     {
-        if (count(request()->keys())) {
+        if (request()->isMethod('get') && count(request()->keys())) {
             foreach (request()->all() as $index => $item) {
                 if (is_array($item) && collect($this->getLinguistically())->has($index)) {
                     $param = array_keys($item)[0];

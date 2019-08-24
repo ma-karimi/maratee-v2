@@ -13,12 +13,12 @@ trait GeneralScope
 {
     /**
      * @param $query
-     * @param bool $value
+     * @param $type
      * @return mixed
      */
     public function scopeOfType($query, $type)
     {
-        return $query->where('type',$type);
+        return $query->where('type','LIKE',"%$type%");
     }
 
     /**

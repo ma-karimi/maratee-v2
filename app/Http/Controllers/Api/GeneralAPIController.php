@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\CreateGeneralAPIRequest;
 use App\Http\Requests\Api\UpdateGeneralAPIRequest;
 use App\Models\General;
+use App\Models\Herbarium;
 use App\Repositories\GeneralRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -58,6 +59,7 @@ class GeneralAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {

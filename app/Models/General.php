@@ -59,19 +59,20 @@ use Illuminate\Validation\Rule;
 class General extends BaseModel
 {
     use GeneralScope;
-    public static $linguistically=['name'=>true,'description'=>false];
+    public static $linguistically=['name'=>false,'description'=>false];
     public static $rules= array(
         'type' => 'required|string',
         'parent_id' => 'integer',
     );
-
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'type', 'updated_at'];
+    protected $guarded=['id'];
+
+    protected $table='generals';
 
 
     /**
