@@ -55,6 +55,7 @@ class UserAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -387,7 +388,7 @@ class UserAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="password",
      *          in="body",
-     *          required=true,
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/User")
      *      ),
      *      @SWG\Parameter(
