@@ -19,8 +19,8 @@ class CreateMedicinalPlantPropertiesTable extends Migration
             $table->unsignedBigInteger('medicinal_plant_type_id');
             $table->timestamps();
             $table->softDeletesTz();
-            $table->foreign('medicinal_plant_id')->references('id')->on('medicinal_plants');
-            $table->foreign('medicinal_plant_type_id')->references('id')->on('medicinal_plant_types');
+            $table->foreign('medicinal_plant_id')->references('id')->on('medicinal_plants')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('medicinal_plant_type_id')->references('id')->on('medicinal_plant_types')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
     }
 

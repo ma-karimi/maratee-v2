@@ -18,7 +18,7 @@ class CreateMedicinalPlantTypesTable extends Migration
             $table->bigIncrements('id');
             $table->json('name');
 //            $table->string('name_en')->generatedAs('name->>"$.en"');
-            $table->json('description');
+            $table->json('description')->nullable();
             $table->tinyInteger('type_id');
             $table->timestamps();
             $table->softDeletesTz();
