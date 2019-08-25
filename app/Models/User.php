@@ -165,6 +165,8 @@ class User extends Authenticatable
      */
     protected $table = 'users';
 
+    protected $guarded=['id'];
+
 
     /**
      * The attributes that should be casted to native types.
@@ -238,7 +240,10 @@ class User extends Authenticatable
      */
     public function articles(): MorphToMany
     {
-        return $this->morphToMany(ArticleHub::class, 'articleable');
+        return $this->morphToMany(Article::class,
+            'articleable','article_hubs')
+            ->whereNull('location_hubs.deleted_at')
+            ->withTimestamps();
     }
 
 

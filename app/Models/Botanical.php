@@ -120,6 +120,7 @@ class Botanical extends BaseModel
             'botanical_irrigations',
             'botanical_id',
             'irrigation_id')
+            ->whereNull('botanical_irrigations.deleted_at')
             ->withPivot('requirement', 'daytime', 'seasonal_feature');
     }
 
@@ -149,7 +150,8 @@ class Botanical extends BaseModel
             'botanical_garden_actions',
             'botanical_id',
             'planting_action_id'
-        );
+        )->whereNull('botanical_garden_actions.deleted_at')
+            ->withTimestamps();
     }
     public function soil_from()
     {
@@ -158,7 +160,8 @@ class Botanical extends BaseModel
             'botanical_garden_actions',
             'botanical_id',
             'from_soil_id'
-        )->with('soilFeatures');
+        )->whereNull('botanical_garden_actions.deleted_at')
+            ->withTimestamps();
     }
     public function soil_to()
     {
@@ -167,7 +170,8 @@ class Botanical extends BaseModel
             'botanical_garden_actions',
             'botanical_id',
             'to_soil_id'
-        )->with('soilFeatures');
+        )->whereNull('botanical_garden_actions.deleted_at')
+            ->withTimestamps();
     }
     public function lighting_from()
     {
@@ -176,7 +180,8 @@ class Botanical extends BaseModel
             'botanical_garden_actions',
             'botanical_id',
             'from_lighting_id'
-        );
+        )->whereNull('botanical_garden_actions.deleted_at')
+            ->withTimestamps();
     }
     public function lighting_to()
     {
@@ -185,7 +190,8 @@ class Botanical extends BaseModel
             'botanical_garden_actions',
             'botanical_id',
             'to_lighting_id'
-        );
+        )->whereNull('botanical_garden_actions.deleted_at')
+            ->withTimestamps();
     }
 
 
@@ -194,6 +200,8 @@ class Botanical extends BaseModel
      */
     public function treatments(): MorphToMany
     {
-        return $this->morphToMany(TreatmentHub::class, 'treamentable');
+        return $this->morphToMany(Treatment::class, 'treatmentable',
+            'treatment_hubs')->whereNull('treatment_hubs.deleted_at')
+            ->withTimestamps();
     }
 }

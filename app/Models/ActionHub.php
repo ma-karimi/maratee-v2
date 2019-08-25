@@ -115,12 +115,12 @@ class ActionHub extends BaseModel
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
 
 
-    /**
-     * @return MorphToMany
-     */
     public function articles(): MorphToMany
     {
-        return $this->morphToMany(ArticleHub::class, 'articleable');
+        return $this->morphToMany(Article::class,
+            'articleable','article_hubs')
+            ->whereNull('location_hubs.deleted_at')
+            ->withTimestamps();
     }
 
     public function project()

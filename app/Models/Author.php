@@ -39,7 +39,9 @@ class Author extends BaseModel
      */
     public function plants()
     {
-        return $this->morphedByMany(Plant::class, 'authorable')->withTimestamps();
+        return $this->morphedByMany(Plant::class, 'authorable','author_hubs')
+            ->whereNull('author_hubs.deleted_at')
+            ->withTimestamps();
     }
 
     /**
@@ -47,7 +49,9 @@ class Author extends BaseModel
      */
     public function generals()
     {
-        return $this->morphedByMany(General::class, 'authorable')->withTimestamps();
+        return $this->morphedByMany(General::class, 'authorable','author_hubs')
+            ->whereNull('author_hubs.deleted_at')
+            ->withTimestamps();
     }
 
 

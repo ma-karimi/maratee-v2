@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use App\Models\Scope\ActionScope;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
+
 
 /**
  * @SWG\Definition(

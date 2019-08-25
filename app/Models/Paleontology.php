@@ -317,12 +317,12 @@ class Paleontology extends BaseModel
     }
 
 
-    /**
-     * @return MorphToMany
-     */
     public function articles(): MorphToMany
     {
-        return $this->morphToMany(ArticleHub::class, 'articleable');
+        return $this->morphToMany(Article::class,
+            'articleable','article_hubs')
+            ->whereNull('location_hubs.deleted_at')
+            ->withTimestamps();
     }
 
     /**

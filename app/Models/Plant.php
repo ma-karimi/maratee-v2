@@ -115,7 +115,10 @@ class Plant extends BaseModel
      */
     public function articles(): MorphToMany
     {
-        return $this->morphToMany(Article::class, 'articleable','article_hubs')->withTimestamps();
+        return $this->morphToMany(Article::class,
+            'articleable','article_hubs')
+            ->whereNull('location_hubs.deleted_at')
+            ->withTimestamps();
     }
 
     /**
@@ -141,7 +144,10 @@ class Plant extends BaseModel
      */
     public function authors(): MorphToMany
     {
-        return $this->morphToMany(Author::class, 'authorable','author_hubs')->withTimestamps();
+        return $this->morphToMany(Author::class, 'authorable',
+            'author_hubs')
+            ->whereNull('author_hubs.deleted_at')
+            ->withTimestamps();
     }
 
     public function seeds(): BelongsToMany

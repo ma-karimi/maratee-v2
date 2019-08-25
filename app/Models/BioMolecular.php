@@ -55,11 +55,10 @@ use App\Models\Technology;
  *      )
  * )
  */
-
 class BioMolecular extends BaseModel
 {
 
-    public static $rules=[
+    public static $rules = [
         'technology_id' => 'required|exists:technologies,id',
         'seed_feature_id' => 'required|exists:seed_features,id',
         'block_id' => 'exists:blocks,id',
@@ -81,6 +80,7 @@ class BioMolecular extends BaseModel
     {
         return $this->belongsTo(Technology::class);
     }
+
     /**
      * @return BelongsTo
      */
@@ -88,6 +88,7 @@ class BioMolecular extends BaseModel
     {
         return $this->belongsTo(SeedFeature::class);
     }
+
     /**
      * @return BelongsTo
      */
@@ -102,6 +103,8 @@ class BioMolecular extends BaseModel
      */
     public function treatments(): MorphToMany
     {
-        return $this->morphToMany(TreatmentHub::class, 'treamentable');
+        return $this->morphToMany(Treatment::class, 'treatmentable', 'treatment_hubs')
+            ->whereNull('treatment_hubs.deleted_at')
+            ->withTimestamps();
     }
 }

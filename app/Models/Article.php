@@ -117,7 +117,9 @@ class Article extends BaseModel
      */
     public function users(): MorphToMany
     {
-        return $this->morphToMany(UserHub::class, 'userable')->withTimestamps();
+        return $this->morphToMany(UserHub::class, 'userable','user_hubs')
+            ->whereNull('user_hubs.deleted_at')
+            ->withTimestamps();
     }
 
     public function chromosomes()

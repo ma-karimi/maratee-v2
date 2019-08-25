@@ -73,12 +73,12 @@ class Chromosome extends BaseModel
     }
 
 
-    /**
-     * @return MorphToMany
-     */
     public function articles(): MorphToMany
     {
-        return $this->morphToMany(ArticleHub::class, 'articleable');
+        return $this->morphToMany(Article::class,
+            'articleable','article_hubs')
+            ->whereNull('article_hubs.deleted_at')
+            ->withTimestamps();
     }
 
 
@@ -87,6 +87,8 @@ class Chromosome extends BaseModel
      */
     public function locations(): MorphToMany
     {
-        return $this->morphToMany(LocationHub::class, 'locationable');
+        return $this->morphToMany(LocationHub::class, 'locationable','location_hubs')
+            ->whereNull('location_hubs.deleted_at')
+            ->withTimestamps();
     }
 }
