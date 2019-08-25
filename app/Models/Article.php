@@ -55,13 +55,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          format="array"
  *      ),
  *      @SWG\Property(
- *          property="auhtors",
- *          description="auhtors",
- *          type="array",
-	 *     @SWG\Items(type="string"),
- *          format="array"
- *      ),
- *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",

@@ -120,13 +120,6 @@ class ArticleAPIController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Article")
      *      ),
-     *      @SWG\Parameter(
-     *          name="authors",
-     *          in="body",
-     *          description="Article that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Article")
-     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -262,13 +255,6 @@ class ArticleAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="type",
-     *          in="body",
-     *          description="Article that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Article")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="authors",
      *          in="body",
      *          description="Article that should be stored",
      *          required=false,

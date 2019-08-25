@@ -21,7 +21,6 @@ class CreateArticlesTable extends Migration {
 			$table->integer('journal_no')->nullable();
 			$table->integer('page_no')->nullable();
 			$table->json('type')->nullable();
-			$table->json('authors')->nullable();
 
 
             $table->timeStampsTz();
