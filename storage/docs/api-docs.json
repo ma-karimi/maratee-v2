@@ -815,15 +815,6 @@
                         "schema": {
                             "$ref": "#/definitions/Article"
                         }
-                    },
-                    {
-                        "name": "authors",
-                        "in": "body",
-                        "description": "Article that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Article"
-                        }
                     }
                 ],
                 "responses": {
@@ -950,15 +941,6 @@
                     },
                     {
                         "name": "type",
-                        "in": "body",
-                        "description": "Article that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Article"
-                        }
-                    },
-                    {
-                        "name": "authors",
                         "in": "body",
                         "description": "Article that should be stored",
                         "required": false,
@@ -11369,6 +11351,15 @@
                         }
                     },
                     {
+                        "name": "protection_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
                         "name": "plant_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11549,15 +11540,6 @@
                         }
                     },
                     {
-                        "name": "habitat_description",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
                         "name": "ecology_description",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11568,15 +11550,6 @@
                     },
                     {
                         "name": "general_ecology_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "general_habitat_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,
@@ -11681,6 +11654,15 @@
                         "type": "integer"
                     },
                     {
+                        "name": "protection_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
                         "name": "organization_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11717,15 +11699,6 @@
                         }
                     },
                     {
-                        "name": "habitat_description",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
                         "name": "ecology_description",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11754,15 +11727,6 @@
                     },
                     {
                         "name": "general_phytogeography_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "general_habitat_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,
@@ -12211,6 +12175,223 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of Irrigation",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/lifeForms": {
+            "get": {
+                "tags": [
+                    "LifeForm"
+                ],
+                "summary": "Get a listing of the LifeForms.",
+                "description": "Get all LifeForms",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/LifeForm"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "LifeForm"
+                ],
+                "summary": "Store a newly created LifeForm in storage",
+                "description": "Store LifeForm",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "LifeForm that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LifeForm"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "body",
+                        "description": "LifeForm that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LifeForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/LifeForm"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/lifeForms/{id}": {
+            "get": {
+                "tags": [
+                    "LifeForm"
+                ],
+                "summary": "Display the specified LifeForm",
+                "description": "Get LifeForm",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of LifeForm",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/LifeForm"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "LifeForm"
+                ],
+                "summary": "Update the specified LifeForm in storage",
+                "description": "Update LifeForm",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of LifeForm",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "LifeForm that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LifeForm"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "body",
+                        "description": "LifeForm that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LifeForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/LifeForm"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "LifeForm"
+                ],
+                "summary": "Remove the specified LifeForm from storage",
+                "description": "Delete LifeForm",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of LifeForm",
                         "required": true,
                         "type": "integer"
                     }
@@ -18138,6 +18319,24 @@
                         }
                     },
                     {
+                        "name": "life_form_cycle_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "life_form_leaf_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
                         "name": "exclusivity",
                         "in": "body",
                         "description": "Plant that should be stored",
@@ -18316,6 +18515,24 @@
                     },
                     {
                         "name": "family_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "life_form_cycle_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "life_form_leaf_id",
                         "in": "body",
                         "description": "Plant that should be stored",
                         "required": true,
@@ -18708,6 +18925,223 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of plantApplication",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/plantLifeForms": {
+            "get": {
+                "tags": [
+                    "PlantLifeForm"
+                ],
+                "summary": "Get a listing of the PlantLifeForms.",
+                "description": "Get all PlantLifeForms",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/PlantLifeForm"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "PlantLifeForm"
+                ],
+                "summary": "Store a newly created PlantLifeForm in storage",
+                "description": "Store PlantLifeForm",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "plant_id",
+                        "in": "body",
+                        "description": "PlantLifeForm that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PlantLifeForm"
+                        }
+                    },
+                    {
+                        "name": "life_form_id",
+                        "in": "body",
+                        "description": "PlantLifeForm that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PlantLifeForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/PlantLifeForm"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/plantLifeForms/{id}": {
+            "get": {
+                "tags": [
+                    "PlantLifeForm"
+                ],
+                "summary": "Display the specified PlantLifeForm",
+                "description": "Get PlantLifeForm",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of PlantLifeForm",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/PlantLifeForm"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "PlantLifeForm"
+                ],
+                "summary": "Update the specified PlantLifeForm in storage",
+                "description": "Update PlantLifeForm",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of PlantLifeForm",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "plant_id",
+                        "in": "body",
+                        "description": "PlantLifeForm that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PlantLifeForm"
+                        }
+                    },
+                    {
+                        "name": "life_form_id",
+                        "in": "body",
+                        "description": "PlantLifeForm that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PlantLifeForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/PlantLifeForm"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "PlantLifeForm"
+                ],
+                "summary": "Remove the specified PlantLifeForm from storage",
+                "description": "Delete PlantLifeForm",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of PlantLifeForm",
                         "required": true,
                         "type": "integer"
                     }
@@ -29147,6 +29581,7 @@
         },
         "Herbarium": {
             "required": [
+                "location_id",
                 "organization_id",
                 "plant_id"
             ],
@@ -29163,6 +29598,11 @@
                 },
                 "number": {
                     "description": "number",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "location_id": {
+                    "description": "location_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -30634,28 +31074,13 @@
                         "type": "string"
                     }
                 },
-                "taxonomy_id": {
-                    "description": "taxonomy_id",
+                "life_form_cycle_id": {
+                    "description": "life_form_cycle_id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "classification_id": {
-                    "description": "classification_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "user_id": {
-                    "description": "user_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "article_id": {
-                    "description": "article_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "location_id": {
-                    "description": "location_id",
+                "life_form_leaf_id": {
+                    "description": "life_form_leaf_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -30781,8 +31206,8 @@
         },
         "PlantLifeForm": {
             "required": [
-                "name",
-                "type"
+                "plant_id",
+                "life_form_id"
             ],
             "properties": {
                 "id": {
@@ -30797,10 +31222,6 @@
                 "life_form_id": {
                     "description": "life_form_id",
                     "type": "integer"
-                },
-                "type": {
-                    "description": "type",
-                    "type": "string"
                 },
                 "created_at": {
                     "description": "created_at",
