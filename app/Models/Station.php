@@ -70,14 +70,6 @@ class Station extends BaseModel
         'type' => 'json',
     ];
 
-
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded = ['id'];
-
     /**
      * @return BelongsTo
      */

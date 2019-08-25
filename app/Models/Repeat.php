@@ -71,12 +71,6 @@ class Repeat extends BaseModel
     protected $table = 'repeats';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded=['id'];
-    /**
      * @return BelongsTo
      */
     public function germination()

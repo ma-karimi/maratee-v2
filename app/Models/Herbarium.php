@@ -12,7 +12,7 @@ use Kalnoy\Nestedset\NodeTrait;
 /**
  * @SWG\Definition(
  *      definition="Herbarium",
- *      required={"protection_id","organization_id", "plant_id"},
+ *      required={"location_id","organization_id", "plant_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -26,14 +26,14 @@ use Kalnoy\Nestedset\NodeTrait;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="protection_id",
- *          description="protection_id",
+ *          property="number",
+ *          description="number",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="number",
- *          description="number",
+ *          property="location_id",
+ *          description="location_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -44,6 +44,12 @@ use Kalnoy\Nestedset\NodeTrait;
  *      ),
  *      @SWG\Property(
  *          property="general_origin_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="protection_id",
+ *          description="protection_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -95,6 +101,12 @@ use Kalnoy\Nestedset\NodeTrait;
  *      ),
  *      @SWG\Property(
  *          property="description",
+ *          description="description",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *      ),
+ *      @SWG\Property(
+ *          property="habitat_description",
  *          description="description",
  *          type="array",
  *     @SWG\Items(type="string"),
@@ -172,8 +184,10 @@ use Kalnoy\Nestedset\NodeTrait;
 class Herbarium extends BaseModel
 {
     use HerbariumScope,NodeTrait;
-    public static $linguistically = ['flowering' => false,'ecology_description' => false,];
+
+    public static $linguistically = ['flowering' => false,'habitat_description' => false,'ecology_description' => false,];
     public static $rules = [
+        'location_id' => 'required|exists:locations,id',
         'protection_id' => 'exists:protections,id',
         'organization_id' => 'required|exists:organizations,id',
         'plant_id' => 'required|exists:plants,id',
@@ -188,11 +202,13 @@ class Herbarium extends BaseModel
         'general_type_id' => 'exists:generals,id',
         'general_group_id' => 'exists:generals,id',
         'general_ecology_id' => 'exists:generals,id',
+        'general_habitat_id' => 'exists:generals,id',
         'general_origin_id' => 'exists:generals,id',
         'general_growth_id' => 'exists:generals,id',
         'general_phytogeography_id' => 'exists:generals,id',
         'general_phenology_id' => 'exists:generals,id',
-        'number' => 'integer|unique_with:herbariums,organization_id',
+        'number' => 'integer',
+
     ];
     /**
      * The database table used by the model.
@@ -200,13 +216,6 @@ class Herbarium extends BaseModel
      * @var string
      */
     protected $table = 'herbariums';
-
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded=['id'];
 
 
     /**
@@ -219,6 +228,7 @@ class Herbarium extends BaseModel
         'description' => 'json',
         'flowering' => 'json',
         'organization_description' => 'json',
+        'habitat_description' => 'json',
         'ecology_description' => 'json',
     ];
 
@@ -358,6 +368,11 @@ class Herbarium extends BaseModel
         return $this->belongsTo(Organization::class);
     }
 
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
+    }
+
     public function protection()
     {
         return $this->belongsTo(Protection::class);
@@ -371,6 +386,11 @@ class Herbarium extends BaseModel
     public function generalEcology()
     {
         return $this->belongsTo(General::class, 'general_ecology_id');
+    }
+
+    public function generalHabitat()
+    {
+        return $this->belongsTo(General::class, 'general_habitat_id');
     }
 
     public function generalOrigin()

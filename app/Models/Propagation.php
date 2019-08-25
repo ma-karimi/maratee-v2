@@ -50,13 +50,6 @@ class Propagation extends BaseModel
      */
     protected $table = 'propagations';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'method', 'updated_at'];
-
 
     /**
      * The attributes that should be casted to native types.

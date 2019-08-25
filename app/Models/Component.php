@@ -26,15 +26,6 @@ class Component extends BaseModel
 
     public static $linguistically=['name'=>true, 'description'=>true];
 
-
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['name', 'description', 'created_at', 'deleted_at', 'updated_at'];
-
-
     /**
      * The attributes that should be casted to native types.
      *

@@ -26,12 +26,6 @@ class AuthorHub extends BaseModel
      */
     protected $table = 'author_hubs';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['authorable_id', 'authorable_type', 'author_id', 'created_at', 'deleted_at',  'updated_at', ];
 
     public static $rules = [
         'author_id'=>'required|exists:authors,id',

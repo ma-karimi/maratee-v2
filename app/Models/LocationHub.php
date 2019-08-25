@@ -53,13 +53,6 @@ class LocationHub extends BaseModel
      */
     protected $table = 'location_hubs';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['locationable_id', 'locationable_type', 'location_id', 'created_at', 'deleted_at',  'updated_at', ];
-
     public static $rules = [
         'location_id'=>'required|exists:locations,id',
         'locationable_id'=>'required|integer',

@@ -115,13 +115,6 @@ class SeedWeight extends BaseModel
      */
     protected $table = 'seed_weights';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded = ['id'];
-
 
     /**
      * The attributes that should be casted to native types.

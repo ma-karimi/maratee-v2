@@ -108,10 +108,6 @@ use Illuminate\Database\Eloquent\Model;
 class Permission extends BaseModel
 {
     public static $linguistically=['owner_crud'=>true,'same_level_crud'=>true,'upper_level_crud'=>true,'lower_level_crud'=>true];
-    /**
-     * @var array
-     */
-    protected $fillable = ['user_id', 'department_id', 'group_id', 'role_id', 'requester_id', 'responser_id', 'permission_status', 'request_date', 'approval_date', 'expire_date', 'owner_crud', 'same_level_crud', 'upper_level_crud', 'lower_level_crud', 'created_at', 'updated_at'];
 
    protected $casts =
        [

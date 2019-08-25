@@ -50,14 +50,6 @@ class Lighting extends BaseModel
     protected $table = 'lightings';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'type', 'updated_at'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

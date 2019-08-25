@@ -61,14 +61,6 @@ class SoilHasSoilFeature extends BaseModel
     protected $table = 'soil_has_soil_features';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'soil_feature_id', 'soil_id', 'updated_at', 'value'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

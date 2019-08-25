@@ -30,14 +30,6 @@ class EvaluationDimension extends BaseModel
      */
     protected $table = 'evaluation_dimensions';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded=['id'];
-
-
 
     /**
      * The attributes that should be mutated to dates.

@@ -51,14 +51,6 @@ class Evaluation extends BaseModel
     protected $table = 'evaluations';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded=['id'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

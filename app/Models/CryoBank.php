@@ -56,14 +56,6 @@ class CryoBank extends BaseModel
     protected $table = 'cryo_banks';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['cell_no', 'created_at', 'deleted_at', 'entry_date', 'geotype_code', 'herbarium_id', 'layering_no', 'protection_id', 'rack_no', 'repetition', 'row_no', 'sample_type', 'tank_no', 'tank_type', 'updated_at', 'voucher_number'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

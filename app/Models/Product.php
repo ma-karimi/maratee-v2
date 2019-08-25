@@ -68,13 +68,6 @@ class Product extends BaseModel
      */
     protected $table = 'products';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'organization_id', 'registration_status', 'updated_at'];
-
 
     /**
      * The attributes that should be casted to native types.

@@ -61,14 +61,6 @@ class MedicinalPlantConstituent extends BaseModel
     protected $table = 'medicinal_plant_constituents';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['constituent_id', 'created_at', 'deleted_at', 'medicinal_plant_id', 'updated_at', 'value'];
-
-
-    /**
      * @return BelongsTo
      */
     public function constituent(): BelongsTo

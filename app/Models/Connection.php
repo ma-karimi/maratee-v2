@@ -32,14 +32,6 @@ class Connection extends BaseModel
     protected $table = 'connections';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'department_id', 'user_id', 'location_id', 'updated_at'];
-
-
-    /**
      * @return BelongsTo
      */
     public function department(): BelongsTo

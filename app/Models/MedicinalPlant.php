@@ -145,14 +145,6 @@ class MedicinalPlant extends BaseModel
     protected $table = 'medicinal_plants';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['code_no', 'created_at', 'deleted_at', 'efficiency', 'exclusivity', 'life_cycle', 'plant_application_id', 'secondary_metabolite', 'studied_sample', 'phenology_stage', 'used_origin','used_type','store_type', 'updated_at', 'vast_cultivation'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

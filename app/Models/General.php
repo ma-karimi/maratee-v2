@@ -7,6 +7,7 @@ use App\Models\Scope\GeneralScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Validation\Rule;
 
 /**
  * @SWG\Definition(
@@ -58,21 +59,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class General extends BaseModel
 {
     use GeneralScope;
-    public static $linguistically = ['name' => false, 'description' => false];
-    public static $rules = array(
+    public static $linguistically=['name'=>true,'description'=>false];
+    public static $rules= array(
         'type' => 'required|string',
         'parent_id' => 'integer',
     );
-
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded = ['id'];
-
-    protected $table = 'generals';
-
 
     /**
      * The attributes that should be casted to native types.
@@ -83,6 +74,34 @@ class General extends BaseModel
         'name' => 'json',
         'description' => 'json',
     ];
+//
+//    /**
+//     * @return HasMany
+//     */
+//    public function herbariums(): HasMany
+//    {
+//        return $this->hasMany(Herbarium::class, 'general_group_id')->latest();
+//    }
+//
+//    /**
+//     * @return HasMany
+//     */
+//    public function plants(): HasMany
+//    {
+//        return $this->hasMany(Plant::class, [
+//            'general_class_id',
+//            'general_family_id',
+//            'general_flowering_id',
+//            'general_genus_id',
+//            'general_group_id',
+//            'general_order_id',
+//            'general_specie_id',
+//            'general_sperm_id',
+//            'general_sub_specie_id',
+//            'general_variety_id',
+//            'general_cotyledon_id',
+//        ])->latest();
+//    }
 
     /**
      * @return MorphToMany
@@ -99,7 +118,6 @@ class General extends BaseModel
     {
         return $this->belongsTo(__CLASS__, 'parent_id')->withDefault();
     }
-
     /**
      * @return BelongsTo
      */
@@ -107,7 +125,6 @@ class General extends BaseModel
     {
         return $this->belongsTo(__CLASS__, 'parent_id')->withDefault();
     }
-
     /**
      * @return BelongsTo
      */
@@ -115,7 +132,6 @@ class General extends BaseModel
     {
         return $this->belongsTo(__CLASS__, 'parent_id')->withDefault();
     }
-
     /**
      * @return BelongsTo
      */
@@ -123,36 +139,32 @@ class General extends BaseModel
     {
         return $this->belongsTo(__CLASS__, 'parent_id')->withDefault();
     }
-
     /**
      * @return HasMany
      */
     public function familyChildren(): HasMany
     {
-        return $this->hasMany(__CLASS__, 'parent_id')->where('type', 'genus');
+        return $this->hasMany(__CLASS__, 'parent_id')->where('type','genus');
     }
-
     /**
      * @return HasMany
      */
     public function genusChildren(): HasMany
     {
-        return $this->hasMany(__CLASS__, 'parent_id')->where('type', 'genus');
+        return $this->hasMany(__CLASS__, 'parent_id')->where('type','genus');
     }
-
     /**
      * @return HasMany
      */
     public function speciesChildren(): HasMany
     {
-        return $this->hasMany(__CLASS__, 'parent_id')->where('type', 'genus');
+        return $this->hasMany(__CLASS__, 'parent_id')->where('type','genus');
     }
-
     /**
      * @return HasMany
      */
     public function subspeciesChildren(): HasMany
     {
-        return $this->hasMany(__CLASS__, 'parent_id')->where('type', 'genus');
+        return $this->hasMany(__CLASS__, 'parent_id')->where('type','genus');
     }
 }

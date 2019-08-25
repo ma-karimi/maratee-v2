@@ -25,14 +25,6 @@ class Dimension extends BaseModel
         'index' => 'integer',
     ];
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded = ['id'];
-
-
     public function evaluations()
     {
         return $this->belongsToMany(Evaluation::class,

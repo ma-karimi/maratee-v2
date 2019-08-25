@@ -94,13 +94,6 @@ class Organization extends BaseModel
     protected $table = 'organizations';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at','fax','description', 'domestic_code', 'email', 'international_code', 'is_herbarium', 'name', 'phone', 'updated_at', 'website'];
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

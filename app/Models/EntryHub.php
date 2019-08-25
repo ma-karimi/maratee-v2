@@ -34,14 +34,6 @@ class EntryHub extends BaseModel
     protected $table = 'entry_hubs';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['botanical_id', 'created_at', 'deleted_at', 'entry_id', 'location_id', 'organization_id', 'updated_at'];
-
-
-    /**
      * @return BelongsTo
      */
     public function location(): BelongsTo

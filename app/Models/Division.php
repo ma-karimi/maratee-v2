@@ -35,10 +35,6 @@ class Division extends BaseModel
     public static $linguistically = ['name' => true];
 
     protected $casts = ['name' => 'json'];
-    /**
-     * @var array
-     */
-    protected $fillable = ['department_id', 'name', 'created_at', 'updated_at'];
 
     public function scopeOfDepartment($query, $department_id)
     {

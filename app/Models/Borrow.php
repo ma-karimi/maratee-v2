@@ -40,15 +40,6 @@ class Borrow extends BaseModel
     protected $table = 'borrows';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['borrows_date', 'created_at', 'deadline', 'deleted_at', 'herbarium_id', 'media_id', 'return', 'sheets_no', 'updated_at', 'user_id'];
-
-
-
-    /**
      * The attributes that should be mutated to dates.
      *
      * @var array

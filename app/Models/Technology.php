@@ -95,14 +95,6 @@ class Technology extends BaseModel
     protected $table = 'technologies';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded=['id'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

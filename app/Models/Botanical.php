@@ -66,13 +66,6 @@ class Botanical extends BaseModel
      */
     protected $table = 'botanicals';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'entry_type', 'first_flowering', 'first_seeding', 'flower_color', 'flowering_period', 'fruit_color', 'growth_rate', 'height', 'herbarium_id', 'foliage_color', 'notes', 'planting', 'cutting_rooting_per', 'season_tolerance', 'seed_production', 'seed_rate', 'sensitivity', 'sensitivity_description', 'seed_germination', 'treatment', 'updated_at', 'year'];
-
 
     /**
      * The attributes that should be casted to native types.

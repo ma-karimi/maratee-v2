@@ -21,13 +21,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class MedicalComponent extends BaseModel
 {
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['medical_id', 'component_id', 'is_active', 'created_at', 'deleted_at', 'updated_at'];
-
 
     /**
      * The attributes that should be casted to native types.

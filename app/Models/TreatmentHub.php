@@ -56,10 +56,5 @@ class TreatmentHub extends BaseModel
      * @var string
      */
     protected $table = 'treatment_hubs';
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['treatmentable_id', 'treatmentable_type', 'treatment_id', 'created_at', 'deleted_at', 'updated_at',];
+
 }

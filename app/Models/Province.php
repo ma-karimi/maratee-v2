@@ -55,13 +55,6 @@ class Province extends BaseModel
      */
     protected $table = 'provinces';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['country_id', 'created_at', 'deleted_at', 'name', 'updated_at'];
-
 
     /**
      * The attributes that should be casted to native types.

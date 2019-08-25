@@ -98,9 +98,6 @@ class Germination extends BaseModel
     protected $dates = ['deleted_at'];
 
 
-   protected $guarded=['id'];
-
-
     /**
      * Validation rules
      *

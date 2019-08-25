@@ -51,12 +51,6 @@ class DepartmentHub extends BaseModel
      */
     protected $table = 'department_hubs';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded=['id'];
     public static $rules = [
         'department_id'=>'required|exists:departments,id',
         'departmentable_id'=>'required|integer',

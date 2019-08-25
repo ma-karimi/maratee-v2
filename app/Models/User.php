@@ -165,13 +165,6 @@ class User extends Authenticatable
      */
     protected $table = 'users';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['birthday', 'created_at', 'degree', 'deleted_at', 'education', 'email', 'first_name', 'is_author', 'last_name', 'mobile', 'national_id', 'nationality', 'nickname', 'passport_no', 'phone', 'title', 'updated_at', 'work_experience', 'password'];
-
 
     /**
      * The attributes that should be casted to native types.

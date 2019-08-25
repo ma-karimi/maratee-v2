@@ -151,13 +151,6 @@ class SeedTechnology extends BaseModel
      */
     protected $table = 'seed_technologies';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded=['id'];
-
 
     /**
      * The attributes that should be mutated to dates.

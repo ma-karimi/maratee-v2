@@ -133,10 +133,6 @@ class Transition extends BaseModel
      */
     //protected $keyType = 'integer';
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['table_id','tables_id', 'creator_id', 'requester_id', 'changer_id', 'responser_id', 'table_name', 'field_name', 'status', 'crud_type', 'request_date', 'change_date', 'response_date', 'request_status', 'previous_value', 'next_value', 'description', 'created_at', 'updated_at'];
 
     /**
      * @var array

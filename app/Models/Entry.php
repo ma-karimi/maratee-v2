@@ -30,14 +30,6 @@ class Entry extends BaseModel
     protected $table = 'entries';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'type', 'updated_at'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

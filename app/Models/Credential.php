@@ -48,14 +48,6 @@ class Credential extends BaseModel
     protected $table = 'credentials';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['archive_no', 'created_at', 'date', 'deleted_at', 'name', 'parent_id', 'place', 'type', 'updated_at'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

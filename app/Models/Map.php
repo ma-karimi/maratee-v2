@@ -65,14 +65,6 @@ class Map extends BaseModel
     protected $table = 'maps';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'reference_year', 'scale', 'name', 'url', 'updated_at'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

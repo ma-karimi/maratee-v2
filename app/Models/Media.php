@@ -135,14 +135,6 @@ class Media extends BaseModel
     protected $table = 'medias';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['botanical_id', 'created_at', 'date', 'deleted_at', 'description', 'format_type', 'herbarium_id', 'info_type', 'location_id', 'medicinal_plant_id', 'name', 'paleontology_id', 'product_id', 'reference', 'seed_id', 'updated_at', 'user_id'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

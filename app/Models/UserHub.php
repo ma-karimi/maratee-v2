@@ -53,13 +53,6 @@ class UserHub extends BaseModel
      */
     protected $table = 'user_hubs';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['userable_id', 'userable_type', 'user_id', 'created_at', 'deleted_at',  'updated_at', ];
-
     public static $rules = [
         'user_id'=>'required|exists:users,id',
         'userable_id'=>'required|integer',

@@ -36,14 +36,6 @@ class City extends BaseModel
     protected $table = 'cities';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['code', 'created_at', 'deleted_at', 'name', 'province_id', 'updated_at'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

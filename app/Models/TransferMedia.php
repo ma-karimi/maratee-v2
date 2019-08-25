@@ -47,11 +47,4 @@ class TransferMedia extends BaseModel
         'transfer_id' => 'required|exists:transfers,id'
     ];
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['media_id', 'created_at', 'deleted_at', 'transfer_id', 'updated_at'];
-
 }

@@ -82,13 +82,6 @@ class CharacterTrait extends BaseModel
     ];
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded=['id'];
-
-    /**
      * @return BelongsTo
      */
     public function character()

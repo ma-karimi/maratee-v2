@@ -50,13 +50,6 @@ class PlantingAction extends BaseModel
      */
     protected $table = 'planting_actions';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'updated_at'];
-
 
     /**
      * The attributes that should be casted to native types.

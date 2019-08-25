@@ -34,13 +34,6 @@ class Attendance extends BaseModel
      */
     protected $table = 'attendances';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'end_time', 'herbarium_id', 'start_time', 'updated_at', 'user_id'];
-
 
     /**
      * The attributes that should be casted to native types.

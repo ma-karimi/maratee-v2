@@ -59,12 +59,6 @@ class Treatment extends BaseModel
      */
     protected $table = 'treatments';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'date', 'updated_at'];
     protected $dates = ['created_at', 'deleted_at', 'updated_at', 'date'];
 
 

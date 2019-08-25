@@ -98,12 +98,6 @@ class ActionHub extends BaseModel
      * @var string
      */
     protected $table = 'action_hubs';
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['action_id', 'created_at', 'date', 'deleted_at', 'department_id', 'description', 'herbarium_id', 'location_id', 'project_id', 'updated_at', 'user_id'];
 
 
     /**

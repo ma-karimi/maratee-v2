@@ -77,13 +77,6 @@ class Taxonomy extends BaseModel
      */
     protected $table = 'taxonomies';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded=['id'];
-
     protected $dates=['deleted_at'];
 
 

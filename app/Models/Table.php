@@ -68,10 +68,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Table extends BaseModel
 {
-    /**
-     * @var array
-     */
-    protected $fillable = ['department_id', 'table_name', 'ownership', 'create', 'read', 'write', 'delete', 'copy', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

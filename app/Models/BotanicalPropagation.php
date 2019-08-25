@@ -32,14 +32,6 @@ class BotanicalPropagation extends BaseModel
     protected $table = 'botanical_propagations';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['botanical_id', 'created_at', 'deleted_at', 'propagation_id', 'updated_at'];
-
-
-    /**
      * @return BelongsTo
      */
     public function botanical(): BelongsTo

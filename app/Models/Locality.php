@@ -97,13 +97,6 @@ class Locality extends BaseModel
      */
     protected $table = 'localities';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'fauna', 'formation', 'layer', 'lithology', 'location_id', 'map_id', 'paleontology_id', 'stratigraphy', 'updated_at'];
-
 
     /**
      * The attributes that should be casted to native types.

@@ -55,6 +55,13 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          format="array"
  *      ),
  *      @SWG\Property(
+ *          property="auhtors",
+ *          description="auhtors",
+ *          type="array",
+	 *     @SWG\Items(type="string"),
+ *          format="array"
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -83,12 +90,7 @@ class Article extends BaseModel
      * @var string
      */
     protected $table = 'articles';
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['authors', 'created_at', 'deleted_at', 'journal_name', 'journal_no', 'page_no', 'title', 'type', 'updated_at', 'year'];
+
     /**
      * The attributes that should be casted to native types.
      *

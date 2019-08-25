@@ -67,12 +67,6 @@ class Transfer extends BaseModel
     ];
 
     use TransferCredentialMutator;
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'credential_id', 'updated_at', 'entitiable_id', 'entitiable_type', 'transferable_id', 'transferable_type'];
 
     public function medias()
     {

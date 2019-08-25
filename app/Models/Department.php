@@ -30,14 +30,6 @@ class Department extends BaseModel
     protected $table = 'departments';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'updated_at'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

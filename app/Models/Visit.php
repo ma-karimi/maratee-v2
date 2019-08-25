@@ -105,14 +105,6 @@ class Visit extends BaseModel
     protected $table = 'visits';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['archive_no', 'archives_types', 'created_at', 'date', 'deleted_at', 'description', 'media_id', 'paleontology_id', 'peoples', 'purpose', 'updated_at', 'user_id'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

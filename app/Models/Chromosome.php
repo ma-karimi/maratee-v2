@@ -47,13 +47,6 @@ class Chromosome extends BaseModel
      */
     protected $table = 'chromosomes';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['2n_no', 'created_at', 'cryo_bank_id', 'url', 'general_class_id','deleted_at', 'herbarium_id',  'n_no', 'notes', 'updated_at'];
-
 
     /**
      * The attributes that should be casted to native types.

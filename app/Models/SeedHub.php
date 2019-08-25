@@ -100,14 +100,6 @@ class SeedHub extends BaseModel
     protected $table = 'seed_hubs';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['action_id', 'action_role', 'action_role_description', 'created_at', 'date', 'deleted_at', 'location_id', 'project_id', 'seed_id', 'updated_at', 'user_id'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

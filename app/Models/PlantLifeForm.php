@@ -53,13 +53,6 @@ class PlantLifeForm extends BaseModel
      */
     protected $table = 'plant_life_forms';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded = ['id'];
-
 
     /**
      * The attributes that should be casted to native types.

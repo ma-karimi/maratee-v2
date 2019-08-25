@@ -109,12 +109,6 @@ class Location extends BaseModel
     protected $spatialFields = [
         'point'
     ];
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['gps_used','gps_datum','address','city_id', 'village_id', 'altitude', 'created_at', 'deleted_at', 'description', 'name', 'point', 'region_name', 'updated_at'];
 
     /**
      * The attributes that should be casted to native types.

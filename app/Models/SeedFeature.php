@@ -61,14 +61,6 @@ class SeedFeature extends BaseModel
     protected $table = 'seed_features';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded=['id'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

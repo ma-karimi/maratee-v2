@@ -55,12 +55,7 @@ class Action extends BaseModel
      * @var string
      */
     protected $table = 'actions';
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'updated_at'];
+
     /**
      * The attributes that should be casted to native types.
      *

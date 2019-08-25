@@ -67,13 +67,6 @@ class Medicine extends BaseModel
      */
     protected $table = 'medicines';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'parent_id', 'type', 'updated_at'];
-
 
     /**
      * The attributes that should be casted to native types.

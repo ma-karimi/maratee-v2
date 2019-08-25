@@ -73,13 +73,6 @@ class BioMolecular extends BaseModel
      */
     protected $table = 'bio_moleculars';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded=['id'];
-
 
     /**
      * @return BelongsTo

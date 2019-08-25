@@ -31,13 +31,6 @@ class Garden extends BaseModel
      */
     protected $table = 'gardens';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'number', 'region', 'section', 'updated_at'];
-
 
     /**
      * The attributes that should be casted to native types.

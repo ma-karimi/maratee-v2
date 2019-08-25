@@ -17,6 +17,7 @@ class BaseModel extends Model
     public static $rules = [];
     public static $jsons = [];
     public static $messages = [];
+    protected $guarded = ['id'];
     public $searchable = ['*'];
     public $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations'];
 
@@ -142,7 +143,7 @@ class BaseModel extends Model
 
     protected function setJsonSelectables(): void
     {
-        if (request()->isMethod('get') && count(request()->keys())) {
+        if (count(request()->keys())) {
             foreach (request()->all() as $index => $item) {
                 if (is_array($item) && collect($this->getLinguistically())->has($index)) {
                     $param = array_keys($item)[0];

@@ -40,14 +40,6 @@ class BotanicalIrrigation extends BaseModel
     protected $table = 'botanical_irrigations';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['botanical_id', 'created_at', 'irrigation_time', 'deleted_at', 'irrigation_id', 'requirement', 'seasonal_feature', 'updated_at'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

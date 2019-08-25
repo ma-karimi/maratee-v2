@@ -55,14 +55,6 @@ class MedicinalPlantMethod extends BaseModel
     protected $table = 'medicinal_plant_methods';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['method_id', 'created_at', 'deleted_at', 'medicinal_plant_id', 'updated_at'];
-
-
-    /**
      * @return BelongsTo
      */
     public function method(): BelongsTo

@@ -52,14 +52,6 @@ class SeedPlant extends BaseModel
     protected $table = 'seed_plants';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'plant_id', 'seed_id', 'updated_at'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

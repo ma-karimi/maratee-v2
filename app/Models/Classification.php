@@ -57,13 +57,6 @@ class Classification extends BaseModel
         'sperm_id' => 'exists:generals,id',
     ];
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $guarded = ['id'];
-
     protected $dates = ['deleted_at'];
 
 

@@ -66,13 +66,6 @@ class PaleontologyMedia extends BaseModel
     protected $table = 'paleontology_medias';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'credential_id', 'deleted_at', 'exchange_id', 'media_id', 'updated_at', 'user_id'];
-
-    /**
      * @return BelongsTo
      */
     public function credential(): BelongsTo

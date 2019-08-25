@@ -40,10 +40,7 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends BaseModel
 {
     public static $linguistically=['name'=>true,'description'=>true,'hierarchy'=>true];
-    /**
-     * @var array
-     */
-    protected $fillable = ['name', 'level', 'description', 'created_at', 'updated_at'];
+
     protected $casts =
         [
             'name' => 'json',

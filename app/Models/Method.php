@@ -55,13 +55,6 @@ class Method extends BaseModel
      */
     protected $table = 'methods';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'name', 'parent_id', 'updated_at'];
-
 
     /**
      * The attributes that should be casted to native types.

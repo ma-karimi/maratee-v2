@@ -23,12 +23,6 @@ class Continent extends BaseModel
     ];
 
     public $timestamps = false;
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['name'];
 
     /**
      * @return HasMany

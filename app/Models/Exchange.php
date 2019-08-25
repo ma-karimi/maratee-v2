@@ -58,14 +58,6 @@ class Exchange extends BaseModel
     protected $table = 'exchanges';
 
     /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['created_at', 'deleted_at', 'description', 'receive_date', 'send_department_id', 'receive_department_id', 'receive_sample_no', 'receive_sheet_no', 'receive_type', 'send_date', 'receive_id', 'send_id', 'exchange_type', 'send_sample_no', 'send_sheet_no', 'send_type', 'updated_at'];
-
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array

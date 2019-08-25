@@ -55,10 +55,7 @@ use Illuminate\Database\Eloquent\Model;
 class Group extends BaseModel
 {
     public static $linguistically=['name'=>true,'owner_crud'=>true,'same_level_crud'=>true,'upper_level_crud'=>true,'lower_level_crud'=>true,'description'=>true];
-    /**
-     * @var array
-     */
-    protected $fillable = ['name', 'owner_crud', 'same_level_crud', 'upper_level_crud', 'lower_level_crud', 'created_at', 'updated_at'];
+
     /**
      * @var array
      */

@@ -53,12 +53,6 @@ class ArticleHub extends BaseModel
      */
     protected $table = 'article_hubs';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['articleable_id', 'articleable_type', 'article_id', 'created_at', 'deleted_at',  'updated_at', ];
 
     public static $rules = [
         'article_id'=>'required|exists:articles,id',
