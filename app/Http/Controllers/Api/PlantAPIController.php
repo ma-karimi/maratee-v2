@@ -31,6 +31,7 @@ class PlantAPIController extends AppBaseController
      * @param Request $request
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Get(
      *      path="/plants",
      *      summary="Get a listing of the Plants & Plant has flowering herbarium",
@@ -159,6 +160,20 @@ class PlantAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="family_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="life_form_cycle_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="life_form_leaf_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=true,
@@ -341,6 +356,20 @@ class PlantAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="family_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="life_form_cycle_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="life_form_leaf_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=true,
