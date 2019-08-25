@@ -123,7 +123,10 @@ class Plant extends BaseModel
      */
     public function locations(): MorphToMany
     {
-        return $this->morphToMany(Location::class, 'locationable','location_hubs')->withTimestamps();
+        return $this->morphToMany(Location::class,
+            'locationable','location_hubs')
+            ->whereNull('location_hubs.deleted_at')
+            ->withTimestamps();
     }
     /**
      * @return MorphToMany
@@ -179,5 +182,14 @@ class Plant extends BaseModel
     public function herbariums(): HasMany
     {
         return $this->hasMany(Herbarium::class);
+    }
+
+
+    public function LifeForm(): BelongsToMany
+    {
+        return $this->belongsToMany(LifeForm::class,
+            'plant_life_forms',
+            'plant_id',
+            'life_form_id');
     }
 }

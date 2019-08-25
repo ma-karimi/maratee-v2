@@ -263,23 +263,26 @@ abstract class BaseRepository
         abort_if(empty($record), JsonResponse::HTTP_NOT_FOUND, 'record not found');
         [$related_model_table, $related_model_class, $related_key, $foreign_key] = $this->getRelatedModelAndClass($related_model, $record);
 
-        foreach ($ids as $index => $id) {
-            $found_record = $related_model_class::where($related_key, $id)->where($foreign_key, $class_id)->first();
-            abort_if($found_record, JsonResponse::HTTP_BAD_REQUEST, "record with id $id already exist!");
-        }
+        $assigned_id = $record->$related_model->pluck('id')->toArray();
 
-        $record->$related_model()->attach($ids);
+        $different_ids = array_diff($ids, $assigned_id);
+        $different_assigned = array_diff($assigned_id, $ids);
+
+        //sync records
+        $record->$related_model()->attach($different_ids);
+        $related_model_class::where($foreign_key, $class_id)->whereIn($related_key, $different_assigned)->delete();
+
         return $record->$related_model;
     }
 
-    public function deleteHub($class_id,$related_model, array $ids)
+    public function deleteHub($class_id, $related_model, array $ids)
     {
         $record = $this->model->find($class_id);
         abort_if(empty($record), JsonResponse::HTTP_NOT_FOUND, 'record not found');
         [$related_model_table, $related_model_class, $related_key, $foreign_key] = $this->getRelatedModelAndClass($related_model, $record);
-        $hub_collection=DB::table($related_model_table)->whereIn($related_key,$ids)
+        $hub_collection = DB::table($related_model_table)->whereIn($related_key, $ids)
             ->where($foreign_key, $class_id)->get();
-        return $related_model_class::whereIn('id',$hub_collection->pluck('id'))->delete();
+        return $related_model_class::whereIn('id', $hub_collection->pluck('id'))->delete();
     }
 
     /**

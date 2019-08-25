@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+
 /**
  * @SWG\Definition(
  *      definition="LifeForm",
@@ -42,7 +44,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class LifeForm extends BaseModel
 {
 
-    public static $linguistically=['name'=>true];
+    public static $linguistically = ['name' => true];
     /**
      * The database table used by the model.
      *
@@ -59,11 +61,12 @@ class LifeForm extends BaseModel
     protected $casts = ['name' => 'json'];
 
 
-    /**
-     * @return HasMany
-     */
-    public function plantLifeForms(): HasMany
+
+    public function Plant(): BelongsToMany
     {
-        return $this->hasMany(PlantLifeForm::class)->latest();
+        return $this->belongsToMany(Plant::class,
+            'plant_life_forms',
+            'life_form_id',
+            'plant_id');
     }
 }

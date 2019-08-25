@@ -19,7 +19,6 @@ class CreatePlantLifeFormsTable extends Migration
             //from life_form table as tree, life_cycle type
             $table->unsignedBigInteger('plant_id');
             $table->unsignedBigInteger('life_form_id');
-            $table->enum('type', ['wooden', 'herbaceous']);
             $table->timestamps();
             $table->softDeletesTz();
 

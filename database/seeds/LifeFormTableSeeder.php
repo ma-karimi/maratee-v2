@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use PragmaRX\Countries\Package\Countries;
 
 class LifeFormTableSeeder extends Seeder
 {
@@ -15,7 +14,7 @@ class LifeFormTableSeeder extends Seeder
         \App\Utility::truncateTables('life_forms');
         $data = [
             'wooden' => ['tree', 'shrubs'],
-            'herbaceous' => ['standing', 'crawling','evergreen','deciduous','semi deciduous','herb','bulb','tuber','rhizome','water plant'],
+            'herbaceous' => ['standing', 'crawling'/*,'evergreen','deciduous','semi deciduous','herb','bulb','tuber','rhizome','water plant'*/],
             'leaf' => ['broad_leaf', 'needle_leaf'],
             'life_cycle' => ['annual', 'biennial', 'perennial'],
         ];

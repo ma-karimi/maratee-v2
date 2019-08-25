@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @SWG\Definition(
  *      definition="PlantLifeForm",
- *      required={"name", "type"},
+ *      required={"plant_id", "life_form_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -25,11 +25,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          description="life_form_id",
  *          type="integer",
  *      ),
- *      @SWG\Property(
- *          property="type",
- *          description="type",
- *          type="string",
- *     ),
  *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
@@ -54,13 +49,15 @@ class PlantLifeForm extends BaseModel
     protected $table = 'plant_life_forms';
 
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = ['type' => 'enum'];
 
+
+    /**
+     * @return BelongsTo
+     */
+    public function Plant(): BelongsTo
+    {
+        return $this->belongsTo(Plant::class);
+    }
 
     /**
      * @return BelongsTo

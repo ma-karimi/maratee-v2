@@ -233,3 +233,8 @@ Route::resource('evaluation_dimensions', 'EvaluationDimensionAPIController');
 Route::resource('author_hubs', 'AuthorHubAPIController');
 Route::resource('location_hubs', 'LocationHubAPIController');
 Route::resource('user_hubs', 'UserHubAPIController');
+
+
+Route::resource('life_forms', 'LifeFormAPIController');
+
+Route::resource('plant_life_forms', 'PlantLifeFormAPIController');
