@@ -19,7 +19,7 @@ class CreatePlantsTable extends Migration {
 			$table->json('description')->nullable();
 			$table->json('domestic_name')->nullable();
 			$table->tinyInteger('exclusivity')->nullable();
-            $table->unsignedBigInteger('taxonomy_id');
+           // $table->unsignedBigInteger('taxonomy_id');
             $table->unsignedBigInteger('classification_id');
             $table->unsignedBigInteger('life_form_leaf_id');
             $table->unsignedBigInteger('life_form_cycle_id');

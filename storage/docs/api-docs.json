@@ -18274,51 +18274,6 @@
                         }
                     },
                     {
-                        "name": "genus_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "species_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "subspecies_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "variety_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "family_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
                         "name": "life_form_cycle_id",
                         "in": "body",
                         "description": "Plant that should be stored",
@@ -18473,51 +18428,6 @@
                         "in": "body",
                         "description": "Plant that should be stored",
                         "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "genus_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "species_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "subspecies_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "variety_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "family_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/Plant"
                         }
@@ -24866,6 +24776,15 @@
                 ],
                 "parameters": [
                     {
+                        "name": "plant_id",
+                        "in": "body",
+                        "description": "Taxonomy that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
                         "name": "genus_id",
                         "in": "body",
                         "description": "Taxonomy that should be stored",
@@ -24987,6 +24906,15 @@
                         "description": "id of Taxonomy",
                         "required": true,
                         "type": "integer"
+                    },
+                    {
+                        "name": "plant_id",
+                        "in": "body",
+                        "description": "Taxonomy that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
                     },
                     {
                         "name": "genus_id",
@@ -30532,6 +30460,80 @@
                 }
             }
         },
+        "MedicinalPlantProperty": {
+            "required": [
+                "name",
+                "type"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "medicinal_plant_id": {
+                    "description": "medicinal_plant_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "medicinal_plant_type_id": {
+                    "description": "medicinal_plant_type_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "MedicinalPlantType": {
+            "required": [
+                "name",
+                "type"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "description": {
+                    "description": "description",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "type_id": {
+                    "description": "type_id",
+                    "type": "integer"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
         "Medicine": {
             "required": [
                 "name",
@@ -31044,7 +31046,6 @@
         "Plant": {
             "required": [
                 "name",
-                "taxonomy_id",
                 "classification_id"
             ],
             "properties": {
@@ -32416,10 +32417,16 @@
         },
         "Taxonomy": {
             "required": [
-                "family_id"
+                "family_id",
+                "plant_id"
             ],
             "properties": {
                 "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "plant_id": {
                     "description": "id",
                     "type": "integer",
                     "format": "int32"

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 /**
  * @SWG\Definition(
  *      definition="Plant",
- *      required={"name","taxonomy_id","classification_id"},
+ *      required={"name","classification_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -80,11 +80,11 @@ class Plant extends BaseModel
         'life_form_cycle_id'=>'required|exists:life_forms,id',
         'exclusivity' => 'integer',
         //taxonomy
-        'family_id' => 'required|exists:generals,id',
+        /*'family_id' => 'required|exists:generals,id',
         'genus_id' => 'exists:generals,id',
         'species_id' => 'exists:generals,id',
         'variety_id' => 'exists:generals,id',
-        'subspecies_id' => 'exists:generals,id',
+        'subspecies_id' => 'exists:generals,id',*/
         //classification
         'flowering_id' => 'required|exists:generals,id',
         'cotyledon_id' => 'exists:generals,id',
@@ -156,14 +156,6 @@ class Plant extends BaseModel
             'seed_plants',
             'plant_id',
             'seed_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function taxonomy(): BelongsTo
-    {
-        return $this->belongsTo(Taxonomy::class,'taxonomy_id');
     }
 
     /**

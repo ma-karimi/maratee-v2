@@ -56,6 +56,7 @@ class TaxonomyAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -78,6 +79,13 @@ class TaxonomyAPIController extends AppBaseController
      *      tags={"Taxonomy"},
      *      description="Store Taxonomy",
      *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="plant_id",
+     *          in="body",
+     *          description="Taxonomy that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *      ),
      *      @SWG\Parameter(
      *          name="genus_id",
      *          in="body",
@@ -210,6 +218,13 @@ class TaxonomyAPIController extends AppBaseController
      *          type="integer",
      *          required=true,
      *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plant_id",
+     *          in="body",
+     *          description="Taxonomy that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
      *          name="genus_id",

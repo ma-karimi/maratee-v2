@@ -55,6 +55,11 @@ class MedicinalPlantType extends BaseModel
 
     public function medicinalPlant()
     {
-        return $this->belongsToMany(MedicinalPlant::class,'');
+        return $this->belongsToMany(MedicinalPlant::class,
+            'medicinal_plant_properties',
+            'medicinal_plant_type_id',
+            'medicinal_plant_id'
+        )->whereNull('medicinal_plant_properties.deleted_at')
+            ->withTimestamps();
     }
 }

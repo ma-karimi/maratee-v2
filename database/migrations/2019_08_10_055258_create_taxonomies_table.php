@@ -21,11 +21,13 @@ class CreateTaxonomiesTable extends Migration
             $table->unsignedBigInteger('subspecies_id')->nullable();
             $table->unsignedBigInteger('variety_id')->nullable();
             $table->unsignedBigInteger('family_id');
+            $table->unsignedBigInteger('plant_id');
             $table->foreign('genus_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('species_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('subspecies_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('variety_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('family_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->timeStampsTz();
             $table->softDeletesTz();
         });

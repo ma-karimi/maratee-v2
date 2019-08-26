@@ -62,9 +62,9 @@ class PlantRepository extends BaseRepository
      */
     public function create($input)
     {
-        [$taxonomy_input, $taxonomy_record] = $this->findTaxonomy($input);
+       /* [$taxonomy_input, $taxonomy_record] = $this->findTaxonomy($input);
         $input = collect($input)->forget(collect($taxonomy_input)->keys()->toArray());
-        $input['taxonomy_id'] = $taxonomy_record->id ?? $this->taxonomyRepository->create($taxonomy_input)->id;
+        $input['taxonomy_id'] = $taxonomy_record->id ?? $this->taxonomyRepository->create($taxonomy_input)->id;*/
 
         [$classification_input, $classification_record] = $this->findClassification($input);
         $input = collect($input)->forget(collect($classification_input)->keys()->toArray());
@@ -80,9 +80,9 @@ class PlantRepository extends BaseRepository
      */
     public function update($input, $id)
     {
-        [$taxonomy_input, $taxonomy_record] = $this->findTaxonomy($input);
+        /*[$taxonomy_input, $taxonomy_record] = $this->findTaxonomy($input);
         $input['taxonomy_id'] = $taxonomy_record->id ?? $this->taxonomyRepository->create($taxonomy_input)->id;
-        $input = collect($input)->forget(collect($taxonomy_input)->keys()->toArray());
+        $input = collect($input)->forget(collect($taxonomy_input)->keys()->toArray());*/
 
         [$classification_input, $classification_record] = $this->findClassification($input);
         $input = collect($input)->forget(collect($classification_input)->keys()->toArray());

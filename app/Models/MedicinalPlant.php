@@ -224,4 +224,14 @@ class MedicinalPlant extends BaseModel
     {
         return $this->morphToMany(TreatmentHub::class, 'treamentable');
     }
+
+    public function medicinalPlantType()
+    {
+        return $this->belongsToMany(MedicinalPlantType::class,
+            'medicinal_plant_properties',
+            'medicinal_plant_id',
+            'medicinal_plant_type_id'
+        )->whereNull('medicinal_plant_properties.deleted_at')
+            ->withTimestamps();
+    }
 }

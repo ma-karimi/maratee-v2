@@ -14,7 +14,7 @@ class AddFoerignKeyToPlantsTable extends Migration
     public function up()
     {
         Schema::table('plants', function (Blueprint $table) {
-            $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onUpdate('NO ACTION')->onDelete('cascade');
+           // $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('classification_id')->references('id')->on('classifications')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('life_form_cycle_id')->references('id')->on('life_forms')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('life_form_leaf_id')->references('id')->on('life_forms')->onUpdate('NO ACTION')->onDelete('cascade');
