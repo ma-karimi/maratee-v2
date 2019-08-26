@@ -89,7 +89,7 @@ class LifeFormAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="type",
      *          in="body",
-     *          description="LifeForm that should be stored",
+     *           description="select one of wooden,leaf, herbaceous, life_cycle",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/LifeForm")
      *      ),
@@ -201,7 +201,7 @@ class LifeFormAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="type",
      *          in="body",
-     *          description="LifeForm that should be stored",
+     *          description="select one of wooden,leaf, herbaceous, life_cycle",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/LifeForm")
      *      ),

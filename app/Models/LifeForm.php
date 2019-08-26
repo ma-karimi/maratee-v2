@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      ),
  *      @SWG\Property(
  *          property="type",
- *          description="type",
+ *          description="select one of wooden,leaf, herbaceous, life_cycle",
  *          type="string",
  *     ),
  *      @SWG\Property(
