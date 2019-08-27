@@ -35,7 +35,8 @@ cultivated
 			$table->json('used_origin')->nullable();
 			$table->json('used_type')->nullable();
 			$table->string('store_type')->nullable();
-
+            $table->unsignedBigInteger('aerial_part_id')->nullable();
+            $table->unsignedBigInteger('ground_part_id')->nullable();
             $table->timeStampsTz();
             $table->softDeletesTz();
 		});

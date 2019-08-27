@@ -107,6 +107,7 @@ class DatabaseSeeder extends Seeder
 //            ComponentTableSeeder::class,
 //            MedicalComponentTableSeeder::class,
 //            MedicinalPlantMethodTableSeeder::class,
+        MedicinalPartTableSeeder::class
         ]);
         Model::reguard();
 
