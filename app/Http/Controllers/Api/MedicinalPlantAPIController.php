@@ -56,6 +56,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -83,6 +84,20 @@ class MedicinalPlantAPIController extends AppBaseController
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=true,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="aerial_part_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="ground_part_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
@@ -272,6 +287,20 @@ class MedicinalPlantAPIController extends AppBaseController
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=true,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="aerial_part_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="ground_part_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(

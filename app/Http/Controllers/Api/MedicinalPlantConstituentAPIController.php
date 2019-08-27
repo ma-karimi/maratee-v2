@@ -56,6 +56,7 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {

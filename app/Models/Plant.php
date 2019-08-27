@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Contracts\RelationshipsTrait;
 use App\Models\Scope\PlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -75,6 +76,8 @@ class Plant extends BaseModel
     public static $linguistically = ['name' => true, 'description' => false, 'domestic_name' => false];
 
     public static $rules = [
+        'life_form_leaf_id'=>'required|exists:life_forms,id',
+        'life_form_cycle_id'=>'required|exists:life_forms,id',
         'exclusivity' => 'integer',
         //taxonomy
         'family_id' => 'required|exists:generals,id',
@@ -114,8 +117,8 @@ class Plant extends BaseModel
     public function articles(): MorphToMany
     {
         return $this->morphToMany(Article::class,
-            'articleable', 'article_hubs')
-            ->whereNull('location_hubs.deleted_at')
+            'articleable','article_hubs')
+            ->whereNull('article_hubs.deleted_at')
             ->withTimestamps();
     }
 

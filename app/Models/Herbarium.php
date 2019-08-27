@@ -189,7 +189,6 @@ class Herbarium extends BaseModel
 
     public static $linguistically = ['flowering' => false,'habitat_description' => false,'ecology_description' => false,'life_forms'=>false];
     public static $rules = [
-//        'location_id' => 'required|exists:locations,id',
         'protection_id' => 'exists:protections,id',
         'organization_id' => 'required|exists:organizations,id',
         'plant_id' => 'required|exists:plants,id',
@@ -210,9 +209,6 @@ class Herbarium extends BaseModel
         'general_phytogeography_id' => 'exists:generals,id',
         'general_phenology_id' => 'exists:generals,id',
         'number' => 'integer',
-        'life_form_leaf_id' => 'required|exists:life_forms,id',
-        'life_form_cycle_id' => 'required|exists:life_forms,id',
-        'life_form_cycle_id' => 'required|exists:life_forms,id',
 
     ];
     /**
@@ -234,7 +230,6 @@ class Herbarium extends BaseModel
         'organization_description' => 'json',
         'habitat_description' => 'json',
         'ecology_description' => 'json',
-        'life_forms'=>'json'
     ];
 
 

@@ -238,3 +238,5 @@ Route::resource('user_hubs', 'UserHubAPIController');
 Route::resource('life_forms', 'LifeFormAPIController');
 
 Route::resource('plant_life_forms', 'PlantLifeFormAPIController');
+
+Route::resource('medicinal_parts', 'MedicinalPartAPIController');

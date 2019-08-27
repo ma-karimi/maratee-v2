@@ -56,6 +56,7 @@ class PaleontologyAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {

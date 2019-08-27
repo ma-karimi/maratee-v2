@@ -29,7 +29,7 @@ trait GeneralScope
      */
     public function scopeOfIdType($query, $id,$type)
     {
-        return $query->where('id', request()->get($id))->where('type', $type);
+        return $query->where('id',$id)->where('type', $type);
     }
 
     /**

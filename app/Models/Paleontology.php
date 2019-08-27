@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\PaleontologyAccessor;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -190,6 +191,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class Paleontology extends BaseModel
 {
+    use PaleontologyAccessor;
     public static $linguistically = ['infra_specific' => false, 'type_status' => false, 'preservation' => false, 'color' => false, 'element' => false, 'description' => true, 'additional_info' => false, 'access' => false, 'excavation' => false, 'collection_name' => false, 'common_name' => false];
     public static $rules = [
         'catalog_no' => 'integer',
@@ -206,8 +208,8 @@ class Paleontology extends BaseModel
         'plant_id' => 'required|integer',
         'last_update' => 'date',
         'location_id' => 'integer|exists:locations,id',
-        'general_class_id' => 'integer',
-        'general_order_id' => 'integer',
+        'general_class_id' => 'integer|exists:generals,id',
+        'general_order_id' => 'integer|exists:generals,id',
     ];
     /**
      * The database table used by the model.
@@ -272,7 +274,7 @@ class Paleontology extends BaseModel
      */
     public function generalClass(): BelongsTo
     {
-        return $this->belongsTo(General::class,'general_class_id');
+        return $this->belongsTo(General::class,'general_class_id')->withDefault();
     }
     /**
      * @return BelongsTo

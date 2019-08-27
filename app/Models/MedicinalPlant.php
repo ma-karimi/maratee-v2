@@ -24,6 +24,18 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="aerial_part_id",
+ *          description="aerial_part_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="ground_part_id",
+ *          description="ground_part_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
  *          property="code_no",
  *          description="code_no",
  *          type="integer",
@@ -135,7 +147,8 @@ class MedicinalPlant extends BaseModel
         'store_type' => 'string',
         'location_id' => 'required|exists:locations,id',
         'article_id' => 'exists:methods,id',
-
+        'aerial_part_id' => 'exists:medicinal_parts,id',
+        'ground_part_id' => 'exists:medicinal_parts,id',
     ];
     /**
      * The database table used by the model.
@@ -233,5 +246,16 @@ class MedicinalPlant extends BaseModel
             'medicinal_plant_type_id'
         )->whereNull('medicinal_plant_properties.deleted_at')
             ->withTimestamps();
+    }
+
+    public function medicinalAerialType()
+    {
+        return $this->belongsTo(MedicinalPart::class
+        )->where('type',array_search('aerial',MedicinalPart::TYPE));
+    }
+    public function medicinalGroundType()
+    {
+        return $this->belongsTo(MedicinalPart::class
+        )->where('type',array_search('ground',MedicinalPart::TYPE));
     }
 }
