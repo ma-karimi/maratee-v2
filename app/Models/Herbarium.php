@@ -226,6 +226,7 @@ class Herbarium extends BaseModel
      */
     protected $casts = [
         'name' => 'json',
+        'life_forms' => 'json',
         'description' => 'json',
         'organization_description' => 'json',
         'habitat_description' => 'json',

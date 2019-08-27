@@ -57,12 +57,9 @@ that is an herbarium organization which we can but its id in this place');
 //			$table->unsignedBigInteger('general_growth_id')->nullable();
             $table->unsignedBigInteger('general_phenology_id')->nullable();
             $table->unsignedBigInteger('general_phytogeography_id');
-
             $table->json('life_forms')->comment('life_form_leaf_id', 'life_form_cycle_id', 'life_form_wooden_id', 'life_form_herbaceous_id');
-            $table->unsignedBigInteger('life_form_leaf_id')->virtualAs('life_forms->>"$.leaf_id"')->nullable();
-            $table->unsignedBigInteger('life_form_cycle_id')->virtualAs('life_forms->>"$.cycle_id"')->nullable();
-            $table->unsignedBigInteger('life_form_wooden_id')->virtualAs('life_forms->>"$.wooden_id"')->nullable();
-            $table->unsignedBigInteger('life_form_herbaceous_id')->virtualAs('life_forms->>"$.herbaceous_id"')->nullable();
+
+          /*  $table->unsignedBigInteger('life_form_leaf_id')->virtualAs('life_forms->>"$.leaf_id"')->nullable();*/
 
             $table->json('habitat_description')->nullable();
             $table->json('ecology_description')->nullable();
@@ -74,6 +71,16 @@ that is an herbarium organization which we can but its id in this place');
 
             $table->timeStampsTz();
             $table->softDeletesTz();
+        });
+        \Illuminate\Support\Facades\DB::statement('ALTER TABLE herbariums ADD life_form_cycle_id BIGINT GENERATED ALWAYS AS (reverse(life_forms)) VIRTUAL');
+        \Illuminate\Support\Facades\DB::statement('ALTER TABLE herbariums ADD life_form_wooden_id BIGINT GENERATED ALWAYS AS (reverse(life_forms)) VIRTUAL');
+        \Illuminate\Support\Facades\DB::statement('ALTER TABLE herbariums ADD life_form_herbaceous_id BIGINT GENERATED ALWAYS AS (reverse(life_forms)) VIRTUAL');
+        \Illuminate\Support\Facades\DB::statement('ALTER TABLE herbariums ADD life_form_leaf_id BIGINT GENERATED ALWAYS AS (reverse(life_forms)) VIRTUAL');
+        \Illuminate\Support\Facades\Schema::table('herbariums',function (Blueprint $table){
+            $table->index('life_form_cycle_id');
+            $table->index('life_form_wooden_id');
+            $table->index('life_form_leaf_id');
+            $table->index('life_form_herbaceous_id');
         });
     }
 
