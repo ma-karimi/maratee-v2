@@ -48,30 +48,30 @@ class PlantLifeForm extends BaseModel
      */
     protected $table = 'plant_life_forms';
 
-
-
-
-    /**
-     * @return BelongsTo
-     */
-    public function Plant(): BelongsTo
-    {
-        return $this->belongsTo(Plant::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function woodenLifeForm(): BelongsTo
-    {
-        return $this->belongsTo(LifeForm::class)->where('type', 'wooden');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function herbaceousLifeForm(): BelongsTo
-    {
-        return $this->belongsTo(LifeForm::class)->where('type', 'herbaceous');
-    }
+//
+//
+//
+//    /**
+//     * @return BelongsTo
+//     */
+//    public function Plant(): BelongsTo
+//    {
+//        return $this->belongsTo(Plant::class);
+//    }
+//
+//    /**
+//     * @return BelongsTo
+//     */
+//    public function woodenLifeForm(): BelongsTo
+//    {
+//        return $this->belongsTo(LifeForm::class)->where('type', 'wooden');
+//    }
+//
+//    /**
+//     * @return BelongsTo
+//     */
+//    public function herbaceousLifeForm(): BelongsTo
+//    {
+//        return $this->belongsTo(LifeForm::class)->where('type', 'herbaceous');
+//    }
 }

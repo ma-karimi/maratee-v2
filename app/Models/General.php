@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use App\Models\Scope\GeneralScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Validation\Rule;
@@ -166,5 +167,13 @@ class General extends BaseModel
     public function subspeciesChildren(): HasMany
     {
         return $this->hasMany(__CLASS__, 'parent_id')->where('type','genus');
+    }
+
+    public function plants(): BelongsToMany
+    {
+        return $this->belongsToMany(Plant::class,
+            'plant_properties',
+            'general_id',
+            'plant_id')->withTimestamps();
     }
 }

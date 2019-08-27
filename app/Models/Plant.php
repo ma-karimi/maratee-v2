@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use App\Models\Contracts\RelationshipsTrait;
 use App\Models\Scope\PlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -76,15 +75,13 @@ class Plant extends BaseModel
     public static $linguistically = ['name' => true, 'description' => false, 'domestic_name' => false];
 
     public static $rules = [
-        'life_form_leaf_id'=>'required|exists:life_forms,id',
-        'life_form_cycle_id'=>'required|exists:life_forms,id',
         'exclusivity' => 'integer',
         //taxonomy
-        /*'family_id' => 'required|exists:generals,id',
+        'family_id' => 'required|exists:generals,id',
         'genus_id' => 'exists:generals,id',
         'species_id' => 'exists:generals,id',
         'variety_id' => 'exists:generals,id',
-        'subspecies_id' => 'exists:generals,id',*/
+        'subspecies_ids.*' => 'exists:generals,id',
         //classification
         'flowering_id' => 'required|exists:generals,id',
         'cotyledon_id' => 'exists:generals,id',
@@ -96,7 +93,8 @@ class Plant extends BaseModel
      * @var string
      */
     protected $table = 'plants';
-
+    protected $with = ['generals'];
+    protected $appends = ['properties'];
 
     /**
      * The attributes that should be casted to native types.
@@ -116,7 +114,7 @@ class Plant extends BaseModel
     public function articles(): MorphToMany
     {
         return $this->morphToMany(Article::class,
-            'articleable','article_hubs')
+            'articleable', 'article_hubs')
             ->whereNull('location_hubs.deleted_at')
             ->withTimestamps();
     }
@@ -127,16 +125,17 @@ class Plant extends BaseModel
     public function locations(): MorphToMany
     {
         return $this->morphToMany(Location::class,
-            'locationable','location_hubs')
+            'locationable', 'location_hubs')
             ->whereNull('location_hubs.deleted_at')
             ->withTimestamps();
     }
+
     /**
      * @return MorphToMany
      */
     public function users(): MorphToMany
     {
-        return $this->morphToMany(User::class, 'userable','user_hubs')->withTimestamps();
+        return $this->morphToMany(User::class, 'userable', 'user_hubs')->withTimestamps();
     }
 
     /**
@@ -163,7 +162,7 @@ class Plant extends BaseModel
      */
     public function classification(): BelongsTo
     {
-        return $this->belongsTo(Classification::class,'classification_id');
+        return $this->belongsTo(Classification::class, 'classification_id');
     }
 
     /**
@@ -182,12 +181,19 @@ class Plant extends BaseModel
         return $this->hasMany(Herbarium::class);
     }
 
-
-    public function LifeForm(): BelongsToMany
+    public function generals(): BelongsToMany
     {
-        return $this->belongsToMany(LifeForm::class,
-            'plant_life_forms',
+        return $this->belongsToMany(General::class,
+            'plant_properties',
             'plant_id',
-            'life_form_id');
+            'general_id')->withTimestamps();
+    }
+
+    public function getPropertiesAttribute($val)
+    {
+        $properties = $this->has('generals') ? $this->generals->groupBy('type') : null;
+        unset($this->generals);
+
+        return $properties;
     }
 }

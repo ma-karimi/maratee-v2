@@ -10,12 +10,17 @@ $factory->define(App\Models\Taxonomy::class, function (Faker $faker) {
     $plant_specie_generals = \App\Models\General::where('type', 'specie')->pluck('id')->toArray();
     $plant_sub_specie_generals = \App\Models\General::where('type', 'sub_specie')->pluck('id')->toArray();
     $plant_variety_generals = \App\Models\General::where('type', 'variety')->pluck('id')->toArray();
-    //dd($plant_family_generals,$plant_genus_generals,$plant_specie_generals,$plant_sub_specie_generals);
+    $orders = \App\Models\General::where('type', 'order')->pluck('id')->toArray();
+    $classes = \App\Models\General::where('type', 'class')->pluck('id')->toArray();
+    $plants = \App\Models\Plant::pluck('id')->toArray();
     return [
         'genus_id' => $faker->randomElement($plant_genus_generals),
         'species_id' => $faker->randomElement($plant_specie_generals),
-        'subspecies_id' => ($faker->randomElement($plant_sub_specie_generals) % 2) ? $faker->randomElement($plant_sub_specie_generals) : null,
         'variety_id' => ($faker->randomElement($plant_variety_generals) % 3) ? $faker->randomElement($plant_variety_generals) : null,
         'family_id' => $faker->randomElement($plant_family_generals),
+        'order_id' => $faker->randomElement($orders),
+        'class_id' => $faker->randomElement($classes),
+        'plant_id' => $faker->randomElement($plants),
+        'type_description' => make_json($faker->word),
     ];
 });

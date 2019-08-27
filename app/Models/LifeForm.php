@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -60,13 +59,23 @@ class LifeForm extends BaseModel
      */
     protected $casts = ['name' => 'json'];
 
-
-
-    public function Plant(): BelongsToMany
+    public function leafHerbariums(): HasMany
     {
-        return $this->belongsToMany(Plant::class,
-            'plant_life_forms',
-            'life_form_id',
-            'plant_id');
+        return $this->hasMany(Plant::class)->where('type', 'leaf');
+    }
+
+    public function herbaceousHerbariums(): HasMany
+    {
+        return $this->hasMany(Plant::class)->where('type', 'herbaceous');
+    }
+
+    public function woodenHerbariums(): HasMany
+    {
+        return $this->hasMany(Plant::class)->where('type', 'wooden');
+    }
+
+    public function cycleHerbariums(): HasMany
+    {
+        return $this->hasMany(Plant::class)->where('type', 'cycle');
     }
 }

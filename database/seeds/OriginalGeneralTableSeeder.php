@@ -28,6 +28,39 @@ class OriginalGeneralTableSeeder extends Seeder
         ['en' => 'Commercial imports']
 
     ];
+    public $classes = [
+        ['en' => 'Liliopsida'],
+        ['en' => 'Magnoliopsida'],
+    ];
+    public $ecologies = [
+        ['en' => 'Grassland'],
+        ['en' => 'Forest'],
+        ['en' => 'Desert'],
+        ['en' => 'Productive'],
+        ['en' => 'Population'],
+        ['en' => 'Community'],
+        ['en' => 'Ecosystem'],
+        ['en' => 'Microbial'],
+        ['en' => 'Radiation'],
+        ['en' => 'Pollution'],
+        ['en' => 'Space'],
+    ];
+    public $cotyledons = [
+        ['en' => 'Monocotyledonous'],
+        ['en' => 'Dicotyledonous'],
+    ];
+    public $sperms = [
+        ['en' => 'Diatom'],
+        ['en' => 'Laminaria'],
+        ['en' => 'Fucus'],
+        ['en' => 'Liverwort'],
+        ['en' => 'Moss'],
+        ['en' => 'Lycopodium'],
+        ['en' => 'Selaginella'],
+        ['en' => 'Psilotum'],
+        ['en' => 'Fern'],
+        ['en' => 'Equisetum'],
+    ];
     public $substrates = [
         ['name' => ['fa' => 'بستر گیاه- گلسنگ', 'en' => 'lichen'], 'type' => 'lichen',
             'children' => [
@@ -75,6 +108,26 @@ class OriginalGeneralTableSeeder extends Seeder
         foreach ($this->getHabitats() as $type) {
             General::create(
                 ['name' => $type, 'type' => 'habitat']
+            );
+        }
+        foreach ($this->classes as $type) {
+            General::create(
+                ['name' => $type, 'type' => 'class']
+            );
+        }
+        foreach ($this->cotyledons as $type) {
+            General::create(
+                ['name' => $type, 'type' => 'cotyledon']
+            );
+        }
+        foreach ($this->sperms as $type) {
+            General::create(
+                ['name' => $type, 'type' => 'sperm']
+            );
+        }
+        foreach ($this->ecologies as $type) {
+            General::create(
+                ['name' => $type, 'type' => 'ecology']
             );
         }
         foreach ($this->getSubstrates() as $type) {

@@ -51,16 +51,17 @@ class DatabaseSeeder extends Seeder
             SoilTableSeeder::class,
             SoilFeatureTableSeeder::class,
             LocationTableSeeder::class,
-            TaxonomyTableSeeder::class,
             AuthorHubTableSeeder::class,
             ClassificationTableSeeder::class,
             LifeFormTableSeeder::class,
             PlantTableSeeder::class,
+            TaxonomyTableSeeder::class,
             PlantLifeFormTableSeeder::class,
             PaleontologyTableSeeder::class,
             TreatmentTableSeeder::class,
             TreatmentHubTableSeeder::class,
             MethodTableSeeder::class,
+            PlantPropertyTableSeeder::class,
         ]);
         $this->call([
             LocalityTableSeeder::class,

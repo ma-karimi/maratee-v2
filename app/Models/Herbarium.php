@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use App\Models\Scope\HerbariumScope;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -185,9 +187,9 @@ class Herbarium extends BaseModel
 {
     use HerbariumScope,NodeTrait;
 
-    public static $linguistically = ['flowering' => false,'habitat_description' => false,'ecology_description' => false,];
+    public static $linguistically = ['flowering' => false,'habitat_description' => false,'ecology_description' => false,'life_forms'=>false];
     public static $rules = [
-        'location_id' => 'required|exists:locations,id',
+//        'location_id' => 'required|exists:locations,id',
         'protection_id' => 'exists:protections,id',
         'organization_id' => 'required|exists:organizations,id',
         'plant_id' => 'required|exists:plants,id',
@@ -199,15 +201,18 @@ class Herbarium extends BaseModel
         'is_flowering' => 'integer',
         'herbarium_tip_location' => 'integer',
         'type_description' => 'string',
-        'general_type_id' => 'exists:generals,id',
+//        'general_type_id' => 'exists:generals,id',
         'general_group_id' => 'exists:generals,id',
         'general_ecology_id' => 'exists:generals,id',
         'general_habitat_id' => 'exists:generals,id',
         'general_origin_id' => 'exists:generals,id',
-        'general_growth_id' => 'exists:generals,id',
+//        'general_growth_id' => 'exists:generals,id',
         'general_phytogeography_id' => 'exists:generals,id',
         'general_phenology_id' => 'exists:generals,id',
         'number' => 'integer',
+        'life_form_leaf_id' => 'required|exists:life_forms,id',
+        'life_form_cycle_id' => 'required|exists:life_forms,id',
+        'life_form_cycle_id' => 'required|exists:life_forms,id',
 
     ];
     /**
@@ -226,13 +231,12 @@ class Herbarium extends BaseModel
     protected $casts = [
         'name' => 'json',
         'description' => 'json',
-        'flowering' => 'json',
         'organization_description' => 'json',
         'habitat_description' => 'json',
         'ecology_description' => 'json',
+        'life_forms'=>'json'
     ];
 
-//    protected $with = ['actionHubs', 'borrows', 'attendances', 'chromosomes', 'cryoBanks', 'sendHerbariumExchanges', 'RecieveHerbariumExchanges', 'seeds', 'medias', 'medicals', 'medicinalPlants', 'organization', 'location', 'protection', 'generalType', 'generalPhenology', 'plant', 'generalGroup', 'generalPhytogeography'];
 
     /**
      * @param null $parameter
@@ -418,6 +422,31 @@ class Herbarium extends BaseModel
     public function generalPhytogeography()
     {
         return $this->belongsTo(General::class, 'general_phytogeography_id');
+    }
+
+
+    public function leafLifeForm(): BelongsTo
+    {
+        return $this->belongsTo(LifeForm::class,
+            'life_form_leaf_id');
+    }
+
+    public function woodenLifeForm(): BelongsTo
+    {
+        return $this->belongsTo(LifeForm::class,
+            'life_form_wooden_id');
+    }
+
+    public function cycleLifeForm(): BelongsTo
+    {
+        return $this->belongsTo(LifeForm::class,
+            'life_form_cycle_id');
+    }
+
+    public function herbaceousLifeForm(): BelongsTo
+    {
+        return $this->belongsTo(LifeForm::class,
+            'life_form_herbaceous_id');
     }
 
 }
