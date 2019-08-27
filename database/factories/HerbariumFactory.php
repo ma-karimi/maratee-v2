@@ -18,7 +18,6 @@ $factory->define(App\Models\Herbarium::class, function (Faker $faker) {
     $leafs = \App\Models\LifeForm::whereType('leaf')->pluck('id')->toArray();
     $woodens = \App\Models\LifeForm::whereType('wooden')->pluck('id')->toArray();
     $herbaceouses = \App\Models\LifeForm::whereType('herbaceous')->pluck('id')->toArray();
-
     return [
         'number' => $faker->numberBetween(1, 100),
         'general_phenology_id' => $faker->randomElement($phenologies),
@@ -37,6 +36,6 @@ $factory->define(App\Models\Herbarium::class, function (Faker $faker) {
         'general_group_id' => $faker->randomElement($plant_groups),
         'general_habitat_id' => $faker->randomElement($habitats),
         'plant_id' => $faker->randomElement($plants),
-        'life_forms' => ['leaf_id' => $faker->randomElement($leafs), 'cycle_id' => $faker->randomElement($cycles), 'wooden_id' => $faker->randomElement($woodens), 'herbaceous_id' => $faker->randomElement($herbaceouses)],
+        'life_forms' => ['cycle_id' => $faker->randomElement($cycles), 'wooden_id' => $faker->randomElement($woodens), 'herbaceous_id' => $faker->randomElement($herbaceouses)],
     ];
 });

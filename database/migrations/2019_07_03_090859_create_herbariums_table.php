@@ -72,10 +72,10 @@ that is an herbarium organization which we can but its id in this place');
             $table->timeStampsTz();
             $table->softDeletesTz();
         });
-        \Illuminate\Support\Facades\DB::statement('ALTER TABLE herbariums ADD life_form_cycle_id BIGINT GENERATED ALWAYS AS (reverse(life_forms)) VIRTUAL');
-        \Illuminate\Support\Facades\DB::statement('ALTER TABLE herbariums ADD life_form_wooden_id BIGINT GENERATED ALWAYS AS (reverse(life_forms)) VIRTUAL');
-        \Illuminate\Support\Facades\DB::statement('ALTER TABLE herbariums ADD life_form_herbaceous_id BIGINT GENERATED ALWAYS AS (reverse(life_forms)) VIRTUAL');
-        \Illuminate\Support\Facades\DB::statement('ALTER TABLE herbariums ADD life_form_leaf_id BIGINT GENERATED ALWAYS AS (reverse(life_forms)) VIRTUAL');
+        \Illuminate\Support\Facades\DB::statement("ALTER TABLE herbariums ADD life_form_cycle_id BIGINT GENERATED ALWAYS AS (json_unquote(json_extract(life_forms,'$.cycle_id'))) VIRTUAL");
+        \Illuminate\Support\Facades\DB::statement("ALTER TABLE herbariums ADD life_form_wooden_id BIGINT GENERATED ALWAYS AS (json_unquote(json_extract(life_forms,'$.wooden_id'))) VIRTUAL");
+        \Illuminate\Support\Facades\DB::statement("ALTER TABLE herbariums ADD life_form_leaf_id BIGINT GENERATED ALWAYS AS (json_unquote(json_extract(life_forms,'$.leaf_id'))) VIRTUAL");
+        \Illuminate\Support\Facades\DB::statement("ALTER TABLE herbariums ADD life_form_herbaceous_id BIGINT GENERATED ALWAYS AS (json_unquote(json_extract(life_forms,'$.herbaceous_id'))) VIRTUAL");
         \Illuminate\Support\Facades\Schema::table('herbariums',function (Blueprint $table){
             $table->index('life_form_cycle_id');
             $table->index('life_form_wooden_id');
