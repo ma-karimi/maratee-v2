@@ -117,7 +117,7 @@ class Plant extends BaseModel
     {
         return $this->morphToMany(Article::class,
             'articleable','article_hubs')
-            ->whereNull('location_hubs.deleted_at')
+            ->whereNull('article_hubs.deleted_at')
             ->withTimestamps();
     }
 
