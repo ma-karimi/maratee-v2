@@ -270,7 +270,7 @@ abstract class BaseRepository
         $record->$related_model()->attach($different_ids);
         $related_model_class::where($foreign_key, $class_id)->whereIn($related_key, $different_assigned)->delete();
 
-        return $record->$related_model;
+        return $record->$related_model()->get();
     }
 
     public function deleteHub($class_id, $related_model, array $ids)

@@ -286,6 +286,7 @@ class HerbariumAPIController extends AppBaseController
      */
     public function store(CreateHerbariumAPIRequest $request)
     {
+        Herbarium::create($request->all());
         $herbarium = $this->herbariumRepository->create($request);
 
         return $this->sendResponse($herbarium->toArray(), 'Herbarium saved successfully');

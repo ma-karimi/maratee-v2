@@ -26,14 +26,13 @@ class CreateHerbariumAPIRequest extends APIRequest
             'general_phenology_id' => 'phenology',
             'general_phytogeography_id' => 'phytogeography',
         ];
+
         foreach ($array_id_types as $index => $value) {
             if ($this->request->get($index) !== null) {
-                $record = General::ofIdType($index, $value)->first();
+                $record = General::ofIdType(request()->get($index), $value)->first();
                 abort_if(!isset($record), JsonResponse::HTTP_BAD_REQUEST, "$index not exists");
             }
         }
-
-
 
         return true;
     }
