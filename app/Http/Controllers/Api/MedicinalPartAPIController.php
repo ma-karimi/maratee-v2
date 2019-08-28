@@ -89,7 +89,7 @@ class MedicinalPartAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="type",
      *          in="body",
-     *          description="MedicinalPart that should be stored",
+     *          description="1 -> aerial , 2 -> ground",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/MedicinalPart")
      *      ),
@@ -139,20 +139,6 @@ class MedicinalPartAPIController extends AppBaseController
      *          type="integer",
      *          required=true,
      *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="name",
-     *          in="body",
-     *          description="MedicinalPart that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPart")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="type",
-     *          in="body",
-     *          description="MedicinalPart that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPart")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -206,10 +192,17 @@ class MedicinalPartAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name",
      *          in="body",
-     *          description="MedicinalPart that should be updated",
-     *          required=false,
+     *          description="MedicinalPart that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPart")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type",
+     *          in="body",
+     *          description="1 -> aerial , 2 -> ground",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/MedicinalPart")
      *      ),
      *      @SWG\Response(

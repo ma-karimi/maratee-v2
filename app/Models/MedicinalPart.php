@@ -43,12 +43,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class MedicinalPart extends BaseModel
 {
-    use MedicinalPartAccessor,MedicinalPartMutator;
+    use MedicinalPartAccessor;
 
-    public const TYPE=['aerial','ground'];
+    public const TYPE = [1 => 'aerial', 2 => 'ground'];
 
-    public static $linguistically=['name'=>true];
-    public static $rules=[
+    public static $linguistically = ['name' => true];
+    public static $rules = [
         'type' => 'required|integer',
     ];
 
@@ -65,8 +65,8 @@ class MedicinalPart extends BaseModel
     /**
      * @return HasMany
      */
-   /* public function medicinalPlant(): HasMany
-    {
-        return $this->hasMany(MedicinalPlant::class,'');
-    }*/
+    /* public function medicinalPlant(): HasMany
+     {
+         return $this->hasMany(MedicinalPlant::class,'');
+     }*/
 }
