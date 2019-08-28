@@ -12200,7 +12200,7 @@
                 }
             }
         },
-        "/lifeForms": {
+        "/life_forms": {
             "get": {
                 "tags": [
                     "LifeForm"
@@ -12283,7 +12283,7 @@
                 }
             }
         },
-        "/lifeForms/{id}": {
+        "/life_forms/{id}": {
             "get": {
                 "tags": [
                     "LifeForm"
@@ -14610,6 +14610,232 @@
                 }
             }
         },
+        "/medicinalParts": {
+            "get": {
+                "tags": [
+                    "MedicinalPart"
+                ],
+                "summary": "Get a listing of the MedicinalParts.",
+                "description": "Get all MedicinalParts",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/MedicinalPart"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "MedicinalPart"
+                ],
+                "summary": "Store a newly created MedicinalPart in storage",
+                "description": "Store MedicinalPart",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "MedicinalPart that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPart"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "body",
+                        "description": "MedicinalPart that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPart"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/MedicinalPart"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/medicinalParts/{id}": {
+            "get": {
+                "tags": [
+                    "MedicinalPart"
+                ],
+                "summary": "Display the specified MedicinalPart",
+                "description": "Get MedicinalPart",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of MedicinalPart",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "MedicinalPart that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPart"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "body",
+                        "description": "MedicinalPart that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPart"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/MedicinalPart"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "MedicinalPart"
+                ],
+                "summary": "Update the specified MedicinalPart in storage",
+                "description": "Update MedicinalPart",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of MedicinalPart",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "MedicinalPart that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPart"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/MedicinalPart"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "MedicinalPart"
+                ],
+                "summary": "Remove the specified MedicinalPart from storage",
+                "description": "Delete MedicinalPart",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of MedicinalPart",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/medicinal_plants": {
             "get": {
                 "tags": [
@@ -14658,6 +14884,24 @@
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "aerial_part_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "ground_part_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlantMorphology"
                         }
@@ -14853,6 +15097,24 @@
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "aerial_part_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "ground_part_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlantMorphology"
                         }
@@ -18274,25 +18536,70 @@
                         }
                     },
                     {
-                        "name": "life_form_cycle_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "life_form_leaf_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
                         "name": "exclusivity",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "family_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "genus_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "order_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "class_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "species_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "variety_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "type_description",
                         "in": "body",
                         "description": "Plant that should be stored",
                         "required": false,
@@ -18433,25 +18740,70 @@
                         }
                     },
                     {
-                        "name": "life_form_cycle_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
-                        "name": "life_form_leaf_id",
-                        "in": "body",
-                        "description": "Plant that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Plant"
-                        }
-                    },
-                    {
                         "name": "exclusivity",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "family_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "genus_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "order_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "class_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "species_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "variety_id",
+                        "in": "body",
+                        "description": "Plant that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "type_description",
                         "in": "body",
                         "description": "Plant that should be stored",
                         "required": false,
@@ -30230,6 +30582,39 @@
                 }
             }
         },
+        "MedicinalPart": {
+            "required": [
+                "name",
+                "type"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "type": {
+                    "description": "type",
+                    "type": "integer"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
         "MedicinalPlant": {
             "required": [
                 "herbarium_id",
@@ -30244,6 +30629,16 @@
                 },
                 "plant_application_id": {
                     "description": "plant_application_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "aerial_part_id": {
+                    "description": "aerial_part_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "ground_part_id": {
+                    "description": "ground_part_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -31054,6 +31449,21 @@
                     "type": "integer",
                     "format": "int32"
                 },
+                "flowering_id": {
+                    "description": "flowering_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "cotyledon_id": {
+                    "description": "cotyledon_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "sperm_id": {
+                    "description": "sperm_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
                 "name": {
                     "description": "name",
                     "type": "array",
@@ -31074,16 +31484,6 @@
                     "items": {
                         "type": "string"
                     }
-                },
-                "life_form_cycle_id": {
-                    "description": "life_form_cycle_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "life_form_leaf_id": {
-                    "description": "life_form_leaf_id",
-                    "type": "integer",
-                    "format": "int32"
                 },
                 "exclusivity": {
                     "description": "exclusivity",
@@ -31223,6 +31623,39 @@
                 "life_form_id": {
                     "description": "life_form_id",
                     "type": "integer"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "PlantProperty": {
+            "required": [
+                "plant_id",
+                "general_id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "plant_id": {
+                    "description": "plant_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "general_id": {
+                    "description": "general_id",
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "created_at": {
                     "description": "created_at",

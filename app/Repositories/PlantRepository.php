@@ -82,17 +82,12 @@ class PlantRepository extends BaseRepository
      */
     public function update($input, $id)
     {
-        $plant_input = [
-            'name' => $input['name'],
-            'description' => $input['description'] ?? null,
-            'domestic_name' => $input['domestic_name'] ?? null,
-            'exclusivity' => $input['exclusivity'] ?? null,
-            'flowering_id' => $input['flowering_id'] ?? null,
-            'cotyledon_id' => $input['cotyledon_id'] ?? null,
-            'sperm_id' => $input['sperm_id'] ?? null,
-        ];
-        dd(parent::update($input->toArray(),$id));
-        return parent::update($input->toArray(),$id);
+        $plant = $this->updatePlant($input, $id);
+        $taxonomy_input = $this->updatePlantTaxonomy($input, $plant);
+        $this->syncPlantProperties($taxonomy_input, $plant);
+        $this->syncPlantTypeProperties($input, $plant);
+        $this->syncPlantSubSpeciesProperties($input, $plant);
+        return $plant;
     }
 
 
@@ -157,19 +152,9 @@ class PlantRepository extends BaseRepository
      */
     private function syncPlantTypeProperties($input, \Illuminate\Database\Eloquent\Model $plant)
     {
-        $plant_type_ids=[];
-        if (isset($input['plant_types'])) {
-            foreach ($input['plant_types'] as $item) {
-                $plant_type_ids[] = DB::table('generals')->where('type', 'plant_type')
-                    ->where('name->en', 'LIKE', "%$item%")->pluck('id')->first();
-            }
-            //remove null members
-            $plant_type_ids = array_filter($plant_type_ids, function ($value) {
-                return $value !== null;
-            });
-            $plant->generals()->sync($plant_type_ids);
+        if (!empty($input['plant_types'])) {
+            $plant->generals()->sync($input['plant_types']);
         }
-        //return $input;
     }
 
     /**
@@ -181,6 +166,45 @@ class PlantRepository extends BaseRepository
         if (isset($input['subspecies_ids'])) {
             $plant->generals()->sync($input['subspecies_ids']);
         }
+    }
+
+    /**
+     * @param $input
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
+     */
+    private function updatePlant($input, $id)
+    {
+        $plant_input = [
+            'name' => $input['name'],
+            'description' => $input['description'] ?? null,
+            'domestic_name' => $input['domestic_name'] ?? null,
+            'exclusivity' => $input['exclusivity'] ?? null,
+            'flowering_id' => $input['flowering_id'] ?? null,
+            'cotyledon_id' => $input['cotyledon_id'] ?? null,
+            'sperm_id' => $input['sperm_id'] ?? null,
+        ];
+        return parent::update($plant_input, $id);t;
+    }
+
+    /**
+     * @param $input
+     * @param $plant
+     * @return array
+     */
+    private function updatePlantTaxonomy($input, $plant): array
+    {
+        $taxonomy_input = [
+            'family_id' => $input['family_id'],
+            'genus_id' => $input['genus_id'] ?? null,
+            'order_id' => $input['order_id'] ?? null,
+            'class_id' => $input['class_id'] ?? null,
+            'species_id' => $input['species_id'] ?? null,
+            'variety_id' => $input['variety_id'] ?? null,
+            'type_description' => $input['type_description'] ?? null,
+        ];
+        $plant->taxonomy->update($taxonomy_input);
+        return $taxonomy_input;
     }
 
 }
