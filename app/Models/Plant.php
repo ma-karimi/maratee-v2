@@ -8,15 +8,34 @@ use App\Models\Scope\PlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
  *      definition="Plant",
- *      required={"name","classification_id"},
+ *      required={"name"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="flowering_id",
+ *          description="flowering_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="cotyledon_id",
+ *          description="cotyledon_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="sperm_id",
+ *          description="sperm_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -37,18 +56,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          description="domestic_name",
  *          type="array",
  *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="life_form_cycle_id",
- *          description="life_form_cycle_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="life_form_leaf_id",
- *          description="life_form_leaf_id",
- *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="exclusivity",
@@ -76,14 +83,14 @@ class Plant extends BaseModel
     public static $linguistically = ['name' => true, 'description' => false, 'domestic_name' => false];
 
     public static $rules = [
-        'life_form_leaf_id'=>'required|exists:life_forms,id',
-        'life_form_cycle_id'=>'required|exists:life_forms,id',
         'exclusivity' => 'integer',
         //taxonomy
         'family_id' => 'required|exists:generals,id',
         'genus_id' => 'exists:generals,id',
         'species_id' => 'exists:generals,id',
         'variety_id' => 'exists:generals,id',
+        'order_id' => 'exists:generals,id',
+        'class_id' => 'exists:generals,id',
         'subspecies_ids.*' => 'exists:generals,id',
         //classification
         'flowering_id' => 'required|exists:generals,id',
@@ -96,8 +103,8 @@ class Plant extends BaseModel
      * @var string
      */
     protected $table = 'plants';
-    protected $with = ['generals'];
-    protected $appends = ['properties'];
+//    protected $with = ['generals'];
+//    protected $appends = ['properties'];
 
     /**
      * The attributes that should be casted to native types.
@@ -117,7 +124,7 @@ class Plant extends BaseModel
     public function articles(): MorphToMany
     {
         return $this->morphToMany(Article::class,
-            'articleable','article_hubs')
+            'articleable', 'article_hubs')
             ->whereNull('article_hubs.deleted_at')
             ->withTimestamps();
     }
@@ -138,7 +145,9 @@ class Plant extends BaseModel
      */
     public function users(): MorphToMany
     {
-        return $this->morphToMany(User::class, 'userable', 'user_hubs')->withTimestamps();
+        return $this->morphToMany(User::class, 'userable', 'user_hubs')
+            ->whereNull('user_hubs.deleted_at')
+            ->withTimestamps();
     }
 
     /**
@@ -157,15 +166,25 @@ class Plant extends BaseModel
         return $this->belongsToMany(Seed::class,
             'seed_plants',
             'plant_id',
-            'seed_id');
+            'seed_id')
+            ->whereNull('seed_plants.deleted_at')
+            ->withTimestamps();
     }
 
     /**
      * @return BelongsTo
      */
-    public function classification(): BelongsTo
+    public function flowering(): BelongsTo
     {
-        return $this->belongsTo(Classification::class, 'classification_id');
+        return $this->belongsTo(General::class, 'flowering_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function cotyledon(): BelongsTo
+    {
+        return $this->belongsTo(General::class, 'cotyledon_id');
     }
 
     /**
@@ -189,10 +208,16 @@ class Plant extends BaseModel
         return $this->belongsToMany(General::class,
             'plant_properties',
             'plant_id',
-            'general_id')->withTimestamps();
+            'general_id')
+            ->whereNull('plant_properties.deleted_at')
+            ->withTimestamps();
+    }
+    public function taxonomy(): HasOne
+    {
+        return $this->hasOne(Taxonomy::class,'plant_id');
     }
 
-    public function getPropertiesAttribute($val)
+    public function getPropertiesAttribute()
     {
         $properties = $this->has('generals') ? $this->generals->groupBy('type') : null;
         unset($this->generals);

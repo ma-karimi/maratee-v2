@@ -10,6 +10,7 @@ use App\Models\General;
 use App\Models\Plant;
 use App\Repositories\PlantRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Response;
 
 /**
@@ -131,21 +132,56 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="life_form_cycle_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="life_form_leaf_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
      *          name="exclusivity",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="family_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="genus_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="order_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="class_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="species_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="variety_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type_description",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
@@ -292,21 +328,56 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="life_form_cycle_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="life_form_leaf_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
      *          name="exclusivity",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="family_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="genus_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="order_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="class_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="species_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="variety_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type_description",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
@@ -333,7 +404,7 @@ class PlantAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdatePlantAPIRequest $request)
+    public function update($id, Request $request)
     {
         $input = $request->all();
 

@@ -2,8 +2,13 @@
 
 namespace App\Repositories;
 
+use App\Models\General;
 use App\Models\Plant;
+use App\Models\PlantProperty;
+use function GuzzleHttp\Promise\queue;
 use Illuminate\Container\Container as Application;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class PlantRepository
@@ -14,7 +19,6 @@ class PlantRepository extends BaseRepository
 {
 
     private $taxonomyRepository;
-    private $classificationRepository;
 
     /**
      * PlantRepository constructor.
@@ -22,11 +26,10 @@ class PlantRepository extends BaseRepository
      * @param TaxonomyRepository $taxonomyRepository
      * @throws \Exception
      */
-    public function __construct(Application $app, TaxonomyRepository $taxonomyRepository, ClassificationRepository $classificationRepository)
+    public function __construct(Application $app, TaxonomyRepository $taxonomyRepository)
     {
         parent::__construct($app);
         $this->taxonomyRepository = $taxonomyRepository;
-        $this->classificationRepository = $classificationRepository;
     }
 
     /**
@@ -62,15 +65,12 @@ class PlantRepository extends BaseRepository
      */
     public function create($input)
     {
-       /* [$taxonomy_input, $taxonomy_record] = $this->findTaxonomy($input);
-        $input = collect($input)->forget(collect($taxonomy_input)->keys()->toArray());
-        $input['taxonomy_id'] = $taxonomy_record->id ?? $this->taxonomyRepository->create($taxonomy_input)->id;*/
-
-        [$classification_input, $classification_record] = $this->findClassification($input);
-        $input = collect($input)->forget(collect($classification_input)->keys()->toArray());
-        $input['classification_id'] = $classification_record->id ?? $this->classificationRepository->create($classification_input)->id;
-
-        return parent::create($input->toArray());
+        $plant = $this->createPlant($input);
+        $taxonomy_input = $this->createTaxonomy($input, $plant);
+        $this->syncPlantProperties($taxonomy_input, $plant);
+        $this->syncPlantTypeProperties($input, $plant);
+        $this->syncPlantSubSpeciesProperties($input, $plant);
+        return $plant;
     }
 
     /**
@@ -80,47 +80,129 @@ class PlantRepository extends BaseRepository
      */
     public function update($input, $id)
     {
-        /*[$taxonomy_input, $taxonomy_record] = $this->findTaxonomy($input);
-        $input['taxonomy_id'] = $taxonomy_record->id ?? $this->taxonomyRepository->create($taxonomy_input)->id;
-        $input = collect($input)->forget(collect($taxonomy_input)->keys()->toArray());*/
+        $plant = $this->updatePlant($input, $id);
+        $taxonomy_input = $this->updatePlantTaxonomy($input, $plant);
+        $this->syncPlantProperties($taxonomy_input, $plant);
+        $this->syncPlantTypeProperties($input, $plant);
+        $this->syncPlantSubSpeciesProperties($input, $plant);
+        return $plant;
+    }
 
-        [$classification_input, $classification_record] = $this->findClassification($input);
-        $input = collect($input)->forget(collect($classification_input)->keys()->toArray());
-        $input['classification_id'] = $classification_record->id ?? $this->classificationRepository->create($taxonomy_input)->id;
 
-        return parent::update($input->toArray(), $id);
+    /**
+     * @param $input
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    private function createPlant($input): \Illuminate\Database\Eloquent\Model
+    {
+        $plant_input = [
+            'name' => $input['name'],
+            'description' => $input['description'] ?? null,
+            'domestic_name' => $input['domestic_name'] ?? null,
+            'exclusivity' => $input['exclusivity'] ?? null,
+            'flowering_id' => $input['flowering_id'] ?? null,
+            'cotyledon_id' => $input['cotyledon_id'] ?? null,
+            'sperm_id' => $input['sperm_id'] ?? null,
+        ];
+        //store plant
+        return  parent::create($plant_input);
     }
 
     /**
      * @param $input
+     * @param \Illuminate\Database\Eloquent\Model $plant
      * @return array
      */
-    public function findTaxonomy($input): array
+    private function createTaxonomy($input, \Illuminate\Database\Eloquent\Model $plant): array
     {
         $taxonomy_input = [
             'family_id' => $input['family_id'],
             'genus_id' => $input['genus_id'] ?? null,
+            'order_id' => $input['order_id'] ?? null,
+            'class_id' => $input['class_id'] ?? null,
             'species_id' => $input['species_id'] ?? null,
-            'subspecies_id' => $input['subspecies_id'] ?? null,
-            'variety_id' => $input['variety_id'] ?? null
+            'variety_id' => $input['variety_id'] ?? null,
+            'type_description' => $input['type_description'] ?? null,
         ];
-        $taxonomy_record = $this->taxonomyRepository->getByCriteria($taxonomy_input)->first();
-        return array($taxonomy_input, $taxonomy_record);
+        $taxonomy_input['plant_id'] = $plant->id;
+        //store taxonomy
+        $this->taxonomyRepository->create($taxonomy_input);
+        return $taxonomy_input;
+    }
+
+    /**
+     * @param array $taxonomy_input
+     * @param \Illuminate\Database\Eloquent\Model $plant
+     */
+    private function syncPlantProperties(array $taxonomy_input, \Illuminate\Database\Eloquent\Model $plant): void
+    {
+        $general_input = array_filter($taxonomy_input, function ($value, $key) {
+            return $value !== null and $key !== 'type_description' and $key !== 'plant_id';
+        }, ARRAY_FILTER_USE_BOTH);
+
+        $plant->generals()->sync($general_input);
     }
 
     /**
      * @param $input
+     * @param \Illuminate\Database\Eloquent\Model $plant
+     * @return mixed
+     */
+    private function syncPlantTypeProperties($input, \Illuminate\Database\Eloquent\Model $plant)
+    {
+        if (!empty($input['plant_types'])) {
+            $plant->generals()->sync($input['plant_types']);
+        }
+    }
+
+    /**
+     * @param $input
+     * @param \Illuminate\Database\Eloquent\Model $plant
+     */
+    private function syncPlantSubSpeciesProperties($input, \Illuminate\Database\Eloquent\Model $plant): void
+    {
+        if (isset($input['subspecies_ids'])) {
+            $plant->generals()->sync($input['subspecies_ids']);
+        }
+    }
+
+    /**
+     * @param $input
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
+     */
+    private function updatePlant($input, $id)
+    {
+        $plant_input = [
+            'name' => $input['name'],
+            'description' => $input['description'] ?? null,
+            'domestic_name' => $input['domestic_name'] ?? null,
+            'exclusivity' => $input['exclusivity'] ?? null,
+            'flowering_id' => $input['flowering_id'] ?? null,
+            'cotyledon_id' => $input['cotyledon_id'] ?? null,
+            'sperm_id' => $input['sperm_id'] ?? null,
+        ];
+        return parent::update($plant_input, $id);t;
+    }
+
+    /**
+     * @param $input
+     * @param $plant
      * @return array
      */
-    public function findClassification($input): array
+    private function updatePlantTaxonomy($input, $plant): array
     {
-        $classification_input = [
-            'flowering_id' => $input['flowering_id'],
-            'sperm_id' => $input['sperm_id'] ?? null,
-            'cotyledon_id' => $input['cotyledon_id'] ?? null,
+        $taxonomy_input = [
+            'family_id' => $input['family_id'],
+            'genus_id' => $input['genus_id'] ?? null,
+            'order_id' => $input['order_id'] ?? null,
+            'class_id' => $input['class_id'] ?? null,
+            'species_id' => $input['species_id'] ?? null,
+            'variety_id' => $input['variety_id'] ?? null,
+            'type_description' => $input['type_description'] ?? null,
         ];
-        $classification_record = $this->classificationRepository->getByCriteria($classification_input)->first();
-        return array($classification_input, $classification_record);
+        $plant->taxonomy->update($taxonomy_input);
+        return $taxonomy_input;
     }
 
 }

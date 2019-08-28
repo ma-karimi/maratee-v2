@@ -14,7 +14,9 @@ class AddFoerignKeyToPlantsTable extends Migration
     public function up()
     {
         Schema::table('plants', function (Blueprint $table) {
-            $table->foreign('classification_id')->references('id')->on('classifications')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('flowering_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('cotyledon_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('sperm_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
         });
     }
 
@@ -26,7 +28,9 @@ class AddFoerignKeyToPlantsTable extends Migration
     public function down()
     {
         Schema::table('plants', function (Blueprint $table) {
-            $table->dropForeign('classification_id');
+            $table->dropForeign('flowering_id');
+            $table->dropForeign('cotyledon_id');
+            $table->dropForeign('sperm_id');
         });
     }
 }

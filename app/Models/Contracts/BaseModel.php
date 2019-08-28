@@ -119,7 +119,7 @@ class BaseModel extends Model
         $json_casts=array_filter(parent::getCastFields(),function ($value){
             return $value ==='json';
         });
-        if (count(request()->keys())) {
+        if (request()->isMethod('get') && count(request()->keys())) {
             foreach (request()->all() as $index => $item) {
                 if (is_array($item) && collect($json_casts)->has($index)) {
                     foreach (parent::getJsons() as $key => $value) {
