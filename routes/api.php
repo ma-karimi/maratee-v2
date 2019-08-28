@@ -211,8 +211,6 @@ Route::resource('germinations', 'GerminationAPIController');
 
 Route::resource('taxonomies', 'TaxonomyAPIController');
 
-Route::resource('classifications', 'ClassificationAPIController');
-
 Route::resource('repeats', 'RepeatAPIController');
 
 Route::resource('stations', 'StationAPIController');

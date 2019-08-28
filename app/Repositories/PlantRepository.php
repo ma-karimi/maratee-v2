@@ -19,7 +19,6 @@ class PlantRepository extends BaseRepository
 {
 
     private $taxonomyRepository;
-    private $classificationRepository;
 
     /**
      * PlantRepository constructor.
@@ -27,11 +26,10 @@ class PlantRepository extends BaseRepository
      * @param TaxonomyRepository $taxonomyRepository
      * @throws \Exception
      */
-    public function __construct(Application $app, TaxonomyRepository $taxonomyRepository, ClassificationRepository $classificationRepository)
+    public function __construct(Application $app, TaxonomyRepository $taxonomyRepository)
     {
         parent::__construct($app);
         $this->taxonomyRepository = $taxonomyRepository;
-        $this->classificationRepository = $classificationRepository;
     }
 
     /**

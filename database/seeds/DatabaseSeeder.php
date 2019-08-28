@@ -52,7 +52,6 @@ class DatabaseSeeder extends Seeder
             SoilFeatureTableSeeder::class,
             LocationTableSeeder::class,
             AuthorHubTableSeeder::class,
-            ClassificationTableSeeder::class,
             LifeFormTableSeeder::class,
             PlantTableSeeder::class,
             TaxonomyTableSeeder::class,

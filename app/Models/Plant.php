@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 /**
  * @SWG\Definition(
  *      definition="Plant",
- *      required={"name","classification_id"},
+ *      required={"name"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -185,14 +185,6 @@ class Plant extends BaseModel
     public function cotyledon(): BelongsTo
     {
         return $this->belongsTo(General::class, 'cotyledon_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function classification(): BelongsTo
-    {
-        return $this->belongsTo(General::class, 'sperm_id');
     }
 
     /**
