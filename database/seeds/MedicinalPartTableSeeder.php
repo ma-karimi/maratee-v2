@@ -14,13 +14,13 @@ class MedicinalPartTableSeeder extends Seeder
     {
         \App\Utility::truncateTables('medicinal_parts');
         $data = [
-            'aerial' => ['fruit', 'stem','leaves','flowers',' seed','bark'],
-            'ground' => ['root', 'rhizome','bulb','corm','node'],
+            0 => ['fruit', 'stem','leaves','flowers',' seed','bark'],
+            1 => ['root', 'rhizome','bulb','corm','node'],
         ];
         foreach ($data as $index => $datum) {
             foreach ($datum as  $item) {
                 \App\Models\MedicinalPart::create([
-                    'type' => random_int(1,2),
+                    'type' => $index,
                     'name' => make_json($item),
                 ]);
             }
