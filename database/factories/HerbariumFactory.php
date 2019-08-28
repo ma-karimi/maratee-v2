@@ -36,6 +36,6 @@ $factory->define(App\Models\Herbarium::class, function (Faker $faker) {
         'general_group_id' => $faker->randomElement($plant_groups),
         'general_habitat_id' => $faker->randomElement($habitats),
         'plant_id' => $faker->randomElement($plants),
-        'life_forms' => ['cycle_id' => $faker->randomElement($cycles), 'wooden_id' => $faker->randomElement($woodens), 'herbaceous_id' => $faker->randomElement($herbaceouses)],
+        'life_forms' => ['leaf_id' => $faker->randomElement($leafs),'cycle_id' => $faker->randomElement($cycles), 'wooden_id' => $faker->randomElement($woodens), 'herbaceous_id' => $faker->randomElement($herbaceouses)],
     ];
 });

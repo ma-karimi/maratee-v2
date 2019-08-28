@@ -30,7 +30,7 @@ class LifeFormAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/lifeForms",
+     *      path="/life_forms",
      *      summary="Get a listing of the LifeForms.",
      *      tags={"LifeForm"},
      *      description="Get all LifeForms",
@@ -74,7 +74,7 @@ class LifeFormAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/lifeForms",
+     *      path="/life_forms",
      *      summary="Store a newly created LifeForm in storage",
      *      tags={"LifeForm"},
      *      description="Store LifeForm",
@@ -128,7 +128,7 @@ class LifeFormAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/lifeForms/{id}",
+     *      path="/life_forms/{id}",
      *      summary="Display the specified LifeForm",
      *      tags={"LifeForm"},
      *      description="Get LifeForm",
@@ -179,7 +179,7 @@ class LifeFormAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/lifeForms/{id}",
+     *      path="/life_forms/{id}",
      *      summary="Update the specified LifeForm in storage",
      *      tags={"LifeForm"},
      *      description="Update LifeForm",
@@ -247,7 +247,7 @@ class LifeFormAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Delete(
-     *      path="/lifeForms/{id}",
+     *      path="/life_forms/{id}",
      *      summary="Remove the specified LifeForm from storage",
      *      tags={"LifeForm"},
      *      description="Delete LifeForm",
