@@ -9,8 +9,6 @@
 namespace App\Models\Mutator;
 
 
-use App\Models\MedicinalPart;
-
 trait MedicinalPartMutator
 {
     /**

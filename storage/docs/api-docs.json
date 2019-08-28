@@ -5625,241 +5625,6 @@
                 }
             }
         },
-        "/classifications": {
-            "get": {
-                "tags": [
-                    "Classification"
-                ],
-                "summary": "Get a listing of the Classifications.",
-                "description": "Get all Classifications",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/Classification"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Classification"
-                ],
-                "summary": "Store a newly created Classification in storage",
-                "description": "Store Classification",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "flowering_id",
-                        "in": "body",
-                        "description": "Classification that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Classification"
-                        }
-                    },
-                    {
-                        "name": "cotyledon_id",
-                        "in": "body",
-                        "description": "Classification that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Classification"
-                        }
-                    },
-                    {
-                        "name": "sperm_id",
-                        "in": "body",
-                        "description": "Classification that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Classification"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Classification"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/classifications/{id}": {
-            "get": {
-                "tags": [
-                    "Classification"
-                ],
-                "summary": "Display the specified Classification",
-                "description": "Get Classification",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Classification",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Classification"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Classification"
-                ],
-                "summary": "Update the specified Classification in storage",
-                "description": "Update Classification",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Classification",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "flowering_id",
-                        "in": "body",
-                        "description": "Classification that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Classification"
-                        }
-                    },
-                    {
-                        "name": "cotyledon_id",
-                        "in": "body",
-                        "description": "Classification that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Classification"
-                        }
-                    },
-                    {
-                        "name": "sperm_id",
-                        "in": "body",
-                        "description": "Classification that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Classification"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Classification"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Classification"
-                ],
-                "summary": "Remove the specified Classification from storage",
-                "description": "Delete Classification",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Classification",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
         "/collections": {
             "get": {
                 "tags": [
@@ -14665,7 +14430,7 @@
                     {
                         "name": "type",
                         "in": "body",
-                        "description": "MedicinalPart that should be stored",
+                        "description": "1 -> aerial , 2 -> ground",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPart"
@@ -14710,24 +14475,6 @@
                         "description": "id of MedicinalPart",
                         "required": true,
                         "type": "integer"
-                    },
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "MedicinalPart that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPart"
-                        }
-                    },
-                    {
-                        "name": "type",
-                        "in": "body",
-                        "description": "MedicinalPart that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPart"
-                        }
                     }
                 ],
                 "responses": {
@@ -14768,10 +14515,19 @@
                         "type": "integer"
                     },
                     {
-                        "name": "body",
+                        "name": "name",
                         "in": "body",
-                        "description": "MedicinalPart that should be updated",
-                        "required": false,
+                        "description": "MedicinalPart that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPart"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "body",
+                        "description": "1 -> aerial , 2 -> ground",
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPart"
                         }
@@ -29029,43 +28785,6 @@
                 }
             }
         },
-        "Classification": {
-            "required": [
-                "flowering_id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "flowering_id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "cotyledon_id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "sperm_id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
-        },
         "Collection": {
             "required": [
                 "name",
@@ -31440,8 +31159,7 @@
         },
         "Plant": {
             "required": [
-                "name",
-                "classification_id"
+                "name"
             ],
             "properties": {
                 "id": {
