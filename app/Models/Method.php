@@ -28,6 +28,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 	 *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
+ *          property="type_id",
+ *          description="type_id",
+ *          type="integer",
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -46,7 +51,7 @@ class Method extends BaseModel
 
     public static $linguistically=['name'=>true,'description'=>false];
     public static $rules=[
-        'parent_id' => 'integer'
+        'type_id' => 'required|integer'
     ];
     /**
      * The database table used by the model.
@@ -67,25 +72,22 @@ class Method extends BaseModel
     /**
      * @return HasMany
      */
-    public function medicinalPlants(): HasMany
+    public function distillationMedicinalPlants(): HasMany
     {
-        return $this->hasMany(MedicinalPlant::class)->latest();
+        return $this->hasMany(MedicinalPlant::class, 'method_distillation_id')->latest();
     }
-
     /**
      * @return HasMany
      */
-    public function childs(): HasMany
+    public function extractionMedicinalPlants(): HasMany
     {
-        return $this->hasMany(self::class, 'parent_id')->latest();
+        return $this->hasMany(MedicinalPlant::class, 'method_extraction_id')->latest();
     }
-
-
     /**
-     * @return BelongsTo
+     * @return HasMany
      */
-    public function parent(): BelongsTo
+    public function analyseMedicinalPlants(): HasMany
     {
-        return $this->belongsTo(self::class, 'parent_id');
+        return $this->hasMany(MedicinalPlant::class, 'method_analyse_id')->latest();
     }
 }

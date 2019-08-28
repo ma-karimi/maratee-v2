@@ -21,6 +21,14 @@ class OriginalGeneralTableSeeder extends Seeder
         ['fa' => 'مرتع', 'en' => 'Desert'],
 
     ];
+    public $phenologies = [
+      ['en'=>'Vegetative stage'],
+      ['en'=>'Early flowering'],
+      ['en'=>'Full flowering'],
+      ['en'=>'immature seed'],
+      ['en'=>'ripe seed'],
+
+    ];
     public $origins = [
         ['en' => 'Endemic'],
         ['en' => 'Native'],
@@ -44,6 +52,15 @@ class OriginalGeneralTableSeeder extends Seeder
         ['en' => 'Radiation'],
         ['en' => 'Pollution'],
         ['en' => 'Space'],
+    ];
+    public $flowers = [
+        ['en' => 'Tubular'],
+        ['en' => 'Dense heads'],
+        ['en' => 'Umbel'],
+        ['en' => 'Regular'],
+        ['en' => 'Irregular'],
+        ['en' => 'Spike'],
+        ['en' => 'Panicle'],
     ];
     public $cotyledons = [
         ['en' => 'Monocotyledonous'],
@@ -115,9 +132,19 @@ class OriginalGeneralTableSeeder extends Seeder
                 ['name' => $type, 'type' => 'class']
             );
         }
+        foreach ($this->phenologies as $type) {
+            General::create(
+                ['name' => $type, 'type' => 'phenology']
+            );
+        }
         foreach ($this->cotyledons as $type) {
             General::create(
                 ['name' => $type, 'type' => 'cotyledon']
+            );
+        }
+        foreach ($this->flowers as $type) {
+            General::create(
+                ['name' => $type, 'type' => 'flowering']
             );
         }
         foreach ($this->sperms as $type) {

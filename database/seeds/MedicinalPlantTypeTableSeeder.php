@@ -11,6 +11,6 @@ class MedicinalPlantTypeTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\MedicinalPlantType::class, 10000)->create();
+        factory(App\Models\MedicinalPlantType::class, 50)->create();
     }
 }

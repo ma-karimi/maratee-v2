@@ -64,11 +64,17 @@ class DatabaseSeeder extends Seeder
             PlantPropertyTableSeeder::class,
         ]);
         $this->call([
+            MedicinalPartTableSeeder::class,
             LocalityTableSeeder::class,
             ActionHubTableSeeder::class,
             PlantingActionTableSeeder::class,
             ProductTableSeeder::class,
             HerbariumTableSeeder::class,
+            MedicinalPlantTableSeeder::class,
+            MedicinalPlantConstituentTableSeeder::class,
+            MedicinalPlantMorphologyTableSeeder::class,
+            MorphAuthorTableSeeder::class,
+
 //            SeedTableSeeder::class,
 //            BioMolecularTableSeeder::class,
 //            SeedExchangeTableSeeder::class,
@@ -79,7 +85,6 @@ class DatabaseSeeder extends Seeder
 //            CryoBankTableSeeder::class,
 //            HerbariumAppendixTableSeeder::class,
 //            MediaTableSeeder::class,
-//            MedicinalPlantTableSeeder::class,
 //
 //            BorrowTableSeeder::class,
 //
@@ -92,8 +97,6 @@ class DatabaseSeeder extends Seeder
 //            BotanicalPropagationTableSeeder::class,
 //            BotanicalIrrigationTableSeeder::class,
 //            MedicalTableSeeder::class,
-//            MedicinalPlantConstituentTableSeeder::class,
-//            MedicinalPlantMorphologyTableSeeder::class,
 //            PlantApplicationTableSeeder::class,
 //
 //            TechnologyCollectionTableSeeder::class,
@@ -103,12 +106,9 @@ class DatabaseSeeder extends Seeder
 //            TableTableSeeder::class,
 //            TransitionTableSeeder::class,
 //            PermissionTableSeeder::class,
-//            MorphAuthorTableSeeder::class,
 //            TransitionTableSeeder::class,
 //            ComponentTableSeeder::class,
 //            MedicalComponentTableSeeder::class,
-//            MedicinalPlantMethodTableSeeder::class,
-        MedicinalPartTableSeeder::class
         ]);
         Model::reguard();
 

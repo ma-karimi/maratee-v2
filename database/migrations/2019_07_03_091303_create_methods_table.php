@@ -17,7 +17,7 @@ class CreateMethodsTable extends Migration {
 			$table->bigIncrements('id');
 			$table->json('name');
 			$table->json('description')->nullable();
-			$table->integer('parent_id')->nullable();
+			$table->tinyInteger('type_id')->comment('1:distillation, 2: extraction, 3: analyse');
 
             $table->timeStampsTz();
             $table->softDeletesTz();

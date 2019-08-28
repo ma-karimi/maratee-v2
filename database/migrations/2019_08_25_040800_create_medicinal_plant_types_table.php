@@ -19,7 +19,7 @@ class CreateMedicinalPlantTypesTable extends Migration
             $table->json('name');
 //            $table->string('name_en')->generatedAs('name->>"$.en"');
             $table->json('description')->nullable();
-            $table->tinyInteger('type_id');
+            $table->tinyInteger('type_id')->comment('1: food industry, 2: other industry, 3: secondary metabolite, 4: material, 5: pharmaceutical');
             $table->timestamps();
             $table->softDeletesTz();
         });

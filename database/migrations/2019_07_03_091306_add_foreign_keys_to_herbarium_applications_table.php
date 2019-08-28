@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class AddForeignKeysToPlantApplicationsTable extends Migration
+class AddForeignKeysToHerbariumApplicationsTable extends Migration
 {
 
     /**
@@ -13,7 +13,7 @@ class AddForeignKeysToPlantApplicationsTable extends Migration
      */
     public function up()
     {
-        Schema::table('plant_applications', function (Blueprint $table) {
+        Schema::table('herbarium_applications', function (Blueprint $table) {
             $table->foreign('general_application_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('general_growth_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
@@ -32,7 +32,7 @@ class AddForeignKeysToPlantApplicationsTable extends Migration
     public
     function down()
     {
-        Schema::table('plant_applications', function (Blueprint $table) {
+        Schema::table('herbarium_applications', function (Blueprint $table) {
             $table->dropForeign(['herbarium_id']);
             $table->dropForeign(['general_part_id']);
             $table->dropForeign(['general_application_id']);

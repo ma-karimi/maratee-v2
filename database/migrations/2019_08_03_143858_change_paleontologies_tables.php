@@ -34,16 +34,6 @@ class ChangePaleontologiesTables extends Migration
             $table->enum('type', ['era', 'period', 'epoch', 'stage']);
             $table->unsignedBigInteger('parent_id')->nullable();
         });
-        Schema::table('plant_applications', function (Blueprint $table){
-            $table->json('habitat_description')->nullable();
-            $table->json('ecology_description')->nullable();
-            $table->unsignedBigInteger('general_ecology_id');
-            $table->unsignedBigInteger('general_habitat_id');
-            $table->unsignedBigInteger('general_origin_id');
-            $table->foreign('general_origin_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('general_habitat_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('general_ecology_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
-        });
     }
 
     /**
@@ -68,13 +58,6 @@ class ChangePaleontologiesTables extends Migration
             $table->json('period');
             $table->json('epoch');
             $table->json('stage');
-        });
-
-        Schema::table('plant_applications', function (Blueprint $table) {
-            $table->dropForeign(['general_ecology_id']);
-            $table->dropForeign(['general_habitat_id']);
-            $table->dropForeign(['general_origin_id']);
-            $table->dropColumn('general_ecology_id', 'general_habitat_id','general_origin_id','habitat_description','ecology_description');
         });
     }
 

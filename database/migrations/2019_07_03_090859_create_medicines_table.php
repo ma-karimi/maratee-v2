@@ -17,7 +17,7 @@ class CreateMedicinesTable extends Migration {
 			$table->bigIncrements('id');
 			$table->json('name');
 			$table->json('description')->nullable();
-			$table->string('type')->comment('medicinal_parts, drug_usage, drug_shape, medicine_side_effects, therapies, medicine_effects', 'drug');
+			$table->string('type')->comment('drug_usage, drug_shape, medicine_side_effects, therapies, medicine_effects', 'drug');
 			$table->unsignedBigInteger('parent_id')->nullable();
 
 
