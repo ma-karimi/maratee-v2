@@ -45,7 +45,7 @@ class CreateMedicinalPlantsTable extends Migration {
             $table->json('consumption')->nullable();
             $table->json('active_compounds')->nullable();
             $table->json('manufacturer')->nullable();
-            $table->float('efficiency', 4, 2)->nullable();
+            $table->float('efficiency', 4)->nullable();
             $table->integer('code_no')->nullable();
             $table->timeStampsTz();
             $table->softDeletesTz();
