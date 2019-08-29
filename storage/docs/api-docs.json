@@ -15747,6 +15747,241 @@
                 }
             }
         },
+        "/medicinalPlantTypes": {
+            "get": {
+                "tags": [
+                    "MedicinalPlantType"
+                ],
+                "summary": "Get a listing of the MedicinalPlantTypes.",
+                "description": "Get all MedicinalPlantTypes",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/MedicinalPlantType"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "MedicinalPlantType"
+                ],
+                "summary": "Store a newly created MedicinalPlantType in storage",
+                "description": "Store MedicinalPlantType",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "MedicinalPlantType that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantType"
+                        }
+                    },
+                    {
+                        "name": "type_id",
+                        "in": "body",
+                        "description": "MedicinalPlantType that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantType"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "MedicinalPlantType that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/MedicinalPlantType"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/medicinalPlantTypes/{id}": {
+            "get": {
+                "tags": [
+                    "MedicinalPlantType"
+                ],
+                "summary": "Display the specified MedicinalPlantType",
+                "description": "Get MedicinalPlantType",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of MedicinalPlantType",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/MedicinalPlantType"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "MedicinalPlantType"
+                ],
+                "summary": "Update the specified MedicinalPlantType in storage",
+                "description": "Update MedicinalPlantType",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of MedicinalPlantType",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "MedicinalPlantType that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantType"
+                        }
+                    },
+                    {
+                        "name": "type_id",
+                        "in": "body",
+                        "description": "MedicinalPlantType that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantType"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "MedicinalPlantType that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/MedicinalPlantType"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "MedicinalPlantType"
+                ],
+                "summary": "Remove the specified MedicinalPlantType from storage",
+                "description": "Delete MedicinalPlantType",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of MedicinalPlantType",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/medicines": {
             "get": {
                 "tags": [
@@ -30632,7 +30867,7 @@
         "MedicinalPlantType": {
             "required": [
                 "name",
-                "type"
+                "type_id"
             ],
             "properties": {
                 "id": {
