@@ -9,6 +9,6 @@ $factory->define(App\Models\Method::class, function (Faker $faker) {
     return [
         'name' => make_json($faker->name),
         'description' => make_json($faker->text),
-        'type' =>   $faker->numberBetween(1,3),
+        'type_id' =>   array_rand(\App\Models\Method::TYPE),
     ];
 });

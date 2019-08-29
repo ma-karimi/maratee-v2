@@ -56,6 +56,7 @@ class MethodAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -80,6 +81,13 @@ class MethodAPIController extends AppBaseController
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="name",
+     *          in="body",
+     *          description="Method that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Method")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type_id",
      *          in="body",
      *          description="Method that should be stored",
      *          required=true,
@@ -192,6 +200,13 @@ class MethodAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="name",
+     *          in="body",
+     *          description="Method that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Method")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type_id",
      *          in="body",
      *          description="Method that should be stored",
      *          required=true,

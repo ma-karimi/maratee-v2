@@ -37,7 +37,7 @@ $factory->define(App\Models\Medical::class, function (Faker $faker) {
             return factory(App\Models\Medicine::class)->create()->id;
         },
         'usage_description' => make_json($faker->word),
-        'plant_application_id' => function () {
+        'herbarium_application_id' => function () {
             return factory(App\Models\PlantApplication::class)->create()->id;
         },
     ];

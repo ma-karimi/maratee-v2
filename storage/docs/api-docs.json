@@ -13715,7 +13715,7 @@
                 ],
                 "parameters": [
                     {
-                        "name": "plant_application_id",
+                        "name": "herbarium_application_id",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": true,
@@ -13937,7 +13937,7 @@
                         "type": "integer"
                     },
                     {
-                        "name": "plant_application_id",
+                        "name": "herbarium_application_id",
                         "in": "body",
                         "description": "Medical that should be stored",
                         "required": true,
@@ -21766,7 +21766,7 @@
                         }
                     },
                     {
-                        "name": "plant_application_id",
+                        "name": "herbarium_application_id",
                         "in": "body",
                         "description": "Seed that should be stored",
                         "required": false,
@@ -30402,7 +30402,7 @@
         },
         "Medical": {
             "required": [
-                "plant_application_id",
+                "herbarium_application_id",
                 "medicine_effect_id",
                 "medicine_medicinal_part_id"
             ],
@@ -30411,8 +30411,8 @@
                     "description": "id",
                     "type": "integer"
                 },
-                "plant_application_id": {
-                    "description": "plant_application_id",
+                "herbarium_application_id": {
+                    "description": "herbarium_application_id",
                     "type": "integer"
                 },
                 "medicine_side_effect_id": {

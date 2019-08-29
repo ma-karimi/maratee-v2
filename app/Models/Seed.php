@@ -252,7 +252,7 @@ class Seed extends BaseModel
         'herbarium_id' => 'required|exists:herbariums,id',
         'protection_id' => 'required|exists:protections,id',
         'department_id' => 'required|exists:departments,id',
-        'plant_application_id' => 'exists:plant_applications,id',
+        'herbarium_application_id' => 'exists:herbarium_applications,id',
         'field_code' => 'string',
         'correct_field_code' => 'string',
         'accession_code' => 'string',
@@ -377,7 +377,7 @@ class Seed extends BaseModel
 
     public function plantApplication()
     {
-        return $this->belongsTo(PlantApplication::class, 'plant_application_id');
+        return $this->belongsTo(PlantApplication::class, 'herbarium_application_id');
     }
 
     public function plants()

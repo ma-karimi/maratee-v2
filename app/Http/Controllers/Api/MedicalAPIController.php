@@ -79,7 +79,7 @@ class MedicalAPIController extends AppBaseController
      *      description="Store Medical",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="plant_application_id",
+     *          name="herbarium_application_id",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=true,
@@ -289,7 +289,7 @@ class MedicalAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_application_id",
+     *          name="herbarium_application_id",
      *          in="body",
      *          description="Medical that should be stored",
      *          required=true,
