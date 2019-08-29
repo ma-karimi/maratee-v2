@@ -400,19 +400,19 @@ class MedicinalPlant extends BaseModel
     public function distillation()
     {
         return $this->belongsTo(Method::class, 'method_distillation_id'
-        )->where('name', 'LIKE', '%distillation%');
+        )->where('name->en', 'LIKE', '%distillation%');
     }
 
     public function extraction()
     {
         return $this->belongsTo(Method::class, 'method_extraction_id'
-        )->where('name', 'LIKE', '%extraction%');
+        )->where('name->en', 'LIKE', '%extraction%');
     }
 
     public function analyse()
     {
         return $this->belongsTo(Method::class, 'method_analyse_id'
-        )->where('name', 'LIKE', '%analyse%');
+        )->where('name->en', 'LIKE', '%analyse%');
     }
 
     public function secondaryMetabolite()
