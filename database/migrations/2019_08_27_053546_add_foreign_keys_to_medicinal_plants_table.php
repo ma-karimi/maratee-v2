@@ -17,6 +17,18 @@ class AddForeignKeysToMedicinalPlantsTable extends Migration {
 			$table->foreign('plant_application_id')->references('id')->on('plant_applications')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('aerial_part_id')->references('id')->on('medicinal_parts')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('ground_part_id')->references('id')->on('medicinal_parts')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('food_industry_id')->references('id')->on('medicinal_plant_types')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('hygienic_cosmetic_industry_id')->references('id')->on('medicinal_plant_types')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('other_industry_id')->references('id')->on('medicinal_plant_types')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('industrial_potential_id')->references('id')->on('medicinal_plant_types')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('general_phenology_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('method_distillation_id')->references('id')->on('methods')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('method_extraction_id')->references('id')->on('methods')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('method_analyse_id')->references('id')->on('methods')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('secondary_metabolite_id')->references('id')->on('medicinal_plant_types')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('effective_material_id')->references('id')->on('medicinal_plant_types')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('pharmaceutical_form_id')->references('id')->on('medicinal_plant_types')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('product_id')->references('id')->on('products')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 
@@ -30,7 +42,11 @@ class AddForeignKeysToMedicinalPlantsTable extends Migration {
 	{
 		Schema::table('medicinal_plants', function(Blueprint $table)
 		{
-			$table->dropForeign(['plant_application_id','aerial_part_id','ground_part_id']);
+			$table->dropForeign([
+			    'plant_application_id',
+                'aerial_part_id',
+                'ground_part_id'
+            ]);
 		});
 	}
 

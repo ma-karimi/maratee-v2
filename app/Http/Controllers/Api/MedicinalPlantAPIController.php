@@ -80,7 +80,14 @@ class MedicinalPlantAPIController extends AppBaseController
      *      description="Store MedicinalPlant",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="plant_application_id",
+     *          name="herbarium_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_name",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=true,
@@ -101,86 +108,170 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
-     *          name="code_no",
+     *          name="food_industry_id",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
-     *          name="vast_cultivation",
+     *          name="hygienic_cosmetic_industry_id",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="industrial_potential_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_phenology_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="method_distillation_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="method_extraction_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="method_analyse_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="secondary_metabolite_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="effective_material_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="traditional_iranian_medicine",
+     *          in="body",
+     *          description="0 -> raw , 1 -> processed",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="natural_drug",
+     *          in="body",
+     *          description="0 -> Human medicines , 1 -> Animal drugs",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="exporting",
+     *          in="body",
+     *          description="0 -> raw , 1 -> processed",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="importing",
+     *          in="body",
+     *          description="0 -> raw , 1 -> processed",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
      *          name="cultivated_area",
      *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
+     *          description="0 -> raw , 1 -> processed",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
      *          name="studied_sample",
      *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
+     *          description="0 -> wild , 1 -> cultivated",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
-     *          name="secondary_metabolite",
+     *          name="presence_in_country",
      *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
+     *          description="0 -> native , 1 -> endemic",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicinal_properties",
+     *          in="body",
+     *          description="medicinal_properties",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="side_effects",
+     *          in="body",
+     *          description="side_effects",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="drug_name",
+     *          in="body",
+     *          description="drug_name",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="consumption",
+     *          in="body",
+     *          description="consumption",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="active_compounds",
+     *          in="body",
+     *          description="active_compounds",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="manufacturer",
+     *          in="body",
+     *          description="manufacturer",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
      *          name="efficiency",
      *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
+     *          description="efficiency",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
-     *          name="exclusivity",
+     *          name="code_no",
      *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="life_cycle",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="phenology_stage",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="used_origin",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="used_type",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="store_type",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
+     *          description="code_no",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
@@ -283,7 +374,14 @@ class MedicinalPlantAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_application_id",
+     *          name="herbarium_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicine_name",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=true,
@@ -304,86 +402,170 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
-     *          name="code_no",
+     *          name="food_industry_id",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
-     *          name="vast_cultivation",
+     *          name="hygienic_cosmetic_industry_id",
      *          in="body",
      *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="industrial_potential_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_phenology_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="method_distillation_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="method_extraction_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="method_analyse_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="secondary_metabolite_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="effective_material_id",
+     *          in="body",
+     *          description="MedicinalPlantMorphology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="traditional_iranian_medicine",
+     *          in="body",
+     *          description="0 -> raw , 1 -> processed",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="natural_drug",
+     *          in="body",
+     *          description="0 -> Human medicines , 1 -> Animal drugs",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="exporting",
+     *          in="body",
+     *          description="0 -> raw , 1 -> processed",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="importing",
+     *          in="body",
+     *          description="0 -> raw , 1 -> processed",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
      *          name="cultivated_area",
      *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
+     *          description="0 -> raw , 1 -> processed",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
      *          name="studied_sample",
      *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
+     *          description="0 -> wild , 1 -> cultivated",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
-     *          name="secondary_metabolite",
+     *          name="presence_in_country",
      *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
+     *          description="0 -> native , 1 -> endemic",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="medicinal_properties",
+     *          in="body",
+     *          description="medicinal_properties",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="side_effects",
+     *          in="body",
+     *          description="side_effects",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="drug_name",
+     *          in="body",
+     *          description="drug_name",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="consumption",
+     *          in="body",
+     *          description="consumption",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="active_compounds",
+     *          in="body",
+     *          description="active_compounds",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="manufacturer",
+     *          in="body",
+     *          description="manufacturer",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
      *          name="efficiency",
      *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
+     *          description="efficiency",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),
      *      @SWG\Parameter(
-     *          name="exclusivity",
+     *          name="code_no",
      *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="life_cycle",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="phenology_stage",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="used_origin",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="used_type",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="store_type",
-     *          in="body",
-     *          description="MedicinalPlantMorphology that should be stored",
+     *          description="code_no",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlantMorphology")
      *      ),

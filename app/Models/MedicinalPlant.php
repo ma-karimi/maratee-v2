@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\MedicinalPlantAccessor;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
  *      definition="MedicinalPlant",
- *      required={"herbarium_id","location_id","method_id"},
+ *      required={"herbarium_id","medicine_name"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -18,56 +20,170 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="plant_application_id",
- *          description="plant_application_id",
+ *          property="herbarium_id",
+ *          description="id",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="aerial_part_id",
- *          description="aerial_part_id",
+ *          description="id",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="ground_part_id",
- *          description="ground_part_id",
+ *          description="id",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="code_no",
- *          description="code_no",
+ *          property="food_industry_id",
+ *          description="id",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="treatment",
- *          description="treatment",
- *          type="array",
- *     @SWG\Items(type="string"),
+ *          property="hygienic_cosmetic_industry_id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="vast_cultivation",
- *          description="vast_cultivation",
- *          type="array",
- *     @SWG\Items(type="string"),
+ *          property="industrial_potential_id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="general_phenology_id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="method_distillation_id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="method_extraction_id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="method_analyse_id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="secondary_metabolite_id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="effective_material_id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="product_id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="traditional_iranian_medicine",
+ *          description="traditional_iranian_medicine",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="natural_drug",
+ *          description="natural_drug",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="inherbal_medicine_store",
+ *          description="inherbal_medicine_store",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="exporting",
+ *          description="exporting",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="importing",
+ *          description="importing",
+ *          type="integer",
+ *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="cultivated_area",
  *          description="cultivated_area",
- *          type="array",
- *     @SWG\Items(type="string"),
+ *          type="integer",
+ *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="studied_sample",
  *          description="studied_sample",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="presence_in_country",
+ *          description="presence_in_country",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="medicinal_properties",
+ *          description="medicinal_properties",
  *          type="array",
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="secondary_metabolite",
- *          description="secondary_metabolite",
+ *          property="side_effects",
+ *          description="side_effects",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *      ),
+ *      @SWG\Property(
+ *          property="drug_name",
+ *          description="drug_name",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *      ),
+ *      @SWG\Property(
+ *          property="medicine_name",
+ *          description="medicine_name",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *      ),
+ *      @SWG\Property(
+ *          property="consumption",
+ *          description="consumption",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *      ),
+ *      @SWG\Property(
+ *          property="active_compounds",
+ *          description="active_compounds",
+ *          type="number",
+ *          format="double"
+ *      ),
+ *      @SWG\Property(
+ *          property="manufacturer",
+ *          description="manufacturer",
  *          type="array",
  *     @SWG\Items(type="string"),
  *      ),
@@ -75,54 +191,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          property="efficiency",
  *          description="efficiency",
  *          type="number",
- *          format="double"
  *      ),
  *      @SWG\Property(
- *          property="exclusivity",
- *          description="exclusivity",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="life_cycle",
- *          description="life_cycle",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="phenology_stage",
- *          description="phenology_stage",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="location_id",
- *          description="location_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="used_origin",
- *          description="used_origin",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="article_id",
- *          description="article_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="used_type",
- *          description="used_type",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="store_type",
- *          description="store_type",
- *          type="string",
+ *          property="code_no",
+ *          description="code_no",
+ *          type="number",
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -140,15 +213,52 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class MedicinalPlant extends BaseModel
 {
-    public static $rules=[
-        'plant_origin_id' => 'integer',
-        'code_no' => 'integer',
-        'efficiency' => 'numeric',
-        'store_type' => 'string',
-        'location_id' => 'required|exists:locations,id',
-        'article_id' => 'exists:methods,id',
+    use MedicinalPlantAccessor;
+
+    public const TRADITIONAL_IRANIAN_MEDICINE = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
+    public const NATURAL_DRUG = [0 => 'unknown', 1 => 'human medicines', 2 => 'animal drugs'];
+    public const INHERBAL_MEDICINE_STORE = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
+    public const EXPORTING = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
+    public const IMPORTING = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
+    public const CULTIVATED_AREA = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
+    public const STUDIED_SAMPLE = [0 => 'unknown', 1 => 'wild', 2 => 'cultivated'];
+    public const PRESENCE_IN_COUNTRY = [0 => 'unknown', 1 => 'native', 2 => 'endemic'];
+
+    public static $rules = [
+        'herbarium_id' => 'required|exists:herbariums,id',
         'aerial_part_id' => 'exists:medicinal_parts,id',
         'ground_part_id' => 'exists:medicinal_parts,id',
+        'food_industry_id' => 'exists:medicinal_plant_types,id',
+        'hygienic_cosmetic_industry_id' => 'exists:medicinal_plant_types,id',
+        'other_industry_id' => 'exists:medicinal_plant_types,id',
+        'industrial_potential_id' => 'exists:medicinal_plant_types,id',
+        'general_phenology_id' => 'exists:generals,id',
+        'method_distillation_id' => 'exists:methods,id',
+        'method_extraction_id' => 'exists:methods,id',
+        'method_analyse_id' => 'exists:methods,id',
+        'secondary_metabolite_id' => 'exists:medicinal_plant_types,id',
+        'effective_material_id' => 'exists:medicinal_plant_types,id',
+        'pharmaceutical_form_id' => 'exists:medicinal_plant_types,id',
+        'product_id' => 'exists:products,id',
+        'traditional_iranian_medicine' => 'integer',
+        'natural_drug' => 'integer',
+        'inherbal_medicine_store' => 'integer',
+        'exporting' => 'integer',
+        'importing' => 'integer',
+        'cultivated_area' => 'integer',
+        'studied_sample' => 'integer',
+        'presence_in_country' => 'integer',
+        'code_no' => 'integer',
+    ];
+    public static $linguistically = [
+        'medicine_name' => true,
+        'medicinal_properties' => false,
+        'side_effects' => false,
+        'drug_name' => false,
+        'consumption' => false,
+        'active_compounds' => false,
+        'manufacturer' => false,
+        'efficiency' => false,
     ];
     /**
      * The database table used by the model.
@@ -163,34 +273,23 @@ class MedicinalPlant extends BaseModel
      * @var array
      */
     protected $casts = [
-        'treatment' => 'json',
-        'vast_cultivation' => 'json',
-        'cultivated_area' => 'json',
-        'studied_sample' => 'json',
-        'efficiency' => 'double',
-        'secondary_metabolite' => 'json',
-        'exclusivity' => 'json',
-        'life_cycle' => 'json',
-        'phenology_stage' => 'json',
-        'used_origin' => 'json',
-        'used_type' => 'json',
+        'medicinal_properties' => 'json',
+        'side_effects' => 'json',
+        'drug_name' => 'json',
+        'medicine_name' => 'json',
+        'consumption' => 'json',
+        'active_compounds' => 'json',
+        'manufacturer' => 'json',
+        'efficiency' => 'json',
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function plantApplication(): BelongsTo
-    {
-        return $this->belongsTo(PlantApplication::class);
-    }
-
 
     /**
-     * @return HasMany
+     * @return MorphMany
      */
-    public function medias(): HasMany
+    public function medias(): MorphMany
     {
-        return $this->hasMany(Media::class)->latest();
+        return $this->morphMany(Media::class, 'mediable');
     }
 
     /**
@@ -216,7 +315,7 @@ class MedicinalPlant extends BaseModel
     public function articles(): MorphToMany
     {
         return $this->morphToMany(Article::class,
-            'articleable','article_hubs')
+            'articleable', 'article_hubs')
             ->whereNull('location_hubs.deleted_at')
             ->withTimestamps();
     }
@@ -248,14 +347,94 @@ class MedicinalPlant extends BaseModel
             ->withTimestamps();
     }
 
-    public function medicinalAerialType()
+    /**
+     * @return BelongsTo
+     */
+    public function herbarium(): BelongsTo
     {
-        return $this->belongsTo(MedicinalPart::class
-        )->where('type',array_search('aerial',MedicinalPart::TYPE));
+        return $this->belongsTo(Herbarium::class);
     }
-    public function medicinalGroundType()
+
+    public function aerialType()
     {
         return $this->belongsTo(MedicinalPart::class
-        )->where('type',array_search('ground',MedicinalPart::TYPE));
+        )->where('type', array_search('aerial', MedicinalPart::TYPE));
+    }
+
+    public function groundType()
+    {
+        return $this->belongsTo(MedicinalPart::class
+        )->where('type', array_search('ground', MedicinalPart::TYPE));
+    }
+
+    public function foodIndustry()
+    {
+        return $this->belongsTo(MedicinalPlantType::class, 'food_industry_id'
+        )->where('type_id', array_search('food_industry', MedicinalPlantType::TYPE));
+    }
+
+    public function hygienicCosmeticIndustry()
+    {
+        return $this->belongsTo(MedicinalPlantType::class, 'hygienic_cosmetic_industry_id'
+        )->where('type_id', array_search('hygienic cosmetic', MedicinalPlantType::TYPE));
+    }
+
+    public function otherIndustry()
+    {
+        return $this->belongsTo(MedicinalPlantType::class, 'other_industry_id'
+        )->where('type_id', array_search('other_industry', MedicinalPlantType::TYPE));
+    }
+
+    public function industrialPotential()
+    {
+        return $this->belongsTo(MedicinalPlantType::class, 'industrial_potential_id'
+        )->where('type_id', array_search('industrial_potential', MedicinalPlantType::TYPE));
+    }
+
+    public function phenology()
+    {
+        return $this->belongsTo(General::class, 'general_phenology_id'
+        )->where('type', 'phenology');
+    }
+
+    public function distillation()
+    {
+        return $this->belongsTo(Method::class, 'method_distillation_id'
+        )->where('name', 'LIKE', '%distillation%');
+    }
+
+    public function extraction()
+    {
+        return $this->belongsTo(Method::class, 'method_extraction_id'
+        )->where('name', 'LIKE', '%extraction%');
+    }
+
+    public function analyse()
+    {
+        return $this->belongsTo(Method::class, 'method_analyse_id'
+        )->where('name', 'LIKE', '%analyse%');
+    }
+
+    public function secondaryMetabolite()
+    {
+        return $this->belongsTo(MedicinalPlantType::class, 'secondary_metabolite_id'
+        )->where('type_id', array_search('secondary_metabolite', MedicinalPlantType::TYPE));
+    }
+
+    public function effectiveMaterial()
+    {
+        return $this->belongsTo(MedicinalPlantType::class, 'effective_material_id'
+        )->where('type_id', array_search('material', MedicinalPlantType::TYPE));
+    }
+
+    public function pharmaceuticalForm()
+    {
+        return $this->belongsTo(MedicinalPlantType::class, 'pharmaceutical_form_id'
+        )->where('type_id', array_search('pharmaceutical', MedicinalPlantType::TYPE));
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }

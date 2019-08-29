@@ -14636,7 +14636,16 @@
                 ],
                 "parameters": [
                     {
-                        "name": "plant_application_id",
+                        "name": "herbarium_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "medicine_name",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": true,
@@ -14663,7 +14672,7 @@
                         }
                     },
                     {
-                        "name": "code_no",
+                        "name": "food_industry_id",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": false,
@@ -14672,9 +14681,108 @@
                         }
                     },
                     {
-                        "name": "vast_cultivation",
+                        "name": "hygienic_cosmetic_industry_id",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "industrial_potential_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "general_phenology_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "method_distillation_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "method_extraction_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "method_analyse_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "secondary_metabolite_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "effective_material_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "traditional_iranian_medicine",
+                        "in": "body",
+                        "description": "0 -> raw , 1 -> processed",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "natural_drug",
+                        "in": "body",
+                        "description": "0 -> Human medicines , 1 -> Animal drugs",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "exporting",
+                        "in": "body",
+                        "description": "0 -> raw , 1 -> processed",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "importing",
+                        "in": "body",
+                        "description": "0 -> raw , 1 -> processed",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlantMorphology"
@@ -14683,7 +14791,7 @@
                     {
                         "name": "cultivated_area",
                         "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
+                        "description": "0 -> raw , 1 -> processed",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlantMorphology"
@@ -14692,16 +14800,70 @@
                     {
                         "name": "studied_sample",
                         "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
+                        "description": "0 -> wild , 1 -> cultivated",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlantMorphology"
                         }
                     },
                     {
-                        "name": "secondary_metabolite",
+                        "name": "presence_in_country",
                         "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
+                        "description": "0 -> native , 1 -> endemic",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "medicinal_properties",
+                        "in": "body",
+                        "description": "medicinal_properties",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "side_effects",
+                        "in": "body",
+                        "description": "side_effects",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "drug_name",
+                        "in": "body",
+                        "description": "drug_name",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "consumption",
+                        "in": "body",
+                        "description": "consumption",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "active_compounds",
+                        "in": "body",
+                        "description": "active_compounds",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "manufacturer",
+                        "in": "body",
+                        "description": "manufacturer",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlantMorphology"
@@ -14710,61 +14872,16 @@
                     {
                         "name": "efficiency",
                         "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
+                        "description": "efficiency",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlantMorphology"
                         }
                     },
                     {
-                        "name": "exclusivity",
+                        "name": "code_no",
                         "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
-                        "name": "life_cycle",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
-                        "name": "phenology_stage",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
-                        "name": "used_origin",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
-                        "name": "used_type",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
-                        "name": "store_type",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
+                        "description": "code_no",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlantMorphology"
@@ -14849,7 +14966,16 @@
                         "type": "integer"
                     },
                     {
-                        "name": "plant_application_id",
+                        "name": "herbarium_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "medicine_name",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": true,
@@ -14876,7 +15002,7 @@
                         }
                     },
                     {
-                        "name": "code_no",
+                        "name": "food_industry_id",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
                         "required": false,
@@ -14885,9 +15011,108 @@
                         }
                     },
                     {
-                        "name": "vast_cultivation",
+                        "name": "hygienic_cosmetic_industry_id",
                         "in": "body",
                         "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "industrial_potential_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "general_phenology_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "method_distillation_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "method_extraction_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "method_analyse_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "secondary_metabolite_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "effective_material_id",
+                        "in": "body",
+                        "description": "MedicinalPlantMorphology that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "traditional_iranian_medicine",
+                        "in": "body",
+                        "description": "0 -> raw , 1 -> processed",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "natural_drug",
+                        "in": "body",
+                        "description": "0 -> Human medicines , 1 -> Animal drugs",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "exporting",
+                        "in": "body",
+                        "description": "0 -> raw , 1 -> processed",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "importing",
+                        "in": "body",
+                        "description": "0 -> raw , 1 -> processed",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlantMorphology"
@@ -14896,7 +15121,7 @@
                     {
                         "name": "cultivated_area",
                         "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
+                        "description": "0 -> raw , 1 -> processed",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlantMorphology"
@@ -14905,16 +15130,70 @@
                     {
                         "name": "studied_sample",
                         "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
+                        "description": "0 -> wild , 1 -> cultivated",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlantMorphology"
                         }
                     },
                     {
-                        "name": "secondary_metabolite",
+                        "name": "presence_in_country",
                         "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
+                        "description": "0 -> native , 1 -> endemic",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "medicinal_properties",
+                        "in": "body",
+                        "description": "medicinal_properties",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "side_effects",
+                        "in": "body",
+                        "description": "side_effects",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "drug_name",
+                        "in": "body",
+                        "description": "drug_name",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "consumption",
+                        "in": "body",
+                        "description": "consumption",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "active_compounds",
+                        "in": "body",
+                        "description": "active_compounds",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantMorphology"
+                        }
+                    },
+                    {
+                        "name": "manufacturer",
+                        "in": "body",
+                        "description": "manufacturer",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlantMorphology"
@@ -14923,61 +15202,16 @@
                     {
                         "name": "efficiency",
                         "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
+                        "description": "efficiency",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlantMorphology"
                         }
                     },
                     {
-                        "name": "exclusivity",
+                        "name": "code_no",
                         "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
-                        "name": "life_cycle",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
-                        "name": "phenology_stage",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
-                        "name": "used_origin",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
-                        "name": "used_type",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMorphology"
-                        }
-                    },
-                    {
-                        "name": "store_type",
-                        "in": "body",
-                        "description": "MedicinalPlantMorphology that should be stored",
+                        "description": "code_no",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlantMorphology"
@@ -15253,241 +15487,6 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of MedicinalPlantConstituent",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/medicinal_plant_methods": {
-            "get": {
-                "tags": [
-                    "MedicinalPlantMethod"
-                ],
-                "summary": "Get a listing of the MedicinalPlantMethods.",
-                "description": "Get all MedicinalPlantMethods",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/MedicinalPlantMethod"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "MedicinalPlantMethod"
-                ],
-                "summary": "Store a newly created MedicinalPlantMethod in storage",
-                "description": "Store MedicinalPlantMethod",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "medicinal_plant_id",
-                        "in": "body",
-                        "description": "MedicinalPlantMethod that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMethod"
-                        }
-                    },
-                    {
-                        "name": "constituent_id",
-                        "in": "body",
-                        "description": "MedicinalPlantMethod that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMethod"
-                        }
-                    },
-                    {
-                        "name": "value",
-                        "in": "body",
-                        "description": "MedicinalPlantMethod that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMethod"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/MedicinalPlantMethod"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/medicinal_plant_methods/{id}": {
-            "get": {
-                "tags": [
-                    "MedicinalPlantMethod"
-                ],
-                "summary": "Display the specified MedicinalPlantMethod",
-                "description": "Get MedicinalPlantMethod",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of MedicinalPlantMethod",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/MedicinalPlantMethod"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "MedicinalPlantMethod"
-                ],
-                "summary": "Update the specified MedicinalPlantMethod in storage",
-                "description": "Update MedicinalPlantMethod",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of MedicinalPlantMethod",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "medicinal_plant_id",
-                        "in": "body",
-                        "description": "MedicinalPlantMethod that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMethod"
-                        }
-                    },
-                    {
-                        "name": "constituent_id",
-                        "in": "body",
-                        "description": "MedicinalPlantMethod that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMethod"
-                        }
-                    },
-                    {
-                        "name": "value",
-                        "in": "body",
-                        "description": "MedicinalPlantMethod that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantMethod"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/MedicinalPlantMethod"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "MedicinalPlantMethod"
-                ],
-                "summary": "Remove the specified MedicinalPlantMethod from storage",
-                "description": "Delete MedicinalPlantMethod",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of MedicinalPlantMethod",
                         "required": true,
                         "type": "integer"
                     }
@@ -30337,8 +30336,7 @@
         "MedicinalPlant": {
             "required": [
                 "herbarium_id",
-                "location_id",
-                "method_id"
+                "medicine_name"
             ],
             "properties": {
                 "id": {
@@ -30346,56 +30344,153 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "plant_application_id": {
-                    "description": "plant_application_id",
+                "herbarium_id": {
+                    "description": "id",
                     "type": "integer",
                     "format": "int32"
                 },
                 "aerial_part_id": {
-                    "description": "aerial_part_id",
+                    "description": "id",
                     "type": "integer",
                     "format": "int32"
                 },
                 "ground_part_id": {
-                    "description": "ground_part_id",
+                    "description": "id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "code_no": {
-                    "description": "code_no",
+                "food_industry_id": {
+                    "description": "id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "treatment": {
-                    "description": "treatment",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "hygienic_cosmetic_industry_id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
                 },
-                "vast_cultivation": {
-                    "description": "vast_cultivation",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "industrial_potential_id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "general_phenology_id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "method_distillation_id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "method_extraction_id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "method_analyse_id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "secondary_metabolite_id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "effective_material_id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "product_id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "traditional_iranian_medicine": {
+                    "description": "traditional_iranian_medicine",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "natural_drug": {
+                    "description": "natural_drug",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "inherbal_medicine_store": {
+                    "description": "inherbal_medicine_store",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "exporting": {
+                    "description": "exporting",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "importing": {
+                    "description": "importing",
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "cultivated_area": {
                     "description": "cultivated_area",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "studied_sample": {
                     "description": "studied_sample",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "presence_in_country": {
+                    "description": "presence_in_country",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "medicinal_properties": {
+                    "description": "medicinal_properties",
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 },
-                "secondary_metabolite": {
-                    "description": "secondary_metabolite",
+                "side_effects": {
+                    "description": "side_effects",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "drug_name": {
+                    "description": "drug_name",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "medicine_name": {
+                    "description": "medicine_name",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "consumption": {
+                    "description": "consumption",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "active_compounds": {
+                    "description": "active_compounds",
+                    "type": "number",
+                    "format": "double"
+                },
+                "manufacturer": {
+                    "description": "manufacturer",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -30403,51 +30498,11 @@
                 },
                 "efficiency": {
                     "description": "efficiency",
-                    "type": "number",
-                    "format": "double"
+                    "type": "number"
                 },
-                "exclusivity": {
-                    "description": "exclusivity",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "life_cycle": {
-                    "description": "life_cycle",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "phenology_stage": {
-                    "description": "phenology_stage",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "location_id": {
-                    "description": "location_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "used_origin": {
-                    "description": "used_origin",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "article_id": {
-                    "description": "article_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "used_type": {
-                    "description": "used_type",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "store_type": {
-                    "description": "store_type",
-                    "type": "string"
+                "code_no": {
+                    "description": "code_no",
+                    "type": "number"
                 },
                 "created_at": {
                     "description": "created_at",
@@ -30485,39 +30540,6 @@
                 },
                 "value": {
                     "description": "value",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
-        },
-        "MedicinalPlantMethod": {
-            "required": [
-                "medicinal_plant_id",
-                "method_id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "medicinal_plant_id": {
-                    "description": "medicinal_plant_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "method_id": {
-                    "description": "method_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -30717,6 +30739,10 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "type_id": {
+                    "description": "type_id",
+                    "type": "integer"
                 },
                 "created_at": {
                     "description": "created_at",
