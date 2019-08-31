@@ -2,13 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Models\General;
 use App\Models\Plant;
-use App\Models\PlantProperty;
-use function GuzzleHttp\Promise\queue;
 use Illuminate\Container\Container as Application;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Class PlantRepository

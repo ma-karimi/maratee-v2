@@ -40,7 +40,7 @@ use Illuminate\Validation\Rule;
  *      ),
  *      @SWG\Property(
  *          property="type",
- *          description="type",
+ *          description="type: 'phytogeography', 'phenology', 'plant_type', 'species', 'sub_species', 'variety', 'family', 'genus', 'class', 'group', 'order', 'flowering', 'sperm', 'cotyledon', 'growth', 'usage', 'part', 'industry', 'application', 'habitat', 'ecology', 'origin', 'lichen', 'moss', 'diatom', 'substrate', 'biological'",
  *          type="string"
  *      ),
  *      @SWG\Property(
