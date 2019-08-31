@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration {
 			$table->json('name');
 			$table->json('description')->nullable();
 			$table->string('registration_status', 45)->nullable();
+			$table->string('components')->nullable();
 			$table->unsignedBigInteger('organization_id');
 
             $table->timeStampsTz();

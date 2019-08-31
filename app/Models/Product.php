@@ -33,6 +33,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          type="string"
  *      ),
  *      @SWG\Property(
+ *          property="components",
+ *          description="components",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
  *          property="organization_id",
  *          description="organization_id",
  *          type="integer",
@@ -59,7 +64,7 @@ class Product extends BaseModel
     public static $linguistically=['name'=>true,'description'=>false];
     public static $rules=[
         'organization_id' => 'required|exists:organizations,id',
-        'registration_status' => 'string',
+        'registration_status' => 'integer|required',
     ];
     /**
      * The database table used by the model.
