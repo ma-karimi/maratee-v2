@@ -48,20 +48,12 @@ class BaseModel extends Model
         parent::__construct($attributes);
         $languages = config('settings.languages');
         $this->exceptionLanguageHandler($languages);
-
         $this->validateJsonRequestHandler($languages);
         $this->setNotSearchable($this->getLinguistically());
         $this->setJsonSelectables();
 
     }
 
-    /**
-     * @param array $fields
-     */
-    public function setNotSearchable(array $fields): void
-    {
-        $this->notSearchable = array_merge($this->notSearchable, array_keys($fields));
-    }
     /**
      * @param $languages
      * @return mixed
@@ -155,6 +147,13 @@ class BaseModel extends Model
         }
     }
 
+    /**
+     * @param array $fields
+     */
+    public function setNotSearchable(array $fields): void
+    {
+        $this->notSearchable = array_merge($this->notSearchable, array_keys($fields));
+    }
     /**
      * @return array
      */

@@ -14,7 +14,7 @@ use Kalnoy\Nestedset\NodeTrait;
 /**
  * @SWG\Definition(
  *      definition="Herbarium",
- *      required={"location_id","organization_id", "plant_id"},
+ *      required={"general_habitat_id","general_phytogeography_id","life_forms","organization_id", "plant_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -34,18 +34,17 @@ use Kalnoy\Nestedset\NodeTrait;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="location_id",
- *          description="location_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
  *          property="general_phenology_id",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="general_origin_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="general_phytogeography_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -58,11 +57,6 @@ use Kalnoy\Nestedset\NodeTrait;
  *      @SWG\Property(
  *          property="organization_id",
  *          description="organization_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="general_phytogeography_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -132,25 +126,14 @@ use Kalnoy\Nestedset\NodeTrait;
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="herbarium_tip_location",
- *          description="herbarium_tip_location",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="type_description",
- *          description="type_description",
+ *          property="flowering_time",
+ *          description="flowering_time",
  *          type="array",
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="general_type_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="flowering_time",
- *          description="flowering_time",
+ *          property="life_forms",
+ *          description="life_forms",
  *          type="array",
  *     @SWG\Items(type="string"),
  *      ),
@@ -187,8 +170,9 @@ class Herbarium extends BaseModel
 {
     use HerbariumScope,NodeTrait;
 
-    public static $linguistically = ['flowering' => false,'habitat_description' => false,'ecology_description' => false,'life_forms'=>false];
+    public static $linguistically = ['flowering' => false,'habitat_description' => false,'ecology_description' => false];
     public static $rules = [
+        'life_forms' => 'required|array',
         'protection_id' => 'exists:protections,id',
         'organization_id' => 'required|exists:organizations,id',
         'plant_id' => 'required|exists:plants,id',
