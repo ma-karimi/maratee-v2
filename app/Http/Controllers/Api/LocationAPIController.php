@@ -57,6 +57,7 @@ class LocationAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -81,12 +82,6 @@ class LocationAPIController extends AppBaseController
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="address",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Location")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="name",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Location")
@@ -258,12 +253,6 @@ class LocationAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="city_id",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Location")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="name",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Location")

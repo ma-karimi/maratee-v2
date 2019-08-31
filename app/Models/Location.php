@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 /**
  * @SWG\Definition(
  *      definition="Location",
- *      required={"address","name", "city_id"},
+ *      required={"address", "city_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -51,12 +51,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="name",
- *          description="name",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
  *          property="description",
  *          description="description",
  *          type="array",
@@ -90,7 +84,7 @@ class Location extends BaseModel
 {
     use SpatialTrait,LocationAccessor,LocationMutator;
 
-    public static $linguistically=['name'=>true,'description'=>false,'region_name'=>false,'address'=>true];
+    public static $linguistically=['description'=>false,'region_name'=>false,'address'=>true];
     public static $rules=[
         'city_id' => 'required|exists:cities,id',
         'village_id' => 'exists:villages,id',
@@ -115,7 +109,7 @@ class Location extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['name' => 'json', 'description' => 'json', 'region_name'=>'json', 'address'=>'json'];
+    protected $casts = ['description' => 'json', 'region_name'=>'json', 'address'=>'json'];
 
 
     /**
