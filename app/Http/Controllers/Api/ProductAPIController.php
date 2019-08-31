@@ -107,6 +107,13 @@ class ProductAPIController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Product")
      *      ),
+     *      @SWG\Parameter(
+     *          name="components",
+     *          in="body",
+     *          description="Product that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Product")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -228,6 +235,13 @@ class ProductAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="registration_status",
+     *          in="body",
+     *          description="Product that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Product")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="components",
      *          in="body",
      *          description="Product that should be stored",
      *          required=false,

@@ -100,6 +100,13 @@ class MethodAPIController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Method")
      *      ),
+     *      @SWG\Parameter(
+     *          name="type_id",
+     *          in="body",
+     *          description="1:distillation, 2: extraction, 3: analyse",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Method")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -216,6 +223,13 @@ class MethodAPIController extends AppBaseController
      *          name="description",
      *          in="body",
      *          description="Method that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Method")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type_id",
+     *          in="body",
+     *          description="1:distillation, 2: extraction, 3: analyse",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Method")
      *      ),
