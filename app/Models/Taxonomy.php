@@ -46,6 +46,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="tip_type_id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
  *          property="family_id",
  *          description="id",
  *          type="integer",
@@ -76,6 +82,7 @@ class Taxonomy extends BaseModel
         'species_id' => 'exists:generals,id',
         'variety_id' => 'exists:generals,id',
         'subspecies_id' => 'exists:generals,id',
+        'tip_type_id' => 'exists:generals,id',
     ];
     /**
      * The database table used by the model.
@@ -118,6 +125,14 @@ class Taxonomy extends BaseModel
     public function subspecies(): BelongsTo
     {
         return $this->belongsTo(General::class, 'subspecies_id')->where('type','sub_species');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function tipType(): BelongsTo
+    {
+        return $this->belongsTo(General::class, 'tip_type_id')->where('type','plant_type');
     }
 
     /**

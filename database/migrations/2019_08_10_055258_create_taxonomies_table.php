@@ -22,6 +22,8 @@ class CreateTaxonomiesTable extends Migration
             $table->unsignedBigInteger('class_id')->nullable();
             $table->unsignedBigInteger('genus_id')->nullable();
             $table->unsignedBigInteger('species_id')->nullable();
+            $table->unsignedBigInteger('sub_species_id')->nullable();
+            $table->unsignedBigInteger('tip_type_id')->nullable();
             $table->unsignedBigInteger('variety_id')->nullable();
             $table->json('type_description')->nullable()->comment('plant type description');
 
@@ -31,6 +33,8 @@ class CreateTaxonomiesTable extends Migration
             $table->foreign('variety_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('family_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('order_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('sub_species_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('tip_type_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('NO ACTION')->onDelete('cascade');
 
             $table->timeStampsTz();

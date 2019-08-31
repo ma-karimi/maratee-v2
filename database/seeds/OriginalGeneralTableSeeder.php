@@ -40,6 +40,16 @@ class OriginalGeneralTableSeeder extends Seeder
         ['en' => 'Liliopsida'],
         ['en' => 'Magnoliopsida'],
     ];
+    public $plant_types = [
+        ['en' => 'Holotype'],
+        ['en' => 'Lectotype'],
+        ['en' => 'Neotype'],
+        ['en' => 'Epitypes'],
+        ['en' => 'Syntypes'],
+        ['en' => 'Paratypes'],
+        ['en' => 'Isotypes'],
+        ['en' => 'Topotypes'],
+    ];
     public $ecologies = [
         ['en' => 'Grassland'],
         ['en' => 'Forest'],
@@ -130,6 +140,11 @@ class OriginalGeneralTableSeeder extends Seeder
         foreach ($this->classes as $type) {
             General::create(
                 ['name' => $type, 'type' => 'class']
+            );
+        }
+        foreach ($this->plant_types as $type) {
+            General::create(
+                ['name' => $type, 'type' => 'plant_type']
             );
         }
         foreach ($this->phenologies as $type) {

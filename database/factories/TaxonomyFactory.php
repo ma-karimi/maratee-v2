@@ -9,6 +9,7 @@ $factory->define(App\Models\Taxonomy::class, function (Faker $faker) {
     $plant_genus_generals = \App\Models\General::where('type', 'genus')->pluck('id')->toArray();
     $plant_specie_generals = \App\Models\General::where('type', 'specie')->pluck('id')->toArray();
     $plant_sub_specie_generals = \App\Models\General::where('type', 'sub_specie')->pluck('id')->toArray();
+    $plant_type_generals = \App\Models\General::where('type', 'plant_type')->pluck('id')->toArray();
     $plant_variety_generals = \App\Models\General::where('type', 'variety')->pluck('id')->toArray();
     $orders = \App\Models\General::where('type', 'order')->pluck('id')->toArray();
     $classes = \App\Models\General::where('type', 'class')->pluck('id')->toArray();
@@ -21,6 +22,8 @@ $factory->define(App\Models\Taxonomy::class, function (Faker $faker) {
         'order_id' => $faker->randomElement($orders),
         'class_id' => $faker->randomElement($classes),
         'plant_id' => $faker->randomElement($plants),
+        'tip_type_id' => $faker->randomElement($plant_type_generals),
+        'sub_species_id' => $faker->randomElement($plant_sub_specie_generals),
         'type_description' => make_json($faker->word),
     ];
 });
