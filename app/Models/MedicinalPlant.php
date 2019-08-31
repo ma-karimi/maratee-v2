@@ -198,6 +198,23 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          type="number",
  *      ),
  *      @SWG\Property(
+ *          property="flower_color",
+ *          description="flower_color",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *      ),
+ *      @SWG\Property(
+ *          property="fruit_color",
+ *          description="fruit_color",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *      ),
+ *      @SWG\Property(
+ *          property="height",
+ *          description="height (cm)",
+ *          type="string",
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -249,6 +266,7 @@ class MedicinalPlant extends BaseModel
         'studied_sample' => 'integer',
         'presence_in_country' => 'integer',
         'code_no' => 'integer',
+        'height' => 'string',
     ];
     public static $linguistically = [
         'medicine_name' => true,
@@ -259,6 +277,8 @@ class MedicinalPlant extends BaseModel
         'active_compounds' => false,
         'manufacturer' => false,
         'efficiency' => false,
+        'fruit_color' => false,
+        'flower_color' => false,
     ];
     /**
      * The database table used by the model.
@@ -281,6 +301,8 @@ class MedicinalPlant extends BaseModel
         'active_compounds' => 'json',
         'manufacturer' => 'json',
         'efficiency' => 'json',
+        'fruit_color' => 'json',
+        'flower_color' => 'json',
     ];
 
 
@@ -298,14 +320,6 @@ class MedicinalPlant extends BaseModel
     public function medicinalPlantConstituents(): HasMany
     {
         return $this->hasMany(MedicinalPlantConstituent::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function medicinalPlantMorphologies(): HasMany
-    {
-        return $this->hasMany(MedicinalPlantMorphology::class)->latest();
     }
 
 

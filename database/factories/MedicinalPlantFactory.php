@@ -47,5 +47,8 @@ $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
         'presence_in_country' =>array_rand(MedicinalPlant::PRESENCE_IN_COUNTRY) ,
         'medicine_name' =>make_json($faker->word) ,
         'code_no' =>$faker->numberBetween(1,100),
+        'flower_color' =>make_json($faker->word),
+        'fruit_color' =>make_json($faker->word),
+        'height' =>random_int(1,100).'-'.random_int(100,200),
     ];
 });
