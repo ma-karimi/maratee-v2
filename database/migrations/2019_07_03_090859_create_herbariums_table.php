@@ -17,7 +17,7 @@ class CreateHerbariumsTable extends Migration
     {
         Schema::create('herbariums', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('number')->nullable()->comment('herbarium number
+            $table->string('number')->nullable()->comment('herbarium number
 ');
 //			$table->unsignedBigInteger('location_id');
 
@@ -30,21 +30,13 @@ if tip_qt > 0, it meant we have the tip herbarium, otherwise means we don\'t hav
             $table->integer('physical_tip_qt')->nullable()->comment('it means how many physical tips we have.
 if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >0, it means we have image tips, rather than physical tips.
 ');
-            $table->string('tip_type', 45)->nullable()->comment('it has the following types:
-کلوتیپ
-ایزوتیپ
-پاراتیپ
-لکتوتیپ
-');
-            //$table->json('name')->nullable();
 
             $table->json('description')->nullable();
-            $table->tinyInteger('is_flowering')->default(0)->comment('options:
-yes or no
-');
-            $table->json('organization_description')->nullable();
-            $table->integer('herbarium_tip_location')->nullable()->comment('location of keeping herbarium tip.
-that is an herbarium organization which we can but its id in this place');
+            $table->tinyInteger('growth_rate')->default(0)->comment('[0:unknown, 1: very low, 2: low, 3: moderate, 4: fast, 5: very fast]');
+            $table->boolean('is_flowering')->default(0);
+//            $table->json('organization_description')->nullable();
+//            $table->integer('herbarium_tip_location')->nullable()->comment('location of keeping herbarium tip.
+//that is an herbarium organization which we can but its id in this place');
 
             $table->string('flowering_time')->nullable();
             $table->unsignedBigInteger('protection_id');
@@ -61,7 +53,6 @@ that is an herbarium organization which we can but its id in this place');
             $table->unsignedBigInteger('general_phytogeography_id');
             $table->json('life_forms')->comment('life_form_leaf_id', 'life_form_cycle_id', 'life_form_wooden_id', 'life_form_herbaceous_id');
 
-          /*  $table->unsignedBigInteger('life_form_leaf_id')->virtualAs('life_forms->>"$.leaf_id"')->nullable();*/
 
             $table->json('habitat_description')->nullable();
             $table->json('ecology_description')->nullable();
@@ -75,6 +66,8 @@ that is an herbarium organization which we can but its id in this place');
 
             $table->timeStampsTz();
             $table->softDeletesTz();
+
+
         });
         CustomBlueprint::generatedBigIntegerVirtual('herbariums','life_form_cycle_id','cycle_id',true);
         CustomBlueprint::generatedBigIntegerVirtual('herbariums','life_form_wooden_id','wooden_id',true);
