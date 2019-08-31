@@ -143,49 +143,42 @@ class PlantAPIController extends AppBaseController
      *          in="body",
      *          description="Plant that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
      *          name="genus_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
      *          name="order_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
      *          name="class_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
      *          name="species_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
      *          name="variety_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="type_description",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -371,13 +364,6 @@ class PlantAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="variety_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="type_description",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,

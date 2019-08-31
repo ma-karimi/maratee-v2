@@ -58,6 +58,12 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
+ *          property="subspecies_ids",
+ *          description="subspecies_ids",
+ *          type="array",
+ *     @SWG\Items(type="integer")
+ *      ),
+ *      @SWG\Property(
  *          property="exclusivity",
  *          description="exclusivity",
  *          type="integer"
