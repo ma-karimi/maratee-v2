@@ -28,7 +28,7 @@ class CreateMedicalsTable extends Migration
             $table->unsignedBigInteger('medicine_usage_id');
             $table->json('usage_description')->nullable();
 
-            $table->unsignedBigInteger('plant_application_id');
+            $table->unsignedBigInteger('herbarium_application_id');
             $table->unsignedBigInteger('product_id')->nullable();
 
 

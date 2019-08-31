@@ -50,7 +50,7 @@ class CreateSeedsTable extends Migration
             $table->integer('plant_height')->nullable();
             $table->json('mother_health')->nullable();
             $table->unsignedBigInteger('department_id');
-            $table->unsignedBigInteger('plant_application_id');
+            $table->unsignedBigInteger('herbarium_application_id');
             $table->json('other_detail')->nullable();
             $table->integer('plants_sampled_no')->nullable();
             $table->integer('plants_found_no')->nullable();

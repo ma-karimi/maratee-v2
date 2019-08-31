@@ -324,7 +324,7 @@ class SeedAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Seed")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_application_id",
+     *          name="herbarium_application_id",
      *          in="body",
      *          description="Seed that should be stored",
      *          required=false,

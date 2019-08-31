@@ -14,7 +14,7 @@ class AddForeignKeysToMedicalsTable extends Migration {
 	{
 		Schema::table('medicals', function(Blueprint $table)
 		{
-			$table->foreign('plant_application_id')->references('id')->on('plant_applications')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('herbarium_application_id')->references('id')->on('herbarium_applications')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('medicine_side_effect_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('medicine_drug_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('medicine_shape_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
@@ -35,7 +35,7 @@ class AddForeignKeysToMedicalsTable extends Migration {
 	{
 		Schema::table('medicals', function(Blueprint $table)
 		{
-			$table->dropForeign(['plant_application_id']);
+			$table->dropForeign(['herbarium_application_id']);
 			$table->dropForeign(['medicine_side_effect_id']);
 			$table->dropForeign(['medicine_drug_id']);
 			$table->dropForeign(['medicine_shape_id']);

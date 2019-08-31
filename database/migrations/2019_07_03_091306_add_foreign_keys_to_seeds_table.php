@@ -17,7 +17,7 @@ class AddForeignKeysToSeedsTable extends Migration {
 			$table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('cascade');
 			$table->foreign('herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('cascade');
 			$table->foreign('protection_id')->references('id')->on('protections')->onUpdate('NO ACTION')->onDelete('cascade');
-			$table->foreign('plant_application_id')->references('id')->on('protections')->onUpdate('NO ACTION')->onDelete('cascade');
+			$table->foreign('herbarium_application_id')->references('id')->on('protections')->onUpdate('NO ACTION')->onDelete('cascade');
 			$table->foreign('collection_id')->references('id')->on('collections')->onUpdate('NO ACTION')->onDelete('cascade');
 		});
 	}
@@ -35,7 +35,7 @@ class AddForeignKeysToSeedsTable extends Migration {
 			$table->dropForeign(['department_id']);
 			$table->dropForeign(['herbarium_id']);
 			$table->dropForeign(['protection_id']);
-			$table->dropForeign(['plant_application_id']);
+			$table->dropForeign(['herbarium_application_id']);
 		});
 	}
 

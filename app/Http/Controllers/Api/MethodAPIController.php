@@ -87,6 +87,13 @@ class MethodAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Method")
      *      ),
      *      @SWG\Parameter(
+     *          name="type_id",
+     *          in="body",
+     *          description="Method that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Method")
+     *      ),
+     *      @SWG\Parameter(
      *          name="description",
      *          in="body",
      *          description="Method that should be stored",
@@ -200,6 +207,13 @@ class MethodAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="name",
+     *          in="body",
+     *          description="Method that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Method")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type_id",
      *          in="body",
      *          description="Method that should be stored",
      *          required=true,

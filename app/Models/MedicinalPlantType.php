@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\MedicinalPlantTypeAccessor;
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Model;
+
 /**
  * @SWG\Definition(
  *      definition="MedicinalPlantType",
- *      required={"name","type"},
+ *      required={"name","type_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -47,10 +48,20 @@ use Illuminate\Database\Eloquent\Model;
  */
 class MedicinalPlantType extends BaseModel
 {
-    protected $casts = ['name'=>'json', 'description'=>'json'];
-    public static $linguistically=['name'=>true,'description'=>false];
-    public static $rules=[
-        'type_id' => 'required|string',
+    use MedicinalPlantTypeAccessor;
+    public const TYPE = [
+        1 => 'food_industry',
+        2 => 'hygienic_cosmetic_industry',
+        3 => 'industrial_potential',
+        4 => 'other_industry',
+        5 => 'secondary_metabolite',
+        6 => 'material',
+        7 => 'pharmaceutical',
+    ];
+    protected $casts = ['name' => 'json', 'description' => 'json'];
+    public static $linguistically = ['name' => true, 'description' => false];
+    public static $rules = [
+        'type_id' => 'required|integer',
     ];
 
     public function medicinalPlant()

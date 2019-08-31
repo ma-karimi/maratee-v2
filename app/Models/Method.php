@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\MethodAccessor;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+
 /**
  * @SWG\Definition(
  *      definition="Method",
@@ -19,13 +21,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          property="name",
  *          description="name",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="type_id",
@@ -48,9 +50,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Method extends BaseModel
 {
-
-    public static $linguistically=['name'=>true,'description'=>false];
-    public static $rules=[
+    use MethodAccessor;
+    public const TYPE = [1 => 'distillation', 2 => 'extraction', 3 => 'analyse'];
+    public static $linguistically = ['name' => true, 'description' => false];
+    public static $rules = [
         'type_id' => 'required|integer'
     ];
     /**
@@ -76,6 +79,7 @@ class Method extends BaseModel
     {
         return $this->hasMany(MedicinalPlant::class, 'method_distillation_id')->latest();
     }
+
     /**
      * @return HasMany
      */
@@ -83,6 +87,7 @@ class Method extends BaseModel
     {
         return $this->hasMany(MedicinalPlant::class, 'method_extraction_id')->latest();
     }
+
     /**
      * @return HasMany
      */

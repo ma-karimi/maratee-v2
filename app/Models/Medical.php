@@ -9,15 +9,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 /**
  * @SWG\Definition(
  *      definition="Medical",
- *      required={"plant_application_id","medicine_effect_id","medicine_medicinal_part_id"},
+ *      required={"herbarium_application_id","medicine_effect_id","medicine_medicinal_part_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
  *      ),
  *      @SWG\Property(
- *          property="plant_application_id",
- *          description="plant_application_id",
+ *          property="herbarium_application_id",
+ *          description="herbarium_application_id",
  *          type="integer",
  *      ),
  *      @SWG\Property(
@@ -121,7 +121,7 @@ class Medical extends BaseModel
 
     public static $linguistically=['effect_description'=>true,'therapy_description'=>true,'drug_description'=>true,'shape_description'=>true,'part_description'=>true,'usage_description'=>true];
     public static $rules=[
-        'plant_application_id' => 'required|exists:plant_applications,id',
+        'herbarium_application_id' => 'required|exists:herbarium_applications,id',
         'medicine_side_effect_id' => 'required|exists:medicines,id',
         'medicine_effect_id' => 'required|exists:medicines,id',
         'medicine_therapy_id' => 'required|exists:medicines,id',

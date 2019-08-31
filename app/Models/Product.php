@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\ProductAccessor;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -30,7 +31,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="registration_status",
  *          description="registration_status",
- *          type="string"
+ *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="components",
@@ -60,7 +61,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends BaseModel
 {
-
+    use ProductAccessor;
+    public const STATUS=[1=>'unregistered',2=>'registered'];
     public static $linguistically=['name'=>true,'description'=>false];
     public static $rules=[
         'organization_id' => 'required|exists:organizations,id',

@@ -141,7 +141,7 @@ class PlantApplication extends BaseModel
      *
      * @var string
      */
-    protected $table = 'plant_applications';
+    protected $table = 'herbarium_applications';
 
 
     /**

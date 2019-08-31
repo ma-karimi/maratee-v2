@@ -17,10 +17,9 @@ class CreateProductsTable extends Migration {
 			$table->bigIncrements('id');
 			$table->json('name');
 			$table->json('description')->nullable();
-			$table->string('registration_status', 45)->nullable();
+            $table->tinyInteger('registration_status')->comment('1:unregistered, 2: registered')->default(1);
+            $table->unsignedBigInteger('organization_id');
 			$table->string('components')->nullable();
-			$table->unsignedBigInteger('organization_id');
-
             $table->timeStampsTz();
             $table->softDeletesTz();
 		});
