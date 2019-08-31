@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Libraries\CustomBlueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -67,22 +69,17 @@ that is an herbarium organization which we can but its id in this place');
 
             $table->unsignedBigInteger('organization_id');
 
+
+
             $table->nestedSet();
 
             $table->timeStampsTz();
             $table->softDeletesTz();
         });
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE herbariums ADD life_form_cycle_id BIGINT GENERATED ALWAYS AS (json_unquote(json_extract(life_forms,'$.cycle_id'))) VIRTUAL");
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE herbariums ADD life_form_wooden_id BIGINT GENERATED ALWAYS AS (json_unquote(json_extract(life_forms,'$.wooden_id'))) VIRTUAL");
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE herbariums ADD life_form_leaf_id BIGINT GENERATED ALWAYS AS (json_unquote(json_extract(life_forms,'$.leaf_id'))) VIRTUAL");
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE herbariums ADD life_form_herbaceous_id BIGINT GENERATED ALWAYS AS (json_unquote(json_extract(life_forms,'$.herbaceous_id'))) VIRTUAL");
-
-        \Illuminate\Support\Facades\Schema::table('herbariums',function (Blueprint $table){
-            $table->index('life_form_cycle_id');
-            $table->index('life_form_wooden_id');
-            $table->index('life_form_leaf_id');
-            $table->index('life_form_herbaceous_id');
-        });
+        CustomBlueprint::generatedBigIntegerVirtual('herbariums','life_form_cycle_id','cycle_id',true);
+        CustomBlueprint::generatedBigIntegerVirtual('herbariums','life_form_wooden_id','wooden_id',true);
+        CustomBlueprint::generatedBigIntegerVirtual('herbariums','life_form_leaf_id','leaf_id',true);
+        CustomBlueprint::generatedBigIntegerVirtual('herbariums','life_form_herbaceous_id','herbaceous_id',true);
     }
 
 
@@ -93,7 +90,7 @@ that is an herbarium organization which we can but its id in this place');
      */
     public function down()
     {
-        Schema::table('herbariums', function (Blueprint $table) {
+        Schema::table('herbariums', function (CustomBlueprint $table) {
             $table->dropNestedSet();
         });
         Schema::drop('herbariums');
