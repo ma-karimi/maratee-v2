@@ -23,7 +23,7 @@ $factory->define(App\Models\Taxonomy::class, function (Faker $faker) {
         'class_id' => $faker->randomElement($classes),
         'plant_id' => $faker->randomElement($plants),
         'tip_type_id' => $faker->randomElement($plant_type_generals),
-        'sub_species_id' => $faker->randomElement($plant_sub_specie_generals),
+        'subspecies_id' => $faker->randomElement($plant_sub_specie_generals),
         'type_description' => make_json($faker->word),
     ];
 });
