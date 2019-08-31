@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\HerbariumAccessor;
 use App\Models\Contracts\BaseModel;
 use App\Models\Scope\HerbariumScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -143,9 +143,8 @@ use Kalnoy\Nestedset\NodeTrait;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="general_growth_id",
- *          type="integer",
- *          format="int32"
+ *          property="growth_rate",
+ *          type="number",
  *      ),
  *      @SWG\Property(
  *          property="plant_id",
@@ -168,9 +167,13 @@ use Kalnoy\Nestedset\NodeTrait;
  */
 class Herbarium extends BaseModel
 {
-    use HerbariumScope,NodeTrait;
+    use HerbariumScope, NodeTrait, HerbariumAccessor;
 
-    public static $linguistically = ['flowering' => false,'habitat_description' => false,'ecology_description' => false];
+
+
+    public const GROWTH_RATES = [0 => 'unknown', 1 => 'very low', 2 => 'low', 3 => 'moderate', 4 => 'fast', 5 => 'very fast'];
+
+    public static $linguistically = ['flowering' => false, 'habitat_description' => false, 'ecology_description' => false];
     public static $rules = [
         'life_forms' => 'required|array',
         'protection_id' => 'exists:protections,id',
@@ -222,23 +225,24 @@ class Herbarium extends BaseModel
      * @param null $parameter
      * @return HasMany
      */
-    public function actionHubs($parameter=null): HasMany
+    public function actionHubs($parameter = null): HasMany
     {
-        return $this->hasMany(ActionHub::class,'herbarium_id','id')
-            ->when($parameter,function ($query,$parameter){
-               return $query->ofAction($parameter);
-        })->latest();
+        return $this->hasMany(ActionHub::class, 'herbarium_id', 'id')
+            ->when($parameter, function ($query, $parameter) {
+                return $query->ofAction($parameter);
+            })->latest();
     }
+
     /**
      * @param null $parameter
      * @return HasMany
      */
-    public function plantApplication($parameter=null): HasMany
+    public function plantApplication($parameter = null): HasMany
     {
-        return $this->hasMany(PlantApplication::class,'herbarium_id','id')
-            ->when($parameter,function ($query,$parameter){
-               return $query->ofAction($parameter);
-        })->latest();
+        return $this->hasMany(PlantApplication::class, 'herbarium_id', 'id')
+            ->when($parameter, function ($query, $parameter) {
+                return $query->ofAction($parameter);
+            })->latest();
     }
 
     /**
@@ -246,7 +250,7 @@ class Herbarium extends BaseModel
      */
     public function action(): MorphToMany
     {
-        return $this->morphToMany(Action::class, 'actionable','action_hubs');
+        return $this->morphToMany(Action::class, 'actionable', 'action_hubs');
     }
 
     /**
@@ -264,8 +268,9 @@ class Herbarium extends BaseModel
 
     public function actions(): MorphToMany
     {
-        return $this->morphToMany(Action::class, 'actionable','action_hubs');
+        return $this->morphToMany(Action::class, 'actionable', 'action_hubs');
     }
+
     /**
      * @return HasMany
      */
@@ -297,6 +302,7 @@ class Herbarium extends BaseModel
     {
         return $this->morphMany(Exchange::class, 'exchangeable')->latest();
     }
+
     /**
      * @return HasMany
      */
@@ -328,7 +334,7 @@ class Herbarium extends BaseModel
      */
     public function medias(): MorphMany
     {
-        return $this->morphMany(Media::class,'mediable')->latest();
+        return $this->morphMany(Media::class, 'mediable')->latest();
     }
 
     /**
@@ -390,7 +396,7 @@ class Herbarium extends BaseModel
 
     public function department()
     {
-        return $this->morphToMany(Department::class,'departmentable','department_hubs');
+        return $this->morphToMany(Department::class, 'departmentable', 'department_hubs');
     }
 
     public function generalGroup()

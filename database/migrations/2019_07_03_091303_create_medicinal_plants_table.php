@@ -49,7 +49,6 @@ class CreateMedicinalPlantsTable extends Migration {
             $table->integer('code_no')->nullable();
             $table->timeStampsTz();
             $table->softDeletesTz();
-
             //morphology
             $table->json('fruit_color')->nullable();
             $table->json('flower_color')->nullable();

@@ -21,7 +21,7 @@ class CreatePlantsTable extends Migration {
 			$table->tinyInteger('exclusivity')->nullable();
            // $table->unsignedBigInteger('taxonomy_id');
             //$table->unsignedBigInteger('classification_id');
-            $table->unsignedBigInteger('flowering_id');
+            $table->unsignedBigInteger('flowering_id')->nullable();
             $table->unsignedBigInteger('cotyledon_id')->nullable();
             $table->unsignedBigInteger('sperm_id')->nullable();
             $table->timeStampsTz();
