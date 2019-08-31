@@ -16,6 +16,7 @@ class CreateAuthorsTable extends Migration {
 		{
 			$table->bigIncrements('id');
 			$table->json('name');
+			$table->unsignedBigInteger('user_id')->nullable();
 			$table->timeStampsTz();
             $table->softDeletesTz();
 		});

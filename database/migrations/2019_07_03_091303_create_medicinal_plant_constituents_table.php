@@ -16,7 +16,8 @@ class CreateMedicinalPlantConstituentsTable extends Migration {
 		{
 			$table->unsignedBigInteger('medicinal_plant_id');
 			$table->unsignedBigInteger('constituent_id');
-			$table->integer('value');
+			$table->unsignedBigInteger('constituent_type_id');
+			$table->float('value', 4, 2);
 
 
             $table->timeStampsTz();

@@ -24,7 +24,9 @@ class Author extends BaseModel
      * @var string
      */
     protected $table = 'authors';
-
+    public static $rules = [
+        'user_id'=>'integer|exists:users,id',
+    ];
     /**
      * The attributes that should be casted to native types.
      *
