@@ -58,6 +58,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="type_description",
+ *          description="type_description",
+ *          type="array",
+ *     @SWG\Items(type="string")
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",

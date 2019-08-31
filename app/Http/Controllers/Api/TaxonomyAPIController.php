@@ -121,6 +121,27 @@ class TaxonomyAPIController extends AppBaseController
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
+     *      @SWG\Parameter(
+     *          name="order_id",
+     *          in="body",
+     *          description="Taxonomy that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="class_id",
+     *          in="body",
+     *          description="Taxonomy that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type_description",
+     *          in="body",
+     *          description="Taxonomy that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -262,9 +283,23 @@ class TaxonomyAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="order_id",
      *          in="body",
-     *          description="Taxonomy that should be updated",
+     *          description="Taxonomy that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="class_id",
+     *          in="body",
+     *          description="Taxonomy that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="type_description",
+     *          in="body",
+     *          description="Taxonomy that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
