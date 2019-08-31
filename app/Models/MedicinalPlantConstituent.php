@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 /**
  * @SWG\Definition(
  *      definition="MedicinalPlantConstituent",
@@ -27,10 +28,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="value",
- *          description="value",
+ *          property="constituent_type_id",
+ *          description="constituent_type_id",
  *          type="integer",
  *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="value",
+ *          description="value",
+ *          type="number",
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -48,10 +54,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class MedicinalPlantConstituent extends BaseModel
 {
-    public static $linguistically=['value'=>true];
-    public static $rules=[
+    public static $linguistically = ['value' => true];
+    public static $rules = [
         'medicinal_plant_id' => 'required|exists:medicinal_plants,id',
         'constituent_id' => 'required|exists:constituents,id',
+        'constituent_type_id' => 'required|exists:constituent_types,id',
+        'value' => 'required|numeric'
     ];
     /**
      * The database table used by the model.
@@ -66,6 +74,14 @@ class MedicinalPlantConstituent extends BaseModel
     public function constituent(): BelongsTo
     {
         return $this->belongsTo(Constituent::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function constituentType(): BelongsTo
+    {
+        return $this->belongsTo(ConstituentType::class);
     }
 
     /**

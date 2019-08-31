@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
             LightingTableSeeder::class,
             MapTableSeeder::class,
             MedicineTableSeeder::class,
+            ConstituentTypeTableSeeder::class,
             SeedFeatureTableSeeder::class,
             MorphologyTableSeeder::class,
             OrganizationTableSeeder::class,
