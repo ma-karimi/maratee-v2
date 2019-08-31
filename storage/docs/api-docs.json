@@ -11161,15 +11161,6 @@
                         }
                     },
                     {
-                        "name": "protection_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
                         "name": "general_phytogeography_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11233,6 +11224,15 @@
                         }
                     },
                     {
+                        "name": "habitat_description",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
                         "name": "description",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11252,33 +11252,6 @@
                     },
                     {
                         "name": "organization_description",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "herbarium_tip_location",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "type_description",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "general_type_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,
@@ -11419,6 +11392,15 @@
                         "type": "integer"
                     },
                     {
+                        "name": "organization_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
                         "name": "protection_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11428,7 +11410,7 @@
                         }
                     },
                     {
-                        "name": "organization_id",
+                        "name": "plant_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": true,
@@ -11446,34 +11428,7 @@
                         }
                     },
                     {
-                        "name": "general_type_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "general_group_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "ecology_description",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "general_ecology_id",
+                        "name": "number",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,
@@ -11492,69 +11447,6 @@
                     },
                     {
                         "name": "general_phytogeography_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "general_origin_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "general_growth_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "number",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "phenology_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "protection_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "phytogeography_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "organization_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,
@@ -11617,6 +11509,15 @@
                         }
                     },
                     {
+                        "name": "habitat_description",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
                         "name": "description",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11644,33 +11545,6 @@
                         }
                     },
                     {
-                        "name": "herbarium_tip_location",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "type_description",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "plant_type_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
                         "name": "flowering_time",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11680,7 +11554,43 @@
                         }
                     },
                     {
-                        "name": "plant_group_id",
+                        "name": "general_group_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "ecology_description",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "general_ecology_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "general_origin_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "general_growth_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,
@@ -12722,14 +12632,6 @@
                         }
                     },
                     {
-                        "name": "name",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    },
-                    {
                         "name": "region_name",
                         "in": "body",
                         "required": false,
@@ -12898,14 +12800,6 @@
                     },
                     {
                         "name": "city_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    },
-                    {
-                        "name": "name",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -16288,9 +16182,27 @@
                         }
                     },
                     {
+                        "name": "type_id",
+                        "in": "body",
+                        "description": "Method that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Method"
+                        }
+                    },
+                    {
                         "name": "description",
                         "in": "body",
                         "description": "Method that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Method"
+                        }
+                    },
+                    {
+                        "name": "type_id",
+                        "in": "body",
+                        "description": "1:distillation, 2: extraction, 3: analyse",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Method"
@@ -16384,9 +16296,27 @@
                         }
                     },
                     {
+                        "name": "type_id",
+                        "in": "body",
+                        "description": "Method that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Method"
+                        }
+                    },
+                    {
                         "name": "description",
                         "in": "body",
                         "description": "Method that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Method"
+                        }
+                    },
+                    {
+                        "name": "type_id",
+                        "in": "body",
+                        "description": "1:distillation, 2: extraction, 3: analyse",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Method"
@@ -19714,6 +19644,15 @@
                         "schema": {
                             "$ref": "#/definitions/Product"
                         }
+                    },
+                    {
+                        "name": "components",
+                        "in": "body",
+                        "description": "Product that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
                     }
                 ],
                 "responses": {
@@ -19822,6 +19761,15 @@
                     },
                     {
                         "name": "registration_status",
+                        "in": "body",
+                        "description": "Product that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    },
+                    {
+                        "name": "components",
                         "in": "body",
                         "description": "Product that should be stored",
                         "required": false,
@@ -29814,7 +29762,9 @@
         },
         "Herbarium": {
             "required": [
-                "location_id",
+                "general_habitat_id",
+                "general_phytogeography_id",
+                "life_forms",
                 "organization_id",
                 "plant_id"
             ],
@@ -29834,16 +29784,15 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "location_id": {
-                    "description": "location_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
                 "general_phenology_id": {
                     "type": "integer",
                     "format": "int32"
                 },
                 "general_origin_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "general_phytogeography_id": {
                     "type": "integer",
                     "format": "int32"
                 },
@@ -29854,10 +29803,6 @@
                 },
                 "organization_id": {
                     "description": "organization_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "general_phytogeography_id": {
                     "type": "integer",
                     "format": "int32"
                 },
@@ -29925,24 +29870,15 @@
                         "type": "string"
                     }
                 },
-                "herbarium_tip_location": {
-                    "description": "herbarium_tip_location",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "type_description": {
-                    "description": "type_description",
+                "flowering_time": {
+                    "description": "flowering_time",
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 },
-                "general_type_id": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "flowering_time": {
-                    "description": "flowering_time",
+                "life_forms": {
+                    "description": "life_forms",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -30161,7 +30097,6 @@
         "Location": {
             "required": [
                 "address",
-                "name",
                 "city_id"
             ],
             "properties": {
@@ -30195,13 +30130,6 @@
                 },
                 "point": {
                     "description": "point",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "name": {
-                    "description": "name",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -31711,6 +31639,10 @@
                 },
                 "registration_status": {
                     "description": "registration_status",
+                    "type": "integer"
+                },
+                "components": {
+                    "description": "components",
                     "type": "string"
                 },
                 "organization_id": {

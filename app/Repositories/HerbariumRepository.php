@@ -3,10 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Herbarium;
-use App\Repositories\BaseRepository;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 /**
  * Class HerbariumRepository
