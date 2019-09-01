@@ -22,7 +22,7 @@ class CreateMediasTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('location_id')->nullable();
             $table->json('description')->nullable();
-            $table->json('info_type')->nullable();
+            $table->tinyInteger('media_type')->default(0)->comment('0 => unknown , 1=> sketch , 2=> picture');
             $table->json('reference')->nullable();
 //            'plant, herbarium, paleontology, product, botanical, user, article, action, chromosome, cryo, seed, garden'
             $table->morphs('mediable');

@@ -103,6 +103,13 @@ class HerbariumAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Parameter(
+     *          name="life_forms",
+     *          in="body",
+     *          description="e.g life_forms[cycle_id] ,life_forms[wooden_id] ,life_forms[leaf_id] ,life_forms[herbaceous_id] , ",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Herbarium")
+     *      ),
+     *      @SWG\Parameter(
      *          name="parent_id",
      *          in="body",
      *          description="Herbarium that should be stored",

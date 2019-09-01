@@ -129,10 +129,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="access",
- *          description="access",
- *          type="array",
- *     @SWG\Items(type="string")
+ *          property="access_code",
+ *          description="access_code",
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="last_update",
@@ -147,8 +146,8 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="collection_name",
- *          description="collection_name",
+ *          property="collector_name",
+ *          description="collector_name",
  *          type="array",
  *     @SWG\Items(type="string")
  *      ),
@@ -192,10 +191,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class Paleontology extends BaseModel
 {
     use PaleontologyAccessor;
-    public static $linguistically = ['infra_specific' => false, 'type_status' => false, 'preservation' => false, 'color' => false, 'element' => false, 'description' => true, 'additional_info' => false, 'access' => false, 'excavation' => false, 'collection_name' => false, 'common_name' => false];
+    public static $linguistically = ['infra_specific' => false, 'type_status' => false, 'preservation' => false, 'color' => false, 'element' => false, 'description' => true, 'additional_info' => false, 'excavation' => false, 'collector_name' => false, 'common_name' => false];
     public static $rules = [
         'catalog_no' => 'integer',
         'specimen_no' => 'string',
+        'access_code' => 'string',
         'field_no' => 'string',
         'barcode_no' => 'string',
         'move_status' => 'string',
@@ -232,9 +232,8 @@ class Paleontology extends BaseModel
         'element' => 'json',
         'treatment' => 'json',
         'additional_info' => 'json',
-        'access' => 'json',
         'excavation' => 'json',
-        'collection_name' => 'json',
+        'collector_name' => 'json',
         'common_name' => 'json',
         'description' => 'json',
     ];

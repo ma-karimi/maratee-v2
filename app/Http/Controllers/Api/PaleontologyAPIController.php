@@ -220,7 +220,7 @@ class PaleontologyAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
      *      @SWG\Parameter(
-     *          name="access",
+     *         name="access_code",
      *          in="body",
      *          description="Paleontology that should be stored",
      *          required=false,
@@ -241,7 +241,7 @@ class PaleontologyAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
      *      @SWG\Parameter(
-     *          name="collection_name",
+     *          name="collector_name",
      *          in="body",
      *          description="Paleontology that should be stored",
      *          required=false,
@@ -474,7 +474,7 @@ class PaleontologyAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="color",
      *          in="body",
-     *          description="Paleontology that should be stored",
+     *          descriptiron="Paleontology that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
@@ -500,7 +500,7 @@ class PaleontologyAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
      *      @SWG\Parameter(
-     *          name="access",
+     *         name="access_code",
      *          in="body",
      *          description="Paleontology that should be stored",
      *          required=false,
@@ -521,7 +521,7 @@ class PaleontologyAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
      *      @SWG\Parameter(
-     *          name="collection_name",
+     *          name="collector_name",
      *          in="body",
      *          description="Paleontology that should be stored",
      *          required=false,
