@@ -474,7 +474,7 @@ class PaleontologyAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="color",
      *          in="body",
-     *          descriptiron="Paleontology that should be stored",
+     *          description="Paleontology that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),

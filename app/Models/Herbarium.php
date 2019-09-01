@@ -173,10 +173,6 @@ class Herbarium extends BaseModel
 
     public static $linguistically = ['flowering' => false, 'habitat_description' => false, 'ecology_description' => false];
     public static $rules = [
-      /*  'life_forms.cycle_id' => 'required|exists:life_forms,id',
-        'life_forms.wooden_id' => 'required|integer',
-        'life_forms.wooden_id' => 'required|integer',
-        'life_forms.wooden_id' => 'required|integer',*/
         'protection_id' => 'exists:protections,id',
         'organization_id' => 'required|exists:organizations,id',
         'plant_id' => 'required|exists:plants,id',
