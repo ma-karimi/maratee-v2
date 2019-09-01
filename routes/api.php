@@ -24,7 +24,8 @@
 Route::delete('/{class}/multiple_delete', 'APIController@multipleDestroy');
 
 Route::post('/{class}/hub', 'APIController@storeHub');
-Route::delete('/{class}/hub', 'APIController@DestroyHub');
+Route::delete('/{class}/hub', 'APIController@destroyHub');
+Route::get('/{class}/constants', 'APIController@getConstants');
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('logout', 'AuthController@logout');

@@ -168,6 +168,46 @@
                 }
             }
         },
+        "/{class}/constants": {
+            "get": {
+                "tags": [
+                    "API"
+                ],
+                "summary": "Get Constants Of Given Class",
+                "description": "Get Constants Of Given Class",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "class",
+                        "in": "path",
+                        "description": "class name e.g herbariums",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/actions": {
             "get": {
                 "tags": [
@@ -18484,7 +18524,7 @@
                         "description": "Plant that should be stored",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Plant"
+                            "$ref": "#/definitions/Taxonomy"
                         }
                     },
                     {
@@ -18493,7 +18533,7 @@
                         "description": "Plant that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/Plant"
+                            "$ref": "#/definitions/Taxonomy"
                         }
                     },
                     {
@@ -18502,7 +18542,7 @@
                         "description": "Plant that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/Plant"
+                            "$ref": "#/definitions/Taxonomy"
                         }
                     },
                     {
@@ -18511,7 +18551,7 @@
                         "description": "Plant that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/Plant"
+                            "$ref": "#/definitions/Taxonomy"
                         }
                     },
                     {
@@ -18520,7 +18560,7 @@
                         "description": "Plant that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/Plant"
+                            "$ref": "#/definitions/Taxonomy"
                         }
                     },
                     {
@@ -18529,7 +18569,7 @@
                         "description": "Plant that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/Plant"
+                            "$ref": "#/definitions/Taxonomy"
                         }
                     }
                 ],
@@ -29762,9 +29802,8 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "general_growth_id": {
-                    "type": "integer",
-                    "format": "int32"
+                "growth_rate": {
+                    "type": "number"
                 },
                 "plant_id": {
                     "type": "integer",

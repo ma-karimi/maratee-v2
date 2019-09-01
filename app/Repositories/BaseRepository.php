@@ -298,4 +298,10 @@ abstract class BaseRepository
         $foreign_key = $record->$related_model()->getForeignPivotKeyName();
         return [$related_model_table, $related_model_class, $related_key, $foreign_key];
     }
+
+    public function getConstants($class)
+    {
+        $model_class = resolve('App\\Models\\' . Str::studly(Str::singular($class)));
+        return $model_class->getConstants();
+    }
 }

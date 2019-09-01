@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Jedrzej\Searchable\SearchableTrait;
+use ReflectionClass;
 
 
 class BaseModel extends Model
@@ -20,6 +21,7 @@ class BaseModel extends Model
     protected $guarded = ['id'];
     public $searchable = ['*'];
     public $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations'];
+
 
     /**
      * The attributes that have en,fa languages.
@@ -108,8 +110,8 @@ class BaseModel extends Model
     protected static function boot()
     {
         parent::boot();
-        $json_casts=array_filter(parent::getCastFields(),function ($value){
-            return $value ==='json';
+        $json_casts = array_filter(parent::getCastFields(), function ($value) {
+            return $value === 'json';
         });
         if (request()->isMethod('get') && count(request()->keys())) {
             foreach (request()->all() as $index => $item) {
@@ -154,12 +156,25 @@ class BaseModel extends Model
     {
         $this->notSearchable = array_merge($this->notSearchable, array_keys($fields));
     }
+
     /**
      * @return array
      */
     public function getNotSearchable(): array
     {
         return $this->notSearchable;
+    }
+
+
+    public static function getConstants()
+    {
+        try {
+            $oClass = new ReflectionClass(static::class);
+            return array_filter($oClass->getConstants(), 'is_array');
+        } catch (\ReflectionException $e) {
+            return $e->getMessage();
+        }
+
     }
 
 }
