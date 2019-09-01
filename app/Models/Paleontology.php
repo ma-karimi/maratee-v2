@@ -208,8 +208,6 @@ class Paleontology extends BaseModel
         'plant_id' => 'required|integer',
         'last_update' => 'date',
         'location_id' => 'integer|exists:locations,id',
-        'general_class_id' => 'integer|exists:generals,id',
-        'general_order_id' => 'integer|exists:generals,id',
     ];
     /**
      * The database table used by the model.
@@ -243,7 +241,7 @@ class Paleontology extends BaseModel
      *
      * @var array
      */
-    protected $dates = ['created_at', 'deleted_at', 'last_update', 'updated_at'];
+    protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
     /**
      * @return HasMany

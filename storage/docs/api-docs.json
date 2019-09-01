@@ -13514,7 +13514,7 @@
                         }
                     },
                     {
-                        "name": "info_type",
+                        "name": "media_type",
                         "in": "body",
                         "description": "Media that should be stored",
                         "required": false,
@@ -13718,7 +13718,7 @@
                         }
                     },
                     {
-                        "name": "info_type",
+                        "name": "media_type",
                         "in": "body",
                         "description": "Media that should be stored",
                         "required": false,
@@ -30206,9 +30206,9 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "info_type": {
-                    "description": "info_type",
-                    "type": "string"
+                "media_type": {
+                    "description": "media_type",
+                    "type": "integer"
                 },
                 "reference": {
                     "description": "reference",
