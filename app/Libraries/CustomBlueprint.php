@@ -15,12 +15,12 @@ use Illuminate\Support\Facades\DB;
 class CustomBlueprint
 {
 
-    public static function generatedBigIntegerVirtual($table,$column, $jsonIndex, $isIndex = false): void
+    public static function generatedBigIntegerVirtual($table,$column_name, $json_column, $json_index, $isIndex = false): void
     {
-        DB::statement("ALTER TABLE $table ADD $column BIGINT GENERATED ALWAYS AS (json_unquote(json_extract(life_forms,'$.$jsonIndex'))) VIRTUAL");
+        DB::statement("ALTER TABLE $table ADD $column_name BIGINT GENERATED ALWAYS AS (json_unquote(json_extract($json_column,'$.$json_index'))) VIRTUAL");
         if ($isIndex) {
-            \Illuminate\Support\Facades\Schema::table($table, function (Blueprint $table) use ($column) {
-                $table->index($column);
+            \Illuminate\Support\Facades\Schema::table($table, function (Blueprint $table) use ($column_name) {
+                $table->index($column_name);
             });
         }
     }

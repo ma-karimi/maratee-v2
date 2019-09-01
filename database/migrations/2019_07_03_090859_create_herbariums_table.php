@@ -73,10 +73,10 @@ if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >
 
 
         });
-        CustomBlueprint::generatedBigIntegerVirtual('herbariums','life_form_cycle_id','cycle_id',true);
-        CustomBlueprint::generatedBigIntegerVirtual('herbariums','life_form_wooden_id','wooden_id',true);
-        CustomBlueprint::generatedBigIntegerVirtual('herbariums','life_form_leaf_id','leaf_id',true);
-        CustomBlueprint::generatedBigIntegerVirtual('herbariums','life_form_herbaceous_id','herbaceous_id',true);
+        CustomBlueprint::generatedBigIntegerVirtual('herbariums','life_form_cycle_id','life_forms','cycle_id',true);
+        CustomBlueprint::generatedBigIntegerVirtual('herbariums','life_form_wooden_id','life_forms','wooden_id',true);
+        CustomBlueprint::generatedBigIntegerVirtual('herbariums','life_form_leaf_id','life_forms','leaf_id',true);
+        CustomBlueprint::generatedBigIntegerVirtual('herbariums','life_form_herbaceous_id','life_forms','herbaceous_id',true);
     }
 
 
