@@ -195,12 +195,57 @@ class APIController extends AppBaseController
      *      )
      * )
      */
-    public function DestroyHub(DeleteHubRequest $request, $class)
+    public function destroyHub(DeleteHubRequest $request, $class)
     {
         $repo = 'App\\Repositories\\' . ucfirst(rtrim($class, 's') . 'Repository');
         $repo = resolve($repo);
         $result = $repo->deleteHub($request->class_id, $request->relation, $request->ids);
         return $this->sendResponse($result, 'Record(s) deleted successfully');
+    }
+    /**
+     * @param $class
+     * @return Response
+     *
+     * @SWG\Get(
+     *      path="/{class}/constants",
+     *      summary="Get Constants Of Given Class",
+     *      tags={"API"},
+     *      description="Get Constants Of Given Class",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="class",
+     *          description="class name e.g herbariums",
+     *          type="string",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function getConstants($class)
+    {
+        $repo = 'App\\Repositories\\' . ucfirst(rtrim($class, 's') . 'Repository');
+        $repo = resolve($repo);
+        $result = $repo->getConstants($class);
+        return $this->sendResponse($result, 'Constant(s) loaded successfully');
     }
 
 

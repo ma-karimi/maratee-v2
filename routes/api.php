@@ -24,7 +24,8 @@
 Route::delete('/{class}/multiple_delete', 'APIController@multipleDestroy');
 
 Route::post('/{class}/hub', 'APIController@storeHub');
-Route::delete('/{class}/hub', 'APIController@DestroyHub');
+Route::delete('/{class}/hub', 'APIController@destroyHub');
+Route::get('/{class}/constants', 'APIController@getConstants');
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('logout', 'AuthController@logout');
@@ -112,8 +113,6 @@ Route::resource('article_hubs', 'ArticleHubAPIController');
 
 Route::resource('evaluations', 'EvaluationAPIController');
 
-Route::resource('evaluation_collections', 'EvaluationCollectionAPIController');
-
 Route::resource('attendances', 'AttendanceAPIController');
 
 Route::resource('authors', 'AuthorAPIController');
@@ -123,7 +122,7 @@ Route::resource('borrows', 'BorrowAPIController');
 Route::resource('botanicals', 'BotanicalAPIController');
 
 Route::resource('botanical_garden_actions', 'BotanicalGardenActionAPIController');
-Route::resource('transfer_credentials', 'TransferCredentialAPIController');
+
 
 Route::resource('botanical_irrigations', 'BotanicalIrrigationAPIController');
 
@@ -143,8 +142,6 @@ Route::resource('credentials', 'CredentialAPIController');
 
 Route::resource('cryo_banks', 'CryoBankAPIController');
 
-Route::resource('cryo_bank_actions', 'CryoBankActionAPIController');
-
 Route::resource('entries', 'EntryAPIController');
 
 Route::resource('entry_hubs', 'EntryHubAPIController');
@@ -154,8 +151,6 @@ Route::resource('exchanges', 'ExchangeAPIController');
 Route::resource('gardens', 'GardenAPIController');
 
 Route::resource('geology_ages', 'GeologyAgeAPIController');
-
-Route::resource('geramins', 'GeraminAPIController');
 
 Route::resource('herbariums', 'HerbariumAPIController');
 
@@ -176,7 +171,6 @@ Route::resource('medicinal_plants', 'MedicinalPlantAPIController');
 
 Route::resource('medicinal_plant_constituents', 'MedicinalPlantConstituentAPIController');
 
-Route::resource('medicinal_plant_morphologies', 'MedicinalPlantMorphologyAPIController');
 
 Route::resource('medicines', 'MedicineAPIController');
 
@@ -187,18 +181,11 @@ Route::resource('seedFeatures', 'seedFeatureAPIController');
 
 Route::resource('paleontologies', 'PaleontologyAPIController');
 
-Route::resource('morphologies', 'MorphologyAPIController');
-
-
-Route::resource('chemicals', 'ChemicalAPIController');
-
-Route::resource('transitions', 'TransitionAPIController');
 
 Route::resource('roles', 'RoleAPIController');
 
 Route::resource('permissions', 'PermissionAPIController');
 
-Route::resource('tables', 'TableAPIController');
 
 Route::resource('groups', 'GroupAPIController');
 
@@ -228,9 +215,9 @@ Route::resource('block_traits', 'BlockTraitAPIController');
 Route::resource('dimensions', 'DimensionAPIController');
 
 Route::resource('evaluation_dimensions', 'EvaluationDimensionAPIController');
-Route::resource('author_hubs', 'AuthorHubAPIController');
-Route::resource('location_hubs', 'LocationHubAPIController');
-Route::resource('user_hubs', 'UserHubAPIController');
+//Route::resource('author_hubs', 'AuthorHubAPIController');
+//Route::resource('location_hubs', 'LocationHubAPIController');
+//Route::resource('user_hubs', 'UserHubAPIController');
 
 
 Route::resource('life_forms', 'LifeFormAPIController');
