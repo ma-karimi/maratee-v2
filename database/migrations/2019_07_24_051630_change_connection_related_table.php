@@ -13,17 +13,12 @@ class ChangeConnectionRelatedTable extends Migration
      */
     public function up()
     {
-        try {
-            Schema::table('countries', function (Blueprint $table) {
-                $table->dropForeign(['continent_id']);
-            });
-        } catch (Exception $e) {
 
-        }
         Schema::dropIfExists('continents');
         Schema::create('continents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 256);
+
         });
     }
 

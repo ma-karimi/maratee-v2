@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -15,13 +14,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *        )
  *
  */
-class Continent extends BaseModel
+class Continent extends Model
 {
-    public static $rules = [
-        'code' => 'string',
-        'continent_id' => 'required|exists:continents,id',
-    ];
-
     public $timestamps = false;
 
     /**

@@ -2,6 +2,7 @@
 
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
+use App\Models\Herbarium;
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Herbarium::class, function (Faker $faker) {
@@ -25,14 +26,15 @@ $factory->define(App\Models\Herbarium::class, function (Faker $faker) {
         'general_phytogeography_id' => $faker->randomElement($phytogeographies),
         'organization_id' => $faker->randomElement($organizations),
         'sheets_no' => $faker->numberBetween(1, 100),
+        'growth_rate' => $faker->randomElement(Herbarium::GROWTH_RATES),
         'samples_no' => $faker->numberBetween(1, 100),
         'tip_qt' => $faker->numberBetween(1, 100),
         'physical_tip_qt' => $faker->numberBetween(1, 100),
-        'tip_type' => $faker->word,
+//        'tip_type' => $faker->word,
         'description' => make_json($faker->text),
         'is_flowering' => $faker->numberBetween(0, 1),
-        'organization_description' => $faker->word,
-        'herbarium_tip_location' => $faker->numberBetween(1, 100),
+//        'organization_description' => $faker->word,
+//        'herbarium_tip_location' => $faker->numberBetween(1, 100),
         'general_group_id' => $faker->randomElement($plant_groups),
         'general_habitat_id' => $faker->randomElement($habitats),
         'plant_id' => $faker->randomElement($plants),

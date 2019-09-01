@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             MedicineTableSeeder::class,
             ConstituentTypeTableSeeder::class,
             SeedFeatureTableSeeder::class,
-            MorphologyTableSeeder::class,
+//            MorphologyTableSeeder::class,
             OrganizationTableSeeder::class,
             GeneralTableSeeder::class,
             OriginalGeneralTableSeeder::class,
@@ -72,7 +72,7 @@ class DatabaseSeeder extends Seeder
             HerbariumTableSeeder::class,
             MedicinalPlantTableSeeder::class,
             MedicinalPlantConstituentTableSeeder::class,
-            MedicinalPlantMorphologyTableSeeder::class,
+//            MedicinalPlantMorphologyTableSeeder::class,
             MorphAuthorTableSeeder::class,
 
 //            SeedTableSeeder::class,

@@ -183,7 +183,7 @@ class Herbarium extends BaseModel
         'samples_no' => 'integer',
         'tip_qt' => 'integer',
         'physical_tip_qt' => 'integer',
-        'tip_type' => 'string',
+//        'tip_type' => 'string',
         'is_flowering' => 'integer',
         'herbarium_tip_location' => 'integer',
         'type_description' => 'string',
@@ -215,7 +215,7 @@ class Herbarium extends BaseModel
         'name' => 'json',
         'life_forms' => 'json',
         'description' => 'json',
-        'organization_description' => 'json',
+//        'organization_description' => 'json',
         'habitat_description' => 'json',
         'ecology_description' => 'json',
     ];
