@@ -26,7 +26,7 @@ $factory->define(App\Models\Herbarium::class, function (Faker $faker) {
         'general_phytogeography_id' => $faker->randomElement($phytogeographies),
         'organization_id' => $faker->randomElement($organizations),
         'sheets_no' => $faker->numberBetween(1, 100),
-        'growth_rate' => $faker->randomElement(Herbarium::GROWTH_RATES),
+        'growth_rate' => $faker->randomKey(Herbarium::GROWTH_RATES),
         'samples_no' => $faker->numberBetween(1, 100),
         'tip_qt' => $faker->numberBetween(1, 100),
         'physical_tip_qt' => $faker->numberBetween(1, 100),
