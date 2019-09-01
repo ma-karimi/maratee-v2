@@ -26,6 +26,9 @@ class AddForeignKeysToHerbariumsTable extends Migration {
 //            $table->foreign('general_growth_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('general_phenology_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('general_phytogeography_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('general_substrate_lichen_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('general_substrate_moss_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('general_substrate_diatom_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
 		});
 	}
 

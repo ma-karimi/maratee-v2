@@ -26,6 +26,9 @@ class CreateHerbariumAPIRequest extends APIRequest
             'general_growth_id' => 'growth',
             'general_phenology_id' => 'phenology',
             'general_phytogeography_id' => 'phytogeography',
+            'general_substrate_lichen_id' => 'lichen',
+            'general_substrate_moss_id' => 'moss',
+            'general_substrate_diatom_id' => 'diatom',
         ];
         $array_id_life_forms = [
             'cycle_id' => 'life_cycle',

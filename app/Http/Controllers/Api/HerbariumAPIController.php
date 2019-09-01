@@ -138,6 +138,27 @@ class HerbariumAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Parameter(
+     *          name="general_substrate_lichen_id",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Herbarium")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_substrate_moss_id",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Herbarium")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_substrate_diatom_id",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Herbarium")
+     *      ),
+     *      @SWG\Parameter(
      *          name="sheets_no",
      *          in="body",
      *          description="Herbarium that should be stored",
@@ -501,6 +522,27 @@ class HerbariumAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="general_growth_id",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Herbarium")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_substrate_lichen_id",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Herbarium")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_substrate_moss_id",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Herbarium")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_substrate_diatom_id",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=false,
