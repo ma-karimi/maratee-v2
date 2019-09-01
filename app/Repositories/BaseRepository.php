@@ -302,6 +302,6 @@ abstract class BaseRepository
     public function getConstants($class)
     {
         $model_class = resolve('App\\Models\\' . Str::studly(Str::singular($class)));
-        return $model_class->getConstants();
+        return $model_class::getConstants();
     }
 }
