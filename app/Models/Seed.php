@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+
 /**
  * @SWG\Definition(
  *      definition="Seed",
@@ -386,5 +388,15 @@ class Seed extends BaseModel
             'seed_plants',
             'seed_id',
             'plant_id');
+    }
+
+    /**
+     * @return MorphToMany
+     */
+    public function transactions(): MorphToMany
+    {
+        return $this->morphToMany(Transaction::class, 'transactionable','transaction_hubs')
+            ->withTimestamps()
+            ->withPivot(['type_id','sheets_no']);
     }
 }

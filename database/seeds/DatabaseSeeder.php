@@ -71,6 +71,8 @@ class DatabaseSeeder extends Seeder
             MedicinalPlantTableSeeder::class,
             MedicinalPlantConstituentTableSeeder::class,
             MorphAuthorTableSeeder::class,
+            TransactionTableSeeder::class,
+            TransactionEvidenceTableSeeder::class
 
 //            SeedTableSeeder::class,
 //            BioMolecularTableSeeder::class,

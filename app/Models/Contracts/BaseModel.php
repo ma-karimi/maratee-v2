@@ -176,5 +176,11 @@ class BaseModel extends Model
         }
 
     }
-
+    /**
+     * @return array
+     */
+    public static function getRules(): array
+    {
+        return static::$rules;
+    }
 }

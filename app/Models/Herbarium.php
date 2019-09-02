@@ -90,12 +90,6 @@ use Kalnoy\Nestedset\NodeTrait;
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="name",
- *          description="name",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
  *          property="description",
  *          description="description",
  *          type="array",
@@ -464,4 +458,13 @@ class Herbarium extends BaseModel
             'life_form_herbaceous_id');
     }
 
+    /**
+     * @return MorphToMany
+     */
+    public function transactions(): MorphToMany
+    {
+        return $this->morphToMany(Transaction::class, 'transactionable','transaction_hubs')
+            ->withTimestamps()
+            ->withPivot(['type_id','sheets_no']);
+    }
 }

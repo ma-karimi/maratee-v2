@@ -96,77 +96,77 @@ class MedicinalPlantAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="aerial_part_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from medicinal_parts where type=aerial",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="ground_part_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from medicinal_parts where type=ground",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="food_industry_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from medicinal_plant_type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="hygienic_cosmetic_industry_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from medicinal_plant_type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="industrial_potential_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from medicinal_plant_type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="general_phenology_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from general",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="method_distillation_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from methods",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="method_extraction_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from methods",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="method_analyse_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from methods",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="secondary_metabolite_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from medicinal_plant_type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="effective_material_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from medicinal_plant_type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
@@ -257,7 +257,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="efficiency",
      *          in="body",
-     *          description="efficiency",
+     *          description="efficiency : float type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
@@ -404,77 +404,77 @@ class MedicinalPlantAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="aerial_part_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from medicinal_parts where type=aerial",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="ground_part_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from medicinal_parts where type=ground",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="food_industry_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from medicinal_plant_type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="hygienic_cosmetic_industry_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from medicinal_plant_type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="industrial_potential_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from medicinal_plant_type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="general_phenology_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from general",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="method_distillation_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from methods",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="method_extraction_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from methods",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="method_analyse_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from methods",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="secondary_metabolite_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from medicinal_plant_type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="effective_material_id",
      *          in="body",
-     *          description="MedicinalPlant that should be stored",
+     *          description="from medicinal_plant_type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
@@ -565,7 +565,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="efficiency",
      *          in="body",
-     *          description="efficiency",
+     *          description="efficiency : float type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
@@ -593,7 +593,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="height",
      *          in="body",
-     *          description="height (cm)",
+     *          description="height",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),

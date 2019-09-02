@@ -53,9 +53,4 @@ class LocationHub extends BaseModel
      */
     protected $table = 'location_hubs';
 
-    public static $rules = [
-        'location_id'=>'required|exists:locations,id',
-        'locationable_id'=>'required|integer',
-        'locationable_type'=>'required|string'
-    ];
 }

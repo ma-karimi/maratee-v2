@@ -17,7 +17,7 @@ class CreateTransactionEvidencesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('transaction_id');
             $table->string('src');
-            $table->text('description');
+            $table->text('src_description')->nullable();
             $table->timestamps();
             $table->softDeletesTz();
         });

@@ -361,4 +361,12 @@ class User extends Authenticatable
     {
         return static::$linguistically;
     }
+
+    /**
+     * @return HasMany
+     */
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class)->latest();
+    }
 }

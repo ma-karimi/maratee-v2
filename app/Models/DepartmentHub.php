@@ -50,10 +50,4 @@ class DepartmentHub extends BaseModel
      * @var string
      */
     protected $table = 'department_hubs';
-
-    public static $rules = [
-        'department_id'=>'required|exists:departments,id',
-        'departmentable_id'=>'required|integer',
-        'departmentable_type'=>'required|string'
-    ];
 }

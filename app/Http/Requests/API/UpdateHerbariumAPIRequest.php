@@ -4,6 +4,7 @@ namespace App\Http\Requests\Api;
 
 use App\Models\General;
 use App\Models\Herbarium;
+use App\Models\LifeForm;
 use Illuminate\Http\JsonResponse;
 use InfyOm\Generator\Request\APIRequest;
 

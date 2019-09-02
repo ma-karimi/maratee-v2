@@ -53,10 +53,4 @@ class ArticleHub extends BaseModel
      */
     protected $table = 'article_hubs';
 
-
-    public static $rules = [
-        'article_id'=>'required|exists:articles,id',
-        'articleable_id'=>'required|integer',
-        'articleable_type'=>'required|string'
-    ];
 }
