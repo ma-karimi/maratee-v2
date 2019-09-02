@@ -152,6 +152,21 @@ use Kalnoy\Nestedset\NodeTrait;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="general_substrate_lichen_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="general_substrate_diatom_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="general_substrate_moss_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -173,8 +188,7 @@ class Herbarium extends BaseModel
 
     public static $linguistically = ['flowering' => false, 'habitat_description' => false, 'ecology_description' => false];
     public static $rules = [
-        'life_forms' => 'required|array',
-        'protection_id' => 'exists:protections,id',
+        'protection_id' => 'required|exists:protections,id',
         'organization_id' => 'required|exists:organizations,id',
         'plant_id' => 'required|exists:plants,id',
         'sheets_no' => 'integer',
@@ -188,10 +202,13 @@ class Herbarium extends BaseModel
 //        'general_type_id' => 'exists:generals,id',
         'general_group_id' => 'exists:generals,id',
         'general_ecology_id' => 'exists:generals,id',
-        'general_habitat_id' => 'exists:generals,id',
+        'general_habitat_id' => 'required|exists:generals,id',
         'general_origin_id' => 'exists:generals,id',
+        'general_substrate_lichen_id' => 'exists:generals,id',
+        'general_substrate_moss_id' => 'exists:generals,id',
+        'general_substrate_diatom_id' => 'exists:generals,id',
 //        'general_growth_id' => 'exists:generals,id',
-        'general_phytogeography_id' => 'exists:generals,id',
+        'general_phytogeography_id' => 'required|exists:generals,id',
         'general_phenology_id' => 'exists:generals,id',
         'number' => 'integer',
 
@@ -408,6 +425,20 @@ class Herbarium extends BaseModel
         return $this->belongsTo(General::class, 'general_phytogeography_id');
     }
 
+    public function generalLichen()
+    {
+        return $this->belongsTo(General::class, 'general_substrate_lichen_id');
+    }
+
+    public function generalMoss()
+    {
+        return $this->belongsTo(General::class, 'general_substrate_moss_id');
+    }
+
+    public function generalDiatom()
+    {
+        return $this->belongsTo(General::class, 'general_substrate_diatom_id');
+    }
 
     public function leafLifeForm(): BelongsTo
     {

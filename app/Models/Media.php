@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\MediaAccessor;
+use App\Models\Accessor\MethodAccessor;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -70,9 +72,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="info_type",
- *          description="info_type",
- *          type="string"
+ *          property="media_type",
+ *          description="media_type",
+ *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="reference",
@@ -113,9 +115,10 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class Media extends BaseModel
 {
-
-    public static $linguistically=['name'=>false,'description'=>false,'info_type'=>false,'reference'=>false];
-    public static $rules=[
+    use MediaAccessor;
+    public static $linguistically = ['name' => false, 'description' => false, 'info_type' => false, 'reference' => false];
+    public const MEDIA_TYPE = [0 => 'unknown', 1 => 'sketch', 2 => 'picture'];
+    public static $rules = [
         'format_type' => 'required|string',
         'date' => 'date',
         'user_id' => 'exists:users,id',
@@ -139,7 +142,7 @@ class Media extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['name' => 'json','info_type' => 'json', 'reference' => 'json', 'description' => 'json'];
+    protected $casts = ['name' => 'json', 'info_type' => 'json', 'reference' => 'json', 'description' => 'json'];
 
     /**
      * The attributes that should be mutated to dates.

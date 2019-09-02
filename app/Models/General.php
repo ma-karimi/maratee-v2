@@ -23,8 +23,7 @@ use Illuminate\Validation\Rule;
  *      @SWG\Property(
  *          property="parent_id",
  *          description="parent_id",
- *          type="integer",
- *          format="int32"
+ *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="name",

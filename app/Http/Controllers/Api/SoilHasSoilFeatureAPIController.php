@@ -30,7 +30,7 @@ class SoilHasSoilFeatureAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/soilHasSoilFeatures",
+     *      path="/soil_has_soil_features",
      *      summary="Get a listing of the SoilHasSoilFeatures.",
      *      tags={"SoilHasSoilFeature"},
      *      description="Get all SoilHasSoilFeatures",
@@ -56,6 +56,7 @@ class SoilHasSoilFeatureAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -73,7 +74,7 @@ class SoilHasSoilFeatureAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/soilHasSoilFeatures",
+     *      path="/soil_has_soil_features",
      *      summary="Store a newly created SoilHasSoilFeature in storage",
      *      tags={"SoilHasSoilFeature"},
      *      description="Store SoilHasSoilFeature",
@@ -134,7 +135,7 @@ class SoilHasSoilFeatureAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/soilHasSoilFeatures/{id}",
+     *      path="/soil_has_soil_features/{id}",
      *      summary="Display the specified SoilHasSoilFeature",
      *      tags={"SoilHasSoilFeature"},
      *      description="Get SoilHasSoilFeature",
@@ -185,7 +186,7 @@ class SoilHasSoilFeatureAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/soilHasSoilFeatures/{id}",
+     *      path="/soil_has_soil_features/{id}",
      *      summary="Update the specified SoilHasSoilFeature in storage",
      *      tags={"SoilHasSoilFeature"},
      *      description="Update SoilHasSoilFeature",
@@ -261,7 +262,7 @@ class SoilHasSoilFeatureAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/soilHasSoilFeatures/{id}",
+     *      path="/soil_has_soil_features/{id}",
      *      summary="Remove the specified SoilHasSoilFeature from storage",
      *      tags={"SoilHasSoilFeature"},
      *      description="Delete SoilHasSoilFeature",

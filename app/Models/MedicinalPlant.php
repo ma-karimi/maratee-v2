@@ -178,8 +178,8 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      @SWG\Property(
  *          property="active_compounds",
  *          description="active_compounds",
- *          type="number",
- *          format="double"
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="manufacturer",

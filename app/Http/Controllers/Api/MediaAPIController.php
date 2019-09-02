@@ -56,6 +56,7 @@ class MediaAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -142,7 +143,7 @@ class MediaAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Media")
      *      ),
      *      @SWG\Parameter(
-     *          name="info_type",
+     *          name="media_type",
      *          in="body",
      *          description="Media that should be stored",
      *          required=false,
@@ -338,7 +339,7 @@ class MediaAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Media")
      *      ),
      *      @SWG\Parameter(
-     *          name="info_type",
+     *          name="media_type",
      *          in="body",
      *          description="Media that should be stored",
      *          required=false,

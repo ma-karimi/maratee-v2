@@ -30,7 +30,7 @@ class SeedPlantAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/seedPlants",
+     *      path="/seed_plants",
      *      summary="Get a listing of the SeedPlants.",
      *      tags={"SeedPlant"},
      *      description="Get all SeedPlants",
@@ -56,6 +56,7 @@ class SeedPlantAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -73,7 +74,7 @@ class SeedPlantAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/seedPlants",
+     *      path="/seed_plants",
      *      summary="Store a newly created SeedPlant in storage",
      *      tags={"SeedPlant"},
      *      description="Store SeedPlant",
@@ -127,7 +128,7 @@ class SeedPlantAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/seedPlants/{id}",
+     *      path="/seed_plants/{id}",
      *      summary="Display the specified SeedPlant",
      *      tags={"SeedPlant"},
      *      description="Get SeedPlant",
@@ -178,7 +179,7 @@ class SeedPlantAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/seedPlants/{id}",
+     *      path="/seed_plants/{id}",
      *      summary="Update the specified SeedPlant in storage",
      *      tags={"SeedPlant"},
      *      description="Update SeedPlant",
@@ -247,7 +248,7 @@ class SeedPlantAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/seedPlants/{id}",
+     *      path="/seed_plants/{id}",
      *      summary="Remove the specified SeedPlant from storage",
      *      tags={"SeedPlant"},
      *      description="Delete SeedPlant",

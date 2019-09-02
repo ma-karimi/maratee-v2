@@ -56,6 +56,7 @@ class SeedFeatureAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -141,7 +142,7 @@ class SeedFeatureAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/seedFeatures/{id}",
+     *      path="/seed_features/{id}",
      *      summary="Display the specified seedFeature",
      *      tags={"seedFeature"},
      *      description="Get seedFeature",
@@ -192,7 +193,7 @@ class SeedFeatureAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/seedFeatures/{id}",
+     *      path="/seed_features/{id}",
      *      summary="Update the specified seedFeature in storage",
      *      tags={"seedFeature"},
      *      description="Update seedFeature",
@@ -275,7 +276,7 @@ class SeedFeatureAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/seedFeatures/{id}",
+     *      path="/seed_features/{id}",
      *      summary="Remove the specified seedFeature from storage",
      *      tags={"seedFeature"},
      *      description="Delete seedFeature",

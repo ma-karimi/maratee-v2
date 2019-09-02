@@ -30,7 +30,7 @@ class SeedHubAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/seedHubs",
+     *      path="/seed_hubs",
      *      summary="Get a listing of the SeedHubs.",
      *      tags={"SeedHub"},
      *      description="Get all SeedHubs",
@@ -56,6 +56,7 @@ class SeedHubAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -73,7 +74,7 @@ class SeedHubAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/seedHubs",
+     *      path="/seed_hubs",
      *      summary="Store a newly created SeedHub in storage",
      *      tags={"SeedHub"},
      *      description="Store SeedHub",
@@ -169,7 +170,7 @@ class SeedHubAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/seedHubs/{id}",
+     *      path="/seed_hubs/{id}",
      *      summary="Display the specified SeedHub",
      *      tags={"SeedHub"},
      *      description="Get SeedHub",
@@ -220,7 +221,7 @@ class SeedHubAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/seedHubs/{id}",
+     *      path="/seed_hubs/{id}",
      *      summary="Update the specified SeedHub in storage",
      *      tags={"SeedHub"},
      *      description="Update SeedHub",
@@ -331,7 +332,7 @@ class SeedHubAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/seedHubs/{id}",
+     *      path="/seed_hubs/{id}",
      *      summary="Remove the specified SeedHub from storage",
      *      tags={"SeedHub"},
      *      description="Delete SeedHub",

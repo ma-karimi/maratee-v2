@@ -30,7 +30,7 @@ class PlantLifeFormAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/plantLifeForms",
+     *      path="/plant_life_forms",
      *      summary="Get a listing of the PlantLifeForms.",
      *      tags={"PlantLifeForm"},
      *      description="Get all PlantLifeForms",
@@ -74,7 +74,7 @@ class PlantLifeFormAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/plantLifeForms",
+     *      path="/plant_life_forms",
      *      summary="Store a newly created PlantLifeForm in storage",
      *      tags={"PlantLifeForm"},
      *      description="Store PlantLifeForm",

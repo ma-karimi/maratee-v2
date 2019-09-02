@@ -30,7 +30,7 @@ class SeedTechnologyAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/seedTechnologies",
+     *      path="/seed_technologies",
      *      summary="Get a listing of the SeedTechnologies.",
      *      tags={"SeedTechnology"},
      *      description="Get all SeedTechnologies",
@@ -56,6 +56,7 @@ class SeedTechnologyAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -73,7 +74,7 @@ class SeedTechnologyAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/seedTechnologies",
+     *      path="/seed_technologies",
      *      summary="Store a newly created SeedTechnology in storage",
      *      tags={"SeedTechnology"},
      *      description="Store SeedTechnology",
@@ -225,7 +226,7 @@ class SeedTechnologyAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/seedTechnologies/{id}",
+     *      path="/seed_technologies/{id}",
      *      summary="Display the specified SeedTechnology",
      *      tags={"SeedTechnology"},
      *      description="Get SeedTechnology",
@@ -276,7 +277,7 @@ class SeedTechnologyAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/seedTechnologies/{id}",
+     *      path="/seed_technologies/{id}",
      *      summary="Update the specified SeedTechnology in storage",
      *      tags={"SeedTechnology"},
      *      description="Update SeedTechnology",
@@ -443,7 +444,7 @@ class SeedTechnologyAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/seedTechnologies/{id}",
+     *      path="/seed_technologies/{id}",
      *      summary="Remove the specified SeedTechnology from storage",
      *      tags={"SeedTechnology"},
      *      description="Delete SeedTechnology",

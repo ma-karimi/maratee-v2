@@ -11391,6 +11391,15 @@
                         }
                     },
                     {
+                        "name": "life_forms",
+                        "in": "body",
+                        "description": "e.g life_forms[cycle_id] ,life_forms[wooden_id] ,life_forms[leaf_id] ,life_forms[herbaceous_id] , ",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
                         "name": "parent_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11419,6 +11428,33 @@
                     },
                     {
                         "name": "general_phytogeography_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "general_substrate_lichen_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "general_substrate_moss_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "general_substrate_diatom_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,
@@ -11848,6 +11884,33 @@
                     },
                     {
                         "name": "general_growth_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "general_substrate_lichen_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "general_substrate_moss_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "general_substrate_diatom_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,
@@ -13514,7 +13577,7 @@
                         }
                     },
                     {
-                        "name": "info_type",
+                        "name": "media_type",
                         "in": "body",
                         "description": "Media that should be stored",
                         "required": false,
@@ -13718,7 +13781,7 @@
                         }
                     },
                     {
-                        "name": "info_type",
+                        "name": "media_type",
                         "in": "body",
                         "description": "Media that should be stored",
                         "required": false,
@@ -17043,7 +17106,7 @@
                         }
                     },
                     {
-                        "name": "access",
+                        "name": "access_code",
                         "in": "body",
                         "description": "Paleontology that should be stored",
                         "required": false,
@@ -17070,7 +17133,7 @@
                         }
                     },
                     {
-                        "name": "collection_name",
+                        "name": "collector_name",
                         "in": "body",
                         "description": "Paleontology that should be stored",
                         "required": false,
@@ -17355,7 +17418,7 @@
                         }
                     },
                     {
-                        "name": "access",
+                        "name": "access_code",
                         "in": "body",
                         "description": "Paleontology that should be stored",
                         "required": false,
@@ -17382,7 +17445,7 @@
                         }
                     },
                     {
-                        "name": "collection_name",
+                        "name": "collector_name",
                         "in": "body",
                         "description": "Paleontology that should be stored",
                         "required": false,
@@ -29809,6 +29872,18 @@
                     "type": "integer",
                     "format": "int32"
                 },
+                "general_substrate_lichen_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "general_substrate_diatom_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "general_substrate_moss_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
                 "created_at": {
                     "description": "created_at",
                     "type": "string",
@@ -30206,9 +30281,9 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "info_type": {
-                    "description": "info_type",
-                    "type": "string"
+                "media_type": {
+                    "description": "media_type",
+                    "type": "integer"
                 },
                 "reference": {
                     "description": "reference",
@@ -30992,12 +31067,9 @@
                         "type": "string"
                     }
                 },
-                "access": {
-                    "description": "access",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "access_code": {
+                    "description": "access_code",
+                    "type": "string"
                 },
                 "last_update": {
                     "description": "last_update",
@@ -31011,8 +31083,8 @@
                         "type": "string"
                     }
                 },
-                "collection_name": {
-                    "description": "collection_name",
+                "collector_name": {
+                    "description": "collector_name",
                     "type": "array",
                     "items": {
                         "type": "string"

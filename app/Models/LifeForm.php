@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Scope\LifeFormScope;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -42,7 +43,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class LifeForm extends BaseModel
 {
-
+    use LifeFormScope;
     public static $linguistically = ['name' => true];
     /**
      * The database table used by the model.
