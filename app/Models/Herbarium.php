@@ -248,7 +248,7 @@ class Herbarium extends BaseModel
      */
     public function plantApplication($parameter = null): HasMany
     {
-        return $this->hasMany(PlantApplication::class, 'herbarium_id', 'id')
+        return $this->hasMany(HerbariumApplication::class, 'herbarium_id', 'id')
             ->when($parameter, function ($query, $parameter) {
                 return $query->ofAction($parameter);
             })->latest();

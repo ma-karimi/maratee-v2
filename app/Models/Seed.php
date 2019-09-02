@@ -379,7 +379,7 @@ class Seed extends BaseModel
 
     public function plantApplication()
     {
-        return $this->belongsTo(PlantApplication::class, 'herbarium_application_id');
+        return $this->belongsTo(HerbariumApplication::class, 'herbarium_application_id');
     }
 
     public function plants()

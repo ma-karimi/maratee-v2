@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\PlantApplication;
+use App\Models\HerbariumApplication;
 
 
 /**
@@ -17,7 +17,7 @@ class PlantApplicationRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**
@@ -35,6 +35,6 @@ class PlantApplicationRepository extends BaseRepository
      **/
     public function model()
     {
-        return PlantApplication::class;
+        return HerbariumApplication::class;
     }
 }

@@ -115,7 +115,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      )
  * )
  */
-class PlantApplication extends BaseModel
+class HerbariumApplication extends BaseModel
 {
 
     public static $linguistically = ['presence' => false,'part_description' => false,'usage_description' => false,'industry_description' => false,'application_description' => false,'potential' => false,];

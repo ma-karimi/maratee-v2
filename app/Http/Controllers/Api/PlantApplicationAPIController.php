@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\CreateplantApplicationAPIRequest;
 use App\Http\Requests\Api\UpdateplantApplicationAPIRequest;
-use App\Models\plantApplication;
+use App\Models\HerbariumApplication;
 use App\Repositories\PlantApplicationRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -209,7 +209,7 @@ class PlantApplicationAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var plantApplication $plantApplication */
+        /** @var HerbariumApplication $plantApplication */
         $plantApplication = $this->plantApplicationRepository->find($id, \request()->get('relations'));
 
         if ($plantApplication === null) {
@@ -322,7 +322,7 @@ class PlantApplicationAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var plantApplication $plantApplication */
+        /** @var HerbariumApplication $plantApplication */
         $plantApplication = $this->plantApplicationRepository->find($id, \request()->get('relations'));
 
         if (empty($plantApplication)) {
@@ -375,7 +375,7 @@ class PlantApplicationAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var plantApplication $plantApplication */
+        /** @var HerbariumApplication $plantApplication */
         $plantApplication = $this->plantApplicationRepository->find($id, \request()->get('relations'));
 
         if (empty($plantApplication)) {

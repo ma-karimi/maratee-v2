@@ -87,24 +87,19 @@ class DatabaseSeeder extends Seeder
 //
 //
 //            EntryHubTableSeeder::class,
-//            ExchangeTableSeeder::class,
 //            GardenTableSeeder::class,
 //            ChromosomeTableSeeder::class,
 //            BotanicalTableSeeder::class,
 //            BotanicalGardenActionTableSeeder::class,
 //            BotanicalPropagationTableSeeder::class,
 //            BotanicalIrrigationTableSeeder::class,
-//            MedicalTableSeeder::class,
-//            PlantApplicationTableSeeder::class,
-//
+//            MedicalTableSeeder::class,//
 //            TechnologyCollectionTableSeeder::class,
-//            VisitTableSeeder::class,
 //            RoleTableSeeder::class,
 //            GroupTableSeeder::class,
 //            TableTableSeeder::class,
 //            TransitionTableSeeder::class,
 //            PermissionTableSeeder::class,
-//            TransitionTableSeeder::class,
 //            ComponentTableSeeder::class,
 //            MedicalComponentTableSeeder::class,
         ]);
