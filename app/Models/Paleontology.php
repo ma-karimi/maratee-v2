@@ -329,11 +329,13 @@ class Paleontology extends BaseModel
      */
     public function actions(): MorphToMany
     {
-        return $this->morphToMany(ActionHub::class, 'actionable');
+        return $this->morphToMany(Action::class, 'actionable');
     }
-
-    public function tags()
+    /**
+     * @return MorphToMany
+     */
+    public function transactions(): MorphToMany
     {
-        return $this->morphToMany(Transaction::class, 'taggable');
+        return $this->morphToMany(Transaction::class, 'transactionable');
     }
 }

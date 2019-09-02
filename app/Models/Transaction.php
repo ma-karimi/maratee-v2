@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\TransactionAccessor;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -91,9 +92,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Transaction extends BaseModel
 {
+    use TransactionAccessor;
 
-    public $table = 'transactions';
-
+    public const TYPE = [1 => 'visit', 2 => 'borrow', 3 => 'exchange', 4 => 'gift', 5 => 'fair', 6 => 'expense', 7 => 'correspondence'];
+    public const VISIT = [1 => 'Sample', 2 => 'All/Museum'];
     public static $rules = [
         'user_id' => 'required|exists:users,id',
         'organization_id' => 'required|exists:organizations,id',
@@ -103,7 +105,6 @@ class Transaction extends BaseModel
         'archive_no' => 'string',
         'visit' => 'in:1,2',
         'peoples_no' => 'integer',
-
     ];
     protected $casts = [
         'description' => 'json',
@@ -131,5 +132,25 @@ class Transaction extends BaseModel
     public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);
+    }
+
+    public function paleontologies()
+    {
+        return $this->morphedByMany(Paleontology::class, 'transactionable');
+    }
+
+    public function herbariums()
+    {
+        return $this->morphedByMany(Herbarium::class, 'transactionable');
+    }
+
+    public function seeds()
+    {
+        return $this->morphedByMany(Seed::class, 'transactionable');
+    }
+
+    public function medicinalPlants()
+    {
+        return $this->morphedByMany(MedicinalPlant::class, 'transactionable');
     }
 }

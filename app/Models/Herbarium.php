@@ -458,4 +458,11 @@ class Herbarium extends BaseModel
             'life_form_herbaceous_id');
     }
 
+    /**
+     * @return MorphToMany
+     */
+    public function transactions(): MorphToMany
+    {
+        return $this->morphToMany(Transaction::class, 'transactionable');
+    }
 }
