@@ -336,6 +336,8 @@ class Paleontology extends BaseModel
      */
     public function transactions(): MorphToMany
     {
-        return $this->morphToMany(Transaction::class, 'transactionable');
+        return $this->morphToMany(Transaction::class, 'transactionable','transaction_hubs')
+            ->withTimestamps()
+            ->withPivot(['type_id','sheets_no']);
     }
 }

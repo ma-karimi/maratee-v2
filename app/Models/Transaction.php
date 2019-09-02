@@ -136,21 +136,29 @@ class Transaction extends BaseModel
 
     public function paleontologies()
     {
-        return $this->morphedByMany(Paleontology::class, 'transactionable');
+        return $this->morphedByMany(Paleontology::class, 'transactionable')
+            ->withTimestamps()
+            ->withPivot(['type_id','sheets_no']);
     }
 
     public function herbariums()
     {
-        return $this->morphedByMany(Herbarium::class, 'transactionable');
+        return $this->morphedByMany(Herbarium::class, 'transactionable')
+            ->withTimestamps()
+            ->withPivot(['type_id','sheets_no']);
     }
 
     public function seeds()
     {
-        return $this->morphedByMany(Seed::class, 'transactionable');
+        return $this->morphedByMany(Seed::class, 'transactionable')
+            ->withTimestamps()
+            ->withPivot(['type_id','sheets_no']);
     }
 
     public function medicinalPlants()
     {
-        return $this->morphedByMany(MedicinalPlant::class, 'transactionable');
+        return $this->morphedByMany(MedicinalPlant::class, 'transactionable')
+            ->withTimestamps()
+            ->withPivot(['type_id','sheets_no']);
     }
 }

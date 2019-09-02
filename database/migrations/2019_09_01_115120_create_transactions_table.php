@@ -27,6 +27,7 @@ class CreateTransactionsTable extends Migration
             $table->integer('peoples_no')->nullable();
             $table->json('person_position')->nullable();
             $table->timestamps();
+            $table->softDeletesTz();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');

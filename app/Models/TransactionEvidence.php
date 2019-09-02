@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @SWG\Definition(
  *      definition="TransactionEvidence",
- *      required={"transaction_id","description"},
+ *      required={"transaction_id","src"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -27,8 +27,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="description",
- *          description="description",
+ *          property="src_description",
+ *          description="src_description",
  *          type="string"
  *      ),
  *      @SWG\Property(
@@ -47,10 +47,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class TransactionEvidence extends BaseModel
 {
+    protected $table='transaction_evidences';
     public static $rules = [
         'transaction_id' => 'required|exists:transactions,id',
-        'src' => 'string',
-        'description' => 'required|string',
+        'src' => 'required|string',
+        'src_description' => 'string',
     ];
 
     /**

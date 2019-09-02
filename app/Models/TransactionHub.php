@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\TransactionHubAccessor;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -16,6 +17,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="type_id",
+ *          description="type_id",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
  *          property="transaction_id",
  *          description="transaction_id",
  *          type="integer"
@@ -24,6 +30,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          property="transactionable_id",
  *          description="transactionable_id",
  *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="sheets_no",
+ *          description="sheets_no",
+ *          type="string"
  *      ),
  *      @SWG\Property(
  *          property="transactionable_type",
@@ -46,10 +57,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class TransactionHub extends BaseModel
 {
+    use TransactionHubAccessor;
+    public const TYPE = [1 => 'send', 2 => 'receive'];
     public static $rules = [
-        'transaction_id' => 'required|exists:transactions,id',
-        'transactionable_id' => 'required|integer',
-        'transactionable_type' => 'required|string',
+        'type_id' => 'required|in:1,2',
+        'sheets_no' => 'string',
     ];
 
 

@@ -44,12 +44,6 @@ use App\Models\Contracts\BaseModel;
  */
 class TreatmentHub extends BaseModel
 {
-
-    public static $rules = [
-        'treatment_id' => 'required|exists:treatments,id',
-        'treatmentable_id' => 'required|integer',
-        'treatmentable_type' => 'required|string'
-    ];
     /**
      * The database table used by the model.
      *

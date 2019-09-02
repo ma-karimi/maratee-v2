@@ -87,17 +87,17 @@ class TransactionEvidenceAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/TransactionEvidence")
      *      ),
      *      @SWG\Parameter(
-     *          name="description",
+     *          name="src_description",
      *          in="body",
      *          description="TransactionEvidence that should be stored",
-     *          required=true,
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/TransactionEvidence")
      *      ),
      *      @SWG\Parameter(
      *          name="src",
      *          in="body",
      *          description="TransactionEvidence that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/TransactionEvidence")
      *      ),
      *      @SWG\Response(
@@ -206,17 +206,17 @@ class TransactionEvidenceAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/TransactionEvidence")
      *      ),
      *      @SWG\Parameter(
-     *          name="description",
+     *          name="src_description",
      *          in="body",
      *          description="TransactionEvidence that should be stored",
-     *          required=true,
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/TransactionEvidence")
      *      ),
      *      @SWG\Parameter(
      *          name="src",
      *          in="body",
      *          description="TransactionEvidence that should be stored",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/TransactionEvidence")
      *      ),
      *      @SWG\Response(

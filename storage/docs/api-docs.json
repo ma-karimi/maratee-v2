@@ -14870,7 +14870,7 @@
                     {
                         "name": "aerial_part_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from medicinal_parts where type=aerial",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -14879,7 +14879,7 @@
                     {
                         "name": "ground_part_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from medicinal_parts where type=ground",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -14888,7 +14888,7 @@
                     {
                         "name": "food_industry_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from medicinal_plant_type",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -14897,7 +14897,7 @@
                     {
                         "name": "hygienic_cosmetic_industry_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from medicinal_plant_type",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -14906,7 +14906,7 @@
                     {
                         "name": "industrial_potential_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from medicinal_plant_type",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -14915,7 +14915,7 @@
                     {
                         "name": "general_phenology_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from general",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -14924,7 +14924,7 @@
                     {
                         "name": "method_distillation_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from methods",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -14933,7 +14933,7 @@
                     {
                         "name": "method_extraction_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from methods",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -14942,7 +14942,7 @@
                     {
                         "name": "method_analyse_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from methods",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -14951,7 +14951,7 @@
                     {
                         "name": "secondary_metabolite_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from medicinal_plant_type",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -14960,7 +14960,7 @@
                     {
                         "name": "effective_material_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from medicinal_plant_type",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -15227,7 +15227,7 @@
                     {
                         "name": "aerial_part_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from medicinal_parts where type=aerial",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -15236,7 +15236,7 @@
                     {
                         "name": "ground_part_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from medicinal_parts where type=ground",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -15245,7 +15245,7 @@
                     {
                         "name": "food_industry_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from medicinal_plant_type",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -15254,7 +15254,7 @@
                     {
                         "name": "hygienic_cosmetic_industry_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from medicinal_plant_type",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -15263,7 +15263,7 @@
                     {
                         "name": "industrial_potential_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from medicinal_plant_type",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -15272,7 +15272,7 @@
                     {
                         "name": "general_phenology_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from general",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -15281,7 +15281,7 @@
                     {
                         "name": "method_distillation_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from methods",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -15290,7 +15290,7 @@
                     {
                         "name": "method_extraction_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from methods",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -15299,7 +15299,7 @@
                     {
                         "name": "method_analyse_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from methods",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -15308,7 +15308,7 @@
                     {
                         "name": "secondary_metabolite_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from medicinal_plant_type",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -15317,7 +15317,7 @@
                     {
                         "name": "effective_material_id",
                         "in": "body",
-                        "description": "MedicinalPlant that should be stored",
+                        "description": "from medicinal_plant_type",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -15479,7 +15479,7 @@
                     {
                         "name": "height",
                         "in": "body",
-                        "description": "height (cm)",
+                        "description": "height",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -26053,6 +26053,241 @@
                 }
             }
         },
+        "/transaction_evidences": {
+            "get": {
+                "tags": [
+                    "TransactionEvidence"
+                ],
+                "summary": "Get a listing of the TransactionEvidences.",
+                "description": "Get all TransactionEvidences",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/TransactionEvidence"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "TransactionEvidence"
+                ],
+                "summary": "Store a newly created TransactionEvidence in storage",
+                "description": "Store TransactionEvidence",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "transaction_id",
+                        "in": "body",
+                        "description": "TransactionEvidence that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransactionEvidence"
+                        }
+                    },
+                    {
+                        "name": "src_description",
+                        "in": "body",
+                        "description": "TransactionEvidence that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/TransactionEvidence"
+                        }
+                    },
+                    {
+                        "name": "src",
+                        "in": "body",
+                        "description": "TransactionEvidence that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransactionEvidence"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/TransactionEvidence"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/transaction_evidences/{id}": {
+            "get": {
+                "tags": [
+                    "TransactionEvidence"
+                ],
+                "summary": "Display the specified TransactionEvidence",
+                "description": "Get TransactionEvidence",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of TransactionEvidence",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/TransactionEvidence"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "TransactionEvidence"
+                ],
+                "summary": "Update the specified TransactionEvidence in storage",
+                "description": "Update TransactionEvidence",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of TransactionEvidence",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "transaction_id",
+                        "in": "body",
+                        "description": "TransactionEvidence that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransactionEvidence"
+                        }
+                    },
+                    {
+                        "name": "src_description",
+                        "in": "body",
+                        "description": "TransactionEvidence that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/TransactionEvidence"
+                        }
+                    },
+                    {
+                        "name": "src",
+                        "in": "body",
+                        "description": "TransactionEvidence that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TransactionEvidence"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/TransactionEvidence"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "TransactionEvidence"
+                ],
+                "summary": "Remove the specified TransactionEvidence from storage",
+                "description": "Delete TransactionEvidence",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of TransactionEvidence",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/transfers": {
             "get": {
                 "tags": [
@@ -33292,6 +33527,77 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "TransactionEvidence": {
+            "required": [
+                "transaction_id",
+                "src"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "transaction_id": {
+                    "description": "transaction_id",
+                    "type": "integer"
+                },
+                "src": {
+                    "description": "src",
+                    "type": "string"
+                },
+                "src_description": {
+                    "description": "src_description",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "TransactionHub": {
+            "required": [
+                "transaction_id",
+                "transactionable_id",
+                "transactionable_type"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "transaction_id": {
+                    "description": "transaction_id",
+                    "type": "integer"
+                },
+                "transactionable_id": {
+                    "description": "transactionable_id",
+                    "type": "integer"
+                },
+                "transactionable_type": {
+                    "description": "transactionable_type",
+                    "type": "string"
                 },
                 "created_at": {
                     "description": "created_at",

@@ -26,10 +26,4 @@ class AuthorHub extends BaseModel
      */
     protected $table = 'author_hubs';
 
-
-    public static $rules = [
-        'author_id'=>'required|exists:authors,id',
-        'authorable_id'=>'required|integer',
-        'authorable_type'=>'required|string'
-    ];
 }

@@ -138,7 +138,7 @@ class APIController extends AppBaseController
     {
         $repo = 'App\\Repositories\\' . Str::singular(Str::studly($class)) . 'Repository';
         $repo = resolve($repo);
-        $result = $repo->createHub($request->class_id, $request->relation, $request->ids);
+        $result = $repo->createHub($request->class_id, $request->relation, $request->ids,$request->except('class_id','relation','ids'));
         return $this->sendResponse($result, 'Record(s) added successfully');
     }
 

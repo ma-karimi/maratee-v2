@@ -53,9 +53,4 @@ class UserHub extends BaseModel
      */
     protected $table = 'user_hubs';
 
-    public static $rules = [
-        'user_id'=>'required|exists:users,id',
-        'userable_id'=>'required|integer',
-        'userable_type'=>'required|string'
-    ];
 }

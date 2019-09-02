@@ -257,7 +257,7 @@ abstract class BaseRepository
     }
 
 
-    public function createHub($class_id, $related_model, array $ids)
+    public function createHub($class_id, $related_model, array $ids, array $additional_data = null)
     {
         $record = $this->model->find($class_id);
         abort_if(empty($record), JsonResponse::HTTP_NOT_FOUND, 'record not found');
@@ -268,8 +268,18 @@ abstract class BaseRepository
         $different_ids = array_diff($ids, $assigned_id);
         $different_assigned = array_diff($assigned_id, $ids);
 
-        //sync records
-        $record->$related_model()->attach($different_ids);
+        //attach and update pivot fields
+        if (!empty($additional_data)) {
+            $exists_related_ids = $related_model_class::whereIn($related_key, $ids)->pluck('id')->toArray();
+            if (count($exists_related_ids)) {
+                $related_model_class::whereIn('id', $exists_related_ids)->update($additional_data);
+            }
+            $record->$related_model()->attach($different_ids, $additional_data);
+        } //attach only ids
+        else {
+            $record->$related_model()->attach($different_ids);
+        }
+
         $related_model_class::where($foreign_key, $class_id)->whereIn($related_key, $different_assigned)->delete();
 
         return $record->$related_model()->get();

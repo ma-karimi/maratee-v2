@@ -6,9 +6,10 @@ use App\Models\TransactionEvidence;
 use Faker\Generator as Faker;
 
 $factory->define(TransactionEvidence::class, function (Faker $faker) {
-
+    $transactions = \App\Models\Transaction::pluck('id')->toArray();
     return [
-        'created_at' => $faker->date('Y-m-d H:i:s'),
-        'updated_at' => $faker->date('Y-m-d H:i:s')
+        'transaction_id' => $faker->randomElement($transactions),
+        'src' => $faker->url,
+        'src_description' => $faker->word
     ];
 });
