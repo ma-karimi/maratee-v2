@@ -17,8 +17,10 @@ class CreateTransactionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('organization_id');
+            $table->unsignedBigInteger('department_id');
             $table->dateTimeTz('start_time');
             $table->dateTimeTz('end_time')->nullable();
+            $table->dateTimeTz('dead_line')->nullable();
             $table->tinyInteger('type_id')->default(1)->comment('1: visit, 2: borrow, 3: exchange, 4:gift, 5:fair 6:expense 7:correspondence');
             $table->string('archive_no')->nullable();
             $table->json('description')->nullable();
@@ -31,6 +33,7 @@ class CreateTransactionsTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
         });
     }
