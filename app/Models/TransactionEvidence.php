@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 
 /**
  * @SWG\Definition(
@@ -30,50 +32,6 @@ use Illuminate\Database\Eloquent\Model;
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="end_time",
- *          description="end_time",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="type_id",
- *          description="'1: visit, 2: borrow, 3: exchange, 4:gift, 5:fair 6:expense 7:correspondence'",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="archive_no",
- *          description="archive_no",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="description",
- *          description="description",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="purpose",
- *          description="purpose",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="visit",
- *          description="1: Sample, 2: All/Museum",
- *          type="integer",
- *      ),
- *      @SWG\Property(
- *          property="peoples_no",
- *          description="peoples_no",
- *          type="integer",
- *      ),
- *      @SWG\Property(
- *          property="person_position",
- *          description="person_position",
- *         type="array",
- *          @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -87,7 +45,19 @@ use Illuminate\Database\Eloquent\Model;
  *      )
  * )
  */
-class TransactionEvidence extends Model
+class TransactionEvidence extends BaseModel
 {
-    //
+    public static $rules = [
+        'transaction_id' => 'required|exists:transactions,id',
+        'src' => 'string',
+        'description' => 'required|string',
+    ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function transaction(): BelongsTo
+    {
+        return $this->belongsTo(Transaction::class);
+    }
 }
