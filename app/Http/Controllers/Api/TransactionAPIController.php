@@ -115,6 +115,20 @@ class TransactionAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
+     *          name="dead_line",
+     *          in="body",
+     *          description="Transaction that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Transaction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
+     *          in="body",
+     *          description="Transaction that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Transaction")
+     *      ),
+     *      @SWG\Parameter(
      *          name="archive_no",
      *          in="body",
      *          description="Transaction that should be stored",
@@ -284,6 +298,20 @@ class TransactionAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="end_time",
+     *          in="body",
+     *          description="Transaction that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Transaction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="dead_line",
+     *          in="body",
+     *          description="Transaction that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Transaction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,

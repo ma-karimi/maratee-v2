@@ -27,6 +27,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          type="integer"
  *      ),
  *      @SWG\Property(
+ *          property="department_id",
+ *          description="department_id",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
  *          property="start_time",
  *          description="start_time",
  *          type="string",
@@ -99,8 +104,10 @@ class Transaction extends BaseModel
     public static $rules = [
         'user_id' => 'required|exists:users,id',
         'organization_id' => 'required|exists:organizations,id',
+        'department_id' => 'exists:departments,id',
         'start_time' => 'required|date',
         'end_time' => 'date',
+        'dead_line' => 'date',
         'type_id' => 'required|in:1,2,3,4,5,6,7',
         'archive_no' => 'string',
         'visit' => 'in:1,2',
