@@ -60,9 +60,9 @@ if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >
 
             $table->unsignedBigInteger('organization_id');
 
-            $table->unsignedBigInteger('general_substrate_lichen_id');
-            $table->unsignedBigInteger('general_substrate_moss_id');
-            $table->unsignedBigInteger('general_substrate_diatom_id');
+            $table->unsignedBigInteger('general_substrate_lichen_id')->nullable();
+            $table->unsignedBigInteger('general_substrate_moss_id')->nullable();
+            $table->unsignedBigInteger('general_substrate_diatom_id')->nullable();
 
 
 
