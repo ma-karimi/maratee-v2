@@ -30,7 +30,7 @@ class SeedWeightAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/seedWeights",
+     *      path="/seed_weights",
      *      summary="Get a listing of the SeedWeights.",
      *      tags={"SeedWeight"},
      *      description="Get all SeedWeights",
@@ -56,6 +56,7 @@ class SeedWeightAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -73,7 +74,7 @@ class SeedWeightAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/seedWeights",
+     *      path="/seed_weights",
      *      summary="Store a newly created SeedWeight in storage",
      *      tags={"SeedWeight"},
      *      description="Store SeedWeight",
@@ -113,7 +114,7 @@ class SeedWeightAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/seedWeights/{id}",
+     *      path="/seed_weights/{id}",
      *      summary="Display the specified SeedWeight",
      *      tags={"SeedWeight"},
      *      description="Get SeedWeight",
@@ -164,7 +165,7 @@ class SeedWeightAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/seedWeights/{id}",
+     *      path="/seed_weights/{id}",
      *      summary="Update the specified SeedWeight in storage",
      *      tags={"SeedWeight"},
      *      description="Update SeedWeight",
@@ -219,7 +220,7 @@ class SeedWeightAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/seedWeights/{id}",
+     *      path="/seed_weights/{id}",
      *      summary="Remove the specified SeedWeight from storage",
      *      tags={"SeedWeight"},
      *      description="Delete SeedWeight",

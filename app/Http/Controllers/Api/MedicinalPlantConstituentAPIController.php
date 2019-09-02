@@ -30,7 +30,7 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/medicinalPlantConstituents",
+     *      path="/medicinal_plant_constituents",
      *      summary="Get a listing of the MedicinalPlantConstituents.",
      *      tags={"MedicinalPlantConstituent"},
      *      description="Get all MedicinalPlantConstituents",
@@ -74,7 +74,7 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/medicinalPlantConstituents",
+     *      path="/medicinal_plant_constituents",
      *      summary="Store a newly created MedicinalPlantConstituent in storage",
      *      tags={"MedicinalPlantConstituent"},
      *      description="Store MedicinalPlantConstituent",

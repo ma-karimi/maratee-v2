@@ -30,7 +30,7 @@ class PaleontologyMediaAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/paleontologyMedia",
+     *      path="/paleontology_media",
      *      summary="Get a listing of the PaleontologyMedia.",
      *      tags={"PaleontologyMedia"},
      *      description="Get all PaleontologyMedia",
@@ -56,6 +56,7 @@ class PaleontologyMediaAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -73,7 +74,7 @@ class PaleontologyMediaAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/paleontologyMedia",
+     *      path="/paleontology_media",
      *      summary="Store a newly created PaleontologyMedia in storage",
      *      tags={"PaleontologyMedia"},
      *      description="Store PaleontologyMedia",

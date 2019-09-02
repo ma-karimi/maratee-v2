@@ -30,7 +30,7 @@ class SeedExchangeAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/seedExchanges",
+     *      path="/seed_exchanges",
      *      summary="Get a listing of the SeedExchanges.",
      *      tags={"SeedExchange"},
      *      description="Get all SeedExchanges",
@@ -56,6 +56,7 @@ class SeedExchangeAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -73,7 +74,7 @@ class SeedExchangeAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/seedExchanges",
+     *      path="/seed_exchanges",
      *      summary="Store a newly created SeedExchange in storage",
      *      tags={"SeedExchange"},
      *      description="Store SeedExchange",

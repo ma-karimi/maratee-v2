@@ -30,7 +30,7 @@ class PlantApplicationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/plantApplications",
+     *      path="/plant_applications",
      *      summary="Get a listing of the plantApplications.",
      *      tags={"plantApplication"},
      *      description="Get all plantApplications",
@@ -56,6 +56,7 @@ class PlantApplicationAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -73,7 +74,7 @@ class PlantApplicationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/plantApplications",
+     *      path="/plant_applications",
      *      summary="Store a newly created plantApplication in storage",
      *      tags={"plantApplication"},
      *      description="Store plantApplication",

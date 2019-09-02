@@ -39,8 +39,10 @@ class CreateGeneralAPIRequest extends APIRequest
      */
     public function authorize()
     {
-        $condition = $this->validateParentId($this->input('type'));
-        abort_if(!$condition, JsonResponse::HTTP_BAD_REQUEST, 'parent_id does not valid');
+        if ($this->input('parent_id') !== null) {
+            $condition = $this->validateParentId($this->input('type'));
+            abort_if(!$condition, JsonResponse::HTTP_BAD_REQUEST, 'parent_id does not valid');
+        }
         return true;
     }
 
