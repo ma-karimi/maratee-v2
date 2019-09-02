@@ -16,7 +16,7 @@ class CreateTransactionEvidencesTable extends Migration
         Schema::create('transaction_evidences', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('transaction_id');
-            $table->string('src');
+            $table->string('src')->nullable();
             $table->text('description');
             $table->timestamps();
             $table->softDeletesTz();

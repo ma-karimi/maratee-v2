@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Contracts\RelationshipsTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Response;
 
 /**
@@ -67,7 +68,7 @@ class HelpersAPIController extends AppBaseController
 //            $models[$class]= self::relationshipsText( $model);
 //        }
         foreach ($classes as $index => $class) {
-            $model='App\\Models\\'.ucfirst(rtrim($class,'s'));
+            $model='App\\Models\\'.Str::singular(Str::studly($class));
             $models[$class]= self::relationshipsWithType($model);
         }
         return $this->sendResponse($models,'Relations retrieved successfully');
