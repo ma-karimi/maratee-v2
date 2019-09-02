@@ -227,3 +227,5 @@ Route::resource('plant_life_forms', 'PlantLifeFormAPIController');
 Route::resource('medicinal_parts', 'MedicinalPartAPIController');
 
 Route::resource('medicinal_plant_types', 'MedicinalPlantTypeAPIController');
+
+Route::resource('transactions', 'TransactionAPIController');

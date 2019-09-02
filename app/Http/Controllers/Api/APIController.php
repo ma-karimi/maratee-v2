@@ -9,6 +9,7 @@ use App\Http\Requests\Api\StoreHubRequest;
 use App\Http\Requests\BaseDeleteAPIRequest;
 use Illuminate\Container\Container as Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Response;
 
 /**
@@ -66,7 +67,7 @@ class APIController extends AppBaseController
      */
     public function multipleDestroy(BaseDeleteAPIRequest $request, $class)
     {
-        $repo = 'App\\Repositories\\' . ucfirst(rtrim($class, 's') . 'Repository');
+        $repo = 'App\\Repositories\\' . Str::singular(Str::studly($class)) . 'Repository';
         $repo = new $repo(new Application());
         foreach ($request->ids as $id) {
             $record = $repo->find($id, \request()->get('relations'));
@@ -135,7 +136,7 @@ class APIController extends AppBaseController
      */
     public function storeHub(CreateHubRequest $request, $class)
     {
-        $repo = 'App\\Repositories\\' . ucfirst(rtrim($class, 's') . 'Repository');
+        $repo = 'App\\Repositories\\' . Str::singular(Str::studly($class)) . 'Repository';
         $repo = resolve($repo);
         $result = $repo->createHub($request->class_id, $request->relation, $request->ids);
         return $this->sendResponse($result, 'Record(s) added successfully');
@@ -197,7 +198,7 @@ class APIController extends AppBaseController
      */
     public function destroyHub(DeleteHubRequest $request, $class)
     {
-        $repo = 'App\\Repositories\\' . ucfirst(rtrim($class, 's') . 'Repository');
+        $repo = 'App\\Repositories\\' . Str::singular(Str::studly($class)) . 'Repository';
         $repo = resolve($repo);
         $result = $repo->deleteHub($request->class_id, $request->relation, $request->ids);
         return $this->sendResponse($result, 'Record(s) deleted successfully');
@@ -242,7 +243,7 @@ class APIController extends AppBaseController
      */
     public function getConstants($class)
     {
-        $repo = 'App\\Repositories\\' . ucfirst(rtrim($class, 's') . 'Repository');
+        $repo = 'App\\Repositories\\' . Str::singular(Str::studly($class)) . 'Repository';
         $repo = resolve($repo);
         $result = $repo->getConstants($class);
         return $this->sendResponse($result, 'Constant(s) loaded successfully');
