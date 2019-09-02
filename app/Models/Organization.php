@@ -127,5 +127,11 @@ class Organization extends BaseModel
     {
         return $this->hasMany(Product::class)->latest();
     }
-
+    /**
+     * @return HasMany
+     */
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class)->latest();
+    }
 }

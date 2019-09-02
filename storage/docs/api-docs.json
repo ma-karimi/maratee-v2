@@ -11382,6 +11382,15 @@
                         }
                     },
                     {
+                        "name": "general_habitat_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
                         "name": "plant_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11430,7 +11439,7 @@
                         "name": "general_phytogeography_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
-                        "required": false,
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/Herbarium"
                         }
@@ -11694,6 +11703,15 @@
                         }
                     },
                     {
+                        "name": "general_habitat_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
                         "name": "protection_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
@@ -11742,7 +11760,7 @@
                         "name": "general_phytogeography_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
-                        "required": false,
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/Herbarium"
                         }
@@ -14589,7 +14607,7 @@
                 }
             }
         },
-        "/medicinalParts": {
+        "/medicinal_parts": {
             "get": {
                 "tags": [
                     "MedicinalPart"
@@ -14672,7 +14690,7 @@
                 }
             }
         },
-        "/medicinalParts/{id}": {
+        "/medicinal_parts/{id}": {
             "get": {
                 "tags": [
                     "MedicinalPart"
@@ -15086,7 +15104,7 @@
                     {
                         "name": "efficiency",
                         "in": "body",
-                        "description": "efficiency",
+                        "description": "efficiency : float type",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -15443,7 +15461,7 @@
                     {
                         "name": "efficiency",
                         "in": "body",
-                        "description": "efficiency",
+                        "description": "efficiency : float type",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -15545,7 +15563,7 @@
                 }
             }
         },
-        "/medicinalPlantConstituents": {
+        "/medicinal_plant_constituents": {
             "get": {
                 "tags": [
                     "MedicinalPlantConstituent"
@@ -17531,7 +17549,7 @@
                 }
             }
         },
-        "/paleontologyMedia": {
+        "/paleontology_media": {
             "get": {
                 "tags": [
                     "PaleontologyMedia"
@@ -18695,7 +18713,7 @@
                 }
             }
         },
-        "/plantApplications": {
+        "/plant_applications": {
             "get": {
                 "tags": [
                     "plantApplication"
@@ -19036,7 +19054,7 @@
                 }
             }
         },
-        "/plantLifeForms": {
+        "/plant_life_forms": {
             "get": {
                 "tags": [
                     "PlantLifeForm"
@@ -19253,7 +19271,7 @@
                 }
             }
         },
-        "/plantingActions": {
+        "/planting_actions": {
             "get": {
                 "tags": [
                     "PlantingAction"
@@ -22124,7 +22142,7 @@
                 }
             }
         },
-        "/seedExchanges": {
+        "/seed_exchanges": {
             "get": {
                 "tags": [
                     "SeedExchange"
@@ -22604,7 +22622,7 @@
                 }
             }
         },
-        "/seedFeatures/{id}": {
+        "/seed_features/{id}": {
             "get": {
                 "tags": [
                     "seedFeature"
@@ -22756,7 +22774,7 @@
                 }
             }
         },
-        "/seedHubs": {
+        "/seed_hubs": {
             "get": {
                 "tags": [
                     "SeedHub"
@@ -22893,7 +22911,7 @@
                 }
             }
         },
-        "/seedHubs/{id}": {
+        "/seed_hubs/{id}": {
             "get": {
                 "tags": [
                     "SeedHub"
@@ -23081,7 +23099,7 @@
                 }
             }
         },
-        "/seedPlants": {
+        "/seed_plants": {
             "get": {
                 "tags": [
                     "SeedPlant"
@@ -23164,7 +23182,7 @@
                 }
             }
         },
-        "/seedPlants/{id}": {
+        "/seed_plants/{id}": {
             "get": {
                 "tags": [
                     "SeedPlant"
@@ -23298,7 +23316,7 @@
                 }
             }
         },
-        "/seedTechnologies": {
+        "/seed_technologies": {
             "get": {
                 "tags": [
                     "SeedTechnology"
@@ -23507,7 +23525,7 @@
                 }
             }
         },
-        "/seedTechnologies/{id}": {
+        "/seed_technologies/{id}": {
             "get": {
                 "tags": [
                     "SeedTechnology"
@@ -23767,7 +23785,7 @@
                 }
             }
         },
-        "/seedWeights": {
+        "/seed_weights": {
             "get": {
                 "tags": [
                     "SeedWeight"
@@ -23830,7 +23848,7 @@
                 }
             }
         },
-        "/seedWeights/{id}": {
+        "/seed_weights/{id}": {
             "get": {
                 "tags": [
                     "SeedWeight"
@@ -24398,7 +24416,7 @@
                 }
             }
         },
-        "/soilHasSoilFeatures": {
+        "/soil_has_soil_features": {
             "get": {
                 "tags": [
                     "SoilHasSoilFeature"
@@ -24490,7 +24508,7 @@
                 }
             }
         },
-        "/soilHasSoilFeatures/{id}": {
+        "/soil_has_soil_features/{id}": {
             "get": {
                 "tags": [
                     "SoilHasSoilFeature"
@@ -25649,6 +25667,385 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of TraitValue",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions": {
+            "get": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Get a listing of the Transactions.",
+                "description": "Get all Transactions",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Transaction"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Store a newly created Transaction in storage",
+                "description": "Store Transaction",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "organization_id",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "type_id",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "archive_no",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "purpose",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "visit",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "peoples_no",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "person_position",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Transaction"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions/{id}": {
+            "get": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Display the specified Transaction",
+                "description": "Get Transaction",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Transaction",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Transaction"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Update the specified Transaction in storage",
+                "description": "Update Transaction",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Transaction",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "organization_id",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "type_id",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "archive_no",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "purpose",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "visit",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "peoples_no",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    {
+                        "name": "person_position",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Transaction"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Remove the specified Transaction from storage",
+                "description": "Delete Transaction",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Transaction",
                         "required": true,
                         "type": "integer"
                     }
@@ -29548,8 +29945,7 @@
                 },
                 "parent_id": {
                     "description": "parent_id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "name": {
                     "description": "name",
@@ -30637,8 +31033,10 @@
                 },
                 "active_compounds": {
                     "description": "active_compounds",
-                    "type": "number",
-                    "format": "double"
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "manufacturer": {
                     "description": "manufacturer",
@@ -32839,6 +33237,86 @@
                 },
                 "value": {
                     "description": "name"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "Transaction": {
+            "required": [
+                "user_id",
+                "organization_id",
+                "start_time",
+                "type_id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "description": "user_id",
+                    "type": "integer"
+                },
+                "organization_id": {
+                    "description": "organization_id",
+                    "type": "integer"
+                },
+                "start_time": {
+                    "description": "start_time",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "end_time": {
+                    "description": "end_time",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "type_id": {
+                    "description": "'1: visit, 2: borrow, 3: exchange, 4:gift, 5:fair 6:expense 7:correspondence'",
+                    "type": "integer"
+                },
+                "archive_no": {
+                    "description": "archive_no",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "description",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "purpose": {
+                    "description": "purpose",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "visit": {
+                    "description": "1: Sample, 2: All/Museum",
+                    "type": "integer"
+                },
+                "peoples_no": {
+                    "description": "peoples_no",
+                    "type": "integer"
+                },
+                "person_position": {
+                    "description": "person_position",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "created_at": {
                     "description": "created_at",

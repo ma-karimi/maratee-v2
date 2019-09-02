@@ -133,5 +133,4 @@ class Visit extends BaseModel
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
 }

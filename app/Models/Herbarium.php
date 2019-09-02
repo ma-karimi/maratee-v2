@@ -90,12 +90,6 @@ use Kalnoy\Nestedset\NodeTrait;
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="name",
- *          description="name",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
  *          property="description",
  *          description="description",
  *          type="array",
