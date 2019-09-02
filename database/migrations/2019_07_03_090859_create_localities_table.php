@@ -23,7 +23,6 @@ class CreateLocalitiesTable extends Migration {
 			$table->json('lithology')->nullable();
 			$table->json('fauna')->nullable();
 			$table->json('description')->nullable();
-			$table->unsignedBigInteger('map_id')->nullable();
 
 
             $table->timeStampsTz();
