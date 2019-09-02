@@ -17,6 +17,5 @@ $factory->define(App\Models\Locality::class, function (Faker $faker) {
         'lithology' => make_json($faker->word),
         'fauna' => make_json($faker->word),
         'description' => make_json($faker->text),
-        'map_id' => $faker->randomElement($maps),
     ];
 });

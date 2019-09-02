@@ -53,8 +53,6 @@ Route::resource('soil_features', 'SoilFeatureAPIController');
 
 Route::resource('soils', 'SoilAPIController');
 
-Route::resource('visits', 'VisitAPIController');
-
 Route::resource('villages', 'VillageAPIController');
 
 Route::resource('users', 'UserAPIController');
@@ -74,8 +72,6 @@ Route::resource('seed_features', 'SeedFeatureAPIController');
 
 
 Route::resource('seed_hubs', 'SeedHubAPIController');
-
-//Route::resource('seed_has_plants', 'SeedHasPlantAPIController');
 
 Route::resource('seed_exchanges', 'SeedExchangeAPIController');
 
@@ -97,11 +93,7 @@ Route::resource('planting_actions', 'PlantingActionAPIController');
 
 Route::resource('generals', 'GeneralAPIController');
 
-//Route::resource('planting_applications', 'PlantingApplicationAPIController');
-
 Route::resource('plants', 'PlantAPIController');
-
-Route::resource('organizations', 'OrganizationAPIController');
 
 Route::resource('actions', 'ActionAPIController');
 
@@ -116,8 +108,6 @@ Route::resource('evaluations', 'EvaluationAPIController');
 Route::resource('attendances', 'AttendanceAPIController');
 
 Route::resource('authors', 'AuthorAPIController');
-
-Route::resource('borrows', 'BorrowAPIController');
 
 Route::resource('botanicals', 'BotanicalAPIController');
 
@@ -138,15 +128,12 @@ Route::resource('constituents', 'ConstituentAPIController');
 
 Route::resource('countries', 'CountryAPIController');
 
-Route::resource('credentials', 'CredentialAPIController');
 
 Route::resource('cryo_banks', 'CryoBankAPIController');
 
 Route::resource('entries', 'EntryAPIController');
 
 Route::resource('entry_hubs', 'EntryHubAPIController');
-
-Route::resource('exchanges', 'ExchangeAPIController');
 
 Route::resource('gardens', 'GardenAPIController');
 
@@ -165,7 +152,6 @@ Route::resource('maps', 'MapAPIController');
 
 Route::resource('media', 'MediaAPIController');
 
-Route::resource('medicals', 'MedicalAPIController');
 
 Route::resource('medicinal_plants', 'MedicinalPlantAPIController');
 
@@ -175,8 +161,6 @@ Route::resource('medicinal_plant_constituents', 'MedicinalPlantConstituentAPICon
 Route::resource('medicines', 'MedicineAPIController');
 
 Route::resource('methods', 'MethodAPIController');
-
-Route::resource('seedFeatures', 'seedFeatureAPIController');
 
 
 Route::resource('paleontologies', 'PaleontologyAPIController');
@@ -191,12 +175,7 @@ Route::resource('groups', 'GroupAPIController');
 
 Route::resource('divisions', 'DivisionAPIController');
 
-
 Route::resource('germinations', 'GerminationAPIController');
-
-Route::resource('germinations', 'GerminationAPIController');
-
-Route::resource('taxonomies', 'TaxonomyAPIController');
 
 Route::resource('repeats', 'RepeatAPIController');
 

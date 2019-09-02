@@ -16,14 +16,7 @@ class ChangePaleontologiesTables extends Migration
     {
         \App\Utility::truncateTables();
 
-        Schema::table('credentials', function (Blueprint $table) {
-            $table->string('url')->nullable();
-            $table->unsignedBigInteger('division_id')->nullable();
-            $table->unsignedBigInteger('department_id');
-            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('division_id')->references('id')->on('divisions')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
-        });
         Schema::table('maps', function (Blueprint $table){
             $table->string('name');
             $table->string('url')->nullable();
@@ -44,11 +37,7 @@ class ChangePaleontologiesTables extends Migration
     public function down()
     {
         \App\Utility::truncateTables();
-        Schema::table('credentials', function (Blueprint $table) {
-            $table->dropForeign(['division_id']);
-            $table->dropForeign(['department_id']);
-            $table->dropColumn('division_id', 'department_id','url');
-        });
+
         Schema::table('maps', function (Blueprint $table){
             $table->dropColumn('name', 'url');
         });

@@ -31,7 +31,6 @@ class DatabaseSeeder extends Seeder
             CollectionTableSeeder::class,
             ConstituentTableSeeder::class,
             DepartmentTableSeeder::class,
-            CredentialTableSeeder::class,
             ProtectionTableSeeder::class,
             DivisionTableSeeder::class,
             EntryTableSeeder::class,
@@ -42,7 +41,6 @@ class DatabaseSeeder extends Seeder
             MedicineTableSeeder::class,
             ConstituentTypeTableSeeder::class,
             SeedFeatureTableSeeder::class,
-//            MorphologyTableSeeder::class,
             OrganizationTableSeeder::class,
             GeneralTableSeeder::class,
             OriginalGeneralTableSeeder::class,
@@ -72,7 +70,6 @@ class DatabaseSeeder extends Seeder
             HerbariumTableSeeder::class,
             MedicinalPlantTableSeeder::class,
             MedicinalPlantConstituentTableSeeder::class,
-//            MedicinalPlantMorphologyTableSeeder::class,
             MorphAuthorTableSeeder::class,
 
 //            SeedTableSeeder::class,
@@ -86,7 +83,6 @@ class DatabaseSeeder extends Seeder
 //            HerbariumAppendixTableSeeder::class,
 //            MediaTableSeeder::class,
 //
-//            BorrowTableSeeder::class,
 //
 //            EntryHubTableSeeder::class,
 //            ExchangeTableSeeder::class,

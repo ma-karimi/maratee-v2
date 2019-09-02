@@ -7,6 +7,7 @@ use App\Models\Herbarium;
 use App\Models\MedicinalPart;
 use App\Models\MedicinalPlant;
 use App\Models\MedicinalPlantType;
+use App\Models\Medicine;
 use App\Models\Method;
 use App\Models\Product;
 use Faker\Generator as Faker;
@@ -20,6 +21,7 @@ $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
     $industrial_potentials = MedicinalPlantType::whereTypeId(3)->pluck('id')->toArray();
     $general_phenology = General::whereType('phenology')->pluck('id')->toArray();
     $methods = Method::pluck('id')->toArray();
+    $medicines = Medicine::pluck('id')->toArray();
     $secondary_metabolites = MedicinalPlantType::whereTypeId(5)->pluck('id')->toArray();
     $effective_materials = MedicinalPlantType::whereTypeId(6)->pluck('id')->toArray();
     $products = Product::pluck('id')->toArray();
@@ -45,7 +47,7 @@ $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
         'cultivated_area' =>array_rand(MedicinalPlant::CULTIVATED_AREA) ,
         'studied_sample' =>array_rand(MedicinalPlant::STUDIED_SAMPLE) ,
         'presence_in_country' =>array_rand(MedicinalPlant::PRESENCE_IN_COUNTRY) ,
-        'medicine_name' =>make_json($faker->word) ,
+        'medicine_id' =>$faker->randomElement($medicines) ,
         'code_no' =>$faker->numberBetween(1,100),
         'flower_color' =>make_json($faker->word),
         'fruit_color' =>make_json($faker->word),

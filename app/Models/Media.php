@@ -117,9 +117,10 @@ class Media extends BaseModel
 {
     use MediaAccessor;
     public static $linguistically = ['name' => false, 'description' => false, 'info_type' => false, 'reference' => false];
-    public const MEDIA_TYPE = [0 => 'unknown', 1 => 'sketch', 2 => 'picture'];
+    public const MEDIA_TYPE = [1 => 'sketch', 2 => 'picture'];
     public static $rules = [
         'format_type' => 'required|string',
+        'media_type' => 'required|integer|in:1,2',
         'date' => 'date',
         'user_id' => 'exists:users,id',
         'location_id' => 'exists:locations,id',

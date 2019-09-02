@@ -11,9 +11,7 @@ class AlterPrimaryKeysTables extends Migration
         'botanical_garden_actions',
         'botanical_irrigations',
         'botanical_propagations',
-        'medicals',
         'medicinal_plant_constituents',
-        'medicinal_plant_morphologies',
     ];
 
     /**

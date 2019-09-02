@@ -29,6 +29,7 @@ class AddForeignKeysToMedicinalPlantsTable extends Migration {
 			$table->foreign('effective_material_id')->references('id')->on('medicinal_plant_types')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('pharmaceutical_form_id')->references('id')->on('medicinal_plant_types')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('product_id')->references('id')->on('products')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('medicine_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 
@@ -40,14 +41,7 @@ class AddForeignKeysToMedicinalPlantsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('medicinal_plants', function(Blueprint $table)
-		{
-			$table->dropForeign([
-			    'herbarium_application_id',
-                'aerial_part_id',
-                'ground_part_id'
-            ]);
-		});
+		//
 	}
 
 }

@@ -40,12 +40,11 @@ class CreateMedicinalPlantsTable extends Migration {
             $table->tinyInteger('presence_in_country')->comment('0:unknown, 1:native, 2: endemic')->default(0);
             $table->json('medicinal_properties')->nullable();
             $table->json('side_effects')->nullable();
-            $table->json('drug_name')->nullable();
-            $table->json('medicine_name');
+            $table->unsignedBigInteger('medicine_id')->nullable();
             $table->json('consumption')->nullable();
             $table->json('active_compounds')->nullable();
             $table->json('manufacturer')->nullable();
-            $table->float('efficiency', 4)->nullable();
+            $table->float('efficiency', 4,2)->nullable();
             $table->integer('code_no')->nullable();
             $table->timeStampsTz();
             $table->softDeletesTz();

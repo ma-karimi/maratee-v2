@@ -158,16 +158,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="drug_name",
- *          description="drug_name",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="medicine_name",
- *          description="medicine_name",
- *          type="array",
- *     @SWG\Items(type="string"),
+ *          property="medicine_id",
+ *          description="medicine_id",
+ *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="consumption",
@@ -257,6 +250,7 @@ class MedicinalPlant extends BaseModel
         'effective_material_id' => 'exists:medicinal_plant_types,id',
         'pharmaceutical_form_id' => 'exists:medicinal_plant_types,id',
         'product_id' => 'exists:products,id',
+        'medicine_id' => 'exists:medicines,id',
         'traditional_iranian_medicine' => 'integer',
         'natural_drug' => 'integer',
         'inherbal_medicine_store' => 'integer',
@@ -269,10 +263,8 @@ class MedicinalPlant extends BaseModel
         'height' => 'string',
     ];
     public static $linguistically = [
-        'medicine_name' => true,
         'medicinal_properties' => false,
         'side_effects' => false,
-        'drug_name' => false,
         'consumption' => false,
         'active_compounds' => false,
         'manufacturer' => false,
@@ -295,8 +287,6 @@ class MedicinalPlant extends BaseModel
     protected $casts = [
         'medicinal_properties' => 'json',
         'side_effects' => 'json',
-        'drug_name' => 'json',
-        'medicine_name' => 'json',
         'consumption' => 'json',
         'active_compounds' => 'json',
         'manufacturer' => 'json',
@@ -367,6 +357,14 @@ class MedicinalPlant extends BaseModel
     public function herbarium(): BelongsTo
     {
         return $this->belongsTo(Herbarium::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function medicine(): BelongsTo
+    {
+        return $this->belongsTo(Medicine::class);
     }
 
     public function aerialType()

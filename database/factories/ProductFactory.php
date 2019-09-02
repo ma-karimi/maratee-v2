@@ -10,6 +10,7 @@ $factory->define(App\Models\Product::class, function (Faker $faker) {
         'name' => make_json($faker->name),
         'description' => make_json($faker->text),
         'registration_status' => array_rand(\App\Models\Product::STATUS),
+        'components' => $faker->text,
         'organization_id' => $faker->randomElement($organizations),
     ];
 });

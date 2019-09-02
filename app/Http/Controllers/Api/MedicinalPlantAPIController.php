@@ -87,10 +87,10 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="medicine_name",
+     *          name="medicine_id",
      *          in="body",
      *          description="MedicinalPlant that should be stored",
-     *          required=true,
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
@@ -230,13 +230,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *          name="side_effects",
      *          in="body",
      *          description="side_effects",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="drug_name",
-     *          in="body",
-     *          description="drug_name",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
@@ -402,10 +395,10 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="medicine_name",
+     *          name="medicine_id",
      *          in="body",
      *          description="MedicinalPlant that should be stored",
-     *          required=true,
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
@@ -545,13 +538,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *          name="side_effects",
      *          in="body",
      *          description="side_effects",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="drug_name",
-     *          in="body",
-     *          description="drug_name",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
