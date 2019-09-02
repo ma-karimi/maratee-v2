@@ -23,15 +23,18 @@ class CreatePaleontologiesTable extends Migration
 ');
             $table->string('barcode_no')->nullable();
             $table->text('move_status')->nullable();
+            //location in collection
             $table->string('salon')->nullable();
             $table->integer('closet')->nullable();
             $table->integer('drawer')->nullable();
+
             $table->json('infra_specific')->nullable();
             $table->json('type_status')->nullable();
             $table->json('preservation')->nullable();
             $table->integer('pieces')->nullable();
             $table->json('color')->nullable();
             $table->json('element')->nullable();
+            $table->json('treatment_history')->nullable();
             $table->unsignedBigInteger('geology_age_era_id')->nullable();
             $table->unsignedBigInteger('geology_age_period_id')->nullable();
             $table->unsignedBigInteger('geology_age_epoch_id')->nullable();
@@ -39,10 +42,10 @@ class CreatePaleontologiesTable extends Migration
             $table->unsignedBigInteger('plant_id');
             $table->integer('plates_no')->nullable();
             $table->json('additional_info')->nullable();
-            $table->json('access')->nullable();
+            $table->string('access_code')->nullable();
             $table->date('last_update')->nullable();
             $table->json('excavation')->nullable();
-            $table->json('collection_name')->nullable();
+            $table->json('collector_name')->nullable();
             $table->unsignedBigInteger('location_id');
             $table->json('common_name')->nullable();
             $table->string('update_frequency');
