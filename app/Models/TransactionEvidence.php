@@ -25,10 +25,9 @@ use Illuminate\Database\Eloquent\Model;
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="start_time",
- *          description="start_time",
- *          type="string",
- *          format="date-time"
+ *          property="description",
+ *          description="description",
+ *          type="string"
  *      ),
  *      @SWG\Property(
  *          property="end_time",
