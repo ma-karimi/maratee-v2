@@ -15798,7 +15798,7 @@
                 }
             }
         },
-        "/medicinalPlantTypes": {
+        "/medicinal_plant_types": {
             "get": {
                 "tags": [
                     "MedicinalPlantType"

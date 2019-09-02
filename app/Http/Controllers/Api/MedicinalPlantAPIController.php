@@ -264,7 +264,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="efficiency",
      *          in="body",
-     *          description="efficiency",
+     *          description="efficiency : float type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
@@ -579,7 +579,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="efficiency",
      *          in="body",
-     *          description="efficiency",
+     *          description="efficiency : float type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),

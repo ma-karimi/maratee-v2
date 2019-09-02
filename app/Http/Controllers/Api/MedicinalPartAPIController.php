@@ -30,7 +30,7 @@ class MedicinalPartAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/medicinalParts",
+     *      path="/medicinal_parts",
      *      summary="Get a listing of the MedicinalParts.",
      *      tags={"MedicinalPart"},
      *      description="Get all MedicinalParts",
@@ -74,7 +74,7 @@ class MedicinalPartAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/medicinalParts",
+     *      path="/medicinal_parts",
      *      summary="Store a newly created MedicinalPart in storage",
      *      tags={"MedicinalPart"},
      *      description="Store MedicinalPart",
@@ -128,7 +128,7 @@ class MedicinalPartAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/medicinalParts/{id}",
+     *      path="/medicinal_parts/{id}",
      *      summary="Display the specified MedicinalPart",
      *      tags={"MedicinalPart"},
      *      description="Get MedicinalPart",
@@ -179,7 +179,7 @@ class MedicinalPartAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/medicinalParts/{id}",
+     *      path="/medicinal_parts/{id}",
      *      summary="Update the specified MedicinalPart in storage",
      *      tags={"MedicinalPart"},
      *      description="Update MedicinalPart",
@@ -247,7 +247,7 @@ class MedicinalPartAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Delete(
-     *      path="/medicinalParts/{id}",
+     *      path="/medicinal_parts/{id}",
      *      summary="Remove the specified MedicinalPart from storage",
      *      tags={"MedicinalPart"},
      *      description="Delete MedicinalPart",
