@@ -217,19 +217,6 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-    public function visits()
-    {
-        return $this->hasMany(Visit::class)->latest();
-    }
-
-    public function borrows()
-    {
-        return $this->hasMany(Borrow::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
     public function actionHubs()
     {
         return $this->hasMany(ActionHub::class)->latest();

@@ -244,14 +244,6 @@ class Paleontology extends BaseModel
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
     /**
-     * @return HasMany
-     */
-    public function exchanges(): HasMany
-    {
-        return $this->hasMany(Exchange::class, ['send_paleontology_id', 'receive_paleontology_id'])->latest();
-    }
-
-    /**
      * @return BelongsTo
      */
     public function geologyAge(): BelongsTo
@@ -305,15 +297,6 @@ class Paleontology extends BaseModel
         return $this->morphToMany(TreatmentHub::class, 'treamentable');
     }
 
-    public function visits()
-    {
-        return $this->morphMany(Visit::class, 'visitable');
-    }
-
-    public function borrows(): MorphMany
-    {
-        return $this->morphMany(Borrow::class, 'borrowable');
-    }
 
 
     public function articles(): MorphToMany

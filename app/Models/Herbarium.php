@@ -262,19 +262,6 @@ class Herbarium extends BaseModel
         return $this->morphToMany(Action::class, 'actionable', 'action_hubs');
     }
 
-    /**
-     * @return MorphMany
-     */
-    public function borrows(): MorphMany
-    {
-        return $this->morphMany(Borrow::class, 'borrowable');
-    }
-
-    public function visits()
-    {
-        return $this->morphMany(Visit::class, 'visitable');
-    }
-
     public function actions(): MorphToMany
     {
         return $this->morphToMany(Action::class, 'actionable', 'action_hubs');
@@ -304,30 +291,6 @@ class Herbarium extends BaseModel
         return $this->hasMany(CryoBank::class)->latest();
     }
 
-    /**
-     * @return MorphMany
-     */
-    public function exchange(): MorphMany
-    {
-        return $this->morphMany(Exchange::class, 'exchangeable')->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function sendHerbariumExchanges(): HasMany
-    {
-        return $this->hasMany(Exchange::class, 'send_herbarium_id')->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function recieveHerbariumExchanges(): HasMany
-    {
-        return $this->hasMany(Exchange::class, 'recieve_herbarium_id')->latest();
-    }
-
 
     /**
      * @return HasMany
@@ -344,14 +307,6 @@ class Herbarium extends BaseModel
     public function medias(): MorphMany
     {
         return $this->morphMany(Media::class, 'mediable')->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function medicals(): HasMany
-    {
-        return $this->hasMany(Medical::class)->latest();
     }
 
     /**
