@@ -176,7 +176,7 @@ use Kalnoy\Nestedset\NodeTrait;
  */
 class Herbarium extends BaseModel
 {
-    use HerbariumScope, NodeTrait, HerbariumAccessor;
+    use HerbariumScope, NodeTrait, Herbarium\Accessor;
 
     public const GROWTH_RATES = [0 => 'unknown', 1 => 'very low', 2 => 'low', 3 => 'moderate', 4 => 'fast', 5 => 'very fast'];
 

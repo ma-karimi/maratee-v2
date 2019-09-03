@@ -23390,46 +23390,6 @@
                 }
             }
         },
-        "/tables/{id}": {
-            "delete": {
-                "tags": [
-                    "Table"
-                ],
-                "summary": "Remove the specified Table from storage",
-                "description": "Delete Table",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Table",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
         "/taxonomies": {
             "get": {
                 "tags": [
@@ -30627,68 +30587,6 @@
                     "description": "updated_at",
                     "type": "string",
                     "format": "date-time"
-                }
-            }
-        },
-        "Table": {
-            "required": [
-                "table_name",
-                "department_id",
-                "ownership",
-                "create",
-                "read",
-                "write",
-                "delete",
-                "copy"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "table_name": {
-                    "description": "table_name",
-                    "type": "string",
-                    "format": "string",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "department_id": {
-                    "description": "department_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "ownership": {
-                    "description": "ownership",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "create": {
-                    "description": "create",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "read": {
-                    "description": "read",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "write": {
-                    "description": "write",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "delete": {
-                    "description": "delete",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "copy": {
-                    "description": "copy",
-                    "type": "integer",
-                    "format": "int32"
                 }
             }
         },
