@@ -74,6 +74,7 @@ class DatabaseSeeder extends Seeder
             TransactionTableSeeder::class,
             TransactionEvidenceTableSeeder::class,
             PaleontologyDocumentTableSeeder::class,
+            ActionHubDocumentTableSeeder::class,
 
 //            SeedTableSeeder::class,
 //            BioMolecularTableSeeder::class,

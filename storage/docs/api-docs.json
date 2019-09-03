@@ -759,6 +759,241 @@
                 }
             }
         },
+        "/actionHubDocuments": {
+            "get": {
+                "tags": [
+                    "ActionHubDocument"
+                ],
+                "summary": "Get a listing of the ActionHubDocuments.",
+                "description": "Get all ActionHubDocuments",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/ActionHubDocument"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "ActionHubDocument"
+                ],
+                "summary": "Store a newly created ActionHubDocument in storage",
+                "description": "Store ActionHubDocument",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "action_hub_id",
+                        "in": "body",
+                        "description": "PaleontologyDocument that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyDocument"
+                        }
+                    },
+                    {
+                        "name": "src",
+                        "in": "body",
+                        "description": "PaleontologyDocument that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyDocument"
+                        }
+                    },
+                    {
+                        "name": "src_description",
+                        "in": "body",
+                        "description": "PaleontologyDocument that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyDocument"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/ActionHubDocument"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/actionHubDocuments/{id}": {
+            "get": {
+                "tags": [
+                    "ActionHubDocument"
+                ],
+                "summary": "Display the specified ActionHubDocument",
+                "description": "Get ActionHubDocument",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of ActionHubDocument",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/ActionHubDocument"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "ActionHubDocument"
+                ],
+                "summary": "Update the specified ActionHubDocument in storage",
+                "description": "Update ActionHubDocument",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of ActionHubDocument",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "action_hub_id",
+                        "in": "body",
+                        "description": "PaleontologyDocument that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyDocument"
+                        }
+                    },
+                    {
+                        "name": "src",
+                        "in": "body",
+                        "description": "PaleontologyDocument that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyDocument"
+                        }
+                    },
+                    {
+                        "name": "src_description",
+                        "in": "body",
+                        "description": "PaleontologyDocument that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyDocument"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/ActionHubDocument"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ActionHubDocument"
+                ],
+                "summary": "Remove the specified ActionHubDocument from storage",
+                "description": "Delete ActionHubDocument",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of ActionHubDocument",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/articles": {
             "get": {
                 "tags": [
@@ -15818,6 +16053,241 @@
                 }
             }
         },
+        "/paleontologyDocuments": {
+            "get": {
+                "tags": [
+                    "PaleontologyDocument"
+                ],
+                "summary": "Get a listing of the PaleontologyDocuments.",
+                "description": "Get all PaleontologyDocuments",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/PaleontologyDocument"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "PaleontologyDocument"
+                ],
+                "summary": "Store a newly created PaleontologyDocument in storage",
+                "description": "Store PaleontologyDocument",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "paleontology_id",
+                        "in": "body",
+                        "description": "PaleontologyDocument that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyDocument"
+                        }
+                    },
+                    {
+                        "name": "src",
+                        "in": "body",
+                        "description": "PaleontologyDocument that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyDocument"
+                        }
+                    },
+                    {
+                        "name": "src_description",
+                        "in": "body",
+                        "description": "PaleontologyDocument that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyDocument"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/PaleontologyDocument"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/paleontologyDocuments/{id}": {
+            "get": {
+                "tags": [
+                    "PaleontologyDocument"
+                ],
+                "summary": "Display the specified PaleontologyDocument",
+                "description": "Get PaleontologyDocument",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of PaleontologyDocument",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/PaleontologyDocument"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "PaleontologyDocument"
+                ],
+                "summary": "Update the specified PaleontologyDocument in storage",
+                "description": "Update PaleontologyDocument",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of PaleontologyDocument",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "paleontology_id",
+                        "in": "body",
+                        "description": "PaleontologyDocument that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyDocument"
+                        }
+                    },
+                    {
+                        "name": "src",
+                        "in": "body",
+                        "description": "PaleontologyDocument that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyDocument"
+                        }
+                    },
+                    {
+                        "name": "src_description",
+                        "in": "body",
+                        "description": "PaleontologyDocument that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyDocument"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/PaleontologyDocument"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "PaleontologyDocument"
+                ],
+                "summary": "Remove the specified PaleontologyDocument from storage",
+                "description": "Delete PaleontologyDocument",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of PaleontologyDocument",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/paleontology_media": {
             "get": {
                 "tags": [
@@ -26171,6 +26641,41 @@
                 }
             }
         },
+        "ActionHubDocument": {
+            "required": [
+                "action_hub_id",
+                "src"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "action_hub_id": {
+                    "description": "action_hub_id",
+                    "type": "integer"
+                },
+                "src": {
+                    "description": "src",
+                    "type": "string"
+                },
+                "src_description": {
+                    "description": "src_description",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
         "Article": {
             "required": [
                 "city_id"
@@ -28938,6 +29443,72 @@
                     "description": "plant_id",
                     "type": "integer",
                     "format": "int32"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "PaleontologyDocument": {
+            "required": [
+                "paleontology_id",
+                "src"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "paleontology_id": {
+                    "description": "paleontology_id",
+                    "type": "integer"
+                },
+                "src": {
+                    "description": "src",
+                    "type": "string"
+                },
+                "src_description": {
+                    "description": "src_description",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "PaleontologyMap": {
+            "required": [
+                "paleontology_id",
+                "map_id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "paleontology_id": {
+                    "description": "paleontology_id",
+                    "type": "integer"
+                },
+                "map_id": {
+                    "description": "map_id",
+                    "type": "integer"
                 },
                 "created_at": {
                     "description": "created_at",

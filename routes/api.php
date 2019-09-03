@@ -215,3 +215,5 @@ Route::resource('transaction_evidences', 'TransactionEvidenceAPIController');
 Route::resource('paleontology_documents', 'PaleontologyDocumentAPIController');
 
 Route::resource('paleontology_maps', 'PaleontologyMapAPIController');
+
+Route::resource('action_hub_documents', 'ActionHubDocumentAPIController');
