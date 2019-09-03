@@ -210,3 +210,10 @@ Route::resource('medicinal_plant_types', 'MedicinalPlantTypeAPIController');
 Route::resource('transactions', 'TransactionAPIController');
 
 Route::resource('transaction_evidences', 'TransactionEvidenceAPIController');
+
+
+Route::resource('paleontology_documents', 'PaleontologyDocumentAPIController');
+
+Route::resource('paleontology_maps', 'PaleontologyMapAPIController');
+
+Route::resource('action_hub_documents', 'ActionHubDocumentAPIController');
