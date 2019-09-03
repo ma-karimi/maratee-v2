@@ -31,9 +31,9 @@ class DepartmentAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/departments",
-     *      summary="Get a listing of the Credentials.",
-     *      tags={"Credential"},
-     *      description="Get all Credentials",
+     *      summary="Get a listing of the Departments.",
+     *      tags={"Department"},
+     *      description="Get all Departments",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -47,7 +47,7 @@ class DepartmentAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/Credential")
+     *                  @SWG\Items(ref="#/definitions/Department")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -56,6 +56,7 @@ class DepartmentAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
