@@ -208,6 +208,52 @@
                 }
             }
         },
+        "/relations": {
+            "get": {
+                "tags": [
+                    "Relation"
+                ],
+                "summary": "Get all RelationShips Of Given Classes.",
+                "description": "Get all RelationShips Of Given Classes",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "classes",
+                        "in": "path",
+                        "description": "class name like plants",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Group"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/actions": {
             "get": {
                 "tags": [
@@ -10518,52 +10564,6 @@
                 }
             }
         },
-        "/relations": {
-            "get": {
-                "tags": [
-                    "Relation"
-                ],
-                "summary": "Get all RelationShips Of Given Classes.",
-                "description": "Get all RelationShips Of Given Classes",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "classes",
-                        "in": "path",
-                        "description": "class name like plants",
-                        "required": true,
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/Group"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
         "/herbarium": {
             "get": {
                 "tags": [
@@ -16263,259 +16263,6 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of PaleontologyDocument",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/paleontology_media": {
-            "get": {
-                "tags": [
-                    "PaleontologyMedia"
-                ],
-                "summary": "Get a listing of the PaleontologyMedia.",
-                "description": "Get all PaleontologyMedia",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/PaleontologyMedia"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "PaleontologyMedia"
-                ],
-                "summary": "Store a newly created PaleontologyMedia in storage",
-                "description": "Store PaleontologyMedia",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "media_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    },
-                    {
-                        "name": "user_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    },
-                    {
-                        "name": "exchange_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    },
-                    {
-                        "name": "credential_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/PaleontologyMedia"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/paleontologyMedia/{id}": {
-            "get": {
-                "tags": [
-                    "PaleontologyMedia"
-                ],
-                "summary": "Display the specified PaleontologyMedia",
-                "description": "Get PaleontologyMedia",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of PaleontologyMedia",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/PaleontologyMedia"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "PaleontologyMedia"
-                ],
-                "summary": "Update the specified PaleontologyMedia in storage",
-                "description": "Update PaleontologyMedia",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of PaleontologyMedia",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "media_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    },
-                    {
-                        "name": "user_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    },
-                    {
-                        "name": "exchange_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    },
-                    {
-                        "name": "credential_id",
-                        "in": "body",
-                        "description": "PaleontologyMedia that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PaleontologyMedia"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/PaleontologyMedia"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "PaleontologyMedia"
-                ],
-                "summary": "Remove the specified PaleontologyMedia from storage",
-                "description": "Delete PaleontologyMedia",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of PaleontologyMedia",
                         "required": true,
                         "type": "integer"
                     }
@@ -29509,44 +29256,6 @@
                 "map_id": {
                     "description": "map_id",
                     "type": "integer"
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
-        },
-        "PaleontologyMedia": {
-            "required": [
-                "media_id",
-                "user_id"
-            ],
-            "properties": {
-                "credential_id": {
-                    "description": "credential_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "media_id": {
-                    "description": "media_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "user_id": {
-                    "description": "user_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "exchange_id": {
-                    "description": "exchange_id",
-                    "type": "integer",
-                    "format": "int32"
                 },
                 "created_at": {
                     "description": "created_at",
