@@ -114,7 +114,7 @@ class Taxonomy extends BaseModel
      */
     public function genus(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'genus_id')->where('type','genus');
+        return $this->belongsTo(General::class, 'genus_id')->withDefault();
     }
 
     /**
@@ -122,7 +122,7 @@ class Taxonomy extends BaseModel
      */
     public function species(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'species_id')->where('type','species');
+        return $this->belongsTo(General::class, 'species_id')->withDefault();
     }
 
     /**
@@ -130,7 +130,7 @@ class Taxonomy extends BaseModel
      */
     public function subspecies(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'subspecies_id')->where('type','sub_species');
+        return $this->belongsTo(General::class, 'subspecies_id')->withDefault();
     }
 
     /**
@@ -138,7 +138,7 @@ class Taxonomy extends BaseModel
      */
     public function tipType(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'tip_type_id')->where('type','plant_type');
+        return $this->belongsTo(General::class, 'tip_type_id')->withDefault();
     }
 
     /**
@@ -146,7 +146,7 @@ class Taxonomy extends BaseModel
      */
     public function variety(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'variety_id')->where('type','variety');
+        return $this->belongsTo(General::class, 'variety_id')->withDefault();
     }
 
     /**
@@ -154,7 +154,7 @@ class Taxonomy extends BaseModel
      */
     public function family(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'family_id')->where('type','family');
+        return $this->belongsTo(General::class, 'family_id')->withDefault();
     }
 
 

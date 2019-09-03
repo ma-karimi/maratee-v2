@@ -23,6 +23,7 @@ trait PlantScope
         });
     }
 
+
     /**
      * @param $query
      * @param bool $value

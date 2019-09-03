@@ -17,7 +17,6 @@ use Response;
  * Class PlantController
  * @package App\Http\Controllers\Api
  */
-
 class PlantAPIController extends AppBaseController
 {
     /** @var  PlantRepository */
@@ -70,12 +69,12 @@ class PlantAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $relation_for_scientific_name = ['taxonomy.genus', 'taxonomy.species', 'taxonomy.subspecies', 'taxonomy.variety'];
         $plants = $this->plantRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            $request->get('relations') ? $relation_for_scientific_name + $request->get('relations') : $relation_for_scientific_name
         );
-
         return $this->sendResponse($plants->toArray(), 'Plants retrieved successfully');
     }
 
@@ -461,7 +460,7 @@ class PlantAPIController extends AppBaseController
 
     public function exportExcel(Request $request)
     {
-        $relations=[
+        $relations = [
             'generalFamily.authors',
             'generalGenus.authors',
             'generalSpecie.authors',
@@ -488,7 +487,7 @@ class PlantAPIController extends AppBaseController
             $request->get('limit'),
             $relations
         );
-        $plants=PlantResource::collection($plants);
+        $plants = PlantResource::collection($plants);
         return $this->sendResponse($plants, 'Plants retrieved successfully');
     }
 }

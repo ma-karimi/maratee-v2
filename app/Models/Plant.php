@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\PlantAccessor;
 use App\Models\Contracts\BaseModel;
 use App\Models\Contracts\RelationshipsTrait;
 use App\Models\Scope\PlantScope;
@@ -84,7 +85,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class Plant extends BaseModel
 {
-    use PlantScope;
+    use PlantScope,PlantAccessor;
+
+    protected $appends = ['scientific_name'];
 
     public static $linguistically = ['name' => true, 'description' => false, 'domestic_name' => false];
 
@@ -220,7 +223,7 @@ class Plant extends BaseModel
     }
     public function taxonomy(): HasOne
     {
-        return $this->hasOne(Taxonomy::class,'plant_id');
+        return $this->hasOne(Taxonomy::class,'plant_id')->withDefault();
     }
 
     public function getPropertiesAttribute()
