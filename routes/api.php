@@ -36,9 +36,9 @@ Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
 Route::post('reset_password', 'AuthController@resetPassword');
 
-Route::resource('treatments', 'TreatmentAPIController');
+Route::apiResource('treatments', 'TreatmentAPIController');
 
-Route::resource('paleontologies', 'PaleontologyAPIController');
+Route::apiResource('paleontologies', 'PaleontologyAPIController');
 
 Route::apiResource('organizations', 'OrganizationAPIController');
 
@@ -48,173 +48,173 @@ Route::apiResource('locations', 'LocationAPIController');
 
 Route::apiResource('connections', 'ConnectionAPIController');
 
-Route::resource('continents', 'ContinentAPIController');
+Route::apiResource('continents', 'ContinentAPIController');
 
-Route::resource('soil_features', 'SoilFeatureAPIController');
+Route::apiResource('soil_features', 'SoilFeatureAPIController');
 
-Route::resource('soils', 'SoilAPIController');
+Route::apiResource('soils', 'SoilAPIController');
 
-Route::resource('villages', 'VillageAPIController');
+Route::apiResource('villages', 'VillageAPIController');
 
-Route::resource('users', 'UserAPIController');
+Route::apiResource('users', 'UserAPIController');
 
-Route::resource('technology', 'TechnologyAPIController');
+Route::apiResource('technology', 'TechnologyAPIController');
 
-Route::resource('soil_has_soil_features', 'SoilHasSoilFeatureAPIController');
+Route::apiResource('soil_has_soil_features', 'SoilHasSoilFeatureAPIController');
 
-Route::resource('seed_weights', 'SeedWeightAPIController');
+Route::apiResource('seed_weights', 'SeedWeightAPIController');
 
-Route::resource('seed_technologies', 'SeedTechnologyAPIController');
+Route::apiResource('seed_technologies', 'SeedTechnologyAPIController');
 
-Route::resource('seed_plants', 'SeedPlantAPIController');
+Route::apiResource('seed_plants', 'SeedPlantAPIController');
 
 
-Route::resource('seed_features', 'SeedFeatureAPIController');
+Route::apiResource('seed_features', 'SeedFeatureAPIController');
 
 
-Route::resource('seed_hubs', 'SeedHubAPIController');
+Route::apiResource('seed_hubs', 'SeedHubAPIController');
 
-Route::resource('seed_exchanges', 'SeedExchangeAPIController');
+Route::apiResource('seed_exchanges', 'SeedExchangeAPIController');
 
-Route::resource('bio_moleculars', 'BioMolecularAPIController');
+Route::apiResource('bio_moleculars', 'BioMolecularAPIController');
 
-Route::resource('seeds', 'SeedAPIController');
+Route::apiResource('seeds', 'SeedAPIController');
 
-Route::resource('propagations', 'PropagationAPIController');
+Route::apiResource('propagations', 'PropagationAPIController');
 
-Route::resource('provinces', 'ProvinceAPIController');
+Route::apiResource('provinces', 'ProvinceAPIController');
 
-Route::resource('protections', 'ProtectionAPIController');
+Route::apiResource('protections', 'ProtectionAPIController');
 
-Route::resource('projects', 'ProjectAPIController');
+Route::apiResource('projects', 'ProjectAPIController');
 
-Route::resource('products', 'ProductAPIController');
+Route::apiResource('products', 'ProductAPIController');
 
-Route::resource('planting_actions', 'PlantingActionAPIController');
+Route::apiResource('planting_actions', 'PlantingActionAPIController');
 
-Route::resource('generals', 'GeneralAPIController');
+Route::apiResource('generals', 'GeneralAPIController');
 
-Route::resource('plants', 'PlantAPIController');
+Route::apiResource('plants', 'PlantAPIController');
 
-Route::resource('actions', 'ActionAPIController');
+Route::apiResource('actions', 'ActionAPIController');
 
-Route::resource('action_hubs', 'ActionHubAPIController');
+Route::apiResource('action_hubs', 'ActionHubAPIController');
 
-Route::resource('articles', 'ArticleAPIController');
+Route::apiResource('articles', 'ArticleAPIController');
 
-Route::resource('article_hubs', 'ArticleHubAPIController');
+Route::apiResource('article_hubs', 'ArticleHubAPIController');
 
-Route::resource('evaluations', 'EvaluationAPIController');
+Route::apiResource('evaluations', 'EvaluationAPIController');
 
-Route::resource('attendances', 'AttendanceAPIController');
+Route::apiResource('attendances', 'AttendanceAPIController');
 
-Route::resource('authors', 'AuthorAPIController');
+Route::apiResource('authors', 'AuthorAPIController');
 
-Route::resource('botanicals', 'BotanicalAPIController');
+Route::apiResource('botanicals', 'BotanicalAPIController');
 
-Route::resource('botanical_garden_actions', 'BotanicalGardenActionAPIController');
+Route::apiResource('botanical_garden_actions', 'BotanicalGardenActionAPIController');
 
 
-Route::resource('botanical_irrigations', 'BotanicalIrrigationAPIController');
+Route::apiResource('botanical_irrigations', 'BotanicalIrrigationAPIController');
 
-Route::resource('botanical_propagations', 'BotanicalPropagationAPIController');
+Route::apiResource('botanical_propagations', 'BotanicalPropagationAPIController');
 
-Route::resource('chromosomes', 'ChromosomeAPIController');
+Route::apiResource('chromosomes', 'ChromosomeAPIController');
 
-Route::resource('cities', 'CityAPIController');
+Route::apiResource('cities', 'CityAPIController');
 
-Route::resource('collections', 'CollectionAPIController');
+Route::apiResource('collections', 'CollectionAPIController');
 
-Route::resource('constituents', 'ConstituentAPIController');
+Route::apiResource('constituents', 'ConstituentAPIController');
 
-Route::resource('countries', 'CountryAPIController');
+Route::apiResource('countries', 'CountryAPIController');
 
 
-Route::resource('cryo_banks', 'CryoBankAPIController');
+Route::apiResource('cryo_banks', 'CryoBankAPIController');
 
-Route::resource('entries', 'EntryAPIController');
+Route::apiResource('entries', 'EntryAPIController');
 
-Route::resource('entry_hubs', 'EntryHubAPIController');
+Route::apiResource('entry_hubs', 'EntryHubAPIController');
 
-Route::resource('gardens', 'GardenAPIController');
+Route::apiResource('gardens', 'GardenAPIController');
 
-Route::resource('geology_ages', 'GeologyAgeAPIController');
+Route::apiResource('geology_ages', 'GeologyAgeAPIController');
 
-Route::resource('herbariums', 'HerbariumAPIController');
+Route::apiResource('herbariums', 'HerbariumAPIController');
 
-Route::resource('irrigations', 'IrrigationAPIController');
+Route::apiResource('irrigations', 'IrrigationAPIController');
 
 
-Route::resource('lightings', 'LightingAPIController');
+Route::apiResource('lightings', 'LightingAPIController');
 
-Route::resource('localities', 'LocalityAPIController');
+Route::apiResource('localities', 'LocalityAPIController');
 
-Route::resource('maps', 'MapAPIController');
+Route::apiResource('maps', 'MapAPIController');
 
-Route::resource('media', 'MediaAPIController');
+Route::apiResource('media', 'MediaAPIController');
 
 
-Route::resource('medicinal_plants', 'MedicinalPlantAPIController');
+Route::apiResource('medicinal_plants', 'MedicinalPlantAPIController');
 
-Route::resource('medicinal_plant_constituents', 'MedicinalPlantConstituentAPIController');
+Route::apiResource('medicinal_plant_constituents', 'MedicinalPlantConstituentAPIController');
 
 
-Route::resource('medicines', 'MedicineAPIController');
+Route::apiResource('medicines', 'MedicineAPIController');
 
-Route::resource('methods', 'MethodAPIController');
+Route::apiResource('methods', 'MethodAPIController');
 
 
-Route::resource('paleontologies', 'PaleontologyAPIController');
+Route::apiResource('paleontologies', 'PaleontologyAPIController');
 
 
-Route::resource('roles', 'RoleAPIController');
+Route::apiResource('roles', 'RoleAPIController');
 
-Route::resource('permissions', 'PermissionAPIController');
+Route::apiResource('permissions', 'PermissionAPIController');
 
 
-Route::resource('groups', 'GroupAPIController');
+Route::apiResource('groups', 'GroupAPIController');
 
-Route::resource('divisions', 'DivisionAPIController');
+Route::apiResource('divisions', 'DivisionAPIController');
 
-Route::resource('germinations', 'GerminationAPIController');
+Route::apiResource('germinations', 'GerminationAPIController');
 
-Route::resource('repeats', 'RepeatAPIController');
+Route::apiResource('repeats', 'RepeatAPIController');
 
-Route::resource('stations', 'StationAPIController');
+Route::apiResource('stations', 'StationAPIController');
 
-Route::resource('blocks', 'BlockAPIController');
+Route::apiResource('blocks', 'BlockAPIController');
 
-Route::resource('characters', 'CharacterAPIController');
+Route::apiResource('characters', 'CharacterAPIController');
 
-Route::resource('character_traits', 'CharacterTraitAPIController');
+Route::apiResource('character_traits', 'CharacterTraitAPIController');
 
-Route::resource('trait_values', 'TraitValueAPIController');
+Route::apiResource('trait_values', 'TraitValueAPIController');
 
-Route::resource('block_traits', 'BlockTraitAPIController');
+Route::apiResource('block_traits', 'BlockTraitAPIController');
 
-Route::resource('dimensions', 'DimensionAPIController');
+Route::apiResource('dimensions', 'DimensionAPIController');
 
-Route::resource('evaluation_dimensions', 'EvaluationDimensionAPIController');
-//Route::resource('author_hubs', 'AuthorHubAPIController');
-//Route::resource('location_hubs', 'LocationHubAPIController');
-//Route::resource('user_hubs', 'UserHubAPIController');
+Route::apiResource('evaluation_dimensions', 'EvaluationDimensionAPIController');
+//Route::apiResource('author_hubs', 'AuthorHubAPIController');
+//Route::apiResource('location_hubs', 'LocationHubAPIController');
+//Route::apiResource('user_hubs', 'UserHubAPIController');
 
 
-Route::resource('life_forms', 'LifeFormAPIController');
+Route::apiResource('life_forms', 'LifeFormAPIController');
 
-Route::resource('plant_life_forms', 'PlantLifeFormAPIController');
+Route::apiResource('plant_life_forms', 'PlantLifeFormAPIController');
 
-Route::resource('medicinal_parts', 'MedicinalPartAPIController');
+Route::apiResource('medicinal_parts', 'MedicinalPartAPIController');
 
-Route::resource('medicinal_plant_types', 'MedicinalPlantTypeAPIController');
+Route::apiResource('medicinal_plant_types', 'MedicinalPlantTypeAPIController');
 
-Route::resource('transactions', 'TransactionAPIController');
+Route::apiResource('transactions', 'TransactionAPIController');
 
-Route::resource('transaction_evidences', 'TransactionEvidenceAPIController');
+Route::apiResource('transaction_evidences', 'TransactionEvidenceAPIController');
 
 
-Route::resource('paleontology_documents', 'PaleontologyDocumentAPIController');
+Route::apiResource('paleontology_documents', 'PaleontologyDocumentAPIController');
 
-Route::resource('paleontology_maps', 'PaleontologyMapAPIController');
+Route::apiResource('paleontology_maps', 'PaleontologyMapAPIController');
 
-Route::resource('action_hub_documents', 'ActionHubDocumentAPIController');
+Route::apiResource('action_hub_documents', 'ActionHubDocumentAPIController');
