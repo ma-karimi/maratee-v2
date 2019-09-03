@@ -20,6 +20,8 @@ class CreateTransactionEvidencesTable extends Migration
             $table->text('src_description')->nullable();
             $table->timestamps();
             $table->softDeletesTz();
+
+            $table->foreign('transaction_id')->references('id')->on('transactions')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
     }
 

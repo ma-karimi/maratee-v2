@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Accessor\PaleontologyAccessor;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -339,5 +340,13 @@ class Paleontology extends BaseModel
         return $this->morphToMany(Transaction::class, 'transactionable','transaction_hubs')
             ->withTimestamps()
             ->withPivot(['type_id','sheets_no']);
+    }
+
+    public function maps(): BelongsToMany
+    {
+        return $this->belongsToMany(Map::class,
+            'paleontology_maps',
+            'paleontology_id',
+            'map_id');
     }
 }

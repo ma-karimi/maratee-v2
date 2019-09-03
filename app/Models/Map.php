@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @SWG\Definition(
@@ -84,5 +85,13 @@ class Map extends BaseModel
     public function localities(): HasMany
     {
         return $this->hasMany(Locality::class)->latest();
+    }
+
+    public function paleontologies(): BelongsToMany
+    {
+        return $this->belongsToMany(Paleontology::class,
+            'paleontology_maps',
+            'map_id',
+            'paleontology_id');
     }
 }
