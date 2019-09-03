@@ -22,15 +22,16 @@
     });
 });*/
 Route::delete('/{class}/multiple_delete', 'APIController@multipleDestroy');
-
 Route::post('/{class}/hub', 'APIController@storeHub');
 Route::delete('/{class}/hub', 'APIController@destroyHub');
 Route::get('/{class}/constants', 'APIController@getConstants');
+Route::get('relations', 'APIController@relations');
+
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('logout', 'AuthController@logout');
 });
-Route::get('relations', 'HelpersAPIController@relations');
+
 Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
 Route::post('reset_password', 'AuthController@resetPassword');

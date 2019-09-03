@@ -7,6 +7,7 @@ use App\Http\Requests\Api\CreateHubRequest;
 use App\Http\Requests\Api\DeleteHubRequest;
 use App\Http\Requests\Api\StoreHubRequest;
 use App\Http\Requests\BaseDeleteAPIRequest;
+use App\Models\Contracts\RelationshipsTrait;
 use Illuminate\Container\Container as Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -18,6 +19,7 @@ use Response;
  */
 class APIController extends AppBaseController
 {
+    use RelationshipsTrait;
     /**
      * @param BaseDeleteAPIRequest $request
      * @param $class
@@ -248,6 +250,61 @@ class APIController extends AppBaseController
         $result = $repo->getConstants($class);
         return $this->sendResponse($result, 'Constant(s) loaded successfully');
     }
-
+    /**
+     * @param Request $request
+     * @return Response
+     *
+     * @SWG\Get(
+     *      path="/relations",
+     *      summary="Get all RelationShips Of Given Classes.",
+     *      tags={"Relation"},
+     *      description="Get all RelationShips Of Given Classes",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="classes",
+     *          description="class name like plants",
+     *          type="array",
+     *          required=true,
+     *          in="path",
+     *          @SWG\Items(
+     *             type="string"
+     *         )
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Group")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function relations(Request $request)
+    {
+        $models=[];
+        $classes=$request->classes;
+//        foreach ($classes as $index => $class) {
+//            $model='App\\Models\\'.ucfirst(rtrim($class,'s'));
+//            $models[$class]= self::relationshipsText( $model);
+//        }
+        foreach ($classes as $index => $class) {
+            $model='App\\Models\\'.Str::singular(Str::studly($class));
+            $models[$class]= self::relationshipsWithType($model);
+        }
+        return $this->sendResponse($models,'Relations retrieved successfully');
+    }
 
 }
