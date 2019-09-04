@@ -29,7 +29,7 @@ class UpdateHerbariumAPIRequest extends APIRequest
         ];
         $array_id_life_forms = [
             'cycle_id' => 'life_cycle',
-            'wooden_id' => 'herbaceous_id',
+            'wooden_id' => 'wooden',
             'leaf_id' => 'leaf',
             'herbaceous_id' => 'herbaceous',
         ];
