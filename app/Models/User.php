@@ -156,7 +156,7 @@ class User extends Authenticatable
     use HasApiTokens, UserScope, UserAccessor, Notifiable , SearchableTrait;
     public static $messages = [];
     public static $searchable = ['*'];
-    public static $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations'];
+    public $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations'];
 
     /**
      * The database table used by the model.
@@ -190,6 +190,26 @@ class User extends Authenticatable
      */
     protected $dates = ['birthday', 'created_at', 'deleted_at', 'updated_at'];
 
+    /**
+     * BaseModel constructor.
+     * @param array $attributes
+     * @throws Exception
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $languages = config('settings.languages');
+        $this->exceptionLanguageHandler($languages);
+        $this->validateJsonRequestHandler($languages);
+        $this->setNotSearchable($this->getLinguistically());
+    }
+    /**
+     * @param array $fields
+     */
+    public function setNotSearchable(array $fields): void
+    {
+        $this->notSearchable = array_merge($this->notSearchable, array_keys($fields));
+    }
     /**
      * Find the user instance for the given username.
      *
@@ -287,21 +307,6 @@ class User extends Authenticatable
         return $this->hasMany(User::class)->latest();
     }
 
-    /**
-     * BaseModel constructor.
-     * @param array $attributes
-     * @throws Exception
-     */
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-        $languages = config('settings.languages');
-        $this->exceptionLanguageHandler($languages);
-
-        $this->validateJsonRequestHandler($languages);
-
-        static::$notSearchable = array_merge(static::$notSearchable, array_keys($this->getLinguistically()));
-    }
 
     /**
      * @param $languages
