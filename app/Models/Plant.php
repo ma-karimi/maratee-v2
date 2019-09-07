@@ -223,7 +223,7 @@ class Plant extends BaseModel
     }
     public function taxonomy(): HasOne
     {
-        return $this->hasOne(Taxonomy::class,'plant_id')->withDefault();
+        return $this->hasOne(Taxonomy::class,'plant_id');
     }
 
     public function getPropertiesAttribute()

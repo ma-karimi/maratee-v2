@@ -70,7 +70,7 @@ class PlantAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $relation_for_scientific_name = ['taxonomy.genus', 'taxonomy.species', 'taxonomy.subspecies', 'taxonomy.variety'];
+        $relation_for_scientific_name = ['taxonomy.family','taxonomy.genus', 'taxonomy.species', 'taxonomy.subspecies', 'taxonomy.variety'];
         $plants = $this->plantRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
