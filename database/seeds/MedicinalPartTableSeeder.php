@@ -14,8 +14,8 @@ class MedicinalPartTableSeeder extends Seeder
     {
         \App\Utility::truncateTables('medicinal_parts');
         $data = [
-            0 => ['fruit', 'stem','leaves','flowers',' seed','bark'],
-            1 => ['root', 'rhizome','bulb','corm','node'],
+            1 => ['fruit', 'stem','leaves','flowers',' seed','bark'],
+            2 => ['root', 'rhizome','bulb','corm','node'],
         ];
         foreach ($data as $index => $datum) {
             foreach ($datum as  $item) {
