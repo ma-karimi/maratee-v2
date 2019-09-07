@@ -74,7 +74,7 @@ class PlantAPIController extends AppBaseController
         $plants = $this->plantRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations') ? $relation_for_scientific_name + $request->get('relations') : $relation_for_scientific_name
+            $request->get('relations') ? array_merge($relation_for_scientific_name,$request->get('relations')) : $relation_for_scientific_name
         );
         return $this->sendResponse($plants->toArray(), 'Plants retrieved successfully');
     }
@@ -253,7 +253,7 @@ class PlantAPIController extends AppBaseController
         $relation_for_scientific_name = ['taxonomy.family','taxonomy.genus', 'taxonomy.species', 'taxonomy.subspecies', 'taxonomy.variety'];
         /** @var Plant $plant */
         $plant = $this->plantRepository->find($id,
-            \request()->get('relations') ? $relation_for_scientific_name + \request()->get('relations') : $relation_for_scientific_name
+            \request()->get('relations') ? array_merge($relation_for_scientific_name,\request()->get('relations')) : $relation_for_scientific_name
         );
 
         if (empty($plant)) {
