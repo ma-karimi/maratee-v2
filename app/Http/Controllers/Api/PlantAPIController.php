@@ -250,8 +250,11 @@ class PlantAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $relation_for_scientific_name = ['taxonomy.family','taxonomy.genus', 'taxonomy.species', 'taxonomy.subspecies', 'taxonomy.variety'];
         /** @var Plant $plant */
-        $plant = $this->plantRepository->find($id, \request()->get('relations'));
+        $plant = $this->plantRepository->find($id,
+            \request()->get('relations') ? $relation_for_scientific_name + \request()->get('relations') : $relation_for_scientific_name
+        );
 
         if (empty($plant)) {
             return $this->sendError('Plant not found');
