@@ -206,7 +206,7 @@ class Paleontology extends BaseModel
         'drawer' => 'integer',
         'pieces' => 'integer',
         'geology_age_id' => 'required|integer',
-        'plant_id' => 'required|integer',
+        'plant_id' => 'required|exists:plants,id',
         'last_update' => 'date',
         'location_id' => 'integer|exists:locations,id',
     ];

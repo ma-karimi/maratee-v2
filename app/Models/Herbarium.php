@@ -342,6 +342,11 @@ class Herbarium extends BaseModel
         return $this->belongsTo(General::class, 'general_ecology_id');
     }
 
+    public function generalPhenology()
+    {
+        return $this->belongsTo(General::class, 'general_phenology_id');
+    }
+
     public function generalHabitat()
     {
         return $this->belongsTo(General::class, 'general_habitat_id');
