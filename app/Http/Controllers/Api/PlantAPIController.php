@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\Test\Hash\SHA1Hash;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreatePlantAPIRequest;
 use App\Http\Requests\Api\UpdatePlantAPIRequest;
