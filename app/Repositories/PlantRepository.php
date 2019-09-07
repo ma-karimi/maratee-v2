@@ -177,7 +177,7 @@ class PlantRepository extends BaseRepository
             'cotyledon_id' => $input['cotyledon_id'] ?? null,
             'sperm_id' => $input['sperm_id'] ?? null,
         ];
-        return parent::update($plant_input, $id);t;
+        return parent::update($plant_input, $id);
     }
 
     /**
