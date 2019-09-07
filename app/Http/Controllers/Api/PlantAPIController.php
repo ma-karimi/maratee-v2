@@ -255,7 +255,6 @@ class PlantAPIController extends AppBaseController
         $plant = $this->plantRepository->find($id,
             \request()->get('relations') ? array_merge($relation_for_scientific_name,\request()->get('relations')) : $relation_for_scientific_name
         );
-
         if (empty($plant)) {
             return $this->sendError('Plant not found');
         }

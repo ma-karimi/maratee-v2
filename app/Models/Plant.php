@@ -185,7 +185,7 @@ class Plant extends BaseModel
      */
     public function flowering(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'flowering_id');
+        return $this->belongsTo(General::class, 'flowering_id')->withDefault();
     }
 
     /**
@@ -193,9 +193,16 @@ class Plant extends BaseModel
      */
     public function cotyledon(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'cotyledon_id');
+        return $this->belongsTo(General::class, 'cotyledon_id')->withDefault();
     }
 
+    /**
+     * @return BelongsTo
+     */
+    public function sperm(): BelongsTo
+    {
+        return $this->belongsTo(General::class, 'sperm_id')->withDefault();
+    }
     /**
      * @return HasMany
      */
