@@ -12,138 +12,121 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 /**
  * @SWG\Definition(
  *      definition="MedicinalPlant",
- *      required={"herbarium_id","medicine_name"},
+ *      required={"plant_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
- *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="plant_id",
+ *          description="id",
+ *          type="integer",
  *      ),
  *      @SWG\Property(
  *          property="herbarium_id",
- *          description="id",
+ *          description="from herbariums selected plant",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="aerial_part_id",
  *          description="id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="ground_part_id",
  *          description="id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="food_industry_id",
  *          description="id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="hygienic_cosmetic_industry_id",
  *          description="id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="industrial_potential_id",
  *          description="id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="general_phenology_id",
  *          description="id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="method_distillation_id",
  *          description="id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="method_extraction_id",
  *          description="id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="method_analyse_id",
  *          description="id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="secondary_metabolite_id",
  *          description="id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="effective_material_id",
  *          description="id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="product_id",
  *          description="id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="traditional_iranian_medicine",
  *          description="traditional_iranian_medicine",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="natural_drug",
  *          description="natural_drug",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="inherbal_medicine_store",
  *          description="inherbal_medicine_store",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="exporting",
  *          description="exporting",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="importing",
  *          description="importing",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="cultivated_area",
  *          description="cultivated_area",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="studied_sample",
  *          description="studied_sample",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="presence_in_country",
  *          description="presence_in_country",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="medicinal_properties",
@@ -235,7 +218,9 @@ class MedicinalPlant extends BaseModel
     public const PRESENCE_IN_COUNTRY = [0 => 'unknown', 1 => 'native', 2 => 'endemic'];
 
     public static $rules = [
-        'herbarium_id' => 'required|exists:herbariums,id',
+        'plant_id' => 'required|exists:plants,id',
+        'herbarium_id' => 'exists:herbariums,id',
+        'location_id' => 'required|exists:locations,id',
         'aerial_part_id' => 'exists:medicinal_parts,id',
         'ground_part_id' => 'exists:medicinal_parts,id',
         'food_industry_id' => 'exists:medicinal_plant_types,id',
@@ -348,6 +333,14 @@ class MedicinalPlant extends BaseModel
             'medicinal_plant_type_id'
         )->whereNull('medicinal_plant_properties.deleted_at')
             ->withTimestamps();
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function plant(): BelongsTo
+    {
+        return $this->belongsTo(Plant::class);
     }
 
     /**
