@@ -221,7 +221,6 @@ class MedicinalPlant extends BaseModel
     public static $rules = [
         'plant_id' => 'required|exists:plants,id',
         'herbarium_id' => 'exists:herbariums,id',
-        'location_id' => 'required|exists:locations,id',
         'aerial_part_id' => 'exists:medicinal_parts,id',
         'ground_part_id' => 'exists:medicinal_parts,id',
         'food_industry_id' => 'exists:medicinal_plant_types,id',
