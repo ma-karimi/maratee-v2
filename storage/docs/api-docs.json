@@ -10705,24 +10705,6 @@
                         "schema": {
                             "$ref": "#/definitions/Herbarium"
                         }
-                    },
-                    {
-                        "name": "general_group_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "general_growth_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
                     }
                 ],
                 "responses": {
@@ -10894,24 +10876,6 @@
                     },
                     {
                         "name": "flowering_time",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "general_group_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "general_growth_id",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,
@@ -26279,14 +26243,6 @@
                         "type": "string"
                     }
                 },
-                "auhtors": {
-                    "description": "auhtors",
-                    "type": "array",
-                    "format": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
                 "created_at": {
                     "description": "created_at",
                     "type": "string",
@@ -27770,10 +27726,6 @@
                     "items": {
                         "type": "string"
                     }
-                },
-                "general_group_id": {
-                    "type": "integer",
-                    "format": "int32"
                 },
                 "growth_rate": {
                     "type": "number"

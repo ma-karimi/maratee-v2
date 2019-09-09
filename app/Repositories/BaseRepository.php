@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\ActionHub;
 use Exception;
 use Illuminate\Container\Container as Application;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -292,7 +293,7 @@ abstract class BaseRepository
     private function getRelatedModelAndClass($related_model, $record): array
     {
         $related_model_table = $record->$related_model()->getTable();
-        $related_model_class = resolve('App\\Models\\' . Str::studly(Str::singular($related_model_table)));
+        $related_model_class =  resolve('App\\Models\\' . Str::studly(Str::singular($related_model_table)));
         $related_key = $record->$related_model()->getRelatedPivotKeyName();
         $foreign_key = $record->$related_model()->getForeignPivotKeyName();
         return [$related_model_table, $related_model_class, $related_key, $foreign_key];
@@ -315,6 +316,11 @@ abstract class BaseRepository
      */
     private function attachAndUpdateFields($related_model, array $ids, array $additional_data, $related_model_class, $related_key, $record, array $different_ids): void
     {
+        //set json to Json Casts
+        foreach ($additional_data as $index => $additional_datum) {
+            if (isset($related_model_class->getCasts()[$index]) and  $related_model_class->getCasts()[$index]='json')
+            is_array($additional_datum)?$additional_data[$index]=json_encode($additional_datum):$additional_datum;
+        }
         //attach and update pivot fields
         if (!empty($additional_data)) {
             $exists_related_ids = $related_model_class::whereIn($related_key, $ids)->pluck('id')->toArray();

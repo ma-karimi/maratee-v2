@@ -90,7 +90,7 @@ class ActionHub extends BaseModel
         'user_id' => 'required|exists:users,id',
         'date' => 'date',
     ];
-    public static $linguistically = ['description' => false];
+    //public static $linguistically = ['description' => false];
 
     /**
      * The database table used by the model.
