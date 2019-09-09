@@ -89,30 +89,9 @@ class HerbariumAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Parameter(
-     *          name="protection_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_habitat_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
      *          name="plant_id",
      *          in="body",
      *          description="Herbarium that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="life_forms",
-     *          in="body",
-     *          description="e.g life_forms[cycle_id] ,life_forms[wooden_id] ,life_forms[leaf_id] ,life_forms[herbaceous_id] , ",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
@@ -125,41 +104,6 @@ class HerbariumAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="number",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_phenology_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_phytogeography_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_substrate_lichen_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_substrate_moss_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_substrate_diatom_id",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=false,
@@ -201,13 +145,6 @@ class HerbariumAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Parameter(
-     *          name="habitat_description",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
      *          name="description",
      *          in="body",
      *          description="Herbarium that should be stored",
@@ -215,49 +152,7 @@ class HerbariumAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Parameter(
-     *          name="is_flowering",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
      *          name="flowering_time",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_group_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="ecology_description",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_ecology_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_origin_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_growth_id",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=false,
@@ -367,20 +262,6 @@ class HerbariumAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Parameter(
-     *          name="general_habitat_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="protection_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
      *          name="plant_id",
      *          in="body",
      *          description="Herbarium that should be stored",
@@ -399,20 +280,6 @@ class HerbariumAPIController extends AppBaseController
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_phenology_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_phytogeography_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Parameter(
@@ -451,13 +318,6 @@ class HerbariumAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Parameter(
-     *          name="habitat_description",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
      *          name="description",
      *          in="body",
      *          description="Herbarium that should be stored",
@@ -465,70 +325,7 @@ class HerbariumAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Parameter(
-     *          name="is_flowering",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
      *          name="flowering_time",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_group_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="ecology_description",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_ecology_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_origin_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_growth_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_substrate_lichen_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_substrate_moss_id",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_substrate_diatom_id",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=false,

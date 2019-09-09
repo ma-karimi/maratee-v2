@@ -14,9 +14,14 @@ class AddFoerignKeyToPlantsTable extends Migration
     public function up()
     {
         Schema::table('plants', function (Blueprint $table) {
-            $table->foreign('flowering_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('cotyledon_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('sperm_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('protection_id')->references('id')->on('protections')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('general_ecology_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('general_habitat_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('general_origin_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('general_phytogeography_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('general_substrate_lichen_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('general_substrate_moss_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('general_substrate_diatom_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
         });
     }
 

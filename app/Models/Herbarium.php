@@ -34,11 +34,6 @@ use Kalnoy\Nestedset\NodeTrait;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="general_phenology_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
  *          property="general_origin_id",
  *          type="integer",
  *          format="int32"
@@ -108,20 +103,8 @@ use Kalnoy\Nestedset\NodeTrait;
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="is_flowering",
- *          description="is_flowering",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
  *          property="organization_description",
  *          description="organization_description",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="flowering_time",
- *          description="flowering_time",
  *          type="array",
  *     @SWG\Items(type="string"),
  *      ),
@@ -130,11 +113,6 @@ use Kalnoy\Nestedset\NodeTrait;
  *          description="life_forms",
  *          type="array",
  *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="general_group_id",
- *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="growth_rate",
@@ -180,9 +158,8 @@ class Herbarium extends BaseModel
 
     public const GROWTH_RATES = [0 => 'unknown', 1 => 'very low', 2 => 'low', 3 => 'moderate', 4 => 'fast', 5 => 'very fast'];
 
-    public static $linguistically = ['flowering' => false, 'habitat_description' => false, 'ecology_description' => false];
+    public static $linguistically = ['flowering' => false];
     public static $rules = [
-        'protection_id' => 'required|exists:protections,id',
         'organization_id' => 'required|exists:organizations,id',
         'plant_id' => 'required|exists:plants,id',
         'sheets_no' => 'integer|max:2147483647',
@@ -190,20 +167,11 @@ class Herbarium extends BaseModel
         'tip_qt' => 'integer',
         'physical_tip_qt' => 'integer',
 //        'tip_type' => 'string',
-        'is_flowering' => 'integer',
         'herbarium_tip_location' => 'integer',
         'type_description' => 'string',
 //        'general_type_id' => 'exists:generals,id',
-        'general_group_id' => 'exists:generals,id',
-        'general_ecology_id' => 'exists:generals,id',
-        'general_habitat_id' => 'required|exists:generals,id',
-        'general_origin_id' => 'exists:generals,id',
-        'general_substrate_lichen_id' => 'exists:generals,id',
-        'general_substrate_moss_id' => 'exists:generals,id',
-        'general_substrate_diatom_id' => 'exists:generals,id',
+
 //        'general_growth_id' => 'exists:generals,id',
-        'general_phytogeography_id' => 'required|exists:generals,id',
-        'general_phenology_id' => 'exists:generals,id',
         'number' => 'integer',
 
     ];
@@ -222,11 +190,7 @@ class Herbarium extends BaseModel
      */
     protected $casts = [
         'name' => 'json',
-        'life_forms' => 'json',
         'description' => 'json',
-//        'organization_description' => 'json',
-        'habitat_description' => 'json',
-        'ecology_description' => 'json',
     ];
 
 
@@ -327,30 +291,13 @@ class Herbarium extends BaseModel
         return $this->belongsTo(Location::class);
     }
 
-    public function protection()
-    {
-        return $this->belongsTo(Protection::class);
-    }
 
     public function generalType()
     {
         return $this->belongsTo(General::class, 'general_type_id');
     }
 
-    public function generalEcology()
-    {
-        return $this->belongsTo(General::class, 'general_ecology_id');
-    }
 
-    public function generalHabitat()
-    {
-        return $this->belongsTo(General::class, 'general_habitat_id');
-    }
-
-    public function generalOrigin()
-    {
-        return $this->belongsTo(General::class, 'general_origin_id');
-    }
 
 
     public function plant()
@@ -363,55 +310,7 @@ class Herbarium extends BaseModel
         return $this->morphToMany(Department::class, 'departmentable', 'department_hubs');
     }
 
-    public function generalGroup()
-    {
-        return $this->belongsTo(General::class,
-            'general_group_id');
-    }
 
-    public function generalPhytogeography()
-    {
-        return $this->belongsTo(General::class, 'general_phytogeography_id');
-    }
-
-    public function generalLichen()
-    {
-        return $this->belongsTo(General::class, 'general_substrate_lichen_id');
-    }
-
-    public function generalMoss()
-    {
-        return $this->belongsTo(General::class, 'general_substrate_moss_id');
-    }
-
-    public function generalDiatom()
-    {
-        return $this->belongsTo(General::class, 'general_substrate_diatom_id');
-    }
-
-    public function leafLifeForm(): BelongsTo
-    {
-        return $this->belongsTo(LifeForm::class,
-            'life_form_leaf_id');
-    }
-
-    public function woodenLifeForm(): BelongsTo
-    {
-        return $this->belongsTo(LifeForm::class,
-            'life_form_wooden_id');
-    }
-
-    public function cycleLifeForm(): BelongsTo
-    {
-        return $this->belongsTo(LifeForm::class,
-            'life_form_cycle_id');
-    }
-
-    public function herbaceousLifeForm(): BelongsTo
-    {
-        return $this->belongsTo(LifeForm::class,
-            'life_form_herbaceous_id');
-    }
 
     /**
      * @return MorphToMany

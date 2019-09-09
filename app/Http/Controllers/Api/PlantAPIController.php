@@ -7,11 +7,9 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreatePlantAPIRequest;
 use App\Http\Requests\Api\UpdatePlantAPIRequest;
 use App\Http\Resources\PlantResource;
-use App\Models\General;
 use App\Models\Plant;
 use App\Repositories\PlantRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Response;
 
 /**
@@ -97,6 +95,62 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
+     *          name="general_phytogeography_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="protection_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="is_flowering",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_substrate_lichen_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_substrate_moss_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_substrate_diatom_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_ecology_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_origin_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
      *          name="description",
      *          in="body",
      *          description="Plant that should be stored",
@@ -104,35 +158,14 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="domestic_name",
+     *          name="habitat_description",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="flowering_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="cotyledon_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="sperm_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="exclusivity",
+     *          name="ecology_description",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
@@ -288,6 +321,62 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
+     *          name="general_phytogeography_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="protection_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="is_flowering",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_substrate_lichen_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_substrate_moss_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_substrate_diatom_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_ecology_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_origin_id",
+     *          in="body",
+     *          description="Plant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Plant")
+     *      ),
+     *      @SWG\Parameter(
      *          name="description",
      *          in="body",
      *          description="Plant that should be stored",
@@ -295,35 +384,14 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="domestic_name",
+     *          name="habitat_description",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="flowering_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="cotyledon_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="sperm_id",
-     *          in="body",
-     *          description="Plant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="exclusivity",
+     *          name="ecology_description",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,

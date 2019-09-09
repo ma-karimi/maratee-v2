@@ -13,6 +13,14 @@ trait PlantScope
 {
     /**
      * @param $query
+     * @return mixed
+     */
+    public function scopeIsFlowering($query,$value)
+    {
+        return $query->where('is_flowering',$value);
+    }
+    /**
+     * @param $query
      * @param bool $value
      * @return mixed
      */

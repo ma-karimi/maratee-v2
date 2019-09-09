@@ -92,12 +92,20 @@ class PlantRepository extends BaseRepository
     {
         $plant_input = [
             'name' => $input['name'],
+            'protection_id' => $input['protection_id'],
+            'general_phytogeography_id' => $input['general_phytogeography_id'],
+            'general_ecology_id' => $input['general_ecology_id'] ?? null,
+            'general_habitat_id' => $input['general_habitat_id'] ?? null,
+            'general_origin_id' => $input['general_origin_id'] ?? null,
+            'general_substrate_lichen_id' => $input['general_substrate_lichen_id'] ?? null,
+            'general_substrate_moss_id' => $input['general_substrate_moss_id'] ?? null,
+            'general_substrate_diatom_id' => $input['general_substrate_diatom_id'] ?? null,
             'description' => $input['description'] ?? null,
-            'domestic_name' => $input['domestic_name'] ?? null,
-            'exclusivity' => $input['exclusivity'] ?? null,
-            'flowering_id' => $input['flowering_id'] ?? null,
-            'cotyledon_id' => $input['cotyledon_id'] ?? null,
-            'sperm_id' => $input['sperm_id'] ?? null,
+            'habitat_description' => $input['habitat_description'] ?? null,
+            'ecology_description' => $input['ecology_description'] ?? null,
+            'life_forms' => $input['life_forms'] ?? null,
+            'is_flowering' => $input['is_flowering'] ?? null,
+            'flowering_time' => $input['is_flowering'] ?? null,
         ];
         //store plant
         return  parent::create($plant_input);
@@ -170,12 +178,20 @@ class PlantRepository extends BaseRepository
     {
         $plant_input = [
             'name' => $input['name'],
+            'protection_id' => $input['protection_id'],
+            'general_phytogeography_id' => $input['general_phytogeography_id'],
+            'general_ecology_id' => $input['general_ecology_id'] ?? null,
+            'general_habitat_id' => $input['general_habitat_id'] ?? null,
+            'general_origin_id' => $input['general_origin_id'] ?? null,
+            'general_substrate_lichen_id' => $input['general_substrate_lichen_id'] ?? null,
+            'general_substrate_moss_id' => $input['general_substrate_moss_id'] ?? null,
+            'general_substrate_diatom_id' => $input['general_substrate_diatom_id'] ?? null,
             'description' => $input['description'] ?? null,
-            'domestic_name' => $input['domestic_name'] ?? null,
-            'exclusivity' => $input['exclusivity'] ?? null,
-            'flowering_id' => $input['flowering_id'] ?? null,
-            'cotyledon_id' => $input['cotyledon_id'] ?? null,
-            'sperm_id' => $input['sperm_id'] ?? null,
+            'habitat_description' => $input['habitat_description'] ?? null,
+            'ecology_description' => $input['ecology_description'] ?? null,
+            'life_forms' => $input['life_forms'] ?? null,
+            'is_flowering' => $input['is_flowering'] ?? null,
+            'flowering_time' => $input['is_flowering'] ?? null,
         ];
         return parent::update($plant_input, $id);
     }

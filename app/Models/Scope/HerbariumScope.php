@@ -14,12 +14,5 @@ namespace App\Models\Scope;
 trait HerbariumScope
 {
 
-    /**
-     * @param $query
-     * @return mixed
-     */
-    public function scopeIsFlowering($query,$value)
-    {
-        return $query->where('is_flowering',$value);
-    }
+
 }

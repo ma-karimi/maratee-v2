@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Accessor\PlantAccessor;
 use App\Models\Contracts\BaseModel;
-use App\Models\Contracts\RelationshipsTrait;
 use App\Models\Scope\PlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -15,34 +14,66 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 /**
  * @SWG\Definition(
  *      definition="Plant",
- *      required={"name"},
+ *      required={"name","protection_id","general_phytogeography_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
- *          type="integer",
- *          format="int32"
+ *          type="integer"
  *      ),
  *      @SWG\Property(
- *          property="flowering_id",
- *          description="flowering_id",
- *          type="integer",
- *          format="int32"
+ *          property="is_flowering",
+ *          description="is_flowering",
+ *          type="integer"
  *      ),
  *      @SWG\Property(
- *          property="cotyledon_id",
- *          description="cotyledon_id",
- *          type="integer",
- *          format="int32"
+ *          property="general_substrate_lichen_id",
+ *          description="general_substrate_lichen_id",
+ *          type="integer"
  *      ),
  *      @SWG\Property(
- *          property="sperm_id",
- *          description="sperm_id",
- *          type="integer",
- *          format="int32"
+ *          property="general_substrate_moss_id",
+ *          description="general_substrate_moss_id",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="general_substrate_diatom_id",
+ *          description="general_substrate_diatom_id",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="general_phytogeography_id",
+ *          description="general_phytogeography_id",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="general_ecology_id",
+ *          description="general_ecology_id",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="general_origin_id",
+ *          description="general_origin_id",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="general_habitat_id",
+ *          description="general_habitat_id",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="protection_id",
+ *          description="protection_id",
+ *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="name",
  *          description="name",
+ *          type="array",
+ *     @SWG\Items(type="string")
+ *      ),
+ *      @SWG\Property(
+ *          property="life_forms",
+ *          description="life_forms",
  *          type="array",
  *     @SWG\Items(type="string")
  *      ),
@@ -53,21 +84,28 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="domestic_name",
- *          description="domestic_name",
+ *          property="ecology_description",
+ *          description="ecology_description",
  *          type="array",
  *     @SWG\Items(type="string")
+ *      ),
+ *      @SWG\Property(
+ *          property="habitat_description",
+ *          description="habitat_description",
+ *          type="array",
+ *     @SWG\Items(type="string")
+ *      ),
+ *      @SWG\Property(
+ *          property="flowering_time",
+ *          description="flowering_time",
+ *          type="array",
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="subspecies_ids",
  *          description="subspecies_ids",
  *          type="array",
  *     @SWG\Items(type="integer")
- *      ),
- *      @SWG\Property(
- *          property="exclusivity",
- *          description="exclusivity",
- *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -85,14 +123,14 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class Plant extends BaseModel
 {
-    use PlantScope,PlantAccessor;
+    use PlantScope, PlantAccessor;
 
     protected $appends = ['scientific_name'];
 
-    public static $linguistically = ['name' => true, 'description' => false, 'domestic_name' => false];
+    public static $linguistically = ['name' => true, 'description' => false,'habitat_description' => false, 'ecology_description' => false];
 
     public static $rules = [
-        'exclusivity' => 'integer',
+        'protection_id' => 'required|exists:protections,id',
         //taxonomy
         'family_id' => 'required|exists:generals,id',
         'genus_id' => 'exists:generals,id',
@@ -101,10 +139,15 @@ class Plant extends BaseModel
         'order_id' => 'exists:generals,id',
         'class_id' => 'exists:generals,id',
         'subspecies_ids.*' => 'exists:generals,id',
+        'is_flowering' => 'integer',
         //classification
-        'flowering_id' => 'required|exists:generals,id',
-        'cotyledon_id' => 'exists:generals,id',
-        'sperm_id' => 'exists:generals,id',
+        'general_ecology_id' => 'exists:generals,id',
+        'general_habitat_id' => 'exists:generals,id',
+        'general_origin_id' => 'exists:generals,id',
+        'general_phytogeography_id' => 'required|exists:generals,id',
+        'general_substrate_lichen_id' => 'exists:generals,id',
+        'general_substrate_moss_id' => 'exists:generals,id',
+        'general_substrate_diatom_id' => 'exists:generals,id',
     ];
     /**
      * The database table used by the model.
@@ -123,7 +166,9 @@ class Plant extends BaseModel
     protected $casts = [
         'name' => 'json',
         'description' => 'json',
-        'domestic_name' => 'json',
+        'life_forms' => 'json',
+        'habitat_description' => 'json',
+        'ecology_description' => 'json',
     ];
 
 
@@ -180,29 +225,9 @@ class Plant extends BaseModel
             ->withTimestamps();
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function flowering(): BelongsTo
-    {
-        return $this->belongsTo(General::class, 'flowering_id')->withDefault();
-    }
 
-    /**
-     * @return BelongsTo
-     */
-    public function cotyledon(): BelongsTo
-    {
-        return $this->belongsTo(General::class, 'cotyledon_id')->withDefault();
-    }
 
-    /**
-     * @return BelongsTo
-     */
-    public function sperm(): BelongsTo
-    {
-        return $this->belongsTo(General::class, 'sperm_id')->withDefault();
-    }
+
     /**
      * @return HasMany
      */
@@ -228,9 +253,10 @@ class Plant extends BaseModel
             ->whereNull('plant_properties.deleted_at')
             ->withTimestamps();
     }
+
     public function taxonomy(): HasOne
     {
-        return $this->hasOne(Taxonomy::class,'plant_id');
+        return $this->hasOne(Taxonomy::class, 'plant_id');
     }
 
     public function getPropertiesAttribute()
@@ -240,4 +266,69 @@ class Plant extends BaseModel
 
         return $properties;
     }
+
+    public function protection(): BelongsTo
+    {
+        return $this->belongsTo(Protection::class);
+    }
+
+    public function generalEcology(): BelongsTo
+    {
+        return $this->belongsTo(General::class, 'general_ecology_id');
+    }
+
+    public function generalHabitat(): BelongsTo
+    {
+        return $this->belongsTo(General::class, 'general_habitat_id');
+    }
+
+    public function generalOrigin(): BelongsTo
+    {
+        return $this->belongsTo(General::class, 'general_origin_id');
+    }
+
+    public function generalPhytogeography(): BelongsTo
+    {
+        return $this->belongsTo(General::class, 'general_phytogeography_id');
+    }
+
+    public function leafLifeForm(): BelongsTo
+    {
+        return $this->belongsTo(LifeForm::class,
+            'life_form_leaf_id');
+    }
+
+    public function woodenLifeForm(): BelongsTo
+    {
+        return $this->belongsTo(LifeForm::class,
+            'life_form_wooden_id');
+    }
+
+    public function cycleLifeForm(): BelongsTo
+    {
+        return $this->belongsTo(LifeForm::class,
+            'life_form_cycle_id');
+    }
+
+    public function herbaceousLifeForm(): BelongsTo
+    {
+        return $this->belongsTo(LifeForm::class,
+            'life_form_herbaceous_id');
+    }
+    public function generalLichen(): BelongsTo
+    {
+        return $this->belongsTo(General::class, 'general_substrate_lichen_id');
+    }
+
+    public function generalMoss(): BelongsTo
+    {
+        return $this->belongsTo(General::class, 'general_substrate_moss_id');
+    }
+
+    public function generalDiatom(): BelongsTo
+    {
+        return $this->belongsTo(General::class, 'general_substrate_diatom_id');
+    }
 }
+
+
