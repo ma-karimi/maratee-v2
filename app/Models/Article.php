@@ -55,13 +55,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          format="array"
  *      ),
  *      @SWG\Property(
- *          property="auhtors",
- *          description="auhtors",
- *          type="array",
-	 *     @SWG\Items(type="string"),
- *          format="array"
- *      ),
- *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -78,7 +71,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class Article extends BaseModel
 {
 
-    public static $linguistically = ['title' => true, 'type' => false, 'authors'=>false, 'journal_name'=>false];
+    public static $linguistically = ['title' => true, 'type' => false, 'journal_name'=>false];
     public static $rules = [
         'year' => 'date',
         'journal_no'=>'integer',
@@ -96,7 +89,7 @@ class Article extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['title' => 'json', 'type' => 'json', 'authors' => 'json', 'journal_name' => 'json'];
+    protected $casts = ['title' => 'json', 'type' => 'json', 'journal_name' => 'json', 'year'=>'date'];
     /**
      * The attributes that should be mutated to dates.
      *

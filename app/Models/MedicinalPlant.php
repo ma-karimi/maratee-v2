@@ -268,7 +268,6 @@ class MedicinalPlant extends BaseModel
         'consumption' => false,
         'active_compounds' => false,
         'manufacturer' => false,
-        'efficiency' => false,
         'fruit_color' => false,
         'flower_color' => false,
     ];
@@ -290,7 +289,7 @@ class MedicinalPlant extends BaseModel
         'consumption' => 'json',
         'active_compounds' => 'json',
         'manufacturer' => 'json',
-        'efficiency' => 'json',
+        'efficiency' => 'float',
         'fruit_color' => 'json',
         'flower_color' => 'json',
     ];

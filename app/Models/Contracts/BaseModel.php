@@ -53,6 +53,9 @@ class BaseModel extends Model
         $this->validateJsonRequestHandler($languages);
         $this->setNotSearchable($this->getLinguistically());
         $this->setJsonSelectables();
+//        foreach ($this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable()) as $index => $item) {
+//            $this->searchable[] = $item;
+//        }
 
     }
 
