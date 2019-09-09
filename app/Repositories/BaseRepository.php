@@ -316,16 +316,11 @@ abstract class BaseRepository
      */
     private function attachAndUpdateFields($related_model, array $ids, array $additional_data, $related_model_class, $related_key, $record, array $different_ids): void
     {
-        //set json to Json Casts
-        foreach ($additional_data as $index => $additional_datum) {
-            if (isset($related_model_class->getCasts()[$index]) and $related_model_class->getCasts()[$index] = 'json') {
-                $additional_data[$index] = json_encode($additional_datum);
-            }
-        }
-        //attach and update pivot fields
         if (!empty($additional_data)) {
+            //update pivot fields
             $exists_related_ids = $related_model_class::whereIn($related_key, $ids)->pluck('id')->toArray();
             if (count($exists_related_ids)) {
+                $this->setJsonCast($additional_data, $related_model_class);
                 $related_model_class::whereIn('id', $exists_related_ids)->update($additional_data);
             }
             $record->$related_model()->attach($different_ids, $additional_data);
@@ -344,5 +339,18 @@ abstract class BaseRepository
         $record = $this->model->find($class_id);
         abort_if(empty($record), JsonResponse::HTTP_NOT_FOUND, 'record not found');
         return $record;
+    }
+
+    /**
+     * @param array $additional_data
+     * @param $related_model_class
+     */
+    private function setJsonCast(array &$additional_data, $related_model_class): void
+    {
+        foreach ($additional_data as $index => $additional_datum) {
+            if (isset($related_model_class->getCasts()[$index]) and $related_model_class->getCasts()[$index] = 'json') {
+                $additional_data[$index] = json_encode($additional_datum);
+            }
+        }
     }
 }
