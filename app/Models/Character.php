@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -63,10 +62,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      )
  * )
  */
-
 class Character extends BaseModel
 {
-    public static $rules=[
+    public static $rules = [
         'seed_id' => 'required|exists:seeds,id',
         'department_id' => 'required|exists:departments,id',
         'project_id' => 'required|exists:projects,id',
@@ -77,21 +75,23 @@ class Character extends BaseModel
      */
     public function seed()
     {
-        return $this->belongsTo(Seed::class,'seed_id');
+        return $this->belongsTo(Seed::class, 'seed_id');
     }
+
     /**
      * @return BelongsTo
      */
     public function department()
     {
-        return $this->belongsTo(Department::class,'department_id');
+        return $this->belongsTo(Department::class, 'department_id');
     }
+
     /**
      * @return BelongsTo
      */
     public function project()
     {
-        return $this->belongsTo(Project::class,'project_id');
+        return $this->belongsTo(Project::class, 'project_id');
     }
 
 }

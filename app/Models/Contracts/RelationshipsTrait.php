@@ -9,23 +9,26 @@
 namespace App\Models\Contracts;
 
 
-use ErrorException;
+use Exception;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Support\Arr;
-use mysql_xdevapi\Exception;
 use ReflectionClass;
 use ReflectionMethod;
 
 trait RelationshipsTrait
 {
-    public static function relationships($model) {
+    public static function relationshipsText($model)
+    {
+        return implode(',', array_keys(self::relationships($model)));
+    }
 
-        $model=new $model;
+    public static function relationships($model)
+    {
+
+        $model = new $model;
 
         $relationships = [];
 
-        foreach((new ReflectionClass($model))->getMethods(ReflectionMethod::IS_PUBLIC) as $method)
-        {
+        foreach ((new ReflectionClass($model))->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
             if ($method->class != get_class($model) ||
                 !empty($method->getParameters()) ||
                 $method->getName() == __FUNCTION__) {
@@ -39,18 +42,16 @@ trait RelationshipsTrait
                     $relationships[$method->getName()] = [
                         'type' => (new ReflectionClass($return))->getShortName(),
                         'model' => (new ReflectionClass($return->getRelated()))->getName(),
-                        'name'=>$method->getName()
+                        'name' => $method->getName()
                     ];
                 }
-            } catch(\Exception $e) {report($e);}
+            } catch (Exception $e) {
+                report($e);
+            }
         }
 
 
         return $relationships;
-    }
-
-    public static function relationshipsText($model){
-      return implode(',',array_keys(self::relationships($model)));
     }
 
     public static function relationshipsWithType($model)

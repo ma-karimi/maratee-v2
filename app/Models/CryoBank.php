@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Relations\ActionRelation;
+use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -19,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  * 			@SWG\Property(property="sample_type", type="string"),
  * 			@SWG\Property(property="repetition", type="integer"),
  * 			@SWG\Property(property="tank_type", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="layering_no", type="integer"),
  * 			@SWG\Property(property="tank_no", type="integer"),
  * 			@SWG\Property(property="row_no", type="integer"),
@@ -32,8 +34,8 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  **/
 class CryoBank extends BaseModel
 {
-
-    public static $linguistically=['tank_type'=>false];
+    use ActionRelation, ArticleRelation;
+    public static $linguistically = ['tank_type' => false];
     public static $rules = [
         'voucher_number' => 'required|string',
         'geotype_code' => 'required|string',
@@ -95,25 +97,6 @@ class CryoBank extends BaseModel
     public function herbarium(): BelongsTo
     {
         return $this->belongsTo(Herbarium::class);
-    }
-
-    /**
-     * @return MorphToMany
-     */
-    public function articles(): MorphToMany
-    {
-        return $this->morphToMany(Article::class, 'articleable', 'article_hubs')->withTimestamps();
-    }
-
-
-    /**
-     * @return MorphToMany
-     */
-    public function actions(): MorphToMany
-    {
-        return $this->morphToMany(Action::class, 'actionable', 'action_hubs')
-            ->withTimestamps()
-            ->withPivot(['user_id','location_id', 'project_id', 'department_id', 'description', 'date']);
     }
 
     /**

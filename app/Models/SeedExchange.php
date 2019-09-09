@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 /**
  * @SWG\Definition(
  *      definition="SeedExchange",
@@ -58,7 +59,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          property="description",
  *          description="description",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="exchange_type",
@@ -86,9 +87,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class SeedExchange extends BaseModel
 {
-    public static $linguistically=['description'=>true];
+    public static $linguistically = ['description' => true];
 
-    public static $rules=[
+    public static $rules = [
         'seed_id' => 'exists:seeds,id',
         'user_id' => 'required|exists:users,id',
         'project_id' => 'exists:projects,id',
@@ -129,6 +130,7 @@ class SeedExchange extends BaseModel
     {
         return $this->belongsTo(User::class);
     }
+
     /**
      * @return BelongsTo
      */
@@ -136,6 +138,7 @@ class SeedExchange extends BaseModel
     {
         return $this->belongsTo(Project::class);
     }
+
     /**
      * @return BelongsTo
      */

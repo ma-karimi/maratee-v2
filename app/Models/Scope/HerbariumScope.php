@@ -9,8 +9,6 @@
 namespace App\Models\Scope;
 
 
-
-
 trait HerbariumScope
 {
 

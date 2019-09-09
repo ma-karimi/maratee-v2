@@ -49,10 +49,10 @@ class PaleontologyMap extends BaseModel
      *
      * @var array
      */
-   /* public static $rules = [
-        'paleontology_id'=>'required|exists:paleontologies:id',
-        'map_id'=>'required|exists:maps:id'
-    ];*/
+    /* public static $rules = [
+         'paleontology_id'=>'required|exists:paleontologies:id',
+         'map_id'=>'required|exists:maps:id'
+     ];*/
 
-    
+
 }

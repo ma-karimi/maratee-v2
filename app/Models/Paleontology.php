@@ -4,10 +4,11 @@ namespace App\Models;
 
 use App\Models\Accessor\PaleontologyAccessor;
 use App\Models\Contracts\BaseModel;
+use App\Models\Relations\ActionRelation;
+use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
@@ -191,7 +192,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class Paleontology extends BaseModel
 {
-    use PaleontologyAccessor;
+    use PaleontologyAccessor, ActionRelation, ArticleRelation;
     public static $linguistically = ['infra_specific' => false, 'type_status' => false, 'preservation' => false, 'color' => false, 'element' => false, 'description' => true, 'additional_info' => false, 'excavation' => false, 'collector_name' => false, 'common_name' => false];
     public static $rules = [
         'catalog_no' => 'integer',
@@ -259,19 +260,21 @@ class Paleontology extends BaseModel
     {
         return $this->belongsTo(Plant::class);
     }
+
     /**
      * @return BelongsTo
      */
     public function generalClass(): BelongsTo
     {
-        return $this->belongsTo(General::class,'general_class_id')->withDefault();
+        return $this->belongsTo(General::class, 'general_class_id')->withDefault();
     }
+
     /**
      * @return BelongsTo
      */
     public function generalOrder(): BelongsTo
     {
-        return $this->belongsTo(General::class,'general_order_id');
+        return $this->belongsTo(General::class, 'general_order_id');
     }
 
     /**
@@ -298,33 +301,14 @@ class Paleontology extends BaseModel
         return $this->morphToMany(TreatmentHub::class, 'treamentable');
     }
 
-
-
-    public function articles(): MorphToMany
-    {
-        return $this->morphToMany(Article::class,
-            'articleable','article_hubs')
-            ->whereNull('location_hubs.deleted_at')
-            ->withTimestamps();
-    }
-
-    /**
-     * @return MorphToMany
-     */
-    public function actions(): MorphToMany
-    {
-        return $this->morphToMany(Action::class, 'actionable', 'action_hubs')
-            ->withTimestamps()
-            ->withPivot(['user_id','location_id', 'project_id', 'department_id', 'description', 'date']);
-    }
     /**
      * @return MorphToMany
      */
     public function transactions(): MorphToMany
     {
-        return $this->morphToMany(Transaction::class, 'transactionable','transaction_hubs')
+        return $this->morphToMany(Transaction::class, 'transactionable', 'transaction_hubs')
             ->withTimestamps()
-            ->withPivot(['type_id','sheets_no']);
+            ->withPivot(['type_id', 'sheets_no']);
     }
 
     public function maps(): BelongsToMany

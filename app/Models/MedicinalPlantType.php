@@ -58,11 +58,11 @@ class MedicinalPlantType extends BaseModel
         6 => 'material',
         7 => 'pharmaceutical',
     ];
-    protected $casts = ['name' => 'json', 'description' => 'json'];
     public static $linguistically = ['name' => true, 'description' => false];
     public static $rules = [
         'type_id' => 'required|integer',
     ];
+    protected $casts = ['name' => 'json', 'description' => 'json'];
 
     public function medicinalPlant()
     {

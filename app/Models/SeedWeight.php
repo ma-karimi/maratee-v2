@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+
 /**
  * @SWG\Definition(
  *      definition="SeedWeight",
@@ -67,7 +68,7 @@ use App\Models\Contracts\BaseModel;
  *          property="other_detail",
  *          description="other_detail",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -89,12 +90,11 @@ use App\Models\Contracts\BaseModel;
  *      )
  * )
  */
-
 class SeedWeight extends BaseModel
 {
 
-    public static $linguistically=['other_detail'=>false];
-    public static $rules=[
+    public static $linguistically = ['other_detail' => false];
+    public static $rules = [
         'total_seed_weight' => 'numeric',
         'total_fruit_weight' => 'numeric',
         'collected_seeds_no' => 'integer',

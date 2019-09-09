@@ -18,9 +18,9 @@ class EvaluationDimension extends BaseModel
 {
 
     public static $rules = [
-        'evaluation_id'=>'required|exists:evaluations,id',
-        'dimension_id'=>'required|exists:dimensions,id',
-        'value'=>'integer',
+        'evaluation_id' => 'required|exists:evaluations,id',
+        'dimension_id' => 'required|exists:dimensions,id',
+        'value' => 'integer',
     ];
 
     /**
@@ -46,6 +46,7 @@ class EvaluationDimension extends BaseModel
     {
         return $this->belongsTo(Evaluation::class);
     }
+
     /**
      * @return BelongsTo
      */

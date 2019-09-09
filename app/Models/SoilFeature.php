@@ -23,7 +23,7 @@ use App\Models\Contracts\BaseModel;
  *          property="unit",
  *          description="unit",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -40,11 +40,10 @@ use App\Models\Contracts\BaseModel;
  *      )
  * )
  */
-
 class SoilFeature extends BaseModel
 {
 
-    public static $linguistically=['name'=>true,'unit'=>false];
+    public static $linguistically = ['name' => true, 'unit' => false];
     /**
      * The database table used by the model.
      *

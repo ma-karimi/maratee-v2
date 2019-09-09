@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *            required={"type"},
  * 			@SWG\Property(property="id", type="integer"),
  * 			@SWG\Property(property="type", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="description", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Entry extends BaseModel
 {
 
-    public static $linguistically=['type'=>true,'description'=>false];
+    public static $linguistically = ['type' => true, 'description' => false];
     /**
      * The database table used by the model.
      *

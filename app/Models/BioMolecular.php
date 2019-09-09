@@ -4,9 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\SeedFeature;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use App\Models\Technology;
 
 /**
  * @SWG\Definition(

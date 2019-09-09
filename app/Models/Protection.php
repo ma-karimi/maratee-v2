@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+
 /**
  * @SWG\Definition(
  *      definition="Protection",
@@ -18,13 +19,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          property="name",
  *          description="name",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -42,7 +43,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Protection extends BaseModel
 {
-    public static $linguistically=['name'=>true,'description'=>false];
+    public static $linguistically = ['name' => true, 'description' => false];
     /**
      * The database table used by the model.
      *

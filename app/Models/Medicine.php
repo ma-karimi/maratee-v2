@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+
 /**
  * @SWG\Definition(
  *      definition="Medicine",
@@ -19,13 +20,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          property="name",
  *          description="name",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="type",
@@ -54,8 +55,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Medicine extends BaseModel
 {
-    public static $linguistically=['name'=>true,'description'=>false];
-    public static $rules=[
+    public static $linguistically = ['name' => true, 'description' => false];
+    public static $rules = [
         'type' => 'required|string',
         'parent_id' => 'integer',
     ];

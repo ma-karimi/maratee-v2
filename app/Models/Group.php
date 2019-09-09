@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @SWG\Definition(
@@ -54,7 +54,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Group extends BaseModel
 {
-    public static $linguistically=['name'=>true,'owner_crud'=>true,'same_level_crud'=>true,'upper_level_crud'=>true,'lower_level_crud'=>true,'description'=>true];
+    public static $linguistically = ['name' => true, 'owner_crud' => true, 'same_level_crud' => true, 'upper_level_crud' => true, 'lower_level_crud' => true, 'description' => true];
 
     /**
      * @var array
@@ -70,12 +70,12 @@ class Group extends BaseModel
         ];
     /**
      * The storage format of the model's date columns.
-     * 
+     *
      * @var string
      */
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function permissions()
     {

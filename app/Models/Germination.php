@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -93,29 +92,25 @@ class Germination extends BaseModel
 {
     use SoftDeletes;
 
-    public $table = 'germinations';
-    
-
-    protected $dates = ['deleted_at'];
-
-
     /**
      * Validation rules
      *
      * @var array
      */
     public static $rules = [
-        'dormancy_breaking_treatments' =>'string',
-        'light_date' =>'date',
-        'dark_date' =>'date',
-        'dormancy_termination' =>'date',
-        'germination_start' =>'date',
-        'light_temperature' =>'integer',
-        'dark_temperature' =>'integer',
-        'germination_period' =>'integer',
-        'germination_percentage' =>'integer',
-        'dormancy_breaking_description' =>'array',
+        'dormancy_breaking_treatments' => 'string',
+        'light_date' => 'date',
+        'dark_date' => 'date',
+        'dormancy_termination' => 'date',
+        'germination_start' => 'date',
+        'light_temperature' => 'integer',
+        'dark_temperature' => 'integer',
+        'germination_period' => 'integer',
+        'germination_percentage' => 'integer',
+        'dormancy_breaking_description' => 'array',
     ];
+    public $table = 'germinations';
+    protected $dates = ['deleted_at'];
 
-    
+
 }

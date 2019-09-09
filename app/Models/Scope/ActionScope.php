@@ -9,8 +9,6 @@
 namespace App\Models\Scope;
 
 
-use App\Models\User;
-
 trait ActionScope
 {
 
@@ -20,6 +18,6 @@ trait ActionScope
      */
     public function scopeOfCollectingAction($query)
     {
-        return $query->where('name->en','LIKE','%collect%');
+        return $query->where('name->en', 'LIKE', '%collect%');
     }
 }

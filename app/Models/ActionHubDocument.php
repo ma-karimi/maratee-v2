@@ -48,8 +48,8 @@ class ActionHubDocument extends BaseModel
 {
     public static $rules = [
         'action_hub_id' => 'required|exists:action_hubs,id',
-        'src'=>'required|string',
-        'src_description'=>'string',
+        'src' => 'required|string',
+        'src_description' => 'string',
     ];
 
 

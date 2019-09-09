@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *            required={"name", "type", "type"},
  * 			@SWG\Property(property="id", type="integer"),
  * 			@SWG\Property(property="name", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="type", type="string"),
  * 			@SWG\Property(property="parent_id", type="integer"),
  * 			@SWG\Property(property="created_at", type="string"),
@@ -23,7 +23,7 @@ class GeologyAge extends BaseModel
 {
 
     const PARENT_ID = 'parent_id';
-    public static $linguistically=['name'=>true];
+    public static $linguistically = ['name' => true];
     /**
      * The database table used by the model.
      *

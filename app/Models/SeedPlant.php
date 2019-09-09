@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 /**
  * @SWG\Definition(
  *      definition="SeedPlant",
@@ -34,13 +35,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      )
  * )
  */
-
 class SeedPlant extends BaseModel
 {
 
-    public static $linguistically=[''];
+    public static $linguistically = [''];
 
-    public static $rules=[
+    public static $rules = [
         'seed_id' => 'required|exists:seeds,id',
         'plant_id' => 'required|exists:plants,id',
     ];

@@ -47,25 +47,25 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          property="transmittance",
  *          description="transmittance",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="land_form",
  *          description="land_form",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="slope_action",
  *          description="slope_action",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="landscape",
  *          description="landscape",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="slope_degree",
@@ -77,61 +77,61 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          property="soil_depth",
  *          description="soil_depth",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="soil_texture",
  *          description="soil_texture",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="drainage",
  *          description="drainage",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="soil_ph",
  *          description="soil_ph",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="salinity",
  *          description="salinity",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="lime",
  *          description="lime",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="climate",
  *          description="climate",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="community_type",
  *          description="community_type",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="associated_species",
  *          description="associated_species",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="soil_erosion",
  *          description="soil_erosion",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="area_sampled",
@@ -152,7 +152,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          property="specimen_type",
  *          description="specimen_type",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="date_flowering",
@@ -163,19 +163,19 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          property="pollination_type",
  *          description="pollination_type",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="pollination_agent",
  *          description="pollination_agent",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="fruit_type",
  *          description="fruit_type",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="seed_collected_from",
@@ -212,7 +212,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          property="mother_health",
  *          description="mother_health",
  *           type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="department_id",
@@ -224,13 +224,13 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          property="seed_advise",
  *          description="seed_advise",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="other_detail",
  *          description="other_detail",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -246,11 +246,10 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      )
  * )
  */
-
 class Seed extends BaseModel
 {
-    public static $linguistically=['seed_advise'=>false,'transmittance'=>false,'land_form'=>false,'slope_action'=>false,'landscape'=>false,'soil_depth'=>false,'soil_texture'=>false,'drainage'=>false,'soil_ph'=>false,'salinity'=>false,'lime'=>false,'climate'=>false,'community_type'=>false,'associated_species'=>false,'soil_erosion'=>false,'area_sampled'=>false,'specimen_type'=>false,'date_flowering'=>false,'pollination_type'=>false,'pollination_agent'=>false,'fruit_type'=>false,'seed_collected_from'=>false,'date_harvesting'=>false,'life_span'=>false,'growth_form'=>false,'mother_health'=>false,'other_detail'=>false];
-    public static $rules=[
+    public static $linguistically = ['seed_advise' => false, 'transmittance' => false, 'land_form' => false, 'slope_action' => false, 'landscape' => false, 'soil_depth' => false, 'soil_texture' => false, 'drainage' => false, 'soil_ph' => false, 'salinity' => false, 'lime' => false, 'climate' => false, 'community_type' => false, 'associated_species' => false, 'soil_erosion' => false, 'area_sampled' => false, 'specimen_type' => false, 'date_flowering' => false, 'pollination_type' => false, 'pollination_agent' => false, 'fruit_type' => false, 'seed_collected_from' => false, 'date_harvesting' => false, 'life_span' => false, 'growth_form' => false, 'mother_health' => false, 'other_detail' => false];
+    public static $rules = [
         'herbarium_id' => 'required|exists:herbariums,id',
         'protection_id' => 'required|exists:protections,id',
         'department_id' => 'required|exists:departments,id',
@@ -277,7 +276,7 @@ class Seed extends BaseModel
      * @var array
      */
     protected $casts = [
-        'seed_advise'=>'json',
+        'seed_advise' => 'json',
         'transmittance' => 'json',
         'land_form' => 'json',
         'slope_action' => 'json',
@@ -395,8 +394,8 @@ class Seed extends BaseModel
      */
     public function transactions(): MorphToMany
     {
-        return $this->morphToMany(Transaction::class, 'transactionable','transaction_hubs')
+        return $this->morphToMany(Transaction::class, 'transactionable', 'transaction_hubs')
             ->withTimestamps()
-            ->withPivot(['type_id','sheets_no']);
+            ->withPivot(['type_id', 'sheets_no']);
     }
 }

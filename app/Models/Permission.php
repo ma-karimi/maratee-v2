@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @SWG\Definition(
@@ -107,18 +107,18 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Permission extends BaseModel
 {
-    public static $linguistically=['owner_crud'=>true,'same_level_crud'=>true,'upper_level_crud'=>true,'lower_level_crud'=>true];
+    public static $linguistically = ['owner_crud' => true, 'same_level_crud' => true, 'upper_level_crud' => true, 'lower_level_crud' => true];
 
-   protected $casts =
-       [
-         'owner_crud'=>'json',
-         'same_level_crud'=>'json',
-         'upper_level_crud'=>'json',
-         'lower_level_crud'=>'json',
-       ];
+    protected $casts =
+        [
+            'owner_crud' => 'json',
+            'same_level_crud' => 'json',
+            'upper_level_crud' => 'json',
+            'lower_level_crud' => 'json',
+        ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function department()
     {
@@ -126,7 +126,7 @@ class Permission extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function group()
     {
@@ -134,7 +134,7 @@ class Permission extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function userRequester()
     {
@@ -142,7 +142,7 @@ class Permission extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function userResponser()
     {
@@ -150,7 +150,7 @@ class Permission extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function role()
     {
@@ -158,7 +158,7 @@ class Permission extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user()
     {

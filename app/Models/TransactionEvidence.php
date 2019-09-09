@@ -47,12 +47,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class TransactionEvidence extends BaseModel
 {
-    protected $table='transaction_evidences';
     public static $rules = [
         'transaction_id' => 'required|exists:transactions,id',
         'src' => 'required|string',
         'src_description' => 'string',
     ];
+    protected $table = 'transaction_evidences';
 
     /**
      * @return BelongsTo

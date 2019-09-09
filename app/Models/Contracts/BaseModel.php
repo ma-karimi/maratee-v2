@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Jedrzej\Searchable\SearchableTrait;
 use ReflectionClass;
+use ReflectionException;
 
 
 class BaseModel extends Model
@@ -18,15 +19,13 @@ class BaseModel extends Model
     public static $rules = [];
     public static $jsons = [];
     public static $messages = [];
-    protected $guarded = ['id'];
-    public $searchable = ['*'];
-    public $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations'];
-
-
     /**
      * The attributes that have en,fa languages.
      **/
     public static $linguistically = [];
+    public $searchable = ['*'];
+    public $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations'];
+    protected $guarded = ['id'];
     /**
      * The attributes excluded from the model's JSON form.
      *
@@ -105,9 +104,45 @@ class BaseModel extends Model
         return static::$linguistically;
     }
 
-    public function getCastFields(): array
+    protected function setJsonSelectables(): void
     {
-        return $this->getCasts();
+        if (count(request()->keys())) {
+            foreach (request()->all() as $index => $item) {
+                if (is_array($item) && collect($this->getLinguistically())->has($index)) {
+                    $param = array_keys($item)[0];
+                    $value = array_values($item)[0];
+                    static::$jsons[$index . '->' . $param]['operator'] = Str::startsWith($value, '%') || Str::endsWith($value, '%') ? 'like' : '=';
+                    static::$jsons[$index . '->' . $param]['value'] = $value;
+                }
+            }
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public static function getJsons(): array
+    {
+        return static::$jsons;
+    }
+
+    public static function getConstants()
+    {
+        try {
+            $oClass = new ReflectionClass(static::class);
+            return array_filter($oClass->getConstants(), 'is_array');
+        } catch (ReflectionException $e) {
+            return $e->getMessage();
+        }
+
+    }
+
+    /**
+     * @return array
+     */
+    public static function getRules(): array
+    {
+        return static::$rules;
     }
 
     protected static function boot()
@@ -130,34 +165,9 @@ class BaseModel extends Model
 
     }
 
-    /**
-     * @return array
-     */
-    public static function getJsons(): array
+    public function getCastFields(): array
     {
-        return static::$jsons;
-    }
-
-    protected function setJsonSelectables(): void
-    {
-        if (count(request()->keys())) {
-            foreach (request()->all() as $index => $item) {
-                if (is_array($item) && collect($this->getLinguistically())->has($index)) {
-                    $param = array_keys($item)[0];
-                    $value = array_values($item)[0];
-                    static::$jsons[$index . '->' . $param]['operator'] = Str::startsWith($value, '%') || Str::endsWith($value, '%') ? 'like' : '=';
-                    static::$jsons[$index . '->' . $param]['value'] = $value;
-                }
-            }
-        }
-    }
-
-    /**
-     * @param array $fields
-     */
-    public function setNotSearchable(array $fields): void
-    {
-        $this->notSearchable = array_merge($this->notSearchable, array_keys($fields));
+        return $this->getCasts();
     }
 
     /**
@@ -168,22 +178,11 @@ class BaseModel extends Model
         return $this->notSearchable;
     }
 
-
-    public static function getConstants()
-    {
-        try {
-            $oClass = new ReflectionClass(static::class);
-            return array_filter($oClass->getConstants(), 'is_array');
-        } catch (\ReflectionException $e) {
-            return $e->getMessage();
-        }
-
-    }
     /**
-     * @return array
+     * @param array $fields
      */
-    public static function getRules(): array
+    public function setNotSearchable(array $fields): void
     {
-        return static::$rules;
+        $this->notSearchable = array_merge($this->notSearchable, array_keys($fields));
     }
 }

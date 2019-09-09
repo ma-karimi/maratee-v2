@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+
 /**
  * @SWG\Definition(
  *      definition="Soil",
@@ -19,13 +19,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          property="type",
  *          description="type",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -41,7 +41,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      )
  * )
  */
-
 class Soil extends BaseModel
 {
 //    public static $linguistically=['type'=>true,'description'=>false];

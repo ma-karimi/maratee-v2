@@ -31,14 +31,14 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          property="action_role",
  *          description="action_role",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="action_role_description",
  *          description="action_role_description",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -79,11 +79,10 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      )
  * )
  */
-
 class SeedHub extends BaseModel
 {
-    public static $linguistically=['action_role'=>false,'action_role_description'=>false];
-    public static $rules=[
+    public static $linguistically = ['action_role' => false, 'action_role_description' => false];
+    public static $rules = [
         'project_id' => 'exists:projects,id',
         'user_id' => 'required|exists:seeds,id',
         'seed_id' => 'required|integer',

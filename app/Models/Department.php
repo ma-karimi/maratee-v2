@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @SWG\Definition(
@@ -11,9 +12,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *            required={"name"},
  * 			@SWG\Property(property="id", type="integer"),
  * 			@SWG\Property(property="name", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="description", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
@@ -21,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Department extends BaseModel
 {
 
-    public static $linguistically=['name'=>true,'description'=>false];
+    public static $linguistically = ['name' => true, 'description' => false];
     /**
      * The database table used by the model.
      *
@@ -69,7 +70,7 @@ class Department extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function table()
     {
@@ -83,6 +84,7 @@ class Department extends BaseModel
     {
         return $this->hasMany(Permission::class);
     }
+
     /**
      * @return HasMany
      */

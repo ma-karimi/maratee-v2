@@ -3,9 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @SWG\Definition(
@@ -36,13 +34,14 @@ class BlockTrait extends BaseModel
      */
     public function block(): BelongsTo
     {
-        return $this->belongsTo(Block::class,'block_id');
+        return $this->belongsTo(Block::class, 'block_id');
     }
+
     /**
      * @return BelongsTo
      */
     public function soil(): BelongsTo
     {
-        return $this->belongsTo(Soil::class,'soil_id');
+        return $this->belongsTo(Soil::class, 'soil_id');
     }
 }

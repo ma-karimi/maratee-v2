@@ -14,10 +14,10 @@ trait PlantAccessor
     public function getScientificNameAttribute()
     {
         return [
-            'genus_name' => !empty($this->taxonomy->genus)?$this->taxonomy->genus->name:null,
-            'species_name' => !empty($this->taxonomy->species)?$this->taxonomy->species->name:null,
-            'subspecies_name' => !empty($this->taxonomy->subspecies)?$this->taxonomy->subspecies->name:null,
-            'variety_name' => !empty($this->taxonomy->variety)?$this->taxonomy->variety->name:null,
+            'genus_name' => !empty($this->taxonomy->genus) ? $this->taxonomy->genus->name : null,
+            'species_name' => !empty($this->taxonomy->species) ? $this->taxonomy->species->name : null,
+            'subspecies_name' => !empty($this->taxonomy->subspecies) ? $this->taxonomy->subspecies->name : null,
+            'variety_name' => !empty($this->taxonomy->variety) ? $this->taxonomy->variety->name : null,
         ];
     }
 }

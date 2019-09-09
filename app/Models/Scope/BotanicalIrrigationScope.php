@@ -9,9 +9,6 @@
 namespace App\Models\Scope;
 
 
-use App\Models\User;
-use function foo\func;
-
 trait BotanicalIrrigationScope
 {
     /**
@@ -19,8 +16,8 @@ trait BotanicalIrrigationScope
      * @param $season
      * @return mixed
      */
-    public function scopeOfSeason($query,$season)
+    public function scopeOfSeason($query, $season)
     {
-        return $query->where('season_feature','LIKE',"%{$season}%");
+        return $query->where('season_feature', 'LIKE', "%{$season}%");
     }
 }

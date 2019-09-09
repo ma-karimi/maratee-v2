@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Accessor\PlantAccessor;
 use App\Models\Contracts\BaseModel;
+use App\Models\Relations\ActionRelation;
+use App\Models\Relations\ArticleRelation;
 use App\Models\Scope\PlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -123,12 +125,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class Plant extends BaseModel
 {
-    use PlantScope, PlantAccessor;
+    use PlantScope, PlantAccessor, ActionRelation, ArticleRelation;
 
-    protected $appends = ['scientific_name'];
-
-    public static $linguistically = ['name' => true, 'description' => false,'habitat_description' => false, 'ecology_description' => false];
-
+    public static $linguistically = ['name' => true, 'description' => false, 'habitat_description' => false, 'ecology_description' => false];
     public static $rules = [
         'protection_id' => 'required|exists:protections,id',
         //taxonomy
@@ -149,6 +148,7 @@ class Plant extends BaseModel
         'general_substrate_moss_id' => 'exists:generals,id',
         'general_substrate_diatom_id' => 'exists:generals,id',
     ];
+    protected $appends = ['scientific_name'];
     /**
      * The database table used by the model.
      *
@@ -170,18 +170,6 @@ class Plant extends BaseModel
         'habitat_description' => 'json',
         'ecology_description' => 'json',
     ];
-
-
-    /**
-     * @return MorphToMany
-     */
-    public function articles(): MorphToMany
-    {
-        return $this->morphToMany(Article::class,
-            'articleable', 'article_hubs')
-            ->whereNull('article_hubs.deleted_at')
-            ->withTimestamps();
-    }
 
     /**
      * @return MorphToMany
@@ -224,8 +212,6 @@ class Plant extends BaseModel
             ->whereNull('seed_plants.deleted_at')
             ->withTimestamps();
     }
-
-
 
 
     /**
@@ -315,6 +301,7 @@ class Plant extends BaseModel
         return $this->belongsTo(LifeForm::class,
             'life_form_herbaceous_id');
     }
+
     public function generalLichen(): BelongsTo
     {
         return $this->belongsTo(General::class, 'general_substrate_lichen_id');
@@ -330,12 +317,6 @@ class Plant extends BaseModel
         return $this->belongsTo(General::class, 'general_substrate_diatom_id');
     }
 
-
-    public function actions(): MorphToMany
-    {
-        return $this->morphToMany(Action::class, 'actionable', 'action_hubs')->withTimestamps()
-            ->withPivot(['user_id','location_id', 'project_id', 'department_id', 'description', 'date']);
-    }
 }
 
 

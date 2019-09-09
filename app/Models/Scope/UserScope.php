@@ -9,8 +9,6 @@
 namespace App\Models\Scope;
 
 
-use App\Models\User;
-
 trait UserScope
 {
 
@@ -19,8 +17,8 @@ trait UserScope
      * @param $email
      * @return mixed
      */
-    public function scopeOfEmail($query,$email)
+    public function scopeOfEmail($query, $email)
     {
-        return $query->where('email',$email);
+        return $query->where('email', $email);
     }
 }

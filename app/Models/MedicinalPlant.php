@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Accessor\MedicinalPlantAccessor;
 use App\Models\Contracts\BaseModel;
+use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -206,7 +207,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class MedicinalPlant extends BaseModel
 {
-    use MedicinalPlantAccessor;
+    use MedicinalPlantAccessor, ArticleRelation;
 
     public const TRADITIONAL_IRANIAN_MEDICINE = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
     public const NATURAL_DRUG = [0 => 'unknown', 1 => 'human medicines', 2 => 'animal drugs'];
@@ -295,19 +296,6 @@ class MedicinalPlant extends BaseModel
     {
         return $this->hasMany(MedicinalPlantConstituent::class)->latest();
     }
-
-
-    /**
-     * @return MorphToMany
-     */
-    public function articles(): MorphToMany
-    {
-        return $this->morphToMany(Article::class,
-            'articleable', 'article_hubs')
-            ->whereNull('location_hubs.deleted_at')
-            ->withTimestamps();
-    }
-
 
     /**
      * @return MorphToMany
@@ -447,8 +435,8 @@ class MedicinalPlant extends BaseModel
      */
     public function transactions(): MorphToMany
     {
-        return $this->morphToMany(Transaction::class, 'transactionable','transaction_hubs')
+        return $this->morphToMany(Transaction::class, 'transactionable', 'transaction_hubs')
             ->withTimestamps()
-            ->withPivot(['type_id','sheets_no']);
+            ->withPivot(['type_id', 'sheets_no']);
     }
 }

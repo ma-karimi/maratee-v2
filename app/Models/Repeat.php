@@ -57,10 +57,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      )
  * )
  */
-
 class Repeat extends BaseModel
 {
-    public static $rules=[
+    public static $rules = [
         'germination_id' => 'required|exists:germinations,id',
     ];
     /**

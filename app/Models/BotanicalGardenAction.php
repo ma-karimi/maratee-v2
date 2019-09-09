@@ -19,15 +19,15 @@ use App\Models\Contracts\BaseModel;
  * 			@SWG\Property(property="from_garden_id", type="string"),
  * 			@SWG\Property(property="to_garden_id", type="string"),
  * 			@SWG\Property(property="initial_place_type", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="destination_place_type", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="initial_place_condition", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="destination_place_condition", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="treatment", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
@@ -35,7 +35,7 @@ use App\Models\Contracts\BaseModel;
 class BotanicalGardenAction extends BaseModel
 {
 
-    public static $linguistically=['initial_place_type'=>false,'destination_place_type'=>false,'initial_place_condition'=>false,'destination_place_condition'=>false,'treatment'=>false];
+    public static $linguistically = ['initial_place_type' => false, 'destination_place_type' => false, 'initial_place_condition' => false, 'destination_place_condition' => false, 'treatment' => false];
     public static $rules = [
         'botanical_id' => 'required|exists:botanicals,id',
         'planting_action_id' => 'required|exists:planting_actions,id',

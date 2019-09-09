@@ -3,9 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Krlove\EloquentModelGenerator\Model\HasMany;
 
 /**
  * @SWG\Definition(
@@ -20,18 +18,17 @@ use Krlove\EloquentModelGenerator\Model\HasMany;
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
-
 class Component extends BaseModel
 {
 
-    public static $linguistically=['name'=>true, 'description'=>true];
+    public static $linguistically = ['name' => true, 'description' => true];
 
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
-    protected $casts = ['name' => 'json','description' => 'json'];
+    protected $casts = ['name' => 'json', 'description' => 'json'];
 
 
     /**

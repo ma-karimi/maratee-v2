@@ -136,7 +136,7 @@ use Laravel\Passport\HasApiTokens;
 class User extends Authenticatable
 {
     use Notifiable;
-    public static $linguistically=['title'=>true,'education'=>false,'degree'=>false,'nationality'=>false,'first_name'=>true,'last_name'=>true,'nickname'=>false];
+    public static $linguistically = ['title' => true, 'education' => false, 'degree' => false, 'nationality' => false, 'first_name' => true, 'last_name' => true, 'nickname' => false];
     public static $rules = [
         'national_id' => 'string',
         'passport_no' => 'string',
@@ -150,14 +150,12 @@ class User extends Authenticatable
         'first_name' => 'required',
         'last_name' => 'required',
     ];
-
-    protected $hidden=['password'];
-
-    use HasApiTokens, UserScope, UserAccessor, Notifiable , SearchableTrait;
     public static $messages = [];
+
+    use HasApiTokens, UserScope, UserAccessor, Notifiable, SearchableTrait;
     public static $searchable = ['*'];
     public $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations'];
-
+    protected $hidden = ['password'];
     /**
      * The database table used by the model.
      *
@@ -165,7 +163,7 @@ class User extends Authenticatable
      */
     protected $table = 'users';
 
-    protected $guarded=['id'];
+    protected $guarded = ['id'];
 
 
     /**
@@ -203,6 +201,53 @@ class User extends Authenticatable
         $this->validateJsonRequestHandler($languages);
         $this->setNotSearchable($this->getLinguistically());
     }
+
+    /**
+     * @param $languages
+     * @return mixed
+     * @throws Exception
+     */
+    private function exceptionLanguageHandler($languages)
+    {
+
+        foreach (request()->all() as $field => $value) {
+            if (is_array($value) &&
+                array_key_exists($field, static::$linguistically) &&
+                count(array_intersect($languages, array_keys($value))) === 0) {
+                throw new Exception('Language doesnt supported. [' . implode(',', $languages) . ']');
+            }
+        }
+    }
+
+    /**
+     * @param $languages
+     */
+    private function validateJsonRequestHandler($languages): void
+    {
+        foreach ($this->getLinguistically() as $key => $value) {
+            if ($value) {
+                static::$rules[$key] = 'required|array';
+            } else {
+                static::$rules[$key] = 'sometimes|required|array';
+            }
+            foreach ($languages as $language) {
+                if (is_array(request()->get($key)) && array_key_exists($language, request()->$key)) {
+                    static::$rules[$key . '.' . $language] = 'sometimes|required|min:3';
+                    static::$messages[$key . '.' . $language . '.' . 'required'] = ' الزامی است' . $key . 'فیلد';
+                    static::$messages[$key . '.' . $language . '.' . 'min'] = 'حداقل ۳ کاراکتر الزامی است';
+                }
+            }
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getLinguistically(): array
+    {
+        return static::$linguistically;
+    }
+
     /**
      * @param array $fields
      */
@@ -210,11 +255,12 @@ class User extends Authenticatable
     {
         $this->notSearchable = array_merge($this->notSearchable, array_keys($fields));
     }
+
     /**
      * Find the user instance for the given username.
      *
      * @param string $username
-     * @return \App\Models\User
+     * @return User
      */
     public function findForPassport($username)
     {
@@ -248,11 +294,10 @@ class User extends Authenticatable
     public function articles(): MorphToMany
     {
         return $this->morphToMany(Article::class,
-            'articleable','article_hubs')
+            'articleable', 'article_hubs')
             ->whereNull('location_hubs.deleted_at')
             ->withTimestamps();
     }
-
 
     public function userHubs()
     {
@@ -305,53 +350,6 @@ class User extends Authenticatable
     public function permission()
     {
         return $this->hasMany(User::class)->latest();
-    }
-
-
-    /**
-     * @param $languages
-     * @return mixed
-     * @throws Exception
-     */
-    private function exceptionLanguageHandler($languages)
-    {
-
-        foreach (request()->all() as $field => $value) {
-            if (is_array($value) &&
-                array_key_exists($field, static::$linguistically) &&
-                count(array_intersect($languages, array_keys($value))) === 0) {
-                throw new Exception('Language doesnt supported. [' . implode(',', $languages) . ']');
-            }
-        }
-    }
-
-    /**
-     * @param $languages
-     */
-    private function validateJsonRequestHandler($languages): void
-    {
-        foreach ($this->getLinguistically() as $key => $value) {
-            if ($value) {
-                static::$rules[$key] = 'required|array';
-            } else {
-                static::$rules[$key] = 'sometimes|required|array';
-            }
-            foreach ($languages as $language) {
-                if (is_array(request()->get($key)) && array_key_exists($language, request()->$key)) {
-                    static::$rules[$key . '.' . $language] = 'sometimes|required|min:3';
-                    static::$messages[$key . '.' . $language . '.' . 'required'] = ' الزامی است' . $key . 'فیلد';
-                    static::$messages[$key . '.' . $language . '.' . 'min'] = 'حداقل ۳ کاراکتر الزامی است';
-                }
-            }
-        }
-    }
-
-    /**
-     * @return array
-     */
-    public function getLinguistically(): array
-    {
-        return static::$linguistically;
     }
 
     /**

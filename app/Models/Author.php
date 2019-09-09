@@ -18,15 +18,15 @@ use App\Models\Contracts\BaseModel;
 class Author extends BaseModel
 {
     public static $linguistically = ['name' => true];
+    public static $rules = [
+        'user_id' => 'integer|exists:users,id',
+    ];
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'authors';
-    public static $rules = [
-        'user_id'=>'integer|exists:users,id',
-    ];
     /**
      * The attributes that should be casted to native types.
      *
@@ -35,13 +35,12 @@ class Author extends BaseModel
     protected $casts = ['name' => 'json'];
 
 
-
     /**
      * Get all of the posts that are assigned this tag.
      */
     public function plants()
     {
-        return $this->morphedByMany(Plant::class, 'authorable','author_hubs')
+        return $this->morphedByMany(Plant::class, 'authorable', 'author_hubs')
             ->whereNull('author_hubs.deleted_at')
             ->withTimestamps();
     }
@@ -51,11 +50,10 @@ class Author extends BaseModel
      */
     public function generals()
     {
-        return $this->morphedByMany(General::class, 'authorable','author_hubs')
+        return $this->morphedByMany(General::class, 'authorable', 'author_hubs')
             ->whereNull('author_hubs.deleted_at')
             ->withTimestamps();
     }
-
 
 
     /**

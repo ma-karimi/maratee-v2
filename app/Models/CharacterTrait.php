@@ -73,10 +73,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      )
  * )
  */
-
 class CharacterTrait extends BaseModel
 {
-    public static $rules=[
+    public static $rules = [
         'character_id' => 'required|exists:characters,id',
         'block_id' => 'required|exists:blocks,id',
     ];
@@ -86,14 +85,15 @@ class CharacterTrait extends BaseModel
      */
     public function character()
     {
-        return $this->belongsTo(Character::class,'character_id');
+        return $this->belongsTo(Character::class, 'character_id');
     }
+
     /**
      * @return BelongsTo
      */
     public function block()
     {
-        return $this->belongsTo(Block::class,'block_id');
+        return $this->belongsTo(Block::class, 'block_id');
     }
 
 }

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @SWG\Definition(
@@ -39,7 +39,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Role extends BaseModel
 {
-    public static $linguistically=['name'=>true,'description'=>true,'hierarchy'=>true];
+    public static $linguistically = ['name' => true, 'description' => true, 'hierarchy' => true];
 
     protected $casts =
         [
@@ -49,7 +49,7 @@ class Role extends BaseModel
         ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function permissions()
     {

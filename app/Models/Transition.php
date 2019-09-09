@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-use Carbon\CarbonImmutable;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @SWG\Definition(
@@ -125,7 +124,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Transition extends BaseModel
 {
-    public static $linguistically=['previous_value'=>true,'next_value'=>true,'description'=>false];
+    public static $linguistically = ['previous_value' => true, 'next_value' => true, 'description' => false];
     /**
      * The "type" of the auto-incrementing ID.
      *
@@ -145,7 +144,7 @@ class Transition extends BaseModel
         ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function userChanger()
     {
@@ -153,7 +152,7 @@ class Transition extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function userCreator()
     {
@@ -161,7 +160,7 @@ class Transition extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function userRequester()
     {
@@ -169,7 +168,7 @@ class Transition extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function userResponser()
     {
@@ -177,10 +176,10 @@ class Transition extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function table()
     {
-        return $this->belongsTo('App\Models\Table','tables_id');
+        return $this->belongsTo('App\Models\Table', 'tables_id');
     }
 }

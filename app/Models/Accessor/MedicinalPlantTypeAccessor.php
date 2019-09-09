@@ -15,6 +15,6 @@ trait MedicinalPlantTypeAccessor
 {
     public function getTypeIdAttribute($value)
     {
-        return Arr::get(self::TYPE,$value);
+        return Arr::get(self::TYPE, $value);
     }
 }

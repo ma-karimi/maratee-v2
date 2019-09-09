@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Accessor\MedicinalPartAccessor;
 use App\Models\Contracts\BaseModel;
-use App\Models\Mutator\MedicinalPartMutator;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
