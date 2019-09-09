@@ -19,7 +19,7 @@ class CreateActionsTable extends Migration {
 جمع واری
 تحقیق (محقق)
 شناسایی
-انتقال
+انتقالa
 ');
 			$table->json('description')->nullable();
 

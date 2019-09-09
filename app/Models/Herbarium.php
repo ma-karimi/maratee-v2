@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Models\Accessor\HerbariumAccessor;
 use App\Models\Contracts\BaseModel;
 use App\Models\Scope\HerbariumScope;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -14,70 +13,59 @@ use Kalnoy\Nestedset\NodeTrait;
 /**
  * @SWG\Definition(
  *      definition="Herbarium",
- *      required={"general_habitat_id","general_phytogeography_id","life_forms","organization_id", "plant_id"},
+ *      required={"organization_id", "plant_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="parent_id",
  *          description="parent_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="number",
  *          description="number",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="general_origin_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="general_phytogeography_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="protection_id",
  *          description="protection_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="organization_id",
  *          description="organization_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="sheets_no",
  *          description="sheets_no",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="samples_no",
  *          description="samples_no",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="tip_qt",
  *          description="tip_qt",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="physical_tip_qt",
  *          description="physical_tip_qt",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="tip_type",
@@ -121,22 +109,18 @@ use Kalnoy\Nestedset\NodeTrait;
  *      @SWG\Property(
  *          property="plant_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="general_substrate_lichen_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="general_substrate_diatom_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="general_substrate_moss_id",
  *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -168,6 +152,7 @@ class Herbarium extends BaseModel
         'physical_tip_qt' => 'integer',
 //        'tip_type' => 'string',
         'herbarium_tip_location' => 'integer',
+        'growth_rate' => 'in:0,1,2,3,4,5,6|integer',
         'type_description' => 'string',
 //        'general_type_id' => 'exists:generals,id',
 
@@ -216,19 +201,6 @@ class Herbarium extends BaseModel
             ->when($parameter, function ($query, $parameter) {
                 return $query->ofAction($parameter);
             })->latest();
-    }
-
-    /**
-     * @return MorphToMany
-     */
-    public function action(): MorphToMany
-    {
-        return $this->morphToMany(Action::class, 'actionable', 'action_hubs');
-    }
-
-    public function actions(): MorphToMany
-    {
-        return $this->morphToMany(Action::class, 'actionable', 'action_hubs');
     }
 
     /**
@@ -298,8 +270,6 @@ class Herbarium extends BaseModel
     }
 
 
-
-
     public function plant()
     {
         return $this->belongsTo(Plant::class);
@@ -311,14 +281,13 @@ class Herbarium extends BaseModel
     }
 
 
-
     /**
      * @return MorphToMany
      */
     public function transactions(): MorphToMany
     {
-        return $this->morphToMany(Transaction::class, 'transactionable','transaction_hubs')
+        return $this->morphToMany(Transaction::class, 'transactionable', 'transaction_hubs')
             ->withTimestamps()
-            ->withPivot(['type_id','sheets_no']);
+            ->withPivot(['type_id', 'sheets_no']);
     }
 }

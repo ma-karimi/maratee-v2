@@ -20,14 +20,14 @@ use App\Models\Scope\ActionScope;
  *          property="name",
  *          description="name",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -63,8 +63,18 @@ class Action extends BaseModel
      */
     protected $casts = ['name' => 'json', 'description' => 'json'];
 
-    public function actionHubs()
+    public function plants()
     {
-        return $this->morphedByMany(ActionHub::class, 'actionable');
+        return $this->morphedByMany(Plant::class, 'actionable', 'action_hubs')->withTimestamps();
+    }
+
+    public function cryoBanks()
+    {
+        return $this->morphedByMany(CryoBank::class, 'actionable', 'action_hubs')->withTimestamps();
+    }
+
+    public function paleontologies()
+    {
+        return $this->morphedByMany(Paleontology::class, 'actionable', 'action_hubs')->withTimestamps();
     }
 }

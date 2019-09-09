@@ -18,7 +18,7 @@ class CreateActionHubsTable extends Migration {
 
 			$table->unsignedBigInteger('user_id');
 			$table->unsignedBigInteger('action_id');
-            //herbarium, cryo_bank, paleontology
+            //plant, cryo_bank, paleontology
             $table->morphs('actionable');
 
             $table->date('date')->nullable();

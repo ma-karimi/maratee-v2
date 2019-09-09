@@ -102,7 +102,7 @@ class CryoBank extends BaseModel
      */
     public function articles(): MorphToMany
     {
-        return $this->morphToMany(ArticleHub::class, 'articleable')->withTimestamps();
+        return $this->morphToMany(Article::class, 'articleable', 'article_hubs')->withTimestamps();
     }
 
 
@@ -111,7 +111,9 @@ class CryoBank extends BaseModel
      */
     public function actions(): MorphToMany
     {
-        return $this->morphToMany(ActionHub::class, 'actionable')->withTimestamps();
+        return $this->morphToMany(Action::class, 'actionable', 'action_hubs')
+            ->withTimestamps()
+            ->withPivot(['user_id','location_id', 'project_id', 'department_id', 'description', 'date']);
     }
 
     /**
@@ -128,6 +130,6 @@ class CryoBank extends BaseModel
      */
     public function treatments(): MorphToMany
     {
-        return $this->morphToMany(TreatmentHub::class, 'treamentable');
+        return $this->morphToMany(Treatment::class, 'treamentable', 'treatment_hubs')->withTimestamps();
     }
 }

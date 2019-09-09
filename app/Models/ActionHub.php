@@ -83,11 +83,11 @@ class ActionHub extends BaseModel
 {
     use ActionHubScope;
     public static $rules = [
-        'action_id' => 'required|exists:actions,id',
+//        'action_id' => 'required|exists:actions,id',
         'department_id' => 'exists:departments,id',
-        'herbarium_id' => 'exists:herbariums,id',
         'project_id' => 'exists:projects,id',
         'location_id' => 'exists:locations,id',
+        'user_id' => 'required|exists:users,id',
         'date' => 'date',
     ];
     public static $linguistically = ['description' => false];

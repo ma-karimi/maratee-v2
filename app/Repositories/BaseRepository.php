@@ -259,8 +259,7 @@ abstract class BaseRepository
 
     public function createHub($class_id, $related_model, array $ids, array $additional_data = null)
     {
-        $record = $this->model->find($class_id);
-        abort_if(empty($record), JsonResponse::HTTP_NOT_FOUND, 'record not found');
+        $record = $this->findException($class_id);
         [$related_model_table, $related_model_class, $related_key, $foreign_key] = $this->getRelatedModelAndClass($related_model, $record);
 
         $assigned_id = $record->$related_model->pluck('id')->toArray();
@@ -269,16 +268,7 @@ abstract class BaseRepository
         $different_assigned = array_diff($assigned_id, $ids);
 
         //attach and update pivot fields
-        if (!empty($additional_data)) {
-            $exists_related_ids = $related_model_class::whereIn($related_key, $ids)->pluck('id')->toArray();
-            if (count($exists_related_ids)) {
-                $related_model_class::whereIn('id', $exists_related_ids)->update($additional_data);
-            }
-            $record->$related_model()->attach($different_ids, $additional_data);
-        } //attach only ids
-        else {
-            $record->$related_model()->attach($different_ids);
-        }
+        $this->attachAndUpdateFields($related_model, $ids, $additional_data, $related_model_class, $related_key, $record, $different_ids);
 
         $related_model_class::where($foreign_key, $class_id)->whereIn($related_key, $different_assigned)->delete();
 
@@ -287,8 +277,7 @@ abstract class BaseRepository
 
     public function deleteHub($class_id, $related_model, array $ids)
     {
-        $record = $this->model->find($class_id);
-        abort_if(empty($record), JsonResponse::HTTP_NOT_FOUND, 'record not found');
+        $record = $this->findException($class_id);
         [$related_model_table, $related_model_class, $related_key, $foreign_key] = $this->getRelatedModelAndClass($related_model, $record);
         $hub_collection = DB::table($related_model_table)->whereIn($related_key, $ids)
             ->where($foreign_key, $class_id)->get();
@@ -313,5 +302,40 @@ abstract class BaseRepository
     {
         $model_class = resolve('App\\Models\\' . Str::studly(Str::singular($class)));
         return $model_class::getConstants();
+    }
+
+    /**
+     * @param $related_model
+     * @param array $ids
+     * @param array $additional_data
+     * @param $related_model_class
+     * @param $related_key
+     * @param $record
+     * @param array $different_ids
+     */
+    private function attachAndUpdateFields($related_model, array $ids, array $additional_data, $related_model_class, $related_key, $record, array $different_ids): void
+    {
+        //attach and update pivot fields
+        if (!empty($additional_data)) {
+            $exists_related_ids = $related_model_class::whereIn($related_key, $ids)->pluck('id')->toArray();
+            if (count($exists_related_ids)) {
+                $related_model_class::whereIn('id', $exists_related_ids)->update($additional_data);
+            }
+            $record->$related_model()->attach($different_ids, $additional_data);
+        } //attach only ids
+        else {
+            $record->$related_model()->attach($different_ids);
+        }
+    }
+
+    /**
+     * @param $class_id
+     * @return mixed
+     */
+    private function findException($class_id)
+    {
+        $record = $this->model->find($class_id);
+        abort_if(empty($record), JsonResponse::HTTP_NOT_FOUND, 'record not found');
+        return $record;
     }
 }

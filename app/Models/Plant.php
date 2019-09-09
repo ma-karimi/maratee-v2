@@ -329,6 +329,13 @@ class Plant extends BaseModel
     {
         return $this->belongsTo(General::class, 'general_substrate_diatom_id');
     }
+
+
+    public function actions(): MorphToMany
+    {
+        return $this->morphToMany(Action::class, 'actionable', 'action_hubs')->withTimestamps()
+            ->withPivot(['user_id','location_id', 'project_id', 'department_id', 'description', 'date']);
+    }
 }
 
 

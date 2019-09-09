@@ -313,7 +313,9 @@ class Paleontology extends BaseModel
      */
     public function actions(): MorphToMany
     {
-        return $this->morphToMany(Action::class, 'actionable');
+        return $this->morphToMany(Action::class, 'actionable', 'action_hubs')
+            ->withTimestamps()
+            ->withPivot(['user_id','location_id', 'project_id', 'department_id', 'description', 'date']);
     }
     /**
      * @return MorphToMany
