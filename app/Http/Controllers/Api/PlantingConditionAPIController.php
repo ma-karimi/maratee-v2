@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreatePlantingActionAPIRequest;
-use App\Http\Requests\Api\UpdatePlantingActionAPIRequest;
-use App\Models\PlantingAction;
-use App\Repositories\PlantingActionRepository;
+use App\Http\Requests\Api\CreatePlantingConditionAPIRequest;
+use App\Http\Requests\Api\UpdatePlantingConditionAPIRequest;
+use App\Models\PlantingCondition;
+use App\Repositories\PlantingConditionRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class PlantingActionController
+ * Class PlantingConditionController
  * @package App\Http\Controllers\Api
  */
 
-class PlantingActionAPIController extends AppBaseController
+class PlantingConditionAPIController extends AppBaseController
 {
-    /** @var  PlantingActionRepository */
-    private $plantingActionRepository;
+    /** @var  PlantingConditionRepository */
+    private $plantingConditionRepository;
 
-    public function __construct(PlantingActionRepository $plantingActionRepo)
+    public function __construct(PlantingConditionRepository $plantingConditionRepo)
     {
-        $this->plantingActionRepository = $plantingActionRepo;
+        $this->plantingConditionRepository = $plantingConditionRepo;
     }
 
     /**
@@ -30,10 +30,10 @@ class PlantingActionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/planting_actions",
-     *      summary="Get a listing of the PlantingActions.",
-     *      tags={"PlantingAction"},
-     *      description="Get all PlantingActions",
+     *      path="/plantingConditions",
+     *      summary="Get a listing of the PlantingConditions.",
+     *      tags={"PlantingCondition"},
+     *      description="Get all PlantingConditions",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -47,7 +47,7 @@ class PlantingActionAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/PlantingAction")
+     *                  @SWG\Items(ref="#/definitions/PlantingCondition")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -60,38 +60,38 @@ class PlantingActionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $plantingActions = $this->plantingActionRepository->paginate(
+        $plantingConditions = $this->plantingConditionRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
             $request->get('relations')
         );
 
-        return $this->sendResponse($plantingActions->toArray(), 'Planting Actions retrieved successfully');
+        return $this->sendResponse($plantingConditions->toArray(), 'Planting Conditions retrieved successfully');
     }
 
     /**
-     * @param CreatePlantingActionAPIRequest $request
+     * @param CreatePlantingConditionAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/planting_actions",
-     *      summary="Store a newly created PlantingAction in storage",
-     *      tags={"PlantingAction"},
-     *      description="Store PlantingAction",
+     *      path="/plantingConditions",
+     *      summary="Store a newly created PlantingCondition in storage",
+     *      tags={"PlantingCondition"},
+     *      description="Store PlantingCondition",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="name",
      *          in="body",
-     *          description="PlantingAction that should be stored",
+     *          description="PlantingCondition that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/PlantingAction")
+     *          @SWG\Schema(ref="#/definitions/PlantingCondition")
      *      ),
      *      @SWG\Parameter(
      *          name="description",
      *          in="body",
-     *          description="PlantingAction that should be stored",
+     *          description="PlantingCondition that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/PlantingAction")
+     *          @SWG\Schema(ref="#/definitions/PlantingCondition")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -104,7 +104,7 @@ class PlantingActionAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/PlantingAction"
+     *                  ref="#/definitions/PlantingCondition"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -114,13 +114,13 @@ class PlantingActionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreatePlantingActionAPIRequest $request)
+    public function store(CreatePlantingConditionAPIRequest $request)
     {
         $input = $request->all();
 
-        $plantingAction = $this->plantingActionRepository->create($input);
+        $plantingCondition = $this->plantingConditionRepository->create($input);
 
-        return $this->sendResponse($plantingAction->toArray(), 'Planting Action saved successfully');
+        return $this->sendResponse($plantingCondition->toArray(), 'Planting Condition saved successfully');
     }
 
     /**
@@ -128,14 +128,14 @@ class PlantingActionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/plantingActions/{id}",
-     *      summary="Display the specified PlantingAction",
-     *      tags={"PlantingAction"},
-     *      description="Get PlantingAction",
+     *      path="/plantingConditions/{id}",
+     *      summary="Display the specified PlantingCondition",
+     *      tags={"PlantingCondition"},
+     *      description="Get PlantingCondition",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of PlantingAction",
+     *          description="id of PlantingCondition",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -151,7 +151,7 @@ class PlantingActionAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/PlantingAction"
+     *                  ref="#/definitions/PlantingCondition"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -163,30 +163,30 @@ class PlantingActionAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var PlantingAction $plantingAction */
-        $plantingAction = $this->plantingActionRepository->find($id, \request()->get('relations'));
+        /** @var PlantingCondition $plantingCondition */
+        $plantingCondition = $this->plantingConditionRepository->find($id);
 
-        if (empty($plantingAction)) {
-            return $this->sendError('Planting Action not found');
+        if (empty($plantingCondition)) {
+            return $this->sendError('Planting Condition not found');
         }
 
-        return $this->sendResponse($plantingAction->toArray(), 'Planting Action retrieved successfully');
+        return $this->sendResponse($plantingCondition->toArray(), 'Planting Condition retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdatePlantingActionAPIRequest $request
+     * @param UpdatePlantingConditionAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/plantingActions/{id}",
-     *      summary="Update the specified PlantingAction in storage",
-     *      tags={"PlantingAction"},
-     *      description="Update PlantingAction",
+     *      path="/plantingConditions/{id}",
+     *      summary="Update the specified PlantingCondition in storage",
+     *      tags={"PlantingCondition"},
+     *      description="Update PlantingCondition",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of PlantingAction",
+     *          description="id of PlantingCondition",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -194,16 +194,16 @@ class PlantingActionAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="name",
      *          in="body",
-     *          description="PlantingAction that should be stored",
+     *          description="PlantingCondition that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/PlantingAction")
+     *          @SWG\Schema(ref="#/definitions/PlantingCondition")
      *      ),
      *      @SWG\Parameter(
      *          name="description",
      *          in="body",
-     *          description="PlantingAction that should be stored",
+     *          description="PlantingCondition that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/PlantingAction")
+     *          @SWG\Schema(ref="#/definitions/PlantingCondition")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -216,7 +216,7 @@ class PlantingActionAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/PlantingAction"
+     *                  ref="#/definitions/PlantingCondition"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -226,36 +226,35 @@ class PlantingActionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdatePlantingActionAPIRequest $request)
+    public function update($id, UpdatePlantingConditionAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var PlantingAction $plantingAction */
-        $plantingAction = $this->plantingActionRepository->find($id, \request()->get('relations'));
+        /** @var PlantingCondition $plantingCondition */
+        $plantingCondition = $this->plantingConditionRepository->find($id);
 
-        if (empty($plantingAction)) {
-            return $this->sendError('Planting Action not found');
+        if (empty($plantingCondition)) {
+            return $this->sendError('Planting Condition not found');
         }
 
-        $plantingAction = $this->plantingActionRepository->update($input, $id);
+        $plantingCondition = $this->plantingConditionRepository->update($input, $id);
 
-        return $this->sendResponse($plantingAction->toArray(), 'PlantingAction updated successfully');
+        return $this->sendResponse($plantingCondition->toArray(), 'PlantingCondition updated successfully');
     }
 
     /**
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
      * @SWG\Delete(
-     *      path="/plantingActions/{id}",
-     *      summary="Remove the specified PlantingAction from storage",
-     *      tags={"PlantingAction"},
-     *      description="Delete PlantingAction",
+     *      path="/plantingConditions/{id}",
+     *      summary="Remove the specified PlantingCondition from storage",
+     *      tags={"PlantingCondition"},
+     *      description="Delete PlantingCondition",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of PlantingAction",
+     *          description="id of PlantingCondition",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -280,18 +279,19 @@ class PlantingActionAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function destroy($id)
     {
-        /** @var PlantingAction $plantingAction */
-        $plantingAction = $this->plantingActionRepository->find($id, \request()->get('relations'));
+        /** @var PlantingCondition $plantingCondition */
+        $plantingCondition = $this->plantingConditionRepository->find($id);
 
-        if (empty($plantingAction)) {
-            return $this->sendError('Planting Action not found');
+        if (empty($plantingCondition)) {
+            return $this->sendError('Planting Condition not found');
         }
 
-        $plantingAction->delete();
+        $plantingCondition->delete();
 
-        return $this->sendResponse($id, 'Planting Action deleted successfully');
+        return $this->sendResponse($id, 'Planting Condition deleted successfully');
     }
 }

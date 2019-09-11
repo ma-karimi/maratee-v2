@@ -211,4 +211,15 @@ class Botanical extends BaseModel
             'treatment_hubs')->whereNull('treatment_hubs.deleted_at')
             ->withTimestamps();
     }
+
+    public function plantingCondition()
+    {
+        return $this->belongsToMany(
+            PlantingCondition::class,
+            'botanical_planting_conditions',
+            'botanical_id',
+            'planting_condition_id'
+        )->whereNull('botanical_planting_conditions.deleted_at')
+            ->withTimestamps();
+    }
 }

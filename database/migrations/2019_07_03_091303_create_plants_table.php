@@ -37,10 +37,10 @@ class CreatePlantsTable extends Migration {
             $table->timeStampsTz();
             $table->softDeletesTz();
 		});
-        CustomBlueprint::generatedBigIntegerVirtual('plants','life_form_cycle_id','life_forms','cycle_id',true);
-        CustomBlueprint::generatedBigIntegerVirtual('plants','life_form_wooden_id','life_forms','wooden_id',true);
-        CustomBlueprint::generatedBigIntegerVirtual('plants','life_form_leaf_id','life_forms','leaf_id',true);
-        CustomBlueprint::generatedBigIntegerVirtual('plants','life_form_herbaceous_id','life_forms','herbaceous_id',true);
+        CustomBlueprint::generatedVirtual('plants','life_form_cycle_id','life_forms','cycle_id',true);
+        CustomBlueprint::generatedVirtual('plants','life_form_wooden_id','life_forms','wooden_id',true);
+        CustomBlueprint::generatedVirtual('plants','life_form_leaf_id','life_forms','leaf_id',true);
+        CustomBlueprint::generatedVirtual('plants','life_form_herbaceous_id','life_forms','herbaceous_id',true);
     }
 
 

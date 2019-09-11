@@ -56,6 +56,7 @@ class SoilAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -79,9 +80,18 @@ class SoilAPIController extends AppBaseController
      *      description="Store Soil",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="type",
+     *          name="ph_type_id",
      *          in="body",
-     *          description="Soil that should be stored",
+     *          description="1 => 'neutral', 2 => 'alkaline', 3 => 'acid', 4 => 'indifferent'",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Soil")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="features",
+     *          in="body",
+     *          description="fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,
+     *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,
+     *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Soil")
      *      ),
@@ -205,9 +215,18 @@ class SoilAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="type",
+     *          name="ph_type_id",
      *          in="body",
-     *          description="Soil that should be stored",
+     *          description="1 => 'neutral', 2 => 'alkaline', 3 => 'acid', 4 => 'indifferent'",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Soil")
+     *      ),
+     *     @SWG\Parameter(
+     *          name="features",
+     *          in="body",
+     *          description="fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,
+     *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,
+     *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Soil")
      *      ),

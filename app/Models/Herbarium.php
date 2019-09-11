@@ -138,7 +138,7 @@ use Kalnoy\Nestedset\NodeTrait;
  */
 class Herbarium extends BaseModel
 {
-    use HerbariumScope, NodeTrait, HerbariumAccessor;
+    use HerbariumScope, NodeTrait;
 
 
     public static $linguistically = ['flowering' => false];

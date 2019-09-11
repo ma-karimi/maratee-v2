@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\SoilAccessor;
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @SWG\Definition(
  *      definition="Soil",
- *      required={"value","soil_id"},
+ *      required={"ph_type_id","features"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -16,8 +16,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="type",
- *          description="type",
+ *          property="ph_type_id",
+ *          description="1 => 'neutral', 2 => 'alkaline', 3 => 'acid', 4 => 'indifferent'",
+ *          type="array",
+ *     @SWG\Items(type="string"),
+ *      ),
+ *      @SWG\Property(
+ *          property="features",
+ *          description="fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,
+ *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,
+ *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
  *          type="array",
  *     @SWG\Items(type="string"),
  *      ),
@@ -43,13 +51,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Soil extends BaseModel
 {
-//    public static $linguistically=['type'=>true,'description'=>false];
+    use SoilAccessor;
+    public static $linguistically = ['description' => false];
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'soils';
+    public const PH = [1 => 'neutral', 2 => 'alkaline', 3 => 'acid', 4 => 'indifferent'];
+    public static $rules = [
+        'ph_type_id' => 'required',
+        'features' => 'required',
+    ];
 
     /**
      * The attributes that should be casted to native types.
@@ -57,29 +71,8 @@ class Soil extends BaseModel
      * @var array
      */
     protected $casts = [
-        'type' => 'json',
+        'features' => 'json',
         'description' => 'json'
     ];
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['created_at', 'deleted_at', 'updated_at'];
-
-
-    public function botanicalGardenActions()
-    {
-        return $this->hasMany(BotanicalOperation::class, ['from_soil_id', 'to_soil_id'])->latest();
-
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function medicinalPlants()
-    {
-        return $this->hasMany(MedicinalPlant::class)->latest();
-    }
 }

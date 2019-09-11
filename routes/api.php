@@ -216,3 +216,6 @@ Route::apiResource('paleontology_documents', 'PaleontologyDocumentAPIController'
 Route::apiResource('paleontology_maps', 'PaleontologyMapAPIController');
 
 Route::apiResource('action_hub_documents', 'ActionHubDocumentAPIController');
+
+
+Route::resource('planting_conditions', 'PlantingConditionAPIController');
