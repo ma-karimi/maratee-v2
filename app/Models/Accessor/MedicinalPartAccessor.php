@@ -15,6 +15,6 @@ trait MedicinalPartAccessor
 {
     public function getTypeAttribute($value)
     {
-        return Arr::get(self::TYPE,$value);
+        return Arr::get(self::TYPE, $value);
     }
 }

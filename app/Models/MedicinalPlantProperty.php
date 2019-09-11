@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+
 /**
  * @SWG\Definition(
  *      definition="MedicinalPlantProperty",
@@ -41,7 +42,7 @@ use App\Models\Contracts\BaseModel;
  */
 class MedicinalPlantProperty extends BaseModel
 {
-    public static $rules=[
+    public static $rules = [
         'medicinal_plant_id' => 'required|exists:medicinal_plants,id',
         'medicinal_plant_type_id' => 'required|exists:medicinal_plant_types,id',
     ];

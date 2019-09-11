@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Continent extends Model
 {
     public $timestamps = false;
-    protected $guarded=['id'];
+    protected $guarded = ['id'];
 
     /**
      * @return HasMany

@@ -98,7 +98,7 @@ class Taxonomy extends BaseModel
     protected $table = 'taxonomies';
 
     protected $dates = ['deleted_at'];
-    protected $casts = ['type_description'=>'json'];
+    protected $casts = ['type_description' => 'json'];
 
 
     /**
@@ -156,7 +156,6 @@ class Taxonomy extends BaseModel
     {
         return $this->belongsTo(General::class, 'family_id')->withDefault();
     }
-
 
 
 }

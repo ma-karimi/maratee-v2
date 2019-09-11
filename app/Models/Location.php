@@ -82,10 +82,10 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class Location extends BaseModel
 {
-    use SpatialTrait,LocationAccessor,LocationMutator;
+    use SpatialTrait, LocationAccessor, LocationMutator;
 
-    public static $linguistically=['description'=>false,'region_name'=>false,'address'=>true];
-    public static $rules=[
+    public static $linguistically = ['description' => false, 'region_name' => false, 'address' => true];
+    public static $rules = [
         'city_id' => 'required|exists:cities,id',
         'village_id' => 'exists:villages,id',
         'altitude' => 'numeric'
@@ -109,7 +109,7 @@ class Location extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['description' => 'json', 'region_name'=>'json', 'address'=>'json'];
+    protected $casts = ['description' => 'json', 'region_name' => 'json', 'address' => 'json'];
 
 
     /**
@@ -126,7 +126,7 @@ class Location extends BaseModel
     public function articles(): MorphToMany
     {
         return $this->morphToMany(Article::class,
-            'articleable','article_hubs')
+            'articleable', 'article_hubs')
             ->whereNull('location_hubs.deleted_at')
             ->withTimestamps();
     }
@@ -226,6 +226,7 @@ class Location extends BaseModel
     {
         return $this->belongsTo(Village::class);
     }
+
     /**
      * @return BelongsTo
      */

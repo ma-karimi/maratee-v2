@@ -15,6 +15,6 @@ trait ProductAccessor
 {
     public function getTypeAttribute($value)
     {
-        return Arr::get(self::STATUS,$value);
+        return Arr::get(self::STATUS, $value);
     }
 }

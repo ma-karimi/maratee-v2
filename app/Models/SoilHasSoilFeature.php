@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+
 /**
  * @SWG\Definition(
  *      definition="SoilHasSoilFeature",
@@ -29,7 +30,7 @@ use App\Models\Contracts\BaseModel;
  *          property="value",
  *          description="value",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -48,8 +49,8 @@ use App\Models\Contracts\BaseModel;
  */
 class SoilHasSoilFeature extends BaseModel
 {
-    public static $linguistically=['value'=>true];
-    public static $rules=[
+    public static $linguistically = ['value' => true];
+    public static $rules = [
         'soil_id' => 'required|exists:soils,id',
         'soil_feature_id' => 'required|exists:soil_features,id',
     ];

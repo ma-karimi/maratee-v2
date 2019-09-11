@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Collection extends BaseModel
 {
 
-    public static $linguistically=['name'=>true,'description'=>true];
+    public static $linguistically = ['name' => true, 'description' => true];
     /**
      * The database table used by the model.
      *
@@ -35,7 +35,7 @@ class Collection extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['name' => 'json','description' => 'json'];
+    protected $casts = ['name' => 'json', 'description' => 'json'];
 
 
     /**

@@ -15,10 +15,11 @@ trait TransactionAccessor
 {
     public function getTypeIdAttribute($value)
     {
-        return Arr::get(self::TYPE,$value);
+        return Arr::get(self::TYPE, $value);
     }
+
     public function getVisitAttribute($value)
     {
-        return Arr::get(self::VISIT,$value);
+        return Arr::get(self::VISIT, $value);
     }
 }

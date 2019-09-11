@@ -11,11 +11,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *            required={"region", "section"},
  * 			@SWG\Property(property="id", type="integer"),
  * 			@SWG\Property(property="region", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="section", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="number", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Garden extends BaseModel
 {
 
-    public static $linguistically=['section'=>true,'region'=>true,'number'=>false];
+    public static $linguistically = ['section' => true, 'region' => true, 'number' => false];
     /**
      * The database table used by the model.
      *

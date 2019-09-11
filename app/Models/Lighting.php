@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+
 /**
  * @SWG\Definition(
  *      definition="Lighting",
@@ -41,7 +42,7 @@ use App\Models\Contracts\BaseModel;
  */
 class Lighting extends BaseModel
 {
-    public static $linguistically=['type'=>true,'description'=>false];
+    public static $linguistically = ['type' => true, 'description' => false];
     /**
      * The database table used by the model.
      *

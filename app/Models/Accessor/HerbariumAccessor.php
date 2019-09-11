@@ -16,6 +16,6 @@ trait HerbariumAccessor
 
     public function getGrowthRateAttribute($value)
     {
-        return Arr::get(self::GROWTH_RATES,$value);
+        return Arr::get(self::GROWTH_RATES, $value);
     }
 }

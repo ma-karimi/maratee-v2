@@ -19,7 +19,7 @@ use App\Models\Contracts\BaseModel;
  * 			@SWG\Property(property="mean_dry_seedling_weight", type="integer"),
  * 			@SWG\Property(property="dry_matter_percentage", type="integer"),
  * 			@SWG\Property(property="description", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )

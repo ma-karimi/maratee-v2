@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Relations\ArticleRelation;
 use App\Models\Scope\ActionHubScope;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
@@ -81,7 +81,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class ActionHub extends BaseModel
 {
-    use ActionHubScope;
+    use ActionHubScope, ArticleRelation;
     public static $rules = [
 //        'action_id' => 'required|exists:actions,id',
         'department_id' => 'exists:departments,id',
@@ -113,15 +113,6 @@ class ActionHub extends BaseModel
      * @var array
      */
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
-
-
-    public function articles(): MorphToMany
-    {
-        return $this->morphToMany(Article::class,
-            'articleable','article_hubs')
-            ->whereNull('location_hubs.deleted_at')
-            ->withTimestamps();
-    }
 
     public function project()
     {

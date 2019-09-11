@@ -18,7 +18,7 @@ trait GeneralScope
      */
     public function scopeOfType($query, $type)
     {
-        return $query->where('type',$type);
+        return $query->where('type', $type);
     }
 
     /**
@@ -27,9 +27,9 @@ trait GeneralScope
      * @param $type
      * @return mixed
      */
-    public function scopeOfIdType($query, $id,$type)
+    public function scopeOfIdType($query, $id, $type)
     {
-        return $query->where('id',$id)->where('type', $type);
+        return $query->where('id', $id)->where('type', $type);
     }
 
     /**

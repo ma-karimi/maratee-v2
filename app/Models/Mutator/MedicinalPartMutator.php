@@ -14,9 +14,9 @@ trait MedicinalPartMutator
     /**
      * @param $value
      */
-   /* public function setTypeAttribute($value)
-    {
-        if (in_array($value,MedicinalPart::TYPE))
-        $this->attributes['type'] = array_search($value,MedicinalPart::TYPE);
-    }*/
+    /* public function setTypeAttribute($value)
+     {
+         if (in_array($value,MedicinalPart::TYPE))
+         $this->attributes['type'] = array_search($value,MedicinalPart::TYPE);
+     }*/
 }

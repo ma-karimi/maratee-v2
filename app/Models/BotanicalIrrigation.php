@@ -13,20 +13,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * 			@SWG\Property(property="botanical_id", type="integer"),
  * 			@SWG\Property(property="irrigation_id", type="integer"),
  * 			@SWG\Property(property="irrigation_time", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="requirement", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="seasonal_feature", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
-
 class BotanicalIrrigation extends BaseModel
 {
 
-    public static $linguistically=['irrigation_time'=>true,'requirement'=>false];
+    public static $linguistically = ['irrigation_time' => true, 'requirement' => false];
     public static $rules = [
         'botanical_id' => 'required|exists:botanicals,id',
         'irrigation_id' => 'required|exists:irrigations,id'

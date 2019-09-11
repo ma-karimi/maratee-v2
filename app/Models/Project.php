@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+
 /**
  * @SWG\Definition(
  *      definition="Project",
@@ -28,13 +29,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          property="title",
  *          description="title",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="research_title",
  *          description="research_title",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="project_no",
@@ -60,11 +61,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      )
  * )
  */
-
 class Project extends BaseModel
 {
-    public static $linguistically=['title'=>true,'research_title'=>true];
-    public static $rules=[
+    public static $linguistically = ['title' => true, 'research_title' => true];
+    public static $rules = [
         'project_no' => 'string',
         'research_no' => 'string',
         'plan_id' => 'integer',
@@ -106,18 +106,20 @@ class Project extends BaseModel
     {
         return $this->hasMany(SeedHub::class)->latest();
     }
+
     /**
      * @return BelongsTo
      */
     public function projectLeader(): BelongsTo
     {
-        return $this->belongsTo(User::class,'project_leader_id');
+        return $this->belongsTo(User::class, 'project_leader_id');
     }
+
     /**
      * @return BelongsTo
      */
     public function researchLeader(): BelongsTo
     {
-        return $this->belongsTo(User::class,'research_leader_id');
+        return $this->belongsTo(User::class, 'research_leader_id');
     }
 }

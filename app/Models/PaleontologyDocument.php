@@ -48,8 +48,8 @@ class PaleontologyDocument extends BaseModel
 {
     public static $rules = [
         'paleontology_id' => 'required|exists:paleontologies,id',
-        'src'=>'required|string',
-        'src_description'=>'string',
+        'src' => 'required|string',
+        'src_description' => 'string',
     ];
 
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+
 /**
  * @SWG\Definition(
  *      definition="Irrigation",
@@ -43,7 +44,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Irrigation extends BaseModel
 {
 
-    public static $linguistically=['type'=>true,'description'=>false];
+    public static $linguistically = ['type' => true, 'description' => false];
     /**
      * The database table used by the model.
      *

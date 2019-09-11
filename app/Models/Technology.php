@@ -76,7 +76,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class Technology extends BaseModel
 {
 
-    public static $rules=[
+    public static $rules = [
         'seed_technology_id' => 'required|exists:seed_technologies,id',
         'evaluation_id' => 'required|exists:evaluations,id',
         'seed_weight_id' => 'required|exists:seed_weights,id',
@@ -106,6 +106,7 @@ class Technology extends BaseModel
     {
         return $this->belongsTo(SeedTechnology::class, 'seed_technology_id');
     }
+
     public function germination()
     {
         return $this->belongsTo(Germination::class, 'germination_id');
@@ -115,10 +116,12 @@ class Technology extends BaseModel
     {
         return $this->belongsTo(Department::class, 'department_id');
     }
+
     public function evaluation()
     {
         return $this->belongsTo(Evaluation::class);
     }
+
     public function project()
     {
         return $this->belongsTo(Project::class, 'project_id');
@@ -128,7 +131,6 @@ class Technology extends BaseModel
     {
         return $this->belongsTo(SeedWeight::class, 'seed_weight_id');
     }
-
 
 
     /**

@@ -113,17 +113,16 @@ class Transaction extends BaseModel
         'visit' => 'in:1,2',
         'peoples_no' => 'integer',
     ];
-    protected $casts = [
-        'description' => 'json',
-        'purpose' => 'json',
-        'person_position' => 'json',
-    ];
     public static $linguistically = [
         'description' => false,
         'purpose' => false,
         'person_position' => false,
     ];
-
+    protected $casts = [
+        'description' => 'json',
+        'purpose' => 'json',
+        'person_position' => 'json',
+    ];
 
     /**
      * @return BelongsTo
@@ -145,27 +144,27 @@ class Transaction extends BaseModel
     {
         return $this->morphedByMany(Paleontology::class, 'transactionable')
             ->withTimestamps()
-            ->withPivot(['type_id','sheets_no']);
+            ->withPivot(['type_id', 'sheets_no']);
     }
 
     public function herbariums()
     {
         return $this->morphedByMany(Herbarium::class, 'transactionable')
             ->withTimestamps()
-            ->withPivot(['type_id','sheets_no']);
+            ->withPivot(['type_id', 'sheets_no']);
     }
 
     public function seeds()
     {
         return $this->morphedByMany(Seed::class, 'transactionable')
             ->withTimestamps()
-            ->withPivot(['type_id','sheets_no']);
+            ->withPivot(['type_id', 'sheets_no']);
     }
 
     public function medicinalPlants()
     {
         return $this->morphedByMany(MedicinalPlant::class, 'transactionable')
             ->withTimestamps()
-            ->withPivot(['type_id','sheets_no']);
+            ->withPivot(['type_id', 'sheets_no']);
     }
 }

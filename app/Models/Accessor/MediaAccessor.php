@@ -15,6 +15,6 @@ trait MediaAccessor
 {
     public function getMediaTypeAttribute($value)
     {
-        return Arr::get(self::MEDIA_TYPE,$value);
+        return Arr::get(self::MEDIA_TYPE, $value);
     }
 }

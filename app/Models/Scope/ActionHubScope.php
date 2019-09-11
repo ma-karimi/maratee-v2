@@ -9,9 +9,6 @@
 namespace App\Models\Scope;
 
 
-use App\Models\User;
-use function foo\func;
-
 trait ActionHubScope
 {
 
@@ -20,10 +17,10 @@ trait ActionHubScope
      * @param $type
      * @return mixed
      */
-    public function scopeOfAction($query,$type)
+    public function scopeOfAction($query, $type)
     {
-        return $query->whereHas('action',function ($query) use ($type){
-             $query->where('name->en','LIKE',"%{$type}%");
+        return $query->whereHas('action', function ($query) use ($type) {
+            $query->where('name->en', 'LIKE', "%{$type}%");
         });
     }
 }

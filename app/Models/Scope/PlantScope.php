@@ -15,19 +15,20 @@ trait PlantScope
      * @param $query
      * @return mixed
      */
-    public function scopeIsFlowering($query,$value)
+    public function scopeIsFlowering($query, $value)
     {
-        return $query->where('is_flowering',$value);
+        return $query->where('is_flowering', $value);
     }
+
     /**
      * @param $query
      * @param bool $value
      * @return mixed
      */
-    public function scopeOfFloweringHerbariums($query,bool $value=false)
+    public function scopeOfFloweringHerbariums($query, bool $value = false)
     {
-        return $query->whereHas('herbariums', function ($query) use($value){
-             $query->isFlowering($value);
+        return $query->whereHas('herbariums', function ($query) use ($value) {
+            $query->isFlowering($value);
         });
     }
 

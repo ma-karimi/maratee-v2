@@ -31,7 +31,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          property="title",
  *          description="title",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -44,14 +44,14 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          property="journal_name",
  *          description="journal_name",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
  *          property="type",
  *          description="type",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -71,11 +71,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class Article extends BaseModel
 {
 
-    public static $linguistically = ['title' => true, 'type' => false, 'journal_name'=>false];
+    public static $linguistically = ['title' => true, 'type' => false, 'journal_name' => false];
     public static $rules = [
         'year' => 'date',
-        'journal_no'=>'integer',
-        'page_no'=>'integer',
+        'journal_no' => 'integer',
+        'page_no' => 'integer',
     ];
     /**
      * The database table used by the model.
@@ -89,7 +89,7 @@ class Article extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['title' => 'json', 'type' => 'json', 'journal_name' => 'json', 'year'=>'date'];
+    protected $casts = ['title' => 'json', 'type' => 'json', 'journal_name' => 'json', 'year' => 'date'];
     /**
      * The attributes that should be mutated to dates.
      *
@@ -104,13 +104,12 @@ class Article extends BaseModel
     }
 
 
-
     /**
      * @return MorphToMany
      */
     public function users(): MorphToMany
     {
-        return $this->morphToMany(UserHub::class, 'userable','user_hubs')
+        return $this->morphToMany(UserHub::class, 'userable', 'user_hubs')
             ->whereNull('user_hubs.deleted_at')
             ->withTimestamps();
     }

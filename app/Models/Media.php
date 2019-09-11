@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Models\Accessor\MediaAccessor;
-use App\Models\Accessor\MethodAccessor;
 use App\Models\Contracts\BaseModel;
+use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -115,9 +115,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class Media extends BaseModel
 {
-    use MediaAccessor;
-    public static $linguistically = ['name' => false, 'description' => false, 'info_type' => false, 'reference' => false];
+    use MediaAccessor, ArticleRelation;
     public const MEDIA_TYPE = [1 => 'sketch', 2 => 'picture'];
+    public static $linguistically = ['name' => false, 'description' => false, 'info_type' => false, 'reference' => false];
     public static $rules = [
         'format_type' => 'required|string',
         'media_type' => 'required|integer|in:1,2',

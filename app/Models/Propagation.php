@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+
 /**
  * @SWG\Definition(
  *      definition="Propagation",
@@ -17,13 +18,13 @@ use App\Models\Contracts\BaseModel;
  *          property="method",
  *          description="method",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
  *          type="array",
-	 *     @SWG\Items(type="string")
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -39,10 +40,9 @@ use App\Models\Contracts\BaseModel;
  *      )
  * )
  */
-
 class Propagation extends BaseModel
 {
-    public static $linguistically=['method'=>true,'description'=>true];
+    public static $linguistically = ['method' => true, 'description' => true];
     /**
      * The database table used by the model.
      *

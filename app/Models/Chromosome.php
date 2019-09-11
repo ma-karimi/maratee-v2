@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  * 			@SWG\Property(property="n_no", type="integer"),
  * 			@SWG\Property(property="2n_no", type="integer"),
  * 			@SWG\Property(property="notes", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="herbarium_id", type="integer"),
  * 			@SWG\Property(property="url", type="string"),
  * 			@SWG\Property(property="cryo_bank_id", type="integer"),
@@ -22,16 +23,15 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  * 			@SWG\Property(property="location_id", type="integer"),
  * 			@SWG\Property(property="general_class_id", type="integer"),
  * 			@SWG\Property(property="description", type="array",
-	 *     @SWG\Items(type="string")),
+ *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
-
 class Chromosome extends BaseModel
 {
-
-    public static $linguistically=['notes'=>false];
+    use ArticleRelation;
+    public static $linguistically = ['notes' => false];
 
     public static $rules = [
         'herbarium_id' => 'required|exists:herbariums,id',
@@ -72,22 +72,12 @@ class Chromosome extends BaseModel
         return $this->belongsTo(Herbarium::class);
     }
 
-
-    public function articles(): MorphToMany
-    {
-        return $this->morphToMany(Article::class,
-            'articleable','article_hubs')
-            ->whereNull('article_hubs.deleted_at')
-            ->withTimestamps();
-    }
-
-
     /**
      * @return MorphToMany
      */
     public function locations(): MorphToMany
     {
-        return $this->morphToMany(LocationHub::class, 'locationable','location_hubs')
+        return $this->morphToMany(LocationHub::class, 'locationable', 'location_hubs')
             ->whereNull('location_hubs.deleted_at')
             ->withTimestamps();
     }

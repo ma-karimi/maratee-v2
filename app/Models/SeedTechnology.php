@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 /**
  * @SWG\Definition(
  *      definition="SeedTechnology",
@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          property="seed_type",
  *          description="seed_type",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *          format="array"
  *      ),
  *      @SWG\Property(
@@ -106,7 +106,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          property="other_detail",
  *          description="other_detail",
  *          type="array",
-	 *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -122,12 +122,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      )
  * )
  */
-
 class SeedTechnology extends BaseModel
 {
 
-    public static $linguistically=['type'=>false,'other_detail'=>false];
-    public static $rules=[
+    public static $linguistically = ['type' => false, 'other_detail' => false];
+    public static $rules = [
         'conserved_content' => 'string',
         'mean_seed_per_fruit' => 'integer',
         'thousand_seed_weight' => 'integer',
@@ -157,7 +156,7 @@ class SeedTechnology extends BaseModel
      *
      * @var array
      */
-    protected $dates = ['created_at', 'received_date','banked_date', 'deleted_at', 'updated_at'];
+    protected $dates = ['created_at', 'received_date', 'banked_date', 'deleted_at', 'updated_at'];
 
     /**
      * The attributes that should be casted to native types.
