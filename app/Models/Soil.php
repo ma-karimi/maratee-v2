@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @SWG\Definition(
  *      definition="Soil",
- *      required={"value","soil_id","soil_feature_id"},
+ *      required={"value","soil_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -68,14 +68,6 @@ class Soil extends BaseModel
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
-
-    public function soilFeatures()
-    {
-        return $this->belongsToMany(SoilFeature::class,
-            'soil_has_soil_features',
-            'soil_id',
-            'soil_feature_id');
-    }
 
     public function botanicalGardenActions()
     {

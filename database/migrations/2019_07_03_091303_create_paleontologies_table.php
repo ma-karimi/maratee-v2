@@ -50,7 +50,6 @@ class CreatePaleontologiesTable extends Migration
             $table->json('common_name')->nullable();
             $table->string('update_frequency');
             $table->json('description')->nullable();
-
             $table->timeStampsTz();
             $table->softDeletesTz();
         });

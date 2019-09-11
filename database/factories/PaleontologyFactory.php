@@ -11,13 +11,12 @@ $factory->define(App\Models\Paleontology::class, function (Faker $faker) {
     $stages = \App\Models\GeologyAge::whereType('stage')->pluck('id')->toArray();
     $plants = \App\Models\Plant::pluck('id')->toArray();
     $locations = \App\Models\Location::pluck('id')->toArray();
-    $a= [
+    $a = [
         'catalog_no' => $faker->numberBetween(1, 100),
         'plant_id' => $faker->randomElement($plants),
         'location_id' => $faker->randomElement($locations),
         'update_frequency' => $faker->word,
-      /*  'specimen_no' => $faker->word,
-        'update_frequency' => $faker->word,
+        'specimen_no' => $faker->word,
         'field_no' => $faker->word,
         'barcode_no' => $faker->word,
         'move_status' => $faker->text,
@@ -34,15 +33,14 @@ $factory->define(App\Models\Paleontology::class, function (Faker $faker) {
         'geology_age_epoch_id' => $faker->randomElement($epochs),
         'geology_age_period_id' => $faker->randomElement($periods),
         'geology_age_stage_id' => $faker->randomElement($stages),
+        'plates_no' => $faker->numberBetween(1, 100),
         'description' => make_json($faker->text),
         'additional_info' => make_json($faker->word),
         'access_code' => $faker->word,
         'last_update' => $faker->date(),
         'excavation' => make_json($faker->word),
-        'collection_name' => make_json($faker->word),
-        'location_id' => $faker->randomElement($locations),
+        'collector_name' => make_json($faker->word),
         'common_name' => make_json($faker->word),
-        'plant_id' => $faker->randomElement($plants),*/
     ];
     return $a;
 });
