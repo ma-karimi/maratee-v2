@@ -19,7 +19,7 @@ class CreatePlantsTable extends Migration {
 			$table->json('name');
 			$table->json('description')->nullable();
             $table->boolean('is_flowering')->default(0);
-            $table->json('life_forms')->comment('life_form_leaf_id', 'life_form_cycle_id', 'life_form_wooden_id', 'life_form_herbaceous_id');
+            $table->json('life_forms')->comment('life_form_leaf_id', 'life_form_cycle_id', 'life_form_wooden_id', 'life_form_herbaceous_id')->nullable();
             $table->json('habitat_description')->nullable();
             $table->json('ecology_description')->nullable();
             // $table->unsignedBigInteger('taxonomy_id');

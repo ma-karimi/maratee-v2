@@ -155,6 +155,7 @@ class BaseModel extends Model
             foreach (request()->all() as $index => $item) {
                 if (is_array($item) && collect($json_casts)->has($index)) {
                     foreach (parent::getJsons() as $key => $value) {
+                        //dd(parent::getJsons());
                         static::addGlobalScope('json:' . $key, function (Builder $builder) use ($value, $key) {
                             $builder->where($key, $value['operator'], $value['value']);
                         });
