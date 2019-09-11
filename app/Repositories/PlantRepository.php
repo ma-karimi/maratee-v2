@@ -120,8 +120,6 @@ class PlantRepository extends BaseRepository
         $taxonomy_input = [
             'family_id' => $input['family_id'],
             'genus_id' => $input['genus_id'] ?? null,
-            'order_id' => $input['order_id'] ?? null,
-            'class_id' => $input['class_id'] ?? null,
             'species_id' => $input['species_id'] ?? null,
             'variety_id' => $input['variety_id'] ?? null,
             'type_description' => $input['type_description'] ?? null,
@@ -205,8 +203,6 @@ class PlantRepository extends BaseRepository
         $taxonomy_input = [
             'family_id' => $input['family_id'],
             'genus_id' => $input['genus_id'] ?? null,
-            'order_id' => $input['order_id'] ?? null,
-            'class_id' => $input['class_id'] ?? null,
             'species_id' => $input['species_id'] ?? null,
             'variety_id' => $input['variety_id'] ?? null,
             'type_description' => $input['type_description'] ?? null,

@@ -122,20 +122,6 @@ class TaxonomyAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
-     *          name="order_id",
-     *          in="body",
-     *          description="Taxonomy that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="class_id",
-     *          in="body",
-     *          description="Taxonomy that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
-     *      ),
-     *      @SWG\Parameter(
      *          name="type_description",
      *          in="body",
      *          description="Taxonomy that should be stored",
@@ -280,20 +266,6 @@ class TaxonomyAPIController extends AppBaseController
      *          in="body",
      *          description="Taxonomy that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="order_id",
-     *          in="body",
-     *          description="Taxonomy that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="class_id",
-     *          in="body",
-     *          description="Taxonomy that should be stored",
-     *          required=false,
      *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
