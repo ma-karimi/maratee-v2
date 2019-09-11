@@ -11,7 +11,9 @@ $factory->define(App\Models\Paleontology::class, function (Faker $faker) {
     $stages = \App\Models\GeologyAge::whereType('stage')->pluck('id')->toArray();
     $plants = \App\Models\Plant::pluck('id')->toArray();
     $locations = \App\Models\Location::pluck('id')->toArray();
-    $a = [
+    $orders = \App\Models\General::where('type', 'order')->pluck('id')->toArray();
+    $classes = \App\Models\General::where('type', 'class')->pluck('id')->toArray();
+    return [
         'catalog_no' => $faker->numberBetween(1, 100),
         'plant_id' => $faker->randomElement($plants),
         'location_id' => $faker->randomElement($locations),
@@ -41,6 +43,7 @@ $factory->define(App\Models\Paleontology::class, function (Faker $faker) {
         'excavation' => make_json($faker->word),
         'collector_name' => make_json($faker->word),
         'common_name' => make_json($faker->word),
+        'order_id' => $faker->randomElement($orders),
+        'class_id' => $faker->randomElement($classes),
     ];
-    return $a;
 });

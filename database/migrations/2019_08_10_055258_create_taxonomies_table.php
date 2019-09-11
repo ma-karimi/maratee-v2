@@ -18,8 +18,6 @@ class CreateTaxonomiesTable extends Migration
             //generals
             $table->unsignedBigInteger('plant_id');
             $table->unsignedBigInteger('family_id');
-            $table->unsignedBigInteger('order_id')->nullable();
-            $table->unsignedBigInteger('class_id')->nullable();
             $table->unsignedBigInteger('genus_id')->nullable();
             $table->unsignedBigInteger('species_id')->nullable();
             $table->unsignedBigInteger('subspecies_id')->nullable();

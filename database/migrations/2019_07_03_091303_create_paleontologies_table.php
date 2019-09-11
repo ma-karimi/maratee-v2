@@ -47,6 +47,8 @@ class CreatePaleontologiesTable extends Migration
             $table->json('excavation')->nullable();
             $table->json('collector_name')->nullable();
             $table->unsignedBigInteger('location_id');
+            $table->unsignedBigInteger('order_id')->nullable();
+            $table->unsignedBigInteger('class_id')->nullable();
             $table->json('common_name')->nullable();
             $table->string('update_frequency');
             $table->json('description')->nullable();
