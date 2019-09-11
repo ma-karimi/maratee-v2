@@ -72,13 +72,6 @@ class Treatment extends BaseModel
         'description' => 'json'
     ];
 
-    public function soilFeatures()
-    {
-        return $this->belongsToMany(SoilFeature::class,
-            'soil_has_soil_features',
-            'soil_id',
-            'soil_feature_id');
-    }
 
 
     public function treatmentHubs()

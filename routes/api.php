@@ -53,8 +53,6 @@ Route::apiResource('connections', 'ConnectionAPIController');
 
 Route::apiResource('continents', 'ContinentAPIController');
 
-Route::apiResource('soil_features', 'SoilFeatureAPIController');
-
 Route::apiResource('soils', 'SoilAPIController');
 
 Route::apiResource('villages', 'VillageAPIController');
@@ -62,8 +60,6 @@ Route::apiResource('villages', 'VillageAPIController');
 Route::apiResource('users', 'UserAPIController');
 
 Route::apiResource('technology', 'TechnologyAPIController');
-
-Route::apiResource('soil_has_soil_features', 'SoilHasSoilFeatureAPIController');
 
 Route::apiResource('seed_weights', 'SeedWeightAPIController');
 
