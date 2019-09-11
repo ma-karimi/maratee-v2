@@ -127,6 +127,8 @@ class Plant extends BaseModel
 {
     use PlantScope, PlantAccessor, ActionRelation, ArticleRelation;
 
+    public const FLOWERING_TIME = [1=>'Farvardin', 2=>'Ordibehesht', 3=>'Khordad', 4=>'Tir', 5=>'Mordad', 6=>'Shahrivar', 7=>'Mehr', 8=>'Aban', 9=>'Azar', 10=>'Dey', 11=>'Bahman', 12=>'Esfand'];
+
     public static $linguistically = ['name' => true, 'description' => false, 'habitat_description' => false, 'ecology_description' => false];
     public static $rules = [
         'protection_id' => 'required|exists:protections,id',
