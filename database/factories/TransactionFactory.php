@@ -11,7 +11,7 @@ $factory->define(Transaction::class, function (Faker $faker) {
     $organizations = \App\Models\Organization::pluck('id')->toArray();
     return [
         'user_id' => $faker->randomElement($users),
-        'organization_id' => $faker->randomElement($users),
+        'organization_id' => $faker->randomElement($organizations),
         'start_time' => $faker->dateTime,
         'type_id' => $faker->numberBetween(1,7),
         'archive_no' => $faker->word,

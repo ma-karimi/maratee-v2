@@ -27,10 +27,8 @@ class CreateTaxonomiesTable extends Migration
 
             $table->foreign('genus_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('species_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('class_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('variety_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('family_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('order_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('subspecies_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('tip_type_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('NO ACTION')->onDelete('cascade');

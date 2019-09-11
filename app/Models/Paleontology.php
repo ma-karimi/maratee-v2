@@ -113,8 +113,26 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="geology_age_id",
- *          description="geology_age_id",
+ *          property="geology_age_era_id",
+ *          description="geology_age_era_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="geology_age_epoch_id",
+ *          description="geology_age_epoch_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="geology_age_stage_id",
+ *          description="geology_age_stage_id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="geology_age_period_id",
+ *          description="geology_age_period_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -213,6 +231,7 @@ class Paleontology extends BaseModel
         'plant_id' => 'required|exists:plants,id',
         'last_update' => 'date',
         'location_id' => 'integer|exists:locations,id',
+        'general_order_id' => 'integer|exists:generals,id',
     ];
     /**
      * The database table used by the model.

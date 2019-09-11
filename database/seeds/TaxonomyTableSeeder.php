@@ -19,16 +19,12 @@ class TaxonomyTableSeeder extends Seeder
             $plant_sub_specie_generals = \App\Models\General::where('type', 'sub_species')->pluck('id');
             $plant_type_generals = \App\Models\General::where('type', 'plant_type')->pluck('id');
             $plant_variety_generals = \App\Models\General::where('type', 'variety')->pluck('id');
-            $orders = \App\Models\General::where('type', 'order')->pluck('id');
-            $classes = \App\Models\General::where('type', 'class')->pluck('id');
             $plants = \App\Models\Plant::pluck('id')->toArray();
             $data = [
                 'genus_id' => $plant_genus_generals->random(),
                 'species_id' => $plant_specie_generals->random(),
                 'variety_id' => ($plant_variety_generals->random() % 3) ? $plant_variety_generals->random() : null,
                 'family_id' => $plant_family_generals->random(),
-                'order_id' => $orders->random(),
-                'class_id' => $classes->random(),
                 'plant_id' => $item->id,
                 'tip_type_id' => $plant_type_generals->random(),
                 'subspecies_id' => $plant_sub_specie_generals->random(),
