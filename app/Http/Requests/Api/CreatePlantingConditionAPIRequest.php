@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\PlantingAction;
+use App\Models\PlantingCondition;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreatePlantingActionAPIRequest extends APIRequest
+class CreatePlantingConditionAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class CreatePlantingActionAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return PlantingAction::$rules;
+        return PlantingCondition::$rules;
     }
 }

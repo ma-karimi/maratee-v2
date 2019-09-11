@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @SWG\Definition(
- *      definition="PlantingAction",
+ *      definition="PlantingCondition",
  *      required={"name"},
  *      @SWG\Property(
  *          property="id",
@@ -41,15 +41,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      )
  * )
  */
-class PlantingAction extends BaseModel
+class PlantingCondition extends BaseModel
 {
     public static $linguistically = ['name' => true, 'description' => false];
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'planting_actions';
 
 
     /**
@@ -62,11 +56,14 @@ class PlantingAction extends BaseModel
         'description' => 'json',
     ];
 
-    /**
-     * @return HasMany
-     */
-    public function botanicalGardenActions(): HasMany
+    public function botanical()
     {
-        return $this->hasMany(BotanicalOperation::class)->latest();
+        return $this->belongsToMany(
+            Botanical::class,
+            'botanical_planting_conditions',
+            'planting_condition_id',
+            'botanical_id'
+        )->whereNull('botanical_planting_conditions.deleted_at')
+            ->withTimestamps();
     }
 }

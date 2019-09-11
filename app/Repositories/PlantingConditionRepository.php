@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\PlantingAction;
+use App\Models\PlantingCondition;
 use App\Repositories\BaseRepository;
 
 /**
- * Class PlantingActionRepository
+ * Class PlantingConditionRepository
  * @package App\Repositories
- * @version July 14, 2019, 11:25 am UTC
+ * @version September 11, 2019, 7:39 am UTC
 */
 
-class PlantingActionRepository extends BaseRepository
+class PlantingConditionRepository extends BaseRepository
 {
     /**
      * @var array
@@ -35,6 +35,6 @@ class PlantingActionRepository extends BaseRepository
      **/
     public function model()
     {
-        return PlantingAction::class;
+        return PlantingCondition::class;
     }
 }

@@ -13,7 +13,6 @@ $factory->define(App\Models\Herbarium::class, function (Faker $faker) {
         'number' => $faker->numberBetween(1, 100),
         'organization_id' => $faker->randomElement($organizations),
         'sheets_no' => $faker->numberBetween(1, 100),
-        'growth_rate' => $faker->randomKey(Herbarium::GROWTH_RATES),
         'samples_no' => $faker->numberBetween(1, 100),
         'tip_qt' => $faker->numberBetween(1, 100),
         'physical_tip_qt' => $faker->numberBetween(1, 100),

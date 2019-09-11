@@ -17,6 +17,10 @@ class CreateBotanicalPlantingConditionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('botanical_id');
             $table->unsignedBigInteger('planting_condition_id');
+
+            $table->foreign('botanical_id')->references('id')->on('botanicals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('planting_condition_id')->references('id')->on('planting_conditions')->onUpdate('NO ACTION')->onDelete('CASCADE');
+
             $table->timestamps();
             $table->softDeletesTz();
         });

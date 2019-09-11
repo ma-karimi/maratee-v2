@@ -19,7 +19,7 @@ class CreatePlantsTable extends Migration {
 			$table->json('name');
 			$table->json('description')->nullable();
             $table->boolean('is_flowering')->default(0);
-            $table->json('life_forms')->comment('life_form_leaf_id', 'life_form_cycle_id', 'life_form_wooden_id', 'life_form_herbaceous_id');
+            $table->json('life_forms')->comment('life_form_leaf_id', 'life_form_cycle_id', 'life_form_wooden_id', 'life_form_herbaceous_id')->nullable();
             $table->json('habitat_description')->nullable();
             $table->json('ecology_description')->nullable();
             // $table->unsignedBigInteger('taxonomy_id');
@@ -37,10 +37,10 @@ class CreatePlantsTable extends Migration {
             $table->timeStampsTz();
             $table->softDeletesTz();
 		});
-        CustomBlueprint::generatedBigIntegerVirtual('plants','life_form_cycle_id','life_forms','cycle_id',true);
-        CustomBlueprint::generatedBigIntegerVirtual('plants','life_form_wooden_id','life_forms','wooden_id',true);
-        CustomBlueprint::generatedBigIntegerVirtual('plants','life_form_leaf_id','life_forms','leaf_id',true);
-        CustomBlueprint::generatedBigIntegerVirtual('plants','life_form_herbaceous_id','life_forms','herbaceous_id',true);
+        CustomBlueprint::generatedVirtual('plants','life_form_cycle_id','life_forms','cycle_id',true);
+        CustomBlueprint::generatedVirtual('plants','life_form_wooden_id','life_forms','wooden_id',true);
+        CustomBlueprint::generatedVirtual('plants','life_form_leaf_id','life_forms','leaf_id',true);
+        CustomBlueprint::generatedVirtual('plants','life_form_herbaceous_id','life_forms','herbaceous_id',true);
     }
 
 

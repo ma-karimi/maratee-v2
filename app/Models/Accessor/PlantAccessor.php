@@ -25,6 +25,8 @@ trait PlantAccessor
 
     public function getFloweringTimeNameAttribute()
     {
-        return Arr::get(self::FLOWERING_TIME, $this->flowering_time);
+        if (isset($this->flowering_time)) {
+            return Arr::get(self::FLOWERING_TIME, $this->flowering_time);
+        }
     }
 }

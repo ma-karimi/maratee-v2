@@ -31,7 +31,7 @@ class BotanicalOperationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/botanical_garden_actions",
+     *      path="/botanical_operations",
      *      summary="Get a listing of the BotanicalOperations.",
      *      tags={"BotanicalOperation"},
      *      description="Get all BotanicalOperations",
@@ -75,7 +75,7 @@ class BotanicalOperationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/botanical_garden_actions",
+     *      path="/botanical_operations",
      *      summary="Store a newly created BotanicalOperation in storage",
      *      tags={"BotanicalOperation"},
      *      description="Store BotanicalOperation",
@@ -87,45 +87,16 @@ class BotanicalOperationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
-     *          name="planting_action_id",
+     *          name="location_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
-     *          name="from_soil_id",
+     *          name="operation_id",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="from_lighting_id",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="from_garden_id",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="to_soil_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="to_lighting_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="to_garden_id",
-     *          in="body",
-     *          required=false,
+     *          description="1 => seeding , 2=>planting",
      *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
@@ -135,31 +106,13 @@ class BotanicalOperationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
-     *          name="initial_place_type",
+     *          name="number",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
-     *          name="destination_place_type",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="initial_place_condition",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="destination_place_condition",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="treatment",
+     *          name="description",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
@@ -199,7 +152,7 @@ class BotanicalOperationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/botanical_garden_actions/{id}",
+     *      path="/botanical_operations/{id}",
      *      summary="Display the specified BotanicalOperation",
      *      tags={"BotanicalOperation"},
      *      description="Get BotanicalOperation",
@@ -250,7 +203,7 @@ class BotanicalOperationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/botanical_garden_actions/{id}",
+     *      path="/botanical_operations/{id}",
      *      summary="Update the specified BotanicalOperation in storage",
      *      tags={"BotanicalOperation"},
      *      description="Update BotanicalOperation",
@@ -263,9 +216,39 @@ class BotanicalOperationAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="botanical_id",
      *          in="body",
-     *          description="BotanicalOperation that should be updated",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="operation_id",
+     *          in="body",
+     *          required=true,
+     *          description="1 => seeding , 2=>planting",
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="number",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
@@ -312,7 +295,7 @@ class BotanicalOperationAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/botanical_garden_actions/{id}",
+     *      path="/botanical_operations/{id}",
      *      summary="Remove the specified BotanicalOperation from storage",
      *      tags={"BotanicalOperation"},
      *      description="Delete BotanicalOperation",

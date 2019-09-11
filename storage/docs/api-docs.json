@@ -3727,308 +3727,6 @@
                 }
             }
         },
-        "/botanical_garden_actions": {
-            "get": {
-                "tags": [
-                    "BotanicalGardenAction"
-                ],
-                "summary": "Get a listing of the BotanicalGardenActions.",
-                "description": "Get all BotanicalGardenActions",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/BotanicalGardenAction"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "BotanicalGardenAction"
-                ],
-                "summary": "Store a newly created BotanicalGardenAction in storage",
-                "description": "Store BotanicalGardenAction",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "botanical_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalGardenAction"
-                        }
-                    },
-                    {
-                        "name": "planting_action_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalGardenAction"
-                        }
-                    },
-                    {
-                        "name": "from_soil_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalGardenAction"
-                        }
-                    },
-                    {
-                        "name": "from_lighting_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalGardenAction"
-                        }
-                    },
-                    {
-                        "name": "from_garden_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalGardenAction"
-                        }
-                    },
-                    {
-                        "name": "to_soil_id",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalGardenAction"
-                        }
-                    },
-                    {
-                        "name": "to_lighting_id",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalGardenAction"
-                        }
-                    },
-                    {
-                        "name": "to_garden_id",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalGardenAction"
-                        }
-                    },
-                    {
-                        "name": "date",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalGardenAction"
-                        }
-                    },
-                    {
-                        "name": "initial_place_type",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalGardenAction"
-                        }
-                    },
-                    {
-                        "name": "destination_place_type",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalGardenAction"
-                        }
-                    },
-                    {
-                        "name": "initial_place_condition",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalGardenAction"
-                        }
-                    },
-                    {
-                        "name": "destination_place_condition",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalGardenAction"
-                        }
-                    },
-                    {
-                        "name": "treatment",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalGardenAction"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/BotanicalGardenAction"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/botanical_garden_actions/{id}": {
-            "get": {
-                "tags": [
-                    "BotanicalGardenAction"
-                ],
-                "summary": "Display the specified BotanicalGardenAction",
-                "description": "Get BotanicalGardenAction",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of BotanicalGardenAction",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/BotanicalGardenAction"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "BotanicalGardenAction"
-                ],
-                "summary": "Update the specified BotanicalGardenAction in storage",
-                "description": "Update BotanicalGardenAction",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of BotanicalGardenAction",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "BotanicalGardenAction that should be updated",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalGardenAction"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/BotanicalGardenAction"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "BotanicalGardenAction"
-                ],
-                "summary": "Remove the specified BotanicalGardenAction from storage",
-                "description": "Delete BotanicalGardenAction",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of BotanicalGardenAction",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
         "/botanical_irrigations": {
             "get": {
                 "tags": [
@@ -4265,6 +3963,285 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of BotanicalIrrigation",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/botanical_operations": {
+            "get": {
+                "tags": [
+                    "BotanicalOperation"
+                ],
+                "summary": "Get a listing of the BotanicalOperations.",
+                "description": "Get all BotanicalOperations",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BotanicalOperation"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "BotanicalOperation"
+                ],
+                "summary": "Store a newly created BotanicalOperation in storage",
+                "description": "Store BotanicalOperation",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "botanical_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalOperation"
+                        }
+                    },
+                    {
+                        "name": "location_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalOperation"
+                        }
+                    },
+                    {
+                        "name": "operation_id",
+                        "in": "body",
+                        "description": "1 => seeding , 2=>planting",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalOperation"
+                        }
+                    },
+                    {
+                        "name": "date",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalOperation"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalOperation"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalOperation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/BotanicalOperation"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/botanical_operations/{id}": {
+            "get": {
+                "tags": [
+                    "BotanicalOperation"
+                ],
+                "summary": "Display the specified BotanicalOperation",
+                "description": "Get BotanicalOperation",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of BotanicalOperation",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/BotanicalOperation"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "BotanicalOperation"
+                ],
+                "summary": "Update the specified BotanicalOperation in storage",
+                "description": "Update BotanicalOperation",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of BotanicalOperation",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "botanical_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalOperation"
+                        }
+                    },
+                    {
+                        "name": "location_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalOperation"
+                        }
+                    },
+                    {
+                        "name": "operation_id",
+                        "in": "body",
+                        "description": "1 => seeding , 2=>planting",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalOperation"
+                        }
+                    },
+                    {
+                        "name": "date",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalOperation"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalOperation"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalOperation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/BotanicalOperation"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "BotanicalOperation"
+                ],
+                "summary": "Remove the specified BotanicalOperation from storage",
+                "description": "Delete BotanicalOperation",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of BotanicalOperation",
                         "required": true,
                         "type": "integer"
                     }
@@ -10696,15 +10673,6 @@
                         "schema": {
                             "$ref": "#/definitions/Herbarium"
                         }
-                    },
-                    {
-                        "name": "flowering_time",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
                     }
                 ],
                 "responses": {
@@ -10867,15 +10835,6 @@
                     },
                     {
                         "name": "description",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Herbarium"
-                        }
-                    },
-                    {
-                        "name": "flowering_time",
                         "in": "body",
                         "description": "Herbarium that should be stored",
                         "required": false,
@@ -13111,10 +13070,19 @@
                 ],
                 "parameters": [
                     {
-                        "name": "herbarium_id",
+                        "name": "plant_id",
                         "in": "body",
                         "description": "MedicinalPlant that should be stored",
                         "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
+                        "name": "herbarium_id",
+                        "in": "body",
+                        "description": "MedicinalPlant that should be stored",
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
                         }
@@ -13459,10 +13427,19 @@
                         "type": "integer"
                     },
                     {
-                        "name": "herbarium_id",
+                        "name": "plant_id",
                         "in": "body",
                         "description": "MedicinalPlant that should be stored",
                         "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
+                        "name": "herbarium_id",
+                        "in": "body",
+                        "description": "MedicinalPlant that should be stored",
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
                         }
@@ -16506,15 +16483,6 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "is_flowering",
-                        "in": "query",
-                        "description": "0,1",
-                        "required": false,
-                        "type": "integer"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -16708,6 +16676,15 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "flowering_time",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
                         }
                     }
                 ],
@@ -16948,6 +16925,15 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "flowering_time",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
                         }
                     }
                 ],
@@ -17568,13 +17554,13 @@
                 }
             }
         },
-        "/planting_actions": {
+        "/plantingConditions": {
             "get": {
                 "tags": [
-                    "PlantingAction"
+                    "PlantingCondition"
                 ],
-                "summary": "Get a listing of the PlantingActions.",
-                "description": "Get all PlantingActions",
+                "summary": "Get a listing of the PlantingConditions.",
+                "description": "Get all PlantingConditions",
                 "produces": [
                     "application/json"
                 ],
@@ -17589,7 +17575,7 @@
                                 "data": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/PlantingAction"
+                                        "$ref": "#/definitions/PlantingCondition"
                                     }
                                 },
                                 "message": {
@@ -17603,10 +17589,10 @@
             },
             "post": {
                 "tags": [
-                    "PlantingAction"
+                    "PlantingCondition"
                 ],
-                "summary": "Store a newly created PlantingAction in storage",
-                "description": "Store PlantingAction",
+                "summary": "Store a newly created PlantingCondition in storage",
+                "description": "Store PlantingCondition",
                 "produces": [
                     "application/json"
                 ],
@@ -17614,19 +17600,19 @@
                     {
                         "name": "name",
                         "in": "body",
-                        "description": "PlantingAction that should be stored",
+                        "description": "PlantingCondition that should be stored",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/PlantingAction"
+                            "$ref": "#/definitions/PlantingCondition"
                         }
                     },
                     {
                         "name": "description",
                         "in": "body",
-                        "description": "PlantingAction that should be stored",
+                        "description": "PlantingCondition that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/PlantingAction"
+                            "$ref": "#/definitions/PlantingCondition"
                         }
                     }
                 ],
@@ -17639,7 +17625,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/PlantingAction"
+                                    "$ref": "#/definitions/PlantingCondition"
                                 },
                                 "message": {
                                     "type": "string"
@@ -17651,13 +17637,13 @@
                 }
             }
         },
-        "/plantingActions/{id}": {
+        "/plantingConditions/{id}": {
             "get": {
                 "tags": [
-                    "PlantingAction"
+                    "PlantingCondition"
                 ],
-                "summary": "Display the specified PlantingAction",
-                "description": "Get PlantingAction",
+                "summary": "Display the specified PlantingCondition",
+                "description": "Get PlantingCondition",
                 "produces": [
                     "application/json"
                 ],
@@ -17665,7 +17651,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of PlantingAction",
+                        "description": "id of PlantingCondition",
                         "required": true,
                         "type": "integer"
                     }
@@ -17679,7 +17665,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/PlantingAction"
+                                    "$ref": "#/definitions/PlantingCondition"
                                 },
                                 "message": {
                                     "type": "string"
@@ -17692,10 +17678,10 @@
             },
             "put": {
                 "tags": [
-                    "PlantingAction"
+                    "PlantingCondition"
                 ],
-                "summary": "Update the specified PlantingAction in storage",
-                "description": "Update PlantingAction",
+                "summary": "Update the specified PlantingCondition in storage",
+                "description": "Update PlantingCondition",
                 "produces": [
                     "application/json"
                 ],
@@ -17703,26 +17689,26 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of PlantingAction",
+                        "description": "id of PlantingCondition",
                         "required": true,
                         "type": "integer"
                     },
                     {
                         "name": "name",
                         "in": "body",
-                        "description": "PlantingAction that should be stored",
+                        "description": "PlantingCondition that should be stored",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/PlantingAction"
+                            "$ref": "#/definitions/PlantingCondition"
                         }
                     },
                     {
                         "name": "description",
                         "in": "body",
-                        "description": "PlantingAction that should be stored",
+                        "description": "PlantingCondition that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/PlantingAction"
+                            "$ref": "#/definitions/PlantingCondition"
                         }
                     }
                 ],
@@ -17735,7 +17721,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/PlantingAction"
+                                    "$ref": "#/definitions/PlantingCondition"
                                 },
                                 "message": {
                                     "type": "string"
@@ -17748,10 +17734,10 @@
             },
             "delete": {
                 "tags": [
-                    "PlantingAction"
+                    "PlantingCondition"
                 ],
-                "summary": "Remove the specified PlantingAction from storage",
-                "description": "Delete PlantingAction",
+                "summary": "Remove the specified PlantingCondition from storage",
+                "description": "Delete PlantingCondition",
                 "produces": [
                     "application/json"
                 ],
@@ -17759,7 +17745,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of PlantingAction",
+                        "description": "id of PlantingCondition",
                         "required": true,
                         "type": "integer"
                     }
@@ -22305,9 +22291,18 @@
                 ],
                 "parameters": [
                     {
-                        "name": "type",
+                        "name": "ph_type_id",
                         "in": "body",
-                        "description": "Soil that should be stored",
+                        "description": "1 => 'neutral', 2 => 'alkaline', 3 => 'acid', 4 => 'indifferent'",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Soil"
+                        }
+                    },
+                    {
+                        "name": "features",
+                        "in": "body",
+                        "description": "fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,\n     *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,\n     *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Soil"
@@ -22419,9 +22414,18 @@
                         "type": "integer"
                     },
                     {
-                        "name": "type",
+                        "name": "ph_type_id",
                         "in": "body",
-                        "description": "Soil that should be stored",
+                        "description": "1 => 'neutral', 2 => 'alkaline', 3 => 'acid', 4 => 'indifferent'",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Soil"
+                        }
+                    },
+                    {
+                        "name": "features",
+                        "in": "body",
+                        "description": "fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,\n     *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,\n     *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Soil"
@@ -22471,458 +22475,6 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of Soil",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/soilFeatures": {
-            "get": {
-                "tags": [
-                    "SoilFeature"
-                ],
-                "summary": "Get a listing of the SoilFeatures.",
-                "description": "Get all SoilFeatures",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/SoilFeature"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "SoilFeature"
-                ],
-                "summary": "Store a newly created SoilFeature in storage",
-                "description": "Store SoilFeature",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "SoilFeature that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SoilFeature"
-                        }
-                    },
-                    {
-                        "name": "unit",
-                        "in": "body",
-                        "description": "SoilFeature that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/SoilFeature"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/SoilFeature"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/soilFeatures/{id}": {
-            "get": {
-                "tags": [
-                    "SoilFeature"
-                ],
-                "summary": "Display the specified SoilFeature",
-                "description": "Get SoilFeature",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of SoilFeature",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/SoilFeature"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "SoilFeature"
-                ],
-                "summary": "Update the specified SoilFeature in storage",
-                "description": "Update SoilFeature",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of SoilFeature",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "SoilFeature that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SoilFeature"
-                        }
-                    },
-                    {
-                        "name": "unit",
-                        "in": "body",
-                        "description": "SoilFeature that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/SoilFeature"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/SoilFeature"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "SoilFeature"
-                ],
-                "summary": "Remove the specified SoilFeature from storage",
-                "description": "Delete SoilFeature",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of SoilFeature",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/soil_has_soil_features": {
-            "get": {
-                "tags": [
-                    "SoilHasSoilFeature"
-                ],
-                "summary": "Get a listing of the SoilHasSoilFeatures.",
-                "description": "Get all SoilHasSoilFeatures",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/SoilHasSoilFeature"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "SoilHasSoilFeature"
-                ],
-                "summary": "Store a newly created SoilHasSoilFeature in storage",
-                "description": "Store SoilHasSoilFeature",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "soil_id",
-                        "in": "body",
-                        "description": "SoilHasSoilFeature that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SoilHasSoilFeature"
-                        }
-                    },
-                    {
-                        "name": "soil_feature_id",
-                        "in": "body",
-                        "description": "SoilHasSoilFeature that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SoilHasSoilFeature"
-                        }
-                    },
-                    {
-                        "name": "value",
-                        "in": "body",
-                        "description": "SoilHasSoilFeature that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SoilHasSoilFeature"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/SoilHasSoilFeature"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/soil_has_soil_features/{id}": {
-            "get": {
-                "tags": [
-                    "SoilHasSoilFeature"
-                ],
-                "summary": "Display the specified SoilHasSoilFeature",
-                "description": "Get SoilHasSoilFeature",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of SoilHasSoilFeature",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/SoilHasSoilFeature"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "SoilHasSoilFeature"
-                ],
-                "summary": "Update the specified SoilHasSoilFeature in storage",
-                "description": "Update SoilHasSoilFeature",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of SoilHasSoilFeature",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "soil_id",
-                        "in": "body",
-                        "description": "SoilHasSoilFeature that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SoilHasSoilFeature"
-                        }
-                    },
-                    {
-                        "name": "soil_feature_id",
-                        "in": "body",
-                        "description": "SoilHasSoilFeature that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SoilHasSoilFeature"
-                        }
-                    },
-                    {
-                        "name": "value",
-                        "in": "body",
-                        "description": "SoilHasSoilFeature that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SoilHasSoilFeature"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/SoilHasSoilFeature"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "SoilHasSoilFeature"
-                ],
-                "summary": "Remove the specified SoilHasSoilFeature from storage",
-                "description": "Delete SoilHasSoilFeature",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of SoilHasSoilFeature",
                         "required": true,
                         "type": "integer"
                     }
@@ -26578,83 +26130,6 @@
                 }
             }
         },
-        "BotanicalGardenAction": {
-            "required": [
-                "botanical_id",
-                "planting_action_id",
-                "from_soil_id",
-                "from_lighting_id",
-                "from_garden_id"
-            ],
-            "properties": {
-                "id": {
-                    "type": "integer"
-                },
-                "botanical_id": {
-                    "type": "integer"
-                },
-                "planting_action_id": {
-                    "type": "integer"
-                },
-                "date": {
-                    "type": "string"
-                },
-                "from_soil_id": {
-                    "type": "integer"
-                },
-                "to_soil_id": {
-                    "type": "integer"
-                },
-                "from_lighting_id": {
-                    "type": "integer"
-                },
-                "to_lighting_id": {
-                    "type": "integer"
-                },
-                "from_garden_id": {
-                    "type": "string"
-                },
-                "to_garden_id": {
-                    "type": "string"
-                },
-                "initial_place_type": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "destination_place_type": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "initial_place_condition": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "destination_place_condition": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "treatment": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "created_at": {
-                    "type": "string"
-                },
-                "updated_at": {
-                    "type": "string"
-                }
-            }
-        },
         "BotanicalIrrigation": {
             "required": [
                 "botanical_id",
@@ -26688,6 +26163,68 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "BotanicalOperation": {
+            "required": [
+                "botanical_id",
+                "location_id",
+                "operation_id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "botanical_id": {
+                    "type": "integer"
+                },
+                "location_id": {
+                    "type": "integer"
+                },
+                "operation_id": {
+                    "type": "integer"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "BotanicalPlantingCondition": {
+            "required": [
+                "botanical_id",
+                "planting_condition_id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "botanical_id": {
+                    "type": "integer"
+                },
+                "planting_condition_id": {
+                    "type": "integer"
                 },
                 "created_at": {
                     "type": "string"
@@ -27628,65 +27165,51 @@
         },
         "Herbarium": {
             "required": [
-                "general_habitat_id",
-                "general_phytogeography_id",
-                "life_forms",
                 "organization_id",
                 "plant_id"
             ],
             "properties": {
                 "id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "parent_id": {
                     "description": "parent_id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "number": {
                     "description": "number",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "general_origin_id": {
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "general_phytogeography_id": {
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "protection_id": {
                     "description": "protection_id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "organization_id": {
                     "description": "organization_id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "sheets_no": {
                     "description": "sheets_no",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "samples_no": {
                     "description": "samples_no",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "tip_qt": {
                     "description": "tip_qt",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "physical_tip_qt": {
                     "description": "physical_tip_qt",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "tip_type": {
                     "description": "tip_type",
@@ -27731,20 +27254,16 @@
                     "type": "number"
                 },
                 "plant_id": {
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "general_substrate_lichen_id": {
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "general_substrate_diatom_id": {
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "general_substrate_moss_id": {
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "created_at": {
                     "description": "created_at",
@@ -28317,119 +27836,100 @@
         },
         "MedicinalPlant": {
             "required": [
-                "herbarium_id",
-                "medicine_name"
+                "plant_id"
             ],
             "properties": {
                 "id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
+                },
+                "plant_id": {
+                    "description": "id",
+                    "type": "integer"
                 },
                 "herbarium_id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "description": "from herbariums selected plant",
+                    "type": "integer"
                 },
                 "aerial_part_id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "ground_part_id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "food_industry_id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "hygienic_cosmetic_industry_id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "industrial_potential_id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "general_phenology_id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "method_distillation_id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "method_extraction_id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "method_analyse_id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "secondary_metabolite_id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "effective_material_id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "product_id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "traditional_iranian_medicine": {
                     "description": "traditional_iranian_medicine",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "natural_drug": {
                     "description": "natural_drug",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "inherbal_medicine_store": {
                     "description": "inherbal_medicine_store",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "exporting": {
                     "description": "exporting",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "importing": {
                     "description": "importing",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "cultivated_area": {
                     "description": "cultivated_area",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "studied_sample": {
                     "description": "studied_sample",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "presence_in_country": {
                     "description": "presence_in_country",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
                 "medicinal_properties": {
                     "description": "medicinal_properties",
@@ -29291,7 +28791,7 @@
                 }
             }
         },
-        "PlantingAction": {
+        "PlantingCondition": {
             "required": [
                 "name"
             ],
@@ -30250,9 +29750,8 @@
         },
         "Soil": {
             "required": [
-                "value",
-                "soil_id",
-                "soil_feature_id"
+                "ph_type_id",
+                "features"
             ],
             "properties": {
                 "id": {
@@ -30260,8 +29759,15 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "type": {
-                    "description": "type",
+                "ph_type_id": {
+                    "description": "1 => 'neutral', 2 => 'alkaline', 3 => 'acid', 4 => 'indifferent'",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "features": {
+                    "description": "fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,\n *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,\n *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -30270,82 +29776,6 @@
                 "description": {
                     "description": "description",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
-        },
-        "SoilFeature": {
-            "required": [
-                "name"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "name": {
-                    "description": "name",
-                    "type": "string"
-                },
-                "unit": {
-                    "description": "unit",
-                    "type": "array",
-                    "format": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
-        },
-        "SoilHasSoilFeature": {
-            "required": [
-                "value",
-                "soil_id",
-                "soil_feature_id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "soil_id": {
-                    "description": "soil_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "soil_feature_id": {
-                    "description": "soil_feature_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "value": {
-                    "description": "value",
-                    "type": "array",
-                    "format": "array",
                     "items": {
                         "type": "string"
                     }
