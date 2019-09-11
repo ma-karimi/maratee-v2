@@ -22,6 +22,5 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'email' => $faker->safeEmail,
         'work_experience' => $faker->numberBetween(1, 100),
         'password' => 'admin@123',
-        'deleted_at' => $faker->dateTimeBetween(),
     ];
 });
