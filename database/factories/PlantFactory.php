@@ -31,6 +31,7 @@ $factory->define(App\Models\Plant::class, function (Faker $faker) {
         'protection_id' => $faker->randomElement($protections),
         'general_phytogeography_id' => $faker->randomElement($phytogeographies),
         'general_ecology_id' => $faker->randomElement($ecology),
-        'is_flowering' => $faker->numberBetween(0, 1),
+        'is_flowering' => $is_flower = $faker->numberBetween(0, 1),
+        'flowering_time' => $is_flower == 1 ? $faker->numberBetween(1, 12) : null,
     ];
 });

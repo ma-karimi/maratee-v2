@@ -230,7 +230,7 @@ class Paleontology extends BaseModel
         'preservation' => 'json',
         'color' => 'json',
         'element' => 'json',
-        'treatment' => 'json',
+        'treatment_history' => 'json',
         'additional_info' => 'json',
         'excavation' => 'json',
         'collector_name' => 'json',

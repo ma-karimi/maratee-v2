@@ -9,6 +9,8 @@
 namespace App\Models\Accessor;
 
 
+use Illuminate\Support\Arr;
+
 trait PlantAccessor
 {
     public function getScientificNameAttribute()
@@ -19,5 +21,10 @@ trait PlantAccessor
             'subspecies_name' => !empty($this->taxonomy->subspecies) ? $this->taxonomy->subspecies->name : null,
             'variety_name' => !empty($this->taxonomy->variety) ? $this->taxonomy->variety->name : null,
         ];
+    }
+
+    public function getFloweringTimeNameAttribute()
+    {
+        return Arr::get(self::FLOWERING_TIME, $this->flowering_time);
     }
 }
