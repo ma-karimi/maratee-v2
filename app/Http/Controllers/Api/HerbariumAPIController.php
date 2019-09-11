@@ -151,13 +151,6 @@ class HerbariumAPIController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
-     *      @SWG\Parameter(
-     *          name="flowering_time",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -319,13 +312,6 @@ class HerbariumAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="description",
-     *          in="body",
-     *          description="Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="flowering_time",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=false,

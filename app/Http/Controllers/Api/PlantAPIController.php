@@ -37,13 +37,6 @@ class PlantAPIController extends AppBaseController
      *      tags={"Plant"},
      *      description="Get all Plants",
      *      produces={"application/json"},
-     *   @SWG\Parameter(
-     *     name="is_flowering",
-     *     in="query",
-     *     description="0,1",
-     *     required=false,
-     *     type="integer"
-     *   ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -212,6 +205,13 @@ class PlantAPIController extends AppBaseController
      *          description="Plant that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="flowering_time",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -438,6 +438,13 @@ class PlantAPIController extends AppBaseController
      *          description="Plant that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="flowering_time",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Herbarium")
      *      ),
      *      @SWG\Response(
      *          response=200,
