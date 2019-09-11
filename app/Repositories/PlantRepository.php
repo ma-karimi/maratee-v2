@@ -31,9 +31,8 @@ class PlantRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'is_flowering' => [
-            'scope' => 'ofFloweringHerbariums'
-        ]
+
+
     ];
 
     /**
