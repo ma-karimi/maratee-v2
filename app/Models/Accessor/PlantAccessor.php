@@ -23,8 +23,8 @@ trait PlantAccessor
         ];
     }
 
-    public function getFloweringTimeAttribute($value)
+    public function getFloweringTimeNameAttribute()
     {
-        return Arr::get(self::FLOWERING_TIME, $value);
+        return Arr::get(self::FLOWERING_TIME, $this->flowering_time);
     }
 }
