@@ -12,7 +12,7 @@ class AddForeignKeysToBotanicalGardenActionsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('botanical_garden_actions', function(Blueprint $table)
+		Schema::table('botanical_operations', function(Blueprint $table)
 		{
 			$table->foreign('to_garden_id')->references('id')->on('gardens')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('from_lighting_id')->references('id')->on('lightings')->onUpdate('NO ACTION')->onDelete('CASCADE');
@@ -33,7 +33,7 @@ class AddForeignKeysToBotanicalGardenActionsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('botanical_garden_actions', function(Blueprint $table)
+		Schema::table('botanical_operations', function(Blueprint $table)
 		{
 			$table->dropForeign(['to_garden_id']);
 			$table->dropForeign(['to_lighting_id']);

@@ -51,6 +51,8 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  **/
 class Botanical extends BaseModel
 {
+    public const GROWTH_RATES = [0 => 'unknown', 1 => 'very low', 2 => 'low', 3 => 'moderate', 4 => 'fast', 5 => 'very fast'];
+
     public static $linguistically = ['flower_color' => false, 'fruit_color' => false, 'foliage_color' => false, 'seed_germination' => false, 'growth_rate' => false, 'first_flowering' => false, 'flowering_period' => false, 'first_seeding' => false, 'seed_rate' => false, 'seed_production' => false, 'sensitivity' => false, 'sensitivity_description' => false, 'notes' => false, 'entry_type' => false];
     public static $rules = [
         'year' => 'date',
@@ -102,7 +104,7 @@ class Botanical extends BaseModel
 
     public function botanicalGardenActions()
     {
-        return $this->hasMany(BotanicalGardenAction::class)->latest();
+        return $this->hasMany(BotanicalOperation::class)->latest();
     }
 
     public function botanicalIrrigations($season = null)

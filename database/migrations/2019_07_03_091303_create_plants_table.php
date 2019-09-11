@@ -24,7 +24,7 @@ class CreatePlantsTable extends Migration {
             $table->json('ecology_description')->nullable();
             // $table->unsignedBigInteger('taxonomy_id');
             //$table->unsignedBigInteger('classification_id');
-            $table->string('flowering_time')->nullable();
+            $table->tinyInteger('flowering_time')->nullable();
             $table->unsignedBigInteger('protection_id');
             $table->unsignedBigInteger('general_ecology_id')->nullable();
             $table->unsignedBigInteger('general_habitat_id')->nullable();

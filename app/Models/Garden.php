@@ -45,6 +45,6 @@ class Garden extends BaseModel
      */
     public function botanicalGardenActions(): HasMany
     {
-        return $this->hasMany(BotanicalGardenAction::class, ['from_garden_id', 'to_garden_id'])->latest();
+        return $this->hasMany(BotanicalOperation::class, ['from_garden_id', 'to_garden_id'])->latest();
     }
 }

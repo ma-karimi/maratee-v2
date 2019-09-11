@@ -7,32 +7,19 @@ use App\Models\Contracts\BaseModel;
 /**
  * @SWG\Definition(
  *            definition="BotanicalGardenAction",
- *            required={"botanical_id", "planting_action_id", "from_soil_id", "from_lighting_id", "from_garden_id"},
+ *            required={"botanical_id", "operation_id", "from_soil_id", "from_lighting_id", "from_garden_id"},
  * 			@SWG\Property(property="id", type="integer"),
  * 			@SWG\Property(property="botanical_id", type="integer"),
- * 			@SWG\Property(property="planting_action_id", type="integer"),
+ * 			@SWG\Property(property="operation_id", type="integer"),
  * 			@SWG\Property(property="date", type="string"),
- * 			@SWG\Property(property="from_soil_id", type="integer"),
- * 			@SWG\Property(property="to_soil_id", type="integer"),
- * 			@SWG\Property(property="from_lighting_id", type="integer"),
- * 			@SWG\Property(property="to_lighting_id", type="integer"),
- * 			@SWG\Property(property="from_garden_id", type="string"),
- * 			@SWG\Property(property="to_garden_id", type="string"),
- * 			@SWG\Property(property="initial_place_type", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="destination_place_type", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="initial_place_condition", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="destination_place_condition", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="treatment", type="array",
+ * 			@SWG\Property(property="number", type="string"),
+ * 			@SWG\Property(property="description", type="array",
  *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
-class BotanicalGardenAction extends BaseModel
+class BotanicalOperation extends BaseModel
 {
 
     public static $linguistically = ['initial_place_type' => false, 'destination_place_type' => false, 'initial_place_condition' => false, 'destination_place_condition' => false, 'treatment' => false];

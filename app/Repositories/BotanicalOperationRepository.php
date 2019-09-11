@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\BotanicalGardenAction;
+use App\Models\BotanicalOperation;
 use App\Repositories\BaseRepository;
 
 /**
@@ -11,13 +11,13 @@ use App\Repositories\BaseRepository;
  * @version July 14, 2019, 10:55 am UTC
 */
 
-class BotanicalGardenActionRepository extends BaseRepository
+class BotanicalOperationRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**
@@ -35,6 +35,6 @@ class BotanicalGardenActionRepository extends BaseRepository
      **/
     public function model()
     {
-        return BotanicalGardenAction::class;
+        return BotanicalOperation::class;
     }
 }

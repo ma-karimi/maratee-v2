@@ -32,7 +32,6 @@ if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >
 ');
 
             $table->json('description')->nullable();
-            $table->tinyInteger('growth_rate')->default(0)->comment('[0:unknown, 1: very low, 2: low, 3: moderate, 4: fast, 5: very fast]');
 //            $table->json('organization_description')->nullable();
 //            $table->integer('herbarium_tip_location')->nullable()->comment('location of keeping herbarium tip.
 //that is an herbarium organization which we can but its id in this place');

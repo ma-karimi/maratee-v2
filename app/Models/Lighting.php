@@ -60,6 +60,6 @@ class Lighting extends BaseModel
 
     public function botanicalGardenActions()
     {
-        return $this->hasMany(BotanicalGardenAction::class, ['from_lighting_id', 'to_lighting_id'])->latest();
+        return $this->hasMany(BotanicalOperation::class, ['from_lighting_id', 'to_lighting_id'])->latest();
     }
 }

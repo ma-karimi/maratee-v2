@@ -1,8 +1,8 @@
 <?php namespace Tests\Traits;
 
 use Faker\Factory as Faker;
-use App\Models\BotanicalGardenAction;
-use App\Repositories\BotanicalGardenActionRepository;
+use App\Models\BotanicalOperation;
+use App\Repositories\BotanicalOperationRepository;
 
 trait MakeBotanicalGardenActionTrait
 {
@@ -10,12 +10,12 @@ trait MakeBotanicalGardenActionTrait
      * Create fake instance of BotanicalGardenAction and save it in database
      *
      * @param array $botanicalGardenActionFields
-     * @return BotanicalGardenAction
+     * @return BotanicalOperation
      */
     public function makeBotanicalGardenAction($botanicalGardenActionFields = [])
     {
-        /** @var BotanicalGardenActionRepository $botanicalGardenActionRepo */
-        $botanicalGardenActionRepo = \App::make(BotanicalGardenActionRepository::class);
+        /** @var BotanicalOperationRepository $botanicalGardenActionRepo */
+        $botanicalGardenActionRepo = \App::make(BotanicalOperationRepository::class);
         $theme = $this->fakeBotanicalGardenActionData($botanicalGardenActionFields);
         return $botanicalGardenActionRepo->create($theme);
     }
@@ -24,11 +24,11 @@ trait MakeBotanicalGardenActionTrait
      * Get fake instance of BotanicalGardenAction
      *
      * @param array $botanicalGardenActionFields
-     * @return BotanicalGardenAction
+     * @return BotanicalOperation
      */
     public function fakeBotanicalGardenAction($botanicalGardenActionFields = [])
     {
-        return new BotanicalGardenAction($this->fakeBotanicalGardenActionData($botanicalGardenActionFields));
+        return new BotanicalOperation($this->fakeBotanicalGardenActionData($botanicalGardenActionFields));
     }
 
     /**

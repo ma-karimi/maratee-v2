@@ -2,28 +2,28 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateBotanicalGardenActionAPIRequest;
-use App\Http\Requests\Api\UpdateBotanicalGardenActionAPIRequest;
-use App\Http\Resources\BotanicalGardenActionResource;
-use App\Models\BotanicalGardenAction;
-use App\Repositories\BotanicalGardenActionRepository;
+use App\Http\Requests\Api\CreateBotanicalOperationAPIRequest;
+use App\Http\Requests\Api\UpdateBotanicalOperationAPIRequest;
+use App\Http\Resources\BotanicalOperationResource;
+use App\Models\BotanicalOperation;
+use App\Repositories\BotanicalOperationRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class BotanicalGardenActionController
+ * Class BotanicalOperationController
  * @package App\Http\Controllers\Api
  */
 
-class BotanicalGardenActionAPIController extends AppBaseController
+class BotanicalOperationAPIController extends AppBaseController
 {
-    /** @var  BotanicalGardenActionRepository */
-    private $botanicalGardenActionRepository;
+    /** @var  BotanicalOperationRepository */
+    private $botanicalOperationRepository;
 
-    public function __construct(BotanicalGardenActionRepository $botanicalGardenActionRepo)
+    public function __construct(BotanicalOperationRepository $botanicalOperationRepo)
     {
-        $this->botanicalGardenActionRepository = $botanicalGardenActionRepo;
+        $this->botanicalOperationRepository = $botanicalOperationRepo;
     }
 
     /**
@@ -32,9 +32,9 @@ class BotanicalGardenActionAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/botanical_garden_actions",
-     *      summary="Get a listing of the BotanicalGardenActions.",
-     *      tags={"BotanicalGardenAction"},
-     *      description="Get all BotanicalGardenActions",
+     *      summary="Get a listing of the BotanicalOperations.",
+     *      tags={"BotanicalOperation"},
+     *      description="Get all BotanicalOperations",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -48,7 +48,7 @@ class BotanicalGardenActionAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/BotanicalGardenAction")
+     *                  @SWG\Items(ref="#/definitions/BotanicalOperation")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -57,111 +57,112 @@ class BotanicalGardenActionAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
-        $botanicalGardenActions = $this->botanicalGardenActionRepository->paginate(
+        $botanicalOperations = $this->botanicalOperationRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
             $request->get('relations')
         );
-       // $botanicalGardenActions=BotanicalGardenActionResource::collection($botanicalGardenActions);
-        return $this->sendResponse($botanicalGardenActions, 'Botanical Garden Actions retrieved successfully');
+       // $botanicalOperations=BotanicalOperationResource::collection($botanicalOperations);
+        return $this->sendResponse($botanicalOperations, 'Botanical Garden Actions retrieved successfully');
     }
 
     /**
-     * @param CreateBotanicalGardenActionAPIRequest $request
+     * @param CreateBotanicalOperationAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
      *      path="/botanical_garden_actions",
-     *      summary="Store a newly created BotanicalGardenAction in storage",
-     *      tags={"BotanicalGardenAction"},
-     *      description="Store BotanicalGardenAction",
+     *      summary="Store a newly created BotanicalOperation in storage",
+     *      tags={"BotanicalOperation"},
+     *      description="Store BotanicalOperation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="botanical_id",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/BotanicalGardenAction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
      *          name="planting_action_id",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/BotanicalGardenAction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
      *          name="from_soil_id",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/BotanicalGardenAction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
      *          name="from_lighting_id",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/BotanicalGardenAction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
      *          name="from_garden_id",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/BotanicalGardenAction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
      *          name="to_soil_id",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/BotanicalGardenAction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
      *          name="to_lighting_id",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/BotanicalGardenAction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
      *          name="to_garden_id",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/BotanicalGardenAction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
      *          name="date",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/BotanicalGardenAction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
      *          name="initial_place_type",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/BotanicalGardenAction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
      *          name="destination_place_type",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/BotanicalGardenAction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
      *          name="initial_place_condition",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/BotanicalGardenAction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
      *          name="destination_place_condition",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/BotanicalGardenAction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
      *          name="treatment",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/BotanicalGardenAction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -174,7 +175,7 @@ class BotanicalGardenActionAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/BotanicalGardenAction"
+     *                  ref="#/definitions/BotanicalOperation"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -184,13 +185,13 @@ class BotanicalGardenActionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateBotanicalGardenActionAPIRequest $request)
+    public function store(CreateBotanicalOperationAPIRequest $request)
     {
         $input = $request->all();
 
-        $botanicalGardenAction = $this->botanicalGardenActionRepository->create($input);
+        $botanicalOperation = $this->botanicalOperationRepository->create($input);
 
-        return $this->sendResponse($botanicalGardenAction->toArray(), 'Botanical Garden Action saved successfully');
+        return $this->sendResponse($botanicalOperation->toArray(), 'Botanical Garden Action saved successfully');
     }
 
     /**
@@ -199,13 +200,13 @@ class BotanicalGardenActionAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/botanical_garden_actions/{id}",
-     *      summary="Display the specified BotanicalGardenAction",
-     *      tags={"BotanicalGardenAction"},
-     *      description="Get BotanicalGardenAction",
+     *      summary="Display the specified BotanicalOperation",
+     *      tags={"BotanicalOperation"},
+     *      description="Get BotanicalOperation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of BotanicalGardenAction",
+     *          description="id of BotanicalOperation",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -221,7 +222,7 @@ class BotanicalGardenActionAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/BotanicalGardenAction"
+     *                  ref="#/definitions/BotanicalOperation"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -233,30 +234,30 @@ class BotanicalGardenActionAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var BotanicalGardenAction $botanicalGardenAction */
-        $botanicalGardenAction = $this->botanicalGardenActionRepository->find($id, \request()->get('relations'));
+        /** @var BotanicalOperation $botanicalOperation */
+        $botanicalOperation = $this->botanicalOperationRepository->find($id, \request()->get('relations'));
 
-        if ($botanicalGardenAction === null) {
+        if ($botanicalOperation === null) {
             return $this->sendError('Botanical Garden Action not found');
         }
 
-        return $this->sendResponse($botanicalGardenAction->toArray(), 'Botanical Garden Action retrieved successfully');
+        return $this->sendResponse($botanicalOperation->toArray(), 'Botanical Garden Action retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdateBotanicalGardenActionAPIRequest $request
+     * @param UpdateBotanicalOperationAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
      *      path="/botanical_garden_actions/{id}",
-     *      summary="Update the specified BotanicalGardenAction in storage",
-     *      tags={"BotanicalGardenAction"},
-     *      description="Update BotanicalGardenAction",
+     *      summary="Update the specified BotanicalOperation in storage",
+     *      tags={"BotanicalOperation"},
+     *      description="Update BotanicalOperation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of BotanicalGardenAction",
+     *          description="id of BotanicalOperation",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -264,9 +265,9 @@ class BotanicalGardenActionAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="BotanicalGardenAction that should be updated",
+     *          description="BotanicalOperation that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/BotanicalGardenAction")
+     *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -279,7 +280,7 @@ class BotanicalGardenActionAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/BotanicalGardenAction"
+     *                  ref="#/definitions/BotanicalOperation"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -289,20 +290,20 @@ class BotanicalGardenActionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateBotanicalGardenActionAPIRequest $request)
+    public function update($id, UpdateBotanicalOperationAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var BotanicalGardenAction $botanicalGardenAction */
-        $botanicalGardenAction = $this->botanicalGardenActionRepository->find($id, \request()->get('relations'));
+        /** @var BotanicalOperation $botanicalOperation */
+        $botanicalOperation = $this->botanicalOperationRepository->find($id, \request()->get('relations'));
 
-        if ($botanicalGardenAction === null) {
+        if ($botanicalOperation === null) {
             return $this->sendError('Botanical Garden Action not found');
         }
 
-        $botanicalGardenAction = $this->botanicalGardenActionRepository->update($input, $id);
+        $botanicalOperation = $this->botanicalOperationRepository->update($input, $id);
 
-        return $this->sendResponse($botanicalGardenAction->toArray(), 'BotanicalGardenAction updated successfully');
+        return $this->sendResponse($botanicalOperation->toArray(), 'BotanicalOperation updated successfully');
     }
 
     /**
@@ -312,13 +313,13 @@ class BotanicalGardenActionAPIController extends AppBaseController
      * @throws \Exception
      * @SWG\Delete(
      *      path="/botanical_garden_actions/{id}",
-     *      summary="Remove the specified BotanicalGardenAction from storage",
-     *      tags={"BotanicalGardenAction"},
-     *      description="Delete BotanicalGardenAction",
+     *      summary="Remove the specified BotanicalOperation from storage",
+     *      tags={"BotanicalOperation"},
+     *      description="Delete BotanicalOperation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of BotanicalGardenAction",
+     *          description="id of BotanicalOperation",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -346,14 +347,14 @@ class BotanicalGardenActionAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var BotanicalGardenAction $botanicalGardenAction */
-        $botanicalGardenAction = $this->botanicalGardenActionRepository->find($id, \request()->get('relations'));
+        /** @var BotanicalOperation $botanicalOperation */
+        $botanicalOperation = $this->botanicalOperationRepository->find($id, \request()->get('relations'));
 
-        if (empty($botanicalGardenAction)) {
+        if (empty($botanicalOperation)) {
             return $this->sendError('Botanical Garden Action not found');
         }
 
-        $botanicalGardenAction->delete();
+        $botanicalOperation->delete();
 
         return $this->sendResponse($id, 'Botanical Garden Action deleted successfully');
     }

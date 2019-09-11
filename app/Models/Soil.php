@@ -79,7 +79,7 @@ class Soil extends BaseModel
 
     public function botanicalGardenActions()
     {
-        return $this->hasMany(BotanicalGardenAction::class, ['from_soil_id', 'to_soil_id'])->latest();
+        return $this->hasMany(BotanicalOperation::class, ['from_soil_id', 'to_soil_id'])->latest();
 
     }
 

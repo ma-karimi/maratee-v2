@@ -15,7 +15,8 @@ class CreateSoilsTable extends Migration {
 		Schema::create('soils', function(Blueprint $table)
 		{
 			$table->bigIncrements('id');
-			$table->json('type');
+			$table->json('ph_type_id')->comment('neutral-alkaline-acid-indifferent');
+			$table->json('features')->comment('clay soil%-loam%-fine sand%-coarse sand%- gravel%-shale%-salt%-gypsum%-forest soil%peat%-compost%-manure%-bone powder%');
 			$table->json('description')->nullable();
 
             $table->timeStampsTz();

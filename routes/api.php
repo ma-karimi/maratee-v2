@@ -21,6 +21,9 @@
         });
     });
 });*/
+
+use App\Repositories\BotanicalOperationRepository;
+
 Route::delete('/{class}/multiple_delete', 'APIController@multipleDestroy');
 Route::post('/{class}/hub', 'APIController@storeHub');
 Route::delete('/{class}/hub', 'APIController@destroyHub');
@@ -112,7 +115,7 @@ Route::apiResource('authors', 'AuthorAPIController');
 
 Route::apiResource('botanicals', 'BotanicalAPIController');
 
-Route::apiResource('botanical_garden_actions', 'BotanicalGardenActionAPIController');
+Route::apiResource('botanical_operations', 'BotanicalOperationAPIController');
 
 
 Route::apiResource('botanical_irrigations', 'BotanicalIrrigationAPIController');

@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\BotanicalGardenAction::class, function (Faker $faker) {
+$factory->define(App\Models\BotanicalOperation::class, function (Faker $faker) {
     return [
         'botanical_id' => function () {
             return factory(App\Models\Botanical::class)->create()->id;

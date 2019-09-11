@@ -67,6 +67,6 @@ class PlantingAction extends BaseModel
      */
     public function botanicalGardenActions(): HasMany
     {
-        return $this->hasMany(BotanicalGardenAction::class)->latest();
+        return $this->hasMany(BotanicalOperation::class)->latest();
     }
 }

@@ -1,7 +1,7 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\BotanicalGardenAction;
-use App\Repositories\BotanicalGardenActionRepository;
+use App\Models\BotanicalOperation;
+use App\Repositories\BotanicalOperationRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\Traits\MakeBotanicalGardenActionTrait;
@@ -12,14 +12,14 @@ class BotanicalGardenActionRepositoryTest extends TestCase
     use MakeBotanicalGardenActionTrait, ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var BotanicalGardenActionRepository
+     * @var BotanicalOperationRepository
      */
     protected $botanicalGardenActionRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->botanicalGardenActionRepo = \App::make(BotanicalGardenActionRepository::class);
+        $this->botanicalGardenActionRepo = \App::make(BotanicalOperationRepository::class);
     }
 
     /**
@@ -32,7 +32,7 @@ class BotanicalGardenActionRepositoryTest extends TestCase
         $createdBotanicalGardenAction = $createdBotanicalGardenAction->toArray();
         $this->assertArrayHasKey('id', $createdBotanicalGardenAction);
         $this->assertNotNull($createdBotanicalGardenAction['id'], 'Created BotanicalGardenAction must have id specified');
-        $this->assertNotNull(BotanicalGardenAction::find($createdBotanicalGardenAction['id']), 'BotanicalGardenAction with given id must be in DB');
+        $this->assertNotNull(BotanicalOperation::find($createdBotanicalGardenAction['id']), 'BotanicalGardenAction with given id must be in DB');
         $this->assertModelData($botanicalGardenAction, $createdBotanicalGardenAction);
     }
 
@@ -68,6 +68,6 @@ class BotanicalGardenActionRepositoryTest extends TestCase
         $botanicalGardenAction = $this->makeBotanicalGardenAction();
         $resp = $this->botanicalGardenActionRepo->delete($botanicalGardenAction->id);
         $this->assertTrue($resp);
-        $this->assertNull(BotanicalGardenAction::find($botanicalGardenAction->id), 'BotanicalGardenAction should not exist in DB');
+        $this->assertNull(BotanicalOperation::find($botanicalGardenAction->id), 'BotanicalGardenAction should not exist in DB');
     }
 }
