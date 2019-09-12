@@ -3789,6 +3789,16 @@
                     {
                         "name": "requirement",
                         "in": "body",
+                        "description": "1 => 'sparse', 2 => 'moderate', 3 => 'heavy'",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalIrrigation"
+                        }
+                    },
+                    {
+                        "name": "appropriate_irrigation_time",
+                        "in": "body",
+                        "description": "0 => 'indifferent', 1 => 'morning', 2 => 'day', 3 => 'evening', 4 => 'night'",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/BotanicalIrrigation"
@@ -3796,14 +3806,6 @@
                     },
                     {
                         "name": "irrigation_time",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalIrrigation"
-                        }
-                    },
-                    {
-                        "name": "seasonal_feature",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3907,6 +3909,16 @@
                     {
                         "name": "requirement",
                         "in": "body",
+                        "description": "1 => 'sparse', 2 => 'moderate', 3 => 'heavy'",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalIrrigation"
+                        }
+                    },
+                    {
+                        "name": "appropriate_irrigation_time",
+                        "in": "body",
+                        "description": "0 => 'indifferent', 1 => 'morning', 2 => 'day', 3 => 'evening', 4 => 'night'",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/BotanicalIrrigation"
@@ -3914,14 +3926,6 @@
                     },
                     {
                         "name": "irrigation_time",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/BotanicalIrrigation"
-                        }
-                    },
-                    {
-                        "name": "seasonal_feature",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -15155,24 +15159,6 @@
                         }
                     },
                     {
-                        "name": "general_class_id",
-                        "in": "body",
-                        "description": "Paleontology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Paleontology"
-                        }
-                    },
-                    {
-                        "name": "general_order_id",
-                        "in": "body",
-                        "description": "Paleontology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Paleontology"
-                        }
-                    },
-                    {
                         "name": "plant_id",
                         "in": "body",
                         "description": "Paleontology that should be stored",
@@ -15467,24 +15453,6 @@
                         }
                     },
                     {
-                        "name": "general_class_id",
-                        "in": "body",
-                        "description": "Paleontology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Paleontology"
-                        }
-                    },
-                    {
-                        "name": "general_order_id",
-                        "in": "body",
-                        "description": "Paleontology that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Paleontology"
-                        }
-                    },
-                    {
                         "name": "plant_id",
                         "in": "body",
                         "description": "Paleontology that should be stored",
@@ -15726,6 +15694,318 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of Paleontology",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/paleontology_citations": {
+            "get": {
+                "tags": [
+                    "PaleontologyCitation"
+                ],
+                "summary": "Get a listing of the PaleontologyCitations.",
+                "description": "Get all PaleontologyCitations",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/PaleontologyCitation"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "PaleontologyCitation"
+                ],
+                "summary": "Store a newly created PaleontologyCitation in storage",
+                "description": "Store PaleontologyCitation",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "paleontology_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        }
+                    },
+                    {
+                        "name": "author_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        }
+                    },
+                    {
+                        "name": "year",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        }
+                    },
+                    {
+                        "name": "publication_name",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        }
+                    },
+                    {
+                        "name": "volume",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        }
+                    },
+                    {
+                        "name": "pages",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        }
+                    },
+                    {
+                        "name": "plates",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        }
+                    },
+                    {
+                        "name": "figures_number",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/PaleontologyCitation"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/paleontology_citations/{id}": {
+            "get": {
+                "tags": [
+                    "PaleontologyCitation"
+                ],
+                "summary": "Display the specified PaleontologyCitation",
+                "description": "Get PaleontologyCitation",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of PaleontologyCitation",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/PaleontologyCitation"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "PaleontologyCitation"
+                ],
+                "summary": "Update the specified PaleontologyCitation in storage",
+                "description": "Update PaleontologyCitation",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of PaleontologyCitation",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        },
+                        "type": "integer"
+                    },
+                    {
+                        "name": "paleontology_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        }
+                    },
+                    {
+                        "name": "author_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        }
+                    },
+                    {
+                        "name": "year",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        }
+                    },
+                    {
+                        "name": "publication_name",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        }
+                    },
+                    {
+                        "name": "volume",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        }
+                    },
+                    {
+                        "name": "pages",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        }
+                    },
+                    {
+                        "name": "plates",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        }
+                    },
+                    {
+                        "name": "figures_number",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PaleontologyCitation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/PaleontologyCitation"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "PaleontologyCitation"
+                ],
+                "summary": "Remove the specified PaleontologyCitation from storage",
+                "description": "Delete PaleontologyCitation",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of PaleontologyCitation",
                         "required": true,
                         "type": "integer"
                     }
@@ -22851,24 +23131,6 @@
                         }
                     },
                     {
-                        "name": "order_id",
-                        "in": "body",
-                        "description": "Taxonomy that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "class_id",
-                        "in": "body",
-                        "description": "Taxonomy that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
                         "name": "type_description",
                         "in": "body",
                         "description": "Taxonomy that should be stored",
@@ -23005,24 +23267,6 @@
                         "in": "body",
                         "description": "Taxonomy that should be stored",
                         "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "order_id",
-                        "in": "body",
-                        "description": "Taxonomy that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "class_id",
-                        "in": "body",
-                        "description": "Taxonomy that should be stored",
-                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
                         }
@@ -26134,7 +26378,7 @@
             "required": [
                 "botanical_id",
                 "irrigation_id",
-                "daytime"
+                "requirement"
             ],
             "properties": {
                 "id": {
@@ -26146,19 +26390,13 @@
                 "irrigation_id": {
                     "type": "integer"
                 },
-                "irrigation_time": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
                 "requirement": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "type": "integer"
                 },
-                "seasonal_feature": {
+                "appropriate_irrigation_time": {
+                    "type": "integer"
+                },
+                "irrigation_time": {
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -28371,8 +28609,23 @@
                         "type": "string"
                     }
                 },
-                "geology_age_id": {
-                    "description": "geology_age_id",
+                "geology_age_era_id": {
+                    "description": "geology_age_era_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "geology_age_epoch_id": {
+                    "description": "geology_age_epoch_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "geology_age_stage_id": {
+                    "description": "geology_age_stage_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "geology_age_period_id": {
+                    "description": "geology_age_period_id",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -28433,6 +28686,63 @@
                     "description": "plant_id",
                     "type": "integer",
                     "format": "int32"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "PaleontologyCitation": {
+            "required": [
+                "paleontology_id",
+                "author_id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer"
+                },
+                "paleontology_id": {
+                    "description": "paleontology_id",
+                    "type": "integer"
+                },
+                "author_id": {
+                    "description": "author_id",
+                    "type": "integer"
+                },
+                "year": {
+                    "description": "year",
+                    "type": "integer"
+                },
+                "volume": {
+                    "description": "volume",
+                    "type": "string"
+                },
+                "pages": {
+                    "description": "pages",
+                    "type": "string"
+                },
+                "plates": {
+                    "description": "plates",
+                    "type": "string"
+                },
+                "figures_number": {
+                    "description": "figures_number",
+                    "type": "string"
+                },
+                "publication_name": {
+                    "description": "publication_name",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "created_at": {
                     "description": "created_at",

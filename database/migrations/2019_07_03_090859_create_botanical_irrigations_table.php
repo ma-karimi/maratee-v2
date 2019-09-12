@@ -18,7 +18,7 @@ class CreateBotanicalIrrigationsTable extends Migration
             $table->unsignedBigInteger('botanical_id');
             $table->unsignedBigInteger('irrigation_id');
             $table->tinyInteger('requirement')->comment('sparse-moderate-heavy');
-            $table->tinyInteger('appropriate_irrigation_time');
+            $table->tinyInteger('appropriate_irrigation_time')->comment('morning-day-evening-night- 0:indifferent')->default(0);
             $table->json('irrigation_time')->nullable()->comment('features are :
 value
 description
