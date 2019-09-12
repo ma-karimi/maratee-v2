@@ -72,9 +72,12 @@ class DatabaseSeeder extends Seeder
             TransactionTableSeeder::class,
             TransactionEvidenceTableSeeder::class,
             PaleontologyDocumentTableSeeder::class,
+            PaleontologyCitationTableSeeder::class,
             ActionHubDocumentTableSeeder::class,
             MedicinalPlantTableSeeder::class,
             MedicinalPlantTypeTableSeeder::class,
+            BotanicalTableSeeder::class,
+            BotanicalIrrigationTableSeeder::class,
 
 //            SeedTableSeeder::class,
 //            BioMolecularTableSeeder::class,
@@ -84,16 +87,14 @@ class DatabaseSeeder extends Seeder
 //            SeedHubSeeder::class,
 //            CryoBankTableSeeder::class,
 //            HerbariumAppendixTableSeeder::class,
+//            GardenTableSeeder::class,
 //            MediaTableSeeder::class,
 //
 //
 //            EntryHubTableSeeder::class,
-//            GardenTableSeeder::class,
 //            ChromosomeTableSeeder::class,
-//            BotanicalTableSeeder::class,
 //            BotanicalGardenActionTableSeeder::class,
 //            BotanicalPropagationTableSeeder::class,
-//            BotanicalIrrigationTableSeeder::class,
 //            MedicalTableSeeder::class,//
 //            TechnologyCollectionTableSeeder::class,
 //            RoleTableSeeder::class,

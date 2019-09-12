@@ -87,13 +87,6 @@ class PaleontologyAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
      *      @SWG\Parameter(
-     *          name="general_class_id",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Paleontology")
-     *      ),
-     *      @SWG\Parameter(
      *          name="general_order_id",
      *          in="body",
      *          description="Paleontology that should be stored",
@@ -164,14 +157,14 @@ class PaleontologyAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
      *      @SWG\Parameter(
-     *          name="infraspecific",
+     *          name="infra_specific",
      *          in="body",
      *          description="Paleontology that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
      *      @SWG\Parameter(
-     *          name="typestatus",
+     *          name="type_status",
      *          in="body",
      *          description="Paleontology that should be stored",
      *          required=false,
@@ -367,13 +360,6 @@ class PaleontologyAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
      *      @SWG\Parameter(
-     *          name="general_class_id",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Paleontology")
-     *      ),
-     *      @SWG\Parameter(
      *          name="general_order_id",
      *          in="body",
      *          description="Paleontology that should be stored",
@@ -444,14 +430,14 @@ class PaleontologyAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
      *      @SWG\Parameter(
-     *          name="infraspecific",
+     *          name="infra_specific",
      *          in="body",
      *          description="Paleontology that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
      *      @SWG\Parameter(
-     *          name="typestatus",
+     *          name="type_status",
      *          in="body",
      *          description="Paleontology that should be stored",
      *          required=false,

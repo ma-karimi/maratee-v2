@@ -6,7 +6,7 @@ use App\Models\PaleontologyCitation;
 use App\Models\PaleontologyMedia;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreatePaleontologCitationAPIRequest extends APIRequest
+class CreatePaleontologyCitationAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
