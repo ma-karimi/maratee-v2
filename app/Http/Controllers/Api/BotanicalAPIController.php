@@ -57,6 +57,7 @@ class BotanicalAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -81,7 +82,7 @@ class BotanicalAPIController extends AppBaseController
      *      description="Store Botanical",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="herbarium_id",
+     *          name="plant_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -117,6 +118,24 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
+     *          name="planting",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="cutting_rooting",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="treatment",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
      *          name="growth_rate",
      *          in="body",
      *          required=false,
@@ -124,12 +143,6 @@ class BotanicalAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="first_flowering",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Botanical")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="flowering_period",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -147,55 +160,49 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="seed_production",
+     *          name="seed_formation",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="season_tolerance",
+     *          name="winter_tolerance",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="year",
+     *          name="summer_tolerance",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="sensitivity",
+     *          name="comments",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="sensitivity_description",
+     *          name="garden_map",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="notes",
+     *          name="garden_name",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="planting",
+     *          name="entrance_to_garden",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="cutting_rooting_per",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Botanical")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="entry_type",
+     *          name="soil_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -299,7 +306,7 @@ class BotanicalAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="herbarium_id",
+     *          name="plant_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -335,6 +342,24 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
+     *          name="planting",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="cutting_rooting",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="treatment",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
      *          name="growth_rate",
      *          in="body",
      *          required=false,
@@ -342,12 +367,6 @@ class BotanicalAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="first_flowering",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Botanical")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="flowering_period",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -365,55 +384,49 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="seed_production",
+     *          name="seed_formation",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="season_tolerance",
+     *          name="winter_tolerance",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="year",
+     *          name="summer_tolerance",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="sensitivity",
+     *          name="comments",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="sensitivity_description",
+     *          name="garden_map",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="notes",
+     *          name="garden_name",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="planting",
+     *          name="entrance_to_garden",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="cutting_rooting_per",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Botanical")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="entry_type",
+     *          name="soil_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
