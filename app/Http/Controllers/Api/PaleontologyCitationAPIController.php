@@ -83,41 +83,49 @@ class PaleontologyCitationAPIController extends AppBaseController
      *          name="paleontology_id",
      *          in="body",
      *          required=true,
+     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
      *          name="author_id",
      *          in="body",
      *          required=true,
+     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
      *          name="year",
      *          in="body",
      *          required=true,
+     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
      *          name="publication_name",
      *          in="body",
      *          required=false,
+     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
      *          name="volume",
      *          in="body",
      *          required=false,
+     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
      *          name="pages",
      *          in="body",
      *          required=false,
+     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
      *          name="plates",
      *          in="body",
      *          required=false,
+     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
      *          name="figures_number",
      *          in="body",
      *          required=false,
+     *      @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -215,47 +223,56 @@ class PaleontologyCitationAPIController extends AppBaseController
      *          description="id of PaleontologyCitation",
      *          type="integer",
      *          required=true,
-     *          in="path"
+     *          in="path",
+     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
      *          name="paleontology_id",
      *          in="body",
      *          required=true,
+     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
      *          name="author_id",
      *          in="body",
      *          required=true,
+     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
      *          name="year",
      *          in="body",
      *          required=true,
+     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
      *          name="publication_name",
      *          in="body",
      *          required=false,
+     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
      *          name="volume",
      *          in="body",
      *          required=false,
+     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
      *          name="pages",
      *          in="body",
      *          required=false,
+     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
      *          name="plates",
      *          in="body",
      *          required=false,
+     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
      *          name="figures_number",
      *          in="body",
      *          required=false,
+     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Response(
      *          response=200,

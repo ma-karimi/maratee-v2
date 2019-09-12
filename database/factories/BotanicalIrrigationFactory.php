@@ -12,8 +12,8 @@ $factory->define(App\Models\BotanicalIrrigation::class, function (Faker $faker) 
         'irrigation_id' => function () {
             return factory(App\Models\Irrigation::class)->create()->id;
         },
-        'requirement' => make_json($faker->word),
-        'daytime' => make_json($faker->word),
-        'seasonal_feature' => make_json($faker->word),
+        'requirement' => $faker->numberBetween(1,3),
+        'appropriate_irrigation_time' => $faker->numberBetween(0,4),
+        'irrigation_time' => make_json($faker->word),
     ];
 });

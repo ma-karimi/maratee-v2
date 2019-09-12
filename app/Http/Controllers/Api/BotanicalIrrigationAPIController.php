@@ -56,6 +56,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -92,18 +93,20 @@ class BotanicalIrrigationAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="requirement",
+     *          description="1 => 'sparse', 2 => 'moderate', 3 => 'heavy'",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="appropriate_irrigation_time",
+     *           description="0 => 'indifferent', 1 => 'morning', 2 => 'day', 3 => 'evening', 4 => 'night'",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
      *      ),
      *      @SWG\Parameter(
      *          name="irrigation_time",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="seasonal_feature",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
@@ -220,18 +223,20 @@ class BotanicalIrrigationAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="requirement",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="irrigation_time",
+     *        description="1 => 'sparse', 2 => 'moderate', 3 => 'heavy'",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
      *      ),
      *      @SWG\Parameter(
-     *          name="seasonal_feature",
+     *          name="appropriate_irrigation_time",
+     *          in="body",
+     *          description="0 => 'indifferent', 1 => 'morning', 2 => 'day', 3 => 'evening', 4 => 'night'",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="irrigation_time",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
