@@ -270,6 +270,34 @@ class Paleontology extends BaseModel
     /**
      * @return BelongsTo
      */
+    public function geologyAgePeriod(): BelongsTo
+    {
+        return $this->belongsTo(GeologyAge::class)->where('type', 'period');
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function geologyAgeStage(): BelongsTo
+    {
+        return $this->belongsTo(GeologyAge::class)->where('type','stage');
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function geologyAgeEpoch(): BelongsTo
+    {
+        return $this->belongsTo(GeologyAge::class)->where('type','epoch');
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function geologyAgeEra(): BelongsTo
+    {
+        return $this->belongsTo(GeologyAge::class)->where('type','era');
+    }
+    /**
+     * @return BelongsTo
+     */
     public function geologyAge(): BelongsTo
     {
         return $this->belongsTo(GeologyAge::class);
