@@ -3414,7 +3414,7 @@
                         }
                     },
                     {
-                        "name": "cutting_rooting_per",
+                        "name": "cutting_rooting",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3652,7 +3652,7 @@
                         }
                     },
                     {
-                        "name": "cutting_rooting_per",
+                        "name": "cutting_rooting",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -26113,7 +26113,7 @@
                 "planting": {
                     "type": "string"
                 },
-                "cutting_rooting_per": {
+                "cutting_rooting": {
                     "type": "integer"
                 },
                 "entry_type": {

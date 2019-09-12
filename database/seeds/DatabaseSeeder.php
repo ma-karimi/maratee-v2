@@ -77,7 +77,7 @@ class DatabaseSeeder extends Seeder
             MedicinalPlantTableSeeder::class,
             MedicinalPlantTypeTableSeeder::class,
             BotanicalTableSeeder::class,
-            BotanicalIrrigationTableSeeder::class,
+//            BotanicalIrrigationTableSeeder::class,
 
 //            SeedTableSeeder::class,
 //            BioMolecularTableSeeder::class,
