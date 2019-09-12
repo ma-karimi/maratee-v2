@@ -328,6 +328,14 @@ class Paleontology extends BaseModel
     }
 
     /**
+     * @return BelongsTo
+     */
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
+    }
+
+    /**
      * @return HasMany
      */
     public function localities(): HasMany
