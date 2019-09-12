@@ -54,7 +54,7 @@ class BotanicalResource extends JsonResource
             'seed_germination' => $this->seed_germination,
             'propagation_methods' => BotanicalPropagationResource::collection($this->botanicalPropagations),
             'planting_date' => $this->planting,
-            'cutting_rooting_percentage' => $this->cutting_rooting_per,
+            'cutting_rootingcentage' => $this->cutting_rooting,
             'treatment' => $this->treatment,
             'growth_rate' => $this->growth_rate,
             'first_flowering' => $this->first_flowering,

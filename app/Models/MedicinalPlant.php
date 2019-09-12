@@ -348,13 +348,13 @@ class MedicinalPlant extends BaseModel
 
     public function aerialType()
     {
-        return $this->belongsTo(MedicinalPart::class
+        return $this->belongsTo(MedicinalPart::class, 'aerial_part_id'
         )->where('type', array_search('aerial', MedicinalPart::TYPE));
     }
 
     public function groundType()
     {
-        return $this->belongsTo(MedicinalPart::class
+        return $this->belongsTo(MedicinalPart::class,'ground_part_id'
         )->where('type', array_search('ground', MedicinalPart::TYPE));
     }
 

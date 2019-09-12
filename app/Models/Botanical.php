@@ -3,15 +3,13 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
  *            definition="Botanical",
- *            required={"herbarium_id"},
- * 			@SWG\Property(property="herbarium_id", type="integer"),
+ *            required={"plant_id"},
+ * 			@SWG\Property(property="plant_id", type="integer"),
  * 			@SWG\Property(property="height", type="float"),
- * 			@SWG\Property(property="weight_k", type="integer"),
  * 			@SWG\Property(property="flower_color", type="array",
  *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="fruit_color", type="array",
@@ -20,31 +18,25 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="seed_germination", type="array",
  *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="growth_rate", type="array",
+ * 			@SWG\Property(property="growth_rate", type="integer"),
+ * 			@SWG\Property(property="first_flowering", type="string"),
+ * 			@SWG\Property(property="first_seeding", type="string"),
+ * 			@SWG\Property(property="treatment", type="array",
  *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="first_flowering", type="array",
+ * 			@SWG\Property(property="comments", type="array",
  *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="flowering_period", type="array",
+ * 			@SWG\Property(property="garden_map", type="array",
  *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="first_seeding", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="seed_rate", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="seed_production", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="season_tolerance", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="year", type="string"),
- * 			@SWG\Property(property="sensitivity", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="sensitivity_description", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="notes", type="array",
+ * 			@SWG\Property(property="garden_name", type="array",
  *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="planting", type="string"),
- * 			@SWG\Property(property="cutting_rooting_per", type="integer"),
- * 			@SWG\Property(property="entry_type", type="array",
- *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="seed_rate", type="integer"),
+ * 			@SWG\Property(property="seed_formation", type="integer"),
+ * 			@SWG\Property(property="winter_tolerance", type="integer"),
+ * 			@SWG\Property(property="summer_tolerance", type="integer"),
+ * 			@SWG\Property(property="cutting_rooting", type="integer"),
+ * 			@SWG\Property(property="general_habitat_id", type="integer"),
+ * 			@SWG\Property(property="entrance_to_garden", type="integer"),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
@@ -52,12 +44,18 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class Botanical extends BaseModel
 {
     public const GROWTH_RATES = [0 => 'unknown', 1 => 'very low', 2 => 'low', 3 => 'moderate', 4 => 'fast', 5 => 'very fast'];
+    public const SEED_RATE = [0 => 'unknown', 1 => 'low', 2 => 'moderate', 3 => 'good', 4 => 'bumper'];
+    public const SEED_FORMATION = [0 => 'unknown', 1 => 'yes', 2 => 'no'];
+    public const WINTER_TOLERANCE = [0 => 'unknown', 1 => 'good', 2 => 'moderate', 3 => 'sensitive', 4 => 'protection', 5 => 'not surviving', 6 => 'minimum temperature'];
+    public const SUMMER_TOLERANCE = [0 => 'unknown', 1 => 'good', 2 => 'moderate', 3 => 'sensitive', 4 => 'protection', 5 => 'not surviving'];
 
-    public static $linguistically = ['flower_color' => false, 'fruit_color' => false, 'foliage_color' => false, 'seed_germination' => false, 'growth_rate' => false, 'first_flowering' => false, 'flowering_period' => false, 'first_seeding' => false, 'seed_rate' => false, 'seed_production' => false, 'sensitivity' => false, 'sensitivity_description' => false, 'notes' => false, 'entry_type' => false];
+    public const ENTRANCE_TO_GARDEN = [0 => 'unknown', 1 => 'seedling', 2 => 'plant', 3 => 'bulb', 4 => 'bulbil', 5 => 'tuber', 6 => 'rhizome'];
+
+    public static $linguistically = ['flower_color' => false, 'fruit_color' => false, 'foliage_color' => false, 'seed_germination' => false,'treatment' => false,'comments' => false, 'garden_map' => false, 'garden_name' => false, ];
     public static $rules = [
         'year' => 'date',
         'planting' => 'date',
-        'cutting_rooting_per' => 'integer',
+        'cutting_rooting' => 'integer',
     ];
 
 
@@ -81,17 +79,9 @@ class Botanical extends BaseModel
         'foliage_color' => 'json',
         'seed_germination' => 'json',
         'treatment' => 'json',
-        'growth_rate' => 'json',
-        'first_flowering' => 'json',
-        'flowering_period' => 'json',
-        'first_seeding' => 'json',
-        'seed_rate' => 'json',
-        'seed_production' => 'json',
-        'season_tolerance' => 'json',
-        'sensitivity' => 'json',
-        'sensitivity_description' => 'json',
-        'notes' => 'json',
-        'entry_type' => 'json',
+        'comments' => 'json',
+        'garden_map' => 'json',
+        'garden_name' => 'json',
     ];
 
     /**
@@ -99,7 +89,7 @@ class Botanical extends BaseModel
      *
      * @var array
      */
-    protected $dates = ['created_at', 'deleted_at', 'planting', 'updated_at', 'year'];
+    protected $dates = ['created_at', 'deleted_at', 'planting', 'updated_at', 'first_seeding', 'first_flowering'];
 
 
     public function botanicalGardenActions()
@@ -136,9 +126,9 @@ class Botanical extends BaseModel
         return $this->hasMany(EntryHub::class)->latest();
     }
 
-    public function herbarium()
+    public function plant()
     {
-        return $this->belongsTo(Herbarium::class);
+        return $this->belongsTo(Plant::class);
     }
 
     public function medias()
@@ -157,59 +147,14 @@ class Botanical extends BaseModel
             ->withTimestamps();
     }
 
-    public function soil_from()
+    public function soil()
     {
-        return $this->belongsToMany(
-            Soil::class,
-            'botanical_garden_actions',
-            'botanical_id',
-            'from_soil_id'
-        )->whereNull('botanical_garden_actions.deleted_at')
-            ->withTimestamps();
+        return $this->belongsTo(Soil::class);
     }
 
-    public function soil_to()
+    public function generalHabitat()
     {
-        return $this->belongsToMany(
-            Soil::class,
-            'botanical_garden_actions',
-            'botanical_id',
-            'to_soil_id'
-        )->whereNull('botanical_garden_actions.deleted_at')
-            ->withTimestamps();
-    }
-
-    public function lighting_from()
-    {
-        return $this->belongsToMany(
-            Lighting::class,
-            'botanical_garden_actions',
-            'botanical_id',
-            'from_lighting_id'
-        )->whereNull('botanical_garden_actions.deleted_at')
-            ->withTimestamps();
-    }
-
-    public function lighting_to()
-    {
-        return $this->belongsToMany(
-            Lighting::class,
-            'botanical_garden_actions',
-            'botanical_id',
-            'to_lighting_id'
-        )->whereNull('botanical_garden_actions.deleted_at')
-            ->withTimestamps();
-    }
-
-
-    /**
-     * @return MorphToMany
-     */
-    public function treatments(): MorphToMany
-    {
-        return $this->morphToMany(Treatment::class, 'treatmentable',
-            'treatment_hubs')->whereNull('treatment_hubs.deleted_at')
-            ->withTimestamps();
+        return $this->belongsTo(General::class)->whereType('habitat');
     }
 
     public function plantingCondition()
