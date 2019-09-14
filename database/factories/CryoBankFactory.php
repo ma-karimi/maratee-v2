@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Models\CryoBank::class, function (Faker $faker) {
     $plants = \App\Models\Plant::pluck('id')->toArray();
     $protections = \App\Models\Protection::pluck('id')->toArray();
+    $treatments = \App\Models\Treatment::pluck('id')->toArray();
     return [
         'genotype_code' => $faker->word,
         'sample_type_id' => random_int(0,3),
@@ -17,7 +18,7 @@ $factory->define(App\Models\CryoBank::class, function (Faker $faker) {
         'rack' => $faker->word,
         'cell' => $faker->numberBetween(1, 100),
         'plant_id' => $faker->randomElement($plants),
-        'treatment_id' => $faker->randomElement($plants),
+        'treatment_id' => $faker->randomElement($treatments),
         'protection_id' => $faker->randomElement($protections),
         'treatment_values' => $faker->numberBetween(20,40),
     ];
