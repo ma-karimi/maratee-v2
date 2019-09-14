@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -41,8 +43,9 @@ use App\Models\Contracts\BaseModel;
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
-class Botanical extends BaseModel
+class Botanical extends BaseModel implements HasMedia
 {
+    use HasMediaTrait;
     public const GROWTH_RATES = [0 => 'unknown', 1 => 'very low', 2 => 'low', 3 => 'moderate', 4 => 'fast', 5 => 'very fast'];
     public const SEED_RATE = [0 => 'unknown', 1 => 'low', 2 => 'moderate', 3 => 'good', 4 => 'bumper'];
     public const SEED_FORMATION = [0 => 'unknown', 1 => 'yes', 2 => 'no'];
@@ -129,11 +132,6 @@ class Botanical extends BaseModel
     public function plant()
     {
         return $this->belongsTo(Plant::class);
-    }
-
-    public function medias()
-    {
-        return $this->hasMany(Media::class);
     }
 
     public function planting_actions()

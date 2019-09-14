@@ -79,6 +79,7 @@ class PlantRepository extends BaseRepository
         $this->syncPlantProperties($taxonomy_input, $plant);
         $this->syncPlantTypeProperties($input, $plant);
         $this->syncPlantSubSpeciesProperties($input, $plant);
+        $this->updateMedia($input, $plant);
         return $plant;
     }
 
@@ -107,7 +108,7 @@ class PlantRepository extends BaseRepository
             'flowering_time' => $input['is_flowering'] ?? null,
         ];
         //store plant
-        return  parent::create($plant_input);
+        return parent::create($plant_input);
     }
 
     /**
@@ -209,6 +210,28 @@ class PlantRepository extends BaseRepository
         ];
         $plant->taxonomy->update($taxonomy_input);
         return $taxonomy_input;
+    }
+
+    /**
+     * @param $input
+     * @param $plant
+     */
+    private function updateMedia($input, $model): void
+    {
+        $media_input = [
+            'date' => $input['date'] ?? null,
+            'user_id' => $input['user_id'] ?? null,
+            'location_id' => $input['location_id'] ?? null,
+            'description' => $input['description'] ?? null,
+            'media_type' => $input['media_type'] ?? 2,
+            'reference' => $input['reference'] ?? null,
+        ];
+        //store media
+        if (request()->hasFile('file')) {
+            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('media');
+            $media_record->update($media_input);
+        }
+        $model->save();
     }
 
 }

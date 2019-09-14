@@ -174,14 +174,6 @@ class Location extends BaseModel
     /**
      * @return HasMany
      */
-    public function medias(): HasMany
-    {
-        return $this->hasMany(Media::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
     public function medicinalPlants(): HasMany
     {
         return $this->hasMany(MedicinalPlant::class)->latest();

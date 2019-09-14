@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use App\Models\Scope\ActionScope;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 
 /**
@@ -44,10 +46,10 @@ use App\Models\Scope\ActionScope;
  *      )
  * )
  */
-class Action extends BaseModel
+class Action extends BaseModel implements HasMedia
 {
 
-    use ActionScope;
+    use ActionScope,HasMediaTrait;
     public static $linguistically = ['name' => true, 'description' => true];
     /**
      * The database table used by the model.

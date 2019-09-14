@@ -36,6 +36,8 @@ trait RelationshipsTrait
             }
 
             try {
+                if ($method->name === 'deletePreservingMedia') continue;
+
                 $return = $method->invoke($model);
 
                 if ($return instanceof Relation) {

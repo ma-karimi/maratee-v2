@@ -8,6 +8,8 @@ use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -32,9 +34,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
-class CryoBank extends BaseModel
+class CryoBank extends BaseModel implements HasMedia
 {
-    use ActionRelation, ArticleRelation;
+    use ActionRelation, ArticleRelation,HasMediaTrait;
     public static $linguistically = ['tank_type' => false];
     public static $rules = [
         'voucher_number' => 'required|string',

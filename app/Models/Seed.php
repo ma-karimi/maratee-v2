@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -246,8 +248,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      )
  * )
  */
-class Seed extends BaseModel
+class Seed extends BaseModel implements HasMedia
 {
+    use HasMediaTrait;
     public static $linguistically = ['seed_advise' => false, 'transmittance' => false, 'land_form' => false, 'slope_action' => false, 'landscape' => false, 'soil_depth' => false, 'soil_texture' => false, 'drainage' => false, 'soil_ph' => false, 'salinity' => false, 'lime' => false, 'climate' => false, 'community_type' => false, 'associated_species' => false, 'soil_erosion' => false, 'area_sampled' => false, 'specimen_type' => false, 'date_flowering' => false, 'pollination_type' => false, 'pollination_agent' => false, 'fruit_type' => false, 'seed_collected_from' => false, 'date_harvesting' => false, 'life_span' => false, 'growth_form' => false, 'mother_health' => false, 'other_detail' => false];
     public static $rules = [
         'herbarium_id' => 'required|exists:herbariums,id',
@@ -346,14 +349,6 @@ class Seed extends BaseModel
     public function bioMoleculars()
     {
         return $this->hasMany(BioMolecular::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function medias()
-    {
-        return $this->hasMany(Media::class)->latest();
     }
 
     public function geramins()

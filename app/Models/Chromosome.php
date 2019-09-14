@@ -6,6 +6,8 @@ use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -28,9 +30,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
-class Chromosome extends BaseModel
+class Chromosome extends BaseModel implements HasMedia
 {
-    use ArticleRelation;
+    use ArticleRelation,HasMediaTrait;
     public static $linguistically = ['notes' => false];
 
     public static $rules = [

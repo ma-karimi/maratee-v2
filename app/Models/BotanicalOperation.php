@@ -34,6 +34,8 @@ class BotanicalOperation extends BaseModel
         'date' => 'date',
     ];
 
+    protected $casts=['description'=>'json'];
+
     public function botanical()
     {
         return $this->belongsTo(Botanical::class);

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -20,9 +22,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
-class Garden extends BaseModel
+class Garden extends BaseModel implements HasMedia
 {
-
+    use  HasMediaTrait;
     public static $linguistically = ['section' => true, 'region' => true, 'number' => false];
     /**
      * The database table used by the model.

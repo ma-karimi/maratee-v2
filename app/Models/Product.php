@@ -6,6 +6,8 @@ use App\Models\Accessor\ProductAccessor;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -59,9 +61,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      )
  * )
  */
-class Product extends BaseModel
+class Product extends BaseModel implements HasMedia
 {
-    use ProductAccessor;
+    use ProductAccessor,HasMediaTrait;
     public const STATUS = [1 => 'unregistered', 2 => 'registered'];
     public static $linguistically = ['name' => true, 'description' => false];
     public static $rules = [
@@ -92,14 +94,6 @@ class Product extends BaseModel
     public function organization()
     {
         return $this->belongsTo(Organization::class);
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function medias()
-    {
-        return $this->hasMany(Media::class)->latest();
     }
 
     /**

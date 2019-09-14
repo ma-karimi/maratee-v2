@@ -285,7 +285,7 @@ class MedicinalPlant extends BaseModel
      */
     public function medias(): MorphMany
     {
-        return $this->morphMany(Media::class, 'mediable');
+        return $this->morphMany(Media::class, 'modelable');
     }
 
     /**
