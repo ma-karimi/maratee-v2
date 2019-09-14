@@ -33,17 +33,17 @@ trait MedicinalPlantAccessor
         return Arr::get(self::EXPORTING, $this->exporting);
     }
 
-    public function getImportingAttribute()
+    public function getImportingNameAttribute()
     {
         return Arr::get(self::IMPORTING, $this->importing);
     }
 
-    public function getCultivatedAreaAttribute()
+    public function getCultivatedAreaNameAttribute()
     {
         return Arr::get(self::CULTIVATED_AREA, $this->cultivated_area);
     }
 
-    public function getStudiedSampleAttribute()
+    public function getStudiedSampleNameAttribute()
     {
         return Arr::get(self::STUDIED_SAMPLE, $this->studied_sample);
     }
