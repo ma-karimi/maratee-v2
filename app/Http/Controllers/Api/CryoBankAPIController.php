@@ -30,7 +30,7 @@ class CryoBankAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/cryoBanks",
+     *      path="/cryo_banks",
      *      summary="Get a listing of the CryoBanks.",
      *      tags={"CryoBank"},
      *      description="Get all CryoBanks",
@@ -56,6 +56,7 @@ class CryoBankAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -73,19 +74,67 @@ class CryoBankAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/cryoBanks",
+     *      path="/cryo_banks",
      *      summary="Store a newly created CryoBank in storage",
      *      tags={"CryoBank"},
      *      description="Store CryoBank",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="voucher_number",
+     *          name="sample_type_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
-     *          name="geotype_code",
+     *          name="genotype_code",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="repeat",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="proposal_name",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="tank",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="cell",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="row",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="rack",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="proposal_name",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plant_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
@@ -97,61 +146,13 @@ class CryoBankAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
-     *          name="proposal_name",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="herbarium_id",
+     *          name="treatment_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
-     *          name="entry_date",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="sample_type",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="tank_type",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="layering_no",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="tank_no",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="row_no",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="rack_no",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="cell_no",
+     *          name="treatment_values",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
@@ -191,7 +192,7 @@ class CryoBankAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/cryoBanks/{id}",
+     *      path="/cryo_banks/{id}",
      *      summary="Display the specified CryoBank",
      *      tags={"CryoBank"},
      *      description="Get CryoBank",
@@ -242,7 +243,7 @@ class CryoBankAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/cryoBanks/{id}",
+     *      path="/cryo_banks/{id}",
      *      summary="Update the specified CryoBank in storage",
      *      tags={"CryoBank"},
      *      description="Update CryoBank",
@@ -255,13 +256,61 @@ class CryoBankAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="voucher_number",
+     *          name="sample_type_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
-     *          name="geotype_code",
+     *          name="genotype_code",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="repeat",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="proposal_name",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="tank",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="cell",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="row",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="rack",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="proposal_name",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plant_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
@@ -273,61 +322,13 @@ class CryoBankAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
-     *          name="proposal_name",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="herbarium_id",
+     *          name="treatment_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
-     *          name="entry_date",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="sample_type",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="tank_type",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="layering_no",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="tank_no",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="row_no",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="rack_no",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CryoBank")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="cell_no",
+     *          name="treatment_values",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
@@ -375,7 +376,7 @@ class CryoBankAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/cryoBanks/{id}",
+     *      path="/cryo_banks/{id}",
      *      summary="Remove the specified CryoBank from storage",
      *      tags={"CryoBank"},
      *      description="Delete CryoBank",

@@ -5140,9 +5140,17 @@
                 ],
                 "parameters": [
                     {
-                        "name": "n_no",
+                        "name": "v_number",
                         "in": "body",
                         "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Chromosome"
+                        }
+                    },
+                    {
+                        "name": "n_no",
+                        "in": "body",
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/Chromosome"
                         }
@@ -5156,47 +5164,7 @@
                         }
                     },
                     {
-                        "name": "notes",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Chromosome"
-                        }
-                    },
-                    {
-                        "name": "herbarium_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Chromosome"
-                        }
-                    },
-                    {
-                        "name": "url",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Chromosome"
-                        }
-                    },
-                    {
-                        "name": "cryo_bank_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Chromosome"
-                        }
-                    },
-                    {
-                        "name": "article_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Chromosome"
-                        }
-                    },
-                    {
-                        "name": "location_id",
+                        "name": "plant_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -5298,9 +5266,17 @@
                         "type": "integer"
                     },
                     {
-                        "name": "n_no",
+                        "name": "v_number",
                         "in": "body",
                         "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Chromosome"
+                        }
+                    },
+                    {
+                        "name": "n_no",
+                        "in": "body",
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/Chromosome"
                         }
@@ -5314,47 +5290,7 @@
                         }
                     },
                     {
-                        "name": "notes",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Chromosome"
-                        }
-                    },
-                    {
-                        "name": "herbarium_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Chromosome"
-                        }
-                    },
-                    {
-                        "name": "url",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Chromosome"
-                        }
-                    },
-                    {
-                        "name": "cryo_bank_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Chromosome"
-                        }
-                    },
-                    {
-                        "name": "article_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Chromosome"
-                        }
-                    },
-                    {
-                        "name": "location_id",
+                        "name": "plant_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -7135,7 +7071,7 @@
                 }
             }
         },
-        "/cryoBanks": {
+        "/cryo_banks": {
             "get": {
                 "tags": [
                     "CryoBank"
@@ -7179,7 +7115,7 @@
                 ],
                 "parameters": [
                     {
-                        "name": "voucher_number",
+                        "name": "sample_type_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -7187,7 +7123,71 @@
                         }
                     },
                     {
-                        "name": "geotype_code",
+                        "name": "genotype_code",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "repeat",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "proposal_name",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "tank",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "cell",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "row",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "rack",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "proposal_name",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "plant_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -7203,15 +7203,7 @@
                         }
                     },
                     {
-                        "name": "proposal_name",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "herbarium_id",
+                        "name": "treatment_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -7219,63 +7211,7 @@
                         }
                     },
                     {
-                        "name": "entry_date",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "sample_type",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "tank_type",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "layering_no",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "tank_no",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "row_no",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "rack_no",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "cell_no",
+                        "name": "treatment_values",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -7304,7 +7240,7 @@
                 }
             }
         },
-        "/cryoBanks/{id}": {
+        "/cryo_banks/{id}": {
             "get": {
                 "tags": [
                     "CryoBank"
@@ -7361,7 +7297,7 @@
                         "type": "integer"
                     },
                     {
-                        "name": "voucher_number",
+                        "name": "sample_type_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -7369,7 +7305,71 @@
                         }
                     },
                     {
-                        "name": "geotype_code",
+                        "name": "genotype_code",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "repeat",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "proposal_name",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "tank",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "cell",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "row",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "rack",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "proposal_name",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CryoBank"
+                        }
+                    },
+                    {
+                        "name": "plant_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -7385,15 +7385,7 @@
                         }
                     },
                     {
-                        "name": "proposal_name",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "herbarium_id",
+                        "name": "treatment_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -7401,63 +7393,7 @@
                         }
                     },
                     {
-                        "name": "entry_date",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "sample_type",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "tank_type",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "layering_no",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "tank_no",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "row_no",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "rack_no",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/CryoBank"
-                        }
-                    },
-                    {
-                        "name": "cell_no",
+                        "name": "treatment_values",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -26157,7 +26093,7 @@
             ],
             "properties": {
                 "authorable_type": {
-                    "description": "plant, general",
+                    "description": "plant, general, chromosome",
                     "type": "string"
                 },
                 "authorable_id": {
@@ -26602,38 +26538,22 @@
         },
         "Chromosome": {
             "required": [
-                "n_no",
-                "herbarium_id"
+                "plant_id"
             ],
             "properties": {
                 "id": {
                     "type": "integer"
                 },
                 "n_no": {
-                    "type": "integer"
-                },
-                "2n_no": {
-                    "type": "integer"
-                },
-                "notes": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "herbarium_id": {
-                    "type": "integer"
-                },
-                "url": {
                     "type": "string"
                 },
-                "cryo_bank_id": {
-                    "type": "integer"
+                "2n_no": {
+                    "type": "string"
                 },
-                "article_id": {
-                    "type": "integer"
+                "v_number": {
+                    "type": "string"
                 },
-                "location_id": {
+                "plant_id": {
                     "type": "integer"
                 },
                 "general_class_id": {
@@ -26870,55 +26790,42 @@
         },
         "CryoBank": {
             "required": [
-                "voucher_number",
-                "geotype_code",
+                "genotype_code",
                 "protection_id",
-                "herbarium_id"
+                "plant_id"
             ],
             "properties": {
                 "id": {
                     "type": "integer"
                 },
-                "voucher_number": {
-                    "type": "string"
-                },
-                "geotype_code": {
+                "genotype_code": {
                     "type": "string"
                 },
                 "protection_id": {
                     "type": "integer"
                 },
-                "entry_date": {
-                    "type": "string"
-                },
                 "sample_type": {
+                    "type": "integer"
+                },
+                "repeat": {
+                    "type": "integer"
+                },
+                "treatment_values": {
+                    "type": "number"
+                },
+                "tank": {
+                    "type": "integer"
+                },
+                "row": {
+                    "type": "integer"
+                },
+                "rack": {
                     "type": "string"
                 },
-                "repetition": {
+                "cell": {
                     "type": "integer"
                 },
-                "tank_type": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "layering_no": {
-                    "type": "integer"
-                },
-                "tank_no": {
-                    "type": "integer"
-                },
-                "row_no": {
-                    "type": "integer"
-                },
-                "rack_no": {
-                    "type": "string"
-                },
-                "cell_no": {
-                    "type": "integer"
-                },
-                "herbarium_id": {
+                "plant_id": {
                     "type": "integer"
                 },
                 "created_at": {
@@ -30072,7 +29979,7 @@
                     }
                 },
                 "features": {
-                    "description": "fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,\r\n *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,\r\n *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
+                    "description": "fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,\n *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,\n *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
                     "type": "array",
                     "items": {
                         "type": "string"
