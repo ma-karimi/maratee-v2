@@ -13,43 +13,43 @@ use Illuminate\Support\Arr;
 
 trait MedicinalPlantAccessor
 {
-    public function getTraditionalIranianMedicineAttribute($value)
+    public function getTraditionalIranianMedicineNameAttribute()
     {
-        return Arr::get(self::TRADITIONAL_IRANIAN_MEDICINE, $value);
+        return Arr::get(self::TRADITIONAL_IRANIAN_MEDICINE, $this->traditional_iranian_medicine);
     }
 
-    public function getNaturalDrugAttribute($value)
+    public function getNaturalDrugNameAttribute()
     {
-        return Arr::get(self::NATURAL_DRUG, $value);
+        return Arr::get(self::NATURAL_DRUG, $this->natural_drug);
     }
 
-    public function getInherbalMedicineStoreAttribute($value)
+    public function getInherbalMedicineStoreNameAttribute()
     {
-        return Arr::get(self::INHERBAL_MEDICINE_STORE, $value);
+        return Arr::get(self::INHERBAL_MEDICINE_STORE, $this->inherbal_medicine_store);
     }
 
-    public function getExportingAttribute($value)
+    public function getExportingNameAttribute()
     {
-        return Arr::get(self::EXPORTING, $value);
+        return Arr::get(self::EXPORTING, $this->exporting);
     }
 
-    public function getImportingAttribute($value)
+    public function getImportingAttribute()
     {
-        return Arr::get(self::IMPORTING, $value);
+        return Arr::get(self::IMPORTING, $this->importing);
     }
 
-    public function getCultivatedAreaAttribute($value)
+    public function getCultivatedAreaAttribute()
     {
-        return Arr::get(self::CULTIVATED_AREA, $value);
+        return Arr::get(self::CULTIVATED_AREA, $this->cultivated_area);
     }
 
-    public function getStudiedSampleAttribute($value)
+    public function getStudiedSampleAttribute()
     {
-        return Arr::get(self::STUDIED_SAMPLE, $value);
+        return Arr::get(self::STUDIED_SAMPLE, $this->studied_sample);
     }
 
-    public function getPresenceInCountryAttribute($value)
+    public function getPresenceInCountryNameAttribute()
     {
-        return Arr::get(self::PRESENCE_IN_COUNTRY, $value);
+        return Arr::get(self::PRESENCE_IN_COUNTRY, $this->presence_in_country);
     }
 }
