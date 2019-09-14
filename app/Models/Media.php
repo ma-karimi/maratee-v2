@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Accessor\MediaAccessor;
 use App\Models\Contracts\BaseModel;
-use App\Models\Relations\ArticleRelation;
+use App\Models\Relations\{ArticleRelation,LocationRelation};
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -115,7 +115,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class Media extends BaseModel
 {
-    use MediaAccessor, ArticleRelation;
+    use MediaAccessor, ArticleRelation,LocationRelation;
     public const MEDIA_TYPE = [1 => 'sketch', 2 => 'picture'];
     public static $linguistically = ['name' => false, 'description' => false, 'info_type' => false, 'reference' => false];
     public static $rules = [
@@ -231,15 +231,6 @@ class Media extends BaseModel
     public function medicinalPlants(): HasMany
     {
         return $this->hasMany(MedicinalPlant::class)->latest();
-    }
-
-
-    /**
-     * @return MorphToMany
-     */
-    public function locations(): MorphToMany
-    {
-        return $this->morphToMany(LocationHub::class, 'locationable')->withTimestamps();
     }
 
 

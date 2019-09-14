@@ -15,20 +15,18 @@ class CreateCryoBanksTable extends Migration
     {
         Schema::create('cryo_banks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('voucher_number');
-            $table->string('geotype_code');
-            $table->unsignedBigInteger('protection_id');
-            $table->date('entry_date')->nullable();
-            $table->string('sample_type', 45)->nullable();
-            $table->integer('repetition')->nullable();
-            $table->json('tank_type')->nullable();
-            $table->integer('layering_no')->nullable();
-            $table->integer('tank_no')->nullable();
-            $table->integer('cell_no')->nullable();
-            $table->integer('row_no')->nullable();
-            $table->string('rack_no')->nullable();
+            $table->string('genotype_code');
+            $table->tinyInteger('sample_type_id')->default(0)->comment('0:unknown, 1:seed, 2: shoot, 3: cell');
+            $table->integer('repeat')->nullable();
+            $table->integer('tank')->nullable();
+            $table->integer('cell')->nullable();
+            $table->integer('row')->nullable();
+            $table->string('rack')->nullable();
             $table->string('proposal_name')->nullable();
-            $table->unsignedBigInteger('herbarium_id');
+            $table->unsignedBigInteger('plant_id');
+            $table->unsignedBigInteger('protection_id');
+            $table->unsignedBigInteger('treatment_id');
+            $table->float('treatment_values', 4, 2)->nullable();
 
             $table->timeStampsTz();
             $table->softDeletesTz();

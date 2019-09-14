@@ -14,8 +14,8 @@ class AddForeignKeysToChromosomesTable extends Migration
     public function up()
     {
         Schema::table('chromosomes', function (Blueprint $table) {
-            $table->foreign('cryo_bank_id')->references('id')->on('cryo_banks')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('herbarium_id')->references('id')->on('herbariums')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('general_class_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
     }
 
@@ -28,8 +28,8 @@ class AddForeignKeysToChromosomesTable extends Migration
     public function down()
     {
         Schema::table('chromosomes', function (Blueprint $table) {
-            $table->dropForeign(['cryo_bank_id']);
-            $table->dropForeign(['herbarium_id']);
+            $table->dropForeign(['plant_id']);
+            $table->dropForeign(['general_class_id']);
         });
     }
 

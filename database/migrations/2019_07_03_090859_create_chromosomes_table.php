@@ -15,12 +15,11 @@ class   CreateChromosomesTable extends Migration
     {
         Schema::create('chromosomes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('n_no');
-            $table->integer('2n_no')->nullable();
-            $table->json('notes')->nullable();
-            $table->string('url')->nullable();
-            $table->unsignedBigInteger('herbarium_id');
-            $table->unsignedBigInteger('cryo_bank_id')->nullable();
+            $table->string('n_no')->nullable();
+            $table->string('2n_no')->nullable();
+            $table->json('description')->nullable();
+            $table->string('v_number')->nullable();
+            $table->unsignedBigInteger('plant_id');
             $table->unsignedBigInteger('general_class_id');
 
             $table->timeStampsTz();

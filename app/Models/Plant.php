@@ -4,8 +4,7 @@ namespace App\Models;
 
 use App\Models\Accessor\PlantAccessor;
 use App\Models\Contracts\BaseModel;
-use App\Models\Relations\ActionRelation;
-use App\Models\Relations\ArticleRelation;
+use App\Models\Relations\{ActionRelation,LocationRelation,ArticleRelation};
 use App\Models\Scope\PlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -125,7 +124,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class Plant extends BaseModel
 {
-    use PlantScope, PlantAccessor, ActionRelation, ArticleRelation;
+    use PlantScope, PlantAccessor, ActionRelation, ArticleRelation, LocationRelation;
 
     public const FLOWERING_TIME = [1=>'Farvardin', 2=>'Ordibehesht', 3=>'Khordad', 4=>'Tir', 5=>'Mordad', 6=>'Shahrivar', 7=>'Mehr', 8=>'Aban', 9=>'Azar', 10=>'Dey', 11=>'Bahman', 12=>'Esfand'];
 
@@ -172,17 +171,6 @@ class Plant extends BaseModel
         'habitat_description' => 'json',
         'ecology_description' => 'json',
     ];
-
-    /**
-     * @return MorphToMany
-     */
-    public function locations(): MorphToMany
-    {
-        return $this->morphToMany(Location::class,
-            'locationable', 'location_hubs')
-            ->whereNull('location_hubs.deleted_at')
-            ->withTimestamps();
-    }
 
     /**
      * @return MorphToMany

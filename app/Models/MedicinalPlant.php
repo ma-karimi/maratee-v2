@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Accessor\MedicinalPlantAccessor;
 use App\Models\Contracts\BaseModel;
-use App\Models\Relations\ArticleRelation;
+use App\Models\Relations\{ArticleRelation,LocationRelation};
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -207,7 +207,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class MedicinalPlant extends BaseModel
 {
-    use MedicinalPlantAccessor, ArticleRelation;
+    use MedicinalPlantAccessor, ArticleRelation, LocationRelation;
 
     public const TRADITIONAL_IRANIAN_MEDICINE = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
     public const NATURAL_DRUG = [0 => 'unknown', 1 => 'human medicines', 2 => 'animal drugs'];
@@ -305,14 +305,6 @@ class MedicinalPlant extends BaseModel
     public function medicinalPlantConstituents(): HasMany
     {
         return $this->hasMany(MedicinalPlantConstituent::class)->latest();
-    }
-
-    /**
-     * @return MorphToMany
-     */
-    public function locations(): MorphToMany
-    {
-        return $this->morphToMany(LocationHub::class, 'locationable');
     }
 
     /**

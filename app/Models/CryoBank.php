@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\CryoBankAccessor;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ActionRelation;
 use App\Models\Relations\ArticleRelation;
@@ -12,43 +13,42 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 /**
  * @SWG\Definition(
  *            definition="CryoBank",
- *            required={"voucher_number", "geotype_code", "protection_id", "herbarium_id"},
+ *            required={"genotype_code", "protection_id", "plant_id"},
  * 			@SWG\Property(property="id", type="integer"),
- * 			@SWG\Property(property="voucher_number", type="string"),
- * 			@SWG\Property(property="geotype_code", type="string"),
+ * 			@SWG\Property(property="genotype_code", type="string"),
  * 			@SWG\Property(property="protection_id", type="integer"),
- * 			@SWG\Property(property="entry_date", type="string"),
- * 			@SWG\Property(property="sample_type", type="string"),
- * 			@SWG\Property(property="repetition", type="integer"),
- * 			@SWG\Property(property="tank_type", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="layering_no", type="integer"),
- * 			@SWG\Property(property="tank_no", type="integer"),
- * 			@SWG\Property(property="row_no", type="integer"),
- * 			@SWG\Property(property="rack_no", type="string"),
- * 			@SWG\Property(property="cell_no", type="integer"),
- * 			@SWG\Property(property="herbarium_id", type="integer"),
+ * 			@SWG\Property(property="sample_type", type="integer"),
+ * 			@SWG\Property(property="repeat", type="integer"),
+ * 			@SWG\Property(property="treatment_values", type="number"),
+ * 			@SWG\Property(property="tank", type="integer"),
+ * 			@SWG\Property(property="row", type="integer"),
+ * 			@SWG\Property(property="rack", type="string"),
+ * 			@SWG\Property(property="cell", type="integer"),
+ * 			@SWG\Property(property="plant_id", type="integer"),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
 class CryoBank extends BaseModel
 {
-    use ActionRelation, ArticleRelation;
-    public static $linguistically = ['tank_type' => false];
+    use ActionRelation, ArticleRelation, CryoBankAccessor;
+
+    public const TYPE_SAMPLE = [
+        ['id'=>'0', 'name'=>'unknown'],
+        ['id'=>'1', 'name'=>'seed'],
+        ['id'=>'2', 'name'=>'shoot'],
+        ['id'=>'3', 'name'=>'cell'],
+    ];
     public static $rules = [
-        'voucher_number' => 'required|string',
-        'geotype_code' => 'required|string',
+        'genotype_code' => 'required|string',
         'protection_id' => 'required|exists:protections,id',
-        'herbarium_id' => 'required|exists:herbariums,id',
-        'entry_date' => 'date',
+        'plant_id' => 'required|exists:plants,id',
         'sample_type' => 'string',
-        'rack_no' => 'string',
-        'repetition' => 'integer',
-        'layering_no' => 'integer',
-        'tank_no' => 'integer',
-        'cell_no' => 'integer',
-        'row_no' => 'integer',
+        'rack' => 'string',
+        'repeat' => 'integer',
+        'tank' => 'integer',
+        'cell' => 'integer',
+        'row' => 'integer',
     ];
     /**
      * The database table used by the model.
@@ -56,33 +56,14 @@ class CryoBank extends BaseModel
      * @var string
      */
     protected $table = 'cryo_banks';
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'tank_type' => 'json',
-    ];
-
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = ['created_at', 'deleted_at', 'entry_date', 'updated_at'];
+    protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
-
-    /**
-     * @return HasMany
-     */
-    public function chromosomes(): HasMany
-    {
-        return $this->hasMany(Chromosome::class)->latest();
-    }
-
-
+    protected $appends = ['sample_type'];
     /**
      * @return BelongsTo
      */
@@ -94,25 +75,16 @@ class CryoBank extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function herbarium(): BelongsTo
+    public function plant(): BelongsTo
     {
-        return $this->belongsTo(Herbarium::class);
+        return $this->belongsTo(Plant::class);
     }
 
     /**
-     * @return MorphToMany
+     * @return BelongsTo
      */
-    public function users(): MorphToMany
+    public function treatment(): BelongsTo
     {
-        return $this->morphToMany(UserHub::class, 'userable')->withTimestamps();
-    }
-
-
-    /**
-     * @return MorphToMany
-     */
-    public function treatments(): MorphToMany
-    {
-        return $this->morphToMany(Treatment::class, 'treamentable', 'treatment_hubs')->withTimestamps();
+        return $this->belongsTo(Treatment::class);
     }
 }

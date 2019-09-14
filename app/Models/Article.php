@@ -98,24 +98,14 @@ class Article extends BaseModel
     protected $dates = ['created_at', 'deleted_at', 'updated_at', 'year'];
 
 
-    public function articleHubs()
-    {
-        return $this->morphedByMany(ArticleHub::class, 'articleable')->withTimestamps();
-    }
-
-
     /**
      * @return MorphToMany
      */
-    public function users(): MorphToMany
+    public function authors(): MorphToMany
     {
-        return $this->morphToMany(UserHub::class, 'userable', 'user_hubs')
-            ->whereNull('user_hubs.deleted_at')
+        return $this->morphToMany(Author::class, 'authorable',
+            'author_hubs')
+            ->whereNull('author_hubs.deleted_at')
             ->withTimestamps();
-    }
-
-    public function chromosomes()
-    {
-        return $this->hasMany(Chromosome::class, 'article_id')->latest();
     }
 }
