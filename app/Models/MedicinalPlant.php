@@ -279,6 +279,17 @@ class MedicinalPlant extends BaseModel
         'flower_color' => 'json',
     ];
 
+    protected $appends = [
+        'traditional_iranian_medicine_name',
+        'natural_drug_name',
+        'inherbal_medicine_store_name',
+        'exporting_name',
+        'importing_name',
+        'cultivated_area_name',
+        'studied_sample_name',
+        'presence_in_country_name',
+    ];
+
 
     /**
      * @return MorphMany
@@ -354,7 +365,7 @@ class MedicinalPlant extends BaseModel
 
     public function groundType()
     {
-        return $this->belongsTo(MedicinalPart::class,'ground_part_id'
+        return $this->belongsTo(MedicinalPart::class, 'ground_part_id'
         )->where('type', array_search('ground', MedicinalPart::TYPE));
     }
 

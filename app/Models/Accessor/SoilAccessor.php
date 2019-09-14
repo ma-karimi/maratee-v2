@@ -13,8 +13,8 @@ use Illuminate\Support\Arr;
 
 trait SoilAccessor
 {
-    public function getPhTypeIdAttribute($value)
+    public function getPhTypeAttribute()
     {
-        return Arr::get(self::PH, $value);
+        return Arr::get(self::PH, $this->ph_type_id);
     }
 }

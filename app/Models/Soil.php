@@ -64,7 +64,7 @@ class Soil extends BaseModel
         'ph_type_id' => 'required',
         'features' => 'required',
     ];
-
+    protected $appends = ['ph_type'];
     /**
      * The attributes that should be casted to native types.
      *
