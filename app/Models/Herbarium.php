@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\Accessor\HerbariumAccessor;
 use App\Models\Contracts\BaseModel;
 use App\Models\Scope\HerbariumScope;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Kalnoy\Nestedset\NodeTrait;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -136,10 +136,10 @@ use Kalnoy\Nestedset\NodeTrait;
  *      )
  * )
  */
-class Herbarium extends BaseModel
+class Herbarium extends BaseModel implements HasMedia
 {
-    use HerbariumScope, NodeTrait;
 
+    use HerbariumScope, NodeTrait,HasMediaTrait;
 
     public static $linguistically = ['flowering' => false];
     public static $rules = [
@@ -233,15 +233,6 @@ class Herbarium extends BaseModel
     public function seeds(): HasMany
     {
         return $this->hasMany(Seed::class)->latest();
-    }
-
-
-    /**
-     * @return MorphMany
-     */
-    public function medias(): MorphMany
-    {
-        return $this->morphMany(Media::class, 'mediable')->latest();
     }
 
     /**

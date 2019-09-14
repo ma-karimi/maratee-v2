@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -68,9 +70,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      )
  * )
  */
-class Article extends BaseModel
+class Article extends BaseModel implements HasMedia
 {
-
+    use HasMediaTrait;
     public static $linguistically = ['title' => true, 'type' => false, 'journal_name' => false];
     public static $rules = [
         'year' => 'date',

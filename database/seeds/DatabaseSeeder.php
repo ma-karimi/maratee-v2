@@ -79,16 +79,17 @@ class DatabaseSeeder extends Seeder
             BotanicalTableSeeder::class,
             BotanicalIrrigationTableSeeder::class,
             BotanicalOperationTableSeeder::class,
+            MediaTableSeeder::class,
             ChromosomeTableSeeder::class,
             CryoBankTableSeeder::class,
 
 //            SeedTableSeeder::class,
 //            BioMolecularTableSeeder::class,
 //            SeedExchangeTableSeeder::class,
-//            HerbariumAppendixTableSeeder::class,
 //            SeedTechnologyTableSeeder::class,
 //            SeedWeightTableSeeder::class,
 //            SeedHubSeeder::class,
+//            HerbariumAppendixTableSeeder::class,
 //            GardenTableSeeder::class,
 //            MediaTableSeeder::class,
 //

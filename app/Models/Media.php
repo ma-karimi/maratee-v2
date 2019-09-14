@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Models\Accessor\MediaAccessor;
-use App\Models\Contracts\BaseModel;
-use App\Models\Relations\{ArticleRelation,LocationRelation};
+use App\Models\Relations\ArticleRelation;
+use App\Models\Relations\BaseModelTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Spatie\MediaLibrary\Models\Media as BaseMedia;
 
 /**
  * @SWG\Definition(
@@ -113,11 +114,18 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      )
  * )
  */
-class Media extends BaseModel
+class Media extends BaseMedia
 {
-    use MediaAccessor, ArticleRelation,LocationRelation;
+    //use BaseModelTrait instead of BaseModel Class
+    use BaseModelTrait,MediaAccessor, ArticleRelation;
+
+    public static $jsons = [];
+    public static $messages = [];
+
     public const MEDIA_TYPE = [1 => 'sketch', 2 => 'picture'];
-    public static $linguistically = ['name' => false, 'description' => false, 'info_type' => false, 'reference' => false];
+    public static $linguistically = ['description' => false, 'reference' => false];
+
+
     public static $rules = [
         'format_type' => 'required|string',
         'media_type' => 'required|integer|in:1,2',
@@ -131,6 +139,14 @@ class Media extends BaseModel
         'product_id' => 'exists:products,id',
         'botanical_id' => 'exists:botanicals,id'
     ];
+    protected $casts=[
+        'reference'=>'json',
+        'description'=>'json',
+        'manipulations'=>'array',
+        'responsive_images'=>'array',
+        'custom_properties'=>'array',
+    ];
+    protected $dates=['date'];
     /**
      * The database table used by the model.
      *
@@ -143,14 +159,9 @@ class Media extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['name' => 'json', 'info_type' => 'json', 'reference' => 'json', 'description' => 'json'];
+    //protected $casts = ['name' => 'json', 'reference' => 'json', 'description' => 'json'];
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
+
 
 
     /**
@@ -231,6 +242,15 @@ class Media extends BaseModel
     public function medicinalPlants(): HasMany
     {
         return $this->hasMany(MedicinalPlant::class)->latest();
+    }
+
+
+    /**
+     * @return MorphToMany
+     */
+    public function locations(): MorphToMany
+    {
+        return $this->morphToMany(LocationHub::class, 'locationable')->withTimestamps();
     }
 
 

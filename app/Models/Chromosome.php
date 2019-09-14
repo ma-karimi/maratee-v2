@@ -6,6 +6,8 @@ use App\Models\Contracts\BaseModel;
 use App\Models\Relations\{ArticleRelation,LocationRelation};
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -25,7 +27,8 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  **/
 class Chromosome extends BaseModel
 {
-    use ArticleRelation, LocationRelation;
+
+    use ArticleRelation, LocationRelation, HasMediaTrait;
     public static $linguistically = ['description' => false];
 
     public static $rules = [

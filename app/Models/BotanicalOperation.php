@@ -34,7 +34,7 @@ class BotanicalOperation extends BaseModel
         'date' => 'date',
     ];
 
-    protected $casts = ['description'=>'json'];
+    protected $casts=['description'=>'json'];
 
     public function botanical()
     {

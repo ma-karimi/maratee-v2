@@ -9,6 +9,8 @@ use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -29,9 +31,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
-class CryoBank extends BaseModel
+class CryoBank extends BaseModel implements HasMedia
 {
-    use ActionRelation, ArticleRelation, CryoBankAccessor;
+    use ActionRelation, ArticleRelation,HasMediaTrait, CryoBankAccessor;
 
     public const TYPE_SAMPLE = [
         ['id'=>'0', 'name'=>'unknown'],

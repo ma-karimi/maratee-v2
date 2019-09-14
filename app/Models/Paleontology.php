@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -208,9 +210,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      )
  * )
  */
-class Paleontology extends BaseModel
+class Paleontology extends BaseModel implements HasMedia
 {
-    use PaleontologyAccessor, ActionRelation, ArticleRelation;
+    use PaleontologyAccessor, ActionRelation, ArticleRelation,HasMediaTrait;
     public static $linguistically = ['infra_specific' => false, 'type_status' => false, 'preservation' => false, 'color' => false, 'element' => false, 'description' => true, 'additional_info' => false, 'excavation' => false, 'collector_name' => false, 'common_name' => false];
     public static $rules = [
         'catalog_no' => 'integer',
@@ -343,13 +345,6 @@ class Paleontology extends BaseModel
         return $this->hasMany(Locality::class)->latest();
     }
 
-    /**
-     * @return HasMany
-     */
-    public function medias(): HasMany
-    {
-        return $this->hasMany(Media::class)->latest();
-    }
 
     /**
      * @return MorphToMany
