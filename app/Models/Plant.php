@@ -150,7 +150,7 @@ class Plant extends BaseModel
         'general_substrate_moss_id' => 'exists:generals,id',
         'general_substrate_diatom_id' => 'exists:generals,id',
     ];
-    protected $appends = ['scientific_name', 'flowering_time_name'];
+    protected $appends = ['flowering_time_name'];
     /**
      * The database table used by the model.
      *

@@ -13,7 +13,7 @@ use Illuminate\Support\Arr;
 
 trait PlantAccessor
 {
-    public function getScientificNameAttribute()
+   /* public function getScientificNameAttribute()
     {
         return [
             'genus_name' => !empty($this->taxonomy->genus) ? $this->taxonomy->genus->name : null,
@@ -21,7 +21,7 @@ trait PlantAccessor
             'subspecies_name' => !empty($this->taxonomy->subspecies) ? $this->taxonomy->subspecies->name : null,
             'variety_name' => !empty($this->taxonomy->variety) ? $this->taxonomy->variety->name : null,
         ];
-    }
+    }*/
 
     public function getFloweringTimeNameAttribute()
     {
