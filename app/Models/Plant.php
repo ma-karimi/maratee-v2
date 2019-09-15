@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
@@ -233,6 +234,11 @@ class Plant extends BaseModel
     public function taxonomy(): HasOne
     {
         return $this->hasOne(Taxonomy::class, 'plant_id');
+    }
+
+    public function scientific(): HasOneThrough
+    {
+        return $this->hasOneThrough(ScientificView::class, Taxonomy::class);
     }
 
     public function getPropertiesAttribute()

@@ -5,6 +5,7 @@ namespace App\Models\Relations;
 
 use App\Models\Location;
 
+
 trait LocationRelation
 {
 

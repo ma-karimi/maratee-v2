@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\CreateTaxonomyAPIRequest;
 use App\Http\Requests\Api\UpdateTaxonomyAPIRequest;
+use App\Models\ScientificView;
 use App\Models\Taxonomy;
 use App\Repositories\TaxonomyRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\DB;
 use Response;
 
 /**
@@ -60,6 +62,7 @@ class TaxonomyAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        ScientificView::all();
         $taxonomies = $this->taxonomyRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),

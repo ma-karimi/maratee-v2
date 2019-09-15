@@ -217,5 +217,7 @@ Route::apiResource('paleontology_maps', 'PaleontologyMapAPIController');
 
 Route::apiResource('action_hub_documents', 'ActionHubDocumentAPIController');
 
+Route::apiResource('taxonomies', 'TaxonomyAPIController');
+
 
 Route::resource('planting_conditions', 'PlantingConditionAPIController');

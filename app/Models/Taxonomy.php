@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @SWG\Definition(
@@ -100,6 +101,14 @@ class Taxonomy extends BaseModel
     protected $dates = ['deleted_at'];
     protected $casts = ['type_description' => 'json'];
 
+
+    /**
+     * @return HasOne
+     */
+    public function scientific(): HasOne
+    {
+        return $this->hasOne(ScientificView::class, 'taxonomy_id');
+    }
 
     /**
      * @return BelongsTo
