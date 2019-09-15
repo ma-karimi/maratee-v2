@@ -134,17 +134,6 @@ class Botanical extends BaseModel implements HasMedia
         return $this->belongsTo(Plant::class);
     }
 
-    public function planting_actions()
-    {
-        return $this->belongsToMany(
-            PlantingAction::class,
-            'botanical_garden_actions',
-            'botanical_id',
-            'planting_action_id'
-        )->whereNull('botanical_garden_actions.deleted_at')
-            ->withTimestamps();
-    }
-
     public function soil()
     {
         return $this->belongsTo(Soil::class);
