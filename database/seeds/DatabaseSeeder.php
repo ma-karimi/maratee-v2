@@ -82,6 +82,7 @@ class DatabaseSeeder extends Seeder
             MediaTableSeeder::class,
             ChromosomeTableSeeder::class,
             CryoBankTableSeeder::class,
+            LocationHubTableSeeder::class,
 
 //            SeedTableSeeder::class,
 //            BioMolecularTableSeeder::class,
