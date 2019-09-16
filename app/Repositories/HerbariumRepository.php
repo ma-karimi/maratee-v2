@@ -39,16 +39,6 @@ class HerbariumRepository extends BaseRepository
 
     public function update($input, $id)
     {
-      /*  $herbarium_input = [
-            'organization_id' => $input['organization_id'],
-            'plant_id' => $input['plant_id'],
-            'number' => $input['number'] ?? null,
-            'sheets_no' => $input['sheets_no'] ?? null,
-            'samples_no' => $input['samples_no'] ?? null,
-            'tip_qt' => $input['tip_qt'] ?? null,
-            'physical_tip_qt' => $input['physical_tip_qt'] ?? null,
-            'description' => $input['description'] ?? null,
-        ];*/
         $media_input = [
             'date' => $input['date'] ?? null,
             'user_id' => $input['user_id'] ?? null,
@@ -58,7 +48,9 @@ class HerbariumRepository extends BaseRepository
             'reference' => $input['reference'] ?? null,
         ];
         $model_input = collect($input)->except(array_keys($media_input))->toArray();
+        $model_input['description']=$input['description'];
         unset($model_input['file']);
+
         $model = parent::update($model_input, $id);
         //store media
         if (request()->hasFile('file')) {
