@@ -53,7 +53,7 @@ class HerbariumRepository extends BaseRepository
             'date' => $input['date'] ?? null,
             'user_id' => $input['user_id'] ?? null,
             'location_id' => $input['location_id'] ?? null,
-            'description' => $input['description'] ?? null,
+            'description' => $input['media_description'] ?? null,
             'media_type' => $input['media_type'] ?? 2,
             'reference' => $input['reference'] ?? null,
         ];
