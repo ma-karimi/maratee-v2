@@ -61,4 +61,12 @@ class Chromosome extends BaseModel
         return $this->belongsTo(Plant::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
+    public function generalClass(): BelongsTo
+    {
+        return $this->belongsTo(General::class)->whereType('class');
+    }
+
 }
