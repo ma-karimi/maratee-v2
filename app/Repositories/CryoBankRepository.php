@@ -17,7 +17,7 @@ class CryoBankRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**
@@ -49,7 +49,7 @@ class CryoBankRepository extends BaseRepository
         ];
 
         $model_input = collect($input)->except(array_keys($media_input))->toArray();
-        $model_input['description']=$input['description'];
+//        $model_input['description']=$input['description'];
         unset($model_input['file']);
         $model = parent::update($model_input, $id);
         //store media
