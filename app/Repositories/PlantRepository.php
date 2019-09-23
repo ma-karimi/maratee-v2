@@ -105,7 +105,7 @@ class PlantRepository extends BaseRepository
             'ecology_description' => $input['ecology_description'] ?? null,
             'life_forms' => $input['life_forms'] ?? null,
             'is_flowering' => $input['is_flowering'] ?? null,
-            'flowering_time' => $input['is_flowering'] ?? null,
+            'flowering_time' => $input['flowering_time'] ?? null,
         ];
         //store plant
         return parent::create($plant_input);

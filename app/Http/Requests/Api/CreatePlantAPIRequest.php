@@ -47,7 +47,26 @@ class CreatePlantAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return Plant::$rules;
+        return [
+            'protection_id' => 'required|exists:protections,id',
+            //taxonomy
+            'family_id' => 'required|exists:generals,id',
+            'genus_id' => 'exists:generals,id',
+            'species_id' => 'exists:generals,id',
+            'variety_id' => 'exists:generals,id',
+            'order_id' => 'exists:generals,id',
+            'class_id' => 'exists:generals,id',
+            'subspecies_ids.*' => 'exists:generals,id',
+            'is_flowering' => 'integer',
+            //classification
+            'general_ecology_id' => 'exists:generals,id',
+            'general_habitat_id' => 'exists:generals,id',
+            'general_origin_id' => 'exists:generals,id',
+            'general_phytogeography_id' => 'required|exists:generals,id',
+            'general_substrate_lichen_id' => 'exists:generals,id',
+            'general_substrate_moss_id' => 'exists:generals,id',
+            'general_substrate_diatom_id' => 'exists:generals,id',
+        ];
     }
 
     /**

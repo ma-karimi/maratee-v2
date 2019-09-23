@@ -93,7 +93,7 @@ Route::apiResource('planting_actions', 'PlantingActionAPIController');
 
 Route::apiResource('generals', 'GeneralAPIController');
 
-Route::apiResource('plants', 'PlantAPIController');
+Route::apiResource('plant_herbariums', 'PlantHerbariumAPIController');
 
 Route::apiResource('actions', 'ActionAPIController');
 

@@ -16,7 +16,7 @@ use Response;
  * Class PlantController
  * @package App\Http\Controllers\Api
  */
-class PlantAPIController extends AppBaseController
+class PlantHerbariumAPIController extends AppBaseController
 {
     /** @var  PlantRepository */
     private $plantRepository;
@@ -32,7 +32,7 @@ class PlantAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Get(
-     *      path="/plants",
+     *      path="/plant_herbariums",
      *      summary="Get a listing of the Plants & Plant has flowering herbarium",
      *      tags={"Plant"},
      *      description="Get all Plants",
@@ -49,7 +49,7 @@ class PlantAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/Plant")
+     *                  @SWG\Items(ref="#/definitions/PlantHerbarium")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -75,7 +75,7 @@ class PlantAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/plants",
+     *      path="/plant_herbariums",
      *      summary="Store a newly created Plant in storage",
      *      tags={"Plant"},
      *      description="Store Plant",
@@ -85,84 +85,84 @@ class PlantAPIController extends AppBaseController
      *          in="body",
      *          description="Plant that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="general_phytogeography_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="protection_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="is_flowering",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="general_substrate_lichen_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="general_substrate_moss_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="general_substrate_diatom_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="general_ecology_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="general_origin_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="description",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="habitat_description",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="ecology_description",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="family_id",
@@ -224,7 +224,7 @@ class PlantAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Plant"
+     *                  ref="#/definitions/PlantHerbarium"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -248,7 +248,7 @@ class PlantAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/plants/{id}",
+     *      path="/plant_herbariums/{id}",
      *      summary="Display the specified Plant",
      *      tags={"Plant"},
      *      description="Get Plant",
@@ -271,7 +271,7 @@ class PlantAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Plant"
+     *                  ref="#/definitions/PlantHerbarium"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -301,7 +301,7 @@ class PlantAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/plants/{id}",
+     *      path="/plant_herbariums/{id}",
      *      summary="Update the specified Plant in storage",
      *      tags={"Plant"},
      *      description="Update Plant",
@@ -318,84 +318,84 @@ class PlantAPIController extends AppBaseController
      *          in="body",
      *          description="Plant that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="general_phytogeography_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="protection_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="is_flowering",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="general_substrate_lichen_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="general_substrate_moss_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="general_substrate_diatom_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="general_ecology_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="general_origin_id",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="description",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="habitat_description",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="ecology_description",
      *          in="body",
      *          description="Plant that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Parameter(
      *          name="family_id",
@@ -457,7 +457,7 @@ class PlantAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Plant"
+     *                  ref="#/definitions/PlantHerbarium"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -467,7 +467,7 @@ class PlantAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, Request $request)
+    public function update($id, UpdatePlantAPIRequest $request)
     {
         $input = $request->all();
 
@@ -489,7 +489,7 @@ class PlantAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/plants/{id}",
+     *      path="/plant_herbariums/{id}",
      *      summary="Remove the specified Plant from storage",
      *      tags={"Plant"},
      *      description="Delete Plant",

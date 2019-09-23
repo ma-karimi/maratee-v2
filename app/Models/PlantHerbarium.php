@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
- *      definition="Plant",
+ *      definition="PlantHerbarium",
  *      required={"name","protection_id","general_phytogeography_id"},
  *      @SWG\Property(
  *          property="id",
@@ -130,26 +130,7 @@ class PlantHerbarium extends BaseModel
     public const FLOWERING_TIME = [1=>'Farvardin', 2=>'Ordibehesht', 3=>'Khordad', 4=>'Tir', 5=>'Mordad', 6=>'Shahrivar', 7=>'Mehr', 8=>'Aban', 9=>'Azar', 10=>'Dey', 11=>'Bahman', 12=>'Esfand'];
 
     public static $linguistically = ['name' => true, 'description' => false, 'habitat_description' => false, 'ecology_description' => false];
-    public static $rules = [
-        'protection_id' => 'required|exists:protections,id',
-        //taxonomy
-        'family_id' => 'required|exists:generals,id',
-        'genus_id' => 'exists:generals,id',
-        'species_id' => 'exists:generals,id',
-        'variety_id' => 'exists:generals,id',
-        'order_id' => 'exists:generals,id',
-        'class_id' => 'exists:generals,id',
-        'subspecies_ids.*' => 'exists:generals,id',
-        'is_flowering' => 'integer',
-        //classification
-        'general_ecology_id' => 'exists:generals,id',
-        'general_habitat_id' => 'exists:generals,id',
-        'general_origin_id' => 'exists:generals,id',
-        'general_phytogeography_id' => 'required|exists:generals,id',
-        'general_substrate_lichen_id' => 'exists:generals,id',
-        'general_substrate_moss_id' => 'exists:generals,id',
-        'general_substrate_diatom_id' => 'exists:generals,id',
-    ];
+
     protected $appends = ['flowering_time_name'];
     /**
      * The database table used by the model.
