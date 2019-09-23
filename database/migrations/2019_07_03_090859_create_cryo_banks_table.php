@@ -18,13 +18,14 @@ class CreateCryoBanksTable extends Migration
             $table->string('genotype_code');
             $table->tinyInteger('sample_type_id')->default(0)->comment('0:unknown, 1:seed, 2: shoot, 3: cell');
             $table->integer('repeat')->nullable();
-            $table->integer('tank')->nullable();
-            $table->integer('cell')->nullable();
-            $table->integer('row')->nullable();
-            $table->string('rack')->nullable();
+            $table->integer('tank');
+            $table->integer('cell');
+            $table->integer('row');
+            $table->string('rack');
             $table->string('proposal_name')->nullable();
-            $table->unsignedBigInteger('plant_id');
+            $table->unsignedBigInteger('taxonomy_id');
             $table->unsignedBigInteger('protection_id');
+            $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('treatment_id');
             $table->float('treatment_values', 4, 2)->nullable();
 

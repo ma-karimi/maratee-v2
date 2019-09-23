@@ -16,7 +16,7 @@ class CreateTaxonomiesTable extends Migration
         Schema::create('taxonomies', function (Blueprint $table) {
             $table->bigIncrements('id');
             //generals
-            $table->unsignedBigInteger('plant_id');
+            $table->unsignedBigInteger('plant_herbarium_id');
             $table->unsignedBigInteger('family_id');
             $table->unsignedBigInteger('genus_id')->nullable();
             $table->unsignedBigInteger('species_id')->nullable();
@@ -31,7 +31,7 @@ class CreateTaxonomiesTable extends Migration
             $table->foreign('family_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('subspecies_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('tip_type_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('plant_herbarium_id')->references('id')->on('plant_herbariums')->onUpdate('NO ACTION')->onDelete('cascade');
 
             $table->timeStampsTz();
             $table->softDeletesTz();

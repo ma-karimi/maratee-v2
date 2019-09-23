@@ -6,7 +6,7 @@ use App\Models\Botanical;
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Botanical::class, function (Faker $faker) {
-    $plants = \App\Models\Plant::pluck('id')->toArray();
+    $plants = \App\Models\PlantHerbarium::pluck('id')->toArray();
     $habitats = \App\Models\General::whereType('habitat')->pluck('id')->toArray();
     $soils = \App\Models\Soil::pluck('id')->toArray();
     return [

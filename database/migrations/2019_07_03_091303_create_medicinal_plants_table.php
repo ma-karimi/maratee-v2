@@ -15,8 +15,8 @@ class CreateMedicinalPlantsTable extends Migration {
 		Schema::create('medicinal_plants', function(Blueprint $table)
 		{
 			$table->bigIncrements('id');
-			$table->unsignedBigInteger('plant_id');
-			$table->unsignedBigInteger('herbarium_id')->nullable();
+			$table->unsignedBigInteger('plant_herbarium_id');
+			$table->string('herbarium_number')->nullable();
             $table->unsignedBigInteger('aerial_part_id')->nullable();
             $table->unsignedBigInteger('ground_part_id')->nullable();
             $table->unsignedBigInteger('food_industry_id')->nullable();

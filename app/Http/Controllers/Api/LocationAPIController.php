@@ -246,23 +246,12 @@ class LocationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
-     *          name="village_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Location")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="city_id",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Location")
-     *      ),
-     *      @SWG\Parameter(
      *          name="region_name",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Location")
-     *      ),@SWG\Parameter(
+     *      ),
+     *      @SWG\Parameter(
      *          name="gps_used",
      *          in="body",
      *          required=false,
@@ -272,6 +261,24 @@ class LocationAPIController extends AppBaseController
      *          name="gps_datum",
      *          in="body",
      *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="region_name",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="village_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="city_id",
+     *          in="body",
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(

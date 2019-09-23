@@ -378,7 +378,7 @@ class Seed extends BaseModel implements HasMedia
 
     public function plants()
     {
-        return $this->belongsToMany(Plant::class,
+        return $this->belongsToMany(PlantHerbarium::class,
             'seed_plants',
             'seed_id',
             'plant_id');

@@ -5,7 +5,7 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\CryoBank::class, function (Faker $faker) {
-    $plants = \App\Models\Plant::pluck('id')->toArray();
+    $plants = \App\Models\PlantHerbarium::pluck('id')->toArray();
     $protections = \App\Models\Protection::pluck('id')->toArray();
     $treatments = \App\Models\Treatment::pluck('id')->toArray();
     return [

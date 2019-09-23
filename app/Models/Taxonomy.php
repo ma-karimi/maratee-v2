@@ -115,7 +115,7 @@ class Taxonomy extends BaseModel
      */
     public function plant(): BelongsTo
     {
-        return $this->belongsTo(Plant::class, 'plant_id');
+        return $this->belongsTo(PlantHerbarium::class, 'plant_id');
     }
 
     /**

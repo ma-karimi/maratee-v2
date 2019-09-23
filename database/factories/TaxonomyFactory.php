@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 $return=[];
-foreach (\App\Models\Plant::all() as $index => $item) {
+foreach (\App\Models\PlantHerbarium::all() as $index => $item) {
 
     $factory->define(App\Models\Taxonomy::class, function (Faker $faker) use ($item) {
         $plant_family_generals = \App\Models\General::where('type', 'family')->pluck('id')->toArray();

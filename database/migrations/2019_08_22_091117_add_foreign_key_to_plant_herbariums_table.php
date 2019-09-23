@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFoerignKeyToPlantsTable extends Migration
+class AddForeignKeyToPlantHerbariumsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddFoerignKeyToPlantsTable extends Migration
      */
     public function up()
     {
-        Schema::table('plants', function (Blueprint $table) {
+        Schema::table('plant_herbariums', function (Blueprint $table) {
             $table->foreign('protection_id')->references('id')->on('protections')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('general_ecology_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('general_habitat_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
@@ -22,6 +22,7 @@ class AddFoerignKeyToPlantsTable extends Migration
             $table->foreign('general_substrate_lichen_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('general_substrate_moss_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('general_substrate_diatom_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
     }
 
@@ -32,10 +33,16 @@ class AddFoerignKeyToPlantsTable extends Migration
      */
     public function down()
     {
-        Schema::table('plants', function (Blueprint $table) {
-            $table->dropForeign('flowering_id');
-            $table->dropForeign('cotyledon_id');
-            $table->dropForeign('sperm_id');
+        Schema::table('plant_herbariums', function (Blueprint $table) {
+            $table->dropForeign('protection_id');
+            $table->dropForeign('general_ecology_id');
+            $table->dropForeign('general_habitat_id');
+            $table->dropForeign('general_origin_id');
+            $table->dropForeign('general_phytogeography_id');
+            $table->dropForeign('general_substrate_lichen_id');
+            $table->dropForeign('general_substrate_moss_id');
+            $table->dropForeign('general_substrate_diatom_id');
+            $table->dropForeign('organization_id');
         });
     }
 }

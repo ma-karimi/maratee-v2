@@ -9,7 +9,7 @@ $factory->define(App\Models\Paleontology::class, function (Faker $faker) {
     $epochs = \App\Models\GeologyAge::whereType('epoch')->pluck('id')->toArray();
     $periods = \App\Models\GeologyAge::whereType('period')->pluck('id')->toArray();
     $stages = \App\Models\GeologyAge::whereType('stage')->pluck('id')->toArray();
-    $plants = \App\Models\Plant::pluck('id')->toArray();
+    $plants = \App\Models\PlantHerbarium::pluck('id')->toArray();
     $locations = \App\Models\Location::pluck('id')->toArray();
     $orders = \App\Models\General::where('type', 'order')->pluck('id')->toArray();
     return [

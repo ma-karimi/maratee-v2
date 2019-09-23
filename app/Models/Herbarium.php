@@ -262,7 +262,7 @@ class Herbarium extends BaseModel implements HasMedia
 
     public function plant()
     {
-        return $this->belongsTo(Plant::class);
+        return $this->belongsTo(PlantHerbarium::class);
     }
 
     public function department()

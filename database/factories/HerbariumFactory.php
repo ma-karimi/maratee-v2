@@ -6,7 +6,7 @@ use App\Models\Herbarium;
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Herbarium::class, function (Faker $faker) {
-    $plants = \App\Models\Plant::pluck('id')->toArray();
+    $plants = \App\Models\PlantHerbarium::pluck('id')->toArray();
     $organizations = \App\Models\Organization::pluck('id')->toArray();
 
     return [

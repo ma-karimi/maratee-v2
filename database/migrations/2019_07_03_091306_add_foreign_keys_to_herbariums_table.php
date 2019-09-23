@@ -13,9 +13,9 @@ class AddForeignKeysToHerbariumsTable extends Migration
      */
     public function up()
     {
-        Schema::table('herbariums', function (Blueprint $table) {
-            $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
-        });
+//        Schema::table('herbariums', function (Blueprint $table) {
+//            $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
+//        });
     }
 
 
@@ -26,9 +26,9 @@ class AddForeignKeysToHerbariumsTable extends Migration
      */
     public function down()
     {
-        Schema::table('herbariums', function (Blueprint $table) {
-            $table->dropForeign(['organization_id']);
-        });
+//        Schema::table('herbariums', function (Blueprint $table) {
+//            $table->dropForeign(['organization_id']);
+//        });
     }
 
 }

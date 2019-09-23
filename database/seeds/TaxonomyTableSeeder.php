@@ -12,14 +12,14 @@ class TaxonomyTableSeeder extends Seeder
     public function run()
     {
         //factory(App\Models\Taxonomy::class, 50)->create();
-        foreach (\App\Models\Plant::all() as $index => $item) {
+        foreach (\App\Models\PlantHerbarium::all() as $index => $item) {
             $plant_family_generals = \App\Models\General::where('type', 'family')->pluck('id');
             $plant_genus_generals = \App\Models\General::where('type', 'genus')->pluck('id');
             $plant_specie_generals = \App\Models\General::where('type', 'species')->pluck('id');
             $plant_sub_specie_generals = \App\Models\General::where('type', 'sub_species')->pluck('id');
             $plant_type_generals = \App\Models\General::where('type', 'plant_type')->pluck('id');
             $plant_variety_generals = \App\Models\General::where('type', 'variety')->pluck('id');
-            $plants = \App\Models\Plant::pluck('id')->toArray();
+            $plants = \App\Models\PlantHerbarium::pluck('id')->toArray();
             $data = [
                 'genus_id' => $plant_genus_generals->random(),
                 'species_id' => $plant_specie_generals->random(),

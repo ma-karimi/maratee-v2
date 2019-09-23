@@ -11,7 +11,7 @@ class MorphAuthorTableSeeder extends Seeder
      */
     public function run()
     {
-        $plants = \App\Models\Plant::all();
+        $plants = \App\Models\PlantHerbarium::all();
         $authors = \App\Models\Author::limit(5)->pluck('id')->toArray();
         foreach ($plants as $plant) {
             $plant->authors()->attach($authors);

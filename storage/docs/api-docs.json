@@ -11991,22 +11991,6 @@
                         }
                     },
                     {
-                        "name": "village_id",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    },
-                    {
-                        "name": "city_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    },
-                    {
                         "name": "region_name",
                         "in": "body",
                         "required": false,
@@ -12026,6 +12010,30 @@
                         "name": "gps_datum",
                         "in": "body",
                         "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "region_name",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "village_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "city_id",
+                        "in": "body",
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/Location"
                         }

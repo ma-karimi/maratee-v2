@@ -79,7 +79,7 @@ class CryoBank extends BaseModel implements HasMedia
      */
     public function plant(): BelongsTo
     {
-        return $this->belongsTo(Plant::class);
+        return $this->belongsTo(PlantHerbarium::class);
     }
 
     /**

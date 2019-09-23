@@ -40,7 +40,7 @@ class Author extends BaseModel
      */
     public function plants()
     {
-        return $this->morphedByMany(Plant::class, 'authorable', 'author_hubs')
+        return $this->morphedByMany(PlantHerbarium::class, 'authorable', 'author_hubs')
             ->whereNull('author_hubs.deleted_at')
             ->withTimestamps();
     }

@@ -9,14 +9,14 @@ use App\Models\MedicinalPlant;
 use App\Models\MedicinalPlantType;
 use App\Models\Medicine;
 use App\Models\Method;
-use App\Models\Plant;
+use App\Models\PlantHerbarium;
 use App\Models\Product;
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
-    $plants = Plant::pluck('id')->toArray();
+    $plants = PlantHerbarium::pluck('id')->toArray();
     $plant_id = $faker->randomElement($plants);
-    $herbariums = Herbarium::where('plant_id', $plant_id)->pluck('id')->toArray();
+//    $herbariums = Herbarium::where('plant_id', $plant_id)->pluck('id')->toArray();
     $aerial_parts = MedicinalPart::whereType(1)->pluck('id')->toArray();
     $ground_parts = MedicinalPart::whereType(2)->pluck('id')->toArray();
     $food_industries = MedicinalPlantType::whereTypeId(1)->pluck('id')->toArray();
@@ -30,7 +30,7 @@ $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
     $products = Product::pluck('id')->toArray();
     return [
         'plant_id' => $plant_id,
-        'herbarium_id' => $faker->randomElement($herbariums),
+        'herbarium_id' => $faker->word,
         'aerial_part_id' => $faker->randomElement($aerial_parts),
         'ground_part_id' => $faker->randomElement($ground_parts),
         'food_industry_id' => $faker->randomElement($food_industries),

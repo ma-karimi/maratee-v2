@@ -2,19 +2,19 @@
 
 namespace App\Observers;
 
-use App\Models\Plant;
+use App\Models\PlantHerbarium;
 use Illuminate\Database\Eloquent\Model;
 use phpDocumentor\Reflection\Types\Parent_;
 
 class PlantObserver extends BaseObserver
 {
 
-    protected $model=Plant::class;
+    protected $model=PlantHerbarium::class;
 
     /**
      * Handle the plant "created" event.
      *
-     * @param Plant $model
+     * @param PlantHerbarium $model
      * @return void
      */
     public function created(Model $model)
@@ -28,7 +28,7 @@ class PlantObserver extends BaseObserver
      * @param  \App\Plant  $plant
      * @return void
      */
-    public function updated(Plant $plant)
+    public function updated(PlantHerbarium $plant)
     {
         //
     }
@@ -39,7 +39,7 @@ class PlantObserver extends BaseObserver
      * @param  \App\Plant  $plant
      * @return void
      */
-    public function deleted(Plant $plant)
+    public function deleted(PlantHerbarium $plant)
     {
         //
     }
@@ -50,7 +50,7 @@ class PlantObserver extends BaseObserver
      * @param  \App\Plant  $plant
      * @return void
      */
-    public function restored(Plant $plant)
+    public function restored(PlantHerbarium $plant)
     {
         //
     }
@@ -61,7 +61,7 @@ class PlantObserver extends BaseObserver
      * @param  \App\Plant  $plant
      * @return void
      */
-    public function forceDeleted(Plant $plant)
+    public function forceDeleted(PlantHerbarium $plant)
     {
         //
     }

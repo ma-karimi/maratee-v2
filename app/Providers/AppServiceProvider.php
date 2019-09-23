@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Plant;
+use App\Models\PlantHerbarium;
 use App\Models\Transfer;
 use App\Observers\PlantObserver;
 use App\Observers\TransferCredentialObserver;
@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Plant::observe(PlantObserver::class);
+        PlantHerbarium::observe(PlantObserver::class);
 
     }
 }

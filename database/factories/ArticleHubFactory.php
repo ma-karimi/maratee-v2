@@ -9,6 +9,6 @@ $factory->define(App\Models\ArticleHub::class, function (Faker $faker) {
     return [
         'article_id' => $faker->randomElement($articles),
         'articleable_id' => $faker->randomElement($articles),
-        'articleable_type' => $faker->randomElement([\App\Models\CryoBank::class, \App\Models\Media::class, \App\Models\ActionHub::class, \App\Models\Plant::class, \App\Models\Chromosome::class, \App\Models\MedicinalPlant::class, \App\Models\Paleontology::class]),
+        'articleable_type' => $faker->randomElement([\App\Models\CryoBank::class, \App\Models\Media::class, \App\Models\ActionHub::class, \App\Models\PlantHerbarium::class, \App\Models\Chromosome::class, \App\Models\MedicinalPlant::class, \App\Models\Paleontology::class]),
     ];
 });

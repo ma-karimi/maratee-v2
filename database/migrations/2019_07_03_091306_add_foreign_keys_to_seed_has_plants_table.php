@@ -14,7 +14,7 @@ class AddForeignKeysToSeedHasPlantsTable extends Migration {
 	{
 		Schema::table('seed_has_plants', function(Blueprint $table)
 		{
-			$table->foreign('plant_id')->references('id')->on('plants')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('plant_herbarium_id')->references('id')->on('plant_herbariums')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('seed_id')->references('id')->on('seeds')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
@@ -29,7 +29,7 @@ class AddForeignKeysToSeedHasPlantsTable extends Migration {
 	{
 		Schema::table('seed_has_plants', function(Blueprint $table)
 		{
-			$table->dropForeign(['plant_id']);
+			$table->dropForeign(['plant_herbarium_id']);
 			$table->dropForeign(['seed_id']);
 		});
 	}

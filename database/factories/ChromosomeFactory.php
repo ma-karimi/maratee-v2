@@ -12,7 +12,7 @@ $factory->define(App\Models\Chromosome::class, function (Faker $faker) {
         '2n_no' => $faker->word,
         'description' => make_json($faker->word),
         'plant_id' => function () {
-            return factory(App\Models\Plant::class)->create()->id;
+            return factory(App\Models\PlantHerbarium::class)->create()->id;
         },
         'general_class_id' => $faker->randomElement($classes),
     ];

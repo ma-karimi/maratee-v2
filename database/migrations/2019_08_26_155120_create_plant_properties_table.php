@@ -15,11 +15,11 @@ class CreatePlantPropertiesTable extends Migration
     {
         Schema::create('plant_properties', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('plant_id');
+            $table->unsignedBigInteger('plant_herbarium_id');
             $table->unsignedBigInteger('general_id');
             $table->timestamps();
             $table->softDeletesTz();
-            $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('plant_herbarium_id')->references('id')->on('plant_herbariums')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('general_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
     }

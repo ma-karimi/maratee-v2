@@ -14,8 +14,8 @@ class ChangeHerbariumRelatedTable extends Migration
     public function up()
     {
         Schema::table('herbariums', function (Blueprint $table) {
-            $table->unsignedBigInteger('plant_id');
-            $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->unsignedBigInteger('plant_herbarium_id');
+            $table->foreign('plant_herbarium_id')->references('id')->on('plant_herbariums')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
         });
     }
@@ -28,8 +28,8 @@ class ChangeHerbariumRelatedTable extends Migration
     public function down()
     {
         Schema::table('herbariums', function (Blueprint $table) {
-            $table->dropForeign(['plant_id']);
-            $table->dropColumn('plant_id');
+            $table->dropForeign(['plant_herbarium_id']);
+            $table->dropColumn('plant_herbarium_id');
 
         });
     }

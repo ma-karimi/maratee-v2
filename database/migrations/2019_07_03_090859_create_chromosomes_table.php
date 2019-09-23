@@ -19,7 +19,7 @@ class   CreateChromosomesTable extends Migration
             $table->string('2n_no')->nullable();
             $table->json('description')->nullable();
             $table->string('v_number')->nullable();
-            $table->unsignedBigInteger('plant_id');
+            $table->unsignedBigInteger('plant_herbarium_id');
             $table->unsignedBigInteger('general_class_id');
 
             $table->timeStampsTz();

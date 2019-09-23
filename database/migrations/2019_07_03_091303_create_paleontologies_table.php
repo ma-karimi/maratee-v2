@@ -39,7 +39,7 @@ class CreatePaleontologiesTable extends Migration
             $table->unsignedBigInteger('geology_age_period_id')->nullable();
             $table->unsignedBigInteger('geology_age_epoch_id')->nullable();
             $table->unsignedBigInteger('geology_age_stage_id')->nullable();
-            $table->unsignedBigInteger('plant_id');
+            $table->unsignedBigInteger('plant_herbarium_id');
             $table->integer('plates_no')->nullable();
             $table->json('additional_info')->nullable();
             $table->string('access_code')->nullable();

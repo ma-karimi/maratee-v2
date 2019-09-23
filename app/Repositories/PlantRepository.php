@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\Plant;
+use App\Models\PlantHerbarium;
 use Illuminate\Container\Container as Application;
 
 /**
@@ -50,7 +50,7 @@ class PlantRepository extends BaseRepository
      **/
     public function model()
     {
-        return Plant::class;
+        return PlantHerbarium::class;
     }
 
     /**

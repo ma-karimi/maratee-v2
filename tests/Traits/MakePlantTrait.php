@@ -1,7 +1,7 @@
 <?php namespace Tests\Traits;
 
 use Faker\Factory as Faker;
-use App\Models\Plant;
+use App\Models\PlantHerbarium;
 use App\Repositories\PlantRepository;
 
 trait MakePlantTrait
@@ -10,7 +10,7 @@ trait MakePlantTrait
      * Create fake instance of Plant and save it in database
      *
      * @param array $plantFields
-     * @return Plant
+     * @return PlantHerbarium
      */
     public function makePlant($plantFields = [])
     {
@@ -24,11 +24,11 @@ trait MakePlantTrait
      * Get fake instance of Plant
      *
      * @param array $plantFields
-     * @return Plant
+     * @return PlantHerbarium
      */
     public function fakePlant($plantFields = [])
     {
-        return new Plant($this->fakePlantData($plantFields));
+        return new PlantHerbarium($this->fakePlantData($plantFields));
     }
 
     /**

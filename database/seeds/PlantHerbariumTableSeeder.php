@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PlantTableSeeder extends Seeder
+class PlantHerbariumTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class PlantTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Plant::class, 50)->create();
+        factory(App\Models\PlantHerbarium::class, 50)->create();
     }
 }

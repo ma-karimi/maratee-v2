@@ -184,7 +184,7 @@ class Location extends BaseModel
      */
     public function plants(): HasMany
     {
-        return $this->hasMany(Plant::class)->latest();
+        return $this->hasMany(PlantHerbarium::class)->latest();
     }
 
     /**

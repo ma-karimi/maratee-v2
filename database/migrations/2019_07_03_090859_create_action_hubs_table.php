@@ -17,14 +17,13 @@ class CreateActionHubsTable extends Migration {
 		    $table->bigIncrements('id');
 
 			$table->unsignedBigInteger('user_id');
-			$table->unsignedBigInteger('action_id');
-            //plant, cryo_bank, paleontology
+			$table->integer('action_id')->default(1)->comment('1: detect, 2:collect, 3:research');
+            //plant_herbarium, cryo_bank, paleontology
             $table->morphs('actionable');
 
             $table->date('date')->nullable();
 			$table->json('description')->nullable();
 			$table->unsignedBigInteger('project_id')->nullable();
-			$table->unsignedBigInteger('location_id')->nullable();
 			$table->unsignedBigInteger('department_id')->nullable();
 
             $table->timeStampsTz();

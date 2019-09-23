@@ -7,7 +7,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreatePlantAPIRequest;
 use App\Http\Requests\Api\UpdatePlantAPIRequest;
 use App\Http\Resources\PlantResource;
-use App\Models\Plant;
+use App\Models\PlantHerbarium;
 use App\Repositories\PlantRepository;
 use Illuminate\Http\Request;
 use Response;
@@ -284,7 +284,7 @@ class PlantAPIController extends AppBaseController
     public function show($id)
     {
         $relation_for_scientific_name = ['taxonomy.family','taxonomy.genus', 'taxonomy.species', 'taxonomy.subspecies', 'taxonomy.variety'];
-        /** @var Plant $plant */
+        /** @var PlantHerbarium $plant */
         $plant = $this->plantRepository->find($id,
             \request()->get('relations') ? array_merge($relation_for_scientific_name,\request()->get('relations')) : $relation_for_scientific_name
         );
@@ -471,7 +471,7 @@ class PlantAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var Plant $plant */
+        /** @var PlantHerbarium $plant */
         $plant = $this->plantRepository->find($id, \request()->get('relations'));
 
         if (empty($plant)) {
@@ -524,7 +524,7 @@ class PlantAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var Plant $plant */
+        /** @var PlantHerbarium $plant */
         $plant = $this->plantRepository->find($id, \request()->get('relations'));
 
         if (empty($plant)) {

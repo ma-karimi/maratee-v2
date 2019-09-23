@@ -123,7 +123,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      )
  * )
  */
-class Plant extends BaseModel
+class PlantHerbarium extends BaseModel
 {
     use PlantScope, PlantAccessor, ActionRelation, ArticleRelation, LocationRelation;
 

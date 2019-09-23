@@ -325,7 +325,7 @@ class User extends Authenticatable
      */
     public function plants()
     {
-        return $this->hasMany(Plant::class)->latest();
+        return $this->hasMany(PlantHerbarium::class)->latest();
     }
 
     /**

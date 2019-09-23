@@ -1,6 +1,6 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\Plant;
+use App\Models\PlantHerbarium;
 use App\Repositories\PlantRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -32,7 +32,7 @@ class PlantRepositoryTest extends TestCase
         $createdPlant = $createdPlant->toArray();
         $this->assertArrayHasKey('id', $createdPlant);
         $this->assertNotNull($createdPlant['id'], 'Created Plant must have id specified');
-        $this->assertNotNull(Plant::find($createdPlant['id']), 'Plant with given id must be in DB');
+        $this->assertNotNull(PlantHerbarium::find($createdPlant['id']), 'Plant with given id must be in DB');
         $this->assertModelData($plant, $createdPlant);
     }
 
@@ -68,6 +68,6 @@ class PlantRepositoryTest extends TestCase
         $plant = $this->makePlant();
         $resp = $this->plantRepo->delete($plant->id);
         $this->assertTrue($resp);
-        $this->assertNull(Plant::find($plant->id), 'Plant should not exist in DB');
+        $this->assertNull(PlantHerbarium::find($plant->id), 'Plant should not exist in DB');
     }
 }
