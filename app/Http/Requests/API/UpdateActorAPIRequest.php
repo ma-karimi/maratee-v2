@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\Author;
+use App\Models\Actor;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreateAuthorAPIRequest extends APIRequest
+class UpdateActorAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class CreateAuthorAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return Author::$rules;
+        return Actor::$rules;
     }
 }

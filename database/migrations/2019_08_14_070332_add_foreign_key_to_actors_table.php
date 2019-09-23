@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddForeignKeyToAuthorsTable extends Migration
+class AddForeignKeyToActorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddForeignKeyToAuthorsTable extends Migration
      */
     public function up()
     {
-        Schema::table('authors', function (Blueprint $table) {
+        Schema::table('actors', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
     }
@@ -25,7 +25,7 @@ class AddForeignKeyToAuthorsTable extends Migration
      */
     public function down()
     {
-        Schema::table('authors', function (Blueprint $table) {
+        Schema::table('actors', function (Blueprint $table) {
             $table->dropForeign('user_id');
         });
     }

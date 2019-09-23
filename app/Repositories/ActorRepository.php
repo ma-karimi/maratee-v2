@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\Author;
+use App\Models\Actor;
 use App\Repositories\BaseRepository;
 
 /**
@@ -11,7 +11,7 @@ use App\Repositories\BaseRepository;
  * @version July 14, 2019, 10:38 am UTC
 */
 
-class AuthorRepository extends BaseRepository
+class ActorRepository extends BaseRepository
 {
     /**
      * @var array
@@ -35,6 +35,6 @@ class AuthorRepository extends BaseRepository
      **/
     public function model()
     {
-        return Author::class;
+        return Actor::class;
     }
 }

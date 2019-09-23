@@ -2,27 +2,26 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateAuthorAPIRequest;
-use App\Http\Requests\Api\UpdateAuthorAPIRequest;
-use App\Models\Author;
-use App\Repositories\AuthorRepository;
-use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
-use Response;
+use App\Http\Requests\Api\CreateActorAPIRequest;
+use App\Http\Requests\Api\UpdateActorAPIRequest;
+use App\Repositories\ActorRepository;
+use Illuminate\Http\Request;
+
 
 /**
- * Class AuthorController
+ * Class ActorController
  * @package App\Http\Controllers\Api
  */
 
-class AuthorAPIController extends AppBaseController
+class ActorAPIController extends AppBaseController
 {
-    /** @var  AuthorRepository */
-    private $authorRepository;
+    /** @var  ActorRepository */
+    private $actorRepository;
 
-    public function __construct(AuthorRepository $authorRepo)
+    public function __construct(ActorRepository $actorRepository)
     {
-        $this->authorRepository = $authorRepo;
+        $this->actorRepository = $actorRepository;
     }
 
     /**
@@ -30,10 +29,10 @@ class AuthorAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/authors",
-     *      summary="Get a listing of the Authors.",
-     *      tags={"Author"},
-     *      description="Get all Authors",
+     *      path="/actors",
+     *      summary="Get a listing of the Actors.",
+     *      tags={"Actor"},
+     *      description="Get all Actors",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -47,7 +46,7 @@ class AuthorAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/Author")
+     *                  @SWG\Items(ref="#/definitions/Actor")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -60,36 +59,36 @@ class AuthorAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $authors = $this->authorRepository->paginate(
+        $actors = $this->actorRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
             $request->get('relations')
         );
 
-        return $this->sendResponse($authors->toArray(), 'Authors retrieved successfully');
+        return $this->sendResponse($actors->toArray(), 'Actors retrieved successfully');
     }
 
     /**
-     * @param CreateAuthorAPIRequest $request
+     * @param CreateActorAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/authors",
-     *      summary="Store a newly created Author in storage",
-     *      tags={"Author"},
-     *      description="Store Author",
+     *      path="/actors",
+     *      summary="Store a newly created Actor in storage",
+     *      tags={"Actor"},
+     *      description="Store Actor",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="name",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Author")
+     *          @SWG\Schema(ref="#/definitions/Actor")
      *      ),
      *      @SWG\Parameter(
      *          name="user_id",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Author")
+     *          @SWG\Schema(ref="#/definitions/Actor")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -102,7 +101,7 @@ class AuthorAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Author"
+     *                  ref="#/definitions/Actor"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -112,13 +111,13 @@ class AuthorAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateAuthorAPIRequest $request)
+    public function store(CreateActorAPIRequest $request)
     {
         $input = $request->all();
 
-        $author = $this->authorRepository->create($input);
+        $actor = $this->actorRepository->create($input);
 
-        return $this->sendResponse($author->toArray(), 'Author saved successfully');
+        return $this->sendResponse($actor->toArray(), 'Actor saved successfully');
     }
 
     /**
@@ -126,14 +125,14 @@ class AuthorAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/authors/{id}",
-     *      summary="Display the specified Author",
-     *      tags={"Author"},
-     *      description="Get Author",
+     *      path="/actors/{id}",
+     *      summary="Display the specified Actor",
+     *      tags={"Actor"},
+     *      description="Get Actor",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Author",
+     *          description="id of Actor",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -149,7 +148,7 @@ class AuthorAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Author"
+     *                  ref="#/definitions/Actor"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -161,30 +160,30 @@ class AuthorAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var Author $author */
-        $author = $this->authorRepository->find($id, \request()->get('relations'));
+        /** @var Actor $actor */
+        $actor = $this->actorRepository->find($id, \request()->get('relations'));
 
-        if ($author === null) {
-            return $this->sendError('Author not found');
+        if ($actor === null) {
+            return $this->sendError('Actor not found');
         }
 
-        return $this->sendResponse($author->toArray(), 'Author retrieved successfully');
+        return $this->sendResponse($actor->toArray(), 'Actor retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdateAuthorAPIRequest $request
+     * @param UpdateActorAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/authors/{id}",
-     *      summary="Update the specified Author in storage",
-     *      tags={"Author"},
-     *      description="Update Author",
+     *      path="/actors/{id}",
+     *      summary="Update the specified Actor in storage",
+     *      tags={"Actor"},
+     *      description="Update Actor",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Author",
+     *          description="id of Actor",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -193,13 +192,13 @@ class AuthorAPIController extends AppBaseController
      *          name="name",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Author")
+     *          @SWG\Schema(ref="#/definitions/Actor")
      *      ),
      *      @SWG\Parameter(
      *          name="user_id",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Author")
+     *          @SWG\Schema(ref="#/definitions/Actor")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -212,7 +211,7 @@ class AuthorAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Author"
+     *                  ref="#/definitions/Actor"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -222,20 +221,20 @@ class AuthorAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateAuthorAPIRequest $request)
+    public function update($id, UpdateActorAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var Author $author */
-        $author = $this->authorRepository->find($id, \request()->get('relations'));
+        /** @var Actor $actor */
+        $actor = $this->actorRepository->find($id, \request()->get('relations'));
 
-        if ($author === null) {
-            return $this->sendError('Author not found');
+        if ($actor === null) {
+            return $this->sendError('Actor not found');
         }
 
-        $author = $this->authorRepository->update($input, $id);
+        $actor = $this->actorRepository->update($input, $id);
 
-        return $this->sendResponse($author->toArray(), 'Author updated successfully');
+        return $this->sendResponse($actor->toArray(), 'Actor updated successfully');
     }
 
     /**
@@ -244,14 +243,14 @@ class AuthorAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/authors/{id}",
-     *      summary="Remove the specified Author from storage",
-     *      tags={"Author"},
-     *      description="Delete Author",
+     *      path="/actors/{id}",
+     *      summary="Remove the specified Actor from storage",
+     *      tags={"Actor"},
+     *      description="Delete Actor",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Author",
+     *          description="id of Actor",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -279,15 +278,15 @@ class AuthorAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var Author $author */
-        $author = $this->authorRepository->find($id, \request()->get('relations'));
+        /** @var Actor $actor */
+        $actor = $this->actorRepository->find($id, \request()->get('relations'));
 
-        if ($author === null) {
-            return $this->sendError('Author not found');
+        if ($actor === null) {
+            return $this->sendError('Actor not found');
         }
 
-        $author->delete();
+        $actor->delete();
 
-        return $this->sendResponse($id, 'Author deleted successfully');
+        return $this->sendResponse($id, 'Actor deleted successfully');
     }
 }

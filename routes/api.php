@@ -107,7 +107,7 @@ Route::apiResource('evaluations', 'EvaluationAPIController');
 
 Route::apiResource('attendances', 'AttendanceAPIController');
 
-Route::apiResource('authors', 'AuthorAPIController');
+Route::apiResource('actors', 'ActorAPIController');
 
 Route::apiResource('botanicals', 'BotanicalAPIController');
 
@@ -194,7 +194,7 @@ Route::apiResource('block_traits', 'BlockTraitAPIController');
 Route::apiResource('dimensions', 'DimensionAPIController');
 
 Route::apiResource('evaluation_dimensions', 'EvaluationDimensionAPIController');
-//Route::apiResource('author_hubs', 'AuthorHubAPIController');
+//Route::apiResource('actor_hubs', 'actorHubAPIController');
 //Route::apiResource('location_hubs', 'LocationHubAPIController');
 //Route::apiResource('user_hubs', 'UserHubAPIController');
 

@@ -6,7 +6,7 @@ use App\Models\Contracts\BaseModel;
 
 /**
  * @SWG\Definition(
- *            definition="Author",
+ *            definition="Actor",
  *            required={"name"},
  * 			@SWG\Property(property="name", type="array",
  *     @SWG\Items(type="string")),
@@ -15,7 +15,7 @@ use App\Models\Contracts\BaseModel;
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
-class Author extends BaseModel
+class Actor extends BaseModel
 {
     public static $linguistically = ['name' => true];
     public static $rules = [

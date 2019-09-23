@@ -105,7 +105,7 @@ class Article extends BaseModel implements HasMedia
      */
     public function authors(): MorphToMany
     {
-        return $this->morphToMany(Author::class, 'authorable',
+        return $this->morphToMany(Actor::class, 'authorable',
             'author_hubs')
             ->whereNull('author_hubs.deleted_at')
             ->withTimestamps();

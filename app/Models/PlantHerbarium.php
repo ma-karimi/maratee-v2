@@ -169,7 +169,7 @@ class PlantHerbarium extends BaseModel
      */
     public function authors(): MorphToMany
     {
-        return $this->morphToMany(Author::class, 'authorable',
+        return $this->morphToMany(Actor::class, 'authorable',
             'author_hubs')
             ->whereNull('author_hubs.deleted_at')
             ->withTimestamps();

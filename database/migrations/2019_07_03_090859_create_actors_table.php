@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateAuthorsTable extends Migration {
+class CreateActorsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateAuthorsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('authors', function(Blueprint $table)
+		Schema::create('actors', function(Blueprint $table)
 		{
 			$table->bigIncrements('id');
 			$table->json('name');
@@ -30,7 +30,7 @@ class CreateAuthorsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('authors');
+		Schema::drop('actors');
 	}
 
 }
