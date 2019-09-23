@@ -98,7 +98,6 @@ class Taxonomy extends BaseModel
      */
     protected $table = 'taxonomies';
 
-    protected $dates = ['deleted_at'];
     protected $casts = ['type_description' => 'json'];
 
 

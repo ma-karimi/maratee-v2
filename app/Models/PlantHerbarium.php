@@ -156,7 +156,7 @@ class PlantHerbarium extends BaseModel
      *
      * @var string
      */
-    protected $table = 'plants';
+    protected $table = 'plant_herbariums';
 //    protected $with = ['generals'];
 //    protected $appends = ['properties'];
 

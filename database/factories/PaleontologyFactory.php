@@ -14,7 +14,7 @@ $factory->define(App\Models\Paleontology::class, function (Faker $faker) {
     $orders = \App\Models\General::where('type', 'order')->pluck('id')->toArray();
     return [
         'catalog_no' => $faker->numberBetween(1, 100),
-        'plant_id' => $faker->randomElement($plants),
+        'plant_herbarium_id' => $faker->randomElement($plants),
         'location_id' => $faker->randomElement($locations),
         'update_frequency' => $faker->word,
         'specimen_no' => $faker->word,

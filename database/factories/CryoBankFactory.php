@@ -5,7 +5,8 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\CryoBank::class, function (Faker $faker) {
-    $plants = \App\Models\PlantHerbarium::pluck('id')->toArray();
+    $locations = \App\Models\Location::pluck('id')->toArray();
+    $taxonomies = \App\Models\Taxonomy::pluck('id')->toArray();
     $protections = \App\Models\Protection::pluck('id')->toArray();
     $treatments = \App\Models\Treatment::pluck('id')->toArray();
     return [
@@ -17,9 +18,10 @@ $factory->define(App\Models\CryoBank::class, function (Faker $faker) {
         'row' => $faker->numberBetween(1, 100),
         'rack' => $faker->word,
         'cell' => $faker->numberBetween(1, 100),
-        'plant_id' => $faker->randomElement($plants),
+        'taxonomy_id' => $faker->randomElement($taxonomies),
         'treatment_id' => $faker->randomElement($treatments),
         'protection_id' => $faker->randomElement($protections),
+        'location_id' => $faker->randomElement($locations),
         'treatment_values' => $faker->numberBetween(20,40),
     ];
 });
