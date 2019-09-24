@@ -25,7 +25,6 @@ $factory->define(App\Models\Paleontology::class, function (Faker $faker) {
         'closet' => $faker->numberBetween(1, 100),
         'drawer' => $faker->numberBetween(1, 100),
         'infra_specific' => make_json($faker->word),
-        'type_status' => make_json($faker->word),
         'preservation' => make_json($faker->word),
         'pieces' => $faker->numberBetween(1, 100),
         'color' => make_json($faker->word),
