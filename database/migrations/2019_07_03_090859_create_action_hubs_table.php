@@ -17,7 +17,7 @@ class CreateActionHubsTable extends Migration {
 		    $table->bigIncrements('id');
 
 			$table->unsignedBigInteger('user_id');
-			$table->integer('actlaraion_id')->default(1)->comment('1: detect, 2:collect, 3:research');
+			$table->integer('action_id')->default(1)->comment('1: detect, 2:collect, 3:research');
             //plant_herbarium, cryo_bank, paleontology
             $table->morphs('actionable');
 
