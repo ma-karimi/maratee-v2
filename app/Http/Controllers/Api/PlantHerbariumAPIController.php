@@ -274,6 +274,55 @@ class PlantHerbariumAPIController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
+     *      @SWG\Parameter(
+     *          name="city_id",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="address",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="region_name",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="min_altitude",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="max_altitude",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="point",
+     *          in="body",
+     *          description="Lat and Lng BY DMS system (Example: [48°49′24″N,2°18′26″E])",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_description",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -569,6 +618,55 @@ class PlantHerbariumAPIController extends AppBaseController
      *          description="Herbarium that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="city_id",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="address",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="region_name",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="min_altitude",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="max_altitude",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="point",
+     *          in="body",
+     *          description="Lat and Lng BY DMS system (Example: [48°49′24″N,2°18′26″E])",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_description",
+     *          in="body",
+     *          description="Herbarium that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Response(
      *          response=200,

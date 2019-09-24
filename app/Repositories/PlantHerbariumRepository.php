@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Location;
 use App\Models\PlantHerbarium;
 use App\Models\Taxonomy;
 use Illuminate\Container\Container as Application;
@@ -17,18 +18,20 @@ use Illuminate\Database\Eloquent\Model;
 class PlantHerbariumRepository extends BaseRepository
 {
 
-    private $taxonomyModel;
+    private $taxonomy_model;
+    private $location_model;
 
     /**
      * PlantRepository constructor.
      * @param Application $app
-     * @param Taxonomy $taxonomyModel
+     * @param Taxonomy $taxonomy_model
      * @throws \Exception
      */
-    public function __construct(Application $app, Taxonomy $taxonomyModel)
+    public function __construct(Application $app, Taxonomy $taxonomy_model, Location $location_model)
     {
         parent::__construct($app);
-        $this->taxonomyModel = $taxonomyModel;
+        $this->taxonomy_model = $taxonomy_model;
+        $this->location_model = $location_model;
     }
 
     /**
@@ -64,7 +67,8 @@ class PlantHerbariumRepository extends BaseRepository
     public function create($input)
     {
         [$taxonomy_input, $taxonomy_id] = $this->firstOrCreateTaxonomy($input);
-        $plant = $this->createPlant($input, $taxonomy_id);
+        $location_id = $this->firstOrCreateLocation($input);
+        $plant = $this->createPlantHerbarium($input, $taxonomy_id,$location_id);
         $this->syncPlantGeneralProperties($taxonomy_input, $plant);
         $this->syncPlantTypeProperties($input, $plant);
         return $plant;
@@ -78,7 +82,8 @@ class PlantHerbariumRepository extends BaseRepository
     public function update($input, $id)
     {
         [$taxonomy_input, $taxonomy_id] = $this->firstOrCreateTaxonomy($input);
-        $plant = $this->updatePlant($input, $id, $taxonomy_id);
+        $location_id = $this->firstOrCreateLocation($input);
+        $plant = $this->updatePlant($input, $id, $taxonomy_id,$location_id);
         $this->syncPlantGeneralProperties($taxonomy_input, $plant);
         $this->syncPlantTypeProperties($input, $plant);
         $this->updateMedia($input, $plant);
@@ -89,15 +94,16 @@ class PlantHerbariumRepository extends BaseRepository
     /**
      * @param $input
      * @param $taxonomy_id
+     * @param $location_id
      * @return Model
      */
-    private function createPlant($input, $taxonomy_id): Model
+    private function createPlantHerbarium($input, $taxonomy_id, $location_id): Model
     {
         $plant_input = [
             'taxonomy_id' => $taxonomy_id,
+            'location_id' => $location_id,
             'name' => $input['name'],
             'protection_id' => $input['protection_id'],
-            'location_id' => $input['location_id'],
             'organization_id' => $input['organization_id'],
             'general_phytogeography_id' => $input['general_phytogeography_id'],
             'general_ecology_id' => $input['general_ecology_id'] ?? null,
@@ -138,8 +144,27 @@ class PlantHerbariumRepository extends BaseRepository
             'variety_id' => $input['variety_id'] ?? null,
         ];
         //store taxonomy
-        $result = $this->taxonomyModel->firstOrCreate($taxonomy_input);
+        $result = $this->taxonomy_model->firstOrCreate($taxonomy_input);
         return [$taxonomy_input, $result->id];
+    }
+    /**
+     * @param $input
+     * @return array
+     */
+    private function firstOrCreateLocation($input): array
+    {
+        $location_input = [
+            'city_id' => $input['city_id'],
+            'region_name' => $input['region_name'] ?? null,
+            'address' => $input['address'] ?? null,
+            'village_id' => $input['village_id'] ?? null,
+            'min_altitude' => $input['min_altitude'] ?? null,
+            'max_altitude' => $input['max_altitude'] ?? null,
+            'point' => $input['point'] ?? null,
+            'description' => $input['location_description'] ?? null,
+        ];
+        //store location
+        return  $this->location_model->firstOrCreate($location_input)->id;
     }
 
     /**
@@ -172,15 +197,16 @@ class PlantHerbariumRepository extends BaseRepository
      * @param $input
      * @param $id
      * @param $taxonomy_id
+     * @param $location_id
      * @return Builder|Builder[]|Collection|Model
      */
-    private function updatePlant($input, $id, $taxonomy_id)
+    private function updatePlant($input, $id, $taxonomy_id,$location_id)
     {
         $plant_input = [
             'taxonomy_id' => $taxonomy_id,
+            'location_id' => $location_id,
             'name' => $input['name'],
             'protection_id' => $input['protection_id'],
-            'location_id' => $input['location_id'],
             'organization_id' => $input['organization_id'],
             'general_phytogeography_id' => $input['general_phytogeography_id'],
             'general_ecology_id' => $input['general_ecology_id'] ?? null,
