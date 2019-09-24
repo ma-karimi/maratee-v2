@@ -26,7 +26,7 @@ class Actor extends BaseModel
      *
      * @var string
      */
-    protected $table = 'authors';
+    protected $table = 'actors';
     /**
      * The attributes that should be casted to native types.
      *

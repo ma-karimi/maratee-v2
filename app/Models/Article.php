@@ -103,7 +103,7 @@ class Article extends BaseModel implements HasMedia
     /**
      * @return MorphToMany
      */
-    public function authors(): MorphToMany
+    public function actors(): MorphToMany
     {
         return $this->morphToMany(Actor::class, 'authorable',
             'author_hubs')

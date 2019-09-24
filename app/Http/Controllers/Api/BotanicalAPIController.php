@@ -524,12 +524,12 @@ class BotanicalAPIController extends AppBaseController
     public function exportExcel(Request $request)
     {
         $relations=[
-            'herbarium.plant.generalFamily.authors',
-            'herbarium.plant.generalGenus.authors',
-            'herbarium.plant.generalSpecie.authors',
-            'herbarium.plant.generalSubSpecie.authors',
-            'herbarium.plant.generalVariety.authors',
-            'herbarium.plant.generalFamily.authors',
+            'herbarium.plant.generalFamily.actors',
+            'herbarium.plant.generalGenus.actors',
+            'herbarium.plant.generalSpecie.actors',
+            'herbarium.plant.generalSubSpecie.actors',
+            'herbarium.plant.generalVariety.actors',
+            'herbarium.plant.generalFamily.actors',
             'herbarium.protection',
             'herbarium.generalType',
             'herbarium.generalPhytogeography',

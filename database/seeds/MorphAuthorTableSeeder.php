@@ -12,9 +12,9 @@ class MorphAuthorTableSeeder extends Seeder
     public function run()
     {
         $plants = \App\Models\PlantHerbarium::all();
-        $authors = \App\Models\Actor::limit(5)->pluck('id')->toArray();
+        $actors = \App\Models\Actor::limit(5)->pluck('id')->toArray();
         foreach ($plants as $plant) {
-            $plant->authors()->attach($authors);
+            $plant->actors()->attach($actors);
         }
     }
 }

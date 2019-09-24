@@ -10,7 +10,7 @@ use App\Models\Contracts\BaseModel;
  *            required={"name"},
  * 			@SWG\Property(property="authorable_type", type="string", description="plant, general, chromosome"),
  * 			@SWG\Property(property="authorable_id", type="integer"),
- * 			@SWG\Property(property="author_id", type="integer"),
+ * 			@SWG\Property(property="actor_id", type="integer"),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )

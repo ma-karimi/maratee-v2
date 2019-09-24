@@ -3,7 +3,11 @@
 namespace App\Repositories;
 
 use App\Models\PlantHerbarium;
+use App\Models\Taxonomy;
 use Illuminate\Container\Container as Application;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class PlantRepository
@@ -13,18 +17,18 @@ use Illuminate\Container\Container as Application;
 class PlantHerbariumRepository extends BaseRepository
 {
 
-    private $taxonomyRepository;
+    private $taxonomyModel;
 
     /**
      * PlantRepository constructor.
      * @param Application $app
-     * @param TaxonomyRepository $taxonomyRepository
+     * @param Taxonomy $taxonomyModel
      * @throws \Exception
      */
-    public function __construct(Application $app, TaxonomyRepository $taxonomyRepository)
+    public function __construct(Application $app, Taxonomy $taxonomyModel)
     {
         parent::__construct($app);
-        $this->taxonomyRepository = $taxonomyRepository;
+        $this->taxonomyModel = $taxonomyModel;
     }
 
     /**
@@ -55,30 +59,28 @@ class PlantHerbariumRepository extends BaseRepository
 
     /**
      * @param array $input
-     * @return \Illuminate\Database\Eloquent\Model|void
+     * @return Model|void
      */
     public function create($input)
     {
-        $plant = $this->createPlant($input);
-        $taxonomy_input = $this->createTaxonomy($input, $plant);
-        $this->syncPlantProperties($taxonomy_input, $plant);
+        [$taxonomy_input, $taxonomy_id] = $this->firstOrCreateTaxonomy($input);
+        $plant = $this->createPlant($input, $taxonomy_id);
+        $this->syncPlantGeneralProperties($taxonomy_input, $plant);
         $this->syncPlantTypeProperties($input, $plant);
-        $this->syncPlantSubSpeciesProperties($input, $plant);
         return $plant;
     }
 
     /**
      * @param array $input
      * @param $id
-     * @return \Illuminate\Database\Eloquent\Model|void
+     * @return Model|void
      */
     public function update($input, $id)
     {
-        $plant = $this->updatePlant($input, $id);
-        $taxonomy_input = $this->updatePlantTaxonomy($input, $plant);
-        $this->syncPlantProperties($taxonomy_input, $plant);
+        [$taxonomy_input, $taxonomy_id] = $this->firstOrCreateTaxonomy($input);
+        $plant = $this->updatePlant($input, $id, $taxonomy_id);
+        $this->syncPlantGeneralProperties($taxonomy_input, $plant);
         $this->syncPlantTypeProperties($input, $plant);
-        $this->syncPlantSubSpeciesProperties($input, $plant);
         $this->updateMedia($input, $plant);
         return $plant;
     }
@@ -86,11 +88,13 @@ class PlantHerbariumRepository extends BaseRepository
 
     /**
      * @param $input
-     * @return \Illuminate\Database\Eloquent\Model
+     * @param $taxonomy_id
+     * @return Model
      */
-    private function createPlant($input): \Illuminate\Database\Eloquent\Model
+    private function createPlant($input, $taxonomy_id): Model
     {
         $plant_input = [
+            'taxonomy_id' => $taxonomy_id,
             'name' => $input['name'],
             'protection_id' => $input['protection_id'],
             'location_id' => $input['location_id'],
@@ -115,7 +119,6 @@ class PlantHerbariumRepository extends BaseRepository
             'samples_no' => $input['samples_no'] ?? null,
             'tip_qt' => $input['tip_qt'] ?? null,
             'physical_tip_qt' => $input['physical_tip_qt'] ?? null,
-            'type_description' => $input['type_description'] ?? null,
         ];
         //store plant
         return parent::create($plant_input);
@@ -123,42 +126,41 @@ class PlantHerbariumRepository extends BaseRepository
 
     /**
      * @param $input
-     * @param \Illuminate\Database\Eloquent\Model $plant
      * @return array
      */
-    private function createTaxonomy($input, \Illuminate\Database\Eloquent\Model $plant): array
+    private function firstOrCreateTaxonomy($input): array
     {
         $taxonomy_input = [
             'family_id' => $input['family_id'],
             'genus_id' => $input['genus_id'] ?? null,
             'species_id' => $input['species_id'] ?? null,
+            'subspecies_id' => $input['subspecies_id'] ?? null,
             'variety_id' => $input['variety_id'] ?? null,
         ];
-        $taxonomy_input['plant_id'] = $plant->id;
         //store taxonomy
-        $this->taxonomyRepository->create($taxonomy_input);
-        return $taxonomy_input;
+        $result = $this->taxonomyModel->firstOrCreate($taxonomy_input);
+        return [$taxonomy_input, $result->id];
     }
 
     /**
      * @param array $taxonomy_input
-     * @param \Illuminate\Database\Eloquent\Model $plant
+     * @param Model $plant
      */
-    private function syncPlantProperties(array $taxonomy_input, \Illuminate\Database\Eloquent\Model $plant): void
+    private function syncPlantGeneralProperties(array $taxonomy_input, Model $plant): void
     {
         $general_input = array_filter($taxonomy_input, function ($value, $key) {
-            return $value !== null and $key !== 'type_description' and $key !== 'plant_id';
+            return $value !== null; /*and $key !== 'type_description' and $key !== 'plant_id';*/
         }, ARRAY_FILTER_USE_BOTH);
 
-        $plant->generals()->sync($general_input);
+        $plant->generals()->sync($taxonomy_input);
     }
 
     /**
      * @param $input
-     * @param \Illuminate\Database\Eloquent\Model $plant
+     * @param Model $plant
      * @return mixed
      */
-    private function syncPlantTypeProperties($input, \Illuminate\Database\Eloquent\Model $plant)
+    private function syncPlantTypeProperties($input, Model $plant)
     {
         if (!empty($input['plant_types'])) {
             $plant->generals()->sync($input['plant_types']);
@@ -168,23 +170,14 @@ class PlantHerbariumRepository extends BaseRepository
 
     /**
      * @param $input
-     * @param \Illuminate\Database\Eloquent\Model $plant
-     */
-    private function syncPlantSubSpeciesProperties($input, \Illuminate\Database\Eloquent\Model $plant): void
-    {
-        if (isset($input['subspecies_ids'])) {
-            $plant->generals()->sync($input['subspecies_ids']);
-        }
-    }
-
-    /**
-     * @param $input
      * @param $id
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
+     * @param $taxonomy_id
+     * @return Builder|Builder[]|Collection|Model
      */
-    private function updatePlant($input, $id)
+    private function updatePlant($input, $id, $taxonomy_id)
     {
         $plant_input = [
+            'taxonomy_id' => $taxonomy_id,
             'name' => $input['name'],
             'protection_id' => $input['protection_id'],
             'location_id' => $input['location_id'],
@@ -208,29 +201,11 @@ class PlantHerbariumRepository extends BaseRepository
             'sheets_no' => $input['sheets_no'] ?? null,
             'samples_no' => $input['samples_no'] ?? null,
             'tip_qt' => $input['tip_qt'] ?? null,
-            'physical_tip_qt' => $input['physical_tip_qt'] ?? null,
-            'type_description' => $input['type_description'] ?? null,
+            'physical_tip_qt' => $input['physical_tip_qt'] ?? null
         ];
         return parent::update($plant_input, $id);
     }
 
-    /**
-     * @param $input
-     * @param $plant
-     * @return array
-     */
-    private function updatePlantTaxonomy($input, $plant): array
-    {
-        $taxonomy_input = [
-            'family_id' => $input['family_id'],
-            'genus_id' => $input['genus_id'] ?? null,
-            'species_id' => $input['species_id'] ?? null,
-            'variety_id' => $input['variety_id'] ?? null,
-            'type_description' => $input['type_description'] ?? null,
-        ];
-        $plant->taxonomy->update($taxonomy_input);
-        return $taxonomy_input;
-    }
 
     /**
      * @param $input

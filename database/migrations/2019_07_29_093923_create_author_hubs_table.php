@@ -16,8 +16,8 @@ class CreateAuthorHubsTable extends Migration
         Schema::create('author_hubs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->morphs('authorable');
-            $table->unsignedBigInteger('author_id');
-            $table->foreign('author_id')->references('id')->on('authors')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->unsignedBigInteger('actor_id');
+            $table->foreign('actor_id')->references('id')->on('actors')->onUpdate('NO ACTION')->onDelete('cascade');
 
             $table->timestamps();
             $table->softDeletesTz();
@@ -32,7 +32,7 @@ class CreateAuthorHubsTable extends Migration
     public function down()
     {
         Schema::table('author_hubs', function (Blueprint $table) {
-            $table->dropForeign(['author_id']);
+            $table->dropForeign(['actor_id']);
         });
         Schema::dropIfExists('author_hubs');
     }

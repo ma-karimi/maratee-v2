@@ -16,7 +16,7 @@ class AuthorApiTest extends TestCase
     public function test_create_author()
     {
         $author = $this->fakeAuthorData();
-        $this->response = $this->json('POST', '/api/authors', $author);
+        $this->response = $this->json('POST', '/api/actors', $author);
 
         $this->assertApiResponse($author);
     }
@@ -27,7 +27,7 @@ class AuthorApiTest extends TestCase
     public function test_read_author()
     {
         $author = $this->makeAuthor();
-        $this->response = $this->json('GET', '/api/authors/'.$author->id);
+        $this->response = $this->json('GET', '/api/actors/'.$author->id);
 
         $this->assertApiResponse($author->toArray());
     }
@@ -40,7 +40,7 @@ class AuthorApiTest extends TestCase
         $author = $this->makeAuthor();
         $editedAuthor = $this->fakeAuthorData();
 
-        $this->response = $this->json('PUT', '/api/authors/'.$author->id, $editedAuthor);
+        $this->response = $this->json('PUT', '/api/actors/'.$author->id, $editedAuthor);
 
         $this->assertApiResponse($editedAuthor);
     }
@@ -51,10 +51,10 @@ class AuthorApiTest extends TestCase
     public function test_delete_author()
     {
         $author = $this->makeAuthor();
-        $this->response = $this->json('DELETE', '/api/authors/'.$author->id);
+        $this->response = $this->json('DELETE', '/api/actors/'.$author->id);
 
         $this->assertApiSuccess();
-        $this->response = $this->json('GET', '/api/authors/'.$author->id);
+        $this->response = $this->json('GET', '/api/actors/'.$author->id);
 
         $this->response->assertStatus(404);
     }

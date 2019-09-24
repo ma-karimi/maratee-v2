@@ -45,7 +45,6 @@ $factory->define(App\Models\PlantHerbarium::class, function (Faker $faker) {
         'tip_qt' => $faker->numberBetween(1, 100),
         'physical_tip_qt' => $faker->numberBetween(1, 100),
         'location_id' => $faker->randomElement($locations),
-        'herbarium_index' => $faker->randomElement(['a', 'b', 'c', null]),
-        'tip_type_id' => $faker->randomElement($plant_type_generals)
+        'herbarium_index' => $faker->randomElement(['a', 'b', 'c', null])
     ];
 });

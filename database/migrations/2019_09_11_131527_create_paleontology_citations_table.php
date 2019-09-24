@@ -16,7 +16,7 @@ class CreatePaleontologyCitationsTable extends Migration
         Schema::create('paleontology_citations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('paleontology_id');
-            $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('actor_id');
             $table->integer('year');
             $table->json('publication_name')->nullable();
             $table->string('volume')->nullable();
@@ -26,7 +26,7 @@ class CreatePaleontologyCitationsTable extends Migration
 
 
             $table->foreign('paleontology_id')->references('id')->on('paleontologies')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('author_id')->references('id')->on('authors')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('actor_id')->references('id')->on('actors')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
             $table->timestamps();
             $table->softDeletesTz();

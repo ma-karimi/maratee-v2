@@ -86,7 +86,7 @@ class PaleontologyCitationAPIController extends AppBaseController
      *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
-     *          name="author_id",
+     *          name="actor_id",
      *          in="body",
      *          required=true,
      *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
@@ -233,7 +233,7 @@ class PaleontologyCitationAPIController extends AppBaseController
      *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
-     *          name="author_id",
+     *          name="actor_id",
      *          in="body",
      *          required=true,
      *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")

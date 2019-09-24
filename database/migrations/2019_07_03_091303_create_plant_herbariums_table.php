@@ -33,7 +33,6 @@ if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >
             $table->json('ecology_description')->nullable();
             $table->json('type_description')->nullable()->comment('plant type description');
             $table->tinyInteger('flowering_time')->nullable();
-            $table->unsignedBigInteger('tip_type_id')->nullable();
 
             $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('organization_id');
