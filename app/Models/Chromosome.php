@@ -25,7 +25,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
-class Chromosome extends BaseModel
+class Chromosome extends BaseModel implements HasMedia
 {
 
     use ArticleRelation, LocationRelation, HasMediaTrait;
