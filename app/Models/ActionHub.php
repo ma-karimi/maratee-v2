@@ -17,26 +17,14 @@ use App\Models\Scope\ActionHubScope;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="user_id",
- *          description="user_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="herbarium_id",
- *          description="herbarium_id",
+ *          property="plant_herbarium_id",
+ *          description="plant_herbarium_id",
  *          type="integer",
  *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="project_id",
  *          description="project_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="location_id",
- *          description="location_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -86,8 +74,7 @@ class ActionHub extends BaseModel
 //        'action_id' => 'required|exists:actions,id',
         'department_id' => 'exists:departments,id',
         'project_id' => 'exists:projects,id',
-        'location_id' => 'exists:locations,id',
-        'user_id' => 'required|exists:users,id',
+//        'user_id' => 'required|exists:users,id',
         'date' => 'date',
     ];
     //public static $linguistically = ['description' => false];
@@ -118,14 +105,17 @@ class ActionHub extends BaseModel
     {
         return $this->belongsTo(Project::class);
     }
+//
+//    public function user()
+//    {
+//        return $this->belongsTo(User::class);
+//    }
 
-    public function location()
+    /**
+     * Get the owning actionable model.
+     */
+    public function actionable()
     {
-        return $this->belongsTo(Location::class);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+        return $this->morphTo('actionable');
     }
 }

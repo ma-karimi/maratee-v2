@@ -28,12 +28,10 @@ if tip_qt > 0, it meant we have the tip herbarium, otherwise means we don\'t hav
 if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >0, it means we have image tips, rather than physical tips.');
             $table->json('description')->nullable();
             $table->boolean('is_flowering')->default(0);
-            $table->json('life_forms')->comment('life_form_leaf_id', 'life_form_cycle_id', 'life_form_wooden_id', 'life_form_herbaceous_id')->nullable();
+            $table->json('life_forms')->comment('life_form_leaf_id, life_form_cycle_id, life_form_wooden_id, life_form_herbaceous_id')->nullable();
             $table->json('habitat_description')->nullable();
             $table->json('ecology_description')->nullable();
-            $table->json('type_description')->nullable()->comment('plant type description');
             $table->tinyInteger('flowering_time')->nullable();
-            $table->unsignedBigInteger('tip_type_id')->nullable();
 
             $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('organization_id');

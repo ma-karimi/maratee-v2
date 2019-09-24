@@ -29,7 +29,6 @@ class CreatePaleontologiesTable extends Migration
             $table->integer('drawer')->nullable();
 
             $table->json('infra_specific')->nullable();
-            $table->json('type_status')->nullable();
             $table->json('preservation')->nullable();
             $table->integer('pieces')->nullable();
             $table->json('color')->nullable();
@@ -48,6 +47,7 @@ class CreatePaleontologiesTable extends Migration
             $table->json('collector_name')->nullable();
             $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('general_order_id')->nullable();
+            $table->unsignedBigInteger('general_plant_type_id')->nullable();
             $table->json('common_name')->nullable();
             $table->string('update_frequency');
             $table->json('description')->nullable();
