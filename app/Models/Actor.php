@@ -26,7 +26,7 @@ class Actor extends BaseModel
      *
      * @var string
      */
-    protected $table = 'authors';
+    protected $table = 'actors';
     /**
      * The attributes that should be casted to native types.
      *
@@ -40,8 +40,8 @@ class Actor extends BaseModel
      */
     public function plants()
     {
-        return $this->morphedByMany(PlantHerbarium::class, 'authorable', 'author_hubs')
-            ->whereNull('author_hubs.deleted_at')
+        return $this->morphedByMany(PlantHerbarium::class, 'actorable', 'actor_hubs')
+            ->whereNull('actor_hubs.deleted_at')
             ->withTimestamps();
     }
 
@@ -50,8 +50,8 @@ class Actor extends BaseModel
      */
     public function generals()
     {
-        return $this->morphedByMany(General::class, 'authorable', 'author_hubs')
-            ->whereNull('author_hubs.deleted_at')
+        return $this->morphedByMany(General::class, 'actorable', 'actor_hubs')
+            ->whereNull('actor_hubs.deleted_at')
             ->withTimestamps();
     }
 

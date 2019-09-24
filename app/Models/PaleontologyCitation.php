@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @SWG\Definition(
  *      definition="PaleontologyCitation",
- *      required={"paleontology_id","author_id"},
+ *      required={"paleontology_id","actor_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -20,8 +20,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          type="integer",
  *      ),
  *      @SWG\Property(
- *          property="author_id",
- *          description="author_id",
+ *          property="actor_id",
+ *          description="actor_id",
  *          type="integer",
  *      ),
  *      @SWG\Property(
@@ -89,7 +89,7 @@ class PaleontologyCitation extends BaseModel
         'plates' => 'string',
         'figures_number' => 'date',
         'paleontology_id' => 'integer|exists:paleontologies,id',
-        'author_id' => 'integer|exists:authors,id',
+        'actor_id' => 'integer|exists:actors,id',
     ];
 
 

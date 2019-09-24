@@ -105,7 +105,7 @@ class General extends BaseModel
     /**
      * @return MorphToMany
      */
-    public function authors(): MorphToMany
+    public function actors(): MorphToMany
     {
         return $this->morphToMany(Actor::class, 'morph_author')->withTimestamps();
     }

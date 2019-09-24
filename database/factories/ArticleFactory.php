@@ -12,6 +12,6 @@ $factory->define(App\Models\Article::class, function (Faker $faker) {
         'journal_no' => $faker->numberBetween(1, 100),
         'page_no' => $faker->numberBetween(1, 100),
         'type' => make_json($faker->word),
-        //'authors' => make_json($faker->word),
+        //'actors' => make_json($faker->word),
     ];
 });

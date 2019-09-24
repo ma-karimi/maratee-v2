@@ -4,13 +4,11 @@ namespace App\Models;
 
 use App\Models\Accessor\PlantAccessor;
 use App\Models\Contracts\BaseModel;
-use App\Models\Relations\{ActionRelation, LocationRelation, ArticleRelation};
+use App\Models\Relations\{ActionRelation, ArticleRelation, LocationRelation};
 use App\Models\Scope\PlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
@@ -148,12 +146,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="type_description",
- *          description="type_description",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
  *          property="flowering_time",
  *          description="flowering_time",
  *          type="integer"
@@ -201,7 +193,6 @@ class PlantHerbarium extends BaseModel
         'life_forms' => 'json',
         'habitat_description' => 'json',
         'ecology_description' => 'json',
-        'type_description' => 'json',
     ];
 
     /**
@@ -217,11 +208,11 @@ class PlantHerbarium extends BaseModel
     /**
      * @return MorphToMany
      */
-    public function authors(): MorphToMany
+    public function actors(): MorphToMany
     {
-        return $this->morphToMany(Actor::class, 'authorable',
-            'author_hubs')
-            ->whereNull('author_hubs.deleted_at')
+        return $this->morphToMany(Actor::class, 'actorable',
+            'actor_hubs')
+            ->whereNull('actor_hubs.deleted_at')
             ->withTimestamps();
     }
 

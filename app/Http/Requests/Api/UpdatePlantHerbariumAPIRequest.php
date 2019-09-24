@@ -48,6 +48,7 @@ class UpdatePlantHerbariumAPIRequest extends APIRequest
         return [
             'protection_id' => 'required|exists:protections,id',
             'organization_id' => 'required|exists:organizations,id',
+            'location_id' => 'required|exists:locations,id',
             //taxonomy
             'family_id' => 'required|exists:generals,id',
             'genus_id' => 'exists:generals,id',

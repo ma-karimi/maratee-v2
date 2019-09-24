@@ -15370,7 +15370,7 @@
                         }
                     },
                     {
-                        "name": "author_id",
+                        "name": "actor_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -15515,7 +15515,7 @@
                         }
                     },
                     {
-                        "name": "author_id",
+                        "name": "actor_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -25901,14 +25901,14 @@
                 "name"
             ],
             "properties": {
-                "authorable_type": {
+                "actorable_type": {
                     "description": "plant, general, chromosome",
                     "type": "string"
                 },
-                "authorable_id": {
+                "actorable_id": {
                     "type": "integer"
                 },
-                "author_id": {
+                "actor_id": {
                     "type": "integer"
                 },
                 "created_at": {
@@ -28299,7 +28299,7 @@
         "PaleontologyCitation": {
             "required": [
                 "paleontology_id",
-                "author_id"
+                "actor_id"
             ],
             "properties": {
                 "id": {
@@ -28310,8 +28310,8 @@
                     "description": "paleontology_id",
                     "type": "integer"
                 },
-                "author_id": {
-                    "description": "author_id",
+                "actor_id": {
+                    "description": "actor_id",
                     "type": "integer"
                 },
                 "year": {
@@ -28645,13 +28645,6 @@
                 },
                 "habitat_description": {
                     "description": "habitat_description",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "type_description": {
-                    "description": "type_description",
                     "type": "array",
                     "items": {
                         "type": "string"
