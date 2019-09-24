@@ -10,7 +10,7 @@ use Illuminate\Container\Container as Application;
  * @package App\Repositories
  * @version July 14, 2019, 11:25 am UTC
  */
-class PlantRepository extends BaseRepository
+class PlantHerbariumRepository extends BaseRepository
 {
 
     private $taxonomyRepository;
@@ -93,6 +93,8 @@ class PlantRepository extends BaseRepository
         $plant_input = [
             'name' => $input['name'],
             'protection_id' => $input['protection_id'],
+            'location_id' => $input['location_id'],
+            'organization_id' => $input['organization_id'],
             'general_phytogeography_id' => $input['general_phytogeography_id'],
             'general_ecology_id' => $input['general_ecology_id'] ?? null,
             'general_habitat_id' => $input['general_habitat_id'] ?? null,
@@ -104,8 +106,16 @@ class PlantRepository extends BaseRepository
             'habitat_description' => $input['habitat_description'] ?? null,
             'ecology_description' => $input['ecology_description'] ?? null,
             'life_forms' => $input['life_forms'] ?? null,
-            'is_flowering' => $input['is_flowering'] ?? null,
+            'is_flowering' => $input['is_flowering'] ?? 0,
             'flowering_time' => $input['flowering_time'] ?? null,
+            'herbarium_number' => $input['herbarium_number'] ?? null,
+            'herbarium_index' => $input['herbarium_index'] ?? null,
+            'cf' => $input['cf'] ?? 0,
+            'sheets_no' => $input['sheets_no'] ?? null,
+            'samples_no' => $input['samples_no'] ?? null,
+            'tip_qt' => $input['tip_qt'] ?? null,
+            'physical_tip_qt' => $input['physical_tip_qt'] ?? null,
+            'type_description' => $input['type_description'] ?? null,
         ];
         //store plant
         return parent::create($plant_input);
@@ -123,7 +133,6 @@ class PlantRepository extends BaseRepository
             'genus_id' => $input['genus_id'] ?? null,
             'species_id' => $input['species_id'] ?? null,
             'variety_id' => $input['variety_id'] ?? null,
-            'type_description' => $input['type_description'] ?? null,
         ];
         $taxonomy_input['plant_id'] = $plant->id;
         //store taxonomy
@@ -156,6 +165,7 @@ class PlantRepository extends BaseRepository
         }
     }
 
+
     /**
      * @param $input
      * @param \Illuminate\Database\Eloquent\Model $plant
@@ -177,6 +187,8 @@ class PlantRepository extends BaseRepository
         $plant_input = [
             'name' => $input['name'],
             'protection_id' => $input['protection_id'],
+            'location_id' => $input['location_id'],
+            'organization_id' => $input['organization_id'],
             'general_phytogeography_id' => $input['general_phytogeography_id'],
             'general_ecology_id' => $input['general_ecology_id'] ?? null,
             'general_habitat_id' => $input['general_habitat_id'] ?? null,
@@ -188,8 +200,16 @@ class PlantRepository extends BaseRepository
             'habitat_description' => $input['habitat_description'] ?? null,
             'ecology_description' => $input['ecology_description'] ?? null,
             'life_forms' => $input['life_forms'] ?? null,
-            'is_flowering' => $input['is_flowering'] ?? null,
-            'flowering_time' => $input['is_flowering'] ?? null,
+            'is_flowering' => $input['is_flowering'] ?? 0,
+            'flowering_time' => $input['flowering_time'] ?? null,
+            'herbarium_number' => $input['herbarium_number'] ?? null,
+            'herbarium_index' => $input['herbarium_index'] ?? null,
+            'cf' => $input['cf'] ?? 0,
+            'sheets_no' => $input['sheets_no'] ?? null,
+            'samples_no' => $input['samples_no'] ?? null,
+            'tip_qt' => $input['tip_qt'] ?? null,
+            'physical_tip_qt' => $input['physical_tip_qt'] ?? null,
+            'type_description' => $input['type_description'] ?? null,
         ];
         return parent::update($plant_input, $id);
     }

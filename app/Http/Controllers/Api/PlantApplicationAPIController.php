@@ -174,7 +174,7 @@ class PlantApplicationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/plantApplications/{id}",
+     *      path="/plant_applications/{id}",
      *      summary="Display the specified plantApplication",
      *      tags={"plantApplication"},
      *      description="Get plantApplication",
@@ -225,7 +225,7 @@ class PlantApplicationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/plantApplications/{id}",
+     *      path="/plant_applications/{id}",
      *      summary="Update the specified plantApplication in storage",
      *      tags={"plantApplication"},
      *      description="Update plantApplication",
@@ -340,7 +340,7 @@ class PlantApplicationAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/plantApplications/{id}",
+     *      path="/plant_applications/{id}",
      *      summary="Remove the specified plantApplication from storage",
      *      tags={"plantApplication"},
      *      description="Delete plantApplication",
