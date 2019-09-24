@@ -10,7 +10,7 @@ $factory->define(App\Models\Botanical::class, function (Faker $faker) {
     $habitats = \App\Models\General::whereType('habitat')->pluck('id')->toArray();
     $soils = \App\Models\Soil::pluck('id')->toArray();
     return [
-        'plant_id' => $faker->randomElement($plants),
+        'plant_herbarium_id' => $faker->randomElement($plants),
         'height' => 2,
         'flower_color' => make_json($faker->word),
         'fruit_color' => make_json($faker->word),

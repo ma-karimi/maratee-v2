@@ -1,7 +1,7 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\Author;
-use App\Repositories\AuthorRepository;
+use App\Models\Actor;
+use App\Repositories\ActorRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\Traits\MakeAuthorTrait;
@@ -12,14 +12,14 @@ class AuthorRepositoryTest extends TestCase
     use MakeAuthorTrait, ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var AuthorRepository
+     * @var ActorRepository
      */
     protected $authorRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->authorRepo = \App::make(AuthorRepository::class);
+        $this->authorRepo = \App::make(ActorRepository::class);
     }
 
     /**
@@ -32,7 +32,7 @@ class AuthorRepositoryTest extends TestCase
         $createdAuthor = $createdAuthor->toArray();
         $this->assertArrayHasKey('id', $createdAuthor);
         $this->assertNotNull($createdAuthor['id'], 'Created Author must have id specified');
-        $this->assertNotNull(Author::find($createdAuthor['id']), 'Author with given id must be in DB');
+        $this->assertNotNull(Actor::find($createdAuthor['id']), 'Author with given id must be in DB');
         $this->assertModelData($author, $createdAuthor);
     }
 
@@ -68,6 +68,6 @@ class AuthorRepositoryTest extends TestCase
         $author = $this->makeAuthor();
         $resp = $this->authorRepo->delete($author->id);
         $this->assertTrue($resp);
-        $this->assertNull(Author::find($author->id), 'Author should not exist in DB');
+        $this->assertNull(Actor::find($author->id), 'Author should not exist in DB');
     }
 }

@@ -93,7 +93,7 @@ Route::apiResource('planting_actions', 'PlantingActionAPIController');
 
 Route::apiResource('generals', 'GeneralAPIController');
 
-Route::apiResource('plants', 'PlantAPIController');
+Route::apiResource('plant_herbariums', 'PlantHerbariumAPIController');
 
 Route::apiResource('actions', 'ActionAPIController');
 
@@ -107,7 +107,7 @@ Route::apiResource('evaluations', 'EvaluationAPIController');
 
 Route::apiResource('attendances', 'AttendanceAPIController');
 
-Route::apiResource('authors', 'AuthorAPIController');
+Route::apiResource('actors', 'ActorAPIController');
 
 Route::apiResource('botanicals', 'BotanicalAPIController');
 
@@ -194,7 +194,7 @@ Route::apiResource('block_traits', 'BlockTraitAPIController');
 Route::apiResource('dimensions', 'DimensionAPIController');
 
 Route::apiResource('evaluation_dimensions', 'EvaluationDimensionAPIController');
-//Route::apiResource('author_hubs', 'AuthorHubAPIController');
+//Route::apiResource('actor_hubs', 'actorHubAPIController');
 //Route::apiResource('location_hubs', 'LocationHubAPIController');
 //Route::apiResource('user_hubs', 'UserHubAPIController');
 

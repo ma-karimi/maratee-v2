@@ -1,7 +1,7 @@
 <?php namespace Tests\Repositories;
 
 use App\Models\PlantHerbarium;
-use App\Repositories\PlantRepository;
+use App\Repositories\PlantHerbariumRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\Traits\MakePlantTrait;
@@ -12,14 +12,14 @@ class PlantRepositoryTest extends TestCase
     use MakePlantTrait, ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var PlantRepository
+     * @var PlantHerbariumRepository
      */
     protected $plantRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->plantRepo = \App::make(PlantRepository::class);
+        $this->plantRepo = \App::make(PlantHerbariumRepository::class);
     }
 
     /**

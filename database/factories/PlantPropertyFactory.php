@@ -10,7 +10,7 @@ $factory->define(App\Models\PlantProperty::class, function (Faker $faker) {
     $plants = PlantHerbarium::pluck('id')->toArray();
     $generals = General::whereIn('type', ['sub_species', 'plant_type'])->pluck('id')->toArray();
     return [
-        'plant_id' => $faker->randomElement($plants),
+        'plant_herbarium_id' => $faker->randomElement($plants),
         'general_id' => $faker->randomElement($generals),
     ];
 });

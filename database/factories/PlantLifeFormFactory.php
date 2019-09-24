@@ -11,6 +11,6 @@ $factory->define(App\Models\PlantLifeForm::class, function (Faker $faker) {
     return [
         'life_form_id' => $record['id'],
        // 'type' => $record['type'],
-        'plant_id' => $faker->randomElement($plants),
+        'plant_herbarium_id' => $faker->randomElement($plants),
     ];
 });

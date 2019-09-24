@@ -20,6 +20,7 @@ $factory->define(App\Models\PlantHerbarium::class, function (Faker $faker) {
     $diatoms = \App\Models\General::whereType('diatom')->pluck('id')->toArray();
     $mosses = \App\Models\General::whereType('moss')->pluck('id')->toArray();
     $ecology = \App\Models\General::whereType('ecology')->pluck('id')->toArray();
+    $plant_type_generals = \App\Models\General::where('type', 'plant_type')->pluck('id')->toArray();
 
     return [
         'name' => make_json($faker->word),
@@ -45,5 +46,6 @@ $factory->define(App\Models\PlantHerbarium::class, function (Faker $faker) {
         'physical_tip_qt' => $faker->numberBetween(1, 100),
         'location_id' => $faker->randomElement($locations),
         'herbarium_index' => $faker->randomElement(['a', 'b', 'c', null]),
+        'tip_type_id' => $faker->randomElement($plant_type_generals)
     ];
 });

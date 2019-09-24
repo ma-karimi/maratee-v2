@@ -2,7 +2,7 @@
 
 use Faker\Factory as Faker;
 use App\Models\PlantHerbarium;
-use App\Repositories\PlantRepository;
+use App\Repositories\PlantHerbariumRepository;
 
 trait MakePlantTrait
 {
@@ -14,8 +14,8 @@ trait MakePlantTrait
      */
     public function makePlant($plantFields = [])
     {
-        /** @var PlantRepository $plantRepo */
-        $plantRepo = \App::make(PlantRepository::class);
+        /** @var PlantHerbariumRepository $plantRepo */
+        $plantRepo = \App::make(PlantHerbariumRepository::class);
         $theme = $this->fakePlantData($plantFields);
         return $plantRepo->create($theme);
     }

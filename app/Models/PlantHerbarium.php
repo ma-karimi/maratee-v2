@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Accessor\PlantAccessor;
 use App\Models\Contracts\BaseModel;
-use App\Models\Relations\{ActionRelation,LocationRelation,ArticleRelation};
+use App\Models\Relations\{ActionRelation, LocationRelation, ArticleRelation};
 use App\Models\Scope\PlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -15,16 +15,72 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
- *      definition="Plant",
- *      required={"name","protection_id","general_phytogeography_id"},
+ *      definition="PlantHerbarium",
+ *      required={"name","location_id","organization_id","protection_id","general_phytogeography_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
  *          type="integer"
  *      ),
  *      @SWG\Property(
+ *          property="name",
+ *          description="name",
+ *          type="array",
+ *     @SWG\Items(type="string")
+ *      ),
+ *      @SWG\Property(
+ *          property="taxonomy_id",
+ *          description="taxonomy_id",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="herbarium_number",
+ *          description="herbarium_number",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="location_id",
+ *          description="location_id",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="organization_id",
+ *          description="organization_id",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="herbarium_index",
+ *          description="herbarium_index",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="cf",
+ *          description="cf",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
  *          property="is_flowering",
  *          description="is_flowering",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="sheets_no",
+ *          description="sheets_no",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="samples_no",
+ *          description="samples_no",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="tip_qt",
+ *          description="tip_qt",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="physical_tip_qt",
+ *          description="physical_tip_qt",
  *          type="integer"
  *      ),
  *      @SWG\Property(
@@ -68,12 +124,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          type="integer"
  *      ),
  *      @SWG\Property(
- *          property="name",
- *          description="name",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
  *          property="life_forms",
  *          description="life_forms",
  *          type="array",
@@ -98,16 +148,15 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="flowering_time",
- *          description="flowering_time",
+ *          property="type_description",
+ *          description="type_description",
  *          type="array",
- *     @SWG\Items(type="string"),
+ *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="subspecies_ids",
- *          description="subspecies_ids",
- *          type="array",
- *     @SWG\Items(type="integer")
+ *          property="flowering_time",
+ *          description="flowering_time",
+ *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -127,36 +176,17 @@ class PlantHerbarium extends BaseModel
 {
     use PlantScope, PlantAccessor, ActionRelation, ArticleRelation, LocationRelation;
 
-    public const FLOWERING_TIME = [1=>'Farvardin', 2=>'Ordibehesht', 3=>'Khordad', 4=>'Tir', 5=>'Mordad', 6=>'Shahrivar', 7=>'Mehr', 8=>'Aban', 9=>'Azar', 10=>'Dey', 11=>'Bahman', 12=>'Esfand'];
+    public const FLOWERING_TIME = [1 => 'Farvardin', 2 => 'Ordibehesht', 3 => 'Khordad', 4 => 'Tir', 5 => 'Mordad', 6 => 'Shahrivar', 7 => 'Mehr', 8 => 'Aban', 9 => 'Azar', 10 => 'Dey', 11 => 'Bahman', 12 => 'Esfand'];
 
     public static $linguistically = ['name' => true, 'description' => false, 'habitat_description' => false, 'ecology_description' => false];
-    public static $rules = [
-        'protection_id' => 'required|exists:protections,id',
-        //taxonomy
-        'family_id' => 'required|exists:generals,id',
-        'genus_id' => 'exists:generals,id',
-        'species_id' => 'exists:generals,id',
-        'variety_id' => 'exists:generals,id',
-        'order_id' => 'exists:generals,id',
-        'class_id' => 'exists:generals,id',
-        'subspecies_ids.*' => 'exists:generals,id',
-        'is_flowering' => 'integer',
-        //classification
-        'general_ecology_id' => 'exists:generals,id',
-        'general_habitat_id' => 'exists:generals,id',
-        'general_origin_id' => 'exists:generals,id',
-        'general_phytogeography_id' => 'required|exists:generals,id',
-        'general_substrate_lichen_id' => 'exists:generals,id',
-        'general_substrate_moss_id' => 'exists:generals,id',
-        'general_substrate_diatom_id' => 'exists:generals,id',
-    ];
+
     protected $appends = ['flowering_time_name'];
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'plants';
+    protected $table = 'plant_herbariums';
 //    protected $with = ['generals'];
 //    protected $appends = ['properties'];
 
@@ -171,6 +201,7 @@ class PlantHerbarium extends BaseModel
         'life_forms' => 'json',
         'habitat_description' => 'json',
         'ecology_description' => 'json',
+        'type_description' => 'json',
     ];
 
     /**
@@ -188,7 +219,7 @@ class PlantHerbarium extends BaseModel
      */
     public function authors(): MorphToMany
     {
-        return $this->morphToMany(Author::class, 'authorable',
+        return $this->morphToMany(Actor::class, 'authorable',
             'author_hubs')
             ->whereNull('author_hubs.deleted_at')
             ->withTimestamps();
@@ -231,14 +262,15 @@ class PlantHerbarium extends BaseModel
             ->withTimestamps();
     }
 
-    public function taxonomy(): HasOne
+    public function taxonomy(): BelongsTo
     {
-        return $this->hasOne(Taxonomy::class, 'plant_id');
+        return $this->belongsTo(Taxonomy::class);
     }
 
-    public function scientific(): HasOneThrough
+    public function scientific()
     {
-        return $this->hasOneThrough(ScientificView::class, Taxonomy::class);
+        //return $this->hasOneThrough(ScientificView::class, Taxonomy::class);
+        return $this->taxonomy->scientific;
     }
 
     public function getPropertiesAttribute()
@@ -247,6 +279,16 @@ class PlantHerbarium extends BaseModel
         unset($this->generals);
 
         return $properties;
+    }
+
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
+    }
+
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class);
     }
 
     public function protection(): BelongsTo

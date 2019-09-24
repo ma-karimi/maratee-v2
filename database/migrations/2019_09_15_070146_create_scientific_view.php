@@ -13,6 +13,7 @@ class CreateScientificView extends Migration
      */
     public function up()
     {
+        \Illuminate\Support\Facades\DB::statement('DROP VIEW IF EXISTS scientific_view');
         \Illuminate\Support\Facades\DB::statement("
       CREATE VIEW scientific_view AS
       (

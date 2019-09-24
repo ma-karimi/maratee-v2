@@ -1,8 +1,8 @@
 <?php namespace Tests\Traits;
 
 use Faker\Factory as Faker;
-use App\Models\Author;
-use App\Repositories\AuthorRepository;
+use App\Models\Actor;
+use App\Repositories\ActorRepository;
 
 trait MakeAuthorTrait
 {
@@ -10,12 +10,12 @@ trait MakeAuthorTrait
      * Create fake instance of Author and save it in database
      *
      * @param array $authorFields
-     * @return Author
+     * @return Actor
      */
     public function makeAuthor($authorFields = [])
     {
-        /** @var AuthorRepository $authorRepo */
-        $authorRepo = \App::make(AuthorRepository::class);
+        /** @var ActorRepository $authorRepo */
+        $authorRepo = \App::make(ActorRepository::class);
         $theme = $this->fakeAuthorData($authorFields);
         return $authorRepo->create($theme);
     }
@@ -24,11 +24,11 @@ trait MakeAuthorTrait
      * Get fake instance of Author
      *
      * @param array $authorFields
-     * @return Author
+     * @return Actor
      */
     public function fakeAuthor($authorFields = [])
     {
-        return new Author($this->fakeAuthorData($authorFields));
+        return new Actor($this->fakeAuthorData($authorFields));
     }
 
     /**

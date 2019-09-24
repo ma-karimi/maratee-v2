@@ -17,13 +17,9 @@ class CreatePlantHerbariumsTable extends Migration
         Schema::create('plant_herbariums', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->json('name');
-            $table->unsignedBigInteger('taxonomy_id');
             $table->string('herbarium_number')->nullable()->comment('herbarium number');
-            $table->unsignedBigInteger('location_id');
-            $table->unsignedBigInteger('organization_id');
             $table->string('herbarium_index')->nullable();
             $table->boolean('cf')->default(0);
-
             $table->integer('sheets_no')->nullable()->comment('Number of required sheets per herbarium sample');
             $table->integer('samples_no')->nullable()->comment('Quantity of samples of each herbarium number');
             $table->integer('tip_qt')->nullable()->comment('number of tips
@@ -35,7 +31,13 @@ if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >
             $table->json('life_forms')->comment('life_form_leaf_id', 'life_form_cycle_id', 'life_form_wooden_id', 'life_form_herbaceous_id')->nullable();
             $table->json('habitat_description')->nullable();
             $table->json('ecology_description')->nullable();
+            $table->json('type_description')->nullable()->comment('plant type description');
             $table->tinyInteger('flowering_time')->nullable();
+            $table->unsignedBigInteger('tip_type_id')->nullable();
+
+            $table->unsignedBigInteger('location_id');
+            $table->unsignedBigInteger('organization_id');
+            $table->unsignedBigInteger('taxonomy_id');
             $table->unsignedBigInteger('protection_id');
             $table->unsignedBigInteger('general_ecology_id')->nullable();
             $table->unsignedBigInteger('general_habitat_id')->nullable();

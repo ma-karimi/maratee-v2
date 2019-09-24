@@ -11,7 +11,8 @@ class TaxonomyTableSeeder extends Seeder
      */
     public function run()
     {
-        //factory(App\Models\Taxonomy::class, 50)->create();
+        factory(\App\Models\Taxonomy::class, 50)->create();
+        /*factory(App\Models\Taxonomy::class, 50)->create();
         foreach (\App\Models\PlantHerbarium::all() as $index => $item) {
             $plant_family_generals = \App\Models\General::where('type', 'family')->pluck('id');
             $plant_genus_generals = \App\Models\General::where('type', 'genus')->pluck('id');
@@ -31,6 +32,6 @@ class TaxonomyTableSeeder extends Seeder
                 'type_description' => make_json(rand(2, 5)),
             ];
             \App\Models\Taxonomy::create($data);
-        }
+        }*/
     }
 }
