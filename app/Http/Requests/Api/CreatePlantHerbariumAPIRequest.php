@@ -4,13 +4,14 @@ namespace App\Http\Requests\Api;
 
 use App\Models\General;
 use App\Models\LifeForm;
-use App\Models\Plant;
+use App\Models\PlantHerbarium;
 use InfyOm\Generator\Request\APIRequest;
 use Illuminate\Http\JsonResponse;
 
 
 class CreatePlantHerbariumAPIRequest extends APIRequest
 {
+    
     /**
      * Determine if the user is authorized to make this request.
      *
