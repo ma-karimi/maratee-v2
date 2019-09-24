@@ -211,7 +211,7 @@ class PlantHerbariumAPIController extends AppBaseController
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -444,7 +444,7 @@ class PlantHerbariumAPIController extends AppBaseController
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Herbarium")
+     *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
      *      @SWG\Response(
      *          response=200,
