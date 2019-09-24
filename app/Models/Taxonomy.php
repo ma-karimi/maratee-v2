@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -110,11 +111,11 @@ class Taxonomy extends BaseModel
     }
 
     /**
-     * @return BelongsTo
+     * @return HasMany
      */
-    public function plant(): BelongsTo
+    public function plantHerbarium(): HasMany
     {
-        return $this->belongsTo(PlantHerbarium::class, 'plant_id');
+        return $this->hasMany(PlantHerbarium::class, 'plant_id');
     }
 
     /**

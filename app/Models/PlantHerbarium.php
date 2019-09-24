@@ -212,9 +212,9 @@ class PlantHerbarium extends BaseModel
             ->withTimestamps();
     }
 
-    public function taxonomy(): HasOne
+    public function taxonomy(): BelongsTo
     {
-        return $this->hasOne(Taxonomy::class, 'plant_id');
+        return $this->belongsTo(Taxonomy::class);
     }
 
     public function scientific(): HasOneThrough
