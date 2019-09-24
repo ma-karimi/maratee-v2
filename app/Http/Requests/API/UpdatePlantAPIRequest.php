@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api;
 
 use App\Models\LifeForm;
-use App\Models\PlantHerbarium;
+use App\Models\Plant;
 use InfyOm\Generator\Request\APIRequest;
 use Illuminate\Http\JsonResponse;
 
@@ -45,7 +45,7 @@ class UpdatePlantAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return PlantHerbarium::$rules;
+        return Plant::$rules;
     }
 
     /**

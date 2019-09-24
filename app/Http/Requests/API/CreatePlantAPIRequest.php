@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 
 class CreatePlantAPIRequest extends APIRequest
 {
+    
     /**
      * Determine if the user is authorized to make this request.
      *
