@@ -60,6 +60,10 @@ class PlantHerbariumRepository extends BaseRepository
         return PlantHerbarium::class;
     }
 
+    public function storeDetect($id,$relation,$input)
+    {
+        
+    }
     /**
      * @param array $input
      * @return Model|void

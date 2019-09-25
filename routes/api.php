@@ -30,6 +30,8 @@ Route::delete('/{class}/hub', 'APIController@destroyHub');
 Route::get('/{class}/constants', 'APIController@getConstants');
 Route::get('relations', 'APIController@relations');
 
+Route::post('{class}/{id}/{relation}', 'APIController@storeMany');
+
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('logout', 'AuthController@logout');
