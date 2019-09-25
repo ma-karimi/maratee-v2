@@ -34,6 +34,7 @@ abstract class BaseRepository
     /**
      * @param Application $app
      *
+     * @param ActionHubRepository $action_hub_repo
      * @throws Exception
      */
     public function __construct(Application $app)
@@ -271,7 +272,6 @@ abstract class BaseRepository
 
         $different_ids = array_diff($ids, $assigned_id);
         $different_assigned = array_diff($assigned_id, $ids);
-
         //attach and update pivot fields
         $this->attachAndUpdateFields($related_model, $ids, $additional_data, $related_model_class, $related_key, $record, $different_ids);
 
@@ -318,7 +318,7 @@ abstract class BaseRepository
      * @param $record
      * @param array $different_ids
      */
-    private function attachAndUpdateFields($related_model, array $ids, array $additional_data, $related_model_class, $related_key, $record, array $different_ids): void
+    public function attachAndUpdateFields($related_model, array $ids, $additional_data = [], $related_model_class, $related_key, $record, array $different_ids): void
     {
         if (!empty($additional_data)) {
             //update pivot fields
@@ -356,5 +356,23 @@ abstract class BaseRepository
                 $additional_data[$index] = json_encode($additional_datum);
             }
         }
+    }
+
+    public function storeAction($id, $input, int $action_type)
+    {
+        $action = ActionHub::updateOrCreate([
+            'action_id' => $action_type,
+            'actionable_type' => $this->model(),
+            'actionable_id' => $id,
+        ], [
+            'project_id' => $input['project_id'] ?? null,
+            'department_id' => $input['department_id'] ?? null,
+            'date' => $input['date'] ?? null,
+            'description' => $input['description'] ?? null
+        ]);
+        //store actors
+        $action_repo = resolve('App\\Repositories\\ActionHubRepository');
+        $action_repo->createHub($action->id, 'actors', $input['actors']);
+        return ActionHub::with('actors')->whereHas('actors')->get();
     }
 }

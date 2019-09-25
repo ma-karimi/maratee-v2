@@ -144,12 +144,7 @@ class APIController extends AppBaseController
         return $this->sendResponse($result, 'Record(s) added successfully');
     }
 
-    public function storeMany($class,$id,$relation)
-    {
-        $repo = 'App\\Repositories\\' . Str::singular(Str::studly($class)) . 'Repository';
-        $repo=resolve($repo);
-       // dd($repo);
-    }
+
     /**
      * @param DeleteHubRequest $request
      * @param $class

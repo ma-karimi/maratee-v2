@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\ActionableRequest;
 use App\Http\Requests\Api\CreateMedicinalPlantAPIRequest;
 use App\Http\Requests\Api\UpdateMedicinalPlantAPIRequest;
 use App\Models\MedicinalPlant;
@@ -699,5 +700,232 @@ class MedicinalPlantAPIController extends AppBaseController
         $medicinalPlant->delete();
 
         return $this->sendResponse($id, 'Medicinal Plant deleted successfully');
+    }
+    /**
+     * @param $id
+     * @param ActionableRequest $request
+     * @return Response
+     *
+     * @SWG\Post(
+     *      path="/medicinal_plants/{id}/determine",
+     *      summary="Store Determine action for Given MedicinalPlant",
+     *      tags={"MedicinalPlant Action"},
+     *      description="Store MedicinalPlant Action",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="actors",
+     *          in="body",
+     *          description="ids of actors",
+     *          required=true,
+     *          @SWG\Schema(type="array", @SWG\Items(type="integer"))
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="MedicinalPlant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="MedicinalPlant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
+     *          description="MedicinalPlant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
+     *          in="body",
+     *          description="MedicinalPlant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/MedicinalPlant"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function storeDetermine($id, ActionableRequest $request)
+    {
+        $input = $request->all();
+
+        $result = $this->medicinalPlantRepository->storeAction($id, $input, 1);
+
+        return $this->sendResponse($result->toArray(), 'MedicinalPlant Action saved successfully');
+    }
+
+    /**
+     * @param $id
+     * @param ActionableRequest $request
+     * @return Response
+     *
+     * @SWG\Post(
+     *      path="/medicinal_plants/{id}/collect",
+     *      summary="Store Collect action for Given MedicinalPlant",
+     *      tags={"MedicinalPlant Action"},
+     *      description="Store MedicinalPlant Action",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="actors",
+     *          in="body",
+     *          description="ids of actors",
+     *          required=true,
+     *          @SWG\Schema(type="array", @SWG\Items(type="integer"))
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="MedicinalPlant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="MedicinalPlant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
+     *          description="MedicinalPlant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
+     *          in="body",
+     *          description="MedicinalPlant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/MedicinalPlant"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function storeCollect($id, ActionableRequest $request)
+    {
+        $input = $request->all();
+
+        $result = $this->medicinalPlantRepository->storeAction($id, $input, 2);
+
+        return $this->sendResponse($result->toArray(), 'MedicinalPlant Action saved successfully');
+    }
+
+    /**
+     * @param $id
+     * @param ActionableRequest $request
+     * @return Response
+     *
+     * @SWG\Post(
+     *      path="/medicinal_plants/{id}/research",
+     *      summary="Store Research action for Given MedicinalPlant",
+     *      tags={"MedicinalPlant Action"},
+     *      description="Store MedicinalPlant Action",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="actors",
+     *          in="body",
+     *          description="ids of actors",
+     *          required=true,
+     *          @SWG\Schema(type="array", @SWG\Items(type="integer"))
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date",
+     *          in="body",
+     *          description="MedicinalPlant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="MedicinalPlant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
+     *          description="MedicinalPlant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
+     *          in="body",
+     *          description="MedicinalPlant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/ActionHub")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/MedicinalPlant"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function storeResearch($id, ActionableRequest $request)
+    {
+        $input = $request->all();
+
+        $result = $this->medicinalPlantRepository->storeAction($id, $input, 3);
+
+        return $this->sendResponse($result->toArray(), 'MedicinalPlant Action saved successfully');
     }
 }

@@ -30,8 +30,6 @@ Route::delete('/{class}/hub', 'APIController@destroyHub');
 Route::get('/{class}/constants', 'APIController@getConstants');
 Route::get('relations', 'APIController@relations');
 
-Route::post('{class}/{id}/{relation}', 'APIController@storeMany');
-
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('logout', 'AuthController@logout');
@@ -221,5 +219,20 @@ Route::apiResource('action_hub_documents', 'ActionHubDocumentAPIController');
 
 Route::apiResource('taxonomies', 'TaxonomyAPIController');
 
-
-Route::resource('planting_conditions', 'PlantingConditionAPIController');
+Route::apiResource('planting_conditions', 'PlantingConditionAPIController');
+//plant_herbarium action
+Route::post('plant_herbariums/{id}/determine', 'PlantHerbariumAPIController@storeDetermine');
+Route::post('plant_herbariums/{id}/collect', 'PlantHerbariumAPIController@storeCollect');
+Route::post('plant_herbariums/{id}/research', 'PlantHerbariumAPIController@storeResearch');
+//CryoBank action
+Route::post('cryo_banks/{id}/determine', 'CryoBankAPIController@storeDetermine');
+Route::post('cryo_banks/{id}/collect', 'CryoBankAPIController@storeCollect');
+Route::post('cryo_banks/{id}/research', 'CryoBankAPIController@storeResearch');
+//Paleontology action
+Route::post('paleontologies/{id}/determine', 'PaleontologyAPIController@storeDetermine');
+Route::post('paleontologies/{id}/collect', 'PaleontologyAPIController@storeCollect');
+Route::post('paleontologies/{id}/research', 'PaleontologyAPIController@storeResearch');
+//MedicinalPlant action
+Route::post('medicinal_plants/{id}/determine', 'MedicinalPlantAPIController@storeDetermine');
+Route::post('medicinal_plants/{id}/collect', 'MedicinalPlantAPIController@storeCollect');
+Route::post('medicinal_plants/{id}/research', 'MedicinalPlantAPIController@storeResearch');

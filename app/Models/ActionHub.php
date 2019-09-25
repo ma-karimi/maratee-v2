@@ -20,12 +20,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="plant_herbarium_id",
- *          description="plant_herbarium_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
  *          property="project_id",
  *          description="project_id",
  *          type="integer",
