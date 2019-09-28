@@ -112,7 +112,6 @@ class PlantHerbariumRepository extends BaseRepository
         $plant_input = [
             'taxonomy_id' => $taxonomy_id,
             'location_id' => $location_id,
-            'name' => $input['name'],
             'protection_id' => $input['protection_id'],
             'organization_id' => $input['organization_id'],
             'general_phytogeography_id' => $input['general_phytogeography_id'],
@@ -152,6 +151,7 @@ class PlantHerbariumRepository extends BaseRepository
             'species_id' => $input['species_id'] ?? null,
             'subspecies_id' => $input['subspecies_id'] ?? null,
             'variety_id' => $input['variety_id'] ?? null,
+            'name' => $input['name'] ?? null,
         ];
         //store taxonomy
         $result = $this->taxonomy_model->firstOrCreate($taxonomy_input);
