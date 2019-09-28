@@ -105,6 +105,16 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'convert' => [
+            'driver'    => env('DB_CONNECTION'),
+            'host'      => env('DB_HOST'),
+            'port'      => env('DB_PORT'),
+            'database'  => env('DB_DATABASE_CONVERT'),
+            'username'  => env('DB_USERNAME'),
+            'password'  => env('DB_PASSWORD'),
+            'charset'   => env('DB_CHARSET'),
+        ],
+
     ],
 
     /*

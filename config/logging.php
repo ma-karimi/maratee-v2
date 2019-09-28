@@ -89,6 +89,11 @@ return [
             'driver' => 'errorlog',
             'level' => 'debug',
         ],
+
+        'convert' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/convert.log'),
+        ],
     ],
 
 ];

@@ -15,10 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::namespace('convert')->group(function (){
+    Route::get('convert', 'IndexConvertController@handle')->name('convert.index');
+    Route::post('convert', 'ConvertController@handle')->name('convert.convert');
+    Route::post('convert/rollback', 'RollbackConvertController@handle')->name('convert.rollback');
+});
+
+
+
+
