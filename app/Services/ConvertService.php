@@ -13,6 +13,7 @@ use App\Models\Convert\Taxonomytree;
 use App\Models\Convert\Treeleaf;
 use App\Models\Organization;
 use App\Models\PlantHerbarium;
+use App\Models\Protection;
 use App\Services\Store\LocationStore;
 use App\Services\Store\TaxonomyStore;
 use App\Traits\GeneralAble;
@@ -91,6 +92,7 @@ class ConvertService
     private function taxonomyData(): array
     {
         return [
+            'name' => ['en' => $this->name, 'fa' => $this->name],
             'family' => $this->getTaxonomyTree($this->family)->name,
             'genus' => $this->getTaxonomyTree($this->genus)->name,
             'species' => $this->getTaxonomyTree($this->species)->name,
@@ -121,14 +123,20 @@ class ConvertService
     private function plantHerbariumData(): array
     {
         return [
-            'name' => ['en' => $this->name, 'fa' => $this->name],
             'herbarium_number' => $this->herbariumnumber,
             'cf' => $this->cf ?? 0,
             'is_flowering' => self::IS_FLOWERING,
             'location_id' => $this->location->id,
             'taxonomy_id' => $this->taxonomy->id,
             'organization_id' => $this->getOrganization()->id,
-            'general_phytogeography_id' => $this->getGeneralId('phytogeography','DD'),
+            'protection_id' => Protection::firstOrCreate($this->protectionData())->id,
+        ];
+    }
+
+    private function protectionData(): array
+    {
+        return [
+            'name' => ['en' => 'dd', 'fa' => 'dd']
         ];
     }
 
