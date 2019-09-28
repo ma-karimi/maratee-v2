@@ -16,7 +16,6 @@ class CreatePlantHerbariumsTable extends Migration
     {
         Schema::create('plant_herbariums', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->json('name');
             $table->string('herbarium_number')->nullable()->comment('herbarium number');
             $table->string('herbarium_index')->nullable();
             $table->boolean('cf')->default(0);

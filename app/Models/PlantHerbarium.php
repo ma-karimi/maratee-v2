@@ -21,12 +21,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          type="integer"
  *      ),
  *      @SWG\Property(
- *          property="name",
- *          description="name",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
  *          property="taxonomy_id",
  *          description="taxonomy_id",
  *          type="integer"
@@ -188,7 +182,6 @@ class PlantHerbarium extends BaseModel
      * @var array
      */
     protected $casts = [
-        'name' => 'json',
         'description' => 'json',
         'life_forms' => 'json',
         'habitat_description' => 'json',

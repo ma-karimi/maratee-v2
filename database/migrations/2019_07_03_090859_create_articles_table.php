@@ -16,12 +16,9 @@ class CreateArticlesTable extends Migration {
 		{
 			$table->bigIncrements('id');
 			$table->json('title');
-			$table->date('year')->nullable();
+			$table->integer('year')->nullable();
 			$table->json('journal_name')->nullable();
-			$table->integer('journal_no')->nullable();
-			$table->integer('page_no')->nullable();
-			$table->json('type')->nullable();
-
+			$table->string('page_no')->nullable();
 
             $table->timeStampsTz();
             $table->softDeletesTz();

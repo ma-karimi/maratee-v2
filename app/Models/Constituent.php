@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * 			@SWG\Property(property="id", type="integer"),
  * 			@SWG\Property(property="name", type="array",
  *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="name", type="string"),
  * 			@SWG\Property(property="description", type="array",
  *     @SWG\Items(type="string")),
  * 			@SWG\Property(property="created_at", type="string"),

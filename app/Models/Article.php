@@ -15,13 +15,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *          property="id",
  *          description="id",
  *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="journal_no",
- *          description="journal_no",
- *          type="integer",
- *          format="int32"
+ *          format="int32"a
  *      ),
  *      @SWG\Property(
  *          property="page_no",
@@ -50,13 +44,6 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *          format="array"
  *      ),
  *      @SWG\Property(
- *          property="type",
- *          description="type",
- *          type="array",
- *     @SWG\Items(type="string"),
- *          format="array"
- *      ),
- *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -75,8 +62,6 @@ class Article extends BaseModel implements HasMedia
     use HasMediaTrait;
     public static $linguistically = ['title' => true, 'type' => false, 'journal_name' => false];
     public static $rules = [
-        'year' => 'date',
-        'journal_no' => 'integer',
         'page_no' => 'integer',
     ];
     /**
@@ -91,13 +76,13 @@ class Article extends BaseModel implements HasMedia
      *
      * @var array
      */
-    protected $casts = ['title' => 'json', 'type' => 'json', 'journal_name' => 'json', 'year' => 'date'];
+    protected $casts = ['title' => 'json', 'journal_name' => 'json'];
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = ['created_at', 'deleted_at', 'updated_at', 'year'];
+    protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
 
     /**

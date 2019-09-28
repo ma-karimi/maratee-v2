@@ -23,7 +23,6 @@ $factory->define(App\Models\PlantHerbarium::class, function (Faker $faker) {
     $plant_type_generals = \App\Models\General::where('type', 'plant_type')->pluck('id')->toArray();
 
     return [
-        'name' => make_json($faker->word),
         'description' => make_json($faker->text),
         'ecology_description' => make_json($faker->text),
         'habitat_description' => make_json($faker->text),
