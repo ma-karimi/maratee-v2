@@ -40,7 +40,7 @@ if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >
             $table->unsignedBigInteger('general_ecology_id')->nullable();
             $table->unsignedBigInteger('general_habitat_id')->nullable();
             $table->unsignedBigInteger('general_origin_id')->nullable();
-            $table->unsignedBigInteger('general_phytogeography_id');
+            $table->unsignedBigInteger('general_phytogeography_id')->nullable();
             $table->unsignedBigInteger('general_substrate_lichen_id')->nullable();
             $table->unsignedBigInteger('general_substrate_moss_id')->nullable();
             $table->unsignedBigInteger('general_substrate_diatom_id')->nullable();

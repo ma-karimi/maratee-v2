@@ -336,14 +336,6 @@ class MedicinalPlant extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function herbarium(): BelongsTo
-    {
-        return $this->belongsTo(Herbarium::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
     public function medicine(): BelongsTo
     {
         return $this->belongsTo(Medicine::class);
