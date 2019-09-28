@@ -125,6 +125,7 @@ Route::apiResource('cities', 'CityAPIController');
 Route::apiResource('collections', 'CollectionAPIController');
 
 Route::apiResource('constituents', 'ConstituentAPIController');
+Route::apiResource('constituent_types', 'ConstituentTypeAPIController');
 
 Route::apiResource('countries', 'CountryAPIController');
 
