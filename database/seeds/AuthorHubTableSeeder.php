@@ -11,6 +11,6 @@ class AuthorHubTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\AuthorHub::class, 50)->create();
+        factory(App\Models\ActorHub::class, 50)->create();
     }
 }

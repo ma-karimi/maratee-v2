@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 /**
  * @SWG\Definition(
  *      definition="Location",
- *      required={"address", "city_id"},
+ *      required={"city_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -39,10 +39,14 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *     @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
- *          property="altitude",
- *          description="altitude",
- *          type="integer",
- *          format="int32"
+ *          property="min_altitude",
+ *          description="min_altitude",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="max_altitude",
+ *          description="max_altitude",
+ *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="point",
@@ -55,16 +59,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          description="description",
  *          type="array",
  *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="gps_used",
- *          description="gps_used",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="gps_datum",
- *          description="gps_datum",
- *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -88,7 +82,8 @@ class Location extends BaseModel
     public static $rules = [
         'city_id' => 'required|exists:cities,id',
         'village_id' => 'exists:villages,id',
-        'altitude' => 'numeric'
+        'min_altitude' => 'numeric',
+        'max_altitude' => 'numeric'
     ];
     /**
      * The database table used by the model.

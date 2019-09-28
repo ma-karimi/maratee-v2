@@ -63,4 +63,9 @@ class Actor extends BaseModel
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function actions()
+    {
+        return $this->morphedByMany(ActionHub::class, 'actorable','actor_hubs');
+    }
 }

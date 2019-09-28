@@ -20,11 +20,12 @@ class CreateLocationsTable extends Migration {
             $table->json('address')->nullable();
             $table->unsignedBigInteger('village_id')->nullable();
 
-            $table->string('altitude')->nullable();
+            $table->integer('min_altitude')->nullable();
+            $table->integer('max_altitude')->nullable();
 			$table->point('point')->nullable();
 			$table->json('description')->nullable();
-			$table->string('gps_used')->nullable();
-			$table->string('gps_datum')->nullable();
+/*	     	$table->string('gps_used')->nullable();
+			$table->string('gps_datum')->nullable();*/
 
 
             $table->timeStampsTz();

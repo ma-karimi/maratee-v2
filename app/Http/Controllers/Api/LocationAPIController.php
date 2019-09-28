@@ -93,18 +93,6 @@ class LocationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
-     *          name="gps_used",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Location")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="gps_datum",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Location")
-     *      ),
-     *      @SWG\Parameter(
      *          name="region_name",
      *          in="body",
      *          required=false,
@@ -123,7 +111,13 @@ class LocationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
-     *          name="altitude",
+     *          name="min_altitude",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="max_altitude",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Location")
@@ -252,18 +246,6 @@ class LocationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
-     *          name="gps_used",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Location")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="gps_datum",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Location")
-     *      ),
-     *      @SWG\Parameter(
      *          name="region_name",
      *          in="body",
      *          required=false,
@@ -282,7 +264,13 @@ class LocationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
-     *          name="altitude",
+     *          name="min_altitude",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Location")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="max_altitude",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Location")

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Accessor\PlantAccessor;
 use App\Models\Contracts\BaseModel;
-use App\Models\Relations\{ActionRelation, ArticleRelation, LocationRelation};
+use App\Models\Relations\{ActionRelation};
 use App\Models\Scope\PlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -195,6 +195,21 @@ class PlantHerbarium extends BaseModel
         'ecology_description' => 'json',
     ];
 
+    public function determine()
+    {
+        return $this->morphMany(ActionHub::class, 'actionable')->where('action_id', 1);
+    }
+
+    public function collect()
+    {
+        return $this->morphMany(ActionHub::class, 'actionable')->where('action_id', 2);
+    }
+
+    public function research()
+    {
+        return $this->morphMany(ActionHub::class, 'actionable')->where('action_id', 3);
+    }
+
     /**
      * @return MorphToMany
      */
@@ -258,11 +273,6 @@ class PlantHerbarium extends BaseModel
         return $this->belongsTo(Taxonomy::class);
     }
 
-    public function scientific()
-    {
-        //return $this->hasOneThrough(ScientificView::class, Taxonomy::class);
-        return $this->taxonomy->scientific;
-    }
 
     public function getPropertiesAttribute()
     {

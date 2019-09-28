@@ -56,6 +56,7 @@ class ActionHubAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -80,13 +81,6 @@ class ActionHubAPIController extends AppBaseController
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="action_id",
-     *          in="body",
-     *          description="ActionHub that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="user_id",
      *          in="body",
      *          description="ActionHub that should be stored",
      *          required=true,
@@ -183,13 +177,6 @@ class ActionHubAPIController extends AppBaseController
      *
      *      @SWG\Parameter(
      *          name="action_id",
-     *          in="body",
-     *          description="ActionHub that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="user_id",
      *          in="body",
      *          description="ActionHub that should be stored",
      *          required=true,

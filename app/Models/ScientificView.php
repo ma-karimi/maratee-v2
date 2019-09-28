@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class ScientificView extends Model
 {
-    protected $table='scientific_view';
+    protected $table = 'scientific_view';
 }

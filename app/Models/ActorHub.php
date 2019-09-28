@@ -6,7 +6,7 @@ use App\Models\Contracts\BaseModel;
 
 /**
  * @SWG\Definition(
- *            definition="AuthorHub",
+ *            definition="ActorHub",
  *            required={"name"},
  * 			@SWG\Property(property="actorable_type", type="string", description="plant, general, chromosome"),
  * 			@SWG\Property(property="actorable_id", type="integer"),
@@ -15,7 +15,7 @@ use App\Models\Contracts\BaseModel;
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
-class AuthorHub extends BaseModel
+class ActorHub extends BaseModel
 {
 
 

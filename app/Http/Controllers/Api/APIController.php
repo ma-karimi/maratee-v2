@@ -144,6 +144,7 @@ class APIController extends AppBaseController
         return $this->sendResponse($result, 'Record(s) added successfully');
     }
 
+
     /**
      * @param DeleteHubRequest $request
      * @param $class

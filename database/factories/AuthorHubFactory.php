@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\AuthorHub::class, function (Faker $faker) {
+$factory->define(App\Models\ActorHub::class, function (Faker $faker) {
     $actors = \App\Models\Location::pluck('id')->toArray();
     $generals = \App\Models\General::whereIn('type', ['family', 'genus', 'specie', 'variety', 'sub_specie'])->pluck('id')->toArray();
     return [
