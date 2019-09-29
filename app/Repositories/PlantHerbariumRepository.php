@@ -216,7 +216,6 @@ class PlantHerbariumRepository extends BaseRepository
         $plant_input = [
             'taxonomy_id' => $taxonomy_id,
             'location_id' => $location_id,
-            'name' => $input['name'],
             'protection_id' => $input['protection_id'],
             'organization_id' => $input['organization_id'],
             'general_phytogeography_id' => $input['general_phytogeography_id'],
