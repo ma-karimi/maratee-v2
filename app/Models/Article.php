@@ -15,7 +15,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *          property="id",
  *          description="id",
  *          type="integer",
- *          format="int32"a
+ *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="page_no",
