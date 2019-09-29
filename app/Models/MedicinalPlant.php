@@ -224,7 +224,7 @@ class MedicinalPlant extends BaseModel
     public const PRESENCE_IN_COUNTRY = [0 => 'unknown', 1 => 'native', 2 => 'endemic'];
 
     public static $rules = [
-        'plant_herbarium_id' => 'required|exists:plant_herbariums,id',
+//        'plant_herbarium_id' => 'required|exists:plant_herbariums,id',
         'taxonomy_id' => 'exists:taxonomies,id',
         'location_id' => 'exists:locations,id',
         'aerial_part_id' => 'exists:medicinal_parts,id',
