@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 /**
  * @SWG\Definition(
  *      definition="PlantHerbarium",
- *      required={"name","location_id","organization_id","protection_id","general_phytogeography_id"},
+ *      required={"location_id","organization_id","protection_id","general_phytogeography_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -48,7 +48,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      @SWG\Property(
  *          property="cf",
  *          description="cf",
- *          type="integer"
+ *          type="string"
  *      ),
  *      @SWG\Property(
  *          property="is_flowering",
@@ -164,7 +164,7 @@ class PlantHerbarium extends BaseModel
 
     public const FLOWERING_TIME = [1 => 'Farvardin', 2 => 'Ordibehesht', 3 => 'Khordad', 4 => 'Tir', 5 => 'Mordad', 6 => 'Shahrivar', 7 => 'Mehr', 8 => 'Aban', 9 => 'Azar', 10 => 'Dey', 11 => 'Bahman', 12 => 'Esfand'];
 
-    public static $linguistically = ['name' => true, 'description' => false, 'habitat_description' => false, 'ecology_description' => false];
+    public static $linguistically = ['description' => false, 'habitat_description' => false, 'ecology_description' => false];
 
     protected $appends = ['flowering_time_name'];
     /**
@@ -241,14 +241,6 @@ class PlantHerbarium extends BaseModel
     public function seedPlants(): HasMany
     {
         return $this->hasMany(SeedPlant::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function herbariums(): HasMany
-    {
-        return $this->hasMany(Herbarium::class);
     }
 
     public function generals(): BelongsToMany

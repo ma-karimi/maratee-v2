@@ -18,7 +18,7 @@ class CreatePlantHerbariumsTable extends Migration
             $table->bigIncrements('id');
             $table->string('herbarium_number')->nullable()->comment('herbarium number');
             $table->string('herbarium_index')->nullable();
-            $table->boolean('cf')->default(0);
+            $table->string('cf')->nullable();
             $table->integer('sheets_no')->nullable()->comment('Number of required sheets per herbarium sample');
             $table->integer('samples_no')->nullable()->comment('Quantity of samples of each herbarium number');
             $table->integer('tip_qt')->nullable()->comment('number of tips

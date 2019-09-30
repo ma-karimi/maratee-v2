@@ -138,7 +138,7 @@ class PlantHerbariumAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="cf",
      *          in="body",
-     *          description="0=> sure  1=> doubt",
+     *          description="s,u,f,g,v",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
@@ -483,7 +483,7 @@ class PlantHerbariumAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="cf",
      *          in="body",
-     *          description="0=> sure  1=> doubt",
+     *          description="s,u,f,g,v",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/PlantHerbarium")
      *      ),
