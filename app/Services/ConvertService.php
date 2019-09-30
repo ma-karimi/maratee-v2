@@ -124,7 +124,7 @@ class ConvertService
     {
         return [
             'herbarium_number' => $this->herbariumnumber,
-            'cf' => $this->cf ?? 0,
+            'cf' => $this->cf,
             'is_flowering' => self::IS_FLOWERING,
             'location_id' => $this->location->id,
             'taxonomy_id' => $this->taxonomy->id,
