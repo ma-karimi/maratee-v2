@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 
 class CreatePlantHerbariumAPIRequest extends APIRequest
 {
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -51,7 +51,7 @@ class CreatePlantHerbariumAPIRequest extends APIRequest
         return [
             'protection_id' => 'required|exists:protections,id',
             'organization_id' => 'required|exists:organizations,id',
-            'location_id' => 'required|exists:locations,id',
+            'location_id' => 'exists:locations,id',
             //taxonomy
             'family_id' => 'required|exists:generals,id',
             'genus_id' => 'exists:generals,id',
