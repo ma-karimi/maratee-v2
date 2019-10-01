@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateCityAPIRequest;
-use App\Http\Requests\Api\UpdateCityAPIRequest;
+use App\Http\Requests\Api\CityAPIRequest;
 use App\Models\City;
 use App\Repositories\CityRepository;
 use Illuminate\Http\Request;
@@ -14,7 +13,6 @@ use Response;
  * Class CityController
  * @package App\Http\Controllers\Api
  */
-
 class CityAPIController extends AppBaseController
 {
     /** @var  CityRepository */
@@ -56,6 +54,7 @@ class CityAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -69,7 +68,7 @@ class CityAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateCityAPIRequest $request
+     * @param CityAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -117,7 +116,7 @@ class CityAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateCityAPIRequest $request)
+    public function store(CityAPIRequest $request)
     {
         $input = $request->all();
 
@@ -178,7 +177,7 @@ class CityAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateCityAPIRequest $request
+     * @param CityAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -233,7 +232,7 @@ class CityAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateCityAPIRequest $request)
+    public function update(CityAPIRequest $request, $id)
     {
         $input = $request->all();
 

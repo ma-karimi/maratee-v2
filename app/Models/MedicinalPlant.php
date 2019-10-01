@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Accessor\MedicinalPlantAccessor;
 use App\Models\Contracts\BaseModel;
-use App\Models\Relations\{ArticleRelation,LocationRelation};
+use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -13,19 +13,24 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 /**
  * @SWG\Definition(
  *      definition="MedicinalPlant",
- *      required={"plant_id"},
+ *      required={"taxonomy_id", "location_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
  *      ),
  *      @SWG\Property(
- *          property="plant_id",
+ *          property="taxonomy_id",
  *          description="id",
  *          type="integer",
  *      ),
  *      @SWG\Property(
- *          property="herbarium_id",
+ *          property="location_id",
+ *          description="id",
+ *          type="integer",
+ *      ),
+ *      @SWG\Property(
+ *          property="plant_herbarium_id",
  *          description="from herbariums selected plant",
  *          type="integer",
  *      ),
@@ -207,7 +212,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class MedicinalPlant extends BaseModel
 {
-    use MedicinalPlantAccessor, ArticleRelation, LocationRelation;
+    use MedicinalPlantAccessor, ArticleRelation;
 
     public const TRADITIONAL_IRANIAN_MEDICINE = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
     public const NATURAL_DRUG = [0 => 'unknown', 1 => 'human medicines', 2 => 'animal drugs'];
@@ -219,8 +224,9 @@ class MedicinalPlant extends BaseModel
     public const PRESENCE_IN_COUNTRY = [0 => 'unknown', 1 => 'native', 2 => 'endemic'];
 
     public static $rules = [
-        'plant_id' => 'required|exists:plants,id',
-        'herbarium_id' => 'exists:herbariums,id',
+//        'plant_herbarium_id' => 'required|exists:plant_herbariums,id',
+        'taxonomy_id' => 'exists:taxonomies,id',
+        'location_id' => 'exists:locations,id',
         'aerial_part_id' => 'exists:medicinal_parts,id',
         'ground_part_id' => 'exists:medicinal_parts,id',
         'food_industry_id' => 'exists:medicinal_plant_types,id',
@@ -336,9 +342,16 @@ class MedicinalPlant extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function herbarium(): BelongsTo
+    public function taxonomy(): BelongsTo
     {
-        return $this->belongsTo(Herbarium::class);
+        return $this->belongsTo(Taxonomy::class);
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
     }
 
     /**

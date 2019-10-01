@@ -17,6 +17,11 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         ini_set('max_execution_time', 30000);
         ini_set('memory_limit', '2000M');
+
+        $this->call([
+            ConvertSeeder::class,
+        ]);
+
         $this->call([
             UserTableSeeder::class,
             ContinentTableSeeder::class,

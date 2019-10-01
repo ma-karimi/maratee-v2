@@ -5,7 +5,6 @@ namespace App\Services\Store;
 
 
 use App\Models\City;
-use App\Models\Continent;
 use App\Models\Country;
 use App\Models\Location;
 use App\Models\Province;
@@ -15,8 +14,6 @@ class LocationStore extends BaseStore
 {
 
     protected static $model = Location::class;
-
-    const DEFAULT_CONTINENT = 'Asia';
 
     protected function data(): array
     {
@@ -59,14 +56,6 @@ class LocationStore extends BaseStore
     {
         return [
             'name' => $this->country,
-            'continent_id' => Continent::firstOrCreate($this->continentData())->id,
-        ];
-    }
-
-    private function continentData(): array
-    {
-        return [
-            'name' => self::DEFAULT_CONTINENT,
         ];
     }
 

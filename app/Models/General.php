@@ -121,6 +121,14 @@ class General extends BaseModel
     /**
      * @return BelongsTo
      */
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(__CLASS__, 'parent_id')->withDefault();
+    }
+
+    /**
+     * @return BelongsTo
+     */
     public function speciesParent(): BelongsTo
     {
         return $this->belongsTo(__CLASS__, 'parent_id')->withDefault();

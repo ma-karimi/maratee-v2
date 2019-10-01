@@ -26,5 +26,5 @@ Route::namespace('convert')->group(function (){
 });
 
 
-
+Route::get('test','TestController@handle');
 

@@ -5,20 +5,17 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ArticleRelation;
 use App\Models\Scope\ActionHubScope;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
  *      definition="ActionHub",
- *      required={"action_id", "user_id"},
+ *      required={"action_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="plant_herbarium_id",
- *          description="plant_herbarium_id",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -74,7 +71,6 @@ class ActionHub extends BaseModel
 //        'action_id' => 'required|exists:actions,id',
         'department_id' => 'exists:departments,id',
         'project_id' => 'exists:projects,id',
-//        'user_id' => 'required|exists:users,id',
         'date' => 'date',
     ];
     //public static $linguistically = ['description' => false];
@@ -101,9 +97,19 @@ class ActionHub extends BaseModel
      */
     protected $dates = ['created_at', 'date', 'deleted_at', 'updated_at'];
 
-    public function project()
+    public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function actionable(): MorphTo
+    {
+        return $this->morphTo('actionable');
+    }
+
+    public function actors(): MorphToMany
+    {
+        return $this->morphToMany(Actor::class, 'actorable', 'actor_hubs');
     }
 //
 //    public function user()
@@ -114,8 +120,5 @@ class ActionHub extends BaseModel
     /**
      * Get the owning actionable model.
      */
-    public function actionable()
-    {
-        return $this->morphTo('actionable');
-    }
+
 }

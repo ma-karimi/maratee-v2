@@ -45,7 +45,6 @@ class ConvertService
 
     public function handle()
     {
-        dd($this->treeleaf);
         Log::channel('convert')->debug("- - begin convert treaaleaf id {$this->id}");
         $this->taxonomy = TaxonomyStore::store($this->taxonomyData());
         Log::channel('convert')->debug("store taxonomy id {$this->taxonomy->id} done");
@@ -107,17 +106,42 @@ class ConvertService
         $city = $this->getCity($village->parentid);
         $province = $this->getCity($city->parentid);
         $country = $this->getCity($province->parentid);
-        return [
-            'village' => ['en' => trim($village->localitye), 'fa' => trim($village->localityf)],
-            'city' => ['en' => trim($city->name), 'fa' => trim($city->othername)],
-            'province' => ['en' => trim($province->name), 'fa' => trim($province->othername)],
-            'country' => ['en' => trim($country->name), 'fa' => trim($country->othername)],
-            'address' => ['en' => trim($this->addresse), 'fa' => trim($this->addressf)],
-            'min_altitude' => $this->minaltitude,
-            'max_altitude' => $this->maxaltitude,
-            'lat' => $this->Latitude,
-            'long' => $this->Longitude,
-        ];
+        // village
+        if(!empty($village->name))
+            $data['village']['en'] = trim($village->name);
+        if(!empty($village->othername))
+            $data['village']['fa'] = trim($village->othername);        
+        // city
+        if(!empty($city->name))
+            $data['city']['en'] = trim($city->name);
+        if(!empty($city->othername))
+            $data['city']['fa'] = trim($city->othername);    
+        // province
+        if(!empty($province->name))
+            $data['province']['en'] = trim($province->name);
+        if(!empty($province->othername))
+            $data['province']['fa'] = trim($province->othername);  
+        // country
+        if(!empty($country->name))
+            $data['country']['en'] = trim($country->name);
+        if(!empty($country->othername))
+            $data['country']['fa'] = trim($country->othername);         
+        // address
+        if(!empty($this->addresse))
+            $data['address']['en'] = trim($this->addresse);
+        if(!empty($this->addressf))
+            $data['address']['fa'] = trim($this->addressf);
+        // altitude
+        if(!empty($this->minaltitude))
+            $data['min_altitude'] = trim($this->minaltitude);
+        if(!empty($this->maxaltitude))
+            $data['max_altitude'] = trim($this->maxaltitude);
+        // point
+        if(!empty($this->minaltitude))
+            $data['lat'] = trim($this->Latitude);
+        if(!empty($this->maxaltitude))
+            $data['long'] = trim($this->Longitude);
+        return $data;
     }
 
     private function plantHerbariumData(): array

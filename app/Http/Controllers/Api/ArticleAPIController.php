@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateArticleAPIRequest;
-use App\Http\Requests\Api\UpdateArticleAPIRequest;
+use App\Http\Requests\Api\ArticleAPIRequest;
 use App\Models\Article;
 use App\Repositories\ArticleRepository;
 use Illuminate\Http\Request;
@@ -56,6 +55,7 @@ class ArticleAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -100,21 +100,7 @@ class ArticleAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Article")
      *      ),
      *      @SWG\Parameter(
-     *          name="journal_no",
-     *          in="body",
-     *          description="Article that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Article")
-     *      ),
-     *      @SWG\Parameter(
      *          name="page_no",
-     *          in="body",
-     *          description="Article that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Article")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="type",
      *          in="body",
      *          description="Article that should be stored",
      *          required=false,
@@ -240,21 +226,7 @@ class ArticleAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Article")
      *      ),
      *      @SWG\Parameter(
-     *          name="journal_no",
-     *          in="body",
-     *          description="Article that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Article")
-     *      ),
-     *      @SWG\Parameter(
      *          name="page_no",
-     *          in="body",
-     *          description="Article that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Article")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="type",
      *          in="body",
      *          description="Article that should be stored",
      *          required=false,

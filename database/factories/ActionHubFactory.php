@@ -6,12 +6,10 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\ActionHub::class, function (Faker $faker) {
     $projects = \App\Models\Project::pluck('id')->toArray();
-    $users = \App\Models\User::pluck('id')->toArray();
     $departments = \App\Models\Department::pluck('id')->toArray();
     $plant_herbariums = \App\Models\PlantHerbarium::pluck('id')->toArray();
     return [
         'action_id' => random_int(1,3),
-        'user_id' => $faker->randomElement($users),
         'date' => $faker->dateTimeBetween(),
         'description' => make_json($faker->text),
         'project_id' => $faker->randomElement($projects),

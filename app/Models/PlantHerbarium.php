@@ -14,17 +14,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 /**
  * @SWG\Definition(
  *      definition="PlantHerbarium",
- *      required={"name","location_id","organization_id","protection_id","general_phytogeography_id"},
+ *      required={"location_id","organization_id","protection_id","general_phytogeography_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
  *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="name",
- *          description="name",
- *          type="array",
- *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
  *          property="taxonomy_id",
@@ -54,7 +48,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      @SWG\Property(
  *          property="cf",
  *          description="cf",
- *          type="integer"
+ *          type="string"
  *      ),
  *      @SWG\Property(
  *          property="is_flowering",
@@ -170,7 +164,7 @@ class PlantHerbarium extends BaseModel
 
     public const FLOWERING_TIME = [1 => 'Farvardin', 2 => 'Ordibehesht', 3 => 'Khordad', 4 => 'Tir', 5 => 'Mordad', 6 => 'Shahrivar', 7 => 'Mehr', 8 => 'Aban', 9 => 'Azar', 10 => 'Dey', 11 => 'Bahman', 12 => 'Esfand'];
 
-    public static $linguistically = ['name' => true, 'description' => false, 'habitat_description' => false, 'ecology_description' => false];
+    public static $linguistically = ['description' => false, 'habitat_description' => false, 'ecology_description' => false];
 
     protected $appends = ['flowering_time_name'];
     /**
@@ -188,12 +182,26 @@ class PlantHerbarium extends BaseModel
      * @var array
      */
     protected $casts = [
-        'name' => 'json',
         'description' => 'json',
         'life_forms' => 'json',
         'habitat_description' => 'json',
         'ecology_description' => 'json',
     ];
+
+    public function determine()
+    {
+        return $this->morphMany(ActionHub::class, 'actionable')->where('action_id', 1);
+    }
+
+    public function collect()
+    {
+        return $this->morphMany(ActionHub::class, 'actionable')->where('action_id', 2);
+    }
+
+    public function research()
+    {
+        return $this->morphMany(ActionHub::class, 'actionable')->where('action_id', 3);
+    }
 
     /**
      * @return MorphToMany
@@ -235,14 +243,6 @@ class PlantHerbarium extends BaseModel
         return $this->hasMany(SeedPlant::class)->latest();
     }
 
-    /**
-     * @return HasMany
-     */
-    public function herbariums(): HasMany
-    {
-        return $this->hasMany(Herbarium::class);
-    }
-
     public function generals(): BelongsToMany
     {
         return $this->belongsToMany(General::class,
@@ -258,11 +258,6 @@ class PlantHerbarium extends BaseModel
         return $this->belongsTo(Taxonomy::class);
     }
 
-    public function scientific()
-    {
-        //return $this->hasOneThrough(ScientificView::class, Taxonomy::class);
-        return $this->taxonomy->scientific;
-    }
 
     public function getPropertiesAttribute()
     {

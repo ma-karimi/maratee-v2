@@ -56,6 +56,7 @@ class GeologyAgeAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -69,7 +70,7 @@ class GeologyAgeAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateGeologyAgeAPIRequest $request
+     * @param GeologyAgeAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -123,7 +124,7 @@ class GeologyAgeAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateGeologyAgeAPIRequest $request)
+    public function store(GeologyAgeAPIRequest $request)
     {
         $input = $request->all();
 
@@ -184,7 +185,7 @@ class GeologyAgeAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateGeologyAgeAPIRequest $request
+     * @param GeologyAgeAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -245,7 +246,7 @@ class GeologyAgeAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateGeologyAgeAPIRequest $request)
+    public function update(GeologyAgeAPIRequest $request, $id)
     {
         $input = $request->all();
 

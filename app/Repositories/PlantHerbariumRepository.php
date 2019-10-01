@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\ActionHub;
 use App\Models\Location;
 use App\Models\PlantHerbarium;
 use App\Models\Taxonomy;
@@ -20,18 +21,22 @@ class PlantHerbariumRepository extends BaseRepository
 
     private $taxonomy_model;
     private $location_model;
+    private $action_hub_repo;
 
     /**
      * PlantRepository constructor.
      * @param Application $app
      * @param Taxonomy $taxonomy_model
+     * @param Location $location_model
+     * @param ActionHubRepository $action_hub_repo
      * @throws \Exception
      */
-    public function __construct(Application $app, Taxonomy $taxonomy_model, Location $location_model)
+    public function __construct(Application $app, Taxonomy $taxonomy_model, Location $location_model, ActionHubRepository $action_hub_repo)
     {
         parent::__construct($app);
         $this->taxonomy_model = $taxonomy_model;
         $this->location_model = $location_model;
+        $this->action_hub_repo = $action_hub_repo;
     }
 
     /**
@@ -60,6 +65,11 @@ class PlantHerbariumRepository extends BaseRepository
         return PlantHerbarium::class;
     }
 
+    public function storeDetect($id, $relation, $input)
+    {
+
+    }
+
     /**
      * @param array $input
      * @return Model|void
@@ -68,7 +78,7 @@ class PlantHerbariumRepository extends BaseRepository
     {
         [$taxonomy_input, $taxonomy_id] = $this->firstOrCreateTaxonomy($input);
         $location_id = $this->firstOrCreateLocation($input);
-        $plant = $this->createPlantHerbarium($input, $taxonomy_id,$location_id);
+        $plant = $this->createPlantHerbarium($input, $taxonomy_id, $location_id);
         $this->syncPlantGeneralProperties($taxonomy_input, $plant);
         $this->syncPlantTypeProperties($input, $plant);
         return $plant;
@@ -83,7 +93,7 @@ class PlantHerbariumRepository extends BaseRepository
     {
         [$taxonomy_input, $taxonomy_id] = $this->firstOrCreateTaxonomy($input);
         $location_id = $this->firstOrCreateLocation($input);
-        $plant = $this->updatePlant($input, $id, $taxonomy_id,$location_id);
+        $plant = $this->updatePlant($input, $id, $taxonomy_id, $location_id);
         $this->syncPlantGeneralProperties($taxonomy_input, $plant);
         $this->syncPlantTypeProperties($input, $plant);
         $this->updateMedia($input, $plant);
@@ -102,7 +112,6 @@ class PlantHerbariumRepository extends BaseRepository
         $plant_input = [
             'taxonomy_id' => $taxonomy_id,
             'location_id' => $location_id,
-            'name' => $input['name'],
             'protection_id' => $input['protection_id'],
             'organization_id' => $input['organization_id'],
             'general_phytogeography_id' => $input['general_phytogeography_id'],
@@ -142,11 +151,13 @@ class PlantHerbariumRepository extends BaseRepository
             'species_id' => $input['species_id'] ?? null,
             'subspecies_id' => $input['subspecies_id'] ?? null,
             'variety_id' => $input['variety_id'] ?? null,
+            'name' => $input['name'] ?? null,
         ];
         //store taxonomy
         $result = $this->taxonomy_model->firstOrCreate($taxonomy_input);
         return [$taxonomy_input, $result->id];
     }
+
     /**
      * @param $input
      * @return array
@@ -164,7 +175,7 @@ class PlantHerbariumRepository extends BaseRepository
             'description' => $input['location_description'] ?? null,
         ];
         //store location
-        return  $this->location_model->firstOrCreate($location_input)->id;
+        return $this->location_model->firstOrCreate($location_input)->id;
     }
 
     /**
@@ -200,12 +211,11 @@ class PlantHerbariumRepository extends BaseRepository
      * @param $location_id
      * @return Builder|Builder[]|Collection|Model
      */
-    private function updatePlant($input, $id, $taxonomy_id,$location_id)
+    private function updatePlant($input, $id, $taxonomy_id, $location_id)
     {
         $plant_input = [
             'taxonomy_id' => $taxonomy_id,
             'location_id' => $location_id,
-            'name' => $input['name'],
             'protection_id' => $input['protection_id'],
             'organization_id' => $input['organization_id'],
             'general_phytogeography_id' => $input['general_phytogeography_id'],

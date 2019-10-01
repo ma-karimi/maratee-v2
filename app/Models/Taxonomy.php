@@ -18,6 +18,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="name",
+ *          description="name",
+ *          type="array",
+ *     @SWG\Items(type="string")
+ *      ),
+ *      @SWG\Property(
  *          property="plant_id",
  *          description="id",
  *          type="integer",
@@ -85,12 +91,10 @@ class Taxonomy extends BaseModel
 
     public static $rules = [
         'family_id' => 'required|exists:generals,id',
-        'plant_id' => 'required|exists:plants,id',
         'genus_id' => 'exists:generals,id',
         'species_id' => 'exists:generals,id',
         'variety_id' => 'exists:generals,id',
         'subspecies_id' => 'exists:generals,id',
-        'tip_type_id' => 'exists:generals,id',
     ];
     /**
      * The database table used by the model.
@@ -99,7 +103,7 @@ class Taxonomy extends BaseModel
      */
     protected $table = 'taxonomies';
 
-    protected $casts = ['type_description' => 'json'];
+    protected $casts = ['name' => 'json'];
 
 
     /**
@@ -113,9 +117,9 @@ class Taxonomy extends BaseModel
     /**
      * @return HasMany
      */
-    public function plantHerbarium(): HasMany
+    public function plantHerbariums(): HasMany
     {
-        return $this->hasMany(PlantHerbarium::class, 'plant_id');
+        return $this->hasMany(PlantHerbarium::class);
     }
 
     /**

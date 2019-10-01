@@ -15,10 +15,8 @@ class CreateActionHubsTable extends Migration {
 		Schema::create('action_hubs', function(Blueprint $table)
 		{
 		    $table->bigIncrements('id');
-
-			$table->unsignedBigInteger('user_id');
 			$table->integer('action_id')->default(1)->comment('1: detect, 2:collect, 3:research');
-            //plant_herbarium, cryo_bank, paleontology
+            //plant_herbarium, cryo_bank, paleontology , medicinal plant
             $table->morphs('actionable');
 
             $table->date('date')->nullable();

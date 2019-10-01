@@ -16,10 +16,9 @@ class CreatePlantHerbariumsTable extends Migration
     {
         Schema::create('plant_herbariums', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->json('name');
             $table->string('herbarium_number')->nullable()->comment('herbarium number');
             $table->string('herbarium_index')->nullable();
-            $table->boolean('cf')->default(0);
+            $table->string('cf')->nullable();
             $table->integer('sheets_no')->nullable()->comment('Number of required sheets per herbarium sample');
             $table->integer('samples_no')->nullable()->comment('Quantity of samples of each herbarium number');
             $table->integer('tip_qt')->nullable()->comment('number of tips
@@ -40,7 +39,7 @@ if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >
             $table->unsignedBigInteger('general_ecology_id')->nullable();
             $table->unsignedBigInteger('general_habitat_id')->nullable();
             $table->unsignedBigInteger('general_origin_id')->nullable();
-            $table->unsignedBigInteger('general_phytogeography_id');
+            $table->unsignedBigInteger('general_phytogeography_id')->nullable();
             $table->unsignedBigInteger('general_substrate_lichen_id')->nullable();
             $table->unsignedBigInteger('general_substrate_moss_id')->nullable();
             $table->unsignedBigInteger('general_substrate_diatom_id')->nullable();
