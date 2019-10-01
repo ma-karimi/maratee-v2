@@ -32,14 +32,14 @@ class LocationStore extends BaseStore
     private function villageData(): array
     {
         return [
-            'name' => $this->village,
+            'name' => json_encode($this->village),
         ];
     }
 
     private function cityData(): array
     {
         return [
-            'name' => $this->city,
+            'name' => json_encode($this->city),
             'province_id' => Province::firstOrCreate($this->provinceData())->id,
         ];
     }
@@ -47,7 +47,7 @@ class LocationStore extends BaseStore
     private function provinceData(): array
     {
         return [
-            'name' => $this->province,
+            'name' => json_encode($this->province),
             'country_id' => Country::firstOrCreate($this->countryData())->id,
         ];
     }
@@ -55,7 +55,7 @@ class LocationStore extends BaseStore
     private function countryData(): array
     {
         return [
-            'name' => $this->country,
+            'name' => json_encode($this->country),
         ];
     }
 

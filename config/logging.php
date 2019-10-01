@@ -91,7 +91,7 @@ return [
         ],
 
         'convert' => [
-            'driver' => 'single',
+            'driver' => 'daily',
             'path' => storage_path('logs/convert.log'),
         ],
     ],

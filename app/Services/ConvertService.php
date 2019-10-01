@@ -10,12 +10,14 @@ use App\Models\Convert\Herbariumname;
 use App\Models\Convert\Person;
 use App\Models\Convert\Taxonomytree;
 use App\Models\Convert\Treeleaf;
+use App\Models\General;
 use App\Models\Organization;
 use App\Models\PlantHerbarium;
 use App\Models\Protection;
 use App\Services\Store\LocationStore;
 use App\Services\Store\TaxonomyStore;
 use App\Traits\GeneralAble;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class ConvertService
@@ -107,40 +109,34 @@ class ConvertService
         $province = $this->getCity($city->parentid);
         $country = $this->getCity($province->parentid);
         // village
-        if(!empty($village->name))
+        if (!empty($village->name))
             $data['village']['en'] = trim($village->name);
-        if(!empty($village->othername))
-            $data['village']['fa'] = trim($village->othername);        
+        if (!empty($village->othername))
+            $data['village']['fa'] = trim($village->othername);
         // city
-        if(!empty($city->name))
+        if (!empty($city->name))
             $data['city']['en'] = trim($city->name);
-        if(!empty($city->othername))
-            $data['city']['fa'] = trim($city->othername);    
+        if (!empty($city->othername))
+            $data['city']['fa'] = trim($city->othername);
         // province
-        if(!empty($province->name))
+        if (!empty($province->name))
             $data['province']['en'] = trim($province->name);
-        if(!empty($province->othername))
-            $data['province']['fa'] = trim($province->othername);  
+        if (!empty($province->othername))
+            $data['province']['fa'] = trim($province->othername);
         // country
-        if(!empty($country->name))
+        if (!empty($country->name))
             $data['country']['en'] = trim($country->name);
-        if(!empty($country->othername))
-            $data['country']['fa'] = trim($country->othername);         
+        if (!empty($country->othername))
+            $data['country']['fa'] = trim($country->othername);
         // address
-        if(!empty($this->addresse))
-            $data['address']['en'] = trim($this->addresse);
-        if(!empty($this->addressf))
+        $data['address']['en'] = trim($this->addresse);
+        if (strlen($this->addressf))
             $data['address']['fa'] = trim($this->addressf);
-        // altitude
-        if(!empty($this->minaltitude))
-            $data['min_altitude'] = trim($this->minaltitude);
-        if(!empty($this->maxaltitude))
-            $data['max_altitude'] = trim($this->maxaltitude);
-        // point
-        if(!empty($this->minaltitude))
-            $data['lat'] = trim($this->Latitude);
-        if(!empty($this->maxaltitude))
-            $data['long'] = trim($this->Longitude);
+        $data['min_altitude'] = trim($this->minaltitude);
+        $data['min_altitude'] = trim($this->minaltitude);
+        $data['max_altitude'] = trim($this->maxaltitude);
+        $data['lat'] = trim($this->Latitude);
+        $data['long'] = trim($this->Longitude);
         return $data;
     }
 
@@ -157,18 +153,10 @@ class ConvertService
         ];
     }
 
-    private function protectionData(): array
-    {
-        return [
-            'name' => ['en' => 'dd', 'fa' => 'dd']
-        ];
-    }
-
     private function getOrganization()
     {
         $name = $this->getOrgan($this->herbariumname);
-        $name = ['en' => $name, 'fa' => $name];
-        $organ = Organization::where('name', $name)->get();
+        $organ = Organization::where('name->en', $name)->get();
         if ($organ instanceof Organization)
             return $organ;
         return Organization::firstOrCreate($this->organData());
@@ -180,6 +168,21 @@ class ConvertService
             'is_herbarium' => 1,
             'name' => $this->getOrgan($this->herbariumname),
             'phone' => '',
+        ];
+    }
+
+    private function getProtection()
+    {
+        $organ = Protection::where('name->en', 'DD')->get();
+        if ($organ instanceof Organization)
+            return $organ;
+        return Protection::firstOrCreate($this->protectionData());
+    }
+
+    private function protectionData(): array
+    {
+        return [
+            'name' => 'dd'
         ];
     }
 

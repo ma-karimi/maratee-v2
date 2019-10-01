@@ -43,7 +43,7 @@ return [
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],*/
-
+/*
         'mysql' => [
             'mapping_types' => [
                 'point'  => Grimzy\LaravelMysqlSpatial\Types\Point::class,
@@ -68,6 +68,16 @@ return [
             ]) : [],
                 \PDO::ATTR_EMULATE_PREPARES => true
             ],
+        ],*/
+
+        'mysql' => [
+            'driver'    => 'mysql',
+            'host'      => 'localhost',
+            'port'      => '3306',
+            'database'  => 'maratee',
+            'username'  => 'root',
+            'password'  => '',
+            'charset'   => 'utf8',
         ],
 
         'convert' => [
