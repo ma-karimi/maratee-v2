@@ -7,8 +7,9 @@ use App\Models\ActionHub;
 use App\Models\Location;
 use App\Models\PlantHerbarium;
 use App\Models\Taxonomy;
+use Illuminate\Database\Eloquent\Model;
 
-class Convert extends BaseModel
+class Convert extends Model
 {
     protected $table = 'converts';
     protected $casts = ['collect_actors_id' => 'json', 'detect_actors_id' => 'json'];

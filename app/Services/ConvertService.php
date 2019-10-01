@@ -4,9 +4,8 @@
 namespace App\Services;
 
 
-use App\Models\Action;
-use App\Models\Convert\City;
 use App\Models\Convert\Convert;
+use App\Models\Convert\City;
 use App\Models\Convert\Herbariumname;
 use App\Models\Convert\Person;
 use App\Models\Convert\Taxonomytree;
@@ -44,8 +43,9 @@ class ConvertService
         return $this;
     }
 
-    public function handle(): Convert
+    public function handle()
     {
+        dd($this->treeleaf);
         Log::channel('convert')->debug("- - begin convert treaaleaf id {$this->id}");
         $this->taxonomy = TaxonomyStore::store($this->taxonomyData());
         Log::channel('convert')->debug("store taxonomy id {$this->taxonomy->id} done");
@@ -64,9 +64,9 @@ class ConvertService
         foreach ($this->collect['actors'] as $actor)
             Log::channel('convert')->debug("store detect actor id {$actor->id} done");
         // store states for rollback
-        $convert = Convert::firstOrCreate($this->convertData());
+//        $convert = Convert::firstOrCreate($this->convertData());
         Log::channel('convert')->debug("- - end convert treaaleaf id {$this->id}");
-        return $convert;
+//        return $convert;
     }
 
     private function getTaxonomyTree(int $id): Taxonomytree
