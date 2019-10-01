@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\ActionAPIRequest;
 use App\Http\Requests\Api\CreateActionAPIRequest;
 use App\Http\Requests\Api\UpdateActionAPIRequest;
 use App\Http\Requests\BaseDeleteAPIRequest;
@@ -115,7 +116,7 @@ class ActionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateActionAPIRequest $request)
+    public function store(ActionAPIRequest $request)
     {
         $input = $request->all();
 
@@ -227,7 +228,7 @@ class ActionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateActionAPIRequest $request)
+    public function update($id, ActionAPIRequest $request)
     {
         $input = $request->all();
 
