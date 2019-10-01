@@ -106,13 +106,13 @@ return [
         ],
 
         'convert' => [
-            'driver'    => env('DB_CONNECTION'),
-            'host'      => env('DB_HOST'),
-            'port'      => env('DB_PORT'),
+            'driver'    => env('DB_CONNECTION_CONVERT'),
+            'host'      => env('DB_HOST_CONVERT'),
+            'port'      => env('DB_PORT_CONVERT'),
             'database'  => env('DB_DATABASE_CONVERT'),
-            'username'  => env('DB_USERNAME'),
-            'password'  => env('DB_PASSWORD'),
-            'charset'   => env('DB_CHARSET'),
+            'username'  => env('DB_USERNAME_CONVERT'),
+            'password'  => env('DB_PASSWORD_CONVERT'),
+            'charset'   => env('DB_CHARSET_CONVERT'),
         ],
 
     ],
