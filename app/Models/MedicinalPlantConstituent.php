@@ -55,7 +55,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class MedicinalPlantConstituent extends BaseModel
 {
     public static $rules = [
-        'medicinal_plant_id' => 'required|exists:medicinal_plants,id',
         'constituents'=>'required|array'
 //        'constituent_id' => 'required|exists:constituents,id',
 //        'constituent_type_id' => 'required|exists:constituent_types,id',

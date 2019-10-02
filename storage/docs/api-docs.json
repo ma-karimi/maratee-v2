@@ -13838,39 +13838,7 @@
                 }
             }
         },
-        "/medicinal_plant_constituents": {
-            "get": {
-                "tags": [
-                    "MedicinalPlantConstituent"
-                ],
-                "summary": "Get a listing of the MedicinalPlantConstituents.",
-                "description": "Get all MedicinalPlantConstituents",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/MedicinalPlantConstituent"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
+        "/medicinal_plant_constituents/{medicinal_plant_id}/store": {
             "post": {
                 "tags": [
                     "MedicinalPlantConstituent"
@@ -13939,45 +13907,7 @@
                 }
             }
         },
-        "/medicinalPlantConstituents/{id}": {
-            "get": {
-                "tags": [
-                    "MedicinalPlantConstituent"
-                ],
-                "summary": "Display the specified MedicinalPlantConstituent",
-                "description": "Get MedicinalPlantConstituent",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of MedicinalPlantConstituent",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/MedicinalPlantConstituent"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
+        "/medicinalPlantConstituents/{id}/update": {
             "put": {
                 "tags": [
                     "MedicinalPlantConstituent"
@@ -14042,44 +13972,6 @@
                                 },
                                 "data": {
                                     "$ref": "#/definitions/MedicinalPlantConstituent"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "MedicinalPlantConstituent"
-                ],
-                "summary": "Remove the specified MedicinalPlantConstituent from storage",
-                "description": "Delete MedicinalPlantConstituent",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of MedicinalPlantConstituent",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
                                 },
                                 "message": {
                                     "type": "string"
