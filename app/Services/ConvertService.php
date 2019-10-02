@@ -70,9 +70,10 @@ class ConvertService
         return $taxonomyTree instanceof Taxonomytree ? $taxonomyTree->name : null;
     }
 
-    private function getCity(int $id): City
+    private function getCityName(int $id): City
     {
-        return City::find($id);
+        $city = City::find($id);
+        return $city instanceof City ? $city->name : null;
     }
 
     private function getPersonName(int $id)
@@ -105,10 +106,10 @@ class ConvertService
 
     private function locationData(): array
     {
-        $village = $this->getCity($this->city);
-        $city = $this->getCity($village->parentid);
-        $province = $this->getCity($city->parentid);
-        $country = $this->getCity($province->parentid);
+        $village = $this->getCityName($this->city);
+        $city = $this->getCityName($village->parentid);
+        $province = $this->getCityName($city->parentid);
+        $country = $this->getCityName($province->parentid);
         return [
             'village' => ['en' => trim($village->name), 'fa' => trim($village->othername)],
             'city' => ['en' => trim($city->name), 'fa' => trim($city->othername)],
