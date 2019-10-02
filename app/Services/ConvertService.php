@@ -61,11 +61,7 @@ class ConvertService
         $this->log("store detect actionHub id {$this->collect['actionHub']->id} done");
         foreach ($this->collect['actors'] as $actor)
             $this->log("store detect actor id {$actor->id} done");
-        // store states for rollback
-//        $convert = Convert::firstOrCreate($this->convertData());
         $this->log("- - end convert treaaleaf id {$this->id}");
-//        return $convert;
-        exit;
     }
 
     private function getTaxonomyTree(int $id): Taxonomytree
