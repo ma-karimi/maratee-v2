@@ -39,7 +39,7 @@ class MedicinalPlantConstituentRepository extends BaseRepository
 
     public function storeItems($request, $medicinal_plant_id)
     {
-        if (!empty($request->all())) {
+        if (count($request->get('constituents'))) {
             foreach ($request->get('constituents') as $item) {
                 if ($request->filled(['constituent_type_id', 'value', 'constituent_id'])) {
                     $this->create([
@@ -55,21 +55,20 @@ class MedicinalPlantConstituentRepository extends BaseRepository
 
     public function updateItems($request, $medicinal_plant_id)
     {
-        if (!empty($request->all())) {
-            foreach ($request->get('constituents') as $item) {
-                if ($request->filled(['constituent_type_id', 'value', 'constituent_id'])) {
-                    $record = $this->find($request->get('medicinal_plant_constituent_id'));
-                    $record->update([
-                        'medicinal_plant_id' => $medicinal_plant_id,
-                        'constituent_id' => $item['constituent_id'],
-                        'constituent_type_id' => $item['constituent_type_id'],
-                        'value' => $item['value'],
-                    ]);
-                } else {
-                    $record = $this->find($request->get('medicinal_plant_constituent_id'));
-                    $record->delete();
-                }
+        foreach ($request->get('constituents') as $item) {
+            if ($request->filled(['constituent_type_id', 'value', 'constituent_id'])) {
+                $record = $this->find($request->get('medicinal_plant_constituent_id'));
+                $record->update([
+                    'medicinal_plant_id' => $medicinal_plant_id,
+                    'constituent_id' => $item['constituent_id'],
+                    'constituent_type_id' => $item['constituent_type_id'],
+                    'value' => $item['value'],
+                ]);
+            } else {
+                $record = $this->find($request->get('medicinal_plant_constituent_id'));
+                $record->delete();
             }
         }
+
     }
 }
