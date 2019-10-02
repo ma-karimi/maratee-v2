@@ -73,7 +73,7 @@ class ConvertService
     private function getCity(int $id)
     {
         $city = City::find($id);
-        return $city instanceof City ? $city->name : null;
+        return $city instanceof City ? $city : null;
     }
 
     private function getPersonName(int $id)
@@ -107,9 +107,9 @@ class ConvertService
     private function locationData(): array
     {
         $village = $this->getCity($this->city);
-        $city = empty($village) ?: $this->getCity($village->parentid);
-        $province = empty($city) ?: $this->getCity($city->parentid);
-        $country = empty($province) ?: $this->getCity($province->parentid);
+        $city = $this->getCity($village->parentid);
+        $province = $this->getCity($city->parentid);
+        $country = $this->getCity($province->parentid);
         return [
             'village' => ['en' => trim($village->name), 'fa' => trim($village->othername)],
             'city' => ['en' => trim($city->name), 'fa' => trim($city->othername)],
