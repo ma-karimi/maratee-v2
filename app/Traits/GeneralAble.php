@@ -16,7 +16,7 @@ trait GeneralAble
         if (empty($name))
             return null;
         $name = trim($name);
-        $general = General::where(['name->en', $name])->first();
+        $general = General::where('name->en', $name)->first();
         if ($general instanceof General)
             return $general->id;
         $name = ['en' => $name];

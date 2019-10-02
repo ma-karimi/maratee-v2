@@ -64,9 +64,10 @@ class ConvertService
         $this->log("- - end convert treaaleaf id {$this->id}");
     }
 
-    private function getTaxonomyTree(int $id): Taxonomytree
+    private function getTaxonomyTreeName(int $id)
     {
-        return Taxonomytree::find($id);
+        $taxonomyTree = Taxonomytree::find($id);
+        return $taxonomyTree instanceof Taxonomytree ? $taxonomyTree->name : null;
     }
 
     private function getCity(int $id): City
@@ -86,11 +87,11 @@ class ConvertService
 
     private function taxonomyData(): array
     {
-        $family = $this->getTaxonomyTree($this->family)->name;
-        $genus = $this->getTaxonomyTree($this->genus)->name;
-        $species = $this->getTaxonomyTree($this->species)->name;
-        $subspecies = $this->getTaxonomyTree($this->subspecies)->name;
-        $variety = $this->getTaxonomyTree($this->variety)->name;
+        $family = $this->getTaxonomyTreeName($this->family);
+        $genus = $this->getTaxonomyTreeName($this->genus);
+        $species = $this->getTaxonomyTreeName($this->species);
+        $subspecies = $this->getTaxonomyTreeName($this->subspecies);
+        $variety = $this->getTaxonomyTreeName($this->variety);
         return [
             'name' => empty($this->name) ? null : ['en' => $this->name],
             'family_id' => $this->getGeneralId('family', $family),
