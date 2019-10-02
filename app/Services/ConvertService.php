@@ -107,9 +107,9 @@ class ConvertService
     private function locationData(): array
     {
         $village = $this->getCity($this->city);
-        $city = $this->getCity($village->parentid);
-        $province = $this->getCity($city->parentid);
-        $country = $this->getCity($province->parentid);
+        $city = $village ? $this->getCity($village->parentid) : null;
+        $province = $city ? $this->getCity($city->parentid) : null;
+        $country = $province ? $this->getCity($province->parentid) : null;
         return [
             'village' => ['en' => trim($village->name), 'fa' => trim($village->othername)],
             'city' => ['en' => trim($city->name), 'fa' => trim($city->othername)],
