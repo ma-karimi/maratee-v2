@@ -17,6 +17,15 @@ class ActionService
     private $data = [];
     private $response = [];
 
+    public function __set($name, $value)
+    {
+        $this->data[$name] = $value;
+    }
+
+    public function __get($name)
+    {
+        return $this->data[$name] ?? null;
+    }
 
     public static function __callStatic($name, $arguments)
     {
@@ -36,13 +45,13 @@ class ActionService
 
     private function action()
     {
-        $this->response['action'] = Action::firstOrCreate($this->actionData());
+
+        $this->response['action'] = $this->getModel(Action::class, $this->actionData());
         $this->response['actionHub'] = ActionHub::firstOrCreate($this->actionHubData());
         $this->response['actors'] = [];
         foreach ($this->data['names'] as $name) {
-            $name = trim($name);
-            $name = ['en' => $name, 'fa' => $name, 'es' => $name];
-            $this->response['actors'][] = Actor::firstOrCreate(compact('name'));
+            $this->name = trim($name);
+            $this->response['actors'][] = $this->getModel(Actor::class, $this->actorData());
             // TODO: actorHub
         }
     }
@@ -50,7 +59,14 @@ class ActionService
     private function actionData(): array
     {
         return [
-            'name' => ['en' => $this->data['type']],
+            'name' => ['en' => $this->type],
+        ];
+    }
+
+    private function actorData(): array
+    {
+        return [
+            'name' => ['en' => $this->name],
         ];
     }
 
@@ -62,6 +78,21 @@ class ActionService
             'actionable_id' => $this->data['location_id'],
             'date' => $this->data['date'],
         ];
+    }
+
+    private function getModel(string $class, array $data)
+    {
+        $className = $this->getClassName($class);
+        $objModel = $class::where('name->en', $this->$className['en'])->first();
+        if ($objModel instanceof $class)
+            return $objModel;
+        return $class::Create($data);
+    }
+
+    private function getClassName(string $class)
+    {
+        $parts = explode('/', $class);
+        return end($parts);
     }
 
 }

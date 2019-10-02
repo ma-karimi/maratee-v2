@@ -11,15 +11,20 @@ abstract class BaseStore
 {
 
     protected static $model = null;
-    private $data = [];
+    protected $data = [];
+
+    public function __get($name)
+    {
+        return $this->data[$name] ?? null;
+    }
 
     public static function store(array $data)
     {
         $service = new static();
         $service->data = $data;
-        $location = static::$model::where($service->whereData())->first();
-        if ($location instanceof static::$model) {
-            return $location;
+        $objModel = static::$model::where($service->whereData())->first();
+        if ($objModel instanceof static::$model) {
+            return $objModel;
         }
         return static::$model::create($service->data());
     }
@@ -27,38 +32,30 @@ abstract class BaseStore
     private function whereData(): array
     {
         $conditions = [];
-        foreach ($this->data as $key => $value)
-            $conditions[] = [$key, $value];
+        foreach ($this->data() as $key => $value)
+            if (empty($value))
+                continue;
+            else if(is_array($value) && array_key_exists('en',$value))
+                $conditions[] = ["{$key}->en",$value['en']];
+            else
+                $conditions[] = [$key, $value];
         return $conditions;
     }
 
     protected abstract function data(): array;
 
-    public function __get($name)
+    protected function getModel(string $class, array $data)
     {
-        return $this->data[$name] ?? null;
+        $className = $this->getClassName($class);
+        $objModel = $class::where('name->en', $this->$className['en'])->first();
+        if ($objModel instanceof $class)
+            return $objModel;
+        return $class::Create($data);
     }
 
-    /**
-     * @param $input
-     * @return mixed
-     */
-    private function firstLocation($input)
+    protected function getClassName(string $class)
     {
-        $coordinate_string = implode(', ', [$input['point'][0], $input['point'][1]]);
-        $coordinate = new Coordinate($coordinate_string);
-        $p = new \Grimzy\LaravelMysqlSpatial\Types\Point($coordinate->getLatitude(), $coordinate->getLongitude());
-        return Location::where('address->fa', $input['address']['fa'])
-            ->where('address->en', $input['address']['en'])
-            ->when(!empty($input['region_name']['fa']), function ($query) use ($input) {
-                return $query->where('region_name->fa', $input['region_name']['fa']);
-            })
-            ->where('region_name->en', $input['region_name']['en'])
-            ->where('city_id', $input['city_id'])
-            ->where('village_id', $input['village_id'])
-            ->where('min_altitude', $input['min_altitude'])
-            ->where('max_altitude', $input['max_altitude'])
-            ->equals('point', $p)
-            ->first();
+        $parts = explode('/', $class);
+        return end($parts);
     }
 }
