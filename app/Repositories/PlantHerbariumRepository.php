@@ -6,11 +6,13 @@ use App\Models\ActionHub;
 use App\Models\Location;
 use App\Models\PlantHerbarium;
 use App\Models\Taxonomy;
+use GeoJson\Geometry\Point;
 use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use League\Geotools\Coordinate\Coordinate;
 
 /**
  * Class PlantRepository
@@ -119,7 +121,24 @@ class PlantHerbariumRepository extends BaseRepository
             'point' => $input['point'] ?? null,
 //            'description' => $input['location_description'] ?? null,
         ];
-        $location = Location::where('address->fa', $input['address']['fa'])
+
+        if ($location = $this->firstLocation($input)) {
+            return $location->id;
+        }
+        //store location
+        return $this->location_model->create($location_input)->id;
+    }
+
+    /**
+     * @param $input
+     * @return mixed
+     */
+    private function firstLocation($input)
+    {
+        $coordinate_string = implode(', ', [$input['point'][0], $input['point'][1]]);
+        $coordinate = new Coordinate($coordinate_string);
+        $p = new \Grimzy\LaravelMysqlSpatial\Types\Point($coordinate->getLatitude(), $coordinate->getLongitude());
+        return Location::where('address->fa', $input['address']['fa'])
             ->where('address->en', $input['address']['en'])
             ->when(!empty($input['region_name']['fa']), function ($query) use ($input) {
                 return $query->where('region_name->fa', $input['region_name']['fa']);
@@ -129,10 +148,8 @@ class PlantHerbariumRepository extends BaseRepository
             ->where('village_id', $input['village_id'])
             ->where('min_altitude', $input['min_altitude'])
             ->where('max_altitude', $input['max_altitude'])
-//            ->where('point', $input['point'])
+            ->equals('point', $p)
             ->first();
-        //store location
-        return $this->location_model->create($location_input)->id;
     }
 
     /**
@@ -171,31 +188,6 @@ class PlantHerbariumRepository extends BaseRepository
         ];
         //store plant
         return parent::create($plant_input);
-    }
-
-    /**
-     * @param array $taxonomy_input
-     * @param Model $plant
-     */
-    private function syncPlantGeneralProperties(array $taxonomy_input, Model $plant): void
-    {
-        $general_input = array_filter($taxonomy_input, function ($value, $key) {
-            return $value !== null; /*and $key !== 'type_description' and $key !== 'plant_id';*/
-        }, ARRAY_FILTER_USE_BOTH);
-
-        $plant->generals()->sync($taxonomy_input);
-    }
-
-    /**
-     * @param $input
-     * @param Model $plant
-     * @return mixed
-     */
-    private function syncPlantTypeProperties($input, Model $plant)
-    {
-        if (!empty($input['plant_types'])) {
-            $plant->generals()->sync($input['plant_types']);
-        }
     }
 
     /**
@@ -252,7 +244,6 @@ class PlantHerbariumRepository extends BaseRepository
         return parent::update($plant_input, $id);
     }
 
-
     /**
      * @param $input
      * @param $plant
@@ -273,6 +264,31 @@ class PlantHerbariumRepository extends BaseRepository
             $media_record->update($media_input);
         }
         $model->save();
+    }
+
+    /**
+     * @param array $taxonomy_input
+     * @param Model $plant
+     */
+    private function syncPlantGeneralProperties(array $taxonomy_input, Model $plant): void
+    {
+        $general_input = array_filter($taxonomy_input, function ($value, $key) {
+            return $value !== null; /*and $key !== 'type_description' and $key !== 'plant_id';*/
+        }, ARRAY_FILTER_USE_BOTH);
+
+        $plant->generals()->sync($taxonomy_input);
+    }
+
+    /**
+     * @param $input
+     * @param Model $plant
+     * @return mixed
+     */
+    private function syncPlantTypeProperties($input, Model $plant)
+    {
+        if (!empty($input['plant_types'])) {
+            $plant->generals()->sync($input['plant_types']);
+        }
     }
 
 }

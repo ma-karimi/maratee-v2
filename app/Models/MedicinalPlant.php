@@ -55,6 +55,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          type="integer",
  *      ),
  *      @SWG\Property(
+ *          property="general_habitat_id",
+ *          description="id",
+ *          type="integer",
+ *      ),
+ *      @SWG\Property(
  *          property="hygienic_cosmetic_industry_id",
  *          description="id",
  *          type="integer",
@@ -235,7 +240,8 @@ class MedicinalPlant extends BaseModel
         'aerial_part_id' => 'exists:medicinal_parts,id',
         'ground_part_id' => 'exists:medicinal_parts,id',
         'food_industry_id' => 'exists:medicinal_plant_types,id',
-        'general_origin_id' => 'exists:medicinal_plant_types,id',
+        'general_origin_id' => 'exists:generals,id',
+        'general_habitat_id' => 'exists:generals,id',
         'hygienic_cosmetic_industry_id' => 'exists:medicinal_plant_types,id',
         'other_industry_id' => 'exists:medicinal_plant_types,id',
         'industrial_potential_id' => 'exists:medicinal_plant_types,id',

@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
         ini_set('max_execution_time', 30000);
         ini_set('memory_limit', '2000M');
 
-        $this->call([
-            ConvertSeeder::class,
-        ]);
+//        $this->call([
+//            ConvertSeeder::class,
+//        ]);
 
         $this->call([
             UserTableSeeder::class,
@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
             ConstituentTypeTableSeeder::class,
             SeedFeatureTableSeeder::class,
             OrganizationTableSeeder::class,
-//            GeneralTableSeeder::class,
+            GeneralTableSeeder::class,
             OriginalGeneralTableSeeder::class,
             OriginalPropagationTableSeeder::class,
             ProjectTableSeeder::class,
@@ -56,8 +56,8 @@ class DatabaseSeeder extends Seeder
             LocationTableSeeder::class,
             AuthorHubTableSeeder::class,
             LifeFormTableSeeder::class,
-//            TaxonomyTableSeeder::class,
-//            PlantHerbariumTableSeeder::class,
+            TaxonomyTableSeeder::class,
+            PlantHerbariumTableSeeder::class,
             PlantLifeFormTableSeeder::class,
             PaleontologyTableSeeder::class,
             TreatmentTableSeeder::class,
