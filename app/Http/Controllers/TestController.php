@@ -13,8 +13,6 @@ class TestController
     {
         ini_set('max_execution_time', 30000);
         ini_set('memory_limit', '2000M');
-        $treeLeafs = Treeleaf::get();
-        foreach ($treeLeafs as $treeLeaf)
-            $convertService->treeleaf($treeLeaf)->handle();
+        $convertService->treeleaf(Treeleaf::find(1269))->handle();
     }
 }

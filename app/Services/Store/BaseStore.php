@@ -35,8 +35,8 @@ abstract class BaseStore
         foreach ($this->data() as $key => $value)
             if (empty($value))
                 continue;
-            else if(is_array($value) && array_key_exists('en',$value))
-                $conditions[] = ["{$key}->en",$value['en']];
+            else if (is_array($value) && array_key_exists('en', $value))
+                $conditions[] = ["{$key}->en", $value['en']];
             else
                 $conditions[] = [$key, $value];
         return $conditions;

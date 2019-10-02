@@ -15,8 +15,6 @@ class LocationStore extends BaseStore
 
     protected static $model = Location::class;
 
-    private const DEFAULT_COUNTRY = ['en'=>'Iran','fa'=>'ایران'];
-
     private $location = [];
 
     protected function data(): array

@@ -24,6 +24,8 @@ class ConvertService
 
     const IS_FLOWERING = 0;
 
+    private $ignore = [1269];
+
     private $treeleaf;
     private $taxonomy;
     private $location;
@@ -42,13 +44,20 @@ class ConvertService
         return $this;
     }
 
+    private function inIgnore($id): bool
+    {
+        return in_array($id, $this->ignore);
+    }
+
     public function handle()
     {
+        if ($this->inIgnore($this->id))
+            return;
         $this->log("- - begin convert treaaleaf id {$this->id}");
         $this->taxonomy = TaxonomyStore::store($this->taxonomyData());
         $this->log("store taxonomy id {$this->taxonomy->id} done");
         $this->location = LocationStore::store($this->locationData());
-        $this->log("store location id {$this->location->id} done");
+        $this->log("store location id {$this->location['id']} done");
         $this->plantHerbarium = PlantHerbarium::firstOrCreate($this->plantHerbariumData());
         $this->log("store plantHerbarium id {$this->plantHerbarium->id} done");
         $this->collect = ActionService::collect($this->collectData());
@@ -107,9 +116,11 @@ class ConvertService
     private function locationData(): array
     {
         $village = $this->getCity($this->city);
-        $city = $village ? $this->getCity($village->parentid) : null;
-        $province = $city ? $this->getCity($city->parentid) : null;
-        $country = $province ? $this->getCity($province->parentid) : null;
+        if (!$village)
+            return [];
+        $city = $this->getCity($village->parentid);
+        $province = $this->getCity($city->parentid);
+        $country = $this->getCity($province->parentid);
         return [
             'village' => ['en' => trim($village->name), 'fa' => trim($village->othername)],
             'city' => ['en' => trim($city->name), 'fa' => trim($city->othername)],
@@ -129,7 +140,7 @@ class ConvertService
             'herbarium_number' => $this->herbariumnumber,
             'cf' => $this->cf,
             'is_flowering' => self::IS_FLOWERING,
-            'location_id' => $this->location->id,
+            'location_id' => $this->location['id'] ?? null,
             'taxonomy_id' => $this->taxonomy->id,
             'organization_id' => $this->getOrganization()->id,
             'protection_id' => Protection::firstOrCreate($this->protectionData())->id,
@@ -164,7 +175,7 @@ class ConvertService
     private function collectData(): array
     {
         return [
-            'location_id' => $this->location->id,
+            'location_id' => $this->location->id ?? null,
             'date' => $this->gatheringdate,
             'names' => $this->getCollectors(),
         ];
@@ -185,7 +196,7 @@ class ConvertService
     private function detectData(): array
     {
         return [
-            'location_id' => $this->location->id,
+            'location_id' => $this->location->id ?? null,
             'date' => $this->identifydate,
             'names' => $this->getDetectors(),
         ];
@@ -203,28 +214,6 @@ class ConvertService
             $persons = array_merge($persons, $names);
         }
         return $persons;
-    }
-
-    private function convertData(): array
-    {
-        $collectors_id = [];
-        $detectors_id = [];
-        foreach ($this->collect['actors'] as $actor)
-            $collectors_id[] = $actor->id;
-        foreach ($this->detect['actors'] as $actor)
-            $detectors_id[] = $actor->id;
-        return [
-            'treeleaf_id' => $this->id,
-            'taxonomy_id' => $this->taxonomy->id,
-            'location_id' => $this->location->id,
-            'plant_herbarium_id' => $this->plantHerbarium->id,
-            'collect_action_id' => $this->collect['action']->id,
-            'collect_actionHub_id' => $this->collect['actionHub']->id,
-            'collect_actors_id' => sizeof($collectors_id) ? implode('-', $collectors_id) : null,
-            'detect_action_id' => $this->detect['action']->id,
-            'detect_actionHub_id' => $this->detect['actionHub']->id,
-            'detect_actors_id' => sizeof($detectors_id) ? implode('-', $detectors_id) : null,
-        ];
     }
 
     private function log(string $message)
