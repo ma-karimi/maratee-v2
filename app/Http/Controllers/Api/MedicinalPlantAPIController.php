@@ -158,6 +158,13 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
+     *          name="general_habitat_id",
+     *          in="body",
+     *          description="MedicinalPlant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
+     *      ),
+     *      @SWG\Parameter(
      *          name="method_distillation_id",
      *          in="body",
      *          description="from methods",
@@ -439,6 +446,13 @@ class MedicinalPlantAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="general_origin_id",
+     *          in="body",
+     *          description="MedicinalPlant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_habitat_id",
      *          in="body",
      *          description="MedicinalPlant that should be stored",
      *          required=false,

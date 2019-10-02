@@ -38,8 +38,6 @@ class CountryTableSeeder extends Seeder
                 'continent_id' => $continent_id ?? null,
                 'code' => $item->iso_n3 ?? null
             ]);
-            exec('echo "jaysvdjavsdfh"');
-            print_r('asdasd');
 
         }
     }
