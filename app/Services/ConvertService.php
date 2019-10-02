@@ -97,7 +97,7 @@ class ConvertService
             'family_id' => $this->getGeneralId('family', $family),
             'genus_id' => $this->getGeneralId('genus', $genus),
             'species_id' => $this->getGeneralId('species', $species),
-            'subspecies_id' => $this->getGeneralId('subspecies', $subspecies),
+            'subspecies_id' => $this->getGeneralId('sub_species', $subspecies),
             'variety_id' => $this->getGeneralId('variety', $variety),
         ];
     }

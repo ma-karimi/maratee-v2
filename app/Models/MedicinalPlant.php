@@ -322,7 +322,7 @@ class MedicinalPlant extends BaseModel
      */
     public function medicinalPlantConstituents(): HasMany
     {
-        return $this->hasMany(MedicinalPlantConstituent::class)->latest();
+        return $this->hasMany(MedicinalPlantConstituent::class)->take(10)->orderBy('constituent_id');
     }
 
     /**

@@ -11,7 +11,7 @@ trait GeneralAble
 
     // use update because parent_id is different
 
-    public function getGeneralId(string $type, $name, int $parent_id = null): int
+    public function getGeneralId(string $type, $name, int $parent_id = null)
     {
         if (empty($name))
             return null;
