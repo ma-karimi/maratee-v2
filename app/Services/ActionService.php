@@ -45,7 +45,6 @@ class ActionService
 
     private function action()
     {
-
         $this->response['action'] = $this->getModel(Action::class, $this->actionData());
         $this->response['actionHub'] = ActionHub::firstOrCreate($this->actionHubData());
         $this->response['actors'] = [];
