@@ -1,5 +1,6 @@
 <?php
 
+use App\Libraries\CustomBlueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -45,6 +46,7 @@ class CreateMedicinalPlantsTable extends Migration {
             $table->json('medicinal_properties')->nullable();
             $table->json('side_effects')->nullable();
             $table->unsignedBigInteger('medicine_id')->nullable();
+            $table->unsignedBigInteger('treatment_id')->nullable();
             $table->json('consumption')->nullable();
             $table->json('active_compounds')->nullable();
             $table->json('manufacturer')->nullable();
@@ -56,8 +58,12 @@ class CreateMedicinalPlantsTable extends Migration {
             $table->json('fruit_color')->nullable();
             $table->json('flower_color')->nullable();
             $table->string('height')->nullable()->comment('unit: cm');
+            $table->json('life_forms')->comment('life_form_cycle_id, life_form_wooden_id, life_form_herbaceous_id')->nullable();
 
         });
+        CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_cycle_id', 'life_forms', 'cycle_id', true);
+        CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_wooden_id', 'life_forms', 'wooden_id', true);
+        CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_herbaceous_id', 'life_forms', 'herbaceous_id', true);
 	}
 
 

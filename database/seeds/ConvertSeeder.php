@@ -14,8 +14,11 @@ class ConvertSeeder extends Seeder
      */
     public function run(ConvertService $convertService)
     {
-        $treeLeafs = Treeleaf::get();
-        foreach ($treeLeafs as $treeLeaf)
-            $convertService->treeleaf($treeLeaf)->handle();
+        $treeLeafs = Treeleaf::where('id','>','1200')->get();
+        foreach ($treeLeafs as $treeLeaf){
+            if($treeLeaf->hasCity())
+                $convertService->treeleaf($treeLeaf)->handle();
+        }
+
     }
 }

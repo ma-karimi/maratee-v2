@@ -24,6 +24,8 @@ class ConvertService
 
     const IS_FLOWERING = 0;
 
+    private $ignores = [1269,1444];
+
     private $treeleaf;
     private $taxonomy;
     private $location;
@@ -36,6 +38,11 @@ class ConvertService
         return $this->treeleaf->$name ?? null;
     }
 
+    private function inIgnore($id)
+    {
+        return in_array($id,$this->ignores);
+    }
+
     public function treeleaf(Treeleaf $treeleaf): self
     {
         $this->treeleaf = $treeleaf;
@@ -44,6 +51,10 @@ class ConvertService
 
     public function handle()
     {
+        if($this->inIgnore($this->id)){
+            $this->log("- ignore treaaleaf id {$this->id}");
+            return;
+        }
         $this->log("- - begin convert treaaleaf id {$this->id}");
         $this->taxonomy = TaxonomyStore::store($this->taxonomyData());
         $this->log("store taxonomy id {$this->taxonomy->id} done");
