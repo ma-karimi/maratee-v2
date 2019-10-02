@@ -75,9 +75,10 @@ class ConvertService
         return City::find($id);
     }
 
-    private function getPerson(int $id)
+    private function getPersonName(int $id)
     {
-        return Person::find($id);
+        $person = Person::find($id);
+        return $person instanceof Person ? $person->name : null;
     }
 
     private function getOrgan(int $id)
@@ -173,7 +174,7 @@ class ConvertService
         $persons = [];
         $persons_id = explode('&', $this->gatherer);
         foreach ($persons_id as $id) {
-            $person_name = $this->getPerson($id)->name;
+            $person_name = $this->getPersonName($id);
             $names = explode('&', $person_name);
             $persons = array_merge($persons, $names);
         }
@@ -196,7 +197,7 @@ class ConvertService
         foreach ($persons_id as $id) {
             if (empty($id))
                 continue;
-            $person_name = $this->getPerson($id)->name;
+            $person_name = $this->getPersonName($id);
             $names = explode('&', $person_name);
             $persons = array_merge($persons, $names);
         }
