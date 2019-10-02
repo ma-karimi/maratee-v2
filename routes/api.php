@@ -156,7 +156,8 @@ Route::apiResource('media', 'MediaAPIController');
 
 Route::apiResource('medicinal_plants', 'MedicinalPlantAPIController');
 
-Route::apiResource('medicinal_plant_constituents', 'MedicinalPlantConstituentAPIController');
+Route::post('medicinal_plant_constituents/{medicinal_plant_id}/store', 'MedicinalPlantConstituentAPIController@store');
+Route::post('medicinal_plant_constituents/{medicinal_plant_id}/update', 'MedicinalPlantConstituentAPIController@update');
 
 
 Route::apiResource('medicines', 'MedicineAPIController');
