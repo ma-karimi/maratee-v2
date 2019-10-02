@@ -18,7 +18,7 @@ abstract class BaseStore
         $service = new static();
         $service->data = $data;
         $location = static::$model::where($service->whereData())->first();
-        if ($location instanceof Location) {
+        if ($location instanceof static::$model) {
             return $location;
         }
         return static::$model::create($service->data());
