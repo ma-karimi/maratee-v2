@@ -4,20 +4,17 @@
 namespace App\Services;
 
 
-use App\Models\Convert\Convert;
 use App\Models\Convert\City;
 use App\Models\Convert\Herbariumname;
 use App\Models\Convert\Person;
 use App\Models\Convert\Taxonomytree;
 use App\Models\Convert\Treeleaf;
-use App\Models\General;
 use App\Models\Organization;
 use App\Models\PlantHerbarium;
 use App\Models\Protection;
 use App\Services\Store\LocationStore;
 use App\Services\Store\TaxonomyStore;
 use App\Traits\GeneralAble;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class ConvertService
@@ -47,27 +44,28 @@ class ConvertService
 
     public function handle()
     {
-        Log::channel('convert')->debug("- - begin convert treaaleaf id {$this->id}");
+        $this->log("- - begin convert treaaleaf id {$this->id}");
         $this->taxonomy = TaxonomyStore::store($this->taxonomyData());
-        Log::channel('convert')->debug("store taxonomy id {$this->taxonomy->id} done");
+        $this->log("store taxonomy id {$this->taxonomy->id} done");
         $this->location = LocationStore::store($this->locationData());
-        Log::channel('convert')->debug("store location id {$this->location->id} done");
+        $this->log("store location id {$this->location->id} done");
         $this->plantHerbarium = PlantHerbarium::firstOrCreate($this->plantHerbariumData());
-        Log::channel('convert')->debug("store plantHerbarium id {$this->plantHerbarium->id} done");
+        $this->log("store plantHerbarium id {$this->plantHerbarium->id} done");
         $this->collect = ActionService::collect($this->collectData());
-        Log::channel('convert')->debug("store collect action id {$this->collect['action']->id} done");
-        Log::channel('convert')->debug("store collect actionHub id {$this->collect['actionHub']->id} done");
+        $this->log("store collect action id {$this->collect['action']->id} done");
+        $this->log("store collect actionHub id {$this->collect['actionHub']->id} done");
         foreach ($this->collect['actors'] as $actor)
-            Log::channel('convert')->debug("store collect actor id {$actor->id} done");
+            $this->log("store collect actor id {$actor->id} done");
         $this->detect = ActionService::detect($this->detectData());
-        Log::channel('convert')->debug("store detect action id {$this->collect['action']->id} done");
-        Log::channel('convert')->debug("store detect actionHub id {$this->collect['actionHub']->id} done");
+        $this->log("store detect action id {$this->collect['action']->id} done");
+        $this->log("store detect actionHub id {$this->collect['actionHub']->id} done");
         foreach ($this->collect['actors'] as $actor)
-            Log::channel('convert')->debug("store detect actor id {$actor->id} done");
+            $this->log("store detect actor id {$actor->id} done");
         // store states for rollback
 //        $convert = Convert::firstOrCreate($this->convertData());
-        Log::channel('convert')->debug("- - end convert treaaleaf id {$this->id}");
+        $this->log("- - end convert treaaleaf id {$this->id}");
 //        return $convert;
+        exit;
     }
 
     private function getTaxonomyTree(int $id): Taxonomytree
@@ -92,13 +90,18 @@ class ConvertService
 
     private function taxonomyData(): array
     {
+        $family = $this->getTaxonomyTree($this->family)->name;
+        $genus = $this->getTaxonomyTree($this->genus)->name;
+        $species = $this->getTaxonomyTree($this->species)->name;
+        $subspecies = $this->getTaxonomyTree($this->subspecies)->name;
+        $variety = $this->getTaxonomyTree($this->variety)->name;
         return [
-            'name' => ['en' => $this->name, 'fa' => $this->name],
-            'family' => $this->getTaxonomyTree($this->family)->name,
-            'genus' => $this->getTaxonomyTree($this->genus)->name,
-            'species' => $this->getTaxonomyTree($this->species)->name,
-            'subspecies' => $this->getTaxonomyTree($this->subspecies)->name,
-            'variety' => $this->getTaxonomyTree($this->variety)->name,
+            'name' => empty($this->name) ? null : ['en' => $this->name],
+            'family_id' => $this->getGeneralId('family', $family),
+            'genus_id' => $this->getGeneralId('genus', $genus),
+            'species_id' => $this->getGeneralId('species', $species),
+            'subspecies_id' => $this->getGeneralId('subspecies', $subspecies),
+            'variety_id' => $this->getGeneralId('variety', $variety),
         ];
     }
 
@@ -108,36 +111,17 @@ class ConvertService
         $city = $this->getCity($village->parentid);
         $province = $this->getCity($city->parentid);
         $country = $this->getCity($province->parentid);
-        // village
-        if (!empty($village->name))
-            $data['village']['en'] = trim($village->name);
-        if (!empty($village->othername))
-            $data['village']['fa'] = trim($village->othername);
-        // city
-        if (!empty($city->name))
-            $data['city']['en'] = trim($city->name);
-        if (!empty($city->othername))
-            $data['city']['fa'] = trim($city->othername);
-        // province
-        if (!empty($province->name))
-            $data['province']['en'] = trim($province->name);
-        if (!empty($province->othername))
-            $data['province']['fa'] = trim($province->othername);
-        // country
-        if (!empty($country->name))
-            $data['country']['en'] = trim($country->name);
-        if (!empty($country->othername))
-            $data['country']['fa'] = trim($country->othername);
-        // address
-        $data['address']['en'] = trim($this->addresse);
-        if (strlen($this->addressf))
-            $data['address']['fa'] = trim($this->addressf);
-        $data['min_altitude'] = trim($this->minaltitude);
-        $data['min_altitude'] = trim($this->minaltitude);
-        $data['max_altitude'] = trim($this->maxaltitude);
-        $data['lat'] = trim($this->Latitude);
-        $data['long'] = trim($this->Longitude);
-        return $data;
+        return [
+            'village' => ['en' => trim($village->name), 'fa' => trim($village->othername)],
+            'city' => ['en' => trim($city->name), 'fa' => trim($city->othername)],
+            'province' => ['en' => trim($province->name), 'fa' => trim($province->othername)],
+            'country' => ['en' => trim($country->name), 'fa' => trim($country->othername)],
+            'address' => ['en' => trim($this->addresse), 'fa' => trim($this->addressf)],
+            'min_altitude' => trim($this->minaltitude),
+            'max_altitude' => trim($this->max_altitude),
+            'lat' => trim($this->Latitude),
+            'long' => trim($this->Longitude),
+        ];
     }
 
     private function plantHerbariumData(): array
@@ -169,14 +153,6 @@ class ConvertService
             'name' => $this->getOrgan($this->herbariumname),
             'phone' => '',
         ];
-    }
-
-    private function getProtection()
-    {
-        $organ = Protection::where('name->en', 'DD')->get();
-        if ($organ instanceof Organization)
-            return $organ;
-        return Protection::firstOrCreate($this->protectionData());
     }
 
     private function protectionData(): array
@@ -230,7 +206,6 @@ class ConvertService
         return $persons;
     }
 
-
     private function convertData(): array
     {
         $collectors_id = [];
@@ -251,6 +226,12 @@ class ConvertService
             'detect_actionHub_id' => $this->detect['actionHub']->id,
             'detect_actors_id' => sizeof($detectors_id) ? implode('-', $detectors_id) : null,
         ];
+    }
+
+    private function log(string $message)
+    {
+        Log::channel('convert')->debug($message);
+        echo "$message\n";
     }
 
 }
