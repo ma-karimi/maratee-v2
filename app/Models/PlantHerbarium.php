@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Accessor\PlantAccessor;
 use App\Models\Contracts\BaseModel;
-use App\Models\Relations\{ActionRelation};
+use App\Models\Relations\{ActionRelation, ArticleRelation};
 use App\Models\Scope\PlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -162,7 +162,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class PlantHerbarium extends BaseModel implements HasMedia
 {
-    use PlantScope, PlantAccessor, ActionRelation,HasMediaTrait;
+    use PlantScope, PlantAccessor, ActionRelation,HasMediaTrait,ArticleRelation;
 
     public const FLOWERING_TIME = [1 => 'Farvardin', 2 => 'Ordibehesht', 3 => 'Khordad', 4 => 'Tir', 5 => 'Mordad', 6 => 'Shahrivar', 7 => 'Mehr', 8 => 'Aban', 9 => 'Azar', 10 => 'Dey', 11 => 'Bahman', 12 => 'Esfand'];
 
