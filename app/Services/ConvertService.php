@@ -40,82 +40,82 @@ class ConvertService
 
     public function handle()
     {
-        $this->log(" - - - - begin convert TreeLeaf id : {$this->id} - - - - ");
+//        $this->log(" - - - - begin convert TreeLeaf id : {$this->id} - - - - ");
 
         // country
         if (!$this->hasCountry())
             $this->models['country'] = Country::create($this->countryData());
-        $this->log('country id : ' . $this->models['country']['id']);
+//        $this->log('country id : ' . $this->models['country']['id']);
 
         // province
         if (!$this->hasProvince())
             $this->models['province'] = Province::create($this->provinceData());
-        $this->log('province id : ' . $this->models['province']['id']);
+//        $this->log('province id : ' . $this->models['province']['id']);
 
         // city
         if (!$this->hasCity())
             $this->models['city'] = City::create($this->cityData());
-        $this->log('city id : ' . $this->models['city']['id']);
+//        $this->log('city id : ' . $this->models['city']['id']);
 
         // village
         if (!$this->hasVillage())
             $this->models['village'] = Village::create($this->villageData());
-        $this->log('village id : ' . $this->models['village']['id']);
+//        $this->log('village id : ' . $this->models['village']['id']);
 
         // location
         if (!$this->hasLocation())
             $this->models['location'] = Location::create($this->locationData());
-        $this->log('location id : ' . $this->models['location']['id']);
+//        $this->log('location id : ' . $this->models['location']['id']);
 
         // family
         if (!$this->hasFamily())
             $this->models['general']['family'] = General::create($this->familyData());
-        $this->log('family : general id : ' . $this->models['general']['family']['id']);
+//        $this->log('family : general id : ' . $this->models['general']['family']['id']);
 
         // genus
         if (!$this->hasGenus())
             $this->models['general']['genus'] = General::create($this->genusData());
-        $this->log('genus : general id : ' . $this->models['general']['genus']['id']);
+//        $this->log('genus : general id : ' . $this->models['general']['genus']['id']);
 
         // species
         if (!$this->hasSpecies())
             $this->models['general']['species'] = General::create($this->speciesData());
-        $this->log('species : general id : ' . $this->models['general']['species']['id']);
+//        $this->log('species : general id : ' . $this->models['general']['species']['id']);
 
         // subspecies
         if (!$this->hasSubspecies())
             $this->models['general']['subspecies'] = General::create($this->subspeciesData());
-        $this->log('subspecies : general id : ' . $this->models['general']['subspecies']['id']);
+//        $this->log('subspecies : general id : ' . $this->models['general']['subspecies']['id']);
 
         // variety
         if (!$this->hasVariety())
             $this->models['general']['variety'] = General::create($this->varietyData());
-        $this->log('variety : general id : ' . $this->models['general']['variety']['id']);
+//        $this->log('variety : general id : ' . $this->models['general']['variety']['id']);
 
         // taxonomy
         if (!$this->hasTaxonomy())
             $this->models['taxonomy'] = Taxonomy::create($this->taxonomyData());
-        $this->log('taxonomy id : ' . $this->models['taxonomy']['id']);
+//        $this->log('taxonomy id : ' . $this->models['taxonomy']['id']);
 
         // organization
         if (!$this->hasOrganization())
             $this->models['organization'] = Organization::create($this->organizationData());
-        $this->log('organization id : ' . $this->models['organization']['id']);
+//        $this->log('organization id : ' . $this->models['organization']['id']);
 
         // protection
         if (!$this->hasProtection())
             $this->models['protection'] = Protection::create($this->protectionData());
-        $this->log('protection id : ' . $this->models['protection']['id']);
+//        $this->log('protection id : ' . $this->models['protection']['id']);
 
         // plant herbarium
         if (!$this->hasPlantHerbarium())
             $this->models['plantHerbarium'] = PlantHerbarium::create($this->plantHerbariumData());
-        $this->log('plantHerbarium id : ' . $this->models['plantHerbarium']['id']);
+//        $this->log('plantHerbarium id : ' . $this->models['plantHerbarium']['id']);
 
         // collect
         if (!$this->hasCollect())
             $this->models['action']['collect'] = Action::create($this->collectData());
-        $this->log('collect : action id : ' . $this->models['action']['collect']['id']);
+//        $this->log('collect : action id : ' . $this->models['action']['collect']['id']);
 
         // collectors
         foreach ($this->collectors as $collector) {
@@ -123,24 +123,24 @@ class ConvertService
             $this->treeLeaf['collector'] = $collector;
             if (!$this->hasCollector())
                 $this->models['actor']['collect'] = Actor::create($this->collectorData());
-            $this->log('collect : actor id : ' . $this->models['actor']['collect']['id']);
+//            $this->log('collect : actor id : ' . $this->models['actor']['collect']['id']);
 
             // collect hub
             if (!$this->hasCollectHub())
                 $this->models['actionHub']['collect'] = ActionHub::create($this->collectHubData());
-            $this->log('collect : actionHub id : ' . $this->models['actionHub']['collect']['id']);
+//            $this->log('collect : actionHub id : ' . $this->models['actionHub']['collect']['id']);
 
             // collector hub
             if (!$this->hasCollectorHub())
                 $this->models['actorHub']['collect'] = ActorHub::create($this->collectorHubData());
-            $this->log('collect : actorHub id : ' . $this->models['actorHub']['collect']['id']);
+//            $this->log('collect : actorHub id : ' . $this->models['actorHub']['collect']['id']);
 
         }
 
         // detect
         if (!$this->hasDetect())
             $this->models['action']['detect'] = Action::create($this->detectData());
-        $this->log('detect : action id : ' . $this->models['action']['detect']['id']);
+//        $this->log('detect : action id : ' . $this->models['action']['detect']['id']);
 
         // detectors
         foreach ($this->detectors as $detector) {
@@ -148,17 +148,17 @@ class ConvertService
             $this->treeLeaf['detector'] = $detector;
             if (!$this->hasDetector())
                 $this->models['actor']['detect'] = Actor::create($this->detectorData());
-            $this->log('detect : actor id : ' . $this->models['actor']['detect']['id']);
+//            $this->log('detect : actor id : ' . $this->models['actor']['detect']['id']);
 
             // collect hub
             if (!$this->hasDetectHub())
                 $this->models['actionHub']['detect'] = ActionHub::create($this->detectHubData());
-            $this->log('detect : actionHub id : ' . $this->models['actionHub']['detect']['id']);
+//            $this->log('detect : actionHub id : ' . $this->models['actionHub']['detect']['id']);
 
             // detect hub
             if (!$this->hasDetectorHub())
                 $this->models['actorHub']['detect'] = ActorHub::create($this->detectorHubData());
-            $this->log('detect : actorHub id : ' . $this->models['actorHub']['detect']['id']);
+//            $this->log('detect : actorHub id : ' . $this->models['actorHub']['detect']['id']);
 
         }
 
