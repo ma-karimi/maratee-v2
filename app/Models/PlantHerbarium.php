@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -158,9 +160,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      )
  * )
  */
-class PlantHerbarium extends BaseModel
+class PlantHerbarium extends BaseModel implements HasMedia
 {
-    use PlantScope, PlantAccessor, ActionRelation;
+    use PlantScope, PlantAccessor, ActionRelation,HasMediaTrait;
 
     public const FLOWERING_TIME = [1 => 'Farvardin', 2 => 'Ordibehesht', 3 => 'Khordad', 4 => 'Tir', 5 => 'Mordad', 6 => 'Shahrivar', 7 => 'Mehr', 8 => 'Aban', 9 => 'Azar', 10 => 'Dey', 11 => 'Bahman', 12 => 'Esfand'];
 
@@ -247,7 +249,7 @@ class PlantHerbarium extends BaseModel
     {
         return $this->belongsToMany(General::class,
             'plant_properties',
-            'plant_id',
+            'plant_herbarium_id',
             'general_id')
             ->whereNull('plant_properties.deleted_at')
             ->withTimestamps();
