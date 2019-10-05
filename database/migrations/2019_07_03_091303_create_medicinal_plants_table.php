@@ -22,7 +22,6 @@ class CreateMedicinalPlantsTable extends Migration {
             $table->unsignedBigInteger('ground_part_id')->nullable();
             $table->unsignedBigInteger('food_industry_id')->nullable();
             $table->unsignedBigInteger('general_origin_id')->nullable();
-            $table->unsignedBigInteger('general_habitat_id')->nullable();
             $table->unsignedBigInteger('hygienic_cosmetic_industry_id')->nullable();
             $table->unsignedBigInteger('other_industry_id')->nullable()->comment('now');
             $table->unsignedBigInteger('industrial_potential_id')->nullable()->comment('other industrial in future');

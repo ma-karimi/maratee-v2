@@ -13,16 +13,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \App\Utility::truncateTables();
-
         Model::unguard();
         ini_set('max_execution_time', 30000);
         ini_set('memory_limit', '2000M');
 
         $this->call([
             ConvertSeeder::class,
-        ]);
-
-        $this->call([
             UserTableSeeder::class,
             ContinentTableSeeder::class,
             CountryTableSeeder::class,
@@ -113,7 +109,7 @@ class DatabaseSeeder extends Seeder
 //            ComponentTableSeeder::class,
 //            MedicalComponentTableSeeder::class,
         ]);
-        Model::reguard();
 
+        Model::reguard();
     }
 }

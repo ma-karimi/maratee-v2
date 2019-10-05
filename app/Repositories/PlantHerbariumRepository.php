@@ -6,13 +6,10 @@ use App\Models\ActionHub;
 use App\Models\Location;
 use App\Models\PlantHerbarium;
 use App\Models\Taxonomy;
-use GeoJson\Geometry\Point;
 use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-use League\Geotools\Coordinate\Coordinate;
 
 /**
  * Class PlantRepository
@@ -22,13 +19,6 @@ use League\Geotools\Coordinate\Coordinate;
 class PlantHerbariumRepository extends BaseRepository
 {
 
-    /**
-     * @var array
-     */
-    protected $fieldSearchable = [
-
-
-    ];
     private $taxonomy_model;
     private $location_model;
     private $action_hub_repo;
@@ -48,6 +38,14 @@ class PlantHerbariumRepository extends BaseRepository
         $this->location_model = $location_model;
         $this->action_hub_repo = $action_hub_repo;
     }
+
+    /**
+     * @var array
+     */
+    protected $fieldSearchable = [
+
+
+    ];
 
     /**
      * Return searchable fields
@@ -81,76 +79,27 @@ class PlantHerbariumRepository extends BaseRepository
         [$taxonomy_input, $taxonomy_id] = $this->firstOrCreateTaxonomy($input);
         $location_id = $this->firstOrCreateLocation($input);
         $plant = $this->createPlantHerbarium($input, $taxonomy_id, $location_id);
-//        $this->syncPlantGeneralProperties($taxonomy_input, $plant);
-//        $this->syncPlantTypeProperties($input, $plant);
+        $this->syncPlantGeneralProperties($taxonomy_input, $plant);
+        $this->syncPlantTypeProperties($input, $plant);
         return $plant;
     }
 
     /**
-     * @param $input
-     * @return array
+     * @param array $input
+     * @param $id
+     * @return Model|void
      */
-    private function firstOrCreateTaxonomy($input): array
+    public function update($input, $id)
     {
-        $taxonomy_input = [
-            'family_id' => $input['family_id'],
-            'genus_id' => $input['genus_id'] ?? null,
-            'species_id' => $input['species_id'] ?? null,
-            'subspecies_id' => $input['subspecies_id'] ?? null,
-            'variety_id' => $input['variety_id'] ?? null,
-            'name' => $input['name'] ?? null,
-        ];
-        //store taxonomy
-        $result = $this->taxonomy_model->firstOrCreate($taxonomy_input);
-        return [$taxonomy_input, $result->id];
+        [$taxonomy_input, $taxonomy_id] = $this->firstOrCreateTaxonomy($input);
+        $location_id = $this->firstOrCreateLocation($input);
+        $plant = $this->updatePlant($input, $id, $taxonomy_id, $location_id);
+        $this->syncPlantGeneralProperties($taxonomy_input, $plant);
+        $this->syncPlantTypeProperties($input, $plant);
+        $this->updateMedia($input, $plant);
+        return $plant;
     }
 
-    /**
-     * @param $input
-     * @return array
-     */
-    private function firstOrCreateLocation($input)
-    {
-        $location_input = [
-            'city_id' => $input['city_id'],
-            'region_name' => $input['region_name'] ?? null,
-            'address' => $input['address'] ?? null,
-            'village_id' => $input['village_id'] ?? null,
-            'min_altitude' => $input['min_altitude'] ?? null,
-            'max_altitude' => $input['max_altitude'] ?? null,
-            'point' => $input['point'] ?? null,
-//            'description' => $input['location_description'] ?? null,
-        ];
-
-        if ($location = $this->firstLocation($input)) {
-            return $location->id;
-        }
-        //store location
-        return $this->location_model->create($location_input)->id;
-    }
-
-    /**
-     * @param $input
-     * @return mixed
-     */
-    private function firstLocation($input)
-    {
-        $coordinate_string = implode(', ', [$input['point'][0], $input['point'][1]]);
-        $coordinate = new Coordinate($coordinate_string);
-        $p = new \Grimzy\LaravelMysqlSpatial\Types\Point($coordinate->getLatitude(), $coordinate->getLongitude());
-        return Location::where('address->fa', $input['address']['fa'])
-            ->where('address->en', $input['address']['en'])
-            ->when(!empty($input['region_name']['fa']), function ($query) use ($input) {
-                return $query->where('region_name->fa', $input['region_name']['fa']);
-            })
-            ->where('region_name->en', $input['region_name']['en'])
-            ->where('city_id', $input['city_id'])
-            ->where('village_id', $input['village_id'])
-            ->where('min_altitude', $input['min_altitude'])
-            ->where('max_altitude', $input['max_altitude'])
-            ->equals('point', $p)
-            ->first();
-    }
 
     /**
      * @param $input
@@ -191,20 +140,69 @@ class PlantHerbariumRepository extends BaseRepository
     }
 
     /**
-     * @param array $input
-     * @param $id
-     * @return Model|void
+     * @param $input
+     * @return array
      */
-    public function update($input, $id)
+    private function firstOrCreateTaxonomy($input): array
     {
-        [$taxonomy_input, $taxonomy_id] = $this->firstOrCreateTaxonomy($input);
-        $location_id = $this->firstOrCreateLocation($input);
-        $plant = $this->updatePlant($input, $id, $taxonomy_id, $location_id);
-//        $this->syncPlantGeneralProperties($taxonomy_input, $plant);
-//        $this->syncPlantTypeProperties($input, $plant);
-        $this->updateMedia($input, $plant);
-        return $plant;
+        $taxonomy_input = [
+            'family_id' => $input['family_id'],
+            'genus_id' => $input['genus_id'] ?? null,
+            'species_id' => $input['species_id'] ?? null,
+            'subspecies_id' => $input['subspecies_id'] ?? null,
+            'variety_id' => $input['variety_id'] ?? null,
+            'name' => $input['name'] ?? null,
+        ];
+        //store taxonomy
+        $result = $this->taxonomy_model->firstOrCreate($taxonomy_input);
+        return [$taxonomy_input, $result->id];
     }
+
+    /**
+     * @param $input
+     * @return array
+     */
+    private function firstOrCreateLocation($input): array
+    {
+        $location_input = [
+            'city_id' => $input['city_id'],
+            'region_name' => $input['region_name'] ?? null,
+            'address' => $input['address'] ?? null,
+            'village_id' => $input['village_id'] ?? null,
+            'min_altitude' => $input['min_altitude'] ?? null,
+            'max_altitude' => $input['max_altitude'] ?? null,
+            'point' => $input['point'] ?? null,
+            'description' => $input['location_description'] ?? null,
+        ];
+        //store location
+        return $this->location_model->firstOrCreate($location_input)->id;
+    }
+
+    /**
+     * @param array $taxonomy_input
+     * @param Model $plant
+     */
+    private function syncPlantGeneralProperties(array $taxonomy_input, Model $plant): void
+    {
+        $general_input = array_filter($taxonomy_input, function ($value, $key) {
+            return $value !== null; /*and $key !== 'type_description' and $key !== 'plant_id';*/
+        }, ARRAY_FILTER_USE_BOTH);
+
+        $plant->generals()->sync($taxonomy_input);
+    }
+
+    /**
+     * @param $input
+     * @param Model $plant
+     * @return mixed
+     */
+    private function syncPlantTypeProperties($input, Model $plant)
+    {
+        if (!empty($input['plant_types'])) {
+            $plant->generals()->sync($input['plant_types']);
+        }
+    }
+
 
     /**
      * @param $input
@@ -244,6 +242,7 @@ class PlantHerbariumRepository extends BaseRepository
         return parent::update($plant_input, $id);
     }
 
+
     /**
      * @param $input
      * @param $plant
@@ -264,31 +263,6 @@ class PlantHerbariumRepository extends BaseRepository
             $media_record->update($media_input);
         }
         $model->save();
-    }
-
-    /**
-     * @param array $taxonomy_input
-     * @param Model $plant
-     */
-    private function syncPlantGeneralProperties(array $taxonomy_input, Model $plant): void
-    {
-        $general_input = array_filter($taxonomy_input, function ($value, $key) {
-            return $value !== null; /*and $key !== 'type_description' and $key !== 'plant_id';*/
-        }, ARRAY_FILTER_USE_BOTH);
-
-        $plant->generals()->sync($taxonomy_input);
-    }
-
-    /**
-     * @param $input
-     * @param Model $plant
-     * @return mixed
-     */
-    private function syncPlantTypeProperties($input, Model $plant)
-    {
-        if (!empty($input['plant_types'])) {
-            $plant->generals()->sync($input['plant_types']);
-        }
     }
 
 }

@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Database\Seeder;
 use App\Models\Convert\Treeleaf;
 use App\Services\ConvertService;
-use Illuminate\Database\Seeder;
 
 class ConvertSeeder extends Seeder
 {
@@ -14,8 +14,9 @@ class ConvertSeeder extends Seeder
      */
     public function run(ConvertService $convertService)
     {
-        $treeLeafs = Treeleaf::get();
+        $treeLeafs = Treeleaf::all();
         foreach ($treeLeafs as $treeLeaf)
-            $convertService->treeleaf($treeLeaf)->handle();
+            if ($treeLeaf->hasVillage())
+                $convertService->treeLeaf($treeLeaf)->handle();
     }
 }

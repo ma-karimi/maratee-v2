@@ -174,8 +174,7 @@ class AuthController extends AppBaseController
      */
     public function register(UserRegisterRequest $request)
     {
-        $user = new User();
-        $user->fill([
+        $user = new User([
             'title' => $request->title,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,

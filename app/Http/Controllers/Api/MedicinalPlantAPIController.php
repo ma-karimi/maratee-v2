@@ -109,13 +109,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="general_origin_id",
-     *          in="body",
-     *          description="MedicinalPlant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
      *          name="aerial_part_id",
      *          in="body",
      *          description="from medicinal_parts where type=aerial",
@@ -154,13 +147,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *          name="general_phenology_id",
      *          in="body",
      *          description="from general",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_habitat_id",
-     *          in="body",
-     *          description="MedicinalPlant that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
@@ -439,20 +425,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="medicine_id",
-     *          in="body",
-     *          description="MedicinalPlant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_origin_id",
-     *          in="body",
-     *          description="MedicinalPlant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_habitat_id",
      *          in="body",
      *          description="MedicinalPlant that should be stored",
      *          required=false,
