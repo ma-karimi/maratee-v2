@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
+use App\Models\General;
 use App\Models\LifeForm;
 use App\Models\Plant;
 use InfyOm\Generator\Request\APIRequest;

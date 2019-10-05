@@ -23317,7 +23317,7 @@
                     {
                         "name": "features",
                         "in": "body",
-                        "description": "fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,\r\n     *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,\r\n     *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
+                        "description": "fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,\n     *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,\n     *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Soil"
@@ -23440,7 +23440,7 @@
                     {
                         "name": "features",
                         "in": "body",
-                        "description": "fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,\r\n     *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,\r\n     *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
+                        "description": "fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,\n     *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,\n     *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Soil"
