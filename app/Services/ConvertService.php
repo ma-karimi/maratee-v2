@@ -583,7 +583,7 @@ class ConvertService
             'actor_id' => $this->models['actor']['collect']['id'],
         ];
     }
-    
+
     private function hasDetect(): bool
     {
         $this->models['action']['detect'] = Action::where($this->detectConditions())->first();

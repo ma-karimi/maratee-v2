@@ -234,6 +234,7 @@ class MedicinalPlant extends BaseModel
         'location_id' => 'exists:locations,id',
         'aerial_part_id' => 'exists:medicinal_parts,id',
         'ground_part_id' => 'exists:medicinal_parts,id',
+        'treatment_id' => 'exists:treatments,id',
         'food_industry_id' => 'exists:medicinal_plant_types,id',
         'general_origin_id' => 'exists:medicinal_plant_types,id',
         'hygienic_cosmetic_industry_id' => 'exists:medicinal_plant_types,id',
@@ -318,13 +319,18 @@ class MedicinalPlant extends BaseModel
     {
         return $this->hasMany(MedicinalPlantConstituent::class)->latest();
     }
+//
+//    /**
+//     * @return MorphToMany
+//     */
+//    public function treatments(): MorphToMany
+//    {
+//        return $this->morphToMany(TreatmentHub::class, 'treamentable');
+//    }
 
-    /**
-     * @return MorphToMany
-     */
-    public function treatments(): MorphToMany
+    public function treatment()
     {
-        return $this->morphToMany(TreatmentHub::class, 'treamentable');
+        return $this->belongsTo(Treatment::class);
     }
 
     public function medicinalPlantType()
@@ -352,6 +358,7 @@ class MedicinalPlant extends BaseModel
     {
         return $this->belongsTo(Taxonomy::class);
     }
+
     /**
      * @return BelongsTo
      */
@@ -409,6 +416,7 @@ class MedicinalPlant extends BaseModel
         return $this->belongsTo(General::class, 'general_phenology_id'
         )->where('type', 'phenology');
     }
+
     public function origin()
     {
         return $this->belongsTo(General::class, 'general_origin_id'
