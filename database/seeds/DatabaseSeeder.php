@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         ini_set('memory_limit', '2000M');
 
         $this->call([
-           // ConvertSeeder::class,
+            ConvertSeeder::class,
             UserTableSeeder::class,
             ContinentTableSeeder::class,
             CountryTableSeeder::class,
