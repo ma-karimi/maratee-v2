@@ -709,8 +709,8 @@ class ConvertService
     private function detectorHubData(): array
     {
         return [
-            'actorable_type' => Location::class,
-            'actorable_id' => $this->models['location']['id'],
+            'actorable_type' => ActionHub::class,
+            'actorable_id' => $this->models['actionHub']['detect']['id'],
             'actor_id' => $this->models['actor']['detect']['id'],
         ];
     }
