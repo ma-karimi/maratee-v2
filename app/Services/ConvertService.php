@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Action;
+use App\Models\ActionHub;
 use App\Models\Actor;
 use App\Models\ActorHub;
 use App\Models\City;
@@ -18,6 +19,7 @@ use App\Models\Protection;
 use App\Models\Province;
 use App\Models\Taxonomy;
 use App\Models\Village;
+use Carbon\Carbon;
 
 class ConvertService
 {
@@ -124,6 +126,11 @@ class ConvertService
             $this->log('collect : actor id : ' . $this->models['actor']['collect']['id']);
 
             // collect hub
+            if (!$this->hasCollectHub())
+                $this->models['actionHub']['collect'] = ActionHub::create($this->collectHubData());
+            $this->log('collect : actionHub id : ' . $this->models['actionHub']['collect']['id']);
+
+            // collector hub
             if (!$this->hasCollectorHub())
                 $this->models['actorHub']['collect'] = ActorHub::create($this->collectorHubData());
             $this->log('collect : actorHub id : ' . $this->models['actorHub']['collect']['id']);
@@ -143,6 +150,11 @@ class ConvertService
                 $this->models['actor']['detect'] = Actor::create($this->detectorData());
             $this->log('detect : actor id : ' . $this->models['actor']['detect']['id']);
 
+            // collect hub
+            if (!$this->hasDetectHub())
+                $this->models['actionHub']['detect'] = ActionHub::create($this->detectHubData());
+            $this->log('detect : actionHub id : ' . $this->models['actionHub']['detect']['id']);
+
             // detect hub
             if (!$this->hasDetectorHub())
                 $this->models['actorHub']['detect'] = ActorHub::create($this->detectorHubData());
@@ -151,6 +163,7 @@ class ConvertService
         }
 
         $this->log(" - - - - end convert TreeLeaf id : {$this->id} - - - - ");
+
     }
 
     private function log(string $message)
@@ -560,6 +573,31 @@ class ConvertService
         ];
     }
 
+    private function hasCollectHub(): bool
+    {
+        $this->models['actionHub']['collect'] = ActionHub::where($this->collectHubConditions())->first();
+        return $this->models['actionHub']['collect'] instanceof ActionHub;
+    }
+
+    private function collectHubConditions(): array
+    {
+        return [
+            ['action_id', $this->models['action']['collect']['id']],
+            ['actionable_type', PlantHerbarium::class],
+            ['actionable_id', $this->models['plantHerbarium']['id']],
+        ];
+    }
+
+    private function collectHubData(): array
+    {
+        return [
+            'action_id' => $this->models['actor']['collect']['id'],
+            'actionable_type' => PlantHerbarium::class,
+            'actionable_id' => $this->models['plantHerbarium']['id'],
+            'date' => $this->gateringdate
+        ];
+    }
+
     private function hasCollectorHub(): bool
     {
         $this->models['actorHub']['collect'] = ActorHub::where($this->collectorHubConditions())->first();
@@ -569,8 +607,8 @@ class ConvertService
     private function collectorHubConditions(): array
     {
         return [
-            ['actorable_type', Location::class],
-            ['actorable_id', $this->models['location']['id']],
+            ['actorable_type', ActionHub::class],
+            ['actorable_id', $this->models['actionHub']['collect']['id']],
             ['actor_id', $this->models['actor']['collect']['id']],
         ];
     }
@@ -578,8 +616,8 @@ class ConvertService
     private function collectorHubData(): array
     {
         return [
-            'actorable_type' => Location::class,
-            'actorable_id' => $this->models['location']['id'],
+            'actorable_type' => ActionHub::class,
+            'actorable_id' => $this->models['actionHub']['collect']['id'],
             'actor_id' => $this->models['actor']['collect']['id'],
         ];
     }
@@ -628,6 +666,31 @@ class ConvertService
         ];
     }
 
+    private function hasDetectHub(): bool
+    {
+        $this->models['actionHub']['detect'] = ActionHub::where($this->detectHubConditions())->first();
+        return $this->models['actionHub']['detect'] instanceof ActionHub;
+    }
+
+    private function detectHubConditions(): array
+    {
+        return [
+            ['actionable_type', PlantHerbarium::class],
+            ['actionable_id', $this->models['plantHerbarium']['id']],
+            ['action_id', $this->models['action']['detect']['id']],
+        ];
+    }
+
+    private function detectHubData(): array
+    {
+        return [
+            'actionable_type' => PlantHerbarium::class,
+            'actionable_id' => $this->models['plantHerbarium']['id'],
+            'action_id' => $this->models['action']['detect']['id'],
+            'date' => $this->identifydate
+        ];
+    }
+
     private function hasDetectorHub(): bool
     {
         $this->models['actorHub']['detect'] = ActorHub::where($this->detectorHubConditions())->first();
@@ -637,8 +700,8 @@ class ConvertService
     private function detectorHubConditions(): array
     {
         return [
-            ['actorable_type', Location::class],
-            ['actorable_id', $this->models['location']['id']],
+            ['actorable_type', ActionHub::class],
+            ['actorable_id', $this->models['actionHub']['detect']['id']],
             ['actor_id', $this->models['actor']['detect']['id']],
         ];
     }
