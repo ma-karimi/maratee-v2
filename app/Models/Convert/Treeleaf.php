@@ -34,19 +34,31 @@ class Treeleaf extends BaseModel
     public function getVillageAttribute()
     {
         $village = $this->village();
-        return ['en' => trim($village->name), 'fa' => trim($village->othername)];
+        if (!empty($village->name))
+            $data['en'] = trim($village->name);
+        if (!empty($village->othername))
+            $data['fa'] = trim($village->othername);
+        return $data ?? null;
     }
 
     public function getCityConvertAttribute()
     {
         $city = $this->city();
-        return ['en' => trim($city->name), 'fa' => trim($city->othername)];
+        if (!empty($city->name))
+            $data['en'] = trim($city->name);
+        if (!empty($city->othername))
+            $data['fa'] = trim($city->othername);
+        return $data ?? null;
     }
 
     public function getProvinceAttribute()
     {
         $province = $this->province();
-        return ['en' => trim($province->name), 'fa' => trim($province->othername)];
+        if (!empty($province->name))
+            $data['en'] = trim($province->name);
+        if (!empty($province->othername))
+            $data['fa'] = trim($province->othername);
+        return $data ?? null;
     }
 
     public function getCountryAttribute()
