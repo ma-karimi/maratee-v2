@@ -6,17 +6,32 @@ use App\Services\ConvertService;
 
 class ConvertSeeder extends Seeder
 {
+    private $skip;
+    private $take;
+
+    /**
+     * ConvertSeeder constructor.
+     */
+    public function __construct($skip, $take)
+    {
+        $this->skip = $skip;
+        $this->take = $take;
+    }
+
     /**
      * Run the database seeds.
      *
      * @param ConvertService $convertService
      * @return void
      */
-    public function run(ConvertService $convertService)
+    public function run()
     {
-        $treeLeafs = Treeleaf::all();
+        $treeLeafs = Treeleaf::skip($this->skip)->take($this->take)->get();
+        \App\Models\Country::create([
+            'name' => $treeLeafs[0]['country']
+        ]);
         foreach ($treeLeafs as $treeLeaf)
             if ($treeLeaf->hasVillage())
-                $convertService->treeLeaf($treeLeaf)->handle();
+                (new ConvertService)->treeLeaf($treeLeaf)->handle();
     }
 }

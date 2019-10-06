@@ -20,7 +20,7 @@ class CreateOrganizationsTable extends Migration
             $table->tinyInteger('is_herbarium')->default(1)->comment('0:disable , 1:enable');
             $table->json('name');
             $table->json('description')->nullable();
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('fax')->nullable();
             $table->string('email', 45)->nullable();
             $table->string('website', 45)->nullable();

@@ -24,8 +24,8 @@ class CreateLocationsTable extends Migration {
             $table->integer('max_altitude')->nullable();
 			$table->point('point')->nullable();
 			$table->json('description')->nullable();
-/*	     	$table->string('gps_used')->nullable();
-			$table->string('gps_datum')->nullable();*/
+	     	$table->boolean('gps_used')->default(0);
+			$table->text('gps_datum')->nullable();
 
 
             $table->timeStampsTz();

@@ -15,18 +15,31 @@ class OriginalGeneralTableSeeder extends Seeder
 
     ];
     public $habitats = [
-        ['fa' => 'جنگل', 'en' => 'Forest'],
-        ['fa' => 'مناطق بیابانی', 'en' => 'Rangeland'],
-        ['fa' => 'تپه های شنی', 'en' => 'Sandy hills'],
-        ['fa' => 'مرتع', 'en' => 'Desert'],
+        ['en' => 'Forest'],
+        ['en' => 'Rangeland'],
+        ['en' => 'Sandy hills'],
+        ['en' => 'Desert'],
+        ['en' => 'Coastal area'],
+        ['en' => 'Field'],
+        ['en' => 'Garden'],
+        ['en' => 'Urban area'],
+        ['en' => 'Industrial area'],
+        ['en' => 'Protected or excluded areas'],
+
+    ];
+    public $growths = [
+        ['en' => 'Tree'],
+        ['en' => 'Shrub'],
+        ['en' => 'Subshrub'],
+        ['en' => 'Herbaceous']
 
     ];
     public $phenologies = [
-      ['en'=>'Vegetative stage'],
-      ['en'=>'Early flowering'],
-      ['en'=>'Full flowering'],
-      ['en'=>'immature seed'],
-      ['en'=>'ripe seed'],
+        ['en' => 'Vegetative stage'],
+        ['en' => 'Early flowering'],
+        ['en' => 'Full flowering'],
+        ['en' => 'immature seed'],
+        ['en' => 'ripe seed'],
 
     ];
     public $origins = [
@@ -124,7 +137,7 @@ class OriginalGeneralTableSeeder extends Seeder
 
         foreach ($this->getPhytogeographies() as $type) {
             General::create(
-                ['name' => ['fa'=>$type['fa'], 'en'=>$type['en']], 'type' => 'phytogeography']
+                ['name' => ['fa' => $type['fa'], 'en' => $type['en']], 'type' => 'phytogeography']
             );
         }
         foreach ($this->getOrigins() as $type) {
@@ -176,9 +189,9 @@ class OriginalGeneralTableSeeder extends Seeder
             $general = General::create(
                 ['name' => $type['name'], 'type' => $type['type']]
             );
-            foreach ($type['children'] as $chid){
+            foreach ($type['children'] as $chid) {
                 General::create(
-                    ['name' => $chid['name'], 'type' => $chid['type'], 'parent_id'=>$general->id]
+                    ['name' => $chid['name'], 'type' => $chid['type'], 'parent_id' => $general->id]
                 );
             }
         }

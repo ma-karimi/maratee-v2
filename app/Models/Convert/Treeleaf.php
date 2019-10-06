@@ -21,32 +21,44 @@ class Treeleaf extends BaseModel
         return $this->belongsTo(ConvertCity::class, 'city')->first();
     }
 
-    public function city()
-    {
-        return $this->village()->parent();
-    }
-
-    public function province()
-    {
-        return $this->city()->parent();
-    }
-
     public function getVillageAttribute()
     {
         $village = $this->village();
-        return ['en' => trim($village->name), 'fa' => trim($village->othername)];
+        if (!empty($village->name))
+            $data['en'] = trim($village->name);
+        if (!empty($village->othername))
+            $data['fa'] = trim($village->othername);
+        return $data ?? null;
     }
 
     public function getCityConvertAttribute()
     {
         $city = $this->city();
-        return ['en' => trim($city->name), 'fa' => trim($city->othername)];
+        if (!empty($city->name))
+            $data['en'] = trim($city->name);
+        if (!empty($city->othername))
+            $data['fa'] = trim($city->othername);
+        return $data ?? null;
+    }
+
+    public function city()
+    {
+        return $this->village()->parent();
     }
 
     public function getProvinceAttribute()
     {
         $province = $this->province();
-        return ['en' => trim($province->name), 'fa' => trim($province->othername)];
+        if (!empty($province->name))
+            $data['en'] = trim($province->name);
+        if (!empty($province->othername))
+            $data['fa'] = trim($province->othername);
+        return $data ?? null;
+    }
+
+    public function province()
+    {
+        return $this->city()->parent();
     }
 
     public function getCountryAttribute()
@@ -94,19 +106,13 @@ class Treeleaf extends BaseModel
         return 'DD';
     }
 
-    public function getCollectorsAttribute()
+    public function collect()
     {
-        if (empty($this->attributes['gatherer']))
-            return [];
-        $names = $this->belongsTo(Person::class, 'gatherer')->first()->name ?? null;
-        return explode('&', $names);
+        return $this->belongsTo(Person::class, 'gatherer');
     }
 
-    public function getDetectorsAttribute()
+    public function detect()
     {
-        if (empty($this->attributes['detector']))
-            return [];
-        $names = $this->belongsTo(Person::class, 'detector')->first()->name ?? null;
-        return explode('&', $names);
+        return $this->belongsTo(Person::class, 'detector');
     }
 }

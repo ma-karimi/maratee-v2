@@ -27,14 +27,12 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      @SWG\Property(
  *          property="name",
  *          description="name",
- *          type="array",
- *     @SWG\Items(type="string")
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
- *          type="array",
- *     @SWG\Items(type="string")
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="type",
