@@ -103,8 +103,6 @@ class Taxonomy extends BaseModel
      */
     protected $table = 'taxonomies';
 
-    protected $casts = ['name' => 'json'];
-
 
     /**
      * @return HasOne
