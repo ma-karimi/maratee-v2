@@ -7,93 +7,36 @@ class Treeleaf extends BaseModel
 {
     protected $table = 'treeleaf';
 
-    protected $appends = [
-        'village', 'cityConvert', 'province', 'country', 'organization', 'protection', 'collectors', 'detectors'
-    ];
-
-    public function hasVillage()
-    {
-        return !empty($this->city) && $this->village() instanceof ConvertCity;
-    }
+    protected $with = ['fam','gen','var','subspe','spe','village'];
 
     public function village()
     {
-        return $this->belongsTo(ConvertCity::class, 'city')->first();
+        return $this->belongsTo(ConvertCity::class, 'city');
     }
 
-    public function getVillageAttribute()
+    public function fam()
     {
-        $village = $this->village();
-        if (!empty($village->name))
-            $data['en'] = trim($village->name);
-        if (!empty($village->othername))
-            $data['fa'] = trim($village->othername);
-        return $data ?? null;
+        return $this->belongsTo(Taxonomytree::class,'family');
     }
 
-    public function getCityConvertAttribute()
+    public function gen()
     {
-        $city = $this->city();
-        if (!empty($city->name))
-            $data['en'] = trim($city->name);
-        if (!empty($city->othername))
-            $data['fa'] = trim($city->othername);
-        return $data ?? null;
+        return $this->belongsTo(Taxonomytree::class,'genus');
     }
 
-    public function city()
+    public function spe()
     {
-        return $this->village()->parent();
+        return $this->belongsTo(Taxonomytree::class,'species');
     }
 
-    public function getProvinceAttribute()
+    public function subspe()
     {
-        $province = $this->province();
-        if (!empty($province->name))
-            $data['en'] = trim($province->name);
-        if (!empty($province->othername))
-            $data['fa'] = trim($province->othername);
-        return $data ?? null;
+        return $this->belongsTo(Taxonomytree::class,'subspecies');
     }
 
-    public function province()
+    public function var()
     {
-        return $this->city()->parent();
-    }
-
-    public function getCountryAttribute()
-    {
-        return ['en' => 'Iran', 'fa' => 'ایران'];
-    }
-
-    public function getFamilyAttribute()
-    {
-        return Taxonomytree::find($this->attributes['family'])->name ?? null;
-//        return $this->belongsTo(Taxonomytree::class,'family')->first()->name ?? null;
-    }
-
-    public function getGenusAttribute()
-    {
-        return Taxonomytree::find($this->attributes['genus'])->name ?? null;
-//        return $this->belongsTo(Taxonomytree::class,'genus')->first()->name ?? null;
-    }
-
-    public function getSpeciesAttribute()
-    {
-        return Taxonomytree::find($this->attributes['species'])->name ?? null;
-//        return $this->belongsTo(Taxonomytree::class,'species')->first()->name ?? null;
-    }
-
-    public function getSubspeciesAttribute()
-    {
-        return Taxonomytree::find($this->attributes['subspecies'])->name ?? null;
-//        return $this->belongsTo(Taxonomytree::class,'subspecies')->first()->name ?? null;
-    }
-
-    public function getVarietyAttribute()
-    {
-        return Taxonomytree::find($this->attributes['variety'])->name ?? null;
-//        return $this->belongsTo(Taxonomytree::class,'variety')->first()->name ?? null;
+        return $this->belongsTo(Taxonomytree::class,'variety');
     }
 
     public function getOrganizationAttribute()

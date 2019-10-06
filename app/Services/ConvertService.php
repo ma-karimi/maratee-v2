@@ -41,25 +41,23 @@ class ConvertService
     {
 
         // province
-        if(!$this->province){
+
             $this->models['province'] = Province::where($this->provinceConditions())->first();
             if (!$this->models['province'])
                 $this->models['province'] = Province::create($this->provinceData());
-        }
+
 
         // city
-        if(!$this->city){
+        if(!empty($this->village)) {
             $this->models['city'] = City::where($this->cityConditions())->first();
             if (!$this->models['city'])
                 $this->models['city'] = City::create($this->cityData());
         }
 
         // village
-        if (!$this->village) {
-            $this->models['village'] = Village::where($this->villageConditions())->first();
-            if (!$this->models['village'])
-                $this->models['village'] = Village::create($this->villageData());
-        }
+        $this->models['village'] = Village::where($this->villageConditions())->first();
+        if (!$this->models['village'])
+            $this->models['village'] = Village::create($this->villageData());
 
         // location
         $this->models['location'] = Location::where($this->locationConditions())->first();
@@ -67,23 +65,24 @@ class ConvertService
             $this->models['location'] = Location::create($this->locationData());
 
         // family
+        if($this->treeLeaf->has('fam') && !empty($this->treeLeaf->fam->name))
         $this->models['general']['family'] = General::firstOrCreate($this->familyData());
 
         // genus
-        if (!empty($this->genus))
-            $this->models['general']['genus'] = General::firstOrCreate($this->genusData());
+        if($this->treeLeaf->has('gen') && !empty($this->treeLeaf->gen->name))
+        $this->models['general']['genus'] = General::firstOrCreate($this->genusData());
 
         // species
-        if (!empty($this->species))
-            $this->models['general']['species'] = General::firstOrCreate($this->speciesData());
+        if($this->treeLeaf->has('spe') && !empty($this->treeLeaf->spe->name))
+        $this->models['general']['species'] = General::firstOrCreate($this->speciesData());
 
         // subspecies
-        if (!empty($this->subspecies))
-            $this->models['general']['subspecies'] = General::firstOrCreate($this->subspeciesData());
+        if($this->treeLeaf->has('subspe') && !empty($this->treeLeaf->subspe->name))
+        $this->models['general']['subspecies'] = General::firstOrCreate($this->subspeciesData());
 
         // variety
-        if (!empty($this->variety))
-            $this->models['general']['variety'] = General::firstOrCreate($this->varietyData());
+        if($this->treeLeaf->has('var') && !empty($this->treeLeaf->var->name))
+        $this->models['general']['variety'] = General::firstOrCreate($this->varietyData());
 
         // taxonomy
         $this->models['taxonomy'] = Taxonomy::firstOrCreate($this->taxonomyData());
@@ -144,19 +143,17 @@ class ConvertService
     private function provinceConditions(): array
     {
         return [
-            ['name->en', $this->province['en']],
+            ['name->en', trim($this->village->parent->parent->name)],
         ];
-    }
-
-    private function hasProvince()
-    {
-        return $this->models['province'];
     }
 
     private function provinceData(): array
     {
         return [
-            'name' => $this->province,
+            'name' => [
+                'en'=> trim($this->village->parent->parent->name ?? ''),
+                'fa'=> trim($this->village->parent->parent->othername ?? ''),
+            ],
             'country_id' => 1
         ];
     }
@@ -164,19 +161,17 @@ class ConvertService
     private function cityConditions(): array
     {
         return [
-            ['name->en', $this->cityConvert['en']],
+            ['name->en', trim($this->village->parent->name)],
         ];
-    }
-
-    private function hasCity()
-    {
-        return $this->models['city'];
     }
 
     private function cityData(): array
     {
         return [
-            'name' => $this->cityConvert,
+            'name' => [
+                'en' => trim($this->village->parent->name),
+                'fa' => trim($this->village->parent->othername),
+            ],
             'province_id' => $this->models['province']['id']
         ];
     }
@@ -184,19 +179,17 @@ class ConvertService
     private function villageConditions(): array
     {
         return [
-            ['name->en', $this->village['en']],
+            ['name->en', trim($this->village->name)],
         ];
-    }
-
-    private function hasVillage()
-    {
-        return $this->models['village'];
     }
 
     private function villageData(): array
     {
         return [
-            'name' => $this->village
+            'name' => [
+                'en' => trim($this->village->name),
+                'fa' => trim($this->village->othername),
+            ]
         ];
     }
 
@@ -207,11 +200,6 @@ class ConvertService
             ['address->en', trim($this->addresse)],
             ['address->fa', trim($this->addressf)],
         ];
-    }
-
-    private function hasLocation()
-    {
-        return $this->models['location'];
     }
 
     private function locationData(): array
@@ -260,11 +248,6 @@ class ConvertService
         ];
     }
 
-    private function hasActorCollect()
-    {
-        return $this->models['actor']['collect'];
-    }
-
     private function ActorCollectData(): array
     {
         return [
@@ -281,11 +264,6 @@ class ConvertService
             ['actorable_id', $this->models['actionHub']['collect']['id']],
             ['actor_id', $this->models['actor']['collect']['id']],
         ];
-    }
-
-    private function hasActorHubCollect()
-    {
-        return $this->models['actorHub']['collect'];
     }
 
     private function actorHubCollectData(): array
@@ -314,11 +292,6 @@ class ConvertService
         ];
     }
 
-    private function hasActorDetect()
-    {
-        return $this->models['actor']['detect'];
-    }
-
     private function actorDetectData(): array
     {
         return [
@@ -341,7 +314,7 @@ class ConvertService
     {
         return [
             'type' => 'family',
-            'name' => trim($this->family)
+            'name' => $this->treeLeaf->fam->name ?? ''
         ];
     }
 
@@ -349,7 +322,7 @@ class ConvertService
     {
         return [
             'type' => 'genus',
-            'name' => trim($this->genus),
+            'name' => $this->treeLeaf->gen->name ?? '',
         ];
     }
 
@@ -357,7 +330,7 @@ class ConvertService
     {
         return [
             'type' => 'species',
-            'name' => trim($this->species),
+            'name' => $this->treeLeaf->spe->name ?? '',
         ];
     }
 
@@ -365,7 +338,7 @@ class ConvertService
     {
         return [
             'type' => 'sub_species',
-            'name' => trim($this->subspecies),
+            'name' => $this->treeLeaf->subspe->name ?? '',
         ];
     }
 
@@ -373,7 +346,7 @@ class ConvertService
     {
         return [
             'type' => 'variety',
-            'name' => trim($this->variety),
+            'name' => $this->treeLeaf->var->name ?? '',
         ];
     }
 
@@ -394,11 +367,6 @@ class ConvertService
         return [
             ['name->en', trim($this->organization)],
         ];
-    }
-
-    private function hasOrganization()
-    {
-        return $this->models['organization'];
     }
 
     private function organizationData(): array

@@ -62,15 +62,6 @@ class General extends BaseModel
         'parent_id' => 'integer',
     );
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'name' => 'json',
-        'description' => 'json',
-    ];
 //
 //    /**
 //     * @return HasMany

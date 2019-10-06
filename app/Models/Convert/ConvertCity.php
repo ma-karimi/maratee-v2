@@ -14,6 +14,7 @@ class ConvertCity extends BaseModel
 
     public function parent()
     {
-        return $this->belongsTo(self::class,'parentid')->first();
+        return $this->belongsTo(self::class,'parentid');
     }
+
 }
