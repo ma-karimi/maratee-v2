@@ -27,14 +27,12 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      @SWG\Property(
  *          property="name",
  *          description="name",
- *          type="array",
- *     @SWG\Items(type="string")
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
- *          type="array",
- *     @SWG\Items(type="string")
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="type",
@@ -58,21 +56,14 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class General extends BaseModel
 {
     use GeneralScope;
-    public static $linguistically = ['name' => true, 'description' => false];
     public static $rules = array(
         'type' => 'required|string',
+        'name' => 'required|string',
+        'description' => 'string',
         'parent_id' => 'integer',
     );
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'name' => 'json',
-        'description' => 'json',
-    ];
+
 //
 //    /**
 //     * @return HasMany

@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSeedsTable extends Migration
+class CreateSeedCollectionsTable extends Migration
 {
 
     /**
@@ -13,48 +13,50 @@ class CreateSeedsTable extends Migration
      */
     public function up()
     {
-        Schema::create('seeds', function (Blueprint $table) {
+        Schema::create('seed_collections', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('herbarium_id');
-            $table->unsignedBigInteger('collection_id');
-            $table->unsignedBigInteger('protection_id');
-            $table->string('field_code')->nullable();
-            $table->string('correct_field_code')->nullable();
-            $table->string('accession_code')->nullable();
             $table->string('voucher_no')->nullable();
-            $table->json('transmittance')->nullable();
-            $table->json('land_form')->nullable();
-            $table->json('slope_action')->nullable();
-            $table->json('landscape')->nullable();
-            $table->integer('slope_degree')->nullable();
-            $table->json('soil_depth')->nullable();
-            $table->json('soil_texture')->nullable();
-            $table->json('drainage')->nullable();
-            $table->json('soil_ph')->nullable();
-            $table->json('salinity')->nullable();
-            $table->json('lime')->nullable();
-            $table->json('climate')->nullable();
-            $table->json('community_type')->nullable();
-            $table->json('associated_species')->nullable();
-            $table->json('soil_erosion')->nullable();
+            $table->unsignedBigInteger('taxonomy_id');
+            $table->unsignedBigInteger('organization_id');
+            $table->unsignedBigInteger('department_id')->nullable();
+            $table->unsignedBigInteger('project_id')->nullable();
+            $table->json('accession_code')->nullable()->comment('encoded code by collector, corrected code by NRGB, accession released code by NRGB');
+            $table->string('encoded_code_by_collector')->nullable();
+            $table->string('corrected_code_by_nrgb')->nullable();
+            $table->string('accession_released_code_by_nrgb')->nullable();
+            $table->unsignedBigInteger('location_id');
+            $table->unsignedBigInteger('land_form_id')->nullable();
+            $table->unsignedBigInteger('slope_aspect')->nullable();
+            $table->string('slope_degree')->nullable();
+            $table->unsignedBigInteger('general_habitat_id')->nullable();
+            $table->unsignedBigInteger('soil_depth_id')->nullable();
+            $table->unsignedBigInteger('soil_texture_id')->nullable();
+            $table->unsignedBigInteger('drainage_id')->nullable();
+            $table->string('soil_ph')->nullable();
+            $table->unsignedBigInteger('soil_salinity_id')->nullable();
+            $table->unsignedBigInteger('soil_lime_id')->nullable();
+            $table->string('climate')->nullable();
+            $table->string('community_type')->nullable();
+            $table->unsignedBigInteger('soil_erosion_id')->nullable();
             $table->integer('area_sampled')->nullable();
-            $table->json('specimen_type')->nullable();
-            $table->string('date_flowering')->nullable();
-            $table->json('pollination_type')->nullable();
-            $table->json('pollination_agent')->nullable();
-            $table->json('fruit_type')->nullable();
-            $table->string('seed_collected_from')->nullable();
-            $table->string('date_harvesting')->nullable();
-            $table->string('life_span')->nullable();
-            $table->string('growth_form')->nullable();
-            $table->integer('plant_height')->nullable();
-            $table->json('mother_health')->nullable();
-            $table->unsignedBigInteger('department_id');
-            $table->unsignedBigInteger('herbarium_application_id');
-            $table->json('other_detail')->nullable();
             $table->integer('plants_sampled_no')->nullable();
-            $table->integer('plants_found_no')->nullable();
-            $table->json('seed_advise')->nullable();
+            $table->integer('approximate_area_of_plant')->nullable();
+            $table->unsignedBigInteger('specimen_type_id')->nullable();
+            $table->tinyInteger('flowering_time_id')->nullable();
+            $table->unsignedBigInteger('pollination_type_id')->nullable();
+            $table->unsignedBigInteger('pollination_agent_id')->nullable();
+            $table->unsignedBigInteger('fruit_type_id')->nullable();
+            $table->unsignedBigInteger('seed_collected_from_id')->nullable();
+            $table->tinyInteger('date_harvesting_id')->nullable();
+            $table->unsignedBigInteger('life_form_id')->nullable();
+            $table->unsignedBigInteger('growth_form_id')->nullable();
+            $table->integer('plant_height')->nullable();
+            $table->unsignedBigInteger('plant_mother_health_id')->nullable();
+            $table->unsignedBigInteger('plant_consumption_value_id');
+            $table->unsignedBigInteger('general_used_part_id');
+            $table->string('how_to_use')->nullable();
+            $table->string('other_details')->nullable();
+            $table->string('special_advise')->nullable();
             $table->timeStampsTz();
             $table->softDeletesTz();
         });
@@ -68,7 +70,7 @@ class CreateSeedsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('seeds');
+        Schema::drop('seed_collections');
     }
 
 }

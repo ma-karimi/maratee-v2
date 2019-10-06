@@ -35,7 +35,7 @@ if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >
             $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('organization_id');
             $table->unsignedBigInteger('taxonomy_id');
-            $table->unsignedBigInteger('protection_id');
+            $table->unsignedBigInteger('protection_id')->nullable();
             $table->unsignedBigInteger('general_ecology_id')->nullable();
             $table->unsignedBigInteger('general_habitat_id')->nullable();
             $table->unsignedBigInteger('general_origin_id')->nullable();
