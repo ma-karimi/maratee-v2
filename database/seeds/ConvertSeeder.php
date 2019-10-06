@@ -27,6 +27,13 @@ class ConvertSeeder extends Seeder
     public function run()
     {
         $treeLeafs = Treeleaf::skip($this->skip)->take($this->take)->get();
+        \App\Models\Country::create([
+            'name' => $treeLeafs[0]['country']
+        ]);
+        \App\Models\Action::insert([
+            ['name'=>'detect'],
+            ['name'=>'collect'],
+        ]);
         foreach ($treeLeafs as $treeLeaf)
             if ($treeLeaf->hasVillage())
                 (new ConvertService)->treeLeaf($treeLeaf)->handle();

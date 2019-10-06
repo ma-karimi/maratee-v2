@@ -9,7 +9,6 @@ use App\Models\Actor;
 use App\Models\ActorHub;
 use App\Models\City;
 use App\Models\Convert\Treeleaf;
-use App\Models\Country;
 use App\Models\General;
 use App\Models\Location;
 use App\Models\Organization;
@@ -41,11 +40,6 @@ class ConvertService
 
     public function handle()
     {
-
-        // country
-        $this->models['country'] = Country::where($this->countryConditions())->first();
-        if (!$this->hasCountry())
-            $this->models['country'] = Country::create($this->countryData());
 
         // province
         $this->models['province'] = Province::where($this->provinceConditions())->first();
@@ -151,26 +145,6 @@ class ConvertService
         echo "$message\n";
     }
 
-    private function hasCountry(): bool
-    {
-        return $this->models['country'];
-    }
-
-    private function countryConditions(): array
-    {
-        return [
-            ['name->en', $this->country['en']],
-            ['name->fa', $this->country['fa']],
-        ];
-    }
-
-    private function countryData()
-    {
-        return [
-            'name' => $this->country
-        ];
-    }
-
     private function hasProvince(): bool
     {
         return $this->models['province'];
@@ -187,7 +161,7 @@ class ConvertService
     {
         return [
             'name' => $this->province,
-            'country_id' => $this->models['country']['id']
+            'country_id' => 1
         ];
     }
 
