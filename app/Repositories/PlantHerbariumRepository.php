@@ -9,6 +9,7 @@ use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class PlantRepository
@@ -243,7 +244,7 @@ class PlantHerbariumRepository extends BaseRepository
 
     /**
      * @param $input
-     * @param $plant
+     * @param $model
      */
     private function updateMedia($input, $model): void
     {

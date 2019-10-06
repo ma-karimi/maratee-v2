@@ -121,6 +121,7 @@ class Media extends BaseMedia
 
     public static $jsons = [];
     public static $messages = [];
+    protected $appends=['full_url'];
 
     public const MEDIA_TYPE = [1 => 'sketch', 2 => 'picture'];
     public static $linguistically = ['description' => false, 'reference' => false];
