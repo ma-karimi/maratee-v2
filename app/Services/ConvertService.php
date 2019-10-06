@@ -116,19 +116,19 @@ class ConvertService
         $this->models['general']['family'] = General::firstOrCreate($this->familyData());
 
         // genus
-        if(!empty($this->genus))
+        if (!empty($this->genus))
             $this->models['general']['genus'] = General::firstOrCreate($this->genusData());
 
         // species
-        if(!empty($this->species))
+        if (!empty($this->species))
             $this->models['general']['species'] = General::firstOrCreate($this->speciesData());
 
         // subspecies
-        if(!empty($this->subspecies))
+        if (!empty($this->subspecies))
             $this->models['general']['subspecies'] = General::firstOrCreate($this->subspeciesData());
 
         // variety
-        if(!empty($this->variety))
+        if (!empty($this->variety))
             $this->models['general']['variety'] = General::firstOrCreate($this->varietyData());
 
         // taxonomy
@@ -457,8 +457,12 @@ class ConvertService
     private function taxonomyData(): array
     {
         return [
-            'name' => $this->name,
-            'family_id' => $this->models['general']['family']
+            'name' => $this->name ?? null,
+            'family_id' => $this->models['general']['family']['id'],
+            'genus_id' => $this->models['general']['genus']['id'] ?? null,
+            'species_id' => $this->models['general']['species']['id'] ?? null,
+            'subspecies_id' => $this->models['general']['subspecies']['id'] ?? null,
+            'variety_id' => $this->models['general']['variety']['id'] ?? null,
         ];
     }
 
