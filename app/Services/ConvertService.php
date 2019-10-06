@@ -20,12 +20,11 @@ use App\Models\Village;
 class ConvertService
 {
 
-    private $treeLeaf;
-    private $models = [];
     private CONST ACTION = [
         'detect' => 1, 'collect' => 2
     ];
-
+    private $treeLeaf;
+    private $models = [];
 
     public function __get($name)
     {
@@ -42,69 +41,30 @@ class ConvertService
     {
 
         // province
-        $this->models['province'] = Province::where($this->provinceConditions())->first();
-        if (!$this->hasProvince())
-            $this->models['province'] = Province::create($this->provinceData());
+        if(!$this->province){
+            $this->models['province'] = Province::where($this->provinceConditions())->first();
+            if (!$this->models['province'])
+                $this->models['province'] = Province::create($this->provinceData());
+        }
 
         // city
-        $this->models['city'] = City::where($this->cityConditions())->first();
-        if (!$this->hasCity())
-            $this->models['city'] = City::create($this->cityData());
+        if(!$this->city){
+            $this->models['city'] = City::where($this->cityConditions())->first();
+            if (!$this->models['city'])
+                $this->models['city'] = City::create($this->cityData());
+        }
 
         // village
-        $this->models['village'] = Village::where($this->villageConditions())->first();
-        if (!$this->hasVillage())
-            $this->models['village'] = Village::create($this->villageData());
+        if (!$this->village) {
+            $this->models['village'] = Village::where($this->villageConditions())->first();
+            if (!$this->models['village'])
+                $this->models['village'] = Village::create($this->villageData());
+        }
 
         // location
         $this->models['location'] = Location::where($this->locationConditions())->first();
-        if (!$this->hasLocation())
+        if (!$this->models['location'])
             $this->models['location'] = Location::create($this->locationData());
-
-
-        if (!empty($this->gatherer)) {
-
-            // action hub collect
-            $this->models['actionHub']['collect'] = ActionHub::create($this->actionHubCollectData());
-
-            foreach ($this->collectors as $collector) {
-
-                $this->treeLeaf['collector'] = $collector;
-
-                // collector
-                $this->models['actor']['collect'] = Actor::where($this->ActorCollectConditions())->first();
-                if (!$this->hasActorCollect())
-                    $this->models['actor']['collect'] = Actor::create($this->ActorCollectData());
-
-                // actor hub collect
-                $this->models['actorHub']['collect'] = ActorHub::where($this->actorHubCollectConditions())->first();
-                if (!$this->hasActorHubCollect())
-                    $this->models['actorHub']['collect'] = ActorHub::create($this->actorHubCollectData());
-
-            }
-        }
-
-        // action hub detect
-        if (!empty($this->detector)) {
-
-            $this->models['actionHub']['detect'] = ActionHub::create($this->actionHubDetectData());
-
-            foreach ($this->detectors as $detector) {
-
-                $this->treeLeaf['detector'] = $detector;
-
-                // detector
-                $this->models['actor']['detect'] = Actor::where($this->actorDetectConditions())->first();
-                if (!$this->hasActorDetect())
-                    $this->models['actor']['detect'] = Actor::create($this->actorDetectData());
-
-                // detect hub
-                $this->models['actorHub']['detect'] = ActorHub::where($this->actorHubDetectConditions())->first();
-                if (!$this->hasActorHubDetect())
-                    $this->models['actorHub']['detect'] = ActorHub::create($this->actorHubDetectData());
-
-            }
-        }
 
         // family
         $this->models['general']['family'] = General::firstOrCreate($this->familyData());
@@ -130,24 +90,55 @@ class ConvertService
 
         // organization
         $this->models['organization'] = Organization::where($this->organizationConditions())->first();
-        if (!$this->hasOrganization())
+        if (!$this->models['organization'])
             $this->models['organization'] = Organization::create($this->organizationData());
 
         // plant herbarium
         $this->models['plantHerbarium'] = PlantHerbarium::create($this->plantHerbariumData());
 
+        if ($this->collect) {
+            $collectors = explode('&', $this->collect->name);
+            // action hub collect
+            $this->models['actionHub']['collect'] = ActionHub::create($this->actionHubCollectData());
+
+            foreach ($collectors as $collector) {
+
+                $this->treeLeaf['collector'] = $collector;
+
+                // collector
+                $this->models['actor']['collect'] = Actor::where($this->ActorCollectConditions())->first();
+                if (!$this->models['actor']['collect'])
+                    $this->models['actor']['collect'] = Actor::create($this->ActorCollectData());
+
+                // actor hub collect
+                $this->models['actorHub']['collect'] = ActorHub::create($this->actorHubCollectData());
+
+            }
+        }
+
+        // action hub detect
+        if ($this->detect) {
+            $detectors = explode('&', $this->detect->name);
+
+            $this->models['actionHub']['detect'] = ActionHub::create($this->actionHubDetectData());
+
+            foreach ($detectors as $detector) {
+
+                $this->treeLeaf['detector'] = $detector;
+
+                // detector
+                $this->models['actor']['detect'] = Actor::where($this->actorDetectConditions())->first();
+                if (!$this->models['actor']['detect'])
+                    $this->models['actor']['detect'] = Actor::create($this->actorDetectData());
+
+                // detect hub
+                $this->models['actorHub']['detect'] = ActorHub::create($this->actorHubDetectData());
+
+            }
+        }
+
         $this->log(" - - - - end convert TreeLeaf id : {$this->id} - - - - ");
 
-    }
-
-    private function log(string $message)
-    {
-        echo "$message\n";
-    }
-
-    private function hasProvince(): bool
-    {
-        return $this->models['province'];
     }
 
     private function provinceConditions(): array
@@ -155,6 +146,11 @@ class ConvertService
         return [
             ['name->en', $this->province['en']],
         ];
+    }
+
+    private function hasProvince()
+    {
+        return $this->models['province'];
     }
 
     private function provinceData(): array
@@ -165,16 +161,16 @@ class ConvertService
         ];
     }
 
-    private function hasCity(): bool
-    {
-        return $this->models['city'];
-    }
-
     private function cityConditions(): array
     {
         return [
             ['name->en', $this->cityConvert['en']],
         ];
+    }
+
+    private function hasCity()
+    {
+        return $this->models['city'];
     }
 
     private function cityData(): array
@@ -185,16 +181,16 @@ class ConvertService
         ];
     }
 
-    private function hasVillage(): bool
-    {
-        return $this->models['village'];
-    }
-
     private function villageConditions(): array
     {
         return [
             ['name->en', $this->village['en']],
         ];
+    }
+
+    private function hasVillage()
+    {
+        return $this->models['village'];
     }
 
     private function villageData(): array
@@ -204,11 +200,6 @@ class ConvertService
         ];
     }
 
-    private function hasLocation(): bool
-    {
-        return $this->models['location'];
-    }
-
     private function locationConditions(): array
     {
         return [
@@ -216,6 +207,11 @@ class ConvertService
             ['address->en', trim($this->addresse)],
             ['address->fa', trim($this->addressf)],
         ];
+    }
+
+    private function hasLocation()
+    {
+        return $this->models['location'];
     }
 
     private function locationData(): array
@@ -235,7 +231,7 @@ class ConvertService
         return $data;
     }
 
-    private function hasPoint(): bool
+    private function hasPoint()
     {
         return strlen($this->latitude) && strlen($this->longitude);
     }
@@ -244,60 +240,6 @@ class ConvertService
     {
         return [
             $this->latitude, $this->longitude
-        ];
-    }
-
-    private function hasOrganization(): bool
-    {
-        return $this->models['organization'];
-    }
-
-    private function organizationConditions(): array
-    {
-        return [
-            ['name->en', trim($this->organization)],
-        ];
-    }
-
-    private function organizationData(): array
-    {
-        return [
-            'name' => [
-                'en' => trim($this->organization),
-            ],
-        ];
-    }
-
-    private function plantHerbariumData(): array
-    {
-        return [
-            'herbarium_number' => $this->herbariumnumber,
-            'cf' => $this->cf,
-            'is_flowering' => 0,
-            'location_id' => $this->models['location']['id'],
-            'organization_id' => $this->models['organization']['id'],
-            'taxonomy_id' => $this->models['taxonomy']['id'],
-        ];
-    }
-
-    private function hasActorCollect(): bool
-    {
-        return $this->models['actor']['collect'];
-    }
-
-    private function ActorCollectConditions(): array
-    {
-        return [
-            ['name->en', $this->collector],
-        ];
-    }
-
-    private function ActorCollectData(): array
-    {
-        return [
-            'name' => [
-                'en' => $this->collector,
-            ],
         ];
     }
 
@@ -311,9 +253,25 @@ class ConvertService
         ];
     }
 
-    private function hasActorHubCollect(): bool
+    private function ActorCollectConditions(): array
     {
-        return $this->models['actorHub']['collect'];
+        return [
+            ['name->en', $this->collector],
+        ];
+    }
+
+    private function hasActorCollect()
+    {
+        return $this->models['actor']['collect'];
+    }
+
+    private function ActorCollectData(): array
+    {
+        return [
+            'name' => [
+                'en' => $this->collector,
+            ],
+        ];
     }
 
     private function actorHubCollectConditions(): array
@@ -325,33 +283,17 @@ class ConvertService
         ];
     }
 
+    private function hasActorHubCollect()
+    {
+        return $this->models['actorHub']['collect'];
+    }
+
     private function actorHubCollectData(): array
     {
         return [
             'actorable_type' => ActionHub::class,
             'actorable_id' => $this->models['actionHub']['collect']['id'],
             'actor_id' => $this->models['actor']['collect']['id'],
-        ];
-    }
-
-    private function hasActorDetect(): bool
-    {
-        return $this->models['actor']['detect'];
-    }
-
-    private function actorDetectConditions(): array
-    {
-        return [
-            ['name->en', $this->detector],
-        ];
-    }
-
-    private function actorDetectData(): array
-    {
-        return [
-            'name' => [
-                'en' => $this->detector,
-            ],
         ];
     }
 
@@ -365,17 +307,24 @@ class ConvertService
         ];
     }
 
-    private function hasActorHubDetect(): bool
-    {
-        return $this->detector && $this->models['actorHub']['detect'];
-    }
-
-    private function actorHubDetectConditions(): array
+    private function actorDetectConditions(): array
     {
         return [
-            ['actorable_type', ActionHub::class],
-            ['actorable_id', $this->models['actionHub']['detect']['id']],
-            ['actor_id', $this->models['actor']['detect']['id']],
+            ['name->en', $this->detector],
+        ];
+    }
+
+    private function hasActorDetect()
+    {
+        return $this->models['actor']['detect'];
+    }
+
+    private function actorDetectData(): array
+    {
+        return [
+            'name' => [
+                'en' => $this->detector,
+            ],
         ];
     }
 
@@ -438,6 +387,44 @@ class ConvertService
             'subspecies_id' => $this->models['general']['subspecies']['id'] ?? null,
             'variety_id' => $this->models['general']['variety']['id'] ?? null,
         ];
+    }
+
+    private function organizationConditions(): array
+    {
+        return [
+            ['name->en', trim($this->organization)],
+        ];
+    }
+
+    private function hasOrganization()
+    {
+        return $this->models['organization'];
+    }
+
+    private function organizationData(): array
+    {
+        return [
+            'name' => [
+                'en' => trim($this->organization),
+            ],
+        ];
+    }
+
+    private function plantHerbariumData(): array
+    {
+        return [
+            'herbarium_number' => $this->herbariumnumber,
+            'cf' => $this->cf,
+            'is_flowering' => 0,
+            'location_id' => $this->models['location']['id'],
+            'organization_id' => $this->models['organization']['id'],
+            'taxonomy_id' => $this->models['taxonomy']['id'],
+        ];
+    }
+
+    private function log(string $message)
+    {
+        echo "$message\n";
     }
 
 }

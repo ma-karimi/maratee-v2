@@ -21,16 +21,6 @@ class Treeleaf extends BaseModel
         return $this->belongsTo(ConvertCity::class, 'city')->first();
     }
 
-    public function city()
-    {
-        return $this->village()->parent();
-    }
-
-    public function province()
-    {
-        return $this->city()->parent();
-    }
-
     public function getVillageAttribute()
     {
         $village = $this->village();
@@ -51,6 +41,11 @@ class Treeleaf extends BaseModel
         return $data ?? null;
     }
 
+    public function city()
+    {
+        return $this->village()->parent();
+    }
+
     public function getProvinceAttribute()
     {
         $province = $this->province();
@@ -59,6 +54,11 @@ class Treeleaf extends BaseModel
         if (!empty($province->othername))
             $data['fa'] = trim($province->othername);
         return $data ?? null;
+    }
+
+    public function province()
+    {
+        return $this->city()->parent();
     }
 
     public function getCountryAttribute()
@@ -106,19 +106,13 @@ class Treeleaf extends BaseModel
         return 'DD';
     }
 
-    public function getCollectorsAttribute()
+    public function collect()
     {
-        if (empty($this->attributes['gatherer']))
-            return [];
-        $names = $this->belongsTo(Person::class, 'gatherer')->first()->name ?? null;
-        return explode('&', $names);
+        return $this->belongsTo(Person::class, 'gatherer');
     }
 
-    public function getDetectorsAttribute()
+    public function detect()
     {
-        if (empty($this->attributes['detector']))
-            return [];
-        $names = $this->belongsTo(Person::class, 'detector')->first()->name ?? null;
-        return explode('&', $names);
+        return $this->belongsTo(Person::class, 'detector');
     }
 }
