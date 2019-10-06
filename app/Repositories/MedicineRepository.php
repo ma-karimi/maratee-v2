@@ -51,7 +51,7 @@ class MedicineRepository extends BaseRepository
         ];
 
         $model_input = collect($input)->except(array_keys($media_input))->toArray();
-        $model_input['description']=$input['description'];
+        $model_input['description']=$input['description']??null;
         unset($model_input['file']);
         $model = parent::update($model_input, $id);
         //store media
