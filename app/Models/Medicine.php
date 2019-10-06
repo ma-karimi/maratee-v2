@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -53,8 +55,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      )
  * )
  */
-class Medicine extends BaseModel
+class Medicine extends BaseModel implements HasMedia
 {
+    use HasMediaTrait;
     public static $linguistically = ['name' => true, 'description' => false];
     public static $rules = [
         'type' => 'required|string',

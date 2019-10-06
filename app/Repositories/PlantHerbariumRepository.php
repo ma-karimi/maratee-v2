@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\ActionHub;
 use App\Models\Location;
 use App\Models\PlantHerbarium;
 use App\Models\Taxonomy;
@@ -77,8 +76,8 @@ class PlantHerbariumRepository extends BaseRepository
     public function create($input)
     {
         [$taxonomy_input, $taxonomy_id] = $this->firstOrCreateTaxonomy($input);
-        $location_id = $this->firstOrCreateLocation($input);
-        $plant = $this->createPlantHerbarium($input, $taxonomy_id, $location_id);
+        $location = $this->firstOrCreateLocation($input);
+        $plant = $this->createPlantHerbarium($input, $taxonomy_id, $location->id);
         $this->syncPlantGeneralProperties($taxonomy_input, $plant);
         $this->syncPlantTypeProperties($input, $plant);
         return $plant;
@@ -92,8 +91,8 @@ class PlantHerbariumRepository extends BaseRepository
     public function update($input, $id)
     {
         [$taxonomy_input, $taxonomy_id] = $this->firstOrCreateTaxonomy($input);
-        $location_id = $this->firstOrCreateLocation($input);
-        $plant = $this->updatePlant($input, $id, $taxonomy_id, $location_id);
+        $location = $this->firstOrCreateLocation($input);
+        $plant = $this->updatePlant($input, $id, $taxonomy_id, $location->id);
         $this->syncPlantGeneralProperties($taxonomy_input, $plant);
         $this->syncPlantTypeProperties($input, $plant);
         $this->updateMedia($input, $plant);
@@ -160,9 +159,9 @@ class PlantHerbariumRepository extends BaseRepository
 
     /**
      * @param $input
-     * @return array
+     * @return object
      */
-    private function firstOrCreateLocation($input): array
+    private function firstOrCreateLocation($input)
     {
         $location_input = [
             'city_id' => $input['city_id'],
@@ -175,7 +174,7 @@ class PlantHerbariumRepository extends BaseRepository
             'description' => $input['location_description'] ?? null,
         ];
         //store location
-        return $this->location_model->firstOrCreate($location_input)->id;
+        return $this->location_model->firstOrCreate($location_input);
     }
 
     /**
@@ -185,10 +184,9 @@ class PlantHerbariumRepository extends BaseRepository
     private function syncPlantGeneralProperties(array $taxonomy_input, Model $plant): void
     {
         $general_input = array_filter($taxonomy_input, function ($value, $key) {
-            return $value !== null; /*and $key !== 'type_description' and $key !== 'plant_id';*/
+            return $value !== null and $key !== 'name';/* and $key !== 'plant_id';*/
         }, ARRAY_FILTER_USE_BOTH);
-
-        $plant->generals()->sync($taxonomy_input);
+        $plant->generals()->sync($general_input);
     }
 
     /**

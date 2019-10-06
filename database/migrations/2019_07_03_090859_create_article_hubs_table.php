@@ -16,7 +16,7 @@ class CreateArticleHubsTable extends Migration {
 		{
 		    $table->bigIncrements('id');
 		    $table->unsignedBigInteger('article_id');
-		    //cryo_bank, media, action_hub, plants, chromosome, medicinal_plant, paleontology
+		    //cryo_bank, media, action_hub, plant_herbarium, chromosome, medicinal_plant, paleontology
 		    $table->morphs('articleable');
 
             $table->timeStampsTz();

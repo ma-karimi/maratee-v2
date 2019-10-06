@@ -15,7 +15,6 @@ use Response;
  * Class ActionController
  * @package App\Http\Controllers\Api
  */
-
 class ActionAPIController extends AppBaseController
 {
     /** @var  ActionRepository */
