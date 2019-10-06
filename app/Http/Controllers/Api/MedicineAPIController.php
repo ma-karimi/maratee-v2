@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+
 use App\Http\Requests\Api\CreateMedicineAPIRequest;
 use App\Http\Requests\Api\UpdateMedicineAPIRequest;
 use App\Models\Medicine;
 use App\Repositories\MedicineRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
-use Response;
+
 
 /**
  * Class MedicineController
@@ -56,6 +57,7 @@ class MedicineAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
