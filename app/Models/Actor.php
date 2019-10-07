@@ -8,8 +8,7 @@ use App\Models\Contracts\BaseModel;
  * @SWG\Definition(
  *            definition="Actor",
  *            required={"name"},
- * 			@SWG\Property(property="name", type="array",
- *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="name", type="string"),
  * 			@SWG\Property(property="user_id", type="integer"),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
@@ -17,7 +16,7 @@ use App\Models\Contracts\BaseModel;
  **/
 class Actor extends BaseModel
 {
-    public static $linguistically = ['name' => true];
+   // public static $linguistically = ['name' => true];
     public static $rules = [
         'user_id' => 'integer|exists:users,id',
     ];
@@ -32,7 +31,7 @@ class Actor extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['name' => 'json'];
+   // protected $casts = ['name' => 'json'];
 
 
     /**

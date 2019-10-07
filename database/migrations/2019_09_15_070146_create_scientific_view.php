@@ -24,10 +24,10 @@ FROM (
 
     SELECT 
     taxonomy_id,
-    json_unquote(json_extract(genus_name,'$.en')) genus_name_en,
-    json_unquote(json_extract(species_name,'$.en')) species_name_en,
-    json_unquote(json_extract(subspecies_name,'$.en')) subspecies_name_en,
-    json_unquote(json_extract(variety_name,'$.en')) variety_name_en
+    genus_name as  genus_name_en,
+    species_name as species_name_en,
+    subspecies_name as subspecies_name_en,
+    variety_name as variety_name_en
 
     FROM (
         SELECT
