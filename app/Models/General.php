@@ -56,7 +56,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class General extends BaseModel
 {
     use GeneralScope;
-    public static $linguistically = ['name' => true, 'description' => false];
     public static $rules = array(
         'type' => 'required|string',
         'parent_id' => 'integer',

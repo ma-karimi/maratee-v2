@@ -102,27 +102,27 @@ class OriginalGeneralTableSeeder extends Seeder
         ['en' => 'Equisetum'],
     ];
     public $substrates = [
-        ['name' => ['fa' => 'بستر گیاه- گلسنگ', 'en' => 'lichen'], 'type' => 'lichen',
+        ['name' =>  'lichen', 'type' => 'lichen',
             'children' => [
-                ['name' => ['fa' => 'درخت', 'en' => 'Tree'], 'type' => 'substrate'],
-                ['name' => ['fa' => 'چوب', 'en' => 'Wood'], 'type' => 'substrate'],
-                ['name' => ['fa' => 'سنگ', 'en' => 'Stone'], 'type' => 'substrate'],
-                ['name' => ['fa' => 'صخره', 'en' => 'Rock'], 'type' => 'substrate'],
-                ['name' => ['fa' => 'خاک', 'en' => 'Soil'], 'type' => 'substrate'],
-                ['name' => ['fa' => 'خزه', 'en' => 'Moss'], 'type' => 'substrate'],
-                ['name' => ['fa' => 'ابنیه', 'en' => 'Building'], 'type' => 'substrate'],
+                ['name' => 'Tree', 'type' => 'substrate'],
+                ['name' => 'Wood', 'type' => 'substrate'],
+                ['name' => 'Stone', 'type' => 'substrate'],
+                ['name' => 'Rock', 'type' => 'substrate'],
+                ['name' => 'Soil', 'type' => 'substrate'],
+                ['name' => 'Moss', 'type' => 'substrate'],
+                ['name' => 'Building', 'type' => 'substrate'],
             ]
         ],
-        ['name' => ['fa' => 'بستر گیاه- خزه', 'en' => 'Moss'], 'type' => 'moss',
+        ['name' =>  'Moss', 'type' => 'moss',
             'children' => [
-                ['name' => ['fa' => 'درخت', 'en' => 'Tree'], 'type' => 'substrate'],
-                ['name' => ['fa' => 'خاک', 'en' => 'Soil'], 'type' => 'substrate'],
+                ['name'  => 'Tree', 'type' => 'substrate'],
+                ['name' => 'Soil', 'type' => 'substrate'],
             ]
         ],
-        ['name' => ['fa' => 'زیستگاه جلبک- دیاتومه', 'en' => 'Diatom'], 'type' => 'diatom',
+        ['name' =>  'Diatom', 'type' => 'diatom',
             'children' => [
-                ['name' => ['fa' => 'اب شیرین', 'en' => 'Sweet water'], 'type' => 'substrate'],
-                ['name' => ['fa' => 'اب شور', 'en' => 'Salty water'], 'type' => 'substrate'],
+                ['name' => 'Sweet water', 'type' => 'substrate'],
+                ['name' => 'Salty water', 'type' => 'substrate'],
             ]
         ]
     ];
@@ -137,52 +137,52 @@ class OriginalGeneralTableSeeder extends Seeder
 
         foreach ($this->getPhytogeographies() as $type) {
             General::create(
-                ['name' => ['fa' => $type['fa'], 'en' => $type['en']], 'type' => 'phytogeography']
+                ['name' => $type['en'], 'type' => 'phytogeography']
             );
         }
         foreach ($this->getOrigins() as $type) {
             General::create(
-                ['name' => $type, 'type' => 'origin']
+                ['name' => $type['en'], 'type' => 'origin']
             );
         }
         foreach ($this->getHabitats() as $type) {
             General::create(
-                ['name' => $type, 'type' => 'habitat']
+                ['name' => $type['en'], 'type' => 'habitat']
             );
         }
         foreach ($this->classes as $type) {
             General::create(
-                ['name' => $type, 'type' => 'class']
+                ['name' => $type['en'], 'type' => 'class']
             );
         }
         foreach ($this->plant_types as $type) {
             General::create(
-                ['name' => $type, 'type' => 'plant_type']
+                ['name' => $type['en'], 'type' => 'plant_type']
             );
         }
         foreach ($this->phenologies as $type) {
             General::create(
-                ['name' => $type, 'type' => 'phenology']
+                ['name' => $type['en'], 'type' => 'phenology']
             );
         }
         foreach ($this->cotyledons as $type) {
             General::create(
-                ['name' => $type, 'type' => 'cotyledon']
+                ['name' => $type['en'], 'type' => 'cotyledon']
             );
         }
         foreach ($this->flowers as $type) {
             General::create(
-                ['name' => $type, 'type' => 'flowering']
+                ['name' => $type['en'], 'type' => 'flowering']
             );
         }
         foreach ($this->sperms as $type) {
             General::create(
-                ['name' => $type, 'type' => 'sperm']
+                ['name' => $type['en'], 'type' => 'sperm']
             );
         }
         foreach ($this->ecologies as $type) {
             General::create(
-                ['name' => $type, 'type' => 'ecology']
+                ['name' => $type['en'], 'type' => 'ecology']
             );
         }
         foreach ($this->getSubstrates() as $type) {

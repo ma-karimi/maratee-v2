@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         ini_set('memory_limit', '2000M');
 
         $this->call([
-            (new ConvertSeeder(1260, 6692))->run(),
+           // (new ConvertSeeder(1260, 6692))->run(),
 //            (new ConvertSeeder(6693, 10000))->run(),
 //            (new ConvertSeeder(10000, 15000))->run(),
 //            (new ConvertSeeder(15000, 20000))->run(),

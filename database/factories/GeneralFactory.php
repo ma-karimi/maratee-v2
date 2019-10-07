@@ -9,8 +9,8 @@ $factory->define(App\Models\General::class, function (Faker $faker) use ($types)
     $generals = \App\Models\General::pluck('id')->toArray();
 
     return [
-        'name' => make_json($faker->name),
-        'description' => make_json($faker->text),
+        'name' => $faker->name,
+        'description' =>$faker->text,
         'type' => $faker->randomElement($types),
         'parent_id' => $faker->randomElement($generals),
     ];

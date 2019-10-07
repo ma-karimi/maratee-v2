@@ -46,7 +46,7 @@ return [
         'media' => [
             'driver'    => 'local',
             'root'      => public_path('app'),
-            'url'       => asset( '/app'),
+            //'url'       => asset( '/app'),
         ],
 
         'local' => [
