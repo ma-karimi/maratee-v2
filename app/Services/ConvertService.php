@@ -385,16 +385,14 @@ class ConvertService
     private function ActorCollectConditions($collector): array
     {
         return [
-            ['name->en', trim($collector)],
+            ['name', trim($collector)]
         ];
     }
 
     private function ActorCollectData($collector): array
     {
         return [
-            'name' => [
-                'en' => trim($collector),
-            ],
+            'name' => trim($collector)
         ];
     }
 
@@ -420,16 +418,14 @@ class ConvertService
     private function actorDetectConditions($detector): array
     {
         return [
-            ['name->en', trim($detector)],
+            ['name', trim($detector)]
         ];
     }
 
     private function actorDetectData($detector): array
     {
         return [
-            'name' => [
-                'en' => trim($detector),
-            ],
+            'name' => trim($detector)
         ];
     }
 
