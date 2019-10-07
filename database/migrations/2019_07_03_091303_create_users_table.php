@@ -1,5 +1,6 @@
 <?php
 
+use App\Libraries\CustomBlueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -35,6 +36,8 @@ class CreateUsersTable extends Migration {
             $table->timeStampsTz();
             $table->softDeletesTz();
 		});
+		$fields=['last_name'=>'en','first_name'=>'en'];
+        CustomBlueprint::generatedVirtualConcat('users', 'full_name', $fields, false, 'VARCHAR(255)');
 	}
 
 

@@ -6,6 +6,7 @@ use App\Models\Accessor\UserAccessor;
 use App\Models\Scope\UserScope;
 use Exception;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -135,7 +136,7 @@ use Laravel\Passport\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, UserScope, UserAccessor, Notifiable, SearchableTrait;
     public static $linguistically = ['title' => true, 'education' => false, 'degree' => false, 'nationality' => false, 'first_name' => true, 'last_name' => true, 'nickname' => false];
     public static $rules = [
         'national_id' => 'string',
@@ -152,8 +153,7 @@ class User extends Authenticatable
     ];
     public static $messages = [];
 
-    use HasApiTokens, UserScope, UserAccessor, Notifiable, SearchableTrait;
-    public static $searchable = ['*'];
+    public $searchable = ['*'];
     public $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations'];
     protected $hidden = ['password'];
     /**
@@ -200,6 +200,20 @@ class User extends Authenticatable
         $this->exceptionLanguageHandler($languages);
         $this->validateJsonRequestHandler($languages);
         $this->setNotSearchable($this->getLinguistically());
+    }
+
+    protected function setJsonSelectables(): void
+    {
+        if (count(request()->keys())) {
+            foreach (request()->all() as $index => $item) {
+                if (is_array($item) && collect($this->getLinguistically())->has($index)) {
+                    $param = array_keys($item)[0];
+                    $value = array_values($item)[0];
+                    static::$jsons[$index . '->' . $param]['operator'] = Str::startsWith($value, '%') || Str::endsWith($value, '%') ? 'like' : '=';
+                    static::$jsons[$index . '->' . $param]['value'] = $value;
+                }
+            }
+        }
     }
 
     /**
@@ -359,4 +373,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(Transaction::class)->latest();
     }
+
 }

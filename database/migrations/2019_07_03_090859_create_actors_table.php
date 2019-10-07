@@ -15,7 +15,7 @@ class CreateActorsTable extends Migration {
 		Schema::create('actors', function(Blueprint $table)
 		{
 			$table->bigIncrements('id');
-			$table->json('name');
+			$table->string('name');
 			$table->unsignedBigInteger('user_id')->nullable();
 			$table->timeStampsTz();
             $table->softDeletesTz();

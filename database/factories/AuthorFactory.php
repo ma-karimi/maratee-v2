@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Actor::class, function (Faker $faker) {
     return [
-        'name' => make_json($faker->name),
+        'name' =>$faker->name,
         'user_id' => $faker->randomElement(\App\Models\User::pluck('id')->toArray()),
     ];
 });

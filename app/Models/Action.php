@@ -49,9 +49,9 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class Action extends BaseModel implements HasMedia
 {
 
-    public const TYPES = ['detect' => 'detect', 'collect' => 'collect'];
-
     use ActionScope, HasMediaTrait;
+
+    public const TYPES = ['detect' => 'detect', 'collect' => 'collect'];
     public static $linguistically = ['name' => true, 'description' => true];
     /**
      * The database table used by the model.
