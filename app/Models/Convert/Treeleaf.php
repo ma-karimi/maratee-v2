@@ -7,11 +7,19 @@ class Treeleaf extends BaseModel
 {
     protected $table = 'treeleaf';
 
-    protected $with = ['fam','gen','var','subspe','spe','village'];
+    protected $with = ['fam','gen','var','subspe','spe','village', 'cityR', 'provinceR'];
 
     public function village()
     {
-        return $this->belongsTo(ConvertCity::class, 'city');
+        return $this->belongsTo(ConvertCity::class, 'city')->where('type', 'v');
+    }
+    public function cityR()
+    {
+        return $this->belongsTo(ConvertCity::class, 'city')->where('type', 'c');
+    }
+    public function provinceR()
+    {
+        return $this->belongsTo(ConvertCity::class, 'city')->where('type', 'p');
     }
 
     public function fam()

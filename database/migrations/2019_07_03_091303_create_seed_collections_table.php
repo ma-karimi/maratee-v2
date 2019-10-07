@@ -20,7 +20,6 @@ class CreateSeedCollectionsTable extends Migration
             $table->unsignedBigInteger('organization_id');
             $table->unsignedBigInteger('department_id')->nullable();
             $table->unsignedBigInteger('project_id')->nullable();
-            $table->json('accession_code')->nullable()->comment('encoded code by collector, corrected code by NRGB, accession released code by NRGB');
             $table->string('encoded_code_by_collector')->nullable();
             $table->string('corrected_code_by_nrgb')->nullable();
             $table->string('accession_released_code_by_nrgb')->nullable();
