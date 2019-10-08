@@ -56,10 +56,10 @@ class ConvertService
 //        }
         if (!empty($this->treeLeaf->village) && !empty($this->treeLeaf->village->parent)) {
             // province
-            $this->firstOrCreateProvince();
+            $this->firstOrCreateProvince($this->treeLeaf->village, 'village');
 
             if (!empty(trim($this->treeLeaf->village->parent['name']))) {
-                $this->firstOrCreateCity();
+                $this->firstOrCreateCity($this->treeLeaf->village, 'village');
             } else {
                 $this->models['city'] = null;
             }
@@ -75,11 +75,11 @@ class ConvertService
 
         } elseif (!empty($this->treeLeaf->cityR) && !empty($this->treeLeaf->cityR->parent)) {
 
-            $this->firstOrCreateProvince();
+            $this->firstOrCreateProvince($this->treeLeaf->cityR, 'city');
 
             if (!empty(trim($this->treeLeaf->cityR['name']))) {
 
-                $this->firstOrCreateCity();
+                $this->firstOrCreateCity($this->treeLeaf->cityR, 'city');
 
             } else {
                 $this->models['city'] = null;
@@ -88,7 +88,7 @@ class ConvertService
             $this->firstOrCreateLocation();
 
         } elseif (!empty($this->treeLeaf->provinceR) && !empty($this->treeLeaf->provinceR['name'])) {
-            $this->firstOrCreateProvince();
+            $this->firstOrCreateProvince($this->treeLeaf->provinceR, 'province');
 
 
             // location
@@ -138,9 +138,7 @@ class ConvertService
             foreach ($collectors as $collector) {
 
                 // collector
-                $this->models['actor']['collect'] = Actor::where($this->ActorCollectConditions($collector))->first();
-                if (!$this->models['actor']['collect'])
-                    $this->models['actor']['collect'] = Actor::create($this->ActorCollectData($collector));
+                $this->models['actor']['collect'] = Actor::firstOrCreate($this->ActorCollectData($collector));
 
                 // actor hub collect
                 $this->models['actorHub']['collect'] = ActorHub::create($this->actorHubCollectData());
@@ -156,11 +154,7 @@ class ConvertService
 
             foreach ($detectors as $detector) {
 
-                // detector
-                $this->models['actor']['detect'] = Actor::where($this->actorDetectConditions($detector))->first();
-                if (!$this->models['actor']['detect'])
-                    $this->models['actor']['detect'] = Actor::create($this->actorDetectData($detector));
-
+                $this->models['actor']['detect'] = Actor::firstOrCreate($this->actorDetectData($detector));
                 // detect hub
                 $this->models['actorHub']['detect'] = ActorHub::create($this->actorHubDetectData());
 
@@ -171,54 +165,96 @@ class ConvertService
 
     }
 
-    private function firstOrCreateProvince(): void
+    private function firstOrCreateProvince($model, $type): void
     {
-        $this->models['province'] = Province::where($this->provinceConditions())->first();
+        $this->models['province'] = Province::where($this->provinceConditions($model, $type))->first();
         if (!$this->models['province'])
-            $this->models['province'] = Province::create($this->provinceData());
+            $this->models['province'] = Province::create($this->provinceData($model, $type));
     }
 
-    private function provinceConditions(): array
+    private function provinceConditions($model, $type): array
     {
+        if ($type == 'village') {
+            $name = $model->parent->parent->name;
+        } elseif ($type == 'city') {
+            $name = $model->parent->name;
+        } else {
+            $name = $model->parent->name;
+        }
         return [
-            ['name->en', trim($this->treeLeaf->village->parent->parent->name)],
+            ['name->en', trim($name)],
         ];
     }
 
-    private function provinceData(): array
+    private function provinceData($model, $type): array
     {
-        return [
+        if ($type == 'village') {
+            $name = $model->parent->parent->name;
+            $other_name = $model->parent->parent->othername;
+        } elseif ($type == 'city') {
+            $name = $model->parent->name;
+            $other_name = $model->parent->othername;
+
+        } else {
+            $name = $model->name;
+            $other_name = $model->othername;
+
+        }
+        $array = [
             'name' => [
-                'en' => trim($this->treeLeaf->village->parent->parent->name ?? ''),
-                'fa' => trim($this->treeLeaf->village->parent->parent->othername ?? ''),
+                'en' => trim($name),
             ],
             'country_id' => 1
         ];
+
+        if (!empty($other_name)) {
+            $array['name']['fa'] = trim($other_name);
+        }
+
+        return $array;
     }
 
-    private function firstOrCreateCity(): void
+    private function firstOrCreateCity($model, $type): void
     {
-        $this->models['city'] = City::where($this->cityConditions())->first();
+        $this->models['city'] = City::where($this->cityConditions($model, $type))->first();
         if (!$this->models['city'])
-            $this->models['city'] = City::create($this->cityData());
+            $this->models['city'] = City::create($this->cityData($model, $type));
     }
 
-    private function cityConditions(): array
+    private function cityConditions($model, $type): array
     {
+        if ($type == 'village') {
+            $name = $model->parent->name;
+        } else {
+            $name = $model->name;
+        }
         return [
-            ['name->en', trim($this->treeLeaf->village->parent->name)],
+            ['name->en', trim($name)],
         ];
     }
 
-    private function cityData(): array
+    private function cityData($model, $type): array
     {
-        return [
+        if ($type == 'village') {
+            $name = $model->parent->name;
+            $other_name = $model->parent->othername;
+        } else {
+            $name = $model->name;
+            $other_name = $model->othername;
+
+        }
+
+        $array = [
             'name' => [
-                'en' => trim($this->treeLeaf->village->parent->name),
-                'fa' => trim($this->treeLeaf->village->parent->othername),
+                'en' => trim($name),
             ],
             'province_id' => $this->models['province']['id']
         ];
+        if (!empty($other_name)) {
+            $array['name']['fa'] = trim($other_name);
+        }
+
+        return $array;
     }
 
     private function firstOrCreateVillage(): void
@@ -237,12 +273,16 @@ class ConvertService
 
     private function villageData(): array
     {
-        return [
+        $array = [
             'name' => [
                 'en' => trim($this->treeLeaf->village->name),
-                'fa' => trim($this->treeLeaf->village->othername),
-            ]
+            ],
         ];
+
+        if (!empty($this->treeLeaf->village->othername)) {
+            $array['name']['fa'] = trim($this->treeLeaf->village->othername);
+        }
+        return $array;
     }
 
     private function firstOrCreateLocation(): void
@@ -382,13 +422,6 @@ class ConvertService
         ];
     }
 
-    private function ActorCollectConditions($collector): array
-    {
-        return [
-            ['name', trim($collector)]
-        ];
-    }
-
     private function ActorCollectData($collector): array
     {
         return [
@@ -415,13 +448,6 @@ class ConvertService
         ];
     }
 
-    private function actorDetectConditions($detector): array
-    {
-        return [
-            ['name', trim($detector)]
-        ];
-    }
-
     private function actorDetectData($detector): array
     {
         return [
@@ -441,6 +467,20 @@ class ConvertService
     private function log(string $message)
     {
         echo "$message\n";
+    }
+
+    private function ActorCollectConditions($collector): array
+    {
+        return [
+            ['name', trim($collector)]
+        ];
+    }
+
+    private function actorDetectConditions($detector): array
+    {
+        return [
+            ['name', trim($detector)]
+        ];
     }
 
     private function actorHubCollectConditions(): array
