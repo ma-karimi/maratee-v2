@@ -31,7 +31,6 @@ class TaxonomyAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/taxonomies",
-     *      summary="Get a listing of the Taxonomies.",
      *      tags={"Taxonomy"},
      *      description="Get all Taxonomies",
      *      produces={"application/json"},
@@ -120,6 +119,21 @@ class TaxonomyAPIController extends AppBaseController
      *          description="Taxonomy that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="species_auth",
+     *          in="body",
+     *          required=true,
+     *      ),
+     *      @SWG\Parameter(
+     *          name="subspecies_auth",
+     *          in="body",
+     *          required=true,
+     *      ),
+     *      @SWG\Parameter(
+     *          name="variety_auth",
+     *          in="body",
+     *          required=true,
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -259,7 +273,21 @@ class TaxonomyAPIController extends AppBaseController
      *          in="body",
      *          description="Taxonomy that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="species_auth",
+     *          in="body",
+     *          required=true,
+     *      ),
+     *      @SWG\Parameter(
+     *          name="subspecies_auth",
+     *          in="body",
+     *          required=true,
+     *      ),
+     *      @SWG\Parameter(
+     *          name="variety_auth",
+     *          in="body",
+     *          required=true,
      *      ),
      *      @SWG\Response(
      *          response=200,
