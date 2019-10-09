@@ -12,24 +12,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Utility::truncateTables();
+//        \App\Utility::truncateTables();
         Model::unguard();
-        ini_set('max_execution_time', 30000);
-        ini_set('memory_limit', '2000M');
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit', '-1');
 
         $this->call([
-           // (new ConvertSeeder(1260, 6692))->run(),
-//            (new ConvertSeeder(6693, 10000))->run(),
-//            (new ConvertSeeder(10000, 15000))->run(),
-//            (new ConvertSeeder(15000, 20000))->run(),
-//            (new ConvertSeeder(20000, 25000))->run(),
-//            (new ConvertSeeder(25000, 30000))->run(),
-//            (new ConvertSeeder(30000, 35000))->run(),
-//            (new ConvertSeeder(35000, 40000))->run(),
-//            (new ConvertSeeder(40000, 45000))->run(),
-//            (new ConvertSeeder(45000, 50000))->run(),
-//            (new ConvertSeeder(50000, 55000))->run(),
-//            (new ConvertSeeder(55000, 65000))->run(),
+//            (new ConvertSeeder(0, 5000))->run(),
+//            (new ConvertSeeder(5000, 10000))->run(),
+            (new ConvertSeeder(8356, 15000))->run(),
+            (new ConvertSeeder(15000, 20000))->run(),
+            (new ConvertSeeder(20000, 25000))->run(),
+            (new ConvertSeeder(25000, 30000))->run(),
+            (new ConvertSeeder(30000, 35000))->run(),
+            (new ConvertSeeder(35000, 40000))->run(),
+            (new ConvertSeeder(40000, 45000))->run(),
+            (new ConvertSeeder(45000, 50000))->run(),
+            (new ConvertSeeder(50000, 55000))->run(),
+            (new ConvertSeeder(55000, 65000))->run(),
             UserTableSeeder::class,
             ContinentTableSeeder::class,
             CountryTableSeeder::class,

@@ -10,15 +10,17 @@ use App\Models\Contracts\BaseModel;
  *            required={"name"},
  * 			@SWG\Property(property="name", type="string"),
  * 			@SWG\Property(property="user_id", type="integer"),
+ * 			@SWG\Property(property="cellphone", type="integer"),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
  **/
 class Actor extends BaseModel
 {
-   // public static $linguistically = ['name' => true];
     public static $rules = [
         'user_id' => 'integer|exists:users,id',
+        'cellphone' => 'numeric',
+        'name' => 'required|min:3',
     ];
     /**
      * The database table used by the model.
@@ -31,7 +33,6 @@ class Actor extends BaseModel
      *
      * @var array
      */
-   // protected $casts = ['name' => 'json'];
 
 
     /**

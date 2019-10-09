@@ -21,7 +21,6 @@ class ConvertSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @param ConvertService $convertService
      * @return void
      */
     public function run()
@@ -31,6 +30,6 @@ class ConvertSeeder extends Seeder
             'name' => ['en'=>'Iran','fa'=>'ایران']
         ]);
         foreach ($treeLeafs as $treeLeaf)
-                (new ConvertService)->treeLeaf($treeLeaf)->handle();
+                (new ConvertService($treeLeaf))->handle();
     }
 }

@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\Api\CreateActorAPIRequest;
-use App\Http\Requests\Api\UpdateActorAPIRequest;
+use App\Http\Requests\Api\ActorAPIRequest;
 use App\Repositories\ActorRepository;
 use Illuminate\Http\Request;
 
@@ -69,7 +68,7 @@ class ActorAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateActorAPIRequest $request
+     * @param ActorAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -86,6 +85,12 @@ class ActorAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="user_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Actor")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="cellphone",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Actor")
@@ -111,7 +116,7 @@ class ActorAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateActorAPIRequest $request)
+    public function store(ActorAPIRequest $request)
     {
         $input = $request->all();
 
@@ -172,7 +177,7 @@ class ActorAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateActorAPIRequest $request
+     * @param ActorAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -200,6 +205,12 @@ class ActorAPIController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Actor")
      *      ),
+     *      @SWG\Parameter(
+     *          name="cellphone",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Actor")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -221,7 +232,7 @@ class ActorAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateActorAPIRequest $request)
+    public function update($id, ActorAPIRequest $request)
     {
         $input = $request->all();
 
