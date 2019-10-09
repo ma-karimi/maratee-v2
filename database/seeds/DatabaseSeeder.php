@@ -12,15 +12,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Utility::truncateTables();
+//        \App\Utility::truncateTables();
         Model::unguard();
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
         $this->call([
-            (new ConvertSeeder(0, 5000))->run(),
-            (new ConvertSeeder(5000, 10000))->run(),
-            (new ConvertSeeder(10000, 15000))->run(),
+//            (new ConvertSeeder(0, 5000))->run(),
+//            (new ConvertSeeder(5000, 10000))->run(),
+            (new ConvertSeeder(8356, 15000))->run(),
             (new ConvertSeeder(15000, 20000))->run(),
             (new ConvertSeeder(20000, 25000))->run(),
             (new ConvertSeeder(25000, 30000))->run(),

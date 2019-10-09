@@ -151,11 +151,10 @@ class TaxonomyAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateTaxonomyAPIRequest $request)
+    public function store(Request $request)
     {
-        $input = $request->all();
 
-        $taxonomy = $this->taxonomyRepository->create($input);
+        $taxonomy = $this->taxonomyRepository->create($request);
 
         return $this->sendResponse($taxonomy->toArray(), 'Taxonomy saved successfully');
     }
@@ -298,7 +297,7 @@ class TaxonomyAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateTaxonomyAPIRequest $request)
+    public function update($id, Request $request)
     {
         $input = $request->all();
 
@@ -309,7 +308,7 @@ class TaxonomyAPIController extends AppBaseController
             return $this->sendError('Taxonomy not found');
         }
 
-        $taxonomy = $this->taxonomyRepository->update($input, $id);
+        $taxonomy = $this->taxonomyRepository->update($request, $id);
 
         return $this->sendResponse($taxonomy->toArray(), 'Taxonomy updated successfully');
     }

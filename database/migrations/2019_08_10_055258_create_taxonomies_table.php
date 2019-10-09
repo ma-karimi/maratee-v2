@@ -17,7 +17,7 @@ class CreateTaxonomiesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->nullable();
             //generals
-            $table->unsignedBigInteger('family_id');
+            $table->unsignedBigInteger('family_id')->nullable();
             $table->unsignedBigInteger('genus_id')->nullable();
             $table->unsignedBigInteger('species_id')->nullable();
             $table->unsignedBigInteger('subspecies_id')->nullable();

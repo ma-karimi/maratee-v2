@@ -376,7 +376,7 @@ class ConvertService
     {
         return [
             'name' => $this->treeLeaf->name ?? null,
-            'family_id' => $this->models['general']['family']['id'],
+            'family_id' => $this->models['general']['family']['id'] ?? null,
             'genus_id' => $this->models['general']['genus']['id'] ?? null,
             'species_id' => $this->models['general']['species']['id'] ?? null,
             'subspecies_id' => $this->models['general']['subspecies']['id'] ?? null,

@@ -8,6 +8,7 @@ use App\Models\General;
 use App\Models\Taxonomy;
 use Illuminate\Container\Container as Application;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class TaxonomyRepository
@@ -65,6 +66,12 @@ class TaxonomyRepository extends BaseRepository
 
     public function create($request)
     {
+        $exist = $this->taxonomyExistWhenCreate($request);
+        if ($exist) {
+            throw ValidationException::withMessages([
+                'taxonomy' => 'Already Exists!'
+            ]);
+        }
         $request = $this->setTaxonomyData($request);
 
         return parent::create([
@@ -75,6 +82,22 @@ class TaxonomyRepository extends BaseRepository
             'variety_id' => $request->filled('variety_id') ? $request['variety_id'] : null,
             'name' => $request->filled('name') ? $request['name'] : null,
         ]);
+    }
+
+    /**
+     * @param $request
+     * @return bool
+     */
+    private function taxonomyExistWhenCreate($request): bool
+    {
+        return Taxonomy::where([
+            'family_id' => $request['family_id'],
+            'genus_id' => $request['genus_id'],
+            'species_id' => $request->filled('species_id') && is_numeric($request['species_id']) ? $request['species_id'] : null,
+            'subspecies_id' => $request->filled('subspecies_id') && is_numeric($request['subspecies_id']) ? $request['subspecies_id'] : null,
+            'variety_id' => $request->filled('variety_id') && is_numeric($request['variety_id']) ? $request['variety_id'] : null
+        ])->exists();
+
     }
 
     /**
@@ -173,7 +196,6 @@ class TaxonomyRepository extends BaseRepository
                 $this->actorHubFirstOrCreate($request['species_id'], $request['species_auth']);
             }
         }
-        return $actor;
     }
 
     /**
@@ -213,7 +235,6 @@ class TaxonomyRepository extends BaseRepository
                 $this->actorHubFirstOrCreate($request['subspecies_id'], $request['species_auth']);
             }
         }
-        return $actor;
     }
 
     /**
@@ -232,8 +253,15 @@ class TaxonomyRepository extends BaseRepository
         }
     }
 
-    public function update($id, $request)
+    public function update($request, $id)
     {
+        $exist = $this->taxonomyExistWhenUpdate($request, $id);
+
+        if ($exist) {
+            throw ValidationException::withMessages([
+                'taxonomy' => 'Already Exists!'
+            ]);
+        }
         $request = $this->setTaxonomyData($request);
 
         return parent::update([
@@ -244,6 +272,23 @@ class TaxonomyRepository extends BaseRepository
             'variety_id' => $request->filled('variety_id') ? $request['variety_id'] : null,
             'name' => $request->filled('name') ? $request['name'] : null,
         ], $id);
+    }
+
+    /**
+     * @param $request
+     * @param $id
+     * @return bool
+     */
+    private function taxonomyExistWhenUpdate($request, $id): bool
+    {
+        return Taxonomy::where([
+            'family_id' => $request['family_id'],
+            'genus_id' => $request['genus_id'],
+            'species_id' => $request->filled('species_id') && is_numeric($request['species_id']) ? $request['species_id'] : null,
+            'subspecies_id' => $request->filled('subspecies_id') && is_numeric($request['subspecies_id']) ? $request['subspecies_id'] : null,
+            'variety_id' => $request->filled('variety_id') && is_numeric($request['variety_id']) ? $request['variety_id'] : null
+        ])->where('id', '!=', $id)->exists();
+
     }
 
 }
