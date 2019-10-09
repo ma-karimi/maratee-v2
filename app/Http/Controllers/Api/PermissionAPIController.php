@@ -14,6 +14,7 @@ use Response;
  * Class PermissionController
  * @package App\Http\Controllers\Api
  */
+
 class PermissionAPIController extends AppBaseController
 {
     /** @var  PermissionRepository */
@@ -55,6 +56,7 @@ class PermissionAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -78,123 +80,11 @@ class PermissionAPIController extends AppBaseController
      *      description="Store Permission",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="user_id",
+     *          name="name",
      *          in="body",
      *          description="Permission that should be stored",
-     *          required=true,
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="department_id",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="group_id",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="role_id",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="requester_id",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="responser_id",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="permission_status",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="request_date",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="approval_date",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="expire_date",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="owner_crud",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="same_level_crud",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="upper_level_crud",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="lower_level_crud",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="organization_id",
-     *          in="body",
-     *          description="Group that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Group")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="division_id",
-     *          in="body",
-     *          description="Group that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Group")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="project_id",
-     *          in="body",
-     *          description="Group that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Group")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -221,7 +111,7 @@ class PermissionAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        $permission = $this->permissionRepository->create($input);
+        $permission = Permission::create($input);
 
         return $this->sendResponse($permission->toArray(), 'Permission saved successfully');
     }
@@ -267,7 +157,7 @@ class PermissionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Permission $permission */
-        $permission = $this->permissionRepository->find($id, \request()->get('relations'));
+        $permission = $this->permissionRepository->find($id);
 
         if (empty($permission)) {
             return $this->sendError('Permission not found');
@@ -295,123 +185,11 @@ class PermissionAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="user_id",
+     *          name="name",
      *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
+     *          description="Permission that should be updated",
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="department_id",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="group_id",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="role_id",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="requester_id",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="responser_id",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="permission_status",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="request_date",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="approval_date",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="expire_date",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="owner_crud",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="same_level_crud",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="upper_level_crud",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="lower_level_crud",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="organization_id",
-     *          in="body",
-     *          description="Group that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Group")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="division_id",
-     *          in="body",
-     *          description="Group that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Group")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="project_id",
-     *          in="body",
-     *          description="Group that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Group")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -439,7 +217,7 @@ class PermissionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Permission $permission */
-        $permission = $this->permissionRepository->find($id, \request()->get('relations'));
+        $permission = $this->permissionRepository->find($id);
 
         if (empty($permission)) {
             return $this->sendError('Permission not found');
@@ -454,7 +232,6 @@ class PermissionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
      * @SWG\Delete(
      *      path="/permissions/{id}",
      *      summary="Remove the specified Permission from storage",
@@ -492,7 +269,7 @@ class PermissionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Permission $permission */
-        $permission = $this->permissionRepository->find($id, \request()->get('relations'));
+        $permission = $this->permissionRepository->find($id);
 
         if (empty($permission)) {
             return $this->sendError('Permission not found');

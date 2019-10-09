@@ -3,12 +3,19 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Spatie\Permission\Contracts\Permission as PermissionContract;
+use Spatie\Permission\Exceptions\PermissionDoesNotExist;
+use Spatie\Permission\Guard;
+use Spatie\Permission\PermissionRegistrar;
+use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Traits\RefreshesPermissionCache;
 
 /**
  * @SWG\Definition(
  *      definition="Permission",
- *      required={"user_id","department_id","group_id","role_id","requester_id","responser_id","permission_status","request_date","approval_date","expire_date","owner_crud","same_level_crud","upper_level_crud","lower_level_crud"},
+ *      required={"name"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -16,152 +23,134 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="user_id",
- *          description="user_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="department_id",
- *          description="department_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="group_id",
- *          description="group_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="role_id",
- *          description="role_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="requester_id",
- *          description="requester_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="responser_id",
- *          description="responser_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="permission_status",
- *          description="permission_status",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="request_date",
- *          description="request_date",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="approval_date",
- *          description="approval_date",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="expire_date",
- *          description="expire_date",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="owner_crud",
- *          description="owner_crud",
- *          type="array",
- *     @SWG\Items(type="string"),
- *          format="array"
- *      ),
- *      @SWG\Property(
- *          property="same_level_crud",
- *          description="same_level_crud",
- *          type="array",
- *     @SWG\Items(type="string"),
- *          format="array"
- *      ),
- *      @SWG\Property(
- *          property="upper_level_crud",
- *          description="upper_level_crud",
- *          type="array",
- *     @SWG\Items(type="string"),
- *          format="array"
- *      ),
- *      @SWG\Property(
- *          property="lower_level_crud",
- *          description="lower_level_crud",
- *          type="array",
- *     @SWG\Items(type="string"),
- *          format="array"
- *      ),
+ *          property="name",
+ *          description="name",
+ *          type="string"
+ *      )
  * )
  */
-class Permission extends BaseModel
+class Permission extends BaseModel implements PermissionContract
 {
-    public static $linguistically = ['owner_crud' => true, 'same_level_crud' => true, 'upper_level_crud' => true, 'lower_level_crud' => true];
+    use HasRoles;
+    use RefreshesPermissionCache;
 
-    protected $casts =
-        [
-            'owner_crud' => 'json',
-            'same_level_crud' => 'json',
-            'upper_level_crud' => 'json',
-            'lower_level_crud' => 'json',
-        ];
-
-    /**
-     * @return BelongsTo
-     */
-    public function department()
+    public function __construct(array $attributes = [])
     {
-        return $this->belongsTo('App\Models\Department');
+        $attributes['guard_name'] = $attributes['guard_name'] ?? config('auth.defaults.guard');
+
+        parent::__construct($attributes);
+
+        $this->setTable(config('permission.table_names.permissions'));
+    }
+
+    public static function create(array $attributes = [])
+    {
+        $attributes['guard_name'] = $attributes['guard_name'] ?? Guard::getDefaultName(static::class);
+
+        if (isNotLumen() && app()::VERSION < '5.4') {
+            return parent::updateOrCreate($attributes);
+        }
+
+        return static::query()->updateOrCreate($attributes);
     }
 
     /**
-     * @return BelongsTo
+     * A permission can be applied to roles.
      */
-    public function group()
+    public function roles(): BelongsToMany
     {
-        return $this->belongsTo('App\Models\Group');
+        return $this->belongsToMany(
+            config('permission.models.role'),
+            config('permission.table_names.role_has_permissions'),
+            'permission_id',
+            'role_id'
+        );
     }
 
     /**
-     * @return BelongsTo
+     * A permission belongs to some users of the model associated with its guard.
      */
-    public function userRequester()
+    public function users(): MorphToMany
     {
-        return $this->belongsTo('App\Models\User', 'requester_id');
+        return $this->morphedByMany(
+            getModelForGuard($this->attributes['guard_name']),
+            'model',
+            config('permission.table_names.model_has_permissions'),
+            'permission_id',
+            config('permission.column_names.model_morph_key')
+        );
     }
 
     /**
-     * @return BelongsTo
+     * Find a permission by its name (and optionally guardName).
+     *
+     * @param string $name
+     * @param string|null $guardName
+     *
+     * @return
+     * @throws \Spatie\Permission\Exceptions\PermissionDoesNotExist
+     *
      */
-    public function userResponser()
+    public static function findByName(string $name, $guardName = null): PermissionContract
     {
-        return $this->belongsTo('App\Models\User', 'responser_id');
+        $guardName = $guardName ?? Guard::getDefaultName(static::class);
+        $permission = static::getPermissions(['name' => $name, 'guard_name' => $guardName])->first();
+        if (!$permission) {
+            throw PermissionDoesNotExist::create($name, $guardName);
+        }
+
+        return $permission;
     }
 
     /**
-     * @return BelongsTo
+     * Find a permission by its id (and optionally guardName).
+     *
+     * @param int $id
+     * @param string|null $guardName
+     *
+     * @throws \Spatie\Permission\Exceptions\PermissionDoesNotExist
+     *
+     * @return \Spatie\Permission\Contracts\Permission
      */
-    public function role()
+    public static function findById(int $id, $guardName = null): PermissionContract
     {
-        return $this->belongsTo('App\Models\Role');
+        $guardName = $guardName ?? Guard::getDefaultName(static::class);
+        $permission = static::getPermissions(['id' => $id, 'guard_name' => $guardName])->first();
+
+        if (!$permission) {
+            throw PermissionDoesNotExist::withId($id, $guardName);
+        }
+
+        return $permission;
     }
 
     /**
-     * @return BelongsTo
+     * Find or create permission by its name (and optionally guardName).
+     *
+     * @param string $name
+     * @param string|null $guardName
+     *
+     * @return PermissionContract
      */
-    public function user()
+    public static function findOrCreate(string $name, $guardName = null): PermissionContract
     {
-        return $this->belongsTo('App\Models\User');
+        $guardName = $guardName ?? Guard::getDefaultName(static::class);
+        $permission = static::getPermissions(['name' => $name, 'guard_name' => $guardName])->first();
+
+        if (!$permission) {
+            return static::query()->create(['name' => $name, 'guard_name' => $guardName]);
+        }
+
+        return $permission;
+    }
+
+    /**
+     * Get the current cached permissions.
+     */
+    protected static function getPermissions(array $params = [])
+    {
+        return app(PermissionRegistrar::class)
+            ->setPermissionClass(static::class)
+            ->getPermissions($params);
     }
 }

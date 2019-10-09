@@ -1,15 +1,14 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Models\Role;
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\Role::class, function (Faker $faker) {
+$factory->define(Role::class, function (Faker $faker) {
 
     return [
-        'name' => make_json($faker->name),
-        'level' => $faker->numberBetween(0,1),
-        'description' => make_json($faker->sentence),
-        'hierarchy' => make_json($faker->name),
+        'created_at' => $faker->date('Y-m-d H:i:s'),
+        'updated_at' => $faker->date('Y-m-d H:i:s')
     ];
 });

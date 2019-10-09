@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class PermissionRepository
  * @package App\Repositories
- * @version July 20, 2019, 10:41 am UTC
+ * @version October 9, 2019, 12:38 pm UTC
 */
 
 class PermissionRepository extends BaseRepository

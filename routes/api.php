@@ -237,3 +237,8 @@ Route::post('paleontologies/{id}/research', 'PaleontologyAPIController@storeRese
 Route::post('medicinal_plants/{id}/determine', 'MedicinalPlantAPIController@storeDetermine');
 Route::post('medicinal_plants/{id}/collect', 'MedicinalPlantAPIController@storeCollect');
 Route::post('medicinal_plants/{id}/research', 'MedicinalPlantAPIController@storeResearch');
+
+
+Route::apiResource('permissions', 'PermissionAPIController');
+
+Route::resource('roles', 'RoleAPIController');

@@ -56,6 +56,7 @@ class RoleAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -64,7 +65,6 @@ class RoleAPIController extends AppBaseController
             $request->except('per_page'),
             $request->get('relations')
         );
-
         return $this->sendResponse($roles->toArray(), 'Roles retrieved successfully');
     }
 
@@ -82,29 +82,8 @@ class RoleAPIController extends AppBaseController
      *          name="name",
      *          in="body",
      *          description="Role that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Role")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          description="Role that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Role")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="level",
-     *          in="body",
-     *          description="Role that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Role")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="hierarchy",
-     *          in="body",
-     *          description="Group that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Group")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -131,7 +110,7 @@ class RoleAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        $role = $this->roleRepository->create($input);
+        $role = Role::create($input);
 
         return $this->sendResponse($role->toArray(), 'Role saved successfully');
     }
@@ -177,7 +156,7 @@ class RoleAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Role $role */
-        $role = $this->roleRepository->find($id, \request()->get('relations'));
+        $role = $this->roleRepository->find($id);
 
         if (empty($role)) {
             return $this->sendError('Role not found');
@@ -207,30 +186,9 @@ class RoleAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="name",
      *          in="body",
-     *          description="Role that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Role")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          description="Role that should be stored",
+     *          description="Role that should be updated",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Role")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="level",
-     *          in="body",
-     *          description="Role that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Role")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="hierarchy",
-     *          in="body",
-     *          description="Group that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Group")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -258,7 +216,7 @@ class RoleAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Role $role */
-        $role = $this->roleRepository->find($id, \request()->get('relations'));
+        $role = $this->roleRepository->find($id);
 
         if (empty($role)) {
             return $this->sendError('Role not found');
@@ -273,7 +231,6 @@ class RoleAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
      * @SWG\Delete(
      *      path="/roles/{id}",
      *      summary="Remove the specified Role from storage",
@@ -311,7 +268,7 @@ class RoleAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Role $role */
-        $role = $this->roleRepository->find($id, \request()->get('relations'));
+        $role = $this->roleRepository->find($id);
 
         if (empty($role)) {
             return $this->sendError('Role not found');

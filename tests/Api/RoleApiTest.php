@@ -3,20 +3,24 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
-use Tests\Traits\MakeRoleTrait;
 use Tests\ApiTestTrait;
+use App\Models\Role;
 
 class RoleApiTest extends TestCase
 {
-    use MakeRoleTrait, ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
+    use ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
 
     /**
      * @test
      */
     public function test_create_role()
     {
-        $role = $this->fakeRoleData();
-        $this->response = $this->json('POST', '/api/roles', $role);
+        $role = factory(Role::class)->make()->toArray();
+
+        $this->response = $this->json(
+            'POST',
+            '/api/roles', $role
+        );
 
         $this->assertApiResponse($role);
     }
@@ -26,8 +30,12 @@ class RoleApiTest extends TestCase
      */
     public function test_read_role()
     {
-        $role = $this->makeRole();
-        $this->response = $this->json('GET', '/api/roles/'.$role->id);
+        $role = factory(Role::class)->create();
+
+        $this->response = $this->json(
+            'GET',
+            '/api/roles/'.$role->id
+        );
 
         $this->assertApiResponse($role->toArray());
     }
@@ -37,10 +45,14 @@ class RoleApiTest extends TestCase
      */
     public function test_update_role()
     {
-        $role = $this->makeRole();
-        $editedRole = $this->fakeRoleData();
+        $role = factory(Role::class)->create();
+        $editedRole = factory(Role::class)->make()->toArray();
 
-        $this->response = $this->json('PUT', '/api/roles/'.$role->id, $editedRole);
+        $this->response = $this->json(
+            'PUT',
+            '/api/roles/'.$role->id,
+            $editedRole
+        );
 
         $this->assertApiResponse($editedRole);
     }
@@ -50,11 +62,18 @@ class RoleApiTest extends TestCase
      */
     public function test_delete_role()
     {
-        $role = $this->makeRole();
-        $this->response = $this->json('DELETE', '/api/roles/'.$role->id);
+        $role = factory(Role::class)->create();
+
+        $this->response = $this->json(
+            'DELETE',
+             '/api/roles/'.$role->id
+         );
 
         $this->assertApiSuccess();
-        $this->response = $this->json('GET', '/api/roles/'.$role->id);
+        $this->response = $this->json(
+            'GET',
+            '/api/roles/'.$role->id
+        );
 
         $this->response->assertStatus(404);
     }

@@ -32,6 +32,7 @@
         "predis/predis": "^1.1",
         "react/promise": "^2.7",
         "spatie/laravel-medialibrary": "^7.0.0",
+        "spatie/laravel-permission": "^3.0",
         "vkovic/laravel-custom-casts": "^1.1",
         "zircote/swagger-php": "2.*"
     },

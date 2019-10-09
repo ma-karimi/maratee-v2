@@ -4,12 +4,11 @@ use App\Models\Permission;
 use App\Repositories\PermissionRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
-use Tests\Traits\MakePermissionTrait;
 use Tests\ApiTestTrait;
 
 class PermissionRepositoryTest extends TestCase
 {
-    use MakePermissionTrait, ApiTestTrait, DatabaseTransactions;
+    use ApiTestTrait, DatabaseTransactions;
 
     /**
      * @var PermissionRepository
@@ -27,8 +26,10 @@ class PermissionRepositoryTest extends TestCase
      */
     public function test_create_permission()
     {
-        $permission = $this->fakePermissionData();
+        $permission = factory(Permission::class)->make()->toArray();
+
         $createdPermission = $this->permissionRepo->create($permission);
+
         $createdPermission = $createdPermission->toArray();
         $this->assertArrayHasKey('id', $createdPermission);
         $this->assertNotNull($createdPermission['id'], 'Created Permission must have id specified');
@@ -41,8 +42,10 @@ class PermissionRepositoryTest extends TestCase
      */
     public function test_read_permission()
     {
-        $permission = $this->makePermission();
+        $permission = factory(Permission::class)->create();
+
         $dbPermission = $this->permissionRepo->find($permission->id);
+
         $dbPermission = $dbPermission->toArray();
         $this->assertModelData($permission->toArray(), $dbPermission);
     }
@@ -52,9 +55,11 @@ class PermissionRepositoryTest extends TestCase
      */
     public function test_update_permission()
     {
-        $permission = $this->makePermission();
-        $fakePermission = $this->fakePermissionData();
+        $permission = factory(Permission::class)->create();
+        $fakePermission = factory(Permission::class)->make()->toArray();
+
         $updatedPermission = $this->permissionRepo->update($fakePermission, $permission->id);
+
         $this->assertModelData($fakePermission, $updatedPermission->toArray());
         $dbPermission = $this->permissionRepo->find($permission->id);
         $this->assertModelData($fakePermission, $dbPermission->toArray());
@@ -65,8 +70,10 @@ class PermissionRepositoryTest extends TestCase
      */
     public function test_delete_permission()
     {
-        $permission = $this->makePermission();
+        $permission = factory(Permission::class)->create();
+
         $resp = $this->permissionRepo->delete($permission->id);
+
         $this->assertTrue($resp);
         $this->assertNull(Permission::find($permission->id), 'Permission should not exist in DB');
     }
