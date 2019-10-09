@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateTaxonomyAPIRequest;
-use App\Http\Requests\Api\UpdateTaxonomyAPIRequest;
-use App\Models\ScientificView;
+use App\Http\Requests\Api\TaxonomyAPIRequest;
 use App\Models\Taxonomy;
 use App\Repositories\TaxonomyRepository;
+use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
  * Class TaxonomyController
  * @package App\Http\Controllers\Api
  */
-
 class TaxonomyAPIController extends AppBaseController
 {
     /** @var  TaxonomyRepository */
@@ -58,7 +56,7 @@ class TaxonomyAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -72,7 +70,7 @@ class TaxonomyAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateTaxonomyAPIRequest $request
+     * @param TaxonomyAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -81,13 +79,6 @@ class TaxonomyAPIController extends AppBaseController
      *      tags={"Taxonomy"},
      *      description="Store Taxonomy",
      *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="plant_id",
-     *          in="body",
-     *          description="Taxonomy that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
-     *      ),
      *      @SWG\Parameter(
      *          name="genus_id",
      *          in="body",
@@ -120,11 +111,11 @@ class TaxonomyAPIController extends AppBaseController
      *          name="family_id",
      *          in="body",
      *          description="Taxonomy that should be stored",
-     *          required=true,
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
-     *          name="type_description",
+     *          name="name",
      *          in="body",
      *          description="Taxonomy that should be stored",
      *          required=false,
@@ -150,8 +141,9 @@ class TaxonomyAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws ValidationException
      */
-    public function store(Request $request)
+    public function store(TaxonomyAPIRequest $request)
     {
 
         $taxonomy = $this->taxonomyRepository->create($request);
@@ -202,7 +194,7 @@ class TaxonomyAPIController extends AppBaseController
         /** @var Taxonomy $taxonomy */
         $taxonomy = $this->taxonomyRepository->find($id);
 
-        if (empty($taxonomy)) {
+        if ($taxonomy === null) {
             return $this->sendError('Taxonomy not found');
         }
 
@@ -211,7 +203,7 @@ class TaxonomyAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateTaxonomyAPIRequest $request
+     * @param TaxonomyAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -226,13 +218,6 @@ class TaxonomyAPIController extends AppBaseController
      *          type="integer",
      *          required=true,
      *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_id",
-     *          in="body",
-     *          description="Taxonomy that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
      *          name="genus_id",
@@ -266,11 +251,11 @@ class TaxonomyAPIController extends AppBaseController
      *          name="family_id",
      *          in="body",
      *          description="Taxonomy that should be stored",
-     *          required=true,
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
-     *          name="type_description",
+     *          name="name",
      *          in="body",
      *          description="Taxonomy that should be stored",
      *          required=false,
@@ -296,11 +281,10 @@ class TaxonomyAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws ValidationException
      */
-    public function update($id, Request $request)
+    public function update(TaxonomyAPIRequest $request, $id)
     {
-        $input = $request->all();
-
         /** @var Taxonomy $taxonomy */
         $taxonomy = $this->taxonomyRepository->find($id);
 
@@ -350,7 +334,7 @@ class TaxonomyAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

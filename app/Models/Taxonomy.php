@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 /**
  * @SWG\Definition(
  *      definition="Taxonomy",
- *      required={"family_id","plant_id"},
+ *      required={"family_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -20,14 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  *      @SWG\Property(
  *          property="name",
  *          description="name",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="plant_id",
- *          description="id",
- *          type="integer",
- *          format="int32"
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="genus_id",
@@ -66,12 +59,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="type_description",
- *          description="type_description",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -95,6 +82,7 @@ class Taxonomy extends BaseModel
         'species_id' => 'exists:generals,id',
         'variety_id' => 'exists:generals,id',
         'subspecies_id' => 'exists:generals,id',
+        'name'=>'string'
     ];
     /**
      * The database table used by the model.
