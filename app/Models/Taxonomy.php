@@ -75,15 +75,15 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Taxonomy extends BaseModel
 {
 
-
-    public static $rules = [
-        'family_id' => 'required|exists:generals,id',
-        'genus_id' => 'exists:generals,id',
-        'species_id' => 'exists:generals,id',
-        'variety_id' => 'exists:generals,id',
-        'subspecies_id' => 'exists:generals,id',
-        'name'=>'string'
-    ];
+//
+//    public static $rules = [
+//        'family_id' => 'required|exists:generals,id',
+//        'genus_id' => 'exists:generals,id',
+//        'species_id' => 'exists:generals,id',
+//        'variety_id' => 'exists:generals,id',
+//        'subspecies_id' => 'exists:generals,id',
+//        'name'=>'string'
+//    ];
     /**
      * The database table used by the model.
      *
