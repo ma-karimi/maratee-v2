@@ -26,7 +26,7 @@ class CreateBiochemicalEvaluationsTable extends Migration {
             $table->text('repeat')->nullable();
             $table->timeStampsTz();
             $table->softDeletesTz();
-            $table->foreign('specimen_type_coll_id')->references('id')->on('biochemical_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('specimen_type_coll_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
         });
 	}

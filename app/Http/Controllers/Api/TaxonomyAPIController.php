@@ -124,16 +124,19 @@ class TaxonomyAPIController extends AppBaseController
      *          name="species_auth",
      *          in="body",
      *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
      *          name="subspecies_auth",
      *          in="body",
      *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
      *          name="variety_auth",
      *          in="body",
      *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -273,21 +276,25 @@ class TaxonomyAPIController extends AppBaseController
      *          in="body",
      *          description="Taxonomy that should be stored",
      *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
      *          name="species_auth",
      *          in="body",
      *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
      *          name="subspecies_auth",
      *          in="body",
      *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Parameter(
      *          name="variety_auth",
      *          in="body",
      *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Taxonomy")
      *      ),
      *      @SWG\Response(
      *          response=200,
