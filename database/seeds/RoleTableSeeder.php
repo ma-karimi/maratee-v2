@@ -13,6 +13,5 @@ class RoleTableSeeder extends Seeder
     public function run()
     {
         factory(Role::class, 50)->create();
-
     }
 }

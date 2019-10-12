@@ -1080,6 +1080,14 @@
                         "schema": {
                             "$ref": "#/definitions/Actor"
                         }
+                    },
+                    {
+                        "name": "cellphone",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Actor"
+                        }
                     }
                 ],
                 "responses": {
@@ -1169,6 +1177,14 @@
                     },
                     {
                         "name": "user_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Actor"
+                        }
+                    },
+                    {
+                        "name": "cellphone",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -12882,15 +12898,6 @@
                         }
                     },
                     {
-                        "name": "general_origin_id",
-                        "in": "body",
-                        "description": "MedicinalPlant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlant"
-                        }
-                    },
-                    {
                         "name": "aerial_part_id",
                         "in": "body",
                         "description": "from medicinal_parts where type=aerial",
@@ -12939,15 +12946,6 @@
                         "name": "general_phenology_id",
                         "in": "body",
                         "description": "from general",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlant"
-                        }
-                    },
-                    {
-                        "name": "general_habitat_id",
-                        "in": "body",
-                        "description": "MedicinalPlant that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -13258,24 +13256,6 @@
                     },
                     {
                         "name": "medicine_id",
-                        "in": "body",
-                        "description": "MedicinalPlant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlant"
-                        }
-                    },
-                    {
-                        "name": "general_origin_id",
-                        "in": "body",
-                        "description": "MedicinalPlant that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlant"
-                        }
-                    },
-                    {
-                        "name": "general_habitat_id",
                         "in": "body",
                         "description": "MedicinalPlant that should be stored",
                         "required": false,
@@ -13838,7 +13818,39 @@
                 }
             }
         },
-        "/medicinal_plant_constituents/{medicinal_plant_id}/store": {
+        "/medicinal_plant_constituents": {
+            "get": {
+                "tags": [
+                    "MedicinalPlantConstituent"
+                ],
+                "summary": "Get a listing of the MedicinalPlantConstituents.",
+                "description": "Get all MedicinalPlantConstituents",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/MedicinalPlantConstituent"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "MedicinalPlantConstituent"
@@ -13907,7 +13919,45 @@
                 }
             }
         },
-        "/medicinalPlantConstituents/{id}/update": {
+        "/medicinalPlantConstituents/{id}": {
+            "get": {
+                "tags": [
+                    "MedicinalPlantConstituent"
+                ],
+                "summary": "Display the specified MedicinalPlantConstituent",
+                "description": "Get MedicinalPlantConstituent",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of MedicinalPlantConstituent",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/MedicinalPlantConstituent"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
             "put": {
                 "tags": [
                     "MedicinalPlantConstituent"
@@ -13972,6 +14022,44 @@
                                 },
                                 "data": {
                                     "$ref": "#/definitions/MedicinalPlantConstituent"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "MedicinalPlantConstituent"
+                ],
+                "summary": "Remove the specified MedicinalPlantConstituent from storage",
+                "description": "Delete MedicinalPlantConstituent",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of MedicinalPlantConstituent",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
                                 },
                                 "message": {
                                     "type": "string"
@@ -16514,156 +16602,12 @@
                 ],
                 "parameters": [
                     {
-                        "name": "user_id",
+                        "name": "name",
                         "in": "body",
                         "description": "Permission that should be stored",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "department_id",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "group_id",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "role_id",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "requester_id",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "responser_id",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "permission_status",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "request_date",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "approval_date",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "expire_date",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "owner_crud",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "same_level_crud",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "upper_level_crud",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "lower_level_crud",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "organization_id",
-                        "in": "body",
-                        "description": "Group that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Group"
-                        }
-                    },
-                    {
-                        "name": "division_id",
-                        "in": "body",
-                        "description": "Group that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Group"
-                        }
-                    },
-                    {
-                        "name": "project_id",
-                        "in": "body",
-                        "description": "Group that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Group"
                         }
                     }
                 ],
@@ -16745,156 +16689,12 @@
                         "type": "integer"
                     },
                     {
-                        "name": "user_id",
+                        "name": "name",
                         "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
+                        "description": "Permission that should be updated",
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "department_id",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "group_id",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "role_id",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "requester_id",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "responser_id",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "permission_status",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "request_date",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "approval_date",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "expire_date",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "owner_crud",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "same_level_crud",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "upper_level_crud",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "lower_level_crud",
-                        "in": "body",
-                        "description": "Permission that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Permission"
-                        }
-                    },
-                    {
-                        "name": "organization_id",
-                        "in": "body",
-                        "description": "Group that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Group"
-                        }
-                    },
-                    {
-                        "name": "division_id",
-                        "in": "body",
-                        "description": "Group that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Group"
-                        }
-                    },
-                    {
-                        "name": "project_id",
-                        "in": "body",
-                        "description": "Group that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Group"
                         }
                     }
                 ],
@@ -20369,36 +20169,9 @@
                         "name": "name",
                         "in": "body",
                         "description": "Role that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Role"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Role that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Role"
-                        }
-                    },
-                    {
-                        "name": "level",
-                        "in": "body",
-                        "description": "Role that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Role"
-                        }
-                    },
-                    {
-                        "name": "hierarchy",
-                        "in": "body",
-                        "description": "Group that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Group"
                         }
                     }
                 ],
@@ -20482,37 +20255,10 @@
                     {
                         "name": "name",
                         "in": "body",
-                        "description": "Role that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Role"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Role that should be stored",
+                        "description": "Role that should be updated",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Role"
-                        }
-                    },
-                    {
-                        "name": "level",
-                        "in": "body",
-                        "description": "Role that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Role"
-                        }
-                    },
-                    {
-                        "name": "hierarchy",
-                        "in": "body",
-                        "description": "Group that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Group"
                         }
                     }
                 ],
@@ -23773,7 +23519,6 @@
                 "tags": [
                     "Taxonomy"
                 ],
-                "summary": "Get a listing of the Taxonomies.",
                 "description": "Get all Taxonomies",
                 "produces": [
                     "application/json"
@@ -23811,15 +23556,6 @@
                     "application/json"
                 ],
                 "parameters": [
-                    {
-                        "name": "plant_id",
-                        "in": "body",
-                        "description": "Taxonomy that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
                     {
                         "name": "genus_id",
                         "in": "body",
@@ -23860,16 +23596,40 @@
                         "name": "family_id",
                         "in": "body",
                         "description": "Taxonomy that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "Taxonomy that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "species_auth",
+                        "in": "body",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
                         }
                     },
                     {
-                        "name": "type_description",
+                        "name": "subspecies_auth",
                         "in": "body",
-                        "description": "Taxonomy that should be stored",
-                        "required": false,
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "variety_auth",
+                        "in": "body",
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
                         }
@@ -23953,15 +23713,6 @@
                         "type": "integer"
                     },
                     {
-                        "name": "plant_id",
-                        "in": "body",
-                        "description": "Taxonomy that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
                         "name": "genus_id",
                         "in": "body",
                         "description": "Taxonomy that should be stored",
@@ -24001,16 +23752,40 @@
                         "name": "family_id",
                         "in": "body",
                         "description": "Taxonomy that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "Taxonomy that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "species_auth",
+                        "in": "body",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
                         }
                     },
                     {
-                        "name": "type_description",
+                        "name": "subspecies_auth",
                         "in": "body",
-                        "description": "Taxonomy that should be stored",
-                        "required": false,
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "variety_auth",
+                        "in": "body",
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
                         }
@@ -26715,12 +26490,12 @@
             ],
             "properties": {
                 "name": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "type": "string"
                 },
                 "user_id": {
+                    "type": "integer"
+                },
+                "cellphone": {
                     "type": "integer"
                 },
                 "created_at": {
@@ -27873,17 +27648,11 @@
                 },
                 "name": {
                     "description": "name",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "type": "string"
                 },
                 "description": {
                     "description": "description",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "type": "string"
                 },
                 "type": {
                     "description": "type: 'phytogeography', 'phenology', 'plant_type', 'species', 'sub_species', 'variety', 'family', 'genus', 'class', 'group', 'order', 'flowering', 'sperm', 'cotyledon', 'growth', 'usage', 'part', 'industry', 'application', 'habitat', 'ecology', 'origin', 'lichen', 'moss', 'diatom', 'substrate', 'biological'",
@@ -28646,10 +28415,6 @@
                     "description": "id",
                     "type": "integer"
                 },
-                "general_habitat_id": {
-                    "description": "id",
-                    "type": "integer"
-                },
                 "hygienic_cosmetic_industry_id": {
                     "description": "id",
                     "type": "integer"
@@ -29373,20 +29138,7 @@
         },
         "Permission": {
             "required": [
-                "user_id",
-                "department_id",
-                "group_id",
-                "role_id",
-                "requester_id",
-                "responser_id",
-                "permission_status",
-                "request_date",
-                "approval_date",
-                "expire_date",
-                "owner_crud",
-                "same_level_crud",
-                "upper_level_crud",
-                "lower_level_crud"
+                "name"
             ],
             "properties": {
                 "id": {
@@ -29394,87 +29146,9 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "user_id": {
-                    "description": "user_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "department_id": {
-                    "description": "department_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "group_id": {
-                    "description": "group_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "role_id": {
-                    "description": "role_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "requester_id": {
-                    "description": "requester_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "responser_id": {
-                    "description": "responser_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "permission_status": {
-                    "description": "permission_status",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "request_date": {
-                    "description": "request_date",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "approval_date": {
-                    "description": "approval_date",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "expire_date": {
-                    "description": "expire_date",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "owner_crud": {
-                    "description": "owner_crud",
-                    "type": "array",
-                    "format": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "same_level_crud": {
-                    "description": "same_level_crud",
-                    "type": "array",
-                    "format": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "upper_level_crud": {
-                    "description": "upper_level_crud",
-                    "type": "array",
-                    "format": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "lower_level_crud": {
-                    "description": "lower_level_crud",
-                    "type": "array",
-                    "format": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "name": {
+                    "description": "name",
+                    "type": "string"
                 }
             }
         },
@@ -29964,9 +29638,7 @@
         },
         "Role": {
             "required": [
-                "name",
-                "level",
-                "description"
+                "name"
             ],
             "properties": {
                 "id": {
@@ -29976,24 +29648,7 @@
                 },
                 "name": {
                     "description": "name",
-                    "type": "array",
-                    "format": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "level": {
-                    "description": "level",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "description": {
-                    "description": "description",
-                    "type": "array",
-                    "format": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "type": "string"
                 }
             }
         },
@@ -30727,8 +30382,7 @@
         },
         "Taxonomy": {
             "required": [
-                "family_id",
-                "plant_id"
+                "family_id"
             ],
             "properties": {
                 "id": {
@@ -30738,15 +30392,7 @@
                 },
                 "name": {
                     "description": "name",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "plant_id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "string"
                 },
                 "genus_id": {
                     "description": "id",
@@ -30777,13 +30423,6 @@
                     "description": "id",
                     "type": "integer",
                     "format": "int32"
-                },
-                "type_description": {
-                    "description": "type_description",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
                 },
                 "created_at": {
                     "description": "created_at",

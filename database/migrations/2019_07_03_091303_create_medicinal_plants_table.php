@@ -18,7 +18,7 @@ class CreateMedicinalPlantsTable extends Migration {
 			$table->bigIncrements('id');
 			$table->unsignedBigInteger('taxonomy_id');
 			$table->unsignedBigInteger('location_id');
-			$table->unsignedBigInteger('plant_herbarium_id')->nullable();
+			$table->string('plant_herbarium_number')->nullable();
             $table->unsignedBigInteger('aerial_part_id')->nullable();
             $table->unsignedBigInteger('ground_part_id')->nullable();
             $table->unsignedBigInteger('food_industry_id')->nullable();
@@ -51,14 +51,14 @@ class CreateMedicinalPlantsTable extends Migration {
             $table->json('manufacturer')->nullable();
             $table->float('efficiency', 4,2)->nullable();
             $table->integer('code_no')->nullable();
-            $table->timeStampsTz();
-            $table->softDeletesTz();
             //morphology
             $table->json('fruit_color')->nullable();
             $table->json('flower_color')->nullable();
             $table->string('height')->nullable()->comment('unit: cm');
             $table->json('life_forms')->comment('life_form_cycle_id, life_form_wooden_id, life_form_herbaceous_id')->nullable();
 
+            $table->timeStampsTz();
+            $table->softDeletesTz();
         });
         CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_cycle_id', 'life_forms', 'cycle_id', true);
         CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_wooden_id', 'life_forms', 'wooden_id', true);
