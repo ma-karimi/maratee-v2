@@ -14,7 +14,7 @@ use App\Models\Product;
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
-    $plants = PlantHerbarium::pluck('id')->toArray();
+    $plants = PlantHerbarium::pluck('herbarium_number')->toArray();
     $taxonomies = \App\Models\Taxonomy::pluck('id')->toArray();
     $locations = \App\Models\Location::pluck('id')->toArray();
     $aerial_parts = MedicinalPart::whereType(1)->pluck('id')->toArray();
@@ -29,7 +29,7 @@ $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
     $effective_materials = MedicinalPlantType::whereTypeId(6)->pluck('id')->toArray();
     $products = Product::pluck('id')->toArray();
     return [
-        'plant_herbarium_id' => $faker->randomElement($plants),
+        'plant_herbarium_number' => $faker->randomElement($plants),
         'taxonomy_id' => $faker->randomElement($taxonomies),
         'location_id' => $faker->randomElement($locations),
         'aerial_part_id' => $faker->randomElement($aerial_parts),
