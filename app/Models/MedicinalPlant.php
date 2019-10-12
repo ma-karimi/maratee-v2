@@ -60,6 +60,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          type="integer",
  *      ),
  *      @SWG\Property(
+ *          property="other_industry_id",
+ *          description="id",
+ *          type="integer",
+ *      ),
+ *      @SWG\Property(
  *          property="industrial_potential_id",
  *          description="id",
  *          type="integer",
@@ -91,6 +96,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      ),
  *      @SWG\Property(
  *          property="effective_material_id",
+ *          description="id",
+ *          type="integer",
+ *      ),
+ *      @SWG\Property(
+ *          property="pharmaceutical_form_id",
  *          description="id",
  *          type="integer",
  *      ),
@@ -157,6 +167,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          type="integer"
  *      ),
  *      @SWG\Property(
+ *          property="treatment_id",
+ *          description="medicine_id",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
  *          property="consumption",
  *          description="consumption",
  *          type="array",
@@ -200,6 +215,12 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          property="height",
  *          description="height (cm)",
  *          type="string",
+ *      ),
+ *      @SWG\Property(
+ *          property="life_forms",
+ *          description="life_form_cycle_id , life_form_wooden_id , life_form_herbaceous_id",
+ *          type="array",
+ *        @SWG\Items(type="string"),
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -290,6 +311,7 @@ class MedicinalPlant extends BaseModel
         'efficiency' => 'float',
         'fruit_color' => 'json',
         'flower_color' => 'json',
+        'life_forms' => 'json',
     ];
 
     protected $appends = [
