@@ -9,15 +9,14 @@ use App\Repositories\BaseRepository;
  * Class RoleRepository
  * @package App\Repositories
  * @version October 9, 2019, 1:38 pm UTC
-*/
-
+ */
 class RoleRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

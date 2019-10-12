@@ -272,7 +272,6 @@ abstract class BaseRepository
         $different_assigned = array_diff($assigned_id, $ids);
         //attach and update pivot fields
         $this->attachAndUpdateFields($related_model, $ids, $additional_data, $related_model_class, $related_key, $record, $different_ids);
-
         $related_model_class::where($foreign_key, $class_id)->whereIn($related_key, $different_assigned)->delete();
 
         return $record->$related_model()->get();
@@ -292,12 +291,13 @@ abstract class BaseRepository
      * @param $record
      * @return array
      */
-    private function getRelatedModelAndClass($related_model, $record): array
+    protected function getRelatedModelAndClass($related_model, $record): array
     {
         $related_model_table = $record->$related_model()->getTable();
         $related_model_class = resolve('App\\Models\\' . Str::studly(Str::singular($related_model_table)));
         $related_key = $record->$related_model()->getRelatedPivotKeyName();
         $foreign_key = $record->$related_model()->getForeignPivotKeyName();
+
         return [$related_model_table, $related_model_class, $related_key, $foreign_key];
     }
 
@@ -316,7 +316,7 @@ abstract class BaseRepository
      * @param $record
      * @param array $different_ids
      */
-    public function attachAndUpdateFields($related_model, array $ids, $additional_data = [], $related_model_class, $related_key, $record, array $different_ids): void
+    protected function attachAndUpdateFields($related_model, array $ids, $additional_data = [], $related_model_class, $related_key, $record, array $different_ids): void
     {
         if (!empty($additional_data)) {
             //update pivot fields
@@ -336,7 +336,7 @@ abstract class BaseRepository
      * @param $class_id
      * @return mixed
      */
-    private function findException($class_id)
+    protected  function findException($class_id)
     {
         $record = $this->model->find($class_id);
         abort_if(empty($record), JsonResponse::HTTP_NOT_FOUND, 'record not found');
@@ -347,7 +347,7 @@ abstract class BaseRepository
      * @param array $additional_data
      * @param $related_model_class
      */
-    private function setJsonCast(array &$additional_data, $related_model_class): void
+    protected function setJsonCast(array &$additional_data, $related_model_class): void
     {
         foreach ($additional_data as $index => $additional_datum) {
             if (isset($related_model_class->getCasts()[$index]) and $related_model_class->getCasts()[$index] = 'json') {

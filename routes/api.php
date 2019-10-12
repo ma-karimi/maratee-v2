@@ -241,4 +241,4 @@ Route::post('medicinal_plants/{id}/research', 'MedicinalPlantAPIController@store
 
 Route::apiResource('permissions', 'PermissionAPIController');
 
-Route::resource('roles', 'RoleAPIController');
+Route::apiResource('roles', 'RoleAPIController');

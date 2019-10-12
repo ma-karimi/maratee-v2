@@ -7,6 +7,7 @@ use Grimzy\LaravelMysqlSpatial\Types\Point;
 
 $factory->define(App\Models\Location::class, function (Faker $faker) {
     $cities = \App\Models\City::pluck('id')->toArray();
+    $provinces = \App\Models\Province::pluck('id')->toArray();
 
     return [
         'address' => make_json($faker->name),
@@ -17,5 +18,6 @@ $factory->define(App\Models\Location::class, function (Faker $faker) {
         'point' => ['48°49′24″N','2°18′26″E'],
         'description' => make_json($faker->text),
         'city_id' => $faker->randomElement($cities),
+        'province_id' => $faker->randomElement($provinces),
     ];
 });

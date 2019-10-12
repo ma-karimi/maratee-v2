@@ -44,7 +44,13 @@ class CreateHubRequest extends FormRequest
         $source_model_class = resolve('App\\Models\\' . Str::studly(Str::singular($source)));
         $relation = $this->request->get('relation');
         $hub_table = $source_model_class->$relation()->getTable();
+
+        if (!class_exists('App\\Models\\' . Str::studly(Str::singular($hub_table)))) {
+            return [];
+        }
+
         $hub_model = resolve('App\\Models\\' . Str::studly(Str::singular($hub_table)));
+
         return $hub_model::getRules();
     }
 }

@@ -29,12 +29,10 @@ use Spatie\Permission\Traits\RefreshesPermissionCache;
  *      )
  * )
  */
-class Role extends BaseModel implements RoleContract
+class Role extends BaseModel
 {
     use HasPermissions;
     use RefreshesPermissionCache;
-
-    protected $guarded = ['id'];
 
     public function __construct(array $attributes = [])
     {
@@ -61,26 +59,30 @@ class Role extends BaseModel implements RoleContract
      */
     public function permissions(): BelongsToMany
     {
+        $role_has_permission_table = config('permission.table_names.role_has_permissions');
         return $this->belongsToMany(
             config('permission.models.permission'),
-            config('permission.table_names.role_has_permissions'),
+            $role_has_permission_table,
             'role_id',
             'permission_id'
-        );
+        )
+            ->whereNull("$role_has_permission_table.deleted_at")
+            ->withTimestamps();
     }
 
     /**
      * A role belongs to some users of the model associated with its guard.
      */
-    public function users(): MorphToMany
+    public function users()
     {
+        $model_has_role_table = config('permission.table_names.model_has_roles');
         return $this->morphedByMany(
             getModelForGuard($this->attributes['guard_name']),
             'model',
-            config('permission.table_names.model_has_roles'),
+            $model_has_role_table,
             'role_id',
             config('permission.column_names.model_morph_key')
-        );
+        )->whereNull("$model_has_role_table.deleted_at");
     }
 
     /**
@@ -99,7 +101,7 @@ class Role extends BaseModel implements RoleContract
 
         $role = static::where('name', $name)->where('guard_name', $guardName)->first();
 
-        if (! $role) {
+        if (!$role) {
             throw RoleDoesNotExist::named($name);
         }
 
@@ -112,7 +114,7 @@ class Role extends BaseModel implements RoleContract
 
         $role = static::where('id', $id)->where('guard_name', $guardName)->first();
 
-        if (! $role) {
+        if (!$role) {
             throw RoleDoesNotExist::withId($id);
         }
 
@@ -133,7 +135,7 @@ class Role extends BaseModel implements RoleContract
 
         $role = static::where('name', $name)->where('guard_name', $guardName)->first();
 
-        if (! $role) {
+        if (!$role) {
             return static::query()->create(['name' => $name, 'guard_name' => $guardName]);
         }
 
@@ -161,7 +163,7 @@ class Role extends BaseModel implements RoleContract
             $permission = $permissionClass->findById($permission, $this->getDefaultGuardName());
         }
 
-        if (! $this->getGuardNames()->contains($permission->guard_name)) {
+        if (!$this->getGuardNames()->contains($permission->guard_name)) {
             throw GuardDoesNotMatch::create($permission->guard_name, $this->getGuardNames());
         }
 

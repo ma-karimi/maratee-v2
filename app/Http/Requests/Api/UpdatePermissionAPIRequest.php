@@ -25,7 +25,6 @@ class UpdatePermissionAPIRequest extends APIRequest
     public function rules()
     {
         $rules = Permission::$rules;
-        $UNIQUE_RULES$
         return $rules;
     }
 }

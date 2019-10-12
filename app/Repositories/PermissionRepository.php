@@ -37,4 +37,5 @@ class PermissionRepository extends BaseRepository
     {
         return Permission::class;
     }
+
 }

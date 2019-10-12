@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
 //            (new ConvertSeeder(0, 5000))->run(),
 //            (new ConvertSeeder(5000, 10000))->run(),
-            (new ConvertSeeder(8356, 15000))->run(),
+          /*  (new ConvertSeeder(8356, 15000))->run(),
             (new ConvertSeeder(15000, 20000))->run(),
             (new ConvertSeeder(20000, 25000))->run(),
             (new ConvertSeeder(25000, 30000))->run(),
@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             (new ConvertSeeder(40000, 45000))->run(),
             (new ConvertSeeder(45000, 50000))->run(),
             (new ConvertSeeder(50000, 55000))->run(),
-            (new ConvertSeeder(55000, 65000))->run(),
+            (new ConvertSeeder(55000, 65000))->run(),*/
             UserTableSeeder::class,
             ContinentTableSeeder::class,
             CountryTableSeeder::class,

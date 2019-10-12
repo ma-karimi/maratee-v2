@@ -25,7 +25,6 @@ class UpdateRoleAPIRequest extends APIRequest
     public function rules()
     {
         $rules = Role::$rules;
-        $UNIQUE_RULES$
         return $rules;
     }
 }

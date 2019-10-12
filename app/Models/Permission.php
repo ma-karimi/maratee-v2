@@ -59,12 +59,14 @@ class Permission extends BaseModel implements PermissionContract
      */
     public function roles(): BelongsToMany
     {
+        $role_has_permission_table = config('permission.table_names.role_has_permissions');
         return $this->belongsToMany(
             config('permission.models.role'),
-            config('permission.table_names.role_has_permissions'),
+            $role_has_permission_table,
             'permission_id',
             'role_id'
-        );
+        ) ->whereNull("$role_has_permission_table.deleted_at")
+            ->withTimestamps();
     }
 
     /**
@@ -72,13 +74,14 @@ class Permission extends BaseModel implements PermissionContract
      */
     public function users(): MorphToMany
     {
+        $model_has_permission_table = config('permission.table_names.model_has_permissions');
         return $this->morphedByMany(
             getModelForGuard($this->attributes['guard_name']),
             'model',
-            config('permission.table_names.model_has_permissions'),
+            $model_has_permission_table,
             'permission_id',
             config('permission.column_names.model_morph_key')
-        );
+        )->whereNull("$model_has_permission_table.deleted_at");
     }
 
     /**

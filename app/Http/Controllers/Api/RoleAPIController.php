@@ -264,6 +264,7 @@ class RoleAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function destroy($id)
     {

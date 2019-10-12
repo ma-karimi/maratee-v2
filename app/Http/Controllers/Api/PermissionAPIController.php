@@ -265,6 +265,7 @@ class PermissionAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function destroy($id)
     {
