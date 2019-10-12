@@ -209,7 +209,7 @@ class TaxonomyAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Taxonomy $taxonomy */
-        $taxonomy = $this->taxonomyRepository->find($id);
+        $taxonomy = $this->taxonomyRepository->find($id, \request()->get('relations'));
 
         if ($taxonomy === null) {
             return $this->sendError('Taxonomy not found');
