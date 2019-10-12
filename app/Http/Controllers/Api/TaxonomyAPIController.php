@@ -390,19 +390,20 @@ class TaxonomyAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/taxonomies/all",
+     *      summary="get all Taxonomies Grouped By ",
      *      tags={"Taxonomy"},
-     *      description="Get all Taxonomies Grouped By ",
+     *      description="get all Taxonomies Grouped By ",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="relation",
-     *          in="path",
+     *          in="query",
      *          required=false,
      *          type="array",
      *          @SWG\Items(type="string")
      *      ),
      *      @SWG\Parameter(
      *          name="groupby",
-     *          in="path",
+     *          in="query",
      *          required=false,
      *          type="string"
      *      ),
