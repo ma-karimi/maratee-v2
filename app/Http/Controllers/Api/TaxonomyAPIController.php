@@ -384,4 +384,55 @@ class TaxonomyAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Taxonomy deleted successfully');
     }
+    /**
+     * @param Request $request
+     * @return Response
+     *
+     * @SWG\Get(
+     *      path="/taxonomies/all",
+     *      tags={"Taxonomy"},
+     *      description="Get all Taxonomies Grouped By ",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="relation",
+     *          in="path",
+     *          required=false,
+     *          type="array",
+     *          @SWG\Items(type="string")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="groupby",
+     *          in="path",
+     *          required=false,
+     *          type="string"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Taxonomy")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     * @throws Exception
+     */
+    public function all(Request $request)
+    {
+        $taxonomies = $this->taxonomyRepository->get($request);
+
+        return $this->sendResponse($taxonomies->toArray(), 'Taxonomies retrieved successfully');
+    }
 }

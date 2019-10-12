@@ -218,7 +218,9 @@ Route::apiResource('paleontology_maps', 'PaleontologyMapAPIController');
 
 Route::apiResource('action_hub_documents', 'ActionHubDocumentAPIController');
 
+Route::get('taxonomies/all', 'TaxonomyAPIController@all');
 Route::apiResource('taxonomies', 'TaxonomyAPIController');
+
 
 Route::apiResource('planting_conditions', 'PlantingConditionAPIController');
 //plant_herbarium action
@@ -242,3 +244,5 @@ Route::post('medicinal_plants/{id}/research', 'MedicinalPlantAPIController@store
 Route::apiResource('permissions', 'PermissionAPIController');
 
 Route::apiResource('roles', 'RoleAPIController');
+
+Route::apiResource('seed_collections', 'SeedCollectionAPIController');
