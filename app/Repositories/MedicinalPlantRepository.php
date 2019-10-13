@@ -38,21 +38,4 @@ class MedicinalPlantRepository extends BaseRepository
         return MedicinalPlant::class;
     }
 
-    public function create($request)
-    {
-        $medicinal_plant = parent::create($request->all());
-        foreach ($request->value as $index => $item) {
-            if (!empty($item['value'])) {
-                MedicinalPlantConstituent::create([
-                    'medicinal_plant_id' => $medicinal_plant->id,
-                    'constituent_id' => $request->constituent_id[$index],
-                    'constituent_type_id' => $request->constituent_type_id,
-                    'value' => $request->$item
-                ]);
-            }
-
-            return $medicinal_plant->load('medicinalPlantConstituents');
-        }
-        return $medicinal_plant;
-    }
 }
