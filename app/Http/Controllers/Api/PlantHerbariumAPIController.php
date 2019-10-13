@@ -60,7 +60,6 @@ class PlantHerbariumAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        dd('a');
         $relation_for_scientific_name = ['taxonomy.family', 'taxonomy.genus', 'taxonomy.species', 'taxonomy.subspecies', 'taxonomy.variety'];
         $plants = $this->plantRepository->paginate(
             $request->get('per_page'),
