@@ -52,6 +52,8 @@ class CreateMedicinalPlantsTable extends Migration {
             $table->float('efficiency', 4,2)->nullable();
             $table->integer('code_no')->nullable();
             //morphology
+            $table->unsignedBigInteger('general_habitat_id')->nullable();
+
             $table->json('fruit_color')->nullable();
             $table->json('flower_color')->nullable();
             $table->string('height')->nullable()->comment('unit: cm');
