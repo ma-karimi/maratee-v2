@@ -293,13 +293,11 @@ class TaxonomyRepository extends BaseRepository
 
     public function get($request)
     {
-        $query = $this->model->newQuery();
-        if (isset($request->groupby)) {
-            $query = $query->groupBy($request->groupby);
-        }
-        if (isset($request->relations)) {
-            $query = $query->with($request->relations);
-        }
-       return $query->get();
+        return $this->model->when($request->groupby, function ($query)use($request) {
+            return $query->whereNotNull($request->groupby)->groupBy($request->groupby);
+        })
+            ->when($request->relations, function ($query)use($request) {
+            return $query->with($request->relations);
+        })->get();
     }
 }
