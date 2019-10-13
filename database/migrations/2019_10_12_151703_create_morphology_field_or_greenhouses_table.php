@@ -24,7 +24,7 @@ class CreateMorphologyFieldOrGreenhousesTable extends Migration
             $table->string('sand')->nullable()->comment('%');
             $table->string('loam')->nullable()->comment('%');
             $table->string('clay')->nullable()->comment('%');
-            $table->unsignedBigInteger('seed_generals')->nullable();
+            $table->unsignedBigInteger('collect_id')->comment('specimen_type_collect_id')->nullable();
             $table->string('n')->nullable()->comment('%');
             $table->string('p')->nullable()->comment('%');
             $table->string('k')->nullable()->comment('%');
@@ -39,7 +39,7 @@ class CreateMorphologyFieldOrGreenhousesTable extends Migration
             $table->string('meteorological_station_data')->nullable()->comment('excel file');
             $table->timeStampsTz();
             $table->softDeletesTz();
-            $table->foreign('specimen_type_collect_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('collect_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('station_id')->references('id')->on('stations')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });

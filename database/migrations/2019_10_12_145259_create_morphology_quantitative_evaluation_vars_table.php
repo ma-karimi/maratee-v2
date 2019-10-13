@@ -15,12 +15,12 @@ class CreateMorphologyQuantitativeEvaluationVarsTable extends Migration
     {
         Schema::create('morphology_quantitative_evaluation_vars', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('morphology_quantitative_evaluation_id');
+            $table->unsignedBigInteger('evaluation_id')->comment('morphology_quantitative_evaluation_id');
             $table->tinyInteger('var_id')->default(1);
             $table->string('value');
             $table->timeStampsTz();
             $table->softDeletesTz();
-            $table->foreign('morphology_quantitative_evaluation_id')->references('id')->on('morphology_quantitative_evaluations')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('evaluation_id')->references('id')->on('morphology_quantitative_evaluations')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
         });
 

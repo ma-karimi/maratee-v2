@@ -18,6 +18,8 @@ class CreateMedicinalPlantProvincesTable extends Migration {
 			$table->unsignedBigInteger('province_id');
             $table->timeStampsTz();
             $table->softDeletesTz();
+            $table->foreign('medicinal_plant_id')->references('id')->on('medicinal_plants')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('province_id')->references('id')->on('provinces')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Phaza\LaravelPostgis\Schema\Blueprint;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateLocationsTable extends Migration {
 

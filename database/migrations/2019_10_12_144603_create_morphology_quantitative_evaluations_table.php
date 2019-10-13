@@ -16,7 +16,7 @@ class CreateMorphologyQuantitativeEvaluationsTable extends Migration
         Schema::create('morphology_quantitative_evaluations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('accession_code')->nullable();
-            $table->unsignedBigInteger('specimen_type_collect_id')->nullable();
+            $table->unsignedBigInteger('collect_id')->comment('specimen_type_collect_id')->nullable();
             $table->string('regeneration_and_evaluation_code')->nullable();
             $table->unsignedBigInteger('organization_id');
             $table->unsignedBigInteger('department_id')->nullable();
@@ -34,7 +34,7 @@ class CreateMorphologyQuantitativeEvaluationsTable extends Migration
             $table->integer('days_to_seed_ripening')->nullable();
             $table->timeStampsTz();
             $table->softDeletesTz();
-            $table->foreign('specimen_type_collect_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('collect_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('project_id')->references('id')->on('projects')->onUpdate('NO ACTION')->onDelete('CASCADE');

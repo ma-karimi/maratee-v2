@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateMolecularEvaluationTable extends Migration
+class CreateMolecularEvaluationsTable extends Migration
 {
 
     /**
@@ -13,7 +13,7 @@ class CreateMolecularEvaluationTable extends Migration
      */
     public function up()
     {
-        Schema::create('molecular_evalutions', function (Blueprint $table) {
+        Schema::create('molecular_evaluations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('organization_id');
             $table->unsignedBigInteger('department_id')->nullable();

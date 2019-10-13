@@ -9,7 +9,8 @@
 namespace App\Libraries;
 
 
-use Grimzy\LaravelMysqlSpatial\Schema\Blueprint as mysqlBluePrint;
+//use ‌ as mysqlBluePrint;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Phaza\LaravelPostgis\Schema\Blueprint as postgresBluePrint;
 
@@ -21,7 +22,7 @@ class CustomBlueprint
         if (DB::getDefaultConnection() !== 'pgsql') {
             DB::statement("ALTER TABLE $table ADD $column_name $column_type GENERATED ALWAYS AS (json_unquote(json_extract($json_column,'$.$json_index'))) VIRTUAL");
             if ($isIndex) {
-                \Illuminate\Support\Facades\Schema::table($table, function (mysqlBluePrint $table) use ($column_name) {
+                \Illuminate\Support\Facades\Schema::table($table, function (Blueprint $table) use ($column_name) {
                     $table->index($column_name);
                 });
             }
