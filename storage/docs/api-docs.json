@@ -12862,10 +12862,10 @@
                 ],
                 "parameters": [
                     {
-                        "name": "plant_herbarium_id",
+                        "name": "plant_herbarium_number",
                         "in": "body",
                         "description": "MedicinalPlant that should be stored",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
                         }
@@ -12934,6 +12934,15 @@
                         }
                     },
                     {
+                        "name": "other_industry_id",
+                        "in": "body",
+                        "description": "from medicinal_plant_type",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
                         "name": "industrial_potential_id",
                         "in": "body",
                         "description": "from medicinal_plant_type",
@@ -12944,6 +12953,15 @@
                     },
                     {
                         "name": "general_phenology_id",
+                        "in": "body",
+                        "description": "from general",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
+                        "name": "pharmaceutical_form_id",
                         "in": "body",
                         "description": "from general",
                         "required": false,
@@ -12988,6 +13006,24 @@
                         }
                     },
                     {
+                        "name": "product_id",
+                        "in": "body",
+                        "description": "from medicinal_plant_type",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
+                        "name": "treatment_id",
+                        "in": "body",
+                        "description": "from medicinal_plant_type",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
                         "name": "effective_material_id",
                         "in": "body",
                         "description": "from medicinal_plant_type",
@@ -13000,6 +13036,15 @@
                         "name": "traditional_iranian_medicine",
                         "in": "body",
                         "description": "0 -> raw , 1 -> processed",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
+                        "name": "inherbal_medicine_store",
+                        "in": "body",
+                        "description": " 1 => 'raw', 2 => 'processed'",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -13144,6 +13189,15 @@
                         "name": "height",
                         "in": "body",
                         "description": "height",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
+                        "name": "life_forms",
+                        "in": "body",
+                        "description": "life_forms",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -13228,10 +13282,10 @@
                         "type": "integer"
                     },
                     {
-                        "name": "plant_herbarium_id",
+                        "name": "plant_herbarium_number",
                         "in": "body",
                         "description": "MedicinalPlant that should be stored",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
                         }
@@ -13300,6 +13354,15 @@
                         }
                     },
                     {
+                        "name": "other_industry_id",
+                        "in": "body",
+                        "description": "from medicinal_plant_type",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
                         "name": "industrial_potential_id",
                         "in": "body",
                         "description": "from medicinal_plant_type",
@@ -13310,6 +13373,15 @@
                     },
                     {
                         "name": "general_phenology_id",
+                        "in": "body",
+                        "description": "from general",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
+                        "name": "pharmaceutical_form_id",
                         "in": "body",
                         "description": "from general",
                         "required": false,
@@ -13354,6 +13426,24 @@
                         }
                     },
                     {
+                        "name": "product_id",
+                        "in": "body",
+                        "description": "from medicinal_plant_type",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
+                        "name": "treatment_id",
+                        "in": "body",
+                        "description": "from medicinal_plant_type",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
                         "name": "effective_material_id",
                         "in": "body",
                         "description": "from medicinal_plant_type",
@@ -13366,6 +13456,15 @@
                         "name": "traditional_iranian_medicine",
                         "in": "body",
                         "description": "0 -> raw , 1 -> processed",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
+                        "name": "inherbal_medicine_store",
+                        "in": "body",
+                        "description": " 1 => 'raw', 2 => 'processed'",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -13510,6 +13609,15 @@
                         "name": "height",
                         "in": "body",
                         "description": "height",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
+                        "name": "life_forms",
+                        "in": "body",
+                        "description": "life_forms",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -21186,6 +21294,205 @@
                 }
             }
         },
+        "/seedCollections": {
+            "get": {
+                "tags": [
+                    "SeedCollection"
+                ],
+                "summary": "Get a listing of the SeedCollections.",
+                "description": "Get all SeedCollections",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/SeedCollection"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "SeedCollection"
+                ],
+                "summary": "Store a newly created SeedCollection in storage",
+                "description": "Store SeedCollection",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "SeedCollection that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/SeedCollection"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/SeedCollection"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/seedCollections/{id}": {
+            "get": {
+                "tags": [
+                    "SeedCollection"
+                ],
+                "summary": "Display the specified SeedCollection",
+                "description": "Get SeedCollection",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of SeedCollection",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/SeedCollection"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "SeedCollection"
+                ],
+                "summary": "Update the specified SeedCollection in storage",
+                "description": "Update SeedCollection",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of SeedCollection",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "SeedCollection that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/SeedCollection"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/SeedCollection"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "SeedCollection"
+                ],
+                "summary": "Remove the specified SeedCollection from storage",
+                "description": "Delete SeedCollection",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of SeedCollection",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/seed_exchanges": {
             "get": {
                 "tags": [
@@ -23839,6 +24146,57 @@
                                 },
                                 "data": {
                                     "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/taxonomies/all": {
+            "get": {
+                "tags": [
+                    "Taxonomy"
+                ],
+                "summary": "get all Taxonomies Grouped By ",
+                "description": "get all Taxonomies Grouped By ",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "relation",
+                        "in": "query",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "groupby",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Taxonomy"
+                                    }
                                 },
                                 "message": {
                                     "type": "string"
@@ -28395,9 +28753,9 @@
                     "description": "id",
                     "type": "integer"
                 },
-                "plant_herbarium_id": {
+                "plant_herbarium_number": {
                     "description": "from herbariums selected plant",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "aerial_part_id": {
                     "description": "id",
@@ -28416,6 +28774,10 @@
                     "type": "integer"
                 },
                 "hygienic_cosmetic_industry_id": {
+                    "description": "id",
+                    "type": "integer"
+                },
+                "other_industry_id": {
                     "description": "id",
                     "type": "integer"
                 },
@@ -28444,6 +28806,10 @@
                     "type": "integer"
                 },
                 "effective_material_id": {
+                    "description": "id",
+                    "type": "integer"
+                },
+                "pharmaceutical_form_id": {
                     "description": "id",
                     "type": "integer"
                 },
@@ -28501,6 +28867,10 @@
                     "description": "medicine_id",
                     "type": "integer"
                 },
+                "treatment_id": {
+                    "description": "medicine_id",
+                    "type": "integer"
+                },
                 "consumption": {
                     "description": "consumption",
                     "type": "array",
@@ -28547,6 +28917,13 @@
                 "height": {
                     "description": "height (cm)",
                     "type": "string"
+                },
+                "life_forms": {
+                    "description": "life_form_cycle_id , life_form_wooden_id , life_form_herbaceous_id",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "created_at": {
                     "description": "created_at",
@@ -29880,6 +30257,44 @@
                 "other_detail": {
                     "description": "other_detail",
                     "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "SeedCollection": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "array",
+                    "format": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "description": {
+                    "description": "description",
+                    "type": "array",
+                    "format": "array",
                     "items": {
                         "type": "string"
                     }

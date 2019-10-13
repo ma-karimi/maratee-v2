@@ -6,6 +6,7 @@ use App\Models\PlantHerbarium;
 use App\Models\Transfer;
 use App\Observers\PlantObserver;
 use App\Observers\TransferCredentialObserver;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,6 +31,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         PlantHerbarium::observe(PlantObserver::class);
-
+        //DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
     }
 }

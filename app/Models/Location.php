@@ -9,6 +9,7 @@ use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
 
 /**
  * @SWG\Definition(
@@ -76,7 +77,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class Location extends BaseModel
 {
-    use SpatialTrait, LocationAccessor, LocationMutator;
+    use SpatialTrait, LocationAccessor, LocationMutator ,PostgisTrait;
 
     public static $linguistically = ['description' => false, 'region_name' => false, 'address' => true];
     public static $rules = [
@@ -84,6 +85,9 @@ class Location extends BaseModel
         'village_id' => 'exists:villages,id',
         'min_altitude' => 'numeric',
         'max_altitude' => 'numeric'
+    ];
+    protected $postgisFields = [
+        'point'
     ];
     /**
      * The database table used by the model.

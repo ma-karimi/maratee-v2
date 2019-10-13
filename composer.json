@@ -28,6 +28,7 @@
         "laravelcollective/html": "^5.8.0",
         "league/geotools": "@stable",
         "orangehill/iseed": "^2.6",
+        "phaza/laravel-postgis": "^4.0",
         "pragmarx/countries": "^0.6.0",
         "predis/predis": "^1.1",
         "react/promise": "^2.7",

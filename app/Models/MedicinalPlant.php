@@ -251,8 +251,8 @@ class MedicinalPlant extends BaseModel
 
     public static $rules = [
         'plant_herbarium_number' => 'string',
-        'taxonomy_id' => 'exists:taxonomies,id',
-        'location_id' => 'exists:locations,id',
+        'taxonomy_id' => 'required|exists:taxonomies,id',
+        'location_id' => 'required|exists:locations,id',
         'aerial_part_id' => 'exists:medicinal_parts,id',
         'ground_part_id' => 'exists:medicinal_parts,id',
         'treatment_id' => 'exists:treatments,id',
@@ -280,6 +280,10 @@ class MedicinalPlant extends BaseModel
         'presence_in_country' => 'integer',
         'code_no' => 'integer',
         'height' => 'string',
+        // medicinal plant constituent
+        'medicinal_plant_id'=>'exists:medicinal_plants,id',
+        'constituent_id'=>'exists:medicinal_plant_constituents,id',
+        'constituent_type_id'=>'exists:constituent_types,id',
     ];
     public static $linguistically = [
         'medicinal_properties' => false,

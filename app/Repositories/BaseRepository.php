@@ -170,12 +170,13 @@ abstract class BaseRepository
     /**
      * Create model record
      *
-     * @param array $input
-     *
+     * @param $input
      * @return Model
      */
     public function create($input)
     {
+        $model = $this->model->newInstance($input);
+        $model->save();
         try {
             DB::beginTransaction();
             $model = $this->model->newInstance($input);

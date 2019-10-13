@@ -25,8 +25,9 @@ class Utility
 
     public static function truncateTables($table_name = null)
     {
-
-        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        if (DB::getDefaultConnection() !== 'pgsql') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        }
         $tableNames = Schema::getConnection()->getDoctrineSchemaManager()->listTableNames();
 
         if (isset($table_name)) {
@@ -40,7 +41,8 @@ class Utility
                 DB::table($name)->truncate();
             }
         }
-        DB::statement('SET FOREIGN_KEY_CHECKS=1');
-
+        if (DB::getDefaultConnection() !== 'pgsql') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        }
     }
 }

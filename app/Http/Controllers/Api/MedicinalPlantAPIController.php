@@ -369,9 +369,9 @@ class MedicinalPlantAPIController extends AppBaseController
      */
     public function store(MedicinalPlantAPIRequest $request)
     {
-        $input = $request->all();
+        //$input = $request->all();
 
-        $medicinalPlant = $this->medicinalPlantRepository->create($input);
+        $medicinalPlant = $this->medicinalPlantRepository->create($request);
 
         return $this->sendResponse($medicinalPlant->toArray(), 'Medicinal Plant saved successfully');
     }

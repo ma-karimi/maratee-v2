@@ -265,6 +265,7 @@ class SeedCollectionAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function destroy($id)
     {
