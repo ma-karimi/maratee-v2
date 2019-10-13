@@ -86,7 +86,9 @@ class Location extends BaseModel
         'min_altitude' => 'numeric',
         'max_altitude' => 'numeric'
     ];
-
+    protected $postgisFields = [
+        'point'
+    ];
     /**
      * The database table used by the model.
      *
