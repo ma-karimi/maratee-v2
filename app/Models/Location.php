@@ -77,7 +77,7 @@ use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
  */
 class Location extends BaseModel
 {
-    use SpatialTrait, LocationAccessor, LocationMutator ,PostgisTrait;
+    use SpatialTrait, LocationAccessor, LocationMutator ;
 
     public static $linguistically = ['description' => false, 'region_name' => false, 'address' => true];
     public static $rules = [
@@ -86,9 +86,7 @@ class Location extends BaseModel
         'min_altitude' => 'numeric',
         'max_altitude' => 'numeric'
     ];
-    protected $postgisFields = [
-        'point'
-    ];
+
     /**
      * The database table used by the model.
      *
@@ -96,12 +94,6 @@ class Location extends BaseModel
      */
     protected $table = 'locations';
 
-    /**
-     * @var array
-     */
-    protected $spatialFields = [
-        'point'
-    ];
 
     /**
      * The attributes that should be casted to native types.
