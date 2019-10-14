@@ -294,9 +294,9 @@ class MedicinalPlant extends BaseModel
         'wooden_id' => 'exists:life_forms,id',
         'herbaceous_id' => 'exists:life_forms,id',
         // medicinal plant constituent
-        'medicinal_plant_id'=>'exists:medicinal_plants,id',
-        'constituent_id'=>'exists:medicinal_plant_constituents,id',
-        'constituent_type_id'=>'exists:constituent_types,id',
+        'medicinal_plant_id' => 'exists:medicinal_plants,id',
+        'constituent_id' => 'exists:medicinal_plant_constituents,id',
+        'constituent_type_id' => 'exists:constituent_types,id',
     ];
     public static $linguistically = [
         'medicinal_properties' => false,
@@ -459,6 +459,12 @@ class MedicinalPlant extends BaseModel
     {
         return $this->belongsTo(General::class, 'general_origin_id'
         )->where('type', 'origin');
+    }
+
+    public function habitat()
+    {
+        return $this->belongsTo(General::class, 'general_habitat_id'
+        )->where('type', 'habitat');
     }
 
     public function distillation()
