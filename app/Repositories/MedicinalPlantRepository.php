@@ -39,7 +39,7 @@ class MedicinalPlantRepository extends BaseRepository
         return MedicinalPlant::class;
     }
 
-    public function create($input)
+   /* public function create($input)
     {
         $model=parent::create(Arr::except($input,'life_forms'));
         $this->storeLifeForm($input, $model);
@@ -51,16 +51,13 @@ class MedicinalPlantRepository extends BaseRepository
         $this->storeLifeForm($input, $model);
     }
 
-    /**
-     * @param $input
-     * @param \Illuminate\Database\Eloquent\Model $model
-     */
+
     private function storeLifeForm($input, \Illuminate\Database\Eloquent\Model $model): void
     {
         $model->cycle_id = $input['life_forms']['cycle_id'] ?? null;
         $model->wooden_id = $input['life_forms']['wooden_id'] ?? null;
         $model->herbaceous_id = $input['life_forms']['herbaceous_id'] ?? null;
         $model->save();
-    }
+    }*/
 
 }
