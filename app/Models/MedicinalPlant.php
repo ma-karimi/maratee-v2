@@ -217,10 +217,19 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          type="string",
  *      ),
  *      @SWG\Property(
- *          property="life_forms",
- *          description="life_form_cycle_id , life_form_wooden_id , life_form_herbaceous_id",
- *          type="array",
- *        @SWG\Items(type="string"),
+ *          property="cycle_id",
+ *          description="id from life_forms ",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="wooden_id",
+ *          description="id from life_forms ",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="herbaceous_id",
+ *          description="id from life_forms ",
+ *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -257,7 +266,7 @@ class MedicinalPlant extends BaseModel
         'ground_part_id' => 'exists:medicinal_parts,id',
         'treatment_id' => 'exists:treatments,id',
         'food_industry_id' => 'exists:medicinal_plant_types,id',
-        'general_origin_id' => 'exists:medicinal_plant_types,id',
+        'general_origin_id' => 'exists:generals,id',
         'hygienic_cosmetic_industry_id' => 'exists:medicinal_plant_types,id',
         'other_industry_id' => 'exists:medicinal_plant_types,id',
         'industrial_potential_id' => 'exists:medicinal_plant_types,id',
@@ -280,6 +289,10 @@ class MedicinalPlant extends BaseModel
         'presence_in_country' => 'integer',
         'code_no' => 'integer',
         'height' => 'string',
+        //life_form
+        'cycle_id' => 'exists:life_forms,id',
+        'wooden_id' => 'exists:life_forms,id',
+        'herbaceous_id' => 'exists:life_forms,id',
         // medicinal plant constituent
         'medicinal_plant_id'=>'exists:medicinal_plants,id',
         'constituent_id'=>'exists:medicinal_plant_constituents,id',
@@ -315,7 +328,6 @@ class MedicinalPlant extends BaseModel
         'efficiency' => 'float',
         'fruit_color' => 'json',
         'flower_color' => 'json',
-        'life_forms' => 'json',
     ];
 
     protected $appends = [
