@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateMedicinalPlantConstituentAPIRequest;
-use App\Http\Requests\Api\UpdateMedicinalPlantConstituentAPIRequest;
 use App\Http\Requests\Api\MedicinalPlantConstituentAPIRequest;
-use App\Models\MedicinalPlantConstituent;
 use App\Repositories\MedicinalPlantConstituentRepository;
-use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
-use Response;
+use Illuminate\Support\Facades\Response;
 
 /**
  * Class MedicinalPlantConstituentController
@@ -68,15 +64,9 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      */
     public function store(MedicinalPlantConstituentAPIRequest $request, $id)
     {
-        /** @var MedicinalPlantConstituent $medicinalPlantConstituent */
-        $medicinalPlantConstituent = $this->medicinalPlantConstituentRepository->find($id, \request()->get('relations'));
 
-        if ($medicinalPlantConstituent === null) {
-            return $this->sendError('Medicinal Plant Constituent not found');
-        }
         $this->medicinalPlantConstituentRepository->storeItems($request, $id);
 
-        //return $this->sendResponse($medicinalPlantConstituent->toArray(), 'Medicinal Plant Constituent retrieved successfully');
         return $this->sendResponse([], 'Medicinal Plant Constituent saved successfully');
     }
 
@@ -123,17 +113,10 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
 
     public function update(MedicinalPlantConstituentAPIRequest $request, $id)
     {
-        /** @var MedicinalPlantConstituent $medicinalPlantConstituent */
-        $medicinalPlantConstituent = $this->medicinalPlantConstituentRepository->find($id, \request()->get('relations'));
 
-        if ($medicinalPlantConstituent === null) {
-            return $this->sendError('Medicinal Plant Constituent not found');
-        }
         $this->medicinalPlantConstituentRepository->updateItems($request, $id);
 
-        $medicinalPlantConstituent->delete();
-
-        return $this->sendResponse($id, 'Medicinal Plant Constituent deleted successfully');
+        return $this->sendResponse([], 'Medicinal Plant Constituent updated successfully');
 
     }
 }
