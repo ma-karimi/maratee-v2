@@ -370,6 +370,18 @@ class MedicinalPlant extends BaseModel
     {
         return $this->belongsTo(Treatment::class);
     }
+    public function cycle()
+    {
+        return $this->belongsTo(LifeForm::class,'cycle_id');
+    }
+    public function wooden()
+    {
+        return $this->belongsTo(LifeForm::class,'wooden_id');
+    }
+    public function herbaceous()
+    {
+        return $this->belongsTo(LifeForm::class,'herbaceous_id');
+    }
 
     public function medicinalPlantType()
     {
