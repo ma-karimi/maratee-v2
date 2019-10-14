@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateMedicinalPlantConstituentAPIRequest;
-use App\Http\Requests\Api\UpdateMedicinalPlantConstituentAPIRequest;
 use App\Http\Requests\Api\MedicinalPlantConstituentAPIRequest;
-use App\Models\MedicinalPlantConstituent;
 use App\Repositories\MedicinalPlantConstituentRepository;
-use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
-use Response;
+use Illuminate\Support\Facades\Response;
 
 /**
  * Class MedicinalPlantConstituentController
@@ -32,8 +28,8 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @SWG\Get(
-     *      path="/medicinalPlantConstituents/{id}",
+     * @SWG\Post(
+     *      path="/medicinalPlantConstituents/{id}/store",
      *      summary="Display the specified MedicinalPlantConstituent",
      *      tags={"MedicinalPlantConstituent"},
      *      description="Get MedicinalPlantConstituent",
@@ -43,7 +39,15 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      *          description="id of MedicinalPlantConstituent",
      *          type="integer",
      *          required=true,
-     *          in="path"
+     *          in="path",
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantConstituent")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="constituents",
+     *          type="array",
+     *          required=true,
+     *          in="body",
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantConstituent")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -68,15 +72,9 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      */
     public function store(MedicinalPlantConstituentAPIRequest $request, $id)
     {
-        /** @var MedicinalPlantConstituent $medicinalPlantConstituent */
-        $medicinalPlantConstituent = $this->medicinalPlantConstituentRepository->find($id, \request()->get('relations'));
 
-        if ($medicinalPlantConstituent === null) {
-            return $this->sendError('Medicinal Plant Constituent not found');
-        }
         $this->medicinalPlantConstituentRepository->storeItems($request, $id);
 
-        //return $this->sendResponse($medicinalPlantConstituent->toArray(), 'Medicinal Plant Constituent retrieved successfully');
         return $this->sendResponse([], 'Medicinal Plant Constituent saved successfully');
     }
 
@@ -86,8 +84,8 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      * @return Response
      *
      * @throws \Exception
-     * @SWG\Delete(
-     *      path="/medicinalPlantConstituents/{id}",
+     * @SWG\Put(
+     *      path="/medicinalPlantConstituents/{id}/update",
      *      summary="Remove the specified MedicinalPlantConstituent from storage",
      *      tags={"MedicinalPlantConstituent"},
      *      description="Delete MedicinalPlantConstituent",
@@ -97,7 +95,15 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      *          description="id of MedicinalPlantConstituent",
      *          type="integer",
      *          required=true,
-     *          in="path"
+     *          in="path",
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantConstituent")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="constituents",
+     *          type="array",
+     *          required=true,
+     *          in="body",
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantConstituent")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -123,17 +129,10 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
 
     public function update(MedicinalPlantConstituentAPIRequest $request, $id)
     {
-        /** @var MedicinalPlantConstituent $medicinalPlantConstituent */
-        $medicinalPlantConstituent = $this->medicinalPlantConstituentRepository->find($id, \request()->get('relations'));
 
-        if ($medicinalPlantConstituent === null) {
-            return $this->sendError('Medicinal Plant Constituent not found');
-        }
         $this->medicinalPlantConstituentRepository->updateItems($request, $id);
 
-        $medicinalPlantConstituent->delete();
-
-        return $this->sendResponse($id, 'Medicinal Plant Constituent deleted successfully');
+        return $this->sendResponse([], 'Medicinal Plant Constituent updated successfully');
 
     }
 }
