@@ -99,6 +99,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Transaction extends BaseModel implements HasMedia
 {
+    protected $appends=['type_name'];
     use TransactionAccessor,HasMediaTrait;
 
     public const TYPE = [1 => 'visit', 2 => 'borrow', 3 => 'exchange', 4 => 'gift', 5 => 'fair', 6 => 'expense', 7 => 'correspondence'];

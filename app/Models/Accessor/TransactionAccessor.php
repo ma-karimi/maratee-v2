@@ -13,8 +13,9 @@ use Illuminate\Support\Arr;
 
 trait TransactionAccessor
 {
-    public function getTypeIdAttribute($value)
+    public function getTypeNameAttribute()
     {
+        $value= $this->attributes['type_id'];
         return Arr::get(self::TYPE, $value);
     }
 

@@ -17,8 +17,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="type_id",
- *          description="type_id",
+ *          property="transaction_type_id",
+ *          description="transaction_type_id",
  *          type="integer"
  *      ),
  *      @SWG\Property(
@@ -60,7 +60,7 @@ class TransactionHub extends BaseModel
     use TransactionHubAccessor;
     public const TYPE = [1 => 'send', 2 => 'receive'];
     public static $rules = [
-        'type_id' => 'required|in:1,2',
+        'transaction_type_id' => 'required|in:1,2',
         'sheets_no' => 'string',
     ];
 
