@@ -35,16 +35,6 @@ use App\Models\Department;
  *          type="integer"
  *      ),
  *      @SWG\Property(
- *          property="plant_consumption_value_id",
- *          description="plant_consumption_value_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="general_used_part_id",
- *          description="general_used_part_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
  *          property="department_id",
  *          description="department_id",
  *          type="integer"
@@ -83,11 +73,6 @@ use App\Models\Department;
  *          property="slope_degree",
  *          description="slope_degree",
  *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="general_habitat_id",
- *          description="general_habitat_id",
- *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="general_habitat_id",

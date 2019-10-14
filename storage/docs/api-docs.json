@@ -13926,84 +13926,35 @@
                 }
             }
         },
-        "/medicinal_plant_constituents": {
-            "get": {
-                "tags": [
-                    "MedicinalPlantConstituent"
-                ],
-                "summary": "Get a listing of the MedicinalPlantConstituents.",
-                "description": "Get all MedicinalPlantConstituents",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/MedicinalPlantConstituent"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
+        "/medicinalPlantConstituents/{id}/store": {
             "post": {
                 "tags": [
                     "MedicinalPlantConstituent"
                 ],
-                "summary": "Store a newly created MedicinalPlantConstituent in storage",
-                "description": "Store MedicinalPlantConstituent",
+                "summary": "Display the specified MedicinalPlantConstituent",
+                "description": "Get MedicinalPlantConstituent",
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
                     {
-                        "name": "medicinal_plant_id",
-                        "in": "body",
-                        "description": "MedicinalPlantConstituent that should be stored",
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of MedicinalPlantConstituent",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlantConstituent"
-                        }
+                        },
+                        "type": "integer"
                     },
                     {
-                        "name": "constituent_id",
+                        "name": "constituents",
                         "in": "body",
-                        "description": "MedicinalPlantConstituent that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlantConstituent"
-                        }
-                    },
-                    {
-                        "name": "constituent_type_id",
-                        "in": "body",
-                        "description": "MedicinalPlantConstituent that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantConstituent"
-                        }
-                    },
-                    {
-                        "name": "value",
-                        "in": "body",
-                        "description": "MedicinalPlantConstituent that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantConstituent"
-                        }
+                        },
+                        "type": "array"
                     }
                 ],
                 "responses": {
@@ -14027,120 +13978,8 @@
                 }
             }
         },
-        "/medicinalPlantConstituents/{id}": {
-            "get": {
-                "tags": [
-                    "MedicinalPlantConstituent"
-                ],
-                "summary": "Display the specified MedicinalPlantConstituent",
-                "description": "Get MedicinalPlantConstituent",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of MedicinalPlantConstituent",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/MedicinalPlantConstituent"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
+        "/medicinalPlantConstituents/{id}/update": {
             "put": {
-                "tags": [
-                    "MedicinalPlantConstituent"
-                ],
-                "summary": "Update the specified MedicinalPlantConstituent in storage",
-                "description": "Update MedicinalPlantConstituent",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of MedicinalPlantConstituent",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "medicinal_plant_id",
-                        "in": "body",
-                        "description": "MedicinalPlantConstituent that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantConstituent"
-                        }
-                    },
-                    {
-                        "name": "constituent_type_id",
-                        "in": "body",
-                        "description": "MedicinalPlantConstituent that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantConstituent"
-                        }
-                    },
-                    {
-                        "name": "constituent_id",
-                        "in": "body",
-                        "description": "MedicinalPlantConstituent that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantConstituent"
-                        }
-                    },
-                    {
-                        "name": "value",
-                        "in": "body",
-                        "description": "MedicinalPlantConstituent that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlantConstituent"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/MedicinalPlantConstituent"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
                 "tags": [
                     "MedicinalPlantConstituent"
                 ],
@@ -14155,7 +13994,19 @@
                         "in": "path",
                         "description": "id of MedicinalPlantConstituent",
                         "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantConstituent"
+                        },
                         "type": "integer"
+                    },
+                    {
+                        "name": "constituents",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlantConstituent"
+                        },
+                        "type": "array"
                     }
                 ],
                 "responses": {
@@ -23370,7 +23221,7 @@
                     {
                         "name": "features",
                         "in": "body",
-                        "description": "fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,\n     *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,\n     *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
+                        "description": "fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,\r\n     *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,\r\n     *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Soil"
@@ -23493,7 +23344,7 @@
                     {
                         "name": "features",
                         "in": "body",
-                        "description": "fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,\n     *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,\n     *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
+                        "description": "fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,\r\n     *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,\r\n     *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Soil"
@@ -30275,29 +30126,176 @@
         },
         "SeedCollection": {
             "required": [
-                "name"
+                "taxonomy_id",
+                "organization_id",
+                "location_id",
+                "plant_consumption_value_id",
+                "general_used_part_id"
             ],
             "properties": {
                 "id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "integer"
                 },
-                "name": {
-                    "description": "name",
-                    "type": "array",
-                    "format": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "taxonomy_id": {
+                    "description": "taxonomy_id",
+                    "type": "integer"
                 },
-                "description": {
-                    "description": "description",
-                    "type": "array",
-                    "format": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "organization_id": {
+                    "description": "organization_id",
+                    "type": "integer"
+                },
+                "location_id": {
+                    "description": "location_id",
+                    "type": "integer"
+                },
+                "department_id": {
+                    "description": "department_id",
+                    "type": "integer"
+                },
+                "project_id": {
+                    "description": "project_id",
+                    "type": "integer"
+                },
+                "encoded_code_by_collector": {
+                    "description": "encoded_code_by_collector",
+                    "type": "string"
+                },
+                "corrected_code_by_nrgb": {
+                    "description": "corrected_code_by_nrgb",
+                    "type": "string"
+                },
+                "accession_released_code_by_nrgb": {
+                    "description": "accession_released_code_by_nrgb",
+                    "type": "string"
+                },
+                "land_form_id": {
+                    "description": "land_form_id",
+                    "type": "integer"
+                },
+                "slope_aspect_id": {
+                    "description": "slope_aspect_id",
+                    "type": "integer"
+                },
+                "slope_degree": {
+                    "description": "slope_degree",
+                    "type": "string"
+                },
+                "general_habitat_id": {
+                    "description": "general_habitat_id",
+                    "type": "integer"
+                },
+                "soil_depth_id": {
+                    "description": "soil_depth_id",
+                    "type": "integer"
+                },
+                "soil_texture_id": {
+                    "description": "soil_texture_id",
+                    "type": "integer"
+                },
+                "drainage_id": {
+                    "description": "drainage_id",
+                    "type": "integer"
+                },
+                "soil_ph": {
+                    "description": "soil_ph",
+                    "type": "string"
+                },
+                "soil_salinity_id": {
+                    "description": "soil_salinity_id",
+                    "type": "integer"
+                },
+                "soil_lime_id": {
+                    "description": "soil_lime_id",
+                    "type": "integer"
+                },
+                "climate": {
+                    "description": "climate",
+                    "type": "string"
+                },
+                "community_type": {
+                    "description": "community_type",
+                    "type": "string"
+                },
+                "soil_erosion_id": {
+                    "description": "soil_erosion_id",
+                    "type": "integer"
+                },
+                "area_sampled": {
+                    "description": "area_sampled",
+                    "type": "integer"
+                },
+                "plants_sampled_no": {
+                    "description": "plants_sampled_no",
+                    "type": "integer"
+                },
+                "approximate_area_of_plant": {
+                    "description": "approximate_area_of_plant",
+                    "type": "integer"
+                },
+                "specimen_type_id": {
+                    "description": "specimen_type_id",
+                    "type": "integer"
+                },
+                "flowering_time_id": {
+                    "description": "1 => January ,2 => February ,3 => March ,4 => April ,5 => May ,6 => June ,7 => July ,8 => August ,9 => September ,10 => October ,11 => November ,12 => December",
+                    "type": "integer"
+                },
+                "pollination_type_id": {
+                    "description": "pollination_type_id",
+                    "type": "integer"
+                },
+                "pollination_agent_id": {
+                    "description": "pollination_agent_id",
+                    "type": "integer"
+                },
+                "fruit_type_id": {
+                    "description": "fruit_type_id",
+                    "type": "integer"
+                },
+                "seed_collected_from_id": {
+                    "description": "seed_collected_from_id",
+                    "type": "integer"
+                },
+                "date_harvesting_id": {
+                    "description": "1 => January ,2 => February ,3 => March ,4 => April ,5 => May ,6 => June ,7 => July ,8 => August ,9 => September ,10 => October ,11 => November ,12 => December",
+                    "type": "integer"
+                },
+                "life_form_id": {
+                    "description": "life_form_id",
+                    "type": "integer"
+                },
+                "growth_form_id": {
+                    "description": "growth_form_id",
+                    "type": "integer"
+                },
+                "plant_height": {
+                    "description": "plant_height",
+                    "type": "integer"
+                },
+                "plant_mother_health_id": {
+                    "description": "plant_mother_health_id",
+                    "type": "integer"
+                },
+                "plant_consumption_value_id": {
+                    "description": "plant_consumption_value_id",
+                    "type": "integer"
+                },
+                "general_used_part_id": {
+                    "description": "general_used_part_id",
+                    "type": "integer"
+                },
+                "how_to_use": {
+                    "description": "how_to_use",
+                    "type": "string"
+                },
+                "other_details": {
+                    "description": "other_details",
+                    "type": "string"
+                },
+                "special_advise": {
+                    "description": "special_advise",
+                    "type": "string"
                 },
                 "created_at": {
                     "description": "created_at",
@@ -30720,7 +30718,7 @@
                     }
                 },
                 "features": {
-                    "description": "fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,\n *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,\n *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
+                    "description": "fill this firlds as percent : clay_feature , loam_feature , fine_sand_feature ,\r\n *          coarse_sand_feature , gravel_feature , shale_feature , salt_feature ,\r\n *          gypsum_feature , peat_feature , compost_feature , manure_feature , bone_powder_feature",
                     "type": "array",
                     "items": {
                         "type": "string"

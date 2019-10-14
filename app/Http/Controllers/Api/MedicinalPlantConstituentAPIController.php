@@ -28,8 +28,8 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @SWG\Get(
-     *      path="/medicinalPlantConstituents/{id}",
+     * @SWG\Post(
+     *      path="/medicinalPlantConstituents/{id}/store",
      *      summary="Display the specified MedicinalPlantConstituent",
      *      tags={"MedicinalPlantConstituent"},
      *      description="Get MedicinalPlantConstituent",
@@ -39,7 +39,15 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      *          description="id of MedicinalPlantConstituent",
      *          type="integer",
      *          required=true,
-     *          in="path"
+     *          in="path",
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantConstituent")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="constituents",
+     *          type="array",
+     *          required=true,
+     *          in="body",
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantConstituent")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -76,8 +84,8 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      * @return Response
      *
      * @throws \Exception
-     * @SWG\Delete(
-     *      path="/medicinalPlantConstituents/{id}",
+     * @SWG\Put(
+     *      path="/medicinalPlantConstituents/{id}/update",
      *      summary="Remove the specified MedicinalPlantConstituent from storage",
      *      tags={"MedicinalPlantConstituent"},
      *      description="Delete MedicinalPlantConstituent",
@@ -87,7 +95,15 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      *          description="id of MedicinalPlantConstituent",
      *          type="integer",
      *          required=true,
-     *          in="path"
+     *          in="path",
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantConstituent")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="constituents",
+     *          type="array",
+     *          required=true,
+     *          in="body",
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlantConstituent")
      *      ),
      *      @SWG\Response(
      *          response=200,
