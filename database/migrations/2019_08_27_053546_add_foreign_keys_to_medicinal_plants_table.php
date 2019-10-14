@@ -29,6 +29,11 @@ class AddForeignKeysToMedicinalPlantsTable extends Migration {
 			$table->foreign('pharmaceutical_form_id')->references('id')->on('medicinal_plant_types')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('product_id')->references('id')->on('products')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('medicine_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('treatment_id')->references('id')->on('treatments')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('general_habitat_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('cycle_id')->references('id')->on('life_forms')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('wooden_id')->references('id')->on('life_forms')->onUpdate('NO ACTION')->onDelete('CASCADE');
+			$table->foreign('herbaceous_id')->references('id')->on('life_forms')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

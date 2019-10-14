@@ -185,24 +185,23 @@ class PlantHerbarium extends BaseModel implements HasMedia
      */
     protected $casts = [
         'description' => 'json',
-        'life_forms' => 'json',
         'habitat_description' => 'json',
         'ecology_description' => 'json',
     ];
 
     public function determine()
     {
-        return $this->morphMany(ActionHub::class, 'actionable')->where('action_id', 1);
+        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 1);
     }
 
     public function collect()
     {
-        return $this->morphMany(ActionHub::class, 'actionable')->where('action_id', 2);
+        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 2);
     }
 
     public function research()
     {
-        return $this->morphMany(ActionHub::class, 'actionable')->where('action_id', 3);
+        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 3);
     }
 
     /**

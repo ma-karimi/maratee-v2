@@ -57,14 +57,17 @@ class CreateMedicinalPlantsTable extends Migration {
             $table->json('fruit_color')->nullable();
             $table->json('flower_color')->nullable();
             $table->string('height')->nullable()->comment('unit: cm');
-            $table->json('life_forms')->comment('life_form_cycle_id, life_form_wooden_id, life_form_herbaceous_id')->nullable();
+            //$table->json('life_forms')->comment('life_form_cycle_id, life_form_wooden_id, life_form_herbaceous_id')->nullable();
+            $table->unsignedBigInteger('cycle_id')->nullable();
+            $table->unsignedBigInteger('wooden_id')->nullable();
+            $table->unsignedBigInteger('herbaceous_id')->nullable();
 
             $table->timeStampsTz();
             $table->softDeletesTz();
         });
-        CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_cycle_id', 'life_forms', 'cycle_id', true);
-        CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_wooden_id', 'life_forms', 'wooden_id', true);
-        CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_herbaceous_id', 'life_forms', 'herbaceous_id', true);
+       // CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_cycle_id', 'life_forms', 'cycle_id', true);
+      //  CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_wooden_id', 'life_forms', 'wooden_id', true);
+       // CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_herbaceous_id', 'life_forms', 'herbaceous_id', true);
 	}
 
 
