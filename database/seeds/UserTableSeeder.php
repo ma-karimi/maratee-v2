@@ -23,9 +23,7 @@ class UserTableSeeder extends Seeder
             'national_id' => 61,
             'birthday' => '1993-01-20',
             'nationality' => ['en' => 'Colombia'],
-            'first_name' => ['en' => 'Camille'],
-            'last_name' => ['en' => 'Swift'],
-            'nickname' => ['en' => 'laborum'],
+            'full_name' => ['en' => 'Camille Swift'],
             'mobile' => '9145508431',
             'phone' => '9145508431',
         ]);
