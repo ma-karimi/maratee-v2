@@ -19,17 +19,17 @@ class CreatePlantHerbariumsTable extends Migration
             $table->string('herbarium_number')->nullable()->comment('herbarium number');
             $table->string('herbarium_index')->nullable();
             $table->string('cf')->nullable();
-            $table->integer('sheets_no')->nullable()->comment('Number of required sheets per herbarium sample');
-            $table->integer('samples_no')->nullable()->comment('Quantity of samples of each herbarium number');
-            $table->integer('tip_qt')->nullable()->comment('number of tips
-if tip_qt > 0, it meant we have the tip herbarium, otherwise means we don\'t have any tips related to this herbarium number');
-            $table->integer('physical_tip_qt')->nullable()->comment('it means how many physical tips we have.
-if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >0, it means we have image tips, rather than physical tips.');
-            $table->json('description')->nullable();
+//            $table->integer('sheets_no')->nullable()->comment('Number of required sheets per herbarium sample');
+//            $table->integer('samples_no')->nullable()->comment('Quantity of samples of each herbarium number');
+//            $table->integer('tip_qt')->nullable()->comment('number of tips
+//if tip_qt > 0, it meant we have the tip herbarium, otherwise means we don\'t have any tips related to this herbarium number');
+//            $table->integer('physical_tip_qt')->nullable()->comment('it means how many physical tips we have.
+//if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >0, it means we have image tips, rather than physical tips.');
+            $table->text('description')->nullable();
             $table->boolean('is_flowering')->default(0);
             //$table->json('life_forms')->comment('life_form_leaf_id, life_form_cycle_id, life_form_wooden_id, life_form_herbaceous_id')->nullable();
-            $table->json('habitat_description')->nullable();
-            $table->json('ecology_description')->nullable();
+            $table->text('habitat_description')->nullable();
+            $table->text('ecology_description')->nullable();
             $table->tinyInteger('flowering_time')->nullable();
 
             $table->unsignedBigInteger('location_id')->nullable();
@@ -47,7 +47,7 @@ if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >
             $table->unsignedBigInteger('cycle_id')->nullable();
             $table->unsignedBigInteger('wooden_id')->nullable();
             $table->unsignedBigInteger('herbaceous_id')->nullable();
-            $table->unsignedBigInteger('leaf_id')->nullable();
+//            $table->unsignedBigInteger('leaf_id')->nullable();
 
             $table->timeStamps();
             $table->softDeletesTz();

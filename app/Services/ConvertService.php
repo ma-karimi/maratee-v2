@@ -261,8 +261,8 @@ class ConvertService
 
     private function firstOrCreateVillage(): void
     {
-        $this->models['village'] = Village::where($this->villageConditions())->first();
-        if (!$this->models['village'])
+//        $this->models['village'] = Village::where($this->villageConditions())->first();
+//        if (!$this->models['village'])
             $this->models['village'] = Village::create($this->villageData());
     }
 
@@ -404,15 +404,22 @@ class ConvertService
 
     private function plantHerbariumData(): array
     {
-        return [
+        $array= [
             'herbarium_number' => $this->treeLeaf->herbariumnumber,
-            'cf' => $this->treeLeaf->cf,
-            'description' => $this->treeLeaf['note1'],
             'is_flowering' => 0,
             'location_id' => $this->models['location']['id'],
             'organization_id' => $this->models['organization']['id'],
             'taxonomy_id' => $this->models['taxonomy']['id'],
         ];
+
+        if(!empty($this->treeLeaf->cf)){
+            $array['cf'] = $this->treeLeaf->cf;
+        }
+        if(!empty($this->treeLeaf->note1)){
+            $array['description'] = $this->treeLeaf->note1;
+        }
+
+        return $array;
     }
 
     private function actionHubCollectData(): array

@@ -193,10 +193,10 @@ class PlantHerbarium extends BaseModel implements HasMedia
      * @var array
      */
     protected $casts = [
-        'description' => 'json',
-        'habitat_description' => 'json',
-        'ecology_description' => 'json',
-        'life_forms' => 'json',
+//        'description' => 'json',
+//        'habitat_description' => 'json',
+//        'ecology_description' => 'json',
+//        'life_forms' => 'json',
     ];
 
     public static $rules = [
