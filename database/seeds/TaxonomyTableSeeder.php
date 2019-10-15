@@ -11,7 +11,7 @@ class TaxonomyTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Taxonomy::class, 50)->create();
+        factory(\App\Models\Taxonomy::class, 500)->create();
         /*factory(App\Models\Taxonomy::class, 50)->create();
         foreach (\App\Models\PlantHerbarium::all() as $index => $item) {
             $plant_family_generals = \App\Models\General::where('type', 'family')->pluck('id');

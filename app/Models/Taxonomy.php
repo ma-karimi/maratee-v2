@@ -99,6 +99,13 @@ class Taxonomy extends BaseModel
     {
         return $this->hasOne(ScientificView::class, 'taxonomy_id');
     }
+    /**
+     * @return HasOne
+     */
+    public function authors(): HasOne
+    {
+        return $this->hasOne(TaxonomyAuthorView::class, 'taxonomy_id');
+    }
 
     /**
      * @return HasMany

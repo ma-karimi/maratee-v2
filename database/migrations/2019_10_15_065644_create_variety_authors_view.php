@@ -25,7 +25,6 @@ class CreateVarietyAuthorsView extends Migration
             ) as variety_authors
       )
     "
-
         );
     }
 
