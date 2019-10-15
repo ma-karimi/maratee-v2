@@ -13,18 +13,18 @@ class CreateFullNameView extends Migration
      */
     public function up()
     {
-        \Illuminate\Support\Facades\DB::statement('DROP VIEW IF EXISTS full_name_view');
-        \Illuminate\Support\Facades\DB::statement("
-      CREATE VIEW full_name_view AS
-      (
-        SELECT 
-        id as user_id,
-        CONCAT_WS(' ', users.last_name::jsonb @>'en',first_name::jsonb @>'en') as full_name
-        from users
-      )
-    "
-
-        );
+//        \Illuminate\Support\Facades\DB::statement('DROP VIEW IF EXISTS full_name_view');
+//        \Illuminate\Support\Facades\DB::statement("
+//      CREATE VIEW full_name_view AS
+//      (
+//        SELECT
+//        id as user_id,
+//        CONCAT_WS(' ', users.last_name::jsonb @>'en',first_name::jsonb @>'en') as full_name
+//        from users
+//      )
+//    "
+//
+//        );
     }
 
     /**
@@ -34,6 +34,6 @@ class CreateFullNameView extends Migration
      */
     public function down()
     {
-        \Illuminate\Support\Facades\DB::statement('DROP VIEW IF EXISTS full_name_view');
+//        \Illuminate\Support\Facades\DB::statement('DROP VIEW IF EXISTS full_name_view');
     }
 }
