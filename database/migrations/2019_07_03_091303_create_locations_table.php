@@ -1,7 +1,7 @@
 <?php
 
+use Grimzy\LaravelMysqlSpatial\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Phaza\LaravelPostgis\Schema\Blueprint;
 
 
 class CreateLocationsTable extends Migration {
