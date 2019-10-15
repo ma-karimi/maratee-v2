@@ -156,10 +156,10 @@ class PlantHerbariumRepository extends BaseRepository
             'habitat_description' => $input['habitat_description'] ?? null,
             'ecology_description' => $input['ecology_description'] ?? null,
             //life_form
-            'cycle_id' => $input['life_forms']['cycle_id'] ?? null,
-            'wooden_id' => $input['life_forms']['wooden_id'] ?? null,
-            'herbaceous_id' => $input['life_forms']['herbaceous_id'] ?? null,
-            'leaf_id' => $input['life_forms']['leaf_id'] ?? null,
+            'cycle_id' => $input['cycle_id'] ?? null,
+            'wooden_id' => $input['wooden_id'] ?? null,
+            'herbaceous_id' => $input['herbaceous_id'] ?? null,
+            'leaf_id' => $input['leaf_id'] ?? null,
             //
             'is_flowering' => $input['is_flowering'] ?? 0,
             'flowering_time' => $input['flowering_time'] ?? null,
@@ -251,10 +251,10 @@ class PlantHerbariumRepository extends BaseRepository
             'habitat_description' => $input['habitat_description'] ?? null,
             'ecology_description' => $input['ecology_description'] ?? null,
             //life_form
-            'cycle_id' => $input['life_forms']['cycle_id'] ?? null,
-            'wooden_id' => $input['life_forms']['wooden_id'] ?? null,
-            'herbaceous_id' => $input['life_forms']['herbaceous_id'] ?? null,
-            'leaf_id' => $input['life_forms']['leaf_id'] ?? null,
+            'cycle_id' => $input['cycle_id'] ?? null,
+            'wooden_id' => $input['wooden_id'] ?? null,
+            'herbaceous_id' => $input['herbaceous_id'] ?? null,
+            'leaf_id' => $input['leaf_id'] ?? null,
             //
             'is_flowering' => $input['is_flowering'] ?? 0,
             'flowering_time' => $input['flowering_time'] ?? null,
