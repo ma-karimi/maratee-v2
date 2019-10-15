@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\MedicinalPlantConstituent;
-use App\Repositories\BaseRepository;
 
 /**
  * Class MedicinalPlantConstituentRepository
@@ -42,7 +41,7 @@ class MedicinalPlantConstituentRepository extends BaseRepository
     {
         if (count($request->get('constituents'))) {
             foreach ($request->get('constituents') as $item) {
-                if (!empty(!$item['constituent_type_id'] && !empty($item['value']) && !empty($item['constituent_id']))) {
+                if (!empty($item['constituent_type_id']) && !empty($item['value'])) {
                     $this->create([
                         'medicinal_plant_id' => $medicinal_plant_id,
                         'constituent_id' => $item['constituent_id'],
@@ -57,7 +56,7 @@ class MedicinalPlantConstituentRepository extends BaseRepository
     public function updateItems($request, $medicinal_plant_id)
     {
         foreach ($request->get('constituents') as $item) {
-            if (!empty(!$item['constituent_type_id'] && !empty($item['value']) && !empty($item['constituent_id']))) {
+            if (!empty($item['constituent_type_id']) && !empty($item['value'])) {
                 $record = $this->find($request->get('medicinal_plant_constituent_id'));
                 $record->update([
                     'medicinal_plant_id' => $medicinal_plant_id,

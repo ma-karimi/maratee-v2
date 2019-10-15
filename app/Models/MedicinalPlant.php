@@ -6,6 +6,7 @@ use App\Models\Accessor\MedicinalPlantAccessor;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -390,6 +391,16 @@ class MedicinalPlant extends BaseModel
             'medicinal_plant_id',
             'medicinal_plant_type_id'
         )->whereNull('medicinal_plant_properties.deleted_at')
+            ->withTimestamps();
+    }
+
+    public function provinces(): BelongsToMany
+    {
+        return $this->belongsToMany(Province::class,
+            'medicinal_plant_provinces',
+            'medicinal_plant_id',
+            'province_id'
+        )->whereNull('medicinal_plant_provinces.deleted_at')
             ->withTimestamps();
     }
 

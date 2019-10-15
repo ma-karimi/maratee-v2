@@ -154,12 +154,11 @@ Route::apiResource('maps', 'MapAPIController');
 Route::apiResource('media', 'MediaAPIController');
 
 
+Route::post('medicinal_plants/{medicinal_plant_id}/provinces', 'MedicinalPlantProvinceAPIController@store');
+Route::match(['PUT', 'PATCH'], 'medicinal_plants/{medicinal_plant_id}/provinces', 'MedicinalPlantProvinceAPIController@update');
+Route::post('medicinal_plants/{medicinal_plant_id}/constituents', 'MedicinalPlantConstituentAPIController@store');
+Route::match(['PUT', 'PATCH'], 'medicinal_plants/{medicinal_plant_id}/constituents', 'MedicinalPlantConstituentAPIController@update');
 Route::apiResource('medicinal_plants', 'MedicinalPlantAPIController');
-
-
-Route::post('medicinal_plant_constituents/{medicinal_plant_id}/store', 'MedicinalPlantConstituentAPIController@store');
-Route::post('medicinal_plant_constituents/{medicinal_plant_id}/update', 'MedicinalPlantConstituentAPIController@update');
-//Route::apiResource('medicinal_plant_constituents', 'MedicinalPlantConstituentAPIController');
 
 
 

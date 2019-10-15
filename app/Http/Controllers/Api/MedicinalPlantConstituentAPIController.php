@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Response;
  * Class MedicinalPlantConstituentController
  * @package App\Http\Controllers\Api
  */
-
 class MedicinalPlantConstituentAPIController extends AppBaseController
 {
     /** @var  MedicinalPlantConstituentRepository */
@@ -29,14 +28,14 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/medicinalPlantConstituents/{id}/store",
+     *      path="medicinal_plants/{medicinal_plant_id}/constituents",
      *      summary="Display the specified MedicinalPlantConstituent",
      *      tags={"MedicinalPlantConstituent"},
      *      description="Get MedicinalPlantConstituent",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of MedicinalPlantConstituent",
+     *          name="medicinal_plant_id",
+     *          description="id of MedicinalPlant",
      *          type="integer",
      *          required=true,
      *          in="path",
@@ -85,14 +84,14 @@ class MedicinalPlantConstituentAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Put(
-     *      path="/medicinalPlantConstituents/{id}/update",
+     *      path="medicinal_plants/{medicinal_plant_id}/constituents",
      *      summary="Remove the specified MedicinalPlantConstituent from storage",
      *      tags={"MedicinalPlantConstituent"},
      *      description="Delete MedicinalPlantConstituent",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of MedicinalPlantConstituent",
+     *          name="medicinal_plant_id",
+     *          description="id of MedicinalPlant",
      *          type="integer",
      *          required=true,
      *          in="path",
