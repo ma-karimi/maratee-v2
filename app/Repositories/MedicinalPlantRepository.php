@@ -97,7 +97,7 @@ class MedicinalPlantRepository extends BaseRepository
      */
     private function locationAndLifeFormsData(): array
     {
-        return ['life_forms', 'address', 'province_id', 'village_id', 'province_id', 'region_name', 'min_altitude', 'max_altitude', 'point', 'location_description'];
+        return ['life_forms', 'address', 'province_id', 'village_id', 'province_id', 'region_name', 'min_altitude', 'max_altitude', 'point', 'location_description', 'city_id'];
     }
 
     private function storeLifeForm($input, \Illuminate\Database\Eloquent\Model $model)
