@@ -294,10 +294,6 @@ class MedicinalPlant extends BaseModel
         'cycle_id' => 'exists:life_forms,id',
         'wooden_id' => 'exists:life_forms,id',
         'herbaceous_id' => 'exists:life_forms,id',
-        // medicinal plant constituent
-        'medicinal_plant_id' => 'exists:medicinal_plants,id',
-        'constituent_id' => 'exists:medicinal_plant_constituents,id',
-        'constituent_type_id' => 'exists:constituent_types,id',
     ];
     public static $linguistically = [
         'medicinal_properties' => false,
