@@ -407,6 +407,7 @@ class ConvertService
         return [
             'herbarium_number' => $this->treeLeaf->herbariumnumber,
             'cf' => $this->treeLeaf->cf,
+            'description' => $this->treeLeaf['note1'],
             'is_flowering' => 0,
             'location_id' => $this->models['location']['id'],
             'organization_id' => $this->models['organization']['id'],
