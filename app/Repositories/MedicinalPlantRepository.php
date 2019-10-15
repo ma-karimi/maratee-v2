@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Models\Location;
 use App\Models\MedicinalPlant;
-use App\Models\MedicinalPlantConstituent;
-use App\Repositories\BaseRepository;
+use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
 
 /**
@@ -14,6 +14,23 @@ use Illuminate\Support\Arr;
  */
 class MedicinalPlantRepository extends BaseRepository
 {
+    /**
+     * @var Location
+     */
+    private $location_model;
+
+    /**
+     * MedicinalPlantRepository constructor.
+     * @param Application $app
+     * @param Location $location_model
+     * @throws \Exception
+     */
+    public function __construct(Application $app, Location $location_model)
+    {
+        parent::__construct($app);
+        $this->location_model = $location_model;
+    }
+
     /**
      * @var array
      */
