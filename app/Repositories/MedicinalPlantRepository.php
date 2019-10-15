@@ -41,25 +41,9 @@ class MedicinalPlantRepository extends BaseRepository
 
     public function create($input)
     {
-        $model=parent::create(Arr::except($input,'life_forms'));
-        $location = $this->firstOrCreateLocation($input);
+        $input['location_id'] = $this->firstOrCreateLocation($input)->id;
+        $model = parent::create(Arr::except($input, $this->locationAndLifeFormsData()));
         return $this->storeLifeForm($input, $model);
-    }
-
-    public function update($input, $id)
-    {
-        $model=parent::update(Arr::except($input,'life_forms'),$id);
-        return $this->storeLifeForm($input, $model);
-    }
-
-
-    private function storeLifeForm($input, \Illuminate\Database\Eloquent\Model $model)
-    {
-        $model->cycle_id = $input['life_forms']['cycle_id'] ?? null;
-        $model->wooden_id = $input['life_forms']['wooden_id'] ?? null;
-        $model->herbaceous_id = $input['life_forms']['herbaceous_id'] ?? null;
-        $model->save();
-        return $model;
     }
 
     /**
@@ -80,6 +64,30 @@ class MedicinalPlantRepository extends BaseRepository
         ];
         //store location
         return $this->location_model->firstOrCreate($location_input);
+    }
+
+    /**
+     * @return array
+     */
+    private function locationAndLifeFormsData(): array
+    {
+        return ['life_forms', 'address', 'province_id', 'village_id', 'province_id', 'region_name', 'min_altitude', 'max_altitude', 'point', 'location_description'];
+    }
+
+    private function storeLifeForm($input, \Illuminate\Database\Eloquent\Model $model)
+    {
+        $model->cycle_id = $input['life_forms']['cycle_id'] ?? null;
+        $model->wooden_id = $input['life_forms']['wooden_id'] ?? null;
+        $model->herbaceous_id = $input['life_forms']['herbaceous_id'] ?? null;
+        $model->save();
+        return $model;
+    }
+
+    public function update($input, $id)
+    {
+        $input['location_id'] = $this->firstOrCreateLocation($input)->id;
+        $model = parent::update(Arr::except($input, $this->locationAndLifeFormsData()), $id);
+        return $this->storeLifeForm($input, $model);
     }
 
 }
