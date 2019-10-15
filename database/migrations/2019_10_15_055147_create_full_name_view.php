@@ -19,7 +19,7 @@ class CreateFullNameView extends Migration
       (
         SELECT 
         id as user_id,
-        CONCAT_WS(' ', users.last_name->>'en',first_name->>'en') as full_name
+        CONCAT_WS(' ', users.last_name->'en',first_name->'en') as full_name
         from users
       )
     "
