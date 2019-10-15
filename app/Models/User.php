@@ -16,7 +16,7 @@ use Laravel\Passport\HasApiTokens;
 /**
  * @SWG\Definition(
  *      definition="User",
- *      required={"title","email","first_name","last_name","password"},
+ *      required={"title","email","full_name","password"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -73,22 +73,8 @@ use Laravel\Passport\HasApiTokens;
  *          type="string",
  *      ),
  *      @SWG\Property(
- *          property="first_name",
- *          description="first_name",
- *          type="array",
- *     @SWG\Items(type="string"),
- *          format="array"
- *      ),
- *      @SWG\Property(
- *          property="last_name",
- *          description="last_name",
- *          type="array",
- *     @SWG\Items(type="string"),
- *          format="array"
- *      ),
- *      @SWG\Property(
- *          property="nickname",
- *          description="nickname",
+ *          property="full_name",
+ *          description="full_name",
  *          type="array",
  *     @SWG\Items(type="string"),
  *          format="array"
@@ -137,7 +123,7 @@ use Laravel\Passport\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, UserScope, UserAccessor, Notifiable, SearchableTrait;
-    public static $linguistically = ['title' => true, 'education' => false, 'degree' => false, 'nationality' => false, 'first_name' => true, 'last_name' => true, 'nickname' => false];
+    public static $linguistically = ['title' => true, 'education' => false, 'degree' => false, 'nationality' => false, 'full_name' => true];
     public static $rules = [
         'national_id' => 'string',
         'passport_no' => 'string',
@@ -148,8 +134,7 @@ class User extends Authenticatable
         'phone' => 'string',
         'password' => 'required|string',
         'work_experience' => 'integer',
-        'first_name' => 'required',
-        'last_name' => 'required',
+        'full_name' => 'required',
     ];
     public static $messages = [];
 
@@ -176,9 +161,7 @@ class User extends Authenticatable
         'education' => 'json',
         'degree' => 'json',
         'nationality' => 'json',
-        'first_name' => 'json',
-        'last_name' => 'json',
-        'nickname' => 'json',
+        'full_name' => 'json',
     ];
 
     /**
@@ -329,14 +312,6 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-    public function paleontologyMedias()
-    {
-        return $this->hasMany(PaleontologyMedia::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
     public function plants()
     {
         return $this->hasMany(PlantHerbarium::class)->latest();
@@ -372,14 +347,6 @@ class User extends Authenticatable
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class)->latest();
-    }
-
-    /**
-     * @return HasOne
-     */
-    public function fullName(): HasOne
-    {
-        return $this->hasOne(FullNameView::class, 'user_id');
     }
 
 }

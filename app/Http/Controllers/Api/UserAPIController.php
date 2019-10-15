@@ -91,13 +91,7 @@ class UserAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/User")
      *      ),
      *      @SWG\Parameter(
-     *          name="first_name",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="last_name",
+     *          name="full_name",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/User")
@@ -140,12 +134,6 @@ class UserAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="passport_no",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="nickname",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/User")
@@ -234,13 +222,7 @@ class UserAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/User")
      *      ),
      *      @SWG\Parameter(
-     *          name="first_name",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="last_name",
+     *          name="full_name",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/User")
@@ -283,12 +265,6 @@ class UserAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="passport_no",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="nickname",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/User")
@@ -380,12 +356,6 @@ class UserAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/User")
      *      ),
      *      @SWG\Parameter(
-     *          name="last_name",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
      *          name="password",
      *          in="body",
      *          required=false,
@@ -423,12 +393,6 @@ class UserAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="passport_no",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="nickname",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/User")

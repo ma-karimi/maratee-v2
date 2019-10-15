@@ -23,25 +23,20 @@ class CreateUsersTable extends Migration {
 			$table->date('birthday')->nullable();
 			$table->json('nationality')->nullable();
 			$table->string('passport_no', 45)->nullable();
-			$table->json('first_name');
+			$table->json('full_name');
 			$table->json('last_name');
-			$table->json('nickname')->nullable();
 			$table->tinyInteger('is_author')->default(0)->comment('0:disable, 1:enable');
 			$table->string('mobile')->nullable();
 			$table->string('phone')->nullable();
 			$table->string('email');
 			$table->string('password');
 			$table->integer('work_experience')->nullable();
-			$table->tinyInteger('status')->nullable();
+			$table->tinyInteger('status_id')->nullable();
             $table->timeStamps();
             $table->softDeletesTz();
-            //$table->string('full_name')->( 'phone');
-            //$table->integer('full_name1')->generatedAs( "last_name->>"."$.en".");
-            //$table->string('full_name2')->generatedAs( 'last_name->>"$.en"');
 
         });
-		//$fields=['last_name'=>'en','first_name'=>'en'];
-       // CustomBlueprint::generatedVirtualConcat('users', 'full_name', $fields, false, 'VARCHAR(255)');
+
 	}
 
 
