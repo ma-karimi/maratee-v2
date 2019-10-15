@@ -102,9 +102,9 @@ class MedicinalPlantRepository extends BaseRepository
 
     private function storeLifeForm($input, \Illuminate\Database\Eloquent\Model $model)
     {
-        $model->cycle_id = $input['life_forms']['cycle_id'] ?? null;
-        $model->wooden_id = $input['life_forms']['wooden_id'] ?? null;
-        $model->herbaceous_id = $input['life_forms']['herbaceous_id'] ?? null;
+        $model->cycle_id = $input['cycle_id'] ?? null;
+        $model->wooden_id = $input['wooden_id'] ?? null;
+        $model->herbaceous_id = $input['herbaceous_id'] ?? null;
         $model->save();
         return $model;
     }
