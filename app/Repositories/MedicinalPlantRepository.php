@@ -15,6 +15,12 @@ use Illuminate\Support\Arr;
 class MedicinalPlantRepository extends BaseRepository
 {
     /**
+     * @var array
+     */
+    protected $fieldSearchable = [
+
+    ];
+    /**
      * @var Location
      */
     private $location_model;
@@ -30,13 +36,6 @@ class MedicinalPlantRepository extends BaseRepository
         parent::__construct($app);
         $this->location_model = $location_model;
     }
-
-    /**
-     * @var array
-     */
-    protected $fieldSearchable = [
-
-    ];
 
     /**
      * Return searchable fields
@@ -58,7 +57,7 @@ class MedicinalPlantRepository extends BaseRepository
 
     public function create($input)
     {
-        $input['location_id'] = $this->firstOrCreateLocation($input)->id;
+        $input['location_id'] = $this->createLocation($input)->id;
         $model = parent::create(Arr::except($input, $this->locationAndLifeFormsData()));
         return $this->storeLifeForm($input, $model);
     }
@@ -67,9 +66,20 @@ class MedicinalPlantRepository extends BaseRepository
      * @param $input
      * @return object
      */
-    private function firstOrCreateLocation($input)
+    private function createLocation($input)
     {
-        $location_input = [
+        $location_input = $this->locationData($input);
+
+        return $this->location_model->create($location_input);
+    }
+
+    /**
+     * @param $input
+     * @return array
+     */
+    private function locationData($input): array
+    {
+        return [
             'province_id' => $input['province_id'],
             'city_id' => $input['city_id'] ?? null,
             'region_name' => $input['region_name'] ?? null,
@@ -80,8 +90,6 @@ class MedicinalPlantRepository extends BaseRepository
             'point' => $input['point'] ?? null,
             'description' => $input['location_description'] ?? null,
         ];
-        //store location
-        return $this->location_model->firstOrCreate($location_input);
     }
 
     /**
@@ -103,9 +111,20 @@ class MedicinalPlantRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        $input['location_id'] = $this->firstOrCreateLocation($input)->id;
+        $this->updateLocation($input);
         $model = parent::update(Arr::except($input, $this->locationAndLifeFormsData()), $id);
         return $this->storeLifeForm($input, $model);
+    }
+
+    /**
+     * @param $input
+     * @return object
+     */
+    private function updateLocation($input)
+    {
+        $location_input = $this->locationData($input);
+
+        return $this->location_model->find($input['location_id'])->update($location_input);
     }
 
 }
