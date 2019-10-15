@@ -170,7 +170,8 @@ class PlantHerbariumRepository extends BaseRepository
     private function firstOrCreateLocation($input)
     {
         $location_input = [
-            'city_id' => $input['city_id'],
+            'province_id' => $input['province_id'],
+            'city_id' => $input['city_id'] ?? null,
             'region_name' => $input['region_name'] ?? null,
             'address' => $input['address'] ?? null,
             'village_id' => $input['village_id'] ?? null,
