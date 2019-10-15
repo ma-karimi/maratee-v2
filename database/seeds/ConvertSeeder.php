@@ -26,7 +26,7 @@ class ConvertSeeder extends Seeder
     public function run()
     {
         $treeLeafs = Treeleaf::skip($this->skip)->take($this->take)->get();
-        \App\Models\Country::create([
+        \App\Models\Country::updateOrCreate([
             'name' => ['en'=>'Iran','fa'=>'ایران']
         ]);
         foreach ($treeLeafs as $treeLeaf)

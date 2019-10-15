@@ -70,7 +70,7 @@ class ConvertService
                 $this->models['village'] = null;
             }
             // location
-            $this->firstOrCreateLocation();
+            $this->createLocation();
 
 
         } elseif (!empty($this->treeLeaf->cityR) && !empty($this->treeLeaf->cityR->parent)) {
@@ -85,14 +85,14 @@ class ConvertService
                 $this->models['city'] = null;
             }
             // location
-            $this->firstOrCreateLocation();
+            $this->createLocation();
 
         } elseif (!empty($this->treeLeaf->provinceR) && !empty($this->treeLeaf->provinceR['name'])) {
             $this->firstOrCreateProvince($this->treeLeaf->provinceR, 'province');
 
 
             // location
-            $this->firstOrCreateLocation();
+            $this->createLocation();
 
 
         } else {
@@ -130,6 +130,22 @@ class ConvertService
         // plant herbarium
         $this->models['plantHerbarium'] = PlantHerbarium::create($this->plantHerbariumData());
 
+
+        // action hub detect
+        if ($this->treeLeaf->detect) {
+            $detectors = explode('&', $this->treeLeaf->detect->name);
+
+            $this->models['actionHub']['detect'] = ActionHub::create($this->actionHubDetectData());
+
+            foreach ($detectors as $detector) {
+
+                $this->models['actor']['detect'] = Actor::firstOrCreate($this->actorDetectData($detector));
+                // detect hub
+                $this->models['actorHub']['detect'] = ActorHub::create($this->actorHubDetectData());
+
+            }
+        }
+
         if ($this->treeLeaf->collect) {
             $collectors = explode('&', $this->treeLeaf->collect->name);
             // action hub collect
@@ -146,20 +162,6 @@ class ConvertService
             }
         }
 
-        // action hub detect
-        if ($this->treeLeaf->detect) {
-            $detectors = explode('&', $this->treeLeaf->detect->name);
-
-            $this->models['actionHub']['detect'] = ActionHub::create($this->actionHubDetectData());
-
-            foreach ($detectors as $detector) {
-
-                $this->models['actor']['detect'] = Actor::firstOrCreate($this->actorDetectData($detector));
-                // detect hub
-                $this->models['actorHub']['detect'] = ActorHub::create($this->actorHubDetectData());
-
-            }
-        }
 
         $this->log(" - - - - end convert TreeLeaf id : {$this->id} - - - - ");
 
@@ -285,10 +287,10 @@ class ConvertService
         return $array;
     }
 
-    private function firstOrCreateLocation(): void
+    private function createLocation(): void
     {
-        $this->models['location'] = Location::where($this->locationConditions())->first();
-        if (!$this->models['location'])
+//        $this->models['location'] = Location::where($this->locationConditions())->first();
+//        if (!$this->models['location'])
             $this->models['location'] = Location::create($this->locationData());
     }
 
