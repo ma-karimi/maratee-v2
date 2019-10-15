@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 
-$types = [ 'species', 'sub_species', 'variety', 'family', 'genus', 'group', 'order', 'growth', 'usage', 'part', 'industry', 'application'];
+$types = ['species', 'sub_species', 'variety', 'family', 'genus'/*, 'group', 'order', 'growth', 'usage', 'part', 'industry', 'application'*/];
 $factory->define(App\Models\General::class, function (Faker $faker) use ($types) {
     $generals = \App\Models\General::pluck('id')->toArray();
 

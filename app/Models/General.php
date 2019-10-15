@@ -7,6 +7,7 @@ use App\Models\Scope\GeneralScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
@@ -176,5 +177,27 @@ class General extends BaseModel
             'plant_properties',
             'general_id',
             'plant_id')->withTimestamps();
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function varietyAuthor(): HasOne
+    {
+        return $this->hasOne(VarietyAuthorView::class, 'general_id');
+    }
+    /**
+     * @return HasOne
+     */
+    public function speciesAuthor(): HasOne
+    {
+        return $this->hasOne(SpeciesAuthorView::class, 'general_id');
+    }
+    /**
+     * @return HasOne
+     */
+    public function subSpeciesAuthor(): HasOne
+    {
+        return $this->hasOne(SubSpeciesAuthorView::class, 'general_id');
     }
 }
