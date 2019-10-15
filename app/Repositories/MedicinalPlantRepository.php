@@ -88,7 +88,7 @@ class MedicinalPlantRepository extends BaseRepository
             'min_altitude' => $input['min_altitude'] ?? null,
             'max_altitude' => $input['max_altitude'] ?? null,
             'point' => $input['point'] ?? null,
-            'description' => $input['location_description'] ?? null,
+            'description' => $input['geographical_description'] ?? null,
         ];
     }
 
@@ -97,7 +97,7 @@ class MedicinalPlantRepository extends BaseRepository
      */
     private function locationAndLifeFormsData(): array
     {
-        return ['life_forms', 'address', 'province_id', 'village_id', 'province_id', 'region_name', 'min_altitude', 'max_altitude', 'point', 'location_description'];
+        return ['life_forms', 'address', 'province_id', 'village_id', 'province_id', 'region_name', 'min_altitude', 'max_altitude', 'point', 'geographical_description', 'city_id'];
     }
 
     private function storeLifeForm($input, \Illuminate\Database\Eloquent\Model $model)

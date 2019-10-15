@@ -128,7 +128,7 @@ class PlantHerbariumRepository extends BaseRepository
             'min_altitude' => $input['min_altitude'] ?? null,
             'max_altitude' => $input['max_altitude'] ?? null,
             'point' => $input['point'] ?? null,
-            'description' => $input['location_description'] ?? null,
+            'description' => $input['geographical_description'] ?? null,
         ];
     }
 
