@@ -27,7 +27,7 @@ class CreateEvaluationsTable extends Migration {
 			$table->integer('mean_dry_seedling_weight')->nullable();
 			$table->integer('dry_matter_percentage')->nullable();
 		    $table->json('description')->nullable();
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

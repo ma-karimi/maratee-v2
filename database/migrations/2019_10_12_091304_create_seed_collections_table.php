@@ -56,7 +56,7 @@ class CreateSeedCollectionsTable extends Migration
             $table->string('how_to_use')->nullable();
             $table->string('other_details')->nullable();
             $table->string('special_advise')->nullable();
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 
             $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onUpdate('NO ACTION')->onDelete('cascade');

@@ -20,7 +20,7 @@ class CreateCitiesTable extends Migration {
 			$table->unsignedBigInteger('province_id')->nullable();
 
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

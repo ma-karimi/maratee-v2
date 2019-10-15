@@ -18,7 +18,7 @@ class CreatePropagationsTable extends Migration {
 			$table->json('method');
 			$table->json('description')->nullable();
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

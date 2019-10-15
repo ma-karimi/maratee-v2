@@ -26,7 +26,7 @@ class CreateSeedExchangesTable extends Migration
             $table->string('recipient_name');
             $table->string('recipient_phone');
             $table->string('request_no');
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
             $table->foreign('specimen_type_collect_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');

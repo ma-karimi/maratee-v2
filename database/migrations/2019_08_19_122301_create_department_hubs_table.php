@@ -19,7 +19,7 @@ class CreateDepartmentHubsTable extends Migration
             $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
             //herbarium , plant
             $table->morphs('departmentable');
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
         });
     }

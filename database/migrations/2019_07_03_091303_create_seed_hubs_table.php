@@ -25,7 +25,7 @@ class CreateSeedHubsTable extends Migration
             $table->unsignedBigInteger('action_id');
             $table->date('date')->nullable();
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
         });
     }

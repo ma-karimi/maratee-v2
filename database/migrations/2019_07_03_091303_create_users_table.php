@@ -33,11 +33,15 @@ class CreateUsersTable extends Migration {
 			$table->string('password');
 			$table->integer('work_experience')->nullable();
 			$table->tinyInteger('status')->nullable();
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
-		});
-		$fields=['last_name'=>'en','first_name'=>'en'];
-        CustomBlueprint::generatedVirtualConcat('users', 'full_name', $fields, false, 'VARCHAR(255)');
+            //$table->string('full_name')->( 'phone');
+            //$table->integer('full_name1')->generatedAs( "last_name->>"."$.en".");
+            //$table->string('full_name2')->generatedAs( 'last_name->>"$.en"');
+
+        });
+		//$fields=['last_name'=>'en','first_name'=>'en'];
+       // CustomBlueprint::generatedVirtualConcat('users', 'full_name', $fields, false, 'VARCHAR(255)');
 	}
 
 

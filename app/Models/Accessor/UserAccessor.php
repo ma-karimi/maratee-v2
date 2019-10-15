@@ -12,5 +12,4 @@ namespace App\Models\Accessor;
 trait UserAccessor
 {
 
-
 }

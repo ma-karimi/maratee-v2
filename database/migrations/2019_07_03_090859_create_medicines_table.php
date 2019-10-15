@@ -21,7 +21,7 @@ class CreateMedicinesTable extends Migration {
 			$table->unsignedBigInteger('parent_id')->nullable();
 
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

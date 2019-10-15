@@ -18,7 +18,7 @@ class CreateProtectionsTable extends Migration {
 			$table->json('name');
 			$table->json('description')->nullable();
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

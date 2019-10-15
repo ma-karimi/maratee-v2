@@ -4,21 +4,21 @@ use App\Libraries\CustomBlueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateMedicinalPlantsTable extends Migration {
+class CreateMedicinalPlantsTable extends Migration
+{
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('medicinal_plants', function(Blueprint $table)
-		{
-			$table->bigIncrements('id');
-			$table->unsignedBigInteger('taxonomy_id');
-			$table->unsignedBigInteger('location_id');
-			$table->string('plant_herbarium_number')->nullable();
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('medicinal_plants', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('taxonomy_id');
+            $table->unsignedBigInteger('location_id');
+            $table->string('plant_herbarium_number')->nullable();
             $table->unsignedBigInteger('aerial_part_id')->nullable();
             $table->unsignedBigInteger('ground_part_id')->nullable();
             $table->unsignedBigInteger('food_industry_id')->nullable();
@@ -49,7 +49,7 @@ class CreateMedicinalPlantsTable extends Migration {
             $table->json('consumption')->nullable();
             $table->json('active_compounds')->nullable();
             $table->json('manufacturer')->nullable();
-            $table->float('efficiency', 4,2)->nullable();
+            $table->float('efficiency', 4, 2)->nullable();
             $table->integer('code_no')->nullable();
             //morphology
             $table->unsignedBigInteger('general_habitat_id')->nullable();
@@ -57,28 +57,28 @@ class CreateMedicinalPlantsTable extends Migration {
             $table->json('fruit_color')->nullable();
             $table->json('flower_color')->nullable();
             $table->string('height')->nullable()->comment('unit: cm');
-            //$table->json('life_forms')->comment('life_form_cycle_id, life_form_wooden_id, life_form_herbaceous_id')->nullable();
             $table->unsignedBigInteger('cycle_id')->nullable();
             $table->unsignedBigInteger('wooden_id')->nullable();
             $table->unsignedBigInteger('herbaceous_id')->nullable();
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
-        });
-       // CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_cycle_id', 'life_forms', 'cycle_id', true);
-      //  CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_wooden_id', 'life_forms', 'wooden_id', true);
-       // CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_herbaceous_id', 'life_forms', 'herbaceous_id', true);
-	}
+            });
+        //for MYSQL OR MariaDB
+       //  CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_cycle_id', 'life_forms', 'cycle_id', true);
+        //  CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_wooden_id', 'life_forms', 'wooden_id', true);
+        // CustomBlueprint::generatedVirtual('medicinal_plants', 'life_form_herbaceous_id', 'life_forms', 'herbaceous_id', true);
+    }
 
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('medicinal_plants');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('medicinal_plants');
+    }
 
 }

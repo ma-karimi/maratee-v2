@@ -18,7 +18,7 @@ class CreateActorsTable extends Migration {
 			$table->string('name');
 			$table->string('cellphone')->nullable();
 			$table->unsignedBigInteger('user_id')->nullable();
-			$table->timeStampsTz();
+			$table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

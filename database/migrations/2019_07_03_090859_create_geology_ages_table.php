@@ -21,7 +21,7 @@ class CreateGeologyAgesTable extends Migration {
 			$table->json('stage');
 
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

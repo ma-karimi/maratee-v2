@@ -39,25 +39,47 @@ class MedicinalPlantRepository extends BaseRepository
         return MedicinalPlant::class;
     }
 
-   /* public function create($input)
+    public function create($input)
     {
         $model=parent::create(Arr::except($input,'life_forms'));
-        $this->storeLifeForm($input, $model);
+        $location = $this->firstOrCreateLocation($input);
+        return $this->storeLifeForm($input, $model);
     }
 
     public function update($input, $id)
     {
         $model=parent::update(Arr::except($input,'life_forms'),$id);
-        $this->storeLifeForm($input, $model);
+        return $this->storeLifeForm($input, $model);
     }
 
 
-    private function storeLifeForm($input, \Illuminate\Database\Eloquent\Model $model): void
+    private function storeLifeForm($input, \Illuminate\Database\Eloquent\Model $model)
     {
         $model->cycle_id = $input['life_forms']['cycle_id'] ?? null;
         $model->wooden_id = $input['life_forms']['wooden_id'] ?? null;
         $model->herbaceous_id = $input['life_forms']['herbaceous_id'] ?? null;
         $model->save();
-    }*/
+        return $model;
+    }
+
+    /**
+     * @param $input
+     * @return object
+     */
+    private function firstOrCreateLocation($input)
+    {
+        $location_input = [
+            'city_id' => $input['city_id'],
+            'region_name' => $input['region_name'] ?? null,
+            'address' => $input['address'] ?? null,
+            'village_id' => $input['village_id'] ?? null,
+            'min_altitude' => $input['min_altitude'] ?? null,
+            'max_altitude' => $input['max_altitude'] ?? null,
+            'point' => $input['point'] ?? null,
+            'description' => $input['location_description'] ?? null,
+        ];
+        //store location
+        return $this->location_model->firstOrCreate($location_input);
+    }
 
 }

@@ -118,10 +118,19 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *          type="integer"
  *      ),
  *      @SWG\Property(
- *          property="life_forms",
- *          description="life_forms",
- *          type="array",
- *     @SWG\Items(type="string")
+ *          property="cycle_id",
+ *          description="id from life_forms ",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="wooden_id",
+ *          description="id from life_forms ",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="herbaceous_id",
+ *          description="id from life_forms ",
+ *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="description",
@@ -187,6 +196,18 @@ class PlantHerbarium extends BaseModel implements HasMedia
         'description' => 'json',
         'habitat_description' => 'json',
         'ecology_description' => 'json',
+        'life_forms' => 'json',
+    ];
+
+    public static $rules = [
+        'protection_id' => 'required|exists:protections,id',
+        'organization_id' => 'required|exists:organizations,id',
+        'location_id' => 'required|exists:locations,id',
+        'general_phytogeography_id' => 'required|exists:generals,id',
+        //life_form
+        'cycle_id' => 'exists:life_forms,id',
+        'wooden_id' => 'exists:life_forms,id',
+        'herbaceous_id' => 'exists:life_forms,id',
     ];
 
     public function determine()
@@ -313,7 +334,24 @@ class PlantHerbarium extends BaseModel implements HasMedia
         return $this->belongsTo(General::class, 'general_phytogeography_id');
     }
 
-    public function leafLifeForm(): BelongsTo
+    public function cycle()
+    {
+        return $this->belongsTo(LifeForm::class,'cycle_id');
+    }
+    public function wooden()
+    {
+        return $this->belongsTo(LifeForm::class,'wooden_id');
+    }
+    public function herbaceous()
+    {
+        return $this->belongsTo(LifeForm::class,'herbaceous_id');
+    }
+    public function leaf()
+    {
+        return $this->belongsTo(LifeForm::class,'leaf_id');
+    }
+
+    /*public function leafLifeForm(): BelongsTo
     {
         return $this->belongsTo(LifeForm::class,
             'life_form_leaf_id');
@@ -335,7 +373,7 @@ class PlantHerbarium extends BaseModel implements HasMedia
     {
         return $this->belongsTo(LifeForm::class,
             'life_form_herbaceous_id');
-    }
+    }*/
 
     public function generalLichen(): BelongsTo
     {

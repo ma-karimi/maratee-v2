@@ -28,6 +28,9 @@ $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
     $secondary_metabolites = MedicinalPlantType::whereTypeId(5)->pluck('id')->toArray();
     $effective_materials = MedicinalPlantType::whereTypeId(6)->pluck('id')->toArray();
     $products = Product::pluck('id')->toArray();
+    $cycles = \App\Models\LifeForm::whereType('life_cycle')->pluck('id')->toArray();
+    $woodens = \App\Models\LifeForm::whereType('wooden')->pluck('id')->toArray();
+    $herbaceouses = \App\Models\LifeForm::whereType('herbaceous')->pluck('id')->toArray();
     return [
         'plant_herbarium_number' => $faker->randomElement($plants),
         'taxonomy_id' => $faker->randomElement($taxonomies),
@@ -57,5 +60,8 @@ $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
         'flower_color' =>make_json($faker->word),
         'fruit_color' =>make_json($faker->word),
         'height' =>random_int(1,100).'-'.random_int(100,200),
+        'cycle_id'=>$faker->randomElement($cycles),
+        'herbaceous_id'=>$faker->randomElement($herbaceouses),
+        'wooden_id'=>$faker->randomElement($woodens),
     ];
 });

@@ -19,7 +19,7 @@ class CreateArticleHubsTable extends Migration {
 		    //cryo_bank, media, action_hub, plant_herbarium, chromosome, medicinal_plant, paleontology
 		    $table->morphs('articleable');
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

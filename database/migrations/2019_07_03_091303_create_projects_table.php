@@ -22,7 +22,7 @@ class CreateProjectsTable extends Migration {
             $table->unsignedBigInteger('project_leader_id')->nullable();
             $table->unsignedBigInteger('research_leader_id')->nullable();
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

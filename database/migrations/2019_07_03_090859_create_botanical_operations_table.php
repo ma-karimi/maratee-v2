@@ -20,7 +20,7 @@ class CreateBotanicalOperationsTable extends Migration {
             $table->date('date')->nullable();
 			$table->string('number');
 			$table->json('description')->nullable();
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
         });
 	}

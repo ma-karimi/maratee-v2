@@ -12,7 +12,9 @@ class ProvinceTableSeeder extends Seeder
     public function run()
     {
         //factory(App\Models\Province::class, 50)->create();
-        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if (DB::getDefaultConnection() !== 'pgsql') {
+            \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
         \Illuminate\Support\Facades\DB::table('provinces')->truncate();
         $countries = new \PragmaRX\Countries\Package\Countries();
         $states=$countries->where('name.common', 'Iran')

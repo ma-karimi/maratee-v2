@@ -17,7 +17,7 @@ class CreateVillagesTable extends Migration {
 			$table->bigIncrements('id');
 			$table->json('name');
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

@@ -22,7 +22,7 @@ class   CreateChromosomesTable extends Migration
             $table->unsignedBigInteger('plant_herbarium_id');
             $table->unsignedBigInteger('general_class_id');
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
         });
     }

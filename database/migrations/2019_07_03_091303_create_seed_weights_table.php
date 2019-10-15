@@ -27,7 +27,7 @@ class CreateSeedWeightsTable extends Migration {
 			$table->float('seed_weight', 4)->nullable();
 			$table->json('other_detail')->nullable();
 			$table->string('regeneration_evaluation')->nullable();
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

@@ -37,7 +37,7 @@ class CreateMorphologyFieldOrGreenhousesTable extends Migration
             $table->string('water')->nullable()->comment('ph');
             $table->string('water_ec')->nullable()->comment('ds/m');
             $table->string('meteorological_station_data')->nullable()->comment('excel file');
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
             $table->foreign('collect_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('CASCADE');

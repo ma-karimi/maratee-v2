@@ -20,7 +20,7 @@ class CreateArticlesTable extends Migration {
 			$table->json('journal_name')->nullable();
 			$table->string('page_no')->nullable();
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

@@ -19,7 +19,7 @@ class CreateMethodsTable extends Migration {
 			$table->json('description')->nullable();
 			$table->tinyInteger('type_id')->comment('1:distillation, 2: extraction, 3: analyse');
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

@@ -20,7 +20,7 @@ class CreateSeedFeaturesTable extends Migration
             $table->string('type');
             $table->json('description')->nullable();
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
         });
     }

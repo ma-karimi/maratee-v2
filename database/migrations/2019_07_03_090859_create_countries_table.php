@@ -20,7 +20,7 @@ class CreateCountriesTable extends Migration {
 			$table->unsignedBigInteger('continent_id')->nullable();
 
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

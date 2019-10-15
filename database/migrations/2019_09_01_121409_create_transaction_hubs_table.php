@@ -17,7 +17,7 @@ class CreateTransactionHubsTable extends Migration
             $table->bigIncrements('id');
             $table->morphs('transactionable');
             $table->unsignedBigInteger('transaction_id');
-            $table->tinyInteger('type_id')->default(1)->comment('1:send , 2:receive');
+            $table->tinyInteger('transaction_type_id')->default(1)->comment('1:send , 2:receive');
             $table->text('sheets_no')->nullable();
             $table->timestamps();
             $table->softDeletesTz();

@@ -374,4 +374,12 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class)->latest();
     }
 
+    /**
+     * @return HasOne
+     */
+    public function fullName(): HasOne
+    {
+        return $this->hasOne(FullNameView::class, 'user_id');
+    }
+
 }

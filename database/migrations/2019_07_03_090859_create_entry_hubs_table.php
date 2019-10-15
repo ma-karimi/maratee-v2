@@ -22,7 +22,7 @@ class CreateEntryHubsTable extends Migration {
 			$table->unsignedBigInteger('botanical_id')->comment('گیاه در باغ');
 			$table->unsignedBigInteger('organization_id')->nullable()->comment('سازمان یا باغ گیاه شناسی که نمونه از انجا می باشد.');
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

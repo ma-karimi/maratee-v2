@@ -25,7 +25,7 @@ description
 per season = Spring	Summer	Autumn');
 
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
         });
     }

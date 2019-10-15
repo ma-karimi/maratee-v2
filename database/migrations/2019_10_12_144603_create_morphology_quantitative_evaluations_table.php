@@ -32,7 +32,7 @@ class CreateMorphologyQuantitativeEvaluationsTable extends Migration
             $table->integer('days_of_start_flowering')->nullable();
             $table->integer('days_to_flowering')->nullable();
             $table->integer('days_to_seed_ripening')->nullable();
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
             $table->foreign('collect_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');

@@ -17,7 +17,7 @@ class CreateConstituentTypesTable extends Migration {
 			$table->bigIncrements('id');
 			$table->json('name');
 			$table->json('description')->nullable();
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

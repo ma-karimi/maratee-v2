@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Phaza\LaravelPostgis\Schema\Blueprint;
+
 
 class CreateLocationsTable extends Migration {
 
@@ -29,7 +30,7 @@ class CreateLocationsTable extends Migration {
 			$table->text('gps_datum')->nullable();
 
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

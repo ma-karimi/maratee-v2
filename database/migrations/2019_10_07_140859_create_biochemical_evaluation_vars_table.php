@@ -18,7 +18,7 @@ class CreateBiochemicalEvaluationVarsTable extends Migration
             $table->unsignedBigInteger('biochemical_evaluation_id');
             $table->tinyInteger('var_id')->default(1);
             $table->string('value');
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
             $table->foreign('biochemical_evaluation_id')->references('id')->on('biochemical_evaluations')->onUpdate('NO ACTION')->onDelete('CASCADE');
 

@@ -27,7 +27,7 @@ if tip_qt > 0, it meant we have the tip herbarium, otherwise means we don\'t hav
 if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >0, it means we have image tips, rather than physical tips.');
             $table->json('description')->nullable();
             $table->boolean('is_flowering')->default(0);
-            $table->json('life_forms')->comment('life_form_leaf_id, life_form_cycle_id, life_form_wooden_id, life_form_herbaceous_id')->nullable();
+            //$table->json('life_forms')->comment('life_form_leaf_id, life_form_cycle_id, life_form_wooden_id, life_form_herbaceous_id')->nullable();
             $table->json('habitat_description')->nullable();
             $table->json('ecology_description')->nullable();
             $table->tinyInteger('flowering_time')->nullable();
@@ -44,13 +44,19 @@ if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >
             $table->unsignedBigInteger('general_substrate_moss_id')->nullable();
             $table->unsignedBigInteger('general_substrate_diatom_id')->nullable();
 
-            $table->timeStampsTz();
+            $table->unsignedBigInteger('cycle_id')->nullable();
+            $table->unsignedBigInteger('wooden_id')->nullable();
+            $table->unsignedBigInteger('herbaceous_id')->nullable();
+            $table->unsignedBigInteger('leaf_id')->nullable();
+
+            $table->timeStamps();
             $table->softDeletesTz();
         });
-        CustomBlueprint::generatedVirtual('plant_herbariums', 'life_form_cycle_id', 'life_forms', 'cycle_id', true);
-        CustomBlueprint::generatedVirtual('plant_herbariums', 'life_form_wooden_id', 'life_forms', 'wooden_id', true);
-        CustomBlueprint::generatedVirtual('plant_herbariums', 'life_form_leaf_id', 'life_forms', 'leaf_id', true);
-        CustomBlueprint::generatedVirtual('plant_herbariums', 'life_form_herbaceous_id', 'life_forms', 'herbaceous_id', true);
+        //for MYSQL OR MariaDB
+       // CustomBlueprint::generatedVirtual('plant_herbariums', 'life_form_cycle_id', 'life_forms', 'cycle_id', true);
+       // CustomBlueprint::generatedVirtual('plant_herbariums', 'life_form_wooden_id', 'life_forms', 'wooden_id', true);
+       // CustomBlueprint::generatedVirtual('plant_herbariums', 'life_form_leaf_id', 'life_forms', 'leaf_id', true);
+       // CustomBlueprint::generatedVirtual('plant_herbariums', 'life_form_herbaceous_id', 'life_forms', 'herbaceous_id', true);
     }
 
 

@@ -18,7 +18,7 @@ class CreateMolecularEvaluationVarsTable extends Migration
             $table->unsignedBigInteger('molecular_evaluation_id');
             $table->tinyInteger('var_id')->default(1);
             $table->string('value');
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
             $table->foreign('molecular_evaluation_id')->references('id')->on('molecular_evaluations')->onUpdate('NO ACTION')->onDelete('CASCADE');
 

@@ -41,7 +41,7 @@ class CreateBotanicalsTable extends Migration
             $table->tinyInteger('entrance_to_garden')->default(0)->comment('[0:unknown, 1: seedling, 2: plant, 3: bulb, 4: bulbil, 5: tuber, 6: rhizome]');
             $table->unsignedBigInteger('soil_id')->nullable();
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
         });
     }

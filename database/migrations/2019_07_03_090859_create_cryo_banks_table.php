@@ -29,7 +29,7 @@ class CreateCryoBanksTable extends Migration
             $table->unsignedBigInteger('treatment_id');
             $table->float('treatment_values', 4, 2)->nullable();
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
         });
     }

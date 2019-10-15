@@ -20,7 +20,7 @@ class CreateMedicinalPlantConstituentsTable extends Migration {
 			$table->float('value', 4, 2);
 
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

@@ -26,7 +26,7 @@ class CreateMorphologyQualitativeEvaluationsTable extends Migration
             $table->unsignedBigInteger('station_id')->nullable();
             $table->unsignedBigInteger('replication_or_block_number')->nullable();
             $table->string('observation')->nullable();
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
             $table->foreign('collect_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');

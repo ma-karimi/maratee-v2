@@ -24,7 +24,7 @@ class CreateBiochemicalEvaluationsTable extends Migration {
             $table->string('regeneration_and_evaluation_code')->nullable();
             $table->text('treat')->nullable();
             $table->text('repeat')->nullable();
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
             $table->foreign('specimen_type_coll_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
 

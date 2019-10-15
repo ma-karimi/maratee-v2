@@ -20,7 +20,7 @@ class CreateBioMolecularsTable extends Migration
             $table->unsignedBigInteger('technology_id');
             $table->unsignedBigInteger('block_id')->nullable();
             $table->unsignedBigInteger('seed_feature_id');
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
         });
     }

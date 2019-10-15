@@ -17,7 +17,7 @@ class CreateSeedPlantsTable extends Migration {
 			$table->unsignedBigInteger('seed_id');
 			$table->unsignedBigInteger('plant_herbarium_id');
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

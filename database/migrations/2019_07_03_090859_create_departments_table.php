@@ -19,7 +19,7 @@ class CreateDepartmentsTable extends Migration {
 			$table->json('description')->nullable();
 
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

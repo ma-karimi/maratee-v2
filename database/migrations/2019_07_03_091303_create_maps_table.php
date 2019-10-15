@@ -19,7 +19,7 @@ class CreateMapsTable extends Migration {
 			$table->string('scale');
 
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

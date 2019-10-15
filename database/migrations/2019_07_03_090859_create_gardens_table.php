@@ -20,7 +20,7 @@ class CreateGardensTable extends Migration {
 			$table->json('number')->nullable();
 
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

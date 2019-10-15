@@ -18,7 +18,7 @@ class CreateScientificView extends Migration
       CREATE VIEW scientific_view AS
       (
        SELECT taxonomy_id, 
-CONCAT_WS(' ', genus_name_en, species_name_en,subspecies_name_en,variety_name_en) name
+CONCAT_WS(' ', genus_name_en, species_name_en,subspecies_name_en,variety_name_en) as name
 FROM (
 
 

@@ -25,6 +25,9 @@ class AddForeignKeyToPlantHerbariumsTable extends Migration
             $table->foreign('protection_id')->references('id')->on('protections')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('cycle_id')->references('id')->on('life_forms')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('wooden_id')->references('id')->on('life_forms')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('herbaceous_id')->references('id')->on('life_forms')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
     }
 
@@ -45,6 +48,9 @@ class AddForeignKeyToPlantHerbariumsTable extends Migration
             $table->dropForeign('general_substrate_moss_id');
             $table->dropForeign('general_substrate_diatom_id');
             $table->dropForeign('organization_id');
+            $table->dropForeign('cycle_id');
+            $table->dropForeign('wooden_id');
+            $table->dropForeign('herbaceous_id');
         });
     }
 }

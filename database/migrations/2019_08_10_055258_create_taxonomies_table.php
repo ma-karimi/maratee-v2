@@ -31,7 +31,7 @@ class CreateTaxonomiesTable extends Migration
             $table->foreign('subspecies_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
 
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
         });
     }

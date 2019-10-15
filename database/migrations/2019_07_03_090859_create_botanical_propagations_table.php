@@ -18,7 +18,7 @@ class CreateBotanicalPropagationsTable extends Migration {
 			$table->unsignedBigInteger('propagation_id');
 
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

@@ -31,7 +31,7 @@ class CreateSeedTechnologiesTable extends Migration
             $table->date('banked_date')->nullable();
             $table->integer('thousand_fruit_weight')->nullable();
             $table->integer('viability')->nullable();
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
         });
     }

@@ -25,7 +25,7 @@ class CreateOrganizationsTable extends Migration
             $table->string('email', 45)->nullable();
             $table->string('website', 45)->nullable();
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
         });
     }

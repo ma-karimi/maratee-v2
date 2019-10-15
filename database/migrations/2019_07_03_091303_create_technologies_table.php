@@ -25,7 +25,7 @@ class CreateTechnologiesTable extends Migration
             $table->integer('fridge_type')->nullable();
             $table->string('regeneration_evaluation')->nullable();
 
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
         });
     }

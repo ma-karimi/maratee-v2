@@ -18,7 +18,7 @@ class CreateCollectionsTable extends Migration {
 			$table->string('type');
 			$table->json('name')->nullable();
 			$table->json('description')->nullable();
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
 		});
 	}

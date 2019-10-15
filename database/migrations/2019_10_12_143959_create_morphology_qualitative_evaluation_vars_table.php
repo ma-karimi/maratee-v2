@@ -18,7 +18,7 @@ class CreateMorphologyQualitativeEvaluationVarsTable extends Migration
             $table->unsignedBigInteger('evaluation_id')->comment('morphology_qualitative_evaluation_id');
             $table->tinyInteger('var_id')->default(1);
             $table->string('value');
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
             $table->foreign('evaluation_id')->references('id')->on('morphology_qualitative_evaluations')->onUpdate('NO ACTION')->onDelete('CASCADE');
 

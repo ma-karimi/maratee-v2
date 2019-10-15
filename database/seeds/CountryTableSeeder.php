@@ -20,7 +20,10 @@ class CountryTableSeeder extends Seeder
                   'name'=>['fa'=>$fa_countries[$index],'en'=>$item],
               ]);
           }*/
-        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        if (DB::getDefaultConnection() !== 'pgsql') {
+            \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
         \Illuminate\Support\Facades\DB::table('countries')->truncate();
         $countries = new \PragmaRX\Countries\Package\Countries();
         foreach ($countries->all() as $index => $item) {

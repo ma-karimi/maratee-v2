@@ -41,7 +41,7 @@ class CreateMediasTable extends Migration
             $table->json('responsive_images')->nullable();
             $table->unsignedInteger('order_column')->nullable();
             //$table->nullableTimestamps();
-            $table->timeStampsTz();
+            $table->timeStamps();
             $table->softDeletesTz();
         });
     }

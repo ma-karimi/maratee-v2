@@ -46,7 +46,7 @@ class CustomBlueprint
             $query = "CONCAT_WS(' ', $query)";
             DB::statement("ALTER TABLE $table ADD $column_name $column_type GENERATED ALWAYS AS ($query) VIRTUAL");
             if ($isIndex) {
-                \Illuminate\Support\Facades\Schema::table($table, function (mysqlBluePrint $table) use ($column_name) {
+                \Illuminate\Support\Facades\Schema::table($table, function (Blueprint $table) use ($column_name) {
                     $table->index($column_name);
                 });
             }
