@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Models\Location;
 use App\Models\MedicinalPlant;
-use App\Models\MedicinalPlantConstituent;
-use App\Repositories\BaseRepository;
+use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
 
 /**
@@ -20,6 +20,22 @@ class MedicinalPlantRepository extends BaseRepository
     protected $fieldSearchable = [
 
     ];
+    /**
+     * @var Location
+     */
+    private $location_model;
+
+    /**
+     * MedicinalPlantRepository constructor.
+     * @param Application $app
+     * @param Location $location_model
+     * @throws \Exception
+     */
+    public function __construct(Application $app, Location $location_model)
+    {
+        parent::__construct($app);
+        $this->location_model = $location_model;
+    }
 
     /**
      * Return searchable fields
@@ -41,17 +57,48 @@ class MedicinalPlantRepository extends BaseRepository
 
     public function create($input)
     {
-        $model=parent::create(Arr::except($input,'life_forms'));
-        $location = $this->firstOrCreateLocation($input);
+        $input['location_id'] = $this->createLocation($input)->id;
+        $model = parent::create(Arr::except($input, $this->locationAndLifeFormsData()));
         return $this->storeLifeForm($input, $model);
     }
 
-    public function update($input, $id)
+    /**
+     * @param $input
+     * @return object
+     */
+    private function createLocation($input)
     {
-        $model=parent::update(Arr::except($input,'life_forms'),$id);
-        return $this->storeLifeForm($input, $model);
+        $location_input = $this->locationData($input);
+
+        return $this->location_model->create($location_input);
     }
 
+    /**
+     * @param $input
+     * @return array
+     */
+    private function locationData($input): array
+    {
+        return [
+            'province_id' => $input['province_id'],
+            'city_id' => $input['city_id'] ?? null,
+            'region_name' => $input['region_name'] ?? null,
+            'address' => $input['address'] ?? null,
+            'village_id' => $input['village_id'] ?? null,
+            'min_altitude' => $input['min_altitude'] ?? null,
+            'max_altitude' => $input['max_altitude'] ?? null,
+            'point' => $input['point'] ?? null,
+            'description' => $input['location_description'] ?? null,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function locationAndLifeFormsData(): array
+    {
+        return ['life_forms', 'address', 'province_id', 'village_id', 'province_id', 'region_name', 'min_altitude', 'max_altitude', 'point', 'location_description'];
+    }
 
     private function storeLifeForm($input, \Illuminate\Database\Eloquent\Model $model)
     {
@@ -62,24 +109,22 @@ class MedicinalPlantRepository extends BaseRepository
         return $model;
     }
 
+    public function update($input, $id)
+    {
+        $this->updateLocation($input);
+        $model = parent::update(Arr::except($input, $this->locationAndLifeFormsData()), $id);
+        return $this->storeLifeForm($input, $model);
+    }
+
     /**
      * @param $input
      * @return object
      */
-    private function firstOrCreateLocation($input)
+    private function updateLocation($input)
     {
-        $location_input = [
-            'city_id' => $input['city_id'],
-            'region_name' => $input['region_name'] ?? null,
-            'address' => $input['address'] ?? null,
-            'village_id' => $input['village_id'] ?? null,
-            'min_altitude' => $input['min_altitude'] ?? null,
-            'max_altitude' => $input['max_altitude'] ?? null,
-            'point' => $input['point'] ?? null,
-            'description' => $input['location_description'] ?? null,
-        ];
-        //store location
-        return $this->location_model->firstOrCreate($location_input);
+        $location_input = $this->locationData($input);
+
+        return $this->location_model->find($input['location_id'])->update($location_input);
     }
 
 }
