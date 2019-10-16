@@ -6,15 +6,15 @@ use App\Services\ConvertService;
 
 class ConvertSeeder extends Seeder
 {
-    private $skip;
+    private $start;
 
     /**
      * ConvertSeeder constructor.
-     * @param $skip
+     * @param $start
      */
-    public function __construct($skip)
+    public function __construct($start)
     {
-        $this->skip = $skip;
+        $this->start = $start;
     }
 
     /**
@@ -25,7 +25,7 @@ class ConvertSeeder extends Seeder
     public function run()
     {
 
-        Treeleaf::skip($this->skip)->chunk(100, function ($queries){
+        Treeleaf::where('id', '>', $this->start)->chunk(100, function ($queries){
             foreach ($queries as $treeLeaf){
                 if ($item = Treeleaf::find($treeLeaf->id)) {
                     (new ConvertService($item))->handle();
