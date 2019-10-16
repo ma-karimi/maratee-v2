@@ -175,7 +175,10 @@ abstract class BaseRepository
      */
     public function create($input)
     {
-        try {
+        $model = $this->model->newInstance($input);
+        $model->save();
+        return  $model;
+  /*      try {
             DB::beginTransaction();
             $model = $this->model->newInstance($input);
             $model->save();
@@ -185,7 +188,7 @@ abstract class BaseRepository
             DB::rollBack();
             report($e);
             abort(JsonResponse::HTTP_BAD_REQUEST, 'Operation Failed!');
-        }
+        }*/
 
     }
 

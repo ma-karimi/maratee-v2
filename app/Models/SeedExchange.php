@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @SWG\Definition(
  *      definition="SeedExchange",
- *      required={"seed_id","collection_id"},
+ *      required={"organization_id","recipient_name","recipient_phone","request_no"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -16,33 +16,29 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="seed_id",
- *          description="seed_id",
- *          type="integer",
- *          format="int32"
+ *          property="organization_id",
+ *          description="organization_id",
+ *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="department_id",
  *          description="department_id",
- *          type="integer",
- *          format="int32"
+ *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="project_id",
  *          description="project_id",
- *          type="integer",
- *          format="int32"
+ *          type="integer"
  *      ),
  *      @SWG\Property(
- *          property="user_id",
- *          description="user_id",
- *          type="integer",
- *          format="int32"
+ *          property="specimen_type_collect_id",
+ *          description="specimen_type_collect_id",
+ *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="seed_weight",
  *          description="seed_weight",
- *          type="float",
+ *          type="number",
  *      ),
  *      @SWG\Property(
  *          property="delivery_date",
@@ -51,25 +47,29 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          format="date"
  *      ),
  *      @SWG\Property(
- *          property="request_no",
- *          description="request_no",
+ *          property="accession_code",
+ *          description="accession_code",
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="description",
- *          description="description",
- *          type="array",
- *     @SWG\Items(type="string")
+ *          property="regeneration_and_evaluation_code",
+ *          description="regeneration_and_evaluation_code",
+ *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="exchange_type",
- *          description="exchange_type",
- *          type="string",
+ *          property="recipient_name",
+ *          description="recipient_name",
+ *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="regeneration_evaluation",
- *          description="regeneration_evaluation",
- *          type="string",
+ *          property="recipient_phone",
+ *          description="recipient_phone",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="request_no",
+ *          description="request_no",
+ *          type="string"
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -89,17 +89,6 @@ class SeedExchange extends BaseModel
 {
     public static $linguistically = ['description' => true];
 
-    public static $rules = [
-        'seed_id' => 'exists:seeds,id',
-        'user_id' => 'required|exists:users,id',
-        'project_id' => 'exists:projects,id',
-        'department_id' => 'exists:departments,id',
-        'seed_weight' => 'integer',
-        'delivery_date' => 'date',
-        'request_no' => 'string',
-        'regeneration_evaluation' => 'string',
-        'exchange_type' => 'string',
-    ];
     /**
      * The database table used by the model.
      *
@@ -107,29 +96,21 @@ class SeedExchange extends BaseModel
      */
     protected $table = 'seed_exchanges';
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'description' => 'json',
+
+    public static $rules = [
+        'organization_id' => 'required|exists:organizations,id',
+        'project_id' => 'exists:projects,id',
+        'department_id' => 'exists:departments,id',
+        'specimen_type_collect_id' => 'exists:seed_generals,id',
+        'seed_weight' => 'numeric',
+        'delivery_date' => 'date',
+        'accession_code' => 'string',
+        'regeneration_and_evaluation_code' => 'string',
+        'recipient_name' => 'string',
+        'recipient_phone' => 'string',
+        'request_no' => 'string',
     ];
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['created_at', 'delivery_date', 'deleted_at', 'updated_at'];
-
-    /**
-     * @return BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 
     /**
      * @return BelongsTo
@@ -146,13 +127,20 @@ class SeedExchange extends BaseModel
     {
         return $this->belongsTo(Department::class);
     }
+    /**
+     * @return BelongsTo
+     */
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
 
     /**
      * @return BelongsTo
      */
-    public function seed()
+    public function specimenTypeCollect()
     {
-        return $this->belongsTo('App\Models\Seed');
+        return $this->belongsTo('App\Models\SeedGeneral');
     }
 
 }

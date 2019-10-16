@@ -452,6 +452,13 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
+     *          name="article_id",
+     *          in="body",
+     *          description="MedicinalPlant that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
+     *      ),
+     *      @SWG\Parameter(
      *          name="taxonomy_id",
      *          in="body",
      *          description="MedicinalPlant that should be stored",

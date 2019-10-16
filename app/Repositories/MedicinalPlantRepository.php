@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Article;
 use App\Models\Location;
 use App\Models\MedicinalPlant;
 use Illuminate\Container\Container as Application;
@@ -24,17 +25,20 @@ class MedicinalPlantRepository extends BaseRepository
      * @var Location
      */
     private $location_model;
+    private $article_model;
 
     /**
      * MedicinalPlantRepository constructor.
      * @param Application $app
+     * @param Article $article_model
      * @param Location $location_model
      * @throws \Exception
      */
-    public function __construct(Application $app, Location $location_model)
+    public function __construct(Application $app, Article $article_model, Location $location_model)
     {
         parent::__construct($app);
         $this->location_model = $location_model;
+        $this->article_model = $article_model;
     }
 
     /**
@@ -57,8 +61,11 @@ class MedicinalPlantRepository extends BaseRepository
 
     public function create($input)
     {
+
+        $article = $this->createArticle($input);
+        $input['article_id'] = $article->id ?? null;
         $input['location_id'] = $this->createLocation($input)->id;
-        $model = parent::create(Arr::except($input, $this->locationAndLifeFormsData()));
+        $model = parent::create(Arr::except($input, $this->ArticleLocationLifeFormsData()));
         return $this->storeLifeForm($input, $model);
     }
 
@@ -95,9 +102,15 @@ class MedicinalPlantRepository extends BaseRepository
     /**
      * @return array
      */
-    private function locationAndLifeFormsData(): array
+    private function ArticleLocationLifeFormsData(): array
     {
-        return ['life_forms', 'address', 'province_id', 'village_id', 'province_id', 'region_name', 'min_altitude', 'max_altitude', 'point', 'geographical_description', 'city_id'];
+      $article = [
+            'title' ,
+            'year' ,
+            'journal_name' ,
+            'page_no'
+        ];
+        return array_merge($article,['life_forms', 'address', 'province_id', 'village_id', 'province_id', 'region_name', 'min_altitude', 'max_altitude', 'point', 'geographical_description', 'city_id']);
     }
 
     private function storeLifeForm($input, \Illuminate\Database\Eloquent\Model $model)
@@ -112,7 +125,7 @@ class MedicinalPlantRepository extends BaseRepository
     public function update($input, $id)
     {
         $this->updateLocation($input);
-        $model = parent::update(Arr::except($input, $this->locationAndLifeFormsData()), $id);
+        $model = parent::update(Arr::except($input, $this->ArticleLocationLifeFormsData()), $id);
         return $this->storeLifeForm($input, $model);
     }
 
@@ -125,6 +138,24 @@ class MedicinalPlantRepository extends BaseRepository
         $location_input = $this->locationData($input);
 
         return $this->location_model->find($input['location_id'])->update($location_input);
+    }
+
+    /**
+     * @param $input
+     * @return mixed
+     */
+    private function createArticle($input)
+    {
+        $article=null;
+        if (Arr::exists($input, 'title')) {
+            $article = $this->article_model->create([
+                'title' => $input['title'],
+                'year' => $input['year'] ?? null,
+                'journal_name' => $input['journal_name'] ?? null,
+                'page_no' => $input['page_no'] ?? null
+            ]);
+        }
+        return $article;
     }
 
 }

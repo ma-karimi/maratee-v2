@@ -20,6 +20,11 @@ use App\Models\Department;
  *          type="integer"
  *      ),
  *      @SWG\Property(
+ *          property="voucher_no",
+ *          description="voucher_no",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
  *          property="taxonomy_id",
  *          description="taxonomy_id",
  *          type="integer"

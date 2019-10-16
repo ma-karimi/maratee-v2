@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Accessor\MedicinalPlantAccessor;
 use App\Models\Contracts\BaseModel;
-use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -17,6 +16,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      required={"taxonomy_id", "location_id"},
  *      @SWG\Property(
  *          property="id",
+ *          description="id",
+ *          type="integer",
+ *      ),
+ *      @SWG\Property(
+ *          property="article_id",
  *          description="id",
  *          type="integer",
  *      ),
@@ -248,7 +252,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class MedicinalPlant extends BaseModel
 {
-    use MedicinalPlantAccessor, ArticleRelation;
+    use MedicinalPlantAccessor;
 
     public const TRADITIONAL_IRANIAN_MEDICINE = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
     public const NATURAL_DRUG = [0 => 'unknown', 1 => 'human medicines', 2 => 'animal drugs'];
@@ -261,6 +265,7 @@ class MedicinalPlant extends BaseModel
 
     public static $rules = [
         'plant_herbarium_number' => 'string',
+        'article_id' => 'exists:articles,id',
         'taxonomy_id' => 'required|exists:taxonomies,id',
         'location_id' => 'exists:locations,id',
         'aerial_part_id' => 'exists:medicinal_parts,id',
@@ -363,21 +368,29 @@ class MedicinalPlant extends BaseModel
 //        return $this->morphToMany(TreatmentHub::class, 'treamentable');
 //    }
 
+    public function article()
+    {
+        return $this->belongsTo(Article::class);
+    }
+
     public function treatment()
     {
         return $this->belongsTo(Treatment::class);
     }
+
     public function cycle()
     {
-        return $this->belongsTo(LifeForm::class,'cycle_id');
+        return $this->belongsTo(LifeForm::class, 'cycle_id');
     }
+
     public function wooden()
     {
-        return $this->belongsTo(LifeForm::class,'wooden_id');
+        return $this->belongsTo(LifeForm::class, 'wooden_id');
     }
+
     public function herbaceous()
     {
-        return $this->belongsTo(LifeForm::class,'herbaceous_id');
+        return $this->belongsTo(LifeForm::class, 'herbaceous_id');
     }
 
     public function medicinalPlantType()

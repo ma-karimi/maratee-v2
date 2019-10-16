@@ -18,6 +18,7 @@ class CreateMedicinalPlantsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('taxonomy_id');
             $table->unsignedBigInteger('location_id');
+            $table->unsignedBigInteger('article_id')->nullable();
             $table->string('plant_herbarium_number')->nullable();
             $table->unsignedBigInteger('aerial_part_id')->nullable();
             $table->unsignedBigInteger('ground_part_id')->nullable();
