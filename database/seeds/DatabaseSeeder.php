@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
-//        \App\Models\Country::create([
-//            'name' => ['en'=>'Iran','fa'=>'ایران']
-//        ]);
+        \App\Models\Country::create([
+            'name' => ['en'=>'Iran','fa'=>'ایران']
+        ]);
         $this->call([
             (new ConvertSeeder(0))->run(),
 
