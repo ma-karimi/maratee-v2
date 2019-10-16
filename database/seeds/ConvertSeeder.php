@@ -7,15 +7,14 @@ use App\Services\ConvertService;
 class ConvertSeeder extends Seeder
 {
     private $skip;
-    private $take;
 
     /**
      * ConvertSeeder constructor.
+     * @param $skip
      */
-    public function __construct($skip, $take)
+    public function __construct($skip)
     {
         $this->skip = $skip;
-        $this->take = $take;
     }
 
     /**
@@ -25,9 +24,13 @@ class ConvertSeeder extends Seeder
      */
     public function run()
     {
-        $treeLeafs = Treeleaf::skip($this->skip)->take($this->take)->get();
 
-        foreach ($treeLeafs as $treeLeaf)
-                (new ConvertService($treeLeaf))->handle();
+        Treeleaf::skip($this->skip)->chunk(100, function ($queries){
+            foreach ($queries as $treeLeaf){
+                if ($item = Treeleaf::find($treeLeaf->id)) {
+                    (new ConvertService($item))->handle();
+                }
+            }
+        });
     }
 }
