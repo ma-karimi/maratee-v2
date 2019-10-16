@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
 //            'name' => ['en'=>'Iran','fa'=>'ایران']
 //        ]);
         $this->call([
-//            (new ConvertSeeder(0))->run(),
+            (new ConvertSeeder(0))->run(),
 
             UserTableSeeder::class,
             ContinentTableSeeder::class,
