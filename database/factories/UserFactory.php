@@ -13,7 +13,7 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'birthday' => $faker->dateTimeBetween(),
         'nationality' => make_json($faker->country),
         'passport_no' => $faker->word,
-        'full_name' => make_json($faker->firstName .' ' .$faker->lastName),
+        'full_name' => make_json($faker->name .' ' .$faker->word),
         'is_author' => $faker->boolean,
         'mobile' => $faker->numberBetween('09100000000','09199999999'),
         'phone' => $faker->phoneNumber,

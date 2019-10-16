@@ -24,7 +24,6 @@ class CreateUsersTable extends Migration {
 			$table->json('nationality')->nullable();
 			$table->string('passport_no', 45)->nullable();
 			$table->json('full_name');
-			$table->json('last_name');
 			$table->tinyInteger('is_author')->default(0)->comment('0:disable, 1:enable');
 			$table->string('mobile')->nullable();
 			$table->string('phone')->nullable();
