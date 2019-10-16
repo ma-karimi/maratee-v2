@@ -12,26 +12,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Utility::truncateTables();
+//        \App\Utility::truncateTables();
 
         Model::unguard();
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
-        \App\Models\Country::create([
-            'name' => ['en' => 'Iran', 'fa' => 'ایران']
-        ]);
+//        \App\Models\Country::create([
+//            'name' => ['en'=>'Iran','fa'=>'ایران']
+//        ]);
         $this->call([
-            //(new ConvertSeeder(0))->run(),
+//            (new ConvertSeeder(0))->run(),
 
             UserTableSeeder::class,
             ContinentTableSeeder::class,
-            CountryTableSeeder::class,
-            ProvinceTableSeeder::class,
-            CityTableSeeder::class,
-            VillageTableSeeder::class,
-            ActionTableSeeder::class,
+//            CountryTableSeeder::class,
+//            ProvinceTableSeeder::class,
+//            CityTableSeeder::class,
+//            VillageTableSeeder::class,
+//            ActionTableSeeder::class,
             EvaluationTableSeeder::class,
-            AuthorTableSeeder::class,
+//            AuthorTableSeeder::class,
             ArticleTableSeeder::class,
             CollectionTableSeeder::class,
             ConstituentTableSeeder::class,
@@ -47,14 +47,14 @@ class DatabaseSeeder extends Seeder
             ConstituentTypeTableSeeder::class,
             SeedFeatureTableSeeder::class,
             OrganizationTableSeeder::class,
-            GeneralTableSeeder::class,
+//            GeneralTableSeeder::class,
             OriginalGeneralTableSeeder::class,
             OriginalPropagationTableSeeder::class,
             ProjectTableSeeder::class,
             PropagationTableSeeder::class,
             SoilTableSeeder::class,
-            LocationTableSeeder::class,
-            AuthorHubTableSeeder::class,
+//            LocationTableSeeder::class,
+//            AuthorHubTableSeeder::class,
             LifeFormTableSeeder::class,
             TaxonomyTableSeeder::class,
             PlantHerbariumTableSeeder::class,
@@ -63,13 +63,14 @@ class DatabaseSeeder extends Seeder
             TreatmentTableSeeder::class,
             TreatmentHubTableSeeder::class,
             MethodTableSeeder::class,
-            PlantPropertyTableSeeder::class,
+//            PlantPropertyTableSeeder::class,
         ]);
         $this->call([
             MedicinalPartTableSeeder::class,
             LocalityTableSeeder::class,
-            ActionHubTableSeeder::class,
+//            ActionHubTableSeeder::class,
             ProductTableSeeder::class,
+//            HerbariumTableSeeder::class,
             MedicinalPlantTableSeeder::class,
             MedicinalPlantConstituentTableSeeder::class,
             TransactionTableSeeder::class,
