@@ -36,9 +36,9 @@ class DatabaseSeeder extends Seeder
             (new ConvertSeeder(55000, 65000))->run(),*/
             UserTableSeeder::class,
             ContinentTableSeeder::class,
-//            CountryTableSeeder::class,
-//            ProvinceTableSeeder::class,
-//            CityTableSeeder::class,
+            CountryTableSeeder::class,
+            ProvinceTableSeeder::class,
+            CityTableSeeder::class,
 //            VillageTableSeeder::class,
 //            ActionTableSeeder::class,
             EvaluationTableSeeder::class,
