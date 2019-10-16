@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        \App\Utility::truncateTables();
+        \App\Utility::truncateTables();
 
         Model::unguard();
         ini_set('max_execution_time', 0);
