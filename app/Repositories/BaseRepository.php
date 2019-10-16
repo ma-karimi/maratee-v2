@@ -16,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use function PHPSTORM_META\type;
 
 
@@ -175,10 +176,7 @@ abstract class BaseRepository
      */
     public function create($input)
     {
-        $model = $this->model->newInstance($input);
-        $model->save();
-        return  $model;
-  /*      try {
+        try {
             DB::beginTransaction();
             $model = $this->model->newInstance($input);
             $model->save();
@@ -187,8 +185,8 @@ abstract class BaseRepository
         } catch (\Exception $e) {
             DB::rollBack();
             report($e);
-            abort(JsonResponse::HTTP_BAD_REQUEST, 'Operation Failed!');
-        }*/
+            ValidationException::withMessages(['errors' => ['message' => 'Operation Failed!', 'Exception' => $e]]);
+        }
 
     }
 
@@ -338,7 +336,7 @@ abstract class BaseRepository
      * @param $class_id
      * @return mixed
      */
-    protected  function findException($class_id)
+    protected function findException($class_id)
     {
         $record = $this->model->find($class_id);
         abort_if(empty($record), JsonResponse::HTTP_NOT_FOUND, 'record not found');

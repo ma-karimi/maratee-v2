@@ -9,6 +9,7 @@ use App\Models\Action;
 use App\Repositories\ActionRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Routing\Route;
 use Response;
 
 /**
@@ -22,6 +23,7 @@ class ActionAPIController extends AppBaseController
 
     public function __construct(ActionRepository $actionRepo)
     {
+
         $this->actionRepository = $actionRepo;
     }
 

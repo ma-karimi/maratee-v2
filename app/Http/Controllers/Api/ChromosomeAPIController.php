@@ -86,6 +86,18 @@ class ChromosomeAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Chromosome")
      *      ),
      *      @SWG\Parameter(
+     *          name="article_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
      *          name="n_no",
      *          in="body",
      *          required=false,
@@ -98,7 +110,7 @@ class ChromosomeAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Chromosome")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_id",
+     *          name="taxonomy_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Chromosome")
@@ -220,6 +232,18 @@ class ChromosomeAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Chromosome")
      *      ),
      *      @SWG\Parameter(
+     *          name="article_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Chromosome")
+     *      ),
+     *      @SWG\Parameter(
      *          name="n_no",
      *          in="body",
      *          required=false,
@@ -232,7 +256,7 @@ class ChromosomeAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Chromosome")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_id",
+     *          name="taxonomy_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Chromosome")
