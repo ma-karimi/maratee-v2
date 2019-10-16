@@ -77,12 +77,7 @@ class Article extends BaseModel implements HasMedia
      * @var array
      */
     protected $casts = ['title' => 'json', 'journal_name' => 'json'];
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['created_at', 'deleted_at', 'updated_at'];
+
 
 
     /**

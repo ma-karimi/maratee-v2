@@ -80,7 +80,287 @@ class SeedCollectionAPIController extends AppBaseController
      *      description="Store SeedCollection",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="taxonomy_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plant_consumption_value_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_used_part_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="voucher_no",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="encoded_code_by_collector",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="corrected_code_by_nrgb",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="accession_released_code_by_nrgb",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="land_form_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="slope_aspect_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="slope_degree",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_habitat_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="soil_depth_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="soil_texture_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="drainage_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="soil_ph",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="soil_salinity_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="soil_lime_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="climate",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="community_type",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="soil_erosion_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="area_sampled",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plants_sampled_no",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="approximate_area_of_plant",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="specimen_type_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="flowering_time_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="pollination_type_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="pollination_agent_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="fruit_type_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_collected_from_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date_harvesting_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="life_form_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="growth_form_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plant_height",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plant_mother_health_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="how_to_use",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="other_details",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="special_advise",
      *          in="body",
      *          description="SeedCollection that should be stored",
      *          required=false,
@@ -185,9 +465,289 @@ class SeedCollectionAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="taxonomy_id",
      *          in="body",
-     *          description="SeedCollection that should be updated",
+     *          description="SeedCollection that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="location_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plant_consumption_value_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_used_part_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="voucher_no",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="department_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="project_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="encoded_code_by_collector",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="corrected_code_by_nrgb",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="accession_released_code_by_nrgb",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="land_form_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="slope_aspect_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="slope_degree",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_habitat_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="soil_depth_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="soil_texture_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="drainage_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="soil_ph",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="soil_salinity_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="soil_lime_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="climate",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="community_type",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="soil_erosion_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="area_sampled",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plants_sampled_no",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="approximate_area_of_plant",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="specimen_type_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="flowering_time_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="pollination_type_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="pollination_agent_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="fruit_type_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_collected_from_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="date_harvesting_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="life_form_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="growth_form_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plant_height",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plant_mother_health_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="how_to_use",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="other_details",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="special_advise",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/SeedCollection")
      *      ),

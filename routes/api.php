@@ -254,3 +254,5 @@ Route::apiResource('seed_collections', 'SeedCollectionAPIController');
 Route::apiResource('biochemical_evaluations', 'BiochemicalEvaluationAPIController');
 
 Route::apiResource('biochemical_evaluation_vars', 'BiochemicalEvaluationVarAPIController');
+
+Route::resource('seed_generals', 'SeedGeneralAPIController');

@@ -25,20 +25,20 @@ class MedicinalPlantRepository extends BaseRepository
      * @var Location
      */
     private $location_model;
-    private $article_model;
+    private $article_repo;
 
     /**
      * MedicinalPlantRepository constructor.
      * @param Application $app
-     * @param Article $article_model
+     * @param ArticleRepository $article_repository
      * @param Location $location_model
      * @throws \Exception
      */
-    public function __construct(Application $app, Article $article_model, Location $location_model)
+    public function __construct(Application $app, ArticleRepository $article_repository, Location $location_model)
     {
         parent::__construct($app);
         $this->location_model = $location_model;
-        $this->article_model = $article_model;
+        $this->article_repo = $article_repository;
     }
 
     /**
@@ -61,9 +61,7 @@ class MedicinalPlantRepository extends BaseRepository
 
     public function create($input)
     {
-
-        $article = $this->createArticle($input);
-        $input['article_id'] = $article->id ?? null;
+        $input['article_id'] = $this->createArticle($input)->id ?? null;
         $input['location_id'] = $this->createLocation($input)->id;
         $model = parent::create(Arr::except($input, $this->ArticleLocationLifeFormsData()));
         return $this->storeLifeForm($input, $model);
@@ -108,7 +106,8 @@ class MedicinalPlantRepository extends BaseRepository
             'title' ,
             'year' ,
             'journal_name' ,
-            'page_no'
+            'page_no',
+          'authors'
         ];
         return array_merge($article,['life_forms', 'address', 'province_id', 'village_id', 'province_id', 'region_name', 'min_altitude', 'max_altitude', 'point', 'geographical_description', 'city_id']);
     }
@@ -148,12 +147,14 @@ class MedicinalPlantRepository extends BaseRepository
     {
         $article=null;
         if (Arr::exists($input, 'title')) {
-            $article = $this->article_model->create([
+            $article = $this->article_repo->create([
                 'title' => $input['title'],
                 'year' => $input['year'] ?? null,
                 'journal_name' => $input['journal_name'] ?? null,
                 'page_no' => $input['page_no'] ?? null
             ]);
+            //store authors
+            $this->article_repo->createHub($article->id,'actors',$input['authors']);
         }
         return $article;
     }
