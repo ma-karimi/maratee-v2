@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
 //            'name' => ['en'=>'Iran','fa'=>'ایران']
 //        ]);
         $this->call([
+            (new ConvertSeeder(0))->run(),
+
             UserTableSeeder::class,
             ContinentTableSeeder::class,
 //            CountryTableSeeder::class,
@@ -86,7 +88,6 @@ class DatabaseSeeder extends Seeder
             CryoBankTableSeeder::class,
             LocationHubTableSeeder::class,
             PermissionTableSeeder::class,
-            (new ConvertSeeder(0))->run(),
 
 //            SeedTableSeeder::class,
 //            BioMolecularTableSeeder::class,

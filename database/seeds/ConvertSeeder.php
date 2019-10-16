@@ -25,7 +25,7 @@ class ConvertSeeder extends Seeder
     public function run()
     {
 
-        Treeleaf::where('id', '>', $this->start)->limit(20000)->get()->each(function ($treeLeaf) {
+        Treeleaf::where('id', '>', $this->start)->limit(10000)->get()->each(function ($treeLeaf) {
             (new ConvertService($treeLeaf))->handle();
         });
     }
