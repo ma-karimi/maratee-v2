@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         PlantHerbarium::observe(PlantObserver::class);
-        //DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
+        DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
+        DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('point', 'point');
     }
 }

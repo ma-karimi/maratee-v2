@@ -256,3 +256,11 @@ Route::apiResource('biochemical_evaluations', 'BiochemicalEvaluationAPIControlle
 Route::apiResource('biochemical_evaluation_vars', 'BiochemicalEvaluationVarAPIController');
 
 Route::resource('seed_generals', 'SeedGeneralAPIController');
+
+Route::resource('molecular_evaluations', 'MolecularEvaluationAPIController');
+
+Route::resource('molecular_evaluation_vars', 'MolecularEvaluationVarAPIController');
+
+Route::resource('seeds', 'SeedAPIController');
+
+Route::resource('morphology_qualitative_evaluations', 'MorphologyQualitativeEvaluationAPIController');

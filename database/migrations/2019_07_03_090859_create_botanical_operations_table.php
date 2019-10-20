@@ -14,6 +14,7 @@ class CreateBotanicalOperationsTable extends Migration {
 	{
 		Schema::create('botanical_operations', function(Blueprint $table)
 		{
+            $table->bigIncrements('id');
 			$table->unsignedBigInteger('botanical_id');
             $table->unsignedBigInteger('location_id');
             $table->tinyInteger('operation_id')->comment('seeding-planting');

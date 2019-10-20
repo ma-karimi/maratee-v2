@@ -21,10 +21,7 @@ class CreateMolecularEvaluationVarsTable extends Migration
             $table->timeStamps();
             $table->softDeletesTz();
             $table->foreign('molecular_evaluation_id')->references('id')->on('molecular_evaluations')->onUpdate('NO ACTION')->onDelete('CASCADE');
-
         });
-
-
     }
 
 

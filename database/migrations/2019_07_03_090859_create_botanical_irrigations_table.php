@@ -15,6 +15,7 @@ class CreateBotanicalIrrigationsTable extends Migration
     public function up()
     {
         Schema::create('botanical_irrigations', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('botanical_id');
             $table->unsignedBigInteger('irrigation_id');
             $table->tinyInteger('requirement')->comment('sparse-moderate-heavy');

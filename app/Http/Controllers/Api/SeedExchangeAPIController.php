@@ -80,7 +80,7 @@ class SeedExchangeAPIController extends AppBaseController
      *      description="Store SeedExchange",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="organization_id",
+     *          name="seed_id",
      *          in="body",
      *          description="SeedExchange that should be stored",
      *          required=true,
@@ -108,20 +108,6 @@ class SeedExchangeAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/SeedExchange")
      *      ),
      *      @SWG\Parameter(
-     *          name="department_id",
-     *          in="body",
-     *          description="SeedExchange that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SeedExchange")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="project_id",
-     *          in="body",
-     *          description="SeedExchange that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SeedExchange")
-     *      ),
-     *      @SWG\Parameter(
      *          name="specimen_type_collect_id",
      *          in="body",
      *          description="SeedExchange that should be stored",
@@ -137,20 +123,6 @@ class SeedExchangeAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="delivery_date",
-     *          in="body",
-     *          description="SeedExchange that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SeedExchange")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="accession_code",
-     *          in="body",
-     *          description="SeedExchange that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SeedExchange")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="regeneration_and_evaluation_code",
      *          in="body",
      *          description="SeedExchange that should be stored",
      *          required=false,
@@ -255,7 +227,7 @@ class SeedExchangeAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="organization_id",
+     *          name="seed_id",
      *          in="body",
      *          description="SeedExchange that should be stored",
      *          required=true,
@@ -283,20 +255,6 @@ class SeedExchangeAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/SeedExchange")
      *      ),
      *      @SWG\Parameter(
-     *          name="department_id",
-     *          in="body",
-     *          description="SeedExchange that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SeedExchange")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="project_id",
-     *          in="body",
-     *          description="SeedExchange that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SeedExchange")
-     *      ),
-     *      @SWG\Parameter(
      *          name="specimen_type_collect_id",
      *          in="body",
      *          description="SeedExchange that should be stored",
@@ -312,20 +270,6 @@ class SeedExchangeAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="delivery_date",
-     *          in="body",
-     *          description="SeedExchange that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SeedExchange")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="accession_code",
-     *          in="body",
-     *          description="SeedExchange that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SeedExchange")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="regeneration_and_evaluation_code",
      *          in="body",
      *          description="SeedExchange that should be stored",
      *          required=false,

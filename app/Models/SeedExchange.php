@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @SWG\Definition(
  *      definition="SeedExchange",
- *      required={"organization_id","recipient_name","recipient_phone","request_no"},
+ *      required={"seed_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -16,18 +16,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="organization_id",
- *          description="organization_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="department_id",
- *          description="department_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="project_id",
- *          description="project_id",
+ *          property="seed_id",
+ *          description="seed_id",
  *          type="integer"
  *      ),
  *      @SWG\Property(
@@ -45,16 +35,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          description="delivery_date",
  *          type="string",
  *          format="date"
- *      ),
- *      @SWG\Property(
- *          property="accession_code",
- *          description="accession_code",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="regeneration_and_evaluation_code",
- *          description="regeneration_and_evaluation_code",
- *          type="string"
  *      ),
  *      @SWG\Property(
  *          property="recipient_name",
@@ -98,9 +78,7 @@ class SeedExchange extends BaseModel
 
 
     public static $rules = [
-        'organization_id' => 'required|exists:organizations,id',
-        'project_id' => 'exists:projects,id',
-        'department_id' => 'exists:departments,id',
+        'seed_id' => 'required|exists:seeds,id',
         'specimen_type_collect_id' => 'exists:seed_generals,id',
         'seed_weight' => 'numeric',
         'delivery_date' => 'date',
@@ -115,24 +93,9 @@ class SeedExchange extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function project()
+    public function seed()
     {
-        return $this->belongsTo(Project::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function department()
-    {
-        return $this->belongsTo(Department::class);
-    }
-    /**
-     * @return BelongsTo
-     */
-    public function organization()
-    {
-        return $this->belongsTo(Organization::class);
+        return $this->belongsTo(Seed::class);
     }
 
     /**

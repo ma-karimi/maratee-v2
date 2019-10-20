@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class SeedRepository
  * @package App\Repositories
- * @version July 14, 2019, 11:22 am UTC
+ * @version October 20, 2019, 7:08 am UTC
 */
 
 class SeedRepository extends BaseRepository
@@ -36,28 +36,5 @@ class SeedRepository extends BaseRepository
     public function model()
     {
         return Seed::class;
-    }
-    public function update($input, $id)
-    {
-        $media_input = [
-            'date' => $input['date'] ?? null,
-            'user_id' => $input['user_id'] ?? null,
-            'location_id' => $input['location_id'] ?? null,
-            'description' => $input['media_description'] ?? null,
-            'media_type' => $input['media_type'] ?? 2,
-            'reference' => $input['reference'] ?? null,
-        ];
-
-        $model_input = collect($input)->except(array_keys($media_input))->toArray();
-        $model_input['description']=$input['description'];
-        unset($model_input['file']);
-        $model = parent::update($model_input, $id);
-        //store media
-        if (request()->hasFile('file')) {
-            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('media');
-            $media_record->update($media_input);
-        }
-        $model->save();
-        return $model;
     }
 }

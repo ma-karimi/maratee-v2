@@ -4,12 +4,11 @@ use App\Models\Seed;
 use App\Repositories\SeedRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
-use Tests\Traits\MakeSeedTrait;
 use Tests\ApiTestTrait;
 
 class SeedRepositoryTest extends TestCase
 {
-    use MakeSeedTrait, ApiTestTrait, DatabaseTransactions;
+    use ApiTestTrait, DatabaseTransactions;
 
     /**
      * @var SeedRepository
@@ -27,8 +26,10 @@ class SeedRepositoryTest extends TestCase
      */
     public function test_create_seed()
     {
-        $seed = $this->fakeSeedData();
+        $seed = factory(Seed::class)->make()->toArray();
+
         $createdSeed = $this->seedRepo->create($seed);
+
         $createdSeed = $createdSeed->toArray();
         $this->assertArrayHasKey('id', $createdSeed);
         $this->assertNotNull($createdSeed['id'], 'Created Seed must have id specified');
@@ -41,8 +42,10 @@ class SeedRepositoryTest extends TestCase
      */
     public function test_read_seed()
     {
-        $seed = $this->makeSeed();
+        $seed = factory(Seed::class)->create();
+
         $dbSeed = $this->seedRepo->find($seed->id);
+
         $dbSeed = $dbSeed->toArray();
         $this->assertModelData($seed->toArray(), $dbSeed);
     }
@@ -52,9 +55,11 @@ class SeedRepositoryTest extends TestCase
      */
     public function test_update_seed()
     {
-        $seed = $this->makeSeed();
-        $fakeSeed = $this->fakeSeedData();
+        $seed = factory(Seed::class)->create();
+        $fakeSeed = factory(Seed::class)->make()->toArray();
+
         $updatedSeed = $this->seedRepo->update($fakeSeed, $seed->id);
+
         $this->assertModelData($fakeSeed, $updatedSeed->toArray());
         $dbSeed = $this->seedRepo->find($seed->id);
         $this->assertModelData($fakeSeed, $dbSeed->toArray());
@@ -65,8 +70,10 @@ class SeedRepositoryTest extends TestCase
      */
     public function test_delete_seed()
     {
-        $seed = $this->makeSeed();
+        $seed = factory(Seed::class)->create();
+
         $resp = $this->seedRepo->delete($seed->id);
+
         $this->assertTrue($resp);
         $this->assertNull(Seed::find($seed->id), 'Seed should not exist in DB');
     }

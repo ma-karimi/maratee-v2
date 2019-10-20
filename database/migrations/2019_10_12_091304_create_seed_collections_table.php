@@ -16,13 +16,14 @@ class CreateSeedCollectionsTable extends Migration
         Schema::create('seed_collections', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('voucher_no')->nullable();
+            $table->unsignedBigInteger('seed_id');
             $table->unsignedBigInteger('taxonomy_id');
-            $table->unsignedBigInteger('organization_id');
-            $table->unsignedBigInteger('department_id')->nullable();
-            $table->unsignedBigInteger('project_id')->nullable();
+        //    $table->unsignedBigInteger('organization_id');
+         //   $table->unsignedBigInteger('department_id')->nullable();
+         //   $table->unsignedBigInteger('project_id')->nullable();
             $table->string('encoded_code_by_collector')->nullable();
             $table->string('corrected_code_by_nrgb')->nullable();
-            $table->string('accession_released_code_by_nrgb')->nullable();
+          //  $table->string('accession_released_code_by_nrgb')->nullable();
             $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('land_form_id')->nullable();
             $table->unsignedBigInteger('slope_aspect_id')->nullable();
@@ -59,10 +60,8 @@ class CreateSeedCollectionsTable extends Migration
             $table->timeStamps();
             $table->softDeletesTz();
 
+            $table->foreign('seed_id')->references('id')->on('seeds')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('project_id')->references('id')->on('projects')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('slope_aspect_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('general_habitat_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');

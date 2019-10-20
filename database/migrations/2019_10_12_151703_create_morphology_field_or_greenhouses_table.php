@@ -13,7 +13,7 @@ class CreateMorphologyFieldOrGreenhousesTable extends Migration
      */
     public function up()
     {
-        Schema::create('morphology_field_or_greenhouses', function (Blueprint $table) {
+        Schema::create('morphology_fields', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('station_id');
             $table->unsignedBigInteger('field_or_greenhouse');

@@ -13,7 +13,7 @@ use App\Models\Department;
 /**
  * @SWG\Definition(
  *      definition="SeedCollection",
- *      required={"taxonomy_id","organization_id","location_id","plant_consumption_value_id","general_used_part_id"},
+ *      required={"taxonomy_id","seed_id","location_id","plant_consumption_value_id","general_used_part_id"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -30,23 +30,13 @@ use App\Models\Department;
  *          type="integer"
  *      ),
  *      @SWG\Property(
- *          property="organization_id",
- *          description="organization_id",
+ *          property="seed_id",
+ *          description="seed_id",
  *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="location_id",
  *          description="location_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="department_id",
- *          description="department_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="project_id",
- *          description="project_id",
  *          type="integer"
  *      ),
  *      @SWG\Property(
@@ -57,11 +47,6 @@ use App\Models\Department;
  *      @SWG\Property(
  *          property="corrected_code_by_nrgb",
  *          description="corrected_code_by_nrgb",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="accession_released_code_by_nrgb",
- *          description="accession_released_code_by_nrgb",
  *          type="string"
  *      ),
  *      @SWG\Property(
@@ -242,12 +227,10 @@ class SeedCollection extends BaseModel
 {
     public static $rules = [
         'taxonomy_id' => 'required|exists:taxonomies,id',
-        'organization_id' => 'required|exists:organizations,id',
+        'seed_id' => 'required|exists:seeds,id',
         'location_id' =>'required|exists:locations,id',
         'plant_consumption_value_id' =>'required|exists:seed_generals,id',
         'general_used_part_id' =>'required|exists:seed_generals,id',
-        'department_id' =>'exists:departments,id',
-        'project_id' =>'exists:projects,id',
         'land_form_id' =>'exists:seed_generals,id',
         'slope_aspect_id' =>'exists:seed_generals,id',
         'general_habitat_id' =>'exists:generals,id',
@@ -286,9 +269,9 @@ class SeedCollection extends BaseModel
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function department()
+    public function seed()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Seed::class);
     }
 
     /**
@@ -347,13 +330,6 @@ class SeedCollection extends BaseModel
         return $this->belongsTo(Location::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function organization()
-    {
-        return $this->belongsTo(Organization::class);
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -387,13 +363,6 @@ class SeedCollection extends BaseModel
         return $this->belongsTo('App\Models\SeedGeneral', 'pollination_type_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function project()
-    {
-        return $this->belongsTo('App\Models\Project');
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

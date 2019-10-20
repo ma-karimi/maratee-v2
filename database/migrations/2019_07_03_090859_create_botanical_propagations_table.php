@@ -14,6 +14,7 @@ class CreateBotanicalPropagationsTable extends Migration {
 	{
 		Schema::create('botanical_propagations', function(Blueprint $table)
 		{
+		    $table->bigIncrements('id');
 			$table->unsignedBigInteger('botanical_id');
 			$table->unsignedBigInteger('propagation_id');
 

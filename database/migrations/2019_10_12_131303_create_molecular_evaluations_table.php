@@ -15,12 +15,13 @@ class CreateMolecularEvaluationsTable extends Migration
     {
         Schema::create('molecular_evaluations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('organization_id');
-            $table->unsignedBigInteger('department_id')->nullable();
-            $table->unsignedBigInteger('project_id')->nullable();
+           // $table->unsignedBigInteger('organization_id');
+           // $table->unsignedBigInteger('department_id')->nullable();
+           // $table->unsignedBigInteger('project_id')->nullable();
             $table->unsignedBigInteger('specimen_type_collect_id')->nullable();
-            $table->string('accession_code')->nullable();
-            $table->string('regeneration_and_evaluation_code')->nullable();
+           // $table->string('accession_code')->nullable();
+           // $table->string('regeneration_and_evaluation_code')->nullable();
+            $table->unsignedBigInteger('seed_id')->nullable();
             $table->text('treat')->nullable();
             $table->integer('repeat')->nullable();
             $table->timeStamps();
@@ -29,6 +30,7 @@ class CreateMolecularEvaluationsTable extends Migration
             $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('project_id')->references('id')->on('projects')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('seed_id')->references('id')->on('seeds')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
 
 

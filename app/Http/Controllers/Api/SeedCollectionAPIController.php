@@ -87,7 +87,7 @@ class SeedCollectionAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/SeedCollection")
      *      ),
      *      @SWG\Parameter(
-     *          name="organization_id",
+     *          name="seed_id",
      *          in="body",
      *          description="SeedCollection that should be stored",
      *          required=true,
@@ -122,20 +122,6 @@ class SeedCollectionAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/SeedCollection")
      *      ),
      *      @SWG\Parameter(
-     *          name="department_id",
-     *          in="body",
-     *          description="SeedCollection that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SeedCollection")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="project_id",
-     *          in="body",
-     *          description="SeedCollection that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SeedCollection")
-     *      ),
-     *      @SWG\Parameter(
      *          name="encoded_code_by_collector",
      *          in="body",
      *          description="SeedCollection that should be stored",
@@ -144,13 +130,6 @@ class SeedCollectionAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="corrected_code_by_nrgb",
-     *          in="body",
-     *          description="SeedCollection that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SeedCollection")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="accession_released_code_by_nrgb",
      *          in="body",
      *          description="SeedCollection that should be stored",
      *          required=false,
@@ -472,7 +451,7 @@ class SeedCollectionAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/SeedCollection")
      *      ),
      *      @SWG\Parameter(
-     *          name="organization_id",
+     *          name="seed_id",
      *          in="body",
      *          description="SeedCollection that should be stored",
      *          required=true,
@@ -507,20 +486,6 @@ class SeedCollectionAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/SeedCollection")
      *      ),
      *      @SWG\Parameter(
-     *          name="department_id",
-     *          in="body",
-     *          description="SeedCollection that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SeedCollection")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="project_id",
-     *          in="body",
-     *          description="SeedCollection that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SeedCollection")
-     *      ),
-     *      @SWG\Parameter(
      *          name="encoded_code_by_collector",
      *          in="body",
      *          description="SeedCollection that should be stored",
@@ -529,13 +494,6 @@ class SeedCollectionAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="corrected_code_by_nrgb",
-     *          in="body",
-     *          description="SeedCollection that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SeedCollection")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="accession_released_code_by_nrgb",
      *          in="body",
      *          description="SeedCollection that should be stored",
      *          required=false,
