@@ -294,7 +294,7 @@ class TaxonomyRepository extends BaseRepository
     public function get($request)
     {
         return $this->model->when($request->groupby, function ($query)use($request) {
-            return $query->whereNotNull($request->groupby)->groupBy($request->groupby);
+            return $query->whereNotNull($request->groupby)->groupBy($request->groupby)->distinct();
         })
             ->when($request->relations, function ($query)use($request) {
             return $query->with($request->relations);
