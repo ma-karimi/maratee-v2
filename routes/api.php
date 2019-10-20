@@ -264,3 +264,7 @@ Route::resource('molecular_evaluation_vars', 'MolecularEvaluationVarAPIControlle
 Route::resource('seeds', 'SeedAPIController');
 
 Route::resource('morphology_qualitative_evaluations', 'MorphologyQualitativeEvaluationAPIController');
+
+Route::resource('morphology_quantitative_evaluations', 'MorphologyQuantitativeEvaluationAPIController');
+
+Route::resource('morphology_quantitative_evaluation_vars', 'MorphologyQuantitativeEvaluationVarAPIController');

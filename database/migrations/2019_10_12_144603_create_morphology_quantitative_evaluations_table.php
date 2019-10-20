@@ -15,15 +15,15 @@ class CreateMorphologyQuantitativeEvaluationsTable extends Migration
     {
         Schema::create('morphology_quantitative_evaluations', function (Blueprint $table) {
             $table->bigIncrements('id');
-           // $table->string('accession_code')->nullable();
+            $table->unsignedBigInteger('seed_id')->nullable();
             $table->unsignedBigInteger('collect_id')->comment('specimen_type_collect_id')->nullable();
-           // $table->string('regeneration_and_evaluation_code')->nullable();
-           // $table->unsignedBigInteger('organization_id');
-           // $table->unsignedBigInteger('department_id')->nullable();
+            // $table->string('accession_code')->nullable();
+            // $table->string('regeneration_and_evaluation_code')->nullable();
+            // $table->unsignedBigInteger('organization_id');
+            // $table->unsignedBigInteger('department_id')->nullable();
             //$table->unsignedBigInteger('project_id')->nullable();
             $table->string('voucher_no')->nullable();
             $table->unsignedBigInteger('taxonomy_id')->nullable();
-            $table->unsignedBigInteger('seed_id')->nullable();
             $table->unsignedBigInteger('station_id')->nullable();
             $table->unsignedBigInteger('replication_or_block_number')->nullable();
             $table->string('plant_density')->nullable()->comment('per hectare');
