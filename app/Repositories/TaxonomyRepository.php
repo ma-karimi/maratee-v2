@@ -293,11 +293,23 @@ class TaxonomyRepository extends BaseRepository
 
     public function get($request)
     {
-        return $this->model->when($request->groupby, function ($query)use($request) {
-            return $query->whereNotNull($request->groupby)->groupBy($request->groupby)->distinct();
+        return $this->model->when($request->groupby, function ($query) use ($request) {
+            return $query->whereNotNull($request->groupby)->groupBy($request->groupby);
         })
-            ->when($request->relations, function ($query)use($request) {
-            return $query->with($request->relations);
-        })->get();
+            ->when($request->relations, function ($query) use ($request) {
+                return $query->with($request->relations);
+            })->get();
+    }
+
+    public function paginate($perPage, array $search = [], array $with_relations = null, $columns = ['*'])
+    {
+        $query = $this->allQuery($search);
+        return $query->when($with_relations, function ($query, $with_relations) {
+            return $query->with($with_relations);
+        })
+            ->when(\request('groupby'), function ($query) {
+                return $query->whereNotNull(\request('groupby'))->groupBy(\request('groupby'));
+            })
+            ->paginate($perPage ?? 25, $columns);
     }
 }
