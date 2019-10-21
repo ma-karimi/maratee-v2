@@ -136,9 +136,8 @@ class PlantHerbariumRepository extends BaseRepository
      * @param $input
      * @param $taxonomy_id
      * @param $location_id
-     * @return Model
      */
-    private function createPlantHerbarium($input, $taxonomy_id, $location_id): Model
+    private function createPlantHerbarium($input, $taxonomy_id, $location_id)
     {
         $plant_input = [
             'taxonomy_id' => $taxonomy_id,
