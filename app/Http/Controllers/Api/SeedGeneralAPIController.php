@@ -30,7 +30,7 @@ class SeedGeneralAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/seedGenerals",
+     *      path="/seed_generals",
      *      summary="Get a listing of the SeedGenerals.",
      *      tags={"SeedGeneral"},
      *      description="Get all SeedGenerals",
@@ -74,21 +74,21 @@ class SeedGeneralAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/seedGenerals",
+     *      path="/seed_generals",
      *      summary="Store a newly created SeedGeneral in storage",
      *      tags={"SeedGeneral"},
      *      description="Store SeedGeneral",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="name",
-     *          in="name",
+     *          in="body",
      *          description="SeedGeneral that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/SeedGeneral")
      *      ),
      *      @SWG\Parameter(
      *          name="type",
-     *          in="type",
+     *          in="body",
      *          description="SeedGeneral that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/SeedGeneral")
@@ -128,7 +128,7 @@ class SeedGeneralAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/seedGenerals/{id}",
+     *      path="/seed_generals/{id}",
      *      summary="Display the specified SeedGeneral",
      *      tags={"SeedGeneral"},
      *      description="Get SeedGeneral",
@@ -179,7 +179,7 @@ class SeedGeneralAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/seedGenerals/{id}",
+     *      path="/seed_generals/{id}",
      *      summary="Update the specified SeedGeneral in storage",
      *      tags={"SeedGeneral"},
      *      description="Update SeedGeneral",
@@ -193,14 +193,14 @@ class SeedGeneralAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="name",
-     *          in="name",
+     *          in="body",
      *          description="SeedGeneral that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/SeedGeneral")
      *      ),
      *      @SWG\Parameter(
      *          name="type",
-     *          in="type",
+     *          in="body",
      *          description="SeedGeneral that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/SeedGeneral")
@@ -247,7 +247,7 @@ class SeedGeneralAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Delete(
-     *      path="/seedGenerals/{id}",
+     *      path="/seed_generals/{id}",
      *      summary="Remove the specified SeedGeneral from storage",
      *      tags={"SeedGeneral"},
      *      description="Delete SeedGeneral",

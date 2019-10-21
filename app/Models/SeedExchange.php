@@ -21,11 +21,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          type="integer"
  *      ),
  *      @SWG\Property(
- *          property="specimen_type_collect_id",
- *          description="specimen_type_collect_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
  *          property="seed_weight",
  *          description="seed_weight",
  *          type="number",
@@ -52,6 +47,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          type="string"
  *      ),
  *      @SWG\Property(
+ *          property="description",
+ *          description="description",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -67,28 +67,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class SeedExchange extends BaseModel
 {
-    public static $linguistically = ['description' => true];
-
+    public static $rules = [
+        'seed_id' => 'required|exists:seeds,id',
+        'seed_weight' => 'numeric',
+        'delivery_date' => 'date',
+        'recipient_name' => 'string',
+        'recipient_phone' => 'string',
+        'request_no' => 'string',
+    ];
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'seed_exchanges';
-
-
-    public static $rules = [
-        'seed_id' => 'required|exists:seeds,id',
-        'specimen_type_collect_id' => 'exists:seed_generals,id',
-        'seed_weight' => 'numeric',
-        'delivery_date' => 'date',
-        'accession_code' => 'string',
-        'regeneration_and_evaluation_code' => 'string',
-        'recipient_name' => 'string',
-        'recipient_phone' => 'string',
-        'request_no' => 'string',
-    ];
-
 
     /**
      * @return BelongsTo
@@ -98,12 +90,5 @@ class SeedExchange extends BaseModel
         return $this->belongsTo(Seed::class);
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function specimenTypeCollect()
-    {
-        return $this->belongsTo('App\Models\SeedGeneral');
-    }
 
 }

@@ -39,8 +39,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      @SWG\Property(
  *          property="description",
  *          description="description",
- *          type="array",
- *     @SWG\Items(type="string")
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="phone",
@@ -78,7 +77,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Organization extends BaseModel
 {
-    public static $linguistically = ['name' => true, 'description' => false];
+    public static $linguistically = ['name' => true];
     public static $rules = [
         'domestic_code' => 'string',
         'international_code' => 'string',
@@ -101,7 +100,6 @@ class Organization extends BaseModel
      */
     protected $casts = [
         'name' => 'json',
-        'description' => 'json',
     ];
 
 
@@ -111,14 +109,6 @@ class Organization extends BaseModel
     public function entryHubs(): HasMany
     {
         return $this->hasMany(EntryHub::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function herbariums(): HasMany
-    {
-        return $this->hasMany(Herbarium::class)->latest();
     }
 
     /**

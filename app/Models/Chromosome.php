@@ -20,9 +20,9 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * 			@SWG\Property(property="article_id", type="integer"),
  * 			@SWG\Property(property="general_class_id", type="integer"),
  * 			@SWG\Property(property="location_id", type="integer"),
- * 			@SWG\Property(property="description", type="string",
+ * 			@SWG\Property(property="description", type="string"),
  * 			@SWG\Property(property="created_at", type="string"),
- * 			@SWG\Property(property="updated_at", type="string"),
+ * 			@SWG\Property(property="updated_at", type="string")
  *        )
  **/
 class Chromosome extends BaseModel implements HasMedia

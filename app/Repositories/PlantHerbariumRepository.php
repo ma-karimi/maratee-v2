@@ -9,7 +9,6 @@ use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * Class PlantRepository
@@ -24,26 +23,23 @@ class PlantHerbariumRepository extends BaseRepository
      */
     protected $fieldSearchable = [
 
-
     ];
+
     private $taxonomy_model;
     private $location_model;
-    private $action_hub_repo;
 
     /**
      * PlantRepository constructor.
      * @param Application $app
      * @param Taxonomy $taxonomy_model
      * @param Location $location_model
-     * @param ActionHubRepository $action_hub_repo
      * @throws \Exception
      */
-    public function __construct(Application $app, Taxonomy $taxonomy_model, Location $location_model, ActionHubRepository $action_hub_repo)
+    public function __construct(Application $app, Taxonomy $taxonomy_model, Location $location_model)
     {
         parent::__construct($app);
         $this->taxonomy_model = $taxonomy_model;
         $this->location_model = $location_model;
-        $this->action_hub_repo = $action_hub_repo;
     }
 
     /**
@@ -136,6 +132,7 @@ class PlantHerbariumRepository extends BaseRepository
      * @param $input
      * @param $taxonomy_id
      * @param $location_id
+     * @return Model
      */
     private function createPlantHerbarium($input, $taxonomy_id, $location_id)
     {
@@ -158,17 +155,17 @@ class PlantHerbariumRepository extends BaseRepository
             'cycle_id' => $input['cycle_id'] ?? null,
             'wooden_id' => $input['wooden_id'] ?? null,
             'herbaceous_id' => $input['herbaceous_id'] ?? null,
-            'leaf_id' => $input['leaf_id'] ?? null,
+//            'leaf_id' => $input['leaf_id'] ?? null,
             //
             'is_flowering' => $input['is_flowering'] ?? 0,
             'flowering_time' => $input['flowering_time'] ?? null,
             'herbarium_number' => $input['herbarium_number'] ?? null,
             'herbarium_index' => $input['herbarium_index'] ?? null,
-            'cf' => $input['cf'] ?? 0,
-            'sheets_no' => $input['sheets_no'] ?? null,
-            'samples_no' => $input['samples_no'] ?? null,
-            'tip_qt' => $input['tip_qt'] ?? null,
-            'physical_tip_qt' => $input['physical_tip_qt'] ?? null,
+            'cf' => $input['cf'] ?? null,
+//            'sheets_no' => $input['sheets_no'] ?? null,
+//            'samples_no' => $input['samples_no'] ?? null,
+//            'tip_qt' => $input['tip_qt'] ?? null,
+//            'physical_tip_qt' => $input['physical_tip_qt'] ?? null,
         ];
         //store plant
         return parent::create($plant_input);
@@ -253,17 +250,17 @@ class PlantHerbariumRepository extends BaseRepository
             'cycle_id' => $input['cycle_id'] ?? null,
             'wooden_id' => $input['wooden_id'] ?? null,
             'herbaceous_id' => $input['herbaceous_id'] ?? null,
-            'leaf_id' => $input['leaf_id'] ?? null,
+//            'leaf_id' => $input['leaf_id'] ?? null,
             //
             'is_flowering' => $input['is_flowering'] ?? 0,
             'flowering_time' => $input['flowering_time'] ?? null,
             'herbarium_number' => $input['herbarium_number'] ?? null,
             'herbarium_index' => $input['herbarium_index'] ?? null,
-            'cf' => $input['cf'] ?? 0,
-            'sheets_no' => $input['sheets_no'] ?? null,
-            'samples_no' => $input['samples_no'] ?? null,
-            'tip_qt' => $input['tip_qt'] ?? null,
-            'physical_tip_qt' => $input['physical_tip_qt'] ?? null
+            'cf' => $input['cf'] ?? null,
+//            'sheets_no' => $input['sheets_no'] ?? null,
+//            'samples_no' => $input['samples_no'] ?? null,
+//            'tip_qt' => $input['tip_qt'] ?? null,
+//            'physical_tip_qt' => $input['physical_tip_qt'] ?? null
         ];
         return parent::update($plant_input, $id);
     }
