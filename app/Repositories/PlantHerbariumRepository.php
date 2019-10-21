@@ -75,7 +75,7 @@ class PlantHerbariumRepository extends BaseRepository
         $location = $this->createLocation($input);
         $plant = $this->createPlantHerbarium($input, $taxonomy_id, $location->id);
         $this->syncPlantGeneralProperties($taxonomy_input, $plant);
-        $this->syncPlantTypeProperties($input, $plant);
+//        $this->syncPlantTypeProperties($input, $plant);
         return $plant;
     }
 
@@ -206,7 +206,7 @@ class PlantHerbariumRepository extends BaseRepository
         $location = $this->updateLocation($input);
         $plant = $this->updatePlant($input, $id, $taxonomy_id, $location->id);
         $this->syncPlantGeneralProperties($taxonomy_input, $plant);
-        $this->syncPlantTypeProperties($input, $plant);
+//        $this->syncPlantTypeProperties($input, $plant);
         $this->updateMedia($input, $plant);
         return $plant;
     }

@@ -690,7 +690,7 @@ class PlantHerbariumAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdatePlantHerbariumAPIRequest $request)
+    public function update(UpdatePlantHerbariumAPIRequest $request, $id)
     {
         $input = $request->all();
 
