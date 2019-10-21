@@ -178,7 +178,7 @@ class PlantHerbariumRepository extends BaseRepository
      * @param array $taxonomy_input
      * @param Model $plant
      */
-    private function syncPlantGeneralProperties(array $taxonomy_input, Model $plant): void
+    private function syncPlantGeneralProperties(array $taxonomy_input, $plant): void
     {
         $general_input = array_filter($taxonomy_input, function ($value, $key) {
             return $value !== null and $key !== 'name';/* and $key !== 'plant_id';*/
@@ -191,7 +191,7 @@ class PlantHerbariumRepository extends BaseRepository
      * @param Model $plant
      * @return mixed
      */
-    private function syncPlantTypeProperties($input, Model $plant)
+    private function syncPlantTypeProperties($input, $plant)
     {
         if (!empty($input['plant_types'])) {
             $plant->generals()->sync($input['plant_types']);
