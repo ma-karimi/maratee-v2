@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @SWG\Definition(
  *      definition="SeedExchange",
- *      required={"seed_id"},
+ *      required={"seed_id", "recipient_name", "recipient_phone", "request_no"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",

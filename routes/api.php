@@ -89,8 +89,6 @@ Route::apiResource('projects', 'ProjectAPIController');
 
 Route::apiResource('products', 'ProductAPIController');
 
-Route::apiResource('planting_actions', 'PlantingActionAPIController');
-
 Route::apiResource('generals', 'GeneralAPIController');
 
 Route::apiResource('plant_herbariums', 'PlantHerbariumAPIController');
@@ -140,7 +138,6 @@ Route::apiResource('gardens', 'GardenAPIController');
 
 Route::apiResource('geology_ages', 'GeologyAgeAPIController');
 
-Route::apiResource('herbariums', 'HerbariumAPIController');
 
 Route::apiResource('irrigations', 'IrrigationAPIController');
 
@@ -216,8 +213,6 @@ Route::apiResource('transactions', 'TransactionAPIController');
 Route::apiResource('transaction_evidences', 'TransactionEvidenceAPIController');
 
 Route::apiResource('paleontology_documents', 'PaleontologyDocumentAPIController');
-
-Route::apiResource('paleontology_maps', 'PaleontologyMapAPIController');
 
 Route::apiResource('action_hub_documents', 'ActionHubDocumentAPIController');
 

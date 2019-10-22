@@ -33,7 +33,6 @@ class CreateSeedCollectionsTable extends Migration
             $table->integer('area_sampled')->nullable();
             $table->integer('plants_sampled_no')->nullable();
             $table->integer('approximate_area_of_plant')->nullable();
-            $table->unsignedBigInteger('specimen_type_id')->nullable();
             $table->tinyInteger('flowering_time_id')->nullable();
             $table->unsignedBigInteger('pollination_type_id')->nullable();
             $table->unsignedBigInteger('pollination_agent_id')->nullable();

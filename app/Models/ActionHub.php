@@ -109,7 +109,7 @@ class ActionHub extends BaseModel
 
     public function actors(): MorphToMany
     {
-        return $this->morphToMany(Actor::class, 'actorable', 'actor_hubs');
+        return $this->morphToMany(Actor::class, 'actorable', 'actor_hubs')->withTimestamps()->whereNull('actor_hubs.deleted_at');
     }
 //
 //    public function user()

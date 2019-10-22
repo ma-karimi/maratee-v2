@@ -218,8 +218,10 @@ class PlantHerbariumRepository extends BaseRepository
     private function updateLocation($input)
     {
         $location_input = $this->locationData($input);
-
-        return $this->location_model->find($input['location_id'])->update($location_input);
+        $data  = $this->location_model->find($input['location_id']);
+        $data->fill($location_input);
+        $data->save();
+        return $data;
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Convert\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @SWG\Definition(
@@ -89,5 +90,14 @@ class Seed extends BaseModel
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
+    }
+
+
+    /**
+     * @return HasOne
+     */
+    public function collection()
+    {
+        return $this->hasOne(SeedCollection::class);
     }
 }

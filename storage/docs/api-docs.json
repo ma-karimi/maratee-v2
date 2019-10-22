@@ -32551,7 +32551,6 @@
         },
         "SeedCollection": {
             "required": [
-                "taxonomy_id",
                 "seed_id",
                 "location_id",
                 "plant_consumption_value_id",
@@ -32728,7 +32727,10 @@
         },
         "SeedExchange": {
             "required": [
-                "seed_id"
+                "seed_id",
+                "recipient_name",
+                "recipient_phone",
+                "request_no"
             ],
             "properties": {
                 "id": {
