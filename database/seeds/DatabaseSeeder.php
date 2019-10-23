@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        \App\Utility::truncateTables();
+        \App\Utility::truncateTables();
 
         Model::unguard();
         ini_set('max_execution_time', 0);
@@ -45,14 +45,12 @@ class DatabaseSeeder extends Seeder
             MapTableSeeder::class,
             MedicineTableSeeder::class,
             ConstituentTypeTableSeeder::class,
-            SeedFeatureTableSeeder::class,
             OrganizationTableSeeder::class,
            GeneralTableSeeder::class,
             OriginalGeneralTableSeeder::class,
             OriginalPropagationTableSeeder::class,
             ProjectTableSeeder::class,
             PropagationTableSeeder::class,
-            SoilTableSeeder::class,
             LocationTableSeeder::class,
            AuthorHubTableSeeder::class,
             LifeFormTableSeeder::class,

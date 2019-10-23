@@ -10,7 +10,7 @@ $factory->define(App\Models\Organization::class, function (Faker $faker) {
         'international_code' => $faker->word,
         'is_herbarium' => $faker->boolean,
         'name' => make_json($faker->name),
-        'description' => make_json($faker->text),
+        'description' => $faker->text,
         'phone' => $faker->phoneNumber,
         'email' => $faker->safeEmail,
         'website' => $faker->word,

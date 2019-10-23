@@ -61,7 +61,7 @@ class CreateSeedCollectionsTable extends Migration
             $table->foreign('soil_salinity_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('soil_lime_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('soil_erosion_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('specimen_type_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
+//            $table->foreign('specimen_type_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('pollination_type_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('pollination_agent_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('fruit_type_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
