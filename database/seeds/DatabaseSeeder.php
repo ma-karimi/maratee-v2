@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\{Country, User};
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,74 +19,99 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
-//        \App\Models\Country::create([
-//            'name' => ['en'=>'Iran','fa'=>'ایران']
-//        ]);
-        $this->call([
-         //   (new ConvertSeeder(0))->run(),
+        if (App::environment() == 'production') {
+            Country::create([
+                'name' => ['en' => 'Iran', 'fa' => 'ایران']
+            ]);
 
-            UserTableSeeder::class,
-            ContinentTableSeeder::class,
-            CountryTableSeeder::class,
-           ProvinceTableSeeder::class,
-            CityTableSeeder::class,
-            VillageTableSeeder::class,
-           ActionTableSeeder::class,
-            EvaluationTableSeeder::class,
-            AuthorTableSeeder::class,
-            ArticleTableSeeder::class,
-            CollectionTableSeeder::class,
-            ConstituentTableSeeder::class,
-            DepartmentTableSeeder::class,
-            ProtectionTableSeeder::class,
-            DivisionTableSeeder::class,
-            EntryTableSeeder::class,
-            GeologyAgeTableSeeder::class,
-            IrrigationTableSeeder::class,
-            LightingTableSeeder::class,
-            MapTableSeeder::class,
-            MedicineTableSeeder::class,
-            ConstituentTypeTableSeeder::class,
-            OrganizationTableSeeder::class,
-           GeneralTableSeeder::class,
-            OriginalGeneralTableSeeder::class,
-            OriginalPropagationTableSeeder::class,
-            ProjectTableSeeder::class,
-            PropagationTableSeeder::class,
-            LocationTableSeeder::class,
-           AuthorHubTableSeeder::class,
-            LifeFormTableSeeder::class,
-            TaxonomyTableSeeder::class,
-            PlantHerbariumTableSeeder::class,
-            PlantLifeFormTableSeeder::class,
-            PaleontologyTableSeeder::class,
-            TreatmentTableSeeder::class,
-            TreatmentHubTableSeeder::class,
-            MethodTableSeeder::class,
-           PlantPropertyTableSeeder::class,
-        ]);
-        $this->call([
-            MedicinalPartTableSeeder::class,
-            LocalityTableSeeder::class,
-           ActionHubTableSeeder::class,
-            ProductTableSeeder::class,
-            MedicinalPlantTableSeeder::class,
-            MedicinalPlantConstituentTableSeeder::class,
-            TransactionTableSeeder::class,
-            TransactionEvidenceTableSeeder::class,
-            PaleontologyDocumentTableSeeder::class,
-            PaleontologyCitationTableSeeder::class,
-            ActionHubDocumentTableSeeder::class,
-            MedicinalPlantTableSeeder::class,
-            MedicinalPlantTypeTableSeeder::class,
-            BotanicalTableSeeder::class,
-            BotanicalIrrigationTableSeeder::class,
-            BotanicalOperationTableSeeder::class,
-            MediaTableSeeder::class,
-            ChromosomeTableSeeder::class,
-            CryoBankTableSeeder::class,
-            LocationHubTableSeeder::class,
-            PermissionTableSeeder::class,
+
+            User::create([
+                'email' => 'admin@gmail.com',
+                'password' => 123456,
+                'title' => ['en' => 'mrs.'],
+                'education' => ['en' => 'wewewe'],
+                'degree' => ['en' => 'ssss'],
+                'national_id' => 61,
+                'birthday' => '1993-01-20',
+                'nationality' => ['en' => 'Colombia'],
+                'full_name' => ['en' => 'Camille Swift'],
+                'mobile' => '9145508431',
+                'phone' => '9145508431',
+            ]);
+
+            $this->call([
+                OriginalGeneralTableSeeder::class,
+                OriginalPropagationTableSeeder::class,
+                (new ConvertSeeder())->run(),
+
+            ]);
+
+        } else {
+            $this->call([
+                //   (new ConvertSeeder(0))->run(),
+
+                UserTableSeeder::class,
+                ContinentTableSeeder::class,
+                CountryTableSeeder::class,
+                ProvinceTableSeeder::class,
+                CityTableSeeder::class,
+                VillageTableSeeder::class,
+                ActionTableSeeder::class,
+                EvaluationTableSeeder::class,
+                AuthorTableSeeder::class,
+                ArticleTableSeeder::class,
+                CollectionTableSeeder::class,
+                ConstituentTableSeeder::class,
+                DepartmentTableSeeder::class,
+                ProtectionTableSeeder::class,
+                DivisionTableSeeder::class,
+                EntryTableSeeder::class,
+                GeologyAgeTableSeeder::class,
+                IrrigationTableSeeder::class,
+                LightingTableSeeder::class,
+                MapTableSeeder::class,
+                MedicineTableSeeder::class,
+                ConstituentTypeTableSeeder::class,
+                OrganizationTableSeeder::class,
+                GeneralTableSeeder::class,
+                OriginalGeneralTableSeeder::class,
+                OriginalPropagationTableSeeder::class,
+                ProjectTableSeeder::class,
+                PropagationTableSeeder::class,
+                LocationTableSeeder::class,
+                AuthorHubTableSeeder::class,
+                LifeFormTableSeeder::class,
+                TaxonomyTableSeeder::class,
+                PlantHerbariumTableSeeder::class,
+                PlantLifeFormTableSeeder::class,
+                PaleontologyTableSeeder::class,
+                TreatmentTableSeeder::class,
+                TreatmentHubTableSeeder::class,
+                MethodTableSeeder::class,
+                PlantPropertyTableSeeder::class,
+            ]);
+            $this->call([
+                MedicinalPartTableSeeder::class,
+                LocalityTableSeeder::class,
+                ActionHubTableSeeder::class,
+                ProductTableSeeder::class,
+                MedicinalPlantTableSeeder::class,
+                MedicinalPlantConstituentTableSeeder::class,
+                TransactionTableSeeder::class,
+                TransactionEvidenceTableSeeder::class,
+                PaleontologyDocumentTableSeeder::class,
+                PaleontologyCitationTableSeeder::class,
+                ActionHubDocumentTableSeeder::class,
+                MedicinalPlantTableSeeder::class,
+                MedicinalPlantTypeTableSeeder::class,
+                BotanicalTableSeeder::class,
+                BotanicalIrrigationTableSeeder::class,
+                BotanicalOperationTableSeeder::class,
+                MediaTableSeeder::class,
+                ChromosomeTableSeeder::class,
+                CryoBankTableSeeder::class,
+                LocationHubTableSeeder::class,
+                PermissionTableSeeder::class,
 
 //            SeedTableSeeder::class,
 //            BioMolecularTableSeeder::class,
@@ -109,8 +136,8 @@ class DatabaseSeeder extends Seeder
 //            PermissionTableSeeder::class,
 //            ComponentTableSeeder::class,
 //            MedicalComponentTableSeeder::class,
-        ]);
-
+            ]);
+        }
         Model::reguard();
     }
 }

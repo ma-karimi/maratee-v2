@@ -6,27 +6,23 @@ use App\Services\ConvertService;
 
 class ConvertSeeder extends Seeder
 {
-    private $start;
-
-    /**
-     * ConvertSeeder constructor.
-     * @param $start
-     */
-    public function __construct($start)
-    {
-        $this->start = $start;
-    }
 
     /**
      * Run the database seeds.
      *
+     * @param int $start
+     * @param null $limit
      * @return void
      */
-    public function run()
+    public function run($start = 0, $limit = null)
     {
 
-        Treeleaf::where('id', '>', $this->start)->limit(10000)->get()->each(function ($treeLeaf) {
-            (new ConvertService($treeLeaf))->handle();
-        });
+        Treeleaf::where('id', '>', $start)
+            ->when($limit, function ($query) use ($limit) {
+                return $query->limit($limit);
+            })
+            ->get()->each(function ($treeLeaf) {
+                (new ConvertService($treeLeaf))->handle();
+            });
     }
 }
