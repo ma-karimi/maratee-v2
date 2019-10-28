@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 OriginalGeneralTableSeeder::class,
                 OriginalPropagationTableSeeder::class,
-                ConvertSeeder::class,
+//                ConvertSeeder::class,
 
             ]);
 
