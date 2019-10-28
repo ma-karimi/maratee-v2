@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 OriginalGeneralTableSeeder::class,
                 OriginalPropagationTableSeeder::class,
-                ConvertSeeder::run(),
+                ConvertSeeder::class,
 
             ]);
 
@@ -115,7 +115,7 @@ class DatabaseSeeder extends Seeder
                 CryoBankTableSeeder::class,
                 LocationHubTableSeeder::class,
                 PermissionTableSeeder::class,
-                ConvertSeeder::run(),
+                ConvertSeeder::class,
 
 //            SeedTableSeeder::class,
 //            BioMolecularTableSeeder::class,
