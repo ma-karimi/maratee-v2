@@ -406,7 +406,7 @@ class ConvertService
     {
         $array= [
             'herbarium_number' => $this->treeLeaf->herbariumnumber,
-            'is_flowering' => 0,
+            'is_flowering' => 1,
             'location_id' => $this->models['location']['id'],
             'organization_id' => $this->models['organization']['id'],
             'taxonomy_id' => $this->models['taxonomy']['id'],
