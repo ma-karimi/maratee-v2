@@ -4,6 +4,7 @@ use App\Models\{Country, User};
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        exec('composer dump-autoload');
+        Artisan::call('passport:install --force');
+
         \App\Utility::truncateTables();
 
         Model::unguard();
@@ -42,13 +46,12 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 OriginalGeneralTableSeeder::class,
                 OriginalPropagationTableSeeder::class,
-                (new ConvertSeeder())->run(),
+                ConvertSeeder::run(),
 
             ]);
 
         } else {
             $this->call([
-                //   (new ConvertSeeder(0))->run(),
 
                 UserTableSeeder::class,
                 ContinentTableSeeder::class,
@@ -112,6 +115,7 @@ class DatabaseSeeder extends Seeder
                 CryoBankTableSeeder::class,
                 LocationHubTableSeeder::class,
                 PermissionTableSeeder::class,
+                ConvertSeeder::run(),
 
 //            SeedTableSeeder::class,
 //            BioMolecularTableSeeder::class,

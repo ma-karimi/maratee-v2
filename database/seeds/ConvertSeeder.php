@@ -12,9 +12,9 @@ class ConvertSeeder extends Seeder
      *
      * @param int $start
      * @param null $limit
-     * @return void
+     * @return string
      */
-    public function run($start = 0, $limit = null)
+    public static function run($start = 0, $limit = null)
     {
 
         Treeleaf::where('id', '>', $start)
@@ -24,5 +24,7 @@ class ConvertSeeder extends Seeder
             ->get()->each(function ($treeLeaf) {
                 (new ConvertService($treeLeaf))->handle();
             });
+
+        return 'done';
     }
 }
