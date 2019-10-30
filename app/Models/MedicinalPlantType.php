@@ -64,6 +64,8 @@ class MedicinalPlantType extends BaseModel
         'name' => 'required|string',
     ];
 
+    protected $appends = ['type'];
+
     public function medicinalPlant()
     {
         return $this->belongsToMany(MedicinalPlant::class,

@@ -13,7 +13,7 @@ use Illuminate\Support\Arr;
 
 trait MedicinalPlantTypeAccessor
 {
-    public function getTypeIdAttribute($value)
+    public function getTypeAttribute($value)
     {
         return Arr::get(self::TYPE, $value);
     }
