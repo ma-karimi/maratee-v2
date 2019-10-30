@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        exec('composer dump-autoload');
-        Artisan::call('passport:install --force');
-
-        \App\Utility::truncateTables();
+//        exec('composer dump-autoload');
+//        Artisan::call('passport:install --force');
+//
+//        \App\Utility::truncateTables();
 
         Model::unguard();
         ini_set('max_execution_time', 0);
@@ -51,20 +51,33 @@ class DatabaseSeeder extends Seeder
             ]);
 
         } else {
+            User::create([
+                'email' => 'admin@gmail.com',
+                'password' => 123456,
+                'title' => ['en' => 'mrs.'],
+                'education' => ['en' => 'wewewe'],
+                'degree' => ['en' => 'ssss'],
+                'national_id' => 61,
+                'birthday' => '1993-01-20',
+                'nationality' => ['en' => 'Colombia'],
+                'full_name' => ['en' => 'Camille Swift'],
+                'mobile' => '9145508431',
+                'phone' => '9145508431',
+            ]);
             $this->call([
-
+                OriginalGeneralTableSeeder::class,
+                OriginalPropagationTableSeeder::class,
                 UserTableSeeder::class,
                 ContinentTableSeeder::class,
-                CountryTableSeeder::class,
-                ProvinceTableSeeder::class,
-                CityTableSeeder::class,
-                VillageTableSeeder::class,
-                ActionTableSeeder::class,
-                EvaluationTableSeeder::class,
-                AuthorTableSeeder::class,
+//                CountryTableSeeder::class,
+//                ProvinceTableSeeder::class,
+//                CityTableSeeder::class,
+//                VillageTableSeeder::class,
+//                ActionTableSeeder::class,
+//                EvaluationTableSeeder::class,
+//                AuthorTableSeeder::class,
                 ArticleTableSeeder::class,
                 CollectionTableSeeder::class,
-                ConstituentTableSeeder::class,
                 DepartmentTableSeeder::class,
                 ProtectionTableSeeder::class,
                 DivisionTableSeeder::class,
@@ -75,10 +88,9 @@ class DatabaseSeeder extends Seeder
                 MapTableSeeder::class,
                 MedicineTableSeeder::class,
                 ConstituentTypeTableSeeder::class,
-                OrganizationTableSeeder::class,
+//                OrganizationTableSeeder::class,
                 GeneralTableSeeder::class,
-                OriginalGeneralTableSeeder::class,
-                OriginalPropagationTableSeeder::class,
+
                 ProjectTableSeeder::class,
                 PropagationTableSeeder::class,
                 LocationTableSeeder::class,
@@ -96,7 +108,7 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 MedicinalPartTableSeeder::class,
                 LocalityTableSeeder::class,
-                ActionHubTableSeeder::class,
+//                ActionHubTableSeeder::class,
                 ProductTableSeeder::class,
                 MedicinalPlantTableSeeder::class,
                 MedicinalPlantConstituentTableSeeder::class,
@@ -115,7 +127,7 @@ class DatabaseSeeder extends Seeder
                 CryoBankTableSeeder::class,
                 LocationHubTableSeeder::class,
                 PermissionTableSeeder::class,
-                ConvertSeeder::class,
+//                ConvertSeeder::class,
 
 //            SeedTableSeeder::class,
 //            BioMolecularTableSeeder::class,
