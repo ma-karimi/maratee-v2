@@ -67,6 +67,7 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 OriginalGeneralTableSeeder::class,
                 OriginalPropagationTableSeeder::class,
+                OriginalMedicinalPlantTypeTableSeeder::class,
                 UserTableSeeder::class,
                 ContinentTableSeeder::class,
                 CountryTableSeeder::class,
@@ -118,8 +119,6 @@ class DatabaseSeeder extends Seeder
                 PaleontologyDocumentTableSeeder::class,
                 PaleontologyCitationTableSeeder::class,
                 ActionHubDocumentTableSeeder::class,
-                MedicinalPlantTableSeeder::class,
-                MedicinalPlantTypeTableSeeder::class,
                 BotanicalTableSeeder::class,
                 BotanicalIrrigationTableSeeder::class,
                 BotanicalOperationTableSeeder::class,
