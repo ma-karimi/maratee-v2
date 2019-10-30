@@ -22,7 +22,7 @@ $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
     $food_industries = MedicinalPlantType::whereTypeId(1)->pluck('id')->toArray();
     $hygienic_cosmetic_industries = MedicinalPlantType::whereTypeId(2)->pluck('id')->toArray();
     $industrial_potentials = MedicinalPlantType::whereTypeId(3)->pluck('id')->toArray();
-    $general_phenology = General::whereType('phenology')->pluck('id')->toArray();
+    $general_phenology = MedicinalPlantType::whereTypeId(8)->pluck('id')->toArray();
     $methods = Method::pluck('id')->toArray();
     $medicines = Medicine::pluck('id')->toArray();
     $secondary_metabolites = MedicinalPlantType::whereTypeId(5)->pluck('id')->toArray();
