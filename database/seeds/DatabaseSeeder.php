@@ -88,7 +88,7 @@ class DatabaseSeeder extends Seeder
                 MapTableSeeder::class,
                 MedicineTableSeeder::class,
                 ConstituentTypeTableSeeder::class,
-//                OrganizationTableSeeder::class,
+                OrganizationTableSeeder::class,
                 GeneralTableSeeder::class,
 
                 ProjectTableSeeder::class,
