@@ -51,9 +51,9 @@ class Method extends BaseModel
 {
     use MethodAccessor;
     public const TYPE = [1 => 'distillation', 2 => 'extraction', 3 => 'analyse'];
-    public static $linguistically = ['name' => true, 'description' => false];
     public static $rules = [
-        'type_id' => 'required|integer'
+        'type_id' => 'required|integer',
+        'name' => 'required|string'
     ];
     /**
      * The database table used by the model.
@@ -62,15 +62,7 @@ class Method extends BaseModel
      */
     protected $table = 'methods';
 
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = ['name' => 'json', 'description' => 'json'];
-
-
+    protected $appends = ['type'];
     /**
      * @return HasMany
      */
