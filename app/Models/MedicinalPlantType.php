@@ -59,11 +59,10 @@ class MedicinalPlantType extends BaseModel
         7 => 'pharmaceutical',
         8 => 'stage_of_phenology',
     ];
-    public static $linguistically = ['name' => true, 'description' => false];
     public static $rules = [
         'type_id' => 'required|integer',
+        'name' => 'required|string',
     ];
-    protected $casts = ['name' => 'json', 'description' => 'json'];
 
     public function medicinalPlant()
     {

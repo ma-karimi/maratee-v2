@@ -16,9 +16,8 @@ class CreateMedicinalPlantTypesTable extends Migration
     {
         Schema::create('medicinal_plant_types', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->json('name');
-//            $table->string('name_en')->generatedAs('name->>"$.en"');
-            $table->json('description')->nullable();
+            $table->string('name');
+            $table->text('description')->nullable();
             $table->tinyInteger('type_id')->comment('1: food industry, 2: hygienic cosmetic industry,3: industrial potential, 4: other industry, 5: secondary metabolite, 6 material, 7: pharmaceutical');
             $table->timestamps();
             $table->softDeletesTz();
