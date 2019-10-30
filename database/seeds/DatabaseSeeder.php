@@ -78,6 +78,7 @@ class DatabaseSeeder extends Seeder
 //                AuthorTableSeeder::class,
                 ArticleTableSeeder::class,
                 CollectionTableSeeder::class,
+                ConstituentTableSeeder::class,
                 DepartmentTableSeeder::class,
                 ProtectionTableSeeder::class,
                 DivisionTableSeeder::class,
