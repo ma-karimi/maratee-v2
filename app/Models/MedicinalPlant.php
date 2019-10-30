@@ -357,7 +357,7 @@ class MedicinalPlant extends BaseModel
      */
     public function medicinalPlantConstituents(): HasMany
     {
-        return $this->hasMany(MedicinalPlantConstituent::class)->take(10);
+        return $this->hasMany(MedicinalPlantConstituent::class);
     }
 
     public function article()
