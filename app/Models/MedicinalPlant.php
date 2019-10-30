@@ -523,7 +523,7 @@ class MedicinalPlant extends BaseModel
         )->where('type_id', array_search('material', MedicinalPlantType::TYPE));
     }
 
-    public function stageOfPhenology()
+    public function phenology()
     {
         return $this->belongsTo(MedicinalPlantType::class, 'phenology_id'
         )->where('type_id', array_search('stage_of_phenology', MedicinalPlantType::TYPE));
