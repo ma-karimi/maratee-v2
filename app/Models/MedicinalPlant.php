@@ -35,9 +35,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          type="integer",
  *      ),
  *      @SWG\Property(
- *          property="plant_herbarium_number",
- *          description="from herbariums selected plant",
- *          type="string",
+ *          property="plant_herbarium_id",
+ *          description="from plant herbariums selected plant",
+ *          type="integer",
  *      ),
  *      @SWG\Property(
  *          property="aerial_part_id",
@@ -264,7 +264,7 @@ class MedicinalPlant extends BaseModel
     public const PRESENCE_IN_COUNTRY = [0 => 'unknown', 1 => 'native', 2 => 'endemic'];
 
     public static $rules = [
-        'plant_herbarium_number' => 'string',
+        'plant_herbarium_id' => 'exists:plant_herbariums,id',
         'article_id' => 'exists:articles,id',
         'taxonomy_id' => 'required|exists:taxonomies,id',
         'location_id' => 'exists:locations,id',
