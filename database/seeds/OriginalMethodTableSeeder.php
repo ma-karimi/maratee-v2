@@ -21,25 +21,19 @@ class OriginalMethodTableSeeder extends Seeder
     {
         foreach ($this->distillations as $distillation) {
             Method::create([
-                'name' => [
-                    'en' => Str::ucfirst($distillation)
-                ],
+                'name' => Str::ucfirst($distillation),
                 'type_id' => 1
             ]);
         }
         foreach ($this->extractions as $extraction) {
             Method::create([
-                'name' => [
-                    'en' => Str::ucfirst($extraction)
-                ],
+                'name' => Str::ucfirst($extraction),
                 'type_id' => 2
             ]);
         }
         foreach ($this->analyses as $analysis) {
             Method::create([
-                'name' => [
-                    'en' => Str::ucfirst($analysis)
-                ],
+                'name' => Str::ucfirst($analysis),
                 'type_id' => 3
             ]);
         }

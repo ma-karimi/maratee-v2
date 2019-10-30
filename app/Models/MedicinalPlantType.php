@@ -57,6 +57,7 @@ class MedicinalPlantType extends BaseModel
         5 => 'secondary_metabolite',
         6 => 'material',
         7 => 'pharmaceutical',
+        8 => 'stage_of_phenology',
     ];
     public static $linguistically = ['name' => true, 'description' => false];
     public static $rules = [

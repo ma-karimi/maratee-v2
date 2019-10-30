@@ -75,7 +75,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          type="integer",
  *      ),
  *      @SWG\Property(
- *          property="general_phenology_id",
+ *          property="phenology_id",
  *          description="id",
  *          type="integer",
  *      ),
@@ -276,7 +276,7 @@ class MedicinalPlant extends BaseModel
         'hygienic_cosmetic_industry_id' => 'exists:medicinal_plant_types,id',
         'other_industry_id' => 'exists:medicinal_plant_types,id',
         'industrial_potential_id' => 'exists:medicinal_plant_types,id',
-        'general_phenology_id' => 'exists:generals,id',
+        'phenology_id' => 'exists:medicinal_plant_types,id',
         'method_distillation_id' => 'exists:methods,id',
         'method_extraction_id' => 'exists:methods,id',
         'method_analyse_id' => 'exists:methods,id',
@@ -481,12 +481,6 @@ class MedicinalPlant extends BaseModel
         )->where('type_id', array_search('industrial_potential', MedicinalPlantType::TYPE));
     }
 
-    public function phenology()
-    {
-        return $this->belongsTo(General::class, 'general_phenology_id'
-        )->where('type', 'phenology');
-    }
-
     public function origin()
     {
         return $this->belongsTo(General::class, 'general_origin_id'
@@ -527,6 +521,12 @@ class MedicinalPlant extends BaseModel
     {
         return $this->belongsTo(MedicinalPlantType::class, 'effective_material_id'
         )->where('type_id', array_search('material', MedicinalPlantType::TYPE));
+    }
+
+    public function stageOfPhenology()
+    {
+        return $this->belongsTo(MedicinalPlantType::class, 'phenology_id'
+        )->where('type_id', array_search('stage_of_phenology', MedicinalPlantType::TYPE));
     }
 
     public function pharmaceuticalForm()

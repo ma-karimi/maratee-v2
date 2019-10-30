@@ -27,7 +27,7 @@ class CreateMedicinalPlantsTable extends Migration
             $table->unsignedBigInteger('hygienic_cosmetic_industry_id')->nullable();
             $table->unsignedBigInteger('other_industry_id')->nullable()->comment('now');
             $table->unsignedBigInteger('industrial_potential_id')->nullable()->comment('other industrial in future');
-            $table->unsignedBigInteger('general_phenology_id')->nullable();
+            $table->unsignedBigInteger('phenology_id')->nullable()->comment('from medicinal_plant_types');
             $table->unsignedBigInteger('method_distillation_id')->nullable();
             $table->unsignedBigInteger('method_extraction_id')->nullable();
             $table->unsignedBigInteger('method_analyse_id')->nullable();

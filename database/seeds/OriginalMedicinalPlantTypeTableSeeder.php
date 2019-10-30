@@ -9,10 +9,19 @@ class OriginalMedicinalPlantTypeTableSeeder extends Seeder
 
     public $foods = ['Edible', 'Flavoring', 'Preservatives', 'Food colors', 'Drinking', 'Additives', 'Oils'];
 
-    public $others = ['Flourishes', 'Extracts and essential oils', 'Fresheners', 'Color', 'Oil', 'Tobacco', 'Paper', 'Glue', 'Toxins and herbal pesticides'];
+    public $others = ['Flourishes', 'Extracts and essential oils', 'Fresheners', 'Color', 'Oil', 'Tobacco', 'Paper', 'Glue', 'Toxins and herbal pesticides', 'Other items'];
+    public $potentials = ['Flourishes', 'Extracts and essential oils', 'Fresheners', 'Color', 'Oil', 'Tobacco', 'Paper', 'Glue', 'Toxins and herbal pesticides', 'Other items'];
     public $metabolites = ['Essential oil', 'Alkaloids', 'Flavonoids', 'Tannin'];
     public $materials = ['Alkaloids', 'Tannin', 'Flavonoids'];
     public $pharmaceuticals = ['Tablet', 'Syrup', 'Ointment', 'drop', 'ampule'];
+    public $phenologies = [
+        ['en' => 'Vegetative stage'],
+        ['en' => 'Early flowering'],
+        ['en' => 'Full flowering'],
+        ['en' => 'immature seed'],
+        ['en' => 'ripe seed'],
+
+    ];
 
     /**
      * Run the database seeds.
@@ -21,44 +30,48 @@ class OriginalMedicinalPlantTypeTableSeeder extends Seeder
      */
     public function run()
     {
-        foreach ($this->foods as $food) {
+        foreach ($this->foods as $item) {
             MedicinalPlantType::create([
-                'name' => [
-                    'en' => Str::ucfirst($food)
-                ],
+                'name' => Str::ucfirst($item),
                 'type_id' => 1
             ]);
         }
-        foreach ($this->others as $others) {
+        foreach ($this->others as $item) {
             MedicinalPlantType::create([
-                'name' => [
-                    'en' => Str::ucfirst($others)
-                ],
-                'type_id' => 2
-            ]);
-        }
-        foreach ($this->metabolites as $metabolite) {
-            MedicinalPlantType::create([
-                'name' => [
-                    'en' => Str::ucfirst($metabolite)
-                ],
-                'type_id' => 3
-            ]);
-        }
-        foreach ($this->materials as $material) {
-            MedicinalPlantType::create([
-                'name' => [
-                    'en' => Str::ucfirst($material)
-                ],
+                'name' => Str::ucfirst($item),
                 'type_id' => 4
             ]);
         }
-        foreach ($this->pharmaceuticals as $pharmaceutical) {
+        foreach ($this->potentials as $item) {
             MedicinalPlantType::create([
-                'name' => [
-                    'en' => Str::ucfirst($pharmaceutical)
-                ],
+                'name' => Str::ucfirst($item),
+                'type_id' => 3
+            ]);
+        }
+        foreach ($this->metabolites as $item) {
+            MedicinalPlantType::create([
+                'name' => Str::ucfirst($item),
                 'type_id' => 5
+            ]);
+        }
+        foreach ($this->materials as $item) {
+            MedicinalPlantType::create([
+                'name' => Str::ucfirst($item),
+                'type_id' => 6
+            ]);
+        }
+        foreach ($this->pharmaceuticals as $item) {
+            MedicinalPlantType::create([
+                'name' => Str::ucfirst($item),
+
+                'type_id' => 7
+            ]);
+        }
+        foreach ($this->phenologies as $item) {
+            MedicinalPlantType::create([
+                'name' => Str::ucfirst($item),
+
+                'type_id' => 8
             ]);
         }
     }

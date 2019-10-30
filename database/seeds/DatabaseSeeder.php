@@ -46,6 +46,9 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 OriginalGeneralTableSeeder::class,
                 OriginalPropagationTableSeeder::class,
+                OriginalMedicinalPlantTypeTableSeeder::class,
+                OriginalMethodTableSeeder::class,
+
 //                ConvertSeeder::class,
 
             ]);
@@ -68,6 +71,7 @@ class DatabaseSeeder extends Seeder
                 OriginalGeneralTableSeeder::class,
                 OriginalPropagationTableSeeder::class,
                 OriginalMedicinalPlantTypeTableSeeder::class,
+                OriginalMethodTableSeeder::class,
                 UserTableSeeder::class,
                 ContinentTableSeeder::class,
                 CountryTableSeeder::class,

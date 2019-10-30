@@ -34,14 +34,7 @@ class OriginalGeneralTableSeeder extends Seeder
         ['en' => 'Herbaceous']
 
     ];
-    public $phenologies = [
-        ['en' => 'Vegetative stage'],
-        ['en' => 'Early flowering'],
-        ['en' => 'Full flowering'],
-        ['en' => 'immature seed'],
-        ['en' => 'ripe seed'],
 
-    ];
     public $origins = [
         ['en' => 'Endemic'],
         ['en' => 'Native'],
@@ -160,11 +153,11 @@ class OriginalGeneralTableSeeder extends Seeder
                 ['name' => $type['en'], 'type' => 'plant_type']
             );
         }
-        foreach ($this->phenologies as $type) {
-            General::create(
-                ['name' => $type['en'], 'type' => 'phenology']
-            );
-        }
+//        foreach ($this->phenologies as $type) {
+//            General::create(
+//                ['name' => $type['en'], 'type' => 'phenology']
+//            );
+//        }
         foreach ($this->cotyledons as $type) {
             General::create(
                 ['name' => $type['en'], 'type' => 'cotyledon']
