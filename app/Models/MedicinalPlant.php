@@ -270,7 +270,7 @@ class MedicinalPlant extends BaseModel
         'location_id' => 'exists:locations,id',
         'aerial_part_id' => 'exists:medicinal_parts,id',
         'ground_part_id' => 'exists:medicinal_parts,id',
-        'treatment_id' => 'exists:treatments,id',
+        'treatment_id' => 'exists:medicinal_plant_types,id',
         'food_industry_id' => 'exists:medicinal_plant_types,id',
         'general_origin_id' => 'exists:generals,id',
         'hygienic_cosmetic_industry_id' => 'exists:medicinal_plant_types,id',
@@ -359,24 +359,12 @@ class MedicinalPlant extends BaseModel
     {
         return $this->hasMany(MedicinalPlantConstituent::class)->latest();
     }
-//
-//    /**
-//     * @return MorphToMany
-//     */
-//    public function treatments(): MorphToMany
-//    {
-//        return $this->morphToMany(TreatmentHub::class, 'treamentable');
-//    }
 
     public function article()
     {
         return $this->belongsTo(Article::class);
     }
 
-    public function treatment()
-    {
-        return $this->belongsTo(Treatment::class);
-    }
 
     public function cycle()
     {
@@ -473,6 +461,12 @@ class MedicinalPlant extends BaseModel
     {
         return $this->belongsTo(MedicinalPlantType::class, 'other_industry_id'
         )->where('type_id', array_search('other_industry', MedicinalPlantType::TYPE));
+    }
+
+    public function treatment()
+    {
+        return $this->belongsTo(MedicinalPlantType::class, 'treatment_id'
+        )->where('type_id', array_search('treatment', MedicinalPlantType::TYPE));
     }
 
     public function industrialPotential()

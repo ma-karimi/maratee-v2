@@ -58,6 +58,7 @@ class MedicinalPlantType extends BaseModel
         6 => 'material',
         7 => 'pharmaceutical',
         8 => 'stage_of_phenology',
+        9 => 'treatment',
     ];
     public static $rules = [
         'type_id' => 'required|integer',

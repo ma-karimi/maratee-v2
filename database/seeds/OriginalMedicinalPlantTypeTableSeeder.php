@@ -14,6 +14,7 @@ class OriginalMedicinalPlantTypeTableSeeder extends Seeder
     public $metabolites = ['Essential oil', 'Alkaloids', 'Flavonoids', 'Tannin'];
     public $materials = ['Alkaloids', 'Tannin', 'Flavonoids'];
     public $pharmaceuticals = ['Tablet', 'Syrup', 'Ointment', 'drop', 'ampule'];
+    public $treatments = ['stage of flowering', 'cutting plant'];
     public $phenologies = [
         'Vegetative stage',
         'Early flowering',
@@ -72,6 +73,13 @@ class OriginalMedicinalPlantTypeTableSeeder extends Seeder
                 'name' => Str::ucfirst($item),
 
                 'type_id' => 8
+            ]);
+        }
+        foreach ($this->treatments as $item) {
+            MedicinalPlantType::create([
+                'name' => Str::ucfirst($item),
+
+                'type_id' => 9
             ]);
         }
     }
