@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        exec('composer dump-autoload');
-//        Artisan::call('passport:install --force');
-//
-//        \App\Utility::truncateTables();
+        exec('composer dump-autoload');
+        Artisan::call('passport:install --force');
+
+        \App\Utility::truncateTables();
 
         Model::unguard();
         ini_set('max_execution_time', 0);
