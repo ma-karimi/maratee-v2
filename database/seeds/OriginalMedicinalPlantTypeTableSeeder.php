@@ -15,11 +15,11 @@ class OriginalMedicinalPlantTypeTableSeeder extends Seeder
     public $materials = ['Alkaloids', 'Tannin', 'Flavonoids'];
     public $pharmaceuticals = ['Tablet', 'Syrup', 'Ointment', 'drop', 'ampule'];
     public $phenologies = [
-        ['en' => 'Vegetative stage'],
-        ['en' => 'Early flowering'],
-        ['en' => 'Full flowering'],
-        ['en' => 'immature seed'],
-        ['en' => 'ripe seed'],
+        'Vegetative stage',
+        'Early flowering',
+        'Full flowering',
+        'immature seed',
+        'ripe seed',
 
     ];
 
