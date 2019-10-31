@@ -105,7 +105,6 @@ class DatabaseSeeder extends Seeder
                 PlantLifeFormTableSeeder::class,
                 PaleontologyTableSeeder::class,
                 TreatmentTableSeeder::class,
-                AuthorHubTableSeeder::class,
                 TreatmentHubTableSeeder::class,
                 MethodTableSeeder::class,
                 PlantPropertyTableSeeder::class,
@@ -121,6 +120,8 @@ class DatabaseSeeder extends Seeder
                 TransactionEvidenceTableSeeder::class,
                 PaleontologyDocumentTableSeeder::class,
                 PaleontologyCitationTableSeeder::class,
+                AuthorHubTableSeeder::class,
+
                 ActionHubDocumentTableSeeder::class,
                 BotanicalTableSeeder::class,
                 BotanicalIrrigationTableSeeder::class,
