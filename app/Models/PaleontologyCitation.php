@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 /**
  * @SWG\Definition(
  *      definition="PaleontologyCitation",
- *      required={"paleontology_id","actor_id"}
+ *      required={"paleontology_id","authro"}
  * )
  */
 
@@ -31,7 +31,7 @@ class PaleontologyCitation extends BaseModel
         'plates' => 'string',
         'publication_name' => 'string',
         'figures_number' => 'date',
-        'paleontology_id' => 'integer|exists:paleontologies,id',
+        'paleontology_id' => 'required|exists:paleontologies,id',
         'author_id' => 'integer|exists:actors,id',
     ];
 
