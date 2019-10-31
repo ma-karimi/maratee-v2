@@ -44,4 +44,9 @@ class GeologyAge extends BaseModel
     {
         return Arr::get($this->types, $this->type_id);
     }
+
+    public function scopeOfType($query, $type_id)
+    {
+        return $query->where('type_id', $type_id);
+    }
 }

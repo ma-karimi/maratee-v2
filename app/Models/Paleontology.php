@@ -70,28 +70,28 @@ class Paleontology extends BaseModel implements HasMedia
      */
     public function geologyAgePeriod(): BelongsTo
     {
-        return $this->belongsTo(GeologyAge::class)->where('type', 'period');
+        return $this->belongsTo(GeologyAge::class)->ofType(2);
     }
     /**
      * @return BelongsTo
      */
     public function geologyAgeStage(): BelongsTo
     {
-        return $this->belongsTo(GeologyAge::class)->where('type','stage');
+        return $this->belongsTo(GeologyAge::class)->ofType(4);
     }
     /**
      * @return BelongsTo
      */
     public function geologyAgeEpoch(): BelongsTo
     {
-        return $this->belongsTo(GeologyAge::class)->where('type','epoch');
+        return $this->belongsTo(GeologyAge::class)->ofType(3);
     }
     /**
      * @return BelongsTo
      */
     public function geologyAgeEra(): BelongsTo
     {
-        return $this->belongsTo(GeologyAge::class)->where('type','era');
+        return $this->belongsTo(GeologyAge::class)->ofType(1);
     }
     /**
      * @return BelongsTo
