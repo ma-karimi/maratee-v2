@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreatePaleontologyCitationAPIRequest;
-use App\Http\Requests\Api\UpdatePaleontologyCitationAPIRequest;
+use App\Http\Requests\Api\PaleontologyCitationAPIRequest;
 use App\Models\PaleontologyCitation;
 use App\Repositories\PaleontologyCitationRepository;
 use Illuminate\Http\Request;
@@ -14,7 +13,6 @@ use Response;
  * Class PaleontologyCitationController
  * @package App\Http\Controllers\Api
  */
-
 class PaleontologyCitationAPIController extends AppBaseController
 {
     /** @var  PaleontologyCitationRepository */
@@ -60,17 +58,17 @@ class PaleontologyCitationAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $paleontologyCitations = $this->paleontologyCitationRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $paleontologyCitations = $this->paleontologyCitationRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($paleontologyCitations->toArray(), 'Paleontology Citations retrieved successfully');
     }
 
     /**
-     * @param CreatePaleontologyCitationAPIRequest $request
+     * @param PaleontologyCitationAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -86,7 +84,7 @@ class PaleontologyCitationAPIController extends AppBaseController
      *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
      *      ),
      *      @SWG\Parameter(
-     *          name="actor_id",
+     *          name="author_id",
      *          in="body",
      *          required=true,
      *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
@@ -148,7 +146,7 @@ class PaleontologyCitationAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreatePaleontologyCitationAPIRequest $request)
+    public function store(PaleontologyCitationAPIRequest $request)
     {
         $input = $request->all();
 
@@ -198,7 +196,7 @@ class PaleontologyCitationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var PaleontologyCitation $paleontologyCitation */
-        $paleontologyCitation = $this->paleontologyCitationRepository->find($id);
+        $paleontologyCitation = $this->paleontologyCitationRepository->find($id, \request()->get('relations'));
 
         if ($paleontologyCitation === null) {
             return $this->sendError('Paleontology Citation not found');
@@ -209,7 +207,7 @@ class PaleontologyCitationAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdatePaleontologyCitationAPIRequest $request
+     * @param PaleontologyCitationAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -295,7 +293,7 @@ class PaleontologyCitationAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdatePaleontologyCitationAPIRequest $request)
+    public function update($id, PaleontologyCitationAPIRequest $request)
     {
         $input = $request->all();
 
@@ -353,7 +351,7 @@ class PaleontologyCitationAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var PaleontologyCitation $paleontologyCitation */
-        $paleontologyCitation = $this->paleontologyCitationRepository->find($id);
+        $paleontologyCitation = $this->paleontologyCitationRepository->find($id, \request()->get('relations'));
 
         if ($paleontologyCitation === null) {
             return $this->sendError('Paleontology Citation not found');
