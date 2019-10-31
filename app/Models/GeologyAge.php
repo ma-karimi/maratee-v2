@@ -10,12 +10,7 @@ use Illuminate\Support\Arr;
 /**
  * @SWG\Definition(
  *            definition="GeologyAge",
- *            required={"name", "type", "type"},
- * 			@SWG\Property(property="id", type="integer"),
- * 			@SWG\Property(property="name", type="string"),
- * 			@SWG\Property(property="type_id", type="string"),
- * 			@SWG\Property(property="created_at", type="string"),
- * 			@SWG\Property(property="updated_at", type="string"),
+ *            required={"name", "type", "type"}
  *        )
  **/
 class GeologyAge extends BaseModel

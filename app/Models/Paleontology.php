@@ -17,7 +17,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 /**
  * @SWG\Definition(
  *      definition="Paleontology",
- *      required={"taxonomy_id","catalog_no"},
+ *      required={"taxonomy_id","catalog_no"}
  * )
  */
 class Paleontology extends BaseModel implements HasMedia

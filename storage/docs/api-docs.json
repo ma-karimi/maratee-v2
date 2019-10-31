@@ -13472,7 +13472,7 @@
                 ],
                 "parameters": [
                     {
-                        "name": "plant_herbarium_number",
+                        "name": "plant_herbarium_id",
                         "in": "body",
                         "description": "MedicinalPlant that should be stored",
                         "required": false,
@@ -13892,7 +13892,7 @@
                         "type": "integer"
                     },
                     {
-                        "name": "plant_herbarium_number",
+                        "name": "plant_herbarium_id",
                         "in": "body",
                         "description": "MedicinalPlant that should be stored",
                         "required": false,
@@ -15978,7 +15978,7 @@
                 }
             }
         },
-        "/morphologyQualitativeEvaluations": {
+        "/morphology/qualitative_evaluations": {
             "get": {
                 "tags": [
                     "MorphologyQualitativeEvaluation"
@@ -16106,7 +16106,7 @@
                 }
             }
         },
-        "/morphologyQualitativeEvaluations/{id}": {
+        "/morphology/qualitative_evaluations/{id}": {
             "get": {
                 "tags": [
                     "MorphologyQualitativeEvaluation"
@@ -16285,7 +16285,7 @@
                 }
             }
         },
-        "/morphologyQuantitativeEvaluations": {
+        "/morphology/quantitative_evaluations": {
             "get": {
                 "tags": [
                     "MorphologyQuantitativeEvaluation"
@@ -16467,7 +16467,7 @@
                 }
             }
         },
-        "/morphologyQuantitativeEvaluations/{id}": {
+        "/morphology/quantitative_evaluations/{id}": {
             "get": {
                 "tags": [
                     "MorphologyQuantitativeEvaluation"
@@ -16700,7 +16700,7 @@
                 }
             }
         },
-        "/morphologyQuantitativeEvaluationVars": {
+        "/morphology/quantitative_evaluation_vars": {
             "get": {
                 "tags": [
                     "MorphologyQuantitativeEvaluationVar"
@@ -16774,7 +16774,7 @@
                 }
             }
         },
-        "/morphologyQuantitativeEvaluationVars/{id}": {
+        "/morphology/quantitative_evaluation_vars/{id}": {
             "get": {
                 "tags": [
                     "MorphologyQuantitativeEvaluationVar"
@@ -30253,16 +30253,10 @@
                     "type": "integer"
                 },
                 "name": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "type": {
                     "type": "string"
                 },
-                "parent_id": {
-                    "type": "integer"
+                "type_id": {
+                    "type": "string"
                 },
                 "created_at": {
                     "type": "string"
@@ -30612,81 +30606,7 @@
             "required": [
                 "paleontology_id",
                 "location_id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "paleontology_id": {
-                    "description": "paleontology_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "location_id": {
-                    "description": "location_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "formation": {
-                    "description": "formation",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "layer": {
-                    "description": "layer",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "stratigraphy": {
-                    "description": "stratigraphy",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "lithology": {
-                    "description": "lithology",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "fauna": {
-                    "description": "fauna",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "description": {
-                    "description": "description",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "map_id": {
-                    "description": "map_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
+            ]
         },
         "Location": {
             "required": [
@@ -30971,9 +30891,9 @@
                     "description": "id",
                     "type": "integer"
                 },
-                "plant_herbarium_number": {
-                    "description": "from herbariums selected plant",
-                    "type": "string"
+                "plant_herbarium_id": {
+                    "description": "from plant herbariums selected plant",
+                    "type": "integer"
                 },
                 "aerial_part_id": {
                     "description": "id",
@@ -31003,7 +30923,7 @@
                     "description": "id",
                     "type": "integer"
                 },
-                "general_phenology_id": {
+                "phenology_id": {
                     "description": "id",
                     "type": "integer"
                 },
@@ -31190,39 +31110,6 @@
                 "value": {
                     "description": "value",
                     "type": "number"
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
-        },
-        "MedicinalPlantProperty": {
-            "required": [
-                "name",
-                "type"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "medicinal_plant_id": {
-                    "description": "medicinal_plant_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "medicinal_plant_type_id": {
-                    "description": "medicinal_plant_type_id",
-                    "type": "integer",
-                    "format": "int32"
                 },
                 "created_at": {
                     "description": "created_at",
@@ -31680,188 +31567,9 @@
         },
         "Paleontology": {
             "required": [
-                "geology_age_id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "general_class_id": {
-                    "description": "general_class_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "general_order_id": {
-                    "description": "general_order_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "catalog_no": {
-                    "description": "catalog_no",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "specimen_no": {
-                    "description": "specimen_no",
-                    "type": "string"
-                },
-                "field_no": {
-                    "description": "field_no",
-                    "type": "string"
-                },
-                "barcode_no": {
-                    "description": "barcode_no",
-                    "type": "string"
-                },
-                "move_status": {
-                    "description": "move_status",
-                    "type": "string"
-                },
-                "salon": {
-                    "description": "salon",
-                    "type": "string"
-                },
-                "closet": {
-                    "description": "closet",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "drawer": {
-                    "description": "drawer",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "infraspecific": {
-                    "description": "infraspecific",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "type_status": {
-                    "description": "type_status",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "preservation": {
-                    "description": "preservation",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "pieces": {
-                    "description": "pieces",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "color": {
-                    "description": "color",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "element": {
-                    "description": "element",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "geology_age_era_id": {
-                    "description": "geology_age_era_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "geology_age_epoch_id": {
-                    "description": "geology_age_epoch_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "geology_age_stage_id": {
-                    "description": "geology_age_stage_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "geology_age_period_id": {
-                    "description": "geology_age_period_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "description": {
-                    "description": "description",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "additional_info": {
-                    "description": "additional_info",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "access_code": {
-                    "description": "access_code",
-                    "type": "string"
-                },
-                "last_update": {
-                    "description": "last_update",
-                    "type": "string",
-                    "format": "date"
-                },
-                "excavation": {
-                    "description": "excavation",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "collector_name": {
-                    "description": "collector_name",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "location_id": {
-                    "description": "location_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "update_frequency": {
-                    "description": "update_frequency",
-                    "type": "string"
-                },
-                "common_name": {
-                    "description": "common_name",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "plant_id": {
-                    "description": "plant_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
+                "taxonomy_id",
+                "catalog_no"
+            ]
         },
         "PaleontologyCitation": {
             "required": [

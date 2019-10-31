@@ -9,65 +9,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 /**
  * @SWG\Definition(
  *      definition="PaleontologyCitation",
- *      required={"paleontology_id","actor_id"},
- *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *      ),
- *      @SWG\Property(
- *          property="paleontology_id",
- *          description="paleontology_id",
- *          type="integer",
- *      ),
- *      @SWG\Property(
- *          property="actor_id",
- *          description="actor_id",
- *          type="integer",
- *      ),
- *      @SWG\Property(
- *          property="year",
- *          description="year",
- *          type="integer",
- *      ),
- *      @SWG\Property(
- *          property="volume",
- *          description="volume",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="pages",
- *          description="pages",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="plates",
- *          description="plates",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="figures_number",
- *          description="figures_number",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="publication_name",
- *          description="publication_name",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
+ *      required={"paleontology_id","actor_id"}
  * )
  */
 
