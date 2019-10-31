@@ -9,6 +9,7 @@ use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -16,207 +17,21 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 /**
  * @SWG\Definition(
  *      definition="Paleontology",
- *      required={"geology_age_id"},
- *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="general_class_id",
- *          description="general_class_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="general_order_id",
- *          description="general_order_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="catalog_no",
- *          description="catalog_no",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="specimen_no",
- *          description="specimen_no",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="field_no",
- *          description="field_no",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="barcode_no",
- *          description="barcode_no",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="move_status",
- *          description="move_status",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="salon",
- *          description="salon",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="closet",
- *          description="closet",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="drawer",
- *          description="drawer",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="infraspecific",
- *          description="infraspecific",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="type_status",
- *          description="type_status",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="preservation",
- *          description="preservation",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="pieces",
- *          description="pieces",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="color",
- *          description="color",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="element",
- *          description="element",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="geology_age_era_id",
- *          description="geology_age_era_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="geology_age_epoch_id",
- *          description="geology_age_epoch_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="geology_age_stage_id",
- *          description="geology_age_stage_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="geology_age_period_id",
- *          description="geology_age_period_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="description",
- *          description="description",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="additional_info",
- *          description="additional_info",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="access_code",
- *          description="access_code",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="last_update",
- *          description="last_update",
- *          type="string",
- *          format="date"
- *      ),
- *      @SWG\Property(
- *          property="excavation",
- *          description="excavation",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="collector_name",
- *          description="collector_name",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="location_id",
- *          description="location_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="update_frequency",
- *          description="update_frequency",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="common_name",
- *          description="common_name",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="plant_id",
- *          description="plant_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
+ *      required={"taxonomy_id","catalog_no"},
  * )
  */
 class Paleontology extends BaseModel implements HasMedia
 {
     use PaleontologyAccessor, ActionRelation, ArticleRelation,HasMediaTrait;
-    public static $linguistically = ['infra_specific' => false, 'type_status' => false, 'preservation' => false, 'color' => false, 'element' => false, 'description' => true, 'additional_info' => false, 'excavation' => false, 'collector_name' => false, 'common_name' => false];
     public static $rules = [
         'catalog_no' => 'integer',
         'specimen_no' => 'string',
+        'infra_specific' => 'string',
+        'preservation' => 'string',
+        'color' => 'string',
+        'element' => 'string',
+        'additional_info' => 'string',
+        'excavation' => 'string',
         'access_code' => 'string',
         'field_no' => 'string',
         'barcode_no' => 'string',
@@ -230,10 +45,11 @@ class Paleontology extends BaseModel implements HasMedia
         'geology_age_epoch_id' => 'integer|exists:geology_ages,id',
         'geology_age_stage_id' => 'integer|exists:geology_ages,id',
         'geology_age_period_id' => 'integer|exists:geology_ages,id',
-        'plant_id' => 'required|exists:plants,id',
+        'taxonomy_id' => 'required|exists:taxonomies,id',
         'last_update' => 'date',
-        'location_id' => 'integer|exists:locations,id',
+        'location_id' => 'required|exists:locations,id',
         'general_order_id' => 'integer|exists:generals,id',
+        'general_plant_type_id' => 'integer|exists:generals,id',
     ];
     /**
      * The database table used by the model.
@@ -241,26 +57,6 @@ class Paleontology extends BaseModel implements HasMedia
      * @var string
      */
     protected $table = 'paleontologies';
-
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'infra_specific' => 'json',
-        'type_status' => 'json',
-        'preservation' => 'json',
-        'color' => 'json',
-        'element' => 'json',
-        'treatment_history' => 'json',
-        'additional_info' => 'json',
-        'excavation' => 'json',
-        'collector_name' => 'json',
-        'common_name' => 'json',
-        'description' => 'json',
-    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -305,12 +101,20 @@ class Paleontology extends BaseModel implements HasMedia
         return $this->belongsTo(GeologyAge::class);
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function plant(): BelongsTo
+    public function determine()
     {
-        return $this->belongsTo(PlantHerbarium::class);
+        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 1);
+    }
+
+    public function collect()
+    {
+        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 2);
+    }
+
+
+    public function taxonomy(): BelongsTo
+    {
+        return $this->belongsTo(Taxonomy::class);
     }
 
     /**
@@ -330,19 +134,11 @@ class Paleontology extends BaseModel implements HasMedia
     }
 
     /**
-     * @return BelongsTo
+     * @return HasOne
      */
-    public function location(): BelongsTo
+    public function locality(): HasOne
     {
-        return $this->belongsTo(Location::class);
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function localities(): HasMany
-    {
-        return $this->hasMany(Locality::class)->latest();
+        return $this->hasOne(Locality::class);
     }
 
 

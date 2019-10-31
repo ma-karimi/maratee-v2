@@ -28,29 +28,28 @@ class CreatePaleontologiesTable extends Migration
             $table->integer('closet')->nullable();
             $table->integer('drawer')->nullable();
 
-            $table->json('infra_specific')->nullable();
-            $table->json('preservation')->nullable();
-            $table->integer('pieces')->nullable();
-            $table->json('color')->nullable();
-            $table->json('element')->nullable();
-            $table->json('treatment_history')->nullable();
+            $table->unsignedBigInteger('taxonomy_id');
+            $table->unsignedBigInteger('general_order_id')->nullable();
+            $table->unsignedBigInteger('general_plant_type_id')->nullable();
+
             $table->unsignedBigInteger('geology_age_era_id')->nullable();
             $table->unsignedBigInteger('geology_age_period_id')->nullable();
             $table->unsignedBigInteger('geology_age_epoch_id')->nullable();
             $table->unsignedBigInteger('geology_age_stage_id')->nullable();
-            $table->unsignedBigInteger('plant_herbarium_id');
-            $table->integer('plates_no')->nullable();
-            $table->json('additional_info')->nullable();
+
+            $table->string('preservation')->nullable();
+            $table->integer('pieces')->nullable();
+            $table->string('color')->nullable();
+            $table->string('element')->nullable();
+            $table->text('treatment_history')->nullable();
+
             $table->string('access_code')->nullable();
+
+            $table->text('additional_info')->nullable();
+            $table->string('update_frequency')->nullable();
             $table->date('last_update')->nullable();
-            $table->json('excavation')->nullable();
-            $table->json('collector_name')->nullable();
-            $table->unsignedBigInteger('location_id');
-            $table->unsignedBigInteger('general_order_id')->nullable();
-            $table->unsignedBigInteger('general_plant_type_id')->nullable();
-            $table->json('common_name')->nullable();
-            $table->string('update_frequency');
-            $table->json('description')->nullable();
+
+            $table->string('excavation')->nullable();
             $table->timeStamps();
             $table->softDeletesTz();
         });

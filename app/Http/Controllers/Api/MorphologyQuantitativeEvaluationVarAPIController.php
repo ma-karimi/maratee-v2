@@ -30,7 +30,7 @@ class MorphologyQuantitativeEvaluationVarAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/morphologyQuantitativeEvaluationVars",
+     *      path="/morphology/quantitative_evaluation_vars",
      *      summary="Get a listing of the MorphologyQuantitativeEvaluationVars.",
      *      tags={"MorphologyQuantitativeEvaluationVar"},
      *      description="Get all MorphologyQuantitativeEvaluationVars",
@@ -56,6 +56,7 @@ class MorphologyQuantitativeEvaluationVarAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -73,7 +74,7 @@ class MorphologyQuantitativeEvaluationVarAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/morphologyQuantitativeEvaluationVars",
+     *      path="/morphology/quantitative_evaluation_vars",
      *      summary="Store a newly created MorphologyQuantitativeEvaluationVar in storage",
      *      tags={"MorphologyQuantitativeEvaluationVar"},
      *      description="Store MorphologyQuantitativeEvaluationVar",
@@ -120,7 +121,7 @@ class MorphologyQuantitativeEvaluationVarAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/morphologyQuantitativeEvaluationVars/{id}",
+     *      path="/morphology/quantitative_evaluation_vars/{id}",
      *      summary="Display the specified MorphologyQuantitativeEvaluationVar",
      *      tags={"MorphologyQuantitativeEvaluationVar"},
      *      description="Get MorphologyQuantitativeEvaluationVar",
@@ -171,7 +172,7 @@ class MorphologyQuantitativeEvaluationVarAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/morphologyQuantitativeEvaluationVars/{id}",
+     *      path="/morphology/quantitative_evaluation_vars/{id}",
      *      summary="Update the specified MorphologyQuantitativeEvaluationVar in storage",
      *      tags={"MorphologyQuantitativeEvaluationVar"},
      *      description="Update MorphologyQuantitativeEvaluationVar",
@@ -232,7 +233,7 @@ class MorphologyQuantitativeEvaluationVarAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Delete(
-     *      path="/morphologyQuantitativeEvaluationVars/{id}",
+     *      path="/morphology/quantitative_evaluation_vars/{id}",
      *      summary="Remove the specified MorphologyQuantitativeEvaluationVar from storage",
      *      tags={"MorphologyQuantitativeEvaluationVar"},
      *      description="Delete MorphologyQuantitativeEvaluationVar",
@@ -264,6 +265,7 @@ class MorphologyQuantitativeEvaluationVarAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function destroy($id)
     {

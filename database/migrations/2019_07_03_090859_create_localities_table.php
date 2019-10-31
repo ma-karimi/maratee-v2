@@ -17,12 +17,12 @@ class CreateLocalitiesTable extends Migration {
 		    $table->bigIncrements('id');
 			$table->unsignedBigInteger('paleontology_id');
 			$table->unsignedBigInteger('location_id');
-			$table->json('formation')->nullable();
-			$table->json('layer')->nullable();
-			$table->json('stratigraphy')->nullable();
-			$table->json('lithology')->nullable();
-			$table->json('fauna')->nullable();
-			$table->json('description')->nullable();
+			$table->string('formation')->nullable();
+			$table->string('layer')->nullable();
+			$table->string('stratigraphy')->nullable();
+			$table->string('lithology')->nullable();
+			$table->string('fauna')->nullable();
+			$table->text('description')->nullable();
 
 
             $table->timeStamps();

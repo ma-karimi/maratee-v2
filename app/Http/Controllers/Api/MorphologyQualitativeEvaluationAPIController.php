@@ -30,7 +30,7 @@ class MorphologyQualitativeEvaluationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/morphologyQualitativeEvaluations",
+     *      path="/morphology/qualitative_evaluations",
      *      summary="Get a listing of the MorphologyQualitativeEvaluations.",
      *      tags={"MorphologyQualitativeEvaluation"},
      *      description="Get all MorphologyQualitativeEvaluations",
@@ -74,7 +74,7 @@ class MorphologyQualitativeEvaluationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/morphologyQualitativeEvaluations",
+     *      path="/morphology/qualitative_evaluations",
      *      summary="Store a newly created MorphologyQualitativeEvaluation in storage",
      *      tags={"MorphologyQualitativeEvaluation"},
      *      description="Store MorphologyQualitativeEvaluation",
@@ -163,7 +163,7 @@ class MorphologyQualitativeEvaluationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/morphologyQualitativeEvaluations/{id}",
+     *      path="/morphology/qualitative_evaluations/{id}",
      *      summary="Display the specified MorphologyQualitativeEvaluation",
      *      tags={"MorphologyQualitativeEvaluation"},
      *      description="Get MorphologyQualitativeEvaluation",
@@ -214,7 +214,7 @@ class MorphologyQualitativeEvaluationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/morphologyQualitativeEvaluations/{id}",
+     *      path="/morphology/qualitative_evaluations/{id}",
      *      summary="Update the specified MorphologyQualitativeEvaluation in storage",
      *      tags={"MorphologyQualitativeEvaluation"},
      *      description="Update MorphologyQualitativeEvaluation",
@@ -317,7 +317,7 @@ class MorphologyQualitativeEvaluationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Delete(
-     *      path="/morphologyQualitativeEvaluations/{id}",
+     *      path="/morphology/qualitative_evaluations/{id}",
      *      summary="Remove the specified MorphologyQualitativeEvaluation from storage",
      *      tags={"MorphologyQualitativeEvaluation"},
      *      description="Delete MorphologyQualitativeEvaluation",

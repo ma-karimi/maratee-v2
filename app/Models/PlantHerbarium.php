@@ -175,7 +175,6 @@ class PlantHerbarium extends BaseModel implements HasMedia
 
     public const FLOWERING_TIME = [1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December'];
 
-    public static $linguistically = ['description' => false, 'habitat_description' => false, 'ecology_description' => false];
 
     protected $appends = ['flowering_time_name'];
     /**
@@ -187,17 +186,6 @@ class PlantHerbarium extends BaseModel implements HasMedia
 //    protected $with = ['generals'];
 //    protected $appends = ['properties'];
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-//        'description' => 'json',
-//        'habitat_description' => 'json',
-//        'ecology_description' => 'json',
-//        'life_forms' => 'json',
-    ];
 
     public static $rules = [
         'protection_id' => 'required|exists:protections,id',
@@ -350,30 +338,6 @@ class PlantHerbarium extends BaseModel implements HasMedia
     {
         return $this->belongsTo(LifeForm::class,'leaf_id');
     }
-
-    /*public function leafLifeForm(): BelongsTo
-    {
-        return $this->belongsTo(LifeForm::class,
-            'life_form_leaf_id');
-    }
-
-    public function woodenLifeForm(): BelongsTo
-    {
-        return $this->belongsTo(LifeForm::class,
-            'life_form_wooden_id');
-    }
-
-    public function cycleLifeForm(): BelongsTo
-    {
-        return $this->belongsTo(LifeForm::class,
-            'life_form_cycle_id');
-    }
-
-    public function herbaceousLifeForm(): BelongsTo
-    {
-        return $this->belongsTo(LifeForm::class,
-            'life_form_herbaceous_id');
-    }*/
 
     public function generalLichen(): BelongsTo
     {

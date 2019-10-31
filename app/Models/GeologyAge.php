@@ -5,16 +5,15 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Arr;
 
 /**
  * @SWG\Definition(
  *            definition="GeologyAge",
  *            required={"name", "type", "type"},
  * 			@SWG\Property(property="id", type="integer"),
- * 			@SWG\Property(property="name", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="type", type="string"),
- * 			@SWG\Property(property="parent_id", type="integer"),
+ * 			@SWG\Property(property="name", type="string"),
+ * 			@SWG\Property(property="type_id", type="string"),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
@@ -22,8 +21,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class GeologyAge extends BaseModel
 {
 
-    const PARENT_ID = 'parent_id';
-    public static $linguistically = ['name' => true];
+    public $types = [
+        1 => 'Era',
+        2 => 'Period',
+        3 => 'Epoch',
+        4 => 'Stage',
+    ];
+
     /**
      * The database table used by the model.
      *
@@ -31,12 +35,7 @@ class GeologyAge extends BaseModel
      */
     protected $table = 'geology_ages';
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = ['name' => 'json'];
+    protected $appends = ['type'];
 
     /**
      * @return HasMany
@@ -46,21 +45,8 @@ class GeologyAge extends BaseModel
         return $this->hasMany(Paleontology::class)->latest();
     }
 
-
-    /**
-     * @return HasMany
-     */
-    public function childs(): HasMany
+    public function getTypeAttribute()
     {
-        return $this->hasMany(self::class, self::PARENT_ID)->latest();
-    }
-
-
-    /**
-     * @return BelongsTo
-     */
-    public function parent(): BelongsTo
-    {
-        return $this->belongsTo(self::class, self::PARENT_ID);
+        return Arr::get($this->types, $this->type_id);
     }
 }

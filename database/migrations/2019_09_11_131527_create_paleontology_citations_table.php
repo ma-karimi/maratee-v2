@@ -18,7 +18,7 @@ class CreatePaleontologyCitationsTable extends Migration
             $table->unsignedBigInteger('paleontology_id');
             $table->unsignedBigInteger('actor_id');
             $table->integer('year');
-            $table->json('publication_name')->nullable();
+            $table->string('publication_name')->nullable();
             $table->string('volume')->nullable();
             $table->string('pages')->nullable();
             $table->string('plates')->nullable();

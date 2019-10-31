@@ -42,6 +42,7 @@ Route::post('reset_password', 'AuthController@resetPassword');
 Route::apiResource('treatments', 'TreatmentAPIController');
 
 Route::apiResource('paleontologies', 'PaleontologyAPIController');
+Route::apiResource('paleontology_citations', 'PaleontologyCitationAPIController');
 
 Route::apiResource('organizations', 'OrganizationAPIController');
 
@@ -163,10 +164,6 @@ Route::apiResource('medicines', 'MedicineAPIController');
 
 Route::apiResource('methods', 'MethodAPIController');
 
-
-Route::apiResource('paleontologies', 'PaleontologyAPIController');
-
-
 Route::apiResource('roles', 'RoleAPIController');
 
 Route::apiResource('permissions', 'PermissionAPIController');
@@ -258,8 +255,11 @@ Route::resource('molecular_evaluation_vars', 'MolecularEvaluationVarAPIControlle
 
 Route::resource('seeds', 'SeedAPIController');
 
-Route::resource('morphology_qualitative_evaluations', 'MorphologyQualitativeEvaluationAPIController');
+Route::group(['prefix' => 'morphology'], function () {
+    Route::resource('qualitative_evaluations', 'MorphologyQualitativeEvaluationAPIController');
 
-Route::resource('morphology_quantitative_evaluations', 'MorphologyQuantitativeEvaluationAPIController');
+    Route::resource('quantitative_evaluations', 'MorphologyQuantitativeEvaluationAPIController');
 
-Route::resource('morphology_quantitative_evaluation_vars', 'MorphologyQuantitativeEvaluationVarAPIController');
+    Route::resource('quantitative_evaluation_vars', 'MorphologyQuantitativeEvaluationVarAPIController');
+});
+

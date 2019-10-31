@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
@@ -81,40 +82,26 @@ class PaleontologyCitation extends BaseModel
     protected $table = 'paleontology_citations';
 
 
-    public static $linguistically = ['publication_name' => false];
     public static $rules = [
         'year' => 'integer',
         'volume' => 'string',
         'pages' => 'string',
         'plates' => 'string',
+        'publication_name' => 'string',
         'figures_number' => 'date',
         'paleontology_id' => 'integer|exists:paleontologies,id',
-        'actor_id' => 'integer|exists:actors,id',
+        'author_id' => 'integer|exists:actors,id',
     ];
 
 
     /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
+     * @return MorphToMany
      */
-    protected $casts = [
-        'publication_name' => 'json',
-    ];
-
-    /**
-     * @return BelongsTo
-     */
-    public function author()
+    public function actors(): MorphToMany
     {
-        return $this->belongsTo(Actor::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function paleontology(): BelongsTo
-    {
-        return $this->belongsTo(Paleontology::class);
+        return $this->morphToMany(Actor::class, 'actorable',
+            'actor_hubs')
+            ->whereNull('actor_hubs.deleted_at')
+            ->withTimestamps();
     }
 }

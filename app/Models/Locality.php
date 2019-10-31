@@ -30,38 +30,32 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      @SWG\Property(
  *          property="formation",
  *          description="formation",
- *          type="array",
- *     @SWG\Items(type="string"),
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="layer",
  *          description="layer",
- *          type="array",
- *     @SWG\Items(type="string"),
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="stratigraphy",
  *          description="stratigraphy",
- *          type="array",
- *     @SWG\Items(type="string"),
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="lithology",
  *          description="lithology",
- *          type="array",
- *     @SWG\Items(type="string"),
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="fauna",
  *          description="fauna",
- *          type="array",
- *     @SWG\Items(type="string"),
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="description",
  *          description="description",
- *          type="array",
- *     @SWG\Items(type="string"),
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="map_id",
@@ -85,11 +79,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Locality extends BaseModel
 {
-    public static $linguistically = ['formation' => false, 'stratigraphy' => false, 'lithology' => false, 'fauna' => false, 'layer' => false, 'description' => false];
     public static $rules = [
         'paleontology_id' => 'required|exists:paleontologies,id',
         'location_id' => 'required|exists:locations,id',
-        'map_id' => 'exists:maps,id',
+        'formation' => 'string',
+        'layer' => 'string',
+        'stratigraphy' => 'string',
+        'fauna' => 'string',
+        'description' => 'string',
+        'lithology' => 'string',
     ];
     /**
      * The database table used by the model.
@@ -98,43 +96,12 @@ class Locality extends BaseModel
      */
     protected $table = 'localities';
 
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'formation' => 'json',
-        'layer' => 'json',
-        'stratigraphy' => 'json',
-        'fauna' => 'json',
-        'description' => 'json',
-        'lithology' => 'json',
-    ];
-
     /**
      * @return BelongsTo
      */
     public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function map(): BelongsTo
-    {
-        return $this->belongsTo(Map::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function paleontology(): BelongsTo
-    {
-        return $this->belongsTo(Paleontology::class);
     }
 
 }

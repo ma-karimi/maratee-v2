@@ -30,7 +30,7 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/morphologyQuantitativeEvaluations",
+     *      path="/morphology/quantitative_evaluations",
      *      summary="Get a listing of the MorphologyQuantitativeEvaluations.",
      *      tags={"MorphologyQuantitativeEvaluation"},
      *      description="Get all MorphologyQuantitativeEvaluations",
@@ -74,7 +74,7 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/morphologyQuantitativeEvaluations",
+     *      path="/morphology/quantitative_evaluations",
      *      summary="Store a newly created MorphologyQuantitativeEvaluation in storage",
      *      tags={"MorphologyQuantitativeEvaluation"},
      *      description="Store MorphologyQuantitativeEvaluation",
@@ -205,7 +205,7 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/morphologyQuantitativeEvaluations/{id}",
+     *      path="/morphology/quantitative_evaluations/{id}",
      *      summary="Display the specified MorphologyQuantitativeEvaluation",
      *      tags={"MorphologyQuantitativeEvaluation"},
      *      description="Get MorphologyQuantitativeEvaluation",
@@ -256,7 +256,7 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/morphologyQuantitativeEvaluations/{id}",
+     *      path="/morphology/quantitative_evaluations/{id}",
      *      summary="Update the specified MorphologyQuantitativeEvaluation in storage",
      *      tags={"MorphologyQuantitativeEvaluation"},
      *      description="Update MorphologyQuantitativeEvaluation",
@@ -401,7 +401,7 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Delete(
-     *      path="/morphologyQuantitativeEvaluations/{id}",
+     *      path="/morphology/quantitative_evaluations/{id}",
      *      summary="Remove the specified MorphologyQuantitativeEvaluation from storage",
      *      tags={"MorphologyQuantitativeEvaluation"},
      *      description="Delete MorphologyQuantitativeEvaluation",

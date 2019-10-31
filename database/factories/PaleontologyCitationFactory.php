@@ -11,7 +11,7 @@ $factory->define(App\Models\PaleontologyCitation::class, function (Faker $faker)
         'paleontology_id' => $faker->randomElement($paleontologies),
         'actor_id' => $faker->randomElement($actors),
         'year'=>$faker->numberBetween(1900,2018),
-        'publication_name'=>make_json($faker->word),
+        'publication_name'=>$faker->word,
         'volume'=>$faker->word,
         'pages'=>$faker->randomNumber(3),
         'plates'=>$faker->randomNumber(3),
