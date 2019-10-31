@@ -18,7 +18,7 @@ class AddForeignKeysToPaleontologiesTable extends Migration {
 			$table->foreign('geology_age_epoch_id')->references('id')->on('geology_ages')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('geology_age_stage_id')->references('id')->on('geology_ages')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('geology_age_period_id')->references('id')->on('geology_ages')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('plant_herbarium_id')->references('id')->on('plant_herbariums')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
         });
 	}
@@ -37,7 +37,7 @@ class AddForeignKeysToPaleontologiesTable extends Migration {
 			$table->dropForeign(['geology_age_epoch_id']);
 			$table->dropForeign(['geology_age_stage_id']);
 			$table->dropForeign(['geology_age_period_id']);
-			$table->dropForeign(['plant_herbarium_id']);
+			$table->dropForeign(['taxonomy_id']);
 		});
 	}
 
