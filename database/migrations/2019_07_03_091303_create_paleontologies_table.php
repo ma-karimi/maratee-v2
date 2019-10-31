@@ -15,12 +15,9 @@ class CreatePaleontologiesTable extends Migration
     {
         Schema::create('paleontologies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('catalog_no')->nullable()->comment('catalog Number
-');
-            $table->string('specimen_no')->nullable()->comment('Specimen Number
-');
-            $table->string('field_no')->nullable()->comment('field_no
-');
+            $table->integer('catalog_no')->nullable();
+            $table->string('specimen_no')->nullable();
+            $table->string('field_no')->nullable();
             $table->string('barcode_no')->nullable();
             $table->text('move_status')->nullable();
             //location in collection

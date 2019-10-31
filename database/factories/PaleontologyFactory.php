@@ -12,10 +12,12 @@ $factory->define(App\Models\Paleontology::class, function (Faker $faker) {
     $plants = \App\Models\PlantHerbarium::pluck('id')->toArray();
     $locations = \App\Models\Location::pluck('id')->toArray();
     $orders = \App\Models\General::where('type', 'order')->pluck('id')->toArray();
+    $plant_types = \App\Models\General::where('type', 'plant_type')->pluck('id')->toArray();
     return [
         'catalog_no' => $faker->numberBetween(1, 100),
-        'plant_herbarium_id' => $faker->randomElement($plants),
-        'location_id' => $faker->randomElement($locations),
+        'taxonomy_id' => $faker->randomElement($plants),
+        'general_order_id' => $faker->randomElement($orders),
+        'general_plant_type_id' => $faker->randomElement($plant_types),
         'update_frequency' => $faker->word,
         'specimen_no' => $faker->word,
         'field_no' => $faker->word,
@@ -24,23 +26,20 @@ $factory->define(App\Models\Paleontology::class, function (Faker $faker) {
         'salon' => $faker->word,
         'closet' => $faker->numberBetween(1, 100),
         'drawer' => $faker->numberBetween(1, 100),
-        'infra_specific' => make_json($faker->word),
-        'preservation' => make_json($faker->word),
+        'preservation' => $faker->word,
         'pieces' => $faker->numberBetween(1, 100),
-        'color' => make_json($faker->word),
-        'element' => make_json($faker->word),
+        'color' => $faker->word,
+        'element' => $faker->word,
         'geology_age_era_id' => $faker->randomElement($eras),
         'geology_age_epoch_id' => $faker->randomElement($epochs),
         'geology_age_period_id' => $faker->randomElement($periods),
         'geology_age_stage_id' => $faker->randomElement($stages),
         'plates_no' => $faker->numberBetween(1, 100),
-        'description' => make_json($faker->text),
-        'additional_info' => make_json($faker->word),
+        'description' => $faker->text,
+        'additional_info' => $faker->word,
+        'treatment_history' => $faker->word,
         'access_code' => $faker->word,
         'last_update' => $faker->date(),
-        'excavation' => make_json($faker->word),
-        'collector_name' => make_json($faker->word),
-        'common_name' => make_json($faker->word),
-        'general_order_id' => $faker->randomElement($orders),
+        'excavation' => $faker->word
     ];
 });
