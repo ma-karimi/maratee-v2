@@ -40,7 +40,7 @@ $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
         'food_industry_id' => $faker->randomElement($food_industries),
         'hygienic_cosmetic_industry_id' => $faker->randomElement($hygienic_cosmetic_industries),
         'industrial_potential_id' => $faker->randomElement($industrial_potentials),
-        'general_phenology_id' => $faker->randomElement($general_phenology),
+        'phenology_id' => $faker->randomElement($general_phenology),
         'method_distillation_id' => $faker->randomElement($methods),
         'method_extraction_id' => $faker->randomElement($methods),
         'method_analyse_id' => $faker->randomElement($methods),

@@ -5,12 +5,11 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Paleontology::class, function (Faker $faker) {
-    $eras = \App\Models\GeologyAge::whereType('era')->pluck('id')->toArray();
-    $epochs = \App\Models\GeologyAge::whereType('epoch')->pluck('id')->toArray();
-    $periods = \App\Models\GeologyAge::whereType('period')->pluck('id')->toArray();
-    $stages = \App\Models\GeologyAge::whereType('stage')->pluck('id')->toArray();
+    $eras = \App\Models\GeologyAge::whereTypeId(1)->pluck('id')->toArray();
+    $epochs = \App\Models\GeologyAge::whereTypeId(2)->pluck('id')->toArray();
+    $periods = \App\Models\GeologyAge::whereTypeId(3)->pluck('id')->toArray();
+    $stages = \App\Models\GeologyAge::whereTypeId(4)->pluck('id')->toArray();
     $plants = \App\Models\PlantHerbarium::pluck('id')->toArray();
-    $locations = \App\Models\Location::pluck('id')->toArray();
     $orders = \App\Models\General::where('type', 'order')->pluck('id')->toArray();
     $plant_types = \App\Models\General::where('type', 'plant_type')->pluck('id')->toArray();
     return [
@@ -34,8 +33,6 @@ $factory->define(App\Models\Paleontology::class, function (Faker $faker) {
         'geology_age_epoch_id' => $faker->randomElement($epochs),
         'geology_age_period_id' => $faker->randomElement($periods),
         'geology_age_stage_id' => $faker->randomElement($stages),
-        'plates_no' => $faker->numberBetween(1, 100),
-        'description' => $faker->text,
         'additional_info' => $faker->word,
         'treatment_history' => $faker->word,
         'access_code' => $faker->word,

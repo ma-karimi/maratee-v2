@@ -7,8 +7,8 @@ use Faker\Generator as Faker;
 $factory->define(App\Models\Method::class, function (Faker $faker) {
 
     return [
-        'name' => make_json($faker->name),
-        'description' => make_json($faker->text),
+        'name' => $faker->name,
+        'description' => $faker->text,
         'type_id' =>   array_rand(\App\Models\Method::TYPE),
     ];
 });

@@ -15,6 +15,8 @@ class CreateMapsTable extends Migration {
 		Schema::create('maps', function(Blueprint $table)
 		{
 			$table->bigIncrements('id');
+            $table->string('name');
+            $table->string('url')->nullable();
 			$table->date('reference_year');
 			$table->string('scale');
 

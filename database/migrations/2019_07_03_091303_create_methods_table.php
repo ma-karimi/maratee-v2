@@ -15,8 +15,8 @@ class CreateMethodsTable extends Migration {
 		Schema::create('methods', function(Blueprint $table)
 		{
 			$table->bigIncrements('id');
-			$table->json('name');
-			$table->json('description')->nullable();
+			$table->string('name');
+			$table->text('description')->nullable();
 			$table->tinyInteger('type_id')->comment('1:distillation, 2: extraction, 3: analyse');
 
             $table->timeStamps();
