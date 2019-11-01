@@ -116,11 +116,11 @@ class DatabaseSeeder extends Seeder
                 ProductTableSeeder::class,
                 MedicinalPlantTableSeeder::class,
                 MedicinalPlantConstituentTableSeeder::class,
-                TransactionTableSeeder::class,
                 TransactionEvidenceTableSeeder::class,
                 PaleontologyDocumentTableSeeder::class,
                 PaleontologyCitationTableSeeder::class,
                 AuthorHubTableSeeder::class,
+                TransactionTableSeeder::class,
 
                 ActionHubDocumentTableSeeder::class,
                 BotanicalTableSeeder::class,
