@@ -107,7 +107,7 @@ class DatabaseSeeder extends Seeder
                 TreatmentTableSeeder::class,
                 TreatmentHubTableSeeder::class,
                 MethodTableSeeder::class,
-                PlantPropertyTableSeeder::class,
+//                PlantPropertyTableSeeder::class,
             ]);
             $this->call([
                 MedicinalPartTableSeeder::class,
@@ -116,11 +116,11 @@ class DatabaseSeeder extends Seeder
                 ProductTableSeeder::class,
                 MedicinalPlantTableSeeder::class,
                 MedicinalPlantConstituentTableSeeder::class,
-                TransactionEvidenceTableSeeder::class,
                 PaleontologyDocumentTableSeeder::class,
                 PaleontologyCitationTableSeeder::class,
                 AuthorHubTableSeeder::class,
                 TransactionTableSeeder::class,
+                TransactionEvidenceTableSeeder::class,
 
                 ActionHubDocumentTableSeeder::class,
                 BotanicalTableSeeder::class,
