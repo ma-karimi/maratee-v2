@@ -18150,7 +18150,7 @@
                         }
                     },
                     {
-                        "name": "actor_id",
+                        "name": "author_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -26859,7 +26859,8 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "integer"
                     },
                     {
                         "name": "organization_id",
@@ -26868,7 +26869,8 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "integer"
                     },
                     {
                         "name": "type_id",
@@ -26877,7 +26879,8 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "integer"
                     },
                     {
                         "name": "start_time",
@@ -26886,7 +26889,8 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "string"
                     },
                     {
                         "name": "end_time",
@@ -26895,7 +26899,8 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "string"
                     },
                     {
                         "name": "dead_line",
@@ -26904,7 +26909,8 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "string"
                     },
                     {
                         "name": "department_id",
@@ -26913,7 +26919,8 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "integer"
                     },
                     {
                         "name": "archive_no",
@@ -26922,7 +26929,8 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "string"
                     },
                     {
                         "name": "description",
@@ -26931,7 +26939,8 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "string"
                     },
                     {
                         "name": "purpose",
@@ -26940,16 +26949,18 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "string"
                     },
                     {
-                        "name": "visit",
+                        "name": "visit_id",
                         "in": "body",
                         "description": "1: Sample, 2: All/Museum",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "integer"
                     },
                     {
                         "name": "peoples_no",
@@ -26958,7 +26969,8 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "integer"
                     },
                     {
                         "name": "person_position",
@@ -26967,7 +26979,8 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -27054,7 +27067,8 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "integer"
                     },
                     {
                         "name": "organization_id",
@@ -27063,7 +27077,8 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "integer"
                     },
                     {
                         "name": "type_id",
@@ -27072,7 +27087,8 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "integer"
                     },
                     {
                         "name": "start_time",
@@ -27081,7 +27097,8 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "string"
                     },
                     {
                         "name": "end_time",
@@ -27090,7 +27107,8 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "string"
                     },
                     {
                         "name": "dead_line",
@@ -27099,7 +27117,8 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "string"
                     },
                     {
                         "name": "department_id",
@@ -27108,7 +27127,8 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "integer"
                     },
                     {
                         "name": "archive_no",
@@ -27117,7 +27137,8 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "string"
                     },
                     {
                         "name": "description",
@@ -27126,7 +27147,8 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "string"
                     },
                     {
                         "name": "purpose",
@@ -27135,16 +27157,18 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "string"
                     },
                     {
-                        "name": "visit",
+                        "name": "visit_id",
                         "in": "body",
                         "description": "1: Sample, 2: All/Museum",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "integer"
                     },
                     {
                         "name": "peoples_no",
@@ -27153,7 +27177,8 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "integer"
                     },
                     {
                         "name": "person_position",
@@ -27162,7 +27187,8 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Transaction"
-                        }
+                        },
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -30207,64 +30233,14 @@
             "required": [
                 "name",
                 "type"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "parent_id": {
-                    "description": "parent_id",
-                    "type": "integer"
-                },
-                "name": {
-                    "description": "name",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "description",
-                    "type": "string"
-                },
-                "type": {
-                    "description": "type: 'phytogeography', 'phenology', 'plant_type', 'species', 'sub_species', 'variety', 'family', 'genus', 'class', 'group', 'order', 'flowering', 'sperm', 'cotyledon', 'growth', 'usage', 'part', 'industry', 'application', 'habitat', 'ecology', 'origin', 'lichen', 'moss', 'diatom', 'substrate', 'biological'",
-                    "type": "string"
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
+            ]
         },
         "GeologyAge": {
             "required": [
                 "name",
                 "type",
                 "type"
-            ],
-            "properties": {
-                "id": {
-                    "type": "integer"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "type_id": {
-                    "type": "string"
-                },
-                "created_at": {
-                    "type": "string"
-                },
-                "updated_at": {
-                    "type": "string"
-                }
-            }
+            ]
         },
         "Germination": {
             "properties": {
@@ -31246,42 +31222,7 @@
         "Method": {
             "required": [
                 "name"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "name": {
-                    "description": "name",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "description": {
-                    "description": "description",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "type_id": {
-                    "description": "type_id",
-                    "type": "integer"
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
+            ]
         },
         "MolecularEvaluation": {
             "required": [
@@ -31574,59 +31515,8 @@
         "PaleontologyCitation": {
             "required": [
                 "paleontology_id",
-                "actor_id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer"
-                },
-                "paleontology_id": {
-                    "description": "paleontology_id",
-                    "type": "integer"
-                },
-                "actor_id": {
-                    "description": "actor_id",
-                    "type": "integer"
-                },
-                "year": {
-                    "description": "year",
-                    "type": "integer"
-                },
-                "volume": {
-                    "description": "volume",
-                    "type": "string"
-                },
-                "pages": {
-                    "description": "pages",
-                    "type": "string"
-                },
-                "plates": {
-                    "description": "plates",
-                    "type": "string"
-                },
-                "figures_number": {
-                    "description": "figures_number",
-                    "type": "string"
-                },
-                "publication_name": {
-                    "description": "publication_name",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
+                "authro"
+            ]
         },
         "PaleontologyDocument": {
             "required": [
@@ -33084,83 +32974,7 @@
                 "organization_id",
                 "start_time",
                 "type_id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "user_id": {
-                    "description": "user_id",
-                    "type": "integer"
-                },
-                "organization_id": {
-                    "description": "organization_id",
-                    "type": "integer"
-                },
-                "department_id": {
-                    "description": "department_id",
-                    "type": "integer"
-                },
-                "start_time": {
-                    "description": "start_time",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "end_time": {
-                    "description": "end_time",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "type_id": {
-                    "description": "'1: visit, 2: borrow, 3: exchange, 4:gift, 5:fair 6:expense 7:correspondence'",
-                    "type": "integer"
-                },
-                "archive_no": {
-                    "description": "archive_no",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "description",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "purpose": {
-                    "description": "purpose",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "visit": {
-                    "description": "1: Sample, 2: All/Museum",
-                    "type": "integer"
-                },
-                "peoples_no": {
-                    "description": "peoples_no",
-                    "type": "integer"
-                },
-                "person_position": {
-                    "description": "person_position",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
+            ]
         },
         "TransactionEvidence": {
             "required": [

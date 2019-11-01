@@ -13,14 +13,18 @@ use Illuminate\Support\Arr;
 
 trait TransactionAccessor
 {
-    public function getTypeNameAttribute()
+    public function getTypeAttribute()
     {
-        $value= $this->attributes['type_id'];
-        return Arr::get(self::TYPE, $value);
+        return Arr::get(self::TYPE, $this->attributes['type_id']);
     }
 
-    public function getVisitAttribute($value)
+    public function getVisitAttribute()
     {
-        return Arr::get(self::VISIT, $value);
+        return Arr::get(self::VISIT, $this->attributes['visit_id']);
+    }
+
+    public function getModeAttribute()
+    {
+        return Arr::get(self::Mode, $this->attributes['mode_id']);
     }
 }

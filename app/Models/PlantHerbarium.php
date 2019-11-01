@@ -239,8 +239,8 @@ class PlantHerbarium extends BaseModel implements HasMedia
     public function transactions(): MorphToMany
     {
         return $this->morphToMany(Transaction::class, 'transactionable',
-            'transaction_hubs')
-            ->whereNull('transaction_hubs.deleted_at')
+            'transactions')
+            ->whereNull('transactions.deleted_at')
             ->withTimestamps();
     }
 

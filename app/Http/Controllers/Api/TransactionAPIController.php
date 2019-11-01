@@ -84,6 +84,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=true,
+     *          type="integer",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -91,6 +92,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=true,
+     *          type="integer",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -98,6 +100,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="1: visit, 2: borrow, 3: exchange, 4:gift, 5:fair 6:expense 7:correspondence",
      *          required=true,
+     *          type="integer",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -105,6 +108,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=true,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -112,6 +116,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -119,6 +124,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -126,6 +132,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
+     *          type="integer",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -133,6 +140,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -140,6 +148,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -147,13 +156,15 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
-     *          name="visit",
+     *          name="visit_id",
      *          in="body",
      *          description="1: Sample, 2: All/Museum",
      *          required=false,
+     *          type="integer",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -161,6 +172,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
+     *          type="integer",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -168,6 +180,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Response(
@@ -273,6 +286,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=true,
+     *          type="integer",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -280,6 +294,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=true,
+     *          type="integer",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -287,6 +302,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="1: visit, 2: borrow, 3: exchange, 4:gift, 5:fair 6:expense 7:correspondence",
      *          required=true,
+     *          type="integer",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -294,6 +310,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=true,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -301,6 +318,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -308,6 +326,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -315,6 +334,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
+     *          type="integer",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -322,6 +342,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -329,6 +350,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -336,13 +358,15 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
-     *          name="visit",
+     *          name="visit_id",
      *          in="body",
      *          description="1: Sample, 2: All/Museum",
      *          required=false,
+     *          type="integer",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -350,6 +374,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
+     *          type="integer",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
@@ -357,6 +382,7 @@ class TransactionAPIController extends AppBaseController
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Response(

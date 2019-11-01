@@ -11,96 +11,14 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 /**
  * @SWG\Definition(
  *      definition="Transaction",
- *      required={"user_id","organization_id","start_time","type_id"},
- *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="user_id",
- *          description="user_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="organization_id",
- *          description="organization_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="department_id",
- *          description="department_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="start_time",
- *          description="start_time",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="end_time",
- *          description="end_time",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="type_id",
- *          description="'1: visit, 2: borrow, 3: exchange, 4:gift, 5:fair 6:expense 7:correspondence'",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="archive_no",
- *          description="archive_no",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="description",
- *          description="description",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="purpose",
- *          description="purpose",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="visit",
- *          description="1: Sample, 2: All/Museum",
- *          type="integer",
- *      ),
- *      @SWG\Property(
- *          property="peoples_no",
- *          description="peoples_no",
- *          type="integer",
- *      ),
- *      @SWG\Property(
- *          property="person_position",
- *          description="person_position",
- *         type="array",
- *          @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
+ *      required={"user_id","organization_id","start_time","type_id"}
  * )
  */
 class Transaction extends BaseModel implements HasMedia
 {
-    protected $appends=['type_name'];
+    protected $appends=['type', 'visit'];
     use TransactionAccessor,HasMediaTrait;
+    public const Mode = [1 => 'send', 2 => 'receive'];
 
     public const TYPE = [1 => 'visit', 2 => 'borrow', 3 => 'exchange', 4 => 'gift', 5 => 'fair', 6 => 'expense', 7 => 'correspondence'];
     public const VISIT = [1 => 'Sample', 2 => 'All/Museum'];
@@ -113,18 +31,13 @@ class Transaction extends BaseModel implements HasMedia
         'dead_line' => 'date',
         'type_id' => 'required|in:1,2,3,4,5,6,7',
         'archive_no' => 'string',
-        'visit' => 'in:1,2',
+        'visit_id' => 'required_if:type_id,1|in:1,2',
         'peoples_no' => 'integer',
-    ];
-    public static $linguistically = [
-        'description' => false,
-        'purpose' => false,
-        'person_position' => false,
-    ];
-    protected $casts = [
-        'description' => 'json',
-        'purpose' => 'json',
-        'person_position' => 'json',
+        'description' => 'string',
+        'purpose' => 'string',
+        'person_position' => 'string',
+        'mode_id' => 'required_if:type_id,3|in:1,2',
+        'sheets_no' => 'string',
     ];
 
     /**
@@ -152,7 +65,7 @@ class Transaction extends BaseModel implements HasMedia
 
     public function herbariums()
     {
-        return $this->morphedByMany(Herbarium::class, 'transactionable')
+        return $this->morphedByMany(PlantHerbarium::class, 'transactionable')
             ->withTimestamps()
             ->withPivot(['type_id', 'sheets_no']);
     }
