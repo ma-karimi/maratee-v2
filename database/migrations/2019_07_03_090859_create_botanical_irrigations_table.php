@@ -20,12 +20,10 @@ class CreateBotanicalIrrigationsTable extends Migration
             $table->unsignedBigInteger('irrigation_id');
             $table->tinyInteger('requirement')->comment('sparse-moderate-heavy');
             $table->tinyInteger('appropriate_irrigation_time')->comment('morning-day-evening-night- 0:indifferent')->default(0);
-            $table->json('irrigation_time')->nullable()->comment('features are :
-value
-description
-per season = Spring	Summer	Autumn');
-
-
+            //irrigation_time
+            $table->string('spring_time')->nullable();
+            $table->string('summer_time')->nullable();
+            $table->string('autumn_time')->nullable();
             $table->timeStamps();
             $table->softDeletesTz();
         });

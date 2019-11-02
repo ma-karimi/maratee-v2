@@ -15,9 +15,10 @@ class CreateGardensTable extends Migration {
 		Schema::create('gardens', function(Blueprint $table)
 		{
 			$table->bigIncrements('id');
-			$table->json('region');
-			$table->json('section');
-			$table->json('number')->nullable();
+			$table->string('name');
+			$table->string('region')->nullable();
+			$table->string('section')->nullable();
+			$table->string('number')->nullable();
 
 
             $table->timeStamps();

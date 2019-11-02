@@ -16,11 +16,11 @@ class CreateBotanicalOperationsTable extends Migration {
 		{
             $table->bigIncrements('id');
 			$table->unsignedBigInteger('botanical_id');
-            $table->unsignedBigInteger('location_id');
-            $table->tinyInteger('operation_id')->comment('seeding-planting');
+            $table->tinyInteger('operation_id')->comment('1:seeding, 2:planting');
+            $table->unsignedBigInteger('garden_id');
             $table->date('date')->nullable();
 			$table->string('number');
-			$table->json('description')->nullable();
+			$table->text('description')->nullable();
             $table->timeStamps();
             $table->softDeletesTz();
         });

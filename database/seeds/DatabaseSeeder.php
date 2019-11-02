@@ -108,6 +108,8 @@ class DatabaseSeeder extends Seeder
                 TreatmentHubTableSeeder::class,
                 MethodTableSeeder::class,
 //                PlantPropertyTableSeeder::class,
+                GardenTableSeeder::class,
+
             ]);
             $this->call([
                 MedicinalPartTableSeeder::class,
@@ -131,6 +133,8 @@ class DatabaseSeeder extends Seeder
                 CryoBankTableSeeder::class,
                 LocationHubTableSeeder::class,
                 PermissionTableSeeder::class,
+                BotanicalPropagationTableSeeder::class,
+
 //                ConvertSeeder::class,
 
 //            SeedTableSeeder::class,
@@ -139,13 +143,11 @@ class DatabaseSeeder extends Seeder
 //            SeedTechnologyTableSeeder::class,
 //            SeedWeightTableSeeder::class,
 //            SeedHubSeeder::class,
-//            GardenTableSeeder::class,
 //            MediaTableSeeder::class,
 //
 //
 //            EntryHubTableSeeder::class,
 //            BotanicalGardenActionTableSeeder::class,
-//            BotanicalPropagationTableSeeder::class,
 //            MedicalTableSeeder::class,//
 //            TechnologyCollectionTableSeeder::class,
 //            RoleTableSeeder::class,

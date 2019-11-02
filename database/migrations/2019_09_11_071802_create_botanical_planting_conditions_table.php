@@ -16,10 +16,10 @@ class CreateBotanicalPlantingConditionsTable extends Migration
         Schema::create('botanical_planting_conditions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('botanical_id');
-            $table->unsignedBigInteger('planting_condition_id');
+            $table->tinyInteger('planting_condition_id')->comment('[ 1: full sun, 2: light shade, 3: moderate shade, 4: deep shade, 5: greenhouse, 6: fancing N, 7: fancing W, 8:  fancing S, 9: fancing E]');
 
             $table->foreign('botanical_id')->references('id')->on('botanicals')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('planting_condition_id')->references('id')->on('planting_conditions')->onUpdate('NO ACTION')->onDelete('CASCADE');
+//            $table->foreign('planting_condition_id')->references('id')->on('planting_conditions')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
             $table->timestamps();
             $table->softDeletesTz();

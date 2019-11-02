@@ -14,6 +14,8 @@ $factory->define(App\Models\BotanicalIrrigation::class, function (Faker $faker) 
         },
         'requirement' => $faker->numberBetween(1,3),
         'appropriate_irrigation_time' => $faker->numberBetween(0,4),
-        'irrigation_time' => make_json($faker->word),
+        'spring_time' => $faker->word,
+        'summer_time' => $faker->word,
+        'autumn_time' => $faker->word,
     ];
 });

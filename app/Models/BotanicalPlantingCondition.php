@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Support\Arr;
 
 /**
  * @SWG\Definition(
@@ -18,10 +19,18 @@ use App\Models\Contracts\BaseModel;
 class BotanicalPlantingCondition extends BaseModel
 {
 
-    /*public static $rules = [
+    public const PLANT_CONDITION = [1 => 'full sun', 2 => 'light shade', 3 => 'moderate shade', 4 => 'deep shade', 5 => 'greenhouse', 6 => 'fancing N', 7 => 'fancing W', 8 => 'fancing S', 9 => 'fancing E'];
+
+    public static $rules = [
         'botanical_id' => 'required|exists:botanicals,id',
-        'planting_condition_id' => 'required|exists:planting_conditions,id',
-    ];*/
+        'planting_condition_id' => 'required|integer',
+    ];
+
+        protected $appends = ['planting_condition'];
+    public function getPlantConditionAttribute()
+    {
+        return !empty($this->attributes['plant_condition_id']) ? Arr::get(self::PLANT_CONDITION, $this->attributes['plant_condition_id']) : null;
+    }
 
 
 }

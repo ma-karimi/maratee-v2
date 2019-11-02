@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateBotanicalIrrigationAPIRequest;
-use App\Http\Requests\Api\UpdateBotanicalIrrigationAPIRequest;
+use App\Http\Requests\Api\BotanicalIrrigationAPIRequest;
 use App\Models\BotanicalIrrigation;
 use App\Repositories\BotanicalIrrigationRepository;
 use Illuminate\Http\Request;
@@ -70,7 +69,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateBotanicalIrrigationAPIRequest $request
+     * @param BotanicalIrrigationAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -106,7 +105,19 @@ class BotanicalIrrigationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
      *      ),
      *      @SWG\Parameter(
-     *          name="irrigation_time",
+     *          name="spring_time",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="autumn_time",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="summer_time",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
@@ -132,7 +143,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateBotanicalIrrigationAPIRequest $request)
+    public function store(BotanicalIrrigationAPIRequest $request)
     {
         $input = $request->all();
 
@@ -193,7 +204,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateBotanicalIrrigationAPIRequest $request
+     * @param BotanicalIrrigationAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -236,7 +247,19 @@ class BotanicalIrrigationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
      *      ),
      *      @SWG\Parameter(
-     *          name="irrigation_time",
+     *          name="spring_time",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="autumn_time",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="summer_time",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/BotanicalIrrigation")
@@ -262,7 +285,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateBotanicalIrrigationAPIRequest $request)
+    public function update($id, BotanicalIrrigationAPIRequest $request)
     {
         $input = $request->all();
 

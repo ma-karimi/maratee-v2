@@ -87,6 +87,30 @@ class TransactionAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
+     *          name="member_address",
+     *          in="body",
+     *          description="Transaction that should be stored",
+     *          required=true,
+     *          type="integer",
+     *          @SWG\Schema(ref="#/definitions/Transaction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="member_phone",
+     *          in="body",
+     *          description="Transaction that should be stored",
+     *          required=true,
+     *          type="integer",
+     *          @SWG\Schema(ref="#/definitions/Transaction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="member_email",
+     *          in="body",
+     *          description="Transaction that should be stored",
+     *          required=true,
+     *          type="integer",
+     *          @SWG\Schema(ref="#/definitions/Transaction")
+     *      ),
+     *      @SWG\Parameter(
      *          name="organization_id",
      *          in="body",
      *          description="Transaction that should be stored",
@@ -282,6 +306,30 @@ class TransactionAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="member_name",
+     *          in="body",
+     *          description="Transaction that should be stored",
+     *          required=true,
+     *          type="integer",
+     *          @SWG\Schema(ref="#/definitions/Transaction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="member_address",
+     *          in="body",
+     *          description="Transaction that should be stored",
+     *          required=true,
+     *          type="integer",
+     *          @SWG\Schema(ref="#/definitions/Transaction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="member_phone",
+     *          in="body",
+     *          description="Transaction that should be stored",
+     *          required=true,
+     *          type="integer",
+     *          @SWG\Schema(ref="#/definitions/Transaction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="member_email",
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=true,

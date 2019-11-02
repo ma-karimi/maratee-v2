@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateGardenAPIRequest;
-use App\Http\Requests\Api\UpdateGardenAPIRequest;
+use App\Http\Requests\Api\GardenAPIRequest;
 use App\Models\Garden;
 use App\Repositories\GardenRepository;
 use Illuminate\Http\Request;
@@ -56,6 +55,7 @@ class GardenAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -69,7 +69,7 @@ class GardenAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateGardenAPIRequest $request
+     * @param GardenAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -79,21 +79,31 @@ class GardenAPIController extends AppBaseController
      *      description="Store Garden",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="region",
+     *          name="name",
      *          in="body",
      *          required=true,
+     *          type="string",
+     *          @SWG\Schema(ref="#/definitions/Garden")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="region",
+     *          in="body",
+     *          required=false,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Garden")
      *      ),
      *      @SWG\Parameter(
      *          name="section",
      *          in="body",
-     *          required=true,
+     *          required=false,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Garden")
      *      ),
      *      @SWG\Parameter(
      *          name="number",
      *          in="body",
      *          required=false,
+     *          type="number",
      *          @SWG\Schema(ref="#/definitions/Garden")
      *      ),
      *      @SWG\Response(
@@ -117,7 +127,7 @@ class GardenAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateGardenAPIRequest $request)
+    public function store(GardenAPIRequest $request)
     {
         $input = $request->all();
 
@@ -178,7 +188,7 @@ class GardenAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateGardenAPIRequest $request
+     * @param GardenAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -195,21 +205,31 @@ class GardenAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="region",
+     *          name="name",
      *          in="body",
      *          required=true,
+     *          type="string",
+     *          @SWG\Schema(ref="#/definitions/Garden")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="region",
+     *          in="body",
+     *          required=false,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Garden")
      *      ),
      *      @SWG\Parameter(
      *          name="section",
      *          in="body",
-     *          required=true,
+     *          required=false,
+     *          type="string",
      *          @SWG\Schema(ref="#/definitions/Garden")
      *      ),
      *      @SWG\Parameter(
      *          name="number",
      *          in="body",
      *          required=false,
+     *          type="number",
      *          @SWG\Schema(ref="#/definitions/Garden")
      *      ),
      *      @SWG\Response(
@@ -233,7 +253,7 @@ class GardenAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateGardenAPIRequest $request)
+    public function update($id, GardenAPIRequest $request)
     {
         $input = $request->all();
 

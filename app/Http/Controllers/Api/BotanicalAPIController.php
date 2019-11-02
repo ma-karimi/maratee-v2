@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateBotanicalAPIRequest;
-use App\Http\Requests\Api\UpdateBotanicalAPIRequest;
+use App\Http\Requests\Api\BotanicalAPIRequest;
 use App\Http\Resources\BotanicalResource;
 use App\Models\Botanical;
 use App\Repositories\BotanicalRepository;
@@ -72,7 +71,7 @@ class BotanicalAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateBotanicalAPIRequest $request
+     * @param BotanicalAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -82,13 +81,61 @@ class BotanicalAPIController extends AppBaseController
      *      description="Store Botanical",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="plant_id",
+     *          name="taxonomy_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_habitat_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_originِ_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="monopoly_of_iran_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="wooden_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="cycle_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="protection_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
      *          name="height",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="value_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="usage_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -112,7 +159,19 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="seed_germination",
+     *          name="garden_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_germination_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="entrance_to_garden_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -136,7 +195,7 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="growth_rate",
+     *          name="growth_rate_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -154,25 +213,31 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="seed_rate",
+     *          name="seed_rate_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="seed_formation",
+     *          name="seed_formation_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="winter_tolerance",
+     *          name="winter_tolerance_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="summer_tolerance",
+     *          name="summer_tolerance_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="planting_condition_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -190,13 +255,7 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="garden_name",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Botanical")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="entrance_to_garden",
+     *          name="sensitivity_conditions",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -228,7 +287,7 @@ class BotanicalAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateBotanicalAPIRequest $request)
+    public function store(BotanicalAPIRequest $request)
     {
         $input = $request->all();
 
@@ -289,7 +348,7 @@ class BotanicalAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateBotanicalAPIRequest $request
+     * @param BotanicalAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -306,13 +365,61 @@ class BotanicalAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_id",
+     *          name="taxonomy_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_habitat_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_originِ_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="monopoly_of_iran_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="wooden_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="cycle_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="protection_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
      *          name="height",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="value_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="usage_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -336,7 +443,19 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="seed_germination",
+     *          name="garden_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_germination_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="entrance_to_garden_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -360,7 +479,7 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="growth_rate",
+     *          name="growth_rate_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -378,25 +497,31 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="seed_rate",
+     *          name="seed_rate_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="seed_formation",
+     *          name="seed_formation_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="winter_tolerance",
+     *          name="winter_tolerance_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="summer_tolerance",
+     *          name="summer_tolerance_id",
+     *          in="body",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Botanical")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="planting_condition_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -414,13 +539,7 @@ class BotanicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Botanical")
      *      ),
      *      @SWG\Parameter(
-     *          name="garden_name",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Botanical")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="entrance_to_garden",
+     *          name="sensitivity_conditions",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Botanical")
@@ -452,7 +571,7 @@ class BotanicalAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateBotanicalAPIRequest $request)
+    public function update($id, BotanicalAPIRequest $request)
     {
         $input = $request->all();
 

@@ -3810,7 +3810,55 @@
                 ],
                 "parameters": [
                     {
-                        "name": "plant_id",
+                        "name": "taxonomy_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "general_habitat_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "general_origin\u0650_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "monopoly_of_iran_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "wooden_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "cycle_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "protection_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -3819,6 +3867,22 @@
                     },
                     {
                         "name": "height",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "value_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "usage_id",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3850,7 +3914,23 @@
                         }
                     },
                     {
-                        "name": "seed_germination",
+                        "name": "garden_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "seed_germination_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "entrance_to_garden_id",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3882,7 +3962,7 @@
                         }
                     },
                     {
-                        "name": "growth_rate",
+                        "name": "growth_rate_id",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3906,7 +3986,7 @@
                         }
                     },
                     {
-                        "name": "seed_rate",
+                        "name": "seed_rate_id",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3914,7 +3994,7 @@
                         }
                     },
                     {
-                        "name": "seed_formation",
+                        "name": "seed_formation_id",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3922,7 +4002,7 @@
                         }
                     },
                     {
-                        "name": "winter_tolerance",
+                        "name": "winter_tolerance_id",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3930,7 +4010,15 @@
                         }
                     },
                     {
-                        "name": "summer_tolerance",
+                        "name": "summer_tolerance_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "planting_condition_id",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -3954,15 +4042,7 @@
                         }
                     },
                     {
-                        "name": "garden_name",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Botanical"
-                        }
-                    },
-                    {
-                        "name": "entrance_to_garden",
+                        "name": "sensitivity_conditions",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -4056,7 +4136,55 @@
                         "type": "integer"
                     },
                     {
-                        "name": "plant_id",
+                        "name": "taxonomy_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "general_habitat_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "general_origin\u0650_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "monopoly_of_iran_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "wooden_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "cycle_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "protection_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -4065,6 +4193,22 @@
                     },
                     {
                         "name": "height",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "value_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "usage_id",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -4096,7 +4240,23 @@
                         }
                     },
                     {
-                        "name": "seed_germination",
+                        "name": "garden_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "seed_germination_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "entrance_to_garden_id",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -4128,7 +4288,7 @@
                         }
                     },
                     {
-                        "name": "growth_rate",
+                        "name": "growth_rate_id",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -4152,7 +4312,7 @@
                         }
                     },
                     {
-                        "name": "seed_rate",
+                        "name": "seed_rate_id",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -4160,7 +4320,7 @@
                         }
                     },
                     {
-                        "name": "seed_formation",
+                        "name": "seed_formation_id",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -4168,7 +4328,7 @@
                         }
                     },
                     {
-                        "name": "winter_tolerance",
+                        "name": "winter_tolerance_id",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -4176,7 +4336,15 @@
                         }
                     },
                     {
-                        "name": "summer_tolerance",
+                        "name": "summer_tolerance_id",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Botanical"
+                        }
+                    },
+                    {
+                        "name": "planting_condition_id",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -4200,15 +4368,7 @@
                         }
                     },
                     {
-                        "name": "garden_name",
-                        "in": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Botanical"
-                        }
-                    },
-                    {
-                        "name": "entrance_to_garden",
+                        "name": "sensitivity_conditions",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -4361,7 +4521,23 @@
                         }
                     },
                     {
-                        "name": "irrigation_time",
+                        "name": "spring_time",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalIrrigation"
+                        }
+                    },
+                    {
+                        "name": "autumn_time",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalIrrigation"
+                        }
+                    },
+                    {
+                        "name": "summer_time",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -4481,7 +4657,23 @@
                         }
                     },
                     {
-                        "name": "irrigation_time",
+                        "name": "spring_time",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalIrrigation"
+                        }
+                    },
+                    {
+                        "name": "autumn_time",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/BotanicalIrrigation"
+                        }
+                    },
+                    {
+                        "name": "summer_time",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -4879,7 +5071,7 @@
                         }
                     },
                     {
-                        "name": "propagation_id",
+                        "name": "propagation_method_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -4973,7 +5165,7 @@
                         }
                     },
                     {
-                        "name": "propagation_id",
+                        "name": "propagation_method_id",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -9988,20 +10180,31 @@
                 ],
                 "parameters": [
                     {
-                        "name": "region",
+                        "name": "name",
                         "in": "body",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Garden"
-                        }
+                        },
+                        "type": "string"
+                    },
+                    {
+                        "name": "region",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Garden"
+                        },
+                        "type": "string"
                     },
                     {
                         "name": "section",
                         "in": "body",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/Garden"
-                        }
+                        },
+                        "type": "string"
                     },
                     {
                         "name": "number",
@@ -10009,7 +10212,8 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Garden"
-                        }
+                        },
+                        "type": "number"
                     }
                 ],
                 "responses": {
@@ -10090,20 +10294,31 @@
                         "type": "integer"
                     },
                     {
-                        "name": "region",
+                        "name": "name",
                         "in": "body",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Garden"
-                        }
+                        },
+                        "type": "string"
+                    },
+                    {
+                        "name": "region",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Garden"
+                        },
+                        "type": "string"
                     },
                     {
                         "name": "section",
                         "in": "body",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/Garden"
-                        }
+                        },
+                        "type": "string"
                     },
                     {
                         "name": "number",
@@ -10111,7 +10326,8 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Garden"
-                        }
+                        },
+                        "type": "number"
                     }
                 ],
                 "responses": {
@@ -26853,7 +27069,7 @@
                 ],
                 "parameters": [
                     {
-                        "name": "user_id",
+                        "name": "member_name",
                         "in": "body",
                         "description": "Transaction that should be stored",
                         "required": true,
@@ -26913,7 +27129,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "department_id",
+                        "name": "department_name",
                         "in": "body",
                         "description": "Transaction that should be stored",
                         "required": false,
@@ -27061,7 +27277,7 @@
                         "type": "integer"
                     },
                     {
-                        "name": "user_id",
+                        "name": "member_name",
                         "in": "body",
                         "description": "Transaction that should be stored",
                         "required": true,
@@ -27121,7 +27337,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "department_id",
+                        "name": "department_name",
                         "in": "body",
                         "description": "Transaction that should be stored",
                         "required": false,
@@ -29451,11 +29667,14 @@
                 "appropriate_irrigation_time": {
                     "type": "integer"
                 },
-                "irrigation_time": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "spring_time": {
+                    "type": "string"
+                },
+                "autumn_time": {
+                    "type": "string"
+                },
+                "summer_time": {
+                    "type": "string"
                 },
                 "created_at": {
                     "type": "string"
@@ -29491,10 +29710,7 @@
                     "type": "string"
                 },
                 "description": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "type": "string"
                 },
                 "created_at": {
                     "type": "string"
@@ -29539,7 +29755,7 @@
                 "botanical_id": {
                     "type": "integer"
                 },
-                "propagation_id": {
+                "propagation_method_id": {
                     "type": "integer"
                 },
                 "created_at": {
@@ -30196,38 +30412,8 @@
         },
         "Garden": {
             "required": [
-                "region",
-                "section"
-            ],
-            "properties": {
-                "id": {
-                    "type": "integer"
-                },
-                "region": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "section": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "number": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "created_at": {
-                    "type": "string"
-                },
-                "updated_at": {
-                    "type": "string"
-                }
-            }
+                "name"
+            ]
         },
         "General": {
             "required": [
@@ -32970,7 +33156,7 @@
         },
         "Transaction": {
             "required": [
-                "user_id",
+                "member_name",
                 "organization_id",
                 "start_time",
                 "type_id"

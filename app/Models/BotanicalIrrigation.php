@@ -15,8 +15,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * 			@SWG\Property(property="irrigation_id", type="integer"),
  * 			@SWG\Property(property="requirement", type="integer"),
  * 			@SWG\Property(property="appropriate_irrigation_time", type="integer"),
- * 			@SWG\Property(property="irrigation_time", type="array",
- *     @SWG\Items(type="string")),
+ * 			@SWG\Property(property="spring_time", type="string"),
+ * 			@SWG\Property(property="autumn_time", type="string"),
+ * 			@SWG\Property(property="summer_time", type="string"),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
@@ -26,12 +27,14 @@ class BotanicalIrrigation extends BaseModel
     use BotanicalIrrigationAccessor;
     public const REQUIREMENT = [1 => 'sparse', 2 => 'moderate', 3 => 'heavy'];
     public const IRRIGATION_TIME = [0 => 'indifferent', 1 => 'morning', 2 => 'day', 3 => 'evening', 4 => 'night'];
-    public static $linguistically = ['irrigation_time' => true, 'requirement' => false];
     public static $rules = [
         'botanical_id' => 'required|exists:botanicals,id',
         'irrigation_id' => 'required|exists:irrigations,id',
         'requirement' => 'required|in:1,2,3',
         'appropriate_irrigation_time' => 'required|in:0,1,2,3,4',
+        'spring_time' =>'string',
+        'autumn_time' =>'string',
+        'summer_time' =>'string',
     ];
 
     /**

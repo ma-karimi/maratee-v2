@@ -5,12 +5,9 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\BotanicalPropagation::class, function (Faker $faker) {
+    $botanicals = \App\Models\Botanical::pluck('id')->toArray();
     return [
-        'botanical_id' => function () {
-            return factory(App\Models\Botanical::class)->create()->id;
-        },
-        'propagation_id' => function () {
-            return factory(App\Models\Propagation::class)->create()->id;
-        },
+        'botanical_id' => $faker->randomElement($botanicals),
+        'propagation_method_id' => $faker->numberBetween(1,7),
     ];
 });

@@ -15,16 +15,16 @@ trait TransactionAccessor
 {
     public function getTypeAttribute()
     {
-        return Arr::get(self::TYPE, $this->attributes['type_id']);
+        return !empty($this->attributes['type_id']) ? Arr::get(self::TYPE, $this->attributes['type_id']) : null;
     }
 
     public function getVisitAttribute()
     {
-        return Arr::get(self::VISIT, $this->attributes['visit_id']);
+        return !empty($this->attributes['visit_id']) ? Arr::get(self::VISIT, $this->attributes['visit_id']) : null;
     }
 
     public function getModeAttribute()
     {
-        return Arr::get(self::Mode, $this->attributes['mode_id']);
+        return !empty($this->attributes['mode_id']) ? Arr::get(self::MODE, $this->attributes['mode_id']) : null;
     }
 }

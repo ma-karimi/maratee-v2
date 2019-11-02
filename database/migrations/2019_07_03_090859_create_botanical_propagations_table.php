@@ -16,8 +16,7 @@ class CreateBotanicalPropagationsTable extends Migration {
 		{
 		    $table->bigIncrements('id');
 			$table->unsignedBigInteger('botanical_id');
-			$table->unsignedBigInteger('propagation_id');
-
+			$table->tinyInteger('propagation_method_id')->comment('1:seed, 2:cutting, 3:graft, 4:natural, 5:natural regeneration, 6:root sucker, 7:collar sprout ');
 
             $table->timeStamps();
             $table->softDeletesTz();

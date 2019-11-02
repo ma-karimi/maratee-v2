@@ -3,21 +3,20 @@
 namespace App\Repositories;
 
 use App\Models\Transaction;
-use App\Repositories\BaseRepository;
+use Illuminate\Support\Arr;
 
 /**
  * Class TransactionRepository
  * @package App\Repositories
  * @version September 2, 2019, 5:47 am UTC
-*/
-
+ */
 class TransactionRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**
@@ -40,17 +39,19 @@ class TransactionRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        $media_input = [
-            'date' => $input['date'] ?? null,
-            'user_id' => $input['user_id'] ?? null,
-            'location_id' => $input['location_id'] ?? null,
-            'description' => $input['media_description'] ?? null,
-            'media_type' => $input['media_type'] ?? 2,
-            'reference' => $input['reference'] ?? null,
-        ];
-
-        $model_input = collect($input)->except(array_keys($media_input))->toArray();
-        $model_input['description']=$input['description'];
+        $media_input = [];
+        if (request()->hasFile('file')) {
+            $media_input = [
+                'date' => $input['date'] ?? null,
+                'user_id' => $input['user_id'] ?? null,
+                'location_id' => $input['location_id'] ?? null,
+                'description' => $input['media_description'] ?? null,
+                'media_type' => $input['media_type'] ?? 2,
+                'reference' => $input['reference'] ?? null,
+            ];
+        }
+        $model_input = Arr::except($input, array_keys($media_input));
+        $model_input['description'] = $input['description'] ?? null;
         unset($model_input['file']);
         $model = parent::update($model_input, $id);
         //store media
@@ -58,7 +59,6 @@ class TransactionRepository extends BaseRepository
             $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('media');
             $media_record->update($media_input);
         }
-        $model->save();
         return $model;
     }
 }

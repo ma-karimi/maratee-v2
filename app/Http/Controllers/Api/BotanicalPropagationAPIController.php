@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateBotanicalPropagationAPIRequest;
-use App\Http\Requests\Api\UpdateBotanicalPropagationAPIRequest;
+use App\Http\Requests\Api\BotanicalPropagationAPIRequest;
 use App\Models\BotanicalPropagation;
 use App\Repositories\BotanicalPropagationRepository;
 use Illuminate\Http\Request;
@@ -56,6 +55,7 @@ class BotanicalPropagationAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -69,7 +69,7 @@ class BotanicalPropagationAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateBotanicalPropagationAPIRequest $request
+     * @param BotanicalPropagationAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -85,7 +85,7 @@ class BotanicalPropagationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/BotanicalPropagation")
      *      ),
      *      @SWG\Parameter(
-     *          name="propagation_id",
+     *          name="propagation_method_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/BotanicalPropagation")
@@ -111,7 +111,7 @@ class BotanicalPropagationAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateBotanicalPropagationAPIRequest $request)
+    public function store(BotanicalPropagationAPIRequest $request)
     {
         $input = $request->all();
 
@@ -172,7 +172,7 @@ class BotanicalPropagationAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateBotanicalPropagationAPIRequest $request
+     * @param BotanicalPropagationAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -195,7 +195,7 @@ class BotanicalPropagationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/BotanicalPropagation")
      *      ),
      *      @SWG\Parameter(
-     *          name="propagation_id",
+     *          name="propagation_method_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/BotanicalPropagation")
@@ -221,7 +221,7 @@ class BotanicalPropagationAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateBotanicalPropagationAPIRequest $request)
+    public function update($id, BotanicalPropagationAPIRequest $request)
     {
         $input = $request->all();
 

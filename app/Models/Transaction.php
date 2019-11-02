@@ -16,14 +16,17 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Transaction extends BaseModel implements HasMedia
 {
-    protected $appends=['type', 'visit'];
+    protected $appends=['type', 'visit', 'mode'];
     use TransactionAccessor,HasMediaTrait;
-    public const Mode = [1 => 'send', 2 => 'receive'];
+    public const MODE = [1 => 'send', 2 => 'receive'];
 
     public const TYPE = [1 => 'visit', 2 => 'borrow', 3 => 'exchange', 4 => 'gift', 5 => 'fair', 6 => 'expense', 7 => 'correspondence'];
     public const VISIT = [1 => 'Sample', 2 => 'All/Museum'];
     public static $rules = [
         'member_name' => 'required|string',
+        'member_address' => 'string',
+        'member_email' => 'string',
+        'member_phone' => 'string',
         'organization_id' => 'required|exists:organizations,id',
         'department_name' => 'string',
         'start_time' => 'required|date',
