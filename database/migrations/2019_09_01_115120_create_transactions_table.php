@@ -15,15 +15,15 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
+            $table->string('member_name');
             $table->unsignedBigInteger('organization_id');
-            $table->unsignedBigInteger('department_id')->nullable();
+            $table->string('department_name')->nullable();
             $table->morphs('transactionable');
             $table->tinyInteger('mode_id')->nullable()->comment('1:send , 2:receive');
             $table->string('sheets_no')->nullable();
-            $table->dateTimeTz('start_time');
-            $table->dateTimeTz('end_time')->nullable();
-            $table->dateTimeTz('dead_line')->nullable();
+            $table->date('start_time');
+            $table->date('end_time')->nullable();
+            $table->date('dead_line')->nullable();
             $table->tinyInteger('type_id')->default(1)->comment('1: visit, 2: borrow, 3: exchange, 4:gift, 5:fair 6:expense 7:correspondence');
             $table->string('archive_no')->nullable();
             $table->text('description')->nullable();
@@ -34,9 +34,7 @@ class CreateTransactionsTable extends Migration
             $table->timestamps();
             $table->softDeletesTz();
 
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
         });
     }
