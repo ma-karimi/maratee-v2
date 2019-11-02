@@ -14,7 +14,6 @@ use Response;
  * Class TransactionController
  * @package App\Http\Controllers\Api
  */
-
 class TransactionAPIController extends AppBaseController
 {
     /** @var  TransactionRepository */
@@ -60,10 +59,10 @@ class TransactionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $transactions = $this->transactionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $transactions = $this->transactionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
         );
 
         return $this->sendResponse($transactions->toArray(), 'Transactions retrieved successfully');
@@ -80,7 +79,7 @@ class TransactionAPIController extends AppBaseController
      *      description="Store Transaction",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="user_id",
+     *          name="member_name",
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=true,
@@ -128,7 +127,7 @@ class TransactionAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
-     *          name="department_id",
+     *          name="department_name",
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
@@ -254,7 +253,7 @@ class TransactionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Transaction $transaction */
-        $transaction = $this->transactionRepository->find($id);
+        $transaction = $this->transactionRepository->find($id, request()->get('relations'));
 
         if (empty($transaction)) {
             return $this->sendError('Transaction not found');
@@ -282,7 +281,7 @@ class TransactionAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="user_id",
+     *          name="member_name",
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=true,
@@ -330,7 +329,7 @@ class TransactionAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
-     *          name="department_id",
+     *          name="department_name",
      *          in="body",
      *          description="Transaction that should be stored",
      *          required=false,
@@ -411,7 +410,7 @@ class TransactionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Transaction $transaction */
-        $transaction = $this->transactionRepository->find($id);
+        $transaction = $this->transactionRepository->find($id,request()->get('relations'));
 
         if (empty($transaction)) {
             return $this->sendError('Transaction not found');
@@ -464,7 +463,7 @@ class TransactionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Transaction $transaction */
-        $transaction = $this->transactionRepository->find($id);
+        $transaction = $this->transactionRepository->find($id, request()->get('relations'));
 
         if (empty($transaction)) {
             return $this->sendError('Transaction not found');

@@ -11,7 +11,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 /**
  * @SWG\Definition(
  *      definition="Transaction",
- *      required={"user_id","organization_id","start_time","type_id"}
+ *      required={"member_name","organization_id","start_time","type_id"}
  * )
  */
 class Transaction extends BaseModel implements HasMedia
@@ -23,9 +23,9 @@ class Transaction extends BaseModel implements HasMedia
     public const TYPE = [1 => 'visit', 2 => 'borrow', 3 => 'exchange', 4 => 'gift', 5 => 'fair', 6 => 'expense', 7 => 'correspondence'];
     public const VISIT = [1 => 'Sample', 2 => 'All/Museum'];
     public static $rules = [
-        'user_id' => 'required|exists:users,id',
+        'member_name' => 'required|string',
         'organization_id' => 'required|exists:organizations,id',
-        'department_id' => 'exists:departments,id',
+        'department_name' => 'string',
         'start_time' => 'required|date',
         'end_time' => 'date',
         'dead_line' => 'date',
@@ -40,13 +40,6 @@ class Transaction extends BaseModel implements HasMedia
         'sheets_no' => 'string',
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 
     /**
      * @return BelongsTo
