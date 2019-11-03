@@ -8,8 +8,7 @@ $factory->define(App\Models\Country::class, function (Faker $faker) {
     $continents = \App\Models\Continent::pluck('id')->toArray();
 
     return [
-        'code' => $faker->word,
-        'name' => make_json($faker->name),
+        'name' => $faker->word,
         'continent_id' => $faker->randomElement($continents),
     ];
 });

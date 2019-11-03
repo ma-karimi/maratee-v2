@@ -30,14 +30,16 @@ use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
  *          type="integer",
  *      ),
  *      @SWG\Property(
- *          property="address",
- *          type="array",
- *     @SWG\Items(type="string"),
+ *          property="address_en",
+ *          type="string",
+ *      ),
+ *      @SWG\Property(
+ *          property="address_fa",
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="region_name",
- *          type="array",
- *     @SWG\Items(type="string"),
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="min_altitude",
@@ -58,8 +60,7 @@ use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
  *      @SWG\Property(
  *          property="description",
  *          description="description",
- *          type="array",
- *     @SWG\Items(type="string"),
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -79,12 +80,15 @@ class Location extends BaseModel
 {
     use SpatialTrait, LocationAccessor, LocationMutator ;
 
-    public static $linguistically = ['description' => false, 'region_name' => false, 'address' => true];
     public static $rules = [
         'city_id' => 'required|exists:cities,id',
         'village_id' => 'exists:villages,id',
         'min_altitude' => 'numeric',
-        'max_altitude' => 'numeric'
+        'max_altitude' => 'numeric',
+        'address_en' => 'string',
+        'address_fa' => 'string',
+        'description' => 'string',
+        'region_name' => 'string',
     ];
     /**
      * The database table used by the model.
@@ -99,13 +103,6 @@ class Location extends BaseModel
     protected $spatialFields = [
         'point'
     ];
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = ['description' => 'json', 'region_name' => 'json', 'address' => 'json'];
 
 
     /**
@@ -197,14 +194,6 @@ class Location extends BaseModel
     public function seedHubs(): HasMany
     {
         return $this->hasMany(SeedHub::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function seedMolecular(): HasMany
-    {
-        return $this->hasMany(seedMolecular::class)->latest();
     }
 
     /**

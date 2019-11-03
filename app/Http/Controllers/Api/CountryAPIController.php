@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateCountryAPIRequest;
-use App\Http\Requests\Api\UpdateCountryAPIRequest;
+use App\Http\Requests\Api\CountryAPIRequest;
 use App\Models\Country;
 use App\Repositories\CountryRepository;
 use Illuminate\Http\Request;
@@ -56,6 +55,7 @@ class CountryAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -69,7 +69,7 @@ class CountryAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateCountryAPIRequest $request
+     * @param CountryAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -79,7 +79,21 @@ class CountryAPIController extends AppBaseController
      *      description="Store Country",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name_en",
+     *          in="body",
+     *          description="Country that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Country")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="name_fa",
+     *          in="body",
+     *          description="Country that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Country")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="continent_id",
      *          in="body",
      *          description="Country that should be stored",
      *          required=false,
@@ -106,7 +120,7 @@ class CountryAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateCountryAPIRequest $request)
+    public function store(CountryAPIRequest $request)
     {
         $input = $request->all();
 
@@ -167,7 +181,7 @@ class CountryAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateCountryAPIRequest $request
+     * @param CountryAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -184,9 +198,23 @@ class CountryAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="body",
+     *          name="name_en",
      *          in="body",
-     *          description="Country that should be updated",
+     *          description="Country that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Country")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="name_fa",
+     *          in="body",
+     *          description="Country that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Country")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="continent_id",
+     *          in="body",
+     *          description="Country that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Country")
      *      ),
@@ -211,7 +239,7 @@ class CountryAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateCountryAPIRequest $request)
+    public function update($id, CountryAPIRequest $request)
     {
         $input = $request->all();
 

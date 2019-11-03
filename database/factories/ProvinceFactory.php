@@ -8,6 +8,6 @@ $factory->define(App\Models\Province::class, function (Faker $faker) {
     $countries = \App\Models\Country::pluck('id')->toArray();
     return [
         'country_id' => $faker->randomElement($countries),
-        'name' => make_json($faker->name),
+        'name_en' => $faker->name,
     ];
 });

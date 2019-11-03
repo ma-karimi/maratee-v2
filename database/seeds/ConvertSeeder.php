@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Country;
 use Illuminate\Database\Seeder;
 use App\Models\Convert\Treeleaf;
 use App\Services\ConvertService;
@@ -16,8 +17,10 @@ class ConvertSeeder extends Seeder
      */
     public static function run($start = 0, $limit = null)
     {
-
-        Treeleaf::where('id', '>', $start)
+        Country::create([
+            'name_en'=> 'Iran', 'name_fa' => 'ایران'
+        ]);
+        Treeleaf::where('id',  3771)
             ->when($limit, function ($query) use ($limit) {
                 return $query->limit($limit);
             })

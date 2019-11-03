@@ -6,6 +6,6 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Village::class, function (Faker $faker) {
     return [
-        'name' => make_json($faker->name),
+        'name_en' => $faker->name,
     ];
 });

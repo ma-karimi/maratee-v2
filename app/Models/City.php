@@ -8,12 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @SWG\Definition(
  *            definition="City",
- *            required={"name","province_id"},
+ *            required={"name_en","province_id"},
  * 			@SWG\Property(property="id", type="integer"),
- * 			@SWG\Property(property="name", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="province_id", type="integer"),
- * 			@SWG\Property(property="code", type="string"),
+ *      @SWG\Property(property="name_en", type="string"),
+ *      @SWG\Property(property="name_fa", type="string"),
+ *      @SWG\Property(property="province_id", type="integer"),
  * 			@SWG\Property(property="created_at", type="string"),
  * 			@SWG\Property(property="updated_at", type="string"),
  *        )
@@ -21,10 +20,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class City extends BaseModel
 {
 
-    public static $linguistically = ['name' => true];
     public static $rules = [
         'province_id' => 'required|exists:provinces,id',
-        'code' => 'string',
+        'name_en' => 'required|string',
+        'name_fa' => 'string',
     ];
 
     /**
@@ -34,12 +33,6 @@ class City extends BaseModel
      */
     protected $table = 'cities';
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = ['name' => 'json'];
 
     /**
      * @return BelongsTo

@@ -7,20 +7,15 @@ use App\Models\Contracts\BaseModel;
 /**
  * @SWG\Definition(
  *      definition="Village",
- *      required={"name"},
+ *      required={"name_en"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
  *          format="int32"
  *      ),
- *      @SWG\Property(
- *          property="name",
- *          description="name",
- *          type="array",
- *     @SWG\Items(type="string"),
- *          format="array"
- *      ),
+ *      @SWG\Property(property="name_en", type="string"),
+ *      @SWG\Property(property="name_fa", type="string"),
  *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
@@ -38,22 +33,12 @@ use App\Models\Contracts\BaseModel;
 class Village extends BaseModel
 {
 
-    public static $linguistically = ['name' => true];
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'villages';
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'name' => 'json',
-    ];
 
     public function locations()
     {

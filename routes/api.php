@@ -237,6 +237,8 @@ Route::post('medicinal_plants/{id}/research', 'MedicinalPlantAPIController@store
 
 
 Route::apiResource('permissions', 'PermissionAPIController');
+Route::apiResource('geographicals', 'GraphicalAPIController');
+Route::apiResource('plant_geographicals', 'PlantGeographicalAPIController');
 
 Route::apiResource('roles', 'RoleAPIController');
 

@@ -9,11 +9,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @SWG\Definition(
  *            definition="Country",
- *            required={"name"},
+ *            required={"name_en"},
  * 			@SWG\Property(property="id", type="integer"),
- * 			@SWG\Property(property="name", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="code", type="string"),
+ * 			@SWG\Property(property="name_en", type="string"),
+ * 			@SWG\Property(property="name_fa", type="string"),
  * 			@SWG\Property(property="continent_id", type="integer"),
  * 			@SWG\Property(property="description", type="array",
  *     @SWG\Items(type="string")),
@@ -24,9 +23,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Country extends BaseModel
 {
 
-    public static $linguistically = ['name' => true];
     public static $rules = [
-        'code' => 'string',
+        'name_en' => 'required|string',
+        'name_fa' => 'string',
         'continent_id' => 'required|exists:continents,id',
     ];
     /**

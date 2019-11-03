@@ -17,12 +17,12 @@ class CreatePlantLifeFormsTable extends Migration
             $table->bigIncrements('id');
 
             //from life_form table as tree, life_cycle type
-            $table->unsignedBigInteger('plant_herbarium_id');
+            $table->unsignedBigInteger('plant_id');
             $table->unsignedBigInteger('life_form_id');
             $table->timestamps();
             $table->softDeletesTz();
 
-            $table->foreign('plant_herbarium_id')->references('id')->on('plant_herbariums')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('life_form_id')->references('id')->on('life_forms')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
     }
@@ -36,7 +36,7 @@ class CreatePlantLifeFormsTable extends Migration
     {
         Schema::table('plant_life_forms', function(Blueprint $table)
         {
-            $table->dropForeign(['plant_herbarium_id']);
+            $table->dropForeign(['plant_id']);
             $table->dropForeign(['life_form_id']);
         });
         Schema::dropIfExists('plant_life_forms');

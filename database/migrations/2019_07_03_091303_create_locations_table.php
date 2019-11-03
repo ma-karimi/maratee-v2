@@ -18,14 +18,15 @@ class CreateLocationsTable extends Migration {
 			$table->bigIncrements('id');
             $table->unsignedBigInteger('province_id');
             $table->unsignedBigInteger('city_id')->nullable();
-            $table->json('region_name')->nullable();
-            $table->json('address')->nullable();
+            $table->string('region_name')->nullable();
+            $table->text('address_en')->nullable();
+            $table->text('address_fa')->nullable();
             $table->unsignedBigInteger('village_id')->nullable();
 
             $table->integer('min_altitude')->nullable();
             $table->integer('max_altitude')->nullable();
 			$table->point('point')->nullable();
-			$table->json('description')->nullable();
+			$table->text('description')->nullable();
 	     	$table->boolean('gps_used')->default(0);
 			$table->text('gps_datum')->nullable();
 

@@ -15,7 +15,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
- *      definition="PlantHerbarium",
+ *      definition="Plant",
  *      required={"location_id","organization_id","protection_id","general_phytogeography_id"},
  *      @SWG\Property(
  *          property="id",
@@ -157,7 +157,7 @@ class Plant extends BaseModel implements HasMedia
      *
      * @var string
      */
-    protected $table = 'plant_herbariums';
+    protected $table = 'plants';
 
 
 

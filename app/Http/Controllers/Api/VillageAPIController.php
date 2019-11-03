@@ -56,6 +56,7 @@ class VillageAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -79,7 +80,14 @@ class VillageAPIController extends AppBaseController
      *      description="Store Village",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="name",
+     *          name="name_en",
+     *          in="body",
+     *          description="Village that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Village")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="name_fa",
      *          in="body",
      *          description="Village that should be stored",
      *          required=true,
@@ -184,9 +192,16 @@ class VillageAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="name",
+     *          name="name_en",
      *          in="body",
-     *          description="Village that should be updated",
+     *          description="Village that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Village")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="name_fa",
+     *          in="body",
+     *          description="Village that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Village")
      *      ),

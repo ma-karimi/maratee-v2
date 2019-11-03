@@ -8,8 +8,6 @@ use App\Http\Requests\Api\UpdateLocationAPIRequest;
 use App\Models\Location;
 use App\Repositories\LocationRepository;
 use Illuminate\Http\Request;
-use League\Geotools\Coordinate\Coordinate;
-use League\Geotools\Geotools;
 use Response;
 
 /**
@@ -81,15 +79,15 @@ class LocationAPIController extends AppBaseController
      *      description="Store Location",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="address",
+     *          name="address_en",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
-     *          name="region_name",
+     *          name="address_fa",
      *          in="body",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
@@ -234,15 +232,15 @@ class LocationAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="address",
+     *          name="address_en",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
-     *          name="region_name",
+     *          name="address_fa",
      *          in="body",
-     *          required=false,
+     *          required=true,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(

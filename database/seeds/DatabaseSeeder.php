@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         ini_set('memory_limit', '-1');
         if (App::environment() == 'production') {
             Country::create([
-                'name' => ['en' => 'Iran', 'fa' => 'ایران']
+                'name_en'=> 'Iran', 'name_fa' => 'ایران'
             ]);
 
 

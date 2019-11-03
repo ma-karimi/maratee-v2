@@ -409,7 +409,7 @@ class HerbariumAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Plant"
+     *                  ref="#/definitions/Herbarium"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -485,7 +485,7 @@ class HerbariumAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Plant"
+     *                  ref="#/definitions/Herbarium"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -561,7 +561,7 @@ class HerbariumAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Plant"
+     *                  ref="#/definitions/Herbarium"
      *              ),
      *              @SWG\Property(
      *                  property="message",

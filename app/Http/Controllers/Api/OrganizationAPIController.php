@@ -80,7 +80,14 @@ class OrganizationAPIController extends AppBaseController
      *      description="Store Organization",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="name",
+     *          name="name_en",
+     *          in="body",
+     *          description="Organization that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Organization")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="name_fa",
      *          in="body",
      *          description="Organization that should be stored",
      *          required=true,
@@ -241,7 +248,14 @@ class OrganizationAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="name",
+     *          name="name_en",
+     *          in="body",
+     *          description="Organization that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Organization")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="name_fa",
      *          in="body",
      *          description="Organization that should be stored",
      *          required=true,

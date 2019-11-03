@@ -31,10 +31,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          type="integer"
  *      ),
  *      @SWG\Property(
- *          property="name",
+ *          property="name_en",
  *          description="name",
- *          type="array",
- *     @SWG\Items(type="string")
+ *          type="string",
+ *      ),
+ *      @SWG\Property(
+ *          property="name_fa",
+ *          description="name",
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="description",
@@ -77,12 +81,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Organization extends BaseModel
 {
-    public static $linguistically = ['name' => true];
     public static $rules = [
         'domestic_code' => 'string',
         'international_code' => 'string',
         'is_herbarium' => 'integer',
         'phone' => 'required|string',
+        'name_en' => 'required|string',
         'email' => 'email',
         'website' => 'string'
     ];
@@ -92,16 +96,6 @@ class Organization extends BaseModel
      * @var string
      */
     protected $table = 'organizations';
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'name' => 'json',
-    ];
-
 
     /**
      * @return HasMany

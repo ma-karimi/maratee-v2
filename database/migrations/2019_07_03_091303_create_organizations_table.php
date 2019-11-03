@@ -18,7 +18,8 @@ class CreateOrganizationsTable extends Migration
             $table->string('domestic_code', 45)->nullable();
             $table->string('international_code', 45)->nullable();
             $table->tinyInteger('is_herbarium')->default(1)->comment('0:disable , 1:enable');
-            $table->json('name');
+            $table->string('name_en');
+            $table->string('name_fa')->nullable();
             $table->text('description')->nullable();
             $table->string('phone')->nullable();
             $table->string('fax')->nullable();

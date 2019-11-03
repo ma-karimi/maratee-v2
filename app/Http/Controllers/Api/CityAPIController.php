@@ -78,13 +78,13 @@ class CityAPIController extends AppBaseController
      *      description="Store City",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="name",
+     *          name="name_en",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/City")
      *      ),
      *      @SWG\Parameter(
-     *          name="code",
+     *          name="name_fa",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/City")
@@ -194,13 +194,13 @@ class CityAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="name",
+     *          name="name_en",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/City")
      *      ),
      *      @SWG\Parameter(
-     *          name="code",
+     *          name="name_fa",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/City")

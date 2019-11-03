@@ -56,6 +56,7 @@ class ProvinceAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -79,7 +80,14 @@ class ProvinceAPIController extends AppBaseController
      *      description="Store Province",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="name",
+     *          name="name_en",
+     *          in="body",
+     *          description="Province that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Province")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="name_fa",
      *          in="body",
      *          description="Province that should be stored",
      *          required=true,
@@ -191,7 +199,14 @@ class ProvinceAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="name",
+     *          name="name_en",
+     *          in="body",
+     *          description="Province that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Province")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="name_fa",
      *          in="body",
      *          description="Province that should be stored",
      *          required=true,

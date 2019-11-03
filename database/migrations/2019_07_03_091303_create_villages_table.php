@@ -15,8 +15,8 @@ class CreateVillagesTable extends Migration {
 		Schema::create('villages', function(Blueprint $table)
 		{
 			$table->bigIncrements('id');
-			$table->json('name');
-
+            $table->string('name_en');
+            $table->string('name_fa')->nullable();
             $table->timeStamps();
             $table->softDeletesTz();
 		});

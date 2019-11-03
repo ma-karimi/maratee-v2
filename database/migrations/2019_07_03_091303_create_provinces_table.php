@@ -16,7 +16,8 @@ class CreateProvincesTable extends Migration {
 		{
 			$table->bigIncrements('id');
 			$table->unsignedBigInteger('country_id')->nullable();
-			$table->json('name');
+			$table->string('name_en');
+			$table->string('name_fa')->nullable();
 
             $table->timeStamps();
             $table->softDeletesTz();

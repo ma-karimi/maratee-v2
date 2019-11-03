@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @SWG\Definition(
  *      definition="Province",
- *      required={"name"},
+ *      required={"name_en"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -23,10 +23,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="name",
+ *          property="name_en",
  *          description="name",
- *          type="array",
- *     @SWG\Items(type="string")
+ *          type="string",
+ *      ),
+ *      @SWG\Property(
+ *          property="name_fa",
+ *          description="name",
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -44,9 +48,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Province extends BaseModel
 {
-    public static $linguistically = ['name' => true];
     public static $rules = [
         'country_id' => 'exists:countries,id',
+        'name_en' => 'required|string',
+        'name_fa' => 'string',
     ];
     /**
      * The database table used by the model.
@@ -54,16 +59,6 @@ class Province extends BaseModel
      * @var string
      */
     protected $table = 'provinces';
-
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'name' => 'json'
-    ];
 
     /**
      * @return BelongsTo

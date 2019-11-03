@@ -10642,6 +10642,219 @@
                 }
             }
         },
+        "/geographicals": {
+            "get": {
+                "tags": [
+                    "Geographical"
+                ],
+                "summary": "Get a listing of the Geographicals.",
+                "description": "Get all Geographicals",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Geographical"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Geographical"
+                ],
+                "summary": "Store a newly created Geographical in storage",
+                "description": "Store Geographical",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "plant_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Geographical"
+                        }
+                    },
+                    {
+                        "name": "geographical_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Geographical"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Geographical"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/geographicals/{id}": {
+            "get": {
+                "tags": [
+                    "Geographical"
+                ],
+                "summary": "Display the specified Geographical",
+                "description": "Get Geographical",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Geographical",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Geographical"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Geographical"
+                ],
+                "summary": "Update the specified Geographical in storage",
+                "description": "Update Geographical",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Geographical",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "plant_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Geographical"
+                        }
+                    },
+                    {
+                        "name": "geographical_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Geographical"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Geographical"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Geographical"
+                ],
+                "summary": "Remove the specified Geographical from storage",
+                "description": "Delete Geographical",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Geographical",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/geologyAges": {
             "get": {
                 "tags": [
@@ -11517,6 +11730,538 @@
                                 },
                                 "data": {
                                     "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/herbariums": {
+            "get": {
+                "tags": [
+                    "Herbarium"
+                ],
+                "summary": "Get a listing of the Herbariums.",
+                "description": "Get all Herbariums",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Herbarium"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Herbarium"
+                ],
+                "summary": "Store a newly created Herbarium in storage",
+                "description": "Store Herbarium",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "herbarium_number",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "location_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "organization_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "herbarium_index",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "cf",
+                        "in": "body",
+                        "description": "s,u,f,g,v",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "taxonomy_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Herbarium"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/herbariums/{id}": {
+            "get": {
+                "tags": [
+                    "Herbarium"
+                ],
+                "summary": "Display the specified Herbarium",
+                "description": "Get Herbarium",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Herbarium",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Herbarium"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Herbarium"
+                ],
+                "summary": "Update the specified Herbarium in storage",
+                "description": "Update Herbarium",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Herbarium",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "herbarium_number",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "location_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "organization_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "herbarium_index",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "cf",
+                        "in": "body",
+                        "description": "s,u,f,g,v",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    },
+                    {
+                        "name": "taxonomy_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Herbarium"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Herbarium"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Herbarium"
+                ],
+                "summary": "Remove the specified Herbarium from storage",
+                "description": "Delete Herbarium",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Herbarium",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/plants/{id}/determine": {
+            "post": {
+                "tags": [
+                    "Plant Action"
+                ],
+                "summary": "Store Determine action for Given Plant Herbarium",
+                "description": "Store Plant Herbarium Action",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "actors",
+                        "in": "body",
+                        "description": "ids of actors",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    {
+                        "name": "date",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ActionHub"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ActionHub"
+                        }
+                    },
+                    {
+                        "name": "project_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ActionHub"
+                        }
+                    },
+                    {
+                        "name": "department_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ActionHub"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Herbarium"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/plants/{id}/collect": {
+            "post": {
+                "tags": [
+                    "Plant Action"
+                ],
+                "summary": "Store Collect action for Given Plant Herbarium",
+                "description": "Store Plant Herbarium Action",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "actors",
+                        "in": "body",
+                        "description": "ids of actors",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    {
+                        "name": "date",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ActionHub"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ActionHub"
+                        }
+                    },
+                    {
+                        "name": "project_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ActionHub"
+                        }
+                    },
+                    {
+                        "name": "department_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ActionHub"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Herbarium"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/plants/{id}/research": {
+            "post": {
+                "tags": [
+                    "Plant Action"
+                ],
+                "summary": "Store Research action for Given Plant Herbarium",
+                "description": "Store Plant Herbarium Action",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "actors",
+                        "in": "body",
+                        "description": "ids of actors",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    {
+                        "name": "date",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ActionHub"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ActionHub"
+                        }
+                    },
+                    {
+                        "name": "project_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ActionHub"
+                        }
+                    },
+                    {
+                        "name": "department_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ActionHub"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Herbarium"
                                 },
                                 "message": {
                                     "type": "string"
@@ -12494,7 +13239,7 @@
                 ],
                 "parameters": [
                     {
-                        "name": "address",
+                        "name": "address_en",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -12502,9 +13247,9 @@
                         }
                     },
                     {
-                        "name": "region_name",
+                        "name": "address_fa",
                         "in": "body",
-                        "required": false,
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/Location"
                         }
@@ -12645,7 +13390,7 @@
                         "type": "integer"
                     },
                     {
-                        "name": "address",
+                        "name": "address_en",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -12653,9 +13398,9 @@
                         }
                     },
                     {
-                        "name": "region_name",
+                        "name": "address_fa",
                         "in": "body",
-                        "required": false,
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/Location"
                         }
@@ -13949,33 +14694,6 @@
                         }
                     },
                     {
-                        "name": "consumption",
-                        "in": "body",
-                        "description": "consumption",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlant"
-                        }
-                    },
-                    {
-                        "name": "active_compounds",
-                        "in": "body",
-                        "description": "active_compounds",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlant"
-                        }
-                    },
-                    {
-                        "name": "manufacturer",
-                        "in": "body",
-                        "description": "manufacturer",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlant"
-                        }
-                    },
-                    {
                         "name": "efficiency",
                         "in": "body",
                         "description": "efficiency : float type",
@@ -14372,33 +15090,6 @@
                         "name": "side_effects",
                         "in": "body",
                         "description": "side_effects",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlant"
-                        }
-                    },
-                    {
-                        "name": "consumption",
-                        "in": "body",
-                        "description": "consumption",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlant"
-                        }
-                    },
-                    {
-                        "name": "active_compounds",
-                        "in": "body",
-                        "description": "active_compounds",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/MedicinalPlant"
-                        }
-                    },
-                    {
-                        "name": "manufacturer",
-                        "in": "body",
-                        "description": "manufacturer",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/MedicinalPlant"
@@ -19060,6 +19751,727 @@
                 }
             }
         },
+        "/plants": {
+            "get": {
+                "tags": [
+                    "Plant"
+                ],
+                "summary": "Get a listing of the Plants & Plant Herbarium has flowering herbarium",
+                "description": "Get all Plants",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Plant"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Plant"
+                ],
+                "summary": "Store a newly created Plant Herbarium in storage",
+                "description": "Store Plant",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "general_phytogeography_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "protection_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "is_flowering",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "sheets_no",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "samples_no",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "tip_qt",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "physical_tip_qt",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "general_substrate_lichen_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "general_substrate_moss_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "general_substrate_diatom_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "general_ecology_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "general_origin_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "habitat_description",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "ecology_description",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "family_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "genus_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "order_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "class_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "species_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "variety_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "flowering_time",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "city_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "address",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "region_name",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "min_altitude",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "max_altitude",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "point",
+                        "in": "body",
+                        "description": "Lat and Lng BY DMS system (Example: [48\u00b049\u203224\u2033N,2\u00b018\u203226\u2033E])",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "location_description",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Plant"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/plants/{id}": {
+            "get": {
+                "tags": [
+                    "Plant"
+                ],
+                "summary": "Display the specified Plant Herbarium",
+                "description": "Get Plant Herbarium",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Plant Herbarium",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Plant"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Plant"
+                ],
+                "summary": "Update the specified Plant Herbarium in storage",
+                "description": "Update Plant Herbarium",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Plant Herbarium",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "general_phytogeography_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "protection_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "is_flowering",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "sheets_no",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "samples_no",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "tip_qt",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "physical_tip_qt",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "general_substrate_lichen_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "general_substrate_moss_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "general_substrate_diatom_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "general_ecology_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "general_origin_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "habitat_description",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "ecology_description",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "family_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "genus_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "order_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "class_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "species_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "variety_id",
+                        "in": "body",
+                        "description": "Plant Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Taxonomy"
+                        }
+                    },
+                    {
+                        "name": "flowering_time",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Plant"
+                        }
+                    },
+                    {
+                        "name": "city_id",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "address",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "region_name",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "min_altitude",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "max_altitude",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "point",
+                        "in": "body",
+                        "description": "Lat and Lng BY DMS system (Example: [48\u00b049\u203224\u2033N,2\u00b018\u203226\u2033E])",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    {
+                        "name": "location_description",
+                        "in": "body",
+                        "description": "Herbarium that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Plant"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Plant"
+                ],
+                "summary": "Remove the specified Plant Herbarium from storage",
+                "description": "Delete Plant Herbarium",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Plant Herbarium",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/plant_applications": {
             "get": {
                 "tags": [
@@ -19401,13 +20813,13 @@
                 }
             }
         },
-        "/plant_herbariums": {
+        "/plant_geographicals": {
             "get": {
                 "tags": [
-                    "PlantHerbarium"
+                    "PlantGeographical"
                 ],
-                "summary": "Get a listing of the Plants & Plant Herbarium has flowering herbarium",
-                "description": "Get all Plants",
+                "summary": "Get a listing of the PlantGeographicals.",
+                "description": "Get all PlantGeographicals",
                 "produces": [
                     "application/json"
                 ],
@@ -19422,7 +20834,7 @@
                                 "data": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/PlantHerbarium"
+                                        "$ref": "#/definitions/PlantGeographical"
                                     }
                                 },
                                 "message": {
@@ -19436,327 +20848,28 @@
             },
             "post": {
                 "tags": [
-                    "PlantHerbarium"
+                    "PlantGeographical"
                 ],
-                "summary": "Store a newly created Plant Herbarium in storage",
-                "description": "Store Plant Herbarium",
+                "summary": "Store a newly created PlantGeographical in storage",
+                "description": "Store PlantGeographical",
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
                     {
-                        "name": "name",
+                        "name": "plant_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
+                            "$ref": "#/definitions/PlantGeographical"
                         }
                     },
                     {
-                        "name": "herbarium_number",
+                        "name": "geographical_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "location_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "organization_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "general_phytogeography_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "protection_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "is_flowering",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "herbarium_index",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "cf",
-                        "in": "body",
-                        "description": "s,u,f,g,v",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "sheets_no",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "samples_no",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "tip_qt",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "physical_tip_qt",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "general_substrate_lichen_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "general_substrate_moss_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "general_substrate_diatom_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "general_ecology_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "general_origin_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "habitat_description",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "ecology_description",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "family_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "genus_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "order_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "class_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "species_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "variety_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "flowering_time",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "city_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    },
-                    {
-                        "name": "address",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    },
-                    {
-                        "name": "region_name",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    },
-                    {
-                        "name": "min_altitude",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    },
-                    {
-                        "name": "max_altitude",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    },
-                    {
-                        "name": "point",
-                        "in": "body",
-                        "description": "Lat and Lng BY DMS system (Example: [48\u00b049\u203224\u2033N,2\u00b018\u203226\u2033E])",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    },
-                    {
-                        "name": "location_description",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
+                            "$ref": "#/definitions/PlantGeographical"
                         }
                     }
                 ],
@@ -19769,7 +20882,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/PlantHerbarium"
+                                    "$ref": "#/definitions/PlantGeographical"
                                 },
                                 "message": {
                                     "type": "string"
@@ -19781,13 +20894,13 @@
                 }
             }
         },
-        "/plant_herbariums/{id}": {
+        "/plant_geographicals/{id}": {
             "get": {
                 "tags": [
-                    "PlantHerbarium"
+                    "PlantGeographical"
                 ],
-                "summary": "Display the specified Plant Herbarium",
-                "description": "Get Plant Herbarium",
+                "summary": "Display the specified PlantGeographical",
+                "description": "Get PlantGeographical",
                 "produces": [
                     "application/json"
                 ],
@@ -19795,7 +20908,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of Plant Herbarium",
+                        "description": "id of PlantGeographical",
                         "required": true,
                         "type": "integer"
                     }
@@ -19809,7 +20922,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/PlantHerbarium"
+                                    "$ref": "#/definitions/PlantGeographical"
                                 },
                                 "message": {
                                     "type": "string"
@@ -19822,10 +20935,10 @@
             },
             "put": {
                 "tags": [
-                    "PlantHerbarium"
+                    "PlantGeographical"
                 ],
-                "summary": "Update the specified Plant Herbarium in storage",
-                "description": "Update Plant Herbarium",
+                "summary": "Update the specified PlantGeographical in storage",
+                "description": "Update PlantGeographical",
                 "produces": [
                     "application/json"
                 ],
@@ -19833,323 +20946,24 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of Plant Herbarium",
+                        "description": "id of PlantGeographical",
                         "required": true,
                         "type": "integer"
                     },
                     {
-                        "name": "name",
+                        "name": "plant_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
+                            "$ref": "#/definitions/PlantGeographical"
                         }
                     },
                     {
-                        "name": "herbarium_number",
+                        "name": "geographical_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "location_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "organization_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "general_phytogeography_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "protection_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "is_flowering",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "herbarium_index",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "cf",
-                        "in": "body",
-                        "description": "s,u,f,g,v",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "sheets_no",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "samples_no",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "tip_qt",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "physical_tip_qt",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "general_substrate_lichen_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "general_substrate_moss_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "general_substrate_diatom_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "general_ecology_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "general_origin_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "habitat_description",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "ecology_description",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "family_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "genus_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "order_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "class_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "species_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "variety_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Taxonomy"
-                        }
-                    },
-                    {
-                        "name": "flowering_time",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PlantHerbarium"
-                        }
-                    },
-                    {
-                        "name": "city_id",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    },
-                    {
-                        "name": "address",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    },
-                    {
-                        "name": "region_name",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    },
-                    {
-                        "name": "min_altitude",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    },
-                    {
-                        "name": "max_altitude",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    },
-                    {
-                        "name": "point",
-                        "in": "body",
-                        "description": "Lat and Lng BY DMS system (Example: [48\u00b049\u203224\u2033N,2\u00b018\u203226\u2033E])",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    },
-                    {
-                        "name": "location_description",
-                        "in": "body",
-                        "description": "Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Location"
+                            "$ref": "#/definitions/PlantGeographical"
                         }
                     }
                 ],
@@ -20162,7 +20976,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/PlantHerbarium"
+                                    "$ref": "#/definitions/PlantGeographical"
                                 },
                                 "message": {
                                     "type": "string"
@@ -20175,10 +20989,10 @@
             },
             "delete": {
                 "tags": [
-                    "PlantHerbarium"
+                    "PlantGeographical"
                 ],
-                "summary": "Remove the specified Plant Herbarium from storage",
-                "description": "Delete Plant Herbarium",
+                "summary": "Remove the specified PlantGeographical from storage",
+                "description": "Delete PlantGeographical",
                 "produces": [
                     "application/json"
                 ],
@@ -20186,7 +21000,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of Plant Herbarium",
+                        "description": "id of PlantGeographical",
                         "required": true,
                         "type": "integer"
                     }
@@ -20201,249 +21015,6 @@
                                 },
                                 "data": {
                                     "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/plant_herbariums/{id}/determine": {
-            "post": {
-                "tags": [
-                    "PlantHerbarium Action"
-                ],
-                "summary": "Store Determine action for Given Plant Herbarium",
-                "description": "Store Plant Herbarium Action",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "actors",
-                        "in": "body",
-                        "description": "ids of actors",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "integer"
-                            }
-                        }
-                    },
-                    {
-                        "name": "date",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/ActionHub"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/ActionHub"
-                        }
-                    },
-                    {
-                        "name": "project_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/ActionHub"
-                        }
-                    },
-                    {
-                        "name": "department_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/ActionHub"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/PlantHerbarium"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/plant_herbariums/{id}/collect": {
-            "post": {
-                "tags": [
-                    "PlantHerbarium Action"
-                ],
-                "summary": "Store Collect action for Given Plant Herbarium",
-                "description": "Store Plant Herbarium Action",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "actors",
-                        "in": "body",
-                        "description": "ids of actors",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "integer"
-                            }
-                        }
-                    },
-                    {
-                        "name": "date",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/ActionHub"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/ActionHub"
-                        }
-                    },
-                    {
-                        "name": "project_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/ActionHub"
-                        }
-                    },
-                    {
-                        "name": "department_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/ActionHub"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/PlantHerbarium"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/plant_herbariums/{id}/research": {
-            "post": {
-                "tags": [
-                    "PlantHerbarium Action"
-                ],
-                "summary": "Store Research action for Given Plant Herbarium",
-                "description": "Store Plant Herbarium Action",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "actors",
-                        "in": "body",
-                        "description": "ids of actors",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "integer"
-                            }
-                        }
-                    },
-                    {
-                        "name": "date",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/ActionHub"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/ActionHub"
-                        }
-                    },
-                    {
-                        "name": "project_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/ActionHub"
-                        }
-                    },
-                    {
-                        "name": "department_id",
-                        "in": "body",
-                        "description": "Plant Herbarium that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/ActionHub"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/PlantHerbarium"
                                 },
                                 "message": {
                                     "type": "string"
@@ -20951,12 +21522,30 @@
                         }
                     },
                     {
-                        "name": "description",
+                        "name": "consumption",
                         "in": "body",
-                        "description": "Product that should be stored",
+                        "description": "consumption",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/Product"
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
+                        "name": "active_compounds",
+                        "in": "body",
+                        "description": "active_compounds",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
+                        "name": "manufacturer",
+                        "in": "body",
+                        "description": "manufacturer",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
                         }
                     },
                     {
@@ -21074,12 +21663,30 @@
                         }
                     },
                     {
-                        "name": "description",
+                        "name": "consumption",
                         "in": "body",
-                        "description": "Product that should be stored",
+                        "description": "consumption",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/Product"
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
+                        "name": "active_compounds",
+                        "in": "body",
+                        "description": "active_compounds",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
+                        }
+                    },
+                    {
+                        "name": "manufacturer",
+                        "in": "body",
+                        "description": "manufacturer",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MedicinalPlant"
                         }
                     },
                     {
@@ -27079,6 +27686,36 @@
                         "type": "integer"
                     },
                     {
+                        "name": "member_address",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        },
+                        "type": "integer"
+                    },
+                    {
+                        "name": "member_phone",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        },
+                        "type": "integer"
+                    },
+                    {
+                        "name": "member_email",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        },
+                        "type": "integer"
+                    },
+                    {
                         "name": "organization_id",
                         "in": "body",
                         "description": "Transaction that should be stored",
@@ -27278,6 +27915,36 @@
                     },
                     {
                         "name": "member_name",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        },
+                        "type": "integer"
+                    },
+                    {
+                        "name": "member_address",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        },
+                        "type": "integer"
+                    },
+                    {
+                        "name": "member_phone",
+                        "in": "body",
+                        "description": "Transaction that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        },
+                        "type": "integer"
+                    },
+                    {
+                        "name": "member_email",
                         "in": "body",
                         "description": "Transaction that should be stored",
                         "required": true,
@@ -30421,6 +31088,31 @@
                 "type"
             ]
         },
+        "Geographical": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
         "GeologyAge": {
             "required": [
                 "name",
@@ -30551,6 +31243,57 @@
                     "items": {
                         "type": "string"
                     }
+                }
+            }
+        },
+        "Herbarium": {
+            "required": [
+                "location_id",
+                "organization_id",
+                "taxonomy_id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer"
+                },
+                "taxonomy_id": {
+                    "description": "taxonomy_id",
+                    "type": "integer"
+                },
+                "herbarium_number": {
+                    "description": "herbarium_number",
+                    "type": "string"
+                },
+                "location_id": {
+                    "description": "location_id",
+                    "type": "integer"
+                },
+                "organization_id": {
+                    "description": "organization_id",
+                    "type": "integer"
+                },
+                "herbarium_index": {
+                    "description": "herbarium_index",
+                    "type": "string"
+                },
+                "cf": {
+                    "description": "cf",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "description",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
                 }
             }
         },
@@ -30786,17 +31529,14 @@
                 "city_id": {
                     "type": "integer"
                 },
-                "address": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "address_en": {
+                    "type": "string"
+                },
+                "address_fa": {
+                    "type": "string"
                 },
                 "region_name": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "type": "string"
                 },
                 "min_altitude": {
                     "description": "min_altitude",
@@ -30815,10 +31555,7 @@
                 },
                 "description": {
                     "description": "description",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "type": "string"
                 },
                 "created_at": {
                     "description": "created_at",
@@ -31171,27 +31908,6 @@
                     "description": "medicine_id",
                     "type": "integer"
                 },
-                "consumption": {
-                    "description": "consumption",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "active_compounds": {
-                    "description": "active_compounds",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "manufacturer": {
-                    "description": "manufacturer",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
                 "efficiency": {
                     "description": "efficiency",
                     "type": "number"
@@ -31202,17 +31918,11 @@
                 },
                 "flower_color": {
                     "description": "flower_color",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "type": "string"
                 },
                 "fruit_color": {
                     "description": "fruit_color",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "type": "string"
                 },
                 "height": {
                     "description": "height (cm)",
@@ -31786,7 +32496,7 @@
                 }
             }
         },
-        "PlantHerbarium": {
+        "Plant": {
             "required": [
                 "location_id",
                 "organization_id",
@@ -31801,26 +32511,6 @@
                 "taxonomy_id": {
                     "description": "taxonomy_id",
                     "type": "integer"
-                },
-                "herbarium_number": {
-                    "description": "herbarium_number",
-                    "type": "string"
-                },
-                "location_id": {
-                    "description": "location_id",
-                    "type": "integer"
-                },
-                "organization_id": {
-                    "description": "organization_id",
-                    "type": "integer"
-                },
-                "herbarium_index": {
-                    "description": "herbarium_index",
-                    "type": "string"
-                },
-                "cf": {
-                    "description": "cf",
-                    "type": "string"
                 },
                 "is_flowering": {
                     "description": "is_flowering",
@@ -31922,6 +32612,12 @@
                     "format": "date-time"
                 }
             }
+        },
+        "PlantGeographical": {
+            "required": [
+                "plant_id",
+                "geographical_id"
+            ]
         },
         "PlantLifeForm": {
             "required": [
@@ -32041,12 +32737,17 @@
                         "type": "string"
                     }
                 },
-                "description": {
-                    "description": "description",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "consumption": {
+                    "description": "consumption",
+                    "type": "string"
+                },
+                "active_compounds": {
+                    "description": "active_compounds",
+                    "type": "string"
+                },
+                "manufacturer": {
+                    "description": "manufacturer",
+                    "type": "string"
                 },
                 "registration_status": {
                     "description": "registration_status",
