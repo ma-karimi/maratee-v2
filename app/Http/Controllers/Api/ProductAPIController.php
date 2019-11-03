@@ -94,11 +94,25 @@ class ProductAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Product")
      *      ),
      *      @SWG\Parameter(
-     *          name="description",
+     *          name="consumption",
      *          in="body",
-     *          description="Product that should be stored",
+     *          description="consumption",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Product")
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="active_compounds",
+     *          in="body",
+     *          description="active_compounds",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="manufacturer",
+     *          in="body",
+     *          description="manufacturer",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="registration_status",
@@ -227,11 +241,25 @@ class ProductAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Product")
      *      ),
      *      @SWG\Parameter(
-     *          name="description",
+     *          name="consumption",
      *          in="body",
-     *          description="Product that should be stored",
+     *          description="consumption",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Product")
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="active_compounds",
+     *          in="body",
+     *          description="active_compounds",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="manufacturer",
+     *          in="body",
+     *          description="manufacturer",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
      *          name="registration_status",

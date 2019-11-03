@@ -5,7 +5,7 @@ namespace App\Models\Convert;
 
 use App\Models\ActionHub;
 use App\Models\Location;
-use App\Models\PlantHerbarium;
+use App\Models\Plant;
 use App\Models\Taxonomy;
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,6 +36,6 @@ class Convert extends Model
 
     public function plantHerbarium()
     {
-        return PlantHerbarium::find($this->attributes['plant_herbarium_id']);
+        return Plant::find($this->attributes['plant_herbarium_id']);
     }
 }

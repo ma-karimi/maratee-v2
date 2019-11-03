@@ -4,7 +4,7 @@ use App\Libraries\CustomBlueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePlantHerbariumsTable extends Migration
+class CreatePlantsTable extends Migration
 {
 
     /**
@@ -14,11 +14,10 @@ class CreatePlantHerbariumsTable extends Migration
      */
     public function up()
     {
-        Schema::create('plant_herbariums', function (Blueprint $table) {
+        Schema::create('plants', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('herbarium_number')->nullable()->comment('herbarium number');
-            $table->string('herbarium_index')->nullable();
-            $table->string('cf')->nullable();
+            $table->unsignedInteger('number')->nullable();
+            $table->unsignedBigInteger('taxonomy_id');
 //            $table->integer('sheets_no')->nullable()->comment('Number of required sheets per herbarium sample');
 //            $table->integer('samples_no')->nullable()->comment('Quantity of samples of each herbarium number');
 //            $table->integer('tip_qt')->nullable()->comment('number of tips
@@ -30,11 +29,8 @@ class CreatePlantHerbariumsTable extends Migration
             //$table->json('life_forms')->comment('life_form_leaf_id, life_form_cycle_id, life_form_wooden_id, life_form_herbaceous_id')->nullable();
             $table->text('habitat_description')->nullable();
             $table->text('ecology_description')->nullable();
-            $table->tinyInteger('flowering_time')->nullable();
+            $table->string('flowering_time')->nullable();
 
-            $table->unsignedBigInteger('location_id')->nullable();
-            $table->unsignedBigInteger('organization_id');
-            $table->unsignedBigInteger('taxonomy_id');
             $table->unsignedBigInteger('protection_id')->nullable();
             $table->unsignedBigInteger('general_ecology_id')->nullable();
             $table->unsignedBigInteger('general_habitat_id')->nullable();
@@ -47,16 +43,14 @@ class CreatePlantHerbariumsTable extends Migration
             $table->unsignedBigInteger('cycle_id')->nullable();
             $table->unsignedBigInteger('wooden_id')->nullable();
             $table->unsignedBigInteger('herbaceous_id')->nullable();
-//            $table->unsignedBigInteger('leaf_id')->nullable();
 
             $table->timeStamps();
             $table->softDeletesTz();
         });
         //for MYSQL OR MariaDB
-       // CustomBlueprint::generatedVirtual('plant_herbariums', 'life_form_cycle_id', 'life_forms', 'cycle_id', true);
-       // CustomBlueprint::generatedVirtual('plant_herbariums', 'life_form_wooden_id', 'life_forms', 'wooden_id', true);
-       // CustomBlueprint::generatedVirtual('plant_herbariums', 'life_form_leaf_id', 'life_forms', 'leaf_id', true);
-       // CustomBlueprint::generatedVirtual('plant_herbariums', 'life_form_herbaceous_id', 'life_forms', 'herbaceous_id', true);
+       // CustomBlueprint::generatedVirtual('plants', 'life_form_cycle_id', 'life_forms', 'cycle_id', true);
+       // CustomBlueprint::generatedVirtual('plants', 'life_form_wooden_id', 'life_forms', 'wooden_id', true);
+       // CustomBlueprint::generatedVirtual('plants', 'life_form_herbaceous_id', 'life_forms', 'herbaceous_id', true);
     }
 
 
@@ -67,7 +61,7 @@ class CreatePlantHerbariumsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('plant_herbariums');
+        Schema::drop('plants');
     }
 
 }

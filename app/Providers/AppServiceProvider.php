@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\PlantHerbarium;
+use App\Models\Plant;
 use App\Models\Transfer;
 use App\Observers\PlantObserver;
 use App\Observers\TransferCredentialObserver;
@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        PlantHerbarium::observe(PlantObserver::class);
+        Plant::observe(PlantObserver::class);
         DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
         DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('point', 'point');
     }

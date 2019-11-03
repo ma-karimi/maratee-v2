@@ -28,31 +28,6 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *          type="integer"
  *      ),
  *      @SWG\Property(
- *          property="herbarium_number",
- *          description="herbarium_number",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="location_id",
- *          description="location_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="organization_id",
- *          description="organization_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="herbarium_index",
- *          description="herbarium_index",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="cf",
- *          description="cf",
- *          type="string"
- *      ),
- *      @SWG\Property(
  *          property="is_flowering",
  *          description="is_flowering",
  *          type="integer"
@@ -169,7 +144,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *      )
  * )
  */
-class PlantHerbarium extends BaseModel implements HasMedia
+class Plant extends BaseModel implements HasMedia
 {
     use PlantScope, PlantAccessor, ActionRelation,HasMediaTrait,ArticleRelation;
 
@@ -183,14 +158,11 @@ class PlantHerbarium extends BaseModel implements HasMedia
      * @var string
      */
     protected $table = 'plant_herbariums';
-//    protected $with = ['generals'];
-//    protected $appends = ['properties'];
+
 
 
     public static $rules = [
         'protection_id' => 'required|exists:protections,id',
-        'organization_id' => 'required|exists:organizations,id',
-        'location_id' => 'required|exists:locations,id',
         'general_phytogeography_id' => 'required|exists:generals,id',
         //life_form
         'cycle_id' => 'exists:life_forms,id',

@@ -43,20 +43,18 @@ class CreateMedicinalPlantsTable extends Migration
             $table->tinyInteger('cultivated_area')->comment('0:unknown, 1:raw, 2: processed')->default(0);
             $table->tinyInteger('studied_sample')->comment('0:unknown, 1:wild, 2: cultivated')->default(0);
             $table->tinyInteger('presence_in_country')->comment('0:unknown, 1:native, 2: endemic')->default(0);
-            $table->json('medicinal_properties')->nullable();
-            $table->json('side_effects')->nullable();
+            $table->text('medicinal_properties')->nullable();
+            $table->text('side_effects')->nullable();
             $table->unsignedBigInteger('medicine_id')->nullable();
             $table->unsignedBigInteger('treatment_id')->nullable();
-            $table->json('consumption')->nullable();
-            $table->json('active_compounds')->nullable();
-            $table->json('manufacturer')->nullable();
+
             $table->float('efficiency', 4, 2)->nullable();
             $table->integer('code_no')->nullable();
             //morphology
             $table->unsignedBigInteger('general_habitat_id')->nullable();
 
-            $table->json('fruit_color')->nullable();
-            $table->json('flower_color')->nullable();
+            $table->string('fruit_color')->nullable();
+            $table->string('flower_color')->nullable();
             $table->string('height')->nullable()->comment('unit: cm');
             $table->unsignedBigInteger('cycle_id')->nullable();
             $table->unsignedBigInteger('wooden_id')->nullable();

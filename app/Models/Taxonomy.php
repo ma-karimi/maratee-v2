@@ -112,7 +112,7 @@ class Taxonomy extends BaseModel
      */
     public function plantHerbariums(): HasMany
     {
-        return $this->hasMany(PlantHerbarium::class);
+        return $this->hasMany(Plant::class);
     }
     /**
      * @return HasMany

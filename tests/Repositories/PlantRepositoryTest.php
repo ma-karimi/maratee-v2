@@ -1,7 +1,7 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\PlantHerbarium;
-use App\Repositories\PlantHerbariumRepository;
+use App\Models\Plant;
+use App\Repositories\PlantRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\Traits\MakePlantTrait;
@@ -12,14 +12,14 @@ class PlantRepositoryTest extends TestCase
     use MakePlantTrait, ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var PlantHerbariumRepository
+     * @var PlantRepository
      */
     protected $plantRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->plantRepo = \App::make(PlantHerbariumRepository::class);
+        $this->plantRepo = \App::make(PlantRepository::class);
     }
 
     /**
@@ -32,7 +32,7 @@ class PlantRepositoryTest extends TestCase
         $createdPlant = $createdPlant->toArray();
         $this->assertArrayHasKey('id', $createdPlant);
         $this->assertNotNull($createdPlant['id'], 'Created Plant must have id specified');
-        $this->assertNotNull(PlantHerbarium::find($createdPlant['id']), 'Plant with given id must be in DB');
+        $this->assertNotNull(Plant::find($createdPlant['id']), 'Plant with given id must be in DB');
         $this->assertModelData($plant, $createdPlant);
     }
 
@@ -68,6 +68,6 @@ class PlantRepositoryTest extends TestCase
         $plant = $this->makePlant();
         $resp = $this->plantRepo->delete($plant->id);
         $this->assertTrue($resp);
-        $this->assertNull(PlantHerbarium::find($plant->id), 'Plant should not exist in DB');
+        $this->assertNull(Plant::find($plant->id), 'Plant should not exist in DB');
     }
 }

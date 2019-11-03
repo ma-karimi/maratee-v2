@@ -108,7 +108,7 @@ class General extends BaseModel
 
     public function plants(): BelongsToMany
     {
-        return $this->belongsToMany(PlantHerbarium::class,
+        return $this->belongsToMany(Plant::class,
             'plant_properties',
             'general_id',
             'plant_id')->withTimestamps();

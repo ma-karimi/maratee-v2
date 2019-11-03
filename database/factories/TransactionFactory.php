@@ -12,7 +12,7 @@ $factory->define(Transaction::class, function (Faker $faker) {
     return [
         'member_name' => $faker->word,
         'organization_id' => $faker->randomElement($organizations),
-        'transactionable_type' => $faker->randomElement([\App\Models\PlantHerbarium::class, \App\Models\Paleontology::class]),
+        'transactionable_type' => $faker->randomElement([\App\Models\Plant::class, \App\Models\Paleontology::class]),
         'transactionable_id' => $faker->randomElement($paleontologies),
         'start_time' => $faker->dateTime,
         'type_id' => $type = $faker->numberBetween(1,7),

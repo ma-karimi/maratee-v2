@@ -60,7 +60,7 @@ class SeedPlant extends BaseModel
 
     public function plant()
     {
-        return $this->belongsTo(PlantHerbarium::class);
+        return $this->belongsTo(Plant::class);
     }
 
     /**

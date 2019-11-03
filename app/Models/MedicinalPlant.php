@@ -177,24 +177,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *          type="integer"
  *      ),
  *      @SWG\Property(
- *          property="consumption",
- *          description="consumption",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="active_compounds",
- *          description="active_compounds",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="manufacturer",
- *          description="manufacturer",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
  *          property="efficiency",
  *          description="efficiency",
  *          type="number",
@@ -207,14 +189,12 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      @SWG\Property(
  *          property="flower_color",
  *          description="flower_color",
- *          type="array",
- *     @SWG\Items(type="string"),
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="fruit_color",
  *          description="fruit_color",
- *          type="array",
- *     @SWG\Items(type="string"),
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="height",
@@ -295,20 +275,14 @@ class MedicinalPlant extends BaseModel
         'presence_in_country' => 'integer',
         'code_no' => 'integer',
         'height' => 'string',
+        'medicinal_properties' => 'string',
+        'side_effects' => 'string',
         //life_form
         'cycle_id' => 'exists:life_forms,id',
         'wooden_id' => 'exists:life_forms,id',
         'herbaceous_id' => 'exists:life_forms,id',
     ];
-    public static $linguistically = [
-        'medicinal_properties' => false,
-        'side_effects' => false,
-        'consumption' => false,
-        'active_compounds' => false,
-        'manufacturer' => false,
-        'fruit_color' => false,
-        'flower_color' => false,
-    ];
+
     /**
      * The database table used by the model.
      *
@@ -322,14 +296,9 @@ class MedicinalPlant extends BaseModel
      * @var array
      */
     protected $casts = [
-        'medicinal_properties' => 'json',
-        'side_effects' => 'json',
-        'consumption' => 'json',
-        'active_compounds' => 'json',
-        'manufacturer' => 'json',
+
+
         'efficiency' => 'float',
-        'fruit_color' => 'json',
-        'flower_color' => 'json',
     ];
 
     protected $appends = [
@@ -406,7 +375,7 @@ class MedicinalPlant extends BaseModel
      */
     public function plant(): BelongsTo
     {
-        return $this->belongsTo(PlantHerbarium::class);
+        return $this->belongsTo(Plant::class);
     }
 
     /**

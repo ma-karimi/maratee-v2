@@ -8,8 +8,10 @@ use App\Models\Plant;
 use InfyOm\Generator\Request\APIRequest;
 use Illuminate\Http\JsonResponse;
 
-class UpdatePlantHerbariumAPIRequest extends APIRequest
+
+class CreatePlantAPIRequest extends APIRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *

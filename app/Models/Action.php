@@ -69,7 +69,7 @@ class Action extends BaseModel implements HasMedia
 
     public function plants()
     {
-        return $this->morphedByMany(PlantHerbarium::class, 'actionable', 'action_hubs')->withTimestamps();
+        return $this->morphedByMany(Plant::class, 'actionable', 'action_hubs')->withTimestamps();
     }
 
     public function cryoBanks()

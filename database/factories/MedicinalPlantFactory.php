@@ -9,12 +9,12 @@ use App\Models\MedicinalPlant;
 use App\Models\MedicinalPlantType;
 use App\Models\Medicine;
 use App\Models\Method;
-use App\Models\PlantHerbarium;
+use App\Models\Plant;
 use App\Models\Product;
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
-    $plants = PlantHerbarium::pluck('id')->toArray();
+    $plants = Plant::pluck('id')->toArray();
     $taxonomies = \App\Models\Taxonomy::pluck('id')->toArray();
     $locations = \App\Models\Location::pluck('id')->toArray();
     $aerial_parts = MedicinalPart::whereType(1)->pluck('id')->toArray();
@@ -57,8 +57,8 @@ $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
         'presence_in_country' =>array_rand(MedicinalPlant::PRESENCE_IN_COUNTRY) ,
         'medicine_id' =>$faker->randomElement($medicines) ,
         'code_no' =>$faker->numberBetween(1,100),
-        'flower_color' =>make_json($faker->word),
-        'fruit_color' =>make_json($faker->word),
+        'flower_color' =>$faker->word,
+        'fruit_color' =>$faker->word,
         'height' =>random_int(1,100).'-'.random_int(100,200),
         'cycle_id'=>$faker->randomElement($cycles),
         'herbaceous_id'=>$faker->randomElement($herbaceouses),

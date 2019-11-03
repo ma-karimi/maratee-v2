@@ -40,7 +40,7 @@ class Actor extends BaseModel
      */
     public function plants()
     {
-        return $this->morphedByMany(PlantHerbarium::class, 'actorable', 'actor_hubs')
+        return $this->morphedByMany(Plant::class, 'actorable', 'actor_hubs')
             ->whereNull('actor_hubs.deleted_at')
             ->withTimestamps();
     }

@@ -219,9 +219,9 @@ Route::apiResource('taxonomies', 'TaxonomyAPIController');
 
 Route::apiResource('planting_conditions', 'PlantingConditionAPIController');
 //plant_herbarium action
-Route::post('plant_herbariums/{id}/determine', 'PlantHerbariumAPIController@storeDetermine');
-Route::post('plant_herbariums/{id}/collect', 'PlantHerbariumAPIController@storeCollect');
-Route::post('plant_herbariums/{id}/research', 'PlantHerbariumAPIController@storeResearch');
+Route::post('herbariums/{id}/determine', 'PlantHerbariumAPIController@storeDetermine');
+Route::post('herbariums/{id}/collect', 'PlantHerbariumAPIController@storeCollect');
+Route::post('herbariums/{id}/research', 'PlantHerbariumAPIController@storeResearch');
 //CryoBank action
 Route::post('cryo_banks/{id}/determine', 'CryoBankAPIController@storeDetermine');
 Route::post('cryo_banks/{id}/collect', 'CryoBankAPIController@storeCollect');

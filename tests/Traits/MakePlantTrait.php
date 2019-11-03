@@ -1,8 +1,8 @@
 <?php namespace Tests\Traits;
 
 use Faker\Factory as Faker;
-use App\Models\PlantHerbarium;
-use App\Repositories\PlantHerbariumRepository;
+use App\Models\Plant;
+use App\Repositories\PlantRepository;
 
 trait MakePlantTrait
 {
@@ -10,12 +10,12 @@ trait MakePlantTrait
      * Create fake instance of Plant and save it in database
      *
      * @param array $plantFields
-     * @return PlantHerbarium
+     * @return Plant
      */
     public function makePlant($plantFields = [])
     {
-        /** @var PlantHerbariumRepository $plantRepo */
-        $plantRepo = \App::make(PlantHerbariumRepository::class);
+        /** @var PlantRepository $plantRepo */
+        $plantRepo = \App::make(PlantRepository::class);
         $theme = $this->fakePlantData($plantFields);
         return $plantRepo->create($theme);
     }
@@ -24,11 +24,11 @@ trait MakePlantTrait
      * Get fake instance of Plant
      *
      * @param array $plantFields
-     * @return PlantHerbarium
+     * @return Plant
      */
     public function fakePlant($plantFields = [])
     {
-        return new PlantHerbarium($this->fakePlantData($plantFields));
+        return new Plant($this->fakePlantData($plantFields));
     }
 
     /**

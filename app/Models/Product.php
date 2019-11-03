@@ -26,10 +26,19 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *     @SWG\Items(type="string")
  *      ),
  *      @SWG\Property(
- *          property="description",
- *          description="description",
- *          type="array",
- *     @SWG\Items(type="string")
+ *          property="consumption",
+ *          description="consumption",
+ *          type="string",
+ *      ),
+ *      @SWG\Property(
+ *          property="active_compounds",
+ *          description="active_compounds",
+ *          type="string",
+ *      ),
+ *      @SWG\Property(
+ *          property="manufacturer",
+ *          description="manufacturer",
+ *          type="string",
  *      ),
  *      @SWG\Property(
  *          property="registration_status",
@@ -65,10 +74,13 @@ class Product extends BaseModel implements HasMedia
 {
     use ProductAccessor,HasMediaTrait;
     public const STATUS = [1 => 'unregistered', 2 => 'registered'];
-    public static $linguistically = ['name' => true, 'description' => false];
+    public static $linguistically = ['name' => true];
     public static $rules = [
         'organization_id' => 'required|exists:organizations,id',
         'registration_status' => 'integer|required',
+        'consumption' => 'string',
+        'active_compounds' => 'string',
+        'manufacturer' => 'string',
     ];
     /**
      * The database table used by the model.
@@ -85,7 +97,6 @@ class Product extends BaseModel implements HasMedia
      */
     protected $casts = [
         'name' => 'json',
-        'description' => 'json',
     ];
 
     /**
@@ -94,14 +105,6 @@ class Product extends BaseModel implements HasMedia
     public function organization()
     {
         return $this->belongsTo(Organization::class);
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function medicals()
-    {
-        return $this->hasMany(Medical::class)->latest();
     }
 
 }

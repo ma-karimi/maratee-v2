@@ -61,7 +61,7 @@ class Transaction extends BaseModel implements HasMedia
 
     public function herbariums()
     {
-        return $this->morphedByMany(PlantHerbarium::class, 'transactionable')
+        return $this->morphedByMany(Plant::class, 'transactionable')
             ->withTimestamps()
             ->withPivot(['type_id', 'sheets_no']);
     }

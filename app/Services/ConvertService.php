@@ -12,7 +12,7 @@ use App\Models\Convert\Treeleaf;
 use App\Models\General;
 use App\Models\Location;
 use App\Models\Organization;
-use App\Models\PlantHerbarium;
+use App\Models\Plant;
 use App\Models\Province;
 use App\Models\Taxonomy;
 use App\Models\Village;
@@ -128,7 +128,7 @@ class ConvertService
             $this->models['organization'] = Organization::create($this->organizationData());
 
         // plant herbarium
-        $this->models['plantHerbarium'] = PlantHerbarium::create($this->plantHerbariumData());
+        $this->models['plantHerbarium'] = Plant::create($this->plantHerbariumData());
 
 
         // action hub detect
@@ -426,7 +426,7 @@ class ConvertService
     {
         return [
             'action_id' => self::ACTION['collect'],
-            'actionable_type' => PlantHerbarium::class,
+            'actionable_type' => Plant::class,
             'actionable_id' => $this->models['plantHerbarium']['id'],
             'date' => $this->treeLeaf->gateringdate
         ];
@@ -452,7 +452,7 @@ class ConvertService
     {
         return [
             'action_id' => self::ACTION['detect'],
-            'actionable_type' => PlantHerbarium::class,
+            'actionable_type' => Plant::class,
             'actionable_id' => $this->models['plantHerbarium']['id'],
             'date' => $this->treeLeaf->identifydate
         ];

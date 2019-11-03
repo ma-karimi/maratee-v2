@@ -62,21 +62,21 @@ class LifeForm extends BaseModel
 
     public function leafHerbariums(): HasMany
     {
-        return $this->hasMany(PlantHerbarium::class)->where('type', 'leaf');
+        return $this->hasMany(Plant::class)->where('type', 'leaf');
     }
 
     public function herbaceousHerbariums(): HasMany
     {
-        return $this->hasMany(PlantHerbarium::class)->where('type', 'herbaceous');
+        return $this->hasMany(Plant::class)->where('type', 'herbaceous');
     }
 
     public function woodenHerbariums(): HasMany
     {
-        return $this->hasMany(PlantHerbarium::class)->where('type', 'wooden');
+        return $this->hasMany(Plant::class)->where('type', 'wooden');
     }
 
     public function cycleHerbariums(): HasMany
     {
-        return $this->hasMany(PlantHerbarium::class)->where('type', 'cycle');
+        return $this->hasMany(Plant::class)->where('type', 'cycle');
     }
 }

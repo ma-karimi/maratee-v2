@@ -284,27 +284,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="consumption",
-     *          in="body",
-     *          description="consumption",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="active_compounds",
-     *          in="body",
-     *          description="active_compounds",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="manufacturer",
-     *          in="body",
-     *          description="manufacturer",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
      *          name="efficiency",
      *          in="body",
      *          description="efficiency : float type",
@@ -651,27 +630,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *          name="side_effects",
      *          in="body",
      *          description="side_effects",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="consumption",
-     *          in="body",
-     *          description="consumption",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="active_compounds",
-     *          in="body",
-     *          description="active_compounds",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="manufacturer",
-     *          in="body",
-     *          description="manufacturer",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),

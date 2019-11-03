@@ -4,12 +4,10 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\PlantHerbarium::class, function (Faker $faker) {
-    $organizations = \App\Models\Organization::pluck('id')->toArray();
+$factory->define(App\Models\Plant::class, function (Faker $faker) {
 
     $taxonomies = \App\Models\Taxonomy::pluck('id')->toArray();
     $phytogeographies = \App\Models\General::whereType('phytogeography')->pluck('id')->toArray();
-    $locations = \App\Models\Location::pluck('id')->toArray();
     $protections = \App\Models\Protection::pluck('id')->toArray();
     $habitats = \App\Models\General::whereType('habitat')->pluck('id')->toArray();
     $cycles = \App\Models\LifeForm::whereType('life_cycle')->pluck('id')->toArray();
@@ -41,13 +39,11 @@ $factory->define(App\Models\PlantHerbarium::class, function (Faker $faker) {
         'is_flowering' => $is_flower = /*$faker->numberBetween(0, 1)*/0,
 //        'flowering_time' => $is_flower == 1 ? $faker->numberBetween(1, 12) : null,
         'taxonomy_id'=>$faker->randomElement($taxonomies),
-        'herbarium_number' => $faker->numberBetween(1, 100),
-        'organization_id' => $faker->randomElement($organizations),
+
         //'sheets_no' => $faker->numberBetween(1, 100),
         //'samples_no' => $faker->numberBetween(1, 100),
         //'tip_qt' => $faker->numberBetween(1, 100),
         //'physical_tip_qt' => $faker->numberBetween(1, 100),
-        'location_id' => $faker->randomElement($locations),
-        'herbarium_index' => $faker->randomElement(['a', 'b', 'c', null])
+
     ];
 });

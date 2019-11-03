@@ -16,10 +16,12 @@ class CreateProductsTable extends Migration {
 		{
 			$table->bigIncrements('id');
 			$table->json('name');
-			$table->json('description')->nullable();
             $table->tinyInteger('registration_status')->comment('1:unregistered, 2: registered')->default(1);
             $table->unsignedBigInteger('organization_id');
 			$table->string('components')->nullable();
+            $table->text('consumption')->nullable();
+            $table->text('active_compounds')->nullable();
+            $table->text('manufacturer')->nullable();
             $table->timeStamps();
             $table->softDeletesTz();
 		});

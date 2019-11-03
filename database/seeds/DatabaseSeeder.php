@@ -101,7 +101,7 @@ class DatabaseSeeder extends Seeder
                 LocationTableSeeder::class,
                 LifeFormTableSeeder::class,
                 TaxonomyTableSeeder::class,
-                PlantHerbariumTableSeeder::class,
+                HerbariumTableSeeder::class,
                 PlantLifeFormTableSeeder::class,
                 PaleontologyTableSeeder::class,
                 TreatmentTableSeeder::class,

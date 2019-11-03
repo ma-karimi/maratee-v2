@@ -162,7 +162,7 @@ class Botanical extends BaseModel implements HasMedia
 
     public function plant()
     {
-        return $this->belongsTo(PlantHerbarium::class);
+        return $this->belongsTo(Plant::class);
     }
 
     public function getMonopolyOfIranAttribute()

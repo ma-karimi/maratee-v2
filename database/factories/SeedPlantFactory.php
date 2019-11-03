@@ -10,7 +10,7 @@ $factory->define(App\Models\SeedPlant::class, function (Faker $faker) {
             return factory(App\Models\Seed::class)->create()->id;
         },
         'plant_id' => function () {
-            return factory(App\Models\PlantHerbarium::class)->create()->id;
+            return factory(App\Models\Plant::class)->create()->id;
         },
     ];
 });

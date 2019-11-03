@@ -35,7 +35,6 @@ abstract class BaseRepository
     /**
      * @param Application $app
      *
-     * @param ActionHubRepository $action_hub_repo
      * @throws Exception
      */
     public function __construct(Application $app)

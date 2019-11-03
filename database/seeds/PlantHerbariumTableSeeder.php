@@ -11,6 +11,6 @@ class PlantHerbariumTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\PlantHerbarium::class, 50)->create();
+        factory(App\Models\Plant::class, 50)->create();
     }
 }
