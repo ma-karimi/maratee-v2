@@ -21,8 +21,8 @@ trait PlantAccessor
 
     public function getPlantGeographicalsAttribute()
     {
-        if($this->whenLoaded($this->geographicals) &&  !empty($geographicals = $this->geographicals)){
-            return implode(', ', $geographicals->pluck('name')->toArray());
+        if($this->relationLoaded('geographicals') &&  !empty($this->geographicals)){
+            return implode(', ', $this->geographicals()->pluck('name')->toArray());
         }
     }
 }

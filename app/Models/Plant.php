@@ -330,7 +330,7 @@ class Plant extends BaseModel implements HasMedia
 
 
     public function geographicals(){
-        return $this->belongsToMany(PlantGeographical::class, 'plant_geographicals');
+        return $this->belongsToMany(Geographical::class, 'plant_geographicals');
     }
 }
 

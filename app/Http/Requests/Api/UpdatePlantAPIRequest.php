@@ -51,13 +51,16 @@ class UpdatePlantAPIRequest extends APIRequest
             'organization_id' => 'required|exists:organizations,id',
             'location_id' => 'exists:locations,id',
             //taxonomy
-            'family_id' => 'required|exists:generals,id',
-            'genus_id' => 'exists:generals,id',
-            'species_id' => 'exists:generals,id',
-            'variety_id' => 'exists:generals,id',
-            'order_id' => 'exists:generals,id',
-            'class_id' => 'exists:generals,id',
-            'subspecies_ids.*' => 'exists:generals,id',
+            'taxonomy_id' => 'required|exists:taxonomies,id',
+            'monopoly_of_iran_id' => 'numeric',
+
+//            'family_id' => 'required|exists:generals,id',
+//            'genus_id' => 'exists:generals,id',
+//            'species_id' => 'exists:generals,id',
+//            'variety_id' => 'exists:generals,id',
+//            'order_id' => 'exists:generals,id',
+//            'class_id' => 'exists:generals,id',
+//            'subspecies_ids.*' => 'exists:generals,id',
             'is_flowering' => 'integer',
             //classification
             'general_ecology_id' => 'exists:generals,id',
