@@ -259,9 +259,11 @@ class Plant extends BaseModel implements HasMedia
         return $properties;
     }
 
-    public function location(): BelongsTo
+    public function locations(): MorphToMany
     {
-        return $this->belongsTo(Location::class);
+        return $this->morphToMany(Location::class, 'locationable', 'location_hubs')
+            ->whereNull('location_hubs.deleted_at')
+            ->withTimestamps();
     }
 
     public function organization(): BelongsTo
