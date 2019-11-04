@@ -75,7 +75,7 @@ class PlantRepository extends BaseRepository
     {
 //        [$taxonomy_input, $taxonomy_id] = $this->firstOrCreateTaxonomy($input);
         $plant = $this->createPlant($input);
-        if ($plant->is_flowering == 0) {
+        if (!isset($plant->is_flowering)) {
             $location = $this->createLocation($input);
             $this->herbariumRepo->create($this->herbariumData($input, $location->id));
         }
@@ -168,7 +168,7 @@ class PlantRepository extends BaseRepository
 //        [$taxonomy_input, $taxonomy_id] = $this->firstOrCreateTaxonomy($input);
 //        $location = $this->updateLocation($input);
         $plant = $this->updatePlant($input, $id);
-        if ($plant->is_flowering == 0) {
+        if (!isset($plant->is_flowering)) {
             $this->herbariumRepo->update($this->herbariumData($input, $input['location_id']), $input['herbarium_id']);
         }
 //        $this->syncPlantGeneralProperties($taxonomy_input, $plant);

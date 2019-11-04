@@ -147,32 +147,29 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Plant extends BaseModel implements HasMedia
 {
-    use PlantScope, PlantAccessor, ActionRelation,HasMediaTrait,ArticleRelation;
+    use PlantScope, PlantAccessor, ActionRelation, HasMediaTrait, ArticleRelation;
 
 //    public const FLOWERING_TIME = [1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December'];
+
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
-
-
-    protected $appends = [ 'monopoly_of_iran', 'plant_geographicals'];
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'plants';
-
-
-
     public static $rules = [
         'protection_id' => 'required|exists:protections,id',
         'monopoly_of_iran_id' => 'numeric',
-        'taxonomy_id' =>'required|exists:taxonomies,id',
+        'taxonomy_id' => 'required|exists:taxonomies,id',
         'general_phytogeography_id' => 'required|exists:generals,id',
         //life_form
         'cycle_id' => 'exists:life_forms,id',
         'wooden_id' => 'exists:life_forms,id',
         'herbaceous_id' => 'exists:life_forms,id',
     ];
+    protected $casts = ['is_flowering' => 'boolean'];
+    protected $appends = ['monopoly_of_iran', 'plant_geographicals'];
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'plants';
 
     public function determine()
     {
@@ -209,6 +206,7 @@ class Plant extends BaseModel implements HasMedia
             ->whereNull('actor_hubs.deleted_at')
             ->withTimestamps();
     }
+
     /**
      * @return MorphMany
      */
@@ -298,19 +296,22 @@ class Plant extends BaseModel implements HasMedia
 
     public function cycle()
     {
-        return $this->belongsTo(LifeForm::class,'cycle_id');
+        return $this->belongsTo(LifeForm::class, 'cycle_id');
     }
+
     public function wooden()
     {
-        return $this->belongsTo(LifeForm::class,'wooden_id');
+        return $this->belongsTo(LifeForm::class, 'wooden_id');
     }
+
     public function herbaceous()
     {
-        return $this->belongsTo(LifeForm::class,'herbaceous_id');
+        return $this->belongsTo(LifeForm::class, 'herbaceous_id');
     }
+
     public function leaf()
     {
-        return $this->belongsTo(LifeForm::class,'leaf_id');
+        return $this->belongsTo(LifeForm::class, 'leaf_id');
     }
 
     public function generalLichen(): BelongsTo
@@ -329,7 +330,8 @@ class Plant extends BaseModel implements HasMedia
     }
 
 
-    public function geographicals(){
+    public function geographicals()
+    {
         return $this->belongsToMany(Geographical::class, 'plant_geographicals');
     }
 }
