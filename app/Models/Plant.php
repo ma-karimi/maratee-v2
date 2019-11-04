@@ -9,6 +9,7 @@ use App\Models\Scope\PlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -206,9 +207,9 @@ class Plant extends BaseModel implements HasMedia
             ->withTimestamps();
     }
     /**
-     * @return MorphToMany
+     * @return MorphMany
      */
-    public function transactions(): MorphToMany
+    public function transactions(): MorphMany
     {
         return $this->morphMany(Transaction::class, 'transactionable')
             ->whereNull('deleted_at')

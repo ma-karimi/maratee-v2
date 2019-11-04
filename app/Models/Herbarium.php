@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ActionRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -104,9 +105,9 @@ class Herbarium extends BaseModel implements HasMedia
 
 
     /**
-     * @return MorphToMany
+     * @return MorphMany
      */
-    public function transactions(): MorphToMany
+    public function transactions(): MorphMany
     {
         return $this->morphMany(Transaction::class, 'transactionable')
             ->whereNull('deleted_at')
