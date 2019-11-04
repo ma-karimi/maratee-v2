@@ -71,11 +71,16 @@ use Spatie\MediaLibrary\Models\Media as BaseMedia;
 class Media extends BaseMedia
 {
     //use BaseModelTrait instead of BaseModel Class
-    use BaseModelTrait, MediaAccessor, ArticleRelation;
+    use BaseModelTrait,MediaAccessor, ArticleRelation;
 
-    public const MEDIA_TYPE = [1 => 'sketch', 2 => 'picture'];
     public static $jsons = [];
     public static $messages = [];
+    protected $appends=['full_url'];
+
+    public const MEDIA_TYPE = [1 => 'sketch', 2 => 'picture'];
+    public static $linguistically = [];
+
+
     public static $rules = [
         'format_type' => 'required|string',
         'media_type' => 'required|integer|in:1,2',
@@ -88,16 +93,15 @@ class Media extends BaseMedia
 //        'medicinal_plant_id' => 'exists:medicinal_plants,id',
 //        'product_id' => 'exists:products,id',
 //        'botanical_id' => 'exists:botanicals,id',
-        'reference' => 'string',
-        'description' => 'string',
+        'reference'=>'string',
+        'description'=>'string',
     ];
-    protected $appends = ['full_url'];
-    protected $casts = [
-        'manipulations' => 'array',
-        'responsive_images' => 'array',
-        'custom_properties' => 'array',
+    protected $casts=[
+        'manipulations'=>'array',
+        'responsive_images'=>'array',
+        'custom_properties'=>'array',
     ];
-    protected $dates = ['date'];
+    protected $dates=['date'];
     /**
      * The database table used by the model.
      *
@@ -113,6 +117,8 @@ class Media extends BaseMedia
     //protected $casts = ['name' => 'json', 'reference' => 'json', 'description' => 'json'];
 
 
+
+
     /**
      * @return MorphToMany
      */
@@ -121,7 +127,7 @@ class Media extends BaseMedia
         return $this->morphToMany(ArticleHub::class, 'articleable')->withTimestamps();
     }
 
-    /**
+      /**
      * @return BelongsTo
      */
     public function user(): BelongsTo
