@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\GeographicalAPIRequest;
-use App\Models\Geographical;
 use App\Repositories\GeographicalRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -160,7 +159,6 @@ class GeographicalAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var Geographical $geographical */
         $geographical = $this->geographicalRepository->find($id, \request()->get('relations'));
 
         if ($geographical === null) {
@@ -225,7 +223,6 @@ class GeographicalAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var Geographical $geographical */
         $geographical = $this->geographicalRepository->find($id, \request()->get('relations'));
 
         if ($geographical === null) {
@@ -278,7 +275,6 @@ class GeographicalAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var Geographical $geographical */
         $geographical = $this->geographicalRepository->find($id, \request()->get('relations'));
 
         if ($geographical === null) {

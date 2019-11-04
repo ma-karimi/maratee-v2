@@ -94,8 +94,6 @@ Route::apiResource('generals', 'GeneralAPIController');
 
 Route::apiResource('plant_herbariums', 'PlantHerbariumAPIController');
 
-Route::apiResource('actions', 'ActionAPIController');
-
 Route::apiResource('action_hubs', 'ActionHubAPIController');
 
 Route::apiResource('articles', 'ArticleAPIController');

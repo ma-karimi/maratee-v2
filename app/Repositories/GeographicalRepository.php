@@ -2,8 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\Connection;
-use App\Repositories\BaseRepository;
+use App\Models\Geographical;
 
 /**
  * Class GeographicalRepository
