@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Location;
+use App\Models\LocationHub;
 use App\Models\Plant;
 use App\Models\Taxonomy;
 use Illuminate\Container\Container as Application;
@@ -75,9 +76,11 @@ class PlantRepository extends BaseRepository
     {
 //        [$taxonomy_input, $taxonomy_id] = $this->firstOrCreateTaxonomy($input);
         $plant = $this->createPlant($input);
+        $location = $this->createLocation($input);
         if (!isset($plant->is_flowering)) {
-            $location = $this->createLocation($input);
             $this->herbariumRepo->create($this->herbariumData($input, $location->id));
+        }else{
+            $this->createHub($location->id, Location::class, [$plant->id]);
         }
 //        $this->syncPlantGeneralProperties($taxonomy_input, $plant);
 //        $this->syncPlantTypeProperties($input, $plant);
@@ -112,7 +115,7 @@ class PlantRepository extends BaseRepository
             //
             'is_flowering' => $input['is_flowering'] ?? 0,
             'flowering_time' => $input['flowering_time'] ?? null,
-            'number'=>$input['number'] ?? null,
+            'number' => $input['number'] ?? null,
             'monopoly_of_iran_id' => $input['monopoly_of_iran_id'] ?? null,
 //            'sheets_no' => $input['sheets_no'] ?? null,
 //            'samples_no' => $input['samples_no'] ?? null,
@@ -207,7 +210,7 @@ class PlantRepository extends BaseRepository
             //
             'is_flowering' => $input['is_flowering'] ?? 0,
             'flowering_time' => $input['flowering_time'] ?? null,
-            'number'=>$input['number'] ?? null,
+            'number' => $input['number'] ?? null,
             'monopoly_of_iran_id' => $input['monopoly_of_iran_id'] ?? null,
 
 //            'herbarium_number' => $input['herbarium_number'] ?? null,
