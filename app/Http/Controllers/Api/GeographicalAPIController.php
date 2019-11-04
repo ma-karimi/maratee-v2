@@ -78,13 +78,7 @@ class GeographicalAPIController extends AppBaseController
      *      description="Store Geographical",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="plant_id",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Geographical")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="geographical_id",
+     *          name="name",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Geographical")
@@ -187,13 +181,7 @@ class GeographicalAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_id",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Geographical")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="geographical_id",
+     *          name="name",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Geographical")

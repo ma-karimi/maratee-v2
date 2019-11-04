@@ -92,7 +92,8 @@ Route::apiResource('products', 'ProductAPIController');
 
 Route::apiResource('generals', 'GeneralAPIController');
 
-Route::apiResource('plant_herbariums', 'PlantHerbariumAPIController');
+Route::apiResource('plants', 'PlantAPIController');
+Route::apiResource('herbariums', 'HerbariumAPIController');
 
 Route::apiResource('action_hubs', 'ActionHubAPIController');
 
