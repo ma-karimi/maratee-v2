@@ -7,6 +7,7 @@ use App\Models\Relations\ActionRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Arr;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -71,6 +72,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class Herbarium extends BaseModel implements HasMedia
 {
     use ActionRelation, HasMediaTrait;
+    public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
 
     public static $rules = [
         'organization_id' => 'required|exists:organizations,id',
@@ -87,6 +89,8 @@ class Herbarium extends BaseModel implements HasMedia
      * @var string
      */
     protected $table = 'herbariums';
+
+    protected $appends = ['tip_picture'];
 
     public function determine()
     {
@@ -127,6 +131,12 @@ class Herbarium extends BaseModel implements HasMedia
     public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);
+    }
+
+
+    public function getTipPictureAttribute()
+    {
+        return !empty($this->attributes['tip_picture_id']) ? Arr::get(self::BOOLEAN, $this->attributes['tip_picture_id']) : null;
     }
 
 }

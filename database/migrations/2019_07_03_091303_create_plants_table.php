@@ -18,6 +18,8 @@ class CreatePlantsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('number')->nullable();
             $table->unsignedBigInteger('taxonomy_id');
+            $table->boolean('monopoly_of_iran_id')->nullable();
+
 //            $table->integer('sheets_no')->nullable()->comment('Number of required sheets per herbarium sample');
 //            $table->integer('samples_no')->nullable()->comment('Quantity of samples of each herbarium number');
 //            $table->integer('tip_qt')->nullable()->comment('number of tips

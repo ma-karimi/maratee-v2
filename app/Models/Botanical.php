@@ -56,11 +56,12 @@ class Botanical extends BaseModel implements HasMedia
     public const ENTRANCE_TO_GARDEN = [1 => 'seedling', 2 => 'plant', 3 => 'bulb', 4 => 'bulbil', 5 => 'tuber', 6 => 'rhizome', 7=>'softwood cutting', 8=>'hardwood cutting', 9=>'root cutting', 10=>'graft-division', 11=>'meristem', 12=>'spore'];
     public const SOIL = [1 => 'neutral', 2 => 'alkaline', 3 => 'acid', 4 => 'indifferent'];
 //    public const PLANT_CONDITION = [1 => 'full sun', 2 => 'light shade', 3 => 'moderate shade', 4 => 'deep shade', 5 => 'greenhouse', 6 => 'fancing N', 7 => 'fancing W', 8 => 'fancing S', 9 => 'fancing E'];
+    public const MONOPOLY = [0 => 'No', 1 => 'Yes'];
 
     public const USAGE = [1 => 'medicinal', 2 => 'ground cover', 3 => 'hedge', 4 => 'ornamental', 5 => 'industrial'];
     public const VALUE = [1 => 'Shape', 2 => 'Bark', 3 => 'leaves', 4 => 'autumn color', 5 => 'flower'];
     public const WOODEN = [1 => 'Tree', 2 => 'Shrub'];
-    public const BOOLEAN = [0 => 'No', 2 => 'Yes'];
+    public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
     public const SEED_GERMINATION = [1 => 'good', 2 => 'moderate', 3 => 'low', 4 => 'none'];
     public const CYCLE = [1 => 'evergreen', 2 => 'deciduous', 3 => 'semi deciduous', 4 => 'annual climber', 5 => 'perennial climber', 6 => 'annual herb', 7 => 'biennial herb', 8 => 'perennial herb', 9 => 'bulb', 10 => 'tuber', 11 => 'rhizome', 12 => 'water plant'];
 
