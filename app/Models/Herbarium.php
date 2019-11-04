@@ -90,7 +90,7 @@ class Herbarium extends BaseModel implements HasMedia
      */
     protected $table = 'herbariums';
 
-    protected $appends = ['tip_picture', 'visit', 'borrow', 'exchange'];
+    protected $appends = ['tip_picture', 'visit', 'borrow', 'exchange_receive', 'exchange_send'];
 
     public function determine()
     {
@@ -107,21 +107,10 @@ class Herbarium extends BaseModel implements HasMedia
         return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 3);
     }
 
-
-    /**
-     * @return MorphMany
-     */
-    public function transactions(): MorphMany
-    {
-        return $this->morphMany(Transaction::class, 'transactionable')
-            ->whereNull('deleted_at');
-    }
-
     public function taxonomy(): BelongsTo
     {
         return $this->belongsTo(Taxonomy::class);
     }
-
 
     public function location(): BelongsTo
     {
@@ -133,15 +122,34 @@ class Herbarium extends BaseModel implements HasMedia
         return $this->belongsTo(Organization::class);
     }
 
-
     public function getTipPictureAttribute()
     {
         return !empty($this->attributes['tip_picture_id']) ? Arr::get(self::BOOLEAN, $this->attributes['tip_picture_id']) : null;
     }
 
-    public function getExchangeAttribute()
+    public function getExchangeReceiveAttribute()
     {
-        return $this->transactions()->where('type_id', array_search('exchange', Transaction::TYPE))->first();
+        return $this->transactions()
+            ->where('type_id', array_search('exchange', Transaction::TYPE))
+            ->where('mode_id', array_search('receive', Transaction::MODE))
+            ->first();
+    }
+
+    /**
+     * @return MorphMany
+     */
+    public function transactions(): MorphMany
+    {
+        return $this->morphMany(Transaction::class, 'transactionable')
+            ->whereNull('deleted_at');
+    }
+
+    public function getExchangeSendAttribute()
+    {
+        return $this->transactions()
+            ->where('type_id', array_search('exchange', Transaction::TYPE))
+            ->where('mode_id', array_search('send', Transaction::MODE))
+            ->first();
     }
 
     public function getBorrowAttribute()

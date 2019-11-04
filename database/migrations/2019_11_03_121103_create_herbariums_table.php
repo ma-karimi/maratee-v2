@@ -22,6 +22,7 @@ class CreateHerbariumsTable extends Migration
             $table->unsignedBigInteger('organization_id');
             $table->unsignedBigInteger('taxonomy_id');
             $table->text('description')->nullable();
+            $table->text('consideration')->nullable();
             $table->boolean('tip_picture_id')->nullable();
 
             $table->timeStamps();
