@@ -80,7 +80,7 @@ class PlantRepository extends BaseRepository
         if (!isset($plant->is_flowering)) {
             $this->herbariumRepo->create($this->herbariumData($input, $location->id));
         }else{
-            $this->createHub($location->id, Location::class, [$plant->id]);
+            $this->createHub($plant->id, Location::class, [$location->id]);
         }
 //        $this->syncPlantGeneralProperties($taxonomy_input, $plant);
 //        $this->syncPlantTypeProperties($input, $plant);
