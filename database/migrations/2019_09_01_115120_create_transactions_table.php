@@ -31,7 +31,7 @@ class CreateTransactionsTable extends Migration
             $table->tinyInteger('visit_id')->nullable()->comment('1: Sample, 2: All/Museum');
             $table->integer('peoples_no')->nullable();
             $table->string('person_position')->nullable();
-            $table->boolean('sample_impression')->nullable();
+            $table->boolean('sample_impression_id')->nullable();
             $table->string('member_address')->nullable();
             $table->string('member_email')->nullable();
             $table->string('member_phone')->nullable();

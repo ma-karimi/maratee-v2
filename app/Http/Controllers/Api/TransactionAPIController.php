@@ -127,6 +127,14 @@ class TransactionAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Parameter(
+     *          name="sample_impression_id",
+     *          in="body",
+     *          description="boolean",
+     *          required=true,
+     *          type="integer",
+     *          @SWG\Schema(ref="#/definitions/Transaction")
+     *      ),
+     *      @SWG\Parameter(
      *          name="start_time",
      *          in="body",
      *          description="Transaction that should be stored",
@@ -430,6 +438,14 @@ class TransactionAPIController extends AppBaseController
      *          description="Transaction that should be stored",
      *          required=false,
      *          type="string",
+     *          @SWG\Schema(ref="#/definitions/Transaction")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="sample_impression_id",
+     *          in="body",
+     *          description="boolean",
+     *          required=true,
+     *          type="integer",
      *          @SWG\Schema(ref="#/definitions/Transaction")
      *      ),
      *      @SWG\Response(

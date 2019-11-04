@@ -16,9 +16,10 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Transaction extends BaseModel implements HasMedia
 {
-    protected $appends=['type', 'visit', 'mode'];
+    protected $appends=['type', 'visit', 'mode', 'sample_impression'];
     use TransactionAccessor,HasMediaTrait;
     public const MODE = [1 => 'send', 2 => 'receive'];
+    public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
 
     public const TYPE = [1 => 'visit', 2 => 'borrow', 3 => 'exchange', 4 => 'gift', 5 => 'fair', 6 => 'expense', 7 => 'correspondence'];
     public const VISIT = [1 => 'Sample', 2 => 'All/Museum'];
@@ -41,6 +42,7 @@ class Transaction extends BaseModel implements HasMedia
         'person_position' => 'string',
         'mode_id' => 'required_if:type_id,3|in:1,2',
         'sheets_no' => 'string',
+        'sample_impression_id' => 'numeric',
     ];
 
 

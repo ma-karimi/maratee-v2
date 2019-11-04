@@ -27,4 +27,10 @@ trait TransactionAccessor
     {
         return !empty($this->attributes['mode_id']) ? Arr::get(self::MODE, $this->attributes['mode_id']) : null;
     }
+
+
+    public function getSampleImpressionAttribute()
+    {
+        return !empty($this->attributes['sample_impression_id']) ? Arr::get(self::BOOLEAN, $this->attributes['sample_impression_id']) : null;
+    }
 }
