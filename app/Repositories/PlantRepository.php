@@ -112,8 +112,8 @@ class PlantRepository extends BaseRepository
             //
             'is_flowering' => $input['is_flowering'] ?? 0,
             'flowering_time' => $input['flowering_time'] ?? null,
-            'herbarium_number' => $input['herbarium_number'] ?? null,
-            'herbarium_index' => $input['herbarium_index'] ?? null,
+            'number'=>$input['number'] ?? null,
+            'monopoly_of_iran_id' => $input['monopoly_of_iran_id'] ?? null,
 //            'sheets_no' => $input['sheets_no'] ?? null,
 //            'samples_no' => $input['samples_no'] ?? null,
 //            'tip_qt' => $input['tip_qt'] ?? null,
@@ -185,7 +185,7 @@ class PlantRepository extends BaseRepository
     private function updatePlant($input, $id)
     {
         $plant_input = [
-            'taxonomy_id' => $input['protection_id'],
+            'taxonomy_id' => $input['taxonomy_id'],
 //            'location_id' => $location_id,
             'protection_id' => $input['protection_id'],
 //            'organization_id' => $input['organization_id'],
@@ -207,6 +207,9 @@ class PlantRepository extends BaseRepository
             //
             'is_flowering' => $input['is_flowering'] ?? 0,
             'flowering_time' => $input['flowering_time'] ?? null,
+            'number'=>$input['number'] ?? null,
+            'monopoly_of_iran_id' => $input['monopoly_of_iran_id'] ?? null,
+
 //            'herbarium_number' => $input['herbarium_number'] ?? null,
 //            'herbarium_index' => $input['herbarium_index'] ?? null,
 //            'cf' => $input['cf'] ?? null,
