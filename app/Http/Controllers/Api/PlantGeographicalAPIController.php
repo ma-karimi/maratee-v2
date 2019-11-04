@@ -85,8 +85,9 @@ class PlantGeographicalAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/PlantGeographical")
      *      ),
      *      @SWG\Parameter(
-     *          name="geographical_id",
+     *          name="geographical_ids",
      *          in="body",
+     *          description="array"
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/PlantGeographical")
      *      ),
@@ -115,126 +116,9 @@ class PlantGeographicalAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        $plantGeographical = $this->plantGeographicalRepository->create($input);
+        $this->plantGeographicalRepository->store($input);
 
-        return $this->sendResponse($plantGeographical->toArray(), 'PlantGeographical saved successfully');
-    }
-
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/plant_geographicals/{id}",
-     *      summary="Display the specified PlantGeographical",
-     *      tags={"PlantGeographical"},
-     *      description="Get PlantGeographical",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of PlantGeographical",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/PlantGeographical"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function show($id)
-    {
-        /** @var PlantGeographical $plantGeographical */
-        $plantGeographical = $this->plantGeographicalRepository->find($id, \request()->get('relations'));
-
-        if ($plantGeographical === null) {
-            return $this->sendError('PlantGeographical not found');
-        }
-
-        return $this->sendResponse($plantGeographical->toArray(), 'PlantGeographical retrieved successfully');
-    }
-
-    /**
-     * @param int $id
-     * @param PlantGeographicalAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Put(
-     *      path="/plant_geographicals/{id}",
-     *      summary="Update the specified PlantGeographical in storage",
-     *      tags={"PlantGeographical"},
-     *      description="Update PlantGeographical",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of PlantGeographical",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="plant_id",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/PlantGeographical")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="geographical_id",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/PlantGeographical")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/PlantGeographical"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function update($id, PlantGeographicalAPIRequest $request)
-    {
-        $input = $request->all();
-
-        /** @var PlantGeographical $plantGeographical */
-        $plantGeographical = $this->plantGeographicalRepository->find($id, \request()->get('relations'));
-
-        if ($plantGeographical === null) {
-            return $this->sendError('PlantGeographical not found');
-        }
-
-        $plantGeographical = $this->plantGeographicalRepository->update($input, $id);
-
-        return $this->sendResponse($plantGeographical->toArray(), 'PlantGeographical updated successfully');
+        return $this->sendResponse([], 'PlantGeographical saved successfully');
     }
 
     /**

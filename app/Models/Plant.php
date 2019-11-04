@@ -153,7 +153,7 @@ class Plant extends BaseModel implements HasMedia
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
 
 
-    protected $appends = [ 'monopoly_of_iran'];
+    protected $appends = [ 'monopoly_of_iran', 'plant_geographicals'];
     /**
      * The database table used by the model.
      *
@@ -328,6 +328,10 @@ class Plant extends BaseModel implements HasMedia
         return $this->belongsTo(General::class, 'general_substrate_diatom_id');
     }
 
+
+    public function geographicals(){
+        return $this->belongsToMany(PlantGeographical::class, 'plant_geographicals');
+    }
 }
 
 

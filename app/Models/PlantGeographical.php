@@ -7,7 +7,7 @@ use App\Models\Contracts\BaseModel;
 /**
  * @SWG\Definition(
  *      definition="PlantGeographical",
- *      required={"plant_id","geographical_id"}
+ *      required={"plant_id","geographical_ids"}
  * )
  */
 
@@ -24,6 +24,7 @@ class PlantGeographical extends BaseModel
 
     public static $rules = [
         'plant_id' => 'required|exists:plants,id',
-        'geographical_id' => 'required|exists:geographical,id'
+        'geographical_ids' => 'required|array',
+        'geographical_ids.*' => 'required|exists:geographicals,id'
     ];
 }

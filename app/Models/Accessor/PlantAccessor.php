@@ -18,4 +18,11 @@ trait PlantAccessor
     {
         return !empty($this->attributes['monopoly_of_iran_id']) ? Arr::get(self::BOOLEAN, $this->attributes['monopoly_of_iran_id']) : null;
     }
+
+    public function getPlantGeographicalsAttribute()
+    {
+        if($this->whenLoaded($this->geographicals) &&  !empty($geographicals = $this->geographicals)){
+            return implode(', ', $geographicals->pluck('name')->toArray());
+        }
+    }
 }
