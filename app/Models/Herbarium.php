@@ -90,7 +90,7 @@ class Herbarium extends BaseModel implements HasMedia
      */
     protected $table = 'herbariums';
 
-    protected $appends = ['tip_picture'];
+    protected $appends = ['tip_picture', 'visit', 'borrow', 'exchange'];
 
     public function determine()
     {
@@ -137,6 +137,21 @@ class Herbarium extends BaseModel implements HasMedia
     public function getTipPictureAttribute()
     {
         return !empty($this->attributes['tip_picture_id']) ? Arr::get(self::BOOLEAN, $this->attributes['tip_picture_id']) : null;
+    }
+
+    public function getExchangeAttribute()
+    {
+        return $this->transactions()->where('type_id', array_search('exchange', Transaction::TYPE))->first();
+    }
+
+    public function getBorrowAttribute()
+    {
+        return $this->transactions()->where('type_id', array_search('borrow', Transaction::TYPE))->first();
+    }
+
+    public function getVisitAttribute()
+    {
+        return $this->transactions()->where('type_id', array_search('visit', Transaction::TYPE))->first();
     }
 
 }
