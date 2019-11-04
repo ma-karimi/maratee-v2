@@ -77,7 +77,8 @@ class Herbarium extends BaseModel implements HasMedia
         'taxonomy_id' => 'exists:taxonomies,id',
         'herbarium_number' => 'string',
         'herbarium_index' => 'string',
-        'herbarium_cf' => 'string',
+        'cf' => 'string',
+        'description' => 'string',
     ];
     /**
      * The database table used by the model.

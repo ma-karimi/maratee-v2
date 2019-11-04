@@ -20,7 +20,11 @@ class ConvertSeeder extends Seeder
         Country::create([
             'name_en'=> 'Iran', 'name_fa' => 'ایران'
         ]);
-        Treeleaf::where('id',  3771)
+
+        if(\Illuminate\Support\Facades\App::environment() == 'local'){
+            $limit = 500;
+        }
+        Treeleaf::where('id',  '>', 0)
             ->when($limit, function ($query) use ($limit) {
                 return $query->limit($limit);
             })

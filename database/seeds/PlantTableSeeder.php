@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PlantHerbariumTableSeeder extends Seeder
+class PlantTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

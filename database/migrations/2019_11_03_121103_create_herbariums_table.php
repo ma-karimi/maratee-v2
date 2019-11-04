@@ -21,6 +21,7 @@ class CreateHerbariumsTable extends Migration
             $table->unsignedBigInteger('location_id')->nullable();
             $table->unsignedBigInteger('organization_id');
             $table->unsignedBigInteger('taxonomy_id');
+            $table->text('description')->nullable();
             $table->timeStamps();
             $table->softDeletesTz();
             $table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('CASCADE');

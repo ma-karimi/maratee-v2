@@ -6181,7 +6181,7 @@
                 ],
                 "parameters": [
                     {
-                        "name": "name",
+                        "name": "name_en",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -6189,7 +6189,7 @@
                         }
                     },
                     {
-                        "name": "code",
+                        "name": "name_fa",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -6283,7 +6283,7 @@
                         "type": "integer"
                     },
                     {
-                        "name": "name",
+                        "name": "name_en",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -6291,7 +6291,7 @@
                         }
                     },
                     {
-                        "name": "code",
+                        "name": "name_fa",
                         "in": "body",
                         "required": false,
                         "schema": {
@@ -7680,7 +7680,25 @@
                 ],
                 "parameters": [
                     {
-                        "name": "body",
+                        "name": "name_en",
+                        "in": "body",
+                        "description": "Country that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Country"
+                        }
+                    },
+                    {
+                        "name": "name_fa",
+                        "in": "body",
+                        "description": "Country that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Country"
+                        }
+                    },
+                    {
+                        "name": "continent_id",
                         "in": "body",
                         "description": "Country that should be stored",
                         "required": false,
@@ -7767,9 +7785,27 @@
                         "type": "integer"
                     },
                     {
-                        "name": "body",
+                        "name": "name_en",
                         "in": "body",
-                        "description": "Country that should be updated",
+                        "description": "Country that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Country"
+                        }
+                    },
+                    {
+                        "name": "name_fa",
+                        "in": "body",
+                        "description": "Country that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Country"
+                        }
+                    },
+                    {
+                        "name": "continent_id",
+                        "in": "body",
+                        "description": "Country that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Country"
@@ -17850,7 +17886,16 @@
                 ],
                 "parameters": [
                     {
-                        "name": "name",
+                        "name": "name_en",
+                        "in": "body",
+                        "description": "Organization that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Organization"
+                        }
+                    },
+                    {
+                        "name": "name_fa",
                         "in": "body",
                         "description": "Organization that should be stored",
                         "required": true,
@@ -18009,7 +18054,16 @@
                         "type": "integer"
                     },
                     {
-                        "name": "name",
+                        "name": "name_en",
+                        "in": "body",
+                        "description": "Organization that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Organization"
+                        }
+                    },
+                    {
+                        "name": "name_fa",
                         "in": "body",
                         "description": "Organization that should be stored",
                         "required": true,
@@ -22588,7 +22642,16 @@
                 ],
                 "parameters": [
                     {
-                        "name": "name",
+                        "name": "name_en",
+                        "in": "body",
+                        "description": "Province that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Province"
+                        }
+                    },
+                    {
+                        "name": "name_fa",
                         "in": "body",
                         "description": "Province that should be stored",
                         "required": true,
@@ -22684,7 +22747,16 @@
                         "type": "integer"
                     },
                     {
-                        "name": "name",
+                        "name": "name_en",
+                        "in": "body",
+                        "description": "Province that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Province"
+                        }
+                    },
+                    {
+                        "name": "name_fa",
                         "in": "body",
                         "description": "Province that should be stored",
                         "required": true,
@@ -29619,7 +29691,16 @@
                 ],
                 "parameters": [
                     {
-                        "name": "name",
+                        "name": "name_en",
+                        "in": "body",
+                        "description": "Village that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Village"
+                        }
+                    },
+                    {
+                        "name": "name_fa",
                         "in": "body",
                         "description": "Village that should be stored",
                         "required": true,
@@ -29706,9 +29787,18 @@
                         "type": "integer"
                     },
                     {
-                        "name": "name",
+                        "name": "name_en",
                         "in": "body",
-                        "description": "Village that should be updated",
+                        "description": "Village that should be stored",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Village"
+                        }
+                    },
+                    {
+                        "name": "name_fa",
+                        "in": "body",
+                        "description": "Village that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Village"
@@ -30585,24 +30675,21 @@
         },
         "City": {
             "required": [
-                "name",
+                "name_en",
                 "province_id"
             ],
             "properties": {
                 "id": {
                     "type": "integer"
                 },
-                "name": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "name_en": {
+                    "type": "string"
+                },
+                "name_fa": {
+                    "type": "string"
                 },
                 "province_id": {
                     "type": "integer"
-                },
-                "code": {
-                    "type": "string"
                 },
                 "created_at": {
                     "type": "string"
@@ -30766,19 +30853,16 @@
         },
         "Country": {
             "required": [
-                "name"
+                "name_en"
             ],
             "properties": {
                 "id": {
                     "type": "integer"
                 },
-                "name": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "name_en": {
+                    "type": "string"
                 },
-                "code": {
+                "name_fa": {
                     "type": "string"
                 },
                 "continent_id": {
@@ -32363,12 +32447,13 @@
                     "description": "is_herbarium",
                     "type": "integer"
                 },
-                "name": {
+                "name_en": {
                     "description": "name",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "type": "string"
+                },
+                "name_fa": {
+                    "description": "name",
+                    "type": "string"
                 },
                 "description": {
                     "description": "description",
@@ -32899,7 +32984,7 @@
         },
         "Province": {
             "required": [
-                "name"
+                "name_en"
             ],
             "properties": {
                 "id": {
@@ -32912,12 +32997,13 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "name": {
+                "name_en": {
                     "description": "name",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "type": "string"
+                },
+                "name_fa": {
+                    "description": "name",
+                    "type": "string"
                 },
                 "created_at": {
                     "description": "created_at",
@@ -34286,7 +34372,7 @@
         },
         "Village": {
             "required": [
-                "name"
+                "name_en"
             ],
             "properties": {
                 "id": {
@@ -34294,13 +34380,11 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "name": {
-                    "description": "name",
-                    "type": "array",
-                    "format": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "name_en": {
+                    "type": "string"
+                },
+                "name_fa": {
+                    "type": "string"
                 },
                 "created_at": {
                     "description": "created_at",

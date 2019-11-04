@@ -24,9 +24,9 @@ class DatabaseSeeder extends Seeder
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
         if (App::environment() == 'production') {
-            Country::create([
-                'name_en'=> 'Iran', 'name_fa' => 'ایران'
-            ]);
+//            Country::create([
+//                'name_en'=> 'Iran', 'name_fa' => 'ایران'
+//            ]);
 
 
             User::create([
@@ -48,8 +48,9 @@ class DatabaseSeeder extends Seeder
                 OriginalPropagationTableSeeder::class,
                 OriginalMedicinalPlantTypeTableSeeder::class,
                 OriginalMethodTableSeeder::class,
-
-//                ConvertSeeder::class,
+                ProtectionTableSeeder::class,
+                LifeFormTableSeeder::class,
+                ConvertSeeder::class,
 
             ]);
 
@@ -72,20 +73,24 @@ class DatabaseSeeder extends Seeder
                 OriginalPropagationTableSeeder::class,
                 OriginalMedicinalPlantTypeTableSeeder::class,
                 OriginalMethodTableSeeder::class,
-                UserTableSeeder::class,
+                ProtectionTableSeeder::class,
+                LifeFormTableSeeder::class,
+
                 ContinentTableSeeder::class,
-                CountryTableSeeder::class,
-                ProvinceTableSeeder::class,
-                CityTableSeeder::class,
-                VillageTableSeeder::class,
+                ConvertSeeder::class,
+
+                UserTableSeeder::class,
+//                CountryTableSeeder::class,
+//                ProvinceTableSeeder::class,
+//                CityTableSeeder::class,
+//                VillageTableSeeder::class,
 //                ActionTableSeeder::class,
 //                EvaluationTableSeeder::class,
-                AuthorTableSeeder::class,
+//                AuthorTableSeeder::class,
                 ArticleTableSeeder::class,
                 CollectionTableSeeder::class,
                 ConstituentTableSeeder::class,
                 DepartmentTableSeeder::class,
-                ProtectionTableSeeder::class,
                 DivisionTableSeeder::class,
                 GeologyAgeTableSeeder::class,
                 IrrigationTableSeeder::class,
@@ -93,16 +98,14 @@ class DatabaseSeeder extends Seeder
                 MapTableSeeder::class,
                 MedicineTableSeeder::class,
                 ConstituentTypeTableSeeder::class,
-                OrganizationTableSeeder::class,
-                GeneralTableSeeder::class,
+//                OrganizationTableSeeder::class,
+//                GeneralTableSeeder::class,
 
                 ProjectTableSeeder::class,
-                PropagationTableSeeder::class,
-                LocationTableSeeder::class,
-                LifeFormTableSeeder::class,
-                TaxonomyTableSeeder::class,
-                HerbariumTableSeeder::class,
-                PlantLifeFormTableSeeder::class,
+//                LocationTableSeeder::class,
+//                TaxonomyTableSeeder::class,
+                PlantTableSeeder::class,
+//                PlantLifeFormTableSeeder::class,
                 PaleontologyTableSeeder::class,
                 TreatmentTableSeeder::class,
                 TreatmentHubTableSeeder::class,
@@ -114,7 +117,7 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 MedicinalPartTableSeeder::class,
                 LocalityTableSeeder::class,
-                ActionHubTableSeeder::class,
+//                ActionHubTableSeeder::class,
                 ProductTableSeeder::class,
                 MedicinalPlantTableSeeder::class,
                 MedicinalPlantConstituentTableSeeder::class,
@@ -135,7 +138,6 @@ class DatabaseSeeder extends Seeder
                 PermissionTableSeeder::class,
                 BotanicalPropagationTableSeeder::class,
 
-//                ConvertSeeder::class,
 
 //            SeedTableSeeder::class,
 //            BioMolecularTableSeeder::class,
