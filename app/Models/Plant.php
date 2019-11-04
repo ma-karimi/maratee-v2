@@ -212,8 +212,7 @@ class Plant extends BaseModel implements HasMedia
     public function transactions(): MorphMany
     {
         return $this->morphMany(Transaction::class, 'transactionable')
-            ->whereNull('deleted_at')
-            ->withTimestamps();
+            ->whereNull('deleted_at');
     }
 
     public function seeds(): BelongsToMany

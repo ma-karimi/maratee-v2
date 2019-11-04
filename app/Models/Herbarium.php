@@ -110,8 +110,7 @@ class Herbarium extends BaseModel implements HasMedia
     public function transactions(): MorphMany
     {
         return $this->morphMany(Transaction::class, 'transactionable')
-            ->whereNull('deleted_at')
-            ->withTimestamps();
+            ->whereNull('deleted_at');
     }
 
     public function taxonomy(): BelongsTo
