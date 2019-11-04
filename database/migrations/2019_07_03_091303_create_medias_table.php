@@ -15,15 +15,12 @@ class CreateMediasTable extends Migration
     {
         Schema::create('medias', function (Blueprint $table) {
             $table->bigIncrements('id');
-           // $table->json('name');
-            //$table->string('src');
-            //$table->string('format_type', 45);
             $table->dateTime('date')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('location_id')->nullable();
-            $table->json('description')->nullable();
+            $table->text('description')->nullable();
             $table->tinyInteger('media_type')->default(2)->comment('1=> sketch , 2=> picture');
-            $table->json('reference')->nullable();
+            $table->string('reference')->nullable();
 //          morphs:  'transaction , plant herbarium, paleontology, product, botanical, user, article, action, chromosome, cryo, seed, garden'
 
             //ADD spatie attributes

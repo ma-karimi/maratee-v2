@@ -55,52 +55,6 @@ use Spatie\MediaLibrary\Models\Media as BaseMedia;
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="herbarium_id",
- *          description="herbarium_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="seed_id",
- *          description="seed_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="paleontology_id",
- *          description="paleontology_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="media_type",
- *          description="media_type",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="reference",
- *          description="reference",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="medicinal_plant_id",
- *          description="medicinal_plant_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="product_id",
- *          description="product_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="botanical_id",
- *          description="botanical_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -117,37 +71,33 @@ use Spatie\MediaLibrary\Models\Media as BaseMedia;
 class Media extends BaseMedia
 {
     //use BaseModelTrait instead of BaseModel Class
-    use BaseModelTrait,MediaAccessor, ArticleRelation;
-
-    public static $jsons = [];
-    public static $messages = [];
-    protected $appends=['full_url'];
+    use BaseModelTrait, MediaAccessor, ArticleRelation;
 
     public const MEDIA_TYPE = [1 => 'sketch', 2 => 'picture'];
-    public static $linguistically = ['description' => false, 'reference' => false];
-
-
+    public static $jsons = [];
+    public static $messages = [];
     public static $rules = [
         'format_type' => 'required|string',
         'media_type' => 'required|integer|in:1,2',
         'date' => 'date',
         'user_id' => 'exists:users,id',
-        'location_id' => 'exists:locations,id',
-        'herbarium_id' => 'exists:herbariums,id',
-        'seed_id' => 'exists:seeds,id',
-        'paleontology_id' => 'exists:paleontologies,id',
-        'medicinal_plant_id' => 'exists:medicinal_plants,id',
-        'product_id' => 'exists:products,id',
-        'botanical_id' => 'exists:botanicals,id'
+//        'location_id' => 'exists:locations,id',
+//        'herbarium_id' => 'exists:herbariums,id',
+//        'seed_id' => 'exists:seeds,id',
+//        'paleontology_id' => 'exists:paleontologies,id',
+//        'medicinal_plant_id' => 'exists:medicinal_plants,id',
+//        'product_id' => 'exists:products,id',
+//        'botanical_id' => 'exists:botanicals,id',
+        'reference' => 'string',
+        'description' => 'string',
     ];
-    protected $casts=[
-        'reference'=>'json',
-        'description'=>'json',
-        'manipulations'=>'array',
-        'responsive_images'=>'array',
-        'custom_properties'=>'array',
+    protected $appends = ['full_url'];
+    protected $casts = [
+        'manipulations' => 'array',
+        'responsive_images' => 'array',
+        'custom_properties' => 'array',
     ];
-    protected $dates=['date'];
+    protected $dates = ['date'];
     /**
      * The database table used by the model.
      *
@@ -163,8 +113,6 @@ class Media extends BaseMedia
     //protected $casts = ['name' => 'json', 'reference' => 'json', 'description' => 'json'];
 
 
-
-
     /**
      * @return MorphToMany
      */
@@ -176,73 +124,9 @@ class Media extends BaseMedia
     /**
      * @return BelongsTo
      */
-    public function botanical(): BelongsTo
-    {
-        return $this->belongsTo(Botanical::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function herbarium(): BelongsTo
-    {
-        return $this->belongsTo(Herbarium::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function location(): BelongsTo
-    {
-        return $this->belongsTo(Location::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function medicinalPlant(): BelongsTo
-    {
-        return $this->belongsTo(MedicinalPlant::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function paleontology(): BelongsTo
-    {
-        return $this->belongsTo(Paleontology::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function product(): BelongsTo
-    {
-        return $this->belongsTo(Product::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function seed(): BelongsTo
-    {
-        return $this->belongsTo(Seed::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function medicinalPlants(): HasMany
-    {
-        return $this->hasMany(MedicinalPlant::class)->latest();
     }
 
 
