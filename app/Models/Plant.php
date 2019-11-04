@@ -210,9 +210,8 @@ class Plant extends BaseModel implements HasMedia
      */
     public function transactions(): MorphToMany
     {
-        return $this->morphToMany(Transaction::class, 'transactionable',
-            'transactions')
-            ->whereNull('transactions.deleted_at')
+        return $this->morphMany(Transaction::class, 'transactionable')
+            ->whereNull('deleted_at')
             ->withTimestamps();
     }
 
