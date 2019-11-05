@@ -212,6 +212,14 @@ class Location extends BaseModel
         return $this->belongsTo(City::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
+    public function province(): BelongsTo
+    {
+        return $this->belongsTo(Province::class);
+    }
+
 
     public function locationHubs()
     {
