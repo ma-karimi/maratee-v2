@@ -3,21 +3,22 @@
 namespace App\Repositories;
 
 use App\Models\Address;
+use App\Models\LocationHub;
 use App\Repositories\BaseRepository;
 
 /**
- * Class AddressRepository
+ * Class LocationHubRepository
  * @package App\Repositories
  * @version July 14, 2019, 10:29 am UTC
 */
 
-class AddressRepository extends BaseRepository
+class LocationHubRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**
@@ -35,6 +36,6 @@ class AddressRepository extends BaseRepository
      **/
     public function model()
     {
-        return Address::class;
+        return LocationHub::class;
     }
 }

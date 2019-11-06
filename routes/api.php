@@ -192,7 +192,7 @@ Route::apiResource('dimensions', 'DimensionAPIController');
 
 Route::apiResource('evaluation_dimensions', 'EvaluationDimensionAPIController');
 //Route::apiResource('actor_hubs', 'actorHubAPIController');
-//Route::apiResource('location_hubs', 'LocationHubAPIController');
+Route::apiResource('location_hubs', 'LocationHubAPIController')->except('update', 'show');
 //Route::apiResource('user_hubs', 'UserHubAPIController');
 
 
