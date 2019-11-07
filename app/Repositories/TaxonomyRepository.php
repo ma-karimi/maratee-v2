@@ -199,7 +199,7 @@ class TaxonomyRepository extends BaseRepository
         ActorHub::where(['actorable_id' => $request->get('species_id'), 'actorable_type' => General::class])
             ->whereNotIn('actor_id', $species_authors)
             ->delete();
-        if (count($species_authors)) {
+        if (!empty($species_authors) && count($species_authors)) {
             foreach ($species_authors as $item) {
                 ActorHub::firstOrCreate([
                     'actor_id' => $item,
@@ -220,7 +220,7 @@ class TaxonomyRepository extends BaseRepository
         ActorHub::where(['actorable_id' => $request->get('subspecies_id'), 'actorable_type' => General::class])
             ->whereNotIn('actor_id', $subspecies_authors)
             ->delete();
-        if (count($subspecies_authors)) {
+        if (!empty($subspecies_authors) && count($subspecies_authors)) {
             foreach ($subspecies_authors as $item) {
                 ActorHub::firstOrCreate([
                     'actor_id' => $item,
@@ -240,7 +240,7 @@ class TaxonomyRepository extends BaseRepository
         ActorHub::where(['actorable_id' => $request->get('variety_id'), 'actorable_type' => General::class])
             ->whereNotIn('actor_id', $variety_authors)
             ->delete();
-        if (count($variety_authors)) {
+        if (!empty($variety_authors) && count($variety_authors)) {
             foreach ($variety_authors as $item) {
                 ActorHub::firstOrCreate([
                     'actor_id' => $item,
