@@ -189,7 +189,7 @@ class TaxonomyRepository extends BaseRepository
     private function specieAuthor($request)
     {
         if ($request->filled(['species_id', 'species_auth'])) {
-            $this->createHub($request->get('species_id'), 'authors', $request->get('species_auth'));
+            $this->generalRepo->createHub($request->get('species_id'), 'authors', $request->get('species_auth'));
         }
     }
 
@@ -223,7 +223,7 @@ class TaxonomyRepository extends BaseRepository
     {
         if ($request->filled(['subspecies_id', 'subspecies_auth'])) {
 
-            $this->createHub($request->get('subspecies_id'), 'authors', $request->get('subspecies_auth'));
+            $this->generalRepo->createHub($request->get('subspecies_id'), 'authors', $request->get('subspecies_auth'));
 
         }
     }
@@ -242,7 +242,7 @@ class TaxonomyRepository extends BaseRepository
 //                $this->actorHubFirstOrCreate($request['variety_id'], $request['variety_auth']);
 //            }
 
-            $this->createHub($request->get('variety_id'), 'authors', $request->get('variety_auth'));
+            $this->generalRepo->createHub($request->get('variety_id'), 'authors', $request->get('variety_auth'));
 
         }
     }

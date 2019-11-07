@@ -31,7 +31,9 @@ class General extends BaseModel
      */
     public function authors(): MorphToMany
     {
-        return $this->morphToMany(Actor::class, 'actorable','actor_hubs')->withTimestamps();
+        return $this->morphToMany(Actor::class, 'actorable','actor_hubs')
+            ->whereNull('actor_hubs.deleted_at')
+            ->withTimestamps();
     }
 
     /**
