@@ -188,10 +188,25 @@ class TaxonomyRepository extends BaseRepository
      */
     private function specieAuthor($request)
     {
-        if ($request->filled(['species_id', 'species_auth'])) {
-            $this->generalRepo->createHub($request->get('species_id'), 'authors', $request->get('species_auth'));
-        } else {
-            $this->actorHub->where(['actorable_id' => $request->get('species_id'), 'actorable_type' => General::class])->delete();
+//        if ($request->filled(['species_id', 'species_auth'])) {
+//
+//            $this->generalRepo->createHub($request->get('species_id'), 'authors', $request->get('species_auth'));
+//        } else {
+//            $this->actorHub->where(['actorable_id' => $request->get('species_id'), 'actorable_type' => General::class])->delete();
+//        }
+
+        $species_authors = $request->get('species_auth');
+        ActorHub::where(['actorable_id' => $request->get('species_id'), 'actorable_type' => General::class])
+            ->whereNotIn('actor_id', $species_authors)
+            ->delete();
+        if (count($species_authors)) {
+            foreach ($species_authors as $item) {
+                ActorHub::firstOrCreate([
+                    'actor_id' => $item,
+                    'actorable_type' => General::class,
+                    'actorable_id' => $request->get('species_id'),
+                ]);
+            }
         }
     }
 
@@ -201,12 +216,18 @@ class TaxonomyRepository extends BaseRepository
      */
     private function subSpecieAuthor($request)
     {
-        if ($request->filled(['subspecies_id', 'subspecies_auth'])) {
-
-            $this->generalRepo->createHub($request->get('subspecies_id'), 'authors', $request->get('subspecies_auth'));
-
-        } else {
-            $this->actorHub->where(['actorable_id' => $request->get('subspecies_id'), 'actorable_type' => General::class])->delete();
+        $subspecies_authors = $request->get('subspecies_auth');
+        ActorHub::where(['actorable_id' => $request->get('subspecies_id'), 'actorable_type' => General::class])
+            ->whereNotIn('actor_id', $subspecies_authors)
+            ->delete();
+        if (count($subspecies_authors)) {
+            foreach ($subspecies_authors as $item) {
+                ActorHub::firstOrCreate([
+                    'actor_id' => $item,
+                    'actorable_type' => General::class,
+                    'actorable_id' => $request->get('subspecies_id'),
+                ]);
+            }
         }
     }
 
@@ -215,18 +236,18 @@ class TaxonomyRepository extends BaseRepository
      */
     private function varietyAuthor($request): void
     {
-        if ($request->filled(['variety_id', 'variety_auth'])) {
-
-//            if (!is_numeric($request->get('variety_auth'))) {
-//                $actor = $this->actorFirstOrCreate($request['variety_auth']);
-//                $this->actorHubFirstOrCreate($request['variety_id'], $actor->id);
-//            } else {
-//                $this->actorHubFirstOrCreate($request['variety_id'], $request['variety_auth']);
-//            }
-
-            $this->generalRepo->createHub($request->get('variety_id'), 'authors', $request->get('variety_auth'));
-        } else {
-            $this->actorHub->where(['actorable_id' => $request->get('variety_id'), 'actorable_type' => General::class])->delete();
+        $variety_authors = $request->get('variety_auth');
+        ActorHub::where(['actorable_id' => $request->get('variety_id'), 'actorable_type' => General::class])
+            ->whereNotIn('actor_id', $variety_authors)
+            ->delete();
+        if (count($variety_authors)) {
+            foreach ($variety_authors as $item) {
+                ActorHub::firstOrCreate([
+                    'actor_id' => $item,
+                    'actorable_type' => General::class,
+                    'actorable_id' => $request->get('variety_id'),
+                ]);
+            }
         }
 
 
