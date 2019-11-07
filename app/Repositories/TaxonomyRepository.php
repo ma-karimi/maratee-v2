@@ -189,12 +189,7 @@ class TaxonomyRepository extends BaseRepository
     private function specieAuthor($request)
     {
         if ($request->filled(['species_id', 'species_auth'])) {
-            if (!is_numeric($request->get('species_auth'))) {
-                $actor = $this->actorFirstOrCreate($request['species_auth']);
-                $this->actorHubFirstOrCreate($request['species_id'], $actor->id);
-            } else {
-                $this->actorHubFirstOrCreate($request['species_id'], $request['species_auth']);
-            }
+            $this->createHub($request->get('species_id'), 'authors', $request->get('species_auth'));
         }
     }
 
@@ -228,12 +223,8 @@ class TaxonomyRepository extends BaseRepository
     {
         if ($request->filled(['subspecies_id', 'subspecies_auth'])) {
 
-            if (!is_numeric($request->get('subspecies_auth'))) {
-                $actor = $this->actorFirstOrCreate($request['subspecies_auth']);
-                $this->actorHubFirstOrCreate($request['subspecies_id'], $actor->id);
-            } else {
-                $this->actorHubFirstOrCreate($request['subspecies_id'], $request['species_auth']);
-            }
+            $this->createHub($request->get('subspecies_id'), 'authors', $request->get('subspecies_auth'));
+
         }
     }
 
@@ -244,12 +235,15 @@ class TaxonomyRepository extends BaseRepository
     {
         if ($request->filled(['variety_id', 'variety_auth'])) {
 
-            if (!is_numeric($request->get('variety_auth'))) {
-                $actor = $this->actorFirstOrCreate($request['variety_auth']);
-                $this->actorHubFirstOrCreate($request['variety_id'], $actor->id);
-            } else {
-                $this->actorHubFirstOrCreate($request['variety_id'], $request['variety_auth']);
-            }
+//            if (!is_numeric($request->get('variety_auth'))) {
+//                $actor = $this->actorFirstOrCreate($request['variety_auth']);
+//                $this->actorHubFirstOrCreate($request['variety_id'], $actor->id);
+//            } else {
+//                $this->actorHubFirstOrCreate($request['variety_id'], $request['variety_auth']);
+//            }
+
+            $this->createHub($request->get('variety_id'), 'authors', $request->get('variety_auth'));
+
         }
     }
 
