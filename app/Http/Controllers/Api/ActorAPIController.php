@@ -300,4 +300,48 @@ class ActorAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Actor deleted successfully');
     }
+
+    /**
+     * @param Request $request
+     * @return Response
+     *
+     * @throws \Exception
+     * @SWG\Get(
+     *      path="/actors/all",
+     *      summary="get all Actor Grouped By ",
+     *      tags={"Taxonomy"},
+     *      description="get all Actor Grouped By ",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Actor")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function all(Request $request)
+    {
+        $taxonomies = $this->actorRepository->all(
+            $request->except(['skip', 'limit']),
+            $request->get('skip'),
+            $request->get('limit')
+        );
+
+        return $this->sendResponse($taxonomies->toArray(), 'Actors retrieved successfully');
+    }
 }

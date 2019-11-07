@@ -254,223 +254,6 @@
                 }
             }
         },
-        "/actions": {
-            "get": {
-                "tags": [
-                    "Action"
-                ],
-                "summary": "Get a listing of the Actions.",
-                "description": "Get all Actions",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/Action"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Action"
-                ],
-                "summary": "Store a newly created Action in storage",
-                "description": "Store Action",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "Action that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Action"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Action that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Action"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Action"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/actions/{id}": {
-            "get": {
-                "tags": [
-                    "Action"
-                ],
-                "summary": "Display the specified Action",
-                "description": "Get Action",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Action",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Action"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Action"
-                ],
-                "summary": "Update the specified Action in storage",
-                "description": "Update Action",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Action",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "name",
-                        "in": "body",
-                        "description": "Action that should be stored",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Action"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "body",
-                        "description": "Action that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/Action"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Action"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Action"
-                ],
-                "summary": "Remove the specified Action from storage",
-                "description": "Delete Action",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of Action",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
         "/action_hubs": {
             "get": {
                 "tags": [
@@ -1240,6 +1023,40 @@
                                 },
                                 "data": {
                                     "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/actors/all": {
+            "get": {
+                "tags": [
+                    "Taxonomy"
+                ],
+                "summary": "get all Actor Grouped By ",
+                "description": "get all Actor Grouped By ",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Actor"
+                                    }
                                 },
                                 "message": {
                                     "type": "string"
@@ -10722,15 +10539,7 @@
                 ],
                 "parameters": [
                     {
-                        "name": "plant_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Geographical"
-                        }
-                    },
-                    {
-                        "name": "geographical_id",
+                        "name": "name",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -10816,15 +10625,7 @@
                         "type": "integer"
                     },
                     {
-                        "name": "plant_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Geographical"
-                        }
-                    },
-                    {
-                        "name": "geographical_id",
+                        "name": "name",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -13519,6 +13320,136 @@
                     }
                 }
             },
+            "delete": {
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Remove the specified Location from storage",
+                "description": "Delete Location",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Location",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/location_hubs": {
+            "get": {
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Get a listing of the Locations.",
+                "description": "Get all Locations",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Location"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Store a newly created Location in storage",
+                "description": "Store Location",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "location_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LocationHub"
+                        }
+                    },
+                    {
+                        "name": "locationable_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LocationHub"
+                        }
+                    },
+                    {
+                        "name": "locationable_type",
+                        "in": "body",
+                        "description": "cryo_bank, action, location, user, media, plant",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/LocationHub"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Location"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/location_hubs/{id}": {
             "delete": {
                 "tags": [
                     "Location"
@@ -19851,7 +19782,6 @@
                     {
                         "name": "name",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -19860,7 +19790,6 @@
                     {
                         "name": "general_phytogeography_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -19869,7 +19798,6 @@
                     {
                         "name": "protection_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -19878,7 +19806,6 @@
                     {
                         "name": "is_flowering",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -19887,7 +19814,6 @@
                     {
                         "name": "sheets_no",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -19896,7 +19822,6 @@
                     {
                         "name": "samples_no",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -19905,7 +19830,6 @@
                     {
                         "name": "tip_qt",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -19914,7 +19838,6 @@
                     {
                         "name": "physical_tip_qt",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -19923,7 +19846,6 @@
                     {
                         "name": "general_substrate_lichen_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -19932,7 +19854,6 @@
                     {
                         "name": "general_substrate_moss_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -19941,7 +19862,6 @@
                     {
                         "name": "general_substrate_diatom_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -19950,7 +19870,6 @@
                     {
                         "name": "general_ecology_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -19959,7 +19878,6 @@
                     {
                         "name": "general_origin_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -19968,7 +19886,6 @@
                     {
                         "name": "description",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -19977,7 +19894,6 @@
                     {
                         "name": "habitat_description",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -19986,7 +19902,6 @@
                     {
                         "name": "ecology_description",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -19995,7 +19910,6 @@
                     {
                         "name": "family_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
@@ -20004,7 +19918,6 @@
                     {
                         "name": "genus_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
@@ -20013,7 +19926,6 @@
                     {
                         "name": "order_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
@@ -20022,7 +19934,6 @@
                     {
                         "name": "class_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
@@ -20031,7 +19942,6 @@
                     {
                         "name": "species_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
@@ -20040,7 +19950,6 @@
                     {
                         "name": "variety_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
@@ -20199,7 +20108,6 @@
                     {
                         "name": "name",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -20208,7 +20116,6 @@
                     {
                         "name": "general_phytogeography_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -20217,7 +20124,6 @@
                     {
                         "name": "protection_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -20226,7 +20132,6 @@
                     {
                         "name": "is_flowering",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -20235,7 +20140,6 @@
                     {
                         "name": "sheets_no",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -20244,7 +20148,6 @@
                     {
                         "name": "samples_no",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -20253,7 +20156,6 @@
                     {
                         "name": "tip_qt",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -20262,7 +20164,6 @@
                     {
                         "name": "physical_tip_qt",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -20271,7 +20172,6 @@
                     {
                         "name": "general_substrate_lichen_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -20280,7 +20180,6 @@
                     {
                         "name": "general_substrate_moss_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -20289,7 +20188,6 @@
                     {
                         "name": "general_substrate_diatom_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -20298,7 +20196,6 @@
                     {
                         "name": "general_ecology_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -20307,7 +20204,6 @@
                     {
                         "name": "general_origin_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -20316,7 +20212,6 @@
                     {
                         "name": "description",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -20325,7 +20220,6 @@
                     {
                         "name": "habitat_description",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -20334,7 +20228,6 @@
                     {
                         "name": "ecology_description",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Plant"
@@ -20343,7 +20236,6 @@
                     {
                         "name": "family_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
@@ -20352,7 +20244,6 @@
                     {
                         "name": "genus_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
@@ -20361,7 +20252,6 @@
                     {
                         "name": "order_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
@@ -20370,7 +20260,6 @@
                     {
                         "name": "class_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
@@ -20379,7 +20268,6 @@
                     {
                         "name": "species_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
@@ -20388,7 +20276,6 @@
                     {
                         "name": "variety_id",
                         "in": "body",
-                        "description": "Plant Herbarium that should be stored",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/Taxonomy"
@@ -20919,8 +20806,9 @@
                         }
                     },
                     {
-                        "name": "geographical_id",
+                        "name": "geographical_ids",
                         "in": "body",
+                        "description": "array",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/PlantGeographical"
@@ -20949,98 +20837,6 @@
             }
         },
         "/plant_geographicals/{id}": {
-            "get": {
-                "tags": [
-                    "PlantGeographical"
-                ],
-                "summary": "Display the specified PlantGeographical",
-                "description": "Get PlantGeographical",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of PlantGeographical",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/PlantGeographical"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "PlantGeographical"
-                ],
-                "summary": "Update the specified PlantGeographical in storage",
-                "description": "Update PlantGeographical",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of PlantGeographical",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "plant_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantGeographical"
-                        }
-                    },
-                    {
-                        "name": "geographical_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PlantGeographical"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/PlantGeographical"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
             "delete": {
                 "tags": [
                     "PlantGeographical"
@@ -27808,6 +27604,16 @@
                         "type": "integer"
                     },
                     {
+                        "name": "sample_impression_id",
+                        "in": "body",
+                        "description": "boolean",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        },
+                        "type": "integer"
+                    },
+                    {
                         "name": "start_time",
                         "in": "body",
                         "description": "Transaction that should be stored",
@@ -28144,6 +27950,16 @@
                             "$ref": "#/definitions/Transaction"
                         },
                         "type": "string"
+                    },
+                    {
+                        "name": "sample_impression_id",
+                        "in": "body",
+                        "description": "boolean",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        },
+                        "type": "integer"
                     }
                 ],
                 "responses": {
@@ -31658,35 +31474,7 @@
                 "location_id",
                 "locationable_id",
                 "locationable_type"
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "locationable_type": {
-                    "description": "cryo_bank, action, location, user, media",
-                    "type": "string"
-                },
-                "locationable_id": {
-                    "type": "integer"
-                },
-                "location_id": {
-                    "description": "location_id",
-                    "type": "integer"
-                },
-                "created_at": {
-                    "description": "created_at",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "description": "updated_at",
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
+            ]
         },
         "Map": {
             "required": [
@@ -31768,44 +31556,6 @@
                 "description": {
                     "description": "description",
                     "type": "string"
-                },
-                "herbarium_id": {
-                    "description": "herbarium_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "seed_id": {
-                    "description": "seed_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "paleontology_id": {
-                    "description": "paleontology_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "media_type": {
-                    "description": "media_type",
-                    "type": "integer"
-                },
-                "reference": {
-                    "description": "reference",
-                    "type": "string"
-                },
-                "medicinal_plant_id": {
-                    "description": "medicinal_plant_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "product_id": {
-                    "description": "product_id",
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "botanical_id": {
-                    "description": "botanical_id",
-                    "type": "integer",
-                    "format": "int32"
                 },
                 "created_at": {
                     "description": "created_at",
@@ -32701,7 +32451,7 @@
         "PlantGeographical": {
             "required": [
                 "plant_id",
-                "geographical_id"
+                "geographical_ids"
             ]
         },
         "PlantLifeForm": {

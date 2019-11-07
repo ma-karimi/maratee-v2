@@ -41,7 +41,7 @@ class LocationHubAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="success",
      *                  type="boolean"
-     *              ),+++++++++++++++++
+     *              ),
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
@@ -93,7 +93,7 @@ class LocationHubAPIController extends AppBaseController
      *          name="locationable_type",
      *          in="body",
      *          required=false,
-     *          description="cryo_bank, action, location, user, media, plant"
+     *          description="cryo_bank, action, location, user, media, plant",
      *          @SWG\Schema(ref="#/definitions/LocationHub")
      *      ),
      *      @SWG\Response(

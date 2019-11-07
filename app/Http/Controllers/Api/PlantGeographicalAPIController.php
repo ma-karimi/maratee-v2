@@ -87,7 +87,7 @@ class PlantGeographicalAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="geographical_ids",
      *          in="body",
-     *          description="array"
+     *          description="array",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/PlantGeographical")
      *      ),

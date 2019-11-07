@@ -105,6 +105,7 @@ Route::apiResource('evaluations', 'EvaluationAPIController');
 
 Route::apiResource('attendances', 'AttendanceAPIController');
 
+Route::get('actors/all', 'ActorAPIController@all');
 Route::apiResource('actors', 'ActorAPIController');
 
 Route::apiResource('botanicals', 'BotanicalAPIController');
