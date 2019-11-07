@@ -195,7 +195,7 @@ class TaxonomyRepository extends BaseRepository
 //            $this->actorHub->where(['actorable_id' => $request->get('species_id'), 'actorable_type' => General::class])->delete();
 //        }
 
-        $species_authors = $request->get('species_auth');
+        $species_authors = $request->filled('species_auth') ? $request->get('species_auth') : [];
         ActorHub::where(['actorable_id' => $request->get('species_id'), 'actorable_type' => General::class])
             ->whereNotIn('actor_id', $species_authors)
             ->delete();
@@ -216,7 +216,7 @@ class TaxonomyRepository extends BaseRepository
      */
     private function subSpecieAuthor($request)
     {
-        $subspecies_authors = $request->get('subspecies_auth');
+        $subspecies_authors = $request->filled('subspecies_auth') ? $request->get('subspecies_auth') : [];
         ActorHub::where(['actorable_id' => $request->get('subspecies_id'), 'actorable_type' => General::class])
             ->whereNotIn('actor_id', $subspecies_authors)
             ->delete();
@@ -236,7 +236,7 @@ class TaxonomyRepository extends BaseRepository
      */
     private function varietyAuthor($request): void
     {
-        $variety_authors = $request->get('variety_auth');
+        $variety_authors = $request->filled('variety_auth') ? $request->get('variety_auth') : [];
         ActorHub::where(['actorable_id' => $request->get('variety_id'), 'actorable_type' => General::class])
             ->whereNotIn('actor_id', $variety_authors)
             ->delete();
