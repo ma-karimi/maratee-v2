@@ -190,29 +190,9 @@ class TaxonomyRepository extends BaseRepository
     {
         if ($request->filled(['species_id', 'species_auth'])) {
             $this->generalRepo->createHub($request->get('species_id'), 'authors', $request->get('species_auth'));
+        } else {
+            $this->actorHub->where(['actorable_id' => $request->get('species_id'), 'actorable_type' => General::class])->delete();
         }
-    }
-
-    /**
-     * @param $name
-     * @return mixed
-     */
-    private function actorFirstOrCreate($name)
-    {
-        return $this->actor->firstOrCreate(['name' => $name]);
-    }
-
-    /**
-     * @param $general_id
-     * @param $actor_id
-     */
-    private function actorHubFirstOrCreate($general_id, $actor_id): void
-    {
-        $old_actor_hub = $this->actorHub->where(['actorable_type' => General::class, 'actorable_id' => $general_id])->first();
-        if ($old_actor_hub && (int)$old_actor_hub->actor_id !== (int)$actor_id) {
-            $old_actor_hub->delete();
-        }
-        $this->actorHub->firstOrCreate(['actorable_type' => General::class, 'actorable_id' => $general_id, 'actor_id' => $actor_id]);
     }
 
     /**
@@ -225,6 +205,8 @@ class TaxonomyRepository extends BaseRepository
 
             $this->generalRepo->createHub($request->get('subspecies_id'), 'authors', $request->get('subspecies_auth'));
 
+        } else {
+            $this->actorHub->where(['actorable_id' => $request->get('subspecies_id'), 'actorable_type' => General::class])->delete();
         }
     }
 
@@ -243,8 +225,11 @@ class TaxonomyRepository extends BaseRepository
 //            }
 
             $this->generalRepo->createHub($request->get('variety_id'), 'authors', $request->get('variety_auth'));
-
+        } else {
+            $this->actorHub->where(['actorable_id' => $request->get('variety_id'), 'actorable_type' => General::class])->delete();
         }
+
+
     }
 
     public function update($request, $id)
@@ -305,5 +290,27 @@ class TaxonomyRepository extends BaseRepository
                 return $query->whereNotNull(\request('groupby'))->groupBy(\request('groupby'));
             })
             ->paginate($perPage ?? 25, $columns);
+    }
+
+    /**
+     * @param $name
+     * @return mixed
+     */
+    private function actorFirstOrCreate($name)
+    {
+        return $this->actor->firstOrCreate(['name' => $name]);
+    }
+
+    /**
+     * @param $general_id
+     * @param $actor_id
+     */
+    private function actorHubFirstOrCreate($general_id, $actor_id): void
+    {
+        $old_actor_hub = $this->actorHub->where(['actorable_type' => General::class, 'actorable_id' => $general_id])->first();
+        if ($old_actor_hub && (int)$old_actor_hub->actor_id !== (int)$actor_id) {
+            $old_actor_hub->delete();
+        }
+        $this->actorHub->firstOrCreate(['actorable_type' => General::class, 'actorable_id' => $general_id, 'actor_id' => $actor_id]);
     }
 }
