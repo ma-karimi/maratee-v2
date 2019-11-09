@@ -19,14 +19,14 @@ class CreatePlantAPIRequest extends APIRequest
      */
     public function authorize()
     {
-        $array_id_life_forms = [
-            'cycle_id' => 'life_cycle',
-            'wooden_id' => 'wooden',
-            'leaf_id' => 'leaf',
-            'herbaceous_id' => 'herbaceous',
-        ];
+//        $array_id_life_forms = [
+//            'cycle_id' => 'life_cycle',
+//            'wooden_id' => 'wooden',
+//            'leaf_id' => 'leaf',
+//            'herbaceous_id' => 'herbaceous',
+//        ];
         $array_id_types = [
-            'general_ecology_id' => 'ecology',
+//            'general_ecology_id' => 'ecology',
             'general_habitat_id' => 'habitat',
             'general_origin_id' => 'origin',
             'general_phenology_id' => 'phenology',
@@ -37,7 +37,7 @@ class CreatePlantAPIRequest extends APIRequest
         ];
 
         $this->validateGeneralIds($array_id_types);
-        $this->validateLifeFormIds($array_id_life_forms);
+//        $this->validateLifeFormIds($array_id_life_forms);
         return true;
     }
 
@@ -55,6 +55,7 @@ class CreatePlantAPIRequest extends APIRequest
             //taxonomy
             'monopoly_of_iran_id' => 'numeric',
             'taxonomy_id' => 'required|exists:taxonomies,id',
+            'life_form_id' => 'numeric',
 //            'family_id' => 'required|exists:generals,id',
 //            'genus_id' => 'exists:generals,id',
 //            'species_id' => 'exists:generals,id',
@@ -64,7 +65,7 @@ class CreatePlantAPIRequest extends APIRequest
 //            'subspecies_ids.*' => 'exists:generals,id',
             'is_flowering' => 'integer',
             //classification
-            'general_ecology_id' => 'exists:generals,id',
+//            'general_ecology_id' => 'exists:generals,id',
             'general_habitat_id' => 'exists:generals,id',
             'general_origin_id' => 'exists:generals,id',
             'general_phytogeography_id' => 'required|exists:generals,id',

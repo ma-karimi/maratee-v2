@@ -25,4 +25,8 @@ trait PlantAccessor
             return implode(', ', $this->geographicals()->pluck('name')->toArray());
         }
     }
+    public function getLifeFormAttribute()
+    {
+            return !empty($this->attributes['life_form_id']) ? Arr::get(self::LIFE_FORM, $this->attributes['life_form_id']) : null;
+    }
 }

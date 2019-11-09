@@ -105,12 +105,10 @@ class DatabaseSeeder extends Seeder
 //                LocationTableSeeder::class,
 //                TaxonomyTableSeeder::class,
                 PlantTableSeeder::class,
-//                PlantLifeFormTableSeeder::class,
                 PaleontologyTableSeeder::class,
                 TreatmentTableSeeder::class,
                 TreatmentHubTableSeeder::class,
                 MethodTableSeeder::class,
-//                PlantPropertyTableSeeder::class,
                 GardenTableSeeder::class,
 
             ]);

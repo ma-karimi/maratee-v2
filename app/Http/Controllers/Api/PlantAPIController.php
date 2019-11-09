@@ -146,12 +146,6 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="general_ecology_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
      *          name="general_origin_id",
      *          in="body",
      *          required=false,
@@ -176,40 +170,16 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="family_id",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="genus_id",
+     *          name="taxonomy_id",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="order_id",
+     *          name="life_form_id",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="class_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="species_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="variety_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
      *          name="flowering_time",
@@ -434,12 +404,6 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="general_ecology_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
      *          name="general_origin_id",
      *          in="body",
      *          required=false,
@@ -464,40 +428,16 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="family_id",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="genus_id",
+     *          name="taxonomy_id",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="order_id",
+     *          name="life_form_id",
      *          in="body",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="class_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="species_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="variety_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Taxonomy")
+     *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
      *          name="flowering_time",

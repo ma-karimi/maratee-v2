@@ -94,18 +94,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *          type="integer"
  *      ),
  *      @SWG\Property(
- *          property="cycle_id",
- *          description="id from life_forms ",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="wooden_id",
- *          description="id from life_forms ",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="herbaceous_id",
- *          description="id from life_forms ",
+ *          property="life_form_id",
  *          type="integer"
  *      ),
  *      @SWG\Property(
@@ -150,6 +139,7 @@ class Plant extends BaseModel implements HasMedia
     use PlantScope, PlantAccessor, ActionRelation, HasMediaTrait, ArticleRelation;
 
 //    public const FLOWERING_TIME = [1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December'];
+    public const LIFE_FORM = [1=> 'annual', 2=>'perennial' , 3=>'tree' , 4=>'shrubs'];
 
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
     public static $rules = [
@@ -163,7 +153,7 @@ class Plant extends BaseModel implements HasMedia
         'herbaceous_id' => 'exists:life_forms,id',
     ];
     protected $casts = ['is_flowering' => 'boolean'];
-    protected $appends = ['monopoly_of_iran', 'plant_geographicals'];
+    protected $appends = ['monopoly_of_iran', 'plant_geographicals', 'life_form'];
     /**
      * The database table used by the model.
      *
@@ -296,25 +286,25 @@ class Plant extends BaseModel implements HasMedia
         return $this->belongsTo(General::class, 'general_phytogeography_id');
     }
 
-    public function cycle()
-    {
-        return $this->belongsTo(LifeForm::class, 'cycle_id');
-    }
-
-    public function wooden()
-    {
-        return $this->belongsTo(LifeForm::class, 'wooden_id');
-    }
-
-    public function herbaceous()
-    {
-        return $this->belongsTo(LifeForm::class, 'herbaceous_id');
-    }
-
-    public function leaf()
-    {
-        return $this->belongsTo(LifeForm::class, 'leaf_id');
-    }
+//    public function cycle()
+//    {
+//        return $this->belongsTo(LifeForm::class, 'cycle_id');
+//    }
+//
+//    public function wooden()
+//    {
+//        return $this->belongsTo(LifeForm::class, 'wooden_id');
+//    }
+//
+//    public function herbaceous()
+//    {
+//        return $this->belongsTo(LifeForm::class, 'herbaceous_id');
+//    }
+//
+//    public function leaf()
+//    {
+//        return $this->belongsTo(LifeForm::class, 'leaf_id');
+//    }
 
     public function generalLichen(): BelongsTo
     {

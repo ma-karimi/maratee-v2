@@ -35,11 +35,10 @@ $factory->define(App\Models\Plant::class, function (Faker $faker) {
         'general_substrate_diatom_id'=>$faker->randomElement($diatoms),
 //        'protection_id' => $faker->randomElement($protections),
         'general_phytogeography_id' => $faker->randomElement($phytogeographies),
-        'general_ecology_id' => $faker->randomElement($ecology),
         'is_flowering' => $is_flower = /*$faker->numberBetween(0, 1)*/0,
 //        'flowering_time' => $is_flower == 1 ? $faker->numberBetween(1, 12) : null,
         'taxonomy_id'=>$faker->randomElement($taxonomies),
-
+        'life_fr'
         //'sheets_no' => $faker->numberBetween(1, 100),
         //'samples_no' => $faker->numberBetween(1, 100),
         //'tip_qt' => $faker->numberBetween(1, 100),
