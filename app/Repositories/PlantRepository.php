@@ -98,7 +98,6 @@ class PlantRepository extends BaseRepository
             'protection_id' => $input['protection_id'],
 //            'organization_id' => $input['organization_id'],
             'general_phytogeography_id' => $input['general_phytogeography_id'],
-            'general_ecology_id' => $input['general_ecology_id'] ?? null,
             'general_habitat_id' => $input['general_habitat_id'] ?? null,
             'general_origin_id' => $input['general_origin_id'] ?? null,
             'general_substrate_lichen_id' => $input['general_substrate_lichen_id'] ?? null,
@@ -108,10 +107,7 @@ class PlantRepository extends BaseRepository
             'habitat_description' => $input['habitat_description'] ?? null,
             'ecology_description' => $input['ecology_description'] ?? null,
             //life_form
-            'cycle_id' => $input['cycle_id'] ?? null,
-            'wooden_id' => $input['wooden_id'] ?? null,
-            'herbaceous_id' => $input['herbaceous_id'] ?? null,
-//            'leaf_id' => $input['leaf_id'] ?? null,
+            'life_form_id' => $input['life_form_id'] ?? null,
             //
             'is_flowering' => $input['is_flowering'] ?? 0,
             'flowering_time' => $input['flowering_time'] ?? null,
@@ -194,7 +190,6 @@ class PlantRepository extends BaseRepository
             'protection_id' => $input['protection_id'],
 //            'organization_id' => $input['organization_id'],
             'general_phytogeography_id' => $input['general_phytogeography_id'],
-            'general_ecology_id' => $input['general_ecology_id'] ?? null,
             'general_habitat_id' => $input['general_habitat_id'] ?? null,
             'general_origin_id' => $input['general_origin_id'] ?? null,
             'general_substrate_lichen_id' => $input['general_substrate_lichen_id'] ?? null,
@@ -203,16 +198,13 @@ class PlantRepository extends BaseRepository
             'description' => $input['description'] ?? null,
             'habitat_description' => $input['habitat_description'] ?? null,
             'ecology_description' => $input['ecology_description'] ?? null,
-            //life_form
-            'cycle_id' => $input['cycle_id'] ?? null,
-            'wooden_id' => $input['wooden_id'] ?? null,
-            'herbaceous_id' => $input['herbaceous_id'] ?? null,
-//            'leaf_id' => $input['leaf_id'] ?? null,
+
             //
             'is_flowering' => $input['is_flowering'] ?? 0,
             'flowering_time' => $input['flowering_time'] ?? null,
             'number' => $input['number'] ?? null,
             'monopoly_of_iran_id' => $input['monopoly_of_iran_id'] ?? null,
+            'life_form_id' => $input['life_form_id'] ?? null,
 
 //            'herbarium_number' => $input['herbarium_number'] ?? null,
 //            'herbarium_index' => $input['herbarium_index'] ?? null,
