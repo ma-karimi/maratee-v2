@@ -25,7 +25,7 @@ class TaxonomyRepository extends BaseRepository
     ];
 
 
-    protected $fieldRelations = [
+    public $fieldRelations = [
         'family', 'genus', 'species', 'subspecies', 'variety', 'scientific'
     ];
     /**
@@ -59,17 +59,6 @@ class TaxonomyRepository extends BaseRepository
     public function getFieldsSearchable()
     {
         return $this->fieldSearchable;
-    }
-
-
-    /**
-     * Return relations fields
-     *
-     * @return array
-     */
-    public function getFieldsRelations()
-    {
-        return $this->fieldRelations;
     }
 
     /**
