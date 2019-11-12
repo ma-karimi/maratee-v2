@@ -74,7 +74,6 @@ class PlantRepository extends BaseRepository
      */
     public function create($input)
     {
-//        [$taxonomy_input, $taxonomy_id] = $this->firstOrCreateTaxonomy($input);
         $plant = $this->createPlant($input);
         $location = $this->createLocation($input);
         if (!isset($plant->is_flowering)) {
@@ -82,8 +81,7 @@ class PlantRepository extends BaseRepository
         }else{
             $this->createHub($plant->id, 'locations', [$location->id]);
         }
-//        $this->syncPlantGpeneralProperties($taxonomy_input, $plant);
-//        $this->syncPlantTypeProperties($input, $plant);
+        $this->updateMedia($input, $plant);
         return $plant;
     }
 
