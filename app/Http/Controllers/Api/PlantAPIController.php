@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreatePlantAPIRequest;
-use App\Http\Requests\Api\ActionableRequest;
 use App\Http\Requests\Api\UpdatePlantAPIRequest;
 use App\Http\Resources\PlantResource;
 use App\Models\Plant;
 use App\Repositories\PlantRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 /**
  * Class PlantController
@@ -32,7 +32,7 @@ class PlantAPIController extends AppBaseController
      * @throws \Exception
      * @SWG\Get(
      *      path="/plants",
-     *      summary="Get a listing of the Plants & Plant Herbarium has flowering herbarium",
+     *      summary="Get a listing of the Plants & Plant has flowering herbarium",
      *      tags={"Plant"},
      *      description="Get all Plants",
      *      produces={"application/json"},
@@ -60,11 +60,11 @@ class PlantAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $relation_for_scientific_name = ['taxonomy.family', 'taxonomy.genus', 'taxonomy.species', 'taxonomy.subspecies', 'taxonomy.variety'];
+
         $plants = $this->plantRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations') ? array_merge($relation_for_scientific_name, $request->get('relations')) : $relation_for_scientific_name
+            (int) $request->is_flowering === 1 ? $this->fieldFloraRelations() : $this->fieldNonFlowerRelations()
         );
         return $this->sendResponse($plants->toArray(), 'Plants retrieved successfully');
     }
@@ -75,7 +75,7 @@ class PlantAPIController extends AppBaseController
      *
      * @SWG\Post(
      *      path="/plants",
-     *      summary="Store a newly created Plant Herbarium in storage",
+     *      summary="Store a newly created Plant in storage",
      *      tags={"Plant"},
      *      description="Store Plant",
      *      produces={"application/json"},
@@ -128,19 +128,7 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="general_substrate_lichen_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_substrate_moss_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_substrate_diatom_id",
+     *          name="general_substrate_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Plant")
@@ -231,7 +219,7 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
-     *          name="location_description",
+     *          name="geographical_description",
      *          in="body",
      *          description="Herbarium that should be stored",
      *          required=false,
@@ -264,7 +252,7 @@ class PlantAPIController extends AppBaseController
 
         $plant = $this->plantRepository->create($input);
 
-        return $this->sendResponse($plant->toArray(), 'Plant Herbarium saved successfully');
+        return $this->sendResponse($plant->toArray(), 'Plant saved successfully');
     }
 
     /**
@@ -273,13 +261,13 @@ class PlantAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/plants/{id}",
-     *      summary="Display the specified Plant Herbarium",
+     *      summary="Display the specified Plant",
      *      tags={"Plant"},
-     *      description="Get Plant Herbarium",
+     *      description="Get Plant",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Plant Herbarium",
+     *          description="id of Plant",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -307,16 +295,15 @@ class PlantAPIController extends AppBaseController
      */
     public function show($id)
     {
-        $relation_for_scientific_name = ['taxonomy.family', 'taxonomy.genus', 'taxonomy.species', 'taxonomy.subspecies', 'taxonomy.variety'];
-        /** @var Plant $plant */
+
         $plant = $this->plantRepository->find($id,
-            \request()->get('relations') ? array_merge($relation_for_scientific_name, \request()->get('relations')) : $relation_for_scientific_name
+            (int) request()->is_flowering === 1 ? $this->fieldFloraRelations() : Arr::except($this->fieldNonFlowerRelations(), 'herbarium.transactions')
         );
         if (empty($plant)) {
-            return $this->sendError('Plant Herbarium not found');
+            return $this->sendError('Plant not found');
         }
 
-        return $this->sendResponse($plant->toArray(), 'Plant Herbarium retrieved successfully');
+        return $this->sendResponse($plant->toArray(), 'Plant retrieved successfully');
     }
 
     /**
@@ -326,13 +313,13 @@ class PlantAPIController extends AppBaseController
      *
      * @SWG\Put(
      *      path="/plants/{id}",
-     *      summary="Update the specified Plant Herbarium in storage",
+     *      summary="Update the specified Plant in storage",
      *      tags={"Plant"},
-     *      description="Update Plant Herbarium",
+     *      description="Update Plant",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Plant Herbarium",
+     *          description="id of Plant",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -386,19 +373,7 @@ class PlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Plant")
      *      ),
      *      @SWG\Parameter(
-     *          name="general_substrate_lichen_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_substrate_moss_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Plant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="general_substrate_diatom_id",
+     *          name="general_substrate_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Plant")
@@ -520,16 +495,15 @@ class PlantAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var Plant $plant */
         $plant = $this->plantRepository->find($id, \request()->get('relations'));
 
         if (empty($plant)) {
-            return $this->sendError('Plant Herbarium not found');
+            return $this->sendError('Plant not found');
         }
 
         $plant = $this->plantRepository->update($input, $id);
 
-        return $this->sendResponse($plant->toArray(), 'Plant Herbarium updated successfully');
+        return $this->sendResponse($plant->toArray(), 'Plant updated successfully');
     }
 
     /**
@@ -539,13 +513,13 @@ class PlantAPIController extends AppBaseController
      * @throws \Exception
      * @SWG\Delete(
      *      path="/plants/{id}",
-     *      summary="Remove the specified Plant Herbarium from storage",
+     *      summary="Remove the specified Plant from storage",
      *      tags={"Plant"},
-     *      description="Delete Plant Herbarium",
+     *      description="Delete Plant",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Plant Herbarium",
+     *          description="id of Plant",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -573,16 +547,15 @@ class PlantAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var Plant $plant */
-        $plant = $this->plantRepository->find($id, \request()->get('relations'));
+        $plant = $this->plantRepository->find($id, []);
 
         if (empty($plant)) {
-            return $this->sendError('Plant Herbarium not found');
+            return $this->sendError('Plant not found');
         }
 
         $plant->delete();
 
-        return $this->sendResponse($id, 'Plant Herbarium deleted successfully');
+        return $this->sendResponse($id, 'Plant deleted successfully');
     }
 
 
@@ -617,5 +590,23 @@ class PlantAPIController extends AppBaseController
         );
         $plants = PlantResource::collection($plants);
         return $this->sendResponse($plants, 'Plants retrieved successfully');
+    }
+
+
+
+    /**
+     * @return array
+     */
+    private function fieldFloraRelations(): array
+    {
+        return ['generalPhytogeography', 'protection', 'locations', 'media', 'geographicals'];
+    }
+
+    /**
+     * @return array
+     */
+    private function fieldNonFlowerRelations(): array
+    {
+        return ['generalPhytogeography', 'generalHabitat', 'media', 'generalSubstrate','herbarium.collect.actors','herbarium.detect.actors', 'herbarium.transactions', 'herbarium.location'];
     }
 }

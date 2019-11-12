@@ -23,19 +23,19 @@ class UpdatePlantAPIRequest extends APIRequest
 //            'leaf_id' => 'leaf',
 //            'herbaceous_id' => 'herbaceous',
 //        ];
-        $array_id_types = [
-//            'general_ecology_id' => 'ecology',
-            'general_habitat_id' => 'habitat',
-            'general_origin_id' => 'origin',
-            'general_phenology_id' => 'phenology',
-            'general_phytogeography_id' => 'phytogeography',
-            'general_substrate_lichen_id' => 'lichen',
-            'general_substrate_moss_id' => 'moss',
-            'general_substrate_diatom_id' => 'diatom',
-        ];
+//        $array_id_types = [
+////            'general_ecology_id' => 'ecology',
+//            'general_habitat_id' => 'habitat',
+//            'general_origin_id' => 'origin',
+//            'general_phenology_id' => 'phenology',
+//            'general_phytogeography_id' => 'phytogeography',
+//            'general_substrate_id' => 'lichen',
+//            'general_substrate_moss_id' => 'moss',
+//            'general_substrate_diatom_id' => 'diatom',
+//        ];
 
-        $this->validateGeneralIds($array_id_types);
-        $this->validateLifeFormIds($array_id_life_forms);
+//        $this->validateGeneralIds($array_id_types);
+//        $this->validateLifeFormIds($array_id_life_forms);
         return true;
     }
 
@@ -47,30 +47,20 @@ class UpdatePlantAPIRequest extends APIRequest
     public function rules()
     {
         return [
-            'protection_id' => 'required|exists:protections,id',
+            'protection_id' => 'required_if:is_flowering,1|exists:protections,id',
             'organization_id' => 'required_if:is_flowering,0|exists:organizations,id',
             'location_id' => 'required_if:is_flowering,0|exists:locations,id',
             //taxonomy
             'taxonomy_id' => 'required|exists:taxonomies,id',
             'monopoly_of_iran_id' => 'numeric',
             'life_form_id' => 'numeric',
-
-//            'family_id' => 'required|exists:generals,id',
-//            'genus_id' => 'exists:generals,id',
-//            'species_id' => 'exists:generals,id',
-//            'variety_id' => 'exists:generals,id',
-//            'order_id' => 'exists:generals,id',
-//            'class_id' => 'exists:generals,id',
-//            'subspecies_ids.*' => 'exists:generals,id',
-            'is_flowering' => 'integer',
+            'number'=>'required_if:is_flowering,0|numeric|required',
+            'is_flowering' => 'numeric',
             //classification
-//            'general_ecology_id' => 'exists:generals,id',
             'general_habitat_id' => 'exists:generals,id',
             'general_origin_id' => 'exists:generals,id',
-            'general_phytogeography_id' => 'required|exists:generals,id',
-            'general_substrate_lichen_id' => 'exists:generals,id',
-            'general_substrate_moss_id' => 'exists:generals,id',
-            'general_substrate_diatom_id' => 'exists:generals,id',
+            'general_phytogeography_id' => 'exists:generals,id',
+            'general_substrate_id' => 'exists:generals,id',
         ];
     }
 

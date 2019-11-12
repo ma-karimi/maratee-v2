@@ -224,29 +224,9 @@ class Plant extends BaseModel implements HasMedia
     {
         return $this->hasMany(SeedPlant::class)->latest();
     }
-
-    public function generals(): BelongsToMany
-    {
-        return $this->belongsToMany(General::class,
-            'plant_properties',
-            'plant_herbarium_id',
-            'general_id')
-            ->whereNull('plant_properties.deleted_at')
-            ->withTimestamps();
-    }
-
     public function taxonomy(): BelongsTo
     {
         return $this->belongsTo(Taxonomy::class);
-    }
-
-
-    public function getPropertiesAttribute()
-    {
-        $properties = $this->has('generals') ? $this->generals->groupBy('type') : null;
-        unset($this->generals);
-
-        return $properties;
     }
 
     public function locations(): MorphToMany
@@ -266,10 +246,6 @@ class Plant extends BaseModel implements HasMedia
         return $this->belongsTo(Protection::class);
     }
 
-    public function generalEcology(): BelongsTo
-    {
-        return $this->belongsTo(General::class, 'general_ecology_id');
-    }
 
     public function generalHabitat(): BelongsTo
     {
@@ -286,39 +262,10 @@ class Plant extends BaseModel implements HasMedia
         return $this->belongsTo(General::class, 'general_phytogeography_id');
     }
 
-//    public function cycle()
-//    {
-//        return $this->belongsTo(LifeForm::class, 'cycle_id');
-//    }
-//
-//    public function wooden()
-//    {
-//        return $this->belongsTo(LifeForm::class, 'wooden_id');
-//    }
-//
-//    public function herbaceous()
-//    {
-//        return $this->belongsTo(LifeForm::class, 'herbaceous_id');
-//    }
-//
-//    public function leaf()
-//    {
-//        return $this->belongsTo(LifeForm::class, 'leaf_id');
-//    }
 
-    public function generalLichen(): BelongsTo
+    public function generalSubstrate()
     {
-        return $this->belongsTo(General::class, 'general_substrate_lichen_id');
-    }
-
-    public function generalMoss(): BelongsTo
-    {
-        return $this->belongsTo(General::class, 'general_substrate_moss_id');
-    }
-
-    public function generalDiatom(): BelongsTo
-    {
-        return $this->belongsTo(General::class, 'general_substrate_diatom_id');
+        return $this->belongsTo(General::class, 'general_substrate_id');
     }
 
 
