@@ -78,6 +78,7 @@ abstract class BaseRepository
      * @return array
      */
     abstract public function getFieldsSearchable();
+    abstract public function getFieldsRelations();
 
     /**
      * Paginate records for scaffold.
@@ -92,7 +93,11 @@ abstract class BaseRepository
     public function paginate($perPage, array $search = [], array $with_relations = null, $columns = ['*'])
     {
         $query = $this->allQuery($search);
-        return $query->when($with_relations, function ($query, $with_relations) {
+        return $query
+            ->when(count($this->getFieldsRelations()), function ($query){
+                $query->with($this->getFieldsRelations());
+            })
+            ->when($with_relations, function ($query, $with_relations) {
             return $query->with($with_relations);
         })->paginate($perPage ?? 25, $columns);
     }

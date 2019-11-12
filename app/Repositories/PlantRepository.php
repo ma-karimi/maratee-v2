@@ -82,7 +82,7 @@ class PlantRepository extends BaseRepository
         }else{
             $this->createHub($plant->id, 'locations', [$location->id]);
         }
-//        $this->syncPlantGeneralProperties($taxonomy_input, $plant);
+//        $this->syncPlantGpeneralProperties($taxonomy_input, $plant);
 //        $this->syncPlantTypeProperties($input, $plant);
         return $plant;
     }

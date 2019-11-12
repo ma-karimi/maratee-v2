@@ -23,6 +23,11 @@ class TaxonomyRepository extends BaseRepository
     protected $fieldSearchable = [
 
     ];
+
+
+    protected $fieldRelations = [
+        'family', 'genus', 'species', 'subspecies', 'variety', 'scientific'
+    ];
     /**
      * @var GeneralRepository
      */
