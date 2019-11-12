@@ -312,9 +312,13 @@ class PlantAPIController extends AppBaseController
     public function show($id)
     {
 
-        $plant = $this->plantRepository->find($id,
-            (int)request()->get('is_flowering') == 1 ? $this->fieldFloraRelations() : Arr::except($this->fieldNonFlowerRelations(), 'herbarium.transactions')
-        );
+        $plant = $this->plantRepository->find($id);
+        if ($plant->is_flowering) {
+            $plant->load($this->fieldFloraRelations());
+        } else {
+            $plant->load(Arr::except($this->fieldNonFlowerRelations(), 'herbarium.transactions'));
+        }
+
         if (empty($plant)) {
             return $this->sendError('Plant not found');
         }
