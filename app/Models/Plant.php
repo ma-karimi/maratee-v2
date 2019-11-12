@@ -232,9 +232,9 @@ class Plant extends BaseModel implements HasMedia
         return $this->belongsTo(Organization::class);
     }
 
-    public function protection(): BelongsTo
+    public function protection()
     {
-        return $this->belongsTo(Protection::class, 'protection_id');
+        return $this->belongsTo(Protection::class);
     }
 
 

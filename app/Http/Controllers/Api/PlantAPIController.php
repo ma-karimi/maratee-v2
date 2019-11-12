@@ -64,7 +64,7 @@ class PlantAPIController extends AppBaseController
         $plants = $this->plantRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            (int)$request->is_flowering === 1 ? $this->fieldFloraRelations() : $this->fieldNonFlowerRelations()
+            $request->is_flowering == 1 ? $this->fieldFloraRelations() : $this->fieldNonFlowerRelations()
         );
         return $this->sendResponse($plants->toArray(), 'Plants retrieved successfully');
     }
@@ -313,7 +313,7 @@ class PlantAPIController extends AppBaseController
     {
 
         $plant = $this->plantRepository->find($id,
-            (int)request()->is_flowering === 1 ? $this->fieldFloraRelations() : Arr::except($this->fieldNonFlowerRelations(), 'herbarium.transactions')
+            (int)request()->is_flowering == 1 ? $this->fieldFloraRelations() : Arr::except($this->fieldNonFlowerRelations(), 'herbarium.transactions')
         );
         if (empty($plant)) {
             return $this->sendError('Plant not found');
