@@ -92,6 +92,11 @@ class Herbarium extends BaseModel implements HasMedia
 
     protected $appends = ['tip_picture', 'visit', 'borrow', 'exchange_receive', 'exchange_send'];
 
+    public function plant()
+    {
+        return $this->belongsTo(Plant::class, 'taxonomy_id', 'taxonomy_id');
+    }
+
     public function determine()
     {
         return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 1);

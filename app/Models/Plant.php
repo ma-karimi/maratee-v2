@@ -143,7 +143,6 @@ class Plant extends BaseModel implements HasMedia
 
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
 
-    protected $casts = ['is_flowering' => 'boolean'];
     protected $appends = ['monopoly_of_iran', 'plant_geographicals', 'life_form'];
     /**
      * The database table used by the model.
@@ -267,7 +266,7 @@ class Plant extends BaseModel implements HasMedia
 
     public function herbarium()
     {
-        return $this->is_flowering == 0 ? $this->hasOne(Herbarium::class, 'taxonomy_id') : null;
+        return $this->is_flowering == 0 ? $this->hasOne(Herbarium::class, 'taxonomy_id', 'taxonomy_id') : null;
     }
 }
 

@@ -63,7 +63,7 @@ class HerbariumAPIController extends AppBaseController
         $herbariums = $this->herbariumRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            $this->fieldRelations()
         );
 
         return $this->sendResponse($herbariums->toArray(), 'Herbariums retrieved successfully');
@@ -192,7 +192,7 @@ class HerbariumAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Herbarium $herbarium */
-        $herbarium = $this->herbariumRepository->find($id, \request()->get('relations'));
+        $herbarium = $this->herbariumRepository->find($id, $this->fieldRelations());
 
         if ($herbarium === null) {
             return $this->sendError('Herbarium not found');
@@ -287,7 +287,7 @@ class HerbariumAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Herbarium $herbarium */
-        $herbarium = $this->herbariumRepository->find($id, \request()->get('relations'));
+        $herbarium = $this->herbariumRepository->find($id, []);
 
         if ($herbarium === null) {
             return $this->sendError('Herbarium not found');
@@ -340,7 +340,7 @@ class HerbariumAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Herbarium $herbarium */
-        $herbarium = $this->herbariumRepository->find($id, \request()->get('relations'));
+        $herbarium = $this->herbariumRepository->find($id, []);
 
         if ($herbarium === null) {
             return $this->sendError('Herbarium not found');
@@ -578,5 +578,10 @@ class HerbariumAPIController extends AppBaseController
         $result = $this->herbariumRepository->storeAction($id, $input, 3);
 
         return $this->sendResponse($result->toArray(), 'Plant Action saved successfully');
+    }
+
+    public function fieldRelations()
+    {
+        return ['location.city.province.country','location.province.country', 'taxonomy', 'plant', 'organization'];
     }
 }

@@ -15,7 +15,7 @@ class HerbariumRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-
+        'plant:is_flowering' => 1
     ];
 
     /**

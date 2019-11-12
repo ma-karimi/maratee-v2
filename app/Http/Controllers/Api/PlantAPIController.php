@@ -313,7 +313,7 @@ class PlantAPIController extends AppBaseController
     {
 
         $plant = $this->plantRepository->find($id);
-        if ($plant->is_flowering) {
+        if ($plant->is_flowering == 1) {
             $plant->load($this->fieldFloraRelations());
         } else {
             $plant->load(Arr::except($this->fieldNonFlowerRelations(), 'herbarium.transactions'));
