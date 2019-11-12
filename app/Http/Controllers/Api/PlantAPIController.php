@@ -64,9 +64,25 @@ class PlantAPIController extends AppBaseController
         $plants = $this->plantRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            (int) $request->is_flowering === 1 ? $this->fieldFloraRelations() : $this->fieldNonFlowerRelations()
+            (int)$request->is_flowering === 1 ? $this->fieldFloraRelations() : $this->fieldNonFlowerRelations()
         );
         return $this->sendResponse($plants->toArray(), 'Plants retrieved successfully');
+    }
+
+    /**
+     * @return array
+     */
+    private function fieldFloraRelations(): array
+    {
+        return ['generalPhytogeography', 'taxonomy', 'protection', 'locations', 'media', 'geographicals'];
+    }
+
+    /**
+     * @return array
+     */
+    private function fieldNonFlowerRelations(): array
+    {
+        return ['generalPhytogeography', 'taxonomy', 'generalHabitat', 'media', 'generalSubstrate', 'herbarium.collect.actors', 'herbarium.detect.actors', 'herbarium.transactions', 'herbarium.location'];
     }
 
     /**
@@ -297,7 +313,7 @@ class PlantAPIController extends AppBaseController
     {
 
         $plant = $this->plantRepository->find($id,
-            (int) request()->is_flowering === 1 ? $this->fieldFloraRelations() : Arr::except($this->fieldNonFlowerRelations(), 'herbarium.transactions')
+            (int)request()->is_flowering === 1 ? $this->fieldFloraRelations() : Arr::except($this->fieldNonFlowerRelations(), 'herbarium.transactions')
         );
         if (empty($plant)) {
             return $this->sendError('Plant not found');
@@ -558,7 +574,6 @@ class PlantAPIController extends AppBaseController
         return $this->sendResponse($id, 'Plant deleted successfully');
     }
 
-
     public function exportExcel(Request $request)
     {
         $relations = [
@@ -590,23 +605,5 @@ class PlantAPIController extends AppBaseController
         );
         $plants = PlantResource::collection($plants);
         return $this->sendResponse($plants, 'Plants retrieved successfully');
-    }
-
-
-
-    /**
-     * @return array
-     */
-    private function fieldFloraRelations(): array
-    {
-        return ['generalPhytogeography', 'protection', 'locations', 'media', 'geographicals'];
-    }
-
-    /**
-     * @return array
-     */
-    private function fieldNonFlowerRelations(): array
-    {
-        return ['generalPhytogeography', 'generalHabitat', 'media', 'generalSubstrate','herbarium.collect.actors','herbarium.detect.actors', 'herbarium.transactions', 'herbarium.location'];
     }
 }
