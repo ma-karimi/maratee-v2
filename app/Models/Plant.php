@@ -273,6 +273,11 @@ class Plant extends BaseModel implements HasMedia
     {
         return $this->belongsToMany(Geographical::class, 'plant_geographicals');
     }
+
+    public function herbarium()
+    {
+        return $this->is_flowering == 0 ? $this->hasOne(Herbarium::class, 'taxonomy_id') : null;
+    }
 }
 
 
