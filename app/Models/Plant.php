@@ -142,16 +142,7 @@ class Plant extends BaseModel implements HasMedia
     public const LIFE_FORM = [1=> 'annual', 2=>'perennial' , 3=>'tree' , 4=>'shrubs'];
 
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
-    public static $rules = [
-        'protection_id' => 'required|exists:protections,id',
-        'monopoly_of_iran_id' => 'numeric',
-        'taxonomy_id' => 'required|exists:taxonomies,id',
-        'general_phytogeography_id' => 'required|exists:generals,id',
-        //life_form
-        'cycle_id' => 'exists:life_forms,id',
-        'wooden_id' => 'exists:life_forms,id',
-        'herbaceous_id' => 'exists:life_forms,id',
-    ];
+
     protected $casts = ['is_flowering' => 'boolean'];
     protected $appends = ['monopoly_of_iran', 'plant_geographicals', 'life_form'];
     /**
@@ -243,7 +234,7 @@ class Plant extends BaseModel implements HasMedia
 
     public function protection(): BelongsTo
     {
-        return $this->belongsTo(Protection::class);
+        return $this->belongsTo(Protection::class, 'protection_id');
     }
 
 
