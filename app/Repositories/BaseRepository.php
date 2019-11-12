@@ -93,7 +93,7 @@ abstract class BaseRepository
     {
         $query = $this->allQuery($search);
         return $query
-            ->when(!empty($this->fieldRelations) && count($this->fieldRelations), function ($query){
+            ->when(count($this->fieldRelations), function ($query){
                 $query->with($this->fieldRelations);
             })
             ->when($with_relations, function ($query, $with_relations) {
