@@ -61,6 +61,17 @@ class TaxonomyRepository extends BaseRepository
         return $this->fieldSearchable;
     }
 
+
+    /**
+     * Return relations fields
+     *
+     * @return array
+     */
+    public function getFieldsRelations()
+    {
+        return $this->fieldRelations;
+    }
+
     /**
      * Configure the Model
      **/
