@@ -62,7 +62,7 @@ class TaxonomyAPIController extends AppBaseController
         $taxonomies = $this->taxonomyRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            $this->fieldRelations()
         );
 
         return $this->sendResponse($taxonomies->toArray(), 'Taxonomies retrieved successfully');
@@ -209,7 +209,7 @@ class TaxonomyAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Taxonomy $taxonomy */
-        $taxonomy = $this->taxonomyRepository->find($id, \request()->get('relations'));
+        $taxonomy = $this->taxonomyRepository->find($id, $this->fieldRelations());
 
         if ($taxonomy === null) {
             return $this->sendError('Taxonomy not found');
@@ -435,5 +435,13 @@ class TaxonomyAPIController extends AppBaseController
         $taxonomies = $this->taxonomyRepository->get($request);
 
         return $this->sendResponse($taxonomies->toArray(), 'Taxonomies retrieved successfully');
+    }
+
+    /**
+     * @return array
+     */
+    private function fieldRelations(): array
+    {
+        return ['family', 'genus', 'species', 'subspecies', 'variety', 'scientific'];
     }
 }

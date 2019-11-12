@@ -92,11 +92,7 @@ abstract class BaseRepository
     public function paginate($perPage, array $search = [], array $with_relations = null, $columns = ['*'])
     {
         $query = $this->allQuery($search);
-        return $query
-            ->when(count($this->fieldRelations), function ($query){
-                $query->with($this->fieldRelations);
-            })
-            ->when($with_relations, function ($query, $with_relations) {
+        return $query->when($with_relations, function ($query, $with_relations) {
             return $query->with($with_relations);
         })->paginate($perPage ?? 25, $columns);
     }

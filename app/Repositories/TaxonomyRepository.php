@@ -24,10 +24,6 @@ class TaxonomyRepository extends BaseRepository
 
     ];
 
-
-    public $fieldRelations = [
-        'family', 'genus', 'species', 'subspecies', 'variety', 'scientific'
-    ];
     /**
      * @var GeneralRepository
      */
