@@ -24,7 +24,7 @@ class PlantGeographical extends BaseModel
 
     public static $rules = [
         'plant_id' => 'required|exists:plants,id',
-        'geographical_ids' => 'required|array',
+//        'geographical_ids' => 'required|array',
         'geographical_ids.*' => 'required|exists:geographicals,id'
     ];
 }
