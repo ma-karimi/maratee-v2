@@ -21,6 +21,7 @@ class CreatePaleontologiesTable extends Migration
             $table->string('barcode_no')->nullable();
             $table->text('move_status')->nullable();
             //location in collection
+
             $table->string('salon')->nullable();
             $table->integer('closet')->nullable();
             $table->integer('drawer')->nullable();

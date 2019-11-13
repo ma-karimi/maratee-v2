@@ -95,29 +95,18 @@ class OriginalGeneralTableSeeder extends Seeder
         ['en' => 'Equisetum'],
     ];
     public $substrates = [
-        ['name' =>  'lichen', 'type' => 'lichen',
-            'children' => [
-                ['name' => 'Tree', 'type' => 'substrate'],
-                ['name' => 'Wood', 'type' => 'substrate'],
-                ['name' => 'Stone', 'type' => 'substrate'],
-                ['name' => 'Rock', 'type' => 'substrate'],
-                ['name' => 'Soil', 'type' => 'substrate'],
-                ['name' => 'Moss', 'type' => 'substrate'],
-                ['name' => 'Building', 'type' => 'substrate'],
-            ]
-        ],
-        ['name' =>  'Moss', 'type' => 'moss',
-            'children' => [
-                ['name'  => 'Tree', 'type' => 'substrate'],
-                ['name' => 'Soil', 'type' => 'substrate'],
-            ]
-        ],
-        ['name' =>  'Diatom', 'type' => 'diatom',
-            'children' => [
-                ['name' => 'Sweet water', 'type' => 'substrate'],
-                ['name' => 'Salty water', 'type' => 'substrate'],
-            ]
-        ]
+
+        ['name' => 'Tree', 'type' => 'lichen'],
+        ['name' => 'Wood', 'type' => 'lichen'],
+        ['name' => 'Stone', 'type' => 'lichen'],
+        ['name' => 'Rock', 'type' => 'lichen'],
+        ['name' => 'Soil', 'type' => 'lichen'],
+        ['name' => 'Moss', 'type' => 'lichen'],
+        ['name' => 'Building', 'type' => 'lichen'],
+        ['name' => 'Tree', 'type' => 'moss'],
+        ['name' => 'Soil', 'type' => 'moss'],
+        ['name' => 'Sweet water', 'type' => 'diatom'],
+        ['name' => 'Salty water', 'type' => 'diatom'],
     ];
 
     /**
@@ -182,11 +171,6 @@ class OriginalGeneralTableSeeder extends Seeder
             $general = General::create(
                 ['name' => $type['name'], 'type' => $type['type']]
             );
-            foreach ($type['children'] as $chid) {
-                General::create(
-                    ['name' => $chid['name'], 'type' => $chid['type'], 'parent_id' => $general->id]
-                );
-            }
         }
 
     }

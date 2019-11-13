@@ -1,0 +1,3 @@
+UPDATE `generals` SET `type` = 'lichen' WHERE `generals`.`parent_id` = 59
+UPDATE `generals` SET `type` = 'moss' WHERE `generals`.`parent_id` = 67
+UPDATE `generals` SET `type` = 'diatom' WHERE `generals`.`parent_id` = 70
