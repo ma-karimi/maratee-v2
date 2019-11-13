@@ -36,10 +36,9 @@ class Paleontology extends BaseModel implements HasMedia
         'field_no' => 'string',
         'barcode_no' => 'string',
         'move_status' => 'string',
-        'salon' => 'string',
+
         'update_frequency' => 'string',
-        'closet' => 'integer',
-        'drawer' => 'integer',
+        'location_in_collection' => 'integer',
         'pieces' => 'integer',
         'geology_age_era_id' => 'integer|exists:geology_ages,id',
         'geology_age_epoch_id' => 'integer|exists:geology_ages,id',

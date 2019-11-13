@@ -130,21 +130,7 @@ class PaleontologyAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
      *      @SWG\Parameter(
-     *          name="salon",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Paleontology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="closet",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Paleontology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="drawer",
+     *          name="location_in_collection",
      *          in="body",
      *          description="Paleontology that should be stored",
      *          required=false,
@@ -396,21 +382,7 @@ class PaleontologyAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
      *      @SWG\Parameter(
-     *          name="salon",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Paleontology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="closet",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Paleontology")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="drawer",
+     *          name="location_in_collection",
      *          in="body",
      *          description="Paleontology that should be stored",
      *          required=false,
