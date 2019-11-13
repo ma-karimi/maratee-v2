@@ -133,6 +133,14 @@ class Paleontology extends BaseModel implements HasMedia
     }
 
     /**
+     * @return BelongsTo
+     */
+    public function generalPlantType(): BelongsTo
+    {
+        return $this->belongsTo(General::class, 'general_plant_type_id');
+    }
+
+    /**
      * @return HasOne
      */
     public function locality(): HasOne
@@ -164,6 +172,6 @@ class Paleontology extends BaseModel implements HasMedia
         return $this->belongsToMany(Map::class,
             'paleontology_maps',
             'paleontology_id',
-            'map_id');
+            'map_id')->whereNull('paleontology_maps.deleted_at');
     }
 }

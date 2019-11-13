@@ -64,7 +64,7 @@ class PaleontologyAPIController extends AppBaseController
         $paleontologies = $this->paleontologyRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            $this->fieldRelations()
         );
 
         return $this->sendResponse($paleontologies->toArray(), 'Paleontologies retrieved successfully');
@@ -305,7 +305,7 @@ class PaleontologyAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Paleontology $paleontology */
-        $paleontology = $this->paleontologyRepository->find($id, \request()->get('relations'));
+        $paleontology = $this->paleontologyRepository->find($id, $this->fieldRelations());
 
         if (empty($paleontology)) {
             return $this->sendError('Paleontology not found');
@@ -565,7 +565,7 @@ class PaleontologyAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Paleontology $paleontology */
-        $paleontology = $this->paleontologyRepository->find($id, \request()->get('relations'));
+        $paleontology = $this->paleontologyRepository->find($id);
 
         if (empty($paleontology)) {
             return $this->sendError('Paleontology not found');
@@ -801,5 +801,9 @@ class PaleontologyAPIController extends AppBaseController
         $result = $this->paleontologyRepository->storeAction($id, $input, 3);
 
         return $this->sendResponse($result->toArray(), 'Paleontology Action saved successfully');
+    }
+
+    private function fieldRelations(){
+        return ['taxonomy_id', 'generalClass', 'generalOrder', 'geologyAgePeriod', 'geologyAgeStage', 'geologyAgeEpoch', 'geologyAgeEra', 'generalPlantType', 'locality', 'maps', 'collect', 'determine', 'media'];
     }
 }

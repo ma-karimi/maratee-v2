@@ -19,7 +19,7 @@ class CreateMediasTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('location_id')->nullable();
             $table->text('description')->nullable();
-            $table->tinyInteger('media_type')->default(2)->comment('1=> sketch , 2=> picture');
+            $table->tinyInteger('media_type')->default(2)->comment('1=> sketch , 2=> picture,3=>relevant correspondence, 4=>treatment document, 5=>expense documents');
             $table->string('reference')->nullable();
 //          morphs:  'transaction , plant herbarium, paleontology, product, botanical, user, article, action, chromosome, cryo, seed, garden'
 
