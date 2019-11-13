@@ -13,7 +13,7 @@ class ChangeLocationCollectionPaleontologiesTable extends Migration
      */
     public function up()
     {
-        Schema::table('paleontlogies', function (Blueprint $table) {
+        Schema::table('paleontologies', function (Blueprint $table) {
             $table->renameColumn('drawer', 'location_in_collection');
         });
     }
