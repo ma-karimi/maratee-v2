@@ -578,6 +578,57 @@ class PlantAPIController extends AppBaseController
         return $this->sendResponse($id, 'Plant deleted successfully');
     }
 
+    /**
+     * @param int $id
+     * @return Response
+     *
+     * @SWG\Post(
+     *      path="/plants/{id}/media",
+     *      tags={"Plant"},
+     *      description="Store Plant Media",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Plant",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     * @throws \Exception
+     */
+    public function media($id)
+    {
+        $plant = $this->plantRepository->find($id, []);
+
+        if (empty($plant)) {
+            return $this->sendError('Plant not found');
+        }
+
+        $this->plantRepository->storeMedia(\request()->all(), $plant);
+
+        return $this->sendResponse($id, 'Plant Media Stored successfully');
+    }
+
     public function exportExcel(Request $request)
     {
         $relations = [

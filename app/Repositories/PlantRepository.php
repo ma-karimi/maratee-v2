@@ -81,7 +81,7 @@ class PlantRepository extends BaseRepository
         }else{
             $this->createHub($plant->id, 'locations', [$location->id]);
         }
-        $this->updateMedia($input, $plant);
+        $this->storeMedia($input, $plant);
         return $plant;
     }
 
@@ -168,7 +168,7 @@ class PlantRepository extends BaseRepository
         }
 //        $this->syncPlantGeneralProperties($taxonomy_input, $plant);
 //        $this->syncPlantTypeProperties($input, $plant);
-        $this->updateMedia($input, $plant);
+        $this->storeMedia($input, $plant);
         return $plant;
     }
 
@@ -209,7 +209,7 @@ class PlantRepository extends BaseRepository
      * @param $input
      * @param $model
      */
-    private function updateMedia($input, $model): void
+    public function storeMedia($input, $model): void
     {
         $media_input = [
             'date' => $input['date'] ?? null,
