@@ -40,7 +40,7 @@ class HerbariumRepository extends BaseRepository
     {
         $model = parent::update($input, $id);
 
-        $this->updateMedia($input, $model);
+        $this->storeMedia($input, $model);
 
         return $model;
     }
@@ -49,7 +49,7 @@ class HerbariumRepository extends BaseRepository
      * @param $input
      * @param $model
      */
-    private function updateMedia($input, $model): void
+    public function storeMedia($input, $model): void
     {
         $media_input = [
             'date' => $input['date'] ?? null,

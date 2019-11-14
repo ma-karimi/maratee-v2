@@ -94,6 +94,8 @@ Route::apiResource('generals', 'GeneralAPIController');
 
 Route::post('plants/{id}/media', 'PlantAPIController@media');
 Route::apiResource('plants', 'PlantAPIController');
+
+Route::post('herbariums/{id}/media', 'HerbariumAPIController@media');
 Route::apiResource('herbariums', 'HerbariumAPIController');
 
 Route::apiResource('action_hubs', 'ActionHubAPIController');

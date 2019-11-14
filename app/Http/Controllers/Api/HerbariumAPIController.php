@@ -584,4 +584,55 @@ class HerbariumAPIController extends AppBaseController
     {
         return ['location.city.province.country','location.province.country', 'taxonomy', 'plant', 'organization'];
     }
+
+    /**
+     * @param int $id
+     * @return Response
+     *
+     * @SWG\Post(
+     *      path="/herbariums/{id}/media",
+     *      tags={"Herbarium"},
+     *      description="Store Herbarium Media",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Herbarium",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     * @throws \Exception
+     */
+    public function media($id)
+    {
+        $plant = $this->herbariumRepository->find($id, []);
+
+        if (empty($plant)) {
+            return $this->sendError('Herbarium not found');
+        }
+
+        $this->herbariumRepository->storeMedia(\request()->all(), $plant);
+
+        return $this->sendResponse($id, 'Herbarium Media Stored successfully');
+    }
 }
