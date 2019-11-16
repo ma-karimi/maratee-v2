@@ -2,6 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Models\ActionHub;
+use App\Models\ActorHub;
+use App\Models\Herbarium;
 use App\Models\Location;
 use App\Models\LocationHub;
 use App\Models\Plant;
@@ -33,6 +36,14 @@ class PlantRepository extends BaseRepository
      * @var HerbariumRepository
      */
     private $herbariumRepo;
+    /**
+     * @var ActionHubRepository
+     */
+    private $actionHubRepo;
+    /**
+     * @var ActorHubRepository
+     */
+    private $actorHubRepo;
 
     /**
      * PlantRepository constructor.
@@ -40,14 +51,18 @@ class PlantRepository extends BaseRepository
      * @param Taxonomy $taxonomy_model
      * @param LocationRepository $locationRepo
      * @param HerbariumRepository $herbariumRepo
+     * @param ActionHubRepository $actionHubRepo
+     * @param ActorHubRepository $actorHubRepo
      * @throws \Exception
      */
-    public function __construct(Application $app, Taxonomy $taxonomy_model, LocationRepository $locationRepo, HerbariumRepository $herbariumRepo)
+    public function __construct(Application $app, Taxonomy $taxonomy_model, LocationRepository $locationRepo, HerbariumRepository $herbariumRepo, ActionHubRepository $actionHubRepo, ActorHubRepository $actorHubRepo)
     {
         parent::__construct($app);
         $this->taxonomy_model = $taxonomy_model;
         $this->locationRepo = $locationRepo;
         $this->herbariumRepo = $herbariumRepo;
+        $this->actionHubRepo = $actionHubRepo;
+        $this->actorHubRepo = $actorHubRepo;
     }
 
     /**
@@ -77,11 +92,15 @@ class PlantRepository extends BaseRepository
         $plant = $this->createPlant($input);
         $location = $this->createLocation($input);
         if (!isset($plant->is_flowering)) {
-            $this->herbariumRepo->create($this->herbariumData($input, $location->id));
-        }else{
+            $herbarium = $this->herbariumRepo->create($this->herbariumData($input, $location->id));
+            $this->storeDetermine($input, $herbarium->id);
+            $this->storeCollect($input, $herbarium->id);
+        } else {
             $this->createHub($plant->id, 'locations', [$location->id]);
         }
         $this->storeMedia($input, $plant);
+
+
         return $plant;
     }
 
@@ -154,6 +173,27 @@ class PlantRepository extends BaseRepository
     }
 
     /**
+     * @param $input
+     * @param $model
+     */
+    public function storeMedia($input, $model): void
+    {
+        $media_input = [
+            'date' => $input['date'] ?? null,
+            'user_id' => $input['user_id'] ?? null,
+            'location_id' => $input['location_id'] ?? null,
+            'description' => $input['media_description'] ?? null,
+            'media_type' => $input['media_type'] ?? 2,
+            'reference' => $input['reference'] ?? null,
+        ];
+        //store media
+        if (request()->hasFile('file')) {
+            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('media');
+            $media_record->update($media_input);
+        }
+    }
+
+    /**
      * @param array $input
      * @param $id
      * @return Model|void
@@ -165,6 +205,8 @@ class PlantRepository extends BaseRepository
         $plant = $this->updatePlant($input, $id);
         if (!isset($plant->is_flowering)) {
             $this->herbariumRepo->update($this->herbariumData($input, $input['location_id']), $input['herbarium_id']);
+            $this->storeDetermine($input, $input['herbarium_id']);
+            $this->storeCollect($input, $input['herbarium_id']);
         }
 //        $this->syncPlantGeneralProperties($taxonomy_input, $plant);
 //        $this->syncPlantTypeProperties($input, $plant);
@@ -203,27 +245,6 @@ class PlantRepository extends BaseRepository
 //            'physical_tip_qt' => $input['physical_tip_qt'] ?? null
         ];
         return parent::update($plant_input, $id);
-    }
-
-    /**
-     * @param $input
-     * @param $model
-     */
-    public function storeMedia($input, $model): void
-    {
-        $media_input = [
-            'date' => $input['date'] ?? null,
-            'user_id' => $input['user_id'] ?? null,
-            'location_id' => $input['location_id'] ?? null,
-            'description' => $input['media_description'] ?? null,
-            'media_type' => $input['media_type'] ?? 2,
-            'reference' => $input['reference'] ?? null,
-        ];
-        //store media
-        if (request()->hasFile('file')) {
-            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('media');
-            $media_record->update($media_input);
-        }
     }
 
     /**
@@ -271,14 +292,71 @@ class PlantRepository extends BaseRepository
     }
 
     /**
+     *
      * @param $input
      * @param Model $plant
      * @return mixed
+     * @deprecated
      */
     private function syncPlantTypeProperties($input, $plant)
     {
         if (!empty($input['plant_types'])) {
             $plant->generals()->sync($input['plant_types']);
+        }
+    }
+
+    private function storeDetermine($input, $herbarium_id)
+    {
+        $determines = $input['determines'];
+
+        $action_hub_id = $this->actionHubRepo->firstOrCreate([
+            'action_id' => 1,
+            'actionable_type' => Herbarium::class,
+            'actionable_id' => $herbarium_id
+        ]);
+
+        $this->actorHubRepo
+            ->where('actorable_id', $action_hub_id)
+            ->where('actorable_type', ActionHub::class)
+            ->whereNotIn('actor_id', $determines)
+            ->delete();
+        if (count($determines)) {
+            foreach ($determines as $item) {
+                $this->actorHubRepo->firstOrCreate([
+                    'actorable_id' => $action_hub_id,
+                    'actorable_type' => ActionHub::class,
+                    'actor_id' => $item,
+                ]);
+            }
+        }
+    }
+
+    private function storeCollect($input, $herbarium_id)
+    {
+        $collectors = $input['collectors'];
+
+        $action_hub_id = $this->actionHubRepo->updateOrCreate(
+            [
+                'action_id' => 2,
+                'actionable_type' => Herbarium::class,
+                'actionable_id' => $herbarium_id
+            ],
+            [
+                'date' => $input['date'] ?? null
+            ]);
+        $this->actorHubRepo
+            ->where('actorable_id', $action_hub_id)
+            ->where('actorable_type', ActionHub::class)
+            ->whereNotIn('actor_id', $collectors)
+            ->delete();
+        if (count($collectors)) {
+            foreach ($collectors as $item) {
+                $this->actorHubRepo->firstOrCreate([
+                    'actorable_id' => $action_hub_id,
+                    'actorable_type' => ActionHub::class,
+                    'actor_id' => $item,
+                ]);
+            }
         }
     }
 }
