@@ -82,7 +82,7 @@ class PlantAPIController extends AppBaseController
      */
     private function fieldNonFlowerRelations(): array
     {
-        return ['generalPhytogeography', 'taxonomy', 'generalHabitat', 'media', 'generalSubstrate.parent', 'herbarium.collect.actors', 'herbarium.determine.actors', 'herbarium.transactions', 'herbarium.location.province.country', 'herbarium.location.city.province.country'];
+        return ['generalPhytogeography', 'taxonomy', 'generalHabitat', 'media', 'generalSubstrate.parent', 'herbarium.collect.actors', 'herbarium.determine.actors', 'herbarium.transactions', 'herbarium.location.province.country', 'herbarium.location.city.province.country', 'herbarium.location.village'];
     }
 
     /**

@@ -105,6 +105,8 @@ class Location extends BaseModel
     ];
 
 
+    protected $with = ['city.province.country', 'province.country', 'village'];
+
     /**
      * @return HasMany
      */
