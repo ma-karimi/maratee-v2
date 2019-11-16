@@ -25,13 +25,13 @@ trait LocationAccessor
 
 
             $s10 = explode('°', $DMS[0]);
-            $s20 = explode('′', $s10[1])[0];
-            $s30 = explode('″', $s10[1])[0];
+            $s20 = explode('′', $s10[1]);
+            $s30 = explode('″', $s20[1]);
             $DMSN = [$s10[0], $s20[0],$s30[0]];
 
             $s11 = explode('°', $DMS[1]);
-            $s21 = explode('′', $s11[1])[0];
-            $s31 = explode('″', $s11[1])[0];
+            $s21 = explode('′', $s11[1]);
+            $s31 = explode('″', $s21[1]);
             $DMSE = [$s11[0], $s21[0],$s31[0]];
 
             return [
