@@ -41,9 +41,7 @@ trait PlantScope
         // this logic should happen for LIKE/EQUAL operators only
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
             $builder->whereHas('locations', function ($query) use ($constraint) {
-                return $query->whereHas('location', function ($key) use ($constraint) {
-                    return $key->where('address_en', $constraint->getOperator(), $constraint->getValue());
-                });
+                    return $query->where('address_en', $constraint->getOperator(), $constraint->getValue());
 
             });
 
