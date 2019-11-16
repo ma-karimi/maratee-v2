@@ -23,7 +23,7 @@ trait LocationAccessor
             $DMS = (new Geotools())->convert($coordinate)->toDMS();
             return [
                 'UTM' => [$value->getLng(), $value->getLat()],
-                'DMS' => $DMS
+                'DMS' => explode(', ', $DMS)
             ];
         }
 
