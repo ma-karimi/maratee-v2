@@ -48,7 +48,7 @@ class UpdatePlantAPIRequest extends APIRequest
     {
         return [
             'protection_id' => 'required_if:is_flowering,1|exists:protections,id',
-            'organization_id' => 'required_if:is_flowering,0|exists:organizations,id',
+//            'organization_id' => 'required_if:is_flowering,0|exists:organizations,id',
             'location_id' => 'required_if:is_flowering,0|exists:locations,id',
             //taxonomy
             'taxonomy_id' => 'required|exists:taxonomies,id',
