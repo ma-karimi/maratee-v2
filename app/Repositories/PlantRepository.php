@@ -112,7 +112,7 @@ class PlantRepository extends BaseRepository
     {
         $plant_input = [
             'taxonomy_id' => $input['taxonomy_id'],
-            'protection_id' => $input['protection_id'],
+            'protection_id' => $input['protection_id'] ?? null,
             'general_phytogeography_id' => $input['general_phytogeography_id'],
             'general_habitat_id' => $input['general_habitat_id'] ?? null,
             'general_origin_id' => $input['general_origin_id'] ?? null,
@@ -223,7 +223,7 @@ class PlantRepository extends BaseRepository
     {
         $plant_input = [
             'taxonomy_id' => $input['taxonomy_id'],
-            'protection_id' => $input['protection_id'],
+            'protection_id' => $input['protection_id'] ?? null,
             'general_phytogeography_id' => $input['general_phytogeography_id'],
             'general_habitat_id' => $input['general_habitat_id'] ?? null,
             'general_origin_id' => $input['general_origin_id'] ?? null,
