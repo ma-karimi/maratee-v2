@@ -2,7 +2,7 @@
 
 use Faker\Factory as Faker;
 use App\Models\PlantingApplication;
-use App\Repositories\PlantApplicationRepository;
+use App\Repositories\PlaceRepository;
 
 trait MakePlantingApplicationTrait
 {
@@ -14,8 +14,8 @@ trait MakePlantingApplicationTrait
      */
     public function makePlantingApplication($plantingApplicationFields = [])
     {
-        /** @var PlantApplicationRepository $plantingApplicationRepo */
-        $plantingApplicationRepo = \App::make(PlantApplicationRepository::class);
+        /** @var PlaceRepository $plantingApplicationRepo */
+        $plantingApplicationRepo = \App::make(PlaceRepository::class);
         $theme = $this->fakePlantingApplicationData($plantingApplicationFields);
         return $plantingApplicationRepo->create($theme);
     }

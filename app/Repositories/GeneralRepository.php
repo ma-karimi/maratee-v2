@@ -3,13 +3,15 @@
 namespace App\Repositories;
 
 use App\Models\General;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class GeneralRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:25 am UTC
-*/
-
+ */
 class GeneralRepository extends BaseRepository
 {
     /**
@@ -35,5 +37,15 @@ class GeneralRepository extends BaseRepository
     public function model()
     {
         return General::class;
+    }
+
+    public function allWithType($type)
+    {
+        if (!Arr::has(General::TYPES, $type)) {
+            ValidationException::withMessages(['errors' => ['message' => 'Operation Failed!']]);
+        }
+        return Cache::get($type, function () use ($type) {
+            return $this->model->whereType($type)->get();
+        });
     }
 }

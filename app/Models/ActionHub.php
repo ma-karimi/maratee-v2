@@ -73,7 +73,6 @@ class ActionHub extends BaseModel
         'project_id' => 'exists:projects,id',
         'date' => 'date',
     ];
-    //public static $linguistically = ['description' => false];
 
     /**
      * The database table used by the model.
@@ -88,7 +87,7 @@ class ActionHub extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['description' => 'json'];
+    protected $casts = ['date' => 'date'];
 
     /**
      * The attributes that should be mutated to dates.

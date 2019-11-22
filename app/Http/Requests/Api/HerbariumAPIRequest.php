@@ -4,6 +4,7 @@ namespace App\Http\Requests\Api;
 
 use App\Models\Article;
 use App\Models\City;
+use App\Models\Herbarium;
 use InfyOm\Generator\Request\APIRequest;
 
 class HerbariumAPIRequest extends APIRequest
@@ -25,6 +26,6 @@ class HerbariumAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return City::$rules;
+        return Herbarium::$rules;
     }
 }

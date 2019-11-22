@@ -85,7 +85,7 @@ class Botanical extends BaseModel implements HasMedia
         'protection_id' => 'integer|exists:protections,id',
         'value_id' => 'integer',
         'usage_id' => 'integer',
-        'garden_id' => 'integer|exists:gardens,id',
+        'internal_habitat_id' => 'integer|exists:internal_habitats,id',
         'entrance_to_garden_id' => 'integer',
         'growth_rate_id' => 'integer',
         'first_flowering' => 'date',
@@ -235,7 +235,16 @@ class Botanical extends BaseModel implements HasMedia
         return $this->belongsTo(General::class)->whereType('habitat');
     }
 
-    public function plantingCondition()
+    public function internal_habitat()
+    {
+        return $this->belongsTo(InternalHabitat::class);
+    }
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class)->where('is_herbarium', 1);
+    }
+
+    public function plantingConditions()
     {
         return $this->belongsToMany(
             PlantingCondition::class,

@@ -16,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use function PHPSTORM_META\type;
@@ -245,9 +246,9 @@ abstract class BaseRepository
             $query = $this->model->newQuery();
 
             $model = $query->findOrFail($id);
-
             $model->fill($input);
 
+            Log::info($input);
             $model->save();
             return $model;
         }

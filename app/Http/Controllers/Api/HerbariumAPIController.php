@@ -144,9 +144,8 @@ class HerbariumAPIController extends AppBaseController
      */
     public function store(HerbariumAPIRequest $request)
     {
-        $input = $request->all();
 
-        $herbarium = $this->herbariumRepository->create($input);
+        $herbarium = $this->herbariumRepository->create($request);
 
         return $this->sendResponse($herbarium->toArray(), 'Herbarium saved successfully');
     }
@@ -284,7 +283,6 @@ class HerbariumAPIController extends AppBaseController
      */
     public function update($id, HerbariumAPIRequest $request)
     {
-        $input = $request->all();
 
         /** @var Herbarium $herbarium */
         $herbarium = $this->herbariumRepository->find($id, []);
@@ -293,7 +291,7 @@ class HerbariumAPIController extends AppBaseController
             return $this->sendError('Herbarium not found');
         }
 
-        $herbarium = $this->herbariumRepository->update($input, $id);
+        $herbarium = $this->herbariumRepository->update($request, $id);
 
         return $this->sendResponse($herbarium->toArray(), 'Herbarium updated successfully');
     }
@@ -582,7 +580,7 @@ class HerbariumAPIController extends AppBaseController
 
     public function fieldRelations()
     {
-        return ['location.city.province.country','location.province.country', 'taxonomy', 'plant', 'organization', 'media'];
+        return ['taxonomy', 'plant', 'organization', 'media', 'determine.actors', 'collect.actors', 'location'];
     }
 
     /**

@@ -227,4 +227,5 @@ class Location extends BaseModel
     {
         return $this->morphedByMany(ActionHub::class, 'actionable');
     }
+
 }

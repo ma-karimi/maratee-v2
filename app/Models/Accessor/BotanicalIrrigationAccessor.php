@@ -13,12 +13,16 @@ use Illuminate\Support\Arr;
 
 trait BotanicalIrrigationAccessor
 {
-    public function getAppropriateIrrigationTimeAttribute($value)
+    public function getIrrigationTimeAttribute()
     {
-        return Arr::get(self::IRRIGATION_TIME, $value);
+        return !empty($this->irrigation_time_id) ? Arr::get(self::IRRIGATION_TIME, $this->irrigation_time_id) : null;
     }
-    public function getRequirementAttribute($value)
+    public function getRequirementAttribute()
     {
-        return Arr::get(self::REQUIREMENT, $value);
+        return !empty($this->requirement_id) ? Arr::get(self::REQUIREMENT, $this->requirement_id) : null;
+    }
+    public function getIrrigationAttribute()
+    {
+        return !empty($this->irrigation_id) ? Arr::get(self::IRRIGATIONS, $this->irrigation_id) : null;
     }
 }

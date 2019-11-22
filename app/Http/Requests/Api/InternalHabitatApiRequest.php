@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\Garden;
+use App\Models\InternalHabitat;
 use Illuminate\Foundation\Http\FormRequest;
 
-class GardenApiRequest extends FormRequest
+class InternalHabitatApiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class GardenApiRequest extends FormRequest
      */
     public function rules()
     {
-        return Garden::$rules;
+        return InternalHabitat::$rules;
 
     }
 }

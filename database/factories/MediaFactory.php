@@ -16,7 +16,7 @@ $factory->define(App\Models\Media::class, function (Faker $faker) {
         'location_id' => $faker->randomElement($locations),
         'description' => make_json($faker->text),
         'model_id'=>$faker->numberBetween(1,10),
-        'model_type'=>$faker->randomElement([\App\Models\Herbarium::class, \App\Models\Paleontology::class, \App\Models\Product::class, \App\Models\Botanical::class, \App\Models\Article::class, \App\Models\Action::class, \App\Models\Chromosome::class, \App\Models\Seed::class, \App\Models\CryoBank::class,\App\Models\Transaction::class, \App\Models\Garden::class]),
+        'model_type'=>$faker->randomElement([\App\Models\Herbarium::class, \App\Models\Paleontology::class, \App\Models\Product::class, \App\Models\Botanical::class, \App\Models\Article::class, \App\Models\Action::class, \App\Models\Chromosome::class, \App\Models\Seed::class, \App\Models\CryoBank::class,\App\Models\Transaction::class, \App\Models\InternalHabitat::class]),
         'reference' => make_json($faker->word),
         'collection_name' => $faker->name,
         'file_name' => $faker->name,

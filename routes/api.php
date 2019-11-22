@@ -44,6 +44,8 @@ Route::apiResource('treatments', 'TreatmentAPIController');
 Route::apiResource('paleontologies', 'PaleontologyAPIController');
 Route::apiResource('paleontology_citations', 'PaleontologyCitationAPIController');
 
+
+Route::get('organizations/all', 'OrganizationAPIController@all');
 Route::apiResource('organizations', 'OrganizationAPIController');
 
 Route::apiResource('departments', 'DepartmentAPIController');
@@ -55,6 +57,7 @@ Route::apiResource('connections', 'ConnectionAPIController');
 Route::apiResource('continents', 'ContinentAPIController');
 
 Route::apiResource('soils', 'SoilAPIController');
+Route::get('villages/all', 'VillageAPIController@all');
 
 Route::apiResource('villages', 'VillageAPIController');
 
@@ -81,6 +84,7 @@ Route::apiResource('bio_moleculars', 'BioMolecularAPIController');
 Route::apiResource('seeds', 'SeedAPIController');
 
 Route::apiResource('propagations', 'PropagationAPIController');
+Route::get('provinces/all', 'ProvinceAPIController@all');
 
 Route::apiResource('provinces', 'ProvinceAPIController');
 
@@ -90,6 +94,7 @@ Route::apiResource('projects', 'ProjectAPIController');
 
 Route::apiResource('products', 'ProductAPIController');
 
+Route::get('generals/{type}/all', 'GeneralAPIController@all');
 Route::apiResource('generals', 'GeneralAPIController');
 
 Route::post('plants/{id}/media', 'PlantAPIController@media');
@@ -122,12 +127,15 @@ Route::apiResource('botanical_propagations', 'BotanicalPropagationAPIController'
 
 Route::apiResource('chromosomes', 'ChromosomeAPIController');
 
+Route::get('cities/all', 'CityAPIController@all');
+
 Route::apiResource('cities', 'CityAPIController');
 
 Route::apiResource('collections', 'CollectionAPIController');
 
 Route::apiResource('constituents', 'ConstituentAPIController');
 Route::apiResource('constituent_types', 'ConstituentTypeAPIController');
+Route::get('countries/all', 'CountryAPIController@all');
 
 Route::apiResource('countries', 'CountryAPIController');
 
@@ -138,7 +146,7 @@ Route::apiResource('entries', 'EntryAPIController');
 
 Route::apiResource('entry_hubs', 'EntryHubAPIController');
 
-Route::apiResource('gardens', 'GardenAPIController');
+Route::apiResource('internal_habitats', 'InternalHabitatAPIController');
 
 Route::apiResource('geology_ages', 'GeologyAgeAPIController');
 
@@ -160,7 +168,6 @@ Route::match(['PUT', 'PATCH'], 'medicinal_plants/{medicinal_plant_id}/provinces'
 Route::post('medicinal_plants/{medicinal_plant_id}/constituents', 'MedicinalPlantConstituentAPIController@store');
 Route::match(['PUT', 'PATCH'], 'medicinal_plants/{medicinal_plant_id}/constituents', 'MedicinalPlantConstituentAPIController@update');
 Route::apiResource('medicinal_plants', 'MedicinalPlantAPIController');
-
 
 
 Route::apiResource('medicines', 'MedicineAPIController');

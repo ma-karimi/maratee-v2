@@ -11,6 +11,6 @@ class GardenTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Garden::class, 50)->create();
+        factory(App\Models\InternalHabitat::class, 50)->create();
     }
 }

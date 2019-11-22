@@ -269,7 +269,7 @@ class Plant extends BaseModel implements HasMedia
 
     public function herbarium()
     {
-        return $this->is_flowering == 0 ? $this->hasOne(Herbarium::class, 'taxonomy_id', 'taxonomy_id') : null;
+            return $this->hasOne(Herbarium::class, 'plant_id');
     }
 }
 

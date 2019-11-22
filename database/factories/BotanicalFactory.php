@@ -11,7 +11,8 @@ $factory->define(App\Models\Botanical::class, function (Faker $faker) {
     $origins = \App\Models\General::whereType('origin')->pluck('id')->toArray();
     $soils = \App\Models\Soil::pluck('id')->toArray();
     $protections = \App\Models\Protection::pluck('id')->toArray();
-    $gardens = \App\Models\Garden::pluck('id')->toArray();
+    $internal_habitats = \App\Models\InternalHabitat::pluck('id')->toArray();
+    $organizations = \App\Models\Organization::where('is_herbarium', 1)->pluck('id')->toArray();
     return [
         'taxonomy_id' => $faker->randomElement($plants),
         'height' => 2,
@@ -19,7 +20,7 @@ $factory->define(App\Models\Botanical::class, function (Faker $faker) {
         'wooden_id'=>$faker->numberBetween(1,2),
         'cycle_id'=>$faker->numberBetween(1,12),
         'entrance_to_garden_id'=>$faker->numberBetween(1,12),
-        'garden_id'=>$faker->randomElement($gardens),
+        'organization_id'=>$faker->randomElement($organizations),
         'protection_id'=>$faker->randomElement($protections),
         'flower_color' => $faker->word,
         'fruit_color' => $faker->word,

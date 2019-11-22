@@ -9,7 +9,9 @@
 namespace App\Models\Scope;
 
 
+use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Log;
 use Jedrzej\Searchable\Constraint;
 
 trait PlantScope
@@ -41,7 +43,7 @@ trait PlantScope
         // this logic should happen for LIKE/EQUAL operators only
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
             $builder->whereHas('locations', function ($query) use ($constraint) {
-                    return $query->where('address_en', $constraint->getOperator(), $constraint->getValue());
+                return $query->where('address_en', $constraint->getOperator(), $constraint->getValue());
 
             });
 
@@ -51,4 +53,213 @@ trait PlantScope
         // default logic should be executed otherwise
         return false;
     }
+
+    // use one filter to search in multiple columns
+    protected function processLocations_MinAltitudeFilter(Builder $builder, Constraint $constraint)
+    {
+        // this logic should happen for LIKE/EQUAL operators only
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('locations', function ($query) use ($constraint) {
+                return $query->where('min_altitude', $constraint->getOperator(), $constraint->getValue());
+
+            });
+
+            return true;
+        }
+
+        // default logic should be executed otherwise
+        return false;
+    }
+
+    // use one filter to search in multiple columns
+    protected function processLocations_MaxAltitudeFilter(Builder $builder, Constraint $constraint)
+    {
+        // this logic should happen for LIKE/EQUAL operators only
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('locations', function ($query) use ($constraint) {
+                return $query->where('max_altitude', $constraint->getOperator(), $constraint->getValue());
+
+            });
+
+            return true;
+        }
+
+        // default logic should be executed otherwise
+        return false;
+    }
+
+    protected function processGeographicals_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('geographicals', function ($query) use ($constraint) {
+                return $query->where('id', $constraint->getOperator(), $constraint->getValue());
+
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processLocations_CountryIdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('locations', function ($query) use ($constraint) {
+                return $query->where('country_id', $constraint->getOperator(), $constraint->getValue());
+
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processLocations_CityIdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('locations', function ($query) use ($constraint) {
+                return $query->where('city_id', $constraint->getOperator(), $constraint->getValue());
+
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processLocations_VillageIdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('locations', function ($query) use ($constraint) {
+                return $query->where('village_id', $constraint->getOperator(), $constraint->getValue());
+
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processLocations_ProvinceIdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('locations', function ($query) use ($constraint) {
+                return $query->where('province_id', $constraint->getOperator(), $constraint->getValue());
+
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processLocations_PointFilter(Builder $builder, Constraint $constraint)
+    {
+        $data = $constraint->getValue();
+        if ($constraint->getOperator() === Constraint::OPERATOR_IN) {
+            $builder->whereHas('locations', function ($query) use ($data) {
+                return $query->distance('point', new Point($data[0], $data[1]), 1);
+
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processLocation_PointFilter(Builder $builder, Constraint $constraint)
+    {
+        $data = $constraint->getValue();
+        if ($constraint->getOperator() === Constraint::OPERATOR_IN) {
+
+            $builder
+                ->whereHas('herbarium', function ($herbarium) use ($data) {
+                    return $herbarium->whereHas('location', function ($query) use ($data) {
+                        return $query->distance('point', new Point($data[0], $data[1]), 1);
+                    });
+                });
+
+
+            return true;
+        }
+        return false;
+    }
+    protected function processGeneralSubstrate_TypeFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+
+            $builder
+                ->whereHas('generalSubstrate', function ($substrate) use ($constraint) {
+                        return $substrate->where('type', $constraint->getOperator(), $constraint->getValue());
+                });
+
+
+            return true;
+        }
+        return false;
+    }
+
+
+    protected function processTaxonomy_Authors_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('taxonomy', function ($query) use ($constraint) {
+                return $query
+                    ->whereHas('species', function ($key) use ($constraint) {
+                        return $key->whereHas('authors', function ($author) use ($constraint) {
+                            return $author->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
+                        });
+                    })
+                    ->orWhereHas('subspecies', function ($key) use ($constraint) {
+                        return $key->whereHas('authors', function ($author) use ($constraint) {
+                            return $author->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
+                        });
+                    })
+                    ->orWhereHas('variety', function ($key) use ($constraint) {
+                        return $key->whereHas('authors', function ($author) use ($constraint) {
+                            return $author->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
+                        });
+                    });
+
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processHerbarium_Determine_Actors_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('herbarium', function ($query) use ($constraint) {
+                return $query->whereHas('determine', function ($determine) use ($constraint) {
+                    return $determine->whereHas('actors', function ($key) use ($constraint) {
+                        return $key->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
+                    });
+                });
+
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processHerbarium_Collect_Actors_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('herbarium', function ($query) use ($constraint) {
+                return $query->whereHas('collect', function ($determine) use ($constraint) {
+                    return $determine->whereHas('actors', function ($key) use ($constraint) {
+                        return $key->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
+                    });
+                });
+
+            });
+
+            return true;
+        }
+        return false;
+    }
+
 }

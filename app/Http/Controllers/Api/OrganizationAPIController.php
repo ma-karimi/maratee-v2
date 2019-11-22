@@ -8,13 +8,13 @@ use App\Models\Organization;
 use App\Repositories\OrganizationRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Cache;
 use Response;
 
 /**
  * Class OrganizationController
  * @package App\Http\Controllers\Api
  */
-
 class OrganizationAPIController extends AppBaseController
 {
     /** @var  OrganizationRepository */
@@ -405,5 +405,46 @@ class OrganizationAPIController extends AppBaseController
         $organization->delete();
 
         return $this->sendResponse($id, 'Organization deleted successfully');
+    }
+
+    /**
+     * @return Response
+     *
+     * @SWG\Get(
+     *      path="/organizations/all",
+     *      summary="Get a listing of the Organizations.",
+     *      tags={"Organization"},
+     *      description="Get Organization",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Organization"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     * @throws \Exception
+     */
+    public function all()
+    {
+        /** @var Organization $organization */
+        $organizations = Cache::get('organizations', function () {
+            return $this->organizationRepository->all();
+        });
+
+        return $this->sendResponse($organizations->toArray(), 'Organizations retrieved successfully');
     }
 }

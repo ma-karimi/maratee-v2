@@ -11,57 +11,15 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 /**
  * @SWG\Definition(
  *      definition="Medicine",
- *      required={"name","type"},
- *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="name",
- *          description="name",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="description",
- *          description="description",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="type",
- *          description="type",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="parent_id",
- *          description="parent_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
+ *      required={"name_en"},
  * )
  */
 class Medicine extends BaseModel implements HasMedia
 {
     use HasMediaTrait;
-    public static $linguistically = ['name' => true, 'description' => false];
     public static $rules = [
-        'type' => 'required|string',
-        'parent_id' => 'integer',
+        'name_en' => 'required|string',
+        'name_fa' => 'string',
     ];
 
     /**
@@ -71,37 +29,4 @@ class Medicine extends BaseModel implements HasMedia
      */
     protected $table = 'medicines';
 
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = ['name' => 'json', 'description' => 'json'];
-
-
-    /**
-     * @return HasMany
-     */
-    public function medicals(): HasMany
-    {
-        return $this->hasMany(Medical::class, ['medicine_drug_id', 'medicine_drug_shape_id', 'medicine_drug_usage_id', 'medicine_effect_id', 'medicine_medicinal_part_id', 'medicine_side_effect_id', 'medicine_therapy_id'])->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function childs(): HasMany
-    {
-        return $this->hasMany(self::class, 'parent_id')->latest();
-    }
-
-
-    /**
-     * @return BelongsTo
-     */
-    public function parent(): BelongsTo
-    {
-        return $this->belongsTo(self::class, 'parent_id');
-    }
 }

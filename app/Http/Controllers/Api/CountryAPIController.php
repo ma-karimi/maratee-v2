@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\CountryAPIRequest;
 use App\Models\Country;
+use App\Models\Province;
 use App\Repositories\CountryRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Cache;
 use Response;
 
 /**
@@ -305,5 +307,47 @@ class CountryAPIController extends AppBaseController
         $country->delete();
 
         return $this->sendResponse($id, 'Country deleted successfully');
+    }
+
+
+    /**
+     * @return Response
+     *
+     * @SWG\Get(
+     *      path="/countries/all",
+     *      summary="Get a listing of the Countries.",
+     *      tags={"Countries"},
+     *      description="Get Country",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Organization"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     * @throws \Exception
+     */
+    public function all()
+    {
+        /** @var Country $countries */
+        $countries = Cache::get('countries', function () {
+            return $this->countryRepository->all();
+        });
+
+        return $this->sendResponse($countries->toArray(), 'Countries retrieved successfully');
     }
 }

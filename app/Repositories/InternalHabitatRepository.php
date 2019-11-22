@@ -2,16 +2,15 @@
 
 namespace App\Repositories;
 
-use App\Models\HerbariumApplication;
-
+use App\Models\InternalHabitat;
 
 /**
- * Class PlantingApplicationRepository
+ * Class InternalHabitatRepository
  * @package App\Repositories
- * @version July 14, 2019, 11:25 am UTC
+ * @version July 14, 2019, 11:12 am UTC
 */
 
-class PlantApplicationRepository extends BaseRepository
+class InternalHabitatRepository extends BaseRepository
 {
     /**
      * @var array
@@ -35,6 +34,7 @@ class PlantApplicationRepository extends BaseRepository
      **/
     public function model()
     {
-        return HerbariumApplication::class;
+        return InternalHabitat::class;
     }
+
 }

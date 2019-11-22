@@ -264,9 +264,8 @@ class PlantAPIController extends AppBaseController
      */
     public function store(CreatePlantAPIRequest $request)
     {
-        $input = $request->all();
 
-        $plant = $this->plantRepository->create($input);
+        $plant = $this->plantRepository->create($request);
 
         return $this->sendResponse($plant->toArray(), 'Plant saved successfully');
     }
@@ -513,15 +512,14 @@ class PlantAPIController extends AppBaseController
      */
     public function update(UpdatePlantAPIRequest $request, $id)
     {
-        $input = $request->all();
 
-        $plant = $this->plantRepository->find($id, \request()->get('relations'));
+        $plant = $this->plantRepository->find($id, []);
 
         if (empty($plant)) {
             return $this->sendError('Plant not found');
         }
 
-        $plant = $this->plantRepository->update($input, $id);
+        $plant = $this->plantRepository->update($request, $id);
 
         return $this->sendResponse($plant->toArray(), 'Plant updated successfully');
     }

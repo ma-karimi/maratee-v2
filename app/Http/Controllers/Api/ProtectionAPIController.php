@@ -8,6 +8,7 @@ use App\Models\Protection;
 use App\Repositories\ProtectionRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Cache;
 use Response;
 
 /**
@@ -56,15 +57,13 @@ class ProtectionAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
-    public function index(Request $request)
+    public function index()
     {
-        $protections = $this->protectionRepository->paginate(
-            $request->get('per_page'),
-            $request->except('per_page'),
-            $request->get('relations')
-        );
-
+        $protections = Cache::get('protections', function () {
+            return $this->protectionRepository->all();
+        });
         return $this->sendResponse($protections->toArray(), 'Protections retrieved successfully');
     }
 

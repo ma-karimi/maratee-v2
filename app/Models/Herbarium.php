@@ -76,12 +76,16 @@ class Herbarium extends BaseModel implements HasMedia
 
     public static $rules = [
         'organization_id' => 'required|exists:organizations,id',
-        'location_id' => 'required|exists:locations,id',
+        'location_id' => 'exists:locations,id',
         'taxonomy_id' => 'exists:taxonomies,id',
         'herbarium_number' => 'string',
         'herbarium_index' => 'string',
         'cf' => 'string',
         'description' => 'string',
+        //
+        'country_id'=>'required|exists:countries,id',
+        'city_id'=>'required|exists:cities,id',
+        'province_id'=>'required|exists:provinces,id',
     ];
     /**
      * The database table used by the model.

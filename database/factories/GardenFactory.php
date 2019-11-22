@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\Garden::class, function (Faker $faker) {
+$factory->define(App\Models\InternalHabitat::class, function (Faker $faker) {
     return [
         'name' => $faker->word,
         'region' => $faker->word,

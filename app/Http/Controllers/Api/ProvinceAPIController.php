@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\CreateProvinceAPIRequest;
 use App\Http\Requests\Api\UpdateProvinceAPIRequest;
+use App\Models\City;
 use App\Models\Province;
 use App\Repositories\ProvinceRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Cache;
 use Response;
 
 /**
@@ -307,5 +309,48 @@ class ProvinceAPIController extends AppBaseController
         $province->delete();
 
         return $this->sendResponse($id, 'Province deleted successfully');
+    }
+
+
+
+    /**
+     * @return Response
+     *
+     * @SWG\Get(
+     *      path="/provinces/all",
+     *      summary="Get a listing of the Provinces.",
+     *      tags={"Provinces"},
+     *      description="Get Province",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Organization"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     * @throws \Exception
+     */
+    public function all()
+    {
+        /** @var Province $provinces */
+        $provinces = Cache::get('provinces', function () {
+            return $this->provinceRepository->all();
+        });
+
+        return $this->sendResponse($provinces->toArray(), 'Provinces retrieved successfully');
     }
 }

@@ -1,7 +1,7 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\Garden;
-use App\Repositories\GardenRepository;
+use App\Models\InternalHabitat;
+use App\Repositories\InternalHabitatRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\Traits\MakeGardenTrait;
@@ -12,14 +12,14 @@ class GardenRepositoryTest extends TestCase
     use MakeGardenTrait, ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var GardenRepository
+     * @var InternalHabitatRepository
      */
     protected $gardenRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->gardenRepo = \App::make(GardenRepository::class);
+        $this->gardenRepo = \App::make(InternalHabitatRepository::class);
     }
 
     /**
@@ -32,7 +32,7 @@ class GardenRepositoryTest extends TestCase
         $createdGarden = $createdGarden->toArray();
         $this->assertArrayHasKey('id', $createdGarden);
         $this->assertNotNull($createdGarden['id'], 'Created Garden must have id specified');
-        $this->assertNotNull(Garden::find($createdGarden['id']), 'Garden with given id must be in DB');
+        $this->assertNotNull(InternalHabitat::find($createdGarden['id']), 'Garden with given id must be in DB');
         $this->assertModelData($garden, $createdGarden);
     }
 
@@ -68,6 +68,6 @@ class GardenRepositoryTest extends TestCase
         $garden = $this->makeGarden();
         $resp = $this->gardenRepo->delete($garden->id);
         $this->assertTrue($resp);
-        $this->assertNull(Garden::find($garden->id), 'Garden should not exist in DB');
+        $this->assertNull(InternalHabitat::find($garden->id), 'Garden should not exist in DB');
     }
 }

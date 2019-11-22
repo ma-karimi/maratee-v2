@@ -26,19 +26,14 @@ $factory->define(App\Models\Plant::class, function (Faker $faker) {
         'habitat_description' => $faker->text,
         'general_habitat_id' => $faker->randomElement($habitats),
         //'life_forms' => ['leaf_id' => $faker->randomElement($leafs), 'cycle_id' => $faker->randomElement($cycles), 'wooden_id' => $faker->randomElement($woodens), 'herbaceous_id' => $faker->randomElement($herbaceouses)],
-//        'cycle_id'=>$faker->randomElement($cycles),
-//        'herbaceous_id'=>$faker->randomElement($herbaceouses),
-//        'wooden_id'=>$faker->randomElement($woodens),
-       // 'leaf_id'=>$faker->randomElement($leafs),
-        'general_substrate_lichen_id'=>$faker->randomElement($lichens),
-        'general_substrate_moss_id'=>$faker->randomElement($mosses),
-        'general_substrate_diatom_id'=>$faker->randomElement($diatoms),
+
+        'general_substrate_id'=>$faker->randomElement($lichens),
 //        'protection_id' => $faker->randomElement($protections),
         'general_phytogeography_id' => $faker->randomElement($phytogeographies),
         'is_flowering' => $is_flower = /*$faker->numberBetween(0, 1)*/0,
 //        'flowering_time' => $is_flower == 1 ? $faker->numberBetween(1, 12) : null,
         'taxonomy_id'=>$faker->randomElement($taxonomies),
-        'life_fr'
+        'life_form_id'=>$faker->numberBetween(1,4)
         //'sheets_no' => $faker->numberBetween(1, 100),
         //'samples_no' => $faker->numberBetween(1, 100),
         //'tip_qt' => $faker->numberBetween(1, 100),

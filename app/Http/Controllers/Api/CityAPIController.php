@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\CityAPIRequest;
 use App\Models\City;
+use App\Models\Organization;
 use App\Repositories\CityRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Cache;
 use Response;
 
 /**
@@ -299,5 +301,47 @@ class CityAPIController extends AppBaseController
         $city->delete();
 
         return $this->sendResponse($id, 'City deleted successfully');
+    }
+
+
+    /**
+     * @return Response
+     *
+     * @SWG\Get(
+     *      path="/cities/all",
+     *      summary="Get a listing of the Cities.",
+     *      tags={"Cities"},
+     *      description="Get City",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Organization"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     * @throws \Exception
+     */
+    public function all()
+    {
+        /** @var City $city */
+        $cities = Cache::get('cities', function () {
+            return $this->cityRepository->all();
+        });
+
+        return $this->sendResponse($cities->toArray(), 'Cities retrieved successfully');
     }
 }

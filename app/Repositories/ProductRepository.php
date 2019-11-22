@@ -17,7 +17,7 @@ class ProductRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**
@@ -37,6 +37,28 @@ class ProductRepository extends BaseRepository
     {
         return Product::class;
     }
+    public function create($input)
+    {
+        $media_input = [
+            'date' => $input['date'] ?? null,
+            'user_id' => $input['user_id'] ?? null,
+            'location_id' => $input['location_id'] ?? null,
+            'description' => $input['media_description'] ?? null,
+            'media_type' => $input['media_type'] ?? 2,
+            'reference' => $input['reference'] ?? null,
+        ];
+
+        $model_input = collect($input)->except(array_keys($media_input))->toArray();
+        unset($model_input['file']);
+        $model = parent::create($model_input);
+        //store media
+        if (request()->hasFile('file')) {
+            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('media');
+            $media_record->update($media_input);
+        }
+        $model->save();
+        return $model;
+    }
     public function update($input, $id)
     {
         $media_input = [
@@ -49,7 +71,6 @@ class ProductRepository extends BaseRepository
         ];
 
         $model_input = collect($input)->except(array_keys($media_input))->toArray();
-        $model_input['description']=$input['description'];
         unset($model_input['file']);
         $model = parent::update($model_input, $id);
         //store media

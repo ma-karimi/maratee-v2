@@ -326,4 +326,51 @@ class GeneralAPIController extends AppBaseController
 
         return $this->sendResponse($id, ' General deleted successfully');
     }
+
+    /**
+     * @param $type
+     * @return Response
+     *
+     * @SWG\Get(
+     *      path="/generals/{type}/all",
+     *      summary="Display the specified General",
+     *      tags={"General"},
+     *      description="Get General",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of General",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/General"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function all($type)
+    {
+
+        $General = $this->GeneralRepository->allWithType($type);
+
+
+        return $this->sendResponse($General->toArray(), ' General retrieved successfully');
+    }
 }

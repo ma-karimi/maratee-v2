@@ -12,6 +12,7 @@ use App\Models\Convert\Treeleaf;
 use App\Models\General;
 use App\Models\Herbarium;
 use App\Models\Location;
+use App\Models\LocationHub;
 use App\Models\Organization;
 use App\Models\Plant;
 use App\Models\Province;
@@ -135,6 +136,15 @@ class ConvertService
 
         // plant herbarium
         $this->models['plant'] = Plant::firstOrCreate($this->plantData());
+        if (!empty($this->models['location'])) {
+            LocationHub::firstOrCreate(
+                [
+                    'locationable_type' => Plant::class,
+                    'locationable_id' => $this->models['plant']['id'],
+                    'location_id' => $this->models['location']['id']
+                ]
+            );
+        }
         $this->models['herbarium'] = Herbarium::create($this->herbariumData());
 
 
@@ -412,6 +422,7 @@ class ConvertService
             'location_id' => $this->models['location']['id'],
             'organization_id' => $this->models['organization']['id'],
             'taxonomy_id' => $this->models['taxonomy']['id'],
+            'plant_id' => $this->models['plant']['id']
         ];
 
         if (!empty($this->treeLeaf->cf)) {

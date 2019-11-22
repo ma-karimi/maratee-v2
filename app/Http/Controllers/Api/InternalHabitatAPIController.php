@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\GardenAPIRequest;
-use App\Models\Garden;
-use App\Repositories\GardenRepository;
+use App\Http\Requests\Api\InternalHabitatApiRequest;
+use App\Models\InternalHabitat;
+use App\Repositories\InternalHabitatRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class GardenController
+ * Class InternalHabitatController
  * @package App\Http\Controllers\Api
  */
 
-class GardenAPIController extends AppBaseController
+class InternalHabitatAPIController extends AppBaseController
 {
-    /** @var  GardenRepository */
-    private $gardenRepository;
+    /** @var  InternalHabitatRepository */
+    private $internalHabitatRepository;
 
-    public function __construct(GardenRepository $gardenRepo)
+    public function __construct(InternalHabitatRepository $internalHabitatRepo)
     {
-        $this->gardenRepository = $gardenRepo;
+        $this->internalHabitatRepository = $internalHabitatRepo;
     }
 
     /**
@@ -29,10 +29,10 @@ class GardenAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/gardens",
-     *      summary="Get a listing of the Gardens.",
-     *      tags={"Garden"},
-     *      description="Get all Gardens",
+     *      path="/internal_habitats",
+     *      summary="Get a listing of the InternalHabitats.",
+     *      tags={"InternalHabitat"},
+     *      description="Get all InternalHabitats",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -46,7 +46,7 @@ class GardenAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/Garden")
+     *                  @SWG\Items(ref="#/definitions/InternalHabitat")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -59,52 +59,31 @@ class GardenAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $gardens = $this->gardenRepository->paginate(
+        $internalHabitats = $this->internalHabitatRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
             $request->get('relations')
         );
 
-        return $this->sendResponse($gardens->toArray(), 'Gardens retrieved successfully');
+        return $this->sendResponse($internalHabitats->toArray(), 'InternalHabitats retrieved successfully');
     }
 
     /**
-     * @param GardenAPIRequest $request
+     * @param InternalHabitatApiRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/gardens",
-     *      summary="Store a newly created Garden in storage",
-     *      tags={"Garden"},
-     *      description="Store Garden",
+     *      path="/internal_habitats",
+     *      summary="Store a newly created InternalHabitat in storage",
+     *      tags={"InternalHabitat"},
+     *      description="Store InternalHabitat",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="name",
      *          in="body",
      *          required=true,
      *          type="string",
-     *          @SWG\Schema(ref="#/definitions/Garden")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="region",
-     *          in="body",
-     *          required=false,
-     *          type="string",
-     *          @SWG\Schema(ref="#/definitions/Garden")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="section",
-     *          in="body",
-     *          required=false,
-     *          type="string",
-     *          @SWG\Schema(ref="#/definitions/Garden")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="number",
-     *          in="body",
-     *          required=false,
-     *          type="number",
-     *          @SWG\Schema(ref="#/definitions/Garden")
+     *          @SWG\Schema(ref="#/definitions/InternalHabitat")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -117,7 +96,7 @@ class GardenAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Garden"
+     *                  ref="#/definitions/InternalHabitat"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -127,13 +106,13 @@ class GardenAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(GardenAPIRequest $request)
+    public function store(InternalHabitatApiRequest $request)
     {
         $input = $request->all();
 
-        $garden = $this->gardenRepository->create($input);
+        $internalHabitat = $this->internalHabitatRepository->create($input);
 
-        return $this->sendResponse($garden->toArray(), 'Garden saved successfully');
+        return $this->sendResponse($internalHabitat->toArray(), 'InternalHabitat saved successfully');
     }
 
     /**
@@ -141,14 +120,14 @@ class GardenAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/gardens/{id}",
-     *      summary="Display the specified Garden",
-     *      tags={"Garden"},
-     *      description="Get Garden",
+     *      path="/internal_habitats/{id}",
+     *      summary="Display the specified InternalHabitat",
+     *      tags={"InternalHabitat"},
+     *      description="Get InternalHabitat",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Garden",
+     *          description="id of InternalHabitat",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -164,7 +143,7 @@ class GardenAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Garden"
+     *                  ref="#/definitions/InternalHabitat"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -176,30 +155,30 @@ class GardenAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var Garden $garden */
-        $garden = $this->gardenRepository->find($id, \request()->get('relations'));
+        /** @var InternalHabitat $internalHabitat */
+        $internalHabitat = $this->internalHabitatRepository->find($id, \request()->get('relations'));
 
-        if ($garden === null) {
-            return $this->sendError('Garden not found');
+        if ($internalHabitat === null) {
+            return $this->sendError('InternalHabitat not found');
         }
 
-        return $this->sendResponse($garden->toArray(), 'Garden retrieved successfully');
+        return $this->sendResponse($internalHabitat->toArray(), 'InternalHabitat retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param GardenAPIRequest $request
+     * @param InternalHabitatApiRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/gardens/{id}",
-     *      summary="Update the specified Garden in storage",
-     *      tags={"Garden"},
-     *      description="Update Garden",
+     *      path="/internal_habitats/{id}",
+     *      summary="Update the specified InternalHabitat in storage",
+     *      tags={"InternalHabitat"},
+     *      description="Update InternalHabitat",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Garden",
+     *          description="id of InternalHabitat",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -209,28 +188,7 @@ class GardenAPIController extends AppBaseController
      *          in="body",
      *          required=true,
      *          type="string",
-     *          @SWG\Schema(ref="#/definitions/Garden")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="region",
-     *          in="body",
-     *          required=false,
-     *          type="string",
-     *          @SWG\Schema(ref="#/definitions/Garden")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="section",
-     *          in="body",
-     *          required=false,
-     *          type="string",
-     *          @SWG\Schema(ref="#/definitions/Garden")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="number",
-     *          in="body",
-     *          required=false,
-     *          type="number",
-     *          @SWG\Schema(ref="#/definitions/Garden")
+     *          @SWG\Schema(ref="#/definitions/InternalHabitat")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -243,7 +201,7 @@ class GardenAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Garden"
+     *                  ref="#/definitions/InternalHabitat"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -253,20 +211,20 @@ class GardenAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, GardenAPIRequest $request)
+    public function update($id, InternalHabitatApiRequest $request)
     {
         $input = $request->all();
 
-        /** @var Garden $garden */
-        $garden = $this->gardenRepository->find($id, \request()->get('relations'));
+        /** @var InternalHabitat $internalHabitat */
+        $internalHabitat = $this->internalHabitatRepository->find($id, \request()->get('relations'));
 
-        if ($garden === null) {
-            return $this->sendError('Garden not found');
+        if ($internalHabitat === null) {
+            return $this->sendError('InternalHabitat not found');
         }
 
-        $garden = $this->gardenRepository->update($input, $id);
+        $internalHabitat = $this->internalHabitatRepository->update($input, $id);
 
-        return $this->sendResponse($garden->toArray(), 'Garden updated successfully');
+        return $this->sendResponse($internalHabitat->toArray(), 'InternalHabitat updated successfully');
     }
 
     /**
@@ -275,14 +233,14 @@ class GardenAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/gardens/{id}",
-     *      summary="Remove the specified Garden from storage",
-     *      tags={"Garden"},
-     *      description="Delete Garden",
+     *      path="/internal_habitats/{id}",
+     *      summary="Remove the specified InternalHabitat from storage",
+     *      tags={"InternalHabitat"},
+     *      description="Delete InternalHabitat",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Garden",
+     *          description="id of InternalHabitat",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -310,15 +268,15 @@ class GardenAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var Garden $garden */
-        $garden = $this->gardenRepository->find($id, \request()->get('relations'));
+        /** @var InternalHabitat $internalHabitat */
+        $internalHabitat = $this->internalHabitatRepository->find($id, \request()->get('relations'));
 
-        if ($garden === null) {
-            return $this->sendError('Garden not found');
+        if ($internalHabitat === null) {
+            return $this->sendError('InternalHabitat not found');
         }
 
-        $garden->delete();
+        $internalHabitat->delete();
 
-        return $this->sendResponse($id, 'Garden deleted successfully');
+        return $this->sendResponse($id, 'InternalHabitat deleted successfully');
     }
 }

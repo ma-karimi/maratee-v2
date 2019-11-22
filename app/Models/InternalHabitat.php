@@ -9,11 +9,11 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
- *            definition="Garden",
+ *            definition="InternalHabitat",
  *            required={"name"}
  *        )
  **/
-class Garden extends BaseModel implements HasMedia
+class InternalHabitat extends BaseModel implements HasMedia
 {
     use  HasMediaTrait;
 
@@ -22,6 +22,6 @@ class Garden extends BaseModel implements HasMedia
      *
      * @var string
      */
-    protected $table = 'gardens';
+    protected $table = 'internal_habitats';
 
 }

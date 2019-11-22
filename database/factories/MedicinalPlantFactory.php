@@ -32,7 +32,7 @@ $factory->define(App\Models\MedicinalPlant::class, function (Faker $faker) {
     $woodens = \App\Models\LifeForm::whereType('wooden')->pluck('id')->toArray();
     $herbaceouses = \App\Models\LifeForm::whereType('herbaceous')->pluck('id')->toArray();
     return [
-        'plant_herbarium_id' => $faker->randomElement($plants),
+        'herbarium_number' => $faker->randomElement($plants),
         'taxonomy_id' => $faker->randomElement($taxonomies),
         'location_id' => $faker->randomElement($locations),
         'aerial_part_id' => $faker->randomElement($aerial_parts),

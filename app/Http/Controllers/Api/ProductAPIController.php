@@ -87,13 +87,6 @@ class ProductAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Product")
      *      ),
      *      @SWG\Parameter(
-     *          name="organization_id",
-     *          in="body",
-     *          description="Product that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Product")
-     *      ),
-     *      @SWG\Parameter(
      *          name="consumption",
      *          in="body",
      *          description="consumption",
@@ -109,6 +102,13 @@ class ProductAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="manufacturer",
+     *          in="body",
+     *          description="manufacturer",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="pharmaceutical_forms",
      *          in="body",
      *          description="manufacturer",
      *          required=false,
@@ -234,13 +234,6 @@ class ProductAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Product")
      *      ),
      *      @SWG\Parameter(
-     *          name="organization_id",
-     *          in="body",
-     *          description="Product that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Product")
-     *      ),
-     *      @SWG\Parameter(
      *          name="consumption",
      *          in="body",
      *          description="consumption",
@@ -256,6 +249,13 @@ class ProductAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="manufacturer",
+     *          in="body",
+     *          description="manufacturer",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="pharmaceutical_forms",
      *          in="body",
      *          description="manufacturer",
      *          required=false,

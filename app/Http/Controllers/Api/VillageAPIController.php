@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\CreateVillageAPIRequest;
 use App\Http\Requests\Api\UpdateVillageAPIRequest;
+use App\Models\Province;
 use App\Models\Village;
 use App\Repositories\VillageRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Cache;
 use Response;
 
 /**
@@ -293,5 +295,47 @@ class VillageAPIController extends AppBaseController
         $village->delete();
 
         return $this->sendResponse($id, 'Village deleted successfully');
+    }
+
+
+    /**
+     * @return Response
+     *
+     * @SWG\Get(
+     *      path="/villages/all",
+     *      summary="Get a listing of the Villages.",
+     *      tags={"Citie"},
+     *      description="Get City",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Organization"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     * @throws \Exception
+     */
+    public function all()
+    {
+        /** @var Village $villages */
+        $villages = Cache::get('villages', function () {
+            return $this->villageRepository->all();
+        });
+
+        return $this->sendResponse($villages->toArray(), 'Villages retrieved successfully');
     }
 }
