@@ -79,8 +79,8 @@ class Herbarium extends BaseModel implements HasMedia
         'location_id' => 'exists:locations,id',
         'taxonomy_id' => 'exists:taxonomies,id',
         'herbarium_number' => 'string',
-        'herbarium_index' => 'string',
-        'cf' => 'string',
+//        'herbarium_index' => 'string',
+//        'cf' => 'string',
         'description' => 'string',
         //
         'country_id'=>'required|exists:countries,id',

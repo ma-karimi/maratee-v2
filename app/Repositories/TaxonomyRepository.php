@@ -70,7 +70,7 @@ class TaxonomyRepository extends BaseRepository
         $exist = $this->taxonomyExistWhenCreate($request);
         if ($exist) {
             throw ValidationException::withMessages([
-                'taxonomy' => 'Already Exists!'
+                'name' => 'Taxonomy Already Exists!'
             ]);
         }
         $request = $this->setTaxonomyData($request);
@@ -260,7 +260,7 @@ class TaxonomyRepository extends BaseRepository
 
         if ($exist) {
             throw ValidationException::withMessages([
-                'taxonomy' => 'Already Exists!'
+                'name' => 'Taxonomy Already Exists!'
             ]);
         }
         $request = $this->setTaxonomyData($request);
