@@ -92,6 +92,8 @@ Route::apiResource('protections', 'ProtectionAPIController');
 
 Route::apiResource('projects', 'ProjectAPIController');
 
+Route::get('products/all', 'GeneralAPIController@all');
+
 Route::apiResource('products', 'ProductAPIController');
 
 Route::get('generals/{type}/all', 'GeneralAPIController@all');
@@ -169,6 +171,7 @@ Route::post('medicinal_plants/{medicinal_plant_id}/constituents', 'MedicinalPlan
 Route::match(['PUT', 'PATCH'], 'medicinal_plants/{medicinal_plant_id}/constituents', 'MedicinalPlantConstituentAPIController@update');
 Route::apiResource('medicinal_plants', 'MedicinalPlantAPIController');
 
+Route::get('medicines/all', 'MedicineAPIController@all');
 
 Route::apiResource('medicines', 'MedicineAPIController');
 

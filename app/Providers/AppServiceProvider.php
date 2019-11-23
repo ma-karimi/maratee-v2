@@ -2,12 +2,27 @@
 
 namespace App\Providers;
 
-use App\Models\{City, Country, General, Organization, Plant, Protection, Province, Village};
+use App\Models\{City,
+    Country,
+    General,
+    MedicinalPlantType,
+    Medicine,
+    Method,
+    Organization,
+    Plant,
+    Product,
+    Protection,
+    Province,
+    Village};
 use App\Observers\{CityObserver,
     CountryObserver,
     GeneralObserver,
+    MedicinalPlantTypeObserver,
+    MedicineObserver,
+    MethodObserver,
     OrganizationObserver,
     PlantObserver,
+    ProductObserver,
     ProtectionObserver,
     ProvinceObserver,
     VillageObserver};
@@ -43,6 +58,10 @@ class AppServiceProvider extends ServiceProvider
         Country::observe(CountryObserver::class);
         Village::observe(VillageObserver::class);
         Organization::observe(OrganizationObserver::class);
+        MedicinalPlantType::observe(MedicinalPlantTypeObserver::class);
+        Method::observe(MethodObserver::class);
+        Medicine::observe(MedicineObserver::class);
+        Product::observe(ProductObserver::class);
         DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
         DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('point', 'point');
     }

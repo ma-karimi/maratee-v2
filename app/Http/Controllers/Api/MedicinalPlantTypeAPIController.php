@@ -6,15 +6,14 @@ use App\Http\Requests\Api\CreateMedicinalPlantTypeAPIRequest;
 use App\Http\Requests\Api\UpdateMedicinalPlantTypeAPIRequest;
 use App\Models\MedicinalPlantType;
 use App\Repositories\MedicinalPlantTypeRepository;
-use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Cache;
 use Response;
 
 /**
  * Class MedicinalPlantTypeController
  * @package App\Http\Controllers\Api
  */
-
 class MedicinalPlantTypeAPIController extends AppBaseController
 {
     /** @var  MedicinalPlantTypeRepository */
@@ -26,7 +25,6 @@ class MedicinalPlantTypeAPIController extends AppBaseController
     }
 
     /**
-     * @param Request $request
      * @return Response
      *
      * @SWG\Get(
@@ -56,15 +54,13 @@ class MedicinalPlantTypeAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
      */
-    public function index(Request $request)
+    public function index()
     {
-        $medicinalPlantTypes = $this->medicinalPlantTypeRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $medicinalPlantTypes = Cache::get('medicinal_plant_types', function () {
+            return $this->medicinalPlantTypeRepository->all();
+        });
+
 
         return $this->sendResponse($medicinalPlantTypes->toArray(), 'Medicinal Plant Types retrieved successfully');
     }

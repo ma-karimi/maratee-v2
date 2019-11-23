@@ -81,7 +81,7 @@ class ActionHub extends BaseModel
      */
     protected $table = 'action_hubs';
 
-
+    protected $with = ['actors' ];
     /**
      * The attributes that should be casted to native types.
      *

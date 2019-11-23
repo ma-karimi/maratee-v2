@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateConstituentTypeAPIRequest;
-use App\Http\Requests\Api\UpdateConstituentTypeAPIRequest;
+use App\Http\Requests\Api\ConstituentTypeAPIRequest;
 use App\Models\ConstituentType;
 use App\Repositories\ConstituentTypeRepository;
 use Illuminate\Http\Request;
@@ -70,7 +69,7 @@ class ConstituentTypeAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateConstituentTypeAPIRequest $request
+     * @param ConstituentTypeAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -80,7 +79,7 @@ class ConstituentTypeAPIController extends AppBaseController
      *      description="Store ConstituentType",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="name",
+     *          name="name_en",
      *          in="body",
      *          description="ConstituentType that should be stored",
      *          required=true,
@@ -114,7 +113,7 @@ class ConstituentTypeAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateConstituentTypeAPIRequest $request)
+    public function store(ConstituentTypeAPIRequest $request)
     {
         $input = $request->all();
 
@@ -175,7 +174,7 @@ class ConstituentTypeAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateConstituentTypeAPIRequest $request
+     * @param ConstituentTypeAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -192,7 +191,7 @@ class ConstituentTypeAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="name",
+     *          name="name_en",
      *          in="body",
      *          description="ConstituentType that should be stored",
      *          required=true,
@@ -226,7 +225,7 @@ class ConstituentTypeAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateConstituentTypeAPIRequest $request)
+    public function update($id, ConstituentTypeAPIRequest $request)
     {
         $input = $request->all();
 

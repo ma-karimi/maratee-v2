@@ -80,7 +80,7 @@ class TreatmentAPIController extends AppBaseController
      *      description="Store Treatment",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="name",
+     *          name="name_en",
      *          in="body",
      *          description="Treatment that should be stored",
      *          required=true,
@@ -192,7 +192,7 @@ class TreatmentAPIController extends AppBaseController
      *      description="Update Treatment",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="name",
+     *          name="name_en",
      *          in="body",
      *          description="Treatment that should be stored",
      *          required=true,

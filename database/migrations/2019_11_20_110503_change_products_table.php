@@ -18,7 +18,7 @@ class ChangeProductsTable extends Migration
         {
             $table->dropForeign(['organization_id']);
             $table->dropColumn('organization_id');
-            $table->string('pharmaceutical_forms')->nullable();
+            $table->unsignedBigInteger('pharmaceutical_form_id')->nullable();
         });
     }
 

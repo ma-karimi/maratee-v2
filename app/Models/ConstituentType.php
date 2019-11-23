@@ -3,25 +3,16 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @SWG\Definition(
  *            definition="ConstituentType",
- *            required={"name"},
- * 			@SWG\Property(property="id", type="integer"),
- * 			@SWG\Property(property="name", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="description", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="created_at", type="string"),
- * 			@SWG\Property(property="updated_at", type="string"),
+ *            required={"name_en"},
  *        )
  **/
 class ConstituentType extends BaseModel
 {
 
-    public static $linguistically = ['name' => true, 'description' => false];
     /**
      * The database table used by the model.
      *
@@ -34,14 +25,6 @@ class ConstituentType extends BaseModel
      *
      * @var array
      */
-    protected $casts = ['name' => 'json', 'description' => 'json'];
+    public static $rules = ['name_en' => 'required|string'];
 
-
-    /**
-     * @return HasMany
-     */
-    public function medicinalPlantConstituents(): HasMany
-    {
-        return $this->hasMany(MedicinalPlantConstituent::class)->latest();
-    }
 }

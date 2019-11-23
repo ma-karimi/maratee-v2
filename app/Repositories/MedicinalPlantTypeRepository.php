@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\MedicinalPlantType;
-use App\Repositories\BaseRepository;
 
 /**
  * Class MedicinalPlantTypeRepository
@@ -17,7 +16,7 @@ class MedicinalPlantTypeRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

@@ -52,4 +52,18 @@ trait MedicinalPlantAccessor
     {
         return Arr::get(self::PRESENCE_IN_COUNTRY, $this->presence_in_country);
     }
+
+    public function getCycleAttribute()
+    {
+        return !empty($this->cyclc_id) ? Arr::get(self::CYCLE, $this->cycle_id) : null;
+    }
+    public function getWoodenAttribute()
+    {
+        return !empty($this->wooden_id) ? Arr::get(self::WOODEN, $this->wooden_id) : null;
+    }
+    public function getHerbaceousAttribute()
+    {
+        return !empty($this->herbaceous_id) ? Arr::get(self::HERBACEOUS, $this->herbaceous_id) : null;
+    }
+
 }

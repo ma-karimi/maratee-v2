@@ -28,6 +28,9 @@ class MedicinalPlant extends BaseModel
     public const CULTIVATED_AREA = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
     public const STUDIED_SAMPLE = [0 => 'unknown', 1 => 'wild', 2 => 'cultivated'];
     public const PRESENCE_IN_COUNTRY = [0 => 'unknown', 1 => 'native', 2 => 'endemic'];
+    public const WOODEN = [1 => 'Tree', 2 => 'Shrubs'];
+    public const HERBACEOUS = [1 => 'Standing', 2 => 'Crawling'];
+    public const CYCLE = [1 => 'Annual', 2 => 'Perennial'];
 
     public static $rules = [
         'herbarium_number' => 'string',
@@ -63,10 +66,10 @@ class MedicinalPlant extends BaseModel
         'height' => 'string',
         'medicinal_properties' => 'string',
         'side_effects' => 'string',
-        //life_form
-        'cycle_id' => 'nullable|exists:life_forms,id',
-        'wooden_id' => 'nullable|exists:life_forms,id',
-        'herbaceous_id' => 'nullable|exists:life_forms,id',
+//        //life_form
+//        'cycle_id' => 'nullable|exists:life_forms,id',
+//        'wooden_id' => 'nullable|exists:life_forms,id',
+//        'herbaceous_id' => 'nullable|exists:life_forms,id',
     ];
 
     /**
@@ -96,16 +99,22 @@ class MedicinalPlant extends BaseModel
         'cultivated_area_name',
         'studied_sample_name',
         'presence_in_country_name',
+        'wooden',
+        'herbaceous',
+        'cycle'
     ];
 
 
-    /**
-     * @return MorphMany
-     */
-    public function medias(): MorphMany
+    public function determine()
     {
-        return $this->morphMany(Media::class, 'modelable');
+        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 1);
     }
+
+    public function collect()
+    {
+        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 2);
+    }
+
 
     /**
      * @return HasMany
@@ -120,21 +129,21 @@ class MedicinalPlant extends BaseModel
         return $this->belongsTo(Article::class);
     }
 
-
-    public function cycle()
-    {
-        return $this->belongsTo(LifeForm::class, 'cycle_id');
-    }
-
-    public function wooden()
-    {
-        return $this->belongsTo(LifeForm::class, 'wooden_id');
-    }
-
-    public function herbaceous()
-    {
-        return $this->belongsTo(LifeForm::class, 'herbaceous_id');
-    }
+//
+//    public function cycle()
+//    {
+//        return $this->belongsTo(LifeForm::class, 'cycle_id');
+//    }
+//
+//    public function wooden()
+//    {
+//        return $this->belongsTo(LifeForm::class, 'wooden_id');
+//    }
+//
+//    public function herbaceous()
+//    {
+//        return $this->belongsTo(LifeForm::class, 'herbaceous_id');
+//    }
 
     public function medicinalPlantType()
     {
@@ -154,14 +163,6 @@ class MedicinalPlant extends BaseModel
             'province_id'
         )->whereNull('medicinal_plant_provinces.deleted_at')
             ->withTimestamps();
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function plant(): BelongsTo
-    {
-        return $this->belongsTo(Plant::class);
     }
 
     /**
@@ -245,19 +246,19 @@ class MedicinalPlant extends BaseModel
     public function distillation()
     {
         return $this->belongsTo(Method::class, 'method_distillation_id'
-        )->where('name->en', 'LIKE', '%distillation%');
+        )->where('type_id',1);
     }
 
     public function extraction()
     {
         return $this->belongsTo(Method::class, 'method_extraction_id'
-        )->where('name->en', 'LIKE', '%extraction%');
+        )->where('type_id',2);
     }
 
     public function analyse()
     {
         return $this->belongsTo(Method::class, 'method_analyse_id'
-        )->where('name->en', 'LIKE', '%analyse%');
+        )->where('type_id',3);
     }
 
     public function secondaryMetabolite()
@@ -287,15 +288,5 @@ class MedicinalPlant extends BaseModel
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
-    }
-
-    /**
-     * @return MorphToMany
-     */
-    public function transactions(): MorphToMany
-    {
-        return $this->morphToMany(Transaction::class, 'transactionable', 'transaction_hubs')
-            ->withTimestamps()
-            ->withPivot(['type_id', 'sheets_no']);
     }
 }

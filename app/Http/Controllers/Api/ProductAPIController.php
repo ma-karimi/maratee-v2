@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Cache;
 use Response;
 
 /**
@@ -65,6 +66,47 @@ class ProductAPIController extends AppBaseController
             $request->except('per_page'),
             $request->get('relations')
         );
+
+        return $this->sendResponse($products->toArray(), 'Products retrieved successfully');
+    }
+    /**
+     * @param Request $request
+     * @return Response
+     *
+     * @SWG\Get(
+     *      path="/products/all",
+     *      summary="Get a listing of the Products.",
+     *      tags={"Product"},
+     *      description="Get all Products",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Product")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     * @throws \Exception
+     */
+    public function all()
+    {
+        $products = Cache::get('products', function () {
+            return $this->productRepository->all();
+        });
 
         return $this->sendResponse($products->toArray(), 'Products retrieved successfully');
     }

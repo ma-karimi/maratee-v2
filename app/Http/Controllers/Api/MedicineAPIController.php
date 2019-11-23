@@ -9,6 +9,7 @@ use App\Models\Medicine;
 use App\Repositories\MedicineRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Cache;
 
 
 /**
@@ -66,6 +67,47 @@ class MedicineAPIController extends AppBaseController
             $request->except('per_page'),
             $request->get('relations')
         );
+
+        return $this->sendResponse($medicines->toArray(), 'Medicines retrieved successfully');
+    }
+
+    /**
+     * @return Response
+     *
+     * @SWG\Get(
+     *      path="/medicines/all",
+     *      summary="Get a listing of the Medicines.",
+     *      tags={"Medicine"},
+     *      description="Get all Medicines",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Medicine")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     * @throws \Exception
+     */
+    public function all()
+    {
+        $medicines = Cache::get('medicines', function () {
+            return $this->medicineRepository->all();
+        });
 
         return $this->sendResponse($medicines->toArray(), 'Medicines retrieved successfully');
     }

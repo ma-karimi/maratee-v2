@@ -72,6 +72,8 @@ class MedicinalPlantConstituent extends BaseModel
      */
     protected $table = 'medicinal_plant_constituents';
 
+    protected $with = ['constituentType'];
+
     /**
      * @return BelongsTo
      */

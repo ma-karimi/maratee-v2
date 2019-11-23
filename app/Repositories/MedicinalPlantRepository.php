@@ -11,6 +11,7 @@ use App\Models\MedicinalPlantConstituent;
 use App\Models\MedicinalPlantProvince;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class MedicinalPlantRepository
@@ -175,7 +176,7 @@ class MedicinalPlantRepository extends BaseRepository
             'page_no',
             'authors'
         ];
-        return array_merge($article, ['date', 'collectors', 'determines', 'life_forms', 'address_en', 'address_fa', 'province_id', 'village_id', 'province_id', 'region_name', 'min_altitude', 'max_altitude', 'point', 'geographical_description', 'city_id', 'country_id']);
+        return array_merge($article, ['date', 'collectors', 'determines', 'life_forms', 'address_en', 'address_fa', 'province_id', 'village_id', 'province_id', 'region_name', 'min_altitude', 'max_altitude', 'point', 'geographical_description', 'city_id', 'country_id', 'provinces', 'constituents']);
     }
 
     private function storeDetermine($input, $medicinal_plant_id)
@@ -235,26 +236,37 @@ class MedicinalPlantRepository extends BaseRepository
 
     private function storeConstituent($input, $medicinal_plant_id)
     {
-        $constituents = $input['constituents'];
+        $constituents = json_decode($input['constituents']);
 
-        $cons_collection = collect($constituents)->map(function ($query) {
-            return $query->constituent_type_id;
-        });
+        Log::info($constituents);
+//        $cons_collection = collect($constituents)->map(function ($query) {
+//            return $query['constituent_type_id'];
+//        });
+//
+//        $this->medicinalPlantConstituentRepo
+//            ->where('medicinal_plant_id', $medicinal_plant_id)
+//            ->whereNotIn('constituent_type_id', $cons_collection->all())
+//            ->delete();
+
+        $cons_collection = [];
+        foreach ($constituents as $constituent){
+            $cons_collection[] = $constituent->constituent_type->id;
+        }
 
         $this->medicinalPlantConstituentRepo
             ->where('medicinal_plant_id', $medicinal_plant_id)
-            ->whereNotIn('constituent_type_id', $cons_collection->all())
+            ->whereNotIn('constituent_type_id', $cons_collection)
             ->delete();
 
         foreach ($constituents as $item) {
             $this->medicinalPlantConstituentRepo
                 ->updateOrCreate(
                     [
-                        'constituent_type_id' => $item['constituent_type_id'],
+                        'constituent_type_id' => $item->constituent_type->id,
                         'medicinal_plant_id' => $medicinal_plant_id
                     ],
                     [
-                        'value' => $item['constituent_type_id']
+                        'value' => $item->value
                     ]
                 );
         }

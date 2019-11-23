@@ -44,4 +44,13 @@ class Product extends BaseModel implements HasMedia
         'name' => 'json',
     ];
 
+    protected $with = ['pharmaceutical_form'];
+
+    protected $appends = ['status_name'];
+
+    public function pharmaceutical_form()
+    {
+        return $this->belongsTo(MedicinalPlantType::class, 'pharmaceutical_form_id')->where('type_id','==', 7);
+    }
+
 }

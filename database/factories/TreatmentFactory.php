@@ -6,8 +6,8 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Treatment::class, function (Faker $faker) {
     return [
-        'name' => make_json($faker->name),
-        'description' => make_json($faker->text),
+        'name' => $faker->name,
+        'description' => $faker->text,
         'date' => $faker->dateTime,
     ];
 });

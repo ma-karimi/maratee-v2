@@ -8,6 +8,7 @@ use App\Models\Method;
 use App\Repositories\MethodRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Cache;
 use Response;
 
 /**
@@ -26,7 +27,6 @@ class MethodAPIController extends AppBaseController
     }
 
     /**
-     * @param Request $request
      * @return Response
      *
      * @SWG\Get(
@@ -56,15 +56,12 @@ class MethodAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
      */
-    public function index(Request $request)
+    public function index()
     {
-        $methods = $this->methodRepository->paginate(
-            $request->get('per_page'),
-            $request->except('per_page'),
-            $request->get('relations')
-        );
+        $methods = Cache::get('methods', function () {
+            return $this->methodRepository->all();
+        });
 
         return $this->sendResponse($methods->toArray(), 'Methods retrieved successfully');
     }

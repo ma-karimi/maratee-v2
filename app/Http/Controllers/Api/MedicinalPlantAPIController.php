@@ -64,11 +64,21 @@ class MedicinalPlantAPIController extends AppBaseController
         $medicinalPlants = $this->medicinalPlantRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            $this->fieldRelations()
         );
 
         return $this->sendResponse($medicinalPlants->toArray(), 'Medicinal Plants retrieved successfully');
     }
+
+
+    /**
+     * @return array
+     */
+    private function fieldRelations(): array
+    {
+        return ['taxonomy', 'medicinalPlantConstituents', 'article', 'provinces', 'location', 'medicine', 'product', 'aerialType', 'groundType', 'foodIndustry', 'hygienicCosmeticIndustry', 'otherIndustry', 'treatment', 'industrialPotential', 'origin', 'habitat', 'distillation', 'extraction', 'analyse', 'secondaryMetabolite', 'effectiveMaterial', 'phenology', 'pharmaceuticalForm', 'collect', 'determine'];
+    }
+
 
     /**
      * @param MedicinalPlantAPIRequest $request
@@ -396,7 +406,7 @@ class MedicinalPlantAPIController extends AppBaseController
     public function show($id)
     {
         /** @var MedicinalPlant $medicinalPlant */
-        $medicinalPlant = $this->medicinalPlantRepository->find($id, \request()->get('relations'));
+        $medicinalPlant = $this->medicinalPlantRepository->find($id, $this->fieldRelations());
 
         if ($medicinalPlant === null) {
             return $this->sendError('Medicinal Plant not found');
@@ -701,7 +711,7 @@ class MedicinalPlantAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var MedicinalPlant $medicinalPlant */
-        $medicinalPlant = $this->medicinalPlantRepository->find($id, \request()->get('relations'));
+        $medicinalPlant = $this->medicinalPlantRepository->find($id, []);
 
         if ($medicinalPlant === null) {
             return $this->sendError('Medicinal Plant not found');
@@ -754,7 +764,7 @@ class MedicinalPlantAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var MedicinalPlant $medicinalPlant */
-        $medicinalPlant = $this->medicinalPlantRepository->find($id, \request()->get('relations'));
+        $medicinalPlant = $this->medicinalPlantRepository->find($id, []);
 
         if ($medicinalPlant === null) {
             return $this->sendError('Medicinal Plant not found');
