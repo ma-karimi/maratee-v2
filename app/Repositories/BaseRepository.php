@@ -95,7 +95,7 @@ abstract class BaseRepository
         $query = $this->allQuery($search);
         return $query->when($with_relations, function ($query, $with_relations) {
             return $query->with($with_relations);
-        })->paginate($perPage ?? 25, $columns);
+        })->latest()->paginate($perPage ?? 25, $columns);
     }
 
     /**
@@ -166,7 +166,7 @@ abstract class BaseRepository
         $query = $this->allQuery($search, $skip, $limit);
         return $query->when($with_relations, function ($query, $with_relations) {
             return $query->with($with_relations);
-        })->get($columns);
+        })->latest()->get($columns);
     }
 
     /**

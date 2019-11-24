@@ -9,71 +9,11 @@ use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
 
 /**
  * @SWG\Definition(
  *      definition="Location",
- *      required={"city_id"},
- *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="village_id",
- *          type="integer",
- *      ),
- *      @SWG\Property(
- *          property="city_id",
- *          type="integer",
- *      ),
- *      @SWG\Property(
- *          property="address_en",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="address_fa",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="region_name",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="min_altitude",
- *          description="min_altitude",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="max_altitude",
- *          description="max_altitude",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="point",
- *          description="point",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="description",
- *          description="description",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
+ *      required={"city_id", "province_id", 'address_en"},
  * )
  */
 class Location extends BaseModel
@@ -82,7 +22,7 @@ class Location extends BaseModel
 
     public static $rules = [
         'city_id' => 'required|exists:cities,id',
-        'village_id' => 'exists:villages,id',
+        'village' => 'string',
         'min_altitude' => 'numeric',
         'max_altitude' => 'numeric',
         'address_en' => 'string',
@@ -105,7 +45,7 @@ class Location extends BaseModel
     ];
 
 
-    protected $with = ['city.province.country', 'province.country', 'village'];
+    protected $with = ['city.province.country', 'province.country'];
 
     /**
      * @return HasMany
@@ -196,14 +136,6 @@ class Location extends BaseModel
     public function seedHubs(): HasMany
     {
         return $this->hasMany(SeedHub::class)->latest();
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function village(): BelongsTo
-    {
-        return $this->belongsTo(Village::class);
     }
 
     /**

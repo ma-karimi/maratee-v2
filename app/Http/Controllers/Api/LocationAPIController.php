@@ -97,7 +97,7 @@ class LocationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
-     *          name="village_id",
+     *          name="village",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Location")
@@ -250,7 +250,7 @@ class LocationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
-     *          name="village_id",
+     *          name="village",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Location")
@@ -312,7 +312,7 @@ class LocationAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Location $location */
-        $location = $this->locationRepository->find($id, \request()->get('relations'));
+        $location = $this->locationRepository->find($id);
 
         if ($location === null) {
             return $this->sendError('Location not found');
@@ -365,7 +365,7 @@ class LocationAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Location $location */
-        $location = $this->locationRepository->find($id, \request()->get('relations'));
+        $location = $this->locationRepository->find($id);
 
         if ($location === null) {
             return $this->sendError('Location not found');

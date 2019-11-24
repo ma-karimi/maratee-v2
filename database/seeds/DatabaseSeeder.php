@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
                 OriginalPropagationTableSeeder::class,
                 OriginalMedicinalPlantTypeTableSeeder::class,
                 OriginalMethodTableSeeder::class,
+                MedicinalPartTableSeeder::class,
                 ProtectionTableSeeder::class,
                 LifeFormTableSeeder::class,
                 ConvertSeeder::class,

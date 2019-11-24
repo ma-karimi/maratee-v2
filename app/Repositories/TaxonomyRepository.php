@@ -299,7 +299,9 @@ class TaxonomyRepository extends BaseRepository
         })
             ->when($request->relations, function ($query) use ($request) {
                 return $query->with($request->relations);
-            })->get();
+            })
+            ->latest()
+            ->get();
     }
 
     public function paginate($perPage, array $search = [], array $with_relations = null, $columns = ['*'])
@@ -311,6 +313,7 @@ class TaxonomyRepository extends BaseRepository
             ->when(\request('groupby'), function ($query) {
                 return $query->whereNotNull(\request('groupby'))->groupBy(\request('groupby'));
             })
+            ->latest()
             ->paginate($perPage ?? 25, $columns);
     }
 
