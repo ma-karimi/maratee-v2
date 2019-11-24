@@ -78,7 +78,7 @@ class Article extends BaseModel implements HasMedia
      */
     protected $casts = ['title' => 'json', 'journal_name' => 'json'];
 
-
+    protected $with = ['actors'];
 
     /**
      * @return MorphToMany
