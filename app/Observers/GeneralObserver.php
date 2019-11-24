@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Models\General;
-use App\Models\Protection;
 use Illuminate\Support\Facades\Cache;
 
 class GeneralObserver
@@ -21,13 +20,13 @@ class GeneralObserver
     }
 
     /**
-     * @param Protection $protection
+     * @param General $general
      * @param $types
      */
-    private function setCache(Protection $protection, array $types): void
+    private function setCache(General $general, array $types): void
     {
         foreach ($types as $type) {
-            Cache::put($type, $protection->whereType($type)->get(), now()->addDays(10));
+            Cache::put($type, $general->whereType($type)->get(), now()->addDays(10));
         }
     }
 
