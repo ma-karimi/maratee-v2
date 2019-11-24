@@ -56,9 +56,9 @@ class BaseModel extends Model
 //            $this->searchable[] = $item;
 //        }
 
-        static::addGlobalScope('id', function (Builder $builder) {
-            $builder->latest();
-        });
+//        static::addGlobalScope('id', function (Builder $builder) {
+//            $builder->latest('id');
+//        });
 
     }
 
