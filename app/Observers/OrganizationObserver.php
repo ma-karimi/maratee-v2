@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 
-use App\Models\Protection;
+use App\Models\Organization;
 use Illuminate\Support\Facades\Cache;
 
 class OrganizationObserver
@@ -11,68 +11,68 @@ class OrganizationObserver
     /**
      * Handle the protection "created" event.
      *
-     * @param Protection $protection
+     * @param Organization $organization
      * @return void
      */
-    public function created(Protection $protection)
+    public function created(Organization $organization)
     {
-        $this->setCache($protection);
+        $this->setCache($organization);
     }
 
     /**
-     * @param Protection $protection
+     * @param Organization $organization
      */
-    private function setCache(Protection $protection): void
+    private function setCache(Organization $organization): void
     {
-        Cache::put('protections', $protection->all(), now()->addDays(10));
+        Cache::put('protections', $organization->all(), now()->addDays(10));
     }
 
     /**
      * Handle the protection "updated" event.
      *
-     * @param Protection $protection
+     * @param Organization $organization
      * @return void
      */
-    public function updated(Protection $protection)
+    public function updated(Organization $organization)
     {
-        $this->setCache($protection);
+        $this->setCache($organization);
     }
 
     /**
      * Handle the protection "deleted" event.
      *
-     * @param Protection $protection
+     * @param Organization $organization
      * @return void
      */
-    public function deleted(Protection $protection)
+    public function deleted(Organization $organization)
     {
-        $this->setCache($protection);
+        $this->setCache($organization);
     }
 
     /**
      * Handle the protection "restored" event.
      *
-     * @param Protection $protection
+     * @param Organization $organization
      * @return void
      */
-    public function restored(Protection $protection)
+    public function restored(Organization $organization)
     {
-        $this->setCache($protection);
+        $this->setCache($organization);
     }
 
     /**
      * Handle the protection "force deleted" event.
      *
-     * @param Protection $protection
+     * @param Organization $organization
      * @return void
      */
-    public function forceDeleted(Protection $protection)
+    public function forceDeleted(Organization $organization)
     {
-        $this->setCache($protection);
+        $this->setCache($organization);
     }
 
-    public function saved(Protection $protection)
+    public function saved(Organization $organization)
     {
-        $this->setCache($protection);
+        $this->setCache($organization);
     }
 }
