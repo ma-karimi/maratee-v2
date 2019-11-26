@@ -82,7 +82,7 @@ class PlantAPIController extends AppBaseController
      */
     private function fieldNonFlowerRelations(): array
     {
-        return ['generalPhytogeography', 'taxonomy', 'generalHabitat', 'media', 'generalSubstrate.parent', 'herbarium.collect.actors', 'herbarium.determine.actors', 'herbarium.transactions', 'herbarium.location.province.country', 'herbarium.location'];
+        return ['generalPhytogeography', 'taxonomy', 'generalHabitat', 'media', 'generalSubstrate.parent', 'herbarium.collect.actors', 'herbarium.determine.actors', 'herbarium.transactions', 'herbarium.location'];
     }
 
     /**
@@ -261,6 +261,7 @@ class PlantAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(CreatePlantAPIRequest $request)
     {
@@ -509,6 +510,7 @@ class PlantAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(UpdatePlantAPIRequest $request, $id)
     {

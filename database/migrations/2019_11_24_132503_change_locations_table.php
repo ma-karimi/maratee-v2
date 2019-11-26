@@ -21,12 +21,12 @@ class ChangeLocationsTable extends Migration
             $table->string('village');
         });
 
-        \App\Models\Location::whereNotNull('village_id')->get()
-            ->load('villager')->each(function ($query) {
-                $query->update(['village'=>$query['villager']['name_en']]);
-            });
+        \App\Models\Location::all()
+        ->load('villager')->each(function ($query) {
+            $query->update(['village'=>!empty($query['villager']['name_en']) ? $query['villager']['name_en'] : null ]);
+        });
 
-        Schema::dropIfExists('villages');
+//        Schema::dropIfExists('villages');
     }
 
 

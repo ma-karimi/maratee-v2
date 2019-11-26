@@ -127,11 +127,11 @@ trait PlantScope
         return false;
     }
 
-    protected function processLocations_VillageIdFilter(Builder $builder, Constraint $constraint)
+    protected function processLocations_VillageFilter(Builder $builder, Constraint $constraint)
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
             $builder->whereHas('locations', function ($query) use ($constraint) {
-                return $query->where('village_id', $constraint->getOperator(), $constraint->getValue());
+                return $query->where('village', $constraint->getOperator(), $constraint->getValue());
 
             });
 

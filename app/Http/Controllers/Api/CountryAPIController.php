@@ -59,13 +59,17 @@ class CountryAPIController extends AppBaseController
      * )
      * @throws \Exception
      */
-    public function index(Request $request)
+    public function index()
     {
-        $countries = $this->countryRepository->paginate(
-            $request->get('per_page'),
-            $request->except('per_page'),
-            $request->get('relations')
+
+        $countries = Cache::get('countries', function () {
+            return $this->countryRepository->all(
+            [],
+            null,
+            null,
+            ['provinces.cities']
         );
+        });
 
         return $this->sendResponse($countries->toArray(), 'Countries retrieved successfully');
     }

@@ -16,11 +16,9 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Transaction extends BaseModel implements HasMedia
 {
-    protected $appends=['type', 'visit', 'mode', 'sample_impression'];
-    use TransactionAccessor,HasMediaTrait;
     public const MODE = [1 => 'send', 2 => 'receive'];
+    use TransactionAccessor, HasMediaTrait;
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
-
     public const TYPE = [1 => 'visit', 2 => 'borrow', 3 => 'exchange', 4 => 'gift', 5 => 'fair', 6 => 'expense', 7 => 'correspondence'];
     public const VISIT = [1 => 'Sample', 2 => 'All/Museum'];
     public static $rules = [
@@ -44,14 +42,22 @@ class Transaction extends BaseModel implements HasMedia
         'sheets_no' => 'string',
         'sample_impression_id' => 'numeric',
     ];
-
-
+    protected $appends = ['type', 'visit', 'mode', 'sample_impression'];
+    protected $with = ['organization'];
     /**
      * @return BelongsTo
      */
     public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);
+    }
+
+    /**
+     * Get the owning transactionable model.
+     */
+    public function transactionable()
+    {
+        return $this->morphTo();
     }
 
     public function paleontologies()

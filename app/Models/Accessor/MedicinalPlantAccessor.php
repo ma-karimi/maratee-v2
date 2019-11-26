@@ -55,7 +55,7 @@ trait MedicinalPlantAccessor
 
     public function getCycleAttribute()
     {
-        return !empty($this->cyclc_id) ? Arr::get(self::CYCLE, $this->cycle_id) : null;
+        return !empty($this->cycle_id) ? Arr::get(self::CYCLE, $this->cycle_id) : null;
     }
     public function getWoodenAttribute()
     {
@@ -65,5 +65,12 @@ trait MedicinalPlantAccessor
     {
         return !empty($this->herbaceous_id) ? Arr::get(self::HERBACEOUS, $this->herbaceous_id) : null;
     }
+
+
+    public function getHygienicCosmeticAttribute()
+    {
+        return !empty($this->hygienic_cosmetic_industry_id) ? Arr::get(self::BOOLEAN, $this->hygienic_cosmetic_industry_id) : null;
+    }
+
 
 }

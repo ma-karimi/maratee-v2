@@ -121,7 +121,7 @@ class Paleontology extends BaseModel implements HasMedia
      */
     public function generalClass(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'general_class_id')->withDefault();
+        return $this->belongsTo(General::class, 'general_class_id');
     }
 
     /**

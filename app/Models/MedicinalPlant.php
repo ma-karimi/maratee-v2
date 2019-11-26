@@ -31,6 +31,7 @@ class MedicinalPlant extends BaseModel
     public const WOODEN = [1 => 'Tree', 2 => 'Shrubs'];
     public const HERBACEOUS = [1 => 'Standing', 2 => 'Crawling'];
     public const CYCLE = [1 => 'Annual', 2 => 'Perennial'];
+    public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
 
     public static $rules = [
         'herbarium_number' => 'string',
@@ -42,7 +43,6 @@ class MedicinalPlant extends BaseModel
         'treatment_id' => 'nullable|exists:medicinal_plant_types,id',
         'food_industry_id' => 'nullable|exists:medicinal_plant_types,id',
         'general_origin_id' => 'nullable|exists:generals,id',
-        'hygienic_cosmetic_industry_id' => 'nullable|exists:medicinal_plant_types,id',
         'other_industry_id' => 'nullable|exists:medicinal_plant_types,id',
         'industrial_potential_id' => 'nullable|exists:medicinal_plant_types,id',
         'phenology_id' => 'nullable|exists:medicinal_plant_types,id',
@@ -101,7 +101,8 @@ class MedicinalPlant extends BaseModel
         'presence_in_country_name',
         'wooden',
         'herbaceous',
-        'cycle'
+        'cycle',
+        'hygienic_cosmetic'
     ];
 
 
@@ -205,12 +206,6 @@ class MedicinalPlant extends BaseModel
     {
         return $this->belongsTo(MedicinalPlantType::class, 'food_industry_id'
         )->where('type_id', array_search('food_industry', MedicinalPlantType::TYPE));
-    }
-
-    public function hygienicCosmeticIndustry()
-    {
-        return $this->belongsTo(MedicinalPlantType::class, 'hygienic_cosmetic_industry_id'
-        )->where('type_id', array_search('hygienic cosmetic', MedicinalPlantType::TYPE));
     }
 
     public function otherIndustry()

@@ -271,6 +271,7 @@ class Plant extends BaseModel implements HasMedia
     {
             return $this->hasOne(Herbarium::class, 'plant_id');
     }
+
 }
 
 

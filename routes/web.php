@@ -11,7 +11,11 @@
 |
 */
 
-
+//\App\Models\Location::all()
+//    ->load('villager')->each(function ($query) {
+//        $query->update(['village'=>!empty($query['villager']['name_en']) ? $query['villager']['name_en'] : null ]);
+//    });
+//dd(\App\Models\Location::first());
 
 Route::get('/', function () {
     return view('welcome');

@@ -280,7 +280,7 @@ class ConvertService
             'province_id' => $this->models['province']['id'],
             'address_en' => trim($this->treeLeaf->addresse),
             'address_fa' => trim($this->treeLeaf->addressf),
-            'village_id' => $this->models['village']['id'] ?? null,
+            'village' => $this->models['village'] ?? null,
             'min_altitude' => $this->treeLeaf->minaltitude,
             'max_altitude' => $this->treeLeaf->maxaltitude,
         ];

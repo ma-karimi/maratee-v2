@@ -117,7 +117,7 @@ class HerbariumRepository extends BaseRepository
             'city_id' => $input['city_id'] ?? null,
             'address_en' => $input['address_en'] ?? null,
             'address_fa' => $input['address_fa'] ?? null,
-            'village_id' => $input['village_id'] ?? null,
+            'village' => $input['village'] ?? null,
             'min_altitude' => $input['min_altitude'] ?? null,
             'max_altitude' => $input['max_altitude'] ?? null,
             'point' => $input['point'] ?? null,

@@ -156,7 +156,7 @@ class MedicinalPlantRepository extends BaseRepository
             'region_name' => $input['region_name'] ?? null,
             'address_en' => $input['address_en'] ?? null,
             'address_fa' => $input['address_fa'] ?? null,
-            'village_id' => $input['village_id'] ?? null,
+            'village' => $input['village'] ?? null,
             'min_altitude' => $input['min_altitude'] ?? null,
             'max_altitude' => $input['max_altitude'] ?? null,
             'point' => $input['point'] ?? null,
@@ -176,7 +176,7 @@ class MedicinalPlantRepository extends BaseRepository
             'page_no',
             'authors'
         ];
-        return array_merge($article, ['date', 'collectors', 'determines', 'life_forms', 'address_en', 'address_fa', 'province_id', 'village_id', 'province_id', 'region_name', 'min_altitude', 'max_altitude', 'point', 'geographical_description', 'city_id', 'country_id', 'provinces', 'constituents']);
+        return array_merge($article, ['date', 'collectors', 'determines', 'life_forms', 'address_en', 'address_fa', 'province_id', 'village', 'province_id', 'region_name', 'min_altitude', 'max_altitude', 'point', 'geographical_description', 'city_id', 'country_id', 'provinces', 'constituents']);
     }
 
     private function storeDetermine($input, $medicinal_plant_id)
@@ -237,16 +237,6 @@ class MedicinalPlantRepository extends BaseRepository
     private function storeConstituent($input, $medicinal_plant_id)
     {
         $constituents = json_decode($input['constituents']);
-
-        Log::info($constituents);
-//        $cons_collection = collect($constituents)->map(function ($query) {
-//            return $query['constituent_type_id'];
-//        });
-//
-//        $this->medicinalPlantConstituentRepo
-//            ->where('medicinal_plant_id', $medicinal_plant_id)
-//            ->whereNotIn('constituent_type_id', $cons_collection->all())
-//            ->delete();
 
         $cons_collection = [];
         foreach ($constituents as $constituent){

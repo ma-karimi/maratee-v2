@@ -804,6 +804,6 @@ class PaleontologyAPIController extends AppBaseController
     }
 
     private function fieldRelations(){
-        return ['taxonomy_id', 'generalClass', 'generalOrder', 'geologyAgePeriod', 'geologyAgeStage', 'geologyAgeEpoch', 'geologyAgeEra', 'generalPlantType', 'locality', 'maps', 'collect', 'determine', 'media'];
+        return ['taxonomy', 'generalClass', 'generalOrder', 'geologyAgePeriod', 'geologyAgeStage', 'geologyAgeEpoch', 'geologyAgeEra', 'generalPlantType', 'locality', 'maps', 'collect', 'determine', 'media'];
     }
 }

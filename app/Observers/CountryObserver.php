@@ -24,7 +24,7 @@ class CountryObserver
      */
     private function setCache(Country $countries): void
     {
-        Cache::put('protections', $countries->all(), now()->addDays(10));
+        Cache::put('countries', $countries->all()->load('provinces.cities'), now()->addDays(10));
     }
 
     /**

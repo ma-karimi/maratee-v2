@@ -580,7 +580,7 @@ class HerbariumAPIController extends AppBaseController
 
     public function fieldRelations()
     {
-        return ['taxonomy', 'plant', 'organization', 'media', 'determine.actors', 'collect.actors', 'location'];
+        return ['taxonomy', 'plant', 'organization', 'media', 'determine', 'collect', 'location'];
     }
 
     /**

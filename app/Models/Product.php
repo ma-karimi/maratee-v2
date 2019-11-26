@@ -50,7 +50,8 @@ class Product extends BaseModel implements HasMedia
 
     public function pharmaceutical_form()
     {
-        return $this->belongsTo(MedicinalPlantType::class, 'pharmaceutical_form_id')->where('type_id','==', 7);
+        return $this->belongsTo(MedicinalPlantType::class, 'pharmaceutical_form_id')
+            ->where('type_id',7);
     }
 
 }

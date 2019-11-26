@@ -43,4 +43,9 @@ trait LocationAccessor
         }
 
     }
+
+    public function getAddressAttribute()
+    {
+        return [];
+    }
 }

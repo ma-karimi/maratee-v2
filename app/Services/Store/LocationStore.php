@@ -24,7 +24,7 @@ class LocationStore extends BaseStore
         $this->location['city'] = $this->getCity();
         $this->location['village'] = $this->getVillage();
         $data['city_id'] = $this->location['city']->id;
-        $data['village_id'] = $this->location['village']->id;
+        $data['village'] = $this->location['village'];
         $data['address'] = $this->address;
         if($this->hasPoint())
             $data['point'] = $this->pointData();

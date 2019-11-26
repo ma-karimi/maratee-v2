@@ -15,6 +15,7 @@ class ChangeDocumentPaleontologiesTable extends Migration
     {
         Schema::table('paleontologies', function (Blueprint $table) {
            $table->text('description')->nullable();
+
         });
     }
 

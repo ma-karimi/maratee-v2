@@ -84,6 +84,7 @@ class PlantRepository extends BaseRepository
     /**
      * @param array $input
      * @return Model|void
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function create($input)
     {
@@ -158,7 +159,7 @@ class PlantRepository extends BaseRepository
             'region_name' => $input['region_name'] ?? null,
             'address_en' => $input['address_en'] ?? null,
             'address_fa' => $input['address_fa'] ?? null,
-            'village_id' => $input['village_id'] ?? null,
+            'village' => $input['village'] ?? null,
             'min_altitude' => $input['min_altitude'] ?? null,
             'max_altitude' => $input['max_altitude'] ?? null,
             'point' => $input['point'] ?? null,
@@ -190,6 +191,7 @@ class PlantRepository extends BaseRepository
      * @param array $input
      * @param $id
      * @return Model|void
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($input, $id)
     {

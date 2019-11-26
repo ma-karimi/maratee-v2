@@ -47,6 +47,7 @@ class Location extends BaseModel
 
     protected $with = ['city.province.country', 'province.country'];
 
+    protected $appends = ['address'];
     /**
      * @return HasMany
      */
@@ -144,6 +145,13 @@ class Location extends BaseModel
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function villager(): BelongsTo
+    {
+        return $this->belongsTo(Village::class, 'village_id');
     }
 
     /**
