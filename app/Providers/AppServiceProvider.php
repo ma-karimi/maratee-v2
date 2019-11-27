@@ -56,7 +56,6 @@ class AppServiceProvider extends ServiceProvider
         City::observe(CityObserver::class);
         Province::observe(ProvinceObserver::class);
         Country::observe(CountryObserver::class);
-        Village::observe(VillageObserver::class);
         Organization::observe(OrganizationObserver::class);
         MedicinalPlantType::observe(MedicinalPlantTypeObserver::class);
         Method::observe(MethodObserver::class);

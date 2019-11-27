@@ -3,6 +3,8 @@
 namespace App\Observers;
 
 
+use App\Models\City;
+use App\Models\Country;
 use App\Models\Province;
 use Illuminate\Support\Facades\Cache;
 
@@ -24,7 +26,9 @@ class ProvinceObserver
      */
     private function setCache(Province $province): void
     {
-        Cache::put('protections', $province->all(), now()->addDays(10));
+        Cache::put('provinces', $province->all(), now()->addDays(10));
+        Cache::put('countries', Country::all()->load('provinces.cities'), now()->addDays(10));
+        Cache::put('cities', City::all(), now()->addDays(10));
     }
 
     /**
