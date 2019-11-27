@@ -25,7 +25,7 @@ class ProvinceTableSeeder extends Seeder
             ->pluck('name', 'postal');
         foreach ($states as $index => $item) {
             \App\Models\Province::create([
-                'name' => ['en' => $item],
+                'name_en' => $item,
                 'country_id' => 109
             ]);
         }

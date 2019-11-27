@@ -29,31 +29,33 @@ class DatabaseSeeder extends Seeder
 //            ]);
 
 
-            User::create([
-                'email' => 'admin@gmail.com',
-                'password' => 123456,
-                'title' => ['en' => 'mrs.'],
-                'education' => ['en' => 'wewewe'],
-                'degree' => ['en' => 'ssss'],
-                'national_id' => 61,
-                'birthday' => '1993-01-20',
-                'nationality' => ['en' => 'Colombia'],
-                'full_name' => ['en' => 'Camille Swift'],
-                'mobile' => '9145508431',
-                'phone' => '9145508431',
-            ]);
+        User::create([
+            'email' => 'admin@gmail.com',
+            'password' => 123456,
+            'title' => ['en' => 'mrs.'],
+            'education' => ['en' => 'wewewe'],
+            'degree' => ['en' => 'ssss'],
+            'national_id' => 61,
+            'birthday' => '1993-01-20',
+            'nationality' => ['en' => 'Colombia'],
+            'full_name' => ['en' => 'Camille Swift'],
+            'mobile' => '9145508431',
+            'phone' => '9145508431',
+        ]);
 
-            $this->call([
-                OriginalGeneralTableSeeder::class,
-                OriginalPropagationTableSeeder::class,
-                OriginalMedicinalPlantTypeTableSeeder::class,
-                OriginalMethodTableSeeder::class,
-                MedicinalPartTableSeeder::class,
-                ProtectionTableSeeder::class,
-                LifeFormTableSeeder::class,
-                ConvertSeeder::class,
+        $this->call([
+            CountryTableSeeder::class,
+            ProvinceTableSeeder::class,
+            OriginalGeneralTableSeeder::class,
+            OriginalPropagationTableSeeder::class,
+            OriginalMedicinalPlantTypeTableSeeder::class,
+            OriginalMethodTableSeeder::class,
+            MedicinalPartTableSeeder::class,
+            ProtectionTableSeeder::class,
+            LifeFormTableSeeder::class,
+            ConvertSeeder::class,
 
-            ]);
+        ]);
 //
 //        } else {
 //            User::create([
@@ -77,12 +79,9 @@ class DatabaseSeeder extends Seeder
 //                ProtectionTableSeeder::class,
 //                LifeFormTableSeeder::class,
 //
-//                ContinentTableSeeder::class,
 //                ConvertSeeder::class,
 //
 //                UserTableSeeder::class,
-////                CountryTableSeeder::class,
-////                ProvinceTableSeeder::class,
 ////                CityTableSeeder::class,
 ////                VillageTableSeeder::class,
 ////                ActionTableSeeder::class,

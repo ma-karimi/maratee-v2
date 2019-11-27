@@ -257,9 +257,8 @@ class PaleontologyAPIController extends AppBaseController
      */
     public function store(CreatePaleontologyAPIRequest $request)
     {
-        $input = $request->all();
 
-        $paleontology = $this->paleontologyRepository->create($input);
+        $paleontology = $this->paleontologyRepository->create($request);
 
         return $this->sendResponse($paleontology->toArray(), 'Paleontology saved successfully');
     }
@@ -509,16 +508,15 @@ class PaleontologyAPIController extends AppBaseController
      */
     public function update($id, UpdatePaleontologyAPIRequest $request)
     {
-        $input = $request->all();
 
         /** @var Paleontology $paleontology */
-        $paleontology = $this->paleontologyRepository->find($id, \request()->get('relations'));
+        $paleontology = $this->paleontologyRepository->find($id);
 
         if (empty($paleontology)) {
             return $this->sendError('Paleontology not found');
         }
 
-        $paleontology = $this->paleontologyRepository->update($input, $id);
+        $paleontology = $this->paleontologyRepository->update($request, $id);
 
         return $this->sendResponse($paleontology->toArray(), 'Paleontology updated successfully');
     }
@@ -575,235 +573,8 @@ class PaleontologyAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Paleontology deleted successfully');
     }
-    /**
-     * @param $id
-     * @param ActionableRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/paleontologies/{id}/determine",
-     *      summary="Store Determine action for Given Paleontology",
-     *      tags={"Paleontology Action"},
-     *      description="Store Paleontology Action",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="actors",
-     *          in="body",
-     *          description="ids of actors",
-     *          required=true,
-     *          @SWG\Schema(type="array", @SWG\Items(type="integer"))
-     *      ),
-     *      @SWG\Parameter(
-     *          name="date",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="project_id",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="department_id",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Paleontology"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function storeDetermine($id, ActionableRequest $request)
-    {
-        $input = $request->all();
-
-        $result = $this->paleontologyRepository->storeAction($id, $input, 1);
-
-        return $this->sendResponse($result->toArray(), 'Paleontology Action saved successfully');
-    }
-
-    /**
-     * @param $id
-     * @param ActionableRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/paleontologies/{id}/collect",
-     *      summary="Store Collect action for Given Paleontology",
-     *      tags={"Paleontology Action"},
-     *      description="Store Paleontology Action",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="actors",
-     *          in="body",
-     *          description="ids of actors",
-     *          required=true,
-     *          @SWG\Schema(type="array", @SWG\Items(type="integer"))
-     *      ),
-     *      @SWG\Parameter(
-     *          name="date",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="project_id",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="department_id",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Paleontology"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function storeCollect($id, ActionableRequest $request)
-    {
-        $input = $request->all();
-
-        $result = $this->paleontologyRepository->storeAction($id, $input, 2);
-
-        return $this->sendResponse($result->toArray(), 'Paleontology Action saved successfully');
-    }
-
-    /**
-     * @param $id
-     * @param ActionableRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/paleontologies/{id}/research",
-     *      summary="Store Research action for Given Paleontology",
-     *      tags={"Paleontology Action"},
-     *      description="Store Paleontology Action",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="actors",
-     *          in="body",
-     *          description="ids of actors",
-     *          required=true,
-     *          @SWG\Schema(type="array", @SWG\Items(type="integer"))
-     *      ),
-     *      @SWG\Parameter(
-     *          name="date",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="project_id",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="department_id",
-     *          in="body",
-     *          description="Paleontology that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Paleontology"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function storeResearch($id, ActionableRequest $request)
-    {
-        $input = $request->all();
-
-        $result = $this->paleontologyRepository->storeAction($id, $input, 3);
-
-        return $this->sendResponse($result->toArray(), 'Paleontology Action saved successfully');
-    }
 
     private function fieldRelations(){
-        return ['taxonomy', 'generalClass', 'generalOrder', 'geologyAgePeriod', 'geologyAgeStage', 'geologyAgeEpoch', 'geologyAgeEra', 'generalPlantType', 'locality', 'maps', 'collect', 'determine', 'media'];
+        return ['taxonomy', 'generalClass', 'generalOrder', 'geologyAgePeriod', 'geologyAgeStage', 'geologyAgeEpoch', 'geologyAgeEra', 'generalPlantType', 'locality.location', 'maps', 'collect', 'determine', 'media'];
     }
 }

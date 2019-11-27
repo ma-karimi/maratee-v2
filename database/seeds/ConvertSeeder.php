@@ -17,9 +17,9 @@ class ConvertSeeder extends Seeder
      */
     public static function run($start = 0, $limit = null)
     {
-        Country::create([
-            'name_en'=> 'Iran', 'name_fa' => 'ایران'
-        ]);
+//        Country::create([
+//            'name_en'=> 'Iran', 'name_fa' => 'ایران'
+//        ]);
 
         if(\Illuminate\Support\Facades\App::environment() == 'local' && env('srico') == true){
             $limit = 500;

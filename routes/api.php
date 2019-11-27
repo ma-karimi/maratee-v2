@@ -239,10 +239,7 @@ Route::post('herbariums/{id}/research', 'PlantHerbariumAPIController@storeResear
 Route::post('cryo_banks/{id}/determine', 'CryoBankAPIController@storeDetermine');
 Route::post('cryo_banks/{id}/collect', 'CryoBankAPIController@storeCollect');
 Route::post('cryo_banks/{id}/research', 'CryoBankAPIController@storeResearch');
-//Paleontology action
-Route::post('paleontologies/{id}/determine', 'PaleontologyAPIController@storeDetermine');
-Route::post('paleontologies/{id}/collect', 'PaleontologyAPIController@storeCollect');
-Route::post('paleontologies/{id}/research', 'PaleontologyAPIController@storeResearch');
+
 //MedicinalPlant action
 Route::post('medicinal_plants/{id}/determine', 'MedicinalPlantAPIController@storeDetermine');
 Route::post('medicinal_plants/{id}/collect', 'MedicinalPlantAPIController@storeCollect');

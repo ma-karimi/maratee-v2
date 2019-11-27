@@ -9,6 +9,7 @@ use App\Models\Actor;
 use App\Models\ActorHub;
 use App\Models\City;
 use App\Models\Convert\Treeleaf;
+use App\Models\Country;
 use App\Models\General;
 use App\Models\Herbarium;
 use App\Models\Location;
@@ -54,10 +55,7 @@ class ConvertService
     public function handle()
     {
 
-//
-//        if($this->treeLeaf->id==2) {
-//        dd($this->treeLeaf->cityR, !empty($this->treeLeaf->village), !empty(trim($this->treeLeaf->village['name'])), !empty($this->treeLeaf->cityR), !empty($this->treeLeaf->cityR['name']), !empty($this->treeLeaf->provinceR), !empty($this->treeLeaf->provinceR['name']));
-//        }
+
         if (!empty($this->treeLeaf->village) && !empty($this->treeLeaf->village->parent)) {
             // province
             $this->firstOrCreateProvince($this->treeLeaf->village, 'village');
@@ -69,7 +67,7 @@ class ConvertService
             }
             if (!empty(trim($this->treeLeaf->village['name']))) {
                 // village
-                $this->firstOrCreateVillage();
+                $this->models['village'] = trim($this->treeLeaf->village->name);
             } else {
                 $this->models['village'] = null;
             }
@@ -130,8 +128,7 @@ class ConvertService
         $this->models['taxonomy'] = Taxonomy::firstOrCreate($this->taxonomyData());
 
         // organization
-//        $this->models['organization'] = Organization::where($this->organizationConditions())->first();
-//        if (!$this->models['organization'])
+
         $this->models['organization'] = Organization::firstOrCreate($this->organizationData());
 
         // plant herbarium
@@ -187,8 +184,7 @@ class ConvertService
 
     private function firstOrCreateProvince($model, $type): void
     {
-//        $this->models['province'] = Province::where($this->provinceConditions($model, $type))->first();
-//        if (!$this->models['province'])
+
         $this->models['province'] = Province::firstOrCreate($this->provinceData($model, $type));
     }
 
@@ -208,7 +204,7 @@ class ConvertService
         }
         $array = [
             'name_en' => trim($name),
-            'country_id' => 1
+            'country_id' => 109
         ];
 
         if (!empty($other_name)) {
@@ -220,8 +216,7 @@ class ConvertService
 
     private function firstOrCreateCity($model, $type): void
     {
-//        $this->models['city'] = City::where($this->cityConditions($model, $type))->first();
-//        if (!$this->models['city'])
+
         $this->models['city'] = City::firstOrCreate($this->cityData($model, $type));
     }
 
@@ -247,29 +242,8 @@ class ConvertService
         return $array;
     }
 
-    private function firstOrCreateVillage(): void
-    {
-//        $this->models['village'] = Village::where($this->villageConditions())->first();
-//        if (!$this->models['village'])
-        $this->models['village'] = Village::create($this->villageData());
-    }
-
-    private function villageData(): array
-    {
-        $array = [
-            'name_en' => trim($this->treeLeaf->village->name)
-        ];
-
-        if (!empty($this->treeLeaf->village->othername)) {
-            $array['name_fa'] = trim($this->treeLeaf->village->othername);
-        }
-        return $array;
-    }
-
     private function createLocation(): void
     {
-//        $this->models['location'] = Location::where($this->locationConditions())->first();
-//        if (!$this->models['location'])
         $this->models['location'] = Location::create($this->locationData());
     }
 
@@ -280,7 +254,7 @@ class ConvertService
             'province_id' => $this->models['province']['id'],
             'address_en' => trim($this->treeLeaf->addresse),
             'address_fa' => trim($this->treeLeaf->addressf),
-            'village' => $this->models['village'] ?? null,
+            'village' => !empty($this->models['village']) ? $this->models['village'] : null,
             'min_altitude' => $this->treeLeaf->minaltitude,
             'max_altitude' => $this->treeLeaf->maxaltitude,
         ];
@@ -495,6 +469,31 @@ class ConvertService
         echo "$message\n";
     }
 
+    /**
+     * @deprecated
+     */
+    private function firstOrCreateVillage(): void
+    {
+        $this->models['village'] = Village::create($this->villageData());
+    }
+
+    /**
+     * @deprecated
+     */
+    private function villageData(): array
+    {
+        $array = [
+            'name_en' => trim($this->treeLeaf->village->name)
+        ];
+
+        if (!empty($this->treeLeaf->village->othername)) {
+            $array['name_fa'] = trim($this->treeLeaf->village->othername);
+        }
+        return $array;
+    }
+    /**
+     * @deprecated
+     */
     private function provinceConditions($model, $type): array
     {
         if ($type == 'village') {
@@ -521,6 +520,9 @@ class ConvertService
         ];
     }
 
+    /**
+     * @deprecated
+     */
     private function organizationConditions(): array
     {
         return [
@@ -528,6 +530,9 @@ class ConvertService
         ];
     }
 
+    /**
+     * @deprecated
+     */
     private function villageConditions(): array
     {
         return [
@@ -535,6 +540,9 @@ class ConvertService
         ];
     }
 
+    /**
+     * @deprecated
+     */
     private function locationConditions(): array
     {
         return [
@@ -545,6 +553,9 @@ class ConvertService
         ];
     }
 
+    /**
+     * @deprecated
+     */
     private function ActorCollectConditions($collector): array
     {
         return [
@@ -552,6 +563,9 @@ class ConvertService
         ];
     }
 
+    /**
+     * @deprecated
+     */
     private function actorDetectConditions($detector): array
     {
         return [
@@ -559,6 +573,9 @@ class ConvertService
         ];
     }
 
+    /**
+     * @deprecated
+     */
     private function actorHubCollectConditions(): array
     {
         return [

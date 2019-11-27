@@ -46,7 +46,6 @@ class Paleontology extends BaseModel implements HasMedia
         'geology_age_period_id' => 'integer|exists:geology_ages,id',
         'taxonomy_id' => 'required|exists:taxonomies,id',
         'last_update' => 'date',
-        'location_id' => 'required|exists:locations,id',
         'general_order_id' => 'integer|exists:generals,id',
         'general_plant_type_id' => 'integer|exists:generals,id',
     ];

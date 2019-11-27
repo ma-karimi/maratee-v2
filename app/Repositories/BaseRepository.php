@@ -122,14 +122,14 @@ abstract class BaseRepository
 //                }
             }
         }
-
-        if ($skip !== null) {
-            $query->skip($skip);
-        }
-
-        if ($limit !== null) {
-            $query->limit($limit);
-        }
+//
+//        if ($skip !== null) {
+//            $query->skip($skip);
+//        }
+//
+//        if ($limit !== null) {
+//            $query->limit($limit);
+//        }
 
         return $query->filtered([]);
     }

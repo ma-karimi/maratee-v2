@@ -222,14 +222,14 @@ class HerbariumRepository extends BaseRepository
     public function update($input, $id)
     {
 
-        if (Herbarium::where('herbarium_number', $input['herbarium_number'])->where('id', '!=',$id)->exists()) {
+        if (Herbarium::where('herbarium_number', $input['herbarium_number'])->where('id', '!=', $id)->exists()) {
             throw ValidationException::withMessages([
                 'herbarium_number' => 'Herbarium Number Already Exists!'
             ]);
         }
         $location = $this->storeLocation($input, $input->filled('location_id') ? $input['location_id'] : null);
         $input['location_id'] = $location->id;
-        $is_flowering = $input['is_flowering'] != 1  ? $input['is_flowering'] : 1;
+        $is_flowering = $input['is_flowering'] != 1 ? $input['is_flowering'] : 1;
         $plant = Plant::where('taxonomy_id', $input['taxonomy_id'])
             ->where('is_flowering', $is_flowering)
             ->first();

@@ -18,13 +18,13 @@ class ChangeLocationsTable extends Migration
             $table->dropForeign(['village_id']);
         });
         Schema::table('locations', function (Blueprint $table) {
-            $table->string('village');
+            $table->string('village')->nullable();
         });
 
-        \App\Models\Location::all()
-        ->load('villager')->each(function ($query) {
-            $query->update(['village'=>!empty($query['villager']['name_en']) ? $query['villager']['name_en'] : null ]);
-        });
+//        \App\Models\Location::all()
+//        ->load('villager')->each(function ($query) {
+//            $query->update(['village'=>!empty($query['villager']['name_en']) ? $query['villager']['name_en'] : null ]);
+//        });
 
 //        Schema::dropIfExists('villages');
     }

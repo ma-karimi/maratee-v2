@@ -27,19 +27,19 @@ class CountryTableSeeder extends Seeder
         \Illuminate\Support\Facades\DB::table('countries')->truncate();
         $countries = new \PragmaRX\Countries\Package\Countries();
         foreach ($countries->all() as $index => $item) {
-            if (!empty($item->geo)) {
-                try {
-                    if (is_object($item->geo->continent)) {
-                        $continent_name = $item->geo->continent->first();
-                    }
-                    $continent_id = \App\Models\Continent::where('name', 'LIKE', "%$continent_name%")->first()->id;
-                } catch (\Exception $exception) {
-                }
-            }
+//            if (!empty($item->geo)) {
+//                try {
+//                    if (is_object($item->geo->continent)) {
+//                        $continent_name = $item->geo->continent->first();
+//                    }
+//                    $continent_id = \App\Models\Continent::where('name', 'LIKE', "%$continent_name%")->first()->id;
+//                } catch (\Exception $exception) {
+//                }
+//            }
             \App\Models\Country::create([
-                'name' => ['en' => $item->name->common],
-                'continent_id' => $continent_id ?? null,
-                'code' => $item->iso_n3 ?? null
+                'name_en' => $item->name->common,
+//                'continent_id' => $continent_id ?? null,
+//                'code' => $item->iso_n3 ?? null
             ]);
 
         }

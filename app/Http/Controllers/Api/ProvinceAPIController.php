@@ -16,7 +16,6 @@ use Response;
  * Class ProvinceController
  * @package App\Http\Controllers\Api
  */
-
 class ProvinceAPIController extends AppBaseController
 {
     /** @var  ProvinceRepository */
@@ -62,10 +61,11 @@ class ProvinceAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $provinces = $this->provinceRepository->paginate(
+        $provinces = $this->provinceRepository->all(
+            [],
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            []
         );
 
         return $this->sendResponse($provinces->toArray(), 'Provinces retrieved successfully');
@@ -310,7 +310,6 @@ class ProvinceAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Province deleted successfully');
     }
-
 
 
     /**

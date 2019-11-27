@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class ChangeLocationCollectionPaleontologiesTable extends Migration
+class AddDeletedPaleontologyMapsTable extends Migration
 {
 
     /**
@@ -13,8 +13,8 @@ class ChangeLocationCollectionPaleontologiesTable extends Migration
      */
     public function up()
     {
-        Schema::table('paleontologies', function (Blueprint $table) {
-            $table->renameColumn('drawer', 'location_in_collection');
+        Schema::table('paleontology_maps', function (Blueprint $table) {
+            $table->softDeletesTz();
         });
     }
 
