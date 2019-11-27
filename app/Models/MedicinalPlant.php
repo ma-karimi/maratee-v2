@@ -4,11 +4,10 @@ namespace App\Models;
 
 use App\Models\Accessor\MedicinalPlantAccessor;
 use App\Models\Contracts\BaseModel;
+use App\Models\Scope\MedicinalPlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
@@ -18,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class MedicinalPlant extends BaseModel
 {
-    use MedicinalPlantAccessor;
+    use MedicinalPlantAccessor, MedicinalPlantScope;
 
     public const TRADITIONAL_IRANIAN_MEDICINE = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
     public const NATURAL_DRUG = [0 => 'unknown', 1 => 'human medicines', 2 => 'animal drugs'];

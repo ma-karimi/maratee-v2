@@ -6,19 +6,18 @@ namespace App\Models\Relations;
 
 use App\CustomPivot;
 use App\Models\Action;
+use App\Models\ActionHub;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait ActionRelation
 {
-
-    /**
-     * @return MorphToMany
-     */
-    public function actions(): MorphToMany
+    public function collect()
     {
-        return $this->morphToMany(Action::class, 'actionable', 'action_hubs')
-            ->whereNull('action_hubs.deleted_at')
-            ->withTimestamps()
-            ->withPivot(['user_id', 'location_id', 'project_id', 'department_id', 'description', 'date'])->using(CustomPivot::class);
+        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 2);
+    }
+
+    public function research()
+    {
+        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 3);
     }
 }

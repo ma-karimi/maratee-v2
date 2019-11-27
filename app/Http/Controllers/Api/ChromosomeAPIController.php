@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateChromosomeAPIRequest;
-use App\Http\Requests\Api\UpdateChromosomeAPIRequest;
+use App\Http\Requests\Api\ChromosomeAPIRequest;
 use App\Models\Chromosome;
 use App\Repositories\ChromosomeRepository;
 use Illuminate\Http\Request;
@@ -63,14 +62,14 @@ class ChromosomeAPIController extends AppBaseController
         $chromosomes = $this->chromosomeRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            $this->getFieldRelations()
         );
 
         return $this->sendResponse($chromosomes->toArray(), 'Chromosomes retrieved successfully');
     }
 
     /**
-     * @param CreateChromosomeAPIRequest $request
+     * @param ChromosomeAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -104,7 +103,7 @@ class ChromosomeAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Chromosome")
      *      ),
      *      @SWG\Parameter(
-     *          name="2n_no",
+     *          name="n2_no",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Chromosome")
@@ -148,11 +147,10 @@ class ChromosomeAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateChromosomeAPIRequest $request)
+    public function store(ChromosomeAPIRequest $request)
     {
-        $input = $request->all();
 
-        $chromosome = $this->chromosomeRepository->create($input);
+        $chromosome = $this->chromosomeRepository->create($request);
 
         return $this->sendResponse($chromosome->toArray(), 'Chromosome saved successfully');
     }
@@ -198,7 +196,8 @@ class ChromosomeAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Chromosome $chromosome */
-        $chromosome = $this->chromosomeRepository->find($id, \request()->get('relations'));
+        $chromosome = $this->chromosomeRepository->find($id, $this->getFieldRelations()
+        );
 
         if ($chromosome === null) {
             return $this->sendError('Chromosome not found');
@@ -209,7 +208,7 @@ class ChromosomeAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateChromosomeAPIRequest $request
+     * @param ChromosomeAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -250,7 +249,7 @@ class ChromosomeAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Chromosome")
      *      ),
      *      @SWG\Parameter(
-     *          name="2n_no",
+     *          name="n2_no",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Chromosome")
@@ -294,18 +293,17 @@ class ChromosomeAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateChromosomeAPIRequest $request)
+    public function update($id, ChromosomeAPIRequest $request)
     {
-        $input = $request->all();
 
         /** @var Chromosome $chromosome */
-        $chromosome = $this->chromosomeRepository->find($id, \request()->get('relations'));
+        $chromosome = $this->chromosomeRepository->find($id);
 
         if ($chromosome === null) {
             return $this->sendError('Chromosome not found');
         }
 
-        $chromosome = $this->chromosomeRepository->update($input, $id);
+        $chromosome = $this->chromosomeRepository->update($request, $id);
 
         return $this->sendResponse($chromosome->toArray(), 'Chromosome updated successfully');
     }
@@ -352,7 +350,7 @@ class ChromosomeAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Chromosome $chromosome */
-        $chromosome = $this->chromosomeRepository->find($id, \request()->get('relations'));
+        $chromosome = $this->chromosomeRepository->find($id);
 
         if ($chromosome === null) {
             return $this->sendError('Chromosome not found');
@@ -361,5 +359,13 @@ class ChromosomeAPIController extends AppBaseController
         $chromosome->delete();
 
         return $this->sendResponse($id, 'Chromosome deleted successfully');
+    }
+
+    /**
+     * @return array
+     */
+    private function getFieldRelations(): array
+    {
+        return ['article', 'taxonomy', 'general_class', 'location'];
     }
 }

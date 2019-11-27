@@ -60,7 +60,6 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class Article extends BaseModel implements HasMedia
 {
     use HasMediaTrait;
-    public static $linguistically = ['title' => true, 'type' => false, 'journal_name' => false];
     public static $rules = [
         'page_no' => 'integer',
     ];
@@ -76,7 +75,6 @@ class Article extends BaseModel implements HasMedia
      *
      * @var array
      */
-    protected $casts = ['title' => 'json', 'journal_name' => 'json'];
 
     protected $with = ['actors'];
 

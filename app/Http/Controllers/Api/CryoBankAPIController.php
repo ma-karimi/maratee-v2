@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\ActionableRequest;
-use App\Http\Requests\Api\CreateCryoBankAPIRequest;
-use App\Http\Requests\Api\UpdateCryoBankAPIRequest;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\CryoBankAPIRequest;
 use App\Models\CryoBank;
 use App\Repositories\CryoBankRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class CryoBankController
  * @package App\Http\Controllers\Api
  */
-
 class CryoBankAPIController extends AppBaseController
 {
     /** @var  CryoBankRepository */
@@ -64,14 +61,14 @@ class CryoBankAPIController extends AppBaseController
         $cryoBanks = $this->cryoBankRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            $this->getFieldRelations()
         );
 
         return $this->sendResponse($cryoBanks->toArray(), 'Cryo Banks retrieved successfully');
     }
 
     /**
-     * @param CreateCryoBankAPIRequest $request
+     * @param CryoBankAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -135,13 +132,19 @@ class CryoBankAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_id",
+     *          name="taxonomy_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
      *          name="protection_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="year",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
@@ -179,11 +182,10 @@ class CryoBankAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateCryoBankAPIRequest $request)
+    public function store(CryoBankAPIRequest $request)
     {
-        $input = $request->all();
 
-        $cryoBank = $this->cryoBankRepository->create($input);
+        $cryoBank = $this->cryoBankRepository->create($request);
 
         return $this->sendResponse($cryoBank->toArray(), 'Cryo Bank saved successfully');
     }
@@ -229,7 +231,7 @@ class CryoBankAPIController extends AppBaseController
     public function show($id)
     {
         /** @var CryoBank $cryoBank */
-        $cryoBank = $this->cryoBankRepository->find($id, \request()->get('relations'));
+        $cryoBank = $this->cryoBankRepository->find($id, $this->getFieldRelations());
 
         if ($cryoBank === null) {
             return $this->sendError('Cryo Bank not found');
@@ -240,7 +242,7 @@ class CryoBankAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateCryoBankAPIRequest $request
+     * @param CryoBankAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -311,13 +313,19 @@ class CryoBankAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
-     *          name="plant_id",
+     *          name="taxonomy_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
      *          name="protection_id",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/CryoBank")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="year",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
@@ -355,18 +363,17 @@ class CryoBankAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateCryoBankAPIRequest $request)
+    public function update($id, CryoBankAPIRequest $request)
     {
-        $input = $request->all();
 
         /** @var CryoBank $cryoBank */
-        $cryoBank = $this->cryoBankRepository->find($id, \request()->get('relations'));
+        $cryoBank = $this->cryoBankRepository->find($id);
 
         if ($cryoBank === null) {
             return $this->sendError('Cryo Bank not found');
         }
 
-        $cryoBank = $this->cryoBankRepository->update($input, $id);
+        $cryoBank = $this->cryoBankRepository->update($request, $id);
 
         return $this->sendResponse($cryoBank->toArray(), 'CryoBank updated successfully');
     }
@@ -413,7 +420,7 @@ class CryoBankAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var CryoBank $cryoBank */
-        $cryoBank = $this->cryoBankRepository->find($id, \request()->get('relations'));
+        $cryoBank = $this->cryoBankRepository->find($id);
 
         if ($cryoBank === null) {
             return $this->sendError('Cryo Bank not found');
@@ -425,230 +432,11 @@ class CryoBankAPIController extends AppBaseController
     }
 
     /**
-     * @param $id
-     * @param ActionableRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/cryo_banks/{id}/determine",
-     *      summary="Store Determine action for Given Cryo Bank",
-     *      tags={"cryoBank Action"},
-     *      description="Store Cryo Bank Action",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="actors",
-     *          in="body",
-     *          description="ids of actors",
-     *          required=true,
-     *          @SWG\Schema(type="array", @SWG\Items(type="integer"))
-     *      ),
-     *      @SWG\Parameter(
-     *          name="date",
-     *          in="body",
-     *          description="Cryo Bank that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          description="Cryo Bank that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="project_id",
-     *          in="body",
-     *          description="Cryo Bank that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="department_id",
-     *          in="body",
-     *          description="Cryo Bank that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/CryoBank"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
+     * @return array
      */
-    public function storeDetermine($id, ActionableRequest $request)
+    private function getFieldRelations(): array
     {
-        $input = $request->all();
-
-        $result = $this->cryoBankRepository->storeAction($id, $input, 1);
-
-        return $this->sendResponse($result->toArray(), 'cryoBank Action saved successfully');
+        return ['taxonomy', 'protection', 'location', 'treatment', 'research', 'collect'];
     }
 
-    /**
-     * @param $id
-     * @param ActionableRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/cryo_banks/{id}/collect",
-     *      summary="Store Collect action for Given Cryo Bank",
-     *      tags={"cryoBank Action"},
-     *      description="Store Cryo Bank Action",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="actors",
-     *          in="body",
-     *          description="ids of actors",
-     *          required=true,
-     *          @SWG\Schema(type="array", @SWG\Items(type="integer"))
-     *      ),
-     *      @SWG\Parameter(
-     *          name="date",
-     *          in="body",
-     *          description="Cryo Bank that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          description="Cryo Bank that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="project_id",
-     *          in="body",
-     *          description="Cryo Bank that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="department_id",
-     *          in="body",
-     *          description="Cryo Bank that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/CryoBank"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function storeCollect($id, ActionableRequest $request)
-    {
-        $input = $request->all();
-
-        $result = $this->cryoBankRepository->storeAction($id, $input, 2);
-
-        return $this->sendResponse($result->toArray(), 'cryoBank Action saved successfully');
-    }
-
-    /**
-     * @param $id
-     * @param ActionableRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/cryo_banks/{id}/research",
-     *      summary="Store Research action for Given Cryo Bank",
-     *      tags={"cryoBank Action"},
-     *      description="Store Cryo Bank Action",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="actors",
-     *          in="body",
-     *          description="ids of actors",
-     *          required=true,
-     *          @SWG\Schema(type="array", @SWG\Items(type="integer"))
-     *      ),
-     *      @SWG\Parameter(
-     *          name="date",
-     *          in="body",
-     *          description="Cryo Bank that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          description="Cryo Bank that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="project_id",
-     *          in="body",
-     *          description="Cryo Bank that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="department_id",
-     *          in="body",
-     *          description="Cryo Bank that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/CryoBank"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function storeResearch($id, ActionableRequest $request)
-    {
-        $input = $request->all();
-
-        $result = $this->cryoBankRepository->storeAction($id, $input, 3);
-
-        return $this->sendResponse($result->toArray(), 'cryoBank Action saved successfully');
-    }
 }

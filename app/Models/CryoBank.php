@@ -7,50 +7,33 @@ use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ActionRelation;
 use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
  *            definition="CryoBank",
- *            required={"genotype_code", "protection_id", "plant_id"},
- * 			@SWG\Property(property="id", type="integer"),
- * 			@SWG\Property(property="genotype_code", type="string"),
- * 			@SWG\Property(property="protection_id", type="integer"),
- * 			@SWG\Property(property="sample_type", type="integer"),
- * 			@SWG\Property(property="repeat", type="integer"),
- * 			@SWG\Property(property="treatment_values", type="number"),
- * 			@SWG\Property(property="tank", type="integer"),
- * 			@SWG\Property(property="row", type="integer"),
- * 			@SWG\Property(property="rack", type="string"),
- * 			@SWG\Property(property="cell", type="integer"),
- * 			@SWG\Property(property="plant_id", type="integer"),
- * 			@SWG\Property(property="created_at", type="string"),
- * 			@SWG\Property(property="updated_at", type="string"),
- *        )
- **/
-class CryoBank extends BaseModel implements HasMedia
+ *            required={"taxonomy_id", "protection_id"},
+ *
+ */
+class CryoBank extends BaseModel
 {
-    use ActionRelation, ArticleRelation,HasMediaTrait, CryoBankAccessor;
+    use ActionRelation, ArticleRelation, CryoBankAccessor;
 
     public const TYPE_SAMPLE = [
-        ['id'=>'0', 'name'=>'unknown'],
-        ['id'=>'1', 'name'=>'seed'],
-        ['id'=>'2', 'name'=>'shoot'],
-        ['id'=>'3', 'name'=>'cell'],
+        1 => 'seed', 2 => 'shoot', 3 => 'cell'
     ];
     public static $rules = [
-        'genotype_code' => 'required|string',
         'protection_id' => 'required|exists:protections,id',
-        'plant_id' => 'required|exists:plants,id',
-        'sample_type' => 'string',
+        'taxonomy_id' => 'required|exists:taxonomies,id',
+        'sample_type_id' => 'required|in:1,2,3',
         'rack' => 'string',
-        'repeat' => 'integer',
-        'tank' => 'integer',
-        'cell' => 'integer',
-        'row' => 'integer',
+        'repeat' => 'string',
+        'tank' => 'string',
+        'cell' => 'string',
+        'row' => 'string',
+        'proposal_name' => 'string',
+        'treatment_id' => 'nullable|exists:treatments,id',
+        'treatment_values' => 'string',
+        'year' => 'integer',
     ];
     /**
      * The database table used by the model.
@@ -66,6 +49,7 @@ class CryoBank extends BaseModel implements HasMedia
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
     protected $appends = ['sample_type'];
+
     /**
      * @return BelongsTo
      */
@@ -77,9 +61,17 @@ class CryoBank extends BaseModel implements HasMedia
     /**
      * @return BelongsTo
      */
-    public function plant(): BelongsTo
+    public function taxonomy(): BelongsTo
     {
-        return $this->belongsTo(Plant::class);
+        return $this->belongsTo(Taxonomy::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
     }
 
     /**

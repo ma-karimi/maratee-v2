@@ -10,8 +10,6 @@ trait CryoBankAccessor
 {
     public function getSampleTypeAttribute()
     {
-        return Arr::first(self::TYPE_SAMPLE, function ($q){
-            return $q['id'] == $this->sample_type_id;
-        });
+        return Arr::get(self::TYPE_SAMPLE, $this->sample_type_id);
     }
 }
