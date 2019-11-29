@@ -99,9 +99,11 @@ Route::apiResource('products', 'ProductAPIController');
 Route::get('generals/{type}/all', 'GeneralAPIController@all');
 Route::apiResource('generals', 'GeneralAPIController');
 
+Route::get('plants/excel', 'PlantAPIController@excel');
 Route::post('plants/{id}/media', 'PlantAPIController@media');
 Route::apiResource('plants', 'PlantAPIController');
 
+Route::get('herbariums/excel', 'HerbariumAPIController@excel');
 Route::post('herbariums/{id}/media', 'HerbariumAPIController@media');
 Route::apiResource('herbariums', 'HerbariumAPIController');
 
@@ -226,6 +228,7 @@ Route::apiResource('paleontology_documents', 'PaleontologyDocumentAPIController'
 
 Route::apiResource('action_hub_documents', 'ActionHubDocumentAPIController');
 
+Route::get('taxonomies/excel', 'TaxonomyAPIController@excel');
 Route::get('taxonomies/all', 'TaxonomyAPIController@all');
 Route::apiResource('taxonomies', 'TaxonomyAPIController');
 

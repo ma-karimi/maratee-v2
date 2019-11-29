@@ -4,79 +4,12 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Krlove\EloquentModelGenerator\Model\BelongsTo;
 
 /**
  * @SWG\Definition(
  *      definition="Organization",
- *      required={"name","phone"},
- *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="domestic_code",
- *          description="domestic_code",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="international_code",
- *          description="international_code",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="is_herbarium",
- *          description="is_herbarium",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="name_en",
- *          description="name",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="name_fa",
- *          description="name",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="description",
- *          description="description",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="phone",
- *          description="phone",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="fax",
- *          description="fax",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="email",
- *          description="email",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="website",
- *          description="website",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
+ *      required={"name_en","phone","city_id"},
  * )
  */
 class Organization extends BaseModel
@@ -87,6 +20,7 @@ class Organization extends BaseModel
         'is_herbarium' => 'integer',
         'phone' => 'required|string',
         'name_en' => 'required|string',
+        'city_id' => 'nullable|exists:cities,id',
         'email' => 'email',
         'website' => 'string'
     ];
@@ -119,5 +53,10 @@ class Organization extends BaseModel
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class)->latest();
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 }

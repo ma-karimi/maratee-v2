@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateTransactionAPIRequest;
-use App\Http\Requests\Api\UpdateTransactionAPIRequest;
+use App\Http\Requests\Api\TransactionAPIRequest;
 use App\Models\Transaction;
 use App\Repositories\TransactionRepository;
 use Illuminate\Http\Request;
@@ -69,7 +68,7 @@ class TransactionAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateTransactionAPIRequest $request
+     * @param TransactionAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -235,7 +234,7 @@ class TransactionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateTransactionAPIRequest $request)
+    public function store(TransactionAPIRequest $request)
     {
         $input = $request->all();
 
@@ -296,7 +295,7 @@ class TransactionAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateTransactionAPIRequest $request
+     * @param TransactionAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -469,7 +468,7 @@ class TransactionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateTransactionAPIRequest $request)
+    public function update($id, TransactionAPIRequest $request)
     {
         $input = $request->all();
 

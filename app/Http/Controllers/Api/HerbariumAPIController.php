@@ -8,6 +8,7 @@ use App\Models\Herbarium;
 use App\Repositories\HerbariumRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Maatwebsite\Excel\Facades\Excel;
 use Response;
 
 /**
@@ -141,6 +142,7 @@ class HerbariumAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(HerbariumAPIRequest $request)
     {
@@ -280,6 +282,7 @@ class HerbariumAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, HerbariumAPIRequest $request)
     {
@@ -632,5 +635,25 @@ class HerbariumAPIController extends AppBaseController
         $this->herbariumRepository->storeMedia(\request()->all(), $plant);
 
         return $this->sendResponse($id, 'Herbarium Media Stored successfully');
+    }
+
+
+    public function excel(Request $request)
+    {
+        $herbariums = $this->herbariumRepository->all(
+            [],
+            null,
+            null,
+            $this->fieldRelations()
+        );
+        return Excel::create('ExportHerbariumList-' . date('Y-m-d-H-i-s'), function ($excel) use ($herbariums) {
+
+            $excel->sheet('Herbarium', function ($sheet) use ($herbariums) {
+
+                $sheet->loadView('exports.herbarium', compact('herbariums'));
+
+            });
+
+        })->export('xls');
     }
 }

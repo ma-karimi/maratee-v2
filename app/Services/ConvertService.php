@@ -4,24 +4,21 @@
 namespace App\Services;
 
 
-use App\Models\ActionHub;
-use App\Models\Actor;
-use App\Models\ActorHub;
-use App\Models\City;
-use App\Models\Convert\Treeleaf;
-use App\Models\Country;
-use App\Models\General;
-use App\Models\Herbarium;
-use App\Models\Location;
-use App\Models\LocationHub;
-use App\Models\Organization;
-use App\Models\Plant;
-use App\Models\Province;
-use App\Models\Taxonomy;
-use App\Models\Village;
+use App\Models\{ActionHub,
+    Actor,
+    ActorHub,
+    City,
+    Convert\Treeleaf,
+    General,
+    Herbarium,
+    Location,
+    LocationHub,
+    Organization,
+    Plant,
+    Province,
+    Taxonomy};
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
 class ConvertService
 {
@@ -65,9 +62,9 @@ class ConvertService
             } else {
                 $this->models['city'] = null;
             }
-            if (!empty(trim($this->treeLeaf->village['name']))) {
+            if (!empty($village = trim($this->treeLeaf['village']['name']))) {
                 // village
-                $this->models['village'] = trim($this->treeLeaf->village->name);
+                $this->models['village'] = $village;
             } else {
                 $this->models['village'] = null;
             }
@@ -99,85 +96,81 @@ class ConvertService
 
         } else {
             Log::info("herb:" . $this->id);
-            $this->models['location'] = null;
+            $this->models['location_id'] = null;
         }
         // family
-        if ($this->treeLeaf->has('fam') && !empty($this->treeLeaf->fam->name))
-            $this->models['general']['family'] = General::firstOrCreate($this->familyData());
+        if (!empty($this->treeLeaf['fam']['name']))
+            $this->models['general']['family_id'] = General::firstOrCreate($this->familyData())->id;
 
         // genus
-        if ($this->treeLeaf->has('gen') && !empty($this->treeLeaf->gen->name))
-            $this->models['general']['genus'] = General::firstOrCreate($this->genusData());
+        if (!empty($this->treeLeaf['gen']['name']))
+            $this->models['general']['genus_id'] = General::firstOrCreate($this->genusData())->id;
 
         // species
-        if ($this->treeLeaf->has('spe') && !empty($this->treeLeaf->spe->name)) {
-            $this->models['general']['species'] = $specie = General::firstOrCreate($this->speciesData());
-            $this->firstOrCreateActorAndActorHub($specie, $this->models['species']['authors']);
+        if (!empty($this->treeLeaf['spe']['name'])) {
+            $this->models['general']['species_id'] = $specie_id = General::firstOrCreate($this->speciesData())->id;
+            if (count($this->models['species_authors'])) {
+                $this->firstOrCreateActorAndActorHub($specie_id, $this->models['species_authors']);
+            }
         }
         // subspecies
-        if ($this->treeLeaf->has('subspe') && !empty($this->treeLeaf->subspe->name)) {
-            $this->models['general']['subspecies'] = $sub_specie = General::firstOrCreate($this->subspeciesData());
-            $this->firstOrCreateActorAndActorHub($sub_specie, $this->models['sub_species']['authors']);
+        if (!empty($this->treeLeaf['subspe']['name'])) {
+            $this->models['general']['subspecies_id'] = $sub_specie_id = General::firstOrCreate($this->subspeciesData())->id;
+            if (count($this->models['sub_species_authors'])) {
+                $this->firstOrCreateActorAndActorHub($sub_specie_id, $this->models['sub_species_authors']);
+            }
         }
         // variety
-        if ($this->treeLeaf->has('var') && !empty($this->treeLeaf->var->name)) {
-            $this->models['general']['variety'] = $variety = General::firstOrCreate($this->varietyData());
-            $this->firstOrCreateActorAndActorHub($variety, $this->models['variety']['authors']);
+        if (!empty($this->treeLeaf['var']['name'])) {
+            $this->models['general']['variety_id'] = $variety_id = General::firstOrCreate($this->varietyData())->id;
+            if (count($this->models['variety_authors'])) {
+                $this->firstOrCreateActorAndActorHub($variety_id, $this->models['variety_authors']);
+            }
         }
         // taxonomy
-        $this->models['taxonomy'] = Taxonomy::firstOrCreate($this->taxonomyData());
+        $this->models['taxonomy_id'] = Taxonomy::firstOrCreate($this->taxonomyData())->id;
 
-        // organization
-
-        $this->models['organization'] = Organization::firstOrCreate($this->organizationData());
+        $this->models['organization_id'] = Organization::firstOrCreate($this->organizationData())->id;
 
         // plant herbarium
-        $this->models['plant'] = Plant::firstOrCreate($this->plantData());
-        if (!empty($this->models['location'])) {
+        $this->models['plant_id'] = Plant::firstOrCreate($this->plantData())->id;
+        if (!empty($this->models['location_id'])) {
             LocationHub::firstOrCreate(
                 [
                     'locationable_type' => Plant::class,
-                    'locationable_id' => $this->models['plant']['id'],
-                    'location_id' => $this->models['location']['id']
+                    'locationable_id' => $this->models['plant_id'],
+                    'location_id' => $this->models['location_id']
                 ]
             );
         }
-        $this->models['herbarium'] = Herbarium::create($this->herbariumData());
+        $herbarium_id = Herbarium::create($this->herbariumData())->id;
 
 
-        // action hub detect
-        if ($this->treeLeaf->detect) {
-            $detectors = explode('&', $this->treeLeaf->detect->name);
-
-            $this->models['actionHub']['detect'] = ActionHub::create($this->actionHubDetectData());
-
-            foreach ($detectors as $detector) {
-
-                $this->models['actor']['detect'] = Actor::firstOrCreate($this->actorDetectData($detector));
-                // detect hub
-                $this->models['actorHub']['detect'] = ActorHub::create($this->actorHubDetectData());
-
+        $detect_id = ActionHub::create($this->actionHubData(self::ACTION['detect'], $herbarium_id, $this->treeLeaf['identifydate']))->id;
+        if (!empty($detect_name = $this->treeLeaf['detect']['name'])) {
+            $detectors = explode('&', $detect_name);
+            if (!empty($detectors) && count($detectors)) {
+                foreach ($detectors as $detector) {
+                    $detector_id = Actor::firstOrCreate($this->actorDetectData($detector))->id;
+                    ActorHub::create($this->actorHubData($detect_id, $detector_id));
+                }
             }
         }
 
-        if ($this->treeLeaf->collect) {
-            $collectors = explode('&', $this->treeLeaf->collect->name);
-            // action hub collect
-            $this->models['actionHub']['collect'] = ActionHub::create($this->actionHubCollectData());
+        $collect_id = ActionHub::create($this->actionHubData(self::ACTION['collect'], $herbarium_id, $this->treeLeaf['gatheringdate']))->id;
 
-            foreach ($collectors as $collector) {
-
-                // collector
-                $this->models['actor']['collect'] = Actor::firstOrCreate($this->ActorCollectData($collector));
-
-                // actor hub collect
-                $this->models['actorHub']['collect'] = ActorHub::create($this->actorHubCollectData());
-
+        if (!empty($collect_name = $this->treeLeaf['collect']['name'])) {
+            $collectors = explode('&', $collect_name);
+            if (!empty($collectors) && count($collectors)) {
+                foreach ($collectors as $collector) {
+                    $collector_id = Actor::firstOrCreate($this->ActorCollectData($collector))->id;
+                    ActorHub::create($this->actorHubData($collect_id, $collector_id));
+                }
             }
         }
 
         if (App::environment() == 'local') {
-            $this->log(" - - - - end convert TreeLeaf id : {$this->id} - - - - ");
+            $this->log(" - TreeLeaf id : {$this->id} - ");
         }
 
     }
@@ -244,7 +237,7 @@ class ConvertService
 
     private function createLocation(): void
     {
-        $this->models['location'] = Location::create($this->locationData());
+        $this->models['location_id'] = Location::create($this->locationData())->id;
     }
 
     private function locationData(): array
@@ -307,9 +300,15 @@ class ConvertService
      */
     private function trimPropAuthor($property, $model): string
     {
-        $prop = trim(substr($property, 0, strpos($property, ' ')));
-        $authors = trim(substr($property, strpos($property, ' '), strlen($property)));
-        $this->models[$model]['authors'] = array_unique(explode(' & ', $authors));
+
+        if ($p = strpos($property, ' ')) {
+            $prop = trim(substr($property, 0, $p));
+            $authors = trim(substr($property, $p, strlen($property)));
+            $this->models[$model . '_authors'] = array_unique(explode(' & ', $authors));
+        } else {
+            $prop = trim($property);
+            $this->models[$model . '_authors'] = [];
+        }
 
         return $prop;
     }
@@ -319,12 +318,12 @@ class ConvertService
      * @param $authors
      * @return void
      */
-    private function firstOrCreateActorAndActorHub($general, $authors)
+    private function firstOrCreateActorAndActorHub($general_id, $authors)
     {
         if (count($authors)) {
             foreach ($authors as $author) {
                 $author = Actor::firstOrCreate(['name' => $author]);
-                $this->setActorHub($author, $general);
+                $this->setActorHub($author, $general_id);
             }
         }
     }
@@ -333,11 +332,11 @@ class ConvertService
      * @param $author
      * @param $general
      */
-    private function setActorHub($author, $general): void
+    private function setActorHub($author, $general_id): void
     {
         ActorHub::firstOrCreate([
             'actor_id' => $author->id,
-            'actorable_id' => $general->id,
+            'actorable_id' => $general_id,
             'actorable_type' => General::class,
         ]);
     }
@@ -364,11 +363,11 @@ class ConvertService
     {
         return [
             'name' => $this->treeLeaf->name ?? null,
-            'family_id' => $this->models['general']['family']['id'] ?? null,
-            'genus_id' => $this->models['general']['genus']['id'] ?? null,
-            'species_id' => $this->models['general']['species']['id'] ?? null,
-            'subspecies_id' => $this->models['general']['subspecies']['id'] ?? null,
-            'variety_id' => $this->models['general']['variety']['id'] ?? null,
+            'family_id' => $this->models['general']['family_id'] ?? null,
+            'genus_id' => $this->models['general']['genus_id'] ?? null,
+            'species_id' => $this->models['general']['species_id'] ?? null,
+            'subspecies_id' => $this->models['general']['subspecies_id'] ?? null,
+            'variety_id' => $this->models['general']['variety_id'] ?? null,
         ];
     }
 
@@ -383,7 +382,7 @@ class ConvertService
     {
         $array = [
             'is_flowering' => 1,
-            'taxonomy_id' => $this->models['taxonomy']['id'],
+            'taxonomy_id' => $this->models['taxonomy_id'],
         ];
 
         return $array;
@@ -393,10 +392,10 @@ class ConvertService
     {
         $array = [
             'herbarium_number' => $this->treeLeaf->herbariumnumber,
-            'location_id' => $this->models['location']['id'],
-            'organization_id' => $this->models['organization']['id'],
-            'taxonomy_id' => $this->models['taxonomy']['id'],
-            'plant_id' => $this->models['plant']['id']
+            'location_id' => $this->models['location_id'],
+            'organization_id' => $this->models['organization_id'],
+            'taxonomy_id' => $this->models['taxonomy_id'],
+            'plant_id' => $this->models['plant_id']['id']
         ];
 
         if (!empty($this->treeLeaf->cf)) {
@@ -412,13 +411,13 @@ class ConvertService
         return $array;
     }
 
-    private function actionHubDetectData(): array
+    private function actionHubData($action_id, $herbarium_id, $date): array
     {
         return [
-            'action_id' => self::ACTION['detect'],
+            'action_id' => $action_id,
             'actionable_type' => Herbarium::class,
-            'actionable_id' => $this->models['herbarium']['id'],
-            'date' => $this->treeLeaf->identifydate
+            'actionable_id' => $herbarium_id,
+            'date' => $date
         ];
     }
 
@@ -429,22 +428,12 @@ class ConvertService
         ];
     }
 
-    private function actorHubDetectData(): array
+    private function actorHubData($action_id, $actor_id): array
     {
         return [
             'actorable_type' => ActionHub::class,
-            'actorable_id' => $this->models['actionHub']['detect']['id'],
-            'actor_id' => $this->models['actor']['detect']['id'],
-        ];
-    }
-
-    private function actionHubCollectData(): array
-    {
-        return [
-            'action_id' => self::ACTION['collect'],
-            'actionable_type' => Herbarium::class,
-            'actionable_id' => $this->models['herbarium']['id'],
-            'date' => $this->treeLeaf->gateringdate
+            'actorable_id' => $action_id,
+            'actor_id' => $actor_id,
         ];
     }
 
@@ -455,133 +444,18 @@ class ConvertService
         ];
     }
 
-    private function actorHubCollectData(): array
-    {
-        return [
-            'actorable_type' => ActionHub::class,
-            'actorable_id' => $this->models['actionHub']['collect']['id'],
-            'actor_id' => $this->models['actor']['collect']['id'],
-        ];
-    }
-
     private function log(string $message)
     {
         echo "$message\n";
     }
 
-    /**
-     * @deprecated
-     */
-    private function firstOrCreateVillage(): void
-    {
-        $this->models['village'] = Village::create($this->villageData());
-    }
-
-    /**
-     * @deprecated
-     */
-    private function villageData(): array
-    {
-        $array = [
-            'name_en' => trim($this->treeLeaf->village->name)
-        ];
-
-        if (!empty($this->treeLeaf->village->othername)) {
-            $array['name_fa'] = trim($this->treeLeaf->village->othername);
-        }
-        return $array;
-    }
-    /**
-     * @deprecated
-     */
-    private function provinceConditions($model, $type): array
-    {
-        if ($type == 'village') {
-            $name = $model->parent->parent->name;
-        } elseif ($type == 'city') {
-            $name = $model->parent->name;
-        } else {
-            $name = $model->parent->name;
-        }
-        return [
-            ['name_en', trim($name)],
-        ];
-    }
-
-    private function cityConditions($model, $type): array
-    {
-        if ($type == 'village') {
-            $name = $model->parent->name;
-        } else {
-            $name = $model->name;
-        }
-        return [
-            ['name_en', trim($name)],
-        ];
-    }
-
-    /**
-     * @deprecated
-     */
-    private function organizationConditions(): array
+    private function actionHubDetectData(): array
     {
         return [
-            ['name_en', trim($this->treeLeaf->organization)],
-        ];
-    }
-
-    /**
-     * @deprecated
-     */
-    private function villageConditions(): array
-    {
-        return [
-            ['name_en', trim($this->treeLeaf->village->name)],
-        ];
-    }
-
-    /**
-     * @deprecated
-     */
-    private function locationConditions(): array
-    {
-        return [
-            ['province_id', $this->models['province']['id']],
-            ['city_id', $this->models['city']['id'] ?? null],
-            ['address_en', trim($this->treeLeaf->addresse)],
-            ['address_fa', trim($this->treeLeaf->addressf)],
-        ];
-    }
-
-    /**
-     * @deprecated
-     */
-    private function ActorCollectConditions($collector): array
-    {
-        return [
-            ['name', trim($collector)]
-        ];
-    }
-
-    /**
-     * @deprecated
-     */
-    private function actorDetectConditions($detector): array
-    {
-        return [
-            ['name', trim($detector)]
-        ];
-    }
-
-    /**
-     * @deprecated
-     */
-    private function actorHubCollectConditions(): array
-    {
-        return [
-            ['actorable_type', ActionHub::class],
-            ['actorable_id', $this->models['actionHub']['collect']['id']],
-            ['actor_id', $this->models['actor']['collect']['id']],
+            'action_id' => self::ACTION['detect'],
+            'actionable_type' => Herbarium::class,
+            'actionable_id' => $this->models['herbarium_id'],
+            'date' => $this->treeLeaf->identifydate
         ];
     }
 

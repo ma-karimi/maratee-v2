@@ -33,7 +33,7 @@ class Transaction extends BaseModel implements HasMedia
         'dead_line' => 'date',
         'type_id' => 'required|in:1,2,3,4,5,6,7',
         'archive_no' => 'string',
-        'visit_id' => 'required_if:type_id,1|in:1,2',
+//        'visit_id' => 'required_if:type_id,1|in:1,2',
         'peoples_no' => 'integer',
         'description' => 'string',
         'purpose' => 'string',

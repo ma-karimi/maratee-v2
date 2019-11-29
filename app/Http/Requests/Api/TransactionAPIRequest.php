@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use App\Models\Transaction;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateTransactionAPIRequest extends APIRequest
+class TransactionAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.

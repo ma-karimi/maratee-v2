@@ -10,6 +10,7 @@ use App\Models\Plant;
 use App\Repositories\PlantRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Maatwebsite\Excel\Facades\Excel;
 
 /**
  * Class PlantController
@@ -629,36 +630,30 @@ class PlantAPIController extends AppBaseController
         return $this->sendResponse($id, 'Plant Media Stored successfully');
     }
 
-    public function exportExcel(Request $request)
+
+    public function excel(Request $request)
     {
-        $relations = [
-            'generalFamily.actors',
-            'generalGenus.actors',
-            'generalSpecie.actors',
-            'generalSubSpecie.actors',
-            'generalVariety.actors',
-            'generalSperm',
-            'generalCotyledon',
-            'actors',
-            'location.city.province.country',
-            'location.village',
-            'herbariums.department',
-            'herbariums.division',
-            'herbariums.generalPhytogeography',
-            'herbariums.actionHubs.user',
-            'herbariums.generalPhenology',
-            'herbariums.protection',
-            'herbariums.attendances',
-            'herbariums.borrows.user',
-            'herbariums.borrows.media',
-        ];
         $plants = $this->plantRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit'),
-            $relations
+            [],
+            null,
+            null,
+            \request()->is_flowering == 1 ? $this->fieldFloraRelations() : $this->fieldNonFlowerRelations()
         );
-        $plants = PlantResource::collection($plants);
-        return $this->sendResponse($plants, 'Plants retrieved successfully');
+
+        $view = \request()->is_flowering == 1 ? 'exports.flora' : 'exports.nonflower';
+        $plant = \request()->is_flowering == 1 ? 'Flora' : 'NonFlower';
+        return Excel::create("Export${plant}List-" . date('Y-m-d-H-i-s'), function ($excel) use ($plants, $view) {
+
+            $excel->sheet('Taxonomy', function ($sheet) use ($plants, $view) {
+                $sheet->freezeFirstRow()
+//                    ->setAutoSize(array(
+//                        'J'
+//                    ))
+//                    ->setWidth('J', 45)
+                    ->loadView($view, compact('plants'));
+
+            });
+
+        })->export('xls');
     }
 }

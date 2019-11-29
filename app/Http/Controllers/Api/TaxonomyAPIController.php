@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exports\TaxonomyExport;
 use App\Http\Requests\Api\TaxonomyAPIRequest;
 use App\Models\Taxonomy;
 use App\Repositories\TaxonomyRepository;
@@ -9,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Validation\ValidationException;
+use Maatwebsite\Excel\Facades\Excel;
 use Response;
 
 /**
@@ -443,5 +445,24 @@ class TaxonomyAPIController extends AppBaseController
     private function fieldRelations(): array
     {
         return ['family', 'genus', 'species.authors', 'subspecies.authors', 'variety.authors', 'scientific'];
+    }
+
+    public function excel(Request $request)
+    {
+        $taxonomies = $this->taxonomyRepository->all(
+            [],
+            null,
+            null,
+            $this->fieldRelations()
+        );
+        return Excel::create('ExportTaxonomyList-' . date('Y-m-d-H-i-s'), function ($excel) use ($taxonomies) {
+
+            $excel->sheet('Taxonomy', function ($sheet) use ($taxonomies) {
+
+                $sheet->loadView('exports.taxonomies', compact('taxonomies'));
+
+            });
+
+        })->export('xls');
     }
 }
