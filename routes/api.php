@@ -41,6 +41,8 @@ Route::post('reset_password', 'AuthController@resetPassword');
 
 Route::apiResource('treatments', 'TreatmentAPIController');
 
+Route::post('paleontologies/{id}/media', 'PaleontologyAPIController@media');
+
 Route::apiResource('paleontologies', 'PaleontologyAPIController');
 Route::apiResource('paleontology_citations', 'PaleontologyCitationAPIController');
 

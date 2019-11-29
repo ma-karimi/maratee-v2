@@ -577,4 +577,56 @@ class PaleontologyAPIController extends AppBaseController
     private function fieldRelations(){
         return ['taxonomy', 'generalClass', 'generalOrder', 'geologyAgePeriod', 'geologyAgeStage', 'geologyAgeEpoch', 'geologyAgeEra', 'generalPlantType', 'locality.location', 'maps', 'collect', 'determine', 'media'];
     }
+
+
+    /**
+     * @param int $id
+     * @return Response
+     *
+     * @SWG\Post(
+     *      path="/paleontologies/{id}/media",
+     *      tags={"Paleontology"},
+     *      description="Store Paleontology Media",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Plant",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     * @throws \Exception
+     */
+    public function media($id)
+    {
+        $plant = $this->paleontologyRepository->find($id, []);
+
+        if (empty($plant)) {
+            return $this->sendError('Paleontology not found');
+        }
+
+        $this->paleontologyRepository->storeMedia(\request()->all(), $plant);
+
+        return $this->sendResponse($id, 'Paleontology Media Stored successfully');
+    }
 }

@@ -366,6 +366,6 @@ class ChromosomeAPIController extends AppBaseController
      */
     private function getFieldRelations(): array
     {
-        return ['article', 'taxonomy', 'general_class', 'location'];
+        return ['article', 'taxonomy', 'generalClass', 'location'];
     }
 }

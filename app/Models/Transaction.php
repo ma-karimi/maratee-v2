@@ -44,7 +44,7 @@ class Transaction extends BaseModel implements HasMedia
     ];
     protected $appends = ['type', 'visit', 'mode', 'sample_impression'];
     protected $with = ['organization'];
-    /**
+    /**p
      * @return BelongsTo
      */
     public function organization(): BelongsTo
