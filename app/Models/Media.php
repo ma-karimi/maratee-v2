@@ -82,11 +82,9 @@ class Media extends BaseMedia
 
 
     public static $rules = [
-        'format_type' => 'required|string',
         'model_type'=>'required',
         'model_id'=>'required',
         'media_type' => 'required|integer|in:1,2',
-        'reference'=>'string',
     ];
     protected $casts=[
         'manipulations'=>'array',
