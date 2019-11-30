@@ -62,14 +62,13 @@ class CountryAPIController extends AppBaseController
     public function index()
     {
 
-        $countries = Cache::get('countries', function () {
-            return $this->countryRepository->all(
+        $countries =
+ $this->countryRepository->all(
             [],
             null,
             null,
             ['provinces.cities']
         );
-        });
 
         return $this->sendResponse($countries->toArray(), 'Countries retrieved successfully');
     }

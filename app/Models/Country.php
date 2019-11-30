@@ -35,7 +35,7 @@ class Country extends BaseModel
      */
     protected $table = 'countries';
 
-    protected $with = ['provinces.cities'];
+//    protected $with = ['provinces.cities'];
 
     /**
      * @return BelongsTo
