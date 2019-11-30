@@ -48,8 +48,8 @@
             <td style="{{$td}}">{{ $item->taxonomy->species->name ?? null }}</td>
             <td style="{{$td}}">{{ $item->taxonomy->subspecies->name ?? null }}</td>
             <td style="{{$td}}">{{ $item->taxonomy->variety->name ?? null }}</td>
-            <td style="{{$td}}">{{ $item->taxonomy->name ?? null }}</td>
             <td style="{{$td}}">{{ $item->taxonomy->scientific->name ?? null }}</td>
+            <td style="{{$td}}">{{ $item->taxonomy->name ?? null }}</td>
             <td style="{{$td}}">
                 @if (!empty($item->taxonomy->genus) && count($item->taxonomy->genus->authors))
                     @foreach($item->taxonomy->genus->authors as $actor)
@@ -57,13 +57,13 @@
                     @endforeach
                 @endif
                 @if (!empty($item->taxonomy->species) && count($item->taxonomy->species->authors))
-                     &
+                     {{empty($item->taxonoomy->genus) ? '' : ' & '}}
                     @foreach($item->taxonomy->species->authors as $actor)
                         {{$actor->name}} {{!$loop->last ? ' & ' : null }}
                     @endforeach
                 @endif
                 @if (!empty($item->taxonomy->subspecies) && count($item->taxonomy->subspecies->authors))
-                     &
+                        {{empty($item->taxonoomy->species) ? '' : ' & '}}
                     @foreach($item->taxonomy->subspecies->authors as $actor)
                         {{$actor->name}} {{!$loop->last ? ' & ' : null }}
                     @endforeach
