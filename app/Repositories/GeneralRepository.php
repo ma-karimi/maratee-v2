@@ -44,8 +44,8 @@ class GeneralRepository extends BaseRepository
         if (!Arr::has(General::TYPES, $type)) {
             ValidationException::withMessages(['errors' => ['message' => 'Operation Failed!']]);
         }
-        return Cache::get($type, function () use ($type) {
+//        return Cache::get($type, function () use ($type) {
             return $this->model->whereType($type)->get();
-        });
+//        });
     }
 }
