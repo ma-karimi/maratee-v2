@@ -65,16 +65,20 @@
             <td style="{{$td}}">{{ $item['location']['point']['UTM'][0] ?? null }}</td>
             <td style="{{$td}}">{{ $item['location']['point']['UTM'][1] ?? null }}</td>
             <td style="{{$td}}">
-                @forelse ($item['collect']['actors'] as $actor)
-                    {{$actor->name}} {{!$loop->last ? ' & ' : null }}
-                @empty
-                @endforelse
+                @if(!empty($item['collect']) && count($item['collect']['actors']))
+                    @forelse ($item['collect']['actors'] as $actor)
+                        {{$actor->name}} {{!$loop->last ? ' & ' : null }}
+                    @empty
+                    @endforelse
+                @endif
             </td>
             <td style="{{$td}}">
-                @forelse ($item['determine']['actors'] as $actor)
-                    {{$actor->name}} {{!$loop->last ? ' & ' : null }}
-                @empty
-                @endforelse
+                @if(!empty($item['determine']) && count($item['determine']['actors']))
+                    @forelse ($item['determine']['actors'] as $actor)
+                        {{$actor->name}} {{!$loop->last ? ' & ' : null }}
+                    @empty
+                    @endforelse
+                @endif
             </td>
 
             <td style="{{$td}}">{{$item['description'] ?? null}}</td>
