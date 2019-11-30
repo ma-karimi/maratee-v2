@@ -57,9 +57,8 @@ class MedicinalPlantTypeAPIController extends AppBaseController
      */
     public function index()
     {
-        $medicinalPlantTypes = Cache::get('medicinal_plant_types', function () {
-            return $this->medicinalPlantTypeRepository->all();
-        });
+        $medicinalPlantTypes =
+             $this->medicinalPlantTypeRepository->all();
 
 
         return $this->sendResponse($medicinalPlantTypes->toArray(), 'Medicinal Plant Types retrieved successfully');

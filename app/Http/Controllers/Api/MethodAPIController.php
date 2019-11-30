@@ -59,9 +59,8 @@ class MethodAPIController extends AppBaseController
      */
     public function index()
     {
-        $methods = Cache::get('methods', function () {
-            return $this->methodRepository->all();
-        });
+        $methods =
+            $this->methodRepository->all();
 
         return $this->sendResponse($methods->toArray(), 'Methods retrieved successfully');
     }

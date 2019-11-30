@@ -61,9 +61,9 @@ class ProtectionAPIController extends AppBaseController
      */
     public function index()
     {
-        $protections = Cache::get('protections', function () {
-            return $this->protectionRepository->all();
-        });
+        $protections =
+            $this->protectionRepository->all();
+
         return $this->sendResponse($protections->toArray(), 'Protections retrieved successfully');
     }
 

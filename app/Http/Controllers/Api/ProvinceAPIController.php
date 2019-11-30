@@ -346,9 +346,9 @@ class ProvinceAPIController extends AppBaseController
     public function all()
     {
         /** @var Province $provinces */
-        $provinces = Cache::get('provinces', function () {
-            return $this->provinceRepository->all();
-        });
+        $provinces =
+            $this->provinceRepository->all();
+
 
         return $this->sendResponse($provinces->toArray(), 'Provinces retrieved successfully');
     }

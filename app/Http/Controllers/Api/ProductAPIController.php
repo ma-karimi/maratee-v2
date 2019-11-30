@@ -104,9 +104,9 @@ class ProductAPIController extends AppBaseController
      */
     public function all()
     {
-        $products = Cache::get('products', function () {
-            return $this->productRepository->all();
-        });
+        $products =
+             $this->productRepository->all();
+
 
         return $this->sendResponse($products->toArray(), 'Products retrieved successfully');
     }

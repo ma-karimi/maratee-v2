@@ -338,9 +338,9 @@ class CityAPIController extends AppBaseController
     public function all()
     {
         /** @var City $city */
-        $cities = Cache::get('cities', function () {
-            return $this->cityRepository->all();
-        });
+        $cities =
+             $this->cityRepository->all();
+
 
         return $this->sendResponse($cities->toArray(), 'Cities retrieved successfully');
     }

@@ -105,9 +105,9 @@ class MedicineAPIController extends AppBaseController
      */
     public function all()
     {
-        $medicines = Cache::get('medicines', function () {
-            return $this->medicineRepository->all();
-        });
+        $medicines =
+            $this->medicineRepository->all();
+
 
         return $this->sendResponse($medicines->toArray(), 'Medicines retrieved successfully');
     }

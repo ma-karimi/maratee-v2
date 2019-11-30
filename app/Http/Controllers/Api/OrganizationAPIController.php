@@ -441,9 +441,8 @@ class OrganizationAPIController extends AppBaseController
     public function all()
     {
         /** @var Organization $organization */
-        $organizations = Cache::get('organizations', function () {
-            return $this->organizationRepository->all();
-        });
+        $organizations =
+            $this->organizationRepository->all();
 
         return $this->sendResponse($organizations->toArray(), 'Organizations retrieved successfully');
     }
