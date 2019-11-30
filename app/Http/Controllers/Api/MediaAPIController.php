@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateMediaAPIRequest;
-use App\Http\Requests\Api\UpdateMediaAPIRequest;
+use App\Http\Requests\Api\MediaAPIRequest;
 use App\Models\Media;
 use App\Repositories\MediaRepository;
 use Illuminate\Http\Request;
@@ -70,7 +69,7 @@ class MediaAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateMediaAPIRequest $request
+     * @param MediaAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -198,7 +197,7 @@ class MediaAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateMediaAPIRequest $request)
+    public function store(MediaAPIRequest $request)
     {
         $input = $request->all();
 
@@ -259,7 +258,7 @@ class MediaAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateMediaAPIRequest $request
+     * @param MediaAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -394,12 +393,12 @@ class MediaAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateMediaAPIRequest $request)
+    public function update($id, MediaAPIRequest $request)
     {
         $input = $request->all();
 
         /** @var Media $media */
-        $media = $this->mediaRepository->find($id, \request()->get('relations'));
+        $media = $this->mediaRepository->find($id);
 
         if ($media === null) {
             return $this->sendError('Media not found');
@@ -452,7 +451,7 @@ class MediaAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Media $media */
-        $media = $this->mediaRepository->find($id, \request()->get('relations'));
+        $media = $this->mediaRepository->find($id);
 
         if ($media === null) {
             return $this->sendError('Media not found');

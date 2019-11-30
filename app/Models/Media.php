@@ -83,18 +83,10 @@ class Media extends BaseMedia
 
     public static $rules = [
         'format_type' => 'required|string',
+        'model_type'=>'required',
+        'model_id'=>'required',
         'media_type' => 'required|integer|in:1,2',
-        'date' => 'date',
-        'user_id' => 'exists:users,id',
-//        'location_id' => 'exists:locations,id',
-//        'herbarium_id' => 'exists:herbariums,id',
-//        'seed_id' => 'exists:seeds,id',
-//        'paleontology_id' => 'exists:paleontologies,id',
-//        'medicinal_plant_id' => 'exists:medicinal_plants,id',
-//        'product_id' => 'exists:products,id',
-//        'botanical_id' => 'exists:botanicals,id',
         'reference'=>'string',
-        'description'=>'string',
     ];
     protected $casts=[
         'manipulations'=>'array',
