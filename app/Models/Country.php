@@ -35,12 +35,7 @@ class Country extends BaseModel
      */
     protected $table = 'countries';
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = ['name' => 'json'];
+    protected $with = ['provinces.cities'];
 
     /**
      * @return BelongsTo
