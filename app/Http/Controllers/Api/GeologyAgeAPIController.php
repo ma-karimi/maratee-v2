@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateGeologyAgeAPIRequest;
-use App\Http\Requests\Api\UpdateGeologyAgeAPIRequest;
+use App\Http\Requests\Api\GeologyAgeAPIRequest;
 use App\Models\GeologyAge;
 use App\Repositories\GeologyAgeRepository;
 use Illuminate\Http\Request;
