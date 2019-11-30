@@ -42,10 +42,10 @@ class MedicineRepository extends BaseRepository
     public function update($input, $id)
     {
         $media_input = [
-            'date' => $input['date'] ?? null,
-            'description' => $input['media_description'] ?? null,
+//            'date' => $input['date'] ?? null,
+//            'description' => $input['media_description'] ?? null,
             'media_type' => $input['media_type'] ?? 2,
-            'reference' => $input['reference'] ?? null,
+//            'reference' => $input['reference'] ?? null,
         ];
 
         $model_input = collect($input)->except(array_keys($media_input))->toArray();
