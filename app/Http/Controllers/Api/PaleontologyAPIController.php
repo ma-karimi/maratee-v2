@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Paleontology;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\Paleontology\PaleontologyAPIRequest;
 use App\Http\Requests\Api\Paleontology\PaleontologyGeologyRemarkAPIRequest;
