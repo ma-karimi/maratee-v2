@@ -17,6 +17,9 @@ class PaleontologyMap extends BaseModel implements HasMedia
     use HasMediaTrait;
     public $table = 'paleontology_maps';
 
-
+    public function paleontology()
+    {
+        return $this->belongsTo(Paleontology::class);
+    }
 
 }
