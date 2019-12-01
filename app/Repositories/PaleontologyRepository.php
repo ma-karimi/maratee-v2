@@ -194,7 +194,7 @@ class PaleontologyRepository extends BaseRepository
     {
         $media_input = [
             'media_type' => $input['media_type'] ?? 2,
-            'description' => $input['description']
+            'description' => $input['description'] ?? null
         ];
         //store media
         if (request()->hasFile('file')) {
