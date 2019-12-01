@@ -130,9 +130,8 @@ class PaleontologyMapAPIController extends AppBaseController
      */
     public function store(PaleontologyMapAPIRequest $request)
     {
-        $input = $request->all();
 
-        $map = $this->paleontologyMapRepository->create($input);
+        $map = $this->paleontologyMapRepository->create($request);
 
         return $this->sendResponse($map->toArray(), 'Paleontology Map saved successfully');
     }
