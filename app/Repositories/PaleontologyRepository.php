@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\ActionHub;
 use App\Models\ActorHub;
+use App\Models\Media;
 use App\Models\Paleontology;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
@@ -199,7 +200,8 @@ class PaleontologyRepository extends BaseRepository
         //store media
         if (request()->hasFile('file')) {
             $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('media');
-            $media_record->update($media_input);
+
+            Media::find($media_record['order_column'])->update($media_input);
         }
     }
 

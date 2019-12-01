@@ -13,9 +13,9 @@ use Illuminate\Support\Arr;
 
 trait MediaAccessor
 {
-    public function getMediaTypeAttribute($value)
+    public function getMediaTypeNameAttribute()
     {
-        return Arr::get(self::MEDIA_TYPE, $value);
+        return Arr::get(self::MEDIA_TYPE, $this->media_type);
     }
     public function getFullUrlAttribute()
     {

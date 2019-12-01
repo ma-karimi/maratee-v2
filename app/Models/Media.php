@@ -13,59 +13,7 @@ use Spatie\MediaLibrary\Models\Media as BaseMedia;
 /**
  * @SWG\Definition(
  *      definition="Media",
- *      required={"name","format_type"},
- *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="name",
- *          description="name",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="format_type",
- *          description="format_type",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="date",
- *          description="date",
- *          type="string",
- *          format="date"
- *      ),
- *      @SWG\Property(
- *          property="user_id",
- *          description="user_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="location_id",
- *          description="location_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="description",
- *          description="description",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
+ *      required={"name","media_type"},
  * )
  */
 class Media extends BaseMedia
@@ -98,16 +46,6 @@ class Media extends BaseMedia
      * @var string
      */
     protected $table = 'medias';
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    //protected $casts = ['name' => 'json', 'reference' => 'json', 'description' => 'json'];
-
-
-
 
     /**
      * @return MorphToMany
