@@ -155,11 +155,8 @@ class Paleontology extends BaseModel implements HasMedia
             ->withPivot(['type_id', 'sheets_no']);
     }
 
-    public function maps(): BelongsToMany
+    public function maps(): HasMany
     {
-        return $this->belongsToMany(PaleontologyMap::class,
-            'paleontology_maps',
-            'paleontology_id',
-            'map_id')->whereNull('paleontology_maps.deleted_at');
+        return $this->hasMany(PaleontologyMap::class)->latest();
     }
 }
