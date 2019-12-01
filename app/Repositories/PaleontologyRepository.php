@@ -4,9 +4,7 @@ namespace App\Repositories;
 
 use App\Models\ActionHub;
 use App\Models\ActorHub;
-use App\Models\Herbarium;
 use App\Models\Paleontology;
-use App\Repositories\BaseRepository;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
 
@@ -71,6 +69,41 @@ class PaleontologyRepository extends BaseRepository
     {
         return parent::create(Arr::only($input->all(), [
             'catalog_no', 'specimen_no', 'field_no', 'barcode_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'location_in_collection']));
+    }
+
+    public function storeGeologyAge($input, $paleontology_id)
+    {
+
+        $data = Arr::only($input->all(), [
+            'geology_age_era_id', 'geology_age_epoch_id', 'geology_age_period_id', 'geology_age_stage_id'
+        ]);
+
+        return parent::update($data, $paleontology_id);
+    }
+    public function storeOtherData($input, $paleontology_id)
+    {
+        $this->storeDetermine($input, $paleontology_id);
+        $this->storeCollect($input, $paleontology_id);
+
+        $data = Arr::only($input->all(), [
+            'preservation', 'pieces', 'color', 'element', 'treatment_history'
+        ]);
+
+        return parent::update($data, $paleontology_id);
+    }
+
+    public function update($input, $id)
+    {
+        $location = $this->storeLocation($input->all(), $input->filled('location_id') ? $input['location_id'] : null);
+        $input['location_id'] = $location->id;
+        $paleontology = parent::update($this->palebotanyData($input->all()), $id);
+        $input['paleontology_id'] = $paleontology->id;
+        $this->storeLocality($input->all(), $input->filled('locality_id') ? $input['locality_id'] : null);
+
+        $this->storeDetermine($input, $paleontology->id);
+        $this->storeCollect($input, $paleontology->id);
+
+        return $paleontology;
     }
 
     private function storeLocation($input, $location_id = null)
@@ -149,7 +182,7 @@ class PaleontologyRepository extends BaseRepository
             ],
             [
                 'date' => $input['collecting_date'] ?? null,
-                'description' => $input['collecting_description'] ?? null
+                'description' => $input['field_notes'] ?? null
             ]);
         $this->actorHubRepo
             ->where('actorable_id', $action_hub->id)
@@ -165,20 +198,6 @@ class PaleontologyRepository extends BaseRepository
                 ]);
             }
         }
-    }
-
-    public function update($input, $id)
-    {
-        $location = $this->storeLocation($input->all(), $input->filled('location_id') ? $input['location_id'] : null);
-        $input['location_id'] = $location->id;
-        $paleontology = parent::update($this->palebotanyData($input->all()), $id);
-        $input['paleontology_id'] = $paleontology->id;
-        $this->storeLocality($input->all(), $input->filled('locality_id') ? $input['locality_id'] : null);
-
-        $this->storeDetermine($input, $paleontology->id);
-        $this->storeCollect($input, $paleontology->id);
-
-        return $paleontology;
     }
 
     /**

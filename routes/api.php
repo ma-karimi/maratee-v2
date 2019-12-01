@@ -43,6 +43,8 @@ Route::apiResource('treatments', 'TreatmentAPIController');
 
 Route::post('paleontologies/{id}/media', 'PaleontologyAPIController@media');
 Route::post('paleontologies/{id}/locality', 'PaleontologyAPIController@locality');
+Route::post('paleontologies/{id}/geology', 'PaleontologyAPIController@geology');
+Route::post('paleontologies/{id}/geology', 'PaleontologyAPIController@information');
 
 Route::apiResource('paleontologies', 'PaleontologyAPIController');
 Route::apiResource('paleontology_citations', 'PaleontologyCitationAPIController');

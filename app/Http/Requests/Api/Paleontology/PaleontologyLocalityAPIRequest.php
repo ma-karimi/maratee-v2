@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\Paleontology;
 
 use App\Models\Article;
 use InfyOm\Generator\Request\APIRequest;

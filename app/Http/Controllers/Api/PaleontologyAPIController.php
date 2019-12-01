@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Paleontology;
 
-use App\Http\Requests\Api\ActionableRequest;
-use App\Http\Requests\Api\CreatePaleontologyAPIRequest;
-use App\Http\Requests\Api\PaleontologyAPIRequest;
-use App\Http\Requests\Api\PaleontologyLocalityAPIRequest;
-use App\Http\Requests\Api\UpdatePaleontologyAPIRequest;
+use App\Http\Requests\Api\Paleontology\PaleontologyAPIRequest;
+use App\Http\Requests\Api\Paleontology\PaleontologyGeologyAPIRequest;
+use App\Http\Requests\Api\Paleontology\PaleontologyInformationAPIRequest;
+use App\Http\Requests\Api\Paleontology\PaleontologyLocalityAPIRequest;
 use App\Models\Paleontology;
 use App\Repositories\PaleontologyRepository;
 use Illuminate\Http\Request;
@@ -226,7 +225,7 @@ class PaleontologyAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdatePaleontologyAPIRequest $request
+     * @param PaleontologyAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -326,7 +325,7 @@ class PaleontologyAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdatePaleontologyAPIRequest $request)
+    public function update($id, PaleontologyAPIRequest $request)
     {
 
         /** @var Paleontology $paleontology */
@@ -456,7 +455,7 @@ class PaleontologyAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/paleontologies/{id}",
+     *      path="/paleontologies/{id}/locality",
      *      summary="Update the specified Paleontology in storage",
      *      tags={"Paleontology"},
      *      description="Update Paleontology",
@@ -598,6 +597,212 @@ class PaleontologyAPIController extends AppBaseController
         }
 
         $paleontology = $this->paleontologyRepository->update($request, $id);
+
+        return $this->sendResponse($paleontology->toArray(), 'Paleontology Locality updated successfully');
+    }
+
+
+    /**
+     * @param int $id
+     * @param PaleontologyGeologyAPIRequest $request
+     * @return Response
+     *
+     * @SWG\Put(
+     *      path="/paleontologies/{id}/geology",
+     *      summary="Update the specified Paleontology in storage",
+     *      tags={"Paleontology"},
+     *      description="Update Paleontology",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Paleontology",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="geology_age_era_id",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="geology_age_epoch_id",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="geology_age_period_id",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="geology_age_stage_id",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Paleontology"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function geology($id, PaleontologyGeologyAPIRequest $request)
+    {
+
+        /** @var Paleontology $paleontology */
+        $paleontology = $this->paleontologyRepository->find($id);
+
+        if ($paleontology === null) {
+            return $this->sendError('Paleontology not found');
+        }
+
+        $paleontology = $this->paleontologyRepository->storeGeologyAge($request, $id);
+
+        return $this->sendResponse($paleontology->toArray(), 'Paleontology Locality updated successfully');
+    }
+    /**
+     * @param int $id
+     * @param PaleontologyinformationAPIRequest $request
+     * @return Response
+     *
+     * @SWG\Put(
+     *      path="/paleontologies/{id}/information",
+     *      summary="Update the specified Paleontology in storage",
+     *      tags={"Paleontology"},
+     *      description="Update Paleontology",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Paleontology",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="preservation",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="pieces",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="color",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="element",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="treatment_history",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="determines",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="identify_date",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="collectors",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="collecting_date",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="field_notes",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Paleontology"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function information($id, PaleontologyinformationAPIRequest $request)
+    {
+
+        /** @var Paleontology $paleontology */
+        $paleontology = $this->paleontologyRepository->find($id);
+
+        if ($paleontology === null) {
+            return $this->sendError('Paleontology not found');
+        }
+
+        $paleontology = $this->paleontologyRepository->storeOtherData($request, $id);
 
         return $this->sendResponse($paleontology->toArray(), 'Paleontology Locality updated successfully');
     }
