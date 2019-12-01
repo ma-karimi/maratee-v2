@@ -80,6 +80,7 @@ class PaleontologyRepository extends BaseRepository
 
         return parent::update($data, $paleontology_id);
     }
+
     public function storeOtherData($input, $paleontology_id)
     {
         $this->storeDetermine($input, $paleontology_id);
@@ -90,47 +91,6 @@ class PaleontologyRepository extends BaseRepository
         ]);
 
         return parent::update($data, $paleontology_id);
-    }
-
-    public function update($input, $id)
-    {
-        return parent::update(Arr::only($input->all(), [
-            'catalog_no', 'specimen_no', 'field_no', 'barcode_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'location_in_collection']), $id);
-    }
-
-    private function storeLocation($input, $location_id = null)
-    {
-        $data = Arr::only($input, [
-            'village', 'city_id', 'province_id', 'address_en', 'region_name', 'address_fa'
-        ]);
-
-        if ($location_id) {
-            return $this->locationRepo->update($data, $location_id);
-        }
-        return $this->locationRepo->create($data);
-
-    }
-
-    private function palebotanyData($input)
-    {
-        return Arr::only($input, [
-            'geology_age_era_id', 'geology_age_period_id', 'geology_age_epoch_id', 'geology_age_stage_id', 'preservation', 'pieces', 'color', 'element', 'treatment_history', 'access_code', 'additional_info', 'update_frequency', 'last_update', 'excavation', 'description'
-        ]);
-    }
-
-    public function storeLocality($input, $locality_id = null)
-    {
-        $location = $this->storeLocation($input->all(), $input->filled('location_id') ? $input['location_id'] : null);
-        $input['location_id'] = $location->id;
-        $data = Arr::only($input->all(), [
-            'location_id', 'paleontology_id', 'formation', 'layer', 'stratigraphy', 'lithology', 'fauna'
-        ]);
-
-        $data['description'] = $input['locality_description'];
-        if ($locality_id) {
-            return $this->localityRepo->update($data, $locality_id);
-        }
-        return $this->localityRepo->create($data);
     }
 
     private function storeDetermine($input, $paleontology_id)
@@ -192,6 +152,40 @@ class PaleontologyRepository extends BaseRepository
         }
     }
 
+    public function update($input, $id)
+    {
+        return parent::update(Arr::only($input->all(), [
+            'catalog_no', 'specimen_no', 'field_no', 'barcode_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'location_in_collection']), $id);
+    }
+
+    public function storeLocality($input, $locality_id = null)
+    {
+        $location = $this->storeLocation($input->all(), $input->filled('location_id') ? $input['location_id'] : null);
+        $input['location_id'] = $location->id;
+        $data = Arr::only($input->all(), [
+            'location_id', 'paleontology_id', 'formation', 'layer', 'stratigraphy', 'lithology', 'fauna'
+        ]);
+
+        $data['description'] = $input['locality_description'];
+        if ($locality_id) {
+            return $this->localityRepo->update($data, $locality_id);
+        }
+        return $this->localityRepo->create($data);
+    }
+
+    private function storeLocation($input, $location_id = null)
+    {
+        $data = Arr::only($input, [
+            'village', 'city_id', 'province_id', 'address_en', 'region_name', 'address_fa'
+        ]);
+
+        if ($location_id) {
+            return $this->locationRepo->update($data, $location_id);
+        }
+        return $this->locationRepo->create($data);
+
+    }
+
     /**
      * @param $input
      * @param $model
@@ -200,11 +194,19 @@ class PaleontologyRepository extends BaseRepository
     {
         $media_input = [
             'media_type' => $input['media_type'] ?? 2,
+            'description' => $input['media_description']
         ];
         //store media
         if (request()->hasFile('file')) {
             $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('media');
             $media_record->update($media_input);
         }
+    }
+
+    private function palebotanyData($input)
+    {
+        return Arr::only($input, [
+            'geology_age_era_id', 'geology_age_period_id', 'geology_age_epoch_id', 'geology_age_stage_id', 'preservation', 'pieces', 'color', 'element', 'treatment_history', 'access_code', 'additional_info', 'update_frequency', 'last_update', 'excavation', 'description'
+        ]);
     }
 }
