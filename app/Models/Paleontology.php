@@ -24,18 +24,7 @@ class Paleontology extends BaseModel implements HasMedia
 {
     use PaleontologyAccessor, ActionRelation, ArticleRelation,HasMediaTrait;
     public static $rules = [
-        'catalog_no' => 'integer',
-        'specimen_no' => 'string',
-        'infra_specific' => 'string',
-        'preservation' => 'string',
-        'color' => 'string',
-        'element' => 'string',
-        'additional_info' => 'string',
-        'excavation' => 'string',
-        'access_code' => 'string',
-        'field_no' => 'string',
-        'barcode_no' => 'string',
-        'move_status' => 'string',
+
 
         'update_frequency' => 'string',
         'location_in_collection' => 'integer',

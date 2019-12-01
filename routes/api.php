@@ -42,6 +42,7 @@ Route::post('reset_password', 'AuthController@resetPassword');
 Route::apiResource('treatments', 'TreatmentAPIController');
 
 Route::post('paleontologies/{id}/media', 'PaleontologyAPIController@media');
+Route::post('paleontologies/{id}/locality', 'PaleontologyAPIController@locality');
 
 Route::apiResource('paleontologies', 'PaleontologyAPIController');
 Route::apiResource('paleontology_citations', 'PaleontologyCitationAPIController');
@@ -162,7 +163,8 @@ Route::apiResource('irrigations', 'IrrigationAPIController');
 
 Route::apiResource('lightings', 'LightingAPIController');
 
-Route::apiResource('localities', 'LocalityAPIController');
+
+//Route::apiResource('localities', 'LocalityAPIController');
 
 Route::apiResource('maps', 'MapAPIController');
 

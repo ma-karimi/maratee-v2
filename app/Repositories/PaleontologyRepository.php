@@ -69,16 +69,8 @@ class PaleontologyRepository extends BaseRepository
 
     public function create($input)
     {
-        $location = $this->storeLocation($input->all(), $input->filled('location_id') ? $input['location_id'] : null);
-        $input['location_id'] = $location->id;
-        $paleontology = parent::create($this->palebotanyData($input->all()));
-        $input['paleontology_id'] = $paleontology->id;
-        $this->storeLocality($input->all(), $input->filled('locality_id') ? $input['locality_id'] : null);
-
-        $this->storeDetermine($input, $paleontology->id);
-        $this->storeCollect($input, $paleontology->id);
-
-        return $paleontology;
+        return parent::create(Arr::only($input->all(), [
+            'catalog_no', 'specimen_no', 'field_no', 'barcode_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'location_in_collection']));
     }
 
     private function storeLocation($input, $location_id = null)
@@ -97,13 +89,15 @@ class PaleontologyRepository extends BaseRepository
     private function palebotanyData($input)
     {
         return Arr::only($input, [
-            'catalog_no', 'specimen_no', 'field_no', 'barcode_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'geology_age_era_id', 'geology_age_period_id', 'geology_age_epoch_id', 'geology_age_stage_id', 'preservation', 'pieces', 'color', 'element', 'treatment_history', 'access_code', 'additional_info', 'update_frequency', 'last_update', 'excavation', 'description', 'location_in_collection'
+            'geology_age_era_id', 'geology_age_period_id', 'geology_age_epoch_id', 'geology_age_stage_id', 'preservation', 'pieces', 'color', 'element', 'treatment_history', 'access_code', 'additional_info', 'update_frequency', 'last_update', 'excavation', 'description'
         ]);
     }
 
-    private function storeLocality($input, $locality_id = null)
+    public function storeLocality($input, $locality_id = null)
     {
-        $data = Arr::only($input, [
+        $location = $this->storeLocation($input->all(), $input->filled('location_id') ? $input['location_id'] : null);
+        $input['location_id'] = $location->id;
+        $data = Arr::only($input->all(), [
             'location_id', 'paleontology_id', 'formation', 'layer', 'stratigraphy', 'lithology', 'fauna'
         ]);
 

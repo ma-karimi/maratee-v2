@@ -54,6 +54,7 @@ class MedicinalPlantTypeAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index()
     {
