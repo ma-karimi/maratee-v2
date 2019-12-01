@@ -44,7 +44,8 @@ Route::apiResource('treatments', 'TreatmentAPIController');
 Route::post('paleontologies/{id}/media', 'PaleontologyAPIController@media');
 Route::post('paleontologies/{id}/locality', 'PaleontologyAPIController@locality');
 Route::post('paleontologies/{id}/geology-remark', 'PaleontologyAPIController@geologyAndRemark');
-Route::post('paleontologies/{id}/geology', 'PaleontologyAPIController@information');
+Route::post('paleontologies/{id}/information', 'PaleontologyAPIController@information');
+//Route::post('paleontologies/{id}/map', 'PaleontologyAPIController@map');
 
 Route::apiResource('paleontologies', 'PaleontologyAPIController');
 Route::apiResource('paleontology_citations', 'PaleontologyCitationAPIController');
