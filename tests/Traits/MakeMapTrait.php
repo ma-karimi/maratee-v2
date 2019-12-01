@@ -1,8 +1,8 @@
 <?php namespace Tests\Traits;
 
 use Faker\Factory as Faker;
-use App\Models\Map;
-use App\Repositories\MapRepository;
+use App\Models\PaleontologyMap;
+use App\Repositories\PaleontologyMapRepository;
 
 trait MakeMapTrait
 {
@@ -10,12 +10,12 @@ trait MakeMapTrait
      * Create fake instance of Map and save it in database
      *
      * @param array $mapFields
-     * @return Map
+     * @return PaleontologyMap
      */
     public function makeMap($mapFields = [])
     {
-        /** @var MapRepository $mapRepo */
-        $mapRepo = \App::make(MapRepository::class);
+        /** @var PaleontologyMapRepository $mapRepo */
+        $mapRepo = \App::make(PaleontologyMapRepository::class);
         $theme = $this->fakeMapData($mapFields);
         return $mapRepo->create($theme);
     }
@@ -24,11 +24,11 @@ trait MakeMapTrait
      * Get fake instance of Map
      *
      * @param array $mapFields
-     * @return Map
+     * @return PaleontologyMap
      */
     public function fakeMap($mapFields = [])
     {
-        return new Map($this->fakeMapData($mapFields));
+        return new PaleontologyMap($this->fakeMapData($mapFields));
     }
 
     /**

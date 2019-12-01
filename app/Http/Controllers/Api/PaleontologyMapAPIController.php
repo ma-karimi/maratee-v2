@@ -2,35 +2,35 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateMapAPIRequest;
-use App\Http\Requests\Api\UpdateMapAPIRequest;
-use App\Models\Map;
-use App\Repositories\MapRepository;
+use App\Http\Requests\Api\Paleontology\PaleontologyMapAPIRequest;
+use App\Models\PaleontologyMap;
+use App\Repositories\PaleontologyMapRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class MapController
+ * Class PaleontologyMapAPIController
  * @package App\Http\Controllers\Api
  */
 
-class MapAPIController extends AppBaseController
+class PaleontologyMapAPIController extends AppBaseController
 {
-    /** @var  MapRepository */
-    private $mapRepository;
+    /** @var  PaleontologyMapRepository */
+    private $paleontologyMapRepository;
 
-    public function __construct(MapRepository $mapRepo)
+    public function __construct(PaleontologyMapRepository $paleontologyMapRepo)
     {
-        $this->mapRepository = $mapRepo;
+        $this->paleontologyMapRepository = $paleontologyMapRepo;
     }
 
     /**
      * @param Request $request
      * @return Response
      *
+     * @throws \Exception
      * @SWG\Get(
-     *      path="/maps",
+     *      path="/paleontology_maps",
      *      summary="Get a listing of the Maps.",
      *      tags={"Map"},
      *      description="Get all Maps",
@@ -47,7 +47,7 @@ class MapAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/Map")
+     *                  @SWG\Items(ref="#/definitions/PaleontologyMap")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -59,38 +59,53 @@ class MapAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $maps = $this->mapRepository->paginate(
+        $maps = $this->paleontologyMapRepository->all(
+            [],
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            $this->getFieldRelation()
         );
 
-        return $this->sendResponse($maps->toArray(), 'Maps retrieved successfully');
+        return $this->sendResponse($maps->toArray(), 'Paleontology Maps retrieved successfully');
     }
 
     /**
-     * @param CreateMapAPIRequest $request
+     * @param PaleontologyMapAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/maps",
+     *      path="/paleontology_maps",
      *      summary="Store a newly created Map in storage",
      *      tags={"Map"},
      *      description="Store Map",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="reference_year",
+     *          name="reference",
      *          in="body",
      *          description="Map that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Map")
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMap")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="file",
+     *          in="body",
+     *          description="Map that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMap")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="year",
+     *          in="body",
+     *          description="Map that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMap")
      *      ),
      *      @SWG\Parameter(
      *          name="scale",
      *          in="body",
      *          description="Map that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Map")
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMap")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -103,7 +118,7 @@ class MapAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Map"
+     *                  ref="#/definitions/PaleontologyMap"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -113,13 +128,13 @@ class MapAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateMapAPIRequest $request)
+    public function store(PaleontologyMapAPIRequest $request)
     {
         $input = $request->all();
 
-        $map = $this->mapRepository->create($input);
+        $map = $this->paleontologyMapRepository->create($input);
 
-        return $this->sendResponse($map->toArray(), 'Map saved successfully');
+        return $this->sendResponse($map->toArray(), 'Paleontology Map saved successfully');
     }
 
     /**
@@ -127,7 +142,7 @@ class MapAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/maps/{id}",
+     *      path="/paleontology_maps/{id}",
      *      summary="Display the specified Map",
      *      tags={"Map"},
      *      description="Get Map",
@@ -150,7 +165,7 @@ class MapAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Map"
+     *                  ref="#/definitions/PaleontologyMap"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -162,23 +177,23 @@ class MapAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var Map $map */
-        $map = $this->mapRepository->find($id, \request()->get('relations'));
+        /** @var PaleontologyMap $map */
+        $map = $this->paleontologyMapRepository->find($id, $this->getFieldRelation());
 
         if ($map === null) {
-            return $this->sendError('Map not found');
+            return $this->sendError('Paleontology Map not found');
         }
 
-        return $this->sendResponse($map->toArray(), 'Map retrieved successfully');
+        return $this->sendResponse($map->toArray(), 'Paleontology Map retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdateMapAPIRequest $request
+     * @param PaleontologyMapAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/maps/{id}",
+     *      path="/paleontology_maps/{id}",
      *      summary="Update the specified Map in storage",
      *      tags={"Map"},
      *      description="Update Map",
@@ -191,18 +206,32 @@ class MapAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="reference_year",
+     *          name="reference",
      *          in="body",
      *          description="Map that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Map")
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMap")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="file",
+     *          in="body",
+     *          description="Map that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMap")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="year",
+     *          in="body",
+     *          description="Map that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMap")
      *      ),
      *      @SWG\Parameter(
      *          name="scale",
      *          in="body",
      *          description="Map that should be stored",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Map")
+     *          @SWG\Schema(ref="#/definitions/PaleontologyMap")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -215,7 +244,7 @@ class MapAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Map"
+     *                  ref="#/definitions/PaleontologyMap"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -225,20 +254,19 @@ class MapAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateMapAPIRequest $request)
+    public function update($id, PaleontologyMapAPIRequest $request)
     {
-        $input = $request->all();
 
-        /** @var Map $map */
-        $map = $this->mapRepository->find($id, \request()->get('relations'));
+        /** @var PaleontologyMap $map */
+        $map = $this->paleontologyMapRepository->find($id);
 
         if ($map === null) {
-            return $this->sendError('Map not found');
+            return $this->sendError('Paleontology Map not found');
         }
 
-        $map = $this->mapRepository->update($input, $id);
+        $map = $this->paleontologyMapRepository->update($request, $id);
 
-        return $this->sendResponse($map->toArray(), 'Map updated successfully');
+        return $this->sendResponse($map->toArray(), 'Paleontology Map updated successfully');
     }
 
     /**
@@ -247,7 +275,7 @@ class MapAPIController extends AppBaseController
      *
      * @throws \Exception
      * @SWG\Delete(
-     *      path="/maps/{id}",
+     *      path="/paleontology_maps/{id}",
      *      summary="Remove the specified Map from storage",
      *      tags={"Map"},
      *      description="Delete Map",
@@ -282,15 +310,23 @@ class MapAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var Map $map */
-        $map = $this->mapRepository->find($id, \request()->get('relations'));
+        /** @var PaleontologyMap $map */
+        $map = $this->paleontologyMapRepository->find($id);
 
         if ($map === null) {
-            return $this->sendError('Map not found');
+            return $this->sendError('Paleontology Map not found');
         }
 
         $map->delete();
 
-        return $this->sendResponse($id, 'Map deleted successfully');
+        return $this->sendResponse($id, 'Paleontology Map deleted successfully');
+    }
+
+    /**
+     * @return array
+     */
+    private function getFieldRelation(): array
+    {
+        return ['paleontology', 'media'];
     }
 }

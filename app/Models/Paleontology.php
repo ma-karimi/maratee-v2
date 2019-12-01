@@ -157,7 +157,7 @@ class Paleontology extends BaseModel implements HasMedia
 
     public function maps(): BelongsToMany
     {
-        return $this->belongsToMany(Map::class,
+        return $this->belongsToMany(PaleontologyMap::class,
             'paleontology_maps',
             'paleontology_id',
             'map_id')->whereNull('paleontology_maps.deleted_at');

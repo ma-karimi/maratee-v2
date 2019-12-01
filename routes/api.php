@@ -45,10 +45,10 @@ Route::post('paleontologies/{id}/media', 'PaleontologyAPIController@media');
 Route::post('paleontologies/{id}/locality', 'PaleontologyAPIController@locality');
 Route::post('paleontologies/{id}/geology-remark', 'PaleontologyAPIController@geologyAndRemark');
 Route::post('paleontologies/{id}/information', 'PaleontologyAPIController@information');
-//Route::post('paleontologies/{id}/map', 'PaleontologyAPIController@map');
 
 Route::apiResource('paleontologies', 'PaleontologyAPIController');
 Route::apiResource('paleontology_citations', 'PaleontologyCitationAPIController');
+Route::apiResource('paleontology_maps', 'PaleontologyMapAPIController');
 
 
 Route::get('organizations/all', 'OrganizationAPIController@all');
@@ -169,7 +169,6 @@ Route::apiResource('lightings', 'LightingAPIController');
 
 //Route::apiResource('localities', 'LocalityAPIController');
 
-Route::apiResource('maps', 'MapAPIController');
 
 Route::apiResource('media', 'MediaAPIController');
 

@@ -11,6 +11,6 @@ class MapTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Map::class, 50)->create();
+        factory(App\Models\PaleontologyMap::class, 50)->create();
     }
 }

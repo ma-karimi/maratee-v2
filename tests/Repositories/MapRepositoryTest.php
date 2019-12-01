@@ -1,7 +1,7 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\Map;
-use App\Repositories\MapRepository;
+use App\Models\PaleontologyMap;
+use App\Repositories\PaleontologyMapRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\Traits\MakeMapTrait;
@@ -12,14 +12,14 @@ class MapRepositoryTest extends TestCase
     use MakeMapTrait, ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var MapRepository
+     * @var PaleontologyMapRepository
      */
     protected $mapRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->mapRepo = \App::make(MapRepository::class);
+        $this->mapRepo = \App::make(PaleontologyMapRepository::class);
     }
 
     /**
@@ -32,7 +32,7 @@ class MapRepositoryTest extends TestCase
         $createdMap = $createdMap->toArray();
         $this->assertArrayHasKey('id', $createdMap);
         $this->assertNotNull($createdMap['id'], 'Created Map must have id specified');
-        $this->assertNotNull(Map::find($createdMap['id']), 'Map with given id must be in DB');
+        $this->assertNotNull(PaleontologyMap::find($createdMap['id']), 'Map with given id must be in DB');
         $this->assertModelData($map, $createdMap);
     }
 
@@ -68,6 +68,6 @@ class MapRepositoryTest extends TestCase
         $map = $this->makeMap();
         $resp = $this->mapRepo->delete($map->id);
         $this->assertTrue($resp);
-        $this->assertNull(Map::find($map->id), 'Map should not exist in DB');
+        $this->assertNull(PaleontologyMap::find($map->id), 'Map should not exist in DB');
     }
 }
