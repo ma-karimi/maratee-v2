@@ -94,16 +94,8 @@ class PaleontologyRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        $location = $this->storeLocation($input->all(), $input->filled('location_id') ? $input['location_id'] : null);
-        $input['location_id'] = $location->id;
-        $paleontology = parent::update($this->palebotanyData($input->all()), $id);
-        $input['paleontology_id'] = $paleontology->id;
-        $this->storeLocality($input->all(), $input->filled('locality_id') ? $input['locality_id'] : null);
-
-        $this->storeDetermine($input, $paleontology->id);
-        $this->storeCollect($input, $paleontology->id);
-
-        return $paleontology;
+        return parent::update(Arr::only($input->all(), [
+            'catalog_no', 'specimen_no', 'field_no', 'barcode_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'location_in_collection']), $id);
     }
 
     private function storeLocation($input, $location_id = null)

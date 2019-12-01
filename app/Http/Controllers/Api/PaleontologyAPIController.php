@@ -681,11 +681,11 @@ class PaleontologyAPIController extends AppBaseController
 
         $paleontology = $this->paleontologyRepository->storeGeologyAge($request, $id);
 
-        return $this->sendResponse($paleontology->toArray(), 'Paleontology Locality updated successfully');
+        return $this->sendResponse($paleontology->toArray(), 'Paleontology Geology updated successfully');
     }
     /**
      * @param int $id
-     * @param PaleontologyinformationAPIRequest $request
+     * @param PaleontologyInformationAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -792,7 +792,7 @@ class PaleontologyAPIController extends AppBaseController
      *      )
      * )
      */
-    public function information($id, PaleontologyinformationAPIRequest $request)
+    public function information($id, PaleontologyInformationAPIRequest $request)
     {
 
         /** @var Paleontology $paleontology */
@@ -804,6 +804,6 @@ class PaleontologyAPIController extends AppBaseController
 
         $paleontology = $this->paleontologyRepository->storeOtherData($request, $id);
 
-        return $this->sendResponse($paleontology->toArray(), 'Paleontology Locality updated successfully');
+        return $this->sendResponse($paleontology->toArray(), 'Paleontology Information updated successfully');
     }
 }
