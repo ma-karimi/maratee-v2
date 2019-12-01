@@ -71,11 +71,11 @@ class PaleontologyRepository extends BaseRepository
             'catalog_no', 'specimen_no', 'field_no', 'barcode_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'location_in_collection']));
     }
 
-    public function storeGeologyAge($input, $paleontology_id)
+    public function storeGeologyAndRemark($input, $paleontology_id)
     {
 
         $data = Arr::only($input->all(), [
-            'geology_age_era_id', 'geology_age_epoch_id', 'geology_age_period_id', 'geology_age_stage_id'
+            'geology_age_era_id', 'geology_age_epoch_id', 'geology_age_period_id', 'geology_age_stage_id', 'additional_info', 'update_frequency', 'last_update', 'access_code'
         ]);
 
         return parent::update($data, $paleontology_id);

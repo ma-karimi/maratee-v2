@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Paleontology;
 
 use App\Http\Requests\Api\Paleontology\PaleontologyAPIRequest;
-use App\Http\Requests\Api\Paleontology\PaleontologyGeologyAPIRequest;
+use App\Http\Requests\Api\Paleontology\PaleontologyGeologyRemarkAPIRequest;
 use App\Http\Requests\Api\Paleontology\PaleontologyInformationAPIRequest;
 use App\Http\Requests\Api\Paleontology\PaleontologyLocalityAPIRequest;
 use App\Models\Paleontology;
@@ -604,11 +604,11 @@ class PaleontologyAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param PaleontologyGeologyAPIRequest $request
+     * @param PaleontologyGeologyRemarkAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/paleontologies/{id}/geology",
+     *      path="/paleontologies/{id}/geology-remark",
      *      summary="Update the specified Paleontology in storage",
      *      tags={"Paleontology"},
      *      description="Update Paleontology",
@@ -648,6 +648,34 @@ class PaleontologyAPIController extends AppBaseController
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/Paleontology")
      *      ),
+     *      @SWG\Parameter(
+     *          name="last_update",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="access_code",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="update_frequency",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="additional_info",
+     *          in="body",
+     *          description="Paleontology that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Paleontology")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -669,7 +697,7 @@ class PaleontologyAPIController extends AppBaseController
      *      )
      * )
      */
-    public function geology($id, PaleontologyGeologyAPIRequest $request)
+    public function geologyAndRemark($id, PaleontologyGeologyRemarkAPIRequest $request)
     {
 
         /** @var Paleontology $paleontology */
@@ -679,7 +707,7 @@ class PaleontologyAPIController extends AppBaseController
             return $this->sendError('Paleontology not found');
         }
 
-        $paleontology = $this->paleontologyRepository->storeGeologyAge($request, $id);
+        $paleontology = $this->paleontologyRepository->storeGeologyAndRemark($request, $id);
 
         return $this->sendResponse($paleontology->toArray(), 'Paleontology Geology updated successfully');
     }

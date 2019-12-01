@@ -24,6 +24,13 @@ class PaleontologyInformationAPIRequest extends APIRequest
             'collecting_date' => 'nullable|date',
             'identify_date' => 'nullable|date',
             'field_notes' => 'nullable|string',
+            'preservation' => 'nullable|string',
+            'pieces' => 'nullable|string',
+            'color' => 'nullable|string',
+            'element' => 'nullable|string',
+            'treatment_history' => 'nullable|string',
+            'determines' => 'nullable',
+            'collectors' => 'nullable',
         ];
     }
 }

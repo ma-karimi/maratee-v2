@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api\Paleontology;
 use App\Models\Article;
 use InfyOm\Generator\Request\APIRequest;
 
-class PaleontologyGeologyAPIRequest extends APIRequest
+class PaleontologyGeologyRemarkAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +25,10 @@ class PaleontologyGeologyAPIRequest extends APIRequest
             'geology_age_epoch_id' => 'nullable|exists:geology_ages,id',
             'geology_age_period_id' => 'required|exists:geology_ages,id',
             'geology_age_stage_id' => 'required|exists:geology_ages,id',
+            'last_update'=>'nullable|date',
+            'access_code'=>'nullable|string',
+            'update_frequency'=>'nullable|string',
+            'additional_info'=>'nullable|string',
         ];
     }
 }
