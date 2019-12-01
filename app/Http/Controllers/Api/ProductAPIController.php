@@ -193,9 +193,8 @@ class ProductAPIController extends AppBaseController
      */
     public function store(CreateProductAPIRequest $request)
     {
-        $input = $request->all();
 
-        $product = $this->productRepository->create($input);
+        $product = $this->productRepository->create($request);
 
         return $this->sendResponse($product->toArray(), 'Product saved successfully');
     }
@@ -340,16 +339,15 @@ class ProductAPIController extends AppBaseController
      */
     public function update($id, UpdateProductAPIRequest $request)
     {
-        $input = $request->all();
 
         /** @var Product $product */
-        $product = $this->productRepository->find($id, \request()->get('relations'));
+        $product = $this->productRepository->find($id);
 
         if (empty($product)) {
             return $this->sendError('Product not found');
         }
 
-        $product = $this->productRepository->update($input, $id);
+        $product = $this->productRepository->update($request, $id);
 
         return $this->sendResponse($product->toArray(), 'Product updated successfully');
     }
@@ -396,7 +394,7 @@ class ProductAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Product $product */
-        $product = $this->productRepository->find($id, \request()->get('relations'));
+        $product = $this->productRepository->find($id);
 
         if (empty($product)) {
             return $this->sendError('Product not found');

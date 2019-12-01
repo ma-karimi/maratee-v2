@@ -173,16 +173,11 @@ class PlantRepository extends BaseRepository
     public function storeMedia($input, $model): void
     {
         $media_input = [
-//            'date' => $input['date'] ?? null,
-//            'user_id' => $input['user_id'] ?? null,
-//            'location_id' => $input['location_id'] ?? null,
-//            'description' => $input['media_description'] ?? null,
             'media_type' => $input['media_type'] ?? 2,
-//            'reference' => $input['reference'] ?? null,
         ];
         //store media
         if (request()->hasFile('file')) {
-            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('media');
+            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('images');
             $media_record->update($media_input);
         }
     }

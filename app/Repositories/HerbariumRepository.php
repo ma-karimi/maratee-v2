@@ -73,15 +73,20 @@ class HerbariumRepository extends BaseRepository
     public function create($input)
     {
 
+        $is_flowering = $input['is_flowering'] != 1 ? $input['is_flowering'] : 1;
 
-        if (Herbarium::where('herbarium_number', $input['herbarium_number'])->exists()) {
+        if (Herbarium::where('herbarium_number', $input['herbarium_number'])
+            ->with('plant')
+            ->whereHas('plant', function ($query) use ($is_flowering) {
+                return $query->where('is_flowering', $is_flowering);
+            })
+            ->exists()) {
             throw ValidationException::withMessages([
                 'herbarium_number' => 'Herbarium Number Already Exists!'
             ]);
         }
         $location = $this->storeLocation($input, $input->filled('location_id') ? $input['location_id'] : null);
         $input['location_id'] = $location->id;
-        $is_flowering = $input['is_flowering'] != 1 ? $input['is_flowering'] : 1;
         $plant = Plant::where('taxonomy_id', $input['taxonomy_id'])
             ->where('is_flowering', $is_flowering)
             ->first();
@@ -205,42 +210,53 @@ class HerbariumRepository extends BaseRepository
     public function storeMedia($input, $model): void
     {
         $media_input = [
-//            'date' => $input['date'] ?? null,
-//            'user_id' => $input['user_id'] ?? null,
-//            'location_id' => $input['location_id'] ?? null,
-//            'description' => $input['media_description'] ?? null,
             'media_type' => $input['media_type'] ?? 2,
-//            'reference' => $input['reference'] ?? null,
         ];
         //store media
         if (request()->hasFile('file')) {
-            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('media');
+            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('images');
             $media_record->update($media_input);
         }
     }
 
     public function update($input, $id)
     {
-
-        if (Herbarium::where('herbarium_number', $input['herbarium_number'])->where('id', '!=', $id)->exists()) {
-            throw ValidationException::withMessages([
-                'herbarium_number' => 'Herbarium Number Already Exists!'
-            ]);
-        }
+        $is_flowering = $this->checkHerbariumNumberExist($input, $id);
         $location = $this->storeLocation($input, $input->filled('location_id') ? $input['location_id'] : null);
         $input['location_id'] = $location->id;
-        $is_flowering = $input['is_flowering'] != 1 ? $input['is_flowering'] : 1;
         $plant = Plant::where('taxonomy_id', $input['taxonomy_id'])
             ->where('is_flowering', $is_flowering)
             ->first();
         if ($plant) {
             $input['plant_id'] = $plant->id;
         }
-        Log::info([$this->herbariumData($input), $id]);
         $model = parent::update($this->herbariumData($input), $id);
         $this->storeDetermine($input, $model->id);
         $this->storeCollect($input, $model->id);
 
         return $model;
+    }
+
+    /**
+     * @param $input
+     * @param $id
+     * @return int
+     * @throws ValidationException
+     */
+    private function checkHerbariumNumberExist($input, $id): int
+    {
+        $is_flowering = $input['is_flowering'] != 1 ? $input['is_flowering'] : 1;
+
+        if (Herbarium::where('herbarium_number', $input['herbarium_number'])
+            ->with('plant')
+            ->whereHas('plant', function ($query) use ($is_flowering) {
+                return $query->where('is_flowering', $is_flowering);
+            })
+            ->where('id', '!=', $id)->exists()) {
+            throw ValidationException::withMessages([
+                'herbarium_number' => 'Herbarium Number Already Exists!'
+            ]);
+        }
+        return $is_flowering;
     }
 }

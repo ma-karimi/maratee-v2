@@ -39,25 +39,35 @@ class MedicineRepository extends BaseRepository
     }
 
 
+    public function create($input)
+    {
+        $model = parent::create($input->except('media_type', 'file'));
+
+        $this->storeMedia($input, $model);
+        return $model;
+    }
+
     public function update($input, $id)
     {
-        $media_input = [
-//            'date' => $input['date'] ?? null,
-//            'description' => $input['media_description'] ?? null,
-            'media_type' => $input['media_type'] ?? 2,
-//            'reference' => $input['reference'] ?? null,
-        ];
+        $model = parent::update($input->except('media_type', 'file'));
 
-        $model_input = collect($input)->except(array_keys($media_input))->toArray();
-        $model_input['description']=$input['description']??null;
-        unset($model_input['file']);
-        $model = parent::update($model_input, $id);
+        $this->storeMedia($input, $model);
+        return $model;
+    }
+
+    /**
+     * @param $input
+     * @param $model
+     */
+    private function storeMedia($input, $model): void
+    {
+        $media_input = [
+            'media_type' => $input['media_type'] ?? 2,
+        ];
         //store media
         if (request()->hasFile('file')) {
-            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('media');
+            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('images');
             $media_record->update($media_input);
         }
-        $model->save();
-        return $model;
     }
 }
