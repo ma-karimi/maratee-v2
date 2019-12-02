@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\MedicinalPlant;
 
-use App\Models\MedicinalPlantConstituent;
 use InfyOm\Generator\Request\APIRequest;
 
 class MedicinalPlantConstituentAPIRequest extends APIRequest
@@ -24,6 +23,6 @@ class MedicinalPlantConstituentAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return MedicinalPlantConstituent::$rules;
+        return ['constituents' => 'required'];
     }
 }

@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class PlantRepository
@@ -25,42 +26,21 @@ class PlantRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-
+//
     ];
 
-    private $taxonomy_model;
     private $locationRepo;
-    /**
-     * @var HerbariumRepository
-     */
-    private $herbariumRepo;
-    /**
-     * @var ActionHubRepository
-     */
-    private $actionHubRepo;
-    /**
-     * @var ActorHubRepository
-     */
-    private $actorHubRepo;
 
     /**
      * PlantRepository constructor.
      * @param Application $app
-     * @param Taxonomy $taxonomy_model
      * @param LocationRepository $locationRepo
-     * @param HerbariumRepository $herbariumRepo
-     * @param ActionHub $actionHubRepo
-     * @param ActorHub $actorHubRepo
      * @throws \Exception
      */
-    public function __construct(Application $app, Taxonomy $taxonomy_model, LocationRepository $locationRepo, HerbariumRepository $herbariumRepo, ActionHub $actionHubRepo, ActorHub $actorHubRepo)
+    public function __construct(Application $app, LocationRepository $locationRepo)
     {
         parent::__construct($app);
-        $this->taxonomy_model = $taxonomy_model;
         $this->locationRepo = $locationRepo;
-        $this->herbariumRepo = $herbariumRepo;
-        $this->actionHubRepo = $actionHubRepo;
-        $this->actorHubRepo = $actorHubRepo;
     }
 
     /**
@@ -81,43 +61,31 @@ class PlantRepository extends BaseRepository
         return Plant::class;
     }
 
-    /**
-     * @param array $input
-     * @return Model|void
-     * @throws \Illuminate\Validation\ValidationException
-     */
+
     public function create($input)
     {
         $plant = $this->createPlant($input);
 
-        if ($input['is_flowering'] != 1) {
-            $this->herbariumRepo->create($input);
-//            $this->storeDetermine($input, $herbarium->id);
-//            $this->storeCollect($input, $herbarium->id);
-        } else {
-            $location = $this->storeLocation($input, $input->filled('location_id') ? $input['location_id'] : null);
-            $input['location_id'] = $location->id;
-            $this->createHub($plant->id, 'locations', [$location->id]);
-            $this->storeMedia($input, $plant);
-        }
+
+        $location = $this->storeLocation($input, $input->filled('location_id') ? $input['location_id'] : null);
+        $input['location_id'] = $location->id;
+        $this->createHub($plant->id, 'locations', [$location->id]);
+        $this->storeMedia($input, $plant);
 
 
         return $plant;
     }
 
-    /**
-     * @param $input
-     * @return Model
-     */
+
     private function createPlant($input)
     {
         $plant_input = [
             'taxonomy_id' => $input['taxonomy_id'],
             'protection_id' => $input['protection_id'] ?? null,
             'general_phytogeography_id' => $input['general_phytogeography_id'],
-            'general_habitat_id' => $input['general_habitat_id'] ?? null,
+//            'general_habitat_id' => $input['general_habitat_id'] ?? null,
             'general_origin_id' => $input['general_origin_id'] ?? null,
-            'general_substrate_id' => $input['general_substrate_id'] ?? null,
+//            'general_substrate_id' => $input['general_substrate_id'] ?? null,
             'description' => $input['description'] ?? null,
             'habitat_description' => $input['habitat_description'] ?? null,
             'ecology_description' => $input['ecology_description'] ?? null,
@@ -182,39 +150,22 @@ class PlantRepository extends BaseRepository
         }
     }
 
-    /**
-     * @param array $input
-     * @param $id
-     * @return Model|void
-     * @throws \Illuminate\Validation\ValidationException
-     */
+
     public function update($input, $id)
     {
-
-        $plant = $this->updatePlant($input, $id);
-        if ($input['is_flowering'] != 1) {
-            $input['plant_id'] = $plant->id;
-            $this->herbariumRepo->update($input, $input['herbarium_id']);
-        } else {
-            $this->storeMedia($input, $plant);
-        }
-        return $plant;
+         return $this->updatePlant($input, $id);
     }
 
-    /**
-     * @param $input
-     * @param $id
-     * @return Builder|Builder[]|Collection|Model
-     */
+
     private function updatePlant($input, $id)
     {
         $plant_input = [
             'taxonomy_id' => $input['taxonomy_id'],
             'protection_id' => $input['protection_id'] ?? null,
             'general_phytogeography_id' => $input['general_phytogeography_id'],
-            'general_habitat_id' => $input['general_habitat_id'] ?? null,
+//            'general_habitat_id' => $input['general_habitat_id'] ?? null,
             'general_origin_id' => $input['general_origin_id'] ?? null,
-            'general_substrate_id' => $input['general_substrate_id'] ?? null,
+//            'general_substrate_id' => $input['general_substrate_id'] ?? null,
             'description' => $input['description'] ?? null,
             'habitat_description' => $input['habitat_description'] ?? null,
             'ecology_description' => $input['ecology_description'] ?? null,
@@ -234,110 +185,4 @@ class PlantRepository extends BaseRepository
         return parent::update($plant_input, $id);
     }
 
-    private function herbariumData(array $data, $location_id)
-    {
-        $data = Arr::only($data, ['taxonomy_id', 'organization_id', 'herbarium_number', 'cf', 'herbarium_index']);
-        $data['location_id'] = $location_id;
-        return $data;
-    }
-
-    private function storeDetermine($input, $herbarium_id)
-    {
-        $determines = is_array($input['determines']) ? $input['determines'] : explode(',', $input['determines']);
-
-        $action_hub_id = $this->actionHubRepo->firstOrCreate([
-            'action_id' => 1,
-            'actionable_type' => Herbarium::class,
-            'actionable_id' => $herbarium_id
-        ]);
-
-        $this->actorHubRepo
-            ->where('actorable_id', $action_hub_id)
-            ->where('actorable_type', ActionHub::class)
-            ->whereNotIn('actor_id', $determines)
-            ->delete();
-        if (count($determines)) {
-            foreach ($determines as $item) {
-                $this->actorHubRepo->firstOrCreate([
-                    'actorable_id' => $action_hub_id,
-                    'actorable_type' => ActionHub::class,
-                    'actor_id' => $item,
-                ]);
-            }
-        }
-    }
-
-    private function storeCollect($input, $herbarium_id)
-    {
-        $collectors = is_array($input['collectors']) ? $input['collectors'] : explode(',', $input['collectors']);
-
-        $action_hub_id = $this->actionHubRepo->updateOrCreate(
-            [
-                'action_id' => 2,
-                'actionable_type' => Herbarium::class,
-                'actionable_id' => $herbarium_id
-            ],
-            [
-                'date' => $input['date'] ?? null
-            ]);
-        $this->actorHubRepo
-            ->where('actorable_id', $action_hub_id)
-            ->where('actorable_type', ActionHub::class)
-            ->whereNotIn('actor_id', $collectors)
-            ->delete();
-        if (count($collectors)) {
-            foreach ($collectors as $item) {
-                $this->actorHubRepo->firstOrCreate([
-                    'actorable_id' => $action_hub_id,
-                    'actorable_type' => ActionHub::class,
-                    'actor_id' => $item,
-                ]);
-            }
-        }
-    }
-
-    /**
-     * @param $input
-     * @return array
-     */
-    private function firstOrCreateTaxonomy($input): array
-    {
-        $taxonomy_input = [
-            'family_id' => $input['family_id'],
-            'genus_id' => $input['genus_id'] ?? null,
-            'species_id' => $input['species_id'] ?? null,
-            'subspecies_id' => $input['subspecies_id'] ?? null,
-            'variety_id' => $input['variety_id'] ?? null,
-            'name' => $input['name'] ?? null,
-        ];
-        //store taxonomy
-        $result = $this->taxonomy_model->firstOrCreate($taxonomy_input);
-        return [$taxonomy_input, $result->id];
-    }
-
-    /**
-     * @param array $taxonomy_input
-     * @param Model $plant
-     */
-    private function syncPlantGeneralProperties(array $taxonomy_input, $plant): void
-    {
-        $general_input = array_filter($taxonomy_input, function ($value, $key) {
-            return $value !== null and $key !== 'name';/* and $key !== 'plant_id';*/
-        }, ARRAY_FILTER_USE_BOTH);
-        $plant->generals()->sync($general_input);
-    }
-
-    /**
-     *
-     * @param $input
-     * @param Model $plant
-     * @return mixed
-     * @deprecated
-     */
-    private function syncPlantTypeProperties($input, $plant)
-    {
-        if (!empty($input['plant_types'])) {
-            $plant->generals()->sync($input['plant_types']);
-        }
-    }
 }

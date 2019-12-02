@@ -58,7 +58,7 @@ class MedicinalPlantConstituentRepository extends BaseRepository
         foreach ($request->get('constituents') as $item) {
             if (!empty($item['constituent_type_id']) && !empty($item['value'])) {
                 $record = $this->find($request->get('medicinal_plant_constituent_id'));
-                $record->update([
+                $record->updateOrCreate([
                     'medicinal_plant_id' => $medicinal_plant_id,
                     'constituent_id' => $item['constituent_id'],
                     'constituent_type_id' => $item['constituent_type_id'],

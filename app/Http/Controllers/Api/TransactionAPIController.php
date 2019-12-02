@@ -61,7 +61,7 @@ class TransactionAPIController extends AppBaseController
         $transactions = $this->transactionRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            $this->getFieldRelation()
         );
 
         return $this->sendResponse($transactions->toArray(), 'Transactions retrieved successfully');
@@ -284,7 +284,7 @@ class TransactionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Transaction $transaction */
-        $transaction = $this->transactionRepository->find($id, request()->get('relations'));
+        $transaction = $this->transactionRepository->find($id, $this->getFieldRelation());
 
         if (empty($transaction)) {
             return $this->sendError('Transaction not found');
@@ -473,7 +473,7 @@ class TransactionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Transaction $transaction */
-        $transaction = $this->transactionRepository->find($id,request()->get('relations'));
+        $transaction = $this->transactionRepository->find($id);
 
         if (empty($transaction)) {
             return $this->sendError('Transaction not found');
@@ -526,7 +526,7 @@ class TransactionAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Transaction $transaction */
-        $transaction = $this->transactionRepository->find($id, request()->get('relations'));
+        $transaction = $this->transactionRepository->find($id);
 
         if (empty($transaction)) {
             return $this->sendError('Transaction not found');
@@ -535,5 +535,13 @@ class TransactionAPIController extends AppBaseController
         $transaction->delete();
 
         return $this->sendResponse($id, 'Transaction deleted successfully');
+    }
+
+    /**
+     * @return array
+     */
+    private function getFieldRelation(): array
+    {
+        return ['organization'];
     }
 }

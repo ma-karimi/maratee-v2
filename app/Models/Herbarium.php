@@ -75,17 +75,21 @@ class Herbarium extends BaseModel implements HasMedia
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
 
     public static $rules = [
-        'organization_id' => 'required|exists:organizations,id',
-        'location_id' => 'exists:locations,id',
-        'taxonomy_id' => 'exists:taxonomies,id',
-        'herbarium_number' => 'string',
-//        'herbarium_index' => 'string',
-//        'cf' => 'string',
+        'organization_id' => 'required_if:is_flowering,1|exists:organizations,id',
+        'location_id' => 'nullable|exists:locations,id',
+        'taxonomy_id' => 'nullable|exists:taxonomies,id',
+        'herbarium_number' => 'nullable|string',
+        'herbarium_index' => 'nullable|string',
+//        'cf' => 'nullable|string',
         'description' => 'string',
-        //
         'country_id'=>'required|exists:countries,id',
         'city_id'=>'required|exists:cities,id',
         'province_id'=>'required|exists:provinces,id',
+        'is_flowering' => 'required|numeric',
+        //classification
+        'general_habitat_id' => 'nullable|exists:generals,id',
+        'general_phytogeography_id' => 'nullable|exists:generals,id',
+        'general_substrate_id' => 'required_if:is_flowering,0|exists:generals,id',
     ];
     /**
      * The database table used by the model.
@@ -169,6 +173,25 @@ class Herbarium extends BaseModel implements HasMedia
     public function getVisitAttribute()
     {
         return $this->transactions()->where('type_id', array_search('visit', Transaction::TYPE))->first();
+    }
+
+
+    public function generalPhytogeography(): BelongsTo
+    {
+        return $this->belongsTo(General::class, 'general_phytogeography_id');
+    }
+
+
+    public function generalSubstrate()
+    {
+        return $this->belongsTo(General::class, 'general_substrate_id');
+    }
+
+
+
+    public function generalHabitat(): BelongsTo
+    {
+        return $this->belongsTo(General::class, 'general_habitat_id');
     }
 
 }

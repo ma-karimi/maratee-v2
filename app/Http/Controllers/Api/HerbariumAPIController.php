@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\ActionableRequest;
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\HerbariumAPIRequest;
 use App\Models\Herbarium;
 use App\Repositories\HerbariumRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Maatwebsite\Excel\Facades\Excel;
 use Response;
 
@@ -15,7 +14,6 @@ use Response;
  * Class HerbariumController
  * @package App\Http\Controllers\Api
  */
-
 class HerbariumAPIController extends AppBaseController
 {
     /** @var  HerbariumRepository */
@@ -64,10 +62,20 @@ class HerbariumAPIController extends AppBaseController
         $herbariums = $this->herbariumRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->fieldRelations()
+            $request->get('is_flowering') == 1 ? $this->fieldRelations() : $this->fieldNonFlowerRelations()
         );
 
         return $this->sendResponse($herbariums->toArray(), 'Herbariums retrieved successfully');
+    }
+
+    public function fieldRelations()
+    {
+        return ['taxonomy', 'organization', 'media', 'determine', 'collect', 'location'];
+    }
+
+    private function fieldNonFlowerRelations()
+    {
+        return ['generalPhytogeography', 'taxonomy', 'generalHabitat', 'media', 'generalSubstrate.parent', 'collect.actors', 'determine.actors', 'transactions', 'location'];
     }
 
     /**
@@ -142,7 +150,6 @@ class HerbariumAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(HerbariumAPIRequest $request)
     {
@@ -193,12 +200,13 @@ class HerbariumAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Herbarium $herbarium */
-        $herbarium = $this->herbariumRepository->find($id, $this->fieldRelations());
+        $herbarium = $this->herbariumRepository->find($id);
 
         if ($herbarium === null) {
             return $this->sendError('Herbarium not found');
         }
 
+        $herbarium = $herbarium->is_flowering == 1 ? $herbarium->load($this->fieldRelations()) : $herbarium->load($this->fieldNonFlowerRelations());
         return $this->sendResponse($herbarium->toArray(), 'Herbarium retrieved successfully');
     }
 
@@ -282,7 +290,6 @@ class HerbariumAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, HerbariumAPIRequest $request)
     {
@@ -352,240 +359,6 @@ class HerbariumAPIController extends AppBaseController
         return $this->sendResponse($id, 'Herbarium deleted successfully');
     }
 
-
-    /**
-     * @param $id
-     * @param ActionableRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/plants/{id}/determine",
-     *      summary="Store Determine action for Given Plant Herbarium",
-     *      tags={"Plant Action"},
-     *      description="Store Plant Herbarium Action",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="actors",
-     *          in="body",
-     *          description="ids of actors",
-     *          required=true,
-     *          @SWG\Schema(type="array", @SWG\Items(type="integer"))
-     *      ),
-     *      @SWG\Parameter(
-     *          name="date",
-     *          in="body",
-     *          description="Plant Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          description="Plant Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="project_id",
-     *          in="body",
-     *          description="Plant Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="department_id",
-     *          in="body",
-     *          description="Plant Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Herbarium"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function storeDetermine($id, ActionableRequest $request)
-    {
-        $input = $request->all();
-
-        $result = $this->herbariumRepository->storeAction($id, $input, 1);
-
-        return $this->sendResponse($result->toArray(), 'Plant Action saved successfully');
-    }
-
-    /**
-     * @param $id
-     * @param ActionableRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/plants/{id}/collect",
-     *      summary="Store Collect action for Given Plant Herbarium",
-     *      tags={"Plant Action"},
-     *      description="Store Plant Herbarium Action",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="actors",
-     *          in="body",
-     *          description="ids of actors",
-     *          required=true,
-     *          @SWG\Schema(type="array", @SWG\Items(type="integer"))
-     *      ),
-     *      @SWG\Parameter(
-     *          name="date",
-     *          in="body",
-     *          description="Plant Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          description="Plant Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="project_id",
-     *          in="body",
-     *          description="Plant Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="department_id",
-     *          in="body",
-     *          description="Plant Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Herbarium"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function storeCollect($id, ActionableRequest $request)
-    {
-        $input = $request->all();
-
-        $result = $this->herbariumRepository->storeAction($id, $input, 2);
-
-        return $this->sendResponse($result->toArray(), 'Plant Action saved successfully');
-    }
-
-    /**
-     * @param $id
-     * @param ActionableRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/plants/{id}/research",
-     *      summary="Store Research action for Given Plant Herbarium",
-     *      tags={"Plant Action"},
-     *      description="Store Plant Herbarium Action",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="actors",
-     *          in="body",
-     *          description="ids of actors",
-     *          required=true,
-     *          @SWG\Schema(type="array", @SWG\Items(type="integer"))
-     *      ),
-     *      @SWG\Parameter(
-     *          name="date",
-     *          in="body",
-     *          description="Plant Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="description",
-     *          in="body",
-     *          description="Plant Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="project_id",
-     *          in="body",
-     *          description="Plant Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="department_id",
-     *          in="body",
-     *          description="Plant Herbarium that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ActionHub")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Herbarium"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function storeResearch($id, ActionableRequest $request)
-    {
-        $input = $request->all();
-
-        $result = $this->herbariumRepository->storeAction($id, $input, 3);
-
-        return $this->sendResponse($result->toArray(), 'Plant Action saved successfully');
-    }
-
-    public function fieldRelations()
-    {
-        return ['taxonomy', 'plant', 'organization', 'media', 'determine', 'collect', 'location'];
-    }
-
     /**
      * @param int $id
      * @return Response
@@ -644,13 +417,21 @@ class HerbariumAPIController extends AppBaseController
             [],
             null,
             null,
-            $this->fieldRelations()
+            $request->get('is_flowering') == 1 ? $this->fieldRelations() : $this->fieldNonFlowerRelations()
         );
-        return Excel::create('ExportHerbariumList-' . date('Y-m-d-H-i-s'), function ($excel) use ($herbariums) {
 
-            $excel->sheet('Herbarium', function ($sheet) use ($herbariums) {
 
-                $sheet->loadView('exports.herbarium', compact('herbariums'));
+        $view = \request()->is_flowering == 1 ? 'exports.herbarium' : 'exports.nonflower';
+        $herbarium = \request()->is_flowering == 1 ? 'Herbarium' : 'NonFlower';
+        return Excel::create("Export${$herbarium}List-" . date('Y-m-d-H-i-s'), function ($excel) use ($herbariums, $view, $herbarium) {
+
+            $excel->sheet($herbarium, function ($sheet) use ($herbariums, $view) {
+                $sheet->freezeFirstRow()
+//                    ->setAutoSize(array(
+//                        'J'
+//                    ))
+//                    ->setWidth('J', 45)
+                    ->loadView($view, compact('herbariums'));
 
             });
 

@@ -266,12 +266,6 @@ class Plant extends BaseModel implements HasMedia
             ->whereNull('plant_geographicals.deleted_at')
             ->withTimestamps();
     }
-
-    public function herbarium()
-    {
-            return $this->hasOne(Herbarium::class, 'plant_id');
-    }
-
 }
 
 

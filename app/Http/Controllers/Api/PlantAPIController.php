@@ -65,7 +65,7 @@ class PlantAPIController extends AppBaseController
         $plants = $this->plantRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('is_flowering') == 1 ? $this->fieldFloraRelations() : $this->fieldNonFlowerRelations()
+            $this->fieldFloraRelations()
         );
         return $this->sendResponse($plants->toArray(), 'Plants retrieved successfully');
     }
@@ -78,13 +78,6 @@ class PlantAPIController extends AppBaseController
         return ['generalPhytogeography', 'taxonomy', 'protection', 'locations', 'media', 'geographicals'];
     }
 
-    /**
-     * @return array
-     */
-    private function fieldNonFlowerRelations(): array
-    {
-        return ['generalPhytogeography', 'taxonomy', 'generalHabitat', 'media', 'generalSubstrate.parent', 'herbarium.collect.actors', 'herbarium.determine.actors', 'herbarium.transactions', 'herbarium.location'];
-    }
 
     /**
      * @param CreatePlantAPIRequest $request
@@ -313,12 +306,7 @@ class PlantAPIController extends AppBaseController
     public function show($id)
     {
 
-        $plant = $this->plantRepository->find($id);
-        if ($plant->is_flowering == 1) {
-            $plant->load($this->fieldFloraRelations());
-        } else {
-            $plant->load(Arr::except($this->fieldNonFlowerRelations(), 'herbarium.transactions'));
-        }
+        $plant = $this->plantRepository->find($id, $this->fieldFloraRelations());
 
         if (empty($plant)) {
             return $this->sendError('Plant not found');
@@ -637,20 +625,14 @@ class PlantAPIController extends AppBaseController
             [],
             null,
             null,
-            \request()->is_flowering == 1 ? $this->fieldFloraRelations() : $this->fieldNonFlowerRelations()
+            $this->fieldFloraRelations()
         );
 
-        $view = \request()->is_flowering == 1 ? 'exports.flora' : 'exports.nonflower';
-        $plant = \request()->is_flowering == 1 ? 'Flora' : 'NonFlower';
-        return Excel::create("Export${plant}List-" . date('Y-m-d-H-i-s'), function ($excel) use ($plants, $view) {
+        return Excel::create("ExportFloraList-" . date('Y-m-d-H-i-s'), function ($excel) use ($plants) {
 
-            $excel->sheet('Taxonomy', function ($sheet) use ($plants, $view) {
+            $excel->sheet('Flora', function ($sheet) use ($plants) {
                 $sheet->freezeFirstRow()
-//                    ->setAutoSize(array(
-//                        'J'
-//                    ))
-//                    ->setWidth('J', 45)
-                    ->loadView($view, compact('plants'));
+                    ->loadView('exports.flora', compact('plants'));
 
             });
 

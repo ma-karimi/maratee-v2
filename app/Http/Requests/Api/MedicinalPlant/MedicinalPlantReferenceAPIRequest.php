@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\MedicinalPlant;
 
-use App\Models\MedicinalPlantProvince;
 use InfyOm\Generator\Request\APIRequest;
 
-class MedicinalPlantProvinceAPIRequest extends APIRequest
+class MedicinalPlantReferenceAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +23,11 @@ class MedicinalPlantProvinceAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return MedicinalPlantProvince::$rules;
+        return [
+            'title' => 'required',
+            'year' => 'nullable|numeric',
+            'journal_name' => 'nullable',
+            'page_no' => 'required',
+        ];
     }
 }

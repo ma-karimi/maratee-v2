@@ -11,7 +11,6 @@ use App\Models\MedicinalPlantConstituent;
 use App\Models\MedicinalPlantProvince;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class MedicinalPlantRepository
@@ -90,47 +89,125 @@ class MedicinalPlantRepository extends BaseRepository
 
     public function create($input)
     {
-        $input['article_id'] = $this->createArticle($input)->id ?? null;
-        $input['location_id'] = $this->createLocation($input)->id;
         $model = parent::create(Arr::except($input, $this->ArticleLocationLifeFormsData()));
-        $this->storeDetermine($input, $model->id);
-        $this->storeCollect($input, $model->id);
-        $this->storeConstituent($input, $model->id);
         $this->storeProvinces($input, $model->id);
         return $this->storeLifeForm($input, $model);
     }
 
     /**
-     * @param $input
-     * @return mixed
+     * @return array
      */
-    private function createArticle($input)
+    private function ArticleLocationLifeFormsData(): array
     {
-        $article = null;
-        if (Arr::exists($input, 'title')) {
-            $article = $this->article_repo->create([
-                'title' => $input['title'],
-                'year' => $input['year'] ?? null,
-                'journal_name' => $input['journal_name'] ?? null,
-                'page_no' => $input['page_no'] ?? null
-            ]);
-            //store authors
+        $article = [
+            'title',
+            'year',
+            'journal_name',
+            'page_no',
+            'authors'
+        ];
+        return array_merge($article, ['date', 'collectors', 'determines', 'life_forms', 'address_en', 'address_fa', 'province_id', 'village', 'province_id', 'region_name', 'min_altitude', 'max_altitude', 'point', 'geographical_description', 'city_id', 'country_id', 'provinces', 'constituents']);
+    }
 
-            $authors = request()->filled('authors') ? request()->get('authors') : [];
-            ActorHub::where(['actorable_id' => $article->id, 'actorable_type' => Article::class])
-                ->whereNotIn('actor_id', $authors)
-                ->delete();
-            if (!empty($authors) && count($authors)) {
-                foreach ($authors as $item) {
-                    ActorHub::firstOrCreate([
-                        'actor_id' => $item,
-                        'actorable_type' => Article::class,
-                        'actorable_id' => $article->id,
-                    ]);
-                }
+    private function storeProvinces($input, $medicinal_plant_id)
+    {
+        $provinces = is_array($input['provinces']) ? $input['provinces'] : explode(',', $input['provinces']);
+
+
+        $this->medicinalPlantProvinceRepo
+            ->where('medicinal_plant_id', $medicinal_plant_id)
+            ->whereNotIn('province_id', $provinces)
+            ->delete();
+        if (count($provinces) && !empty($provinces[0])) {
+            foreach ($provinces as $item) {
+                $this->medicinalPlantProvinceRepo->firstOrCreate([
+                    'medicinal_plant_id' => $medicinal_plant_id,
+                    'province_id' => (int)$item,
+                ]);
             }
         }
-        return $article;
+    }
+
+    private function storeLifeForm($input, \Illuminate\Database\Eloquent\Model $model)
+    {
+        $model->cycle_id = $input['cycle_id'] ?? null;
+        $model->wooden_id = $input['wooden_id'] ?? null;
+        $model->herbaceous_id = $input['herbaceous_id'] ?? null;
+        $model->save();
+        return $model;
+    }
+
+    public function storeConstituent($input, $medicinal_plant_id)
+    {
+        $constituents = json_decode($input['constituents']);
+
+        $cons_collection = [];
+        foreach ($constituents as $constituent) {
+            $cons_collection[] = $constituent->constituent_type->id;
+        }
+
+        $this->medicinalPlantConstituentRepo
+            ->where('medicinal_plant_id', $medicinal_plant_id)
+            ->whereNotIn('constituent_type_id', $cons_collection)
+            ->delete();
+
+        foreach ($constituents as $item) {
+            $this->medicinalPlantConstituentRepo
+                ->updateOrCreate(
+                    [
+                        'constituent_type_id' => $item->constituent_type->id,
+                        'medicinal_plant_id' => $medicinal_plant_id
+                    ],
+                    [
+                        'value' => $item->value
+                    ]
+                );
+        }
+    }
+
+    public function update($input, $id)
+    {
+        $model = parent::update(Arr::except($input, $this->ArticleLocationLifeFormsData()), $id);
+        $this->storeProvinces($input, $model->id);
+        return $this->storeLifeForm($input, $model);
+    }
+
+    public function storeProductOrMedicine(array $input, $id)
+    {
+        return parent::update(['product_id' => $input['product_id'] ?? null, 'medicine_id' => $input['medicine_id']], $id);
+    }
+
+    public function storeReference(array $input, $id)
+    {
+        $article_id = $this->storeArticle($input, !empty($input['article_id']) ? $input['article_id'] : null)->id ?? null;
+        return parent::update(['article_id' => $article_id], $id);
+    }
+
+    private function storeArticle(array $input, $article_id = null)
+    {
+        $data = [
+            'title' => $input['title'],
+            'year' => $input['year'] ?? null,
+            'journal_name' => $input['journal_name'] ?? null,
+            'page_no' => $input['page_no'] ?? null
+        ];
+        if ($article_id) {
+            return $this->article_repo->update($data, $article_id);
+        }
+        return $this->article_repo->create($data);
+    }
+
+    public function storePlantLocationOrDetectOrCollect(array $input, $id)
+    {
+        if (empty($input['location_id'])) {
+            $input['location_id'] = $this->createLocation($input)->id;
+        } else {
+            $this->updateLocation($input);
+        }
+        $this->storeDetermine($input, $id);
+        $this->storeCollect($input, $id);
+
+        return parent::update(['location_id' => $input['location_id']], $id);
     }
 
     /**
@@ -165,18 +242,14 @@ class MedicinalPlantRepository extends BaseRepository
     }
 
     /**
-     * @return array
+     * @param $input
+     * @return object
      */
-    private function ArticleLocationLifeFormsData(): array
+    private function updateLocation($input)
     {
-        $article = [
-            'title',
-            'year',
-            'journal_name',
-            'page_no',
-            'authors'
-        ];
-        return array_merge($article, ['date', 'collectors', 'determines', 'life_forms', 'address_en', 'address_fa', 'province_id', 'village', 'province_id', 'region_name', 'min_altitude', 'max_altitude', 'point', 'geographical_description', 'city_id', 'country_id', 'provinces', 'constituents']);
+        $location_input = $this->locationData($input);
+
+        return $this->location_model->find($input['location_id'])->update($location_input);
     }
 
     private function storeDetermine($input, $medicinal_plant_id)
@@ -234,82 +307,31 @@ class MedicinalPlantRepository extends BaseRepository
         }
     }
 
-    private function storeConstituent($input, $medicinal_plant_id)
+    public function storeMedicinalApplication($input, $id)
     {
-        $constituents = json_decode($input['constituents']);
-
-        $cons_collection = [];
-        foreach ($constituents as $constituent){
-            $cons_collection[] = $constituent->constituent_type->id;
-        }
-
-        $this->medicinalPlantConstituentRepo
-            ->where('medicinal_plant_id', $medicinal_plant_id)
-            ->whereNotIn('constituent_type_id', $cons_collection)
-            ->delete();
-
-        foreach ($constituents as $item) {
-            $this->medicinalPlantConstituentRepo
-                ->updateOrCreate(
-                    [
-                        'constituent_type_id' => $item->constituent_type->id,
-                        'medicinal_plant_id' => $medicinal_plant_id
-                    ],
-                    [
-                        'value' => $item->value
-                    ]
-                );
-        }
-    }
-
-    private function storeProvinces($input, $medicinal_plant_id)
-    {
-        $provinces = is_array($input['provinces']) ? $input['provinces'] : explode(',', $input['provinces']);
-
-
-        $this->medicinalPlantProvinceRepo
-            ->where('medicinal_plant_id', $medicinal_plant_id)
-            ->whereNotIn('province_id', $provinces)
-            ->delete();
-        if (count($provinces) && !empty($provinces[0])) {
-            foreach ($provinces as $item) {
-                $this->medicinalPlantProvinceRepo->firstOrCreate([
-                    'medicinal_plant_id' => $medicinal_plant_id,
-                    'province_id' => (int)$item,
-                ]);
-            }
-        }
-    }
-
-    private function storeLifeForm($input, \Illuminate\Database\Eloquent\Model $model)
-    {
-        $model->cycle_id = $input['cycle_id'] ?? null;
-        $model->wooden_id = $input['wooden_id'] ?? null;
-        $model->herbaceous_id = $input['herbaceous_id'] ?? null;
-        $model->save();
-        return $model;
-    }
-
-    public function update($input, $id)
-    {
-        $this->updateLocation($input);
-        $model = parent::update(Arr::except($input, $this->ArticleLocationLifeFormsData()), $id);
-        $this->storeDetermine($input, $model->id);
-        $this->storeCollect($input, $model->id);
-        $this->storeConstituent($input, $model->id);
-        $this->storeProvinces($input, $model->id);
-        return $this->storeLifeForm($input, $model);
+        return parent::update(['location_id' => $input['location_id']], $id);
     }
 
     /**
      * @param $input
-     * @return object
+     * @return mixed
      */
-    private function updateLocation($input)
+    private function createArticle(array $input, $article_id)
     {
-        $location_input = $this->locationData($input);
 
-        return $this->location_model->find($input['location_id'])->update($location_input);
+        $authors = request()->filled('authors') ? request()->get('authors') : [];
+        ActorHub::where(['actorable_id' => $article_id, 'actorable_type' => Article::class])
+            ->whereNotIn('actor_id', $authors)
+            ->delete();
+        if (!empty($authors) && count($authors)) {
+            foreach ($authors as $item) {
+                ActorHub::firstOrCreate([
+                    'actor_id' => $item,
+                    'actorable_type' => Article::class,
+                    'actorable_id' => $article_id,
+                ]);
+            }
+        }
     }
 
 }

@@ -58,9 +58,10 @@ class GeographicalAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $geographicals = $this->geographicalRepository->paginate(
-            $request->get('per_page'),
-            $request->except('per_page'),
+        $geographicals = $this->geographicalRepository->all(
+            [],
+            null,
+            null,
             $request->get('relations')
         );
 

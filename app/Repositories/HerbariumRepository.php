@@ -5,9 +5,9 @@ namespace App\Repositories;
 use App\Models\ActionHub;
 use App\Models\ActorHub;
 use App\Models\Herbarium;
+use App\Models\LocationHub;
 use App\Models\Plant;
 use Illuminate\Container\Container as Application;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -21,7 +21,7 @@ class HerbariumRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'plant:is_flowering' => 1
+//
     ];
     /**
      * @var ActionHubRepository
@@ -35,21 +35,18 @@ class HerbariumRepository extends BaseRepository
      * @var LocationRepository
      */
     private $locationRepo;
-
     /**
-     * PlantRepository constructor.
-     * @param Application $app
-     * @param ActionHub $actionHubRepo
-     * @param ActorHub $actorHubRepo
-     * @param LocationRepository $locationRepo
-     * @throws \Exception
+     * @var PlantRepository
      */
-    public function __construct(Application $app, ActionHub $actionHubRepo, ActorHub $actorHubRepo, LocationRepository $locationRepo)
+    private $plantRepo;
+
+    public function __construct(Application $app, ActionHub $actionHubRepo, ActorHub $actorHubRepo, LocationRepository $locationRepo, PlantRepository $plantRepo)
     {
         parent::__construct($app);
         $this->actionHubRepo = $actionHubRepo;
         $this->actorHubRepo = $actorHubRepo;
         $this->locationRepo = $locationRepo;
+        $this->plantRepo = $plantRepo;
     }
 
     /**
@@ -74,24 +71,11 @@ class HerbariumRepository extends BaseRepository
     {
 
         $is_flowering = $input['is_flowering'] != 1 ? $input['is_flowering'] : 1;
-
-        if (Herbarium::where('herbarium_number', $input['herbarium_number'])
-            ->with('plant')
-            ->whereHas('plant', function ($query) use ($is_flowering) {
-                return $query->where('is_flowering', $is_flowering);
-            })
-            ->exists()) {
-            throw ValidationException::withMessages([
-                'herbarium_number' => 'Herbarium Number Already Exists!'
-            ]);
-        }
+        $plant = $this->firstOrCreatePlant($input, $is_flowering);
         $location = $this->storeLocation($input, $input->filled('location_id') ? $input['location_id'] : null);
         $input['location_id'] = $location->id;
-        $plant = Plant::where('taxonomy_id', $input['taxonomy_id'])
-            ->where('is_flowering', $is_flowering)
-            ->first();
-        if ($plant) {
-            $input['plant_id'] = $plant->id;
+        if ($is_flowering == 1) {
+            $this->plantRepo->createHub($plant->id, 'locations', [$location->id]);
         }
         $herbarium = parent::create($this->herbariumData($input));
         $this->storeDetermine($input, $herbarium->id);
@@ -99,6 +83,25 @@ class HerbariumRepository extends BaseRepository
         $this->storeMedia($input, $herbarium);
 
         return $herbarium;
+    }
+
+
+    private function firstOrCreatePlant($input, int $is_flowering)
+    {
+
+            $plant = Plant::firstOrCreate(['taxonomy_id' => $input['taxonomy_id'], 'is_flowering' => 1]);
+
+        return $plant;
+    }
+
+
+    private function nonFlowerData($input)
+    {
+        return [
+            'general_phytogeography_id' => $input['general_phytogeography_id'],
+            'general_origin_id' => $input['general_origin_id'] ?? null,
+            'general_substrate_id' => $input['general_substrate_id'] ?? null,
+        ];
     }
 
     private function storeLocation($input, $location_id)
@@ -111,10 +114,7 @@ class HerbariumRepository extends BaseRepository
         return $location;
     }
 
-    /**
-     * @param $input
-     * @return array
-     */
+
     private function locationData($input): array
     {
         return [
@@ -129,23 +129,24 @@ class HerbariumRepository extends BaseRepository
         ];
     }
 
-    /**
-     * @param $input
-     * @return array
-     */
+
     private function herbariumData($input): array
     {
         return [
             'herbarium_index' => $input->herbarium_index ?? null,
             'herbarium_number' => $input->herbarium_number ?? null,
             'cf' => $input->cf ?? null,
-            'plant_id' => $input->plant_id ?? null,
+            'is_flowering' => $input->is_flowering ?? null,
             'location_id' => $input->location_id ?? null,
             'taxonomy_id' => $input->taxonomy_id ?? null,
             'organization_id' => $input->organization_id ?? null,
             'tip_picture_id' => $input->tip_picture_id ?? null,
             'consideration' => $input->consideration ?? null,
-            'description' => $input->description ?? null];
+            'description' => $input->description ?? null,
+            'general_phytogeography_id' => $input['general_phytogeography_id'] ?? null,
+            'general_habitat_id' => $input['general_habitat_id'] ?? null,
+            'general_substrate_id' => $input['general_substrate_id'] ?? null,
+        ];
     }
 
     private function storeDetermine($input, $herbarium_id)
@@ -203,10 +204,7 @@ class HerbariumRepository extends BaseRepository
         }
     }
 
-    /**
-     * @param $input
-     * @param $model
-     */
+
     public function storeMedia($input, $model): void
     {
         $media_input = [
@@ -221,15 +219,12 @@ class HerbariumRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        $is_flowering = $this->checkHerbariumNumberExist($input, $id);
-        $location = $this->storeLocation($input, $input->filled('location_id') ? $input['location_id'] : null);
-        $input['location_id'] = $location->id;
-        $plant = Plant::where('taxonomy_id', $input['taxonomy_id'])
-            ->where('is_flowering', $is_flowering)
-            ->first();
-        if ($plant) {
-            $input['plant_id'] = $plant->id;
-        }
+        $is_flowering = $input['is_flowering'] != 1 ? $input['is_flowering'] : 1;
+
+        $this->storeLocation($input, $input->filled('location_id') ? $input['location_id'] : null);
+
+        $this->changeFloraLocationHubWhenChangeTaxonomyId($input, $id, $is_flowering);
+
         $model = parent::update($this->herbariumData($input), $id);
         $this->storeDetermine($input, $model->id);
         $this->storeCollect($input, $model->id);
@@ -237,26 +232,21 @@ class HerbariumRepository extends BaseRepository
         return $model;
     }
 
+
     /**
      * @param $input
      * @param $id
-     * @return int
-     * @throws ValidationException
+     * @param $is_flowering
      */
-    private function checkHerbariumNumberExist($input, $id): int
+    private function changeFloraLocationHubWhenChangeTaxonomyId($input, $id, int $is_flowering): void
     {
-        $is_flowering = $input['is_flowering'] != 1 ? $input['is_flowering'] : 1;
-
-        if (Herbarium::where('herbarium_number', $input['herbarium_number'])
-            ->with('plant')
-            ->whereHas('plant', function ($query) use ($is_flowering) {
-                return $query->where('is_flowering', $is_flowering);
-            })
-            ->where('id', '!=', $id)->exists()) {
-            throw ValidationException::withMessages([
-                'herbarium_number' => 'Herbarium Number Already Exists!'
-            ]);
+        $herbarium = $this->find($id)->load('plant');
+        if ($herbarium->taxonomy_id != $input['taxonomy_id']) {
+            $plant = $this->firstOrCreatePlant($input, $is_flowering);
+            if ($herbarium->plant && $herbarium->is_flowering == 1) {
+                LocationHub::where(['locationable_type' => Plant::class, 'locationable_id' => $herbarium->plant->id, 'location_id' => $input['location_id']])->delete();
+                LocationHub::create(['locationable_type' => Plant::class, 'locationable_id' => $plant->id, 'location_id' => $input['location_id']]);
+            }
         }
-        return $is_flowering;
     }
 }

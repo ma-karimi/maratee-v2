@@ -2,22 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateGeneralAPIRequest;
 use App\Http\Requests\Api\UpdateGeneralAPIRequest;
 use App\Models\General;
-use App\Models\Herbarium;
 use App\Repositories\GeneralRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 use Response;
 
 /**
  * Class GeneralController
  * @package App\Http\Controllers\Api
  */
-
 class GeneralAPIController extends AppBaseController
 {
     /** @var  GeneralRepository */
@@ -63,10 +59,11 @@ class GeneralAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $Generals = $this->GeneralRepository->paginate(
-            $request->get('per_page'),
-            $request->except('per_page'),
-            $request->get('relations')
+        $Generals = $this->GeneralRepository->all(
+            [],
+            null,
+            null,
+            []
         );
 
         return $this->sendResponse($Generals->toArray(), ' Generals retrieved successfully');

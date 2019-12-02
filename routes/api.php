@@ -173,10 +173,11 @@ Route::apiResource('lightings', 'LightingAPIController');
 Route::apiResource('media', 'MediaAPIController');
 
 
-Route::post('medicinal_plants/{medicinal_plant_id}/provinces', 'MedicinalPlantProvinceAPIController@store');
-Route::match(['PUT', 'PATCH'], 'medicinal_plants/{medicinal_plant_id}/provinces', 'MedicinalPlantProvinceAPIController@update');
-Route::post('medicinal_plants/{medicinal_plant_id}/constituents', 'MedicinalPlantConstituentAPIController@store');
-Route::match(['PUT', 'PATCH'], 'medicinal_plants/{medicinal_plant_id}/constituents', 'MedicinalPlantConstituentAPIController@update');
+Route::post('medicinal_plants/{medicinal_plant_id}/applications', 'MedicinalPlantAPIController@storeApplication');
+Route::post('medicinal_plants/{medicinal_plant_id}/constituents', 'MedicinalPlantAPIController@storeConstituent');
+Route::post('medicinal_plants/{medicinal_plant_id}/reference', 'MedicinalPlantAPIController@storeReference');
+Route::post('medicinal_plants/{medicinal_plant_id}/product', 'MedicinalPlantAPIController@storeProductOrMedicine');
+Route::post('medicinal_plants/{medicinal_plant_id}/location_action', 'MedicinalPlantAPIController@storePlantLocationOrDetectOrCollect');
 Route::apiResource('medicinal_plants', 'MedicinalPlantAPIController');
 
 Route::get('medicines/all', 'MedicineAPIController@all');
@@ -211,6 +212,7 @@ Route::apiResource('trait_values', 'TraitValueAPIController');
 Route::apiResource('block_traits', 'BlockTraitAPIController');
 
 Route::apiResource('dimensions', 'DimensionAPIController');
+Route::apiResource('places', 'PlaceAPIController');
 
 Route::apiResource('evaluation_dimensions', 'EvaluationDimensionAPIController');
 //Route::apiResource('actor_hubs', 'actorHubAPIController');
@@ -248,11 +250,6 @@ Route::post('herbariums/{id}/research', 'PlantHerbariumAPIController@storeResear
 Route::post('cryo_banks/{id}/determine', 'CryoBankAPIController@storeDetermine');
 Route::post('cryo_banks/{id}/collect', 'CryoBankAPIController@storeCollect');
 Route::post('cryo_banks/{id}/research', 'CryoBankAPIController@storeResearch');
-
-//MedicinalPlant action
-Route::post('medicinal_plants/{id}/determine', 'MedicinalPlantAPIController@storeDetermine');
-Route::post('medicinal_plants/{id}/collect', 'MedicinalPlantAPIController@storeCollect');
-Route::post('medicinal_plants/{id}/research', 'MedicinalPlantAPIController@storeResearch');
 
 
 Route::apiResource('permissions', 'PermissionAPIController');

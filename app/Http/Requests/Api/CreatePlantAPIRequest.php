@@ -56,13 +56,13 @@ class CreatePlantAPIRequest extends APIRequest
             'monopoly_of_iran_id' => 'numeric',
             'taxonomy_id' => 'required|exists:taxonomies,id',
             'life_form_id' => 'numeric',
-            'number'=>'required_if:is_flowering,1|numeric',
-            'is_flowering' => 'numeric',
-            //classification
-            'general_habitat_id' => 'exists:generals,id',
-            'general_origin_id' => 'exists:generals,id',
-            'general_phytogeography_id' => 'exists:generals,id',
-            'general_substrate_id' => 'exists:generals,id',
+//            'number'=>'required_if:is_flowering,1|numeric',
+//            'is_flowering' => 'numeric',
+//            //classification
+//            'general_habitat_id' => 'exists:generals,id',
+//            'general_origin_id' => 'exists:generals,id',
+//            'general_phytogeography_id' => 'exists:generals,id',
+//            'general_substrate_id' => 'exists:generals,id',
 
         ];
     }

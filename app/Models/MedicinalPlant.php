@@ -33,42 +33,22 @@ class MedicinalPlant extends BaseModel
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
 
     public static $rules = [
-        'herbarium_number' => 'string',
-        'article_id' => 'exists:articles,id',
+        'herbarium_number' => 'nullable|string',
         'taxonomy_id' => 'required|exists:taxonomies,id',
-        'location_id' => 'exists:locations,id',
         'aerial_part_id' => 'nullable|exists:medicinal_parts,id',
         'ground_part_id' => 'nullable|exists:medicinal_parts,id',
-        'treatment_id' => 'nullable|exists:medicinal_plant_types,id',
-        'food_industry_id' => 'nullable|exists:medicinal_plant_types,id',
         'general_origin_id' => 'nullable|exists:generals,id',
-        'other_industry_id' => 'nullable|exists:medicinal_plant_types,id',
-        'industrial_potential_id' => 'nullable|exists:medicinal_plant_types,id',
-        'phenology_id' => 'nullable|exists:medicinal_plant_types,id',
-        'method_distillation_id' => 'exists:methods,id',
-        'method_extraction_id' => 'nullable|exists:methods,id',
-        'method_analyse_id' => 'nullable|exists:methods,id',
         'secondary_metabolite_id' => 'nullable|exists:medicinal_plant_types,id',
         'effective_material_id' => 'nullable|exists:medicinal_plant_types,id',
-        'pharmaceutical_form_id' => 'nullable|exists:medicinal_plant_types,id',
-        'product_id' => 'nullable|exists:products,id',
-        'medicine_id' => 'nullable|exists:medicines,id',
-        'traditional_iranian_medicine' => 'integer',
-        'natural_drug' => 'integer',
-        'inherbal_medicine_store' => 'integer',
-        'exporting' => 'integer',
-        'importing' => 'integer',
-        'cultivated_area' => 'integer',
-        'studied_sample' => 'integer',
         'presence_in_country' => 'integer',
         'code_no' => 'integer',
         'height' => 'string',
         'medicinal_properties' => 'string',
         'side_effects' => 'string',
 //        //life_form
-//        'cycle_id' => 'nullable|exists:life_forms,id',
-//        'wooden_id' => 'nullable|exists:life_forms,id',
-//        'herbaceous_id' => 'nullable|exists:life_forms,id',
+        'cycle_id' => 'nullable|exists:life_forms,id',
+        'wooden_id' => 'nullable|exists:life_forms,id',
+        'herbaceous_id' => 'nullable|exists:life_forms,id',
     ];
 
     /**
@@ -84,8 +64,6 @@ class MedicinalPlant extends BaseModel
      * @var array
      */
     protected $casts = [
-
-
         'efficiency' => 'float',
     ];
 
