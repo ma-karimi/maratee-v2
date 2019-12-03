@@ -259,10 +259,17 @@ class Plant extends BaseModel implements HasMedia
         return $this->belongsTo(General::class, 'general_substrate_id');
     }
 
+    //Todo
+//    public function geographicals(): MorphToMany
+//    {
+//        return $this->morphToMany(Geographical::class, 'distributable', 'distribution_hubs')
+//            ->whereNull('distribution_hubs.deleted_at')
+//            ->withTimestamps();
+//    }
 
     public function geographicals()
     {
-        return $this->belongsToMany(Geographical::class, 'plant_geographicals')
+        return $this->morphMany(Geographical::class, 'plant_geographicals')
             ->whereNull('plant_geographicals.deleted_at')
             ->withTimestamps();
     }

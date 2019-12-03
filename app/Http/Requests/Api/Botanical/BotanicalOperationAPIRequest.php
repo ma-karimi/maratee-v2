@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\Botanical;
 
 
 use App\Models\BotanicalIrrigation;
+use App\Models\BotanicalOperation;
 use InfyOm\Generator\Request\APIRequest;
 
-class BotanicalIrrigationAPIRequest extends APIRequest
+class BotanicalOperationAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +26,6 @@ class BotanicalIrrigationAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return BotanicalIrrigation::$rules;
+        return BotanicalOperation::$rules;
     }
 }

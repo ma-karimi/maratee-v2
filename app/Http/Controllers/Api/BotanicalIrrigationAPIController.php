@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\BotanicalIrrigationAPIRequest;
+use App\Http\Requests\Api\Botanical\BotanicalIrrigationAPIRequest;
 use App\Models\BotanicalIrrigation;
 use App\Repositories\BotanicalIrrigationRepository;
 use Illuminate\Http\Request;

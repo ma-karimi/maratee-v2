@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\BotanicalAPIRequest;
-use App\Http\Resources\BotanicalResource;
+use App\Http\Requests\Api\Botanical\BotanicalAPIRequest;
+use App\Http\Requests\Api\Botanical\BotanicalInformationAPIRequest;
+use App\Http\Requests\Api\Botanical\BotanicalIrrigationAPIRequest;
+use App\Http\Requests\Api\Botanical\BotanicalLocationAPIRequest;
 use App\Models\Botanical;
 use App\Repositories\BotanicalRepository;
 use Illuminate\Http\Request;
@@ -640,39 +642,50 @@ class BotanicalAPIController extends AppBaseController
         return $this->sendResponse($id, 'Botanical deleted successfully');
     }
 
-    public function exportExcel(Request $request)
+    public function storeIrrigation($id, BotanicalIrrigationAPIRequest $request)
     {
-        $relations=[
-            'herbarium.plant.generalFamily.actors',
-            'herbarium.plant.generalGenus.actors',
-            'herbarium.plant.generalSpecie.actors',
-            'herbarium.plant.generalSubSpecie.actors',
-            'herbarium.plant.generalVariety.actors',
-            'herbarium.plant.generalFamily.actors',
-            'herbarium.protection',
-            'herbarium.generalType',
-            'herbarium.generalPhytogeography',
-            'botanicalPropagations.propagation',
-            'lighting_from',
-            'lighting_to',
-            'soil_from',
-            'soil_to',
-            'botanicalGardenActions',
-            'herbarium.plant',
-            'herbarium.medias',
-            'entryHubs.location',
-            'entryHubs.entry',
-            'entryHubs.organization',
-            'botanicalIrrigations',
-            'planting_actions',
-            'irrigation'];
-        $botanicals = $this->botanicalRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit'),
-            $relations
-        );
-        $botanicals=BotanicalResource::collection($botanicals);
-        return $this->sendResponse($botanicals, 'Botanicals retrieved successfully');
+        $input = $request->all();
+
+        /** @var Botanical $botanical */
+        $botanical = $this->botanicalRepository->find($id);
+
+        if ($botanical === null) {
+            return $this->sendError('Botanical not found');
+        }
+
+        $botanical = $this->botanicalRepository->storeBotanicalIrrigation($input, $id);
+
+        return $this->sendResponse($botanical->toArray(), 'Botanical updated successfully');
+    }
+
+    public function storeLocation($id, BotanicalLocationAPIRequest $request)
+    {
+        $input = $request->all();
+
+        /** @var Botanical $botanical */
+        $botanical = $this->botanicalRepository->find($id);
+
+        if ($botanical === null) {
+            return $this->sendError('Botanical not found');
+        }
+
+        $botanical = $this->botanicalRepository->storeLocation($input, $id);
+
+        return $this->sendResponse($botanical->toArray(), 'Botanical updated successfully');
+    }
+    public function storeInformation($id, BotanicalInformationAPIRequest $request)
+    {
+        $input = $request->all();
+
+        /** @var Botanical $botanical */
+        $botanical = $this->botanicalRepository->find($id);
+
+        if ($botanical === null) {
+            return $this->sendError('Botanical not found');
+        }
+
+        $botanical = $this->botanicalRepository->storeLocation($input, $id);
+
+        return $this->sendResponse($botanical->toArray(), 'Botanical updated successfully');
     }
 }

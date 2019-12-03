@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantApplicationAPIRequest;
 use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantCollectAPIRequest;
 use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantConstituentAPIRequest;
 use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantProductAPIRequest;

@@ -9,18 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @SWG\Definition(
  *            definition="BotanicalIrrigation",
- *            required={"botanical_id", "irrigation_id", "requirement_id"},
- * 			@SWG\Property(property="id", type="integer"),
- * 			@SWG\Property(property="botanical_id", type="integer"),
- * 			@SWG\Property(property="irrigation_id", type="integer"),
- * 			@SWG\Property(property="requirement", type="integer"),
- * 			@SWG\Property(property="irrigation_time_id", type="integer"),
- * 			@SWG\Property(property="spring_time", type="string"),
- * 			@SWG\Property(property="autumn_time", type="string"),
- * 			@SWG\Property(property="summer_time", type="string"),
- * 			@SWG\Property(property="created_at", type="string"),
- * 			@SWG\Property(property="updated_at", type="string"),
- *        )
+ *            required={"botanical_id", "irrigation_id", "requirement_id"}
  **/
 class BotanicalIrrigation extends BaseModel
 {
@@ -47,6 +36,7 @@ class BotanicalIrrigation extends BaseModel
      */
     protected $table = 'botanical_irrigations';
 
+    protected $with = ['irrigation'];
 
     /**
      * @return BelongsTo

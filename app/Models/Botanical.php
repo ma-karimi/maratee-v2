@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Arr;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -10,40 +11,9 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 /**
  * @SWG\Definition(
  *            definition="Botanical",
- *            required={"plant_id"},
- * 			@SWG\Property(property="plant_id", type="integer"),
- * 			@SWG\Property(property="height", type="float"),
- * 			@SWG\Property(property="flower_color", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="fruit_color", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="foliage_color", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="seed_germination", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="growth_rate", type="integer"),
- * 			@SWG\Property(property="first_flowering", type="string"),
- * 			@SWG\Property(property="first_seeding", type="string"),
- * 			@SWG\Property(property="treatment", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="comments", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="garden_map", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="garden_name", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="planting", type="string"),
- * 			@SWG\Property(property="seed_rate", type="integer"),
- * 			@SWG\Property(property="seed_formation", type="integer"),
- * 			@SWG\Property(property="winter_tolerance", type="integer"),
- * 			@SWG\Property(property="summer_tolerance", type="integer"),
- * 			@SWG\Property(property="cutting_rooting", type="integer"),
- * 			@SWG\Property(property="general_habitat_id", type="integer"),
- * 			@SWG\Property(property="entrance_to_garden", type="integer"),
- * 			@SWG\Property(property="created_at", type="string"),
- * 			@SWG\Property(property="updated_at", type="string"),
- *        )
- **/
+ *            required={"taxonomy_id"},
+ *
+ */
 class Botanical extends BaseModel implements HasMedia
 {
     use HasMediaTrait;
@@ -53,21 +23,17 @@ class Botanical extends BaseModel implements HasMedia
     public const WINTER_TOLERANCE = [1 => 'good', 2 => 'moderate', 3 => 'sensitive', 4 => 'protection', 5 => 'not surviving', 6 => 'minimum temperature'];
     public const SUMMER_TOLERANCE = [1 => 'good', 2 => 'moderate', 3 => 'sensitive', 4 => 'protection', 5 => 'not surviving'];
 
-    public const ENTRANCE_TO_GARDEN = [1 => 'seedling', 2 => 'plant', 3 => 'bulb', 4 => 'bulbil', 5 => 'tuber', 6 => 'rhizome', 7=>'softwood cutting', 8=>'hardwood cutting', 9=>'root cutting', 10=>'graft-division', 11=>'meristem', 12=>'spore'];
+    public const ENTRANCE_TO_GARDEN = [1 => 'seedling', 2 => 'plant', 3 => 'bulb', 4 => 'bulbil', 5 => 'tuber', 6 => 'rhizome', 7 => 'softwood cutting', 8 => 'hardwood cutting', 9 => 'root cutting', 10 => 'graft-division', 11 => 'meristem', 12 => 'spore'];
     public const SOIL = [1 => 'neutral', 2 => 'alkaline', 3 => 'acid', 4 => 'indifferent'];
 //    public const PLANT_CONDITION = [1 => 'full sun', 2 => 'light shade', 3 => 'moderate shade', 4 => 'deep shade', 5 => 'greenhouse', 6 => 'fancing N', 7 => 'fancing W', 8 => 'fancing S', 9 => 'fancing E'];
-    public const MONOPOLY = [0 => 'No', 1 => 'Yes'];
 
-    public const USAGE = [1 => 'medicinal', 2 => 'ground cover', 3 => 'hedge', 4 => 'ornamental', 5 => 'industrial'];
-    public const VALUE = [1 => 'Shape', 2 => 'Bark', 3 => 'leaves', 4 => 'autumn color', 5 => 'flower'];
+
     public const WOODEN = [1 => 'Tree', 2 => 'Shrub'];
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
     public const SEED_GERMINATION = [1 => 'good', 2 => 'moderate', 3 => 'low', 4 => 'none'];
     public const CYCLE = [1 => 'evergreen', 2 => 'deciduous', 3 => 'semi deciduous', 4 => 'annual climber', 5 => 'perennial climber', 6 => 'annual herb', 7 => 'biennial herb', 8 => 'perennial herb', 9 => 'bulb', 10 => 'tuber', 11 => 'rhizome', 12 => 'water plant'];
 
     public static $rules = [
-        'year' => 'date',
-        'planting' => 'date',
         'cutting_rooting' => 'numeric',
         'flower_color' => 'string',
         'fruit_color' => 'string',
@@ -83,24 +49,22 @@ class Botanical extends BaseModel implements HasMedia
         'wooden_id' => 'integer',
         'cycle_id' => 'integer',
         'protection_id' => 'integer|exists:protections,id',
-        'value_id' => 'integer',
-        'usage_id' => 'integer',
         'internal_habitat_id' => 'integer|exists:internal_habitats,id',
         'entrance_to_garden_id' => 'integer',
         'growth_rate_id' => 'integer',
         'first_flowering' => 'date',
-        'first_seeding' => 'date',
+//        'first_seeding' => 'date',
         'seed_rate_id' => 'integer',
         'seed_formation_id' => 'integer',
         'winter_tolerance_id' => 'integer',
         'summer_tolerance_id' => 'integer',
-        'planting_condition_id' => 'integer',
         'sensitivity_conditions' => 'string',
         'soil_id' => 'integer',
     ];
 
 
-    protected $appends = ['soil', 'summer_tolerance', 'winter_tolerance', /*'planting_condition',*/ 'seed_formation', 'seed_germination', 'seed_rate', 'growth_rate', 'entrance_to_garden', 'usage', 'value', 'cycle', 'wooden', 'monopoly_of_iran'];
+    protected $appends = ['soil', 'summer_tolerance', 'winter_tolerance',
+        'seed_formation', 'seed_germination', 'seed_rate', 'growth_rate', 'entrance_to_garden', 'cycle', 'wooden', 'monopoly_of_iran'];
 
     /**
      * The database table used by the model.
@@ -127,49 +91,42 @@ class Botanical extends BaseModel implements HasMedia
     protected $dates = ['created_at', 'deleted_at', 'planting', 'updated_at', 'first_seeding', 'first_flowering'];
 
 
-    public function botanicalGardenActions()
+    public function operations()
     {
         return $this->hasMany(BotanicalOperation::class)->latest();
     }
 
-    public function botanicalIrrigations($season = null)
+    public function values()
     {
-        return $this->hasMany(BotanicalIrrigation::class)
-            ->when($season, function ($query, $season) {
-                return $query->ofSeason($season);
-            })->latest();
+        return $this->hasMany(BotanicalProperty::class)->latest()->where('type_id', 1);
     }
 
-    public function irrigation()
+    public function usages()
     {
-        return $this->belongsToMany(
-            Irrigation::class,
-            'botanical_irrigations',
-            'botanical_id',
-            'irrigation_id')
-            ->whereNull('botanical_irrigations.deleted_at')
-            ->withPivot('requirement', 'daytime', 'seasonal_feature');
+        return $this->hasMany(BotanicalProperty::class)->latest()->where('type_id', 2);
     }
 
-    public function botanicalPropagations()
+    public function propagations()
     {
-        return $this->hasMany(BotanicalPropagation::class);
+        return $this->hasMany(BotanicalProperty::class)->latest()->where('type_id', 3);
     }
 
-    public function entryHubs()
+    public function plantingConditions()
     {
-        return $this->hasMany(EntryHub::class)->latest();
+        return $this->hasMany(BotanicalProperty::class)->latest()->where('type_id', 4);
     }
 
-    public function plant()
+
+    public function botanicalIrrigation()
     {
-        return $this->belongsTo(Plant::class);
+        return $this->hasOne(BotanicalIrrigation::class);
     }
 
     public function getMonopolyOfIranAttribute()
     {
         return !empty($this->attributes['monopoly_of_iran_id']) ? Arr::get(self::BOOLEAN, $this->attributes['monopoly_of_iran_id']) : null;
     }
+
     public function getSoilAttribute()
     {
         return !empty($this->attributes['soil_id']) ? Arr::get(self::SOIL, $this->attributes['soil_id']) : null;
@@ -199,21 +156,6 @@ class Botanical extends BaseModel implements HasMedia
     {
         return !empty($this->attributes['summer_tolerance_id']) ? Arr::get(self::SUMMER_TOLERANCE, $this->attributes['summer_tolerance_id']) : null;
     }
-//
-//    public function getPlantConditionAttribute()
-//    {
-//        return !empty($this->attributes['plant_condition_id']) ? Arr::get(self::PLANT_CONDITION, $this->attributes['plant_condition_id']) : null;
-//    }
-
-    public function getUsageAttribute()
-    {
-        return !empty($this->attributes['usage_id']) ? Arr::get(self::USAGE, $this->attributes['usage_id']) : null;
-    }
-
-    public function getValueAttribute()
-    {
-        return !empty($this->attributes['value_id']) ? Arr::get(self::VALUE, $this->attributes['value_id']) : null;
-    }
 
     public function getWoodenAttribute()
     {
@@ -224,6 +166,7 @@ class Botanical extends BaseModel implements HasMedia
     {
         return !empty($this->attributes['cycle_id']) ? Arr::get(self::CYCLE, $this->attributes['cycle_id']) : null;
     }
+
     public function getSeedGerminationAttribute()
     {
         return !empty($this->attributes['seed_germination_id']) ? Arr::get(self::SEED_GERMINATION, $this->attributes['seed_germination_id']) : null;
@@ -239,19 +182,16 @@ class Botanical extends BaseModel implements HasMedia
     {
         return $this->belongsTo(InternalHabitat::class);
     }
+
     public function organization()
     {
         return $this->belongsTo(Organization::class)->where('is_herbarium', 1);
     }
 
-    public function plantingConditions()
+    public function distributions(): MorphToMany
     {
-        return $this->belongsToMany(
-            PlantingCondition::class,
-            'botanical_planting_conditions',
-            'botanical_id',
-            'planting_condition_id'
-        )->whereNull('botanical_planting_conditions.deleted_at')
+        return $this->morphToMany(Geographical::class, 'distributable', 'distribution_hubs')
+            ->whereNull('distribution_hubs.deleted_at')
             ->withTimestamps();
     }
 }

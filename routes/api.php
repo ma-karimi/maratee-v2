@@ -126,8 +126,12 @@ Route::apiResource('attendances', 'AttendanceAPIController');
 Route::get('actors/all', 'ActorAPIController@all');
 Route::apiResource('actors', 'ActorAPIController');
 
+Route::post('botanicals/{botanical_id}/location', 'BotanicalAPIController@storeLocation');
+Route::post('botanicals/{botanical_id}/information', 'BotanicalAPIController@storeInformation');
+Route::post('botanicals/{botanical_id}/irrigation', 'BotanicalAPIController@storeIrrigation');
 Route::apiResource('botanicals', 'BotanicalAPIController');
 
+Route::apiResource('botanical_properties', 'BotanicalPropertyAPIController');
 Route::apiResource('botanical_operations', 'BotanicalOperationAPIController');
 
 
@@ -251,6 +255,7 @@ Route::post('cryo_banks/{id}/determine', 'CryoBankAPIController@storeDetermine')
 Route::post('cryo_banks/{id}/collect', 'CryoBankAPIController@storeCollect');
 Route::post('cryo_banks/{id}/research', 'CryoBankAPIController@storeResearch');
 
+Route::post('distribution_hubs/{$istributable_id}', 'DistributionHubAPIController@store');
 
 Route::apiResource('permissions', 'PermissionAPIController');
 Route::apiResource('geographicals', 'GeographicalAPIController');

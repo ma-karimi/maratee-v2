@@ -180,6 +180,7 @@ class MedicinalPlantRepository extends BaseRepository
     public function storeReference(array $input, $id)
     {
         $article_id = $this->storeArticle($input, !empty($input['article_id']) ? $input['article_id'] : null)->id ?? null;
+        $this->storeArticleAuthors($input, $article_id);
         return parent::update(['article_id' => $article_id], $id);
     }
 
@@ -309,14 +310,14 @@ class MedicinalPlantRepository extends BaseRepository
 
     public function storeMedicinalApplication($input, $id)
     {
-        return parent::update(['location_id' => $input['location_id']], $id);
+        return parent::update($input, $id);
     }
 
     /**
      * @param $input
      * @return mixed
      */
-    private function createArticle(array $input, $article_id)
+    private function storeArticleAuthors(array $input, $article_id)
     {
 
         $authors = request()->filled('authors') ? request()->get('authors') : [];

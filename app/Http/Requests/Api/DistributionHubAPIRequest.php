@@ -2,12 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-
-use App\Models\BotanicalIrrigation;
-use App\Models\BotanicalPropagation;
+use App\Models\DistributionHub;
 use InfyOm\Generator\Request\APIRequest;
 
-class BotanicalPropagationAPIRequest extends APIRequest
+class DistributionHubAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,6 +24,6 @@ class BotanicalPropagationAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return BotanicalPropagation::$rules;
+        return DistributionHub::$rules;
     }
 }

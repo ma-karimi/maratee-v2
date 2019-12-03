@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateBotanicalOperationAPIRequest;
-use App\Http\Requests\Api\UpdateBotanicalOperationAPIRequest;
-use App\Http\Resources\BotanicalOperationResource;
+use App\Http\Requests\Api\Botanical\BotanicalOperationAPIRequest;
 use App\Models\BotanicalOperation;
 use App\Repositories\BotanicalOperationRepository;
 use Illuminate\Http\Request;
@@ -66,12 +64,11 @@ class BotanicalOperationAPIController extends AppBaseController
             $request->except('per_page'),
             $request->get('relations')
         );
-       // $botanicalOperations=BotanicalOperationResource::collection($botanicalOperations);
-        return $this->sendResponse($botanicalOperations, 'Botanical Garden Actions retrieved successfully');
+        return $this->sendResponse($botanicalOperations, 'Botanical Operations retrieved successfully');
     }
 
     /**
-     * @param CreateBotanicalOperationAPIRequest $request
+     * @param BotanicalOperationAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -87,7 +84,7 @@ class BotanicalOperationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
-     *          name="location_id",
+     *          name="place_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
@@ -138,13 +135,13 @@ class BotanicalOperationAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateBotanicalOperationAPIRequest $request)
+    public function store(BotanicalOperationAPIRequest $request)
     {
         $input = $request->all();
 
         $botanicalOperation = $this->botanicalOperationRepository->create($input);
 
-        return $this->sendResponse($botanicalOperation->toArray(), 'Botanical Garden Action saved successfully');
+        return $this->sendResponse($botanicalOperation->toArray(), 'Botanical Operation saved successfully');
     }
 
     /**
@@ -191,15 +188,15 @@ class BotanicalOperationAPIController extends AppBaseController
         $botanicalOperation = $this->botanicalOperationRepository->find($id, \request()->get('relations'));
 
         if ($botanicalOperation === null) {
-            return $this->sendError('Botanical Garden Action not found');
+            return $this->sendError('Botanical Operation not found');
         }
 
-        return $this->sendResponse($botanicalOperation->toArray(), 'Botanical Garden Action retrieved successfully');
+        return $this->sendResponse($botanicalOperation->toArray(), 'Botanical Operation retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdateBotanicalOperationAPIRequest $request
+     * @param BotanicalOperationAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -222,7 +219,7 @@ class BotanicalOperationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
      *      ),
      *      @SWG\Parameter(
-     *          name="location_id",
+     *          name="place_id",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/BotanicalOperation")
@@ -273,7 +270,7 @@ class BotanicalOperationAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateBotanicalOperationAPIRequest $request)
+    public function update($id, BotanicalOperationAPIRequest $request)
     {
         $input = $request->all();
 
@@ -281,7 +278,7 @@ class BotanicalOperationAPIController extends AppBaseController
         $botanicalOperation = $this->botanicalOperationRepository->find($id, \request()->get('relations'));
 
         if ($botanicalOperation === null) {
-            return $this->sendError('Botanical Garden Action not found');
+            return $this->sendError('Botanical Operation not found');
         }
 
         $botanicalOperation = $this->botanicalOperationRepository->update($input, $id);
@@ -334,11 +331,11 @@ class BotanicalOperationAPIController extends AppBaseController
         $botanicalOperation = $this->botanicalOperationRepository->find($id, \request()->get('relations'));
 
         if (empty($botanicalOperation)) {
-            return $this->sendError('Botanical Garden Action not found');
+            return $this->sendError('Botanical Operation not found');
         }
 
         $botanicalOperation->delete();
 
-        return $this->sendResponse($id, 'Botanical Garden Action deleted successfully');
+        return $this->sendResponse($id, 'Botanical Operation deleted successfully');
     }
 }

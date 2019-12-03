@@ -8,29 +8,7 @@ use App\Models\Contracts\BaseModel;
  * @SWG\Definition(
  *      definition="Geographical",
  *      required={"name"},
- *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *      ),
- *      @SWG\Property(
- *          property="name",
- *          description="name",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
- * )
+ *     }
  */
 class Geographical extends BaseModel
 {
@@ -44,4 +22,20 @@ class Geographical extends BaseModel
      * @var string
      */
     protected $table = 'geographicals';
+
+    /**
+     * Get all of the posts that are assigned this tag.
+     */
+    public function plants()
+    {
+        return $this->morphedByMany(Plant::class, 'distributable');
+    }
+
+    /**
+     * Get all of the videos that are assigned this tag.
+     */
+    public function botanicals()
+    {
+        return $this->morphedByMany(Botanical::class, 'distributable');
+    }
 }

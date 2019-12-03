@@ -8,40 +8,32 @@ use App\Models\Contracts\BaseModel;
 /**
  * @SWG\Definition(
  *            definition="BotanicalOperation",
- *            required={"botanical_id", "location_id","operation_id"},
- * 			@SWG\Property(property="id", type="integer"),
- * 			@SWG\Property(property="botanical_id", type="integer"),
- * 			@SWG\Property(property="location_id", type="integer"),
- * 			@SWG\Property(property="operation_id", type="integer"),
- * 			@SWG\Property(property="date", type="string"),
- * 			@SWG\Property(property="number", type="string"),
- * 			@SWG\Property(property="description", type="string"),
- * 			@SWG\Property(property="created_at", type="string"),
- * 			@SWG\Property(property="updated_at", type="string"),
- *        )
- **/
+ *            required={"botanical_id", "place_id","operation_id"},
+ *
+ */
 class BotanicalOperation extends BaseModel
 {
     use BotanicalOperationAccessor;
-    public const OPERATION = [1 => 'seeding', 2 => 'planting'];
+    public const OPERATION = [1 => 'seeding', 2 => 'planting', 3 => 'transfer'];
     public static $rules = [
         'botanical_id' => 'required|exists:botanicals,id',
-        'garden_id' => 'required|exists:gardens,id',
-        'operation_id' => 'required|in:1,2',
+        'place_id' => 'required|exists:places,id',
+        'operation_id' => 'required|in:1,2,3',
         'number' => 'required|string',
-        'date' => 'date',
-        'description' => 'string'
+        'date' => 'required|date',
+        'description' => 'nullable|string'
     ];
 
+    protected $with = ['place'];
 
     public function botanical()
     {
         return $this->belongsTo(Botanical::class);
     }
 
-    public function location()
+    public function place()
     {
-        return $this->belongsTo(Location::class);
+        return $this->belongsTo(Place::class);
     }
 
 }

@@ -28,7 +28,7 @@ class MedicinalPlantCollectAPIRequest extends APIRequest
             'city_id' => 'required|exists:cities,id',
             'province_id' => 'required|exists:provinces,id',
             'address_en' => 'required',
-            'collecting_date'=>'required'
+            'date'=>'required'
         ];
     }
 }
