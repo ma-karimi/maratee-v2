@@ -166,9 +166,8 @@ class MedicineAPIController extends AppBaseController
      */
     public function store(CreateMedicineAPIRequest $request)
     {
-        $input = $request->all();
 
-        $medicine = $this->medicineRepository->create($input);
+        $medicine = $this->medicineRepository->create($request);
 
         return $this->sendResponse($medicine->toArray(), 'Medicine saved successfully');
     }
@@ -285,7 +284,6 @@ class MedicineAPIController extends AppBaseController
      */
     public function update($id, UpdateMedicineAPIRequest $request)
     {
-        $input = $request->all();
 
         /** @var Medicine $medicine */
         $medicine = $this->medicineRepository->find($id);
@@ -294,7 +292,7 @@ class MedicineAPIController extends AppBaseController
             return $this->sendError('Medicine not found');
         }
 
-        $medicine = $this->medicineRepository->update($input, $id);
+        $medicine = $this->medicineRepository->update($request, $id);
 
         return $this->sendResponse($medicine->toArray(), 'Medicine updated successfully');
     }
