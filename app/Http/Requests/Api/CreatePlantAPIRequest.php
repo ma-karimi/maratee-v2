@@ -53,9 +53,9 @@ class CreatePlantAPIRequest extends APIRequest
 //            'organization_id' => 'required_if:is_flowering,0|exists:organizations,id',
 //            'location_id' => 'required_if:is_flowering,0|exists:locations,id',
             //taxonomy
-            'monopoly_of_iran_id' => 'numeric',
+            'monopoly_of_iran_id' => 'nullable|numeric',
             'taxonomy_id' => 'required|exists:taxonomies,id',
-            'life_form_id' => 'numeric',
+            'life_form_id' => 'nullable|numeric',
 //            'number'=>'required_if:is_flowering,1|numeric',
 //            'is_flowering' => 'numeric',
 //            //classification

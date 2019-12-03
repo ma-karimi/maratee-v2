@@ -81,7 +81,7 @@ class Herbarium extends BaseModel implements HasMedia
         'herbarium_number' => 'nullable|string',
         'herbarium_index' => 'nullable|string',
 //        'cf' => 'nullable|string',
-        'description' => 'string',
+        'description' => 'nullable|string',
         'country_id'=>'required|exists:countries,id',
         'city_id'=>'required|exists:cities,id',
         'province_id'=>'required|exists:provinces,id',
