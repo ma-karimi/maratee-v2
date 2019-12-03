@@ -25,15 +25,15 @@ class CryoBank extends BaseModel
         'protection_id' => 'required|exists:protections,id',
         'taxonomy_id' => 'required|exists:taxonomies,id',
         'sample_type_id' => 'required|in:1,2,3',
-        'rack' => 'string',
-        'repeat' => 'string',
-        'tank' => 'string',
-        'cell' => 'string',
-        'row' => 'string',
-        'proposal_name' => 'string',
+        'rack' => 'required|string',
+        'repeat' => 'nullable|string',
+        'tank' => 'required|string',
+        'cell' => 'required|string',
+        'row' => 'required|string',
+        'proposal_name' => 'nullable|string',
         'treatment_id' => 'nullable|exists:treatments,id',
-        'treatment_values' => 'string',
-        'year' => 'integer',
+        'treatment_values' => 'nullable|string',
+        'year' => 'required|integer',
     ];
     /**
      * The database table used by the model.
