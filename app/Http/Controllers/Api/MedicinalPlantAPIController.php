@@ -840,7 +840,7 @@ class MedicinalPlantAPIController extends AppBaseController
 
         return $this->sendResponse($medicinalPlant->toArray(), 'MedicinalPlant updated successfully');
     }
-    public function storeMedicinalApplication(MedicinalPlantApplicationAPIRequest $request, $id)
+    public function storeApplication(MedicinalPlantApplicationAPIRequest $request, $id)
     {
         $input = $request->all();
 

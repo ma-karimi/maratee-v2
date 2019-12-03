@@ -94,7 +94,7 @@ class Taxonomy extends BaseModel
      */
     protected $table = 'taxonomies';
 
-    protected $with = ['scientific', 'authors', 'family', 'genus', 'subspecies.authors', 'species.authors', 'variety.authors'];
+    protected $with = ['scientific', 'family', 'genus', 'subspecies.authors', 'species.authors', 'variety.authors'];
 
     /**
      * @return HasOne
