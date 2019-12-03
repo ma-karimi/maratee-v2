@@ -19,9 +19,9 @@ class Chromosome extends BaseModel
     public static $rules = [
         'taxonomy_id' => 'required|exists:taxonomies,id',
         'general_class_id' => 'required|exists:generals,id',
-        'n_no' => 'integer',
-        'n2_no' => 'integer',
-        'v_number' => 'string',
+        'n_no' => 'nullable|integer',
+        'n2_no' => 'nullable|integer',
+        'v_number' => 'nullable|string',
     ];
     /**
      * The database table used by the model.
