@@ -56,7 +56,7 @@
     <tbody>
     @foreach($plants as $item)
         <tr>
-            <td style="{{$td}}">{{ $item->herbarium->herbarium_number ?? null }}</td>
+            <td style="{{$td}}">{{ $item->herbarium_number ?? null }}</td>
             <td style="{{$td}}">{{ $item->taxonomy->family->name ?? null }}</td>
             <td style="{{$td}}">{{ $item->taxonomy->genus->name ?? null }}</td>
             <td style="{{$td}}">{{ $item->taxonomy->species->name ?? null }}</td>
@@ -89,35 +89,35 @@
             <td style="{{$td}}">{{ $item['location']['point']['UTM'][0] ?? null }}</td>
             <td style="{{$td}}">{{ $item['location']['point']['UTM'][1] ?? null }}</td>
             <td style="{{$td}}">
-                @forelse ($item['herbarium']['collect']['actors'] as $actor)
+                @forelse ($item['collect']['actors'] as $actor)
                     {{$actor->name}} {{!$loop->last ? ' & ' : null }}
                 @empty
                 @endforelse
             </td>
             <td style="{{$td}}">{{ $item['location']['min_altitude']}} - {{ $item['location']['max_altitude']}}</td>
 
-            <td style="{{$td}}">{{$item['herbarium']['collect']['date'] ?? null}}</td>
+            <td style="{{$td}}">{{$item['collect']['date'] ?? null}}</td>
             <td style="{{$td}}">{{$item['general_substrate']['type'] ?? null}}
                 | {{$item['general_substrate']['name'] ?? null}}</td>
 
             <td style="{{$td}}">{{$item['description'] ?? null}}</td>
             <td style="{{$td}}">{{$item['general_phytogeography']['name'] ?? null}}</td>
             <td style="{{$td}}">
-                @forelse ($item['herbarium']['determine']['actors'] as $actor)
+                @forelse ($item['determine']['actors'] as $actor)
                     {{$actor->name}} {{!$loop->last ? ' & ' : null }}
                 @empty
                 @endforelse
             </td>
             <td style="{{$td}}">{{$item['general_habitat']['name'] ?? null}}</td>
-            <td style="{{$td}}">{{$item['herbarium']['borrow']['member_name'] ?? null}}</td>
-            <td style="{{$td}}">{{$item['herbarium']['borrow']['start_time'] ?? null}}</td>
-            <td style="{{$td}}">{{$item['herbarium']['borrow']['organization']['name_en'] ?? null}}</td>
-            <td style="{{$td}}">{{!empty($item['herbarium']['borrow']['end_time']) ? $item['herbarium']['borrow']['end_time'] : null}}</td>
-            <td style="{{$td}}">{{$item['herbarium']['visit']['sample_impression'] ?? null}}</td>
-            <td style="{{$td}}">{{$item['herbarium']['visit']['start_time'] ?? null}}</td>
-            <td style="{{$td}}">{{$item['herbarium']['visit']['member_name'] ?? null}}</td>
-            <td style="{{$td}}">{{$item['herbarium']['exchange_receive']['organization']['name_en'] ?? null}}{{$item['herbarium']['exchange_receive']['start_time'] ?? null}}</td>
-            <td style="{{$td}}">{{$item['herbarium']['exchange_send']['organization']['name_en'] ?? null}}{{$item['herbarium']['exchange_send']['start_time'] ?? null}}</td>
+            <td style="{{$td}}">{{$item['borrow']['member_name'] ?? null}}</td>
+            <td style="{{$td}}">{{$item['borrow']['start_time'] ?? null}}</td>
+            <td style="{{$td}}">{{$item['borrow']['organization']['name_en'] ?? null}}</td>
+            <td style="{{$td}}">{{!empty($item['borrow']['end_time']) ? $item['borrow']['end_time'] : null}}</td>
+            <td style="{{$td}}">{{$item['visit']['sample_impression'] ?? null}}</td>
+            <td style="{{$td}}">{{$item['visit']['start_time'] ?? null}}</td>
+            <td style="{{$td}}">{{$item['visit']['member_name'] ?? null}}</td>
+            <td style="{{$td}}">{{$item['exchange_receive']['organization']['name_en'] ?? null}}{{$item['exchange_receive']['start_time'] ?? null}}</td>
+            <td style="{{$td}}">{{$item['exchange_send']['organization']['name_en'] ?? null}}{{$item['exchange_send']['start_time'] ?? null}}</td>
         </tr>
     @endforeach
     </tbody>
