@@ -269,7 +269,7 @@ class Plant extends BaseModel implements HasMedia
 
     public function geographicals()
     {
-        return $this->morphMany(Geographical::class, 'plant_geographicals')
+        return $this->belongsToMany(Geographical::class, 'plant_geographicals')
             ->whereNull('plant_geographicals.deleted_at')
             ->withTimestamps();
     }
