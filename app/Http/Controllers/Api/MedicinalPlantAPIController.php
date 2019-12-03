@@ -820,7 +820,7 @@ class MedicinalPlantAPIController extends AppBaseController
             return $this->sendError('Medicinal Plant not found');
         }
 
-        $medicinalPlant = $this->medicinalPlantRepository->storeConstituent($input, $id);
+        $this->medicinalPlantRepository->storeConstituent($input, $id);
 
         return $this->sendResponse($medicinalPlant->toArray(), 'MedicinalPlant updated successfully');
     }
