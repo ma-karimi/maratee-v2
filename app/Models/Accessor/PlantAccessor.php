@@ -21,9 +21,12 @@ trait PlantAccessor
 
     public function getPlantGeographicalsAttribute()
     {
-        if($this->relationLoaded('geographicals') &&  !empty($this->geographicals)){
-            return implode(', ', $this->geographicals()->pluck('name')->toArray());
+        $distributions = null;
+
+        if ($this->relationLoaded('geographicals') &&  $this->geographicals->count()) {
+            $distributions .= $this->geographicals->implode('name', ' & ');
         }
+        return $distributions;
     }
     public function getLifeFormAttribute()
     {

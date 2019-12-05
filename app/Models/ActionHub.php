@@ -12,56 +12,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 /**
  * @SWG\Definition(
  *      definition="ActionHub",
- *      required={"action_id"},
- *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="project_id",
- *          description="project_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="action_id",
- *          description="action_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="department_id",
- *          description="department_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="description",
- *          description="description",
- *          type="array",
- *     @SWG\Items(type="string"),
- *          format="array"
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="date",
- *          description="date",
- *          type="string",
- *          format="date"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
+ *      required={"action_id"}
  * )
  */
 class ActionHub extends BaseModel
@@ -82,6 +33,7 @@ class ActionHub extends BaseModel
     protected $table = 'action_hubs';
 
     protected $with = ['actors'];
+    protected $appends = ['authors'];
     /**
      * The attributes that should be casted to native types.
      *
@@ -110,14 +62,16 @@ class ActionHub extends BaseModel
     {
         return $this->morphToMany(Actor::class, 'actorable', 'actor_hubs')->withTimestamps()->whereNull('actor_hubs.deleted_at');
     }
-//
-//    public function user()
-//    {
-//        return $this->belongsTo(User::class);
-//    }
 
-    /**
-     * Get the owning actionable model.
-     */
 
+    public function getAuthorsAttribute()
+    {
+        $authors = null;
+
+        if ($this->relationLoaded('actors') && $this->actors->count()) {
+            $authors = $this->actors->implode('name', ' & ');
+        }
+
+        return $authors;
+    }
 }

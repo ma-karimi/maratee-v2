@@ -3,89 +3,34 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Jedrzej\Searchable\Constraint;
+use Illuminate\Support\Arr;
 
 /**
  * @SWG\Definition(
  *      definition="Taxonomy",
- *      required={"family_id"},
- *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="name",
- *          description="name",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="genus_id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="species_id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="subspecies_id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="variety_id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="tip_type_id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="family_id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
+ *      required={"family_id"}
  * )
  */
 class Taxonomy extends BaseModel
 {
 
 
+    public const TYPE = [
+        1 => 'Flora',
+        2 => 'NonFlower',
+        3 => 'Palebotany'
+    ];
     public static $rules = [
         'family_id' => 'required|exists:generals,id',
         'genus_id' => 'exists:generals,id',
         'species_id' => 'nullable|exists:generals,id',
         'variety_id' => 'nullable|exists:generals,id',
         'subspecies_id' => 'nullable|exists:generals,id',
-        'name'=>'string'
+        'name' => 'nullable|string',
+        'type_id' => 'required|in:1,2,3'
     ];
     /**
      * The database table used by the model.
@@ -93,8 +38,55 @@ class Taxonomy extends BaseModel
      * @var string
      */
     protected $table = 'taxonomies';
-
     protected $with = ['scientific', 'family', 'genus', 'subspecies.authors', 'species.authors', 'variety.authors'];
+    protected $appends = ['type', 'authors', 'scientific_name'];
+
+    public function getTypeAttribute()
+    {
+        return Arr::get(self::TYPE, $this->type_id);
+    }
+
+    public function getAuthorsAttribute()
+    {
+        $authors = null;
+
+        if ($this->relationLoaded('species') && !empty($this->species) && $this->species->authors->count()) {
+            $authors = $this->species->authors->implode('name', ' & ');
+        }
+        if ($this->relationLoaded('subspecies') && !empty($this->subspecies) && $this->subspecies->authors->count()) {
+            $and  = !empty($authors) ? ' & ' : null;
+            $authors .= $and . $this->subspecies->authors->implode('name', ' & ');
+        }
+        if ($this->relationLoaded('variety') && !empty($this->variety) && $this->variety->authors->count()) {
+            $and  = !empty($authors) ? ' & ' : null;
+            $authors .= $and . $this->variety->authors->implode('name', ' & ');
+        }
+
+        return $authors;
+    }
+
+    public function getScientificNameAttribute()
+    {
+        $name = null;
+
+        if ($this->relationLoaded('genus') && !empty($this->genus)) {
+            $name = $this->genus->name;
+        }
+        if ($this->relationLoaded('species') && !empty($this->species)) {
+            $and  = !empty($name) ? ' ' : null;
+            $name .= $and . $this->species->name;
+        }
+        if ($this->relationLoaded('subspecies') && !empty($this->subspecies)) {
+            $and  = !empty($name) ? ' ' : null;
+            $name .= $and . $this->subspecies->name;
+        }
+        if ($this->relationLoaded('variety') && !empty($this->variety)) {
+            $and  = !empty($name) ? ' ' : null;
+            $name .= $and . $this->variety->name;
+        }
+
+        return $name;
+    }
 
     /**
      * @return HasOne
@@ -103,13 +95,13 @@ class Taxonomy extends BaseModel
     {
         return $this->hasOne(ScientificView::class, 'taxonomy_id');
     }
-    /**
-     * @return HasOne
-     */
-    public function authors(): HasOne
-    {
-        return $this->hasOne(TaxonomyAuthorView::class, 'taxonomy_id');
-    }
+//    /**
+//     * @return HasOne
+//     */
+//    public function authors(): HasOne
+//    {
+//        return $this->hasOne(TaxonomyAuthorView::class, 'taxonomy_id');
+//    }
 
     /**
      * @return HasMany
@@ -118,6 +110,7 @@ class Taxonomy extends BaseModel
     {
         return $this->hasMany(Plant::class);
     }
+
     /**
      * @return HasMany
      */

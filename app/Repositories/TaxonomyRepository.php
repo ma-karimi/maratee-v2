@@ -81,6 +81,7 @@ class TaxonomyRepository extends BaseRepository
             'species_id' => $request->filled('species_id') ? $request['species_id'] : null,
             'subspecies_id' => $request->filled('subspecies_id') ? $request['subspecies_id'] : null,
             'variety_id' => $request->filled('variety_id') ? $request['variety_id'] : null,
+            'type_id' => $request['type_id'],
             'name' => $request->filled('name') ? $request['name'] : null,
         ]);
     }
@@ -94,6 +95,7 @@ class TaxonomyRepository extends BaseRepository
         return Taxonomy::where([
             'family_id' => $request['family_id'],
             'genus_id' => $request['genus_id'],
+            'type_id' => $request['type_id'],
             'species_id' => $request->filled('species_id') && is_numeric($request['species_id']) ? $request['species_id'] : null,
             'subspecies_id' => $request->filled('subspecies_id') && is_numeric($request['subspecies_id']) ? $request['subspecies_id'] : null,
             'variety_id' => $request->filled('variety_id') && is_numeric($request['variety_id']) ? $request['variety_id'] : null
@@ -271,6 +273,7 @@ class TaxonomyRepository extends BaseRepository
             'species_id' => $request->filled('species_id') ? $request['species_id'] : null,
             'subspecies_id' => $request->filled('subspecies_id') ? $request['subspecies_id'] : null,
             'variety_id' => $request->filled('variety_id') ? $request['variety_id'] : null,
+            'type_id'=>$request['type_id'],
             'name' => $request->filled('name') ? $request['name'] : null,
         ], $id);
     }

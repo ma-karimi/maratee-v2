@@ -8,42 +8,7 @@ use App\Models\Contracts\BaseModel;
 /**
  * @SWG\Definition(
  *      definition="MedicinalPlantType",
- *      required={"name","type_id"},
- *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="name",
- *          description="name",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="description",
- *          description="description",
- *          type="array",
- *     @SWG\Items(type="string")
- *      ),
- *      @SWG\Property(
- *          property="type_id",
- *          description="type_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
+ *      required={"name","type_id"}
  * )
  */
 class MedicinalPlantType extends BaseModel
