@@ -81,6 +81,39 @@ class BotanicalRepository extends BaseRepository
 
     }
 
+    /**
+     * @param $input
+     * @return array
+     */
+    private function primaryData($input): array
+    {
+        return [
+            'taxonomy_id' => $input['taxonomy_id'] ?? null,
+            'general_origin_id' => $input['general_origin_id'] ?? null,
+            'general_habitat_id' => $input['general_habitat_id'] ?? null,
+            'botanical_irrigation' => $input['botanical_irrigation'] ?? null,
+            'flowering_time' => $input['flowering_time'] ?? null,
+            'organization_id' => $input['organization_id'] ?? null,
+            'internal_habitat_id' => $input['internal_habitat_id'] ?? null,
+            'internal_habitat' => $input['internal_habitat'] ?? null,
+            'entrance_to_garden_id' => $input['entrance_to_garden_id'] ?? null,
+            'seed_germination_id' => $input['seed_germination_id'] ?? null,
+            'cutting_root' => $input['cutting_root'] ?? null,
+            'treatment' => $input['treatment'] ?? null,
+            'first_flowering' => $input['first_flowering'] ?? null,
+            'flowering_period' => $input['flowering_period'] ?? null,
+            'seed_rate_id' => $input['seed_rate_id'] ?? null,
+            'seed_formation_id' => $input['seed_formation_id'] ?? null,
+            'winter_tolerance_id' => $input['winter_tolerance_id'] ?? null,
+            'summer_tolerance_id' => $input['summer_tolerance_id'] ?? null,
+            'soil_id' => $input['soil_id'] ?? null,
+            'growth_rate_id' => $input['growth_rate_id'] ?? null,
+            'sensitivity_conditions' => $input['sensitivity_conditions'] ?? null,
+            'garden_map' => $input['garden_map'] ?? null,
+            'comments' => $input['comments'] ?? null,
+        ];
+    }
+
     private function storeProperties($properties, $type_id, $botanical_id)
     {
         $properties = is_array($properties) ? $properties : explode(',', $properties);
@@ -150,38 +183,6 @@ class BotanicalRepository extends BaseRepository
         $this->storeProperties($input['propagations'], 3, $botanical->id);
         $this->storeProperties($input['planting_conditions'], 4, $botanical->id);
 
-    }
-
-    /**
-     * @return array
-     */
-    private function primaryData(): array
-    {
-        return [
-            'taxonomy_id' => 'taxonomy_id' ?? null,
-            'general_origin_id' => 'general_origin_id' ?? null,
-            'general_habitat_id' => 'general_habitat_id' ?? null,
-            'botanical_irrigation' => 'botanical_irrigation' ?? null,
-            'flowering_time' => 'flowering_time' ?? null,
-            'organization_id' => 'organization_id' ?? null,
-            'internal_habitat_id' => 'internal_habitat_id' ?? null,
-            'internal_habitat' => 'internal_habitat' ?? null,
-            'entrance_to_garden_id' => 'entrance_to_garden_id' ?? null,
-            'seed_germination_id' => 'seed_germination_id' ?? null,
-            'cutting_root' => 'cutting_root' ?? null,
-            'treatment' => 'treatment' ?? null,
-            'first_flowering' => 'first_flowering' ?? null,
-            'flowering_period' => 'flowering_period' ?? null,
-            'seed_rate_id' => 'seed_rate_id' ?? null,
-            'seed_formation_id' => 'seed_formation_id' ?? null,
-            'winter_tolerance_id' => 'winter_tolerance_id' ?? null,
-            'summer_tolerance_id' => 'summer_tolerance_id' ?? null,
-            'soil_id' => 'soil_id' ?? null,
-            'growth_rate_id' => 'growth_rate_id' ?? null,
-            'sensitivity_conditions' => 'sensitivity_conditions' ?? null,
-            'garden_map' => 'garden_map' ?? null,
-            'comments' => 'comments' ?? null,
-        ];
     }
 
 }
