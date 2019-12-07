@@ -34,32 +34,32 @@ class Botanical extends BaseModel implements HasMedia
     public const CYCLE = [1 => 'evergreen', 2 => 'deciduous', 3 => 'semi deciduous', 4 => 'annual climber', 5 => 'perennial climber', 6 => 'annual herb', 7 => 'biennial herb', 8 => 'perennial herb', 9 => 'bulb', 10 => 'tuber', 11 => 'rhizome', 12 => 'water plant'];
 
     public static $rules = [
-        'cutting_rooting' => 'numeric',
-        'flower_color' => 'string',
-        'fruit_color' => 'string',
-        'foliage_color' => 'string',
-        'seed_germination_id' => 'integer',
-        'treatment' => 'string',
-        'comments' => 'string',
+        'cutting_rooting' => 'nullable|numeric',
+        'flower_color' => 'nullable|string',
+        'fruit_color' => 'nullable|string',
+        'foliage_color' => 'nullable|string',
+        'seed_germination_id' => 'nullable|integer',
+        'treatment' => 'nullable|string',
+        'comments' => 'nullable|string',
         'taxonomy_id' => 'required|exists:taxonomies,id',
-        'garden_map' => 'string',
-        'general_habitat_id' => 'integer|exists:generals,id',
-        'general_originِ_id' => 'integer|exists:generals,id',
-        'monopoly_of_iran_id' => 'numeric',
-        'wooden_id' => 'integer',
-        'cycle_id' => 'integer',
-        'protection_id' => 'integer|exists:protections,id',
-        'internal_habitat_id' => 'integer|exists:internal_habitats,id',
-        'entrance_to_garden_id' => 'integer',
-        'growth_rate_id' => 'integer',
+        'garden_map' => 'nullable|string',
+        'general_habitat_id' => 'nullable|integer|exists:generals,id',
+        'general_originِ_id' => 'nullable|integer|exists:generals,id',
+        'monopoly_of_iran_id' => 'nullable|numeric',
+        'wooden_id' => 'nullable|integer',
+        'cycle_id' => 'nullable|integer',
+        'protection_id' => 'nullable|integer|exists:protections,id',
+        'internal_habitat_id' => 'nullable|integer|exists:internal_habitats,id',
+        'entrance_to_garden_id' => 'nullable|integer',
+        'growth_rate_id' => 'nullable|integer',
         'first_flowering' => 'nullable|date',
 //        'first_seeding' => 'date',
-        'seed_rate_id' => 'integer',
-        'seed_formation_id' => 'integer',
-        'winter_tolerance_id' => 'integer',
-        'summer_tolerance_id' => 'integer',
-        'sensitivity_conditions' => 'string',
-        'soil_id' => 'integer',
+        'seed_rate_id' => 'nullable|integer',
+        'seed_formation_id' => 'nullable|integer',
+        'winter_tolerance_id' => 'nullable|integer',
+        'summer_tolerance_id' => 'nullable|integer',
+        'sensitivity_conditions' => 'nullable|string',
+        'soil_id' => 'nullable|integer',
     ];
 
 
@@ -81,6 +81,7 @@ class Botanical extends BaseModel implements HasMedia
      */
     protected $casts = [
         'height' => 'float',
+        'first_flowering'=>'date'
     ];
 
     /**
