@@ -73,7 +73,7 @@ class BotanicalRepository extends BaseRepository
     }
 
 
-    public function create(array $input)
+    public function create($input)
     {
         $botanical = parent::create([
             'taxonomy_id' ?? null,
@@ -168,7 +168,7 @@ class BotanicalRepository extends BaseRepository
         ], $id);
     }
 
-    public function update(array $input, $id)
+    public function update($input, $id)
     {
         $botanical = parent::update($this->primaryData(), $id);
         $this->storeProperties($input['propagations'], 3, $botanical->id);
