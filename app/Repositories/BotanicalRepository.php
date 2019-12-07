@@ -98,7 +98,7 @@ class BotanicalRepository extends BaseRepository
 //            'internal_habitat' => $input['internal_habitat'] ?? null,
             'entrance_to_garden_id' => $input['entrance_to_garden_id'] ?? null,
             'seed_germination_id' => $input['seed_germination_id'] ?? null,
-            'cutting_root' => $input['cutting_root'] ?? null,
+            'cutting_rooting' => $input['cutting_rooting'] ?? null,
             'treatment' => $input['treatment'] ?? null,
             'first_flowering' => $input['first_flowering'] ?? null,
             'flowering_period' => $input['flowering_period'] ?? null,
