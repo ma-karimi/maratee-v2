@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use App\Models\MedicinalPart;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateMedicinalPartAPIRequest extends APIRequest
+class MedicinalPartAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.

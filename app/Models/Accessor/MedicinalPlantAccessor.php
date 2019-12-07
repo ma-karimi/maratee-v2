@@ -73,4 +73,15 @@ trait MedicinalPlantAccessor
     }
 
 
+    public function getDistributionsAttribute()
+    {
+        $authors = null;
+
+        if ($this->relationLoaded('provinces') && $this->provinces->count()) {
+            $authors = $this->provinces->implode('name_en', ' & ');
+        }
+
+        return $authors;
+    }
+
 }

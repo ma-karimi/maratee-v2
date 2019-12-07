@@ -15,8 +15,8 @@ class CreateMedicinalPartsTable extends Migration
     {
         Schema::create('medicinal_parts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->json('name');
-            $table->tinyInteger('type');
+            $table->string('name');
+            $table->tinyInteger('type_id');
             $table->timestamps();
             $table->softDeletesTz();
         });

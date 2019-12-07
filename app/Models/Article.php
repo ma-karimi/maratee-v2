@@ -10,51 +10,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 /**
  * @SWG\Definition(
  *      definition="Article",
- *      required={"city_id"},
- *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="page_no",
- *          description="page_no",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="title",
- *          description="title",
- *          type="array",
- *     @SWG\Items(type="string"),
- *          format="array"
- *      ),
- *      @SWG\Property(
- *          property="year",
- *          description="year",
- *          type="string",
- *          format="date"
- *      ),
- *      @SWG\Property(
- *          property="journal_name",
- *          description="journal_name",
- *          type="array",
- *     @SWG\Items(type="string"),
- *          format="array"
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
+ *      required={"title"}
  * )
  */
 class Article extends BaseModel implements HasMedia
@@ -77,7 +33,7 @@ class Article extends BaseModel implements HasMedia
      */
 
     protected $with = ['actors'];
-
+    protected $appends = ['authors'];
     /**
      * @return MorphToMany
      */
@@ -87,5 +43,18 @@ class Article extends BaseModel implements HasMedia
             'actor_hubs')
             ->whereNull('actor_hubs.deleted_at')
             ->withTimestamps();
+    }
+
+
+
+    public function getAuthorsAttribute()
+    {
+        $authors = null;
+
+        if ($this->relationLoaded('actors') && $this->actors->count()) {
+            $authors = $this->actors->implode('name', ' & ');
+        }
+
+        return $authors;
     }
 }

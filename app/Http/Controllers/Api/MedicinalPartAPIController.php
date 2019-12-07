@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateMedicinalPartAPIRequest;
-use App\Http\Requests\Api\UpdateMedicinalPartAPIRequest;
+use App\Http\Requests\Api\MedicinalPartAPIRequest;
 use App\Models\MedicinalPart;
 use App\Repositories\MedicinalPartRepository;
 use Illuminate\Http\Request;
@@ -70,7 +69,7 @@ class MedicinalPartAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateMedicinalPartAPIRequest $request
+     * @param MedicinalPartAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -87,7 +86,7 @@ class MedicinalPartAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPart")
      *      ),
      *      @SWG\Parameter(
-     *          name="type",
+     *          name="type_id",
      *          in="body",
      *          description="1 -> aerial , 2 -> ground",
      *          required=true,
@@ -114,7 +113,7 @@ class MedicinalPartAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateMedicinalPartAPIRequest $request)
+    public function store(MedicinalPartAPIRequest $request)
     {
         $input = $request->all();
 
@@ -175,7 +174,7 @@ class MedicinalPartAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateMedicinalPartAPIRequest $request
+     * @param MedicinalPartAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -199,7 +198,7 @@ class MedicinalPartAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPart")
      *      ),
      *      @SWG\Parameter(
-     *          name="type",
+     *          name="type_id",
      *          in="body",
      *          description="1 -> aerial , 2 -> ground",
      *          required=true,
@@ -226,7 +225,7 @@ class MedicinalPartAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateMedicinalPartAPIRequest $request)
+    public function update($id, MedicinalPartAPIRequest $request)
     {
         $input = $request->all();
 
