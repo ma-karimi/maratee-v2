@@ -52,7 +52,7 @@ class Botanical extends BaseModel implements HasMedia
         'internal_habitat_id' => 'nullable|integer|exists:internal_habitats,id',
         'entrance_to_garden_id' => 'nullable|integer',
         'growth_rate_id' => 'nullable|integer',
-        'first_flowering' => 'nullable|date',
+//        'first_flowering' => 'nullable|date',
 //        'first_seeding' => 'date',
         'seed_rate_id' => 'nullable|integer',
         'seed_formation_id' => 'nullable|integer',
@@ -81,7 +81,7 @@ class Botanical extends BaseModel implements HasMedia
      */
     protected $casts = [
         'height' => 'float',
-        'first_flowering'=>'date'
+//        'first_flowering'=>'date'
     ];
 
     /**
