@@ -6,6 +6,7 @@ use App\Models\ActionHub;
 use App\Models\ActorHub;
 use App\Models\Media;
 use App\Models\Paleontology;
+use App\Models\PaleontologySample;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
 
@@ -38,14 +39,19 @@ class PaleontologyRepository extends BaseRepository
      * @var LocalityRepository
      */
     private $localityRepo;
+    /**
+     * @var PaleontologySample
+     */
+    private $paleontologySample;
 
-    public function __construct(Application $app, ActionHub $actionHubRepo, ActorHub $actorHubRepo, LocationRepository $locationRepo, LocalityRepository $localityRepo)
+    public function __construct(Application $app, ActionHub $actionHubRepo, ActorHub $actorHubRepo, LocationRepository $locationRepo, LocalityRepository $localityRepo, PaleontologySample $paleontologySample)
     {
         parent::__construct($app);
         $this->actionHubRepo = $actionHubRepo;
         $this->actorHubRepo = $actorHubRepo;
         $this->locationRepo = $locationRepo;
         $this->localityRepo = $localityRepo;
+        $this->paleontologySample = $paleontologySample;
     }
 
     /**
@@ -68,8 +74,10 @@ class PaleontologyRepository extends BaseRepository
 
     public function create($input)
     {
-        return parent::create(Arr::only($input->all(), [
+        $paleontology = parent::create(Arr::only($input->all(), [
             'catalog_no', 'specimen_no', 'field_no', 'barcode_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'location_in_collection']));
+
+        $this->storePaleontologySample($input, $paleontology->id);
     }
 
     public function storeGeologyAndRemark($input, $paleontology_id)
@@ -155,8 +163,11 @@ class PaleontologyRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        return parent::update(Arr::only($input->all(), [
+        parent::update(Arr::only($input->all(), [
             'catalog_no', 'specimen_no', 'field_no', 'barcode_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'location_in_collection']), $id);
+
+        $this->storePaleontologySample($input, $id);
+
     }
 
     public function storeLocality($input, $locality_id = null)
@@ -210,5 +221,24 @@ class PaleontologyRepository extends BaseRepository
         return Arr::only($input, [
             'geology_age_era_id', 'geology_age_period_id', 'geology_age_epoch_id', 'geology_age_stage_id', 'preservation', 'pieces', 'color', 'element', 'treatment_history', 'access_code', 'additional_info', 'update_frequency', 'last_update', 'excavation', 'description'
         ]);
+    }
+
+    private function storePaleontologySample($input, $id)
+    {
+        $samples = is_array($input['samples']) ? $input['samples'] : explode(',', $input['samples']);
+
+
+        $this->paleontologySample
+            ->where('paleontolgy_id', $id)
+            ->whereNotIn('sample_id', $samples)
+            ->delete();
+        if (count($samples)) {
+            foreach ($samples as $item) {
+                $this->actorHubRepo->firstOrCreate([
+                    'paleontolgy_id' => $id,
+                    'sample_id' => (int)$item,
+                ]);
+            }
+        }
     }
 }

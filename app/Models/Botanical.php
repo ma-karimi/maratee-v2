@@ -177,6 +177,10 @@ class Botanical extends BaseModel implements HasMedia
     {
         return $this->belongsTo(General::class)->whereType('habitat');
     }
+    public function generalSamples()
+    {
+        return $this->belongsToMany(General::class, 'palebotany_samples')->whereType('sample');
+    }
 
     public function internal_habitat()
     {
