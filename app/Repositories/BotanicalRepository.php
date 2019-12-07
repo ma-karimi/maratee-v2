@@ -75,7 +75,7 @@ class BotanicalRepository extends BaseRepository
 
     public function create($input)
     {
-        $botanical = parent::create($this->primaryData());
+        $botanical = parent::create($this->primaryData($input));
         $this->storeProperties($input['propagations'], 3, $botanical->id);
         $this->storeProperties($input['planting_conditions'], 4, $botanical->id);
 
@@ -179,7 +179,7 @@ class BotanicalRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        $botanical = parent::update($this->primaryData(), $id);
+        $botanical = parent::update($this->primaryData($input), $id);
         $this->storeProperties($input['propagations'], 3, $botanical->id);
         $this->storeProperties($input['planting_conditions'], 4, $botanical->id);
 
