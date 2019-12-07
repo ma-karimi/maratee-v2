@@ -52,7 +52,7 @@ class Botanical extends BaseModel implements HasMedia
         'internal_habitat_id' => 'integer|exists:internal_habitats,id',
         'entrance_to_garden_id' => 'integer',
         'growth_rate_id' => 'integer',
-        'first_flowering' => 'date',
+        'first_flowering' => 'nullable|date',
 //        'first_seeding' => 'date',
         'seed_rate_id' => 'integer',
         'seed_formation_id' => 'integer',
