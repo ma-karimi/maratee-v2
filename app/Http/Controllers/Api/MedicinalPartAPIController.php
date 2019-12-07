@@ -59,11 +59,7 @@ class MedicinalPartAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $medicinalParts = $this->medicinalPartRepository->paginate(
-            $request->get('per_page'),
-            $request->except('per_page'),
-            $request->get('relations')
-        );
+        $medicinalParts = $this->medicinalPartRepository->all();
 
         return $this->sendResponse($medicinalParts->toArray(), 'Medicinal Parts retrieved successfully');
     }
