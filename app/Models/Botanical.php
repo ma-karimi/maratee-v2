@@ -128,6 +128,11 @@ class Botanical extends BaseModel implements HasMedia
         return !empty($this->attributes['monopoly_of_iran_id']) ? Arr::get(self::BOOLEAN, $this->attributes['monopoly_of_iran_id']) : null;
     }
 
+    public function getEntranceToGardenAttribute()
+    {
+        return !empty($this->attributes['entrance_to_garden_id']) ? Arr::get(self::ENTRANCE_TO_GARDEN, $this->attributes['entrance_to_garden_id']) : null;
+    }
+
     public function getSoilAttribute()
     {
         return !empty($this->attributes['soil_id']) ? Arr::get(self::SOIL, $this->attributes['soil_id']) : null;
