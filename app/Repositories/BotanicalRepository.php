@@ -81,6 +81,7 @@ class BotanicalRepository extends BaseRepository
         $this->storeProperties($input['propagations'], 3, $botanical->id);
         $this->storeProperties($input['planting_conditions'], 4, $botanical->id);
 
+        return $botanical;
     }
 
     /**
@@ -185,6 +186,7 @@ class BotanicalRepository extends BaseRepository
         $this->storeProperties($input['propagations'], 3, $botanical->id);
         $this->storeProperties($input['planting_conditions'], 4, $botanical->id);
 
+        return $botanical;
     }
 
 }
