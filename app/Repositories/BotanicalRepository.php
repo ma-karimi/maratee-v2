@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Botanical;
+use App\Models\BotanicalProperty;
 use Illuminate\Container\Container as Application;
 
 /**
@@ -40,10 +41,11 @@ class BotanicalRepository extends BaseRepository
      * @param Application $app
      * @param BotanicalIrrigationRepository $botanicalIrrigationRepo
      * @param LocationRepository $locationRepo
-     * @param BotanicalPropertyRepository $botanicalPropertyRepo
+     * @param BotanicalProperty $botanicalPropertyRepo
+     * @param DistributionHubRepository $distributionHubRepo
      * @throws \Exception
      */
-    public function __construct(Application $app, BotanicalIrrigationRepository $botanicalIrrigationRepo, LocationRepository $locationRepo, BotanicalPropertyRepository $botanicalPropertyRepo, DistributionHubRepository $distributionHubRepo)
+    public function __construct(Application $app, BotanicalIrrigationRepository $botanicalIrrigationRepo, LocationRepository $locationRepo, BotanicalProperty $botanicalPropertyRepo, DistributionHubRepository $distributionHubRepo)
     {
         parent::__construct($app);
         $this->botanicalIrrigationRepo = $botanicalIrrigationRepo;
