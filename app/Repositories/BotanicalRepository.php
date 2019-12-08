@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Botanical;
 use App\Models\BotanicalProperty;
 use Illuminate\Container\Container as Application;
+use Illuminate\Support\Arr;
 
 /**
  * Class BotanicalRepository
@@ -20,9 +21,9 @@ class BotanicalRepository extends BaseRepository
 
     ];
     /**
-     * @var BotanicalIrrigationRepository
+     * @var BotanicalIrrigation
      */
-    private $botanicalIrrigationRepo;
+    private $botanicalIrrigation;
     /**
      * @var LocationRepository
      */
@@ -45,10 +46,10 @@ class BotanicalRepository extends BaseRepository
      * @param DistributionHubRepository $distributionHubRepo
      * @throws \Exception
      */
-    public function __construct(Application $app, BotanicalIrrigationRepository $botanicalIrrigationRepo, LocationRepository $locationRepo, BotanicalProperty $botanicalPropertyRepo, DistributionHubRepository $distributionHubRepo)
+    public function __construct(Application $app, BotanicalIrrigation $botanicalIrrigation, LocationRepository $locationRepo, BotanicalProperty $botanicalPropertyRepo, DistributionHubRepository $distributionHubRepo)
     {
         parent::__construct($app);
-        $this->botanicalIrrigationRepo = $botanicalIrrigationRepo;
+        $this->botanicalIrrigation = $botanicalIrrigation;
         $this->locationRepo = $locationRepo;
         $this->botanicalPropertyRepo = $botanicalPropertyRepo;
         $this->distributionHubRepo = $distributionHubRepo;
@@ -187,15 +188,9 @@ class BotanicalRepository extends BaseRepository
         return parent::update($this->primaryData($input), $id);
     }
 
-    public function storeBotanicalIrrigation(array $input, $id)
+    public function storeBotanicalIrrigation(array $input)
     {
-        if (!empty($input['botanical_irrigation_id'])) {
-            $irrigation = $this->botanicalIrrigationRepo->update($input, $input['botanical_irrigation_id']);
-        } else {
-            $irrigation =  $this->botanicalIrrigationRepo->create($input);
-        }
-
-        return $irrigation;
+        return $this->botanicalIrrigation->updateOrCreate(['botanical_id' => $input['botanical_id']], Arr::except($input, 'botanical_id'));
     }
 
 }

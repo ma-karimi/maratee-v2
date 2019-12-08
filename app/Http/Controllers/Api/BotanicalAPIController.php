@@ -653,7 +653,7 @@ class BotanicalAPIController extends AppBaseController
             return $this->sendError('Botanical not found');
         }
 
-        $botanical = $this->botanicalRepository->storeBotanicalIrrigation($input, $id);
+        $botanical = $this->botanicalRepository->storeBotanicalIrrigation($input);
 
         return $this->sendResponse($botanical->toArray(), 'Botanical updated successfully');
     }
