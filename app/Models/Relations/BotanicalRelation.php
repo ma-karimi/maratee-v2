@@ -15,6 +15,7 @@ use App\Models\Geographical;
 use App\Models\InternalHabitat;
 use App\Models\Organization;
 use App\Models\Protection;
+use App\Models\Taxonomy;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait BotanicalRelation
@@ -69,6 +70,11 @@ trait BotanicalRelation
     public function protection()
     {
         return $this->belongsTo(Protection::class);
+    }
+
+    public function taxonomy()
+    {
+        return $this->belongsTo(Taxonomy::class);
     }
 
     public function distributions(): MorphToMany
