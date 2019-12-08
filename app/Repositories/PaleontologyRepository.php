@@ -229,13 +229,13 @@ class PaleontologyRepository extends BaseRepository
 
 
         $this->paleontologySample
-            ->where('paleontolgy_id', $id)
+            ->where('paleontology_id', $id)
             ->whereNotIn('sample_id', $samples)
             ->delete();
         if (count($samples)) {
             foreach ($samples as $item) {
                 $this->actorHubRepo->firstOrCreate([
-                    'paleontolgy_id' => $id,
+                    'paleontology_id' => $id,
                     'sample_id' => (int)$item,
                 ]);
             }
