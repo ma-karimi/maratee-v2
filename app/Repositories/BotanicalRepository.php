@@ -190,9 +190,9 @@ class BotanicalRepository extends BaseRepository
     public function storeBotanicalIrrigation(array $input, $id)
     {
         if (!empty($input['botanical_irrigation_id'])) {
-            $irrigation = $this->locationRepo->update($input, $input['botanical_irrigation_id']);
+            $irrigation = $this->botanicalIrrigationRepo->update($input, $input['botanical_irrigation_id']);
         } else {
-            $irrigation =  $this->locationRepo->create($input);
+            $irrigation =  $this->botanicalIrrigationRepo->create($input);
         }
 
         return $irrigation;
