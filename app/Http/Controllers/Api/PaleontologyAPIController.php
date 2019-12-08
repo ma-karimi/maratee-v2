@@ -597,7 +597,7 @@ class PaleontologyAPIController extends AppBaseController
             return $this->sendError('Paleontology not found');
         }
 
-        $paleontology = $this->paleontologyRepository->update($request, $id);
+        $paleontology = $this->paleontologyRepository->storeLocality($request, $request->filled('locality_id') ? $request['locality_id'] : null);
 
         return $this->sendResponse($paleontology->toArray(), 'Paleontology Locality updated successfully');
     }

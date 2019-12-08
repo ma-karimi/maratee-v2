@@ -194,11 +194,16 @@ class PaleontologyRepository extends BaseRepository
     public function storeLocality($input, $locality_id = null)
     {
         $location = $this->storeLocation($input->all(), $input->filled('location_id') ? $input['location_id'] : null);
-        $input['location_id'] = $location->id;
-        $data = Arr::only($input->all(), [
-            'location_id', 'paleontology_id', 'formation', 'layer', 'stratigraphy', 'lithology', 'fauna'
-        ]);
+        $data = [
+            'paleontology_id' => $input['paleontology_id'] ?? null,
+            'formation' => $input['formation'] ?? null,
+            'layer' => $input['layer'] ?? null,
+            'stratigraphy' => $input['stratigraphy'] ?? null,
+            'lithology' => $input['lithology'] ?? null,
+            'fauna' => $input['fauna'] ?? null,
+        ];
 
+        $data['location_id'] = $location->id;
         $data['description'] = $input['locality_description'];
         if ($locality_id) {
             return $this->localityRepo->update($data, $locality_id);
