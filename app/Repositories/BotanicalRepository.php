@@ -150,7 +150,7 @@ class BotanicalRepository extends BaseRepository
         $this->storeProperties($input['usages'], 2, $id);
         $this->storeProperties($input['propagations'], 3, $id);
         $this->storeProperties($input['planting_conditions'], 4, $id);
-        return $this->update([
+        return parent::update([
             'cycle_id' => $input['cycle_id'] ?? null,
             'protection_id' => $input['protection_id'] ?? null,
             'height' => $input['height'] ?? null,
