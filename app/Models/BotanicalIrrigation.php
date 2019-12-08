@@ -36,8 +36,6 @@ class BotanicalIrrigation extends BaseModel
      */
     protected $table = 'botanical_irrigations';
 
-    protected $with = ['irrigation'];
-
     /**
      * @return BelongsTo
      */
