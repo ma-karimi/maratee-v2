@@ -116,27 +116,6 @@ class BotanicalRepository extends BaseRepository
         ];
     }
 
-    private function storeProperties($properties, $type_id, $botanical_id)
-    {
-        $properties = is_array($properties) ? $properties : explode(',', $properties);
-
-
-        $this->botanicalPropertyRepo
-            ->where('botanical_id', $botanical_id)
-            ->where('type_id', $type_id)
-            ->whereNotIn('property_id', $properties)
-            ->delete();
-        if (count($properties) && !empty($properties[0])) {
-            foreach ($properties as $item) {
-                $this->botanicalPropertyRepo->firstOrCreate([
-                    'botanical_id' => $botanical_id,
-                    'type_id' => $type_id,
-                    'property_id' => (int)$item,
-                ]);
-            }
-        }
-    }
-
     public function storeLocation($input, $id)
     {
         if (!empty($input['location_id'])) {
@@ -172,13 +151,34 @@ class BotanicalRepository extends BaseRepository
         $this->storeProperties($input['propagations'], 3, $id);
         $this->storeProperties($input['planting_conditions'], 4, $id);
         return $this->update([
-            $input['cycle_id'] ?? null,
-            $input['protection_id'] ?? null,
-            $input['height'] ?? null,
-            $input['flower_color'] ?? null,
-            $input['fruit_color'] ?? null,
-            $input['foliage_color'] ?? null,
+            'cycle_id' => $input['cycle_id'] ?? null,
+            'protection_id' => $input['protection_id'] ?? null,
+            'height' => $input['height'] ?? null,
+            'flower_color' => $input['flower_color'] ?? null,
+            'fruit_color' => $input['fruit_color'] ?? null,
+            'foliage_color' => $input['foliage_color'] ?? null,
         ], $id);
+    }
+
+    private function storeProperties($properties, $type_id, $botanical_id)
+    {
+        $properties = is_array($properties) ? $properties : explode(',', $properties);
+
+
+        $this->botanicalPropertyRepo
+            ->where('botanical_id', $botanical_id)
+            ->where('type_id', $type_id)
+            ->whereNotIn('property_id', $properties)
+            ->delete();
+        if (count($properties) && !empty($properties[0])) {
+            foreach ($properties as $item) {
+                $this->botanicalPropertyRepo->firstOrCreate([
+                    'botanical_id' => $botanical_id,
+                    'type_id' => $type_id,
+                    'property_id' => (int)$item,
+                ]);
+            }
+        }
     }
 
     public function update($input, $id)

@@ -684,7 +684,7 @@ class BotanicalAPIController extends AppBaseController
             return $this->sendError('Botanical not found');
         }
 
-        $botanical = $this->botanicalRepository->storeLocation($input, $id);
+        $botanical = $this->botanicalRepository->updateInfo($input, $id);
 
         return $this->sendResponse($botanical->toArray(), 'Botanical updated successfully');
     }
