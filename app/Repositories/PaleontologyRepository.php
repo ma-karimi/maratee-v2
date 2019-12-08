@@ -234,7 +234,7 @@ class PaleontologyRepository extends BaseRepository
             ->delete();
         if (count($samples)) {
             foreach ($samples as $item) {
-                $this->actorHubRepo->firstOrCreate([
+                $this->paleontologySample->firstOrCreate([
                     'paleontology_id' => $id,
                     'sample_id' => (int)$item,
                 ]);
