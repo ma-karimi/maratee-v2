@@ -58,6 +58,11 @@ trait BotanicalRelation
         return $this->belongsTo(General::class)->whereType('habitat');
     }
 
+    public function generalOrigin()
+    {
+        return $this->belongsTo(General::class)->whereType('origin');
+    }
+
     public function internalHabitat()
     {
         return $this->belongsTo(InternalHabitat::class);
