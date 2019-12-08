@@ -78,6 +78,27 @@ class PaleontologyRepository extends BaseRepository
             'catalog_no', 'specimen_no', 'field_no', 'barcode_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'location_in_collection']));
 
         $this->storePaleontologySample($input, $paleontology->id);
+
+        return $paleontology;
+    }
+
+    private function storePaleontologySample($input, $id)
+    {
+        $samples = is_array($input['samples']) ? $input['samples'] : explode(',', $input['samples']);
+
+
+        $this->paleontologySample
+            ->where('paleontology_id', $id)
+            ->whereNotIn('sample_id', $samples)
+            ->delete();
+        if (count($samples)) {
+            foreach ($samples as $item) {
+                $this->paleontologySample->firstOrCreate([
+                    'paleontology_id' => $id,
+                    'sample_id' => (int)$item,
+                ]);
+            }
+        }
     }
 
     public function storeGeologyAndRemark($input, $paleontology_id)
@@ -163,11 +184,11 @@ class PaleontologyRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        parent::update(Arr::only($input->all(), [
+        $paleontology = parent::update(Arr::only($input->all(), [
             'catalog_no', 'specimen_no', 'field_no', 'barcode_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'location_in_collection']), $id);
 
         $this->storePaleontologySample($input, $id);
-
+        return $paleontology;
     }
 
     public function storeLocality($input, $locality_id = null)
@@ -221,24 +242,5 @@ class PaleontologyRepository extends BaseRepository
         return Arr::only($input, [
             'geology_age_era_id', 'geology_age_period_id', 'geology_age_epoch_id', 'geology_age_stage_id', 'preservation', 'pieces', 'color', 'element', 'treatment_history', 'access_code', 'additional_info', 'update_frequency', 'last_update', 'excavation', 'description'
         ]);
-    }
-
-    private function storePaleontologySample($input, $id)
-    {
-        $samples = is_array($input['samples']) ? $input['samples'] : explode(',', $input['samples']);
-
-
-        $this->paleontologySample
-            ->where('paleontology_id', $id)
-            ->whereNotIn('sample_id', $samples)
-            ->delete();
-        if (count($samples)) {
-            foreach ($samples as $item) {
-                $this->paleontologySample->firstOrCreate([
-                    'paleontology_id' => $id,
-                    'sample_id' => (int)$item,
-                ]);
-            }
-        }
     }
 }
