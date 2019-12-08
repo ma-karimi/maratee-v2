@@ -66,7 +66,7 @@ class BotanicalAPIController extends AppBaseController
         $botanicals = $this->botanicalRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            $this->getFieldRelations()
         );
 
         return $this->sendResponse($botanicals->toArray(), 'Botanicals retrieved successfully');
@@ -339,7 +339,7 @@ class BotanicalAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Botanical $botanical */
-        $botanical = $this->botanicalRepository->find($id, \request()->get('relations'));
+        $botanical = $this->botanicalRepository->find($id, $this->getFieldRelations());
 
         if ($botanical === null) {
             return $this->sendError('Botanical not found');
@@ -687,5 +687,10 @@ class BotanicalAPIController extends AppBaseController
         $botanical = $this->botanicalRepository->storeLocation($input, $id);
 
         return $this->sendResponse($botanical->toArray(), 'Botanical updated successfully');
+    }
+
+    private function getFieldRelations()
+    {
+        return ['distributions', 'organization', 'protection', 'internalHabitat', 'generalSamples', 'generalHabitat', 'botanicalIrrigation', 'plantingConditions', 'propagations', 'usages', 'values', 'operations', 'media'];
     }
 }

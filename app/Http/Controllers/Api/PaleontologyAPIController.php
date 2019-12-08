@@ -66,7 +66,7 @@ class PaleontologyAPIController extends AppBaseController
         $paleontologies = $this->paleontologyRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->fieldRelations()
+            $this->getFieldRelations()
         );
 
         return $this->sendResponse($paleontologies->toArray(), 'Paleontologies retrieved successfully');
@@ -215,7 +215,7 @@ class PaleontologyAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Paleontology $paleontology */
-        $paleontology = $this->paleontologyRepository->find($id, $this->fieldRelations());
+        $paleontology = $this->paleontologyRepository->find($id, $this->getFieldRelations());
 
         if (empty($paleontology)) {
             return $this->sendError('Paleontology not found');
@@ -394,8 +394,8 @@ class PaleontologyAPIController extends AppBaseController
         return $this->sendResponse($id, 'Paleontology deleted successfully');
     }
 
-    private function fieldRelations(){
-        return ['taxonomy', 'generalClass', 'generalOrder', 'geologyAgePeriod', 'geologyAgeStage', 'geologyAgeEpoch', 'geologyAgeEra', 'generalPlantType', 'locality.location', 'maps', 'collect', 'determine', 'media'];
+    private function getFieldRelations(){
+        return ['taxonomy', 'generalClass', 'generalOrder', 'geologyAgePeriod', 'geologyAgeStage', 'geologyAgeEpoch', 'geologyAgeEra', 'generalPlantType', 'locality.location', 'maps', 'collect', 'determine', 'media', 'generalSamples'];
     }
 
 

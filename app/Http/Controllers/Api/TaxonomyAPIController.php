@@ -64,7 +64,7 @@ class TaxonomyAPIController extends AppBaseController
         $taxonomies = $this->taxonomyRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->fieldRelations()
+            $this->getFieldRelations()
         );
 
         return $this->sendResponse($taxonomies->toArray(), 'Taxonomies retrieved successfully');
@@ -211,7 +211,7 @@ class TaxonomyAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Taxonomy $taxonomy */
-        $taxonomy = $this->taxonomyRepository->find($id, $this->fieldRelations());
+        $taxonomy = $this->taxonomyRepository->find($id, $this->getFieldRelations());
 
         if ($taxonomy === null) {
             return $this->sendError('Taxonomy not found');
@@ -442,7 +442,7 @@ class TaxonomyAPIController extends AppBaseController
     /**
      * @return array
      */
-    private function fieldRelations(): array
+    private function getFieldRelations(): array
     {
         return ['family', 'genus', 'species.authors', 'subspecies.authors', 'variety.authors', 'scientific'];
     }
@@ -453,7 +453,7 @@ class TaxonomyAPIController extends AppBaseController
             [],
             null,
             null,
-            $this->fieldRelations()
+            $this->getFieldRelations()
         );
         return Excel::create('ExportTaxonomyList-' . date('Y-m-d-H-i-s'), function ($excel) use ($taxonomies) {
 

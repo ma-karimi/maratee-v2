@@ -11,9 +11,15 @@ namespace App\Models\Accessor;
 
 trait PaleontologyAccessor
 {
-    public function getScientificNameAttribute()
-    {
-        return $this->plant->name;
-    }
 
+    public function getSamplesAttribute()
+    {
+        $samples = null;
+
+        if ($this->relationLoaded('generalSamples') && $this->generalSamples->count()) {
+            $samples = $this->generalSamples->implode('name', ' & ');
+        }
+
+        return $samples;
+    }
 }

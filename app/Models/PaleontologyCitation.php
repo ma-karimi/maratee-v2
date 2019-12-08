@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 /**
  * @SWG\Definition(
  *      definition="PaleontologyCitation",
- *      required={"paleontology_id","authro"}
+ *      required={"paleontology_id","authors"}
  * )
  */
 
@@ -25,16 +25,17 @@ class PaleontologyCitation extends BaseModel
 
 
     public static $rules = [
-        'year' => 'integer',
-        'volume' => 'string',
-        'pages' => 'string',
-        'plates' => 'string',
-        'publication_name' => 'string',
-        'figures_number' => 'date',
+        'year' => 'nullable|integer',
+        'volume' => 'nullable|string',
+        'pages' => 'nullable|string',
+        'plates' => 'nullable|string',
+        'publication_name' => 'nullable|string',
+        'figures_number' => 'nullable|date',
         'paleontology_id' => 'required|exists:paleontologies,id',
-        'author_id' => 'integer|exists:actors,id',
     ];
 
+    protected $with = ['actors'];
+    protected $appends = ['authors'];
 
     /**
      * @return MorphToMany
@@ -45,5 +46,16 @@ class PaleontologyCitation extends BaseModel
             'actor_hubs')
             ->whereNull('actor_hubs.deleted_at')
             ->withTimestamps();
+    }
+
+    public function getAuthorsAttribute()
+    {
+        $authors = null;
+
+        if ($this->relationLoaded('actors') && $this->actors->count()) {
+            $authors = $this->actors->implode('name', ' & ');
+        }
+
+        return $authors;
     }
 }

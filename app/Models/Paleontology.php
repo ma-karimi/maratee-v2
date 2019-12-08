@@ -7,7 +7,6 @@ use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ActionRelation;
 use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -22,7 +21,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Paleontology extends BaseModel implements HasMedia
 {
-    use PaleontologyAccessor, ActionRelation, ArticleRelation,HasMediaTrait;
+    use PaleontologyAccessor, ActionRelation, ArticleRelation, HasMediaTrait;
     public static $rules = [
 
 
@@ -52,6 +51,8 @@ class Paleontology extends BaseModel implements HasMedia
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
+    protected $appends = ['samples'];
+
     /**
      * @return BelongsTo
      */
@@ -59,6 +60,7 @@ class Paleontology extends BaseModel implements HasMedia
     {
         return $this->belongsTo(GeologyAge::class)->ofType(2);
     }
+
     /**
      * @return BelongsTo
      */
@@ -66,6 +68,7 @@ class Paleontology extends BaseModel implements HasMedia
     {
         return $this->belongsTo(GeologyAge::class)->ofType(4);
     }
+
     /**
      * @return BelongsTo
      */
@@ -73,6 +76,7 @@ class Paleontology extends BaseModel implements HasMedia
     {
         return $this->belongsTo(GeologyAge::class)->ofType(3);
     }
+
     /**
      * @return BelongsTo
      */
@@ -80,6 +84,7 @@ class Paleontology extends BaseModel implements HasMedia
     {
         return $this->belongsTo(GeologyAge::class)->ofType(1);
     }
+
     /**
      * @return BelongsTo
      */
@@ -120,6 +125,11 @@ class Paleontology extends BaseModel implements HasMedia
         return $this->belongsTo(General::class, 'general_order_id');
     }
 
+    public function generalSamples()
+    {
+        return $this->belongsToMany(General::class, 'palebotany_samples')->whereType('sample');
+    }
+
     /**
      * @return BelongsTo
      */
@@ -158,5 +168,10 @@ class Paleontology extends BaseModel implements HasMedia
     public function maps(): HasMany
     {
         return $this->hasMany(PaleontologyMap::class)->latest();
+    }
+
+    public function citations(): HasMany
+    {
+        return $this->hasMany(PaleontologyCitation::class);
     }
 }

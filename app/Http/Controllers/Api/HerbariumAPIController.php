@@ -62,18 +62,18 @@ class HerbariumAPIController extends AppBaseController
         $herbariums = $this->herbariumRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('is_flowering') == 1 ? $this->fieldRelations() : $this->fieldNonFlowerRelations()
+            $request->get('is_flowering') == 1 ? $this->getFieldRelations() : $this->getFieldNonFlowerRelations()
         );
 
         return $this->sendResponse($herbariums->toArray(), 'Herbariums retrieved successfully');
     }
 
-    public function fieldRelations()
+    public function getFieldRelations()
     {
         return ['taxonomy', 'organization', 'media', 'determine', 'collect', 'location'];
     }
 
-    private function fieldNonFlowerRelations()
+    private function getFieldNonFlowerRelations()
     {
         return ['generalPhytogeography', 'taxonomy', 'generalHabitat', 'media', 'generalSubstrate.parent', 'collect.actors', 'determine.actors', 'transactions', 'location'];
     }
@@ -206,7 +206,7 @@ class HerbariumAPIController extends AppBaseController
             return $this->sendError('Herbarium not found');
         }
 
-        $herbarium = $herbarium->is_flowering == 1 ? $herbarium->load($this->fieldRelations()) : $herbarium->load($this->fieldNonFlowerRelations());
+        $herbarium = $herbarium->is_flowering == 1 ? $herbarium->load($this->getFieldRelations()) : $herbarium->load($this->getFieldNonFlowerRelations());
         return $this->sendResponse($herbarium->toArray(), 'Herbarium retrieved successfully');
     }
 
@@ -417,7 +417,7 @@ class HerbariumAPIController extends AppBaseController
             [],
             null,
             null,
-            $request->get('is_flowering') == 1 ? $this->fieldRelations() : $this->fieldNonFlowerRelations()
+            $request->get('is_flowering') == 1 ? $this->getFieldRelations() : $this->getFieldNonFlowerRelations()
         );
 
 
