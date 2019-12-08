@@ -59,11 +59,7 @@ class GeologyAgeAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $geologyAges = $this->geologyAgeRepository->all(
-            $request->get('per_page'),
-            $request->except('per_page'),
-            $request->get('relations')
-        );
+        $geologyAges = $this->geologyAgeRepository->all();
 
         return $this->sendResponse($geologyAges->toArray(), 'Geology Ages retrieved successfully');
     }
