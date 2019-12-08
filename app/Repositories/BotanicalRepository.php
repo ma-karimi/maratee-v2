@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Botanical;
+use App\Models\BotanicalIrrigation;
 use App\Models\BotanicalProperty;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
@@ -40,7 +41,7 @@ class BotanicalRepository extends BaseRepository
     /**
      * BotanicalRepository constructor.
      * @param Application $app
-     * @param BotanicalIrrigationRepository $botanicalIrrigationRepo
+     * @param BotanicalIrrigation $botanicalIrrigation
      * @param LocationRepository $locationRepo
      * @param BotanicalProperty $botanicalPropertyRepo
      * @param DistributionHubRepository $distributionHubRepo
