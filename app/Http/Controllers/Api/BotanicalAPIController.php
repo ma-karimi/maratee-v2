@@ -691,6 +691,6 @@ class BotanicalAPIController extends AppBaseController
 
     private function getFieldRelations()
     {
-        return ['distributions', 'organization', 'protection', 'internalHabitat', 'generalHabitat', 'botanicalIrrigation', 'plantingConditions', 'propagations', 'usages', 'values', 'operations', 'media', 'taxonomy'];
+        return ['distributions', 'organization', 'protection', 'internalHabitat', 'generalHabitat', 'botanicalIrrigation', 'plantingConditions', 'propagations', 'usages', 'values', 'operations', 'media', 'taxonomy', 'locations'];
     }
 }

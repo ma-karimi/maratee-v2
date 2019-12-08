@@ -13,6 +13,7 @@ use App\Models\BotanicalProperty;
 use App\Models\General;
 use App\Models\Geographical;
 use App\Models\InternalHabitat;
+use App\Models\Location;
 use App\Models\Organization;
 use App\Models\Protection;
 use App\Models\Taxonomy;
@@ -81,6 +82,14 @@ trait BotanicalRelation
     {
         return $this->morphToMany(Geographical::class, 'distributable', 'distribution_hubs')
             ->whereNull('distribution_hubs.deleted_at')
+            ->withTimestamps();
+    }
+
+
+    public function locations(): MorphToMany
+    {
+        return $this->morphToMany(Location::class, 'locationable', 'location_hubs')
+            ->whereNull('location_hubs.deleted_at')
             ->withTimestamps();
     }
 }
