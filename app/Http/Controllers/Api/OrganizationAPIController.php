@@ -60,11 +60,7 @@ class OrganizationAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $organizations = $this->organizationRepository->paginate(
-            $request->get('per_page'),
-            $request->except('per_page'),
-            $request->get('relations')
-        );
+        $organizations = $this->organizationRepository->all();
 
         return $this->sendResponse($organizations->toArray(), 'Organizations retrieved successfully');
     }

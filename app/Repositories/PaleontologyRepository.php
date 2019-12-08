@@ -238,7 +238,7 @@ class PaleontologyRepository extends BaseRepository
         if (request()->hasFile('file')) {
             $media_record = $model->addMedia(request()->file('file'))->toMediaCollection(in_array($media_input['media_type'], [1, 2]) ? 'images' : 'media');
 
-            Media::find($media_record['order_column'])->update($media_input);
+            $media_record->update($media_input);
         }
     }
 

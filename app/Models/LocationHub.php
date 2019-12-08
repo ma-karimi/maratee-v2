@@ -20,6 +20,8 @@ class LocationHub extends BaseModel
      */
     protected $table = 'location_hubs';
 
+    protected $with = ['location'];
+
     public function location()
     {
         return $this->belongsTo(Location::class);

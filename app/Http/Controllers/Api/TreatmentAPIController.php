@@ -60,11 +60,7 @@ class TreatmentAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $treatments = $this->treatmentRepository->paginate(
-            $request->get('per_page'),
-            $request->except('per_page'),
-            $request->get('relations')
-        );
+        $treatments = $this->treatmentRepository->all();
 
         return $this->sendResponse($treatments->toArray(), 'Treatments retrieved successfully');
     }

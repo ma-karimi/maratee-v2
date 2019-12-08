@@ -25,7 +25,7 @@ class Media extends BaseMedia
     public static $messages = [];
     protected $appends=['full_url', 'media_type_name'];
 
-    public const MEDIA_TYPE = [1 => 'sketch', 2 => 'picture'];
+    public const MEDIA_TYPE = [1 => 'sketch', 2 => 'picture', 3=>'relevant correspondence', 4=>'treatment document', 5=>'expense documents'];
     public static $linguistically = [];
 
 
