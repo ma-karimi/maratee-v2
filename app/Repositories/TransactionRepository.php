@@ -50,10 +50,11 @@ class TransactionRepository extends BaseRepository
                 'reference' => $input['reference'] ?? null,
             ];
         }
+
         $model = $this->find($id);
         //store media
         if (request()->hasFile('file')) {
-            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('media');
+            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection(in_array($media_input['media_type'], [1, 2]) ? 'images' : 'media');
             $media_record->update($media_input);
         }
         return $model;
