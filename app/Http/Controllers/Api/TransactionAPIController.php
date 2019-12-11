@@ -555,7 +555,7 @@ class TransactionAPIController extends AppBaseController
             return $this->sendError('Transaction not found');
         }
 
-        $transaction = $this->transactionRepository->update(\request()->all(), $id);
+        $transaction = $this->transactionRepository->storeMedia(\request()->all(), $id);
 
         return $this->sendResponse($transaction->toArray(), 'Transaction Media updated successfully');
     }
