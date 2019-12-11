@@ -43,7 +43,7 @@ class Transaction extends BaseModel implements HasMedia
         'sample_impression_id' => 'nullable|numeric',
     ];
     protected $appends = ['type', 'visit', 'mode', 'sample_impression'];
-    protected $with = ['organization'];
+    protected $with = ['organization', 'media'];
     /**p
      * @return BelongsTo
      */
