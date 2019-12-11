@@ -37,23 +37,20 @@ class TransactionRepository extends BaseRepository
         return Transaction::class;
     }
 
-    public function update($input, $id)
+    public function storeMedia($input, $id)
     {
         $media_input = [];
         if (request()->hasFile('file')) {
             $media_input = [
                 'date' => $input['date'] ?? null,
-                'user_id' => $input['user_id'] ?? null,
-                'location_id' => $input['location_id'] ?? null,
+//                'user_id' => $input['user_id'] ?? null,
+//                'location_id' => $input['location_id'] ?? null,
                 'description' => $input['media_description'] ?? null,
                 'media_type' => $input['media_type'] ?? 2,
                 'reference' => $input['reference'] ?? null,
             ];
         }
-        $model_input = Arr::except($input, array_keys($media_input));
-        $model_input['description'] = $input['description'] ?? null;
-        unset($model_input['file']);
-        $model = parent::update($model_input, $id);
+        $model = $this->find($id);
         //store media
         if (request()->hasFile('file')) {
             $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('media');

@@ -542,6 +542,21 @@ class TransactionAPIController extends AppBaseController
      */
     private function getFieldRelation(): array
     {
-        return ['organization'];
+        return ['organization', 'media'];
+    }
+
+    public function media($id)
+    {
+
+        /** @var Transaction $transaction */
+        $transaction = $this->transactionRepository->find($id);
+
+        if (empty($transaction)) {
+            return $this->sendError('Transaction not found');
+        }
+
+        $transaction = $this->transactionRepository->update(\request()->all(), $id);
+
+        return $this->sendResponse($transaction->toArray(), 'Transaction Media updated successfully');
     }
 }

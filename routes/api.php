@@ -232,6 +232,7 @@ Route::apiResource('medicinal_parts', 'MedicinalPartAPIController');
 
 Route::apiResource('medicinal_plant_types', 'MedicinalPlantTypeAPIController');
 
+Route::post('transactions/{id}/media', 'TransactionAPIController@media');
 Route::apiResource('transactions', 'TransactionAPIController');
 
 Route::apiResource('transaction_evidences', 'TransactionEvidenceAPIController');
