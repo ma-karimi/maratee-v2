@@ -31,6 +31,6 @@ trait TransactionAccessor
 
     public function getSampleImpressionAttribute()
     {
-        return !empty($this->attributes['sample_impression_id']) ? Arr::get(self::BOOLEAN, $this->attributes['sample_impression_id']) : null;
+        return Arr::get(self::BOOLEAN, $this->attributes['sample_impression_id']);
     }
 }

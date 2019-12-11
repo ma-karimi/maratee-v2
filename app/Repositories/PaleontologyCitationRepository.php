@@ -60,7 +60,7 @@ class PaleontologyCitationRepository extends BaseRepository
     {
         $citation = parent::create(Arr::except($input, 'authors'));
 
-        $this->setAuthors($citation);
+        $this->setAuthors($input, $citation->id);
 
         return $citation;
     }
@@ -69,19 +69,22 @@ class PaleontologyCitationRepository extends BaseRepository
     {
         $citation = parent::update(Arr::except($input, 'authors'), $id);
 
-        $this->setAuthors($citation);
+        $this->setAuthors($input, $citation->id);
 
         return $citation;
     }
 
     /**
-     * @param $citation
+     * @param $input
+     * @param $citation_id
      */
-    private function setAuthors($citation)
+    private function setAuthors($input, $citation_id)
     {
-        $authors = request()->filled('authors') ? request()->get('authors') : [];
+        $authors = is_array($input['authors']) ? $input['authors'] : explode(',', $input['authors']);
+
+
         $this->actorHub->where([
-            'actorable_id' => $citation->id,
+            'actorable_id' => $citation_id,
             'actorable_type' => PaleontologyCitation::class
         ])
             ->whereNotIn('actor_id', $authors)
@@ -91,7 +94,7 @@ class PaleontologyCitationRepository extends BaseRepository
                 $this->actorHub->firstOrCreate([
                     'actor_id' => $item,
                     'actorable_type' => PaleontologyCitation::class,
-                    'actorable_id' => $citation->id,
+                    'actorable_id' => $citation_id,
                 ]);
             }
         }

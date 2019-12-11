@@ -29,7 +29,7 @@ class PaleontologyCitation extends BaseModel
         'volume' => 'nullable|string',
         'pages' => 'nullable|string',
         'plates' => 'nullable|string',
-        'publication_name' => 'nullable|string',
+        'publication_name' => 'required|string',
         'figures_number' => 'nullable|date',
         'paleontology_id' => 'required|exists:paleontologies,id',
     ];
