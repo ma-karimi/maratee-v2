@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantApplicationAPIRequest;
-use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantCollectAPIRequest;
-use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantConstituentAPIRequest;
 use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantProductAPIRequest;
-use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantReferenceAPIRequest;
+use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantAPIRequest;
 use App\Models\MedicinalPlant;
 use App\Repositories\MedicinalPlantRepository;
 use Illuminate\Http\Request;
@@ -77,12 +75,12 @@ class MedicinalPlantAPIController extends AppBaseController
      */
     private function getFieldRelations(): array
     {
-        return ['taxonomy', 'medicinalPlantConstituents', 'article', 'provinces', 'location', 'medicine.media', 'product.media', 'aerialType', 'groundType', 'foodIndustry', 'otherIndustry', 'treatment', 'industrialPotential', 'origin', 'habitat', 'distillation', 'extraction', 'analyse', 'secondaryMetabolite', 'effectiveMaterial', 'phenology', 'pharmaceuticalForm', 'collect', 'determine'];
+        return ['taxonomy', 'provinces', 'aerialType', 'groundType', 'foodIndustries', 'otherIndustries', 'industrialPotentials', 'origin', 'habitat', 'locations'];
     }
 
 
     /**
-     * @param MedicinalPlantProductAPIRequest $request
+     * @param MedicinalPlantAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -356,8 +354,9 @@ class MedicinalPlantAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(MedicinalPlantProductAPIRequest $request)
+    public function store(MedicinalPlantAPIRequest $request)
     {
         $input = $request->all();
 
@@ -418,7 +417,7 @@ class MedicinalPlantAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param MedicinalPlantProductAPIRequest $request
+     * @param MedicinalPlantAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -706,8 +705,9 @@ class MedicinalPlantAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(MedicinalPlantProductAPIRequest $request, $id)
+    public function update(MedicinalPlantAPIRequest $request, $id)
     {
         $input = $request->all();
 
@@ -793,53 +793,6 @@ class MedicinalPlantAPIController extends AppBaseController
         return $this->sendResponse($medicinalPlant->toArray(), 'MedicinalPlant updated successfully');
     }
 
-    public function storeReference(MedicinalPlantReferenceAPIRequest $request, $id)
-    {
-        $input = $request->all();
-
-        /** @var MedicinalPlant $medicinalPlant */
-        $medicinalPlant = $this->medicinalPlantRepository->find($id, []);
-
-        if ($medicinalPlant === null) {
-            return $this->sendError('Medicinal Plant not found');
-        }
-
-        $medicinalPlant = $this->medicinalPlantRepository->storeReference($input, $id);
-
-        return $this->sendResponse($medicinalPlant->toArray(), 'MedicinalPlant updated successfully');
-    }
-
-    public function storeConstituent(MedicinalPlantConstituentAPIRequest $request, $id)
-    {
-        $input = $request->all();
-
-        /** @var MedicinalPlant $medicinalPlant */
-        $medicinalPlant = $this->medicinalPlantRepository->find($id, []);
-
-        if ($medicinalPlant === null) {
-            return $this->sendError('Medicinal Plant not found');
-        }
-
-        $this->medicinalPlantRepository->storeConstituent($input, $id);
-
-        return $this->sendResponse($medicinalPlant->toArray(), 'MedicinalPlant updated successfully');
-    }
-
-    public function storePlantLocationOrDetectOrCollect(MedicinalPlantCollectAPIRequest $request, $id)
-    {
-        $input = $request->all();
-
-        /** @var MedicinalPlant $medicinalPlant */
-        $medicinalPlant = $this->medicinalPlantRepository->find($id, []);
-
-        if ($medicinalPlant === null) {
-            return $this->sendError('Medicinal Plant not found');
-        }
-
-        $medicinalPlant = $this->medicinalPlantRepository->storePlantLocationOrDetectOrCollect($input, $id);
-
-        return $this->sendResponse($medicinalPlant->toArray(), 'MedicinalPlant updated successfully');
-    }
     public function storeApplication(MedicinalPlantApplicationAPIRequest $request, $id)
     {
         $input = $request->all();

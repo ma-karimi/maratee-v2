@@ -11,7 +11,7 @@ class OriginalMedicinalPlantTypeTableSeeder extends Seeder
 
     public $others = ['Flourishes', 'Extracts and essential oils', 'Fresheners', 'Color', 'Oil', 'Tobacco', 'Paper', 'Glue', 'Toxins and herbal pesticides', 'Other items'];
     public $potentials = ['Flourishes', 'Extracts and essential oils', 'Fresheners', 'Color', 'Oil', 'Tobacco', 'Paper', 'Glue', 'Toxins and herbal pesticides', 'Other items'];
-    public $metabolites = ['Essential oil', 'Alkaloids', 'Flavonoids', 'Tannin'];
+    public $metabolites = ['Carbohydrates', 'Lipids', 'Amino acids & derivatives', 'Phenolic compounds', 'Essential oils and terpenoids', 'Steroids', 'Alkaloids', 'Lactones', 'Lignans', 'Tannins'];
     public $materials = ['Alkaloids', 'Tannin', 'Flavonoids'];
     public $pharmaceuticals = ['Tablet', 'Syrup', 'Ointment', 'drop', 'ampule'];
     public $treatments = ['stage of flowering', 'cutting plant'];

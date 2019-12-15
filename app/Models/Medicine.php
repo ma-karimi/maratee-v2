@@ -29,4 +29,10 @@ class Medicine extends BaseModel implements HasMedia
      */
     protected $table = 'medicines';
 
+
+    public function medicinals()
+    {
+        return $this->morphToMany(MedicinalPlant::class, 'hub','medicinal_hubs');
+    }
+
 }

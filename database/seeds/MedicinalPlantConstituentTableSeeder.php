@@ -11,6 +11,6 @@ class MedicinalPlantConstituentTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\MedicinalPlantConstituent::class, 50)->create();
+        factory(App\Models\MedicinalLocationConstituent::class, 50)->create();
     }
 }

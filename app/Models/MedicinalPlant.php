@@ -6,9 +6,6 @@ use App\Models\Accessor\MedicinalPlantAccessor;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\MedicinalPlantRelations;
 use App\Models\Scope\MedicinalPlantScope;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @SWG\Definition(
@@ -25,13 +22,13 @@ class MedicinalPlant extends BaseModel
     public const INHERBAL_MEDICINE_STORE = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
     public const EXPORTING = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
     public const IMPORTING = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
-    public const CULTIVATED_AREA = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
     public const STUDIED_SAMPLE = [0 => 'unknown', 1 => 'wild', 2 => 'cultivated'];
     public const PRESENCE_IN_COUNTRY = [0 => 'unknown', 1 => 'native', 2 => 'endemic'];
+
+    public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
     public const WOODEN = [1 => 'Tree', 2 => 'Shrubs'];
     public const HERBACEOUS = [1 => 'Standing', 2 => 'Crawling'];
-    public const CYCLE = [1 => 'Annual', 2 => 'Perennial'];
-    public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
+    public const CYCLE = [1 => 'Annual', 2 => 'Perennial', 3=>'Biennal'];
 
     public static $rules = [
         'herbarium_number' => 'nullable|string',
@@ -39,10 +36,11 @@ class MedicinalPlant extends BaseModel
         'aerial_part_id' => 'nullable|exists:medicinal_parts,id',
         'ground_part_id' => 'nullable|exists:medicinal_parts,id',
         'general_origin_id' => 'nullable|exists:generals,id',
-        'secondary_metabolite_id' => 'nullable|exists:medicinal_plant_types,id',
         'effective_material_id' => 'nullable|exists:medicinal_plant_types,id',
         'presence_in_country' => 'integer',
         'code_no' => 'integer',
+
+        //Medicinal Location
         'height' => 'string',
         'medicinal_properties' => 'string',
         'side_effects' => 'string',
@@ -74,13 +72,13 @@ class MedicinalPlant extends BaseModel
         'inherbal_medicine_store_name',
         'exporting_name',
         'importing_name',
-        'cultivated_area_name',
+        'cultivated_area',
         'studied_sample_name',
         'presence_in_country_name',
+        'hygienic_cosmetic',
+        'distributions',
         'wooden',
         'herbaceous',
-        'cycle',
-        'hygienic_cosmetic',
-        'distributions'
+        'cycle'
     ];
 }

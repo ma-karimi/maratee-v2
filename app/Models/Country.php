@@ -9,16 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @SWG\Definition(
  *            definition="Country",
- *            required={"name_en"},
- * 			@SWG\Property(property="id", type="integer"),
- * 			@SWG\Property(property="name_en", type="string"),
- * 			@SWG\Property(property="name_fa", type="string"),
- * 			@SWG\Property(property="continent_id", type="integer"),
- * 			@SWG\Property(property="description", type="array",
- *     @SWG\Items(type="string")),
- * 			@SWG\Property(property="created_at", type="string"),
- * 			@SWG\Property(property="updated_at", type="string"),
- *        )
+ *            required={"name_en"}
  **/
 class Country extends BaseModel
 {
@@ -34,6 +25,7 @@ class Country extends BaseModel
      * @var string
      */
     protected $table = 'countries';
+    protected $hidden = ['created_at', 'updated_at'];
 
 //    protected $with = ['provinces.cities'];
 

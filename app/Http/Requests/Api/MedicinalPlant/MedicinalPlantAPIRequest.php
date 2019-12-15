@@ -1,12 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\MedicinalPlant;
 
-use App\Models\Article;
-use App\Models\LifeForm;
 use App\Models\MedicinalPlant;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Validation\ValidationException;
 use InfyOm\Generator\Request\APIRequest;
 
 class MedicinalPlantAPIRequest extends APIRequest

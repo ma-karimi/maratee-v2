@@ -7,12 +7,12 @@ use Illuminate\Support\Str;
 class OriginalMethodTableSeeder extends Seeder
 {
 
-    public $distillations = ['macceration', 'soxchelet', ' sonication', 'supereitica fluid'];
+    public $extractions = ['macceration', 'soxchelet', ' sonication', 'supereitica fluid'];
 
-    public $extractions = ['hydro distillation', 'water & steam distillation', 'direct steam distillation'];
-    public $analyses = ['Gc', 'GCIMS', 'HPLC', 'NMR', 'ICP', 'Atomic absorption'];
+    public $distillations= ['water distillation', 'water & steam distillation', 'direct steam distillation'];
+    public $analyses = ['Gc', 'GC/MS', 'HPLC', 'NMR', 'ICP', 'Atomic absorption'];
 
-    /**
+    /**da
      * Run the database seeds.
      *
      * @return void

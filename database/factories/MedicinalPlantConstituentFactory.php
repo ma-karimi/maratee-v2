@@ -5,7 +5,7 @@
 use App\Models\{Constituent, ConstituentType, MedicinalPlant};
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\MedicinalPlantConstituent::class, function (Faker $faker) {
+$factory->define(App\Models\MedicinalLocationConstituent::class, function (Faker $faker) {
 
     $types = ConstituentType::pluck('id')->toArray();
     $constituents = Constituent::pluck('id')->toArray();

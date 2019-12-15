@@ -1,6 +1,5 @@
 <?php
 
-use App\Libraries\CustomBlueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 

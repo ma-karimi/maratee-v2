@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\General;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -42,10 +41,10 @@ class GeneralRepository extends BaseRepository
     public function allWithType($type)
     {
         if (!Arr::has(General::TYPES, $type)) {
-            ValidationException::withMessages(['errors' => ['message' => 'Operation Failed!']]);
+            throw ValidationException::withMessages(['errors' => ['message' => 'Operation Failed!']]);
         }
 //        return Cache::get($type, function () use ($type) {
-            return $this->model->whereType($type)->get();
+        return $this->model->whereType($type)->get();
 //        });
     }
 }

@@ -54,4 +54,9 @@ class Product extends BaseModel implements HasMedia
             ->where('type_id',7);
     }
 
+    public function medicinals()
+    {
+        return $this->morphToMany(MedicinalPlant::class, 'hub','medicinal_hubs');
+    }
+
 }

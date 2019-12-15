@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api\MedicinalPlant;
 
 use InfyOm\Generator\Request\APIRequest;
 
-class MedicinalPlantConstituentAPIRequest extends APIRequest
+class MedicinalLocationReferenceAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,6 +23,11 @@ class MedicinalPlantConstituentAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return ['constituents' => 'required'];
+        return [
+            'title' => 'required',
+            'year' => 'nullable|numeric',
+            'journal_name' => 'nullable',
+            'page_no' => 'required',
+        ];
     }
 }

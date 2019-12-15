@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\MedicinalPlantConstituent;
+use App\Models\MedicinalLocationConstituent;
 
 /**
  * Class MedicinalPlantConstituentRepository
@@ -33,7 +33,7 @@ class MedicinalPlantConstituentRepository extends BaseRepository
      **/
     public function model()
     {
-        return MedicinalPlantConstituent::class;
+        return MedicinalLocationConstituent::class;
     }
 
 

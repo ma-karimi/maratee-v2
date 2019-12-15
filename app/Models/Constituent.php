@@ -42,6 +42,6 @@ class Constituent extends BaseModel
      */
     public function medicinalPlantConstituents(): HasMany
     {
-        return $this->hasMany(MedicinalPlantConstituent::class)->latest();
+        return $this->hasMany(MedicinalLocationConstituent::class)->latest();
     }
 }

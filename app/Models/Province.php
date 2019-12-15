@@ -9,41 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @SWG\Definition(
  *      definition="Province",
- *      required={"name_en"},
- *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="country_id",
- *          description="country_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="name_en",
- *          description="name",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="name_fa",
- *          description="name",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
+ *      required={"name_en"}
  * )
  */
 class Province extends BaseModel
@@ -59,6 +25,7 @@ class Province extends BaseModel
      * @var string
      */
     protected $table = 'provinces';
+    protected $hidden = ['created_at', 'updated_at'];
 
     /**
      * @return BelongsTo
@@ -74,6 +41,12 @@ class Province extends BaseModel
     public function cities()
     {
         return $this->hasMany(City::class)->latest();
+    }
+
+
+    public function medicinals()
+    {
+        return $this->morphToMany(MedicinalPlant::class, 'hub','medicinal_hubs');
     }
 
 }

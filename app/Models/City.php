@@ -8,14 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @SWG\Definition(
  *            definition="City",
- *            required={"name_en","province_id"},
- * 			@SWG\Property(property="id", type="integer"),
- *      @SWG\Property(property="name_en", type="string"),
- *      @SWG\Property(property="name_fa", type="string"),
- *      @SWG\Property(property="province_id", type="integer"),
- * 			@SWG\Property(property="created_at", type="string"),
- * 			@SWG\Property(property="updated_at", type="string"),
- *        )
+ *            required={"name_en","province_id"}
  **/
 class City extends BaseModel
 {
@@ -32,6 +25,7 @@ class City extends BaseModel
      * @var string
      */
     protected $table = 'cities';
+    protected $hidden = ['created_at', 'updated_at'];
 
 
     /**

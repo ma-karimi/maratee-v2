@@ -1,7 +1,7 @@
 <?php namespace Tests\Traits;
 
 use Faker\Factory as Faker;
-use App\Models\MedicinalPlantConstituent;
+use App\Models\MedicinalLocationConstituent;
 use App\Repositories\MedicinalPlantConstituentRepository;
 
 trait MakeMedicinalPlantConstituentTrait
@@ -10,7 +10,7 @@ trait MakeMedicinalPlantConstituentTrait
      * Create fake instance of MedicinalPlantConstituent and save it in database
      *
      * @param array $medicinalPlantConstituentFields
-     * @return MedicinalPlantConstituent
+     * @return MedicinalLocationConstituent
      */
     public function makeMedicinalPlantConstituent($medicinalPlantConstituentFields = [])
     {
@@ -24,11 +24,11 @@ trait MakeMedicinalPlantConstituentTrait
      * Get fake instance of MedicinalPlantConstituent
      *
      * @param array $medicinalPlantConstituentFields
-     * @return MedicinalPlantConstituent
+     * @return MedicinalLocationConstituent
      */
     public function fakeMedicinalPlantConstituent($medicinalPlantConstituentFields = [])
     {
-        return new MedicinalPlantConstituent($this->fakeMedicinalPlantConstituentData($medicinalPlantConstituentFields));
+        return new MedicinalLocationConstituent($this->fakeMedicinalPlantConstituentData($medicinalPlantConstituentFields));
     }
 
     /**

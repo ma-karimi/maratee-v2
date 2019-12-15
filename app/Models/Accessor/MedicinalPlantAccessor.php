@@ -38,10 +38,6 @@ trait MedicinalPlantAccessor
         return Arr::get(self::IMPORTING, $this->importing);
     }
 
-    public function getCultivatedAreaNameAttribute()
-    {
-        return Arr::get(self::CULTIVATED_AREA, $this->cultivated_area);
-    }
 
     public function getStudiedSampleNameAttribute()
     {
@@ -51,6 +47,29 @@ trait MedicinalPlantAccessor
     public function getPresenceInCountryNameAttribute()
     {
         return Arr::get(self::PRESENCE_IN_COUNTRY, $this->presence_in_country);
+    }
+
+
+    public function getHygienicCosmeticAttribute()
+    {
+        return !empty($this->hygienic_cosmetic_industry_id) ? Arr::get(self::BOOLEAN, $this->hygienic_cosmetic_industry_id) : null;
+    }
+
+    public function getCultivatedAreaAttribute()
+    {
+        return !empty($this->cultivated_area_id) ? Arr::get(self::BOOLEAN, $this->cultivated_area_id) : null;
+    }
+
+
+    public function getDistributionsAttribute()
+    {
+        $authors = null;
+
+        if ($this->relationLoaded('provinces') && $this->provinces->count()) {
+            $authors = $this->provinces->implode('name_en', ' & ');
+        }
+
+        return $authors;
     }
 
     public function getCycleAttribute()
@@ -64,24 +83,6 @@ trait MedicinalPlantAccessor
     public function getHerbaceousAttribute()
     {
         return !empty($this->herbaceous_id) ? Arr::get(self::HERBACEOUS, $this->herbaceous_id) : null;
-    }
-
-
-    public function getHygienicCosmeticAttribute()
-    {
-        return !empty($this->hygienic_cosmetic_industry_id) ? Arr::get(self::BOOLEAN, $this->hygienic_cosmetic_industry_id) : null;
-    }
-
-
-    public function getDistributionsAttribute()
-    {
-        $authors = null;
-
-        if ($this->relationLoaded('provinces') && $this->provinces->count()) {
-            $authors = $this->provinces->implode('name_en', ' & ');
-        }
-
-        return $authors;
     }
 
 }

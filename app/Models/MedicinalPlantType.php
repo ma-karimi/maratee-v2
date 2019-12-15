@@ -30,15 +30,12 @@ class MedicinalPlantType extends BaseModel
         'name' => 'required|string',
     ];
 
+    protected $hidden = ['created_at', 'updated_at'];
     protected $appends = ['type'];
 
-    public function medicinalPlant()
+    public function medicinals()
     {
-        return $this->belongsToMany(MedicinalPlant::class,
-            'medicinal_plant_properties',
-            'medicinal_plant_type_id',
-            'medicinal_plant_id'
-        )->whereNull('medicinal_plant_properties.deleted_at')
-            ->withTimestamps();
+        return $this->morphToMany(MedicinalPlant::class, 'hub','medicinal_hubs');
     }
+
 }

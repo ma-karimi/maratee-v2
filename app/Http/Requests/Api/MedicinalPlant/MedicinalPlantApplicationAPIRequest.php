@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api\MedicinalPlant;
 
+use App\Models\MedicinalPlant;
 use InfyOm\Generator\Request\APIRequest;
 
 class MedicinalPlantApplicationAPIRequest extends APIRequest
@@ -13,6 +14,7 @@ class MedicinalPlantApplicationAPIRequest extends APIRequest
      */
     public function authorize()
     {
+
         return true;
     }
 
@@ -24,21 +26,7 @@ class MedicinalPlantApplicationAPIRequest extends APIRequest
     public function rules()
     {
         return [
-            'traditional_iranian_medicine' => 'nullable|numeric',
-            'natural_drug' => 'nullable|numeric',
-            'food_industry_id' => 'nullable|exists:medicinal_plant_types,id',
-            'other_industry_id' => 'nullable|exists:medicinal_plant_types,id',
-            'industrial_potential_id' => 'nullable|exists:medicinal_plant_types,id',
-            'phenology_id' => 'nullable|exists:medicinal_plant_types,id',
-            'method_distillation_id' => 'nullable|exists:methods,id',
-            'method_extraction_id' => 'nullable|exists:methods,id',
-            'method_analyse_id' => 'nullable|exists:methods,id',
-            'treatment_id' => 'nullable|exists:medicinal_plant_types,id',
-            'inherbal_medicine_store' => 'nullable|numeric',
-            'exporting' => 'nullable|numeric',
-            'importing' => 'nullable|numeric',
-            'cultivated_area' => 'nullable|numeric',
-            'studied_sample' => 'nullable|numeric',
+            'traditional_iranian_medicine'=>'nullable|numeric'
         ];
     }
 }

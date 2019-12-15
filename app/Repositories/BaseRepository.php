@@ -171,6 +171,7 @@ abstract class BaseRepository
      *
      * @param $input
      * @return Model
+     * @throws ValidationException
      */
     public function create($input)
     {
@@ -184,7 +185,7 @@ abstract class BaseRepository
             } catch (\Exception $e) {
                 DB::rollBack();
                 report($e);
-                ValidationException::withMessages(['errors' => ['message' => 'Operation Failed!', 'Exception' => $e]]);
+                throw ValidationException::withMessages(['errors' => ['message' => 'Operation Failed!', 'Exception' => $e]]);
             }
         } else {
             $model = $this->model->newInstance($input);
@@ -219,6 +220,7 @@ abstract class BaseRepository
      * @param int $id
      *
      * @return Builder|Builder[]|Collection|Model
+     * @throws ValidationException
      */
     public function update($input, $id)
     {
@@ -237,7 +239,7 @@ abstract class BaseRepository
             } catch (\Exception $e) {
                 DB::rollBack();
                 report($e);
-                ValidationException::withMessages(['errors' => ['message' => 'Operation Failed!', 'Exception' => $e]]);
+                throw ValidationException::withMessages(['errors' => ['message' => 'Operation Failed!', 'Exception' => $e]]);
             }
         } else {
             $query = $this->model->newQuery();

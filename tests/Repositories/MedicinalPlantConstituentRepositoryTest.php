@@ -1,6 +1,6 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\MedicinalPlantConstituent;
+use App\Models\MedicinalLocationConstituent;
 use App\Repositories\MedicinalPlantConstituentRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -32,7 +32,7 @@ class MedicinalPlantConstituentRepositoryTest extends TestCase
         $createdMedicinalPlantConstituent = $createdMedicinalPlantConstituent->toArray();
         $this->assertArrayHasKey('id', $createdMedicinalPlantConstituent);
         $this->assertNotNull($createdMedicinalPlantConstituent['id'], 'Created MedicinalPlantConstituent must have id specified');
-        $this->assertNotNull(MedicinalPlantConstituent::find($createdMedicinalPlantConstituent['id']), 'MedicinalPlantConstituent with given id must be in DB');
+        $this->assertNotNull(MedicinalLocationConstituent::find($createdMedicinalPlantConstituent['id']), 'MedicinalPlantConstituent with given id must be in DB');
         $this->assertModelData($medicinalPlantConstituent, $createdMedicinalPlantConstituent);
     }
 
@@ -68,6 +68,6 @@ class MedicinalPlantConstituentRepositoryTest extends TestCase
         $medicinalPlantConstituent = $this->makeMedicinalPlantConstituent();
         $resp = $this->medicinalPlantConstituentRepo->delete($medicinalPlantConstituent->id);
         $this->assertTrue($resp);
-        $this->assertNull(MedicinalPlantConstituent::find($medicinalPlantConstituent->id), 'MedicinalPlantConstituent should not exist in DB');
+        $this->assertNull(MedicinalLocationConstituent::find($medicinalPlantConstituent->id), 'MedicinalPlantConstituent should not exist in DB');
     }
 }
