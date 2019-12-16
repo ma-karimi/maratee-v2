@@ -17,6 +17,7 @@ class CreateMedicinalLocationsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('medicinal_plant_id');
             $table->unsignedBigInteger('location_id');
+            $table->unsignedBigInteger('article_id');
             $table->unsignedBigInteger('treatment_id')->nullable();
 
             $table->float('efficiency', 4, 2)->nullable();

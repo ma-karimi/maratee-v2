@@ -336,7 +336,7 @@ abstract class BaseRepository
      * @param $record
      * @param array $different_ids
      */
-    protected function attachAndUpdateFields($related_model, array $ids, $additional_data = [], $related_model_class, $related_key, $record, array $different_ids): void
+    protected function attachAndUpdateFields($related_model, array $ids, $additional_data, $related_model_class, $related_key, $record, array $different_ids): void
     {
         if (!empty($additional_data)) {
             //update pivot fields

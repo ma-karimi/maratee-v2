@@ -164,7 +164,7 @@ class MedicinalLocationAPIController extends AppBaseController
 
         $medicinalPlant = $this->medicinalLocationRepository->create($input);
 
-        return $this->sendResponse($medicinalPlant->toArray(), 'Medicinal Plant saved successfully');
+        return $this->sendResponse($medicinalPlant->toArray(), 'Medicinal Location saved successfully');
     }
 
     /**
@@ -211,10 +211,10 @@ class MedicinalLocationAPIController extends AppBaseController
         $medicinalPlant = $this->medicinalLocationRepository->find($id, $this->getFieldRelations());
 
         if ($medicinalPlant === null) {
-            return $this->sendError('Medicinal Plant not found');
+            return $this->sendError('Medicinal Location not found');
         }
 
-        return $this->sendResponse($medicinalPlant->toArray(), 'Medicinal Plant retrieved successfully');
+        return $this->sendResponse($medicinalPlant->toArray(), 'Medicinal Location retrieved successfully');
     }
 
     /**
@@ -361,7 +361,7 @@ class MedicinalLocationAPIController extends AppBaseController
      * )
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(MedicinalLocationProductAPIRequest $request, $id)
+    public function update(MedicinalLocationAPIRequest $request, $id)
     {
         $input = $request->all();
 
@@ -369,7 +369,7 @@ class MedicinalLocationAPIController extends AppBaseController
         $medicinalPlant = $this->medicinalLocationRepository->find($id, []);
 
         if ($medicinalPlant === null) {
-            return $this->sendError('Medicinal Plant not found');
+            return $this->sendError('Medicinal Location not found');
         }
 
         $medicinalPlant = $this->medicinalLocationRepository->update($input, $id);
@@ -422,29 +422,12 @@ class MedicinalLocationAPIController extends AppBaseController
         $medicinalPlant = $this->medicinalLocationRepository->find($id, []);
 
         if ($medicinalPlant === null) {
-            return $this->sendError('Medicinal Plant not found');
+            return $this->sendError('Medicinal Location not found');
         }
 
         $medicinalPlant->delete();
 
-        return $this->sendResponse($id, 'Medicinal Plant deleted successfully');
-    }
-
-
-    public function storeProductOrMedicine(MedicinalLocationProductAPIRequest $request, $id)
-    {
-        $input = $request->all();
-
-        /** @var MedicinalLocation $medicinalPlant */
-        $medicinalPlant = $this->medicinalLocationRepository->find($id, []);
-
-        if ($medicinalPlant === null) {
-            return $this->sendError('Medicinal Plant not found');
-        }
-
-        $medicinalPlant = $this->medicinalLocationRepository->storeProductOrMedicine($input, $id);
-
-        return $this->sendResponse($medicinalPlant->toArray(), 'MedicinalLocation updated successfully');
+        return $this->sendResponse($id, 'Medicinal Location deleted successfully');
     }
 
     public function storeReference(MedicinalLocationReferenceAPIRequest $request, $id)
@@ -455,7 +438,7 @@ class MedicinalLocationAPIController extends AppBaseController
         $medicinalPlant = $this->medicinalLocationRepository->find($id, []);
 
         if ($medicinalPlant === null) {
-            return $this->sendError('Medicinal Plant not found');
+            return $this->sendError('Medicinal Location not found');
         }
 
         $medicinalPlant = $this->medicinalLocationRepository->storeReference($input, $id);
@@ -468,45 +451,14 @@ class MedicinalLocationAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var MedicinalLocation $medicinalPlant */
-        $medicinalPlant = $this->medicinalLocationRepository->find($id, []);
+        $medicinalLocation = $this->medicinalLocationRepository->find($id, []);
 
-        if ($medicinalPlant === null) {
-            return $this->sendError('Medicinal Plant not found');
+        if ($medicinalLocation === null) {
+            return $this->sendError('Medicinal Location not found');
         }
 
         $this->medicinalLocationRepository->storeConstituent($input, $id);
 
-        return $this->sendResponse($medicinalPlant->toArray(), 'MedicinalLocation updated successfully');
-    }
-
-    public function storePlantLocationOrDetectOrCollect(MedicinalLocationCollectAPIRequest $request, $id)
-    {
-        $input = $request->all();
-
-        /** @var MedicinalLocation $medicinalPlant */
-        $medicinalPlant = $this->medicinalLocationRepository->find($id, []);
-
-        if ($medicinalPlant === null) {
-            return $this->sendError('Medicinal Plant not found');
-        }
-
-        $medicinalPlant = $this->medicinalLocationRepository->storePlantLocationOrDetectOrCollect($input, $id);
-
-        return $this->sendResponse($medicinalPlant->toArray(), 'MedicinalLocation updated successfully');
-    }
-    public function storeApplication(MedicinalLocationApplicationAPIRequest $request, $id)
-    {
-        $input = $request->all();
-
-        /** @var MedicinalLocation $medicinalPlant */
-        $medicinalPlant = $this->medicinalLocationRepository->find($id, []);
-
-        if ($medicinalPlant === null) {
-            return $this->sendError('Medicinal Plant not found');
-        }
-
-        $medicinalPlant = $this->medicinalLocationRepository->storeMedicinalApplication($input, $id);
-
-        return $this->sendResponse($medicinalPlant->toArray(), 'MedicinalLocation updated successfully');
+        return $this->sendResponse($medicinalLocation->toArray(), 'MedicinalLocation updated successfully');
     }
 }

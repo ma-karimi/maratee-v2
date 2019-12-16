@@ -2,16 +2,10 @@
 
 namespace App\Repositories;
 
-use App\Models\ActionHub;
-use App\Models\ActorHub;
-use App\Models\Article;
-use App\Models\Location;
-use App\Models\MedicinalLocation;
-use App\Models\MedicinalLocationConstituent;
-use App\Models\MedicinalLocationHub;
-use App\Models\MedicinalPlant;
+use App\Models\{ActionHub, ActorHub, Location, MedicinalLocation, MedicinalLocationConstituent};
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class MedicinalLocationRepository
@@ -30,44 +24,39 @@ class MedicinalLocationRepository extends BaseRepository
      * @var Location
      */
     private $location_model;
-    private $article_repo;
+    private $articleRepo;
     /**
      * @var ActionHub
      */
     private $actionHubRepo;
     /**
-     * @var ActorHub
-     */
-    private $actorHubRepo;
-    /**
      * @var MedicinalLocationConstituent
      */
-    private $medicinalPlantConstituentRepo;
-
+    private $medicinalLocationConstituentRepo;
     /**
-     * @var MedicinalLocationHub
+     * @var ActionHub
      */
-    private $medicinalLocationHub;
+    private $actionHub;
+
 
     /**
      * MedicinalLocationRepository constructor.
      * @param Application $app
-     * @param ArticleRepository $article_repository
-     * @param ActionHub $actionHubRepo
-     * @param ActorHub $actorHubRepo
+     * @param ArticleRepository $articleRepository
+     * @param ActionHub $actionHub
+     * @param ActionHubRepository $actionHubRepo
      * @param Location $location_model
-     * @param MedicinalLocationConstituent $medicinalPlantConstituentRepo
-     * @param MedicinalLocationHub $medicinalLocationHub
+     * @param MedicinalLocationConstituent $medicinalLocationConstituentRepo
      * @throws \Exception
      */
-    public function __construct(Application $app, ArticleRepository $article_repository, ActionHub $actionHubRepo, ActorHub $actorHubRepo, Location $location_model, MedicinalLocationConstituent $medicinalPlantConstituentRepo)
+    public function __construct(Application $app, ArticleRepository $articleRepository, ActionHub $actionHub, ActionHubRepository $actionHubRepo, Location $location_model, MedicinalLocationConstituent $medicinalLocationConstituentRepo)
     {
         parent::__construct($app);
         $this->location_model = $location_model;
-        $this->article_repo = $article_repository;
+        $this->articleRepo = $articleRepository;
         $this->actionHubRepo = $actionHubRepo;
-        $this->actorHubRepo = $actorHubRepo;
-        $this->medicinalPlantConstituentRepo = $medicinalPlantConstituentRepo;
+        $this->medicinalLocationConstituentRepo = $medicinalLocationConstituentRepo;
+        $this->actionHub = $actionHub;
     }
 
     /**
@@ -137,49 +126,51 @@ class MedicinalLocationRepository extends BaseRepository
      */
     private function MedicinalLocationData(): array
     {
-        return ['location_id', 'treatment_id', 'efficiency', 'studied_sample', 'presence_in_country', 'medicinal_properties', 'side_effects', 'phenology_id', 'method_distillation_id', 'method_extraction_id', 'method_analyse_id', 'herbarium_number'];
+        return ['location_id', 'treatment_id', 'efficiency', 'studied_sample', 'presence_in_country', 'medicinal_properties', 'side_effects', 'phenology_id', 'method_distillation_id', 'method_extraction_id', 'method_analyse_id', 'herbarium_number', 'medicinal_plant_id'];
     }
 
     private function storeMetabolites($input, $medicinal_location)
     {
-        $metabolites = request()->filled('metabolites') ? $input['metabolites'] : [];
+        $metabolites = request()->filled('metabolites') ? explode(',', $input['metabolites']) : [];
         $this->createHub($medicinal_location->id, 'secondaryMetabolites', $metabolites);
     }
 
     private function storeEffectiveMaterials($input, $medicinal_location)
     {
-        $materials = request()->filled('materials') ? $input['materials'] : [];
-        $this->createHub($medicinal_location->id, 'secondaryMetabolites', $materials);
+        $materials = request()->filled('materials') ? explode(',', $input['materials']) : [];
+        $this->createHub($medicinal_location->id, 'effectiveMaterials', $materials);
     }
 
     private function storeDetermine($input, $medicinal_location_id)
     {
-        $action_hub = $this->actionHubRepo->firstOrCreate([
+        $action_hub = $this->actionHub->firstOrCreate([
             'action_id' => 1,
-            'actionable_type' => MedicinalPlant::class,
+            'actionable_type' => MedicinalLocation::class,
             'actionable_id' => $medicinal_location_id
         ]);
-        $determines = request()->filled('determines') ? $input['determines'] : [];
-        $this->createHub($action_hub->id, 'actors', $determines);
+
+        $determines = request()->filled('determines') ? explode(',', $input['determines']) : [];
+
+        $this->actionHubRepo->createHub($action_hub->id, 'actors', $determines);
     }
 
     private function storeCollect($input, $medicinal_location_id)
     {
 
-        $action_hub = $this->actionHubRepo->updateOrCreate(
+        $action_hub = $this->actionHub->updateOrCreate(
             [
                 'action_id' => 2,
-                'actionable_type' => MedicinalPlant::class,
+                'actionable_type' => MedicinalLocation::class,
                 'actionable_id' => $medicinal_location_id
             ],
             [
                 'date' => $input['date'] ?? null
             ]);
-        $collectors = request()->filled('collectors') ? $input['collectors'] : [];
-        $this->createHub($action_hub->id, 'actors', $collectors);
+        $collectors = request()->filled('collectors') ? explode(',', $input['collectors']) : [];
+        $this->actionHubRepo->createHub($action_hub->id, 'actors', $collectors);
     }
 
-    public function storeConstituent($input, $medicinal_plant_id)
+    public function storeConstituent($input, $medicinal_location_id)
     {
         $constituents = json_decode($input['constituents']);
 
@@ -188,17 +179,17 @@ class MedicinalLocationRepository extends BaseRepository
             $cons_collection[] = $constituent->constituent_type->id;
         }
 
-        $this->medicinalPlantConstituentRepo
-            ->where('medicinal_plant_id', $medicinal_plant_id)
+        $this->medicinalLocationConstituentRepo
+            ->where('medicinal_location_id', $medicinal_location_id)
             ->whereNotIn('constituent_type_id', $cons_collection)
             ->delete();
 
         foreach ($constituents as $item) {
-            $this->medicinalPlantConstituentRepo
+            $this->medicinalLocationConstituentRepo
                 ->updateOrCreate(
                     [
                         'constituent_type_id' => $item->constituent_type->id,
-                        'medicinal_plant_id' => $medicinal_plant_id
+                        'medicinal_location_id' => $medicinal_location_id
                     ],
                     [
                         'value' => $item->value
@@ -212,11 +203,11 @@ class MedicinalLocationRepository extends BaseRepository
 
         $this->updateLocation($input);
 
-        $model = parent::update(Arr::except($input, $this->MedicinalLocationData()), $id);
-        $this->storeMetabolites($input, $model->id);
-        $this->storeEffectiveMaterials($input, $model->id);
-        $this->storeDetermine($input, $id);
-        $this->storeCollect($input, $id);
+        $model = parent::update(Arr::only($input, $this->MedicinalLocationData()), $id);
+        $this->storeMetabolites($input, $model);
+        $this->storeEffectiveMaterials($input, $model);
+        $this->storeDetermine($input, $model->id);
+        $this->storeCollect($input, $model->id);
         return $model;
     }
 
@@ -247,20 +238,20 @@ class MedicinalLocationRepository extends BaseRepository
             'page_no' => $input['page_no'] ?? null
         ];
         if ($article_id) {
-            return $this->article_repo->update($data, $article_id);
+            return $this->articleRepo->update($data, $article_id);
         }
-        return $this->article_repo->create($data);
+        return $this->articleRepo->create($data);
     }
 
     /**
      * @param array $input
-     * @param $article
+     * @param $article_id
      * @return mixed
      */
-    private function storeArticleAuthors(array $input, $article)
+    private function storeArticleAuthors(array $input, $article_id)
     {
-        $authors = request()->filled('authors') ? $input['authors'] : [];
-        $this->createHub($article->id, 'actors', $authors);
+        $authors = request()->filled('authors') ? explode(',', $input['authors']) : [];
+        $this->articleRepo->createHub($article_id, 'actors', $authors);
     }
 
 }

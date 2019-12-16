@@ -15,8 +15,9 @@ use App\Models\Relations\MedicinalLocationRelations;
 class MedicinalLocation extends BaseModel
 {
     use MedicinalLocationRelations, MedicinalLocationAccessor;
-
-    protected $with = ['determine', 'location', 'collect', 'constituents', 'treatment',  'distillation', 'secondaryMetabolites', 'effectiveMaterials'];
+    public const STUDIED_SAMPLE = [0 => 'unknown', 1 => 'wild', 2 => 'cultivated'];
+    public const PRESENCE_IN_COUNTRY = [0 => 'unknown', 1 => 'native', 2 => 'endemic'];
+    protected $with = ['determine', 'location', 'collect', 'constituents', 'treatment',  'distillation', 'secondaryMetabolites', 'effectiveMaterials', 'phenology', 'distillation', 'extraction', 'analyse', 'article'];
 
 
     /**
@@ -28,4 +29,8 @@ class MedicinalLocation extends BaseModel
         'efficiency' => 'float',
     ];
 
+    protected $appends = [
+        'studied_sample_name',
+        'presence_in_country_name',
+    ];
 }

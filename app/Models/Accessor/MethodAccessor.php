@@ -13,8 +13,8 @@ use Illuminate\Support\Arr;
 
 trait MethodAccessor
 {
-    public function getTypeAttribute($value)
+    public function getTypeAttribute()
     {
-        return Arr::get(self::TYPE, $value);
+        return Arr::get(self::TYPE, $this->type_id);
     }
 }

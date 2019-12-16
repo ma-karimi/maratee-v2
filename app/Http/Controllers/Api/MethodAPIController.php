@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateMethodAPIRequest;
-use App\Http\Requests\Api\UpdateMethodAPIRequest;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\MethodAPIRequest;
 use App\Models\Method;
 use App\Repositories\MethodRepository;
-use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Support\Facades\Cache;
 use Response;
 
 /**
  * Class MethodController
  * @package App\Http\Controllers\Api
  */
-
 class MethodAPIController extends AppBaseController
 {
     /** @var  MethodRepository */
@@ -56,6 +52,7 @@ class MethodAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Exception
      */
     public function index()
     {
@@ -66,7 +63,7 @@ class MethodAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateMethodAPIRequest $request
+     * @param MethodAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -123,8 +120,9 @@ class MethodAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(CreateMethodAPIRequest $request)
+    public function store(MethodAPIRequest $request)
     {
         $input = $request->all();
 
@@ -174,7 +172,7 @@ class MethodAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Method $method */
-        $method = $this->methodRepository->find($id, \request()->get('relations'));
+        $method = $this->methodRepository->find($id);
 
         if ($method === null) {
             return $this->sendError('Method not found');
@@ -185,7 +183,7 @@ class MethodAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateMethodAPIRequest $request
+     * @param MethodAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -249,8 +247,9 @@ class MethodAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update($id, UpdateMethodAPIRequest $request)
+    public function update($id, MethodAPIRequest $request)
     {
         $input = $request->all();
 

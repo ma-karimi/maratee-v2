@@ -14,59 +14,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 /**
  * @SWG\Definition(
  *      definition="Herbarium",
- *      required={"location_id","organization_id","taxonomy_id"},
- *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="taxonomy_id",
- *          description="taxonomy_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="herbarium_number",
- *          description="herbarium_number",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="location_id",
- *          description="location_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="organization_id",
- *          description="organization_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="herbarium_index",
- *          description="herbarium_index",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="cf",
- *          description="cf",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="description",
- *          description="description",
- *          type="string",
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
+ *      required={"location_id","organization_id","taxonomy_id"}
  * )
  */
 class Herbarium extends BaseModel implements HasMedia

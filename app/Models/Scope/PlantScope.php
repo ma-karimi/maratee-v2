@@ -13,6 +13,7 @@ use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Log;
 use Jedrzej\Searchable\Constraint;
+use League\Geotools\Coordinate\Coordinate;
 
 trait PlantScope
 {
@@ -158,7 +159,8 @@ trait PlantScope
         $data = $constraint->getValue();
         if ($constraint->getOperator() === Constraint::OPERATOR_IN) {
             $builder->whereHas('locations', function ($query) use ($data) {
-                return $query->distance('point', new Point($data[0], $data[1]), 1);
+                $coordinate = new Coordinate(implode(', ', $data));
+                return $query->distance('point', new Point($coordinate->getLatitude(), $coordinate->getLongitude()), 1);
 
             });
 
@@ -167,23 +169,6 @@ trait PlantScope
         return false;
     }
 
-    protected function processLocation_PointFilter(Builder $builder, Constraint $constraint)
-    {
-        $data = $constraint->getValue();
-        if ($constraint->getOperator() === Constraint::OPERATOR_IN) {
-
-            $builder
-                ->whereHas('herbarium', function ($herbarium) use ($data) {
-                    return $herbarium->whereHas('location', function ($query) use ($data) {
-                        return $query->distance('point', new Point($data[0], $data[1]), 1);
-                    });
-                });
-
-
-            return true;
-        }
-        return false;
-    }
     protected function processGeneralSubstrate_TypeFilter(Builder $builder, Constraint $constraint)
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {

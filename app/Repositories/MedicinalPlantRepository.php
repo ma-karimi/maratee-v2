@@ -41,9 +41,9 @@ class MedicinalPlantRepository extends BaseRepository
     public function create($input)
     {
         $model = parent::create(Arr::only($input, $this->MedicinalData()));
-        $this->storeProvinces($input, $model->id);
-        $this->storeProducts($input, $model->id);
-        $this->storeMedicines($input, $model->id);
+        $this->storeProvinces($input, $model);
+        $this->storeProducts($input, $model);
+        $this->storeMedicines($input, $model);
 
         return $model;
     }
@@ -56,40 +56,40 @@ class MedicinalPlantRepository extends BaseRepository
         return ['taxonomy_id', 'aerial_part_id', 'ground_part_id', 'general_origin_id', 'code_no', 'hygienic_cosmetic_industry_id', 'fruit_color', 'flower_color', 'foliage_color', 'height', 'cycle_id', 'wooden_id', 'herbaceous_id', 'general_habitat_id'];
     }
 
-    private function storeProvinces($input, $medicinal_id)
+    private function storeProvinces($input, $medicinal)
     {
         $provinces = request()->filled('provinces') ? $input['provinces'] : [];
-        $this->createHub($medicinal_id, 'provinces', $provinces);
+        $this->createHub($medicinal->id, 'provinces', $provinces);
     }
 
     /**
      * @param array $input
-     * @param $medicinal_id
+     * @param $medicinal
      * @return mixed
      */
-    private function storeProducts(array $input, $medicinal_id)
+    private function storeProducts(array $input, $medicinal)
     {
         $products = request()->filled('products') ? $input['products'] : [];
-        $this->createHub($medicinal_id, 'products', $products);
+        $this->createHub($medicinal->id, 'products', $products);
     }
 
     /**
      * @param array $input
-     * @param $medicinal_id
+     * @param $medicinal
      * @return mixed
      */
-    private function storeMedicines(array $input, $medicinal_id)
+    private function storeMedicines(array $input, $medicinal)
     {
         $medicines = request()->filled('medicines') ? $input['medicines'] : [];
-        $this->createHub($medicinal_id, 'medicines', $medicines);
+        $this->createHub($medicinal->id, 'medicines', $medicines);
     }
 
     public function update($input, $id)
     {
         $model = parent::update(Arr::only($input, $this->MedicinalData()), $id);
-        $this->storeProvinces($input, $model->id);
-        $this->storeProducts($input, $model->id);
-        $this->storeMedicines($input, $model->id);
+        $this->storeProvinces($input, $model);
+        $this->storeProducts($input, $model);
+        $this->storeMedicines($input, $model);
         return $model;
     }
 
@@ -110,22 +110,22 @@ class MedicinalPlantRepository extends BaseRepository
 
     }
 
-    private function storeFoodIndustries($input, $model)
+    private function storeFoodIndustries($input, $medicinal)
     {
-        $industries = request()->filled('food_industries') ? $input['food_industries'] : [];
-        $this->createHub($model->id, 'foodIndustries', $industries);
+        $industries = request()->filled('food_industries') ? explode(',', $input['food_industries']) : [];
+        $this->createHub($medicinal->id, 'foodIndustries', $industries);
     }
 
-    private function storeOtherIndustries($input, $model)
+    private function storeOtherIndustries($input, $medicinal)
     {
-        $industries = request()->filled('other_industries') ? $input['other_industries'] : [];
-        $this->createHub($model->id, 'otherIndustries', $industries);
+        $industries = request()->filled('other_industries') ? explode(',', $input['other_industries']) : [];
+        $this->createHub($medicinal->id, 'otherIndustries', $industries);
     }
 
-    private function storeInsdustrialPotential($input, $model)
+    private function storeInsdustrialPotential($input, $medicinal)
     {
-        $industries = request()->filled('industrial_potentials') ? $input['industrial_potentials'] : [];
-        $this->createHub($model->id, 'industrialPotentials', $industries);
+        $industries = request()->filled('industrial_potentials') ? explode(',', $input['industrial_potentials']) : [];
+        $this->createHub($medicinal->id, 'industrialPotentials', $industries);
     }
 
 }

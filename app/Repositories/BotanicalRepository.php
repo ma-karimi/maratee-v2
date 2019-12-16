@@ -124,7 +124,8 @@ class BotanicalRepository extends BaseRepository
             $this->locationRepo->update($this->locationData($input), $input['location_id']);
         } else {
             $location = $this->locationRepo->create($this->locationData($input));
-            $this->createHub($id, 'locations', [$location->id]);
+            $botanical = $this->find($id);
+            $this->createHub($botanical->id, 'locations', [$location->id]);
         }
 
         $this->distributionHubRepo->store($input, $id);

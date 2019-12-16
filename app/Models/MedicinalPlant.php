@@ -22,8 +22,7 @@ class MedicinalPlant extends BaseModel
     public const INHERBAL_MEDICINE_STORE = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
     public const EXPORTING = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
     public const IMPORTING = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
-    public const STUDIED_SAMPLE = [0 => 'unknown', 1 => 'wild', 2 => 'cultivated'];
-    public const PRESENCE_IN_COUNTRY = [0 => 'unknown', 1 => 'native', 2 => 'endemic'];
+
 
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
     public const WOODEN = [1 => 'Tree', 2 => 'Shrubs'];
@@ -73,8 +72,6 @@ class MedicinalPlant extends BaseModel
         'exporting_name',
         'importing_name',
         'cultivated_area',
-        'studied_sample_name',
-        'presence_in_country_name',
         'hygienic_cosmetic',
         'distributions',
         'wooden',
