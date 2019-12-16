@@ -53,7 +53,7 @@ class MedicinalPlantRepository extends BaseRepository
      */
     private function MedicinalData(): array
     {
-        return ['taxonomy_id', 'aerial_part_id', 'ground_part_id', 'general_origin_id', 'code_no', 'hygienic_cosmetic_industry_id', 'fruit_color', 'flower_color', 'foliage_color', 'height', 'cycle_id', 'wooden_id', 'herbaceous_id', 'general_habitat_id'];
+        return ['taxonomy_id', 'aerial_part_id', 'ground_part_id', 'general_origin_id', 'code_no', 'fruit_color', 'flower_color', 'foliage_color', 'height', 'cycle_id', 'wooden_id', 'herbaceous_id', 'general_habitat_id'];
     }
 
     private function storeProvinces($input, $medicinal)
@@ -99,9 +99,10 @@ class MedicinalPlantRepository extends BaseRepository
             'traditional_iranian_medicine' => $input['traditional_iranian_medicine'] ?? null,
             'natural_drug' => $input['natural_drug'] ?? null,
             'inherbal_medicine_store' => $input['inherbal_medicine_store'] ?? null,
+            'hygienic_cosmetic_industry_id'=>$input['hygienic_cosmetic_industry_id'],
             'exporting' => $input['exporting'] ?? null,
             'importing' => $input['importing'] ?? null,
-            'cultivated_area_id' => $input['cultivated_area_id'] ?? null,
+            'cultivated_area_id' => $input['cultivated_area_id'],
         ], $id);
         $this->storeFoodIndustries($input, $model);
         $this->storeOtherIndustries($input, $model);
