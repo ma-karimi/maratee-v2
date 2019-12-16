@@ -15,20 +15,21 @@ class ChangeMedicinal extends Migration
     {
         Schema::table('medicinal_plants', function (Blueprint $table) {
 
-            $table->dropForeign(['medicine_id']);
-            $table->dropForeign(['product_id']);
-            $table->dropForeign(['pharmaceutical_form_id']);
-            $table->dropForeign(['effective_material_id']);
-            $table->dropForeign(['secondary_metabolite_id']);
-            $table->dropForeign(['method_analyse_id']);
-            $table->dropForeign(['method_extraction_id']);
-            $table->dropForeign(['method_distillation_id']);
-
-            $table->dropColumn( 'location_id', 'height', 'efficiency', 'treatment_id', 'medicine_id', 'product_id', 'studied_sample', 'presence_in_country', 'medicinal_properties', 'side_effects', 'phenology_id', 'method_distillation_id', 'method_extraction_id', 'method_analyse_id', 'secondary_metabolite_id', 'effective_material_id', 'industrial_potential_id', 'cultivated_area', 'article_id');
-
-
-            $table->boolean('hygienic_cosmetic_industry_id')->default(0)->change();
-            $table->boolean('cultivated_area_id')->default(0)->change();
+//            $table->dropForeign(['medicine_id']);
+//            $table->dropForeign(['product_id']);
+//            $table->dropForeign(['pharmaceutical_form_id']);
+//            $table->dropForeign(['effective_material_id']);
+//            $table->dropForeign(['secondary_metabolite_id']);
+//            $table->dropForeign(['method_analyse_id']);
+//            $table->dropForeign(['method_extraction_id']);
+//            $table->dropForeign(['method_distillation_id']);
+//            $table->boolean('cultivated_area')->default(0)->change();
+//
+//            $table->dropColumn( 'location_id', 'height', 'efficiency', 'treatment_id', 'medicine_id', 'product_id', 'studied_sample', 'presence_in_country', 'medicinal_properties', 'side_effects', 'phenology_id', 'method_distillation_id', 'method_extraction_id', 'method_analyse_id', 'secondary_metabolite_id', 'effective_material_id', 'industrial_potential_id', 'cultivated_area', 'article_id');
+//
+//
+//            $table->boolean('hygienic_cosmetic_industry_id')->default(0)->change();
+            $table->boolean('cultivated_area_id')->default(0);
         });
     }
 
