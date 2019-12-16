@@ -30,6 +30,7 @@ class CreateMedicinalLocationsTable extends Migration
             $table->unsignedBigInteger('method_distillation_id')->nullable();
             $table->unsignedBigInteger('method_extraction_id')->nullable();
             $table->unsignedBigInteger('method_analyse_id')->nullable();
+            $table->string('herbarium_number')->nullable();
 
             $table->timestamps();
             $table->softDeletesTz();

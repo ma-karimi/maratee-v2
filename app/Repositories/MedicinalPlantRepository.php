@@ -58,7 +58,7 @@ class MedicinalPlantRepository extends BaseRepository
 
     private function storeProvinces($input, $medicinal)
     {
-        $provinces = request()->filled('provinces') ? $input['provinces'] : [];
+        $provinces = request()->filled('provinces') ? explode(',', $input['provinces']) : [];
         $this->createHub($medicinal->id, 'provinces', $provinces);
     }
 
@@ -69,7 +69,7 @@ class MedicinalPlantRepository extends BaseRepository
      */
     private function storeProducts(array $input, $medicinal)
     {
-        $products = request()->filled('products') ? $input['products'] : [];
+        $products = request()->filled('products') ? explode(',', $input['products']) : [];
         $this->createHub($medicinal->id, 'products', $products);
     }
 
@@ -80,7 +80,7 @@ class MedicinalPlantRepository extends BaseRepository
      */
     private function storeMedicines(array $input, $medicinal)
     {
-        $medicines = request()->filled('medicines') ? $input['medicines'] : [];
+        $medicines = request()->filled('medicines') ? explode(',', $input['medicines']) : [];
         $this->createHub($medicinal->id, 'medicines', $medicines);
     }
 
