@@ -22,7 +22,7 @@ trait MedicinalPlantScope
         // this logic should happen for LIKE/EQUAL operators only
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
             $builder->whereHas('locations', function ($query) use ($constraint) {
-                $query->whereHas('medicinal_plant_constituents', function ($constituent_types) use ($constraint) {
+                $query->whereHas('constituents', function ($constituent_types) use ($constraint) {
                     return $constituent_types->where('constituent_type_id', $constraint->getOperator(), $constraint->getValue());
                 });
             });
@@ -76,6 +76,7 @@ trait MedicinalPlantScope
         }
         return false;
     }
+
     protected function processProductFilter(Builder $builder, Constraint $constraint)
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
@@ -87,6 +88,7 @@ trait MedicinalPlantScope
         }
         return false;
     }
+
     protected function processFoodIndustryFilter(Builder $builder, Constraint $constraint)
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
@@ -98,6 +100,7 @@ trait MedicinalPlantScope
         }
         return false;
     }
+
     protected function processOtherIndustryFilter(Builder $builder, Constraint $constraint)
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
@@ -109,6 +112,7 @@ trait MedicinalPlantScope
         }
         return false;
     }
+
     protected function processPotentialFilter(Builder $builder, Constraint $constraint)
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
@@ -136,6 +140,19 @@ trait MedicinalPlantScope
         return false;
     }
 
+    protected function processCollectDateFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('locations', function ($query) use ($constraint) {
+                $query->whereHas('collect', function ($collect) use ($constraint) {
+                    return $collect->where('date', $constraint->getOperator(), $constraint->getValue());
+                });
+            });
+            return true;
+        }
+        return false;
+    }
+
     protected function processCollectorFilter(Builder $builder, Constraint $constraint)
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
@@ -144,6 +161,32 @@ trait MedicinalPlantScope
                     return $collect->whereHas('actors', function ($key) use ($constraint) {
                         return $key->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
                     });
+                });
+            });
+            return true;
+        }
+        return false;
+    }
+
+    protected function processMetaboliteFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('locations', function ($query) use ($constraint) {
+                $query->whereHas('secondaryMetabolites', function ($key) use ($constraint) {
+                    return $key->where('id', $constraint->getOperator(), $constraint->getValue());
+                });
+            });
+            return true;
+        }
+        return false;
+    }
+
+    protected function processMaterialFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('locations', function ($query) use ($constraint) {
+                $query->whereHas('effectiveMaterials', function ($key) use ($constraint) {
+                    return $key->where('id', $constraint->getOperator(), $constraint->getValue());
                 });
             });
             return true;
@@ -233,6 +276,17 @@ trait MedicinalPlantScope
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
             $builder->whereHas('locations', function ($query) use ($constraint) {
                 return $query->where('method_distillation_id', $constraint->getOperator(), $constraint->getValue());
+            });
+            return true;
+        }
+        return false;
+    }
+
+    protected function processPheonologyFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('locations', function ($query) use ($constraint) {
+                return $query->where('phenology_id', $constraint->getOperator(), $constraint->getValue());
             });
             return true;
         }
@@ -336,6 +390,16 @@ trait MedicinalPlantScope
                     return $location->where('province_id', $constraint->getOperator(), $constraint->getValue());
                 });
             });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processHygenicFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->where('hygienic_cosmetic_industry_id', $constraint->getOperator(), $constraint->getValue());
 
             return true;
         }
