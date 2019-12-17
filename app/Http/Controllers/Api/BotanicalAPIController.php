@@ -288,6 +288,7 @@ class BotanicalAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(BotanicalAPIRequest $request)
     {
@@ -572,6 +573,7 @@ class BotanicalAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, BotanicalAPIRequest $request)
     {

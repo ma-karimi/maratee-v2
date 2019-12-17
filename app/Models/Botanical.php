@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Accessor\BotanicalAccessor;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\BotanicalRelation;
+use App\Models\Scope\BotanicalScope;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -16,7 +17,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Botanical extends BaseModel implements HasMedia
 {
-    use HasMediaTrait, BotanicalAccessor, BotanicalRelation;
+    use HasMediaTrait, BotanicalAccessor, BotanicalRelation, BotanicalScope;
     public const GROWTH_RATES = [1 => 'very low', 2 => 'low', 3 => 'moderate', 4 => 'fast', 5 => 'very fast'];
     public const SEED_RATE = [1 => 'low', 2 => 'moderate', 3 => 'good', 4 => 'bumper'];
     public const SEED_FORMATION = [1 => 'yes', 2 => 'no'];
