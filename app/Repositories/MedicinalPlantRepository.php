@@ -42,8 +42,7 @@ class MedicinalPlantRepository extends BaseRepository
     {
         $model = parent::create(Arr::only($input, $this->MedicinalData()));
         $this->storeProvinces($input, $model);
-        $this->storeProducts($input, $model);
-        $this->storeMedicines($input, $model);
+
 
         return $model;
     }
@@ -88,8 +87,6 @@ class MedicinalPlantRepository extends BaseRepository
     {
         $model = parent::update(Arr::only($input, $this->MedicinalData()), $id);
         $this->storeProvinces($input, $model);
-        $this->storeProducts($input, $model);
-        $this->storeMedicines($input, $model);
         return $model;
     }
 
@@ -127,6 +124,15 @@ class MedicinalPlantRepository extends BaseRepository
     {
         $industries = request()->filled('industrial_potentials') ? explode(',', $input['industrial_potentials']) : [];
         $this->createHub($medicinal->id, 'industrialPotentials', $industries);
+    }
+
+    public function storeProductOrMedicine(array $input, $id)
+    {
+        $model = $this->find($id);
+        $this->storeProducts($input, $model);
+        $this->storeMedicines($input, $model);
+
+        return $model;
     }
 
 }
