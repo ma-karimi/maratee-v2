@@ -9,7 +9,9 @@ $factory->define(App\Models\Product::class, function (Faker $faker) {
         'name' => make_json($faker->name),
         'registration_status' => array_rand(\App\Models\Product::STATUS),
         'components' => $faker->text,
-        'manufacturer' => $faker->text,
+        'address' => $faker->text,
+        'telephone' => $faker->text,
+        'company' => $faker->text,
         'active_compounds' => $faker->text,
     ];
 });

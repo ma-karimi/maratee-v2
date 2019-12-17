@@ -361,6 +361,7 @@ class GeneralAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function all($type)
     {
