@@ -79,6 +79,9 @@ class MedicinalPlant extends BaseModel
         'cycle',
         'pharmaceuticals',
         'other_products',
-        'distributions'
+        'distributions',
+        'potentials',
+        'foods',
+        'industries'
     ];
 }

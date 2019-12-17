@@ -86,6 +86,34 @@ trait MedicinalPlantAccessor
         }
         return $item;
     }
+    public function getIndustriesAttribute()
+    {
+        $item = null;
+
+        if ($this->relationLoaded('otherIndustries') &&  $this->otherIndustries->count()) {
+            $item .= $this->otherIndustries->implode('name', ' & ');
+        }
+        return $item;
+    }
+    public function getFoodsAttribute()
+    {
+        $item = null;
+
+        if ($this->relationLoaded('foodIndustries') &&  $this->foodIndustries->count()) {
+            $item .= $this->foodIndustries->implode('name', ' & ');
+        }
+        return $item;
+    }
+
+    public function getPotentialsAttribute()
+    {
+        $item = null;
+
+        if ($this->relationLoaded('industrialPotentials') &&  $this->industrialPotentials->count()) {
+            $item .= $this->industrialPotentials->implode('name', ' & ');
+        }
+        return $item;
+    }
 
     public function getPharmaceuticalsAttribute()
     {
