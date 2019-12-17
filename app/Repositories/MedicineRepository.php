@@ -39,7 +39,7 @@ class MedicineRepository extends BaseRepository
 
     public function create($input)
     {
-        $model = parent::create($input->except('media_type', 'file'));
+        $model = parent::create($input->except('media_type', 'file', 'industries'));
         $this->storeIndustries($input, $model->id);
         $this->storeMedia($input, $model);
         return $model;
@@ -81,7 +81,7 @@ class MedicineRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        $model = parent::update($input->except('media_type', 'file'));
+        $model = parent::update($input->except('media_type', 'file','industries'));
         $this->storeIndustries($input, $model->id);
         $this->storeMedia($input, $model);
         return $model;
