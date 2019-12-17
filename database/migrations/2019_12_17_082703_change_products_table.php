@@ -24,6 +24,9 @@ class ChangeProductsTable extends Migration
             $table->string('company')->nullable();
             $table->string('address')->nullable();
             $table->string('telephone')->nullable();
+            $table->string('name_en');
+            $table->string('name_fa')->nullable();
+            $table->dropColumn('name');
         });
     }
 

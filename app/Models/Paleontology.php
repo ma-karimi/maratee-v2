@@ -25,17 +25,17 @@ class Paleontology extends BaseModel implements HasMedia
     public static $rules = [
 
 
-        'update_frequency' => 'string',
-        'location_in_collection' => 'integer',
-        'pieces' => 'integer',
-        'geology_age_era_id' => 'integer|exists:geology_ages,id',
-        'geology_age_epoch_id' => 'integer|exists:geology_ages,id',
-        'geology_age_stage_id' => 'integer|exists:geology_ages,id',
-        'geology_age_period_id' => 'integer|exists:geology_ages,id',
+        'update_frequency' => 'nullable|string',
+        'location_in_collection' => 'nullable|integer',
+        'pieces' => 'nullable|integer',
+        'geology_age_era_id' => 'nullable|integer|exists:geology_ages,id',
+        'geology_age_epoch_id' => 'nullable|integer|exists:geology_ages,id',
+        'geology_age_stage_id' => 'nullable|integer|exists:geology_ages,id',
+        'geology_age_period_id' => 'nullable|integer|exists:geology_ages,id',
         'taxonomy_id' => 'required|exists:taxonomies,id',
-        'last_update' => 'date',
-        'general_order_id' => 'integer|exists:generals,id',
-        'general_plant_type_id' => 'integer|exists:generals,id',
+        'last_update' => 'nullable|date',
+        'general_order_id' => 'nullable|integer|exists:generals,id',
+        'general_plant_type_id' => 'nullable|integer|exists:generals,id',
     ];
     /**
      * The database table used by the model.

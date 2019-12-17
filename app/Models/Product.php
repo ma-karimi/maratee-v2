@@ -19,7 +19,6 @@ class Product extends BaseModel implements HasMedia
 {
     use ProductAccessor,HasMediaTrait;
     public const STATUS = [1 => 'unregistered', 2 => 'registered'];
-    public static $linguistically = ['name' => true];
     public static $rules = [
         'registration_status' => 'integer|required',
         'consumption' => 'nullable|string',
@@ -36,15 +35,6 @@ class Product extends BaseModel implements HasMedia
      */
     protected $table = 'products';
 
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'name' => 'json',
-    ];
 
     protected $with = ['pharmaceutical_form', 'media'];
 

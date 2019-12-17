@@ -19,7 +19,7 @@ class Medicine extends BaseModel implements HasMedia
     use HasMediaTrait;
     public static $rules = [
         'name_en' => 'required|string',
-        'name_fa' => 'string',
+        'name_fa' => 'nullable|string',
     ];
 
     /**

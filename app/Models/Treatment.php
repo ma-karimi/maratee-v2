@@ -26,7 +26,7 @@ class Treatment extends BaseModel
 
     public static $rules = [
         'name_en' => 'required|string',
-        'description' => 'string'
+        'description' => 'nullable|string'
     ];
 
 

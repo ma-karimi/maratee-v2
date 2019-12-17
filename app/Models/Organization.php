@@ -15,14 +15,14 @@ use Krlove\EloquentModelGenerator\Model\BelongsTo;
 class Organization extends BaseModel
 {
     public static $rules = [
-        'domestic_code' => 'string',
-        'international_code' => 'string',
-        'is_herbarium' => 'integer',
+        'domestic_code' => 'nullable|string',
+        'international_code' => 'nullable|string',
+        'is_herbarium' => 'nullable|integer',
         'phone' => 'required|string',
         'name_en' => 'required|string',
         'city_id' => 'nullable|exists:cities,id',
-        'email' => 'email',
-        'website' => 'string'
+        'email' => 'nullable|email',
+        'website' => 'nullable|string'
     ];
     /**
      * The database table used by the model.

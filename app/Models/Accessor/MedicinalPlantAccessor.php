@@ -120,7 +120,7 @@ trait MedicinalPlantAccessor
         $item = null;
 
         if ($this->relationLoaded('products') &&  $this->products->count()) {
-            $item .= $this->products->implode('name->en', ' & ');
+            $item .= $this->products->implode('name_en', ' & ');
         }
         return $item;
     }
