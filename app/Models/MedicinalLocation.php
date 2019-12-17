@@ -32,5 +32,7 @@ class MedicinalLocation extends BaseModel
     protected $appends = [
         'studied_sample_name',
         'presence_in_country_name',
+        'metabolites',
+        'materials'
     ];
 }

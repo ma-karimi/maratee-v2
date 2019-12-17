@@ -76,6 +76,9 @@ class MedicinalPlant extends BaseModel
         'distributions',
         'wooden',
         'herbaceous',
-        'cycle'
+        'cycle',
+        'pharmaceuticals',
+        'other_products',
+        'distributions'
     ];
 }

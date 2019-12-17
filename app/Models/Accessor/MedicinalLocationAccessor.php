@@ -25,4 +25,24 @@ trait MedicinalLocationAccessor
         return Arr::get(self::PRESENCE_IN_COUNTRY, $this->presence_in_country);
     }
 
+
+    public function getMetabolitesAttribute()
+    {
+        $item = null;
+
+        if ($this->relationLoaded('secondaryMetabolites') &&  $this->secondaryMetabolites->count()) {
+            $item .= $this->secondaryMetabolites->implode('name', ' & ');
+        }
+        return $item;
+    }
+
+    public function getMaterialsAttribute()
+    {
+        $item = null;
+
+        if ($this->relationLoaded('effectiveMaterials') &&  $this->effectiveMaterials->count()) {
+            $item .= $this->effectiveMaterials->implode('name', ' & ');
+        }
+        return $item;
+    }
 }

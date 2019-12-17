@@ -76,4 +76,24 @@ trait MedicinalPlantAccessor
         return !empty($this->herbaceous_id) ? Arr::get(self::HERBACEOUS, $this->herbaceous_id) : null;
     }
 
+
+    public function getOtherProductsAttribute()
+    {
+        $item = null;
+
+        if ($this->relationLoaded('medicines') &&  $this->medicines->count()) {
+            $item .= $this->medicines->implode('name_en', ' & ');
+        }
+        return $item;
+    }
+
+    public function getPharmaceuticalsAttribute()
+    {
+        $item = null;
+
+        if ($this->relationLoaded('products') &&  $this->products->count()) {
+            $item .= $this->products->implode('name[en]', ' & ');
+        }
+        return $item;
+    }
 }

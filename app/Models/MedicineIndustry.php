@@ -29,7 +29,7 @@ class MedicineIndustry extends BaseModel
     ];
     protected $table = 'medicine_industries';
     protected $appends = ['type'];
-
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
     public function getTypeAttribute()
     {
         return Arr::get(self::TYPE, $this->type_id);

@@ -25,6 +25,7 @@ class MedicinalLocationConstituent extends BaseModel
     protected $table = 'medicinal_location_constituents';
 
     protected $with = ['constituentType'];
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
     /**
      * @return BelongsTo

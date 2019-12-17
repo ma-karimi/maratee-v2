@@ -29,6 +29,7 @@ class Medicine extends BaseModel implements HasMedia
      */
     protected $table = 'medicines';
     protected $with = ['industries'];
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
     public function medicinals()
     {
