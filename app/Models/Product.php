@@ -46,7 +46,7 @@ class Product extends BaseModel implements HasMedia
         'name' => 'json',
     ];
 
-    protected $with = ['pharmaceutical_form'];
+    protected $with = ['pharmaceutical_form', 'media'];
 
     protected $appends = ['status_name'];
 
