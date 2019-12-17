@@ -28,11 +28,16 @@ class Medicine extends BaseModel implements HasMedia
      * @var string
      */
     protected $table = 'medicines';
-
+    protected $with = ['industries'];
 
     public function medicinals()
     {
         return $this->morphToMany(MedicinalPlant::class, 'hub','medicinal_hubs');
+    }
+
+    public function industries()
+    {
+        return $this->hasMany(MedicineIndustry::class)->latest();
     }
 
 }
