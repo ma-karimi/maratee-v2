@@ -22,10 +22,12 @@ class Product extends BaseModel implements HasMedia
     public static $linguistically = ['name' => true];
     public static $rules = [
         'registration_status' => 'integer|required',
-        'consumption' => 'string',
-        'active_compounds' => 'string',
-        'manufacturer' => 'string',
-        'pharmaceutical_forms' => 'string',
+        'consumption' => 'nullable|string',
+        'active_compounds' => 'nullable|string',
+        'telephone' => 'nullable|string',
+        'address' => 'nullable|string',
+        'company' => 'nullable|string',
+        'pharmaceutical_forms' => 'nullable|string',
     ];
     /**
      * The database table used by the model.
