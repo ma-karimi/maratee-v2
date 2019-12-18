@@ -36,13 +36,4 @@ trait MedicinalLocationAccessor
         return $item;
     }
 
-    public function getMaterialsAttribute()
-    {
-        $item = null;
-
-        if ($this->relationLoaded('effectiveMaterials') &&  $this->effectiveMaterials->count()) {
-            $item .= $this->effectiveMaterials->implode('name', ' & ');
-        }
-        return $item;
-    }
 }

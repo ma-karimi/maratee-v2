@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use App\Models\Product;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateProductAPIRequest extends APIRequest
+class ProductAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.

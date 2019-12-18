@@ -6,7 +6,7 @@ use App\Models\ActionHubDocument;
 use App\Models\Medicine;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateMedicineAPIRequest extends APIRequest
+class MedicineAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.

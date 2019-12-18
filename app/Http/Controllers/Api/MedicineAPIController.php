@@ -3,20 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 
-use App\Http\Requests\Api\CreateMedicineAPIRequest;
-use App\Http\Requests\Api\UpdateMedicineAPIRequest;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\MedicineAPIRequest;
 use App\Models\Medicine;
 use App\Repositories\MedicineRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Support\Facades\Cache;
 
 
 /**
  * Class MedicineController
  * @package App\Http\Controllers\Api
  */
-
 class MedicineAPIController extends AppBaseController
 {
     /** @var  MedicineRepository */
@@ -62,7 +59,7 @@ class MedicineAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $medicines = $this->medicineRepository->all(
+        $medicines = $this->medicineRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
             $request->get('relations')
@@ -114,7 +111,7 @@ class MedicineAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateMedicineAPIRequest $request
+     * @param MedicineAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -164,8 +161,9 @@ class MedicineAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(CreateMedicineAPIRequest $request)
+    public function store(MedicineAPIRequest $request)
     {
 
         $medicine = $this->medicineRepository->create($request);
@@ -225,7 +223,7 @@ class MedicineAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateMedicineAPIRequest $request
+     * @param MedicineAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -282,8 +280,9 @@ class MedicineAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update($id, UpdateMedicineAPIRequest $request)
+    public function update($id, MedicineAPIRequest $request)
     {
 
         /** @var Medicine $medicine */

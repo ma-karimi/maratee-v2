@@ -17,7 +17,7 @@ class MedicinalLocation extends BaseModel
     use MedicinalLocationRelations, MedicinalLocationAccessor;
     public const STUDIED_SAMPLE = [0 => 'unknown', 1 => 'wild', 2 => 'cultivated'];
     public const PRESENCE_IN_COUNTRY = [0 => 'unknown', 1 => 'native', 2 => 'endemic'];
-    protected $with = ['determine', 'location', 'collect', 'constituents', 'treatment',  'distillation', 'secondaryMetabolites', 'effectiveMaterials', 'phenology', 'distillation', 'extraction', 'analyse', 'article'];
+    protected $with = ['determine', 'location', 'collect', 'constituents', 'treatment',  'distillation', 'secondaryMetabolites', 'phenology', 'distillation', 'extraction', 'analyse', 'article'];
 
 
     /**
@@ -33,6 +33,5 @@ class MedicinalLocation extends BaseModel
         'studied_sample_name',
         'presence_in_country_name',
         'metabolites',
-        'materials'
     ];
 }

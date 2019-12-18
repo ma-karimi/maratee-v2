@@ -82,6 +82,8 @@ class MedicinalPlant extends BaseModel
         'distributions',
         'potentials',
         'foods',
-        'industries'
+        'industries',
+        'materials'
+
     ];
 }

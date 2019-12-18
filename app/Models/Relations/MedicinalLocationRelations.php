@@ -73,12 +73,6 @@ trait MedicinalLocationRelations
         )->where('medicinal_plant_types.type_id', array_search('secondary_metabolite', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_location_hubs.deleted_at');
     }
 
-    public function effectiveMaterials()
-    {
-        return $this->morphedByMany(MedicinalPlantType::class, 'hub', 'medicinal_location_hubs'
-        )->where('medicinal_plant_types.type_id', array_search('material', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_location_hubs.deleted_at');
-    }
-
 
     public function phenology()
     {

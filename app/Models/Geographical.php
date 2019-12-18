@@ -12,6 +12,7 @@ use App\Models\Contracts\BaseModel;
  */
 class Geographical extends BaseModel
 {
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
     public static $rules = [
         'name' => 'required|string',

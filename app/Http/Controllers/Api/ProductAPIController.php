@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateProductAPIRequest;
-use App\Http\Requests\Api\UpdateProductAPIRequest;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\ProductAPIRequest;
 use App\Models\Product;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Support\Facades\Cache;
 use Response;
 
 /**
  * Class ProductController
  * @package App\Http\Controllers\Api
  */
-
 class ProductAPIController extends AppBaseController
 {
     /** @var  ProductRepository */
@@ -69,6 +66,7 @@ class ProductAPIController extends AppBaseController
 
         return $this->sendResponse($products->toArray(), 'Products retrieved successfully');
     }
+
     /**
      * @param Request $request
      * @return Response
@@ -105,14 +103,14 @@ class ProductAPIController extends AppBaseController
     public function all()
     {
         $products =
-             $this->productRepository->all();
+            $this->productRepository->all();
 
 
         return $this->sendResponse($products->toArray(), 'Products retrieved successfully');
     }
 
     /**
-     * @param CreateProductAPIRequest $request
+     * @param ProductAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -122,7 +120,7 @@ class ProductAPIController extends AppBaseController
      *      description="Store Product",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="name",
+     *          name="name_en",
      *          in="body",
      *          description="Product that should be stored",
      *          required=true,
@@ -170,6 +168,13 @@ class ProductAPIController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Product")
      *      ),
+     *      @SWG\Parameter(
+     *          name="side_effects",
+     *          in="body",
+     *          description="Product that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Product")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -190,8 +195,9 @@ class ProductAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(CreateProductAPIRequest $request)
+    public function store(ProductAPIRequest $request)
     {
 
         $product = $this->productRepository->create($request);
@@ -251,7 +257,7 @@ class ProductAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateProductAPIRequest $request
+     * @param ProductAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -316,6 +322,13 @@ class ProductAPIController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Product")
      *      ),
+     *      @SWG\Parameter(
+     *          name="side_effects",
+     *          in="body",
+     *          description="Product that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Product")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -336,8 +349,9 @@ class ProductAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update($id, UpdateProductAPIRequest $request)
+    public function update($id, ProductAPIRequest $request)
     {
 
         /** @var Product $product */

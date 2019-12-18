@@ -75,7 +75,7 @@ class MedicinalPlantAPIController extends AppBaseController
      */
     private function getFieldRelations(): array
     {
-        return ['taxonomy', 'provinces', 'aerialType', 'groundType', 'foodIndustries', 'otherIndustries', 'industrialPotentials', 'origin', 'habitat', 'locations', 'medicines', 'products'];
+        return ['taxonomy', 'provinces.geographical', 'aerialType', 'groundType', 'foodIndustries', 'otherIndustries', 'industrialPotentials', 'origin', 'habitat', 'locations', 'medicines','effectiveMaterials',  'products'];
     }
 
 

@@ -4,7 +4,17 @@
 namespace App\Models\Relations;
 
 
-use App\Models\{General, MedicinalLocation, MedicinalPart, MedicinalPlantType, Medicine, Product, Province, Taxonomy};
+use App\Models\{General,
+    Geographical,
+    MedicinalLocation,
+    MedicinalPart,
+    MedicinalPlantType,
+    Medicine,
+    Plant,
+    PlantGeographical,
+    Product,
+    Province,
+    Taxonomy};
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -13,11 +23,12 @@ trait MedicinalPlantRelations
 
     public function provinces()
     {
-        return $this->morphedByMany(Province::class,
-            'hub',
-            'medicinal_hubs', 'medicinal_plant_id'
-        )->whereNull('medicinal_hubs.deleted_at')
-            ->withTimestamps();
+        return $this->hasManyThrough(PlantGeographical::class, Plant::class, 'taxonomy_id', 'plant_id');
+//        return $this->morphedByMany(Province::class,
+//            'hub',
+//            'medicinal_hubs', 'medicinal_plant_id'
+//        )->whereNull('medicinal_hubs.deleted_at')
+//            ->withTimestamps();
     }
 
     /**
@@ -87,5 +98,13 @@ trait MedicinalPlantRelations
         return $this->belongsTo(General::class, 'general_habitat_id'
         )->where('type', 'habitat');
     }
+
+
+    public function effectiveMaterials()
+    {
+        return $this->morphedByMany(MedicinalPlantType::class, 'hub', 'medicinal_hubs'
+        )->where('medicinal_plant_types.type_id', array_search('material', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
+    }
+
 
 }

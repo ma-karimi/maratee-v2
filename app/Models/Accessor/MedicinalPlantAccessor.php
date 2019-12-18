@@ -39,8 +39,6 @@ trait MedicinalPlantAccessor
     }
 
 
-
-
     public function getHygienicCosmeticAttribute()
     {
         return !empty($this->hygienic_cosmetic_industry_id) ? Arr::get(self::BOOLEAN, $this->hygienic_cosmetic_industry_id) : null;
@@ -54,23 +52,25 @@ trait MedicinalPlantAccessor
 
     public function getDistributionsAttribute()
     {
-        $authors = null;
+        $item = null;
 
         if ($this->relationLoaded('provinces') && $this->provinces->count()) {
-            $authors = $this->provinces->implode('name_en', ' & ');
+            $item = $this->provinces->implode('name', ' & ');
         }
 
-        return $authors;
+        return $item;
     }
 
     public function getCycleAttribute()
     {
         return !empty($this->cycle_id) ? Arr::get(self::CYCLE, $this->cycle_id) : null;
     }
+
     public function getWoodenAttribute()
     {
         return !empty($this->wooden_id) ? Arr::get(self::WOODEN, $this->wooden_id) : null;
     }
+
     public function getHerbaceousAttribute()
     {
         return !empty($this->herbaceous_id) ? Arr::get(self::HERBACEOUS, $this->herbaceous_id) : null;
@@ -81,25 +81,27 @@ trait MedicinalPlantAccessor
     {
         $item = null;
 
-        if ($this->relationLoaded('medicines') &&  $this->medicines->count()) {
+        if ($this->relationLoaded('medicines') && $this->medicines->count()) {
             $item .= $this->medicines->implode('name_en', ' & ');
         }
         return $item;
     }
+
     public function getIndustriesAttribute()
     {
         $item = null;
 
-        if ($this->relationLoaded('otherIndustries') &&  $this->otherIndustries->count()) {
+        if ($this->relationLoaded('otherIndustries') && $this->otherIndustries->count()) {
             $item .= $this->otherIndustries->implode('name', ' & ');
         }
         return $item;
     }
+
     public function getFoodsAttribute()
     {
         $item = null;
 
-        if ($this->relationLoaded('foodIndustries') &&  $this->foodIndustries->count()) {
+        if ($this->relationLoaded('foodIndustries') && $this->foodIndustries->count()) {
             $item .= $this->foodIndustries->implode('name', ' & ');
         }
         return $item;
@@ -109,7 +111,7 @@ trait MedicinalPlantAccessor
     {
         $item = null;
 
-        if ($this->relationLoaded('industrialPotentials') &&  $this->industrialPotentials->count()) {
+        if ($this->relationLoaded('industrialPotentials') && $this->industrialPotentials->count()) {
             $item .= $this->industrialPotentials->implode('name', ' & ');
         }
         return $item;
@@ -119,8 +121,18 @@ trait MedicinalPlantAccessor
     {
         $item = null;
 
-        if ($this->relationLoaded('products') &&  $this->products->count()) {
+        if ($this->relationLoaded('products') && $this->products->count()) {
             $item .= $this->products->implode('name_en', ' & ');
+        }
+        return $item;
+    }
+
+    public function getMaterialsAttribute()
+    {
+        $item = null;
+
+        if ($this->relationLoaded('effectiveMaterials') && $this->effectiveMaterials->count()) {
+            $item .= $this->effectiveMaterials->implode('name', ' & ');
         }
         return $item;
     }
