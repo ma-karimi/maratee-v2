@@ -366,6 +366,7 @@ class GeneralAPIController extends AppBaseController
     public function all($type)
     {
 
+
         $General = $this->GeneralRepository->allWithType($type);
 
 

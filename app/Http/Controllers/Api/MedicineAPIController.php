@@ -62,7 +62,7 @@ class MedicineAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $medicines = $this->medicineRepository->paginate(
+        $medicines = $this->medicineRepository->all(
             $request->get('per_page'),
             $request->except('per_page'),
             $request->get('relations')
@@ -70,6 +70,7 @@ class MedicineAPIController extends AppBaseController
 
         return $this->sendResponse($medicines->toArray(), 'Medicines retrieved successfully');
     }
+
 
     /**
      * @return Response

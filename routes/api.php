@@ -98,7 +98,7 @@ Route::apiResource('protections', 'ProtectionAPIController');
 
 Route::apiResource('projects', 'ProjectAPIController');
 
-Route::get('products/all', 'GeneralAPIController@all');
+Route::get('products/all', 'ProductAPIController@all');
 
 Route::apiResource('products', 'ProductAPIController');
 
