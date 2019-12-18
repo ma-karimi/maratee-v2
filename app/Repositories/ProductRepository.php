@@ -48,7 +48,7 @@ class ProductRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        $model = parent::update($input->except('media_type', 'file'));
+        $model = parent::update($input->except('media_type', 'file'), $id);
 
         $this->storeMedia($input, $model);
         return $model;
