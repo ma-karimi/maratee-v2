@@ -28,10 +28,11 @@ class MedicineIndustry extends BaseModel
         12 => 'Toxins and herbal pesticides'
     ];
     protected $table = 'medicine_industries';
-    protected $appends = ['type'];
+    protected $appends = ['industry'];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
-    public function getTypeAttribute()
+
+    public function getIndustryAttribute()
     {
-        return Arr::get(self::TYPE, $this->type_id);
+        return Arr::get(self::TYPE, $this->industry_id);
     }
 }
