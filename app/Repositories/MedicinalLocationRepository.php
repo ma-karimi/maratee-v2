@@ -93,7 +93,8 @@ class MedicinalLocationRepository extends BaseRepository
 
     private function getLastCode($medicinal_location): int
     {
-        $lastMedicinal = $this->model->where('medicinal_plant_id', $medicinal_location->medicinal_plant_id)->whereNotId($medicinal_location->id)->withTrashed()->latest()->first();
+        $lastMedicinal = $this->model->where('medicinal_plant_id', $medicinal_location->medicinal_plant_id)
+            ->where('id', '!=', $medicinal_location->id)->withTrashed()->latest()->first();
 
         return $lastMedicinal ? $lastMedicinal->code : 0;
     }
