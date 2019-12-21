@@ -47,10 +47,10 @@ class MedicinalPlantRepository extends BaseRepository
         return $model;
     }
 
-    private function storeEffectiveMaterials($input, $medicinal_location)
+    private function storeEffectiveMaterials($input, $medicinal)
     {
         $materials = request()->filled('materials') ? explode(',', $input['materials']) : [];
-        $this->createHub($medicinal_location->id, 'effectiveMaterials', $materials);
+        $this->createHub($medicinal->id, 'effectiveMaterials', $materials);
     }
     /**
      * @return array
