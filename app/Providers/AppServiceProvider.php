@@ -66,7 +66,6 @@ class AppServiceProvider extends ServiceProvider
             Medicine::observe(MedicineObserver::class);
             Product::observe(ProductObserver::class);
         }
-        MedicinalLocation::observe(MedicinalLocationObserver::class);
 
         DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
         DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('point', 'point');

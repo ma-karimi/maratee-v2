@@ -41,6 +41,8 @@ class MedicinalPlantRepository extends BaseRepository
     public function create($input)
     {
         $model = parent::create(Arr::only($input, $this->MedicinalData()));
+        $lastCode = $this->getLastCode($model);
+        $model->update(['code'=>$lastCode + 1]);
         $this->storeEffectiveMaterials($input, $model);
 
 
@@ -86,6 +88,13 @@ class MedicinalPlantRepository extends BaseRepository
     {
         $medicines = request()->filled('medicines') ? explode(',', $input['medicines']) : [];
         $this->createHub($medicinal->id, 'medicines', $medicines);
+    }
+
+    private function getLastCode($medicinal_location): int
+    {
+        $lastMedicinal = $this->model->where('medicinal_plant_id', $medicinal_location->medicinal_plant_id)->whereNotId($medicinal_location->id)->withTrashed()->latest()->first();
+
+        return $lastMedicinal ? $lastMedicinal->code : 0;
     }
 
     public function update($input, $id)
