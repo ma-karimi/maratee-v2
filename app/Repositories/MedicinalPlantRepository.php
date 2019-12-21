@@ -41,18 +41,23 @@ class MedicinalPlantRepository extends BaseRepository
     public function create($input)
     {
         $model = parent::create(Arr::only($input, $this->MedicinalData()));
-        $this->storeProvinces($input, $model);
+        $this->storeEffectiveMaterials($input, $model);
 
 
         return $model;
     }
 
+    private function storeEffectiveMaterials($input, $medicinal_location)
+    {
+        $materials = request()->filled('materials') ? explode(',', $input['materials']) : [];
+        $this->createHub($medicinal_location->id, 'effectiveMaterials', $materials);
+    }
     /**
      * @return array
      */
     private function MedicinalData(): array
     {
-        return ['taxonomy_id', 'aerial_part_id', 'ground_part_id', 'general_origin_id', 'code_no', 'fruit_color', 'flower_color', 'foliage_color', 'height', 'cycle_id', 'wooden_id', 'herbaceous_id', 'general_habitat_id'];
+        return ['taxonomy_id', 'aerial_part_id', 'ground_part_id', 'general_origin_id', 'code_no', 'fruit_color', 'flower_color', 'foliage_color', 'height', 'cycle_id', 'wooden_id', 'herbaceous_id', 'general_habitat_id', 'medicinal_properties'];
     }
 
     private function storeProvinces($input, $medicinal)
@@ -86,7 +91,7 @@ class MedicinalPlantRepository extends BaseRepository
     public function update($input, $id)
     {
         $model = parent::update(Arr::only($input, $this->MedicinalData()), $id);
-        $this->storeProvinces($input, $model);
+        $this->storeEffectiveMaterials($input, $model);
         return $model;
     }
 

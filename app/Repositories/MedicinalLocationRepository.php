@@ -84,7 +84,6 @@ class MedicinalLocationRepository extends BaseRepository
 
         $model = parent::create(Arr::only($input, $this->MedicinalLocationData()));
         $this->storeMetabolites($input, $model);
-        $this->storeEffectiveMaterials($input, $model);
         $this->storeDetermine($input, $model->id);
         $this->storeCollect($input, $model->id);
         return $model;
@@ -126,7 +125,7 @@ class MedicinalLocationRepository extends BaseRepository
      */
     private function MedicinalLocationData(): array
     {
-        return ['location_id', 'treatment_id', 'efficiency', 'studied_sample', 'presence_in_country', 'medicinal_properties', 'side_effects', 'phenology_id', 'method_distillation_id', 'method_extraction_id', 'method_analyse_id', 'herbarium_number', 'medicinal_plant_id'];
+        return ['location_id', 'treatment_id', 'efficiency', 'studied_sample', 'presence_in_country', 'phenology_id', 'method_distillation_id', 'method_extraction_id', 'method_analyse_id', 'herbarium_number', 'medicinal_plant_id'];
     }
 
     private function storeMetabolites($input, $medicinal_location)
@@ -135,11 +134,6 @@ class MedicinalLocationRepository extends BaseRepository
         $this->createHub($medicinal_location->id, 'secondaryMetabolites', $metabolites);
     }
 
-    private function storeEffectiveMaterials($input, $medicinal_location)
-    {
-        $materials = request()->filled('materials') ? explode(',', $input['materials']) : [];
-        $this->createHub($medicinal_location->id, 'effectiveMaterials', $materials);
-    }
 
     private function storeDetermine($input, $medicinal_location_id)
     {
@@ -205,7 +199,6 @@ class MedicinalLocationRepository extends BaseRepository
 
         $model = parent::update(Arr::only($input, $this->MedicinalLocationData()), $id);
         $this->storeMetabolites($input, $model);
-        $this->storeEffectiveMaterials($input, $model);
         $this->storeDetermine($input, $model->id);
         $this->storeCollect($input, $model->id);
         return $model;

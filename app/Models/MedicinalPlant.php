@@ -35,14 +35,11 @@ class MedicinalPlant extends BaseModel
         'aerial_part_id' => 'nullable|exists:medicinal_parts,id',
         'ground_part_id' => 'nullable|exists:medicinal_parts,id',
         'general_origin_id' => 'nullable|exists:generals,id',
-        'effective_material_id' => 'nullable|exists:medicinal_plant_types,id',
         'presence_in_country' => 'nullable|integer',
-        'code_no' => 'nullable|integer',
 
         //Medicinal Location
         'height' => 'nullable|string',
         'medicinal_properties' => 'nullable|string',
-        'side_effects' => 'nullable|string',
 //        //life_form
         'cycle_id' => 'nullable|exists:life_forms,id',
         'wooden_id' => 'nullable|exists:life_forms,id',
