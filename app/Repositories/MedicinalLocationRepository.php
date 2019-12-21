@@ -2,10 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Models\{ActionHub, ActorHub, Location, MedicinalLocation, MedicinalLocationConstituent};
+use App\Models\{ActionHub, Location, MedicinalLocation, MedicinalLocationConstituent};
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class MedicinalLocationRepository
@@ -86,9 +85,18 @@ class MedicinalLocationRepository extends BaseRepository
         $this->storeMetabolites($input, $model);
         $this->storeDetermine($input, $model->id);
         $this->storeCollect($input, $model->id);
+
+        $lastCode = $this->getLastCode($model);
+        parent::update(['code' => $lastCode + 1], $model->id);
         return $model;
     }
 
+    private function getLastCode($medicinal_location): int
+    {
+        $lastMedicinal = $this->model->where('medicinal_plant_id', $medicinal_location->medicinal_plant_id)->whereNotId($medicinal_location->id)->withTrashed()->latest()->first();
+
+        return $lastMedicinal ? $lastMedicinal->code : 0;
+    }
     /**
      * @param $input
      * @return object
