@@ -57,7 +57,7 @@ class MedicinalPlantRepository extends BaseRepository
      */
     private function MedicinalData(): array
     {
-        return ['taxonomy_id', 'aerial_part_id', 'ground_part_id', 'general_origin_id', 'code_no', 'fruit_color', 'flower_color', 'foliage_color', 'height', 'cycle_id', 'wooden_id', 'herbaceous_id', 'general_habitat_id', 'medicinal_properties'];
+        return ['taxonomy_id', 'aerial_part_id', 'ground_part_id', 'general_origin_id', 'fruit_color', 'flower_color', 'foliage_color', 'height', 'cycle_id', 'wooden_id', 'herbaceous_id', 'general_habitat_id', 'medicinal_properties'];
     }
 
     private function storeProvinces($input, $medicinal)
