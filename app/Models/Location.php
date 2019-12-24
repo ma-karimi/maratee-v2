@@ -22,13 +22,13 @@ class Location extends BaseModel
 
     public static $rules = [
         'city_id' => 'required|exists:cities,id',
-        'village' => 'string',
-        'min_altitude' => 'numeric',
-        'max_altitude' => 'numeric',
-        'address_en' => 'string',
-        'address_fa' => 'string',
-        'description' => 'string',
-        'region_name' => 'string',
+        'village' => 'nullable|string',
+        'min_altitude' => 'nullable|numeric',
+        'max_altitude' => 'nullable|numeric',
+        'address_en' => 'nullable|string',
+        'address_fa' => 'nullable|string',
+        'description' => 'nullable|string',
+        'region_name' => 'nullable|string',
     ];
     /**
      * The database table used by the model.
