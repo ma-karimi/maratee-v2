@@ -81,11 +81,16 @@ class BotanicalRepository extends BaseRepository
     {
         $botanical = parent::create($this->primaryData($input));
 
-        $this->distributionHubRepo->store($input, $botanical->id);
+        $this->storeDistributions($input, $botanical);
 
         return $botanical;
     }
 
+    private function storeDistributions($input, $botanical)
+    {
+        $distributions = request()->filled('distributions') ? explode(',', $input['distributions']) : [];
+        $this->createHub($botanical->id, 'distributions', $distributions);
+    }
     /**
      * @param $input
      * @return array
@@ -188,7 +193,7 @@ class BotanicalRepository extends BaseRepository
     public function update($input, $id)
     {
         $botanical = parent::update($this->primaryData($input), $id);
-        $this->distributionHubRepo->store($input, $botanical->id);
+        $this->storeDistributions($input, $botanical);
 
         return $botanical;
     }

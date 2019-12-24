@@ -93,8 +93,6 @@ class MedicinalPlantRepository extends BaseRepository
     {
         $model = parent::update(Arr::only($input, $this->MedicinalData()), $id);
         $this->storeEffectiveMaterials($input, $model);
-        $lastCode = $this->getLastCode($model);
-        parent::update(['code'=>$lastCode + 1], $model->id);
         return $model;
     }
 

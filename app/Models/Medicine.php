@@ -31,7 +31,7 @@ class Medicine extends BaseModel implements HasMedia
     protected $table = 'medicines';
     protected $with = ['industries', 'media'];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
-
+    protected $appends = ['medicine_industries'];
     public function medicinals()
     {
         return $this->morphToMany(MedicinalPlant::class, 'hub','medicinal_hubs');
@@ -40,6 +40,17 @@ class Medicine extends BaseModel implements HasMedia
     public function industries()
     {
         return $this->hasMany(MedicineIndustry::class)->latest();
+    }
+
+
+    public function getMedicineIndustriesAttribute()
+    {
+        $item = null;
+
+        if ($this->relationLoaded('industries') &&  $this->industries->count()) {
+            $item .= $this->industries->implode('industry', ' & ');
+        }
+        return $item;
     }
 
 }
