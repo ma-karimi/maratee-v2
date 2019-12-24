@@ -22,6 +22,7 @@ class Location extends BaseModel
 
     public static $rules = [
         'city_id' => 'required|exists:cities,id',
+        'province_id' => 'required|exists:provinces,id',
         'village' => 'nullable|string',
         'min_altitude' => 'nullable|numeric',
         'max_altitude' => 'nullable|numeric',
