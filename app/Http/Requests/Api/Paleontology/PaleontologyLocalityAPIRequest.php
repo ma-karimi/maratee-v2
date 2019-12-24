@@ -24,13 +24,13 @@ class PaleontologyLocalityAPIRequest extends APIRequest
             'formation' => 'required',
             'city_id' => 'required|exists:cities,id',
             'province_id' => 'required|exists:provinces,id',
-            'village' => 'string',
+            'village' => 'nullable|string',
             'address_en' => 'required|string',
-            'address_fa' => 'string',
-            'region_name' => 'string',
-            'stratigraphy' => 'string',
-            'lithology' => 'string',
-            'locality_description' => 'string',
+            'address_fa' => 'nullable|string',
+            'region_name' => 'nullable|string',
+            'stratigraphy' => 'nullable|string',
+            'lithology' => 'nullable|string',
+            'locality_description' => 'nullable|string',
         ];
     }
 }
