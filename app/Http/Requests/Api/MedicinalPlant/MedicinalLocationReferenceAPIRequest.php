@@ -27,7 +27,7 @@ class MedicinalLocationReferenceAPIRequest extends APIRequest
             'title' => 'required',
             'year' => 'nullable|numeric',
             'journal_name' => 'nullable',
-            'page_no' => 'required',
+            'page_no' => 'nullable',
         ];
     }
 }
