@@ -96,6 +96,8 @@ class PlantRepository extends BaseRepository
             'flowering_time' => $input['flowering_time'] ?? null,
             'number' => $input['number'] ?? null,
             'monopoly_of_iran_id' => $input['monopoly_of_iran_id'] ?? null,
+            'n_no' => $input['n_no'] ?? null,
+            'n2_no' => $input['n2_no'] ?? null,
 //            'sheets_no' => $input['sheets_no'] ?? null,
 //            'samples_no' => $input['samples_no'] ?? null,
 //            'tip_qt' => $input['tip_qt'] ?? null,
@@ -176,7 +178,8 @@ class PlantRepository extends BaseRepository
             'number' => $input['number'] ?? null,
             'monopoly_of_iran_id' => $input['monopoly_of_iran_id'] ?? null,
             'life_form_id' => $input['life_form_id'] ?? null,
-
+            'n_no' => $input['n_no'] ?? null,
+            'n2_no' => $input['n2_no'] ?? null,
 //            'sheets_no' => $input['sheets_no'] ?? null,
 //            'samples_no' => $input['samples_no'] ?? null,
 //            'tip_qt' => $input['tip_qt'] ?? null,
