@@ -16,12 +16,12 @@ class Locality extends BaseModel
     public static $rules = [
         'paleontology_id' => 'required|exists:paleontologies,id',
         'location_id' => 'required|exists:locations,id',
-        'formation' => 'string',
-        'layer' => 'string',
-        'stratigraphy' => 'string',
-        'fauna' => 'string',
-        'description' => 'string',
-        'lithology' => 'string',
+        'formation' => 'nullable|string',
+        'layer' => 'nullable|string',
+        'stratigraphy' => 'nullable|string',
+        'fauna' => 'nullable|string',
+        'description' => 'nullable|string',
+        'lithology' => 'nullable|string',
     ];
     /**
      * The database table used by the model.
