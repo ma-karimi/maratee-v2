@@ -81,6 +81,7 @@ class BotanicalRepository extends BaseRepository
     {
         $botanical = parent::create($this->primaryData($input));
 
+        $this->distributionHubRepo->store($input, $botanical->id);
 
         return $botanical;
     }
@@ -128,7 +129,6 @@ class BotanicalRepository extends BaseRepository
             $this->createHub($botanical->id, 'locations', [$location->id]);
         }
 
-        $this->distributionHubRepo->store($input, $id);
 
     }
 
@@ -187,7 +187,10 @@ class BotanicalRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        return parent::update($this->primaryData($input), $id);
+        $botanical = parent::update($this->primaryData($input), $id);
+        $this->distributionHubRepo->store($input, $botanical->id);
+
+        return $botanical;
     }
 
     public function storeBotanicalIrrigation(array $input)

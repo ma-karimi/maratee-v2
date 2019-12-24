@@ -65,7 +65,7 @@ class Botanical extends BaseModel implements HasMedia
 
 
     protected $appends = ['soil', 'summer_tolerance', 'winter_tolerance',
-        'seed_formation', 'seed_germination', 'seed_rate', 'growth_rate', 'entrance_to_garden', 'cycle', 'wooden', 'monopoly_of_iran'];
+        'seed_formation', 'seed_germination', 'seed_rate', 'growth_rate', 'entrance_to_garden', 'cycle', 'wooden', 'monopoly_of_iran', 'geographicals'];
 
     /**
      * The database table used by the model.

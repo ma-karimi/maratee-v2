@@ -69,4 +69,16 @@ trait BotanicalAccessor
         return !empty($this->attributes['seed_germination_id']) ? Arr::get(self::SEED_GERMINATION, $this->attributes['seed_germination_id']) : null;
     }
 
+
+
+    public function getGeographicalsAttribute()
+    {
+        $distributions = null;
+
+        if ($this->relationLoaded('$this->distributions') &&  $this->distributions->count()) {
+            $distributions .= $this->distributions->implode('name', ' & ');
+        }
+        return $distributions;
+    }
+
 }
