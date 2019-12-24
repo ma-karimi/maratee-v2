@@ -2,9 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\ActorHub;
 use App\Models\PaleontologyCitation;
-use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
 
 /**
@@ -20,22 +18,6 @@ class PaleontologyCitationRepository extends BaseRepository
     protected $fieldSearchable = [
 
     ];
-    /**
-     * @var ActorHub
-     */
-    private $actorHub;
-
-    /**
-     * PaleontologyCitationRepository constructor.
-     * @param Application $app
-     * @param ActorHub $actorHub
-     * @throws \Exception
-     */
-    public function __construct(Application $app, ActorHub $actorHub)
-    {
-        parent::__construct($app);
-        $this->actorHub = $actorHub;
-    }
 
     /**
      * Return searchable fields
@@ -60,43 +42,27 @@ class PaleontologyCitationRepository extends BaseRepository
     {
         $citation = parent::create(Arr::except($input, 'authors'));
 
-        $this->setAuthors($input, $citation->id);
-
-        return $citation;
-    }
-
-    public function update($input, $id)
-    {
-        $citation = parent::update(Arr::except($input, 'authors'), $id);
-
-        $this->setAuthors($input, $citation->id);
+        $this->setAuthors($input, $citation);
 
         return $citation;
     }
 
     /**
      * @param $input
-     * @param $citation_id
+     * @param $citation
      */
-    private function setAuthors($input, $citation_id)
+    private function setAuthors($input, $citation)
     {
         $authors = is_array($input['authors']) ? $input['authors'] : explode(',', $input['authors']);
+        $this->createHub($citation->id, 'actors', $authors);
+    }
 
+    public function update($input, $id)
+    {
+        $citation = parent::update(Arr::except($input, 'authors'), $id);
 
-        $this->actorHub->where([
-            'actorable_id' => $citation_id,
-            'actorable_type' => PaleontologyCitation::class
-        ])
-            ->whereNotIn('actor_id', $authors)
-            ->delete();
-        if (!empty($authors) && count($authors)) {
-            foreach ($authors as $item) {
-                $this->actorHub->firstOrCreate([
-                    'actor_id' => $item,
-                    'actorable_type' => PaleontologyCitation::class,
-                    'actorable_id' => $citation_id,
-                ]);
-            }
-        }
+        $this->setAuthors($input, $citation);
+
+        return $citation;
     }
 }
