@@ -22,9 +22,9 @@ class BotanicalIrrigation extends BaseModel
         'irrigation_id' => 'required|in:1,2,3,4,5,6',
         'requirement_id' => 'required|in:1,2,3',
         'irrigation_time_id' => 'required|in:1,2,3,4,5',
-        'spring_time' =>'string',
-        'autumn_time' =>'string',
-        'summer_time' =>'string',
+        'spring_time' =>'nullable|string',
+        'autumn_time' =>'nullable|string',
+        'summer_time' =>'nullable|string',
     ];
 
     protected $appends = ['requirement', 'irrigation_time', 'irrigation'];
