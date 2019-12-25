@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Role;
-use App\Repositories\BaseRepository;
 
 /**
  * Class RoleRepository

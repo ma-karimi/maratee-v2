@@ -43,7 +43,7 @@ use App\Models\Contracts\BaseModel;
 class MedicinalPlantProvince extends BaseModel
 {
     public static $rules = [
-        'provinces'=>'required|array'
+        'provinces' => 'required|array'
 
     ];
     /**

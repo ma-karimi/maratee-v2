@@ -15,7 +15,14 @@ class CreateSeedCollectionsTable extends Migration
     {
         Schema::create('seed_collections', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('seed_id');
+            $table->unsignedBigInteger('taxonomy_id');
+            $table->string('encoded_code_by_collector')->nullable();
+            $table->string('corrected_code_by_nrgb')->nullable();
+            $table->string('accession_code')->nullable();
+            $table->string('voucher_no')->nullable();
+            $table->unsignedBigInteger('organization_id');
+            $table->string('department_or_group')->nullable();
+            $table->unsignedBigInteger('project_id')->nullable();
             $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('land_form_id')->nullable();
             $table->unsignedBigInteger('slope_aspect_id')->nullable();
@@ -29,10 +36,12 @@ class CreateSeedCollectionsTable extends Migration
             $table->unsignedBigInteger('soil_lime_id')->nullable();
             $table->string('climate')->nullable();
             $table->string('community_type')->nullable();
+            $table->string('associated_species')->nullable();
             $table->unsignedBigInteger('soil_erosion_id')->nullable();
             $table->integer('area_sampled')->nullable();
             $table->integer('plants_sampled_no')->nullable();
             $table->integer('approximate_area_of_plant')->nullable();
+            $table->unsignedBigInteger('specimen_type_collect_id');
             $table->tinyInteger('flowering_time_id')->nullable();
             $table->unsignedBigInteger('pollination_type_id')->nullable();
             $table->unsignedBigInteger('pollination_agent_id')->nullable();

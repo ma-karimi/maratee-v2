@@ -18,13 +18,14 @@ trait ScopeBuilder
                 return $query->whereIn($column, $operand);
                 break;
             case 'LIKE':
-                return $query->where($column,'LIKE', "%$operand%");
+                return $query->where($column, 'LIKE', "%$operand%");
             default:
                 return abort('400', 'invalid entry');
         }
     }
+
     public function scopeComparisonScope($query, $column, $operator, $operand)
     {
-        return $query->where($column,$operator, $operand);
+        return $query->where($column, $operator, $operand);
     }
 }

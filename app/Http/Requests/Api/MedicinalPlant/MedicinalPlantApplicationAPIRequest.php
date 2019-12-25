@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Api\MedicinalPlant;
 
-use App\Models\MedicinalPlant;
 use InfyOm\Generator\Request\APIRequest;
 
 class MedicinalPlantApplicationAPIRequest extends APIRequest
@@ -26,7 +25,7 @@ class MedicinalPlantApplicationAPIRequest extends APIRequest
     public function rules()
     {
         return [
-            'traditional_iranian_medicine'=>'nullable|numeric'
+            'traditional_iranian_medicine' => 'nullable|numeric'
         ];
     }
 }

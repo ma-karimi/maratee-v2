@@ -8,8 +8,7 @@ use App\Models\Geographical;
  * Class GeographicalRepository
  * @package App\Repositories
  * @version July 14, 2019, 10:06 am UTC
-*/
-
+ */
 class GeographicalRepository extends BaseRepository
 {
     /**

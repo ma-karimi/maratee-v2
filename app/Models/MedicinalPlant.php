@@ -27,7 +27,7 @@ class MedicinalPlant extends BaseModel
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
     public const WOODEN = [1 => 'Tree', 2 => 'Shrubs'];
     public const HERBACEOUS = [1 => 'Standing', 2 => 'Crawling'];
-    public const CYCLE = [1 => 'Annual', 2 => 'Perennial', 3=>'Biennal'];
+    public const CYCLE = [1 => 'Annual', 2 => 'Perennial', 3 => 'Biennal'];
 
     public static $rules = [
         'herbarium_number' => 'nullable|string',

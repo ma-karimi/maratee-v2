@@ -13,23 +13,17 @@ use App\Models\Contracts\BaseModel;
 class Treatment extends BaseModel
 {
 
+    public static $rules = [
+        'name_en' => 'required|string',
+        'description' => 'nullable|string'
+    ];
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'treatments';
-
     protected $dates = ['created_at', 'deleted_at', 'updated_at', 'date'];
-
-
-
-    public static $rules = [
-        'name_en' => 'required|string',
-        'description' => 'nullable|string'
-    ];
-
-
 
     public function treatmentHubs()
     {

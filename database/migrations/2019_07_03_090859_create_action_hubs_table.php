@@ -21,8 +21,6 @@ class CreateActionHubsTable extends Migration {
 
             $table->date('date')->nullable();
 			$table->json('description')->nullable();
-			$table->unsignedBigInteger('project_id')->nullable();
-			$table->unsignedBigInteger('department_id')->nullable();
 
             $table->timeStamps();
             $table->softDeletesTz();

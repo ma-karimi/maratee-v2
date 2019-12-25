@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\DistributionHubAPIRequest;
 use App\Repositories\DistributionHubRepository;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class DistributionHubController
  * @package App\Http\Controllers\Api
  */
-
 class DistributionHubAPIController extends AppBaseController
 {
     /** @var  DistributionHubRepository */

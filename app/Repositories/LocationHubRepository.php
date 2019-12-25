@@ -4,14 +4,12 @@ namespace App\Repositories;
 
 use App\Models\Address;
 use App\Models\LocationHub;
-use App\Repositories\BaseRepository;
 
 /**
  * Class LocationHubRepository
  * @package App\Repositories
  * @version July 14, 2019, 10:29 am UTC
-*/
-
+ */
 class LocationHubRepository extends BaseRepository
 {
     /**

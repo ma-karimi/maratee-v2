@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\MediaAPIRequest;
 use App\Models\Media;
 use App\Repositories\MediaRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class MediaController
  * @package App\Http\Controllers\Api
  */
-
 class MediaAPIController extends AppBaseController
 {
     /** @var  MediaRepository */
@@ -55,7 +55,7 @@ class MediaAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -413,7 +413,7 @@ class MediaAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/media/{id}",
      *      summary="Remove the specified Media from storage",

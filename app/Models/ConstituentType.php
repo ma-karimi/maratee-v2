@@ -14,17 +14,16 @@ class ConstituentType extends BaseModel
 {
 
     /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'constituent_types';
-
-    /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     public static $rules = ['name_en' => 'required|string'];
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'constituent_types';
 
 }

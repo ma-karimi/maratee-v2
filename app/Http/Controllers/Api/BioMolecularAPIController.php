@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateBioMolecularAPIRequest;
 use App\Http\Requests\Api\UpdateBioMolecularAPIRequest;
 use App\Models\BioMolecular;
 use App\Repositories\BioMolecularRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class BioMolecularController
  * @package App\Http\Controllers\Api
  */
-
 class BioMolecularAPIController extends AppBaseController
 {
     /** @var  BioMolecularRepository */
@@ -287,7 +287,7 @@ class BioMolecularAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/bio_moleculars/{id}",
      *      summary="Remove the specified BioMolecular from storage",

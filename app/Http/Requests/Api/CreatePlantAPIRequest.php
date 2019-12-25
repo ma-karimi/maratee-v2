@@ -4,9 +4,8 @@ namespace App\Http\Requests\Api;
 
 use App\Models\General;
 use App\Models\LifeForm;
-use App\Models\Plant;
-use InfyOm\Generator\Request\APIRequest;
 use Illuminate\Http\JsonResponse;
+use InfyOm\Generator\Request\APIRequest;
 
 
 class CreatePlantAPIRequest extends APIRequest
@@ -79,6 +78,7 @@ class CreatePlantAPIRequest extends APIRequest
             }
         }
     }
+
     /**
      * @param array $array_id_types
      */

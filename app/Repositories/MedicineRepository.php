@@ -81,7 +81,7 @@ class MedicineRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        $model = parent::update($input->except('media_type', 'file','industries'), $id);
+        $model = parent::update($input->except('media_type', 'file', 'industries'), $id);
         $this->storeIndustries($input, $model->id);
         $this->storeMedia($input, $model);
         return $model;

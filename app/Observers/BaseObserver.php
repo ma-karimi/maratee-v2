@@ -15,14 +15,15 @@ abstract class BaseObserver
         $this->collection = $this->model::all();
     }
 
+    public function refreshRedis($groupBy = 'id')
+    {
+        Cache::add($this->model, $this->filteredModel($groupBy), 1440);
+    }
+
     public function filteredModel($column)
     {
         return $this->collection->groupBy($column)->toJson();
     }
 
-    public function refreshRedis($groupBy='id')
-    {
-        Cache::add($this->model, $this->filteredModel($groupBy), 1440);
-    }
-     abstract protected function created(Model $model);
+    abstract protected function created(Model $model);
 }

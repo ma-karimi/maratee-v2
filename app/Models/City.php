@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @SWG\Definition(
  *            definition="City",
  *            required={"name_en","province_id"}
- **/
+ *
+ */
 class City extends BaseModel
 {
 

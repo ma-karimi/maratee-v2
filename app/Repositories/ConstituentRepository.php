@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Constituent;
-use App\Repositories\BaseRepository;
 
 /**
  * Class ConstituentRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:04 am UTC
-*/
-
+ */
 class ConstituentRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

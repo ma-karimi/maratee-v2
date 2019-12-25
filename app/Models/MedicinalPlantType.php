@@ -35,7 +35,7 @@ class MedicinalPlantType extends BaseModel
 
     public function medicinals()
     {
-        return $this->morphToMany(MedicinalPlant::class, 'hub','medicinal_hubs');
+        return $this->morphToMany(MedicinalPlant::class, 'hub', 'medicinal_hubs');
     }
 
 }

@@ -28,7 +28,7 @@ class MedicinalLocationCollectAPIRequest extends APIRequest
             'city_id' => 'required|exists:cities,id',
             'province_id' => 'required|exists:provinces,id',
             'address_en' => 'required',
-            'date'=>'required'
+            'date' => 'required'
         ];
     }
 }

@@ -24,14 +24,14 @@ class BaseDeleteAPIRequest extends FormRequest
     public function rules()
     {
         return [
-            'ids.0'=>'required|integer'
+            'ids.0' => 'required|integer'
         ];
     }
 
     public function messages()
     {
         return [
-            'ids.0.required'=>'array ids is empty!'
+            'ids.0.required' => 'array ids is empty!'
         ];
     }
 }

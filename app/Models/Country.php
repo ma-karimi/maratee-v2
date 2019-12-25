@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @SWG\Definition(
  *            definition="Country",
  *            required={"name_en"}
- **/
+ *
+ */
 class Country extends BaseModel
 {
 

@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\PlaceAPIRequest;
 use App\Models\Place;
 use App\Repositories\PlaceRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class placeController
  * @package App\Http\Controllers\Api
  */
-
 class PlaceAPIController extends AppBaseController
 {
     /** @var  PlaceRepository */
@@ -55,7 +55,7 @@ class PlaceAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -241,7 +241,7 @@ class PlaceAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/places/{id}",
      *      summary="Remove the specified place from storage",

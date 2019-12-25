@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\Article;
-use App\Models\City;
 use App\Models\Herbarium;
 use InfyOm\Generator\Request\APIRequest;
 

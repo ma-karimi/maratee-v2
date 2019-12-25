@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateTreatmentAPIRequest;
 use App\Http\Requests\Api\UpdateTreatmentAPIRequest;
 use App\Models\Treatment;
 use App\Repositories\TreatmentRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class TreatmentController
  * @package App\Http\Controllers\Api
  */
-
 class TreatmentAPIController extends AppBaseController
 {
     /** @var  TreatmentRepository */
@@ -56,7 +56,7 @@ class TreatmentAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -249,7 +249,7 @@ class TreatmentAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/treatments/{id}",
      *      summary="Remove the specified Treatment from storage",

@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Article;
-use App\Repositories\BaseRepository;
 
 /**
  * Class ArticleRepository
  * @package App\Repositories
  * @version July 14, 2019, 10:33 am UTC
-*/
-
+ */
 class ArticleRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**
@@ -37,6 +35,7 @@ class ArticleRepository extends BaseRepository
     {
         return Article::class;
     }
+
     public function update($input, $id)
     {
         $media_input = [
@@ -49,7 +48,7 @@ class ArticleRepository extends BaseRepository
         ];
 
         $model_input = collect($input)->except(array_keys($media_input))->toArray();
-        $model_input['description']=$input['description'];
+        $model_input['description'] = $input['description'];
         unset($model_input['file']);
         $model = parent::update($model_input, $id);
         //store media

@@ -4,10 +4,8 @@
 namespace App\Models\Relations;
 
 
-use App\CustomPivot;
 use App\Models\Action;
 use App\Models\ActionHub;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait ActionRelation
 {

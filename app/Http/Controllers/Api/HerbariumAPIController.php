@@ -6,6 +6,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\HerbariumAPIRequest;
 use App\Models\Herbarium;
 use App\Repositories\HerbariumRepository;
+use Exception;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Response;
@@ -55,7 +56,7 @@ class HerbariumAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -150,6 +151,7 @@ class HerbariumAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(HerbariumAPIRequest $request)
     {
@@ -290,6 +292,7 @@ class HerbariumAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, HerbariumAPIRequest $request)
     {
@@ -310,7 +313,7 @@ class HerbariumAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/herbariums/{id}",
      *      summary="Remove the specified Herbarium from storage",
@@ -395,7 +398,7 @@ class HerbariumAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function media($id)
     {

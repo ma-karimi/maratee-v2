@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateTransitionAPIRequest;
 use App\Http\Requests\Api\UpdateTransitionAPIRequest;
 use App\Models\Transition;
 use App\Repositories\TransitionRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class TransitionController
  * @package App\Http\Controllers\Api
  */
-
 class TransitionAPIController extends AppBaseController
 {
     /** @var  TransitionRepository */
@@ -441,7 +441,7 @@ class TransitionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/transitions/{id}",
      *      summary="Remove the specified Transition from storage",

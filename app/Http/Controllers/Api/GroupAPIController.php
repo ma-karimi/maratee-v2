@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateGroupAPIRequest;
 use App\Http\Requests\Api\UpdateGroupAPIRequest;
 use App\Models\Group;
 use App\Repositories\GroupRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class GroupController
  * @package App\Http\Controllers\Api
  */
-
 class GroupAPIController extends AppBaseController
 {
     /** @var  GroupRepository */
@@ -294,7 +294,7 @@ class GroupAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/groups/{id}",
      *      summary="Remove the specified Group from storage",

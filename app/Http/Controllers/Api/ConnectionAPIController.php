@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateConnectionAPIRequest;
 use App\Http\Requests\Api\UpdateConnectionAPIRequest;
 use App\Models\Connection;
 use App\Repositories\ConnectionRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class ConnectionController
  * @package App\Http\Controllers\Api
  */
-
 class ConnectionAPIController extends AppBaseController
 {
     /** @var  ConnectionRepository */
@@ -229,7 +229,7 @@ class ConnectionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/connections/{id}",
      *      summary="Remove the specified Connection from storage",

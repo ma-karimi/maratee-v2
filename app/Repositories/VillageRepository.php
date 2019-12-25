@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Village;
-use App\Repositories\BaseRepository;
 
 /**
  * Class VillageRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:09 am UTC
-*/
-
+ */
 class VillageRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

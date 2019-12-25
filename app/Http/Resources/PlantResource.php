@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PlantResource extends JsonResource
@@ -9,7 +10,7 @@ class PlantResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param Request $request
      * @return array
      */
 
@@ -22,7 +23,7 @@ class PlantResource extends JsonResource
         $plant_variety_name = $this->generalVariety->name ?? null;
 
         return [
-            'herbarium'=>HerbariumResource::collection($this->whenLoaded('herbariums')),
+            'herbarium' => HerbariumResource::collection($this->whenLoaded('herbariums')),
             'local_name' => $this->name['fa'] ?? null,
             'plant_sperm' => $this->generalSperm->name ?? null,
             'plant_cotyledon' => $this->generalCotyledon->name ?? null,

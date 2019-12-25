@@ -6,13 +6,14 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\ResetPasswordRequest;
 use App\Http\Requests\Api\UserLoginRequest;
 use App\Http\Requests\Api\UserRegisterRequest;
-use App\Http\Requests\Api\UserRequest;
 use App\Models\User;
 use App\Notifications\ResetPassword;
 use App\Services\UserServices;
 use App\Utility;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -169,8 +170,8 @@ class AuthController extends AppBaseController
      *          )
      *      )
      * )
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
+     * @return JsonResponse
+     * @throws Exception
      */
     public function register(UserRegisterRequest $request)
     {
@@ -190,7 +191,7 @@ class AuthController extends AppBaseController
     /**
      * @param UserLoginRequest $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      * @SWG\Post(
      *      path="/login",
      *      summary="Login User",
@@ -366,7 +367,7 @@ class AuthController extends AppBaseController
             $this->userServices->updateUserWithNewPassword($user, $newPassword);
             $user->notify(new ResetPassword($newPassword));
             return $this->sendResponse(null, 'The Password reset token and sent to Email');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             report($exception);
             return $this->sendError($exception->getMessage());
         }

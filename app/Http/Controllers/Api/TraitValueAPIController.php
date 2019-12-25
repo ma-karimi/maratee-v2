@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateTraitValueAPIRequest;
 use App\Http\Requests\Api\UpdateTraitValueAPIRequest;
 use App\Models\TraitValue;
 use App\Repositories\TraitValueRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class TraitValueController
  * @package App\Http\Controllers\Api
  */
-
 class TraitValueAPIController extends AppBaseController
 {
     /** @var  TraitValueRepository */

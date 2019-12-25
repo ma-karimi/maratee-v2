@@ -24,16 +24,16 @@ class DeleteHubRequest extends FormRequest
     public function rules()
     {
         return [
-            'ids.0'=>'required|integer',
-            'class_id'=>'required|integer',
-            'relation'=>'required|string',
+            'ids.0' => 'required|integer',
+            'class_id' => 'required|integer',
+            'relation' => 'required|string',
         ];
     }
 
     public function messages()
     {
         return [
-            'ids.0.required'=>'array ids is empty!'
+            'ids.0.required' => 'array ids is empty!'
         ];
     }
 }

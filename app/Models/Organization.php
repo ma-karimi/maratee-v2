@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Krlove\EloquentModelGenerator\Model\BelongsTo;
 
 /**
  * @SWG\Definition(

@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\Botanical\BotanicalOperationAPIRequest;
 use App\Models\BotanicalOperation;
 use App\Repositories\BotanicalOperationRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class BotanicalOperationController
  * @package App\Http\Controllers\Api
  */
-
 class BotanicalOperationAPIController extends AppBaseController
 {
     /** @var  BotanicalOperationRepository */
@@ -55,7 +55,7 @@ class BotanicalOperationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -290,7 +290,7 @@ class BotanicalOperationAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/botanical_operations/{id}",
      *      summary="Remove the specified BotanicalOperation from storage",

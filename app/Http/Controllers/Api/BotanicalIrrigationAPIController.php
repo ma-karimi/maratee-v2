@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\Botanical\BotanicalIrrigationAPIRequest;
 use App\Models\BotanicalIrrigation;
 use App\Repositories\BotanicalIrrigationRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class BotanicalIrrigationController
  * @package App\Http\Controllers\Api
  */
-
 class BotanicalIrrigationAPIController extends AppBaseController
 {
     /** @var  BotanicalIrrigationRepository */
@@ -55,7 +55,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -307,7 +307,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/botanical_irrigations/{id}",
      *      summary="Remove the specified BotanicalIrrigation from storage",

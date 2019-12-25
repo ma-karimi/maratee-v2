@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Seed;
-use App\Repositories\BaseRepository;
 
 /**
  * Class SeedRepository
  * @package App\Repositories
  * @version October 20, 2019, 7:08 am UTC
-*/
-
+ */
 class SeedRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

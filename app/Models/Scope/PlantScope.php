@@ -11,7 +11,6 @@ namespace App\Models\Scope;
 
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Log;
 use Jedrzej\Searchable\Constraint;
 use League\Geotools\Coordinate\Coordinate;
 
@@ -175,7 +174,7 @@ trait PlantScope
 
             $builder
                 ->whereHas('generalSubstrate', function ($substrate) use ($constraint) {
-                        return $substrate->where('type', $constraint->getOperator(), $constraint->getValue());
+                    return $substrate->where('type', $constraint->getOperator(), $constraint->getValue());
                 });
 
 

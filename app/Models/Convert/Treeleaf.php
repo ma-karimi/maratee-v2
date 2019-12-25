@@ -7,16 +7,18 @@ class Treeleaf extends BaseModel
 {
     protected $table = 'treeleaf';
 
-    protected $with = ['fam','gen','var','subspe','spe','village', 'cityR', 'provinceR'];
+    protected $with = ['fam', 'gen', 'var', 'subspe', 'spe', 'village', 'cityR', 'provinceR'];
 
     public function village()
     {
         return $this->belongsTo(ConvertCity::class, 'city')->where('type', 'v');
     }
+
     public function cityR()
     {
         return $this->belongsTo(ConvertCity::class, 'city')->where('type', 'c');
     }
+
     public function provinceR()
     {
         return $this->belongsTo(ConvertCity::class, 'city')->where('type', 'p');
@@ -24,27 +26,27 @@ class Treeleaf extends BaseModel
 
     public function fam()
     {
-        return $this->belongsTo(Taxonomytree::class,'family');
+        return $this->belongsTo(Taxonomytree::class, 'family');
     }
 
     public function gen()
     {
-        return $this->belongsTo(Taxonomytree::class,'genus');
+        return $this->belongsTo(Taxonomytree::class, 'genus');
     }
 
     public function spe()
     {
-        return $this->belongsTo(Taxonomytree::class,'species');
+        return $this->belongsTo(Taxonomytree::class, 'species');
     }
 
     public function subspe()
     {
-        return $this->belongsTo(Taxonomytree::class,'subspecies');
+        return $this->belongsTo(Taxonomytree::class, 'subspecies');
     }
 
     public function var()
     {
-        return $this->belongsTo(Taxonomytree::class,'variety');
+        return $this->belongsTo(Taxonomytree::class, 'variety');
     }
 
     public function getOrganizationAttribute()

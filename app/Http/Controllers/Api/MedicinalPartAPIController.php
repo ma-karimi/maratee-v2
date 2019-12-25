@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\MedicinalPartAPIRequest;
 use App\Models\MedicinalPart;
 use App\Repositories\MedicinalPartRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class MedicinalPartController
  * @package App\Http\Controllers\Api
  */
-
 class MedicinalPartAPIController extends AppBaseController
 {
     /** @var  MedicinalPartRepository */
@@ -55,7 +55,7 @@ class MedicinalPartAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -274,7 +274,7 @@ class MedicinalPartAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

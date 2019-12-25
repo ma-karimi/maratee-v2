@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\MedicinalPlantProvinceAPIRequest;
 use App\Repositories\MedicinalPlantProvinceRepository;
-use App\Http\Controllers\AppBaseController;
+use Exception;
 use Illuminate\Support\Facades\Response;
 
 /**
  * Class MedicinalPlantProvinceController
  * @package App\Http\Controllers\Api
  */
-
 class MedicinalPlantProvinceAPIController extends AppBaseController
 {
     /** @var  MedicinalPlantProvinceRepository */
@@ -83,7 +83,7 @@ class MedicinalPlantProvinceAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Put(
      *      path="medicinal_plants/{medicinal_plant_id}/provinces",
      *      summary="Remove the specified MedicinalPlantProvince from storage",

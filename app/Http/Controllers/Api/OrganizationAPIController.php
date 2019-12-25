@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateOrganizationAPIRequest;
 use App\Http\Requests\Api\UpdateOrganizationAPIRequest;
 use App\Models\Organization;
 use App\Repositories\OrganizationRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Support\Facades\Cache;
 use Response;
 
 /**
@@ -56,7 +56,7 @@ class OrganizationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -354,7 +354,7 @@ class OrganizationAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/organizations/{id}",
      *      summary="Remove the specified Organization from storage",
@@ -432,7 +432,7 @@ class OrganizationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function all()
     {

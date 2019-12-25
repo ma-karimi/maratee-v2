@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\InternalHabitatApiRequest;
 use App\Models\InternalHabitat;
 use App\Repositories\InternalHabitatRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class InternalHabitatController
  * @package App\Http\Controllers\Api
  */
-
 class InternalHabitatAPIController extends AppBaseController
 {
     /** @var  InternalHabitatRepository */
@@ -55,7 +55,7 @@ class InternalHabitatAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -231,7 +231,7 @@ class InternalHabitatAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/internal_habitats/{id}",
      *      summary="Remove the specified InternalHabitat from storage",

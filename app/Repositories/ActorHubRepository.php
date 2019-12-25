@@ -8,8 +8,7 @@ use App\Models\ActorHub;
  * Class ActorHubRepository
  * @package App\Repositories
  * @version July 14, 2019, 10:28 am UTC
-*/
-
+ */
 class ActorHubRepository extends BaseRepository
 {
     /**

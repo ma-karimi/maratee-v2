@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateArticleHubAPIRequest;
 use App\Http\Requests\Api\UpdateArticleHubAPIRequest;
 use App\Models\ArticleHub;
 use App\Repositories\ArticleHubRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class ArticleHubController
  * @package App\Http\Controllers\Api
  */
-
 class ArticleHubAPIController extends AppBaseController
 {
     /** @var  ArticleHubRepository */
@@ -287,7 +287,7 @@ class ArticleHubAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/article_hubs/{id}",
      *      summary="Remove the specified ArticleHub from storage",

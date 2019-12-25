@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\Paleontology\PaleontologyMapAPIRequest;
 use App\Models\PaleontologyMap;
 use App\Repositories\PaleontologyMapRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class PaleontologyMapAPIController
  * @package App\Http\Controllers\Api
  */
-
 class PaleontologyMapAPIController extends AppBaseController
 {
     /** @var  PaleontologyMapRepository */
@@ -28,7 +28,7 @@ class PaleontologyMapAPIController extends AppBaseController
      * @param Request $request
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Get(
      *      path="/paleontology_maps",
      *      summary="Get a listing of the Maps.",
@@ -67,6 +67,14 @@ class PaleontologyMapAPIController extends AppBaseController
         );
 
         return $this->sendResponse($maps->toArray(), 'Paleontology Maps retrieved successfully');
+    }
+
+    /**
+     * @return array
+     */
+    private function getFieldRelation(): array
+    {
+        return ['paleontology', 'media'];
     }
 
     /**
@@ -272,7 +280,7 @@ class PaleontologyMapAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/paleontology_maps/{id}",
      *      summary="Remove the specified Map from storage",
@@ -319,13 +327,5 @@ class PaleontologyMapAPIController extends AppBaseController
         $map->delete();
 
         return $this->sendResponse($id, 'Paleontology Map deleted successfully');
-    }
-
-    /**
-     * @return array
-     */
-    private function getFieldRelation(): array
-    {
-        return ['paleontology', 'media'];
     }
 }

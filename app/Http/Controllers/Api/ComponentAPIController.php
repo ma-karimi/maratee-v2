@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateComponentAPIRequest;
 use App\Http\Requests\Api\UpdateComponentAPIRequest;
 use App\Models\Component;
 use App\Repositories\ComponentRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class ComponentController
  * @package App\Http\Controllers\Api
  */
-
 class ComponentAPIController extends AppBaseController
 {
     /** @var  ComponentRepository */
@@ -241,7 +241,7 @@ class ComponentAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/components/{id}",
      *      summary="Remove the specified Component from storage",

@@ -3,14 +3,12 @@
 namespace App\Repositories;
 
 use App\Models\Propagation;
-use App\Repositories\BaseRepository;
 
 /**
  * Class PropagationRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:22 am UTC
-*/
-
+ */
 class PropagationRepository extends BaseRepository
 {
     /**

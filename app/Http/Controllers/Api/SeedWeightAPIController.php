@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateSeedWeightAPIRequest;
 use App\Http\Requests\Api\UpdateSeedWeightAPIRequest;
 use App\Models\SeedWeight;
 use App\Repositories\SeedWeightRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class SeedWeightController
  * @package App\Http\Controllers\Api
  */
-
 class SeedWeightAPIController extends AppBaseController
 {
     /** @var  SeedWeightRepository */
@@ -56,7 +56,7 @@ class SeedWeightAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -218,7 +218,7 @@ class SeedWeightAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/seed_weights/{id}",
      *      summary="Remove the specified SeedWeight from storage",

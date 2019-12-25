@@ -28,6 +28,8 @@ class ChangePlantsTable extends Migration
 //            $table->dropColumn(['wooden_id']);
 //            $table->dropColumn(['herbaceous_id']);
             $table->tinyInteger('life_form_id')->nullable()->comment('1=> annual, 2=>perennial , 3=>tree , 4=>shrubs');
+            $table->string('n_no')->nullable();
+            $table->string('n2_no')->nullable();
         });
     }
 

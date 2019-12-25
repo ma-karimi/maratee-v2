@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateProtectionAPIRequest;
-use App\Http\Requests\Api\UpdateProtectionAPIRequest;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\ProtectionAPIRequest;
+use App\Http\Requests\Api\ProtectionAPIRequest;
 use App\Models\Protection;
 use App\Repositories\ProtectionRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Support\Facades\Cache;
 use Response;
 
 /**
  * Class ProtectionController
  * @package App\Http\Controllers\Api
  */
-
 class ProtectionAPIController extends AppBaseController
 {
     /** @var  ProtectionRepository */
@@ -57,7 +56,7 @@ class ProtectionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index()
     {
@@ -68,7 +67,7 @@ class ProtectionAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateProtectionAPIRequest $request
+     * @param ProtectionAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -112,7 +111,7 @@ class ProtectionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateProtectionAPIRequest $request)
+    public function store(ProtectionAPIRequest $request)
     {
         $input = $request->all();
 
@@ -173,7 +172,7 @@ class ProtectionAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateProtectionAPIRequest $request
+     * @param ProtectionAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -224,7 +223,7 @@ class ProtectionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateProtectionAPIRequest $request)
+    public function update($id, ProtectionAPIRequest $request)
     {
         $input = $request->all();
 
@@ -244,7 +243,7 @@ class ProtectionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/protections/{id}",
      *      summary="Remove the specified Protection from storage",

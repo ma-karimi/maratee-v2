@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\Paleontology\PaleontologyAPIRequest;
 use App\Http\Requests\Api\Paleontology\PaleontologyGeologyRemarkAPIRequest;
 use App\Http\Requests\Api\Paleontology\PaleontologyInformationAPIRequest;
 use App\Http\Requests\Api\Paleontology\PaleontologyLocalityAPIRequest;
-use App\Http\Requests\Api\Paleontology\PaleontologyMapAPIRequest;
 use App\Models\Paleontology;
 use App\Repositories\PaleontologyRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
  * Class PaleontologyController
  * @package App\Http\Controllers\Api
  */
-
 class PaleontologyAPIController extends AppBaseController
 {
     /** @var  PaleontologyRepository */
@@ -59,7 +59,7 @@ class PaleontologyAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -70,6 +70,11 @@ class PaleontologyAPIController extends AppBaseController
         );
 
         return $this->sendResponse($paleontologies->toArray(), 'Paleontologies retrieved successfully');
+    }
+
+    private function getFieldRelations()
+    {
+        return ['taxonomy', 'generalClass', 'generalOrder', 'geologyAgePeriod', 'geologyAgeStage', 'geologyAgeEpoch', 'geologyAgeEra', 'generalPlantType', 'locality.location', 'maps', 'collect', 'determine', 'media', 'generalSamples'];
     }
 
     /**
@@ -165,6 +170,7 @@ class PaleontologyAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws ValidationException
      */
     public function store(PaleontologyAPIRequest $request)
     {
@@ -325,6 +331,7 @@ class PaleontologyAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws ValidationException
      */
     public function update($id, PaleontologyAPIRequest $request)
     {
@@ -345,7 +352,7 @@ class PaleontologyAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/paleontologies/{id}",
      *      summary="Remove the specified Paleontology from storage",
@@ -394,11 +401,6 @@ class PaleontologyAPIController extends AppBaseController
         return $this->sendResponse($id, 'Paleontology deleted successfully');
     }
 
-    private function getFieldRelations(){
-        return ['taxonomy', 'generalClass', 'generalOrder', 'geologyAgePeriod', 'geologyAgeStage', 'geologyAgeEpoch', 'geologyAgeEra', 'generalPlantType', 'locality.location', 'maps', 'collect', 'determine', 'media', 'generalSamples'];
-    }
-
-
     /**
      * @param int $id
      * @return Response
@@ -435,7 +437,7 @@ class PaleontologyAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function media($id)
     {
@@ -712,6 +714,7 @@ class PaleontologyAPIController extends AppBaseController
 
         return $this->sendResponse($paleontology->toArray(), 'Paleontology Geology updated successfully');
     }
+
     /**
      * @param int $id
      * @param PaleontologyInformationAPIRequest $request

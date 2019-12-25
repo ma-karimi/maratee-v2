@@ -12,7 +12,7 @@ class RollbackConvertController
     public function handle(Request $request)
     {
         $converts = Convert::where('id', '>=', $request->id)->get();
-        $converts->each(function ($convert){
+        $converts->each(function ($convert) {
             $convert->taxonomy()->delete();
             $convert->location()->delete();
             $convert->collectHub()->delete();

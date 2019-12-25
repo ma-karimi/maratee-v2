@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\ArticleHub;
-use App\Repositories\BaseRepository;
 
 /**
  * Class ArticleHubRepository
  * @package App\Repositories
  * @version July 14, 2019, 10:34 am UTC
-*/
-
+ */
 class ArticleHubRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

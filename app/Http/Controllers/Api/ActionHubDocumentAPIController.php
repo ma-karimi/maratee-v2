@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateActionHubDocumentAPIRequest;
 use App\Http\Requests\Api\UpdateActionHubDocumentAPIRequest;
 use App\Models\ActionHubDocument;
 use App\Repositories\ActionHubDocumentRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class ActionHubDocumentController
  * @package App\Http\Controllers\Api
  */
-
 class ActionHubDocumentAPIController extends AppBaseController
 {
     /** @var  ActionHubDocumentRepository */
@@ -56,7 +56,7 @@ class ActionHubDocumentAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -293,7 +293,7 @@ class ActionHubDocumentAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

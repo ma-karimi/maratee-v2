@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\Permission\Contracts\Role as RoleContract;
 use Spatie\Permission\Exceptions\GuardDoesNotMatch;
 use Spatie\Permission\Exceptions\RoleDoesNotExist;
@@ -55,45 +54,14 @@ class Role extends BaseModel
     }
 
     /**
-     * A role may be given various permissions.
-     */
-    public function permissions(): BelongsToMany
-    {
-        $role_has_permission_table = config('permission.table_names.role_has_permissions');
-        return $this->belongsToMany(
-            config('permission.models.permission'),
-            $role_has_permission_table,
-            'role_id',
-            'permission_id'
-        )
-            ->whereNull("$role_has_permission_table.deleted_at")
-            ->withTimestamps();
-    }
-
-    /**
-     * A role belongs to some users of the model associated with its guard.
-     */
-    public function users()
-    {
-        $model_has_role_table = config('permission.table_names.model_has_roles');
-        return $this->morphedByMany(
-            getModelForGuard($this->attributes['guard_name']),
-            'model',
-            $model_has_role_table,
-            'role_id',
-            config('permission.column_names.model_morph_key')
-        )->whereNull("$model_has_role_table.deleted_at");
-    }
-
-    /**
      * Find a role by its name and guard name.
      *
      * @param string $name
      * @param string|null $guardName
      *
-     * @return \Spatie\Permission\Contracts\Role|\Spatie\Permission\Models\Role
+     * @return RoleContract|\Spatie\Permission\Models\Role
      *
-     * @throws \Spatie\Permission\Exceptions\RoleDoesNotExist
+     * @throws RoleDoesNotExist
      */
     public static function findByName(string $name, $guardName = null): RoleContract
     {
@@ -127,7 +95,7 @@ class Role extends BaseModel
      * @param string $name
      * @param string|null $guardName
      *
-     * @return \Spatie\Permission\Contracts\Role
+     * @return RoleContract
      */
     public static function findOrCreate(string $name, $guardName = null): RoleContract
     {
@@ -143,13 +111,44 @@ class Role extends BaseModel
     }
 
     /**
+     * A role may be given various permissions.
+     */
+    public function permissions(): BelongsToMany
+    {
+        $role_has_permission_table = config('permission.table_names.role_has_permissions');
+        return $this->belongsToMany(
+            config('permission.models.permission'),
+            $role_has_permission_table,
+            'role_id',
+            'permission_id'
+        )
+            ->whereNull("$role_has_permission_table.deleted_at")
+            ->withTimestamps();
+    }
+
+    /**
+     * A role belongs to some users of the model associated with its guard.
+     */
+    public function users()
+    {
+        $model_has_role_table = config('permission.table_names.model_has_roles');
+        return $this->morphedByMany(
+            getModelForGuard($this->attributes['guard_name']),
+            'model',
+            $model_has_role_table,
+            'role_id',
+            config('permission.column_names.model_morph_key')
+        )->whereNull("$model_has_role_table.deleted_at");
+    }
+
+    /**
      * Determine if the user may perform the given permission.
      *
      * @param string|Permission $permission
      *
      * @return bool
      *
-     * @throws \Spatie\Permission\Exceptions\GuardDoesNotMatch
+     * @throws GuardDoesNotMatch
      */
     public function hasPermissionTo($permission): bool
     {

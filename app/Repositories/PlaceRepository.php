@@ -9,8 +9,7 @@ use App\Models\Place;
  * Class PlaceRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:25 am UTC
-*/
-
+ */
 class PlaceRepository extends BaseRepository
 {
     /**

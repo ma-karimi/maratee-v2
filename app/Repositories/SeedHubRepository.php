@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\SeedHub;
-use App\Repositories\BaseRepository;
 
 /**
  * Class SeedHubRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:21 am UTC
-*/
-
+ */
 class SeedHubRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

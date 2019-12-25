@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateVillageAPIRequest;
 use App\Http\Requests\Api\UpdateVillageAPIRequest;
-use App\Models\Province;
 use App\Models\Village;
 use App\Repositories\VillageRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Support\Facades\Cache;
 use Response;
 
@@ -16,7 +16,6 @@ use Response;
  * Class VillageController
  * @package App\Http\Controllers\Api
  */
-
 class VillageAPIController extends AppBaseController
 {
     /** @var  VillageRepository */
@@ -58,7 +57,7 @@ class VillageAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -248,7 +247,7 @@ class VillageAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/villages/{id}",
      *      summary="Remove the specified Village from storage",
@@ -327,7 +326,7 @@ class VillageAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function all()
     {

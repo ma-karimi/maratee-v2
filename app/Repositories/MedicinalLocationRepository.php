@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\{ActionHub, Location, MedicinalLocation, MedicinalLocationConstituent};
+use Exception;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
 
@@ -46,7 +47,7 @@ class MedicinalLocationRepository extends BaseRepository
      * @param ActionHubRepository $actionHubRepo
      * @param Location $location_model
      * @param MedicinalLocationConstituent $medicinalLocationConstituentRepo
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct(Application $app, ArticleRepository $articleRepository, ActionHub $actionHub, ActionHubRepository $actionHubRepo, Location $location_model, MedicinalLocationConstituent $medicinalLocationConstituentRepo)
     {
@@ -81,7 +82,7 @@ class MedicinalLocationRepository extends BaseRepository
 
         $input['location_id'] = $this->createLocation($input)->id;
 
-        $model = parent::create(Arr::only($input, $this->MedicinalLocationData()));
+        $model = parent::create(Arr::only($input, $this->medicinalLocationData()));
         $this->storeMetabolites($input, $model);
         $this->storeDetermine($input, $model->id);
         $this->storeCollect($input, $model->id);
@@ -91,13 +92,6 @@ class MedicinalLocationRepository extends BaseRepository
         return $model;
     }
 
-    private function getLastCode($medicinal_location): int
-    {
-        $lastMedicinal = $this->model->where('medicinal_plant_id', $medicinal_location->medicinal_plant_id)
-            ->where('id', '!=', $medicinal_location->id)->withTrashed()->latest()->first();
-
-        return $lastMedicinal ? $lastMedicinal->code : 0;
-    }
     /**
      * @param $input
      * @return object
@@ -132,7 +126,7 @@ class MedicinalLocationRepository extends BaseRepository
     /**
      * @return array
      */
-    private function MedicinalLocationData(): array
+    private function medicinalLocationData(): array
     {
         return ['location_id', 'treatment_id', 'efficiency', 'studied_sample', 'presence_in_country', 'phenology_id', 'method_distillation_id', 'method_extraction_id', 'method_analyse_id', 'herbarium_number', 'medicinal_plant_id'];
     }
@@ -142,7 +136,6 @@ class MedicinalLocationRepository extends BaseRepository
         $metabolites = request()->filled('metabolites') ? explode(',', $input['metabolites']) : [];
         $this->createHub($medicinal_location->id, 'secondaryMetabolites', $metabolites);
     }
-
 
     private function storeDetermine($input, $medicinal_location_id)
     {
@@ -171,6 +164,14 @@ class MedicinalLocationRepository extends BaseRepository
             ]);
         $collectors = request()->filled('collectors') ? explode(',', $input['collectors']) : [];
         $this->actionHubRepo->createHub($action_hub->id, 'actors', $collectors);
+    }
+
+    private function getLastCode($medicinal_location): int
+    {
+        $lastMedicinal = $this->model->where('medicinal_plant_id', $medicinal_location->medicinal_plant_id)
+            ->where('id', '!=', $medicinal_location->id)->withTrashed()->latest()->first();
+
+        return $lastMedicinal ? $lastMedicinal->code : 0;
     }
 
     public function storeConstituent($input, $medicinal_location_id)
@@ -206,7 +207,7 @@ class MedicinalLocationRepository extends BaseRepository
 
         $this->updateLocation($input);
 
-        $model = parent::update(Arr::only($input, $this->MedicinalLocationData()), $id);
+        $model = parent::update(Arr::only($input, $this->medicinalLocationData()), $id);
         $this->storeMetabolites($input, $model);
         $this->storeDetermine($input, $model->id);
         $this->storeCollect($input, $model->id);

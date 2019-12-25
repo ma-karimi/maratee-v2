@@ -30,7 +30,7 @@ trait MedicinalLocationAccessor
     {
         $item = null;
 
-        if ($this->relationLoaded('secondaryMetabolites') &&  $this->secondaryMetabolites->count()) {
+        if ($this->relationLoaded('secondaryMetabolites') && $this->secondaryMetabolites->count()) {
             $item .= $this->secondaryMetabolites->implode('name', ' & ');
         }
         return $item;

@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Locality;
-use App\Repositories\BaseRepository;
 
 /**
  * Class LocalityRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:20 am UTC
-*/
-
+ */
 class LocalityRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

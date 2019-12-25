@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\ChromosomeAPIRequest;
 use App\Models\Chromosome;
 use App\Repositories\ChromosomeRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class ChromosomeController
  * @package App\Http\Controllers\Api
  */
-
 class ChromosomeAPIController extends AppBaseController
 {
     /** @var  ChromosomeRepository */
@@ -55,7 +55,7 @@ class ChromosomeAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -66,6 +66,14 @@ class ChromosomeAPIController extends AppBaseController
         );
 
         return $this->sendResponse($chromosomes->toArray(), 'Chromosomes retrieved successfully');
+    }
+
+    /**
+     * @return array
+     */
+    private function getFieldRelations(): array
+    {
+        return ['article', 'taxonomy', 'generalClass', 'location'];
     }
 
     /**
@@ -312,7 +320,7 @@ class ChromosomeAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/chromosomes/{id}",
      *      summary="Remove the specified Chromosome from storage",
@@ -359,13 +367,5 @@ class ChromosomeAPIController extends AppBaseController
         $chromosome->delete();
 
         return $this->sendResponse($id, 'Chromosome deleted successfully');
-    }
-
-    /**
-     * @return array
-     */
-    private function getFieldRelations(): array
-    {
-        return ['article', 'taxonomy', 'generalClass', 'location'];
     }
 }

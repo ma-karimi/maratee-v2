@@ -6,7 +6,10 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\MethodAPIRequest;
 use App\Models\Method;
 use App\Repositories\MethodRepository;
+use Exception;
+use Illuminate\Validation\ValidationException;
 use Response;
+use function request;
 
 /**
  * Class MethodController
@@ -52,7 +55,7 @@ class MethodAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index()
     {
@@ -120,7 +123,7 @@ class MethodAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(MethodAPIRequest $request)
     {
@@ -247,14 +250,14 @@ class MethodAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update($id, MethodAPIRequest $request)
     {
         $input = $request->all();
 
         /** @var Method $method */
-        $method = $this->methodRepository->find($id, \request()->get('relations'));
+        $method = $this->methodRepository->find($id, request()->get('relations'));
 
         if ($method === null) {
             return $this->sendError('Method not found');
@@ -269,7 +272,7 @@ class MethodAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/methods/{id}",
      *      summary="Remove the specified Method from storage",
@@ -307,7 +310,7 @@ class MethodAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Method $method */
-        $method = $this->methodRepository->find($id, \request()->get('relations'));
+        $method = $this->methodRepository->find($id, request()->get('relations'));
 
         if ($method === null) {
             return $this->sendError('Method not found');

@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateHubRequest;
 use App\Http\Requests\Api\DeleteHubRequest;
-use App\Http\Requests\Api\StoreHubRequest;
 use App\Http\Requests\BaseDeleteAPIRequest;
-use App\Models\Contracts\RelationshipsTrait;
+use App\Models\Contracts\Relationships;
 use Illuminate\Container\Container as Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -19,7 +18,8 @@ use Response;
  */
 class APIController extends AppBaseController
 {
-    use RelationshipsTrait;
+    use Relationships;
+
     /**
      * @param BaseDeleteAPIRequest $request
      * @param $class
@@ -140,7 +140,7 @@ class APIController extends AppBaseController
     {
         $repo = 'App\\Repositories\\' . Str::singular(Str::studly($class)) . 'Repository';
         $repo = resolve($repo);
-        $result = $repo->createHub($request->class_id, $request->relation, $request->ids,$request->except('class_id','relation','ids'));
+        $result = $repo->createHub($request->class_id, $request->relation, $request->ids, $request->except('class_id', 'relation', 'ids'));
         return $this->sendResponse($result, 'Record(s) added successfully');
     }
 
@@ -206,6 +206,7 @@ class APIController extends AppBaseController
         $result = $repo->deleteHub($request->class_id, $request->relation, $request->ids);
         return $this->sendResponse($result, 'Record(s) deleted successfully');
     }
+
     /**
      * @param $class
      * @return Response
@@ -251,6 +252,7 @@ class APIController extends AppBaseController
         $result = $repo->getConstants($class);
         return $this->sendResponse($result, 'Constant(s) loaded successfully');
     }
+
     /**
      * @param Request $request
      * @return Response
@@ -295,17 +297,17 @@ class APIController extends AppBaseController
      */
     public function relations(Request $request)
     {
-        $models=[];
-        $classes=$request->classes;
+        $models = [];
+        $classes = $request->classes;
 //        foreach ($classes as $index => $class) {
 //            $model='App\\Models\\'.ucfirst(rtrim($class,'s'));
 //            $models[$class]= self::relationshipsText( $model);
 //        }
         foreach ($classes as $index => $class) {
-            $model='App\\Models\\'.Str::singular(Str::studly($class));
-            $models[$class]= self::relationshipsWithType($model);
+            $model = 'App\\Models\\' . Str::singular(Str::studly($class));
+            $models[$class] = self::relationshipsWithType($model);
         }
-        return $this->sendResponse($models,'Relations retrieved successfully');
+        return $this->sendResponse($models, 'Relations retrieved successfully');
     }
 
 }

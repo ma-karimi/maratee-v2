@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Models\{City,
     Country,
     General,
-    MedicinalLocation,
     MedicinalPlantType,
     Medicine,
     Method,
@@ -13,12 +12,10 @@ use App\Models\{City,
     Plant,
     Product,
     Protection,
-    Province
-};
+    Province};
 use App\Observers\{CityObserver,
     CountryObserver,
     GeneralObserver,
-    MedicinalLocationObserver,
     MedicinalPlantTypeObserver,
     MedicineObserver,
     MethodObserver,
@@ -26,8 +23,7 @@ use App\Observers\{CityObserver,
     PlantObserver,
     ProductObserver,
     ProtectionObserver,
-    ProvinceObserver
-};
+    ProvinceObserver};
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;

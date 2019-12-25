@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateLightingAPIRequest;
 use App\Http\Requests\Api\UpdateLightingAPIRequest;
 use App\Models\Lighting;
 use App\Repositories\LightingRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class LightingController
  * @package App\Http\Controllers\Api
  */
-
 class LightingAPIController extends AppBaseController
 {
     /** @var  LightingRepository */
@@ -56,7 +56,7 @@ class LightingAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -246,7 +246,7 @@ class LightingAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/lightings/{id}",
      *      summary="Remove the specified Lighting from storage",

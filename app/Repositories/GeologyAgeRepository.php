@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\GeologyAge;
-use App\Repositories\BaseRepository;
 
 /**
  * Class GeologyAgeRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:13 am UTC
-*/
-
+ */
 class GeologyAgeRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

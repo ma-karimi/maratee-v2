@@ -3,15 +3,12 @@
 namespace App\Repositories;
 
 use App\Models\Component;
-use App\Models\Constituent;
-use App\Repositories\BaseRepository;
 
 /**
  * Class ComponentRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:04 am UTC
-*/
-
+ */
 class ComponentRepository extends BaseRepository
 {
     /**

@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreatePropagationAPIRequest;
 use App\Http\Requests\Api\UpdatePropagationAPIRequest;
 use App\Models\Propagation;
 use App\Repositories\PropagationRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class PropagationController
  * @package App\Http\Controllers\Api
  */
-
 class PropagationAPIController extends AppBaseController
 {
     /** @var  PropagationRepository */
@@ -245,7 +245,7 @@ class PropagationAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/propagations/{id}",
      *      summary="Remove the specified Propagation from storage",

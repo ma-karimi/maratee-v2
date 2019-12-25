@@ -70,12 +70,11 @@ trait BotanicalAccessor
     }
 
 
-
     public function getGeographicalsAttribute()
     {
         $distributions = null;
 
-        if ($this->relationLoaded('$this->distributions') &&  $this->distributions->count()) {
+        if ($this->relationLoaded('$this->distributions') && $this->distributions->count()) {
             $distributions .= $this->distributions->implode('name', ' & ');
         }
         return $distributions;

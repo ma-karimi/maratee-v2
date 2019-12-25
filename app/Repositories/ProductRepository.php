@@ -3,14 +3,12 @@
 namespace App\Repositories;
 
 use App\Models\Product;
-use App\Repositories\BaseRepository;
 
 /**
  * Class ProductRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:24 am UTC
-*/
-
+ */
 class ProductRepository extends BaseRepository
 {
     /**
@@ -46,14 +44,6 @@ class ProductRepository extends BaseRepository
         return $model;
     }
 
-    public function update($input, $id)
-    {
-        $model = parent::update($input->except('media_type', 'file'), $id);
-
-        $this->storeMedia($input, $model);
-        return $model;
-    }
-
     /**
      * @param $input
      * @param $model
@@ -68,5 +58,13 @@ class ProductRepository extends BaseRepository
             $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('images');
             $media_record->update($media_input);
         }
+    }
+
+    public function update($input, $id)
+    {
+        $model = parent::update($input->except('media_type', 'file'), $id);
+
+        $this->storeMedia($input, $model);
+        return $model;
     }
 }

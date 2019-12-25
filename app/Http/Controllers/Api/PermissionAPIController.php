@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreatePermissionAPIRequest;
-use App\Http\Requests\Api\UpdatePermissionAPIRequest;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\PermissionAPIRequest;
+use App\Http\Requests\Api\PermissionAPIRequest;
 use App\Models\Permission;
 use App\Repositories\PermissionRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class PermissionController
  * @package App\Http\Controllers\Api
  */
-
 class PermissionAPIController extends AppBaseController
 {
     /** @var  PermissionRepository */
@@ -56,7 +56,7 @@ class PermissionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -70,7 +70,7 @@ class PermissionAPIController extends AppBaseController
     }
 
     /**
-     * @param CreatePermissionAPIRequest $request
+     * @param PermissionAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -107,7 +107,7 @@ class PermissionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreatePermissionAPIRequest $request)
+    public function store(PermissionAPIRequest $request)
     {
         $input = $request->all();
 
@@ -168,7 +168,7 @@ class PermissionAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdatePermissionAPIRequest $request
+     * @param PermissionAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -212,7 +212,7 @@ class PermissionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdatePermissionAPIRequest $request)
+    public function update($id, PermissionAPIRequest $request)
     {
         $input = $request->all();
 
@@ -265,7 +265,7 @@ class PermissionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

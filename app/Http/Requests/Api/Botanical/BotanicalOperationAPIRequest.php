@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Api\Botanical;
 
 
-use App\Models\BotanicalIrrigation;
 use App\Models\BotanicalOperation;
 use InfyOm\Generator\Request\APIRequest;
 

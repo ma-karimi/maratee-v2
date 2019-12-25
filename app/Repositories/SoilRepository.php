@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Soil;
-use App\Repositories\BaseRepository;
 
 /**
  * Class SoilRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:04 am UTC
-*/
-
+ */
 class SoilRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

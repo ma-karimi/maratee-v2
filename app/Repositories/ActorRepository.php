@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Actor;
-use App\Repositories\BaseRepository;
 
 /**
  * Class AuthorRepository
  * @package App\Repositories
  * @version July 14, 2019, 10:38 am UTC
-*/
-
+ */
 class ActorRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

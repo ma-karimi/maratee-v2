@@ -3,14 +3,12 @@
 namespace App\Repositories;
 
 use App\Models\BotanicalProperty;
-use App\Repositories\BaseRepository;
 
 /**
  * Class BotanicalPropertyRepository
  * @package App\Repositories
  * @version July 14, 2019, 10:55 am UTC
-*/
-
+ */
 class BotanicalPropertyRepository extends BaseRepository
 {
     /**

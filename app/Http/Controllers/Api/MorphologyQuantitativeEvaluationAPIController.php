@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateMorphologyQuantitativeEvaluationAPIRequest;
-use App\Http\Requests\Api\UpdateMorphologyQuantitativeEvaluationAPIRequest;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\MorphologyQuantitativeEvaluationAPIRequest;
 use App\Models\MorphologyQuantitativeEvaluation;
 use App\Repositories\MorphologyQuantitativeEvaluationRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
  * Class MorphologyQuantitativeEvaluationController
  * @package App\Http\Controllers\Api
  */
-
 class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
 {
     /** @var  MorphologyQuantitativeEvaluationRepository */
@@ -56,7 +56,7 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -70,7 +70,7 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateMorphologyQuantitativeEvaluationAPIRequest $request
+     * @param MorphologyQuantitativeEvaluationAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -190,8 +190,9 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws ValidationException
      */
-    public function store(CreateMorphologyQuantitativeEvaluationAPIRequest $request)
+    public function store(MorphologyQuantitativeEvaluationAPIRequest $request)
     {
         $input = $request->all();
 
@@ -252,7 +253,7 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateMorphologyQuantitativeEvaluationAPIRequest $request
+     * @param MorphologyQuantitativeEvaluationAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -379,8 +380,9 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws ValidationException
      */
-    public function update($id, UpdateMorphologyQuantitativeEvaluationAPIRequest $request)
+    public function update($id, MorphologyQuantitativeEvaluationAPIRequest $request)
     {
         $input = $request->all();
 
@@ -433,7 +435,7 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

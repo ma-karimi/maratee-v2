@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateSeedHubAPIRequest;
 use App\Http\Requests\Api\UpdateSeedHubAPIRequest;
 use App\Models\SeedHub;
 use App\Repositories\SeedHubRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class SeedHubController
  * @package App\Http\Controllers\Api
  */
-
 class SeedHubAPIController extends AppBaseController
 {
     /** @var  SeedHubRepository */
@@ -56,7 +56,7 @@ class SeedHubAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -330,7 +330,7 @@ class SeedHubAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/seed_hubs/{id}",
      *      summary="Remove the specified SeedHub from storage",

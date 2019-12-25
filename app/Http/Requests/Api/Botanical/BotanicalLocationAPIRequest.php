@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Api\Botanical;
 
 
-use App\Models\Botanical;
 use InfyOm\Generator\Request\APIRequest;
 
 class BotanicalLocationAPIRequest extends APIRequest
@@ -26,11 +25,11 @@ class BotanicalLocationAPIRequest extends APIRequest
     public function rules()
     {
         return [
-            'village'=>'nullable|string',
-            'city_id'=>'required|exists:cities,id',
-            'country_id'=>'required|exists:countries,id',
-            'province_id'=>'required|exists:provinces,id',
-            'address_en'=>'required|string',
+            'village' => 'nullable|string',
+            'city_id' => 'required|exists:cities,id',
+            'country_id' => 'required|exists:countries,id',
+            'province_id' => 'required|exists:provinces,id',
+            'address_en' => 'required|string',
         ];
     }
 }

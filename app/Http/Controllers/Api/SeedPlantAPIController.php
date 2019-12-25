@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateSeedPlantAPIRequest;
 use App\Http\Requests\Api\UpdateSeedPlantAPIRequest;
 use App\Models\SeedPlant;
 use App\Repositories\SeedPlantRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class SeedPlantController
  * @package App\Http\Controllers\Api
  */
-
 class SeedPlantAPIController extends AppBaseController
 {
     /** @var  SeedPlantRepository */
@@ -56,7 +56,7 @@ class SeedPlantAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -246,7 +246,7 @@ class SeedPlantAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/seed_plants/{id}",
      *      summary="Remove the specified SeedPlant from storage",

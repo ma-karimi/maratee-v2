@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\Botanical\BotanicalAPIRequest;
 use App\Http\Requests\Api\Botanical\BotanicalInformationAPIRequest;
 use App\Http\Requests\Api\Botanical\BotanicalIrrigationAPIRequest;
 use App\Http\Requests\Api\Botanical\BotanicalLocationAPIRequest;
 use App\Models\Botanical;
 use App\Repositories\BotanicalRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
  * Class BotanicalController
  * @package App\Http\Controllers\Api
  */
-
 class BotanicalAPIController extends AppBaseController
 {
     /** @var  BotanicalRepository */
@@ -58,7 +59,7 @@ class BotanicalAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -70,6 +71,11 @@ class BotanicalAPIController extends AppBaseController
         );
 
         return $this->sendResponse($botanicals->toArray(), 'Botanicals retrieved successfully');
+    }
+
+    private function getFieldRelations()
+    {
+        return ['distributions', 'organization', 'protection', 'internalHabitat', 'generalHabitat', 'generalOrigin', 'botanicalIrrigation', 'plantingConditions', 'propagations', 'usages', 'values', 'operations', 'media', 'taxonomy', 'locations'];
     }
 
     /**
@@ -288,7 +294,7 @@ class BotanicalAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(BotanicalAPIRequest $request)
     {
@@ -573,7 +579,7 @@ class BotanicalAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update($id, BotanicalAPIRequest $request)
     {
@@ -595,7 +601,7 @@ class BotanicalAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/botanicals/{id}",
      *      summary="Remove the specified Botanical from storage",
@@ -675,6 +681,7 @@ class BotanicalAPIController extends AppBaseController
 
         return $this->sendResponse($botanical->toArray(), 'Botanical updated successfully');
     }
+
     public function storeInformation($id, BotanicalInformationAPIRequest $request)
     {
         $input = $request->all();
@@ -689,10 +696,5 @@ class BotanicalAPIController extends AppBaseController
         $botanical = $this->botanicalRepository->updateInfo($input, $id);
 
         return $this->sendResponse($botanical->toArray(), 'Botanical updated successfully');
-    }
-
-    private function getFieldRelations()
-    {
-        return ['distributions', 'organization', 'protection', 'internalHabitat', 'generalHabitat', 'generalOrigin', 'botanicalIrrigation', 'plantingConditions', 'propagations', 'usages', 'values', 'operations', 'media', 'taxonomy', 'locations'];
     }
 }

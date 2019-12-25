@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateProvinceAPIRequest;
-use App\Http\Requests\Api\UpdateProvinceAPIRequest;
-use App\Models\City;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\ProvinceAPIRequest;
+use App\Http\Requests\Api\ProvinceAPIRequest;
 use App\Models\Province;
 use App\Repositories\ProvinceRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Support\Facades\Cache;
 use Response;
 
 /**
@@ -57,7 +56,7 @@ class ProvinceAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -72,7 +71,7 @@ class ProvinceAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateProvinceAPIRequest $request
+     * @param ProvinceAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -123,7 +122,7 @@ class ProvinceAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateProvinceAPIRequest $request)
+    public function store(ProvinceAPIRequest $request)
     {
         $input = $request->all();
 
@@ -184,7 +183,7 @@ class ProvinceAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateProvinceAPIRequest $request
+     * @param ProvinceAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -242,7 +241,7 @@ class ProvinceAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateProvinceAPIRequest $request)
+    public function update($id, ProvinceAPIRequest $request)
     {
         $input = $request->all();
 
@@ -262,7 +261,7 @@ class ProvinceAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/provinces/{id}",
      *      summary="Remove the specified Province from storage",
@@ -341,7 +340,7 @@ class ProvinceAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function all()
     {

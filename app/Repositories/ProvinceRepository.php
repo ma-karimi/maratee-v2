@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Province;
-use App\Repositories\BaseRepository;
 
 /**
  * Class ProvinceRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:23 am UTC
-*/
-
+ */
 class ProvinceRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

@@ -5,7 +5,6 @@ namespace App\Models\Relations;
 
 
 use App\Models\{General,
-    Geographical,
     MedicinalLocation,
     MedicinalPart,
     MedicinalPlantType,
@@ -13,7 +12,6 @@ use App\Models\{General,
     Plant,
     PlantGeographical,
     Product,
-    Province,
     Taxonomy};
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;

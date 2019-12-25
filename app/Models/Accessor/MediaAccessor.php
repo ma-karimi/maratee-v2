@@ -17,6 +17,7 @@ trait MediaAccessor
     {
         return Arr::get(self::MEDIA_TYPE, $this->media_type);
     }
+
     public function getFullUrlAttribute()
     {
         return $this->getFullUrl();

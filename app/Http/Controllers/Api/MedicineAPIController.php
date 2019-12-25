@@ -7,7 +7,9 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\MedicineAPIRequest;
 use App\Models\Medicine;
 use App\Repositories\MedicineRepository;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 
 /**
@@ -55,7 +57,7 @@ class MedicineAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -99,7 +101,7 @@ class MedicineAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function all()
     {
@@ -161,7 +163,7 @@ class MedicineAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(MedicineAPIRequest $request)
     {
@@ -280,7 +282,7 @@ class MedicineAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update($id, MedicineAPIRequest $request)
     {
@@ -301,7 +303,7 @@ class MedicineAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/medicines/{id}",
      *      summary="Remove the specified Medicine from storage",

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class ConvertController
 {
-    public function handle(Request $request,ConvertService $convertService)
+    public function handle(Request $request, ConvertService $convertService)
     {
         $treeLeafs = Treeleaf::skip($this->getSkip())->take($request->count)->get();
         foreach ($treeLeafs as $treeLeaf)

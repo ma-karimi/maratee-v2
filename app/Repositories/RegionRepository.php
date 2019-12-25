@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Region;
-use App\Repositories\BaseRepository;
 
 /**
  * Class RegionRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:23 am UTC
-*/
-
+ */
 class RegionRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

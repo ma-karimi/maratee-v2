@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateRoleAPIRequest;
-use App\Http\Requests\Api\UpdateRoleAPIRequest;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\RoleAPIRequest;
+use App\Http\Requests\Api\RoleAPIRequest;
 use App\Models\Role;
 use App\Repositories\RoleRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class RoleController
  * @package App\Http\Controllers\Api
  */
-
 class RoleAPIController extends AppBaseController
 {
     /** @var  RoleRepository */
@@ -56,7 +56,7 @@ class RoleAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -69,7 +69,7 @@ class RoleAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateRoleAPIRequest $request
+     * @param RoleAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -106,7 +106,7 @@ class RoleAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateRoleAPIRequest $request)
+    public function store(RoleAPIRequest $request)
     {
         $input = $request->all();
 
@@ -167,7 +167,7 @@ class RoleAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateRoleAPIRequest $request
+     * @param RoleAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -211,7 +211,7 @@ class RoleAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateRoleAPIRequest $request)
+    public function update($id, RoleAPIRequest $request)
     {
         $input = $request->all();
 
@@ -264,7 +264,7 @@ class RoleAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

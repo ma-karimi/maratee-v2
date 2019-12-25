@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\LifeForm;
-use App\Repositories\BaseRepository;
 
 /**
  * Class LifeFormRepository
  * @package App\Repositories
  * @version August 25, 2019, 6:13 am UTC
-*/
-
+ */
 class LifeFormRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

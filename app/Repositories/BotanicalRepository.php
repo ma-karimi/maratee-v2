@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Botanical;
 use App\Models\BotanicalIrrigation;
 use App\Models\BotanicalProperty;
+use Exception;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
 
@@ -45,7 +46,7 @@ class BotanicalRepository extends BaseRepository
      * @param LocationRepository $locationRepo
      * @param BotanicalProperty $botanicalPropertyRepo
      * @param DistributionHubRepository $distributionHubRepo
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct(Application $app, BotanicalIrrigation $botanicalIrrigation, LocationRepository $locationRepo, BotanicalProperty $botanicalPropertyRepo, DistributionHubRepository $distributionHubRepo)
     {
@@ -86,11 +87,6 @@ class BotanicalRepository extends BaseRepository
         return $botanical;
     }
 
-    private function storeDistributions($input, $botanical)
-    {
-        $distributions = request()->filled('distributions') ? explode(',', $input['distributions']) : [];
-        $this->createHub($botanical->id, 'distributions', $distributions);
-    }
     /**
      * @param $input
      * @return array
@@ -122,6 +118,12 @@ class BotanicalRepository extends BaseRepository
             'garden_map' => $input['garden_map'] ?? null,
             'comments' => $input['comments'] ?? null,
         ];
+    }
+
+    private function storeDistributions($input, $botanical)
+    {
+        $distributions = request()->filled('distributions') ? explode(',', $input['distributions']) : [];
+        $this->createHub($botanical->id, 'distributions', $distributions);
     }
 
     public function storeLocation($input, $id)

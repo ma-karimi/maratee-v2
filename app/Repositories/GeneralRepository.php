@@ -3,8 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\General;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 /**

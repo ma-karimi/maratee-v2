@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateUserAPIRequest;
 use App\Http\Requests\Api\UpdateUserAPIRequest;
 use App\Models\User;
 use App\Repositories\UserRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
@@ -55,7 +56,7 @@ class UserAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -462,7 +463,7 @@ class UserAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/users/{id}",
      *      summary="Remove the specified User from storage",

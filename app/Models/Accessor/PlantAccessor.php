@@ -23,13 +23,14 @@ trait PlantAccessor
     {
         $distributions = null;
 
-        if ($this->relationLoaded('geographicals') &&  $this->geographicals->count()) {
+        if ($this->relationLoaded('geographicals') && $this->geographicals->count()) {
             $distributions .= $this->geographicals->implode('name', ' & ');
         }
         return $distributions;
     }
+
     public function getLifeFormAttribute()
     {
-            return !empty($this->attributes['life_form_id']) ? Arr::get(self::LIFE_FORM, $this->attributes['life_form_id']) : null;
+        return !empty($this->attributes['life_form_id']) ? Arr::get(self::LIFE_FORM, $this->attributes['life_form_id']) : null;
     }
 }

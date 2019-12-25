@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\PlantingCondition;
-use App\Repositories\BaseRepository;
 
 /**
  * Class PlantingConditionRepository
  * @package App\Repositories
  * @version September 11, 2019, 7:39 am UTC
-*/
-
+ */
 class PlantingConditionRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

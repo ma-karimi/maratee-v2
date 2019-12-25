@@ -17,10 +17,12 @@ trait BotanicalIrrigationAccessor
     {
         return !empty($this->irrigation_time_id) ? Arr::get(self::IRRIGATION_TIME, $this->irrigation_time_id) : null;
     }
+
     public function getRequirementAttribute()
     {
         return !empty($this->requirement_id) ? Arr::get(self::REQUIREMENT, $this->requirement_id) : null;
     }
+
     public function getIrrigationAttribute()
     {
         return !empty($this->irrigation_id) ? Arr::get(self::IRRIGATIONS, $this->irrigation_id) : null;

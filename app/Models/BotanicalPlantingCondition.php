@@ -26,7 +26,8 @@ class BotanicalPlantingCondition extends BaseModel
         'planting_condition_id' => 'required|integer',
     ];
 
-        protected $appends = ['planting_condition'];
+    protected $appends = ['planting_condition'];
+
     public function getPlantConditionAttribute()
     {
         return !empty($this->attributes['plant_condition_id']) ? Arr::get(self::PLANT_CONDITION, $this->attributes['plant_condition_id']) : null;

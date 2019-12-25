@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Exports\TaxonomyExport;
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\TaxonomyAPIRequest;
 use App\Models\Taxonomy;
 use App\Repositories\TaxonomyRepository;
 use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 use Response;
@@ -68,6 +68,14 @@ class TaxonomyAPIController extends AppBaseController
         );
 
         return $this->sendResponse($taxonomies->toArray(), 'Taxonomies retrieved successfully');
+    }
+
+    /**
+     * @return array
+     */
+    private function getFieldRelations(): array
+    {
+        return ['family', 'genus', 'species.authors', 'subspecies.authors', 'variety.authors', 'scientific'];
     }
 
     /**
@@ -386,6 +394,7 @@ class TaxonomyAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Taxonomy deleted successfully');
     }
+
     /**
      * @param Request $request
      * @return Response
@@ -437,14 +446,6 @@ class TaxonomyAPIController extends AppBaseController
         $taxonomies = $this->taxonomyRepository->get($request);
 
         return $this->sendResponse($taxonomies->toArray(), 'Taxonomies retrieved successfully');
-    }
-
-    /**
-     * @return array
-     */
-    private function getFieldRelations(): array
-    {
-        return ['family', 'genus', 'species.authors', 'subspecies.authors', 'variety.authors', 'scientific'];
     }
 
     public function excel(Request $request)

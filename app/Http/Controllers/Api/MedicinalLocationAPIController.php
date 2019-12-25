@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\MedicinalPlant\MedicinalLocationAPIRequest;
-use App\Http\Requests\Api\MedicinalPlant\MedicinalLocationCollectAPIRequest;
 use App\Http\Requests\Api\MedicinalPlant\MedicinalLocationConstituentAPIRequest;
 use App\Http\Requests\Api\MedicinalPlant\MedicinalLocationReferenceAPIRequest;
 use App\Models\MedicinalLocation;
 use App\Repositories\MedicinalLocationRepository;
-use Illuminate\Http\Request;
+use Exception;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
@@ -27,12 +27,11 @@ class MedicinalLocationAPIController extends AppBaseController
     }
 
 
-
     /**
      * @param MedicinalLocationAPIRequest $request
      * @return Response
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      * @SWG\Post(
      *      path="/medicinal_locations",
      *      summary="Store a newly created MedicinalLocation in storage",
@@ -359,7 +358,7 @@ class MedicinalLocationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update(MedicinalLocationAPIRequest $request, $id)
     {
@@ -381,7 +380,7 @@ class MedicinalLocationAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/medicinal_locations/{id}",
      *      summary="Remove the specified MedicinalLocation from storage",

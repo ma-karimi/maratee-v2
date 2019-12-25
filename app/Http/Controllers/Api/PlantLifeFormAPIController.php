@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreatePlantLifeFormAPIRequest;
 use App\Http\Requests\Api\UpdatePlantLifeFormAPIRequest;
 use App\Models\PlantLifeForm;
 use App\Repositories\PlantLifeFormRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class PlantLifeFormController
  * @package App\Http\Controllers\Api
  */
-
 class PlantLifeFormAPIController extends AppBaseController
 {
     /** @var  PlantLifeFormRepository */
@@ -56,7 +56,7 @@ class PlantLifeFormAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -279,7 +279,7 @@ class PlantLifeFormAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

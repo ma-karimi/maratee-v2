@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Transaction;
-use Illuminate\Support\Arr;
 
 /**
  * Class TransactionRepository

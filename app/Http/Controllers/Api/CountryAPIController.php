@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CountryAPIRequest;
 use App\Models\Country;
-use App\Models\Province;
 use App\Repositories\CountryRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Support\Facades\Cache;
 use Response;
 
 /**
  * Class CountryController
  * @package App\Http\Controllers\Api
  */
-
 class CountryAPIController extends AppBaseController
 {
     /** @var  CountryRepository */
@@ -57,18 +55,18 @@ class CountryAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index()
     {
 
         $countries =
- $this->countryRepository->all(
-            [],
-            null,
-            null,
-            ['provinces.cities']
-        );
+            $this->countryRepository->all(
+                [],
+                null,
+                null,
+                ['provinces.cities']
+            );
 
         return $this->sendResponse($countries->toArray(), 'Countries retrieved successfully');
     }
@@ -342,13 +340,13 @@ class CountryAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function all()
     {
         /** @var Country $countries */
         $countries =
-             $this->countryRepository->all();
+            $this->countryRepository->all();
 
 
         return $this->sendResponse($countries->toArray(), 'Countries retrieved successfully');

@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Country;
-use App\Repositories\BaseRepository;
 
 /**
  * Class CountryRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:06 am UTC
-*/
-
+ */
 class CountryRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

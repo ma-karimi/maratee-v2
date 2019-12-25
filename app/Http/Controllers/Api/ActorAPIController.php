@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\ActorAPIRequest;
 use App\Repositories\ActorRepository;
+use Exception;
 use Illuminate\Http\Request;
 
 
@@ -12,7 +13,6 @@ use Illuminate\Http\Request;
  * Class ActorController
  * @package App\Http\Controllers\Api
  */
-
 class ActorAPIController extends AppBaseController
 {
     /** @var  ActorRepository */
@@ -54,7 +54,7 @@ class ActorAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -252,7 +252,7 @@ class ActorAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/actors/{id}",
      *      summary="Remove the specified Actor from storage",
@@ -305,7 +305,7 @@ class ActorAPIController extends AppBaseController
      * @param Request $request
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Get(
      *      path="/actors/all",
      *      summary="get all Actor Grouped By ",

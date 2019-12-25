@@ -13,24 +13,22 @@ use App\Models\Contracts\BaseModel;
 class LocationHub extends BaseModel
 {
 
+    public static $rules = [
+        'location_id' => 'required|exists:locations,id',
+        'locationable_id' => 'required|integer',
+        'locationable_type' => 'required'
+    ];
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'location_hubs';
-
     protected $with = ['location'];
 
     public function location()
     {
         return $this->belongsTo(Location::class);
     }
-
-    public static $rules = [
-        'location_id' => 'required|exists:locations,id',
-        'locationable_id' => 'required|integer',
-        'locationable_type' => 'required'
-    ];
 
 }

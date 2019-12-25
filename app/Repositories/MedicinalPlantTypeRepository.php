@@ -8,8 +8,7 @@ use App\Models\MedicinalPlantType;
  * Class MedicinalPlantTypeRepository
  * @package App\Repositories
  * @version August 29, 2019, 10:06 am UTC
-*/
-
+ */
 class MedicinalPlantTypeRepository extends BaseRepository
 {
     /**

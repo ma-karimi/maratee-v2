@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateMedicinalPlantTypeAPIRequest;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\MedicinalPlantTypeAPIRequest;
 use App\Http\Requests\Api\UpdateMedicinalPlantTypeAPIRequest;
 use App\Models\MedicinalPlantType;
 use App\Repositories\MedicinalPlantTypeRepository;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Support\Facades\Cache;
+use Exception;
 use Response;
 
 /**
@@ -54,19 +54,19 @@ class MedicinalPlantTypeAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index()
     {
         $medicinalPlantTypes =
-             $this->medicinalPlantTypeRepository->all();
+            $this->medicinalPlantTypeRepository->all();
 
 
         return $this->sendResponse($medicinalPlantTypes->toArray(), 'Medicinal Plant Types retrieved successfully');
     }
 
     /**
-     * @param CreateMedicinalPlantTypeAPIRequest $request
+     * @param MedicinalPlantTypeAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -117,7 +117,7 @@ class MedicinalPlantTypeAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateMedicinalPlantTypeAPIRequest $request)
+    public function store(MedicinalPlantTypeAPIRequest $request)
     {
         $input = $request->all();
 
@@ -289,7 +289,7 @@ class MedicinalPlantTypeAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

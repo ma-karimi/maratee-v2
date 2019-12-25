@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Continent;
-use App\Repositories\BaseRepository;
 
 /**
  * Class ContinentRepository
  * @package App\Repositories
  * @version July 14, 2019, 9:32 am UTC
-*/
-
+ */
 class ContinentRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

@@ -34,6 +34,7 @@ class Article extends BaseModel implements HasMedia
 
     protected $with = ['actors'];
     protected $appends = ['authors'];
+
     /**
      * @return MorphToMany
      */
@@ -44,7 +45,6 @@ class Article extends BaseModel implements HasMedia
             ->whereNull('actor_hubs.deleted_at')
             ->withTimestamps();
     }
-
 
 
     public function getAuthorsAttribute()

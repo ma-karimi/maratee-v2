@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateIrrigationAPIRequest;
 use App\Http\Requests\Api\UpdateIrrigationAPIRequest;
 use App\Models\Irrigation;
 use App\Repositories\IrrigationRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class IrrigationController
  * @package App\Http\Controllers\Api
  */
-
 class IrrigationAPIController extends AppBaseController
 {
     /** @var  IrrigationRepository */
@@ -245,7 +245,7 @@ class IrrigationAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/irrigations/{id}",
      *      summary="Remove the specified Irrigation from storage",

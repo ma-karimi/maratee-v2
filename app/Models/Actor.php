@@ -67,6 +67,6 @@ class Actor extends BaseModel
 
     public function actions()
     {
-        return $this->morphedByMany(ActionHub::class, 'actorable','actor_hubs');
+        return $this->morphedByMany(ActionHub::class, 'actorable', 'actor_hubs');
     }
 }

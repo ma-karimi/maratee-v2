@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Lighting;
-use App\Repositories\BaseRepository;
 
 /**
  * Class LightingRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:17 am UTC
-*/
-
+ */
 class LightingRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

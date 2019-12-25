@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\ActionHub;
 use App\Models\ActorHub;
-use App\Models\Media;
 use App\Models\Paleontology;
 use App\Models\PaleontologySample;
 use Illuminate\Container\Container as Application;

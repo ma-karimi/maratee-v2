@@ -54,11 +54,11 @@ class Taxonomy extends BaseModel
             $authors = $this->species->authors->implode('name', ' & ');
         }
         if ($this->relationLoaded('subspecies') && !empty($this->subspecies) && $this->subspecies->authors->count()) {
-            $and  = !empty($authors) ? ' & ' : null;
+            $and = !empty($authors) ? ' & ' : null;
             $authors .= $and . $this->subspecies->authors->implode('name', ' & ');
         }
         if ($this->relationLoaded('variety') && !empty($this->variety) && $this->variety->authors->count()) {
-            $and  = !empty($authors) ? ' & ' : null;
+            $and = !empty($authors) ? ' & ' : null;
             $authors .= $and . $this->variety->authors->implode('name', ' & ');
         }
 
@@ -73,15 +73,15 @@ class Taxonomy extends BaseModel
             $name = $this->genus->name;
         }
         if ($this->relationLoaded('species') && !empty($this->species)) {
-            $and  = !empty($name) ? ' ' : null;
+            $and = !empty($name) ? ' ' : null;
             $name .= $and . $this->species->name;
         }
         if ($this->relationLoaded('subspecies') && !empty($this->subspecies)) {
-            $and  = !empty($name) ? ' ' : null;
+            $and = !empty($name) ? ' ' : null;
             $name .= $and . $this->subspecies->name;
         }
         if ($this->relationLoaded('variety') && !empty($this->variety)) {
-            $and  = !empty($name) ? ' ' : null;
+            $and = !empty($name) ? ' ' : null;
             $name .= $and . $this->variety->name;
         }
 

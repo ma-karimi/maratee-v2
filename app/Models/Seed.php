@@ -62,7 +62,7 @@ class Seed extends BaseModel
      *
      * @var array
      */
-        public static $rules = [
+    public static $rules = [
         'organization_id' => 'required|exists:organizations,id',
         'department_id' => 'exists:departments,id',
         'project_id' => 'exists:projects,id',
@@ -77,6 +77,7 @@ class Seed extends BaseModel
     {
         return $this->belongsTo(Organization::class);
     }
+
     /**
      * @return BelongsTo
      */
@@ -84,6 +85,7 @@ class Seed extends BaseModel
     {
         return $this->belongsTo(Department::class);
     }
+
     /**
      * @return BelongsTo
      */

@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateSeedAPIRequest;
 use App\Http\Requests\Api\UpdateSeedAPIRequest;
 use App\Models\Seed;
 use App\Repositories\SeedRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class SeedController
  * @package App\Http\Controllers\Api
  */
-
 class SeedAPIController extends AppBaseController
 {
     /** @var  SeedRepository */
@@ -56,7 +56,7 @@ class SeedAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -321,7 +321,7 @@ class SeedAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

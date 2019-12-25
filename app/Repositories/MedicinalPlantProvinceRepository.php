@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\MedicinalPlantProvince;
-use App\Repositories\BaseRepository;
 
 /**
  * Class MedicinalPlantProvinceRepository

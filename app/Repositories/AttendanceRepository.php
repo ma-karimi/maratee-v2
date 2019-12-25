@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Attendance;
-use App\Repositories\BaseRepository;
 
 /**
  * Class AttendanceRepository
  * @package App\Repositories
  * @version July 14, 2019, 10:36 am UTC
-*/
-
+ */
 class AttendanceRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

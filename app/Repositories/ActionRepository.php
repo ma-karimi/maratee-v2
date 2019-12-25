@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Action;
-use App\Repositories\BaseRepository;
 
 /**
  * Class ActionRepository
  * @package App\Repositories
  * @version July 14, 2019, 9:55 am UTC
-*/
-
+ */
 class ActionRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**
@@ -37,6 +35,7 @@ class ActionRepository extends BaseRepository
     {
         return Action::class;
     }
+
     public function update($input, $id)
     {
         $media_input = [
@@ -49,7 +48,7 @@ class ActionRepository extends BaseRepository
         ];
 
         $model_input = collect($input)->except(array_keys($media_input))->toArray();
-        $model_input['description']=$input['description'];
+        $model_input['description'] = $input['description'];
         unset($model_input['file']);
         $model = parent::update($model_input, $id);
         //store media

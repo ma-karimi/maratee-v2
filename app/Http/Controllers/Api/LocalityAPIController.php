@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateLocalityAPIRequest;
-use App\Http\Requests\Api\UpdateLocalityAPIRequest;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\LocalityAPIRequest;
 use App\Models\Locality;
 use App\Repositories\LocalityRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
  * Class LocalityController
  * @package App\Http\Controllers\Api
  */
-
 class LocalityAPIController extends AppBaseController
 {
     /** @var  LocalityRepository */
@@ -56,6 +56,7 @@ class LocalityAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -69,7 +70,7 @@ class LocalityAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateLocalityAPIRequest $request
+     * @param LocalityAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -161,8 +162,9 @@ class LocalityAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws ValidationException
      */
-    public function store(CreateLocalityAPIRequest $request)
+    public function store(LocalityAPIRequest $request)
     {
         $input = $request->all();
 
@@ -223,7 +225,7 @@ class LocalityAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateLocalityAPIRequest $request
+     * @param LocalityAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -267,7 +269,7 @@ class LocalityAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateLocalityAPIRequest $request)
+    public function update($id, LocalityAPIRequest $request)
     {
         $input = $request->all();
 

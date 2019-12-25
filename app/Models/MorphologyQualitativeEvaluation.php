@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Models\Convert\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 /**
  * @SWG\Definition(
  *      definition="MorphologyQualitativeEvaluation",
@@ -76,7 +79,7 @@ class MorphologyQualitativeEvaluation extends BaseModel
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function seed()
     {
@@ -84,7 +87,7 @@ class MorphologyQualitativeEvaluation extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function collect()
     {
@@ -92,7 +95,7 @@ class MorphologyQualitativeEvaluation extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function station()
     {
@@ -100,7 +103,7 @@ class MorphologyQualitativeEvaluation extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function taxonomy()
     {
@@ -108,7 +111,7 @@ class MorphologyQualitativeEvaluation extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function vars()
     {

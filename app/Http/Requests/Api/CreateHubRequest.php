@@ -31,13 +31,6 @@ class CreateHubRequest extends FormRequest
             ];
     }
 
-    public function messages()
-    {
-        return [
-            'ids.0.required' => 'array ids is empty!'
-        ];
-    }
-
     private function getHubModelRules(): array
     {
         $source = explode('/', $this->url())[4];
@@ -52,5 +45,12 @@ class CreateHubRequest extends FormRequest
         $hub_model = resolve('App\\Models\\' . Str::studly(Str::singular($hub_table)));
 
         return $hub_model::getRules();
+    }
+
+    public function messages()
+    {
+        return [
+            'ids.0.required' => 'array ids is empty!'
+        ];
     }
 }

@@ -8,8 +8,7 @@ use App\Models\InternalHabitat;
  * Class InternalHabitatRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:12 am UTC
-*/
-
+ */
 class InternalHabitatRepository extends BaseRepository
 {
     /**

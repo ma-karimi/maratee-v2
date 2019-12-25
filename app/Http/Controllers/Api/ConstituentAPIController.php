@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateConstituentAPIRequest;
 use App\Http\Requests\Api\UpdateConstituentAPIRequest;
 use App\Models\Constituent;
 use App\Repositories\ConstituentRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class ConstituentController
  * @package App\Http\Controllers\Api
  */
-
 class ConstituentAPIController extends AppBaseController
 {
     /** @var  ConstituentRepository */
@@ -245,7 +245,7 @@ class ConstituentAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/constituents/{id}",
      *      summary="Remove the specified Constituent from storage",

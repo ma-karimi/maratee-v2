@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\TransactionAPIRequest;
 use App\Models\Transaction;
 use App\Repositories\TransactionRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
@@ -54,7 +55,7 @@ class TransactionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -65,6 +66,14 @@ class TransactionAPIController extends AppBaseController
         );
 
         return $this->sendResponse($transactions->toArray(), 'Transactions retrieved successfully');
+    }
+
+    /**
+     * @return array
+     */
+    private function getFieldRelation(): array
+    {
+        return ['organization', 'media'];
     }
 
     /**
@@ -521,7 +530,7 @@ class TransactionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {
@@ -535,14 +544,6 @@ class TransactionAPIController extends AppBaseController
         $transaction->delete();
 
         return $this->sendResponse($id, 'Transaction deleted successfully');
-    }
-
-    /**
-     * @return array
-     */
-    private function getFieldRelation(): array
-    {
-        return ['organization', 'media'];
     }
 
     public function media($id)

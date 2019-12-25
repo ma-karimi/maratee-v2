@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Permission;
-use App\Repositories\BaseRepository;
 
 /**
  * Class PermissionRepository
  * @package App\Repositories
  * @version October 9, 2019, 12:38 pm UTC
-*/
-
+ */
 class PermissionRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

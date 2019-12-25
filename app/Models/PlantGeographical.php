@@ -10,10 +10,13 @@ use App\Models\Contracts\BaseModel;
  *      required={"plant_id","geographical_ids"}
  * )
  */
-
 class PlantGeographical extends BaseModel
 {
 
+    public static $rules = [
+        'plant_id' => 'required|exists:plants,id',
+        'geographical_ids.*' => 'required|exists:geographicals,id'
+    ];
     /**
      * The database table used by the model.
      *
@@ -21,13 +24,6 @@ class PlantGeographical extends BaseModel
      */
     protected $table = 'plant_geographicals';
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
-
-
-    public static $rules = [
-        'plant_id' => 'required|exists:plants,id',
-        'geographical_ids.*' => 'required|exists:geographicals,id'
-    ];
-
     protected $appends = ['name'];
 
 

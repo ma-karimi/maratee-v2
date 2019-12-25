@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\MedicinalPart;
-use App\Repositories\BaseRepository;
 
 /**
  * Class MedicinalPartRepository
  * @package App\Repositories
  * @version August 27, 2019, 6:19 am UTC
-*/
-
+ */
 class MedicinalPartRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

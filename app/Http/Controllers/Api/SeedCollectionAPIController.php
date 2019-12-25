@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateSeedCollectionAPIRequest;
-use App\Http\Requests\Api\UpdateSeedCollectionAPIRequest;
+use App\Http\Requests\Api\SeedCollectionAPIRequest;
 use App\Models\SeedCollection;
 use App\Repositories\SeedCollectionRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class SeedCollectionController
  * @package App\Http\Controllers\Api
  */
-
 class SeedCollectionAPIController extends AppBaseController
 {
     /** @var  SeedCollectionRepository */
@@ -56,7 +56,7 @@ class SeedCollectionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -427,7 +427,7 @@ class SeedCollectionAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateSeedCollectionAPIRequest $request
+     * @param SeedCollectionAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -730,7 +730,7 @@ class SeedCollectionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateSeedCollectionAPIRequest $request)
+    public function update($id, SeedCollectionAPIRequest $request)
     {
         $input = $request->all();
 
@@ -783,7 +783,7 @@ class SeedCollectionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

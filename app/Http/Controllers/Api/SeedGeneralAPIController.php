@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\CreateSeedGeneralAPIRequest;
-use App\Http\Requests\Api\UpdateSeedGeneralAPIRequest;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\SeedGeneralAPIRequest;
 use App\Models\SeedGeneral;
 use App\Repositories\SeedGeneralRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
  * Class SeedGeneralController
  * @package App\Http\Controllers\Api
  */
-
 class SeedGeneralAPIController extends AppBaseController
 {
     /** @var  SeedGeneralRepository */
@@ -56,7 +56,7 @@ class SeedGeneralAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -70,7 +70,7 @@ class SeedGeneralAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateSeedGeneralAPIRequest $request
+     * @param SeedGeneralAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -87,7 +87,7 @@ class SeedGeneralAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/SeedGeneral")
      *      ),
      *      @SWG\Parameter(
-     *          name="type",
+     *          name="type_id",
      *          in="body",
      *          description="SeedGeneral that should be stored",
      *          required=true,
@@ -113,8 +113,9 @@ class SeedGeneralAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws ValidationException
      */
-    public function store(CreateSeedGeneralAPIRequest $request)
+    public function store(SeedGeneralAPIRequest $request)
     {
         $input = $request->all();
 
@@ -175,7 +176,7 @@ class SeedGeneralAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateSeedGeneralAPIRequest $request
+     * @param SeedGeneralAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -199,7 +200,7 @@ class SeedGeneralAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/SeedGeneral")
      *      ),
      *      @SWG\Parameter(
-     *          name="type",
+     *          name="type_id",
      *          in="body",
      *          description="SeedGeneral that should be stored",
      *          required=true,
@@ -225,8 +226,9 @@ class SeedGeneralAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws ValidationException
      */
-    public function update($id, UpdateSeedGeneralAPIRequest $request)
+    public function update($id, SeedGeneralAPIRequest $request)
     {
         $input = $request->all();
 
@@ -279,7 +281,7 @@ class SeedGeneralAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

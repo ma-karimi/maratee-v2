@@ -13,10 +13,10 @@ use Illuminate\Support\Arr;
 
 trait SeedGeneralAccessor
 {
-    public function getTypeNameAttribute()
+    public function getTypeAttribute()
     {
-        if (isset($this->attributes['type'])){
-            return Arr::get(self::TYPE, $this->attributes['type']);
+        if (isset($this->attributes['type_id'])) {
+            return Arr::get(self::TYPE, $this->attributes['type_id']);
         }
     }
 }

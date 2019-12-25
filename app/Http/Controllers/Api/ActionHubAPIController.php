@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateActionHubAPIRequest;
 use App\Http\Requests\Api\UpdateActionHubAPIRequest;
 use App\Models\ActionHub;
 use App\Repositories\ActionHubRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class ActionHubController
  * @package App\Http\Controllers\Api
  */
-
 class ActionHubAPIController extends AppBaseController
 {
     /** @var  ActionHubRepository */
@@ -56,7 +56,7 @@ class ActionHubAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -323,7 +323,7 @@ class ActionHubAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/action_hubs/{id}",
      *      summary="Remove the specified ActionHub from storage",

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
@@ -12,17 +11,8 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      required={"paleontology_id","authors"}
  * )
  */
-
 class PaleontologyCitation extends BaseModel
 {
-
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'paleontology_citations';
-
 
     public static $rules = [
         'year' => 'nullable|integer',
@@ -33,7 +23,12 @@ class PaleontologyCitation extends BaseModel
         'figures_number' => 'nullable|string',
         'paleontology_id' => 'required|exists:paleontologies,id',
     ];
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'paleontology_citations';
     protected $with = ['actors'];
     protected $appends = ['authors'];
 

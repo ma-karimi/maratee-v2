@@ -6,10 +6,9 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateContinentAPIRequest;
 use App\Http\Requests\Api\UpdateContinentAPIRequest;
 use App\Models\Continent;
-use App\Models\Province;
 use App\Repositories\ContinentRepository;
+use Exception;
 use Illuminate\Http\Request;
-use PragmaRX\Countries\Package\Countries;
 use Response;
 
 /**
@@ -230,7 +229,7 @@ class ContinentAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/continents/{id}",
      *      summary="Remove the specified Constituent from storage",

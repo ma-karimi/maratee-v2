@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\ActionHub;
-use App\Repositories\BaseRepository;
 
 /**
  * Class ActionHubRepository
  * @package App\Repositories
  * @version July 14, 2019, 10:28 am UTC
-*/
-
+ */
 class ActionHubRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

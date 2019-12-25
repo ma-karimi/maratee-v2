@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Organization;
-use App\Repositories\BaseRepository;
 
 /**
  * Class OrganizationRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:27 am UTC
-*/
-
+ */
 class OrganizationRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

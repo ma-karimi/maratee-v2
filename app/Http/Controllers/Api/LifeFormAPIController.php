@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateLifeFormAPIRequest;
 use App\Http\Requests\Api\UpdateLifeFormAPIRequest;
 use App\Models\LifeForm;
 use App\Repositories\LifeFormRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class LifeFormController
  * @package App\Http\Controllers\Api
  */
-
 class LifeFormAPIController extends AppBaseController
 {
     /** @var  LifeFormRepository */
@@ -56,7 +56,7 @@ class LifeFormAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -279,7 +279,7 @@ class LifeFormAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

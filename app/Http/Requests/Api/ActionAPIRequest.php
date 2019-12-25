@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Api;
 
 use App\Models\Action;
-use App\Models\Article;
 use InfyOm\Generator\Request\APIRequest;
 
 class ActionAPIRequest extends APIRequest

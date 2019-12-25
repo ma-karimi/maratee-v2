@@ -6,7 +6,6 @@ use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ActionRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Arr;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -30,9 +29,9 @@ class Herbarium extends BaseModel implements HasMedia
         'herbarium_index' => 'nullable|string',
 //        'cf' => 'nullable|string',
         'description' => 'nullable|string',
-        'country_id'=>'required|exists:countries,id',
-        'city_id'=>'required|exists:cities,id',
-        'province_id'=>'required|exists:provinces,id',
+        'country_id' => 'required|exists:countries,id',
+        'city_id' => 'required|exists:cities,id',
+        'province_id' => 'required|exists:provinces,id',
         'is_flowering' => 'required|numeric',
         //classification
         'general_habitat_id' => 'nullable|exists:generals,id',
@@ -134,7 +133,6 @@ class Herbarium extends BaseModel implements HasMedia
     {
         return $this->belongsTo(General::class, 'general_substrate_id');
     }
-
 
 
     public function generalHabitat(): BelongsTo

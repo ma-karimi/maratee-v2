@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateSeedExchangeAPIRequest;
 use App\Http\Requests\Api\UpdateSeedExchangeAPIRequest;
 use App\Models\SeedExchange;
 use App\Repositories\SeedExchangeRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class SeedExchangeController
  * @package App\Http\Controllers\Api
  */
-
 class SeedExchangeAPIController extends AppBaseController
 {
     /** @var  SeedExchangeRepository */
@@ -56,7 +56,7 @@ class SeedExchangeAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -316,7 +316,7 @@ class SeedExchangeAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/seedExchanges/{id}",
      *      summary="Remove the specified SeedExchange from storage",

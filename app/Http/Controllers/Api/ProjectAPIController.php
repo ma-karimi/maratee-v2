@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateProjectAPIRequest;
 use App\Http\Requests\Api\UpdateProjectAPIRequest;
 use App\Models\Project;
 use App\Repositories\ProjectRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class ProjectController
  * @package App\Http\Controllers\Api
  */
-
 class ProjectAPIController extends AppBaseController
 {
     /** @var  ProjectRepository */
@@ -343,7 +343,7 @@ class ProjectAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/projects/{id}",
      *      summary="Remove the specified Project from storage",

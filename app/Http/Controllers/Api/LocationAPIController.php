@@ -7,7 +7,9 @@ use App\Http\Requests\Api\CreateLocationAPIRequest;
 use App\Http\Requests\Api\UpdateLocationAPIRequest;
 use App\Models\Location;
 use App\Repositories\LocationRepository;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
@@ -55,7 +57,7 @@ class LocationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -153,6 +155,7 @@ class LocationAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws ValidationException
      */
     public function store(CreateLocationAPIRequest $request)
     {
@@ -327,7 +330,7 @@ class LocationAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/locations/{id}",
      *      summary="Remove the specified Location from storage",

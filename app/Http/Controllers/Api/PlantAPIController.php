@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreatePlantAPIRequest;
 use App\Http\Requests\Api\UpdatePlantAPIRequest;
-use App\Http\Resources\PlantResource;
-use App\Models\Plant;
 use App\Repositories\PlantRepository;
+use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
+use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 
 /**
@@ -30,7 +29,7 @@ class PlantAPIController extends AppBaseController
      * @param Request $request
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Get(
      *      path="/plants",
      *      summary="Get a listing of the Plants & Plant has flowering herbarium",
@@ -255,7 +254,7 @@ class PlantAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(CreatePlantAPIRequest $request)
     {
@@ -499,7 +498,7 @@ class PlantAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update(UpdatePlantAPIRequest $request, $id)
     {
@@ -519,7 +518,7 @@ class PlantAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/plants/{id}",
      *      summary="Remove the specified Plant from storage",
@@ -603,7 +602,7 @@ class PlantAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function media($id)
     {

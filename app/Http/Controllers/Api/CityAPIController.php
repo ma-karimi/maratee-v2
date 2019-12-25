@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CityAPIRequest;
 use App\Models\City;
-use App\Models\Organization;
 use App\Repositories\CityRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Support\Facades\Cache;
 use Response;
 
 /**
@@ -56,7 +55,7 @@ class CityAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -254,7 +253,7 @@ class CityAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/cities/{id}",
      *      summary="Remove the specified City from storage",
@@ -333,13 +332,13 @@ class CityAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function all()
     {
         /** @var City $city */
         $cities =
-             $this->cityRepository->all();
+            $this->cityRepository->all();
 
 
         return $this->sendResponse($cities->toArray(), 'Cities retrieved successfully');

@@ -12,7 +12,7 @@ namespace App\Libraries;
 //use ‌ as mysqlBluePrint;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
-use Phaza\LaravelPostgis\Schema\Blueprint as postgresBluePrint;
+use Illuminate\Support\Facades\Schema;
 
 class CustomBlueprint
 {
@@ -22,11 +22,11 @@ class CustomBlueprint
         if (DB::getDefaultConnection() !== 'pgsql') {
             DB::statement("ALTER TABLE $table ADD $column_name $column_type GENERATED ALWAYS AS (json_unquote(json_extract($json_column,'$.$json_index'))) VIRTUAL");
             if ($isIndex) {
-                \Illuminate\Support\Facades\Schema::table($table, function (Blueprint $table) use ($column_name) {
+                Schema::table($table, function (Blueprint $table) use ($column_name) {
                     $table->index($column_name);
                 });
             }
-        } else if ($isIndex) {
+        } elseif ($isIndex) {
             /*   DB::statement("CREATE OR REPLACE FUNCTION $column_name($table) RETURNS text AS $$
                       SELECT $1.$json_column->>$json_index;
                       $$ LANGUAGE SQL");*/
@@ -46,12 +46,11 @@ class CustomBlueprint
             $query = "CONCAT_WS(' ', $query)";
             DB::statement("ALTER TABLE $table ADD $column_name $column_type GENERATED ALWAYS AS ($query) VIRTUAL");
             if ($isIndex) {
-                \Illuminate\Support\Facades\Schema::table($table, function (Blueprint $table) use ($column_name) {
+                Schema::table($table, function (Blueprint $table) use ($column_name) {
                     $table->index($column_name);
                 });
             }
-        }
-        else if ($isIndex) {
+        } elseif ($isIndex) {
             foreach ($json_column_indexes as $index => $value) {
                 DB::statement("CREATE INDEX ON $table(($index->>'$value'))");
             }

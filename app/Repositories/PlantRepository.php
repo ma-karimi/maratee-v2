@@ -2,17 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Models\ActionHub;
-use App\Models\ActorHub;
-use App\Models\Herbarium;
 use App\Models\Plant;
-use App\Models\Taxonomy;
+use Exception;
 use Illuminate\Container\Container as Application;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
-use Illuminate\Validation\ValidationException;
 
 /**
  * Class PlantRepository
@@ -26,7 +18,7 @@ class PlantRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-//
+
     ];
 
     private $locationRepo;
@@ -35,7 +27,7 @@ class PlantRepository extends BaseRepository
      * PlantRepository constructor.
      * @param Application $app
      * @param LocationRepository $locationRepo
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct(Application $app, LocationRepository $locationRepo)
     {
@@ -83,25 +75,17 @@ class PlantRepository extends BaseRepository
             'taxonomy_id' => $input['taxonomy_id'],
             'protection_id' => $input['protection_id'] ?? null,
             'general_phytogeography_id' => $input['general_phytogeography_id'],
-//            'general_habitat_id' => $input['general_habitat_id'] ?? null,
             'general_origin_id' => $input['general_origin_id'] ?? null,
-//            'general_substrate_id' => $input['general_substrate_id'] ?? null,
             'description' => $input['description'] ?? null,
             'habitat_description' => $input['habitat_description'] ?? null,
             'ecology_description' => $input['ecology_description'] ?? null,
-            //life_form
             'life_form_id' => $input['life_form_id'] ?? null,
-            //
-            'is_flowering' => $input['is_flowering'] ?? 0,
+            'is_flowering' => $input['is_flowering'] ?? 1,
             'flowering_time' => $input['flowering_time'] ?? null,
             'number' => $input['number'] ?? null,
             'monopoly_of_iran_id' => $input['monopoly_of_iran_id'] ?? null,
             'n_no' => $input['n_no'] ?? null,
             'n2_no' => $input['n2_no'] ?? null,
-//            'sheets_no' => $input['sheets_no'] ?? null,
-//            'samples_no' => $input['samples_no'] ?? null,
-//            'tip_qt' => $input['tip_qt'] ?? null,
-//            'physical_tip_qt' => $input['physical_tip_qt'] ?? null,
         ];
         //store plant
         return parent::create($plant_input);
@@ -155,24 +139,14 @@ class PlantRepository extends BaseRepository
 
     public function update($input, $id)
     {
-         return $this->updatePlant($input, $id);
-    }
-
-
-    private function updatePlant($input, $id)
-    {
         $plant_input = [
             'taxonomy_id' => $input['taxonomy_id'],
             'protection_id' => $input['protection_id'] ?? null,
             'general_phytogeography_id' => $input['general_phytogeography_id'],
-//            'general_habitat_id' => $input['general_habitat_id'] ?? null,
             'general_origin_id' => $input['general_origin_id'] ?? null,
-//            'general_substrate_id' => $input['general_substrate_id'] ?? null,
             'description' => $input['description'] ?? null,
             'habitat_description' => $input['habitat_description'] ?? null,
             'ecology_description' => $input['ecology_description'] ?? null,
-
-            //
             'is_flowering' => $input['is_flowering'] ?? 0,
             'flowering_time' => $input['flowering_time'] ?? null,
             'number' => $input['number'] ?? null,
@@ -180,12 +154,9 @@ class PlantRepository extends BaseRepository
             'life_form_id' => $input['life_form_id'] ?? null,
             'n_no' => $input['n_no'] ?? null,
             'n2_no' => $input['n2_no'] ?? null,
-//            'sheets_no' => $input['sheets_no'] ?? null,
-//            'samples_no' => $input['samples_no'] ?? null,
-//            'tip_qt' => $input['tip_qt'] ?? null,
-//            'physical_tip_qt' => $input['physical_tip_qt'] ?? null
         ];
         return parent::update($plant_input, $id);
     }
+
 
 }

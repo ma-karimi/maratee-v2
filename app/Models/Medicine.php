@@ -3,9 +3,6 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Arr;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -32,9 +29,10 @@ class Medicine extends BaseModel implements HasMedia
     protected $with = ['industries', 'media'];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
     protected $appends = ['medicine_industries'];
+
     public function medicinals()
     {
-        return $this->morphToMany(MedicinalPlant::class, 'hub','medicinal_hubs');
+        return $this->morphToMany(MedicinalPlant::class, 'hub', 'medicinal_hubs');
     }
 
     public function industries()
@@ -47,7 +45,7 @@ class Medicine extends BaseModel implements HasMedia
     {
         $item = null;
 
-        if ($this->relationLoaded('industries') &&  $this->industries->count()) {
+        if ($this->relationLoaded('industries') && $this->industries->count()) {
             $item .= $this->industries->implode('industry', ' & ');
         }
         return $item;

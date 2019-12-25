@@ -6,6 +6,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\LocationHubAPIRequest;
 use App\Models\Location;
 use App\Repositories\LocationHubRepository;
+use Exception;
 use Illuminate\Http\Request;
 use Response;
 
@@ -54,7 +55,7 @@ class LocationHubAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -127,12 +128,11 @@ class LocationHubAPIController extends AppBaseController
     }
 
 
-
     /**
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/location_hubs/{id}",
      *      summary="Remove the specified Location from storage",

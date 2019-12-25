@@ -18,7 +18,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class Botanical extends BaseModel implements HasMedia
 {
     use HasMediaTrait, BotanicalAccessor, BotanicalRelation, BotanicalScope;
-    public const GROWTH_RATES = [0=>'Unknown', 1 => 'very low', 2 => 'low', 3 => 'moderate', 4 => 'fast', 5 => 'very fast'];
+    public const GROWTH_RATES = [0 => 'Unknown', 1 => 'very low', 2 => 'low', 3 => 'moderate', 4 => 'fast', 5 => 'very fast'];
     public const SEED_RATE = [1 => 'low', 2 => 'moderate', 3 => 'good', 4 => 'bumper'];
     public const SEED_FORMATION = [1 => 'yes', 2 => 'no'];
     public const WINTER_TOLERANCE = [1 => 'good', 2 => 'moderate', 3 => 'sensitive', 4 => 'protection', 5 => 'not surviving', 6 => 'minimum temperature'];
@@ -90,7 +90,6 @@ class Botanical extends BaseModel implements HasMedia
      * @var array
      */
     protected $dates = ['created_at', 'deleted_at', 'planting', 'updated_at', 'first_seeding', 'first_flowering'];
-
 
 
 }

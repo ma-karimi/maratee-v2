@@ -21,7 +21,7 @@ class CreateLocationsTable extends Migration {
             $table->string('region_name')->nullable();
             $table->text('address_en')->nullable();
             $table->text('address_fa')->nullable();
-            $table->unsignedBigInteger('village_id')->nullable();
+            $table->string('village')->nullable();
 
             $table->integer('min_altitude')->nullable();
             $table->integer('max_altitude')->nullable();

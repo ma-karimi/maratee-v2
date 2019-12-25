@@ -6,6 +6,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CryoBankAPIRequest;
 use App\Models\CryoBank;
 use App\Repositories\CryoBankRepository;
+use Exception;
 use Illuminate\Http\Request;
 use Response;
 
@@ -54,7 +55,7 @@ class CryoBankAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -65,6 +66,14 @@ class CryoBankAPIController extends AppBaseController
         );
 
         return $this->sendResponse($cryoBanks->toArray(), 'Cryo Banks retrieved successfully');
+    }
+
+    /**
+     * @return array
+     */
+    private function getFieldRelations(): array
+    {
+        return ['taxonomy', 'protection', 'location', 'treatment', 'research', 'collect'];
     }
 
     /**
@@ -382,7 +391,7 @@ class CryoBankAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/cryo_banks/{id}",
      *      summary="Remove the specified CryoBank from storage",
@@ -429,14 +438,6 @@ class CryoBankAPIController extends AppBaseController
         $cryoBank->delete();
 
         return $this->sendResponse($id, 'Cryo Bank deleted successfully');
-    }
-
-    /**
-     * @return array
-     */
-    private function getFieldRelations(): array
-    {
-        return ['taxonomy', 'protection', 'location', 'treatment', 'research', 'collect'];
     }
 
 }

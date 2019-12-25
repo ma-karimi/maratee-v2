@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\User;
-use App\Repositories\BaseRepository;
 
 /**
  * Class UserRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:10 am UTC
-*/
-
+ */
 class UserRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

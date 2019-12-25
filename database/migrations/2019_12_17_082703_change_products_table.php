@@ -18,6 +18,10 @@ class ChangeProductsTable extends Migration
         Schema::dropIfExists('entry_hubs');
         Schema::dropIfExists('entries');
         Schema::dropIfExists('divisions');
+        Schema::dropIfExists('soils');
+        Schema::dropIfExists('lightings');
+        Schema::dropIfExists('transaction_evidences');
+
         Schema::table('products', function(Blueprint $table)
         {
             $table->dropColumn('manufacturer');

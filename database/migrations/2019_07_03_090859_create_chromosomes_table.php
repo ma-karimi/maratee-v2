@@ -16,7 +16,7 @@ class   CreateChromosomesTable extends Migration
         Schema::create('chromosomes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('n_no')->nullable();
-            $table->string('2n_no')->nullable();
+            $table->string('n2_no')->nullable();
             $table->string('description')->nullable();
             $table->string('v_number')->nullable();
             $table->unsignedBigInteger('taxonomy_id');

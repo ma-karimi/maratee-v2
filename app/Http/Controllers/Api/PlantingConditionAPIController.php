@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreatePlantingConditionAPIRequest;
 use App\Http\Requests\Api\UpdatePlantingConditionAPIRequest;
 use App\Models\PlantingCondition;
 use App\Repositories\PlantingConditionRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class PlantingConditionController
  * @package App\Http\Controllers\Api
  */
-
 class PlantingConditionAPIController extends AppBaseController
 {
     /** @var  PlantingConditionRepository */
@@ -56,7 +56,7 @@ class PlantingConditionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -279,7 +279,7 @@ class PlantingConditionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

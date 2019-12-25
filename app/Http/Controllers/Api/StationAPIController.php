@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateStationAPIRequest;
 use App\Http\Requests\Api\UpdateStationAPIRequest;
 use App\Models\Station;
 use App\Repositories\StationRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class StationController
  * @package App\Http\Controllers\Api
  */
-
 class StationAPIController extends AppBaseController
 {
     /** @var  StationRepository */
@@ -306,7 +306,7 @@ class StationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

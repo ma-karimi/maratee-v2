@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Irrigation;
-use App\Repositories\BaseRepository;
 
 /**
  * Class IrrigationRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:15 am UTC
-*/
-
+ */
 class IrrigationRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

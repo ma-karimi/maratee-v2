@@ -20,14 +20,13 @@ class ChangeSeedCollectionsTable extends Migration
             $table->string('accession_code');
             $table->string('voucher_no')->nullable();
             $table->unsignedBigInteger('organization_id');
-            $table->unsignedBigInteger('department_id')->nullable();
+            $table->unsignedBigInteger('department_name')->nullable();
             $table->unsignedBigInteger('project_id')->nullable();
             $table->string('regeneration_and_evaluation_code')->nullable();
             $table->unsignedBigInteger('specimen_type_collect_id');
             $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('specimen_type_collect_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('project_id')->references('id')->on('projects')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
 

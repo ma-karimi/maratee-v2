@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\Article;
 use App\Models\ConstituentType;
 use InfyOm\Generator\Request\APIRequest;
 

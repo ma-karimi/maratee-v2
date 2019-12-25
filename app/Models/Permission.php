@@ -55,43 +55,13 @@ class Permission extends BaseModel implements PermissionContract
     }
 
     /**
-     * A permission can be applied to roles.
-     */
-    public function roles(): BelongsToMany
-    {
-        $role_has_permission_table = config('permission.table_names.role_has_permissions');
-        return $this->belongsToMany(
-            config('permission.models.role'),
-            $role_has_permission_table,
-            'permission_id',
-            'role_id'
-        ) ->whereNull("$role_has_permission_table.deleted_at")
-            ->withTimestamps();
-    }
-
-    /**
-     * A permission belongs to some users of the model associated with its guard.
-     */
-    public function users(): MorphToMany
-    {
-        $model_has_permission_table = config('permission.table_names.model_has_permissions');
-        return $this->morphedByMany(
-            getModelForGuard($this->attributes['guard_name']),
-            'model',
-            $model_has_permission_table,
-            'permission_id',
-            config('permission.column_names.model_morph_key')
-        )->whereNull("$model_has_permission_table.deleted_at");
-    }
-
-    /**
      * Find a permission by its name (and optionally guardName).
      *
      * @param string $name
      * @param string|null $guardName
      *
      * @return
-     * @throws \Spatie\Permission\Exceptions\PermissionDoesNotExist
+     * @throws PermissionDoesNotExist
      *
      */
     public static function findByName(string $name, $guardName = null): PermissionContract
@@ -106,14 +76,24 @@ class Permission extends BaseModel implements PermissionContract
     }
 
     /**
+     * Get the current cached permissions.
+     */
+    protected static function getPermissions(array $params = [])
+    {
+        return app(PermissionRegistrar::class)
+            ->setPermissionClass(static::class)
+            ->getPermissions($params);
+    }
+
+    /**
      * Find a permission by its id (and optionally guardName).
      *
      * @param int $id
      * @param string|null $guardName
      *
-     * @throws \Spatie\Permission\Exceptions\PermissionDoesNotExist
+     * @return PermissionContract
+     * @throws PermissionDoesNotExist
      *
-     * @return \Spatie\Permission\Contracts\Permission
      */
     public static function findById(int $id, $guardName = null): PermissionContract
     {
@@ -148,12 +128,32 @@ class Permission extends BaseModel implements PermissionContract
     }
 
     /**
-     * Get the current cached permissions.
+     * A permission can be applied to roles.
      */
-    protected static function getPermissions(array $params = [])
+    public function roles(): BelongsToMany
     {
-        return app(PermissionRegistrar::class)
-            ->setPermissionClass(static::class)
-            ->getPermissions($params);
+        $role_has_permission_table = config('permission.table_names.role_has_permissions');
+        return $this->belongsToMany(
+            config('permission.models.role'),
+            $role_has_permission_table,
+            'permission_id',
+            'role_id'
+        )->whereNull("$role_has_permission_table.deleted_at")
+            ->withTimestamps();
+    }
+
+    /**
+     * A permission belongs to some users of the model associated with its guard.
+     */
+    public function users(): MorphToMany
+    {
+        $model_has_permission_table = config('permission.table_names.model_has_permissions');
+        return $this->morphedByMany(
+            getModelForGuard($this->attributes['guard_name']),
+            'model',
+            $model_has_permission_table,
+            'permission_id',
+            config('permission.column_names.model_morph_key')
+        )->whereNull("$model_has_permission_table.deleted_at");
     }
 }

@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\ActionHubDocument;
-use App\Repositories\BaseRepository;
 
 /**
  * Class ActionHubDocumentRepository
  * @package App\Repositories
  * @version September 3, 2019, 5:22 am UTC
-*/
-
+ */
 class ActionHubDocumentRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

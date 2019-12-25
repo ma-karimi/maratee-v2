@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\GeographicalAPIRequest;
 use App\Repositories\GeographicalRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class GeographicalController
  * @package App\Http\Controllers\Api
  */
-
 class GeographicalAPIController extends AppBaseController
 {
     /** @var  GeographicalRepository */
@@ -54,7 +54,7 @@ class GeographicalAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -227,7 +227,7 @@ class GeographicalAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/geographicals/{id}",
      *      summary="Remove the specified Geographical from storage",

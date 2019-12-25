@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateSoilAPIRequest;
 use App\Http\Requests\Api\UpdateSoilAPIRequest;
 use App\Models\Soil;
 use App\Repositories\SoilRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class SoilController
  * @package App\Http\Controllers\Api
  */
-
 class SoilAPIController extends AppBaseController
 {
     /** @var  SoilRepository */
@@ -56,7 +56,7 @@ class SoilAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -278,7 +278,7 @@ class SoilAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/soils/{id}",
      *      summary="Remove the specified Soil from storage",

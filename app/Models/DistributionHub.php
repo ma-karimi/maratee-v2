@@ -13,6 +13,11 @@ use App\Models\Contracts\BaseModel;
 class DistributionHub extends BaseModel
 {
 
+    public static $rules = [
+        'geographical_id' => 'required|exists:geographicals,id',
+        'distributable_id' => 'required|integer',
+        'distributable_type' => 'required'
+    ];
     /**
      * The database table used by the model.
      *
@@ -32,11 +37,5 @@ class DistributionHub extends BaseModel
     {
         return $this->morphTo();
     }
-
-    public static $rules = [
-        'geographical_id' => 'required|exists:geographicals,id',
-        'distributable_id' => 'required|integer',
-        'distributable_type' => 'required'
-    ];
 
 }

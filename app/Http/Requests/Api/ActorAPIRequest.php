@@ -3,8 +3,6 @@
 namespace App\Http\Requests\Api;
 
 use App\Models\Actor;
-use App\Models\Article;
-use App\Models\City;
 use InfyOm\Generator\Request\APIRequest;
 
 class ActorAPIRequest extends APIRequest

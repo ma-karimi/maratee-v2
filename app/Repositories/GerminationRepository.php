@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Germination;
-use App\Repositories\BaseRepository;
 
 /**
  * Class GerminationRepository
  * @package App\Repositories
  * @version August 13, 2019, 5:33 am UTC
-*/
-
+ */
 class GerminationRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

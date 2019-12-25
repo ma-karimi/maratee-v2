@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Project;
-use App\Repositories\BaseRepository;
 
 /**
  * Class ProjectRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:24 am UTC
-*/
-
+ */
 class ProjectRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Media;
-use App\Repositories\BaseRepository;
 
 /**
  * Class MediaRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:21 am UTC
-*/
-
+ */
 class MediaRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

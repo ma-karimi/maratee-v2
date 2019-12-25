@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantAPIRequest;
 use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantApplicationAPIRequest;
 use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantProductAPIRequest;
-use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantAPIRequest;
 use App\Models\MedicinalPlant;
 use App\Repositories\MedicinalPlantRepository;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
@@ -56,7 +58,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -75,7 +77,7 @@ class MedicinalPlantAPIController extends AppBaseController
      */
     private function getFieldRelations(): array
     {
-        return ['taxonomy', 'provinces.geographical', 'aerialType', 'groundType', 'foodIndustries', 'otherIndustries', 'industrialPotentials', 'origin', 'habitat', 'locations', 'medicines','effectiveMaterials',  'products'];
+        return ['taxonomy', 'provinces.geographical', 'aerialType', 'groundType', 'foodIndustries', 'otherIndustries', 'industrialPotentials', 'origin', 'habitat', 'locations', 'medicines', 'effectiveMaterials', 'products'];
     }
 
 
@@ -354,7 +356,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(MedicinalPlantAPIRequest $request)
     {
@@ -705,7 +707,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update(MedicinalPlantAPIRequest $request, $id)
     {
@@ -727,7 +729,7 @@ class MedicinalPlantAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/medicinal_plants/{id}",
      *      summary="Remove the specified MedicinalPlant from storage",

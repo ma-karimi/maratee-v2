@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\ArticleAPIRequest;
+use App\Http\Controllers\AppBaseController;
 use App\Models\Article;
 use App\Repositories\ArticleRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class ArticleController
  * @package App\Http\Controllers\Api
  */
-
 class ArticleAPIController extends AppBaseController
 {
     /** @var  ArticleRepository */
@@ -55,7 +54,7 @@ class ArticleAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -273,7 +272,7 @@ class ArticleAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/articles/{id}",
      *      summary="Remove the specified Article from storage",

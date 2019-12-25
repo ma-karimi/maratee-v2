@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\Botanical\BotanicalPropertyAPIRequest;
 use App\Models\BotanicalProperty;
 use App\Repositories\BotanicalPropertyRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class BotanicalPropertyController
  * @package App\Http\Controllers\Api
  */
-
 class BotanicalPropertyAPIController extends AppBaseController
 {
     /** @var  BotanicalPropertyRepository */
@@ -55,12 +55,12 @@ class BotanicalPropertyAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
         $botanicalProperties = $this->botanicalPropertyRepository->all(
-                [],
+            [],
             null,
             null
         );
@@ -254,7 +254,7 @@ class BotanicalPropertyAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/botanical_properties/{id}",
      *      summary="Remove the specified BotanicalProperty from storage",

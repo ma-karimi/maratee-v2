@@ -38,17 +38,6 @@ class ConvertService
         $this->treeLeaf = $treeLeaf;
     }
 
-    public function __get($name)
-    {
-        return $this->treeLeaf[$name] ?? null;
-    }
-//
-//    public function treeLeaf(Treeleaf $treeLeaf): self
-//    {
-//        $this->treeLeaf = $treeLeaf;
-//        return $this;
-//    }
-
     public function handle()
     {
 
@@ -163,7 +152,7 @@ class ConvertService
             $collectors = explode('&', $collect_name);
             if (!empty($collectors) && count($collectors)) {
                 foreach ($collectors as $collector) {
-                    $collector_id = Actor::firstOrCreate($this->ActorCollectData($collector))->id;
+                    $collector_id = Actor::firstOrCreate($this->actorCollectData($collector))->id;
                     ActorHub::create($this->actorHubData($collect_id, $collector_id));
                 }
             }
@@ -380,12 +369,10 @@ class ConvertService
 
     private function plantData(): array
     {
-        $array = [
+        return [
             'is_flowering' => 1,
             'taxonomy_id' => $this->models['taxonomy_id'],
         ];
-
-        return $array;
     }
 
     private function herbariumData(): array
@@ -437,7 +424,7 @@ class ConvertService
         ];
     }
 
-    private function ActorCollectData($collector): array
+    private function actorCollectData($collector): array
     {
         return [
             'name' => trim($collector)

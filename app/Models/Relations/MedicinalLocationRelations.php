@@ -4,8 +4,7 @@
 namespace App\Models\Relations;
 
 
-use App\Models\{ActionHub, Article, General, Location, MedicinalLocationConstituent, MedicinalPlantType, Method};
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\{ActionHub, Article, Location, MedicinalLocationConstituent, MedicinalPlantType, Method};
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 trait MedicinalLocationRelations

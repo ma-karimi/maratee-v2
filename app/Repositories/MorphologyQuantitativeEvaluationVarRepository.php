@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\MorphologyQuantitativeEvaluationVar;
-use App\Repositories\BaseRepository;
 
 /**
  * Class MorphologyQuantitativeEvaluationVarRepository
  * @package App\Repositories
  * @version October 20, 2019, 10:06 am UTC
-*/
-
+ */
 class MorphologyQuantitativeEvaluationVarRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

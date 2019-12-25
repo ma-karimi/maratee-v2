@@ -8,6 +8,20 @@ use InfyOm\Generator\Request\APIRequest;
 
 class CreateGeneralAPIRequest extends APIRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        if ($this->input('parent_id') !== null) {
+            $condition = $this->validateParentId($this->input('type'));
+            abort_if(!$condition, JsonResponse::HTTP_BAD_REQUEST, 'parent_id does not valid');
+        }
+        return true;
+    }
+
     private function validateParentId($type): bool
     {
         $condition = false;
@@ -30,20 +44,6 @@ class CreateGeneralAPIRequest extends APIRequest
         }
         return $condition;
 
-    }
-
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        if ($this->input('parent_id') !== null) {
-            $condition = $this->validateParentId($this->input('type'));
-            abort_if(!$condition, JsonResponse::HTTP_BAD_REQUEST, 'parent_id does not valid');
-        }
-        return true;
     }
 
     /**

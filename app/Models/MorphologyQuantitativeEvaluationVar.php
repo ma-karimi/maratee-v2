@@ -3,18 +3,13 @@
 namespace App\Models;
 
 use App\Models\Convert\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @SWG\Definition(
  *            definition="MorphologyQuantitativeEvaluationVar",
- *            required={"evaluation_id","value"},
- * 			@SWG\Property(property="evaluation_id", type="integer"),
- * 			@SWG\Property(property="var_id", type="integer"),
- * 			@SWG\Property(property="value", type="integer"),
- * 			@SWG\Property(property="created_at", type="string"),
- * 			@SWG\Property(property="updated_at", type="string"),
- *        )
- **/
+ *            required={"evaluation_id","value"}
+ */
 class MorphologyQuantitativeEvaluationVar extends BaseModel
 {
     public static $rules = [
@@ -24,10 +19,10 @@ class MorphologyQuantitativeEvaluationVar extends BaseModel
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function morphologyQuantitativeEvaluation()
     {
-        return $this->belongsTo('App\Models\MorphologyQuantitativeEvaluation', 'evaluation_id');
+        return $this->belongsTo(MorphologyQuantitativeEvaluation::class, 'evaluation_id');
     }
 }

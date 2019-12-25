@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
-
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -104,7 +103,7 @@ abstract class BaseRepository
      * @return Builder
      * @throws Exception
      */
-    public function allQuery($search = [], $skip = null, $limit = null)
+    public function allQuery($search = [])
     {
 
         $query = $this->model->newQuery();
@@ -119,14 +118,6 @@ abstract class BaseRepository
 //                }
             }
         }
-//
-//        if ($skip !== null) {
-//            $query->skip($skip);
-//        }
-//
-//        if ($limit !== null) {
-//            $query->limit($limit);
-//        }
 
         return $query->filtered([]);
     }
@@ -182,7 +173,7 @@ abstract class BaseRepository
                 $model->save();
                 DB::commit();
                 return $model;
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 DB::rollBack();
                 report($e);
                 throw ValidationException::withMessages(['errors' => ['message' => 'Operation Failed!', 'Exception' => $e]]);
@@ -227,16 +218,16 @@ abstract class BaseRepository
         if (App::environment() == 'production') {
             try {
                 DB::beginTransaction();
-            $query = $this->model->newQuery();
+                $query = $this->model->newQuery();
 
-            $model = $query->findOrFail($id);
+                $model = $query->findOrFail($id);
 
-            $model->fill($input);
+                $model->fill($input);
 
-            $model->save();
+                $model->save();
                 DB::commit();
                 return $model;
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 DB::rollBack();
                 report($e);
                 throw ValidationException::withMessages(['errors' => ['message' => 'Operation Failed!', 'Exception' => $e]]);

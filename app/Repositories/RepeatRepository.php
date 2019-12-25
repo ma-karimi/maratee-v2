@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Repeat;
-use App\Repositories\BaseRepository;
 
 /**
  * Class RepeatRepository
  * @package App\Repositories
  * @version August 13, 2019, 9:57 am UTC
-*/
-
+ */
 class RepeatRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

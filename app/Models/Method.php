@@ -28,6 +28,7 @@ class Method extends BaseModel
     protected $table = 'methods';
 
     protected $appends = ['type'];
+
     /**
      * @return HasMany
      */

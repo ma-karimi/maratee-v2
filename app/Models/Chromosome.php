@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @SWG\Definition(
  *            definition="Chromosome",
  *            required={"taxonomy_id"},
- **/
+ *
+ */
 class Chromosome extends BaseModel
 {
 
@@ -29,7 +30,6 @@ class Chromosome extends BaseModel
      * @var string
      */
     protected $table = 'chromosomes';
-
 
 
     /**

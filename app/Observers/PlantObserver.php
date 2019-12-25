@@ -4,12 +4,11 @@ namespace App\Observers;
 
 use App\Models\Plant;
 use Illuminate\Database\Eloquent\Model;
-use phpDocumentor\Reflection\Types\Parent_;
 
 class PlantObserver extends BaseObserver
 {
 
-    protected $model=Plant::class;
+    protected $model = Plant::class;
 
     /**
      * Handle the plant "created" event.
@@ -19,13 +18,13 @@ class PlantObserver extends BaseObserver
      */
     public function created(Model $model)
     {
-       $this->refreshRedis('id');
+        $this->refreshRedis('id');
     }
 
     /**
      * Handle the plant "updated" event.
      *
-     * @param  \App\Plant  $plant
+     * @param \App\Plant $plant
      * @return void
      */
     public function updated(Plant $plant)
@@ -36,7 +35,7 @@ class PlantObserver extends BaseObserver
     /**
      * Handle the plant "deleted" event.
      *
-     * @param  \App\Plant  $plant
+     * @param \App\Plant $plant
      * @return void
      */
     public function deleted(Plant $plant)
@@ -47,7 +46,7 @@ class PlantObserver extends BaseObserver
     /**
      * Handle the plant "restored" event.
      *
-     * @param  \App\Plant  $plant
+     * @param \App\Plant $plant
      * @return void
      */
     public function restored(Plant $plant)
@@ -58,7 +57,7 @@ class PlantObserver extends BaseObserver
     /**
      * Handle the plant "force deleted" event.
      *
-     * @param  \App\Plant  $plant
+     * @param \App\Plant $plant
      * @return void
      */
     public function forceDeleted(Plant $plant)

@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\GeologyAgeAPIRequest;
 use App\Models\GeologyAge;
 use App\Repositories\GeologyAgeRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class GeologyAgeController
  * @package App\Http\Controllers\Api
  */
-
 class GeologyAgeAPIController extends AppBaseController
 {
     /** @var  GeologyAgeRepository */
@@ -55,7 +55,7 @@ class GeologyAgeAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -261,7 +261,7 @@ class GeologyAgeAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/geologyAges/{id}",
      *      summary="Remove the specified GeologyAge from storage",

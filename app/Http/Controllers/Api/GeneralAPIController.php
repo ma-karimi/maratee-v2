@@ -7,7 +7,9 @@ use App\Http\Requests\Api\CreateGeneralAPIRequest;
 use App\Http\Requests\Api\UpdateGeneralAPIRequest;
 use App\Models\General;
 use App\Repositories\GeneralRepository;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
@@ -55,7 +57,7 @@ class GeneralAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -275,7 +277,7 @@ class GeneralAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/generals/{id}",
      *      summary="Remove the specified General from storage",
@@ -361,7 +363,7 @@ class GeneralAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function all($type)
     {

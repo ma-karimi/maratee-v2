@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateAttendanceAPIRequest;
 use App\Http\Requests\Api\UpdateAttendanceAPIRequest;
 use App\Models\Attendance;
 use App\Repositories\AttendanceRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class AttendanceController
  * @package App\Http\Controllers\Api
  */
-
 class AttendanceAPIController extends AppBaseController
 {
     /** @var  AttendanceRepository */
@@ -265,7 +265,7 @@ class AttendanceAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/attendances/{id}",
      *      summary="Remove the specified Attendance from storage",

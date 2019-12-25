@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateGerminationAPIRequest;
 use App\Http\Requests\Api\UpdateGerminationAPIRequest;
 use App\Models\Germination;
 use App\Repositories\GerminationRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class GerminationController
  * @package App\Http\Controllers\Api
  */
-
 class GerminationAPIController extends AppBaseController
 {
     /** @var  GerminationRepository */
@@ -390,7 +390,7 @@ class GerminationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

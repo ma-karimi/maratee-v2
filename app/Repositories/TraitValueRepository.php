@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\TraitValue;
-use App\Repositories\BaseRepository;
 
 /**
  * Class TraitValueRepository
  * @package App\Repositories
  * @version August 13, 2019, 12:20 pm UTC
-*/
-
+ */
 class TraitValueRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

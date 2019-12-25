@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class Location extends BaseModel
 {
-    use SpatialTrait, LocationAccessor, LocationMutator ;
+    use SpatialTrait, LocationAccessor, LocationMutator;
 
     public static $rules = [
         'city_id' => 'required|exists:cities,id',
@@ -49,6 +49,7 @@ class Location extends BaseModel
     protected $with = ['city.province.country', 'province.country'];
 
     protected $appends = ['address'];
+
     /**
      * @return HasMany
      */
@@ -147,6 +148,7 @@ class Location extends BaseModel
     {
         return $this->belongsTo(City::class);
     }
+
     /**
      * @return BelongsTo
      */

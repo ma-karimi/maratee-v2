@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class MedicinalLocationConstituent extends BaseModel
 {
     public static $rules = [
-        'constituents'=>'required'
+        'constituents' => 'required'
 
     ];
     /**

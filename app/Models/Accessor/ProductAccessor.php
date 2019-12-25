@@ -20,7 +20,7 @@ trait ProductAccessor
 
     public function getStatusNameAttribute()
     {
-        if (isset($this->attributes['registration_status'])){
+        if (isset($this->attributes['registration_status'])) {
             return Arr::get(self::STATUS, $this->attributes['registration_status']);
         }
     }

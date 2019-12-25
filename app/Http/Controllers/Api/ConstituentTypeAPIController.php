@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\ConstituentTypeAPIRequest;
 use App\Models\ConstituentType;
 use App\Repositories\ConstituentTypeRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class ConstituentTypeTypeController
  * @package App\Http\Controllers\Api
  */
-
 class ConstituentTypeAPIController extends AppBaseController
 {
     /** @var  ConstituentTypeRepository */
@@ -55,7 +55,7 @@ class ConstituentTypeAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -245,7 +245,7 @@ class ConstituentTypeAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/constituent_types/{id}",
      *      summary="Remove the specified ConstituentType from storage",

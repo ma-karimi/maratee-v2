@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\Actor;
 use App\Models\ActorHub;
 use App\Models\General;
 use App\Models\Taxonomy;
@@ -28,22 +27,11 @@ class TaxonomyRepository extends BaseRepository
      * @var GeneralRepository
      */
     private $generalRepo;
-    /**
-     * @var Actor
-     */
-    private $actor;
-    /**
-     * @var ActorHub
-     */
-    private $actorHub;
 
-    public function __construct(Application $app, GeneralRepository $generalRepo, Actor $actor, ActorHub $actorHub)
+    public function __construct(Application $app, GeneralRepository $generalRepo)
     {
         parent::__construct($app);
-
         $this->generalRepo = $generalRepo;
-        $this->actor = $actor;
-        $this->actorHub = $actorHub;
     }
 
 
@@ -73,16 +61,16 @@ class TaxonomyRepository extends BaseRepository
                 'name' => 'Taxonomy Already Exists!'
             ]);
         }
-        $request = $this->setTaxonomyData($request);
+        $input = $this->setTaxonomyData($request);
 
         return parent::create([
-            'family_id' => $request['family_id'],
-            'genus_id' => $request['genus_id'],
-            'species_id' => $request->filled('species_id') ? $request['species_id'] : null,
-            'subspecies_id' => $request->filled('subspecies_id') ? $request['subspecies_id'] : null,
-            'variety_id' => $request->filled('variety_id') ? $request['variety_id'] : null,
-            'type_id' => $request['type_id'],
-            'name' => $request->filled('name') ? $request['name'] : null,
+            'family_id' => $input['family_id'],
+            'genus_id' => $input['genus_id'],
+            'species_id' => $input->filled('species_id') ? $input['species_id'] : null,
+            'subspecies_id' => $input->filled('subspecies_id') ? $input['subspecies_id'] : null,
+            'variety_id' => $input->filled('variety_id') ? $input['variety_id'] : null,
+            'type_id' => $input['type_id'],
+            'name' => $input->filled('name') ? $input['name'] : null,
         ]);
     }
 
@@ -191,14 +179,8 @@ class TaxonomyRepository extends BaseRepository
      */
     private function specieAuthor($request)
     {
-//        if ($request->filled(['species_id', 'species_auth'])) {
-//
-//            $this->generalRepo->createHub($request->get('species_id'), 'authors', $request->get('species_auth'));
-//        } else {
-//            $this->actorHub->where(['actorable_id' => $request->get('species_id'), 'actorable_type' => General::class])->delete();
-//        }
-
         $species_authors = $request->filled('species_auth') ? $request->get('species_auth') : [];
+
         ActorHub::where(['actorable_id' => $request->get('species_id'), 'actorable_type' => General::class])
             ->whereNotIn('actor_id', $species_authors)
             ->delete();
@@ -265,16 +247,16 @@ class TaxonomyRepository extends BaseRepository
                 'name' => 'Taxonomy Already Exists!'
             ]);
         }
-        $request = $this->setTaxonomyData($request);
+        $input = $this->setTaxonomyData($request);
 
         return parent::update([
-            'family_id' => $request['family_id'],
-            'genus_id' => $request['genus_id'],
-            'species_id' => $request->filled('species_id') ? $request['species_id'] : null,
-            'subspecies_id' => $request->filled('subspecies_id') ? $request['subspecies_id'] : null,
-            'variety_id' => $request->filled('variety_id') ? $request['variety_id'] : null,
-            'type_id'=>$request['type_id'],
-            'name' => $request->filled('name') ? $request['name'] : null,
+            'family_id' => $input['family_id'],
+            'genus_id' => $input['genus_id'],
+            'species_id' => $input->filled('species_id') ? $input['species_id'] : null,
+            'subspecies_id' => $input->filled('subspecies_id') ? $input['subspecies_id'] : null,
+            'variety_id' => $input->filled('variety_id') ? $input['variety_id'] : null,
+            'type_id' => $input['type_id'],
+            'name' => $input->filled('name') ? $input['name'] : null,
         ], $id);
     }
 
@@ -318,27 +300,5 @@ class TaxonomyRepository extends BaseRepository
             })
             ->latest()
             ->paginate($perPage ?? 25, $columns);
-    }
-
-    /**
-     * @param $name
-     * @return mixed
-     */
-    private function actorFirstOrCreate($name)
-    {
-        return $this->actor->firstOrCreate(['name' => $name]);
-    }
-
-    /**
-     * @param $general_id
-     * @param $actor_id
-     */
-    private function actorHubFirstOrCreate($general_id, $actor_id): void
-    {
-        $old_actor_hub = $this->actorHub->where(['actorable_type' => General::class, 'actorable_id' => $general_id])->first();
-        if ($old_actor_hub && (int)$old_actor_hub->actor_id !== (int)$actor_id) {
-            $old_actor_hub->delete();
-        }
-        $this->actorHub->firstOrCreate(['actorable_type' => General::class, 'actorable_id' => $general_id, 'actor_id' => $actor_id]);
     }
 }

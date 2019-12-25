@@ -3,21 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Group;
-use App\Repositories\BaseRepository;
 
 /**
  * Class GroupRepository
  * @package App\Repositories
  * @version July 20, 2019, 10:45 am UTC
-*/
-
+ */
 class GroupRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**

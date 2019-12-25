@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Api\Botanical;
 
 
-use App\Models\Botanical;
 use InfyOm\Generator\Request\APIRequest;
 
 class BotanicalInformationAPIRequest extends APIRequest
@@ -27,7 +26,7 @@ class BotanicalInformationAPIRequest extends APIRequest
     {
         //ToDo
         return [
-            'protection_id'=>'required|exists:protections,id',
+            'protection_id' => 'required|exists:protections,id',
         ];
     }
 }

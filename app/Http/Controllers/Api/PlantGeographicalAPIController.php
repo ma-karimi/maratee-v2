@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\PlantGeographicalAPIRequest;
 use App\Models\PlantGeographical;
 use App\Repositories\PlantGeographicalRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class PlantGeographicalController
  * @package App\Http\Controllers\Api
  */
-
 class PlantGeographicalAPIController extends AppBaseController
 {
     /** @var  PlantGeographicalRepository */
@@ -55,7 +55,7 @@ class PlantGeographicalAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -125,7 +125,7 @@ class PlantGeographicalAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/plant_geographicals/{id}",
      *      summary="Remove the specified PlantGeographical from storage",

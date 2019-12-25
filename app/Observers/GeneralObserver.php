@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cache;
 class GeneralObserver
 {
     public $types = ['family', 'genus', 'phytogeography', 'species', 'sub_species', 'variety', 'habitat', 'origin', 'lichen', 'moss', 'diatom', 'ecology'];
+
     /**
      * Handle the general "created" event.
      *

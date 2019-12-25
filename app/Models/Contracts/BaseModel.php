@@ -24,7 +24,7 @@ class BaseModel extends Model
      **/
     public static $linguistically = [];
     public $searchable = ['*'];
-    public $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations','groupby'];
+    public $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations', 'groupby'];
     protected $guarded = ['id'];
     /**
      * The attributes excluded from the model's JSON form.
@@ -122,14 +122,6 @@ class BaseModel extends Model
         }
     }
 
-    /**
-     * @return array
-     */
-    public static function getJsons(): array
-    {
-        return static::$jsons;
-    }
-
     public static function getConstants()
     {
         try {
@@ -173,6 +165,14 @@ class BaseModel extends Model
     public function getCastFields(): array
     {
         return $this->getCasts();
+    }
+
+    /**
+     * @return array
+     */
+    public static function getJsons(): array
+    {
+        return static::$jsons;
     }
 
     /**

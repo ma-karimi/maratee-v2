@@ -6,7 +6,9 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\ProductAPIRequest;
 use App\Models\Product;
 use App\Repositories\ProductRepository;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
@@ -54,7 +56,7 @@ class ProductAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -98,7 +100,7 @@ class ProductAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function all()
     {
@@ -195,7 +197,7 @@ class ProductAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(ProductAPIRequest $request)
     {
@@ -349,7 +351,7 @@ class ProductAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update($id, ProductAPIRequest $request)
     {
@@ -370,7 +372,7 @@ class ProductAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      * @SWG\Delete(
      *      path="/products/{id}",
      *      summary="Remove the specified Product from storage",

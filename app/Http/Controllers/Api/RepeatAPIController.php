@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateRepeatAPIRequest;
 use App\Http\Requests\Api\UpdateRepeatAPIRequest;
 use App\Models\Repeat;
 use App\Repositories\RepeatRepository;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
  * Class RepeatController
  * @package App\Http\Controllers\Api
  */
-
 class RepeatAPIController extends AppBaseController
 {
     /** @var  RepeatRepository */
@@ -320,7 +320,7 @@ class RepeatAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

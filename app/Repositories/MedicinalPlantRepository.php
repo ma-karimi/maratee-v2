@@ -2,8 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\{MedicinalHub, MedicinalPlant, MedicinalPlantType, Medicine, Product, Province};
-use Illuminate\Container\Container as Application;
+use App\Models\{MedicinalPlant};
 use Illuminate\Support\Arr;
 
 /**
@@ -40,11 +39,19 @@ class MedicinalPlantRepository extends BaseRepository
 
     public function create($input)
     {
-        $model = parent::create(Arr::only($input, $this->MedicinalData()));
+        $model = parent::create(Arr::only($input, $this->medicinalData()));
         $this->storeEffectiveMaterials($input, $model);
 
 
         return $model;
+    }
+
+    /**
+     * @return array
+     */
+    private function medicinalData(): array
+    {
+        return ['taxonomy_id', 'aerial_part_id', 'ground_part_id', 'general_origin_id', 'fruit_color', 'flower_color', 'foliage_color', 'height', 'cycle_id', 'wooden_id', 'herbaceous_id', 'general_habitat_id', 'medicinal_properties'];
     }
 
     private function storeEffectiveMaterials($input, $medicinal)
@@ -52,46 +59,10 @@ class MedicinalPlantRepository extends BaseRepository
         $materials = request()->filled('materials') ? explode(',', $input['materials']) : [];
         $this->createHub($medicinal->id, 'effectiveMaterials', $materials);
     }
-    /**
-     * @return array
-     */
-    private function MedicinalData(): array
-    {
-        return ['taxonomy_id', 'aerial_part_id', 'ground_part_id', 'general_origin_id', 'fruit_color', 'flower_color', 'foliage_color', 'height', 'cycle_id', 'wooden_id', 'herbaceous_id', 'general_habitat_id', 'medicinal_properties'];
-    }
-
-    private function storeProvinces($input, $medicinal)
-    {
-        $provinces = request()->filled('provinces') ? explode(',', $input['provinces']) : [];
-        $this->createHub($medicinal->id, 'provinces', $provinces);
-    }
-
-    /**
-     * @param array $input
-     * @param $medicinal
-     * @return mixed
-     */
-    private function storeProducts(array $input, $medicinal)
-    {
-        $products = request()->filled('products') ? explode(',', $input['products']) : [];
-        $this->createHub($medicinal->id, 'products', $products);
-    }
-
-    /**
-     * @param array $input
-     * @param $medicinal
-     * @return mixed
-     */
-    private function storeMedicines(array $input, $medicinal)
-    {
-        $medicines = request()->filled('medicines') ? explode(',', $input['medicines']) : [];
-        $this->createHub($medicinal->id, 'medicines', $medicines);
-    }
-
 
     public function update($input, $id)
     {
-        $model = parent::update(Arr::only($input, $this->MedicinalData()), $id);
+        $model = parent::update(Arr::only($input, $this->medicinalData()), $id);
         $this->storeEffectiveMaterials($input, $model);
         return $model;
     }
@@ -102,7 +73,7 @@ class MedicinalPlantRepository extends BaseRepository
             'traditional_iranian_medicine' => $input['traditional_iranian_medicine'] ?? null,
             'natural_drug' => $input['natural_drug'] ?? null,
             'inherbal_medicine_store' => $input['inherbal_medicine_store'] ?? null,
-            'hygienic_cosmetic_industry_id'=>$input['hygienic_cosmetic_industry_id'],
+            'hygienic_cosmetic_industry_id' => $input['hygienic_cosmetic_industry_id'],
             'exporting' => $input['exporting'] ?? null,
             'importing' => $input['importing'] ?? null,
             'cultivated_area_id' => $input['cultivated_area_id'],
@@ -139,6 +110,34 @@ class MedicinalPlantRepository extends BaseRepository
         $this->storeMedicines($input, $model);
 
         return $model;
+    }
+
+    /**
+     * @param array $input
+     * @param $medicinal
+     * @return mixed
+     */
+    private function storeProducts(array $input, $medicinal)
+    {
+        $products = request()->filled('products') ? explode(',', $input['products']) : [];
+        $this->createHub($medicinal->id, 'products', $products);
+    }
+
+    /**
+     * @param array $input
+     * @param $medicinal
+     * @return mixed
+     */
+    private function storeMedicines(array $input, $medicinal)
+    {
+        $medicines = request()->filled('medicines') ? explode(',', $input['medicines']) : [];
+        $this->createHub($medicinal->id, 'medicines', $medicines);
+    }
+
+    private function storeProvinces($input, $medicinal)
+    {
+        $provinces = request()->filled('provinces') ? explode(',', $input['provinces']) : [];
+        $this->createHub($medicinal->id, 'provinces', $provinces);
     }
 
 }
