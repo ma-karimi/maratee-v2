@@ -62,29 +62,13 @@ Route::apiResource('connections', 'ConnectionAPIController');
 
 Route::apiResource('continents', 'ContinentAPIController');
 
-Route::apiResource('soils', 'SoilAPIController');
-Route::get('villages/all', 'VillageAPIController@all');
-
-Route::apiResource('villages', 'VillageAPIController');
-
 Route::apiResource('users', 'UserAPIController');
 
 Route::apiResource('technology', 'TechnologyAPIController');
 
 Route::apiResource('seed_weights', 'SeedWeightAPIController');
 
-Route::apiResource('seed_technologies', 'SeedTechnologyAPIController');
-
-Route::apiResource('seed_plants', 'SeedPlantAPIController');
-
-
-Route::apiResource('seed_features', 'SeedFeatureAPIController');
-
-
-Route::apiResource('seed_hubs', 'SeedHubAPIController');
-
 Route::apiResource('seed_exchanges', 'SeedExchangeAPIController');
-Route::apiResource('seeds', 'SeedAPIController');
 
 Route::apiResource('propagations', 'PropagationAPIController');
 Route::get('provinces/all', 'ProvinceAPIController@all');
@@ -138,8 +122,6 @@ Route::apiResource('chromosomes', 'ChromosomeAPIController');
 Route::get('cities/all', 'CityAPIController@all');
 
 Route::apiResource('cities', 'CityAPIController');
-
-Route::apiResource('collections', 'CollectionAPIController');
 
 Route::apiResource('constituents', 'ConstituentAPIController');
 Route::apiResource('constituent_types', 'ConstituentTypeAPIController');
@@ -217,7 +199,7 @@ Route::post('cryo_banks/{id}/determine', 'CryoBankAPIController@storeDetermine')
 Route::post('cryo_banks/{id}/collect', 'CryoBankAPIController@storeCollect');
 Route::post('cryo_banks/{id}/research', 'CryoBankAPIController@storeResearch');
 
-Route::post('distribution_hubs/{$istributable_id}', 'DistributionHubAPIController@store');
+Route::post('distribution_hubs/{$distributable_id}', 'DistributionHubAPIController@store');
 
 Route::apiResource('permissions', 'PermissionAPIController');
 Route::apiResource('geographicals', 'GeographicalAPIController');
@@ -225,13 +207,15 @@ Route::apiResource('plant_geographicals', 'PlantGeographicalAPIController')->exc
 
 Route::apiResource('roles', 'RoleAPIController');
 
+Route::post('seed_collections/{id}/plant', 'SeedCollectionAPIController@storePlant');
+Route::post('seed_collections/{id}/soil', 'SeedCollectionAPIController@storeSoil');
+Route::post('seed_collections/{id}/climate', 'SeedCollectionAPIController@storeClimate');
 Route::apiResource('seed_collections', 'SeedCollectionAPIController');
 
 
+Route::get('seed_generals/all', 'SeedGeneralAPIController@all');
 Route::resource('seed_generals', 'SeedGeneralAPIController');
 
-
-Route::resource('seeds', 'SeedAPIController');
 
 Route::group(['prefix' => 'morphology'], function () {
     Route::resource('qualitative_evaluations', 'MorphologyQualitativeEvaluationAPIController');

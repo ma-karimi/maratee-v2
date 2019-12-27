@@ -2,7 +2,13 @@
 
 namespace App\Repositories;
 
+use App\Models\ActionHub;
+use App\Models\ActorHub;
+use App\Models\Herbarium;
 use App\Models\SeedCollection;
+use Illuminate\Container\Container as Application;
+use Illuminate\Support\Arr;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class SeedCollectionRepository
@@ -17,6 +23,31 @@ class SeedCollectionRepository extends BaseRepository
     protected $fieldSearchable = [
 
     ];
+    /**
+     * @var ActionHub
+     */
+    private $actionHubRepo;
+    /**
+     * @var ActorHub
+     */
+    private $actorHubRepo;
+    /**
+     * @var LocationRepository
+     */
+    private $locationRepo;
+    /**
+     * @var ProjectRepository
+     */
+    private $projectRepo;
+
+    public function __construct(Application $app, ActionHub $actionHubRepo, ActorHub $actorHubRepo, LocationRepository $locationRepo, ProjectRepository $projectRepo)
+    {
+        parent::__construct($app);
+        $this->actionHubRepo = $actionHubRepo;
+        $this->actorHubRepo = $actorHubRepo;
+        $this->locationRepo = $locationRepo;
+        $this->projectRepo = $projectRepo;
+    }
 
     /**
      * Return searchable fields
@@ -34,5 +65,98 @@ class SeedCollectionRepository extends BaseRepository
     public function model()
     {
         return SeedCollection::class;
+    }
+
+    public function create($input)
+    {
+        $input['location_id'] = $this->locationRepo->create($input['location'])->id;
+        return parent::create(Arr::except($input, ['location']));
+    }
+
+    /**
+     * @param $input
+     * @param $id
+     * @throws ValidationException
+     */
+    public function storeProject($input, $id)
+    {
+        $input = $this->createOrUpdateProject($input);
+        $seed_collect = $this->update($input, $id);
+        $this->storeCollect($input, $seed_collect->id);
+    }
+
+    public function storePlantFlowering($input, $id)
+    {
+        return $this->update($input, $id);
+    }
+
+    public function storeSoil($input, $id)
+    {
+        return $this->update($input, $id);
+    }
+
+    public function storeClimate($input, $id)
+    {
+        return $this->update($input, $id);
+    }
+
+    private function storeCollect($input, $herbarium_id)
+    {
+        $collectors = is_array($input['collectors']) ? $input['collectors'] : explode(',', $input['collectors']);
+
+        $action_hub = $this->actionHubRepo->updateOrCreate(
+            [
+                'action_id' => 2,
+                'actionable_type' => Herbarium::class,
+                'actionable_id' => $herbarium_id
+            ],
+            [
+                'date' => $input['date'] ?? null
+            ]);
+        $this->actorHubRepo
+            ->where('actorable_id', $action_hub->id)
+            ->where('actorable_type', ActionHub::class)
+            ->whereNotIn('actor_id', $collectors)
+            ->delete();
+        if (count($collectors) && !empty($collectors[0])) {
+            foreach ($collectors as $item) {
+                $this->actorHubRepo::firstOrCreate([
+                    'actorable_id' => $action_hub->id,
+                    'actorable_type' => ActionHub::class,
+                    'actor_id' => (int)$item,
+                ]);
+            }
+        }
+    }
+
+    public function update($input, $id)
+    {
+        $input['location_id'] = $this->locationRepo->update($input['location'], $input['location']['id'])->id;
+        return parent::update(Arr::except($input, ['location', 'collect']), $id);
+    }
+
+    public function storeMedia($input, $model): void
+    {
+        $media_input = [
+            'media_type' => $input['media_type'] ?? 2,
+        ];
+        //store media
+        if (request()->hasFile('file')) {
+            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('images');
+            $media_record->update($media_input);
+        }
+    }
+
+    /**
+     * @param $input
+     * @return mixed
+     * @throws ValidationException
+     */
+    private function createOrUpdateProject($input)
+    {
+        $input['project_id'] = !empty($input['project_id']) ?
+            $this->projectRepo->update($input['project'], $input['project_id'])->id :
+            $this->projectRepo->create($input['project'])->id;
+        return $input;
     }
 }

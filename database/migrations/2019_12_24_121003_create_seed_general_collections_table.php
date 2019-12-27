@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSeedCollectionHubsTable extends Migration
+class CreateSeedGeneralCollectionsTable extends Migration
 {
 
     /**
@@ -17,9 +17,16 @@ class CreateSeedCollectionHubsTable extends Migration
 
         Schema::table('seed_collections', function(Blueprint $table)
         {
-            $table->dropColumn('department_id', 'climate', 'community_type', 'associated_species');
+            $table->dropColumn('department_id','seed_id', 'climate', 'community_type', 'associated_species', 'flowering_time_id', 'date_harvesting_id');
+            $table->string('harvesting_time')->nullable();
+            $table->string('flowering_time')->nullable();
             $table->string('department_name')->nullable();
+            $table->float('area_sampled', 5, 2)->nullable()->change();
+            $table->float('approximate_area_of_plant', 5, 2)->nullable()->change();
+            $table->string('approximate_area_of_plant', 5, 2)->nullable()->change();
+            $table->float('plant_height', 5, 2)->nullable()->change();
             $table->boolean('dna')->default(0);
+            $table->dateTimeTz('shipping_date')->nullable();
         });
         Schema::dropIfExists('molecular_evaluation_vars');
         Schema::dropIfExists('molecular_evaluations');
@@ -35,16 +42,26 @@ class CreateSeedCollectionHubsTable extends Migration
         Schema::dropIfExists('department_hubs');
         Schema::dropIfExists('departments');
         Schema::dropIfExists('evaluations');
+        Schema::dropIfExists('components');
         Schema::dropIfExists('collections');
         Schema::dropIfExists('transaction_evidences');
         Schema::dropIfExists('action_hub_documents');
         Schema::dropIfExists('bio_moleculars');
+        Schema::dropIfExists('villages');
+        Schema::dropIfExists('soils');
+        Schema::dropIfExists('seeds');
 
-        Schema::create('seed_collection_hubs', function(Blueprint $table)
+        \Illuminate\Support\Facades\DB::statement('DROP VIEW IF EXISTS scientific_view');
+        \Illuminate\Support\Facades\DB::statement('DROP VIEW IF EXISTS species_authors_view');
+        \Illuminate\Support\Facades\DB::statement('DROP VIEW IF EXISTS sub_species_authors_view');
+        \Illuminate\Support\Facades\DB::statement('DROP VIEW IF EXISTS taxonomy_authors_view');
+        \Illuminate\Support\Facades\DB::statement('DROP VIEW IF EXISTS variety_authors_view');
+
+        Schema::create('seed_general_collections', function(Blueprint $table)
         {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('seed_collection_id');
-            $table->morphs('hub');
+            $table->unsignedBigInteger('seed_general_id');
             $table->timestamps();
             $table->softDeletesTz();
         });

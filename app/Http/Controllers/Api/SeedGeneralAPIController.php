@@ -69,6 +69,12 @@ class SeedGeneralAPIController extends AppBaseController
         return $this->sendResponse($seedGenerals->toArray(), 'Seed Generals retrieved successfully');
     }
 
+    public function all()
+    {
+        $seedGenerals = $this->seedGeneralRepository->all();
+
+        return $this->sendResponse($seedGenerals->toArray(), 'Seed Generals retrieved successfully');    }
+
     /**
      * @param SeedGeneralAPIRequest $request
      * @return Response
