@@ -38,7 +38,7 @@ class Taxonomy extends BaseModel
      * @var string
      */
     protected $table = 'taxonomies';
-    protected $with = ['scientific', 'family', 'genus', 'subspecies.authors', 'species.authors', 'variety.authors'];
+    protected $with = ['family', 'genus', 'subspecies.authors', 'species.authors', 'variety.authors'];
     protected $appends = ['type', 'authors', 'scientific_name'];
 
     public function getTypeAttribute()
