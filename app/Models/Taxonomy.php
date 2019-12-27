@@ -88,20 +88,6 @@ class Taxonomy extends BaseModel
         return $name;
     }
 
-    /**
-     * @return HasOne
-     */
-    public function scientific(): HasOne
-    {
-        return $this->hasOne(ScientificView::class, 'taxonomy_id');
-    }
-//    /**
-//     * @return HasOne
-//     */
-//    public function authors(): HasOne
-//    {
-//        return $this->hasOne(TaxonomyAuthorView::class, 'taxonomy_id');
-//    }
 
     /**
      * @return HasMany
