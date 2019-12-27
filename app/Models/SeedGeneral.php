@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Accessor\SeedGeneralAccessor;
-use App\Models\Convert\BaseModel;
+use App\Models\Contracts\BaseModel;
 
 /**
  * @SWG\Definition(
@@ -20,6 +20,5 @@ class SeedGeneral extends BaseModel
         'type_id' => 'required|integer',
     ];
     protected $appends = ['type'];
-    protected $table = 'seed_generals';
 
 }

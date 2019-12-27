@@ -25,7 +25,7 @@ class ChangeMedicinal extends Migration
             $table->dropForeign(['method_distillation_id']);
             $table->boolean('cultivated_area')->default(0)->change();
 
-            $table->dropColumn( 'location_id',  'efficiency', 'treatment_id', 'medicine_id', 'product_id', 'studied_sample', 'presence_in_country', 'phenology_id', 'method_distillation_id', 'method_extraction_id', 'method_analyse_id', 'secondary_metabolite_id', 'effective_material_id', 'industrial_potential_id', 'cultivated_area', 'article_id');
+            $table->dropColumn( ['location_id',  'efficiency', 'treatment_id', 'medicine_id', 'product_id', 'studied_sample', 'presence_in_country', 'phenology_id', 'method_distillation_id', 'method_extraction_id', 'method_analyse_id', 'secondary_metabolite_id', 'effective_material_id', 'industrial_potential_id', 'cultivated_area', 'article_id']);
 
 
             $table->boolean('hygienic_cosmetic_industry_id')->default(0)->change();
