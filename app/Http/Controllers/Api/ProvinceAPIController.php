@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\ProvinceAPIRequest;
-use App\Http\Requests\Api\ProvinceAPIRequest;
 use App\Models\Province;
 use App\Repositories\ProvinceRepository;
 use Exception;

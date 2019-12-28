@@ -15,7 +15,7 @@ class CreateMedicinalLocationsTable extends Migration
     {
         Schema::create('medicinal_locations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('code');
+            $table->string('code')->nullable();
             $table->unsignedBigInteger('medicinal_plant_id');
             $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('article_id');
