@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\ProtectionAPIRequest;
-use App\Http\Requests\Api\ProtectionAPIRequest;
 use App\Models\Protection;
 use App\Repositories\ProtectionRepository;
 use Exception;
