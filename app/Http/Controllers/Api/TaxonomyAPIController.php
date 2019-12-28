@@ -75,7 +75,7 @@ class TaxonomyAPIController extends AppBaseController
      */
     private function getFieldRelations(): array
     {
-        return ['family', 'genus', 'species.authors', 'subspecies.authors', 'variety.authors', 'scientific'];
+        return ['family', 'genus', 'species.authors', 'subspecies.authors', 'variety.authors'];
     }
 
     /**

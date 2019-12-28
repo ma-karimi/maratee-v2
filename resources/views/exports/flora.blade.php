@@ -37,6 +37,8 @@
         <th style="{{$th}}">Ecology Conditions</th>
         <th style="{{$th}}">Status of Conversation</th>
         <th style="{{$th}}">Note</th>
+        <th style="{{$th}}">N</th>
+        <th style="{{$th}}">2N</th>
     </tr>
     </thead>
     <tbody>
@@ -48,26 +50,21 @@
             <td style="{{$td}}">{{ $item->taxonomy->species->name ?? null }}</td>
             <td style="{{$td}}">{{ $item->taxonomy->subspecies->name ?? null }}</td>
             <td style="{{$td}}">{{ $item->taxonomy->variety->name ?? null }}</td>
-            <td style="{{$td}}">{{ $item->taxonomy->scientific->name ?? null }}</td>
+            <td style="{{$td}}">{{ $item->taxonomy->scientific_name ?? null }}</td>
             <td style="{{$td}}">{{ $item->taxonomy->name ?? null }}</td>
             <td style="{{$td}}">
                 @if (!empty($item->taxonomy->genus) && count($item->taxonomy->genus->authors))
-                    @foreach($item->taxonomy->genus->authors as $actor)
-                        {{$actor->name}} {{!$loop->last ? ' & ' : null }}
-                    @endforeach
+                    {{$item['taxonomy']['genus']['actors']}}
                 @endif
                 @if (!empty($item->taxonomy->species) && count($item->taxonomy->species->authors))
                      {{empty($item->taxonoomy->genus) ? '' : ' & '}}
-                    @foreach($item->taxonomy->species->authors as $actor)
-                        {{$actor->name}} {{!$loop->last ? ' & ' : null }}
-                    @endforeach
-                @endif
+                        {{$item['taxonomy']['species']['actors']}}
+                    @endif
                 @if (!empty($item->taxonomy->subspecies) && count($item->taxonomy->subspecies->authors))
                         {{empty($item->taxonoomy->species) ? '' : ' & '}}
-                    @foreach($item->taxonomy->subspecies->authors as $actor)
-                        {{$actor->name}} {{!$loop->last ? ' & ' : null }}
-                    @endforeach
-                @endif
+                        {{$item['taxonomy']['subspecies']['actors']}}
+
+                    @endif
             </td>
             <td>
                 @foreach($item->locations as $location)
@@ -88,6 +85,8 @@
             <td style="{{$td}}">{{$item['ecology_description'] ?? null}}</td>
             <td style="{{$td}}">{{$item['protection']['name']['en'] ?? null}}</td>
             <td style="{{$td}}">{{$item['description'] ?? null}}</td>
+            <td style="{{$td}}">{{$item['n_no'] ?? null}}</td>
+            <td style="{{$td}}">{{$item['n2_no'] ?? null}}</td>
         </tr>
     @endforeach
     </tbody>
