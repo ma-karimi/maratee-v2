@@ -60,7 +60,11 @@ class OrganizationAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $organizations = $this->organizationRepository->all();
+        $organizations = $this->organizationRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $request->get('relations')
+        );
 
         return $this->sendResponse($organizations->toArray(), 'Organizations retrieved successfully');
     }
@@ -165,6 +169,7 @@ class OrganizationAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(CreateOrganizationAPIRequest $request)
     {
@@ -333,6 +338,7 @@ class OrganizationAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, UpdateOrganizationAPIRequest $request)
     {

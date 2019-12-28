@@ -30,13 +30,6 @@ class Organization extends BaseModel
      */
     protected $table = 'organizations';
 
-    /**
-     * @return HasMany
-     */
-    public function entryHubs(): HasMany
-    {
-        return $this->hasMany(EntryHub::class)->latest();
-    }
 
     /**
      * @return HasMany
