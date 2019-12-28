@@ -7,6 +7,7 @@ use App\Http\Requests\Api\Botanical\BotanicalAPIRequest;
 use App\Http\Requests\Api\Botanical\BotanicalInformationAPIRequest;
 use App\Http\Requests\Api\Botanical\BotanicalIrrigationAPIRequest;
 use App\Http\Requests\Api\Botanical\BotanicalLocationAPIRequest;
+use App\Http\Requests\Api\Botanical\BotanicalMediaAPIRequest;
 use App\Models\Botanical;
 use App\Repositories\BotanicalRepository;
 use Exception;
@@ -696,5 +697,20 @@ class BotanicalAPIController extends AppBaseController
         $botanical = $this->botanicalRepository->updateInfo($input, $id);
 
         return $this->sendResponse($botanical->toArray(), 'Botanical updated successfully');
+    }
+    public function storeMedia($id, BotanicalMediaAPIRequest $request)
+    {
+        $input = $request->all();
+
+        /** @var Botanical $botanical */
+        $botanical = $this->botanicalRepository->find($id);
+
+        if ($botanical === null) {
+            return $this->sendError('Botanical not found');
+        }
+
+        $this->botanicalRepository->storeMedia($id);
+
+        return $this->sendResponse([], 'Botanical updated successfully');
     }
 }

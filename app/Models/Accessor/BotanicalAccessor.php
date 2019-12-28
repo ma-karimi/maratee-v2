@@ -61,7 +61,12 @@ trait BotanicalAccessor
 
     public function getCycleAttribute()
     {
-        return !empty($this->attributes['cycle_id']) ? Arr::get(self::CYCLE, $this->attributes['cycle_id']) : null;
+        $cycles = null;
+
+        if ($this->relationLoaded('cycles') && $this->cycles->count()) {
+            $cycles .= $this->cycles->implode('cycle', ' & ');
+        }
+        return $cycles;
     }
 
     public function getSeedGerminationAttribute()
@@ -74,7 +79,7 @@ trait BotanicalAccessor
     {
         $distributions = null;
 
-        if ($this->relationLoaded('$this->distributions') && $this->distributions->count()) {
+        if ($this->relationLoaded('distributions') && $this->distributions->count()) {
             $distributions .= $this->distributions->implode('name', ' & ');
         }
         return $distributions;

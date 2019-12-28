@@ -45,16 +45,14 @@ class BotanicalRepository extends BaseRepository
      * @param BotanicalIrrigation $botanicalIrrigation
      * @param LocationRepository $locationRepo
      * @param BotanicalProperty $botanicalPropertyRepo
-     * @param DistributionHubRepository $distributionHubRepo
      * @throws Exception
      */
-    public function __construct(Application $app, BotanicalIrrigation $botanicalIrrigation, LocationRepository $locationRepo, BotanicalProperty $botanicalPropertyRepo, DistributionHubRepository $distributionHubRepo)
+    public function __construct(Application $app, BotanicalIrrigation $botanicalIrrigation, LocationRepository $locationRepo, BotanicalProperty $botanicalPropertyRepo)
     {
         parent::__construct($app);
         $this->botanicalIrrigation = $botanicalIrrigation;
         $this->locationRepo = $locationRepo;
         $this->botanicalPropertyRepo = $botanicalPropertyRepo;
-        $this->distributionHubRepo = $distributionHubRepo;
         $this->app = $app;
     }
 
@@ -83,6 +81,7 @@ class BotanicalRepository extends BaseRepository
         $botanical = parent::create($this->primaryData($input));
 
         $this->storeDistributions($input, $botanical);
+        $this->storeProperties($input['woodens'], 5, $botanical->id);
 
         return $botanical;
     }
@@ -97,11 +96,8 @@ class BotanicalRepository extends BaseRepository
             'taxonomy_id' => $input['taxonomy_id'] ?? null,
             'general_origin_id' => $input['general_origin_id'] ?? null,
             'general_habitat_id' => $input['general_habitat_id'] ?? null,
-//            'botanical_irrigation' => $input['botanical_irrigation'] ?? null,
-//            'flowering_time' => $input['flowering_time'] ?? null,
             'organization_id' => $input['organization_id'] ?? null,
             'internal_habitat_id' => $input['internal_habitat_id'] ?? null,
-//            'internal_habitat' => $input['internal_habitat'] ?? null,
             'entrance_to_garden_id' => $input['entrance_to_garden_id'] ?? null,
             'seed_germination_id' => $input['seed_germination_id'] ?? null,
             'cutting_rooting' => $input['cutting_rooting'] ?? null,
@@ -160,6 +156,8 @@ class BotanicalRepository extends BaseRepository
         $this->storeProperties($input['usages'], 2, $id);
         $this->storeProperties($input['propagations'], 3, $id);
         $this->storeProperties($input['planting_conditions'], 4, $id);
+        $this->storeProperties($input['woodens'], 5, $id);
+
         return parent::update([
             'wooden_id' => $input['wooden_id'] ?? null,
             'cycle_id' => $input['cycle_id'] ?? null,
@@ -203,6 +201,19 @@ class BotanicalRepository extends BaseRepository
     public function storeBotanicalIrrigation(array $input)
     {
         return $this->botanicalIrrigation->updateOrCreate(['botanical_id' => $input['botanical_id']], Arr::except($input, 'botanical_id'));
+    }
+
+    public function storeMedia($id)
+    {
+        $model = $this->find($id);
+        $media_input = [
+            'media_type' => $input['media_type'] ?? 2,
+        ];
+        //store media
+        if (request()->hasFile('file')) {
+            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('images');
+            $media_record->update($media_input);
+        }
     }
 
 }

@@ -43,6 +43,10 @@ trait BotanicalRelation
     {
         return $this->hasMany(BotanicalProperty::class)->latest()->where('type_id', 4);
     }
+    public function cycles()
+    {
+        return $this->hasMany(BotanicalProperty::class)->latest()->where('type_id', 5);
+    }
 
 
     public function botanicalIrrigation()

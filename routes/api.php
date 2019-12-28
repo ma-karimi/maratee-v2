@@ -106,6 +106,7 @@ Route::apiResource('actors', 'ActorAPIController');
 
 Route::post('botanicals/{botanical_id}/location', 'BotanicalAPIController@storeLocation');
 Route::post('botanicals/{botanical_id}/information', 'BotanicalAPIController@storeInformation');
+Route::post('botanicals/{botanical_id}/media', 'BotanicalAPIController@storeMedia');
 Route::post('botanicals/{botanical_id}/irrigation', 'BotanicalAPIController@storeIrrigation');
 Route::apiResource('botanicals', 'BotanicalAPIController');
 
