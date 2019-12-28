@@ -109,6 +109,7 @@ class ProtectionAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(ProtectionAPIRequest $request)
     {
@@ -221,6 +222,7 @@ class ProtectionAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, ProtectionAPIRequest $request)
     {
