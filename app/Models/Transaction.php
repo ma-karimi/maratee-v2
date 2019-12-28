@@ -22,11 +22,11 @@ class Transaction extends BaseModel implements HasMedia
     public const TYPE = [1 => 'visit', 2 => 'borrow', 3 => 'exchange', 4 => 'gift', 5 => 'fair', 6 => 'buy'];
     public const VISIT = [1 => 'Sample', 2 => 'All/Museum'];
     public static $rules = [
-        'member_name' => 'required|string',
+        'member_name' => 'nullable|string',
         'member_address' => 'nullable|string',
         'member_email' => 'nullable|string',
         'member_phone' => 'nullable|string',
-        'organization_id' => 'required|exists:organizations,id',
+        'organization_id' => 'nullable|exists:organizations,id',
         'department_name' => 'nullable|string',
         'start_time' => 'required|date',
         'end_time' => 'nullable|date',

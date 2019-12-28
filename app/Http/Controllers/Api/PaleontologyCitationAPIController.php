@@ -146,6 +146,7 @@ class PaleontologyCitationAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(PaleontologyCitationAPIRequest $request)
     {

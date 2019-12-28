@@ -20,7 +20,7 @@ class Media extends BaseMedia
     //use BaseModelTrait instead of BaseModel Class
     use BaseModel, MediaAccessor, ArticleRelation;
 
-    public const MEDIA_TYPE = [1 => 'sketch', 2 => 'picture', 3 => 'relevant correspondence', 4 => 'treatment document', 5 => 'expense documents'];
+    public const MEDIA_TYPE = [1 => 'sketch', 2 => 'picture', 3 => 'relevant correspondence', 4 => 'treatment document', 5 => 'expense documents', 6=> 'filed notes'];
     public static $jsons = [];
     public static $messages = [];
     public static $linguistically = [];
