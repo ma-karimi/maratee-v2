@@ -34,10 +34,6 @@ class BotanicalRepository extends BaseRepository
      * @var BotanicalPropertyRepository
      */
     private $botanicalPropertyRepo;
-    /**
-     * @var DistributionHubRepository
-     */
-    private $distributionHubRepo;
 
     /**
      * BotanicalRepository constructor.
@@ -81,8 +77,7 @@ class BotanicalRepository extends BaseRepository
         $botanical = parent::create($this->primaryData($input));
 
         $this->storeDistributions($input, $botanical);
-        $this->storeProperties($input['woodens'], 5, $botanical->id);
-
+        $this->storeProperties($input['cycles'], 5, $botanical->id);
         return $botanical;
     }
 
@@ -156,7 +151,7 @@ class BotanicalRepository extends BaseRepository
         $this->storeProperties($input['usages'], 2, $id);
         $this->storeProperties($input['propagations'], 3, $id);
         $this->storeProperties($input['planting_conditions'], 4, $id);
-        $this->storeProperties($input['woodens'], 5, $id);
+        $this->storeProperties($input['cycles'], 5, $id);
 
         return parent::update([
             'wooden_id' => $input['wooden_id'] ?? null,
