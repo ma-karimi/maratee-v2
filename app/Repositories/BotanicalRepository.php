@@ -78,6 +78,8 @@ class BotanicalRepository extends BaseRepository
 
         $this->storeDistributions($input, $botanical);
         $this->storeProperties($input['cycles'], 5, $botanical->id);
+        $this->storeProperties($input['values'], 1, $botanical->id);
+        $this->storeProperties($input['usages'], 2, $botanical->id);
         return $botanical;
     }
 
@@ -93,21 +95,11 @@ class BotanicalRepository extends BaseRepository
             'general_habitat_id' => $input['general_habitat_id'] ?? null,
             'organization_id' => $input['organization_id'] ?? null,
             'internal_habitat_id' => $input['internal_habitat_id'] ?? null,
-            'entrance_to_garden_id' => $input['entrance_to_garden_id'] ?? null,
-            'seed_germination_id' => $input['seed_germination_id'] ?? null,
-            'cutting_rooting' => $input['cutting_rooting'] ?? null,
-            'treatment' => $input['treatment'] ?? null,
-            'first_flowering' => $input['first_flowering'] ?? null,
-            'flowering_period' => $input['flowering_period'] ?? null,
-            'seed_rate_id' => $input['seed_rate_id'] ?? null,
-            'seed_formation_id' => $input['seed_formation_id'] ?? null,
-            'winter_tolerance_id' => $input['winter_tolerance_id'] ?? null,
-            'summer_tolerance_id' => $input['summer_tolerance_id'] ?? null,
-            'soil_id' => $input['soil_id'] ?? null,
-            'growth_rate_id' => $input['growth_rate_id'] ?? null,
-            'sensitivity_conditions' => $input['sensitivity_conditions'] ?? null,
-            'garden_map' => $input['garden_map'] ?? null,
-            'comments' => $input['comments'] ?? null,
+            'protection_id' => $input['protection_id'] ?? null,
+            'height' => $input['height'] ?? null,
+            'flower_color' => $input['flower_color'] ?? null,
+            'fruit_color' => $input['fruit_color'] ?? null,
+            'foliage_color' => $input['foliage_color'] ?? null,
         ];
     }
 
@@ -147,20 +139,26 @@ class BotanicalRepository extends BaseRepository
 
     public function updateInfo(array $input, $id)
     {
-        $this->storeProperties($input['values'], 1, $id);
-        $this->storeProperties($input['usages'], 2, $id);
+
         $this->storeProperties($input['propagations'], 3, $id);
         $this->storeProperties($input['planting_conditions'], 4, $id);
-        $this->storeProperties($input['cycles'], 5, $id);
 
         return parent::update([
-            'wooden_id' => $input['wooden_id'] ?? null,
-            'cycle_id' => $input['cycle_id'] ?? null,
-            'protection_id' => $input['protection_id'] ?? null,
-            'height' => $input['height'] ?? null,
-            'flower_color' => $input['flower_color'] ?? null,
-            'fruit_color' => $input['fruit_color'] ?? null,
-            'foliage_color' => $input['foliage_color'] ?? null,
+            'entrance_to_garden_id' => $input['entrance_to_garden_id'] ?? null,
+            'seed_germination_id' => $input['seed_germination_id'] ?? null,
+            'cutting_rooting' => $input['cutting_rooting'] ?? null,
+            'treatment' => $input['treatment'] ?? null,
+            'first_flowering' => $input['first_flowering'] ?? null,
+            'flowering_period' => $input['flowering_period'] ?? null,
+            'seed_rate_id' => $input['seed_rate_id'] ?? null,
+            'seed_formation_id' => $input['seed_formation_id'] ?? null,
+            'winter_tolerance_id' => $input['winter_tolerance_id'] ?? null,
+            'summer_tolerance_id' => $input['summer_tolerance_id'] ?? null,
+            'soil_id' => $input['soil_id'] ?? null,
+            'growth_rate_id' => $input['growth_rate_id'] ?? null,
+            'sensitivity_conditions' => $input['sensitivity_conditions'] ?? null,
+            'garden_map' => $input['garden_map'] ?? null,
+            'comments' => $input['comments'] ?? null,
         ], $id);
     }
 
@@ -189,7 +187,9 @@ class BotanicalRepository extends BaseRepository
     {
         $botanical = parent::update($this->primaryData($input), $id);
         $this->storeDistributions($input, $botanical);
-
+        $this->storeProperties($input['cycles'], 5, $id);
+        $this->storeProperties($input['values'], 1, $id);
+        $this->storeProperties($input['usages'], 2, $id);
         return $botanical;
     }
 
