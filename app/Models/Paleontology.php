@@ -172,6 +172,6 @@ class Paleontology extends BaseModel implements HasMedia
 
     public function citations(): HasMany
     {
-        return $this->hasMany(PaleontologyCitation::class);
+        return $this->hasMany(PaleontologyCitation::class)->latest();
     }
 }
