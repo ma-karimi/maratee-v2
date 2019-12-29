@@ -9,6 +9,7 @@ use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -155,14 +156,15 @@ class Paleontology extends BaseModel implements HasMedia
         return $this->morphToMany(TreatmentHub::class, 'treamentable');
     }
 
+
     /**
-     * @return MorphToMany
+     * @return MorphMany
      */
-    public function transactions(): MorphToMany
+    public function transactions(): MorphMany
     {
-        return $this->morphToMany(Transaction::class, 'transactionable', 'transaction_hubs')
-            ->withTimestamps()
-            ->withPivot(['type_id', 'sheets_no']);
+        return $this->morphMany(Transaction::class, 'transactionable')
+            ->latest()
+            ->whereNull('deleted_at');
     }
 
     public function maps(): HasMany
