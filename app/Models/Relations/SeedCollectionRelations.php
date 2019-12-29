@@ -11,6 +11,7 @@ use App\Models\Organization;
 use App\Models\Project;
 use App\Models\Seed;
 use App\Models\SeedGeneral;
+use App\Models\Taxonomy;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -142,6 +143,13 @@ trait SeedCollectionRelations
     public function slopeAspect()
     {
         return $this->belongsTo(SeedGeneral::class, 'slope_aspect_id')->where('seed_generals.type_id', 3);
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function taxonomy()
+    {
+        return $this->belongsTo(Taxonomy::class, 'taxonomy_id');
     }
 
     /**
