@@ -8,6 +8,7 @@ use App\Models\ActionHub;
 use App\Models\General;
 use App\Models\Location;
 use App\Models\Organization;
+use App\Models\Project;
 use App\Models\Seed;
 use App\Models\SeedGeneral;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -84,6 +85,13 @@ trait SeedCollectionRelations
     public function organization()
     {
         return $this->belongsTo(Organization::class);
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
     }
 
 
