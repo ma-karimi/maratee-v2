@@ -7,6 +7,7 @@ namespace App\Models\Relations;
 use App\Models\ActionHub;
 use App\Models\General;
 use App\Models\Location;
+use App\Models\Organization;
 use App\Models\Seed;
 use App\Models\SeedGeneral;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -75,6 +76,14 @@ trait SeedCollectionRelations
     public function location()
     {
         return $this->belongsTo(Location::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
     }
 
 
@@ -190,6 +199,7 @@ trait SeedCollectionRelations
     {
         return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')->where('seed_generals.type_id', 21)->latest();
     }
+
     /**
      * @return BelongsToMany
      */
