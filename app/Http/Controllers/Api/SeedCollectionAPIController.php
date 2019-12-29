@@ -63,10 +63,10 @@ class SeedCollectionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $seedCollections = $this->seedCollectionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
+        $seedCollections = $this->seedCollectionRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $this->getRelationField()
         );
 
         return $this->sendResponse($seedCollections->toArray(), 'Seed Collections retrieved successfully');
@@ -210,7 +210,7 @@ class SeedCollectionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedCollection $seedCollection */
-        $seedCollection = $this->seedCollectionRepository->find($id);
+        $seedCollection = $this->seedCollectionRepository->find($id, $this->getRelationField());
 
         if (empty($seedCollection)) {
             return $this->sendError('Seed Collection not found');
@@ -1014,5 +1014,10 @@ class SeedCollectionAPIController extends AppBaseController
         $seedCollection = $this->seedCollectionRepository->storeProject($input, $id);
 
         return $this->sendResponse($seedCollection->toArray(), 'SeedCollection updated successfully');
+    }
+
+    private function getRelationField()
+    {
+        return ['location', 'organization', 'project', 'collect', 'drainage', 'fruitType', 'habitat', 'usedPart', 'growthForm', 'lifeForm', 'consumption', 'motherHealth', 'pollinationAgent', 'pollinationType', 'collectedFrom', 'slopeAspect', 'soilDepth', 'soilErosion', 'soilLime', 'soilSalinity', 'soilTexture', 'specimenType', 'associatedSpecies', 'communityTypes', 'climates'];
     }
 }

@@ -24,14 +24,6 @@ trait SeedCollectionRelations
     /**
      * @return BelongsTo
      */
-    public function seed()
-    {
-        return $this->belongsTo(Seed::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
     public function drainage()
     {
         return $this->belongsTo(SeedGeneral::class, 'drainage_id')->where('seed_generals.type_id', 7);
@@ -89,7 +81,7 @@ trait SeedCollectionRelations
     /**
      * @return BelongsTo
      */
-    public function consumptionValue()
+    public function consumption()
     {
         return $this->belongsTo(SeedGeneral::class, 'plant_consumption_value_id')->where('seed_generals.type_id', 17);
     }

@@ -8,7 +8,7 @@ use App\Models\Relations\SeedCollectionRelations;
 /**
  * @SWG\Definition(
  *      definition="SeedCollection",
- *      required={"seed_id","location_id","plant_consumption_value_id","general_used_part_id"}
+ *      required={"taxonomy_id"}
  * )
  */
 class SeedCollection extends BaseModel

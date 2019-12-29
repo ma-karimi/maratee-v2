@@ -20,10 +20,10 @@ class CreateSeedCollectionsTable extends Migration
             $table->string('corrected_code_by_nrgb')->nullable();
             $table->string('accession_code')->nullable();
             $table->string('voucher_no')->nullable();
-            $table->unsignedBigInteger('organization_id');
+            $table->unsignedBigInteger('organization_id')->nullable();
             $table->string('department_or_group')->nullable();
             $table->unsignedBigInteger('project_id')->nullable();
-            $table->unsignedBigInteger('location_id');
+            $table->unsignedBigInteger('location_id')->nullable();
             $table->unsignedBigInteger('land_form_id')->nullable();
             $table->unsignedBigInteger('slope_aspect_id')->nullable();
             $table->string('slope_degree')->nullable();
@@ -52,8 +52,8 @@ class CreateSeedCollectionsTable extends Migration
             $table->unsignedBigInteger('growth_form_id')->nullable();
             $table->integer('plant_height')->nullable();
             $table->unsignedBigInteger('plant_mother_health_id')->nullable();
-            $table->unsignedBigInteger('plant_consumption_value_id');
-            $table->unsignedBigInteger('general_used_part_id');
+            $table->unsignedBigInteger('plant_consumption_value_id')->nullable();
+            $table->unsignedBigInteger('general_used_part_id')->nullable();
             $table->string('how_to_use')->nullable();
             $table->string('other_details')->nullable();
             $table->string('special_advise')->nullable();

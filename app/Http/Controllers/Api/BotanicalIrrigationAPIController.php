@@ -143,6 +143,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(BotanicalIrrigationAPIRequest $request)
     {
@@ -286,6 +287,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, BotanicalIrrigationAPIRequest $request)
     {

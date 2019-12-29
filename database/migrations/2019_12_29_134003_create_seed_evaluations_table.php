@@ -19,10 +19,20 @@ class CreateSeedEvaluationsTable extends Migration
         Schema::create('seed_evaluations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('seed_collection_id');
+            $table->unsignedBigInteger('specimen_type_collect_id');
             $table->string('regeneration_code')->nullable();
-            $table->date('date_ended')->nullable();
+            $table->integer('number_of_exchanged_seeds')->nullable();
+            $table->integer('light_hr')->nullable();
+            $table->integer('light_c')->nullable();
+            $table->integer('dark_hr')->nullable();
+            $table->integer('dark_c')->nullable();
+
+            $table->date('started_test')->nullable();
+            $table->date('started_germination')->nullable();
             $table->integer('repeat')->nullable();
-            $table->integer('number_of_planted_seeds')->nullable();
+            $table->integer('planted_seeds')->nullable();
+            $table->integer('dormancy_termination')->nullable()->comment('day');
+            $table->integer('germination_period')->nullable()->comment('day');
             $table->integer('fresh_non_germinated')->nullable();
             $table->integer('rotten_seed')->nullable();
             $table->integer('abnormal')->nullable();
@@ -30,11 +40,14 @@ class CreateSeedEvaluationsTable extends Migration
             $table->float('mean_fresh_seedling_weight', 5,2)->nullable();
             $table->float('mean_dry_seedling_weight', 5,2)->nullable()->comment('g, in 10 seedlings');
             $table->float('dry_matter', 4, 2)->nullable()->comment('%');
+            $table->unsignedBigInteger('dormancy_breaking_id')->nullable();
             $table->text('describe_dormancy_breaking_treatment')->nullable();
 
             $table->timeStamps();
             $table->softDeletesTz();
             $table->foreign('seed_collection_id')->references('id')->on('seed_collections')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('specimen_type_collect_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('dormancy_breaking_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
         });
         Schema::enableForeignKeyConstraints();
