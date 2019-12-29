@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\Seed\SeedCollectionClimateAPIRequest;
 use App\Http\Requests\Api\Seed\SeedCollectionPlantAPIRequest;
+use App\Http\Requests\Api\Seed\SeedCollectionProjectAPIRequest;
 use App\Http\Requests\Api\Seed\SeedCollectionSoilAPIRequest;
 use App\Http\Requests\Api\SeedCollectionAPIRequest;
 use App\Models\SeedCollection;
@@ -857,6 +858,160 @@ class SeedCollectionAPIController extends AppBaseController
         }
 
         $seedCollection = $this->seedCollectionRepository->storeClimate($input, $id);
+
+        return $this->sendResponse($seedCollection->toArray(), 'SeedCollection updated successfully');
+    }
+ /**
+     * @param int $id
+     * @param SeedCollectionProjectAPIRequest $request
+     * @return Response
+     *
+     * @SWG\Put(
+     *      path="/seedCollections/{id}/climate",
+     *      summary="Update the specified SeedCollection in storage",
+     *      tags={"SeedCollection"},
+     *      description="Update SeedCollection",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of SeedCollection",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="land_form_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="slope_aspect_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="slope_degree",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_habitat_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="climate",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="community_type",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+
+     *      @SWG\Parameter(
+     *          name="land_form_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="slope_aspect_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="slope_degree",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_habitat_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="climate",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="community_type",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="specimen_type_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="specimen_type_id",
+     *          in="body",
+     *          description="SeedCollection that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedCollection")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/SeedCollection"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function storeProject($id, SeedCollectionProjectAPIRequest $request)
+    {
+        $input = $request->all();
+
+        /** @var SeedCollection $seedCollection */
+        $seedCollection = $this->seedCollectionRepository->find($id);
+
+        if (empty($seedCollection)) {
+            return $this->sendError('Seed Collection not found');
+        }
+
+        $seedCollection = $this->seedCollectionRepository->storeProject($input, $id);
 
         return $this->sendResponse($seedCollection->toArray(), 'SeedCollection updated successfully');
     }

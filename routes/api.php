@@ -211,6 +211,7 @@ Route::apiResource('roles', 'RoleAPIController');
 Route::post('seed_collections/{id}/plant', 'SeedCollectionAPIController@storePlant');
 Route::post('seed_collections/{id}/soil', 'SeedCollectionAPIController@storeSoil');
 Route::post('seed_collections/{id}/climate', 'SeedCollectionAPIController@storeClimate');
+Route::post('seed_collections/{id}/project', 'SeedCollectionAPIController@storeProject');
 Route::apiResource('seed_collections', 'SeedCollectionAPIController');
 
 
