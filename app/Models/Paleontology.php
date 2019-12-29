@@ -52,7 +52,7 @@ class Paleontology extends BaseModel implements HasMedia
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
-    protected $appends = ['samples'];
+    protected $appends = ['samples', 'fair', 'gift', 'buy', 'borrow', 'visit'];
 
     /**
      * @return BelongsTo
@@ -156,6 +156,22 @@ class Paleontology extends BaseModel implements HasMedia
         return $this->morphToMany(TreatmentHub::class, 'treamentable');
     }
 
+    public function maps(): HasMany
+    {
+        return $this->hasMany(PaleontologyMap::class)->latest();
+    }
+
+    public function citations(): HasMany
+    {
+        return $this->hasMany(PaleontologyCitation::class)->latest();
+    }
+
+    public function getVisitAttribute()
+    {
+        return $this->transactions()
+            ->where('type_id', array_search('visit', Transaction::TYPE))
+            ->first();
+    }
 
     /**
      * @return MorphMany
@@ -167,13 +183,23 @@ class Paleontology extends BaseModel implements HasMedia
             ->whereNull('deleted_at');
     }
 
-    public function maps(): HasMany
+    public function getBorrowAttribute()
     {
-        return $this->hasMany(PaleontologyMap::class)->latest();
+        return $this->transactions()->where('type_id', array_search('borrow', Transaction::TYPE))->first();
     }
 
-    public function citations(): HasMany
+    public function getFairAttribute()
     {
-        return $this->hasMany(PaleontologyCitation::class)->latest();
+        return $this->transactions()->where('type_id', array_search('fair', Transaction::TYPE))->first();
+    }
+
+    public function getGiftAttribute()
+    {
+        return $this->transactions()->where('type_id', array_search('gift', Transaction::TYPE))->first();
+    }
+
+    public function getBuyAttribute()
+    {
+        return $this->transactions()->where('type_id', array_search('buy', Transaction::TYPE))->first();
     }
 }
