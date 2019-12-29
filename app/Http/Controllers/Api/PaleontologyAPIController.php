@@ -74,6 +74,7 @@ class PaleontologyAPIController extends AppBaseController
 
     private function getFieldRelations()
     {
+        return ['taxonomy', 'generalClass', 'generalOrder', 'geologyAgePeriod', 'geologyAgeStage', 'geologyAgeEpoch', 'geologyAgeEra', 'generalPlantType', 'locality.location', 'maps.media', 'collect', 'determine', 'media', 'generalSamples', 'citations', 'transactions.media'];
     }
 
     /**
