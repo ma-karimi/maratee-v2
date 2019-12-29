@@ -7,15 +7,19 @@ class CreateSeedEvaluationsTable extends Migration
 {
 
     /**
-     * Run the migrations.
+     * Run the migsrations.
      *
      * @return void
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
+        Schema::dropIfExists('seed_evaluations');
         Schema::create('seed_evaluations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('seed_id');
+            $table->unsignedBigInteger('seed_collection_id');
+            $table->string('regeneration_code')->nullable();
             $table->date('date_ended')->nullable();
             $table->integer('repeat')->nullable();
             $table->integer('number_of_planted_seeds')->nullable();
@@ -30,9 +34,10 @@ class CreateSeedEvaluationsTable extends Migration
 
             $table->timeStamps();
             $table->softDeletesTz();
-            $table->foreign('seed_id')->references('id')->on('seeds')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('seed_collection_id')->references('id')->on('seed_collections')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
         });
+        Schema::enableForeignKeyConstraints();
 
 
     }

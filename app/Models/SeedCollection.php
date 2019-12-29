@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Convert\BaseModel;
+use App\Models\Contracts\BaseModel;
 use App\Models\Relations\SeedCollectionRelations;
 
 /**
