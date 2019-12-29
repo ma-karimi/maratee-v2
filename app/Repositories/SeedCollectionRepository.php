@@ -131,8 +131,8 @@ class SeedCollectionRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        $input['location_id'] = $this->locationRepo->update($input['location'], $input['location']['id'])->id;
-        return parent::update(Arr::except($input, ['location', 'collect']), $id);
+        $this->locationRepo->update($input['location'], $input['location']['id']);
+        return parent::update(Arr::except($input, ['location', 'collect', 'id']), $id);
     }
 
     public function storeMedia($input, $model): void

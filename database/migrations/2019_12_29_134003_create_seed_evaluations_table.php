@@ -37,6 +37,8 @@ class CreateSeedEvaluationsTable extends Migration
             $table->integer('rotten_seed')->nullable();
             $table->integer('abnormal')->nullable();
             $table->integer('seedling_mortality')->nullable();
+            $table->float('germination', 5,2)->nullable();
+            $table->float('viability', 5,2)->nullable();
             $table->float('mean_fresh_seedling_weight', 5,2)->nullable();
             $table->float('mean_dry_seedling_weight', 5,2)->nullable()->comment('g, in 10 seedlings');
             $table->float('dry_matter', 4, 2)->nullable()->comment('%');
