@@ -22,7 +22,7 @@ class SeedGeneralCollection extends BaseModel
      *
      * @var string
      */
-    protected $table = 'seed_collections';
+    protected $table = 'seed_general_collections';
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
 }
