@@ -148,7 +148,7 @@ class SeedCollectionRepository extends BaseRepository
     private function storePivot($input, $id, $type_id)
     {
         SeedGeneralCollection::where('seed_collection_id', $id)
-            ->whereNotIn($input)
+            ->whereNotIn('seed_general_id', $input)
             ->where('seed_general_type_id', $type_id)
             ->delete();
 
