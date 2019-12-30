@@ -152,12 +152,14 @@ class SeedCollectionRepository extends BaseRepository
             ->where('seed_general_type_id', $type_id)
             ->delete();
 
-        foreach ($input as $item) {
-            SeedGeneralCollection::firstOrCreate([
-                'seed_collection_id' => $id,
-                'seed_general_type_id' => $id,
-                'seed_general_id' => $item,
-            ]);
+        if (!empty($input) && count($input)) {
+            foreach ($input as $item) {
+                SeedGeneralCollection::firstOrCreate([
+                    'seed_collection_id' => $id,
+                    'seed_general_type_id' => $id,
+                    'seed_general_id' => $item,
+                ]);
+            }
         }
     }
 
