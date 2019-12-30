@@ -137,9 +137,9 @@ class SeedCollectionRepository extends BaseRepository
 
     public function storeClimate($input, $id)
     {
-        $this->model()->climates()->sync($input['climates']);
-        $this->model()->communityTypes()->sync($input['community_types']);
-        $this->model()->associatedSpecies()->sync($input['associated_species']);
+        $this->model()->climates->sync($input['climates']);
+        $this->model()->communityTypes->sync($input['community_types']);
+        $this->model()->associatedSpecies->sync($input['associated_species']);
         return $this->update(Arr::except($input, ['climates', 'community_types', 'associated_species']), $id);
     }
 
