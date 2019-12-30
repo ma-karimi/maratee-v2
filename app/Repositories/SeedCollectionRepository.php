@@ -59,14 +59,6 @@ class SeedCollectionRepository extends BaseRepository
         return $this->fieldSearchable;
     }
 
-    /**
-     * Configure the Model
-     **/
-    public function model()
-    {
-        return SeedCollection::class;
-    }
-
     public function create($input)
     {
         $input['location_id'] = $this->locationRepo->create($input['location'])->id;
@@ -85,19 +77,23 @@ class SeedCollectionRepository extends BaseRepository
         $this->storeCollect($input, $seed_collect->id);
     }
 
-    public function storePlantFlowering($input, $id)
+    /**
+     * @param $input
+     * @return mixed
+     * @throws ValidationException
+     */
+    private function createOrUpdateProject($input)
     {
-        return $this->update($input, $id);
+        $input['project_id'] = !empty($input['project_id']) ?
+            $this->projectRepo->update($input['project'], $input['project_id'])->id :
+            $this->projectRepo->create($input['project'])->id;
+        return $input;
     }
 
-    public function storeSoil($input, $id)
+    public function update($input, $id)
     {
-        return $this->update($input, $id);
-    }
-
-    public function storeClimate($input, $id)
-    {
-        return $this->update($input, $id);
+        $this->locationRepo->update($input['location'], $input['location']['id']);
+        return parent::update(Arr::except($input, ['location', 'collect', 'id']), $id);
     }
 
     private function storeCollect($input, $herbarium_id)
@@ -129,10 +125,30 @@ class SeedCollectionRepository extends BaseRepository
         }
     }
 
-    public function update($input, $id)
+    public function storePlantFlowering($input, $id)
     {
-        $this->locationRepo->update($input['location'], $input['location']['id']);
-        return parent::update(Arr::except($input, ['location', 'collect', 'id']), $id);
+        return $this->update($input, $id);
+    }
+
+    public function storeSoil($input, $id)
+    {
+        return $this->update($input, $id);
+    }
+
+    public function storeClimate($input, $id)
+    {
+        $this->model()->climates()->sync($input['climates']);
+        $this->model()->communityTypes()->sync($input['community_types']);
+        $this->model()->associatedSpecies()->sync($input['associated_species']);
+        return $this->update(Arr::except($input, ['climates', 'community_types', 'associated_species']), $id);
+    }
+
+    /**
+     * Configure the Model
+     **/
+    public function model()
+    {
+        return SeedCollection::class;
     }
 
     public function storeMedia($input, $model): void
@@ -145,18 +161,5 @@ class SeedCollectionRepository extends BaseRepository
             $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('images');
             $media_record->update($media_input);
         }
-    }
-
-    /**
-     * @param $input
-     * @return mixed
-     * @throws ValidationException
-     */
-    private function createOrUpdateProject($input)
-    {
-        $input['project_id'] = !empty($input['project_id']) ?
-            $this->projectRepo->update($input['project'], $input['project_id'])->id :
-            $this->projectRepo->create($input['project'])->id;
-        return $input;
     }
 }

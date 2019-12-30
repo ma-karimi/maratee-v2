@@ -212,7 +212,7 @@ trait SeedCollectionRelations
      */
     public function associatedSpecies()
     {
-        return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')->where('seed_generals.type_id', 22)->latest();
+        return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')->where('seed_generals.type_id', 22)->latest()->withTimestamps();
     }
 
     /**
@@ -220,7 +220,7 @@ trait SeedCollectionRelations
      */
     public function communityTypes()
     {
-        return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')->where('seed_generals.type_id', 21)->latest();
+        return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')->where('seed_generals.type_id', 21)->latest()->withTimestamps();
     }
 
     /**
@@ -228,7 +228,7 @@ trait SeedCollectionRelations
      */
     public function climates()
     {
-        return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')->where('seed_generals.type_id', 20)->latest();
+        return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')->where('seed_generals.type_id', 20)->latest()->withTimestamps();
     }
 
 }
