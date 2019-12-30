@@ -29,7 +29,7 @@ trait SeedCollectionRelations
      */
     public function drainage()
     {
-        return $this->belongsTo(SeedGeneral::class, 'drainage_id')->where('seed_generals.type_id', 7);
+        return $this->belongsTo(SeedGeneral::class, 'drainage_id')->where('seed_generals.type_id', 6);
     }
 
     /**
