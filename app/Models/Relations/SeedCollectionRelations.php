@@ -204,7 +204,7 @@ trait SeedCollectionRelations
      */
     public function specimenType()
     {
-        return $this->belongsTo(SeedGeneral::class, 'specimen_type_id')->where('seed_generals.type_id', 1);
+        return $this->belongsTo(SeedGeneral::class, 'specimen_type_collect_id')->where('seed_generals.type_id', 1);
     }
 
     /**
