@@ -6,6 +6,7 @@ use App\Models\ActionHub;
 use App\Models\ActorHub;
 use App\Models\Herbarium;
 use App\Models\SeedCollection;
+use App\Models\SeedGeneralCollection;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
@@ -138,13 +139,26 @@ class SeedCollectionRepository extends BaseRepository
     public function storeClimate($input, $id)
     {
         $seed_collection = parent::update(Arr::except($input, ['climates', 'community_types', 'associated_species']), $id);
-        $this->createHub($seed_collection->id,'climates', $input['climates']);
-        $this->createHub($seed_collection->id, 'communityTypes', $input['community_types']);
-        $this->createHub($seed_collection->id, 'associatedSpecies', $input['associated_species']);
-//        $seed_collection->climates()->sync($input['climates']);
-//        $seed_collection->communityTypes()->sync($input['community_types']);
-//        $seed_collection->associatedSpecies()->sync($input['ass']);
+        $this->storePivot($input['climates'], $seed_collection->id, 20);
+        $this->storePivot($input['community_types'], $seed_collection->id, 21);
+        $this->storePivot($input['associated_species'], $seed_collection->id, 22);
         return $seed_collection;
+    }
+
+    private function storePivot($input, $id, $type_id)
+    {
+        SeedGeneralCollection::where('seed_collection_id', $id)
+            ->whereNotIn($input)
+            ->where('seed_general_type_id', $type_id)
+            ->delete();
+
+        foreach ($input as $item) {
+            SeedGeneralCollection::firstOrCreate([
+                'seed_collection_id' => $id,
+                'seed_general_type_id' => $id,
+                'seed_general_id' => $item,
+            ]);
+        }
     }
 
     /**

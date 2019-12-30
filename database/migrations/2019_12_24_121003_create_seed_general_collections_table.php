@@ -64,6 +64,7 @@ class CreateSeedGeneralCollectionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('seed_collection_id');
             $table->unsignedBigInteger('seed_general_id');
+            $table->tinyInteger('seed_general_type_id');
             $table->timestamps();
             $table->softDeletesTz();
         });
