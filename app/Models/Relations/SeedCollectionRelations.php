@@ -76,7 +76,7 @@ trait SeedCollectionRelations
      */
     public function landForm()
     {
-        return $this->belongsTo(SeedGeneral::class, 'life_form_id')->where('seed_generals.type_id', 2);
+        return $this->belongsTo(SeedGeneral::class, 'land_form_id')->where('seed_generals.type_id', 2);
     }
 
     /**
