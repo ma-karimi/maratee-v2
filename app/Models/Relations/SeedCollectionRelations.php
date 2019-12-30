@@ -37,7 +37,7 @@ trait SeedCollectionRelations
      */
     public function fruitType()
     {
-        return $this->belongsTo(SeedGeneral::class, 'fruit_type_id')->where('seed_generals.type_id', 13);
+        return $this->belongsTo(SeedGeneral::class, 'fruit_type_id')->where('seed_generals.type_id', 12);
     }
 
     /**
