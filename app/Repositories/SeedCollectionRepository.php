@@ -156,7 +156,7 @@ class SeedCollectionRepository extends BaseRepository
             foreach ($input as $item) {
                 SeedGeneralCollection::firstOrCreate([
                     'seed_collection_id' => $id,
-                    'seed_general_type_id' => $id,
+                    'seed_general_type_id' => $type_id,
                     'seed_general_id' => $item,
                 ]);
             }
