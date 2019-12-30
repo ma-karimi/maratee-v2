@@ -41,9 +41,10 @@ class CreateSeedEvaluationsTable extends Migration
             $table->float('viability', 5,2)->nullable();
             $table->float('mean_fresh_seedling_weight', 5,2)->nullable();
             $table->float('mean_dry_seedling_weight', 5,2)->nullable()->comment('g, in 10 seedlings');
-            $table->float('dry_matter', 4, 2)->nullable()->comment('%');
+            $table->float('dry_matter', 5, 2)->nullable()->comment('%');
             $table->unsignedBigInteger('dormancy_breaking_id')->nullable();
-            $table->text('describe_dormancy_breaking_treatment')->nullable();
+            $table->text('describe_dormancy_treatment')->nullable();
+            $table->text('description')->nullable();
 
             $table->timeStamps();
             $table->softDeletesTz();
