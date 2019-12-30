@@ -127,17 +127,17 @@ class SeedCollectionRepository extends BaseRepository
 
     public function storePlantFlowering($input, $id)
     {
-        return $this->update($input, $id);
+        return parent::update($input, $id);
     }
 
     public function storeSoil($input, $id)
     {
-        return $this->update($input, $id);
+        return parent::update($input, $id);
     }
 
     public function storeClimate($input, $id)
     {
-        $seed_collection = $this->update(Arr::except($input, ['climates', 'community_types', 'associated_species']), $id);
+        $seed_collection = parent::update(Arr::except($input, ['climates', 'community_types', 'associated_species']), $id);
         $this->createHub($seed_collection->id, $input['climates']);
         $this->createHub($seed_collection->id, $input['community_types']);
         $this->createHub($seed_collection->id, $input['associated_species']);
