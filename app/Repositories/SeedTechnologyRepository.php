@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\SeedTechnology;
+use App\Models\SeedEvaluation;
 
 /**
  * Class SeedTechnologyRepository
@@ -33,6 +33,6 @@ class SeedTechnologyRepository extends BaseRepository
      **/
     public function model()
     {
-        return SeedTechnology::class;
+        return SeedEvaluation::class;
     }
 }

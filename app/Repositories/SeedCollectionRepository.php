@@ -97,15 +97,15 @@ class SeedCollectionRepository extends BaseRepository
         return parent::update(Arr::except($input, ['location', 'collect', 'id']), $id);
     }
 
-    private function storeCollect($input, $herbarium_id)
+    private function storeCollect($input, $seed_collect_id)
     {
         $collectors = is_array($input['collectors']) ? $input['collectors'] : explode(',', $input['collectors']);
 
         $action_hub = $this->actionHubRepo->updateOrCreate(
             [
                 'action_id' => 2,
-                'actionable_type' => Herbarium::class,
-                'actionable_id' => $herbarium_id
+                'actionable_type' => SeedCollection::class,
+                'actionable_id' => $seed_collect_id
             ],
             [
                 'date' => $input['date'] ?? null

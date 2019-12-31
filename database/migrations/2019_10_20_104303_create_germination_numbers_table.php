@@ -16,7 +16,6 @@ class CreateGerminationNumbersTable extends Migration
         Schema::create('germination_numbers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('seed_evaluation_id');
-            $table->date('day');
             $table->integer('count');
             $table->string('germinated_number');
             $table->timeStamps();

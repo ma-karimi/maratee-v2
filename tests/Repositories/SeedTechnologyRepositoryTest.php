@@ -1,6 +1,6 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\SeedTechnology;
+use App\Models\SeedEvaluation;
 use App\Repositories\SeedTechnologyRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -32,7 +32,7 @@ class SeedTechnologyRepositoryTest extends TestCase
         $createdSeedTechnology = $createdSeedTechnology->toArray();
         $this->assertArrayHasKey('id', $createdSeedTechnology);
         $this->assertNotNull($createdSeedTechnology['id'], 'Created SeedTechnology must have id specified');
-        $this->assertNotNull(SeedTechnology::find($createdSeedTechnology['id']), 'SeedTechnology with given id must be in DB');
+        $this->assertNotNull(SeedEvaluation::find($createdSeedTechnology['id']), 'SeedTechnology with given id must be in DB');
         $this->assertModelData($seedTechnology, $createdSeedTechnology);
     }
 
@@ -68,6 +68,6 @@ class SeedTechnologyRepositoryTest extends TestCase
         $seedTechnology = $this->makeSeedTechnology();
         $resp = $this->seedTechnologyRepo->delete($seedTechnology->id);
         $this->assertTrue($resp);
-        $this->assertNull(SeedTechnology::find($seedTechnology->id), 'SeedTechnology should not exist in DB');
+        $this->assertNull(SeedEvaluation::find($seedTechnology->id), 'SeedTechnology should not exist in DB');
     }
 }

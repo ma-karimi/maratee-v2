@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\SeedTechnology::class, function (Faker $faker) {
+$factory->define(App\Models\SeedEvaluation::class, function (Faker $faker) {
     $seeds = \App\Models\Seed::pluck('id')->toArray();
     return [
         '' => $faker->randomElement($seeds),

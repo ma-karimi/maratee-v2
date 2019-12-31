@@ -1,7 +1,7 @@
 <?php namespace Tests\Traits;
 
 use Faker\Factory as Faker;
-use App\Models\SeedTechnology;
+use App\Models\SeedEvaluation;
 use App\Repositories\SeedTechnologyRepository;
 
 trait MakeSeedTechnologyTrait
@@ -10,7 +10,7 @@ trait MakeSeedTechnologyTrait
      * Create fake instance of SeedTechnology and save it in database
      *
      * @param array $seedTechnologyFields
-     * @return SeedTechnology
+     * @return SeedEvaluation
      */
     public function makeSeedTechnology($seedTechnologyFields = [])
     {
@@ -24,11 +24,11 @@ trait MakeSeedTechnologyTrait
      * Get fake instance of SeedTechnology
      *
      * @param array $seedTechnologyFields
-     * @return SeedTechnology
+     * @return SeedEvaluation
      */
     public function fakeSeedTechnology($seedTechnologyFields = [])
     {
-        return new SeedTechnology($this->fakeSeedTechnologyData($seedTechnologyFields));
+        return new SeedEvaluation($this->fakeSeedTechnologyData($seedTechnologyFields));
     }
 
     /**
