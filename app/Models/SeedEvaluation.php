@@ -32,4 +32,24 @@ class SeedEvaluation extends BaseModel
     {
         return $this->belongsTo(SeedCollection::class);
     }
+
+    public function radicals()
+    {
+        return $this->hasMany(SeedLength::class)->where('type_id', 1);
+    }
+
+    public function shoots()
+    {
+        return $this->hasMany(SeedLength::class)->where('type_id', 2);
+    }
+
+    public function lengths()
+    {
+        return $this->hasMany(SeedLength::class)->where('type_id', 3);
+    }
+
+    public function widths()
+    {
+        return $this->hasMany(SeedLength::class)->where('type_id', 4);
+    }
 }
