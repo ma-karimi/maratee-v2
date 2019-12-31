@@ -18,7 +18,7 @@ class SeedEvaluation extends BaseModel implements HasMedia
     use HasMediaTrait;
 
     public static $rules = [
-        'seed_collection_id' => 'required|seed_collections,id',
+        'seed_collection_id' => 'required|exists:seed_collections,id',
         'project.title' => 'required|string',
         'project.project_no' => 'required|string',
         'project.project_leader_name' => 'required|string',
@@ -27,8 +27,8 @@ class SeedEvaluation extends BaseModel implements HasMedia
     ];
     public static $germinations = [
         'germinations' => 'nullable|array',
-        'specimen_type_collect_id'=>'required|seed_generals,id',
-        'dormancy_breaking_id'=>'required|seed_generals,id',
+        'specimen_type_collect_id'=>'required|exists:seed_generals,id',
+        'dormancy_breaking_id'=>'required|exists:seed_generals,id',
         'dormancy_termination'=>'nullable|integer',
         'germination_period'=>'nullable|integer'
     ];
