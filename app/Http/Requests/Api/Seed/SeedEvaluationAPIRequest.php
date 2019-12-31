@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api\Seed;
 
-use App\Models\SeedCollection;
+use App\Models\SeedEvaluation;
 use InfyOm\Generator\Request\APIRequest;
 
 class SeedEvaluationAPIRequest extends APIRequest
@@ -24,6 +24,6 @@ class SeedEvaluationAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return SeedCollection::$rules;
+        return SeedEvaluation::$rules;
     }
 }
