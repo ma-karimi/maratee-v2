@@ -72,7 +72,7 @@ class SeedEvalautionAPIController extends AppBaseController
 
     private function getRelationField()
     {
-        return ['organization.city', 'seedCollection', 'project', 'shoots', 'radicals', 'lengths', 'widths','germinations',  'media', 'dormancyBreaking', 'specimenType'];
+        return ['organization.city', 'seedCollection:id,accession_code', 'project', 'shoots', 'radicals', 'lengths', 'widths','germinations',  'media', 'dormancyBreaking', 'specimenType'];
     }
 
     /**
