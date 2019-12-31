@@ -3,15 +3,18 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
  *      definition="SeedEvaluation",
  * )
  */
-class SeedEvaluation extends BaseModel
+class SeedEvaluation extends BaseModel implements HasMedia
 {
 
+    use HasMediaTrait;
 
     /**
      * The database table used by the model.

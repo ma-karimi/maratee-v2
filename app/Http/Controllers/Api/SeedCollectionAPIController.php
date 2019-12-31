@@ -72,6 +72,11 @@ class SeedCollectionAPIController extends AppBaseController
         return $this->sendResponse($seedCollections->toArray(), 'Seed Collections retrieved successfully');
     }
 
+    private function getRelationField()
+    {
+        return ['location', 'organization', 'landForm', 'taxonomy', 'project', 'collect', 'drainage', 'fruitType', 'habitat', 'usedPart', 'growthForm', 'lifeForm', 'consumption', 'motherHealth', 'pollinationAgent', 'pollinationType', 'collectedFrom', 'slopeAspect', 'soilDepth', 'soilErosion', 'soilLime', 'soilSalinity', 'soilTexture', 'specimenType', 'associatedSpecies', 'communityTypes', 'climates', 'media'];
+    }
+
     /**
      * @param SeedCollectionAPIRequest $request
      * @return Response
@@ -551,7 +556,6 @@ class SeedCollectionAPIController extends AppBaseController
         return $this->sendResponse($seedCollection->toArray(), 'SeedCollection updated successfully');
     }
 
-
     /**
      * @param int $id
      * @param SeedCollectionSoilAPIRequest $request
@@ -612,7 +616,6 @@ class SeedCollectionAPIController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/SeedCollection")
      *      ),
-
      *      @SWG\Parameter(
      *          name="soil_depth_id",
      *          in="body",
@@ -767,7 +770,6 @@ class SeedCollectionAPIController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/SeedCollection")
      *      ),
-
      *      @SWG\Parameter(
      *          name="land_form_id",
      *          in="body",
@@ -861,7 +863,8 @@ class SeedCollectionAPIController extends AppBaseController
 
         return $this->sendResponse($seedCollection->toArray(), 'SeedCollection updated successfully');
     }
- /**
+
+    /**
      * @param int $id
      * @param SeedCollectionProjectAPIRequest $request
      * @return Response
@@ -921,7 +924,6 @@ class SeedCollectionAPIController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/SeedCollection")
      *      ),
-
      *      @SWG\Parameter(
      *          name="land_form_id",
      *          in="body",
@@ -1016,8 +1018,19 @@ class SeedCollectionAPIController extends AppBaseController
         return $this->sendResponse($seedCollection->toArray(), 'SeedCollection updated successfully');
     }
 
-    private function getRelationField()
+    public function storeMedia($id, Request $request)
     {
-        return ['location', 'organization', 'landForm', 'taxonomy', 'project', 'collect', 'drainage', 'fruitType', 'habitat', 'usedPart', 'growthForm', 'lifeForm', 'consumption', 'motherHealth', 'pollinationAgent', 'pollinationType', 'collectedFrom', 'slopeAspect', 'soilDepth', 'soilErosion', 'soilLime', 'soilSalinity', 'soilTexture', 'specimenType', 'associatedSpecies', 'communityTypes', 'climates'];
+        $input = $request->all();
+
+        /** @var SeedCollection $seedCollection */
+        $seedCollection = $this->seedCollectionRepository->find($id);
+
+        if (empty($seedCollection)) {
+            return $this->sendError('Seed Collection not found');
+        }
+
+        $this->seedCollectionRepository->storeMedia($input, $seedCollection);
+
+        return $this->sendResponse([], 'SeedCollection updated successfully');
     }
 }

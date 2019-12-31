@@ -8,6 +8,9 @@ use App\Models\Herbarium;
 use App\Models\SeedCollection;
 use App\Models\SeedGeneralCollection;
 use Illuminate\Container\Container as Application;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
 
@@ -69,6 +72,7 @@ class SeedCollectionRepository extends BaseRepository
     /**
      * @param $input
      * @param $id
+     * @return Builder|Builder[]|Collection|Model
      * @throws ValidationException
      */
     public function storeProject($input, $id)
@@ -76,6 +80,8 @@ class SeedCollectionRepository extends BaseRepository
         $input = $this->createOrUpdateProject($input);
         $seed_collect = parent::update(Arr::except($input, ['project', 'collectors', 'date']), $id);
         $this->storeCollect($input, $seed_collect->id);
+
+        return $seed_collect;
     }
 
     /**

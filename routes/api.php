@@ -212,6 +212,7 @@ Route::post('seed_collections/{id}/plant', 'SeedCollectionAPIController@storePla
 Route::post('seed_collections/{id}/soil', 'SeedCollectionAPIController@storeSoil');
 Route::post('seed_collections/{id}/climate', 'SeedCollectionAPIController@storeClimate');
 Route::post('seed_collections/{id}/project', 'SeedCollectionAPIController@storeProject');
+Route::post('seed_collections/{id}/media', 'SeedCollectionAPIController@storeMedia');
 Route::apiResource('seed_collections', 'SeedCollectionAPIController');
 
 

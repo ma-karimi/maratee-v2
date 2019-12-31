@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\SeedCollectionRelations;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -11,10 +13,10 @@ use App\Models\Relations\SeedCollectionRelations;
  *      required={"taxonomy_id"}
  * )
  */
-class SeedCollection extends BaseModel
+class SeedCollection extends BaseModel implements HasMedia
 {
 
-    use SeedCollectionRelations;
+    use SeedCollectionRelations, HasMediaTrait;
     public static $climates = [
         'land_form_id' => 'nullable|exists:seed_generals,id',
         'slope_aspect_id' => 'nullable|exists:seed_generals,id',
