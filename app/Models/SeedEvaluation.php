@@ -52,4 +52,9 @@ class SeedEvaluation extends BaseModel
     {
         return $this->hasMany(SeedLength::class)->where('type_id', 4);
     }
+
+    public function germinations()
+    {
+        return $this->hasMany(GerminationNumber::class);
+    }
 }

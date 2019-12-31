@@ -74,7 +74,7 @@ class SeedCollectionRepository extends BaseRepository
     public function storeProject($input, $id)
     {
         $input = $this->createOrUpdateProject($input);
-        $seed_collect = parent::update(Arr::except($input, ['projects', 'collectors', 'date']), $id);
+        $seed_collect = parent::update(Arr::except($input, ['project', 'collectors', 'date']), $id);
         $this->storeCollect($input, $seed_collect->id);
     }
 
