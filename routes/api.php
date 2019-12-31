@@ -215,6 +215,14 @@ Route::post('seed_collections/{id}/project', 'SeedCollectionAPIController@storeP
 Route::post('seed_collections/{id}/media', 'SeedCollectionAPIController@storeMedia');
 Route::apiResource('seed_collections', 'SeedCollectionAPIController');
 
+Route::post('seed_evaluations/{id}/shoot', 'SeedEvaluationAPIController@storeShoot');
+Route::post('seed_evaluations/{id}/length', 'SeedEvaluationAPIController@storeLength');
+Route::post('seed_evaluations/{id}/width', 'SeedEvaluationAPIController@storeWidth');
+Route::post('seed_evaluations/{id}/radical', 'SeedEvaluationAPIController@storeRadical');
+Route::post('seed_evaluations/{id}/germination', 'SeedEvaluationAPIController@storeGermination');
+Route::post('seed_evaluations/{id}/media', 'SeedEvaluationAPIController@storeMedia');
+Route::apiResource('seed_evaluations', 'SeedEvaluationAPIController');
+
 
 Route::get('seed_generals/all', 'SeedGeneralAPIController@all');
 Route::resource('seed_generals', 'SeedGeneralAPIController');

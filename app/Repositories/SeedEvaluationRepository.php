@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Models\SeedCollection;
-use App\Models\SeedGeneralCollection;
+use App\Models\GerminationNumber;
+use App\Models\SeedEvaluation;
 use App\Models\SeedLength;
 use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Builder;
@@ -99,15 +99,49 @@ class SeedEvaluationRepository extends BaseRepository
         if (!empty($input) && count($input)) {
             foreach ($input as $item) {
                 if (!empty($item['id'])) {
-                    SeedGeneralCollection::find($item['id'])
+                    SeedLength::find($item['id'])
                         ->update([
                             'value' => $item['value'],
                         ]);
                 } else {
-                    SeedGeneralCollection::create([
+                    SeedLength::create([
                         'seed_collection_id' => $id,
                         'type_id' => $type_id,
                         'value' => $item['value'],
+                    ]);
+                }
+            }
+        }
+    }
+
+    public function storeGerminations($input, $seed_collection)
+    {
+        $this->storeGerminatedNumber($input, $seed_collection);
+        return parent::update(Arr::except($input, ['germinations']), $seed_collection->id);
+    }
+
+    /**
+     * @param $input
+     * @param $seed_collection
+     */
+    public function storeGerminatedNumber($input, $seed_collection): void
+    {
+        $germinations = $input['germinations'];
+        GerminationNumber::whereNotIn('id', collect($germinations)->pluck('id')->all())
+            ->delete();
+
+        if (!empty($germinations) && count($germinations)) {
+            foreach ($germinations as $item) {
+                if (!empty($item['id'])) {
+                    GerminationNumber::find($item['id'])
+                        ->update([
+                            'germinated_number' => $item['germinated_number'],
+                        ]);
+                } else {
+                    GerminationNumber::create([
+                        'seed_collection_id' => $seed_collection->id,
+                        'count' => $item['count'],
+                        'germinated_number' => $item['germinated_number'],
                     ]);
                 }
             }
@@ -134,13 +168,14 @@ class SeedEvaluationRepository extends BaseRepository
      **/
     public function model()
     {
-        return SeedCollection::class;
+        return SeedEvaluation::class;
     }
 
     public function storeMedia($input, $model): void
     {
         $media_input = [
             'media_type' => $input['media_type'] ?? 2,
+            'description' => $input['description'] ?? null
         ];
         //store media
         if (request()->hasFile('file')) {

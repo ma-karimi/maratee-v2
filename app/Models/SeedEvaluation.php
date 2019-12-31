@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -16,14 +17,33 @@ class SeedEvaluation extends BaseModel implements HasMedia
 
     use HasMediaTrait;
 
+    public static $rules = [
+        'seed_collection_id' => 'required|seed_collections,id',
+        'project.title' => 'required|string',
+        'project.project_no' => 'required|string',
+        'project.project_leader_name' => 'required|string',
+        'project.research_leader_name' => 'required|string',
+        'organization_id' => 'required|exists:organizations,id',
+    ];
+    public static $germinations = [
+        'germinations' => 'nullable|array',
+        'specimen_type_collect_id'=>'required|seed_generals,id',
+        'dormancy_breaking_id'=>'required|seed_generals,id',
+        'dormancy_termination'=>'nullable|integer',
+        'germination_period'=>'nullable|integer'
+    ];
+    public static $lengths = [
+        'shoots' => 'nullable|array',
+        'lengths' => 'nullable|array',
+        'radicals' => 'nullable|array',
+        'widths' => 'nullable|array',
+    ];
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'seed_evaluations';
-
-
     /**
      * The attributes that should be mutated to dates.
      *
@@ -59,5 +79,18 @@ class SeedEvaluation extends BaseModel implements HasMedia
     public function germinations()
     {
         return $this->hasMany(GerminationNumber::class);
+    }
+
+    public function dormancyBreaking()
+    {
+        return $this->belongsTo(SeedGeneral::class, 'dormancy_breaking_id')->where('type_id', 23);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function specimenType()
+    {
+        return $this->belongsTo(SeedGeneral::class, 'specimen_type_collect_id')->where('seed_generals.type_id', 1);
     }
 }

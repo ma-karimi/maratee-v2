@@ -33,7 +33,7 @@ class SeedCollectionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/seedCollections",
+     *      path="/seed_collections",
      *      summary="Get a listing of the SeedCollections.",
      *      tags={"SeedCollection"},
      *      description="Get all SeedCollections",
@@ -82,7 +82,7 @@ class SeedCollectionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/seedCollections",
+     *      path="/seed_collections",
      *      summary="Store a newly created SeedCollection in storage",
      *      tags={"SeedCollection"},
      *      description="Store SeedCollection",
@@ -179,7 +179,7 @@ class SeedCollectionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/seedCollections/{id}",
+     *      path="/seed_collections/{id}",
      *      summary="Display the specified SeedCollection",
      *      tags={"SeedCollection"},
      *      description="Get SeedCollection",
@@ -230,7 +230,7 @@ class SeedCollectionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/seedCollections/{id}",
+     *      path="/seed_collections/{id}",
      *      summary="Update the specified SeedCollection in storage",
      *      tags={"SeedCollection"},
      *      description="Update SeedCollection",
@@ -340,7 +340,7 @@ class SeedCollectionAPIController extends AppBaseController
      * @param int $id
      * @return Response
      *     * @SWG\Delete(
-     *      path="/seedCollections/{id}",
+     *      path="/seed_collections/{id}",
      *      summary="Remove the specified SeedCollection from storage",
      *      tags={"SeedCollection"},
      *      description="Delete SeedCollection",
@@ -394,7 +394,7 @@ class SeedCollectionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/seedCollections/{id}/plant",
+     *      path="/seed_collections/{id}/plant",
      *      summary="Update the specified SeedCollection in storage",
      *      tags={"SeedCollection"},
      *      description="Update SeedCollection",
@@ -562,7 +562,7 @@ class SeedCollectionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/seedCollections/{id}/soil",
+     *      path="/seed_collections/{id}/soil",
      *      summary="Update the specified SeedCollection in storage",
      *      tags={"SeedCollection"},
      *      description="Update SeedCollection",
@@ -716,7 +716,7 @@ class SeedCollectionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/seedCollections/{id}/climate",
+     *      path="/seed_collections/{id}/climate",
      *      summary="Update the specified SeedCollection in storage",
      *      tags={"SeedCollection"},
      *      description="Update SeedCollection",
@@ -870,7 +870,7 @@ class SeedCollectionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/seedCollections/{id}/climate",
+     *      path="/seed_collections/{id}/climate",
      *      summary="Update the specified SeedCollection in storage",
      *      tags={"SeedCollection"},
      *      description="Update SeedCollection",

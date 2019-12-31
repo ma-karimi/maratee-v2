@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Requests\Api\Seed;
+
+use App\Models\SeedCollection;
+use App\Models\SeedEvaluation;
+use InfyOm\Generator\Request\APIRequest;
+
+class SeedEvaluationGerminationAPIRequest extends APIRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return SeedEvaluation::$germinations;
+    }
+}
