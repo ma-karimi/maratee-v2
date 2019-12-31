@@ -61,8 +61,8 @@ class SeedCollection extends BaseModel
         'seed_collected_from_id' => 'nullable|exists:seed_generals,id',
         'project.title' => 'required|string',
         'project.project_no' => 'required|string',
-        'project.project_leader_id' => 'required|exists:users,id',
-        'project.research_leader_id' => 'required|exists:users,id',
+        'project.project_leader_name' => 'required|string',
+        'project.research_leader_name' => 'required|string',
         'organization_id' => 'required|exists:organizations,id',
     ];
 }

@@ -19,8 +19,8 @@ class CreateProjectsTable extends Migration {
 			$table->string('project_no')->nullable();
 			$table->string('research_no')->nullable();
 			$table->json('research_title')->nullable();
-            $table->unsignedBigInteger('project_leader_id')->nullable();
-            $table->unsignedBigInteger('research_leader_id')->nullable();
+            $table->string('project_leader_name')->nullable();
+            $table->string('research_leader_name')->nullable();
 
             $table->timeStamps();
             $table->softDeletesTz();
