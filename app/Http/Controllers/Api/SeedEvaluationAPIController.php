@@ -13,10 +13,10 @@ use Illuminate\Http\Request;
 use Response;
 
 /**
- * Class SeedEvalautionAPIController
+ * Class SeedEvaluationAPIController
  * @package App\Http\Controllers\Api
  */
-class SeedEvalautionAPIController extends AppBaseController
+class SeedEvaluationAPIController extends AppBaseController
 {
     /** @var  SeedEvaluationRepository */
     private $seedEvaluationRepository;
