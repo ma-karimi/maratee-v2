@@ -74,7 +74,7 @@ class SeedCollectionRepository extends BaseRepository
     public function storeProject($input, $id)
     {
         $input = $this->createOrUpdateProject($input);
-        $seed_collect = $this->update($input, $id);
+        $seed_collect = parent::update($input, $id);
         $this->storeCollect($input, $seed_collect->id);
     }
 
