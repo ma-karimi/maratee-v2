@@ -24,10 +24,10 @@ class SeedEvaluation extends BaseModel implements HasMedia
         'project.project_leader_name' => 'required|string',
         'project.research_leader_name' => 'required|string',
         'organization_id' => 'required|exists:organizations,id',
+        'specimen_type_collect_id'=>'required|exists:seed_generals,id',
     ];
     public static $germinations = [
         'germinations' => 'nullable|array',
-        'specimen_type_collect_id'=>'required|exists:seed_generals,id',
         'dormancy_breaking_id'=>'required|exists:seed_generals,id',
         'dormancy_termination'=>'nullable|integer',
         'germination_period'=>'nullable|integer'
