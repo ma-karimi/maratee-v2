@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use App\Models\SeedWeight;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateSeedWeightAPIRequest extends APIRequest
+class SeedWeightAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.

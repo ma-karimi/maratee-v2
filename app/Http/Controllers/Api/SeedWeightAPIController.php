@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\Api\CreateSeedWeightAPIRequest;
-use App\Http\Requests\Api\UpdateSeedWeightAPIRequest;
+use App\Http\Requests\Api\SeedWeightAPIRequest;
 use App\Models\SeedWeight;
 use App\Repositories\SeedWeightRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
@@ -63,14 +63,14 @@ class SeedWeightAPIController extends AppBaseController
         $seedWeights = $this->seedWeightRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            $this->getFieldRelations()
         );
 
         return $this->sendResponse($seedWeights->toArray(), 'Seed Weights retrieved successfully');
     }
 
     /**
-     * @param CreateSeedWeightAPIRequest $request
+     * @param SeedWeightAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -79,6 +79,118 @@ class SeedWeightAPIController extends AppBaseController
      *      tags={"SeedWeight"},
      *      description="Store SeedWeight",
      *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="seed_collection_id",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="refrigerator_id",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="regeneration_code",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="row",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="column",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="humidity",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="purity",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="number_seeds_per_fruit",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="range_seeds_per_fruit",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="thousand_fruits_weight",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="thousand_seeds_weight",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="total_fruit_weight",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="total_seed_weight",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="banked",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="collected_seeds_no",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -99,8 +211,9 @@ class SeedWeightAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws ValidationException
      */
-    public function store(CreateSeedWeightAPIRequest $request)
+    public function store(SeedWeightAPIRequest $request)
     {
         $input = $request->all();
 
@@ -150,7 +263,7 @@ class SeedWeightAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedWeight $seedWeight */
-        $seedWeight = $this->seedWeightRepository->find($id, \request()->get('relations'));
+        $seedWeight = $this->seedWeightRepository->find($id, $this->getFieldRelations());
 
         if (empty($seedWeight)) {
             return $this->sendError('Seed Weight not found');
@@ -159,9 +272,14 @@ class SeedWeightAPIController extends AppBaseController
         return $this->sendResponse($seedWeight->toArray(), 'Seed Weight retrieved successfully');
     }
 
+    private function getFieldRelations()
+    {
+        return ['seedCollection:id,accession_code', 'refrigerator'];
+    }
+
     /**
      * @param int $id
-     * @param UpdateSeedWeightAPIRequest $request
+     * @param SeedWeightAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -176,6 +294,118 @@ class SeedWeightAPIController extends AppBaseController
      *          type="integer",
      *          required=true,
      *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="seed_collection_id",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="refrigerator_id",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="regeneration_code",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="row",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="column",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="humidity",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="purity",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="number_seeds_per_fruit",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="range_seeds_per_fruit",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="thousand_fruits_weight",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="thousand_seeds_weight",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="total_fruit_weight",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="total_seed_weight",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="banked",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="collected_seeds_no",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -197,8 +427,9 @@ class SeedWeightAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws ValidationException
      */
-    public function update($id, UpdateSeedWeightAPIRequest $request)
+    public function update($id, SeedWeightAPIRequest $request)
     {
         $input = $request->all();
 
