@@ -28,6 +28,15 @@ trait BotanicalAccessor
         }
         return $cycles;
     }
+    public function getUsageAttribute()
+    {
+        $usages = null;
+
+        if ($this->relationLoaded('usages') && $this->usages->count()) {
+            $usages .= $this->usages->implode('name', ' & ');
+        }
+        return $usages;
+    }
 
     public function getValueAttribute()
     {
