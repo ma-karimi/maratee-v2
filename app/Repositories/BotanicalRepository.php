@@ -93,6 +93,7 @@ class BotanicalRepository extends BaseRepository
             'organization_id' => $input['organization_id'] ?? null,
             'internal_habitat_id' => $input['internal_habitat_id'] ?? null,
             'protection_id' => $input['protection_id'] ?? null,
+            'wooden_id' => $input['wooden_id'] ?? null,
             'height' => $input['height'] ?? null,
         ];
     }
