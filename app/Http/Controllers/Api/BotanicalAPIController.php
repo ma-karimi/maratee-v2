@@ -76,7 +76,7 @@ class BotanicalAPIController extends AppBaseController
 
     private function getFieldRelations()
     {
-        return ['distributions', 'organization', 'protection', 'internalHabitat', 'generalHabitat', 'generalOrigin', 'botanicalIrrigation', 'plantingConditions', 'propagations', 'usages', 'values', 'operations', 'media', 'taxonomy', 'locations', 'cycles', 'flowerColors', 'fruitColors', 'foliageColors'];
+        return ['distributions', 'organization', 'protection', 'internalHabitat', 'generalHabitat', 'generalOrigin', 'botanicalIrrigation', 'plantingConditions', 'propagations', 'usages', 'values', 'operations', 'media', 'taxonomy', 'locations', 'cycles', 'flowerColors:id,name', 'fruitColors:id,name', 'foliageColors:id,name'];
     }
 
     /**
