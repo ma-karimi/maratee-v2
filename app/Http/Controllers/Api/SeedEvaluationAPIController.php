@@ -661,9 +661,9 @@ class SeedEvaluationAPIController extends AppBaseController
             return $this->sendError('Seed Evaluation not found');
         }
 
-        $seedCollection = $this->seedEvaluationRepository->storeShoots($input, $seedCollection);
+        $this->seedEvaluationRepository->storeShoots($input, $seedCollection);
 
-        return $this->sendResponse($seedCollection->toArray(), 'SeedEvaluation updated successfully');
+        return $this->sendResponse([], 'SeedEvaluation updated successfully');
     }
 
     /**
@@ -724,9 +724,9 @@ class SeedEvaluationAPIController extends AppBaseController
             return $this->sendError('Seed Evaluation not found');
         }
 
-        $seedCollection = $this->seedEvaluationRepository->storeWidths($input, $seedCollection);
+        $this->seedEvaluationRepository->storeWidths($input, $seedCollection);
 
-        return $this->sendResponse($seedCollection->toArray(), 'SeedEvaluation updated successfully');
+        return $this->sendResponse([], 'SeedEvaluation updated successfully');
     }
 
     /**
@@ -786,9 +786,9 @@ class SeedEvaluationAPIController extends AppBaseController
             return $this->sendError('Seed Evaluation not found');
         }
 
-        $seedCollection = $this->seedEvaluationRepository->storeLengths($input, $seedCollection);
+        $this->seedEvaluationRepository->storeLengths($input, $seedCollection);
 
-        return $this->sendResponse($seedCollection->toArray(), 'SeedEvaluation updated successfully');
+        return $this->sendResponse([], 'SeedEvaluation updated successfully');
     }
     /**
      * @param int $id
@@ -847,9 +847,9 @@ class SeedEvaluationAPIController extends AppBaseController
             return $this->sendError('Seed Evaluation not found');
         }
 
-        $seedCollection = $this->seedEvaluationRepository->storeRadicals($input, $seedCollection);
+        $this->seedEvaluationRepository->storeRadicals($input, $seedCollection);
 
-        return $this->sendResponse($seedCollection->toArray(), 'SeedEvaluation updated successfully');
+        return $this->sendResponse([], 'SeedEvaluation updated successfully');
     }
 
     public function storeMedia($id, Request $request)
