@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Accessor\BotanicalOperationAccessor;
 use App\Models\Contracts\BaseModel;
+use Illuminate\Support\Arr;
 
 /**
  * @SWG\Definition(
@@ -25,6 +26,7 @@ class BotanicalOperation extends BaseModel
     ];
 
     protected $with = ['place'];
+    protected $appends = ['operation'];
 
     public function botanical()
     {
@@ -36,4 +38,8 @@ class BotanicalOperation extends BaseModel
         return $this->belongsTo(Place::class);
     }
 
+    public function getOperationAttribute()
+    {
+        return Arr::get(self::OPERATION, $this->operation_id);
+    }
 }

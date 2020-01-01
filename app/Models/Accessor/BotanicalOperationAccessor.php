@@ -13,8 +13,8 @@ use Illuminate\Support\Arr;
 
 trait BotanicalOperationAccessor
 {
-    public function getOperationIdAttribute($value)
+    public function getOperationAttribute()
     {
-        return Arr::get(self::OPERATION, $value);
+        return Arr::get(self::OPERATION, $this->operation_id);
     }
 }
