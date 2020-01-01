@@ -7,7 +7,7 @@ use Illuminate\Support\Arr;
 
 /**
  * @SWG\Definition(
- *            definition="BotanicalColorHub",
+ *            definition="BotanicalColor",
  *            required={"botanical_id", "botanical_general_id", "type_id"}
  *
  */
