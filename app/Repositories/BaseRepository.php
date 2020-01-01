@@ -336,13 +336,13 @@ abstract class BaseRepository
                 $this->setJsonCast($additional_data, $related_model_class);
                 $related_model_class::whereIn('id', $exists_related_ids)->update($additional_data);
             }
-            if (count($different_ids)) {
+            if (count($different_ids) && !empty($different_ids[0])) {
                 Log::info([$different_ids, $additional_data]);
                 $record->$related_model()->attach($different_ids, $additional_data);
             }
         } //attach only ids
         else {
-            if (count($different_ids)) {
+            if (count($different_ids) && !empty($different_ids[0])) {
                 $record->$related_model()->attach($different_ids);
             }
         }
