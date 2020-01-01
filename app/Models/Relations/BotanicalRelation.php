@@ -52,17 +52,17 @@ trait BotanicalRelation
 
     public function foliageColors()
     {
-        return $this->belongsToMany(BotanicalColor::class, 'botanical_colors')->latest()->where('botanical_generals.type_id', 6)->where('botanical_colors.type_id', 3);
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_colors')->latest()->where('botanical_generals.type_id', 6)->where('botanical_colors.type_id', 3);
     }
 
     public function flowerColors()
     {
-        return $this->belongsToMany(BotanicalColor::class, 'botanical_colors')->latest()->where('botanical_generals.type_id', 6)->where('botanical_colors.type_id', 1);
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_colors')->latest()->where('botanical_generals.type_id', 6)->where('botanical_colors.type_id', 1);
     }
 
     public function fruitColors()
     {
-        return $this->belongsToMany(BotanicalColor::class, 'botanical_colors')->latest()->where('botanical_generals.type_id', 6)->where('botanical_colors.type_id', 2);
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_colors')->latest()->where('botanical_generals.type_id', 6)->where('botanical_colors.type_id', 2);
     }
 
 
