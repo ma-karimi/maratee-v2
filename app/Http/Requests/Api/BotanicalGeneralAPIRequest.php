@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\SeedPlant;
+use App\Models\BotanicalGeneral;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateSeedPlantAPIRequest extends APIRequest
+class BotanicalGeneralAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class UpdateSeedPlantAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return SeedPlant::$rules;
+        return BotanicalGeneral::$rules;
     }
 }

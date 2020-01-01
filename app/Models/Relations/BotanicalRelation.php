@@ -5,9 +5,10 @@ namespace App\Models\Relations;
 
 
 use App\Models\Action;
+use App\Models\BotanicalColorHub;
+use App\Models\BotanicalGeneral;
 use App\Models\BotanicalIrrigation;
 use App\Models\BotanicalOperation;
-use App\Models\BotanicalProperty;
 use App\Models\General;
 use App\Models\Geographical;
 use App\Models\InternalHabitat;
@@ -26,26 +27,42 @@ trait BotanicalRelation
 
     public function values()
     {
-        return $this->hasMany(BotanicalProperty::class)->latest()->where('type_id', 1);
+        return $this->belongsToMany(BotanicalGeneral::class)->latest()->where('botanical_generals.type_id', 1);
     }
 
     public function usages()
     {
-        return $this->hasMany(BotanicalProperty::class)->latest()->where('type_id', 2);
+        return $this->belongsToMany(BotanicalGeneral::class)->latest()->where('botanical_generals.type_id', 2);
     }
 
     public function propagations()
     {
-        return $this->hasMany(BotanicalProperty::class)->latest()->where('type_id', 3);
+        return $this->belongsToMany(BotanicalGeneral::class)->latest()->where('botanical_generals.type_id', 3);
     }
 
     public function plantingConditions()
     {
-        return $this->hasMany(BotanicalProperty::class)->latest()->where('type_id', 4);
+        return $this->belongsToMany(BotanicalGeneral::class)->latest()->where('botanical_generals.type_id', 4);
     }
+
     public function cycles()
     {
-        return $this->hasMany(BotanicalProperty::class)->latest()->where('type_id', 5);
+        return $this->belongsToMany(BotanicalGeneral::class)->latest()->where('botanical_generals.type_id', 5);
+    }
+
+    public function foliageColors()
+    {
+        return $this->belongsToMany(BotanicalColorHub::class)->latest()->where('botanical_generals.type_id', 6)->where('botanical_color_hubs.type_id', 3);
+    }
+
+    public function flowerColors()
+    {
+        return $this->belongsToMany(BotanicalColorHub::class)->latest()->where('botanical_generals.type_id', 6)->where('botanical_color_hubs.type_id', 1);
+    }
+
+    public function fruitColors()
+    {
+        return $this->belongsToMany(BotanicalColorHub::class)->latest()->where('botanical_generals.type_id', 6)->where('botanical_color_hubs.type_id', 2);
     }
 
 

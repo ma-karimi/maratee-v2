@@ -111,6 +111,8 @@ Route::post('botanicals/{botanical_id}/irrigation', 'BotanicalAPIController@stor
 Route::apiResource('botanicals', 'BotanicalAPIController');
 
 Route::apiResource('botanical_properties', 'BotanicalPropertyAPIController');
+Route::get('botanical_generals/all', 'BotanicalGeneralAPIController@all');
+Route::apiResource('botanical_generals', 'BotanicalGeneralAPIController');
 Route::apiResource('botanical_operations', 'BotanicalOperationAPIController');
 
 
