@@ -76,7 +76,7 @@ class BotanicalAPIController extends AppBaseController
 
     private function getRelationFields()
     {
-        return ['distributions', 'organization', 'protection:id,name', 'internalHabitat', 'generalHabitat:id,name', 'origin:id,name', 'botanicalIrrigation', 'plantingConditions:id,name', 'propagations:id,name', 'usages:id,name', 'values:id,name', 'operations', 'media', 'taxonomy', 'locations', 'cycles:id,name', 'flowerColors:id,name', 'fruitColors:id,name', 'foliageColors:id,name', 'soil:id,name', 'summerTolerance:id,name', 'winterTolerance:id,name', 'seedGermination:id,name', 'seedRate:id,name', 'growthRate:id,name', 'entranceToGarden:id,name', 'wooden:id,name'];
+        return ['distributions', 'organization', 'protection:id,name', 'internalHabitat', 'generalHabitat:id,name', 'origin:id,name', 'botanicalIrrigation', 'plantingConditions', 'propagations', 'usages', 'values', 'operations', 'media', 'taxonomy', 'locations', 'cycles', 'flowerColors', 'fruitColors', 'foliageColors', 'soil:id,name', 'summerTolerance:id,name', 'winterTolerance:id,name', 'seedGermination:id,name', 'seedRate:id,name', 'growthRate:id,name', 'entranceToGarden:id,name', 'wooden:id,name'];
     }
 
     /**
