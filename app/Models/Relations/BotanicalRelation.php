@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait BotanicalRelation
 {
+
     public function operations()
     {
         return $this->hasMany(BotanicalOperation::class)->latest();

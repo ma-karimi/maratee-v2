@@ -57,7 +57,7 @@ class Botanical extends BaseModel implements HasMedia
     protected $appends = [
 
         'seed_formation',  'monopoly_of_iran', 'geographicals',
-        'cycle', 'value', 'propagation', 'plant_condition', 'usage', 'flower_color', 'fruit_color', 'foliage_color'
+        'cycle', 'value', 'propagation', 'plant_condition', 'usage', 'flower_color', 'fruit_color', 'foliage_color', 'seeding', 'planting', 'transfer'
     ];
 
     /**

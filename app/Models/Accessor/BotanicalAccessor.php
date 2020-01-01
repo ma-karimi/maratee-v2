@@ -115,4 +115,32 @@ trait BotanicalAccessor
         return $distributions;
     }
 
+    public function transfer()
+    {
+        if ($this->relationLoaded('operations') && count($this->operations)) {
+            return $this->operations()
+                ->where('operation_id', 3)
+                ->latest()
+                ->first();
+        }
+    }
+
+    public function planting()
+    {
+        if ($this->relationLoaded('operations') && count($this->operations)) {
+            return $this->operations()
+                ->where('operation_id', 2)
+                ->latest()
+                ->first();
+        }
+    }
+    public function seeding()
+    {
+        if ($this->relationLoaded('operations') && count($this->operations)) {
+            return $this->operations()
+                ->where('operation_id', 1)
+                ->latest()
+                ->first();
+        }
+    }
 }
