@@ -115,7 +115,7 @@ trait BotanicalAccessor
         return $distributions;
     }
 
-    public function transfer()
+    public function getTransferAttribute()
     {
         if ($this->relationLoaded('operations') && count($this->operations)) {
             return $this->operations()
@@ -125,7 +125,7 @@ trait BotanicalAccessor
         }
     }
 
-    public function planting()
+    public function getPlantingAttribute()
     {
         if ($this->relationLoaded('operations') && count($this->operations)) {
             return $this->operations()
@@ -134,7 +134,7 @@ trait BotanicalAccessor
                 ->first();
         }
     }
-    public function seeding()
+    public function getSeedingAttribute()
     {
         if ($this->relationLoaded('operations') && count($this->operations)) {
             return $this->operations()
