@@ -17,7 +17,7 @@ class CreateBotanicalsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('taxonomy_id');
             $table->unsignedBigInteger('general_habitat_id')->nullable();
-            $table->unsignedBigInteger('general_origin_id')->nullable();
+            $table->unsignedBigInteger('origin_id')->nullable();
             $table->boolean('monopoly_of_iran_id')->default(0);
             $table->tinyInteger('wooden_id')->nullable()->comment('1:Tree, 2:Shrub');
             $table->tinyInteger('cycle_id')->nullable()->comment('1:evergreen,2:deciduous,3:semi deciduous, 4: annual climber, 5:perennial climber, 6:annual herb, 7:biennial herb, 8:perennial herb, 9:bulb, 10:tuber, 11:rhizome, 12:water plant

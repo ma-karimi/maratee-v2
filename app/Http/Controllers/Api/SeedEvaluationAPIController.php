@@ -598,7 +598,7 @@ class SeedEvaluationAPIController extends AppBaseController
             return $this->sendError('Seed Evaluation not found');
         }
 
-        $seedCollection = $this->seedEvaluationRepository->storeGerminations($input, $id);
+        $seedCollection = $this->seedEvaluationRepository->storeGerminations($input, $seedCollection);
 
         return $this->sendResponse($seedCollection->toArray(), 'SeedEvaluation updated successfully');
     }
@@ -661,7 +661,7 @@ class SeedEvaluationAPIController extends AppBaseController
             return $this->sendError('Seed Evaluation not found');
         }
 
-        $seedCollection = $this->seedEvaluationRepository->storeShoots($input, $id);
+        $seedCollection = $this->seedEvaluationRepository->storeShoots($input, $seedCollection);
 
         return $this->sendResponse($seedCollection->toArray(), 'SeedEvaluation updated successfully');
     }
@@ -724,7 +724,7 @@ class SeedEvaluationAPIController extends AppBaseController
             return $this->sendError('Seed Evaluation not found');
         }
 
-        $seedCollection = $this->seedEvaluationRepository->storeWidths($input, $id);
+        $seedCollection = $this->seedEvaluationRepository->storeWidths($input, $seedCollection);
 
         return $this->sendResponse($seedCollection->toArray(), 'SeedEvaluation updated successfully');
     }
@@ -786,7 +786,7 @@ class SeedEvaluationAPIController extends AppBaseController
             return $this->sendError('Seed Evaluation not found');
         }
 
-        $seedCollection = $this->seedEvaluationRepository->storeLengths($input, $id);
+        $seedCollection = $this->seedEvaluationRepository->storeLengths($input, $seedCollection);
 
         return $this->sendResponse($seedCollection->toArray(), 'SeedEvaluation updated successfully');
     }
@@ -847,7 +847,7 @@ class SeedEvaluationAPIController extends AppBaseController
             return $this->sendError('Seed Evaluation not found');
         }
 
-        $seedCollection = $this->seedEvaluationRepository->storeRadicals($input, $id);
+        $seedCollection = $this->seedEvaluationRepository->storeRadicals($input, $seedCollection);
 
         return $this->sendResponse($seedCollection->toArray(), 'SeedEvaluation updated successfully');
     }
