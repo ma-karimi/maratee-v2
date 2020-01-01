@@ -286,7 +286,7 @@ abstract class BaseRepository
         $different_ids = array_diff($ids, $assigned_id);
         $different_assigned = array_diff($assigned_id, $ids);
         //attach and update pivot fields
-        $this->attachAndUpdateFields($related_model, $ids, $additional_data, $related_model_class, $related_key, $record, $different_ids);
+        $this->attachAndUpdateFields($related_model, $ids, $additional_data, $related_model_class, $related_key, $record, collect($different_ids)->filter()->all());
         $related_model_class::where($foreign_key, $class_id)->whereIn($related_key, $different_assigned)->delete();
 
         return $record->$related_model()->get();
@@ -336,15 +336,10 @@ abstract class BaseRepository
                 $this->setJsonCast($additional_data, $related_model_class);
                 $related_model_class::whereIn('id', $exists_related_ids)->update($additional_data);
             }
-            if (count($different_ids) && !empty($different_ids[0])) {
-                Log::info([$different_ids, $additional_data]);
-                $record->$related_model()->attach($different_ids, $additional_data);
-            }
+            $record->$related_model()->attach($different_ids, $additional_data);
         } //attach only ids
         else {
-            if (count($different_ids) && !empty($different_ids[0])) {
-                $record->$related_model()->attach($different_ids);
-            }
+            $record->$related_model()->attach($different_ids);
         }
     }
 
