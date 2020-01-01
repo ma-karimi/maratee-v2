@@ -34,7 +34,7 @@ trait LocationAccessor
             $DMSE = [$s11[0], $s21[0], $s31[0]];
 
             return [
-                'UTM' => [$value->getLng(), $value->getLat()],
+                'UTM' => [(float)$value->getLng(), (float)$value->getLat()],
                 'DMS' => $DMS,
                 'DMSN' => $DMSN,
                 'DMSE' => $DMSE,
