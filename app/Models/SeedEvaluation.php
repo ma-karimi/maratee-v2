@@ -93,4 +93,21 @@ class SeedEvaluation extends BaseModel implements HasMedia
     {
         return $this->belongsTo(SeedGeneral::class, 'specimen_type_collect_id')->where('seed_generals.type_id', 1);
     }
+
+
+    /**
+     * @return BelongsTo
+     */
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

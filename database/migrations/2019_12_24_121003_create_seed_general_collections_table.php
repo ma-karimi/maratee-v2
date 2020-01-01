@@ -28,6 +28,9 @@ class CreateSeedGeneralCollectionsTable extends Migration
             $table->string('approximate_area_of_plant', 5, 2)->nullable()->change();
             $table->float('plant_height', 5, 2)->nullable()->change();
             $table->boolean('dna')->default(0);
+            $table->string('organization_phone')->nullable();
+            $table->string('organization_fax')->nullable();
+            $table->string('organization_email')->nullable();
             $table->dateTimeTz('shipping_date')->nullable();
         });
         Schema::dropIfExists('molecular_evaluation_vars');

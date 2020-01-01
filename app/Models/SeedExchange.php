@@ -68,12 +68,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SeedExchange extends BaseModel
 {
     public static $rules = [
-        'seed_id' => 'required|exists:seeds,id',
-        'seed_weight' => 'numeric',
-        'delivery_date' => 'date',
-        'recipient_name' => 'string',
-        'recipient_phone' => 'string',
-        'request_no' => 'string',
+        'seed_collection_id' => 'required|exists:seed_collections,id',
+        'seed_weight' => 'required|numeric',
+        'delivery_date' => 'required|date',
+        'recipient_name' => 'required|string',
+        'recipient_phone' => 'required|string',
+        'request_no' => 'required|string',
     ];
     /**
      * The database table used by the model.
@@ -85,10 +85,33 @@ class SeedExchange extends BaseModel
     /**
      * @return BelongsTo
      */
-    public function seed()
+    public function seedCollection()
     {
-        return $this->belongsTo(Seed::class);
+        return $this->belongsTo(SeedCollection::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
+    public function specimenType()
+    {
+        return $this->belongsTo(SeedGeneral::class, 'specimen_type_collect_id')->where('seed_generals.type_id', 1);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 
 }

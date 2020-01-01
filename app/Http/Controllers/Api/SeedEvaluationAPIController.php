@@ -72,7 +72,7 @@ class SeedEvaluationAPIController extends AppBaseController
 
     private function getRelationField()
     {
-        return ['organization.city', 'seedCollection:id,accession_code', 'project', 'shoots', 'radicals', 'lengths', 'widths','germinations',  'media', 'dormancyBreaking', 'specimenType'];
+        return ['organization.city', 'organization:id,name_en,city_id,city', 'seedCollection:id,accession_code', 'project', 'shoots', 'radicals', 'lengths', 'widths','germinations',  'media', 'dormancyBreaking', 'specimenType'];
     }
 
     /**
@@ -98,6 +98,27 @@ class SeedEvaluationAPIController extends AppBaseController
      *          description="SeedEvaluation that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_email",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_phone",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_fax",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
      *      ),
      *      @SWG\Parameter(
      *          name="organization_id",
@@ -225,6 +246,27 @@ class SeedEvaluationAPIController extends AppBaseController
      *          type="integer",
      *          required=true,
      *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_email",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_phone",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_fax",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
      *      ),
      *      @SWG\Parameter(
      *          name="seed_collection_id",

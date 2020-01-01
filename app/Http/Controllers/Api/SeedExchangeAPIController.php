@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\Api\CreateSeedExchangeAPIRequest;
-use App\Http\Requests\Api\UpdateSeedExchangeAPIRequest;
+use App\Http\Requests\Api\Seed\SeedExchangeAPIRequest;
 use App\Models\SeedExchange;
 use App\Repositories\SeedExchangeRepository;
 use Exception;
@@ -63,14 +62,14 @@ class SeedExchangeAPIController extends AppBaseController
         $seedExchanges = $this->seedExchangeRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            $this->getRelationField()
         );
 
         return $this->sendResponse($seedExchanges->toArray(), 'Seed Exchanges retrieved successfully');
     }
 
     /**
-     * @param CreateSeedExchangeAPIRequest $request
+     * @param SeedExchangeAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -80,7 +79,28 @@ class SeedExchangeAPIController extends AppBaseController
      *      description="Store SeedExchange",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="seed_id",
+     *          name="seed_collection_id",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_email",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_phone",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_fax",
      *          in="body",
      *          description="SeedExchange that should be stored",
      *          required=true,
@@ -148,8 +168,9 @@ class SeedExchangeAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(CreateSeedExchangeAPIRequest $request)
+    public function store(SeedExchangeAPIRequest $request)
     {
         $input = $request->all();
 
@@ -199,7 +220,7 @@ class SeedExchangeAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedExchange $seedExchange */
-        $seedExchange = $this->seedExchangeRepository->find($id, \request()->get('relations'));
+        $seedExchange = $this->seedExchangeRepository->find($id, $this->getRelationField());
 
         if (empty($seedExchange)) {
             return $this->sendError('Seed Exchange not found');
@@ -210,7 +231,7 @@ class SeedExchangeAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateSeedExchangeAPIRequest $request
+     * @param SeedExchangeAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -227,7 +248,28 @@ class SeedExchangeAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="seed_id",
+     *          name="seed_collection_id",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_email",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_phone",
+     *          in="body",
+     *          description="SeedExchange that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedExchange")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="organization_fax",
      *          in="body",
      *          description="SeedExchange that should be stored",
      *          required=true,
@@ -295,8 +337,9 @@ class SeedExchangeAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update($id, UpdateSeedExchangeAPIRequest $request)
+    public function update($id, SeedExchangeAPIRequest $request)
     {
         $input = $request->all();
 
@@ -363,5 +406,9 @@ class SeedExchangeAPIController extends AppBaseController
         $seedExchange->delete();
 
         return $this->sendResponse($id, 'Seed Exchange deleted successfully');
+    }
+
+    private function getRelationField(){
+        return ['organization.city', 'organization:id,name_en,city_id,city', 'project', 'specimenType', 'seedCollection:id,accession_code'];
     }
 }
