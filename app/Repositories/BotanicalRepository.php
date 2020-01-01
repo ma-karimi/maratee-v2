@@ -151,7 +151,7 @@ class BotanicalRepository extends BaseRepository
             'comments' => $input['comments'] ?? null,
         ], $id);
         $this->createHub($botanical->id, 'propagations', is_array($input['propagations']) ? $input['propagations'] : explode(',', $input['propagations']));
-        $this->createHub($botanical->id, 'planting_conditions', is_array($input['plantingConditions']) ? $input['planting_conditions'] : explode(',', $input['planting_conditions']));
+        $this->createHub($botanical->id, 'plantingConditions', is_array($input['planting_conditions']) ? $input['planting_conditions'] : explode(',', $input['planting_conditions']));
 
         return $botanical;
     }
