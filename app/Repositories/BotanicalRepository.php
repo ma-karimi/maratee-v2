@@ -94,6 +94,7 @@ class BotanicalRepository extends BaseRepository
             'protection_id' => $input['protection_id'] ?? null,
             'wooden_id' => $input['wooden_id'] ?? null,
             'height' => $input['height'] ?? null,
+            'entrance_to_garden_id' => $input['entrance_to_garden_id'] ?? null,
         ];
     }
 
@@ -134,7 +135,6 @@ class BotanicalRepository extends BaseRepository
     public function updateInfo(array $input, $id)
     {
         $botanical = parent::update([
-            'entrance_to_garden_id' => $input['entrance_to_garden_id'] ?? null,
             'seed_germination_id' => $input['seed_germination_id'] ?? null,
             'cutting_rooting' => $input['cutting_rooting'] ?? null,
             'treatment' => $input['treatment'] ?? null,
