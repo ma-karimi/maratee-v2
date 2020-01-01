@@ -4,8 +4,6 @@
 namespace App\Models\Relations;
 
 
-use App\Models\Action;
-use App\Models\BotanicalColor;
 use App\Models\BotanicalGeneral;
 use App\Models\BotanicalIrrigation;
 use App\Models\BotanicalOperation;
@@ -27,42 +25,51 @@ trait BotanicalRelation
 
     public function values()
     {
-        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 1);
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 1)
+            ->whereNull('botanical_general_hubs.deleted_at')
+            ->withTimestamps();
     }
 
     public function usages()
     {
-        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 2);
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 2)->whereNull('botanical_general_hubs.deleted_at')
+            ->withTimestamps();
     }
 
     public function propagations()
     {
-        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 3);
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 3)->whereNull('botanical_general_hubs.deleted_at')
+            ->withTimestamps();
     }
 
     public function plantingConditions()
     {
-        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 4);
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 4)->whereNull('botanical_general_hubs.deleted_at')
+            ->withTimestamps();
     }
 
     public function cycles()
     {
-        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 5);
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 5)->whereNull('botanical_general_hubs.deleted_at')
+            ->withTimestamps();
     }
 
     public function foliageColors()
     {
-        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_colors')->latest()->where('botanical_generals.type_id', 6)->where('botanical_colors.type_id', 3);
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_colors')->latest()->where('botanical_generals.type_id', 6)->where('botanical_colors.type_id', 3)->whereNull('botanical_colors.deleted_at')
+            ->withTimestamps();
     }
 
     public function flowerColors()
     {
-        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_colors')->latest()->where('botanical_generals.type_id', 6)->where('botanical_colors.type_id', 1);
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_colors')->latest()->where('botanical_generals.type_id', 6)->where('botanical_colors.type_id', 1)->whereNull('botanical_colors.deleted_at')
+            ->withTimestamps();
     }
 
     public function fruitColors()
     {
-        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_colors')->latest()->where('botanical_generals.type_id', 6)->where('botanical_colors.type_id', 2);
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_colors')->latest()->where('botanical_generals.type_id', 6)->where('botanical_colors.type_id', 2)->whereNull('botanical_colors.deleted_at')
+            ->withTimestamps();
     }
 
 
