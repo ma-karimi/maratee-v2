@@ -119,6 +119,11 @@ trait BotanicalRelation
         return $this->belongsTo(BotanicalGeneral::class, 'winter_tolerance_id')->where('botanical_generals.type_id', 10);
     }
 
+    public function growthRate()
+    {
+        return $this->belongsTo(BotanicalGeneral::class, 'growth_rate_id')->where('botanical_generals.type_id', 8);
+    }
+
     public function seedRate()
     {
         return $this->belongsTo(BotanicalGeneral::class, 'seed_rate_id')->where('botanical_generals.type_id', 9);
