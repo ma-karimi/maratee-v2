@@ -91,7 +91,7 @@ class SeedEvaluationRepository extends BaseRepository
 
     private function storePivot($input, $id, $type_id)
     {
-        SeedLength::where('seed_collection_id', $id)
+        SeedLength::where('seed_evaluation_id', $id)
             ->whereNotIn('id', collect($input)->pluck('id')->all())
             ->where('type_id', $type_id)
             ->delete();
@@ -105,7 +105,7 @@ class SeedEvaluationRepository extends BaseRepository
                         ]);
                 } else {
                     SeedLength::create([
-                        'seed_collection_id' => $id,
+                        'seed_evaluation_id' => $id,
                         'type_id' => $type_id,
                         'value' => $item['value'],
                     ]);
