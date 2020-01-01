@@ -139,7 +139,7 @@ class SeedEvaluationRepository extends BaseRepository
                         ]);
                 } else {
                     GerminationNumber::create([
-                        'seed_collection_id' => $seed_collection->id,
+                        'seed_evaluation_id' => $seed_collection->id,
                         'count' => $item['count'],
                         'germinated_number' => $item['germinated_number'],
                     ]);
