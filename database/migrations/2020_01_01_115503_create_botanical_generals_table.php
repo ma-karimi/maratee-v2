@@ -26,7 +26,7 @@ class CreateBotanicalGeneralsTable extends Migration
 
         Schema::create('botanical_generals', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('name');
+            $table->string('name');
             $table->tinyInteger('type_id');
             $table->timeStamps();
             $table->softDeletesTz();
