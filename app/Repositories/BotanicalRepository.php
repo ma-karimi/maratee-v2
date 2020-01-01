@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\Botanical;
 use App\Models\BotanicalIrrigation;
-use App\Models\BotanicalProperty;
 use Exception;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
@@ -74,9 +73,9 @@ class BotanicalRepository extends BaseRepository
         $this->createHub($botanical->id, 'values', is_array($input['values']) ? $input['values'] : explode(',', $input['values']));
         $this->createHub($botanical->id, 'usages', is_array($input['usages']) ? $input['usages'] : explode(',', $input['usages']));
         $this->createHub($botanical->id, 'cycles', is_array($input['cycles']) ? $input['cycles'] : explode(',', $input['cycles']));
-        $this->createHub($botanical->id, 'fruitColors', is_array($input['fruit_colors']) ? $input['fruit_colors'] : explode(',', $input['fruit_colors']), ['type_id'=> 2]);
-        $this->createHub($botanical->id, 'flowerColors', is_array($input['flower_colors']) ? $input['flower_colors'] : explode(',', $input['flower_colors']), ['type_id'=> 1]);
-        $this->createHub($botanical->id, 'foliageColors', is_array($input['foliage_colors']) ? $input['foliage_colors'] : explode(',', $input['foliage_colors']), ['type_id'=> 3]);
+        $this->createHub($botanical->id, 'fruitColors', is_array($input['fruit_colors']) ? $input['fruit_colors'] : explode(',', $input['fruit_colors']), ['type_id' => 2]);
+        $this->createHub($botanical->id, 'flowerColors', is_array($input['flower_colors']) ? $input['flower_colors'] : explode(',', $input['flower_colors']), ['type_id' => 1]);
+        $this->createHub($botanical->id, 'foliageColors', is_array($input['foliage_colors']) ? $input['foliage_colors'] : explode(',', $input['foliage_colors']), ['type_id' => 3]);
         return $botanical;
     }
 
@@ -154,7 +153,7 @@ class BotanicalRepository extends BaseRepository
         $this->createHub($botanical->id, 'propagations', is_array($input['propagations']) ? $input['propagations'] : explode(',', $input['propagations']));
         $this->createHub($botanical->id, 'planting_conditions', is_array($input['planting_conditions']) ? $input['planting_conditions'] : explode(',', $input['planting_conditions']));
 
-      return $botanical;
+        return $botanical;
     }
 
     public function update($input, $id)
@@ -164,9 +163,9 @@ class BotanicalRepository extends BaseRepository
         $this->createHub($botanical->id, 'values', is_array($input['values']) ? $input['values'] : explode(',', $input['values']));
         $this->createHub($botanical->id, 'usages', is_array($input['usages']) ? $input['usages'] : explode(',', $input['usages']));
         $this->createHub($botanical->id, 'cycles', is_array($input['cycles']) ? $input['cycles'] : explode(',', $input['cycles']));
-        $this->createHub($botanical->id, 'fruitColors', is_array($input['fruit_colors']) ? $input['fruit_colors'] : explode(',', $input['fruit_colors']), ['type_id'=> 2]);
-        $this->createHub($botanical->id, 'flowerColors', is_array($input['flower_colors']) ? $input['flower_colors'] : explode(',', $input['flower_colors']), ['type_id'=> 1]);
-        $this->createHub($botanical->id, 'foliageColors', is_array($input['foliage_colors']) ? $input['foliage_colors'] : explode(',', $input['foliage_colors']), ['type_id'=> 3]);
+        $this->createHub($botanical->id, 'fruitColors', is_array($input['fruit_colors']) ? $input['fruit_colors'] : explode(',', $input['fruit_colors']), ['type_id' => 2]);
+        $this->createHub($botanical->id, 'flowerColors', is_array($input['flower_colors']) ? $input['flower_colors'] : explode(',', $input['flower_colors']), ['type_id' => 1]);
+        $this->createHub($botanical->id, 'foliageColors', is_array($input['foliage_colors']) ? $input['foliage_colors'] : explode(',', $input['foliage_colors']), ['type_id' => 3]);
         return $botanical;
     }
 
