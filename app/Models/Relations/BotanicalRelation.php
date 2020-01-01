@@ -5,7 +5,7 @@ namespace App\Models\Relations;
 
 
 use App\Models\Action;
-use App\Models\BotanicalColorHub;
+use App\Models\BotanicalColor;
 use App\Models\BotanicalGeneral;
 use App\Models\BotanicalIrrigation;
 use App\Models\BotanicalOperation;
@@ -52,17 +52,17 @@ trait BotanicalRelation
 
     public function foliageColors()
     {
-        return $this->belongsToMany(BotanicalColorHub::class)->latest()->where('botanical_generals.type_id', 6)->where('botanical_color_hubs.type_id', 3);
+        return $this->belongsToMany(BotanicalColor::class)->latest()->where('botanical_generals.type_id', 6)->where('botanical_color_hubs.type_id', 3);
     }
 
     public function flowerColors()
     {
-        return $this->belongsToMany(BotanicalColorHub::class)->latest()->where('botanical_generals.type_id', 6)->where('botanical_color_hubs.type_id', 1);
+        return $this->belongsToMany(BotanicalColor::class)->latest()->where('botanical_generals.type_id', 6)->where('botanical_color_hubs.type_id', 1);
     }
 
     public function fruitColors()
     {
-        return $this->belongsToMany(BotanicalColorHub::class)->latest()->where('botanical_generals.type_id', 6)->where('botanical_color_hubs.type_id', 2);
+        return $this->belongsToMany(BotanicalColor::class)->latest()->where('botanical_generals.type_id', 6)->where('botanical_color_hubs.type_id', 2);
     }
 
 

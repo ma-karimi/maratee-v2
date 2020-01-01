@@ -11,9 +11,9 @@ use Illuminate\Support\Arr;
  *            required={"botanical_id", "botanical_general_id", "type_id"}
  *
  */
-class BotanicalColorHub extends BaseModel
+class BotanicalColor extends BaseModel
 {
-    
+
     public static $rules = [
         'type_id' => 'required|in:1,2,3',
         'botanical_id' => 'required|exists:botanicals,id',

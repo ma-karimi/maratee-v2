@@ -33,42 +33,42 @@ class CreateBotanicalGeneralsTable extends Migration
 
         });
 
-        foreach (self::CYCLE as $item) {
+        foreach (self::CYCLE as $index => $item) {
             \App\Models\BotanicalGeneral::create([
                 'type_id' => 5,
                 'name' => $item
             ]);
         }
 
-        foreach (self::USAGE as $item) {
+        foreach (self::USAGE as $index => $item) {
             \App\Models\BotanicalGeneral::create([
                 'type_id' => 2,
                 'name' => $item
             ]);
         }
 
-        foreach (self::PLANT_CONDITION as $item) {
+        foreach (self::PLANT_CONDITION as $index => $item) {
             \App\Models\BotanicalGeneral::create([
                 'type_id' => 4,
                 'name' => $item
             ]);
         }
 
-        foreach (self::PROPAGATION as $item) {
+        foreach (self::PROPAGATION as $index => $item) {
             \App\Models\BotanicalGeneral::create([
                 'type_id' => 3,
                 'name' => $item
             ]);
         }
 
-        foreach (self::VALUE as $item) {
+        foreach (self::VALUE as $index => $item) {
             \App\Models\BotanicalGeneral::create([
                 'type_id' => 1,
                 'name' => $item
             ]);
         }
 
-        foreach (explode('-', self::COLOR) as $item) {
+        foreach (explode('-', self::COLOR) as $index => $item) {
             \App\Models\BotanicalGeneral::create([
                 'type_id' => 6,
                 'name' => $item
@@ -109,7 +109,9 @@ class CreateBotanicalGeneralsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('seed_exchanges');
+        Schema::dropIfExists('botanical_generals');
+        Schema::dropIfExists('botanical_general_hubs');
+        Schema::dropIfExists('botanical_colors');
     }
 
 }
