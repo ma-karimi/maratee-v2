@@ -8,6 +8,7 @@ use App\Models\Herbarium;
 use App\Repositories\HerbariumRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 use Response;
 
@@ -63,13 +64,13 @@ class HerbariumAPIController extends AppBaseController
         $herbariums = $this->herbariumRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('is_flowering') == 1 ? $this->getFieldRelations() : $this->getFieldNonFlowerRelations()
+            $request->get('is_flowering') == 1 ? $this->getRelationFields() : $this->getFieldNonFlowerRelations()
         );
 
         return $this->sendResponse($herbariums->toArray(), 'Herbariums retrieved successfully');
     }
 
-    public function getFieldRelations()
+    public function getRelationFields()
     {
         return ['taxonomy', 'organization', 'media', 'determine', 'collect', 'location'];
     }
@@ -151,7 +152,7 @@ class HerbariumAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(HerbariumAPIRequest $request)
     {
@@ -208,7 +209,7 @@ class HerbariumAPIController extends AppBaseController
             return $this->sendError('Herbarium not found');
         }
 
-        $herbarium = $herbarium->is_flowering == 1 ? $herbarium->load($this->getFieldRelations()) : $herbarium->load($this->getFieldNonFlowerRelations());
+        $herbarium = $herbarium->is_flowering == 1 ? $herbarium->load($this->getRelationFields()) : $herbarium->load($this->getFieldNonFlowerRelations());
         return $this->sendResponse($herbarium->toArray(), 'Herbarium retrieved successfully');
     }
 
@@ -292,7 +293,7 @@ class HerbariumAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update($id, HerbariumAPIRequest $request)
     {
@@ -420,7 +421,7 @@ class HerbariumAPIController extends AppBaseController
             [],
             null,
             null,
-            $request->get('is_flowering') == 1 ? $this->getFieldRelations() : $this->getFieldNonFlowerRelations()
+            $request->get('is_flowering') == 1 ? $this->getRelationFields() : $this->getFieldNonFlowerRelations()
         );
 
 

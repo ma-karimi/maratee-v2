@@ -60,17 +60,12 @@ Route::apiResource('locations', 'LocationAPIController');
 
 Route::apiResource('connections', 'ConnectionAPIController');
 
-Route::apiResource('continents', 'ContinentAPIController');
-
 Route::apiResource('users', 'UserAPIController');
-
-Route::apiResource('technology', 'TechnologyAPIController');
 
 Route::apiResource('seed_weights', 'SeedWeightAPIController');
 
 Route::apiResource('seed_exchanges', 'SeedExchangeAPIController');
 
-Route::apiResource('propagations', 'PropagationAPIController');
 Route::get('provinces/all', 'ProvinceAPIController@all');
 
 Route::apiResource('provinces', 'ProvinceAPIController');
@@ -92,8 +87,6 @@ Route::apiResource('plants', 'PlantAPIController');
 Route::get('herbariums/excel', 'HerbariumAPIController@excel');
 Route::post('herbariums/{id}/media', 'HerbariumAPIController@media');
 Route::apiResource('herbariums', 'HerbariumAPIController');
-
-Route::apiResource('action_hubs', 'ActionHubAPIController');
 
 Route::apiResource('articles', 'ArticleAPIController');
 
@@ -118,7 +111,6 @@ Route::apiResource('botanical_operations', 'BotanicalOperationAPIController');
 
 Route::apiResource('botanical_irrigations', 'BotanicalIrrigationAPIController');
 
-Route::apiResource('botanical_propagations', 'BotanicalPropagationAPIController');
 
 Route::apiResource('chromosomes', 'ChromosomeAPIController');
 
@@ -137,11 +129,6 @@ Route::apiResource('cryo_banks', 'CryoBankAPIController');
 Route::apiResource('internal_habitats', 'InternalHabitatAPIController');
 
 Route::apiResource('geology_ages', 'GeologyAgeAPIController');
-
-Route::apiResource('irrigations', 'IrrigationAPIController');
-
-
-Route::apiResource('lightings', 'LightingAPIController');
 
 Route::apiResource('media', 'MediaAPIController');
 
@@ -166,18 +153,12 @@ Route::apiResource('permissions', 'PermissionAPIController');
 
 Route::apiResource('groups', 'GroupAPIController');
 
-Route::apiResource('divisions', 'DivisionAPIController');
-
 Route::apiResource('germinations', 'GerminationAPIController');
 
 Route::apiResource('repeats', 'RepeatAPIController');
 
-Route::apiResource('stations', 'StationAPIController');
-
-Route::apiResource('dimensions', 'DimensionAPIController');
 Route::apiResource('places', 'PlaceAPIController');
 
-Route::apiResource('evaluation_dimensions', 'EvaluationDimensionAPIController');
 Route::apiResource('location_hubs', 'LocationHubAPIController')->except('update', 'show');
 
 

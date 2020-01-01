@@ -9,7 +9,6 @@ use App\Repositories\MethodRepository;
 use Exception;
 use Illuminate\Validation\ValidationException;
 use Response;
-use function request;
 
 /**
  * Class MethodController

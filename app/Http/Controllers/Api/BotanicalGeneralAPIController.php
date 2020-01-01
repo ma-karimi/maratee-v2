@@ -8,6 +8,7 @@ use App\Models\BotanicalGeneral;
 use App\Repositories\BotanicalGeneralRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
@@ -116,7 +117,7 @@ class BotanicalGeneralAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(BotanicalGeneralAPIRequest $request)
     {
@@ -228,7 +229,7 @@ class BotanicalGeneralAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update($id, BotanicalGeneralAPIRequest $request)
     {

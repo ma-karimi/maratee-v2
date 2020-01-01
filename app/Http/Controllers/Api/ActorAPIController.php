@@ -115,6 +115,7 @@ class ActorAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(ActorAPIRequest $request)
     {
@@ -231,6 +232,7 @@ class ActorAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, ActorAPIRequest $request)
     {

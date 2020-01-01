@@ -9,36 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @SWG\Definition(
  *      definition="LifeForm",
- *      required={"name", "type"},
- *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="name",
- *          description="name",
- *          type="array",
- *     @SWG\Items(type="string"),
- *      ),
- *      @SWG\Property(
- *          property="type",
- *          description="select one of wooden,leaf, herbaceous, life_cycle",
- *          type="string",
- *     ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
+ *      required={"name", "type"}
  * )
  */
 class LifeForm extends BaseModel

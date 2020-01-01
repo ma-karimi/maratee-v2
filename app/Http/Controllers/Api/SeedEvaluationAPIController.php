@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\Seed\SeedEvaluationAPIRequest;
 use App\Http\Requests\Api\Seed\SeedEvaluationGerminationAPIRequest;
 use App\Http\Requests\Api\Seed\SeedEvaluationLengthAPIRequest;
-use App\Http\Requests\Api\Seed\SeedEvaluationAPIRequest;
 use App\Models\SeedEvaluation;
 use App\Repositories\SeedEvaluationRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
@@ -61,18 +62,18 @@ class SeedEvaluationAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $seed_evaluatios = $this->seedEvaluationRepository->paginate(
+        $seed_evaluations = $this->seedEvaluationRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationField()
+            $this->getRelationFields()
         );
 
-        return $this->sendResponse($seed_evaluatios->toArray(), 'Seed Evaluations retrieved successfully');
+        return $this->sendResponse($seed_evaluations->toArray(), 'Seed Evaluations retrieved successfully');
     }
 
-    private function getRelationField()
+    private function getRelationFields()
     {
-        return ['organization.city', 'organization:id,name_en,city_id', 'seedCollection:id,accession_code', 'project', 'shoots', 'radicals', 'lengths', 'widths','germinations',  'media', 'dormancyBreaking', 'specimenType', 'research'];
+        return ['organization.city', 'organization:id,name_en,city_id', 'seedCollection:id,accession_code', 'project', 'shoots', 'radicals', 'lengths', 'widths', 'germinations', 'media', 'dormancyBreaking', 'specimenType', 'research'];
     }
 
     /**
@@ -168,7 +169,7 @@ class SeedEvaluationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(SeedEvaluationAPIRequest $request)
     {
@@ -220,7 +221,7 @@ class SeedEvaluationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedEvaluation $seedCollection */
-        $seedCollection = $this->seedEvaluationRepository->find($id, $this->getRelationField());
+        $seedCollection = $this->seedEvaluationRepository->find($id, $this->getRelationFields());
 
         if (empty($seedCollection)) {
             return $this->sendError('Seed Evaluation not found');
@@ -330,7 +331,7 @@ class SeedEvaluationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update($id, SeedEvaluationAPIRequest $request)
     {
@@ -585,7 +586,7 @@ class SeedEvaluationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function storeGermination($id, SeedEvaluationGerminationAPIRequest $request)
     {
@@ -648,7 +649,7 @@ class SeedEvaluationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function storeShoot($id, SeedEvaluationLengthAPIRequest $request)
     {
@@ -711,7 +712,7 @@ class SeedEvaluationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function storeWidth($id, SeedEvaluationLengthAPIRequest $request)
     {
@@ -789,6 +790,7 @@ class SeedEvaluationAPIController extends AppBaseController
 
         return $this->sendResponse([], 'SeedEvaluation updated successfully');
     }
+
     /**
      * @param int $id
      * @param SeedEvaluationLengthAPIRequest $request

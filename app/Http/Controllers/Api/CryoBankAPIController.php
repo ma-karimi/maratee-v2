@@ -62,7 +62,7 @@ class CryoBankAPIController extends AppBaseController
         $cryoBanks = $this->cryoBankRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getFieldRelations()
+            $this->getRelationFields()
         );
 
         return $this->sendResponse($cryoBanks->toArray(), 'Cryo Banks retrieved successfully');
@@ -71,7 +71,7 @@ class CryoBankAPIController extends AppBaseController
     /**
      * @return array
      */
-    private function getFieldRelations(): array
+    private function getRelationFields(): array
     {
         return ['taxonomy', 'protection', 'location', 'treatment', 'research', 'collect'];
     }
@@ -240,7 +240,7 @@ class CryoBankAPIController extends AppBaseController
     public function show($id)
     {
         /** @var CryoBank $cryoBank */
-        $cryoBank = $this->cryoBankRepository->find($id, $this->getFieldRelations());
+        $cryoBank = $this->cryoBankRepository->find($id, $this->getRelationFields());
 
         if ($cryoBank === null) {
             return $this->sendError('Cryo Bank not found');

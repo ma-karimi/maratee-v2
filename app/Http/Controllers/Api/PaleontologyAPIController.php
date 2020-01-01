@@ -66,13 +66,13 @@ class PaleontologyAPIController extends AppBaseController
         $paleontologies = $this->paleontologyRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getFieldRelations()
+            $this->getRelationFields()
         );
 
         return $this->sendResponse($paleontologies->toArray(), 'Paleontologies retrieved successfully');
     }
 
-    private function getFieldRelations()
+    private function getRelationFields()
     {
         return ['taxonomy', 'generalClass', 'generalOrder', 'geologyAgePeriod', 'geologyAgeStage', 'geologyAgeEpoch', 'geologyAgeEra', 'generalPlantType', 'locality.location', 'maps.media', 'collect', 'determine', 'media', 'generalSamples', 'citations', 'transactions.media'];
     }
@@ -221,7 +221,7 @@ class PaleontologyAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Paleontology $paleontology */
-        $paleontology = $this->paleontologyRepository->find($id, $this->getFieldRelations());
+        $paleontology = $this->paleontologyRepository->find($id, $this->getRelationFields());
 
         if (empty($paleontology)) {
             return $this->sendError('Paleontology not found');

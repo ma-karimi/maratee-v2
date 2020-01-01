@@ -153,7 +153,12 @@ class CreateBotanicalGeneralsTable extends Migration
 
         });
 
-//        Schema::dropIfExists('botanical_property');
+        Schema::dropIfExists('botanical_properties');
+        Schema::dropIfExists('botanical_planting_conditions');
+        Schema::dropIfExists('botanical_propagations');
+        Schema::dropIfExists('irrigations');
+        Schema::dropIfExists('propagations');
+        Schema::dropIfExists('lightings');
         Schema::enableForeignKeyConstraints();
 
 

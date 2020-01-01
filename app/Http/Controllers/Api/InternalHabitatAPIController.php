@@ -105,6 +105,7 @@ class InternalHabitatAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(InternalHabitatApiRequest $request)
     {
@@ -210,6 +211,7 @@ class InternalHabitatAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, InternalHabitatApiRequest $request)
     {

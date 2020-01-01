@@ -8,6 +8,7 @@ use App\Models\PaleontologyCitation;
 use App\Repositories\PaleontologyCitationRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
@@ -146,7 +147,7 @@ class PaleontologyCitationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(PaleontologyCitationAPIRequest $request)
     {

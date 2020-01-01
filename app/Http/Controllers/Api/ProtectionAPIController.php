@@ -8,6 +8,7 @@ use App\Models\Protection;
 use App\Repositories\ProtectionRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
@@ -25,9 +26,9 @@ class ProtectionAPIController extends AppBaseController
     }
 
     /**
-     * @param Request $request
      * @return Response
      *
+     * @throws Exception
      * @SWG\Get(
      *      path="/protections",
      *      summary="Get a listing of the Protections.",
@@ -55,7 +56,6 @@ class ProtectionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws Exception
      */
     public function index()
     {
@@ -109,7 +109,7 @@ class ProtectionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(ProtectionAPIRequest $request)
     {
@@ -222,7 +222,7 @@ class ProtectionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update($id, ProtectionAPIRequest $request)
     {

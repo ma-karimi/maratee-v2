@@ -8,6 +8,7 @@ use App\Models\SeedExchange;
 use App\Repositories\SeedExchangeRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
@@ -62,10 +63,15 @@ class SeedExchangeAPIController extends AppBaseController
         $seedExchanges = $this->seedExchangeRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationField()
+            $this->getRelationFields()
         );
 
         return $this->sendResponse($seedExchanges->toArray(), 'Seed Exchanges retrieved successfully');
+    }
+
+    private function getRelationFields()
+    {
+        return ['organization.city', 'organization:id,name_en,city_id', 'project', 'specimenType', 'seedCollection:id,accession_code'];
     }
 
     /**
@@ -168,7 +174,7 @@ class SeedExchangeAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(SeedExchangeAPIRequest $request)
     {
@@ -220,7 +226,7 @@ class SeedExchangeAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedExchange $seedExchange */
-        $seedExchange = $this->seedExchangeRepository->find($id, $this->getRelationField());
+        $seedExchange = $this->seedExchangeRepository->find($id, $this->getRelationFields());
 
         if (empty($seedExchange)) {
             return $this->sendError('Seed Exchange not found');
@@ -337,7 +343,7 @@ class SeedExchangeAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update($id, SeedExchangeAPIRequest $request)
     {
@@ -406,9 +412,5 @@ class SeedExchangeAPIController extends AppBaseController
         $seedExchange->delete();
 
         return $this->sendResponse($id, 'Seed Exchange deleted successfully');
-    }
-
-    private function getRelationField(){
-        return ['organization.city', 'organization:id,name_en,city_id', 'project', 'specimenType', 'seedCollection:id,accession_code'];
     }
 }

@@ -207,7 +207,7 @@ class MedicinalLocationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var MedicinalLocation $medicinalPlant */
-        $medicinalPlant = $this->medicinalLocationRepository->find($id, $this->getFieldRelations());
+        $medicinalPlant = $this->medicinalLocationRepository->find($id, $this->getRelationFields());
 
         if ($medicinalPlant === null) {
             return $this->sendError('Medicinal Location not found');

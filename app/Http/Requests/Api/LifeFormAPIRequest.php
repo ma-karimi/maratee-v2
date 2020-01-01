@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\ActionHubDocument;
+use App\Models\LifeForm;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateActionHubDocumentAPIRequest extends APIRequest
+class LifeFormAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class UpdateActionHubDocumentAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return ActionHubDocument::$rules;
+        return LifeForm::$rules;
     }
 }

@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\Api\CreateLifeFormAPIRequest;
-use App\Http\Requests\Api\UpdateLifeFormAPIRequest;
+use App\Http\Requests\Api\LifeFormAPIRequest;
 use App\Models\LifeForm;
 use App\Repositories\LifeFormRepository;
 use Exception;
@@ -70,7 +69,7 @@ class LifeFormAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateLifeFormAPIRequest $request
+     * @param LifeFormAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -113,8 +112,9 @@ class LifeFormAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(CreateLifeFormAPIRequest $request)
+    public function store(LifeFormAPIRequest $request)
     {
         $input = $request->all();
 
@@ -175,7 +175,7 @@ class LifeFormAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateLifeFormAPIRequest $request
+     * @param LifeFormAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -225,8 +225,9 @@ class LifeFormAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update($id, UpdateLifeFormAPIRequest $request)
+    public function update($id, LifeFormAPIRequest $request)
     {
         $input = $request->all();
 

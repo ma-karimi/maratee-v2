@@ -8,6 +8,7 @@ use App\Models\BotanicalIrrigation;
 use App\Repositories\BotanicalIrrigationRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
@@ -143,7 +144,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(BotanicalIrrigationAPIRequest $request)
     {
@@ -287,7 +288,7 @@ class BotanicalIrrigationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update($id, BotanicalIrrigationAPIRequest $request)
     {

@@ -63,10 +63,15 @@ class SeedWeightAPIController extends AppBaseController
         $seedWeights = $this->seedWeightRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getFieldRelations()
+            $this->getRelationFields()
         );
 
         return $this->sendResponse($seedWeights->toArray(), 'Seed Weights retrieved successfully');
+    }
+
+    private function getRelationFields()
+    {
+        return ['seedCollection:id,accession_code', 'refrigerator'];
     }
 
     /**
@@ -263,18 +268,13 @@ class SeedWeightAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedWeight $seedWeight */
-        $seedWeight = $this->seedWeightRepository->find($id, $this->getFieldRelations());
+        $seedWeight = $this->seedWeightRepository->find($id, $this->getRelationFields());
 
         if (empty($seedWeight)) {
             return $this->sendError('Seed Weight not found');
         }
 
         return $this->sendResponse($seedWeight->toArray(), 'Seed Weight retrieved successfully');
-    }
-
-    private function getFieldRelations()
-    {
-        return ['seedCollection:id,accession_code', 'refrigerator'];
     }
 
     /**

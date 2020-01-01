@@ -12,6 +12,7 @@ use App\Models\SeedCollection;
 use App\Repositories\SeedCollectionRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
@@ -66,15 +67,15 @@ class SeedCollectionAPIController extends AppBaseController
         $seedCollections = $this->seedCollectionRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationField()
+            $this->getRelationFields()
         );
 
         return $this->sendResponse($seedCollections->toArray(), 'Seed Collections retrieved successfully');
     }
 
-    private function getRelationField()
+    private function getRelationFields()
     {
-        return ['location','organization.city', 'organization:id,name_en,city_id',  'landForm', 'taxonomy', 'project', 'collect', 'drainage', 'fruitType', 'habitat', 'usedPart', 'growthForm', 'lifeForm', 'consumption', 'motherHealth', 'pollinationAgent', 'pollinationType', 'collectedFrom', 'slopeAspect', 'soilDepth', 'soilErosion', 'soilLime', 'soilSalinity', 'soilTexture', 'specimenType', 'associatedSpecies', 'communityTypes', 'climates', 'media'];
+        return ['location', 'organization.city', 'organization:id,name_en,city_id', 'landForm', 'taxonomy', 'project', 'collect', 'drainage', 'fruitType', 'habitat', 'usedPart', 'growthForm', 'lifeForm', 'consumption', 'motherHealth', 'pollinationAgent', 'pollinationType', 'collectedFrom', 'slopeAspect', 'soilDepth', 'soilErosion', 'soilLime', 'soilSalinity', 'soilTexture', 'specimenType', 'associatedSpecies', 'communityTypes', 'climates', 'media'];
     }
 
     /**
@@ -163,7 +164,7 @@ class SeedCollectionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(SeedCollectionAPIRequest $request)
     {
@@ -215,7 +216,7 @@ class SeedCollectionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedCollection $seedCollection */
-        $seedCollection = $this->seedCollectionRepository->find($id, $this->getRelationField());
+        $seedCollection = $this->seedCollectionRepository->find($id, $this->getRelationFields());
 
         if (empty($seedCollection)) {
             return $this->sendError('Seed Collection not found');
@@ -318,7 +319,7 @@ class SeedCollectionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update($id, SeedCollectionAPIRequest $request)
     {
@@ -538,7 +539,7 @@ class SeedCollectionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function storePlant($id, SeedCollectionPlantAPIRequest $request)
     {
@@ -692,7 +693,7 @@ class SeedCollectionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function storeSoil($id, SeedCollectionSoilAPIRequest $request)
     {
@@ -846,7 +847,7 @@ class SeedCollectionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function storeClimate($id, SeedCollectionClimateAPIRequest $request)
     {
@@ -865,7 +866,6 @@ class SeedCollectionAPIController extends AppBaseController
     }
 
     /**
-     * @todo
      * @param int $id
      * @param SeedCollectionProjectAPIRequest $request
      * @return Response
@@ -903,7 +903,8 @@ class SeedCollectionAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
+     * @todo
      */
     public function storeProject($id, SeedCollectionProjectAPIRequest $request)
     {

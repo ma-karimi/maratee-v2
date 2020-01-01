@@ -9,6 +9,7 @@ use App\Models\Organization;
 use App\Repositories\OrganizationRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
@@ -67,6 +68,14 @@ class OrganizationAPIController extends AppBaseController
         );
 
         return $this->sendResponse($organizations->toArray(), 'Organizations retrieved successfully');
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getRelationFields()
+    {
+        return ['city'];
     }
 
     /**
@@ -169,7 +178,7 @@ class OrganizationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(CreateOrganizationAPIRequest $request)
     {
@@ -338,7 +347,7 @@ class OrganizationAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update($id, UpdateOrganizationAPIRequest $request)
     {
@@ -447,13 +456,5 @@ class OrganizationAPIController extends AppBaseController
             $this->organizationRepository->all();
 
         return $this->sendResponse($organizations->toArray(), 'Organizations retrieved successfully');
-    }
-
-    /**
-     * @return mixed
-     */
-    private function getRelationFields()
-    {
-        return ['city'];
     }
 }

@@ -30,25 +30,19 @@ class BotanicalRepository extends BaseRepository
      * @var LocationRepository
      */
     private $locationRepo;
-    /**
-     * @var BotanicalPropertyRepository
-     */
-    private $botanicalPropertyRepo;
 
     /**
      * BotanicalRepository constructor.
      * @param Application $app
      * @param BotanicalIrrigation $botanicalIrrigation
      * @param LocationRepository $locationRepo
-     * @param BotanicalProperty $botanicalPropertyRepo
      * @throws Exception
      */
-    public function __construct(Application $app, BotanicalIrrigation $botanicalIrrigation, LocationRepository $locationRepo, BotanicalProperty $botanicalPropertyRepo)
+    public function __construct(Application $app, BotanicalIrrigation $botanicalIrrigation, LocationRepository $locationRepo)
     {
         parent::__construct($app);
         $this->botanicalIrrigation = $botanicalIrrigation;
         $this->locationRepo = $locationRepo;
-        $this->botanicalPropertyRepo = $botanicalPropertyRepo;
         $this->app = $app;
     }
 
@@ -160,27 +154,6 @@ class BotanicalRepository extends BaseRepository
         $this->createHub($botanical->id, 'planting_conditions', is_array($input['planting_conditions']) ? $input['planting_conditions'] : explode(',', $input['planting_conditions']));
 
       return $botanical;
-    }
-
-    private function storeProperties($properties, $type_id, $botanical_id)
-    {
-        $properties = is_array($properties) ? $properties : explode(',', $properties);
-
-
-        $this->botanicalPropertyRepo
-            ->where('botanical_id', $botanical_id)
-            ->where('type_id', $type_id)
-            ->whereNotIn('property_id', $properties)
-            ->delete();
-        if (count($properties) && !empty($properties[0])) {
-            foreach ($properties as $item) {
-                $this->botanicalPropertyRepo->firstOrCreate([
-                    'botanical_id' => $botanical_id,
-                    'type_id' => $type_id,
-                    'property_id' => (int)$item,
-                ]);
-            }
-        }
     }
 
     public function update($input, $id)
