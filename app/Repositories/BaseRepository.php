@@ -337,6 +337,7 @@ abstract class BaseRepository
                 $related_model_class::whereIn('id', $exists_related_ids)->update($additional_data);
             }
             if (count($different_ids)) {
+                Log::info([$different_ids, $additional_data]);
                 $record->$related_model()->attach($different_ids, $additional_data);
             }
         } //attach only ids
