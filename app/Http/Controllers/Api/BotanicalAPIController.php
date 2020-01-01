@@ -68,15 +68,15 @@ class BotanicalAPIController extends AppBaseController
         $botanicals = $this->botanicalRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getFieldRelations()
+            $this->getRelationFields()
         );
 
         return $this->sendResponse($botanicals->toArray(), 'Botanicals retrieved successfully');
     }
 
-    private function getFieldRelations()
+    private function getRelationFields()
     {
-        return ['distributions', 'organization', 'protection', 'internalHabitat', 'generalHabitat', 'generalOrigin', 'botanicalIrrigation', 'plantingConditions', 'propagations', 'usages', 'values', 'operations', 'media', 'taxonomy', 'locations', 'cycles', 'flowerColors', 'fruitColors', 'foliageColors'];
+        return ['distributions', 'organization', 'protection:id,name', 'internalHabitat', 'generalHabitat:id,name', 'origin:id,name', 'botanicalIrrigation', 'plantingConditions:id,name', 'propagations:id,name', 'usages:id,name', 'values:id,name', 'operations', 'media', 'taxonomy', 'locations', 'cycles:id,name', 'flowerColors:id,name', 'fruitColors:id,name', 'foliageColors:id,name', 'soil:id,name', 'summerTolerance:id,name', 'winterTolerance:id,name', 'seedGermination:id,name', 'seedRate:id,name', 'growthRate:id,name', 'entranceToGarden:id,name', 'wooden:id,name'];
     }
 
     /**
@@ -347,7 +347,7 @@ class BotanicalAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Botanical $botanical */
-        $botanical = $this->botanicalRepository->find($id, $this->getFieldRelations());
+        $botanical = $this->botanicalRepository->find($id, $this->getRelationFields());
 
         if ($botanical === null) {
             return $this->sendError('Botanical not found');
@@ -698,6 +698,7 @@ class BotanicalAPIController extends AppBaseController
 
         return $this->sendResponse($botanical->toArray(), 'Botanical updated successfully');
     }
+
     public function storeMedia($id, BotanicalMediaAPIRequest $request)
     {
         $input = $request->all();

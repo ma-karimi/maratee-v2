@@ -18,19 +18,11 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class Botanical extends BaseModel implements HasMedia
 {
     use HasMediaTrait, BotanicalAccessor, BotanicalRelation, BotanicalScope;
-    public const GROWTH_RATES = [0 => 'Unknown', 1 => 'very low', 2 => 'low', 3 => 'moderate', 4 => 'fast', 5 => 'very fast'];
-    public const SEED_RATE = [1 => 'low', 2 => 'moderate', 3 => 'good', 4 => 'bumper'];
+
     public const SEED_FORMATION = [1 => 'yes', 2 => 'no'];
-    public const WINTER_TOLERANCE = [1 => 'good', 2 => 'moderate', 3 => 'sensitive', 4 => 'protection', 5 => 'not surviving', 6 => 'minimum temperature'];
-    public const SUMMER_TOLERANCE = [1 => 'good', 2 => 'moderate', 3 => 'sensitive', 4 => 'protection', 5 => 'not surviving'];
-
-    public const ENTRANCE_TO_GARDEN = [1 => 'seedling', 2 => 'plant', 3 => 'bulb', 4 => 'bulbil', 5 => 'tuber', 6 => 'rhizome', 7 => 'softwood cutting', 8 => 'hardwood cutting', 9 => 'root cutting', 10 => 'graft-division', 11 => 'meristem', 12 => 'spore'];
-    public const SOIL = [1 => 'neutral', 2 => 'alkaline', 3 => 'acid', 4 => 'indifferent'];
 
 
-    public const WOODEN = [1 => 'Tree', 2 => 'Shrub'];
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
-    public const SEED_GERMINATION = [1 => 'good', 2 => 'moderate', 3 => 'low', 4 => 'none'];
 
 
     public static $rules = [
@@ -38,32 +30,35 @@ class Botanical extends BaseModel implements HasMedia
         'flower_color' => 'nullable|string',
         'fruit_color' => 'nullable|string',
         'foliage_color' => 'nullable|string',
-        'seed_germination_id' => 'nullable|integer',
+        'seed_germination_id' => 'nullable|exists:botanical_generals,id',
         'treatment' => 'nullable|string',
         'comments' => 'nullable|string',
         'taxonomy_id' => 'required|exists:taxonomies,id',
         'garden_map' => 'nullable|string',
         'general_habitat_id' => 'nullable|integer|exists:generals,id',
-        'general_originِ_id' => 'nullable|integer|exists:generals,id',
+        'originِ_id' => 'nullable|exists:botanical_generals,id',
         'monopoly_of_iran_id' => 'nullable|numeric',
-        'wooden_id' => 'nullable|integer',
+        'wooden_id' => 'nullable|exists:botanical_generals,id',
         'protection_id' => 'nullable|integer|exists:protections,id',
         'internal_habitat_id' => 'nullable|integer|exists:internal_habitats,id',
-        'entrance_to_garden_id' => 'nullable|integer',
-        'growth_rate_id' => 'nullable|integer',
+        'entrance_to_garden_id' => 'nullable|exists:botanical_generals,id',
+        'growth_rate_id' => 'nullable|exists:botanical_generals,id',
         'first_flowering' => 'nullable|date',
 //        'first_seeding' => 'date',
-        'seed_rate_id' => 'nullable|integer',
+        'seed_rate_id' => 'nullable|exists:botanical_generals,id',
         'seed_formation_id' => 'nullable|integer',
-        'winter_tolerance_id' => 'nullable|integer',
-        'summer_tolerance_id' => 'nullable|integer',
+        'winter_tolerance_id' => 'nullable|exists:botanical_generals,id',
+        'summer_tolerance_id' => 'nullable|exists:botanical_generals,id',
         'sensitivity_conditions' => 'nullable|string',
-        'soil_id' => 'nullable|integer',
+        'soil_id' => 'nullable|exists:botanical_generals,id',
     ];
 
 
-    protected $appends = ['soil', 'summer_tolerance', 'winter_tolerance',
-        'seed_formation', 'seed_germination', 'seed_rate', 'growth_rate', 'entrance_to_garden', 'wooden', 'monopoly_of_iran', 'geographicals'];
+    protected $appends = [
+
+        'seed_formation',  'monopoly_of_iran', 'geographicals',
+        'cycle', 'value', 'propagation', 'plantCondition', 'usage', 'flower_color', 'fruit_color', 'foliage_color'
+    ];
 
     /**
      * The database table used by the model.

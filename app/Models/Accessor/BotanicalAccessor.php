@@ -19,60 +19,81 @@ trait BotanicalAccessor
         return !empty($this->attributes['monopoly_of_iran_id']) ? Arr::get(self::BOOLEAN, $this->attributes['monopoly_of_iran_id']) : null;
     }
 
-    public function getEntranceToGardenAttribute()
-    {
-        return !empty($this->attributes['entrance_to_garden_id']) ? Arr::get(self::ENTRANCE_TO_GARDEN, $this->attributes['entrance_to_garden_id']) : null;
-    }
-
-    public function getSoilAttribute()
-    {
-        return !empty($this->attributes['soil_id']) ? Arr::get(self::SOIL, $this->attributes['soil_id']) : null;
-    }
-
-    public function getGrowthRateAttribute()
-    {
-        return !empty($this->attributes['growth_rate_id']) ? Arr::get(self::GROWTH_RATES, $this->attributes['growth_rate_id']) : null;
-    }
-
-    public function getSeedRateAttribute()
-    {
-        return !empty($this->attributes['seed_rate_id']) ? Arr::get(self::SEED_RATE, $this->attributes['seed_rate_id']) : null;
-    }
-
-    public function getSeedFormationAttribute()
-    {
-        return !empty($this->attributes['seed_formation_id']) ? Arr::get(self::GROWTH_RATES, $this->attributes['seed_formation_id']) : null;
-    }
-
-    public function getWinterToleranceAttribute()
-    {
-        return !empty($this->attributes['winter_tolerance_id']) ? Arr::get(self::WINTER_TOLERANCE, $this->attributes['winter_tolerance_id']) : null;
-    }
-
-    public function getSummerToleranceAttribute()
-    {
-        return !empty($this->attributes['summer_tolerance_id']) ? Arr::get(self::SUMMER_TOLERANCE, $this->attributes['summer_tolerance_id']) : null;
-    }
-
-    public function getWoodenAttribute()
-    {
-        return !empty($this->attributes['wooden_id']) ? Arr::get(self::WOODEN, $this->attributes['wooden_id']) : null;
-    }
-
     public function getCycleAttribute()
     {
         $cycles = null;
 
         if ($this->relationLoaded('cycles') && $this->cycles->count()) {
-            $cycles .= $this->cycles->implode('cycle', ' & ');
+            $cycles .= $this->cycles->implode('name', ' & ');
         }
         return $cycles;
     }
 
-    public function getSeedGerminationAttribute()
+    public function getValueAttribute()
     {
-        return !empty($this->attributes['seed_germination_id']) ? Arr::get(self::SEED_GERMINATION, $this->attributes['seed_germination_id']) : null;
+        $values = null;
+
+        if ($this->relationLoaded('values') && $this->values->count()) {
+            $values .= $this->values->implode('name', ' & ');
+        }
+        return $values;
     }
+
+    public function getFlowerColorAttribute()
+    {
+        $flower_colors = null;
+
+        if ($this->relationLoaded('flowerColors') && $this->flowerColors->count()) {
+            $flower_colors .= $this->flowerColors->implode('name', ' & ');
+        }
+        return $flower_colors;
+    }
+
+    public function getFruitColorAttribute()
+    {
+        $fruit_colors = null;
+
+        if ($this->relationLoaded('fruitColors') && $this->fruitColors->count()) {
+            $fruit_colors .= $this->fruitColors->implode('name', ' & ');
+        }
+        return $fruit_colors;
+    }
+
+    public function getFoliageColorAttribute()
+    {
+        $foliage_colors = null;
+
+        if ($this->relationLoaded('foliageColors') && $this->foliageColors->count()) {
+            $foliage_colors .= $this->foliageColors->implode('name', ' & ');
+        }
+        return $foliage_colors;
+    }
+
+    public function getPlantConditionAttribute()
+    {
+        $conditions = null;
+
+        if ($this->relationLoaded('plantConditions') && $this->plantConditions->count()) {
+            $conditions .= $this->plantConditions->implode('name', ' & ');
+        }
+        return $conditions;
+    }
+
+    public function getPropagationAttribute()
+    {
+        $propagations = null;
+
+        if ($this->relationLoaded('propagations') && $this->propagations->count()) {
+            $propagations .= $this->propagations->implode('name', ' & ');
+        }
+        return $propagations;
+    }
+
+    public function getSeedFormationAttribute()
+    {
+        return !empty($this->attributes['seed_formation_id']) ? Arr::get(self::SEED_FORMATION, $this->attributes['seed_formation_id']) : null;
+    }
+
 
 
     public function getGeographicalsAttribute()

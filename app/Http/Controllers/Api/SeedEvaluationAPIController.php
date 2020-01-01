@@ -781,7 +781,6 @@ class SeedEvaluationAPIController extends AppBaseController
 
         /** @var SeedEvaluation $seedCollection */
         $seedCollection = $this->seedEvaluationRepository->find($id);
-
         if (empty($seedCollection)) {
             return $this->sendError('Seed Evaluation not found');
         }

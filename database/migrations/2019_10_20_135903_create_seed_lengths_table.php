@@ -16,7 +16,7 @@ class CreateSeedLengthsTable extends Migration
         Schema::create('seed_lengths', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('seed_evaluation_id');
-            $table->float('value', 3, 2);
+            $table->float('value', 4, 2);
             $table->tinyInteger('type_id')->comment('1:radical_length, 2:shoot_length, 3: seed_length, 4:seed_width');
             $table->timeStamps();
             $table->softDeletesTz();

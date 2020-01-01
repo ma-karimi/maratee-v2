@@ -89,6 +89,41 @@ trait BotanicalRelation
         return $this->belongsTo(BotanicalGeneral::class, 'origin_id')->where('botanical_generals.type_id', 7);
     }
 
+    public function soil()
+    {
+        return $this->belongsTo(BotanicalGeneral::class, 'soil_id')->where('botanical_generals.type_id', 13);
+    }
+
+    public function seedGermination()
+    {
+        return $this->belongsTo(BotanicalGeneral::class, 'seed_germination_id')->where('botanical_generals.type_id', 15);
+    }
+
+    public function entranceToGarden()
+    {
+        return $this->belongsTo(BotanicalGeneral::class, 'entrance_to_garden_id')->where('botanical_generals.type_id', 12);
+    }
+
+    public function wooden()
+    {
+        return $this->belongsTo(BotanicalGeneral::class, 'wooden_id')->where('botanical_generals.type_id', 14);
+    }
+
+    public function summerTolerance()
+    {
+        return $this->belongsTo(BotanicalGeneral::class, 'summer_tolerance_id')->where('botanical_generals.type_id', 11);
+    }
+
+    public function winterTolerance()
+    {
+        return $this->belongsTo(BotanicalGeneral::class, 'winter_tolerance_id')->where('botanical_generals.type_id', 10);
+    }
+
+    public function seedRate()
+    {
+        return $this->belongsTo(BotanicalGeneral::class, 'seed_rate_id')->where('botanical_generals.type_id', 9);
+    }
+
     public function internalHabitat()
     {
         return $this->belongsTo(InternalHabitat::class);
