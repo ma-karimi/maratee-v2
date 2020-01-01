@@ -27,42 +27,42 @@ trait BotanicalRelation
 
     public function values()
     {
-        return $this->belongsToMany(BotanicalGeneral::class)->latest()->where('botanical_generals.type_id', 1);
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 1);
     }
 
     public function usages()
     {
-        return $this->belongsToMany(BotanicalGeneral::class)->latest()->where('botanical_generals.type_id', 2);
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 2);
     }
 
     public function propagations()
     {
-        return $this->belongsToMany(BotanicalGeneral::class)->latest()->where('botanical_generals.type_id', 3);
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 3);
     }
 
     public function plantingConditions()
     {
-        return $this->belongsToMany(BotanicalGeneral::class)->latest()->where('botanical_generals.type_id', 4);
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 4);
     }
 
     public function cycles()
     {
-        return $this->belongsToMany(BotanicalGeneral::class)->latest()->where('botanical_generals.type_id', 5);
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 5);
     }
 
     public function foliageColors()
     {
-        return $this->belongsToMany(BotanicalColor::class)->latest()->where('botanical_generals.type_id', 6)->where('botanical_color_hubs.type_id', 3);
+        return $this->belongsToMany(BotanicalColor::class, 'botanical_colors')->latest()->where('botanical_generals.type_id', 6)->where('botanical_color_hubs.type_id', 3);
     }
 
     public function flowerColors()
     {
-        return $this->belongsToMany(BotanicalColor::class)->latest()->where('botanical_generals.type_id', 6)->where('botanical_color_hubs.type_id', 1);
+        return $this->belongsToMany(BotanicalColor::class, 'botanical_colors')->latest()->where('botanical_generals.type_id', 6)->where('botanical_color_hubs.type_id', 1);
     }
 
     public function fruitColors()
     {
-        return $this->belongsToMany(BotanicalColor::class)->latest()->where('botanical_generals.type_id', 6)->where('botanical_color_hubs.type_id', 2);
+        return $this->belongsToMany(BotanicalColor::class, 'botanical_colors')->latest()->where('botanical_generals.type_id', 6)->where('botanical_color_hubs.type_id', 2);
     }
 
 
