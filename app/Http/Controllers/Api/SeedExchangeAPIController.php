@@ -409,6 +409,6 @@ class SeedExchangeAPIController extends AppBaseController
     }
 
     private function getRelationField(){
-        return ['organization.city', 'organization:id,name_en,city_id,city', 'project', 'specimenType', 'seedCollection:id,accession_code'];
+        return ['organization.city', 'organization:id,name_en,city_id', 'project', 'specimenType', 'seedCollection:id,accession_code'];
     }
 }
