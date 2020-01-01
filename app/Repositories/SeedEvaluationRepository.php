@@ -2,7 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Models\ActionHub;
+use App\Models\ActorHub;
 use App\Models\GerminationNumber;
+use App\Models\SeedCollection;
 use App\Models\SeedEvaluation;
 use App\Models\SeedLength;
 use Illuminate\Container\Container as Application;
@@ -29,12 +32,22 @@ class SeedEvaluationRepository extends BaseRepository
      * @var ProjectRepository
      */
     private $projectRepo;
+    /**
+     * @var ActionHub
+     */
+    private $actionHubRepo;
+    /**
+     * @var ActorHub
+     */
+    private $actorHubRepo;
 
-    public function __construct(Application $app, ProjectRepository $projectRepo)
+    public function __construct(Application $app, ProjectRepository $projectRepo, ActionHub $actionHubRepo, ActorHub $actorHubRepo)
     {
         parent::__construct($app);
 
         $this->projectRepo = $projectRepo;
+        $this->actionHubRepo = $actionHubRepo;
+        $this->actorHubRepo = $actorHubRepo;
     }
 
     /**
@@ -50,7 +63,10 @@ class SeedEvaluationRepository extends BaseRepository
     public function create($input)
     {
         $input = $this->createOrUpdateProject($input);
-        return parent::create(Arr::except($input, ['project']));
+        $seed = parent::create(Arr::except($input, ['project', 'researchers']));
+        $this->storeResearch($input, $seed->id);
+
+        return $seed;
     }
 
     /**
@@ -80,7 +96,10 @@ class SeedEvaluationRepository extends BaseRepository
     public function update($input, $id)
     {
         $input = $this->createOrUpdateProject($input);
-        return parent::update(Arr::except($input, ['project']), $id);
+        $seed = parent::update(Arr::except($input, ['project', 'researchers']), $id);
+        $this->storeResearch($input, $seed->id);
+
+        return $seed;
     }
 
 
@@ -181,6 +200,33 @@ class SeedEvaluationRepository extends BaseRepository
         if (request()->hasFile('file')) {
             $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('images');
             $media_record->update($media_input);
+        }
+    }
+
+
+    private function storeResearch($input, $seed_evaluation_id)
+    {
+        $researchers = is_array($input['researchers']) ? $input['researchers'] : explode(',', $input['researchers']);
+
+        $action_hub = $this->actionHubRepo->updateOrCreate(
+            [
+                'action_id' => 3,
+                'actionable_type' => SeedEvaluation::class,
+                'actionable_id' => $seed_evaluation_id
+            ]);
+        $this->actorHubRepo
+            ->where('actorable_id', $action_hub->id)
+            ->where('actorable_type', ActionHub::class)
+            ->whereNotIn('actor_id', $researchers)
+            ->delete();
+        if (count($researchers) && !empty($researchers[0])) {
+            foreach ($researchers as $item) {
+                $this->actorHubRepo::firstOrCreate([
+                    'actorable_id' => $action_hub->id,
+                    'actorable_type' => ActionHub::class,
+                    'actor_id' => (int)$item,
+                ]);
+            }
         }
     }
 }

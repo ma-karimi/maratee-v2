@@ -51,6 +51,12 @@ class SeedEvaluation extends BaseModel implements HasMedia
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
+
+    public function research()
+    {
+        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 3);
+    }
+
     public function seedCollection()
     {
         return $this->belongsTo(SeedCollection::class);
