@@ -83,9 +83,6 @@ class BotanicalRepository extends BaseRepository
         $this->createHub($botanical->id, 'fruitColors', is_array($input['fruit_colors']) ? $input['fruit_colors'] : explode(',', $input['fruit_colors']));
         $this->createHub($botanical->id, 'flowerColors', is_array($input['flower_colors']) ? $input['flower_colors'] : explode(',', $input['flower_colors']));
         $this->createHub($botanical->id, 'foliageColors', is_array($input['foliage_colors']) ? $input['foliage_colors'] : explode(',', $input['foliage_colors']));
-//        $this->storeProperties($input['cycles'], 5, $botanical->id);
-//        $this->storeProperties($input['values'], 1, $botanical->id);
-//        $this->storeProperties($input['usages'], 2, $botanical->id);
         return $botanical;
     }
 
@@ -142,11 +139,7 @@ class BotanicalRepository extends BaseRepository
 
     public function updateInfo(array $input, $id)
     {
-
-        $this->storeProperties($input['propagations'], 3, $id);
-        $this->storeProperties($input['planting_conditions'], 4, $id);
-
-        return parent::update([
+        $botanical = parent::update([
             'entrance_to_garden_id' => $input['entrance_to_garden_id'] ?? null,
             'seed_germination_id' => $input['seed_germination_id'] ?? null,
             'cutting_rooting' => $input['cutting_rooting'] ?? null,
@@ -163,6 +156,10 @@ class BotanicalRepository extends BaseRepository
             'garden_map' => $input['garden_map'] ?? null,
             'comments' => $input['comments'] ?? null,
         ], $id);
+        $this->createHub($botanical->id, 'propagations', is_array($input['propagations']) ? $input['propagations'] : explode(',', $input['propagations']));
+        $this->createHub($botanical->id, 'planting_conditions', is_array($input['planting_conditions']) ? $input['planting_conditions'] : explode(',', $input['planting_conditions']));
+
+      return $botanical;
     }
 
     private function storeProperties($properties, $type_id, $botanical_id)
@@ -190,9 +187,6 @@ class BotanicalRepository extends BaseRepository
     {
         $botanical = parent::update($this->primaryData($input), $id);
         $this->storeDistributions($input, $botanical);
-//        $this->storeProperties($input['cycles'], 5, $id);
-//        $this->storeProperties($input['values'], 1, $id);
-//        $this->storeProperties($input['usages'], 2, $id);
         $this->createHub($botanical->id, 'values', is_array($input['values']) ? $input['values'] : explode(',', $input['values']));
         $this->createHub($botanical->id, 'usages', is_array($input['usages']) ? $input['usages'] : explode(',', $input['usages']));
         $this->createHub($botanical->id, 'cycles', is_array($input['cycles']) ? $input['cycles'] : explode(',', $input['cycles']));
