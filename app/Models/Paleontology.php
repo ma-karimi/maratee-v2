@@ -128,7 +128,7 @@ class Paleontology extends BaseModel implements HasMedia
 
     public function generalSamples()
     {
-        return $this->belongsToMany(General::class, 'paleontology_samples', 'id', 'sample_id')->whereType('sample');
+        return $this->belongsToMany(General::class, 'paleontology_samples', 'id', 'sample_id')->where('generals.type', 'sample');
     }
 
     /**

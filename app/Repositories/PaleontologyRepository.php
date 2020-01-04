@@ -76,7 +76,8 @@ class PaleontologyRepository extends BaseRepository
         $paleontology = parent::create(Arr::only($input->all(), [
             'catalog_no', 'specimen_no', 'field_no', 'barcode_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'location_in_collection']));
 
-        $this->storePaleontologySample($input, $paleontology->id);
+        $this->createHub($paleontology->id, 'generalSamples', is_array($input['samples']) ? $input['samples'] : explode(',', $input['samples']));
+//        $this->storePaleontologySample($input, $paleontology->id);
 
         return $paleontology;
     }
@@ -186,7 +187,7 @@ class PaleontologyRepository extends BaseRepository
         $paleontology = parent::update(Arr::only($input->all(), [
             'catalog_no', 'specimen_no', 'field_no', 'barcode_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'location_in_collection']), $id);
 
-        $this->storePaleontologySample($input, $id);
+        $this->createHub($paleontology->id, 'generalSamples', is_array($input['samples']) ? $input['samples'] : explode(',', $input['samples']));
         return $paleontology;
     }
 
