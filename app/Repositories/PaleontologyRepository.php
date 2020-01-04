@@ -126,7 +126,7 @@ class PaleontologyRepository extends BaseRepository
     {
         $determines = is_array($input['determines']) ? $input['determines'] : explode(',', $input['determines']);
 
-        $action_hub = $this->actionHubRepo->firstOrCreate([
+        $action_hub = $this->actionHubRepo->updateOrCreate([
             'action_id' => 1,
             'actionable_type' => Paleontology::class,
             'actionable_id' => $paleontology_id
