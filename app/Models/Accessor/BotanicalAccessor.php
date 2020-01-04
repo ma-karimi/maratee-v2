@@ -82,8 +82,8 @@ trait BotanicalAccessor
     {
         $conditions = null;
 
-        if ($this->relationLoaded('plantConditions') && $this->plantConditions->count()) {
-            $conditions .= $this->plantConditions->implode('name', ' & ');
+        if ($this->relationLoaded('plantingConditions') && $this->plantingConditions->count()) {
+            $conditions .= $this->plantingConditions->implode('name', ' & ');
         }
         return $conditions;
     }

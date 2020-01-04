@@ -136,7 +136,7 @@ class Paleontology extends BaseModel implements HasMedia
      */
     public function generalPlantType(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'general_plant_type_id');
+        return $this->belongsTo(General::class, 'general_plant_type_id')->whereType('plant_type');
     }
 
     /**

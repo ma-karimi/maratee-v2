@@ -21,7 +21,10 @@ trait BotanicalScope
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
             $builder->whereHas('locations', function ($query) use ($constraint) {
                 return $query->whereHas('location', function ($location) use ($constraint) {
-                    return $location->where('country_id', $constraint->getOperator(), $constraint->getValue());
+                    return $location
+                        ->whereHas('province', function ($province) use ($constraint) {
+                            return $province->where('country_id', $constraint->getOperator(), $constraint->getValue());
+                        });
                 });
             });
 

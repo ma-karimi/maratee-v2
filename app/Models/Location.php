@@ -80,22 +80,6 @@ class Location extends BaseModel
     /**
      * @return HasMany
      */
-    public function connections(): HasMany
-    {
-        return $this->hasMany(Connection::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function entryHubs(): HasMany
-    {
-        return $this->hasMany(EntryHub::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
     public function herbariums(): HasMany
     {
         return $this->hasMany(Herbarium::class)->latest();
@@ -126,35 +110,11 @@ class Location extends BaseModel
     }
 
     /**
-     * @return HasMany
-     */
-    public function bioMoleculars(): HasMany
-    {
-        return $this->hasMany(BioMolecular::class)->latest();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function seedHubs(): HasMany
-    {
-        return $this->hasMany(SeedHub::class)->latest();
-    }
-
-    /**
      * @return BelongsTo
      */
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function villager(): BelongsTo
-    {
-        return $this->belongsTo(Village::class, 'village_id');
     }
 
     /**

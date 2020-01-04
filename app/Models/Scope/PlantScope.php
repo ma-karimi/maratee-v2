@@ -105,8 +105,10 @@ trait PlantScope
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
             $builder->whereHas('locations', function ($query) use ($constraint) {
-                return $query->where('country_id', $constraint->getOperator(), $constraint->getValue());
-
+                    return $query
+                        ->whereHas('province', function ($province) use ($constraint) {
+                            return $province->where('country_id', $constraint->getOperator(), $constraint->getValue());
+                        });
             });
 
             return true;

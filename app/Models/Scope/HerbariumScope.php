@@ -28,4 +28,20 @@ trait HerbariumScope
         }
         return false;
     }
+
+
+    protected function processLocation_CountryIdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('location', function ($query) use ($constraint) {
+                    return $query
+                        ->whereHas('province', function ($province) use ($constraint) {
+                            return $province->where('country_id', $constraint->getOperator(), $constraint->getValue());
+                        });
+            });
+
+            return true;
+        }
+        return false;
+    }
 }
