@@ -44,7 +44,7 @@ class Botanical extends BaseModel implements HasMedia
         'entrance_to_garden_id' => 'nullable|exists:botanical_generals,id',
         'growth_rate_id' => 'nullable|exists:botanical_generals,id',
         'first_flowering' => 'nullable|date',
-//        'first_seeding' => 'date',
+        'first_seeding' => 'nullable|date',
         'seed_rate_id' => 'nullable|exists:botanical_generals,id',
         'seed_formation_id' => 'nullable|integer',
         'winter_tolerance_id' => 'nullable|exists:botanical_generals,id',

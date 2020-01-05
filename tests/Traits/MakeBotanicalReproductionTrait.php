@@ -1,7 +1,7 @@
 <?php namespace Tests\Traits;
 
 use Faker\Factory as Faker;
-use App\Models\BotanicalPropagation;
+use App\Models\BotanicalSoil;
 use App\Repositories\BotanicalPropagationRepository;
 
 trait MakeBotanicalPropagationTrait
@@ -10,7 +10,7 @@ trait MakeBotanicalPropagationTrait
      * Create fake instance of BotanicalPropagation and save it in database
      *
      * @param array $botanicalPropagationFields
-     * @return BotanicalPropagation
+     * @return BotanicalSoil
      */
     public function makeBotanicalPropagation($botanicalPropagationFields = [])
     {
@@ -24,11 +24,11 @@ trait MakeBotanicalPropagationTrait
      * Get fake instance of BotanicalPropagation
      *
      * @param array $botanicalPropagationFields
-     * @return BotanicalPropagation
+     * @return BotanicalSoil
      */
     public function fakeBotanicalPropagation($botanicalPropagationFields = [])
     {
-        return new BotanicalPropagation($this->fakeBotanicalPropagationData($botanicalPropagationFields));
+        return new BotanicalSoil($this->fakeBotanicalPropagationData($botanicalPropagationFields));
     }
 
     /**

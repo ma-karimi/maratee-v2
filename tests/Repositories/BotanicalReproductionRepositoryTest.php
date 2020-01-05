@@ -1,6 +1,6 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\BotanicalPropagation;
+use App\Models\BotanicalSoil;
 use App\Repositories\BotanicalPropagationRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -32,7 +32,7 @@ class BotanicalPropagationRepositoryTest extends TestCase
         $createdBotanicalPropagation = $createdBotanicalPropagation->toArray();
         $this->assertArrayHasKey('id', $createdBotanicalPropagation);
         $this->assertNotNull($createdBotanicalPropagation['id'], 'Created BotanicalPropagation must have id specified');
-        $this->assertNotNull(BotanicalPropagation::find($createdBotanicalPropagation['id']), 'BotanicalPropagation with given id must be in DB');
+        $this->assertNotNull(BotanicalSoil::find($createdBotanicalPropagation['id']), 'BotanicalPropagation with given id must be in DB');
         $this->assertModelData($botanicalPropagation, $createdBotanicalPropagation);
     }
 
@@ -68,6 +68,6 @@ class BotanicalPropagationRepositoryTest extends TestCase
         $botanicalPropagation = $this->makeBotanicalPropagation();
         $resp = $this->botanicalPropagationRepo->delete($botanicalPropagation->id);
         $this->assertTrue($resp);
-        $this->assertNull(BotanicalPropagation::find($botanicalPropagation->id), 'BotanicalPropagation should not exist in DB');
+        $this->assertNull(BotanicalSoil::find($botanicalPropagation->id), 'BotanicalPropagation should not exist in DB');
     }
 }

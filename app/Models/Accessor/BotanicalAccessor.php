@@ -28,6 +28,7 @@ trait BotanicalAccessor
         }
         return $cycles;
     }
+
     public function getUsageAttribute()
     {
         $usages = null;
@@ -98,11 +99,30 @@ trait BotanicalAccessor
         return $propagations;
     }
 
+    public function getOriginAttribute()
+    {
+        $origins = null;
+
+        if ($this->relationLoaded('origins') && $this->origins->count()) {
+            $origins .= $this->origins->implode('name', ' & ');
+        }
+        return $origins;
+    }
+
+    public function getHabitatAttribute()
+    {
+        $habitats = null;
+
+        if ($this->relationLoaded('habitats') && $this->habitats->count()) {
+            $habitats .= $this->habitats->implode('name', ' & ');
+        }
+        return $habitats;
+    }
+
     public function getSeedFormationAttribute()
     {
         return !empty($this->attributes['seed_formation_id']) ? Arr::get(self::SEED_FORMATION, $this->attributes['seed_formation_id']) : null;
     }
-
 
 
     public function getGeographicalsAttribute()
@@ -134,6 +154,7 @@ trait BotanicalAccessor
                 ->first();
         }
     }
+
     public function getSeedingAttribute()
     {
         if ($this->relationLoaded('operations') && count($this->operations)) {

@@ -11,6 +11,6 @@ class BotanicalPropagationTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\BotanicalPropagation::class, 50)->create();
+        factory(App\Models\BotanicalSoil::class, 50)->create();
     }
 }

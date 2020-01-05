@@ -7,7 +7,7 @@ namespace App\Models\Relations;
 use App\Models\BotanicalGeneral;
 use App\Models\BotanicalIrrigation;
 use App\Models\BotanicalOperation;
-use App\Models\General;
+use App\Models\BotanicalSoil;
 use App\Models\Geographical;
 use App\Models\InternalHabitat;
 use App\Models\Location;
@@ -22,6 +22,11 @@ trait BotanicalRelation
     public function operations()
     {
         return $this->hasMany(BotanicalOperation::class)->latest();
+    }
+
+    public function soilTypes()
+    {
+        return $this->hasMany(BotanicalSoil::class)->latest();
     }
 
     public function values()
@@ -55,6 +60,18 @@ trait BotanicalRelation
             ->withTimestamps();
     }
 
+    public function origins()
+    {
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 7)->whereNull('botanical_general_hubs.deleted_at')
+            ->withTimestamps();
+    }
+
+    public function habitats()
+    {
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 16)->whereNull('botanical_general_hubs.deleted_at')
+            ->withTimestamps();
+    }
+
     public function foliageColors()
     {
         return $this->belongsToMany(BotanicalGeneral::class, 'botanical_colors')->latest()->where('botanical_generals.type_id', 6)->where('botanical_colors.type_id', 3)->whereNull('botanical_colors.deleted_at')
@@ -77,17 +94,6 @@ trait BotanicalRelation
     public function botanicalIrrigation()
     {
         return $this->hasOne(BotanicalIrrigation::class);
-    }
-
-
-    public function generalHabitat()
-    {
-        return $this->belongsTo(General::class)->whereType('habitat');
-    }
-
-    public function origin()
-    {
-        return $this->belongsTo(BotanicalGeneral::class, 'origin_id')->where('botanical_generals.type_id', 7);
     }
 
     public function soil()

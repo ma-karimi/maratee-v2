@@ -8,6 +8,7 @@ use App\Http\Requests\Api\Botanical\BotanicalInformationAPIRequest;
 use App\Http\Requests\Api\Botanical\BotanicalIrrigationAPIRequest;
 use App\Http\Requests\Api\Botanical\BotanicalLocationAPIRequest;
 use App\Http\Requests\Api\Botanical\BotanicalMediaAPIRequest;
+use App\Http\Requests\Api\Botanical\BotanicalSoilAPIRequest;
 use App\Models\Botanical;
 use App\Repositories\BotanicalRepository;
 use Exception;
@@ -76,7 +77,7 @@ class BotanicalAPIController extends AppBaseController
 
     private function getRelationFields()
     {
-        return ['distributions', 'organization', 'protection:id,name', 'internalHabitat', 'generalHabitat:id,name', 'origin', 'botanicalIrrigation', 'plantingConditions', 'propagations', 'usages', 'values', 'operations', 'media', 'taxonomy', 'locations', 'cycles', 'flowerColors', 'fruitColors', 'foliageColors', 'soil', 'summerTolerance', 'winterTolerance', 'seedGermination', 'seedRate', 'growthRate', 'entranceToGarden', 'wooden'];
+        return ['distributions', 'organization', 'protection:id,name', 'internalHabitat', 'generalHabitat:id,name', 'origins', 'habitats', 'botanicalIrrigation', 'plantingConditions', 'propagations', 'usages', 'values', 'operations', 'media', 'taxonomy', 'locations', 'cycles', 'flowerColors', 'fruitColors', 'foliageColors', 'soil', 'summerTolerance', 'winterTolerance', 'seedGermination', 'seedRate', 'growthRate', 'entranceToGarden', 'wooden', 'soilTypes'];
     }
 
     /**
@@ -695,6 +696,22 @@ class BotanicalAPIController extends AppBaseController
         }
 
         $botanical = $this->botanicalRepository->updateInfo($input, $id);
+
+        return $this->sendResponse($botanical->toArray(), 'Botanical updated successfully');
+    }
+
+    public function storeSoil($id, BotanicalSoilAPIRequest $request)
+    {
+        $input = $request->all();
+
+        /** @var Botanical $botanical */
+        $botanical = $this->botanicalRepository->find($id);
+
+        if ($botanical === null) {
+            return $this->sendError('Botanical not found');
+        }
+
+        $botanical = $this->botanicalRepository->updateSoil($input, $id);
 
         return $this->sendResponse($botanical->toArray(), 'Botanical updated successfully');
     }

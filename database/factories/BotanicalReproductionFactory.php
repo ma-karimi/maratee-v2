@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\BotanicalPropagation::class, function (Faker $faker) {
+$factory->define(App\Models\BotanicalSoil::class, function (Faker $faker) {
     $botanicals = \App\Models\Botanical::pluck('id')->toArray();
     return [
         'botanical_id' => $faker->randomElement($botanicals),
