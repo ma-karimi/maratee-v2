@@ -51,7 +51,7 @@ class Paleontology extends BaseModel implements HasMedia
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
-    protected $appends = ['samples', 'fair', 'gift', 'buy', 'borrow', 'visit', 'preservations'];
+    protected $appends = ['samples', 'fair', 'gift', 'buy', 'borrow', 'visit', 'preservations', 'citation'];
 
     /**
      * @return BelongsTo

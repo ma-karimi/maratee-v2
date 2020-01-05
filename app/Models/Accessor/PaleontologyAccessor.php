@@ -22,12 +22,24 @@ trait PaleontologyAccessor
 
         return $samples;
     }
+
     public function getPreservationsAttribute()
     {
         $text = null;
 
         if ($this->relationLoaded('generalPreservations') && $this->generalPreservations->count()) {
             $text = $this->generalPreservations->implode('name', ' & ');
+        }
+
+        return $text;
+    }
+
+    public function getCitationAttribute()
+    {
+        $text = null;
+
+        if ($this->relationLoaded('citations') && $this->citations->count()) {
+            $text = $this->citations->implode('name', ' & ');
         }
 
         return $text;
