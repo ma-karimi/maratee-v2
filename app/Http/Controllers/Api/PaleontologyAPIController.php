@@ -734,7 +734,7 @@ class PaleontologyAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="preservation",
+     *          name="preservations",
      *          in="body",
      *          description="Paleontology that should be stored",
      *          required=false,

@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Models\ActionHub;
 use App\Models\ActorHub;
 use App\Models\Paleontology;
-use App\Models\PaleontologySample;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
 
@@ -38,19 +37,14 @@ class PaleontologyRepository extends BaseRepository
      * @var LocalityRepository
      */
     private $localityRepo;
-    /**
-     * @var PaleontologySample
-     */
-    private $paleontologySample;
 
-    public function __construct(Application $app, ActionHub $actionHubRepo, ActorHub $actorHubRepo, LocationRepository $locationRepo, LocalityRepository $localityRepo, PaleontologySample $paleontologySample)
+    public function __construct(Application $app, ActionHub $actionHubRepo, ActorHub $actorHubRepo, LocationRepository $locationRepo, LocalityRepository $localityRepo)
     {
         parent::__construct($app);
         $this->actionHubRepo = $actionHubRepo;
         $this->actorHubRepo = $actorHubRepo;
         $this->locationRepo = $locationRepo;
         $this->localityRepo = $localityRepo;
-        $this->paleontologySample = $paleontologySample;
     }
 
     /**
@@ -73,31 +67,21 @@ class PaleontologyRepository extends BaseRepository
 
     public function create($input)
     {
-        $paleontology = parent::create(Arr::only($input->all(), [
-            'catalog_no', 'specimen_no', 'field_no', 'barcode_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'location_in_collection']));
+        $paleontology = parent::create($this->setPrimaryData($input));
 
-        $this->storePaleontologySample($input, $paleontology->id);
+        $this->createHub($paleontology->id, 'generalSamples', is_array($input['samples']) ? $input['samples'] : explode(',', $input['samples']));
 
         return $paleontology;
     }
 
-    private function storePaleontologySample($input, $id)
+    /**
+     * @param $input
+     * @return array
+     */
+    public function setPrimaryData($input): array
     {
-        $samples = is_array($input['samples']) ? $input['samples'] : explode(',', $input['samples']);
-
-
-        $this->paleontologySample
-            ->where('paleontology_id', $id)
-            ->whereNotIn('sample_id', $samples)
-            ->delete();
-        if (count($samples)) {
-            foreach ($samples as $item) {
-                $this->paleontologySample->firstOrCreate([
-                    'paleontology_id' => $id,
-                    'sample_id' => (int)$item,
-                ]);
-            }
-        }
+        return Arr::only($input->all(), [
+            'catalog_no', 'specimen_no', 'field_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'location_in_collection', 'additional_info']);
     }
 
     public function storeGeologyAndRemark($input, $paleontology_id)
@@ -114,12 +98,15 @@ class PaleontologyRepository extends BaseRepository
     {
         $this->storeDetermine($input, $paleontology_id);
         $this->storeCollect($input, $paleontology_id);
-
-        $data = Arr::only($input->all(), [
-            'preservation', 'pieces', 'color', 'element', 'treatment_history'
+        $data = Arr::only($input->all(), ['pieces', 'color', 'element', 'treatment_history'
         ]);
 
-        return parent::update($data, $paleontology_id);
+        $paleontology = parent::update($data, $paleontology_id);
+        $this->createHub($paleontology->id, 'generalPreservations', is_array($input['preservations']) ? $input['preservations'] : explode(',', $input['preservations']));
+        $this->createHub($paleontology->id, 'citations', is_array($input['citations']) ? $input['citations'] : explode(',', $input['citations']));
+
+        return $paleontology;
+
     }
 
     private function storeDetermine($input, $paleontology_id)
@@ -163,7 +150,6 @@ class PaleontologyRepository extends BaseRepository
             ],
             [
                 'date' => $input['collecting_date'] ?? null,
-                'description' => $input['field_notes'] ?? null
             ]);
         $this->actorHubRepo
             ->where('actorable_id', $action_hub->id)
@@ -183,10 +169,9 @@ class PaleontologyRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        $paleontology = parent::update(Arr::only($input->all(), [
-            'catalog_no', 'specimen_no', 'field_no', 'barcode_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'location_in_collection']), $id);
+        $paleontology = parent::update($this->setPrimaryData($input), $id);
 
-        $this->storePaleontologySample($input, $id);
+        $this->createHub($paleontology->id, 'generalSamples', is_array($input['samples']) ? $input['samples'] : explode(',', $input['samples']));
         return $paleontology;
     }
 
@@ -213,7 +198,7 @@ class PaleontologyRepository extends BaseRepository
     private function storeLocation($input, $location_id = null)
     {
         $data = Arr::only($input, [
-            'village', 'city_id', 'province_id', 'address_en', 'region_name', 'address_fa'
+            'village', 'city_id', 'province_id', 'address_en', 'region_name', 'address_fa', 'point'
         ]);
 
         if ($location_id) {
@@ -239,12 +224,5 @@ class PaleontologyRepository extends BaseRepository
 
             $media_record->update($media_input);
         }
-    }
-
-    private function palebotanyData($input)
-    {
-        return Arr::only($input, [
-            'geology_age_era_id', 'geology_age_period_id', 'geology_age_epoch_id', 'geology_age_stage_id', 'preservation', 'pieces', 'color', 'element', 'treatment_history', 'access_code', 'additional_info', 'update_frequency', 'last_update', 'excavation', 'description'
-        ]);
     }
 }

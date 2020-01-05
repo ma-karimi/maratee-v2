@@ -22,4 +22,14 @@ trait PaleontologyAccessor
 
         return $samples;
     }
+    public function getPreservationsAttribute()
+    {
+        $text = null;
+
+        if ($this->relationLoaded('generalPreservations') && $this->generalPreservations->count()) {
+            $text = $this->generalPreservations->implode('name', ' & ');
+        }
+
+        return $text;
+    }
 }

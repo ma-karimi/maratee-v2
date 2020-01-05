@@ -7,6 +7,7 @@ use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ActionRelation;
 use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -26,7 +27,6 @@ class Paleontology extends BaseModel implements HasMedia
     public static $rules = [
 
 
-        'update_frequency' => 'nullable|string',
         'location_in_collection' => 'nullable|integer',
         'pieces' => 'nullable|integer',
         'geology_age_era_id' => 'nullable|integer|exists:geology_ages,id',
@@ -34,7 +34,6 @@ class Paleontology extends BaseModel implements HasMedia
         'geology_age_stage_id' => 'nullable|integer|exists:geology_ages,id',
         'geology_age_period_id' => 'nullable|integer|exists:geology_ages,id',
         'taxonomy_id' => 'required|exists:taxonomies,id',
-        'last_update' => 'nullable|date',
         'general_order_id' => 'nullable|integer|exists:generals,id',
         'general_plant_type_id' => 'nullable|integer|exists:generals,id',
     ];
@@ -52,7 +51,7 @@ class Paleontology extends BaseModel implements HasMedia
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
-    protected $appends = ['samples', 'fair', 'gift', 'buy', 'borrow', 'visit'];
+    protected $appends = ['samples', 'fair', 'gift', 'buy', 'borrow', 'visit', 'preservations'];
 
     /**
      * @return BelongsTo
@@ -128,7 +127,12 @@ class Paleontology extends BaseModel implements HasMedia
 
     public function generalSamples()
     {
-        return $this->belongsToMany(General::class, 'paleontology_samples', 'paleontology_id', 'sample_id')->whereType('sample')->whereNull('paleontology_samples.deleted_at');
+        return $this->belongsToMany(General::class, 'paleontology_generals', 'paleontology_id', 'general_id')->whereType('sample')->whereNull('paleontology_generals.deleted_at')->latest()->withTimestamps();
+    }
+
+    public function generalPreservations()
+    {
+        return $this->belongsToMany(General::class, 'paleontology_generals', 'paleontology_id', 'general_id')->whereType('preservation')->whereNull('paleontology_generals.deleted_at')->latest()->withTimestamps();
     }
 
     /**
@@ -161,9 +165,10 @@ class Paleontology extends BaseModel implements HasMedia
         return $this->hasMany(PaleontologyMap::class)->latest();
     }
 
-    public function citations(): HasMany
+    public function citations()
     {
-        return $this->hasMany(PaleontologyCitation::class)->latest();
+        return $this->belongsToMany(Citation::class, 'paleontology_citations')->latest()
+            ->whereNull('paleontology_citations.deleted_at')->withTimestamps();
     }
 
     public function getVisitAttribute()
