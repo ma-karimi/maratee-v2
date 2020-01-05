@@ -52,4 +52,9 @@ class Citation extends BaseModel
 
         return $authors;
     }
+
+    public function getNameAttribute()
+    {
+        return $this->publication_name;
+    }
 }
