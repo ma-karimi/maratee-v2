@@ -83,14 +83,11 @@ class BotanicalRepository extends BaseRepository
     {
         return [
             'taxonomy_id' => $input['taxonomy_id'] ?? null,
-            'origin_id' => $input['origin_id'] ?? null,
-            'general_habitat_id' => $input['general_habitat_id'] ?? null,
             'organization_id' => $input['organization_id'] ?? null,
-            'internal_habitat_id' => $input['internal_habitat_id'] ?? null,
             'protection_id' => $input['protection_id'] ?? null,
             'wooden_id' => $input['wooden_id'] ?? null,
             'height' => $input['height'] ?? null,
-            'entrance_to_garden_id' => $input['entrance_to_garden_id'] ?? null,
+            'collection_id' => $input['collection_id'] ?? null,
         ];
     }
 
@@ -157,10 +154,8 @@ class BotanicalRepository extends BaseRepository
             'seed_formation_id' => $input['seed_formation_id'] ?? null,
             'winter_tolerance_id' => $input['winter_tolerance_id'] ?? null,
             'summer_tolerance_id' => $input['summer_tolerance_id'] ?? null,
-            'soil_id' => $input['soil_id'] ?? null,
             'growth_rate_id' => $input['growth_rate_id'] ?? null,
             'sensitivity_conditions' => $input['sensitivity_conditions'] ?? null,
-            'garden_map' => $input['garden_map'] ?? null,
             'comments' => $input['comments'] ?? null,
         ], $id);
         $this->createHub($botanical->id, 'propagations', is_array($input['propagations']) ? $input['propagations'] : explode(',', $input['propagations']));

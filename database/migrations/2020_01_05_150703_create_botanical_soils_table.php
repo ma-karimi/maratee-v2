@@ -35,6 +35,12 @@ class CreateBotanicalSoilsTable extends Migration
             ]);
         }
 
+
+        Schema::table('botanicals', function(Blueprint $table)
+        {
+            $table->unsignedBigInteger('collection_id');
+            $table->dropColumn(['origin_id', 'general_habitat_id', 'garden_map']);
+        });
         Schema::enableForeignKeyConstraints();
 
 

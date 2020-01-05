@@ -101,6 +101,11 @@ trait BotanicalRelation
         return $this->belongsTo(BotanicalGeneral::class, 'soil_id')->where('botanical_generals.type_id', 13);
     }
 
+    public function collection()
+    {
+        return $this->belongsTo(BotanicalGeneral::class, 'collection_id')->where('botanical_generals.type_id', 18);
+    }
+
     public function seedGermination()
     {
         return $this->belongsTo(BotanicalGeneral::class, 'seed_germination_id')->where('botanical_generals.type_id', 15);
