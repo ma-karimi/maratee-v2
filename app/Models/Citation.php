@@ -29,7 +29,7 @@ class Citation extends BaseModel
      */
     protected $table = 'citations';
     protected $with = ['actors'];
-    protected $appends = ['authors'];
+    protected $appends = ['authors', 'name'];
 
     /**
      * @return MorphToMany
