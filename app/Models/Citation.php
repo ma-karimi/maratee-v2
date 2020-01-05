@@ -24,7 +24,13 @@ class Citation extends BaseModel
      */
 
     protected $with = ['actors'];
-    protected $appends = ['authors'];
+    protected $appends = ['authors', 'name'];
+
+    public function getNameAttribute(){
+
+        $text = !empty($this->year) ? ' - ' . $this->year : null;
+        return $this->publication_name . $text;
+    }
 
     /**
      * @return MorphToMany

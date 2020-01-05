@@ -15,11 +15,7 @@ class ChangePaleontologyCitationsTable extends Migration
     public function up()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::rename('paleontology_citations', 'citations');
-        Schema::table('citations', function(Blueprint $table)
-        {
-            $table->dropColumn(['paleontology_id']);
-        });
+
         Schema::create('paleontology_citations', function(Blueprint $table)
         {
            $table->bigIncrements('id');
