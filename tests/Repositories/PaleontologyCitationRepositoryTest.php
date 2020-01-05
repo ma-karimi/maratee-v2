@@ -1,7 +1,7 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\PaleontologyCitation;
-use App\Repositories\PaleontologyCitationRepository;
+use App\Models\Citation;
+use App\Repositories\CitationRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\Traits\MakePaleontologyCitationTrait;
@@ -12,14 +12,14 @@ class PaleontologyCitationRepositoryTest extends TestCase
     use MakePaleontologyCitationTrait, ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var PaleontologyCitationRepository
+     * @var CitationRepository
      */
     protected $paleontologyCitationRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->paleontologyCitationRepo = \App::make(PaleontologyCitationRepository::class);
+        $this->paleontologyCitationRepo = \App::make(CitationRepository::class);
     }
 
     /**
@@ -32,7 +32,7 @@ class PaleontologyCitationRepositoryTest extends TestCase
         $createdPaleontologyCitation = $createdPaleontologyCitation->toArray();
         $this->assertArrayHasKey('id', $createdPaleontologyCitation);
         $this->assertNotNull($createdPaleontologyCitation['id'], 'Created PaleontologyCitation must have id specified');
-        $this->assertNotNull(PaleontologyCitation::find($createdPaleontologyCitation['id']), 'PaleontologyCitation with given id must be in DB');
+        $this->assertNotNull(Citation::find($createdPaleontologyCitation['id']), 'PaleontologyCitation with given id must be in DB');
         $this->assertModelData($paleontologyCitation, $createdPaleontologyCitation);
     }
 
@@ -68,6 +68,6 @@ class PaleontologyCitationRepositoryTest extends TestCase
         $paleontologyCitation = $this->makePaleontologyCitation();
         $resp = $this->paleontologyCitationRepo->delete($paleontologyCitation->id);
         $this->assertTrue($resp);
-        $this->assertNull(PaleontologyCitation::find($paleontologyCitation->id), 'PaleontologyCitation should not exist in DB');
+        $this->assertNull(Citation::find($paleontologyCitation->id), 'PaleontologyCitation should not exist in DB');
     }
 }

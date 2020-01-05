@@ -1,8 +1,8 @@
 <?php namespace Tests\Traits;
 
 use Faker\Factory as Faker;
-use App\Models\PaleontologyCitation;
-use App\Repositories\PaleontologyCitationRepository;
+use App\Models\Citation;
+use App\Repositories\CitationRepository;
 
 trait MakePaleontologyCitationTrait
 {
@@ -10,12 +10,12 @@ trait MakePaleontologyCitationTrait
      * Create fake instance of PaleontologyCitation and save it in database
      *
      * @param array $paleontologyCitationFields
-     * @return PaleontologyCitation
+     * @return Citation
      */
     public function makePaleontologyCitation($paleontologyCitationFields = [])
     {
-        /** @var PaleontologyCitationRepository $paleontologyCitationRepo */
-        $paleontologyCitationRepo = \App::make(PaleontologyCitationRepository::class);
+        /** @var CitationRepository $paleontologyCitationRepo */
+        $paleontologyCitationRepo = \App::make(CitationRepository::class);
         $theme = $this->fakePaleontologyCitationData($paleontologyCitationFields);
         return $paleontologyCitationRepo->create($theme);
     }
@@ -24,11 +24,11 @@ trait MakePaleontologyCitationTrait
      * Get fake instance of PaleontologyCitation
      *
      * @param array $paleontologyCitationFields
-     * @return PaleontologyCitation
+     * @return Citation
      */
     public function fakePaleontologyCitation($paleontologyCitationFields = [])
     {
-        return new PaleontologyCitation($this->fakePaleontologyCitationData($paleontologyCitationFields));
+        return new Citation($this->fakePaleontologyCitationData($paleontologyCitationFields));
     }
 
     /**

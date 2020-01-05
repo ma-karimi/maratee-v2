@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\PaleontologyCitation;
+use App\Models\Citation;
 use Illuminate\Support\Arr;
 
 /**
@@ -10,7 +10,7 @@ use Illuminate\Support\Arr;
  * @package App\Repositories
  * @version July 14, 2019, 11:27 am UTC
  */
-class PaleontologyCitationRepository extends BaseRepository
+class CitationRepository extends BaseRepository
 {
     /**
      * @var array
@@ -35,7 +35,7 @@ class PaleontologyCitationRepository extends BaseRepository
      **/
     public function model()
     {
-        return PaleontologyCitation::class;
+        return Citation::class;
     }
 
     public function create($input)

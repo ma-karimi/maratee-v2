@@ -16,16 +16,16 @@ class ChangePaleontologyCitationsTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-//        Schema::create('paleontology_citations', function(Blueprint $table)
-//        {
-//           $table->bigIncrements('id');
-//           $table->unsignedBigInteger('paleontology_id');
-//           $table->unsignedBigInteger('citation_id');
-//           $table->timestamps();
-//           $table->softDeletesTz();
-//        });
-//        Schema::dropIfExists('paleontology_documents');
-//        Schema::rename('paleontology_samples', 'paleontology_generals');
+        Schema::create('paleontology_citations', function(Blueprint $table)
+        {
+           $table->bigIncrements('id');
+           $table->unsignedBigInteger('paleontology_id');
+           $table->unsignedBigInteger('citation_id');
+           $table->timestamps();
+           $table->softDeletesTz();
+        });
+        Schema::dropIfExists('paleontology_documents');
+        Schema::rename('paleontology_samples', 'paleontology_generals');
         Schema::table('paleontology_generals', function(Blueprint $table)
         {
             $table->renameColumn('sample_id', 'general_id')->change();

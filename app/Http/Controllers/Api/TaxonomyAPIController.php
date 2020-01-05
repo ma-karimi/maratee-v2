@@ -344,8 +344,10 @@ class TaxonomyAPIController extends AppBaseController
 
     /**
      * @param int $id
+     * @param null $delete
      * @return Response
      *
+     * @throws Exception
      * @SWG\Delete(
      *      path="/taxonomies/{id}",
      *      summary="Remove the specified Taxonomy from storage",
@@ -379,9 +381,8 @@ class TaxonomyAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws Exception
      */
-    public function destroy($id)
+    public function destroy($id, $delete = null)
     {
         /** @var Taxonomy $taxonomy */
         $taxonomy = $this->taxonomyRepository->find($id);
@@ -390,7 +391,13 @@ class TaxonomyAPIController extends AppBaseController
             return $this->sendError('Taxonomy not found');
         }
 
+        if(empty($delete)){
+            $taxonomy->loadCount(['flora', 'nonflower', 'herbarium', 'medicinalPlant']);
+        }
+
+        if($delete == 'delete'){
         $taxonomy->delete();
+        }
 
         return $this->sendResponse($id, 'Taxonomy deleted successfully');
     }

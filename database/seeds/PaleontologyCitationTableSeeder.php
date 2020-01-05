@@ -11,6 +11,6 @@ class PaleontologyCitationTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\PaleontologyCitation::class, 50)->create();
+        factory(App\Models\Citation::class, 50)->create();
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\PaleontologyCitation;
+use App\Models\Citation;
 use InfyOm\Generator\Request\APIRequest;
 
-class PaleontologyCitationAPIRequest extends APIRequest
+class CitationAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class PaleontologyCitationAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return PaleontologyCitation::$rules;
+        return Citation::$rules;
     }
 }

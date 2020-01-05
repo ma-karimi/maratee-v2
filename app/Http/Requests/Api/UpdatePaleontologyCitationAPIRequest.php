@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\PaleontologyCitation;
+use App\Models\Citation;
 use App\Models\PaleontologyMedia;
 use InfyOm\Generator\Request\APIRequest;
 
@@ -25,6 +25,6 @@ class UpdatePaleontologyCitationAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return PaleontologyCitation::$rules;
+        return Citation::$rules;
     }
 }

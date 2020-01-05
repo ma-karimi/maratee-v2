@@ -3,26 +3,26 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\Api\PaleontologyCitationAPIRequest;
-use App\Models\PaleontologyCitation;
-use App\Repositories\PaleontologyCitationRepository;
+use App\Http\Requests\Api\CitationAPIRequest;
+use App\Models\Citation;
+use App\Repositories\CitationRepository;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
- * Class PaleontologyCitationController
+ * Class CitationAPIController
  * @package App\Http\Controllers\Api
  */
-class PaleontologyCitationAPIController extends AppBaseController
+class CitationAPIController extends AppBaseController
 {
-    /** @var  PaleontologyCitationRepository */
-    private $paleontologyCitationRepository;
+    /** @var  CitationRepository */
+    private $citationRepository;
 
-    public function __construct(PaleontologyCitationRepository $paleontologyCitationRepo)
+    public function __construct(CitationRepository $citationRepo)
     {
-        $this->paleontologyCitationRepository = $paleontologyCitationRepo;
+        $this->citationRepository = $citationRepo;
     }
 
     /**
@@ -30,10 +30,10 @@ class PaleontologyCitationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/paleontology_citations",
-     *      summary="Get a listing of the PaleontologyCitations.",
-     *      tags={"PaleontologyCitation"},
-     *      description="Get all PaleontologyCitations",
+     *      path="/citations",
+     *      summary="Get a listing of the Citations.",
+     *      tags={"Citation"},
+     *      description="Get all Citations",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -47,7 +47,7 @@ class PaleontologyCitationAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/PaleontologyCitation")
+     *                  @SWG\Items(ref="#/definitions/Citation")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -60,72 +60,66 @@ class PaleontologyCitationAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $paleontologyCitations = $this->paleontologyCitationRepository->paginate(
+        $citations = $this->citationRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
             $request->get('relations')
         );
 
-        return $this->sendResponse($paleontologyCitations->toArray(), 'Paleontology Citations retrieved successfully');
+        return $this->sendResponse($citations->toArray(), 'Citations retrieved successfully');
     }
 
     /**
-     * @param PaleontologyCitationAPIRequest $request
+     * @param CitationAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/paleontology_citations",
-     *      summary="Store a newly created PaleontologyCitation in storage",
-     *      tags={"PaleontologyCitation"},
-     *      description="Store PaleontologyCitation",
+     *      path="/citations",
+     *      summary="Store a newly created Citation in storage",
+     *      tags={"Citation"},
+     *      description="Store Citation",
      *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="paleontology_id",
-     *          in="body",
-     *          required=true,
-     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
-     *      ),
      *      @SWG\Parameter(
      *          name="author_id",
      *          in="body",
      *          required=true,
-     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *     @SWG\Schema(ref="#/definitions/Citation")
      *      ),
      *      @SWG\Parameter(
      *          name="year",
      *          in="body",
      *          required=true,
-     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *     @SWG\Schema(ref="#/definitions/Citation")
      *      ),
      *      @SWG\Parameter(
      *          name="publication_name",
      *          in="body",
      *          required=false,
-     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *     @SWG\Schema(ref="#/definitions/Citation")
      *      ),
      *      @SWG\Parameter(
      *          name="volume",
      *          in="body",
      *          required=false,
-     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *     @SWG\Schema(ref="#/definitions/Citation")
      *      ),
      *      @SWG\Parameter(
      *          name="pages",
      *          in="body",
      *          required=false,
-     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *     @SWG\Schema(ref="#/definitions/Citation")
      *      ),
      *      @SWG\Parameter(
      *          name="plates",
      *          in="body",
      *          required=false,
-     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *     @SWG\Schema(ref="#/definitions/Citation")
      *      ),
      *      @SWG\Parameter(
      *          name="figures_number",
      *          in="body",
      *          required=false,
-     *      @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *      @SWG\Schema(ref="#/definitions/Citation")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -138,7 +132,7 @@ class PaleontologyCitationAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/PaleontologyCitation"
+     *                  ref="#/definitions/Citation"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -149,13 +143,13 @@ class PaleontologyCitationAPIController extends AppBaseController
      * )
      * @throws ValidationException
      */
-    public function store(PaleontologyCitationAPIRequest $request)
+    public function store(CitationAPIRequest $request)
     {
         $input = $request->all();
 
-        $paleontologyCitation = $this->paleontologyCitationRepository->create($input);
+        $citation = $this->citationRepository->create($input);
 
-        return $this->sendResponse($paleontologyCitation->toArray(), 'Paleontology Citation saved successfully');
+        return $this->sendResponse($citation->toArray(), 'Citation saved successfully');
     }
 
     /**
@@ -163,14 +157,14 @@ class PaleontologyCitationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/paleontology_citations/{id}",
-     *      summary="Display the specified PaleontologyCitation",
-     *      tags={"PaleontologyCitation"},
-     *      description="Get PaleontologyCitation",
+     *      path="/citations/{id}",
+     *      summary="Display the specified Citation",
+     *      tags={"Citation"},
+     *      description="Get Citation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of PaleontologyCitation",
+     *          description="id of Citation",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -186,7 +180,7 @@ class PaleontologyCitationAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/PaleontologyCitation"
+     *                  ref="#/definitions/Citation"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -198,82 +192,76 @@ class PaleontologyCitationAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var PaleontologyCitation $paleontologyCitation */
-        $paleontologyCitation = $this->paleontologyCitationRepository->find($id, \request()->get('relations'));
+        /** @var Citation $citation */
+        $citation = $this->citationRepository->find($id, \request()->get('relations'));
 
-        if ($paleontologyCitation === null) {
-            return $this->sendError('Paleontology Citation not found');
+        if ($citation === null) {
+            return $this->sendError('Citation not found');
         }
 
-        return $this->sendResponse($paleontologyCitation->toArray(), 'Paleontology Citation retrieved successfully');
+        return $this->sendResponse($citation->toArray(), 'Citation retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param PaleontologyCitationAPIRequest $request
+     * @param CitationAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/paleontology_citations/{id}",
-     *      summary="Update the specified PaleontologyCitation in storage",
-     *      tags={"PaleontologyCitation"},
-     *      description="Update PaleontologyCitation",
+     *      path="/citations/{id}",
+     *      summary="Update the specified Citation in storage",
+     *      tags={"Citation"},
+     *      description="Update Citation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of PaleontologyCitation",
+     *          description="id of Citation",
      *          type="integer",
      *          required=true,
      *          in="path",
-     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="paleontology_id",
-     *          in="body",
-     *          required=true,
-     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *     @SWG\Schema(ref="#/definitions/Citation")
      *      ),
      *      @SWG\Parameter(
      *          name="actor_id",
      *          in="body",
      *          required=true,
-     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *     @SWG\Schema(ref="#/definitions/Citation")
      *      ),
      *      @SWG\Parameter(
      *          name="year",
      *          in="body",
      *          required=true,
-     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *     @SWG\Schema(ref="#/definitions/Citation")
      *      ),
      *      @SWG\Parameter(
      *          name="publication_name",
      *          in="body",
      *          required=false,
-     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *     @SWG\Schema(ref="#/definitions/Citation")
      *      ),
      *      @SWG\Parameter(
      *          name="volume",
      *          in="body",
      *          required=false,
-     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *     @SWG\Schema(ref="#/definitions/Citation")
      *      ),
      *      @SWG\Parameter(
      *          name="pages",
      *          in="body",
      *          required=false,
-     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *     @SWG\Schema(ref="#/definitions/Citation")
      *      ),
      *      @SWG\Parameter(
      *          name="plates",
      *          in="body",
      *          required=false,
-     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *     @SWG\Schema(ref="#/definitions/Citation")
      *      ),
      *      @SWG\Parameter(
      *          name="figures_number",
      *          in="body",
      *          required=false,
-     *     @SWG\Schema(ref="#/definitions/PaleontologyCitation")
+     *     @SWG\Schema(ref="#/definitions/Citation")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -286,7 +274,7 @@ class PaleontologyCitationAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/PaleontologyCitation"
+     *                  ref="#/definitions/Citation"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -295,21 +283,22 @@ class PaleontologyCitationAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws ValidationException
      */
-    public function update($id, PaleontologyCitationAPIRequest $request)
+    public function update($id, CitationAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var PaleontologyCitation $paleontologyCitation */
-        $paleontologyCitation = $this->paleontologyCitationRepository->find($id);
+        /** @var Citation $citation */
+        $citation = $this->citationRepository->find($id);
 
-        if ($paleontologyCitation === null) {
-            return $this->sendError('Paleontology Citation not found');
+        if ($citation === null) {
+            return $this->sendError('Citation not found');
         }
 
-        $paleontologyCitation = $this->paleontologyCitationRepository->update($input, $id);
+        $citation = $this->citationRepository->update($input, $id);
 
-        return $this->sendResponse($paleontologyCitation->toArray(), 'PaleontologyCitation updated successfully');
+        return $this->sendResponse($citation->toArray(), 'Citation updated successfully');
     }
 
     /**
@@ -317,14 +306,14 @@ class PaleontologyCitationAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Delete(
-     *      path="/paleontology_citations/{id}",
-     *      summary="Remove the specified PaleontologyCitation from storage",
-     *      tags={"PaleontologyCitation"},
-     *      description="Delete PaleontologyCitation",
+     *      path="/citations/{id}",
+     *      summary="Remove the specified Citation from storage",
+     *      tags={"Citation"},
+     *      description="Delete Citation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of PaleontologyCitation",
+     *          description="id of Citation",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -353,15 +342,15 @@ class PaleontologyCitationAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var PaleontologyCitation $paleontologyCitation */
-        $paleontologyCitation = $this->paleontologyCitationRepository->find($id, \request()->get('relations'));
+        /** @var Citation $citation */
+        $citation = $this->citationRepository->find($id, \request()->get('relations'));
 
-        if ($paleontologyCitation === null) {
-            return $this->sendError('Paleontology Citation not found');
+        if ($citation === null) {
+            return $this->sendError('Citation not found');
         }
 
-        $paleontologyCitation->delete();
+        $citation->delete();
 
-        return $this->sendResponse($id, 'Paleontology Citation deleted successfully');
+        return $this->sendResponse($id, 'Citation deleted successfully');
     }
 }

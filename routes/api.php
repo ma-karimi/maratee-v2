@@ -47,6 +47,7 @@ Route::post('paleontologies/{id}/geology-remark', 'PaleontologyAPIController@geo
 Route::post('paleontologies/{id}/information', 'PaleontologyAPIController@information');
 
 Route::apiResource('paleontologies', 'PaleontologyAPIController');
+Route::apiResource('citations', 'CitationAPIController');
 Route::apiResource('paleontology_maps', 'PaleontologyMapAPIController');
 
 

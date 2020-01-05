@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\PaleontologyCitation::class, function (Faker $faker) {
+$factory->define(App\Models\Citation::class, function (Faker $faker) {
     $paleontologies = \App\Models\Paleontology::pluck('id')->toArray();
     return [
         'paleontology_id' => $faker->randomElement($paleontologies),

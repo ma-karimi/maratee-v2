@@ -4,33 +4,32 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
- *      definition="Citation",
- *      required={"title"}
+ *      definition="PaleontologyCitation",
+ *      required={"publication_name","authors"}
  * )
  */
 class Citation extends BaseModel
 {
 
-
+    public static $rules = [
+        'year' => 'required|integer',
+        'volume' => 'nullable|string',
+        'pages' => 'nullable|string',
+        'plates' => 'nullable|string',
+        'publication_name' => 'required|string',
+        'figures_number' => 'nullable|string',
+    ];
     /**
-     * The attributes that should be casted to native types.
+     * The database table used by the model.
      *
-     * @var array
+     * @var string
      */
-
+    protected $table = 'citations';
     protected $with = ['actors'];
-    protected $appends = ['authors', 'name'];
-
-    public function getNameAttribute(){
-
-        $text = !empty($this->year) ? ' - ' . $this->year : null;
-        return $this->publication_name . $text;
-    }
+    protected $appends = ['authors'];
 
     /**
      * @return MorphToMany
@@ -42,7 +41,6 @@ class Citation extends BaseModel
             ->whereNull('actor_hubs.deleted_at')
             ->withTimestamps();
     }
-
 
     public function getAuthorsAttribute()
     {
