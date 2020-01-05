@@ -21,6 +21,9 @@ class CryoBank extends BaseModel
     public const TYPE_SAMPLE = [
         1 => 'seed', 2 => 'shoot', 3 => 'cell'
     ];
+    public const SAMPLE = [
+        1 => 'S', 2 => 'SH', 3 => 'C'
+    ];
     public static $rules = [
         'protection_id' => 'required|exists:protections,id',
         'taxonomy_id' => 'required|exists:taxonomies,id',
@@ -48,7 +51,7 @@ class CryoBank extends BaseModel
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
-    protected $appends = ['sample_type'];
+    protected $appends = ['sample_type', 'sample', 'genotype_code'];
 
     /**
      * @return BelongsTo

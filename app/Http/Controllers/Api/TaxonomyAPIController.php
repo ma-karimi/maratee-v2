@@ -392,7 +392,8 @@ class TaxonomyAPIController extends AppBaseController
         }
 
         if (empty($delete)) {
-            $taxonomy->loadCount(['flora', 'nonflower', 'herbarium', 'medicinalPlant', 'seedCollection', 'botanical', 'palebotany', 'chromosome', 'cryobank']);
+            $taxonomy = $taxonomy->loadCount(['flora', 'nonflower', 'herbarium', 'medicinalPlant', 'seedCollection', 'botanical', 'palebotany', 'chromosome', 'cryobank']);
+            return $this->sendResponse($taxonomy, 'Taxonomy retrieved successfully');
         }
 
         if ($delete == 'delete') {
