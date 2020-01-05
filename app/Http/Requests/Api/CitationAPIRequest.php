@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api;
 
 use App\Models\Citation;
+use App\Models\PaleontologyMedia;
 use InfyOm\Generator\Request\APIRequest;
 
 class CitationAPIRequest extends APIRequest

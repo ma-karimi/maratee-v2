@@ -6,7 +6,7 @@ use App\Models\Citation;
 use Illuminate\Support\Arr;
 
 /**
- * Class PaleontologyCitationRepository
+ * Class CitationRepository
  * @package App\Repositories
  * @version July 14, 2019, 11:27 am UTC
  */

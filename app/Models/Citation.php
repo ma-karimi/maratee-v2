@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
- *      definition="PaleontologyCitation",
+ *      definition="Citation",
  *      required={"publication_name","authors"}
  * )
  */
