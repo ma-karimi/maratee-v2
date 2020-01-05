@@ -121,17 +121,40 @@ class Taxonomy extends BaseModel
     /**
      * @return HasMany
      */
-    public function seeds(): HasMany
+    public function seedCollection(): HasMany
     {
-        return $this->hasMany(Herbarium::class)->where('is_flowering', 0);
+        return $this->hasMany(SeedCollection::class);
+    }
+    /**
+     * @return HasMany
+     */
+    public function botanical(): HasMany
+    {
+        return $this->hasMany(Botanical::class);
     }
 
     /**
      * @return HasMany
      */
-    public function seedCollection(): HasMany
+    public function palebotany(): HasMany
     {
-        return $this->hasMany(SeedCollection::class);
+        return $this->hasMany(Botanical::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function chromosome(): HasMany
+    {
+        return $this->hasMany(Chromosome::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function cryobank(): HasMany
+    {
+        return $this->hasMany(Chromosome::class);
     }
 
     /**

@@ -391,12 +391,12 @@ class TaxonomyAPIController extends AppBaseController
             return $this->sendError('Taxonomy not found');
         }
 
-        if(empty($delete)){
-            $taxonomy->loadCount(['flora', 'nonflower', 'herbarium', 'medicinalPlant']);
+        if (empty($delete)) {
+            $taxonomy->loadCount(['flora', 'nonflower', 'herbarium', 'medicinalPlant', 'seedCollection', 'botanical', 'palebotany', 'chromosome', 'cryobank']);
         }
 
-        if($delete == 'delete'){
-        $taxonomy->delete();
+        if ($delete == 'delete') {
+            $taxonomy->delete();
         }
 
         return $this->sendResponse($id, 'Taxonomy deleted successfully');

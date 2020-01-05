@@ -21,13 +21,9 @@ class PaleontologyGeologyRemarkAPIRequest extends APIRequest
 
         return [
             'geology_age_era_id' => 'required|exists:geology_ages,id',
-            'geology_age_epoch_id' => 'required|exists:geology_ages,id',
+            'geology_age_epoch_id' => 'nullable|exists:geology_ages,id',
             'geology_age_period_id' => 'required|exists:geology_ages,id',
-            'geology_age_stage_id' => 'required|exists:geology_ages,id',
-            'last_update' => 'nullable|date',
-            'access_code' => 'nullable|string',
-            'update_frequency' => 'nullable|string',
-            'additional_info' => 'nullable|string',
+            'geology_age_stage_id' => 'nullable|exists:geology_ages,id',
         ];
     }
 }

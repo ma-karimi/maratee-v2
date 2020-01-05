@@ -173,7 +173,8 @@ Route::apiResource('transactions', 'TransactionAPIController');
 
 Route::get('taxonomies/excel', 'TaxonomyAPIController@excel');
 Route::get('taxonomies/all', 'TaxonomyAPIController@all');
-Route::apiResource('taxonomies', 'TaxonomyAPIController');
+Route::delete('taxonomies/{id}/{delete}', 'TaxonomyAPIController@destroy');
+Route::apiResource('taxonomies', 'TaxonomyAPIController')->except('delete');
 
 
 Route::apiResource('planting_conditions', 'PlantingConditionAPIController');
