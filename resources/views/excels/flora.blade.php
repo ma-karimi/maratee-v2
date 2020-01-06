@@ -64,7 +64,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($plants as $item)
+    @foreach($result as $item)
         <tr>
             <td style="{{$td}}">{{ $item->id ?? null }}</td>
             @if($keys['family'] ?? false)
