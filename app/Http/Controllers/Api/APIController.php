@@ -266,9 +266,8 @@ class APIController extends AppBaseController
         if (\request()->filled('excel')) {
             $model = Str::ucfirst(\request('model'));
             $file = 'App\\Exports\\' . $model . 'Export';
-            $file_export = resolve($file);
             $file_excel = "Export${model}List-" . date('Y-m-d-H-i-s') . '.xlsx';
-            Excel::store(new $file_export($result), $file_excel);
+            Excel::store(new $file($result), $file_excel);
         }
         return $this->sendResponse($result, $name . ' loaded successfully');
     }
