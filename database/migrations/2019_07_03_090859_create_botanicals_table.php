@@ -36,7 +36,7 @@ class CreateBotanicalsTable extends Migration
 
             $table->tinyInteger('seed_germination_id')->nullable()->comment('[1: good, 2: moderate, 3: low, 4: none]');
 
-            $table->date('planting')->nullable();
+            $table->date('planting_date')->nullable();
             $table->float('cutting_rooting', 4, 2)->nullable();
 
             $table->string('treatment')->nullable();

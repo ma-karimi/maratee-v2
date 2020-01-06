@@ -22,12 +22,12 @@
     });
 });*/
 
-use App\Repositories\BotanicalOperationRepository;
 
 Route::delete('/{class}/multiple_delete', 'APIController@multipleDestroy');
 Route::post('/{class}/hub', 'APIController@storeHub');
 Route::delete('/{class}/hub', 'APIController@destroyHub');
 Route::get('/{class}/constants', 'APIController@getConstants');
+Route::post('/export/{class}/all', 'APIController@all');
 Route::get('relations', 'APIController@relations');
 
 

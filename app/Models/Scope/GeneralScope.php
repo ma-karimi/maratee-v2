@@ -32,15 +32,8 @@ trait GeneralScope
         return $query->where('id', $id)->where('type', $type);
     }
 
-    /**
-     * @param $query
-     * @param bool $value
-     * @return mixed
-     */
-    /*public function scopeIsFlower($query,bool $value)
+    public function scopeOfSelect($query)
     {
-        return $query->whereHas('general', function (Builder $query) {
-            $query->where('type','flowering');
-        })->where('general_flowering_id',$value)->get();
-    }*/
+        return $query->select('id', 'name');
+    }
 }

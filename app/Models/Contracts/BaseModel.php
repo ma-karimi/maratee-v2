@@ -15,7 +15,7 @@ use ReflectionException;
 
 class BaseModel extends Model
 {
-    use SoftDeletes, SearchableTrait;
+    use SoftDeletes, SearchableTrait, RelationManager;
     public static $rules = [];
     public static $jsons = [];
     public static $messages = [];
@@ -24,7 +24,7 @@ class BaseModel extends Model
      **/
     public static $linguistically = [];
     public $searchable = ['*'];
-    public $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations', 'groupby'];
+    public $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations', 'groupby', 'excel', 'model', 'keys'];
     protected $guarded = ['id'];
     /**
      * The attributes excluded from the model's JSON form.

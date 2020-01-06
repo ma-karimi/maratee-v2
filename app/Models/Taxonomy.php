@@ -162,7 +162,7 @@ class Taxonomy extends BaseModel
      */
     public function genus(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'genus_id');
+        return $this->belongsTo(General::class, 'genus_id')->ofSelect();
     }
 
     /**
@@ -170,7 +170,7 @@ class Taxonomy extends BaseModel
      */
     public function species(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'species_id');
+        return $this->belongsTo(General::class, 'species_id')->ofSelect();
     }
 
     /**
@@ -178,15 +178,7 @@ class Taxonomy extends BaseModel
      */
     public function subspecies(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'subspecies_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function tipType(): BelongsTo
-    {
-        return $this->belongsTo(General::class, 'tip_type_id');
+        return $this->belongsTo(General::class, 'subspecies_id')->ofSelect();
     }
 
     /**
@@ -194,7 +186,7 @@ class Taxonomy extends BaseModel
      */
     public function variety(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'variety_id');
+        return $this->belongsTo(General::class, 'variety_id')->ofSelect();
     }
 
     /**
@@ -202,7 +194,7 @@ class Taxonomy extends BaseModel
      */
     public function family(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'family_id');
+        return $this->belongsTo(General::class, 'family_id')->ofSelect();
     }
 
 

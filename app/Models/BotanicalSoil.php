@@ -24,6 +24,6 @@ class BotanicalSoil extends BaseModel
 
     public function general()
     {
-        return $this->belongsTo(BotanicalGeneral::class);
+        return $this->belongsTo(BotanicalGeneral::class)->select('id', 'name');
     }
 }

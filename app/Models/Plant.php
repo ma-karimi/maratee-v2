@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Accessor\PlantAccessor;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\{ActionRelation, ArticleRelation};
+use App\Models\Contracts\RelationManager;
 use App\Models\Scope\PlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -24,7 +25,6 @@ class Plant extends BaseModel implements HasMedia
 {
     use PlantScope, PlantAccessor, ActionRelation, HasMediaTrait, ArticleRelation;
 
-//    public const FLOWERING_TIME = [1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December'];
     public const LIFE_FORM = [1 => 'annual', 2 => 'perennial', 3 => 'tree', 4 => 'shrubs'];
 
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
@@ -80,25 +80,6 @@ class Plant extends BaseModel implements HasMedia
     {
         return $this->morphMany(Transaction::class, 'transactionable')
             ->whereNull('deleted_at');
-    }
-
-    public function seeds(): BelongsToMany
-    {
-        return $this->belongsToMany(Seed::class,
-            'seed_plants',
-            'plant_id',
-            'seed_id')
-            ->whereNull('seed_plants.deleted_at')
-            ->withTimestamps();
-    }
-
-
-    /**
-     * @return HasMany
-     */
-    public function seedPlants(): HasMany
-    {
-        return $this->hasMany(SeedPlant::class)->latest();
     }
 
     public function taxonomy(): BelongsTo

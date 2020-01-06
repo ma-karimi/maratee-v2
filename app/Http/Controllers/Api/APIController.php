@@ -9,7 +9,9 @@ use App\Http\Requests\BaseDeleteAPIRequest;
 use App\Models\Contracts\Relationships;
 use Illuminate\Container\Container as Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 use Response;
 
 /**
@@ -251,6 +253,25 @@ class APIController extends AppBaseController
         $repo = resolve($repo);
         $result = $repo->getConstants($class);
         return $this->sendResponse($result, 'Constant(s) loaded successfully');
+    }
+
+    public function all($class)
+    {
+        $name = Str::singular(Str::studly($class));
+        $repo = 'App\\Repositories\\' . $name . 'Repository';
+        $repo = resolve($repo);
+        $result = $repo->all()->load(Arr::flatten($repo->model()::getAllRelations()));
+        if (\request()->filled('excel')) {
+            $model = \request('model');
+            return Excel::create("Export${model}List-" . date('Y-m-d-H-i-s'), function ($excel) use ($result, $model) {
+                $excel->sheet($model, function ($sheet) use ($result, $model) {
+
+                    $sheet->loadView("excels.${model}", ['result' => $result, 'keys' => \request('keys')]);
+
+                });
+            })->export('xls');
+        }
+        return $this->sendResponse($result, $name . ' loaded successfully');
     }
 
     /**
