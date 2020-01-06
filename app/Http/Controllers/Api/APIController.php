@@ -7,9 +7,11 @@ use App\Http\Requests\Api\CreateHubRequest;
 use App\Http\Requests\Api\DeleteHubRequest;
 use App\Http\Requests\BaseDeleteAPIRequest;
 use App\Models\Contracts\Relationships;
+use App\Services\Course\Backend\ExportUserCourse;
 use Illuminate\Container\Container as Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Response;
@@ -263,13 +265,10 @@ class APIController extends AppBaseController
         $result = $repo->all()->load(Arr::flatten($repo->model()::getAllRelations()));
         if (\request()->filled('excel')) {
             $model = \request('model');
-            return Excel::create("Export${model}List-" . date('Y-m-d-H-i-s'), function ($excel) use ($result, $model) {
-                $excel->sheet($model, function ($sheet) use ($result, $model) {
-
-                    $sheet->loadView("excels.${model}", ['result' => $result, 'keys' => \request('keys')]);
-
-                });
-            })->export('xls');
+            $file = 'App\\Exports\\' . Str::camel($name) . 'Export';
+            $file_export = resolve($file);
+            $file_excel = "Export${model}List-" . date('Y-m-d-H-i-s') . 'xlsx';
+            Excel::store(new $file_export($result), $file_excel);
         }
         return $this->sendResponse($result, $name . ' loaded successfully');
     }
