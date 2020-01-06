@@ -149,6 +149,7 @@ class BotanicalRepository extends BaseRepository
             'cutting_rooting' => $input['cutting_rooting'] ?? null,
             'treatment' => $input['treatment'] ?? null,
             'first_flowering' => $input['first_flowering'] ?? null,
+            'first_seeding' => $input['first_seeding'] ?? null,
             'flowering_period' => $input['flowering_period'] ?? null,
             'planting_date' => $input['planting_date'] ?? null,
             'seed_rate_id' => $input['seed_rate_id'] ?? null,
