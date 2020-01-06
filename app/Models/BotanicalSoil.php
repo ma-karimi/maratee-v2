@@ -15,12 +15,14 @@ class BotanicalSoil extends BaseModel
 
     public static $rules = [
         'soil_id' => 'required|exists:botanical_generals,id',
-        'soil_types' => 'required'
+        'soil_types' => 'required',
+        'soil_types.*.general_id' => 'required|exists:botanical_generals,id',
+        'soil_types.*.value' => 'required',
     ];
 
-    protected $with = ['type'];
+    protected $with = ['general'];
 
-    public function type()
+    public function general()
     {
         return $this->belongsTo(BotanicalGeneral::class);
     }
