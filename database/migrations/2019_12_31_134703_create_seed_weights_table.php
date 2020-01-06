@@ -35,7 +35,7 @@ class CreateSeedWeightsTable extends Migration
             $table->float('total_seed_weight', 5, 2)->nullable();
             $table->date('banked')->nullable();
             $table->integer('collected_seeds_no')->nullable();
-            $table->integer('description')->nullable();
+            $table->text('description')->nullable();
             $table->timeStamps();
             $table->softDeletesTz();
             $table->foreign('seed_collection_id')->references('id')->on('seed_collections')->onUpdate('NO ACTION')->onDelete('CASCADE');
