@@ -6,11 +6,9 @@
  * Time: 1:33 PM
  */
 
-namespace App\Services\Course\Backend;
+namespace App\Exports;
 
 
-use App\Models\UserCourse;
-use Excel;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
