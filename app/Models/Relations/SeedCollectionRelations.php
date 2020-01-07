@@ -75,7 +75,7 @@ trait SeedCollectionRelations
     /**
      * @return BelongsTo
      */
-    public function dateHarvesting()
+    public function harvestingTime()
     {
         return $this->belongsTo(SeedGeneral::class, 'harvesting_time_id')->where('seed_generals.type_id', 25);
     }
