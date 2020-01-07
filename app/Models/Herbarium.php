@@ -125,7 +125,7 @@ class Herbarium extends BaseModel implements HasMedia
 
     public function generalPhytogeography(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'general_phytogeography_id');
+        return $this->belongsTo(General::class, 'general_phytogeography_id')->whereType('phytogeography');
     }
 
 
@@ -137,7 +137,7 @@ class Herbarium extends BaseModel implements HasMedia
 
     public function generalHabitat(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'general_habitat_id');
+        return $this->belongsTo(General::class, 'general_habitat_id')->whereType('habitat');
     }
 
 }
