@@ -77,7 +77,7 @@ class HerbariumAPIController extends AppBaseController
 
     private function getFieldNonFlowerRelations()
     {
-        return ['generalPhytogeography', 'taxonomy', 'generalHabitat', 'media', 'generalSubstrate.parent', 'collect.actors', 'determine.actors', 'transactions', 'location'];
+        return ['generalPhytogeography', 'taxonomy', 'generalHabitat', 'media', 'generalSubstrate', 'collect.actors', 'determine.actors', 'transactions', 'location'];
     }
 
     /**
