@@ -131,7 +131,7 @@ class Herbarium extends BaseModel implements HasMedia
 
     public function generalSubstrate()
     {
-        return $this->belongsTo(General::class, 'general_substrate_id');
+        return $this->belongsTo(General::class, 'general_substrate_id')->whereIn('type', ['diatom', 'moss', 'lichen']);
     }
 
 

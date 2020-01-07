@@ -28,7 +28,7 @@ class CreateLocationsTable extends Migration {
 			$table->point('point')->nullable();
 			$table->text('description')->nullable();
 	     	$table->boolean('gps_used')->default(0);
-			$table->text('gps_datum')->nullable();
+			$table->string('gps_datum')->nullable();
 
 
             $table->timeStamps();
