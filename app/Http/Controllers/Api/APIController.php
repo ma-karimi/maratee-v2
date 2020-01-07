@@ -268,7 +268,6 @@ class APIController extends AppBaseController
             $file = 'App\\Exports\\' . $model . 'Export';
             $file_excel = "Export${model}List-" . date('Y-m-d-H-i-s') . '.xlsx';
             Excel::store(new $file($result), 'public/' . $file_excel);
-
             return $this->sendResponse(Storage::url($file_excel), 'success');
         }
         return $this->sendResponse($result, $name . ' loaded successfully');

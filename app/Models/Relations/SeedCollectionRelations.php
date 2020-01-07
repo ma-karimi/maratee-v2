@@ -67,6 +67,22 @@ trait SeedCollectionRelations
     /**
      * @return BelongsTo
      */
+    public function floweringTime()
+    {
+        return $this->belongsTo(SeedGeneral::class, 'flowering_time_id')->where('seed_generals.type_id', 25);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function dateHarvesting()
+    {
+        return $this->belongsTo(SeedGeneral::class, 'harvesting_time_id')->where('seed_generals.type_id', 25);
+    }
+
+    /**
+     * @return BelongsTo
+     */
     public function lifeForm()
     {
         return $this->belongsTo(SeedGeneral::class, 'life_form_id')->where('seed_generals.type_id', 14);

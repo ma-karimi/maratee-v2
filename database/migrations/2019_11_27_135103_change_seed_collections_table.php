@@ -16,6 +16,9 @@ class ChangeSeedCollectionsTable extends Migration
     {
         Schema::table('seed_collections', function (Blueprint $table) {
             $table->unsignedBigInteger('taxonomy_id');
+            $table->dropColumn(['harvesting_time', 'flowering_time']);
+            $table->unsignedBigInteger('flowering_time_id')->nullable();
+            $table->unsignedBigInteger('harvesting_time_id')->nullable();
             $table->string('encoded_code_by_collector')->nullable();
             $table->string('corrected_code_by_nrgb')->nullable();
             $table->string('accession_code');
