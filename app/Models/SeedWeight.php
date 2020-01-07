@@ -21,7 +21,7 @@ class SeedWeight extends BaseModel
         'total_fruit_weight' => 'nullable|numeric',
         'total_seed_weight' => 'nullable|numeric',
         'collected_seeds_no' => 'required|numeric',
-        'banked' =>'nullable|date'
+        'banked' => 'nullable|date'
     ];
     /**
      * The database table used by the model.
@@ -39,6 +39,11 @@ class SeedWeight extends BaseModel
     public function seedCollection()
     {
         return $this->belongsTo(SeedCollection::class);
+    }
+
+    public function collection()
+    {
+        return $this->belongsTo(SeedGeneral::class)->where('type_id', 19);
     }
 
 

@@ -62,9 +62,9 @@ class OriginalSeedGeneralTableSeeder extends Seeder
     public $mother_healths = ['Healthy', 'Unhealthy'];
     public $consumptions = ['Forage', 'Food', 'Medicinal', 'Other'];
     public $used_parts = ['Leaf', 'Stem', 'Flower', 'Fruit', 'Seed', 'Root', 'Tuber', 'Rhizome', 'Secondary plant products'];
-    public $specimen_types = ['Entrance seed technology test', 'Seed in Active Collection', 'Fruit in Active Collection', 'Seed in Base Collection', 'Fruit in Base Collection', 'Seed in Duplicate Collection', 'Fruit in Duplicate Collection', 'Regenerated seed in Active Collection', 'Regenerated fruit in Active Collection', 'Regenerated seed in Base Collection', 'Regenerated fruit in Base Collection', 'Regenerated seed in Duplicate Collection', 'Regenerated  fruit in Duplicate Collection'
-    ];
+    public $specimen_types = ['Seed','Fruit','Both'];
     public $months = [1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December'];
+    public $collections = ['Base Collection', 'Active Collection', 'Regenerated in Base Collection', 'Regenerated in Active Collection', 'Duplicate Collection'];
 
     /**da
      * Run the database seeds.
@@ -185,6 +185,12 @@ class OriginalSeedGeneralTableSeeder extends Seeder
             SeedGeneral::create([
                 'name' => Str::ucfirst($item),
                 'type_id' => 1
+            ]);
+        }
+        foreach ($this->collections as $item) {
+            SeedGeneral::create([
+                'name' => Str::ucfirst($item),
+                'type_id' => 19
             ]);
         }
         foreach ($this->months as $item) {

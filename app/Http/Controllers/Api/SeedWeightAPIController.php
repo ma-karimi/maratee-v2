@@ -71,7 +71,7 @@ class SeedWeightAPIController extends AppBaseController
 
     private function getRelationFields()
     {
-        return ['seedCollection:id,accession_code', 'refrigerator'];
+        return ['seedCollection:id,accession_code', 'refrigerator', 'collection'];
     }
 
     /**
@@ -86,6 +86,13 @@ class SeedWeightAPIController extends AppBaseController
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="seed_collection_id",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="collection_id",
      *          in="body",
      *          description="SeedEvaluation that should be stored",
      *          required=true,
@@ -297,6 +304,13 @@ class SeedWeightAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="seed_collection_id",
+     *          in="body",
+     *          description="SeedEvaluation that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="collection_id",
      *          in="body",
      *          description="SeedEvaluation that should be stored",
      *          required=true,

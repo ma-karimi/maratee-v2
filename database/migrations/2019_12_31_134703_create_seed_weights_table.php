@@ -18,13 +18,16 @@ class CreateSeedWeightsTable extends Migration
         Schema::dropIfExists('seed_weights');
         Schema::create('seed_weights', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('collection_id');
             $table->unsignedBigInteger('seed_collection_id');
             $table->unsignedBigInteger('refrigerator_id');
             $table->string('regeneration_code')->nullable();
             $table->string('row')->nullable();
             $table->string('column')->nullable();
-            $table->float('humidity', 5,2)->nullable();
-            $table->float('purity', 5,2)->nullable();
+            $table->float('fruit_humidity', 5,2)->nullable();
+            $table->float('seed_humidity', 5,2)->nullable();
+            $table->float('fruit_purity', 5,2)->nullable();
+            $table->float('seed_purity', 5,2)->nullable();
             $table->tinyInteger('number_seeds_per_fruit')->nullable();
             $table->tinyInteger('range_seeds_per_fruit')->nullable();
 
