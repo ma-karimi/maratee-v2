@@ -24,14 +24,14 @@ class SeedEvaluation extends BaseModel implements HasMedia
         'project.project_leader_name' => 'required|string',
         'project.research_leader_name' => 'required|string',
         'organization_id' => 'required|exists:organizations,id',
-        'specimen_type_id'=>'required|exists:seed_generals,id',
-        'collection_id'=>'required|exists:seed_generals,id',
+        'specimen_type_id' => 'required|exists:seed_generals,id',
+        'collection_id' => 'required|exists:seed_generals,id',
     ];
     public static $germinations = [
         'germinations' => 'nullable|array',
-        'dormancy_breaking_id'=>'required|exists:seed_generals,id',
-        'dormancy_termination'=>'nullable|integer',
-        'germination_period'=>'nullable|integer'
+        'dormancy_breaking_id' => 'required|exists:seed_generals,id',
+        'dormancy_termination' => 'nullable|integer',
+        'germination_period' => 'nullable|integer',
     ];
     public static $lengths = [
         'shoots' => 'nullable|array',
@@ -51,7 +51,7 @@ class SeedEvaluation extends BaseModel implements HasMedia
      * @var array
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
-
+    protected $appends = ['viability', 'germination', 'germinated_seed_no'];
 
     public function research()
     {
@@ -100,6 +100,7 @@ class SeedEvaluation extends BaseModel implements HasMedia
     {
         return $this->belongsTo(SeedGeneral::class, 'specimen_type_id')->where('seed_generals.type_id', 1);
     }
+
     /**
      * @return BelongsTo
      */
@@ -123,5 +124,29 @@ class SeedEvaluation extends BaseModel implements HasMedia
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function getViabilityAttribute()
+    {
+        $germinated_seed = $this->germinated_seed_no ?? 0;
+        $fresh_non_germinated = $this->fresh_non_germinated ?? 0;
+        $abnormal = $this->abnormal ?? 0;
+
+        return $this->planted_seeds == 0 ? 0 : (($germinated_seed + $fresh_non_germinated + $abnormal) * 100) / $this->planted_seeds;
+    }
+
+
+    public function getGerminationAttribute()
+    {
+        $germinated_seed = $this->germinated_seed_no ?? 0;
+
+        return $this->planted_seeds == 0 ? 0 : (($germinated_seed) * 100) / $this->planted_seeds;
+    }
+
+    public function getGerminatedSeedNoAttribute()
+    {
+        if ($this->relationLoaded('germinations') && count($this->germinations)) {
+            return $this->germinations()->latest()->first()->germinated_number;
+        }
     }
 }
