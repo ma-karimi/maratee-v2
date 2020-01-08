@@ -67,6 +67,12 @@ class PlaceAPIController extends AppBaseController
 
         return $this->sendResponse($places->toArray(), 'Places retrieved successfully');
     }
+    public function all(Request $request)
+    {
+        $places = $this->placeRepository->all();
+
+        return $this->sendResponse($places->toArray(), 'Places retrieved successfully');
+    }
 
     /**
      * @param PlaceAPIRequest $request

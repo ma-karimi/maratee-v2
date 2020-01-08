@@ -47,6 +47,7 @@ Route::post('paleontologies/{id}/geology-remark', 'PaleontologyAPIController@geo
 Route::post('paleontologies/{id}/information', 'PaleontologyAPIController@information');
 
 Route::apiResource('paleontologies', 'PaleontologyAPIController');
+Route::get('citations/all', 'CitationAPIController@all');
 Route::apiResource('citations', 'CitationAPIController');
 Route::apiResource('paleontology_maps', 'PaleontologyMapAPIController');
 
@@ -157,6 +158,7 @@ Route::apiResource('germinations', 'GerminationAPIController');
 
 Route::apiResource('repeats', 'RepeatAPIController');
 
+Route::get('places/all', 'PlaceAPIController@all');
 Route::apiResource('places', 'PlaceAPIController');
 
 Route::apiResource('location_hubs', 'LocationHubAPIController')->except('update', 'show');

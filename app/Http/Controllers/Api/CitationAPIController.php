@@ -69,6 +69,13 @@ class CitationAPIController extends AppBaseController
         return $this->sendResponse($citations->toArray(), 'Citations retrieved successfully');
     }
 
+    public function all(Request $request)
+    {
+        $citations = $this->citationRepository->all();
+
+        return $this->sendResponse($citations->toArray(), 'Citations retrieved successfully');
+    }
+
     /**
      * @param CitationAPIRequest $request
      * @return Response
