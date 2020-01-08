@@ -20,7 +20,6 @@ class CreateSeedWeightsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('collection_id');
             $table->unsignedBigInteger('seed_collection_id');
-            $table->unsignedBigInteger('refrigerator_id');
             $table->string('regeneration_code')->nullable();
             $table->string('row')->nullable();
             $table->string('column')->nullable();

@@ -71,7 +71,7 @@ class SeedWeightAPIController extends AppBaseController
 
     private function getRelationFields()
     {
-        return ['seedCollection:id,accession_code', 'refrigerator', 'collection'];
+        return ['seedCollection:id,accession_code', 'collection'];
     }
 
     /**

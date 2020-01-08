@@ -15,12 +15,12 @@ class SeedWeight extends BaseModel
 
     public static $rules = [
         'seed_collection_id' => 'required|exists:seed_collections,id',
-        'refrigerator_id' => 'required|exists:seed_generals,id',
+        'collection_id' => 'required|exists:seed_generals,id',
         'thousand_fruits_weight' => 'nullable|numeric',
         'thousand_seeds_weight' => 'nullable|numeric',
         'total_fruit_weight' => 'nullable|numeric',
         'total_seed_weight' => 'nullable|numeric',
-        'collected_seeds_no' => 'required|numeric',
+//        'collected_seeds_no' => 'required|numeric',
         'banked' => 'nullable|date'
     ];
     /**
@@ -44,14 +44,5 @@ class SeedWeight extends BaseModel
     public function collection()
     {
         return $this->belongsTo(SeedGeneral::class)->where('type_id', 19);
-    }
-
-
-    /**
-     * @return BelongsTo
-     */
-    public function refrigerator()
-    {
-        return $this->belongsTo(SeedGeneral::class, 'refrigerator_id')->where('seed_generals.type_id', 24);
     }
 }
