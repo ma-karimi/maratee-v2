@@ -25,7 +25,8 @@ class CreateSeedEvaluationsTable extends Migration
             $table->string('organization_phone')->nullable();
             $table->string('organization_fax')->nullable();
             $table->string('organization_email')->nullable();
-            $table->unsignedBigInteger('specimen_type_collect_id');
+            $table->unsignedBigInteger('specimen_type_id');
+            $table->unsignedBigInteger('collection_id');
             $table->string('regeneration_code')->nullable();
             $table->integer('number_of_exchanged_seeds')->nullable();
             $table->integer('light_hr')->nullable();

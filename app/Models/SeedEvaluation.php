@@ -24,7 +24,8 @@ class SeedEvaluation extends BaseModel implements HasMedia
         'project.project_leader_name' => 'required|string',
         'project.research_leader_name' => 'required|string',
         'organization_id' => 'required|exists:organizations,id',
-        'specimen_type_collect_id'=>'required|exists:seed_generals,id',
+        'specimen_type_id'=>'required|exists:seed_generals,id',
+        'collection_id'=>'required|exists:seed_generals,id',
     ];
     public static $germinations = [
         'germinations' => 'nullable|array',
@@ -97,7 +98,14 @@ class SeedEvaluation extends BaseModel implements HasMedia
      */
     public function specimenType()
     {
-        return $this->belongsTo(SeedGeneral::class, 'specimen_type_collect_id')->where('seed_generals.type_id', 1);
+        return $this->belongsTo(SeedGeneral::class, 'specimen_type_id')->where('seed_generals.type_id', 1);
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function collection()
+    {
+        return $this->belongsTo(SeedGeneral::class, 'collection_id')->where('seed_generals.type_id', 19);
     }
 
 
