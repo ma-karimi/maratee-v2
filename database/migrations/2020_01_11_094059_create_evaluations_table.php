@@ -45,9 +45,7 @@ class CreateEvaluationsTable extends Migration
             $table->string('water_ec')->nullable()->comment('ds/m');
             $table->timeStamps();
             $table->softDeletesTz();
-            $table->foreign('collect_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('station_id')->references('id')->on('stations')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
 
         Schema::create('morphology_quantitative_evaluations', function (Blueprint $table) {
@@ -79,7 +77,7 @@ class CreateEvaluationsTable extends Migration
             $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('project_id')->references('id')->on('projects')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
-            $table->foreign('station_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('morphology_field_id')->references('id')->on('morphology_fields')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
 
 
