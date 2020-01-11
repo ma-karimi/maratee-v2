@@ -72,7 +72,7 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
 
     private function getRelationFields()
     {
-        return ['variables', 'morphologyField', 'seedCollection:id,accession_code', 'specimenType', 'collection', 'organization', 'project'];
+        return ['variables', 'morphologyField:id,name', 'seedCollection:id,accession_code', 'specimenType', 'collection', 'organization', 'project'];
     }
 
     /**
