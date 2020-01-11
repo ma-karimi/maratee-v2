@@ -68,8 +68,8 @@ class SeedWeight extends BaseModel
         return $query->where('specimen_type_id', $specimen_type_id);
     }
 
-    public function scopeByAccessionCode($query, $accession_code)
+    public function scopeBySeedCollection($query, $seed_collection_id)
     {
-        return $query->where('accession_code', $accession_code);
+        return $query->where('seed_collection_id', $seed_collection_id);
     }
 }
