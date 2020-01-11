@@ -28,7 +28,7 @@ class MorphologyQuantitativeEvaluation extends BaseModel
 
     public function variables()
     {
-        return $this->morphToMany(SeedGeneral::class, 'morphology', 'morphology_variables');
+        return $this->morphToMany(SeedGeneral::class, 'morphology', 'morphology_variables')->withPivot('value');
     }
 
     public function morphologyField()
