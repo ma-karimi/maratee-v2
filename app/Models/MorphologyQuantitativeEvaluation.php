@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Convert\BaseModel;
+use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @SWG\Definition(
@@ -53,6 +52,7 @@ class MorphologyQuantitativeEvaluation extends BaseModel
     {
         return $this->belongsTo(SeedGeneral::class, 'specimen_type_id')->where('seed_generals.type_id', 1);
     }
+
     /**
      * @return BelongsTo
      */
