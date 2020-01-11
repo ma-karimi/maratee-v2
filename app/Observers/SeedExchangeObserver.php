@@ -62,9 +62,7 @@ class SeedExchangeObserver
 
     public function saving(SeedExchange $seedExchange)
     {
-        $old_weight = $old_collection_id = $old_specimen_type_id = $old_accession_code = null;
 
-//        if ($seedExchange->isDirty('weight') || $seedExchange->isDirty('collection_id') || $seedExchange->isDirty('specimen_type_id') || $seedExchange->isDirty('accession_code')) {
         // weight has changed
         $new_weight = $seedExchange->weight;
         $old_weight = $seedExchange->getOriginal('weight');
@@ -105,21 +103,7 @@ class SeedExchangeObserver
         SeedWeight::byCollection($new_collection_id)
             ->bySeedCollection($new_seed_collection_id)
             ->decrement("total_${new_specimen_type}_weight", $new_weight);
-//        }
 
-//        if ($seedExchange->isDirty('collection_id')) {
-//            // collection has changed
-//            $new_collection_id = $seedExchange->collection_id;
-//            $old_collection_id = $seedExchange->getOriginal('collection_id');
-//
-//        }
-//
-//        if ($seedExchange->isDirty('specimen_type_id')) {
-//            // specimen_type has changed
-//            $new_specimen_type_id = $seedExchange->specimen_type_id;
-//            $old_specimen_type_id = $seedExchange->getOriginal('specimen_type_id');
-//
-//        }
 
 
     }
