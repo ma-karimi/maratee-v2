@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Convert\BaseModel;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Contracts\BaseModel;
 
 /**
  * @SWG\Definition(
