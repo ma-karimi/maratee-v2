@@ -2,14 +2,15 @@
 
 namespace App\Repositories;
 
-use App\Models\MorphologyQuantitativeEvaluationVar;
+use App\Models\MorphologyField;
+
 
 /**
- * Class MorphologyQuantitativeEvaluationVarRepository
+ * Class MorphologyFieldRepository
  * @package App\Repositories
- * @version October 20, 2019, 10:06 am UTC
+ * @version July 14, 2019, 11:25 am UTC
  */
-class MorphologyQuantitativeEvaluationVarRepository extends BaseRepository
+class MorphologyFieldRepository extends BaseRepository
 {
     /**
      * @var array
@@ -33,6 +34,6 @@ class MorphologyQuantitativeEvaluationVarRepository extends BaseRepository
      **/
     public function model()
     {
-        return MorphologyQuantitativeEvaluationVar::class;
+        return MorphologyField::class;
     }
 }

@@ -21,12 +21,14 @@ class CreateSeedExchangesTable extends Migration
             $table->unsignedBigInteger('seed_collection_id');
             $table->unsignedBigInteger('organization_id');
             $table->unsignedBigInteger('project_id');
+            $table->string('regeneration_code')->nullable();
             $table->string('department_name')->nullable();
             $table->string('organization_phone')->nullable();
             $table->string('organization_fax')->nullable();
             $table->string('organization_email')->nullable();
-            $table->unsignedBigInteger('specimen_type_collect_id');
-            $table->float('seed_weight', 4, 2)->nullable();
+            $table->unsignedBigInteger('specimen_type_id');
+            $table->unsignedBigInteger('collection_id');
+            $table->float('weight', 5, 2)->nullable();
             $table->date('delivery_date');
 
             $table->string('recipient_name');

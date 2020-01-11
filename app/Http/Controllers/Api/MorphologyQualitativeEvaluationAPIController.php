@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\MorphologyQualitativeEvaluationAPIRequest;
+use App\Http\Requests\Api\MorphologyVariableAPIRequest;
 use App\Models\MorphologyQualitativeEvaluation;
 use App\Repositories\MorphologyQualitativeEvaluationRepository;
 use Exception;
@@ -365,5 +366,21 @@ class MorphologyQualitativeEvaluationAPIController extends AppBaseController
         $morphologyQualitativeEvaluation->delete();
 
         return $this->sendResponse($id, 'Morphology Qualitative Evaluation deleted successfully');
+    }
+
+    public function storeVariables($id, MorphologyVariableAPIRequest $request)
+    {
+        $input = $request->all();
+
+        /** @var MorphologyQualitativeEvaluation $morphologyQualitativeEvaluation */
+        $morphologyQualitativeEvaluation = $this->morphologyQualitativeEvaluationRepository->find($id);
+
+        if (empty($morphologyQualitativeEvaluation)) {
+            return $this->sendError('Morphology Qualitative Evaluation not found');
+        }
+
+        $this->morphologyQualitativeEvaluationRepository->storeVariable($input['variables'], $id);
+
+        return $this->sendResponse($morphologyQualitativeEvaluation->toArray(), 'MorphologyQualitativeEvaluation updated successfully');
     }
 }

@@ -3,8 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\MorphologyQuantitativeEvaluation;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
+use App\Models\MorphologyVariable;
 
 /**
  * Class MorphologyQuantitativeEvaluationRepository
@@ -38,31 +37,30 @@ class MorphologyQuantitativeEvaluationRepository extends BaseRepository
         return MorphologyQuantitativeEvaluation::class;
     }
 
-    public function create($input)
+    public function storeVariable($input, $id)
     {
-        $morphology_quantitative_evaluation = parent::create(Arr::except($input, ['value', 'var_id']));
-        $this->setMorphologyVar($input, $morphology_quantitative_evaluation);
-        return $morphology_quantitative_evaluation->load('vars');
-    }
+        MorphologyVariable::where(
+            [
+                'morphology_type' => MorphologyQuantitativeEvaluation::class,
+                'morphology_id' => $id
+            ]
+        )
+            ->whereNotIn('seed_general_id', collect($input)->pluck('seed_general_id')->all())
+            ->delete();
 
-    /**
-     * @param $input
-     * @param Model $biochemical_evaluation
-     */
-    private function setMorphologyVar($input, Model $biochemical_evaluation): void
-    {
-        if (array_key_exists('value', $input)) {
-            $biochemical_evaluation->vars()->updateOrCreate([
-                'var_id' => $input['var_id'] ?? 1,
-                'value' => $input['value']
-            ]);
+        if (!empty($input) && count($input)) {
+            foreach ($input as $item) {
+                MorphologyVariable::updateOrCreate(
+                    [
+                        'morphology_type' => MorphologyQuantitativeEvaluation::class,
+                        'morphology_id' => $id,
+                        'seed_general_id' => $item['seed_general_id']
+                    ],
+                    [
+                        'value' => $item['value']
+                    ]
+                );
+            }
         }
-    }
-
-    public function update($input, $id)
-    {
-        $morphology_quantitative_evaluation = parent::update(Arr::except($input, ['value', 'var_id']), $id);
-        $this->setMorphologyVar($input, $morphology_quantitative_evaluation);
-        return $morphology_quantitative_evaluation->load('vars');
     }
 }

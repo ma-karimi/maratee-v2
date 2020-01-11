@@ -71,7 +71,7 @@ class SeedExchangeAPIController extends AppBaseController
 
     private function getRelationFields()
     {
-        return ['organization.city', 'organization:id,name_en,city_id', 'project', 'specimenType', 'seedCollection:id,accession_code'];
+        return ['organization.city', 'organization:id,name_en,city_id', 'project', 'specimenType', 'seedCollection:id,accession_code', 'collection'];
     }
 
     /**

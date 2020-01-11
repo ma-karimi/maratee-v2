@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\MorphologyQuantitativeEvaluationVar;
+use App\Models\MorphologyVariable;
 use Faker\Generator as Faker;
 
-$factory->define(MorphologyQuantitativeEvaluationVar::class, function (Faker $faker) {
+$factory->define(MorphologyVariable::class, function (Faker $faker) {
 
     return [
         'created_at' => $faker->date('Y-m-d H:i:s'),

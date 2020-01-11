@@ -4,117 +4,72 @@ namespace App\Models;
 
 use App\Models\Convert\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @SWG\Definition(
  *      definition="MorphologyQualitativeEvaluation",
- *      required={"seed_id"},
- *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="seed_id",
- *          description="seed_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="collect_id",
- *          description="collect_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="taxonomy_id",
- *          description="taxonomy_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="station_id",
- *          description="station_id",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="replication_or_block_number",
- *          description="replication_or_block_number",
- *          type="integer"
- *      ),
- *      @SWG\Property(
- *          property="voucher_no",
- *          description="voucher_no",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="observation",
- *          description="observation",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
+ *      required={"collection_id"},
  * )
  */
 class MorphologyQualitativeEvaluation extends BaseModel
 {
 
     public static $rules = [
-        'seed_id' => 'required|exists:seeds,id',
-        'collect_id' => 'required|exists:seed_generals,id',
-        'taxonomy_id' => 'required|exists:taxonomies,id',
-        'station_id' => 'required|exists:stations,id',
-        'replication_or_block_number' => 'integer',
-        'voucher_no' => 'string',
-        'observation' => 'string',
+        'seed_collection_id' => 'required|exists:seed_collections,id',
+        'collection_id' => 'required|exists:seed_generals,id',
+        'specimen_type_id' => 'required|exists:seed_generals,id',
+        'morphology_field_id' => 'required|exists:morphology_fields,id',
     ];
 
+
+    public function variables()
+    {
+        return $this->morphToMany(MorphologyVariable::class, 'morphology');
+    }
+
+    public function morphologyField()
+    {
+        return $this->belongsTo(MorphologyField::class);
+    }
+
+
     /**
      * @return BelongsTo
      */
-    public function seed()
+    public function seedCollection()
     {
-        return $this->belongsTo(Seed::class);
+        return $this->belongsTo(SeedCollection::class);
     }
 
     /**
      * @return BelongsTo
      */
-    public function collect()
+    public function specimenType()
     {
-        return $this->belongsTo('App\Models\SeedGeneral', 'collect_id');
+        return $this->belongsTo(SeedGeneral::class, 'specimen_type_id')->where('seed_generals.type_id', 1);
     }
 
     /**
      * @return BelongsTo
      */
-    public function station()
+    public function collection()
     {
-        return $this->belongsTo('App\Models\Station');
+        return $this->belongsTo(SeedGeneral::class, 'collection_id')->where('seed_generals.type_id', 19);
     }
 
     /**
      * @return BelongsTo
      */
-    public function taxonomy()
+    public function organization()
     {
-        return $this->belongsTo('App\Models\Taxonomy');
+        return $this->belongsTo(Organization::class);
     }
 
     /**
-     * @return HasMany
+     * @return BelongsTo
      */
-    public function vars()
+    public function project()
     {
-        return $this->hasMany('App\Models\MorphologyQualitativeEvaluationVar', 'evaluation_id');
+        return $this->belongsTo(Project::class);
     }
 }

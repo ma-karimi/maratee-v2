@@ -215,10 +215,13 @@ Route::resource('seed_generals', 'SeedGeneralAPIController');
 
 
 Route::group(['prefix' => 'morphology'], function () {
+    Route::post('qualitative_evaluations/{id}/variables', 'MorphologyQualitativeEvaluationAPIController@storeVariables');
+    Route::post('quantitative_evaluations/{id}/variables', 'MorphologyQuantitativeEvaluationAPIController@storeVariables');
     Route::resource('qualitative_evaluations', 'MorphologyQualitativeEvaluationAPIController');
 
     Route::resource('quantitative_evaluations', 'MorphologyQuantitativeEvaluationAPIController');
+    Route::resource('fields', 'MorphologyFieldAPIController');
 
-    Route::resource('quantitative_evaluation_vars', 'MorphologyQuantitativeEvaluationVarAPIController');
 });
+
 

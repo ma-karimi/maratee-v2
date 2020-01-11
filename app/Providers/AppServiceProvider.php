@@ -12,7 +12,9 @@ use App\Models\{City,
     Plant,
     Product,
     Protection,
-    Province};
+    Province,
+    SeedExchange
+};
 use App\Observers\{CityObserver,
     CountryObserver,
     GeneralObserver,
@@ -23,7 +25,9 @@ use App\Observers\{CityObserver,
     PlantObserver,
     ProductObserver,
     ProtectionObserver,
-    ProvinceObserver};
+    ProvinceObserver,
+    SeedExchangeObserver
+};
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
@@ -62,6 +66,7 @@ class AppServiceProvider extends ServiceProvider
             Medicine::observe(MedicineObserver::class);
             Product::observe(ProductObserver::class);
         }
+        SeedExchange::observe(SeedExchangeObserver::class);
 
         DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
         DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('point', 'point');

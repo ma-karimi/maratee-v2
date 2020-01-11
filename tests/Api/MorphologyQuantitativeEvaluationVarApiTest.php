@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
-use App\Models\MorphologyQuantitativeEvaluationVar;
+use App\Models\MorphologyVariable;
 
 class MorphologyQuantitativeEvaluationVarApiTest extends TestCase
 {
@@ -15,7 +15,7 @@ class MorphologyQuantitativeEvaluationVarApiTest extends TestCase
      */
     public function test_create_morphology_quantitative_evaluation_var()
     {
-        $morphologyQuantitativeEvaluationVar = factory(MorphologyQuantitativeEvaluationVar::class)->make()->toArray();
+        $morphologyQuantitativeEvaluationVar = factory(MorphologyVariable::class)->make()->toArray();
 
         $this->response = $this->json(
             'POST',
@@ -30,7 +30,7 @@ class MorphologyQuantitativeEvaluationVarApiTest extends TestCase
      */
     public function test_read_morphology_quantitative_evaluation_var()
     {
-        $morphologyQuantitativeEvaluationVar = factory(MorphologyQuantitativeEvaluationVar::class)->create();
+        $morphologyQuantitativeEvaluationVar = factory(MorphologyVariable::class)->create();
 
         $this->response = $this->json(
             'GET',
@@ -45,8 +45,8 @@ class MorphologyQuantitativeEvaluationVarApiTest extends TestCase
      */
     public function test_update_morphology_quantitative_evaluation_var()
     {
-        $morphologyQuantitativeEvaluationVar = factory(MorphologyQuantitativeEvaluationVar::class)->create();
-        $editedMorphologyQuantitativeEvaluationVar = factory(MorphologyQuantitativeEvaluationVar::class)->make()->toArray();
+        $morphologyQuantitativeEvaluationVar = factory(MorphologyVariable::class)->create();
+        $editedMorphologyQuantitativeEvaluationVar = factory(MorphologyVariable::class)->make()->toArray();
 
         $this->response = $this->json(
             'PUT',
@@ -62,7 +62,7 @@ class MorphologyQuantitativeEvaluationVarApiTest extends TestCase
      */
     public function test_delete_morphology_quantitative_evaluation_var()
     {
-        $morphologyQuantitativeEvaluationVar = factory(MorphologyQuantitativeEvaluationVar::class)->create();
+        $morphologyQuantitativeEvaluationVar = factory(MorphologyVariable::class)->create();
 
         $this->response = $this->json(
             'DELETE',

@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\MorphologyQuantitativeEvaluationVar;
 use InfyOm\Generator\Request\APIRequest;
 
-class MorphologyQuantitativeEvaluationVarAPIRequest extends APIRequest
+class MorphologyVariableAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +23,10 @@ class MorphologyQuantitativeEvaluationVarAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return MorphologyQuantitativeEvaluationVar::$rules;
+        return [
+            'variables' => 'required|array',
+            'variables.*.value' => 'required|string',
+            'variables.*.seed_general_id' => 'required|exists:seed_generals,id',
+        ];
     }
 }

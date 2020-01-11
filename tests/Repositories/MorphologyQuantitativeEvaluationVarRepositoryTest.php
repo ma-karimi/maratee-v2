@@ -1,7 +1,7 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\MorphologyQuantitativeEvaluationVar;
-use App\Repositories\MorphologyQuantitativeEvaluationVarRepository;
+use App\Models\MorphologyVariable;
+use App\Repositories\VariableRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
@@ -11,14 +11,14 @@ class MorphologyQuantitativeEvaluationVarRepositoryTest extends TestCase
     use ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var MorphologyQuantitativeEvaluationVarRepository
+     * @var VariableRepository
      */
     protected $morphologyQuantitativeEvaluationVarRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->morphologyQuantitativeEvaluationVarRepo = \App::make(MorphologyQuantitativeEvaluationVarRepository::class);
+        $this->morphologyQuantitativeEvaluationVarRepo = \App::make(VariableRepository::class);
     }
 
     /**
@@ -26,14 +26,14 @@ class MorphologyQuantitativeEvaluationVarRepositoryTest extends TestCase
      */
     public function test_create_morphology_quantitative_evaluation_var()
     {
-        $morphologyQuantitativeEvaluationVar = factory(MorphologyQuantitativeEvaluationVar::class)->make()->toArray();
+        $morphologyQuantitativeEvaluationVar = factory(MorphologyVariable::class)->make()->toArray();
 
         $createdMorphologyQuantitativeEvaluationVar = $this->morphologyQuantitativeEvaluationVarRepo->create($morphologyQuantitativeEvaluationVar);
 
         $createdMorphologyQuantitativeEvaluationVar = $createdMorphologyQuantitativeEvaluationVar->toArray();
         $this->assertArrayHasKey('id', $createdMorphologyQuantitativeEvaluationVar);
         $this->assertNotNull($createdMorphologyQuantitativeEvaluationVar['id'], 'Created MorphologyQuantitativeEvaluationVar must have id specified');
-        $this->assertNotNull(MorphologyQuantitativeEvaluationVar::find($createdMorphologyQuantitativeEvaluationVar['id']), 'MorphologyQuantitativeEvaluationVar with given id must be in DB');
+        $this->assertNotNull(MorphologyVariable::find($createdMorphologyQuantitativeEvaluationVar['id']), 'MorphologyQuantitativeEvaluationVar with given id must be in DB');
         $this->assertModelData($morphologyQuantitativeEvaluationVar, $createdMorphologyQuantitativeEvaluationVar);
     }
 
@@ -42,7 +42,7 @@ class MorphologyQuantitativeEvaluationVarRepositoryTest extends TestCase
      */
     public function test_read_morphology_quantitative_evaluation_var()
     {
-        $morphologyQuantitativeEvaluationVar = factory(MorphologyQuantitativeEvaluationVar::class)->create();
+        $morphologyQuantitativeEvaluationVar = factory(MorphologyVariable::class)->create();
 
         $dbMorphologyQuantitativeEvaluationVar = $this->morphologyQuantitativeEvaluationVarRepo->find($morphologyQuantitativeEvaluationVar->id);
 
@@ -55,8 +55,8 @@ class MorphologyQuantitativeEvaluationVarRepositoryTest extends TestCase
      */
     public function test_update_morphology_quantitative_evaluation_var()
     {
-        $morphologyQuantitativeEvaluationVar = factory(MorphologyQuantitativeEvaluationVar::class)->create();
-        $fakeMorphologyQuantitativeEvaluationVar = factory(MorphologyQuantitativeEvaluationVar::class)->make()->toArray();
+        $morphologyQuantitativeEvaluationVar = factory(MorphologyVariable::class)->create();
+        $fakeMorphologyQuantitativeEvaluationVar = factory(MorphologyVariable::class)->make()->toArray();
 
         $updatedMorphologyQuantitativeEvaluationVar = $this->morphologyQuantitativeEvaluationVarRepo->update($fakeMorphologyQuantitativeEvaluationVar, $morphologyQuantitativeEvaluationVar->id);
 
@@ -70,11 +70,11 @@ class MorphologyQuantitativeEvaluationVarRepositoryTest extends TestCase
      */
     public function test_delete_morphology_quantitative_evaluation_var()
     {
-        $morphologyQuantitativeEvaluationVar = factory(MorphologyQuantitativeEvaluationVar::class)->create();
+        $morphologyQuantitativeEvaluationVar = factory(MorphologyVariable::class)->create();
 
         $resp = $this->morphologyQuantitativeEvaluationVarRepo->delete($morphologyQuantitativeEvaluationVar->id);
 
         $this->assertTrue($resp);
-        $this->assertNull(MorphologyQuantitativeEvaluationVar::find($morphologyQuantitativeEvaluationVar->id), 'MorphologyQuantitativeEvaluationVar should not exist in DB');
+        $this->assertNull(MorphologyVariable::find($morphologyQuantitativeEvaluationVar->id), 'MorphologyQuantitativeEvaluationVar should not exist in DB');
     }
 }

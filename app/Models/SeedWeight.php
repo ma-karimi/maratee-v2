@@ -35,14 +35,41 @@ class SeedWeight extends BaseModel
         'total_fruit_weight' => 'float',
         'total_seed_weight' => 'float',
     ];
-
+    /**
+     * @return BelongsTo
+     */
     public function seedCollection()
     {
         return $this->belongsTo(SeedCollection::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
+    public function specimenType()
+    {
+        return $this->belongsTo(SeedGeneral::class, 'specimen_type_id')->where('seed_generals.type_id', 1);
+    }
+    /**
+     * @return BelongsTo
+     */
     public function collection()
     {
-        return $this->belongsTo(SeedGeneral::class)->where('type_id', 19);
+        return $this->belongsTo(SeedGeneral::class, 'collection_id')->where('seed_generals.type_id', 19);
+    }
+
+    public function scopeByCollection($query, $collection_id)
+    {
+        return $query->where('collection_id', $collection_id);
+    }
+
+    public function scopeBySpecimenType($query, $specimen_type_id)
+    {
+        return $query->where('specimen_type_id', $specimen_type_id);
+    }
+
+    public function scopeByAccessionCode($query, $accession_code)
+    {
+        return $query->where('accession_code', $accession_code);
     }
 }
