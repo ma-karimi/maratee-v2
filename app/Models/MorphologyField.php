@@ -9,4 +9,9 @@ class MorphologyField extends BaseModel
     public static $rules = [
         'name' => 'required|string',
     ];
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
+    }
 }
