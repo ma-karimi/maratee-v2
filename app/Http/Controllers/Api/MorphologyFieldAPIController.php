@@ -63,7 +63,7 @@ class MorphologyFieldAPIController extends AppBaseController
         $morphologyFields = $this->morphologyFieldRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            $this->getRelationFields()
         );
 
         return $this->sendResponse($morphologyFields->toArray(), 'Morphology Fields retrieved successfully');
@@ -295,5 +295,10 @@ class MorphologyFieldAPIController extends AppBaseController
         $morphologyField->delete();
 
         return $this->sendResponse($id, 'Morphology Field deleted successfully');
+    }
+
+    private function getRelationFields()
+    {
+        return ['location'];
     }
 }
