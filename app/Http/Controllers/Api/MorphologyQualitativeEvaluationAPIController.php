@@ -70,6 +70,11 @@ class MorphologyQualitativeEvaluationAPIController extends AppBaseController
         return $this->sendResponse($morphologyQualitativeEvaluations->toArray(), 'Morphology Qualitative Evaluations retrieved successfully');
     }
 
+    private function getRelationFields()
+    {
+        return ['variables', 'morphologyField', 'seedCollection:id,accession_code', 'specimenType', 'collection', 'organization', 'project'];
+    }
+
     /**
      * @param MorphologyQualitativeEvaluationAPIRequest $request
      * @return Response
@@ -81,49 +86,14 @@ class MorphologyQualitativeEvaluationAPIController extends AppBaseController
      *      description="Store MorphologyQualitativeEvaluation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="seed_id",
+     *          name="seed_collection_id",
      *          in="body",
      *          description="MorphologyQualitativeEvaluation that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/MorphologyQualitativeEvaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="collect_id",
-     *          in="body",
-     *          description="MorphologyQualitativeEvaluation that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MorphologyQualitativeEvaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="taxonomy_id",
-     *          in="body",
-     *          description="MorphologyQualitativeEvaluation that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MorphologyQualitativeEvaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="station_id",
-     *          in="body",
-     *          description="MorphologyQualitativeEvaluation that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MorphologyQualitativeEvaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="replication_or_block_number",
-     *          in="body",
-     *          description="MorphologyQualitativeEvaluation that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MorphologyQualitativeEvaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="voucher_no",
-     *          in="body",
-     *          description="MorphologyQualitativeEvaluation that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MorphologyQualitativeEvaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="observation",
+     *          name="collection_id",
      *          in="body",
      *          description="MorphologyQualitativeEvaluation that should be stored",
      *          required=false,
@@ -201,7 +171,7 @@ class MorphologyQualitativeEvaluationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var MorphologyQualitativeEvaluation $morphologyQualitativeEvaluation */
-        $morphologyQualitativeEvaluation = $this->morphologyQualitativeEvaluationRepository->find($id);
+        $morphologyQualitativeEvaluation = $this->morphologyQualitativeEvaluationRepository->find($id, $this->getRelationFields());
 
         if (empty($morphologyQualitativeEvaluation)) {
             return $this->sendError('Morphology Qualitative Evaluation not found');
@@ -229,49 +199,14 @@ class MorphologyQualitativeEvaluationAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="seed_id",
+     *          name="seed_collection_id",
      *          in="body",
      *          description="MorphologyQualitativeEvaluation that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/MorphologyQualitativeEvaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="collect_id",
-     *          in="body",
-     *          description="MorphologyQualitativeEvaluation that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MorphologyQualitativeEvaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="taxonomy_id",
-     *          in="body",
-     *          description="MorphologyQualitativeEvaluation that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MorphologyQualitativeEvaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="station_id",
-     *          in="body",
-     *          description="MorphologyQualitativeEvaluation that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MorphologyQualitativeEvaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="replication_or_block_number",
-     *          in="body",
-     *          description="MorphologyQualitativeEvaluation that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MorphologyQualitativeEvaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="voucher_no",
-     *          in="body",
-     *          description="MorphologyQualitativeEvaluation that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MorphologyQualitativeEvaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="observation",
+     *          name="collection_id",
      *          in="body",
      *          description="MorphologyQualitativeEvaluation that should be stored",
      *          required=false,
@@ -382,10 +317,5 @@ class MorphologyQualitativeEvaluationAPIController extends AppBaseController
         $this->morphologyQualitativeEvaluationRepository->storeVariable($input['variables'], $id);
 
         return $this->sendResponse($morphologyQualitativeEvaluation->toArray(), 'MorphologyQualitativeEvaluation updated successfully');
-    }
-
-    private function getRelationFields()
-    {
-        return [];
     }
 }

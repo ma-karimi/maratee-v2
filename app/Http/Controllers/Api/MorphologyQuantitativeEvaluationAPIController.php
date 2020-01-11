@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\MorphologyQuantitativeEvaluationAPIRequest;
 use App\Http\Requests\Api\MorphologyVariableAPIRequest;
-use App\Models\MorphologyQualitativeEvaluation;
 use App\Models\MorphologyQuantitativeEvaluation;
 use App\Repositories\MorphologyQuantitativeEvaluationRepository;
 use Exception;
@@ -65,10 +64,15 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
         $morphologyQuantitativeEvaluations = $this->morphologyQuantitativeEvaluationRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            $this->getRelationFields()
         );
 
         return $this->sendResponse($morphologyQuantitativeEvaluations->toArray(), 'Morphology Quantitative Evaluations retrieved successfully');
+    }
+
+    private function getRelationFields()
+    {
+        return ['variables', 'morphologyField', 'seedCollection:id,accession_code', 'specimenType', 'collection', 'organization', 'project'];
     }
 
     /**
@@ -82,35 +86,21 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
      *      description="Store MorphologyQuantitativeEvaluation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="seed_id",
+     *          name="seed_collection_id",
      *          in="body",
      *          description="MorphologyQuantitativeEvaluation that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/MorphologyQuantitativeEvaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="collect_id",
+     *          name="collection_id",
      *          in="body",
      *          description="MorphologyQuantitativeEvaluation that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MorphologyQuantitativeEvaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="voucher_no",
-     *          in="body",
-     *          description="MorphologyQuantitativeEvaluation that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MorphologyQuantitativeEvaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="taxonomy_id",
-     *          in="body",
-     *          description="MorphologyQuantitativeEvaluation that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MorphologyQuantitativeEvaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="station_id",
+     *          name="morphology_field_id",
      *          in="body",
      *          description="MorphologyQuantitativeEvaluation that should be stored",
      *          required=false,
@@ -244,7 +234,7 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var MorphologyQuantitativeEvaluation $morphologyQuantitativeEvaluation */
-        $morphologyQuantitativeEvaluation = $this->morphologyQuantitativeEvaluationRepository->find($id);
+        $morphologyQuantitativeEvaluation = $this->morphologyQuantitativeEvaluationRepository->find($id, $this->getRelationFields());
 
         if (empty($morphologyQuantitativeEvaluation)) {
             return $this->sendError('Morphology Quantitative Evaluation not found');
@@ -272,35 +262,21 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="seed_id",
+     *          name="seed_collection_id",
      *          in="body",
      *          description="MorphologyQuantitativeEvaluation that should be stored",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/MorphologyQuantitativeEvaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="collect_id",
+     *          name="collection_id",
      *          in="body",
      *          description="MorphologyQuantitativeEvaluation that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MorphologyQuantitativeEvaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="voucher_no",
-     *          in="body",
-     *          description="MorphologyQuantitativeEvaluation that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MorphologyQuantitativeEvaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="taxonomy_id",
-     *          in="body",
-     *          description="MorphologyQuantitativeEvaluation that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MorphologyQuantitativeEvaluation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="station_id",
+     *          name="morphology_field_id",
      *          in="body",
      *          description="MorphologyQuantitativeEvaluation that should be stored",
      *          required=false,
@@ -452,7 +428,6 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Morphology Quantitative Evaluation deleted successfully');
     }
-
 
     public function storeVariables($id, MorphologyVariableAPIRequest $request)
     {
