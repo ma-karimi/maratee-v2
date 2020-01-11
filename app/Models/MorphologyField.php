@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\BaseModel;
 
-class MorphologyField extends Model
+class MorphologyField extends BaseModel
 {
     public static $rules = [
         'name' => 'required|string',
