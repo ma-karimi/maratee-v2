@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Models\MorphologyQualitativeEvaluation;
 use App\Models\MorphologyVariable;
+use Illuminate\Container\Container as Application;
+use Illuminate\Support\Arr;
 
 /**
  * Class MorphologyQualitativeEvaluationRepository
@@ -18,6 +20,10 @@ class MorphologyQualitativeEvaluationRepository extends BaseRepository
     protected $fieldSearchable = [
 
     ];
+    /**
+     * @var ProjectRepository
+     */
+    private $projectRepository;
 
     /**
      * Return searchable fields
@@ -35,6 +41,25 @@ class MorphologyQualitativeEvaluationRepository extends BaseRepository
     public function model()
     {
         return MorphologyQualitativeEvaluation::class;
+    }
+    public function __construct(Application $app, ProjectRepository $projectRepository)
+    {
+        parent::__construct($app);
+        $this->projectRepository = $projectRepository;
+    }
+
+    public function create($input)
+    {
+        $input['project_id'] = $this->projectRepository->create($input['project'])->id;
+        return parent::create(Arr::except($input, ['project']));
+
+    }
+
+    public function update($input, $id)
+    {
+        $input['project_id'] = $this->projectRepository->update($input['project'], $input['project']['id'])->id;
+        return parent::update(Arr::except($input, ['project']), $id);
+
     }
 
     public function storeVariable($input, $id)

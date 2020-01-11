@@ -56,9 +56,6 @@ class CreateEvaluationsTable extends Migration
             $table->unsignedBigInteger('organization_id');
             $table->unsignedBigInteger('project_id');
             $table->string('department_name')->nullable();
-            $table->string('organization_phone')->nullable();
-            $table->string('organization_fax')->nullable();
-            $table->string('organization_email')->nullable();
             $table->unsignedBigInteger('morphology_field_id')->nullable();
             $table->unsignedBigInteger('replication_or_block_number')->nullable();
             $table->string('plant_density')->nullable();
@@ -89,9 +86,6 @@ class CreateEvaluationsTable extends Migration
             $table->unsignedBigInteger('organization_id');
             $table->unsignedBigInteger('project_id');
             $table->string('department_name')->nullable();
-            $table->string('organization_phone')->nullable();
-            $table->string('organization_fax')->nullable();
-            $table->string('organization_email')->nullable();
             $table->unsignedBigInteger('morphology_field_id')->nullable();
             $table->unsignedBigInteger('replication_or_block_number')->nullable();
             $table->string('observation_no')->nullable();
