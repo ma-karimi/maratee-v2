@@ -64,7 +64,7 @@ class MorphologyQualitativeEvaluationAPIController extends AppBaseController
         $morphologyQualitativeEvaluations = $this->morphologyQualitativeEvaluationRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            $this->getRelationFields()
         );
 
         return $this->sendResponse($morphologyQualitativeEvaluations->toArray(), 'Morphology Qualitative Evaluations retrieved successfully');
@@ -382,5 +382,10 @@ class MorphologyQualitativeEvaluationAPIController extends AppBaseController
         $this->morphologyQualitativeEvaluationRepository->storeVariable($input['variables'], $id);
 
         return $this->sendResponse($morphologyQualitativeEvaluation->toArray(), 'MorphologyQualitativeEvaluation updated successfully');
+    }
+
+    private function getRelationFields()
+    {
+        return [];
     }
 }

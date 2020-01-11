@@ -165,7 +165,7 @@ class MorphologyFieldAPIController extends AppBaseController
     public function show($id)
     {
         /** @var MorphologyField $morphologyField */
-        $morphologyField = $this->morphologyFieldRepository->find($id);
+        $morphologyField = $this->morphologyFieldRepository->find($id, $this->getRelationFields());
 
         if (empty($morphologyField)) {
             return $this->sendError('Morphology Field not found');
