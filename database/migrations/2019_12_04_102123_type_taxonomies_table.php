@@ -15,6 +15,7 @@ class TypeTaxonomiesTable  extends Migration
     {
         Schema::table('taxonomies', function (Blueprint $table) {
            $table->tinyInteger('type_id')->default('1')->comment('1: flora, 2: nonflower, 3: palebotany');
+           $table->boolean('is_native')->default('1')->comment('0: non-native, 1: native');
         });
     }
 
