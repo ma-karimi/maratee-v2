@@ -63,15 +63,7 @@ class TaxonomyRepository extends BaseRepository
         }
         $input = $this->setTaxonomyData($request);
 
-        return parent::create([
-            'family_id' => $input['family_id'],
-            'genus_id' => $input['genus_id'],
-            'species_id' => $input->filled('species_id') ? $input['species_id'] : null,
-            'subspecies_id' => $input->filled('subspecies_id') ? $input['subspecies_id'] : null,
-            'variety_id' => $input->filled('variety_id') ? $input['variety_id'] : null,
-            'type_id' => $input['type_id'],
-            'name' => $input->filled('name') ? $input['name'] : null,
-        ]);
+        return parent::create($this->setPrimaryData($input));
     }
 
     /**
@@ -249,15 +241,7 @@ class TaxonomyRepository extends BaseRepository
         }
         $input = $this->setTaxonomyData($request);
 
-        return parent::update([
-            'family_id' => $input['family_id'],
-            'genus_id' => $input['genus_id'],
-            'species_id' => $input->filled('species_id') ? $input['species_id'] : null,
-            'subspecies_id' => $input->filled('subspecies_id') ? $input['subspecies_id'] : null,
-            'variety_id' => $input->filled('variety_id') ? $input['variety_id'] : null,
-            'type_id' => $input['type_id'],
-            'name' => $input->filled('name') ? $input['name'] : null,
-        ], $id);
+        return parent::update($this->setPrimaryData($input), $id);
     }
 
     /**
@@ -285,5 +269,23 @@ class TaxonomyRepository extends BaseRepository
             ->with($relations)
             ->latest()
             ->get();
+    }
+
+    /**
+     * @param Request $input
+     * @return array
+     */
+    public function setPrimaryData(Request $input): array
+    {
+        return [
+            'family_id' => $input['family_id'],
+            'genus_id' => $input['genus_id'],
+            'species_id' => $input->filled('species_id') ? $input['species_id'] : null,
+            'subspecies_id' => $input->filled('subspecies_id') ? $input['subspecies_id'] : null,
+            'variety_id' => $input->filled('variety_id') ? $input['variety_id'] : null,
+            'type_id' => $input['type_id'],
+            'non_native' => $input['non_native'] ?? 0,
+            'name' => $input->filled('name') ? $input['name'] : null,
+        ];
     }
 }
