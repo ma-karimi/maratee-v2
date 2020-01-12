@@ -31,13 +31,13 @@ trait BotanicalRelation
 
     public function internalHabitats()
     {
-        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_gardens', 'internal_habitat_id', 'id')->latest()->where('botanical_generals.type_id', 20)
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_gardens', 'id','internal_habitat_id')->latest()->where('botanical_generals.type_id', 20)
             ->whereNull('botanical_gardens.deleted_at')
             ->withTimestamps();
     }
     public function gardens()
     {
-        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_gardens', 'garden_id', 'id')->latest()->where('botanical_generals.type_id', 19)
+        return $this->belongsToMany(BotanicalGeneral::class, 'botanical_gardens', 'id','garden_id')->latest()->where('botanical_generals.type_id', 19)
             ->whereNull('botanical_gardens.deleted_at')
             ->withTimestamps();
     }
