@@ -67,4 +67,6 @@ class SeedCollection extends BaseModel implements HasMedia
         'project.research_leader_name' => 'required|string',
         'organization_id' => 'required|exists:organizations,id',
     ];
+
+    protected $with = ['taxonomy'];
 }
