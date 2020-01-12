@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\Botanical\BotanicalAPIRequest;
+use App\Http\Requests\Api\Botanical\BotanicalGardenAPIRequest;
 use App\Http\Requests\Api\Botanical\BotanicalInformationAPIRequest;
 use App\Http\Requests\Api\Botanical\BotanicalIrrigationAPIRequest;
 use App\Http\Requests\Api\Botanical\BotanicalLocationAPIRequest;

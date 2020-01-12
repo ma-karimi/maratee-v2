@@ -98,6 +98,7 @@ Route::apiResource('evaluations', 'EvaluationAPIController');
 Route::get('actors/all', 'ActorAPIController@all');
 Route::apiResource('actors', 'ActorAPIController');
 
+Route::apiResource('botanical_gardens', 'BotanicalGardenAPIController');
 Route::post('botanicals/{botanical_id}/location', 'BotanicalAPIController@storeLocation');
 Route::post('botanicals/{botanical_id}/information', 'BotanicalAPIController@storeInformation');
 Route::post('botanicals/{botanical_id}/media', 'BotanicalAPIController@storeMedia');
@@ -217,10 +218,10 @@ Route::resource('seed_generals', 'SeedGeneralAPIController');
 Route::group(['prefix' => 'morphology'], function () {
     Route::post('qualitative_evaluations/{id}/variables', 'MorphologyQualitativeEvaluationAPIController@storeVariables');
     Route::post('quantitative_evaluations/{id}/variables', 'MorphologyQuantitativeEvaluationAPIController@storeVariables');
-    Route::resource('qualitative_evaluations', 'MorphologyQualitativeEvaluationAPIController');
+    Route::apiResource('qualitative_evaluations', 'MorphologyQualitativeEvaluationAPIController');
 
-    Route::resource('quantitative_evaluations', 'MorphologyQuantitativeEvaluationAPIController');
-    Route::resource('fields', 'MorphologyFieldAPIController');
+    Route::apiResource('quantitative_evaluations', 'MorphologyQuantitativeEvaluationAPIController');
+    Route::apiResource('fields', 'MorphologyFieldAPIController');
 
 });
 

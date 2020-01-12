@@ -3,8 +3,11 @@
 namespace App\Repositories;
 
 use App\Models\Botanical;
+use App\Models\BotanicalGarden;
 use App\Models\BotanicalIrrigation;
 use App\Models\BotanicalSoil;
+use App\Models\MorphologyQuantitativeEvaluation;
+use App\Models\MorphologyVariable;
 use Exception;
 use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Model;

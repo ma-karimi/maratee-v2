@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Support\Arr;
 
 /**
  * @SWG\Definition(
@@ -14,9 +13,5 @@ use Illuminate\Support\Arr;
 class BotanicalGeneralHub extends BaseModel
 {
 
-    public static $rules = [
-        'type_id' => 'required|integer',
-        'name' => 'required|string',
-    ];
 
 }
