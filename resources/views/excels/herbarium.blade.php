@@ -23,77 +23,111 @@
     <tr>
         <th style="{{$th}}">Herbarium Number</th>
         <th style="{{$th}}">Herbarium Index</th>
-        <th style="{{$th}}">Family</th>
-        <th style="{{$th}}">Scientific Name</th>
-        <th style="{{$th}}">Location</th>
-        <th style="{{$th}}">Date</th>
-        <th style="{{$th}}">Alt</th>
-        <th style="{{$th}}">N</th>
-        <th style="{{$th}}">E</th>
-        <th style="{{$th}}">Leg</th>
-        <th style="{{$th}}">Det</th>
-        <th style="{{$th}}">Description</th>
-        <th style="{{$th}}">Herbarium Name</th>
-        <th style="{{$th_transaction}}">Borrower's name (Last Lending)</th>
-        <th style="{{$th_transaction}}">Organization or university</th>
-        <th style="{{$th_transaction}}">Date received</th>
-        <th style="{{$th_transaction}}">Return date</th>
-        <th style="{{$th_transaction}}">Sample impression (Last Visit)</th>
-        <th style="{{$th_transaction}}">Organization or university</th>
-        <th style="{{$th_transaction}}">Service date</th>
-        <th style="{{$th_transaction}}">Referred Name</th>
-        <th style="{{$th}}">Type Sample</th>
-        <th style="{{$th_transaction}}">Last Exchange Receive</th>
-        <th style="{{$th_transaction}}">Last Exchange Send</th>
-        <th style="{{$th}}">Consideration</th>
+        @include('excels.partials.taxonomyHeader')
+        @if($keys['location'] ?? false)
+            <th style="{{$th}}">Location</th>
+            <th style="{{$th}}">Alt</th>
+            <th style="{{$th}}">N</th>
+            <th style="{{$th}}">E</th>
+        @endif
+        @if($keys['collect'] ?? false)
+            <th style="{{$th}}">Date</th>
+            <th style="{{$th}}">Leg</th>
+        @endif
+        @if($keys['determine'] ?? false)
+            <th style="{{$th}}">Det</th>
+        @endif
+        @if($keys['determine'] ?? false)
+
+            <th style="{{$th}}">Description</th>
+        @endif
+
+        @if($keys['determine'] ?? false)
+
+            <th style="{{$th}}">Herbarium Name</th>
+        @endif
+
+        @if($keys['determine'] ?? false)
+
+            <th style="{{$th_transaction}}">Borrower's name (Last Lending)</th>
+            <th style="{{$th_transaction}}">Organization or university</th>
+            <th style="{{$th_transaction}}">Date received</th>
+            <th style="{{$th_transaction}}">Return date</th>
+        @endif
+
+        @if($keys['determine'] ?? false)
+
+            <th style="{{$th_transaction}}">Sample impression (Last Visit)</th>
+            <th style="{{$th_transaction}}">Organization or university</th>
+            <th style="{{$th_transaction}}">Service date</th>
+            <th style="{{$th_transaction}}">Referred Name</th>
+        @endif
+
+        @if($keys['determine'] ?? false)
+
+            <th style="{{$th_transaction}}">Last Exchange Receive</th>
+            <th style="{{$th_transaction}}">Last Exchange Send</th>
+        @endif
+
+        @if($keys['determine'] ?? false)
+
+            <th style="{{$th}}">Type Sample</th>
+        @endif
+
+        @if($keys['determine'] ?? false)
+
+            <th style="{{$th}}">Consideration</th>
+        @endif
+
 
     </tr>
     </thead>
     <tbody>
-    @foreach($herbariums as $item)
+    @foreach($result as $item)
         <tr>
             <td style="{{$td}}">{{ $item->herbarium_number ?? null }}</td>
             <td style="{{$td}}">{{ $item->herbarium_index ?? null }}</td>
-            <td style="{{$td}}">{{ $item->taxonomy->family->name ?? null }}</td>
-            <td style="{{$td}}">{{ $item->taxonomy->scientific->name ?? null }}</td>
-            <td>
-                {{ $item['location']['address_en']}} | {{$item['location']['address_fa']}}
-            </td>
-            <td style="{{$td}}">{{$item['collect']['date'] ?? null}}</td>
-            <td style="{{$td}}">{{ $item['location']['min_altitude']}} - {{ $item['location']['max_altitude']}}</td>
-
-            <td style="{{$td}}">{{ $item['location']['point']['UTM'][0] ?? null }}</td>
-            <td style="{{$td}}">{{ $item['location']['point']['UTM'][1] ?? null }}</td>
-            <td style="{{$td}}">
-                @if(!empty($item['collect']) && count($item['collect']['actors']))
-                    @forelse ($item['collect']['actors'] as $actor)
-                        {{$actor->name}} {{!$loop->last ? ' & ' : null }}
-                    @empty
-                    @endforelse
-                @endif
-            </td>
-            <td style="{{$td}}">
-                @if(!empty($item['determine']) && count($item['determine']['actors']))
-                    @forelse ($item['determine']['actors'] as $actor)
-                        {{$actor->name}} {{!$loop->last ? ' & ' : null }}
-                    @empty
-                    @endforelse
-                @endif
-            </td>
-
-            <td style="{{$td}}">{{$item['description'] ?? null}}</td>
-
-            <td style="{{$td}}">{{$item['borrow']['member_name'] ?? null}}</td>
-            <td style="{{$td}}">{{$item['borrow']['start_time'] ?? null}}</td>
-            <td style="{{$td}}">{{$item['borrow']['organization']['name_en'] ?? null}}</td>
-            <td style="{{$td}}">{{!empty($item['borrow']['end_time']) ? $item['borrow']['end_time'] : null}}</td>
-            <td style="{{$td}}">{{$item['visit']['sample_impression'] ?? null}}</td>
-            <td style="{{$td}}">{{$item['visit']['start_time'] ?? null}}</td>
-            <td style="{{$td}}">{{$item['visit']['member_name'] ?? null}}</td>
-            <td style="{{$td}}">{{$item['type_sample_image'] ?? null}}</td>
-            <td style="{{$td}}">{{$item['exchange_receive']['organization']['name_en'] ?? null}}{{$item['exchange_receive']['start_time'] ?? null}}</td>
-            <td style="{{$td}}">{{$item['exchange_send']['organization']['name_en'] ?? null}}{{$item['exchange_send']['start_time'] ?? null}}</td>
-            <td style="{{$td}}">{{$item['consideration'] ?? null}}</td>
+            @include('excels.partials.taxonomyRow', ['taxonomy'=>$item->taxonomy, 'keys'=>$keys])
+            @if($keys['location'] ?? false)
+                <td>{{ $item['location']['address_en']}} | {{$item['location']['address_fa']}}</td>
+                <td style="{{$td}}">{{ $item['location']['min_altitude']}} - {{ $item['location']['max_altitude']}}</td>
+                <td style="{{$td}}">{{ $item['location']['point']['UTM'][0] ?? null }}</td>
+                <td style="{{$td}}">{{ $item['location']['point']['UTM'][1] ?? null }}</td>
+            @endif
+            @if($keys['collect'] ?? false)
+                <td style="{{$td}}">{{$item['collect']['date'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['collect']['authors'] ?? null}}</td>
+            @endif
+            @if($keys['determine'] ?? false)
+                <td style="{{$td}}">{{ $item['determine']['authors'] ?? null}}</td>
+            @endif
+            @if($keys['description'] ?? false)
+                <td style="{{$td}}">{{$item['description'] ?? null}}</td>
+            @endif
+            @if($keys['herbarium'] ?? false)
+                <td style="{{$td}}">{{$item['organization']['name'] ?? null}}</td>
+            @endif
+            @if($keys['borrow'] ?? false)
+                <td style="{{$td}}">{{$item['borrow']['member_name'] ?? null}}</td>
+                <td style="{{$td}}">{{$item['borrow']['start_time'] ?? null}}</td>
+                <td style="{{$td}}">{{$item['borrow']['organization']['name_en'] ?? null}}</td>
+                <td style="{{$td}}">{{!empty($item['borrow']['end_time']) ? $item['borrow']['end_time'] : null}}</td>
+            @endif
+            @if($keys['visit'] ?? false)
+                <td style="{{$td}}">{{$item['visit']['sample_impression'] ?? null}}</td>
+                <td style="{{$td}}">{{$item['visit']['start_time'] ?? null}}</td>
+                <td style="{{$td}}">{{$item['visit']['member_name'] ?? null}}</td>
+            @endif
+            @if($keys['exchange'] ?? false)
+                <td style="{{$td}}">{{$item['exchange_receive']['organization']['name_en'] ?? null}}{{$item['exchange_receive']['start_time'] ?? null}}</td>
+                <td style="{{$td}}">{{$item['exchange_send']['organization']['name_en'] ?? null}}{{$item['exchange_send']['start_time'] ?? null}}</td>
+            @endif
+            @if($keys['type_sample_image'] ?? false)
+                <td style="{{$td}}">{{$item['type_sample_image'] ?? null}}</td>
+            @endif
+            @if($keys['consideration'] ?? false)
+                <td style="{{$td}}">{{$item['consideration'] ?? null}}</td>
+            @endif
         </tr>p
     @endforeach
     </tbody>

@@ -29,33 +29,24 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($taxonomies as $item)
+    @foreach($result as $item)
         <tr>
             <td style="{{$td}}">{{ $item->family->name ?? null }}</td>
             <td style="{{$td}}">{{ $item->genus->name ?? null }}</td>
             <td style="{{$td}}">
                 {{ $item->species->name ?? null }}
                 @if (!empty($item->species->authors) && count($item->species->authors))
-                    &nbsp; | &nbsp;
-                    @foreach($item->species->authors as $author)
-                        {{$author->name}} {{!$loop->last ? ' & ' : null }}
-                    @endforeach
+                    | {{$item->species->actors}}
                 @endif
             </td>
             <td style="{{$td}}">{{ $item->subspecies->name ?? null }}
                 @if (!empty($item->subspecies->authors) && count($item->subspecies->authors))
-                    &nbsp; | &nbsp;
-                    @foreach($item->subspecies->authors as $author)
-                        {{$author->name}} {{!$loop->last ? ' & ' : null }}
-                    @endforeach
+                    | {{$item->subspecies->actors}}
                 @endif
             </td>
             <td style="{{$td}}">{{ $item->variety->name ?? null }}
-                @if(!empty($item->variety->authors) && count($item->variety->authors))
-                    &nbsp; | &nbsp;
-                    @foreach($item->variety->authors as $author)
-                        {{$author->name}} {{!$loop->last ? ' & ' : null }}
-                    @endforeach
+                @if (!empty($item->variety->authors) && count($item->variety->authors))
+                    | {{$item->variety->actors}}
                 @endif
             </td>
             <td style="{{$td}}">{{ $item->name ?? null }}</td>

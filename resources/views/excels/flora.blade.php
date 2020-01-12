@@ -21,30 +21,7 @@
     <thead>
     <tr>
         <th style="{{$th}}">Number</th>
-        @if($keys['family'] ?? false)
-            <th style="{{$th}}">Family</th>
-        @endif
-        @if($keys['genus'] ?? false)
-            <th style="{{$th}}">Genus</th>
-        @endif
-        @if($keys['species'] ?? false)
-            <th style="{{$th}}">Species</th>
-        @endif
-        @if($keys['subspecies'] ?? false)
-            <th style="{{$th}}">SubSpecies</th>
-        @endif
-        @if($keys['variety'] ?? false)
-            <th style="{{$th}}">Variety</th>
-        @endif
-        @if($keys['scientific'] ?? false)
-            <th style="{{$th}}">Scientific Name</th>
-        @endif
-        @if($keys['local_name'] ?? false)
-            <th style="{{$th}}">Local/Persian Name</th>
-        @endif
-        @if($keys['author'] ?? false)
-            <th style="{{$th}}">Author</th>
-        @endif
+        @include('excels.partials.taxonomyHeader')
         @if($keys['georgaphical'] ?? false)
             <th style="{{$th}}">Geographical Locations</th>
             <th style="{{$th}}">Distributions</th>
@@ -67,30 +44,7 @@
     @foreach($result as $item)
         <tr>
             <td style="{{$td}}">{{ $item->id ?? null }}</td>
-            @if($keys['family'] ?? false)
-                <td style="{{$td}}">{{ $item->taxonomy->family->name ?? null }}</td>
-            @endif
-            @if($keys['genus'] ?? false)
-                <td style="{{$td}}">{{ $item->taxonomy->genus->name ?? null }}</td>
-            @endif
-            @if($keys['species'] ?? false)
-                <td style="{{$td}}">{{ $item->taxonomy->species->name ?? null }}</td>
-            @endif
-            @if($keys['subspecies'] ?? false)
-                <td style="{{$td}}">{{ $item->taxonomy->subspecies->name ?? null }}</td>
-            @endif
-            @if($keys['variety'] ?? false)
-                <td style="{{$td}}">{{ $item->taxonomy->variety->name ?? null }}</td>
-            @endif
-            @if($keys['scientific'] ?? false)
-                <td style="{{$td}}">{{ $item->taxonomy->scientific_name ?? null }}</td>
-            @endif
-            @if($keys['local_name'] ?? false)
-                <td style="{{$td}}">{{ $item->taxonomy->name ?? null }}</td>
-            @endif
-            @if($keys['author'] ?? false)
-                <td style="{{$td}}">{{ $item->taxonomy->authors ?? null }}</td>
-            @endif
+            @include('excels.partials.taxonomyRow', ['taxonomy'=>$item->taxonomy, 'keys'=>$keys])
             @if($keys['georgaphical'] ?? false)
                 <td>
                     @foreach($item->locations as $location)
