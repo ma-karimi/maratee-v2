@@ -18,4 +18,15 @@ class BotanicalGarden extends BaseModel
     }
 
     protected $with = ['entrances'];
+
+
+    public function internalHabitat()
+    {
+        return $this->belongsTo(BotanicalGeneral::class, 'internal_habitat_id')->where('botanical_generals.type_id', 20);
+    }
+
+    public function garden()
+    {
+        return $this->belongsTo(BotanicalGeneral::class, 'garden_id')->where('botanical_generals.type_id', 19);
+    }
 }

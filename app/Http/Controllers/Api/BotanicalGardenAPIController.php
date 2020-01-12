@@ -63,10 +63,15 @@ class BotanicalGardenAPIController extends AppBaseController
         $botanicalGardens = $this->botanicalGardenRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('relations')
+            $this->getRelationFields()
         );
 
         return $this->sendResponse($botanicalGardens->toArray(), 'Botanical Gardens retrieved successfully');
+    }
+
+    private function getRelationFields()
+    {
+        return ['internalHabitat', 'garden'];
     }
 
     /**
@@ -178,7 +183,7 @@ class BotanicalGardenAPIController extends AppBaseController
     public function show($id)
     {
         /** @var BotanicalGarden $botanicalGarden */
-        $botanicalGarden = $this->botanicalGardenRepository->find($id, \request()->get('relations'));
+        $botanicalGarden = $this->botanicalGardenRepository->find($id, $this->getRelationFields());
 
         if ($botanicalGarden === null) {
             return $this->sendError('Botanical Garden not found');
