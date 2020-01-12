@@ -21,6 +21,7 @@
 <table class="table">
     <thead>
     <tr>
+        <th style="{{$th}}">Class</th>
         @include('excels.partials.taxonomyHeader')
         @if($keys['reference'] ?? false)
             <th style="{{$th}}">Authors</th>
@@ -49,6 +50,9 @@
     <tbody>
     @foreach($result as $item)
         <tr>
+            @if($keys['class'] ?? false)
+                <td style="{{$td}}">{{ $item['generalClass']['name'] ?? null}}</td>
+            @endif
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item->taxonomy, 'keys'=>$keys])
             @if($keys['reference'] ?? false)
                 <td>{{ $item['reference']['authors']}}</td>
@@ -65,40 +69,17 @@
                 </td>
             @endif
             @if($keys['n'] ?? false)
-                <td style="{{$td}}">{{$item['collect']['date'] ?? null}}</td>
-                <td style="{{$td}}">{{ $item['collect']['authors'] ?? null}}</td>
+                <td style="{{$td}}">{{$item['n_no'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['n2_no'] ?? null}}</td>
             @endif
             @if($keys['v.number'] ?? false)
-                <td style="{{$td}}">{{ $item['determine']['authors'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['v_number'] ?? null}}</td>
             @endif
             @if($keys['description'] ?? false)
                 <td style="{{$td}}">{{$item['description'] ?? null}}</td>
             @endif
-            @if($keys['herbarium'] ?? false)
-                <td style="{{$td}}">{{$item['organization']['name'] ?? null}}</td>
-            @endif
-            @if($keys['borrow'] ?? false)
-                <td style="{{$td}}">{{$item['borrow']['member_name'] ?? null}}</td>
-                <td style="{{$td}}">{{$item['borrow']['start_time'] ?? null}}</td>
-                <td style="{{$td}}">{{$item['borrow']['organization']['name_en'] ?? null}}</td>
-                <td style="{{$td}}">{{!empty($item['borrow']['end_time']) ? $item['borrow']['end_time'] : null}}</td>
-            @endif
-            @if($keys['visit'] ?? false)
-                <td style="{{$td}}">{{$item['visit']['sample_impression'] ?? null}}</td>
-                <td style="{{$td}}">{{$item['visit']['start_time'] ?? null}}</td>
-                <td style="{{$td}}">{{$item['visit']['member_name'] ?? null}}</td>
-            @endif
-            @if($keys['exchange'] ?? false)
-                <td style="{{$td}}">{{$item['exchange_receive']['organization']['name_en'] ?? null}}{{$item['exchange_receive']['start_time'] ?? null}}</td>
-                <td style="{{$td}}">{{$item['exchange_send']['organization']['name_en'] ?? null}}{{$item['exchange_send']['start_time'] ?? null}}</td>
-            @endif
-            @if($keys['type_sample_image'] ?? false)
-                <td style="{{$td}}">{{$item['type_sample_image'] ?? null}}</td>
-            @endif
-            @if($keys['consideration'] ?? false)
-                <td style="{{$td}}">{{$item['consideration'] ?? null}}</td>
-            @endif
-        </tr>p
+
+        </tr>
     @endforeach
     </tbody>
 </table>

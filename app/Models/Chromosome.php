@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
@@ -30,7 +31,7 @@ class Chromosome extends BaseModel
      * @var string
      */
     protected $table = 'chromosomes';
-
+    protected $appends = ['addresses'];
 
     /**
      * @return BelongsTo
@@ -40,14 +41,13 @@ class Chromosome extends BaseModel
         return $this->belongsTo(Taxonomy::class);
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function location(): BelongsTo
-    {
-        return $this->belongsTo(Location::class);
-    }
 
+    public function locations(): MorphToMany
+    {
+        return $this->morphToMany(Location::class, 'locationable', 'location_hubs')
+            ->whereNull('location_hubs.deleted_at')
+            ->withTimestamps();
+    }
     /**
      * @return BelongsTo
      */
@@ -62,6 +62,18 @@ class Chromosome extends BaseModel
     public function generalClass(): BelongsTo
     {
         return $this->belongsTo(General::class)->whereType('class');
+    }
+
+
+    public function getAddressesAttribute()
+    {
+        $item = null;
+
+        if ($this->relationLoaded('locations') && $this->locations->count()) {
+            $item = $this->locations->implode('address_en', ' & ');
+        }
+
+        return $item;
     }
 
 }

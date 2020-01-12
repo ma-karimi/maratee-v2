@@ -21,7 +21,6 @@ class   CreateChromosomesTable extends Migration
             $table->string('v_number')->nullable();
             $table->unsignedBigInteger('taxonomy_id');
             $table->unsignedBigInteger('article_id')->nullable();
-            $table->unsignedBigInteger('location_id')->nullable();
             $table->unsignedBigInteger('general_class_id');
 
             $table->timeStamps();
