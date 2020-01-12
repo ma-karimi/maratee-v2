@@ -123,11 +123,6 @@ trait BotanicalRelation
         return $this->belongsTo(BotanicalGeneral::class, 'seed_germination_id')->where('botanical_generals.type_id', 15);
     }
 
-    public function entranceToGarden()
-    {
-        return $this->belongsTo(BotanicalGeneral::class, 'entrance_to_garden_id')->where('botanical_generals.type_id', 12);
-    }
-
     public function wooden()
     {
         return $this->belongsTo(BotanicalGeneral::class, 'wooden_id')->where('botanical_generals.type_id', 14);
@@ -151,16 +146,6 @@ trait BotanicalRelation
     public function seedRate()
     {
         return $this->belongsTo(BotanicalGeneral::class, 'seed_rate_id')->where('botanical_generals.type_id', 9);
-    }
-
-    public function internalHabitat()
-    {
-        return $this->belongsTo(InternalHabitat::class);
-    }
-
-    public function organization()
-    {
-        return $this->belongsTo(Organization::class)->where('is_herbarium', 1);
     }
 
     public function protection()

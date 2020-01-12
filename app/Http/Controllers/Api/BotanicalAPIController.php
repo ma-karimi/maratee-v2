@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\Botanical\BotanicalAPIRequest;
-use App\Http\Requests\Api\Botanical\BotanicalGardenAPIRequest;
 use App\Http\Requests\Api\Botanical\BotanicalInformationAPIRequest;
 use App\Http\Requests\Api\Botanical\BotanicalIrrigationAPIRequest;
 use App\Http\Requests\Api\Botanical\BotanicalLocationAPIRequest;
@@ -78,7 +77,7 @@ class BotanicalAPIController extends AppBaseController
 
     private function getRelationFields()
     {
-        return ['distributions', 'organization', 'protection:id,name', 'internalHabitat', 'origins', 'habitats', 'botanicalIrrigation', 'plantingConditions', 'propagations', 'usages', 'values', 'operations', 'media', 'taxonomy', 'locations', 'cycles', 'flowerColors', 'fruitColors', 'foliageColors', 'soil', 'summerTolerance', 'winterTolerance', 'seedGermination', 'seedRate', 'growthRate', 'entranceToGarden', 'wooden', 'soilTypes', 'collection'];
+        return ['distributions', 'protection:id,name', 'internalHabitats', 'gardens', 'origins', 'habitats', 'botanicalIrrigation', 'plantingConditions', 'propagations', 'usages', 'values', 'operations', 'media', 'taxonomy', 'locations', 'cycles', 'flowerColors', 'fruitColors', 'foliageColors', 'soil', 'summerTolerance', 'winterTolerance', 'seedGermination', 'seedRate', 'growthRate', 'wooden', 'soilTypes', 'collection'];
     }
 
     /**
