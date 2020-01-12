@@ -440,7 +440,7 @@ class MorphologyQuantitativeEvaluationAPIController extends AppBaseController
             return $this->sendError('Morphology Quantitative Evaluation not found');
         }
 
-        $this->morphologyQuantitativeEvaluationRepository->storeVariable($input, $id);
+        $this->morphologyQuantitativeEvaluationRepository->storeVariable($input['variables'], $id);
 
         return $this->sendResponse([], 'MorphologyQuantitativeEvaluation updated successfully');
     }
