@@ -73,7 +73,7 @@ class ChromosomeAPIController extends AppBaseController
      */
     private function getRelationFields(): array
     {
-        return ['article', 'taxonomy', 'generalClass', 'location'];
+        return ['article', 'taxonomy', 'generalClass', 'locations'];
     }
 
     /**
@@ -94,12 +94,6 @@ class ChromosomeAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="article_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Chromosome")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="location_id",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Chromosome")
@@ -154,6 +148,7 @@ class ChromosomeAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(ChromosomeAPIRequest $request)
     {
@@ -245,12 +240,6 @@ class ChromosomeAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Chromosome")
      *      ),
      *      @SWG\Parameter(
-     *          name="location_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Chromosome")
-     *      ),
-     *      @SWG\Parameter(
      *          name="n_no",
      *          in="body",
      *          required=false,
@@ -300,6 +289,7 @@ class ChromosomeAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, ChromosomeAPIRequest $request)
     {
