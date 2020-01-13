@@ -4,6 +4,7 @@ namespace App\Http\Requests\Api\Botanical;
 
 
 use App\Models\Botanical;
+use Illuminate\Validation\ValidationException;
 use InfyOm\Generator\Request\APIRequest;
 
 class BotanicalAPIRequest extends APIRequest
@@ -12,9 +13,14 @@ class BotanicalAPIRequest extends APIRequest
      * Determine if the user is authorized to make this request.
      *
      * @return bool
+     * @throws ValidationException
      */
     public function authorize()
     {
+        if(Botanical::where('taxonomy_id', $this->taxonomy_id)->where('collection_id', $this->collection_id)->exists()){
+            throw ValidationException::withMessages(['errors' => ['taxonomy_id' => 'Taxonomy & Collection Repetitive!', 'collection_id' => 'Taxonomy & Collection Repetitive!']]) ;
+        }
+
         return true;
     }
 
