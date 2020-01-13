@@ -29,6 +29,26 @@ trait BotanicalAccessor
         return $cycles;
     }
 
+    public function getInternalHabitatAttribute()
+    {
+        $internalHabitats = null;
+
+        if ($this->relationLoaded('internalHabitats') && $this->internalHabitats->count()) {
+            $internalHabitats .= $this->internalHabitats->implode('name', ' & ');
+        }
+        return $internalHabitats;
+    }
+
+    public function getGardenAttribute()
+    {
+        $gardens = null;
+
+        if ($this->relationLoaded('gardens') && $this->gardens->count()) {
+            $gardens .= $this->gardens->implode('name', ' & ');
+        }
+        return $gardens;
+    }
+
     public function getUsageAttribute()
     {
         $usages = null;

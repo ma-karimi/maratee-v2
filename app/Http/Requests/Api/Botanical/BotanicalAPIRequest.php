@@ -17,8 +17,10 @@ class BotanicalAPIRequest extends APIRequest
      */
     public function authorize()
     {
-        if(Botanical::where('taxonomy_id', $this->taxonomy_id)->where('collection_id', $this->collection_id)->exists()){
-            throw ValidationException::withMessages(['errors' => ['taxonomy_id' => 'Taxonomy & Collection Repetitive!', 'collection_id' => 'Taxonomy & Collection Repetitive!']]) ;
+
+        if (Botanical::where('taxonomy_id', $this->taxonomy_id)->where('collection_id', $this->collection_id)->exists() && $this->isMethod('post')) {
+            $botanicalDuplicateErrorMessage = 'Taxonomy & Collection Repetitive!';
+            throw ValidationException::withMessages(['family_id' => $botanicalDuplicateErrorMessage, 'genus_id' => $botanicalDuplicateErrorMessage, 'collection_id' => $botanicalDuplicateErrorMessage]);
         }
 
         return true;
