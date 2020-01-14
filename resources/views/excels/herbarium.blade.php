@@ -91,8 +91,8 @@
             @if($keys['location'] ?? false)
                 <td>{{ $item['location']['address_en']}} | {{$item['location']['address_fa']}}</td>
                 <td style="{{$td}}">{{ $item['location']['min_altitude']}} - {{ $item['location']['max_altitude']}}</td>
-                <td style="{{$td}}">{{ $item['location']['point']['UTM'][0] ?? null }}</td>
-                <td style="{{$td}}">{{ $item['location']['point']['UTM'][1] ?? null }}</td>
+                <td style="{{$td}}">{{ $item['location']['point']['DMS'][0] ?? null }}</td>
+                <td style="{{$td}}">{{ $item['location']['point']['DMS'][1] ?? null }}</td>
             @endif
             @if($keys['collect'] ?? false)
                 <td style="{{$td}}">{{$item['collect']['date'] ?? null}}</td>

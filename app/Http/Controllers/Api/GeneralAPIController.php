@@ -96,13 +96,6 @@ class GeneralAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/General")
      *      ),
      *      @SWG\Parameter(
-     *          name="parent_id",
-     *          in="body",
-     *          description="General that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/General")
-     *      ),
-     *      @SWG\Parameter(
      *          name="description",
      *          in="body",
      *          description="General that should be stored",
@@ -129,6 +122,7 @@ class GeneralAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws ValidationException
      */
     public function store(CreateGeneralAPIRequest $request)
     {
@@ -223,13 +217,6 @@ class GeneralAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/General")
      *      ),
      *      @SWG\Parameter(
-     *          name="parent_id",
-     *          in="body",
-     *          description="General that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/General")
-     *      ),
-     *      @SWG\Parameter(
      *          name="description",
      *          in="body",
      *          description="General that should be stored",
@@ -256,6 +243,7 @@ class GeneralAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws ValidationException
      */
     public function update($id, UpdateGeneralAPIRequest $request)
     {
@@ -327,6 +315,54 @@ class GeneralAPIController extends AppBaseController
     }
 
     /**
+     * @return Response
+     *
+     * @SWG\Get(
+     *      path="/generals/all",
+     *      summary="Display the specified General",
+     *      tags={"General"},
+     *      description="Get General",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of General",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/General"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     * @throws Exception
+     */
+    public function all()
+    {
+
+        $General = $this->GeneralRepository->all()->groupBy('type');
+
+
+        return $this->sendResponse($General->toArray(), ' General retrieved successfully');
+    }
+
+
+    /**
      * @param $type
      * @return Response
      *
@@ -365,9 +401,8 @@ class GeneralAPIController extends AppBaseController
      * )
      * @throws ValidationException
      */
-    public function all($type)
+    public function type($type)
     {
-
 
         $General = $this->GeneralRepository->allWithType($type);
 

@@ -48,8 +48,8 @@
             @if($keys['georgaphical'] ?? false)
                 <td>
                     @foreach($item->locations as $location)
-                        {{$location['address_en']}} | {{$location['point']['UTM'][0]}}
-                        - {{$location['point']['UTM'][1]}}
+                        {{$location['address_en']}} | {{$location['point']['DMS'][0]}}
+                        - {{$location['point']['DMS'][1]}}
                         | {{$location['min_altitude']}} - {{$location['max_altitude']}}
                         <hr>
                     @endforeach

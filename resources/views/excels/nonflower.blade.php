@@ -73,8 +73,8 @@
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item->taxonomy, 'keys'=>$keys])
             @if($keys['location'] ?? false)
                 <td>{{ $item['location']['address_en'] ?? null}}</td>
-                <td style="{{$td}}">{{ $item['location']['point']['UTM'][0] ?? null }}</td>
-                <td style="{{$td}}">{{ $item['location']['point']['UTM'][1] ?? null }}</td>
+                <td style="{{$td}}">{{ $item['location']['point']['DMS'][0] ?? null }}</td>
+                <td style="{{$td}}">{{ $item['location']['point']['DMS'][1] ?? null }}</td>
                 <td style="{{$td}}">{{ $item['location']['min_altitude']}} - {{ $item['location']['max_altitude']}}</td>
             @endif
             @if($keys['collect'] ?? false)

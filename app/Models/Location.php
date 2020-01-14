@@ -48,7 +48,7 @@ class Location extends BaseModel
 
     protected $with = ['city.province.country', 'province.country'];
 
-    protected $appends = ['address'];
+    protected $appends = ['address', 'country'];
 
     /**
      * @return HasMany
@@ -131,4 +131,11 @@ class Location extends BaseModel
         return $this->morphedByMany(ActionHub::class, 'actionable');
     }
 
+
+    public function getCountryAttribute()
+    {
+        if($this->relationLoaded('province') && !empty($this->province)){
+            return $this->province->country;
+        }
+    }
 }

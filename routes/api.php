@@ -78,7 +78,8 @@ Route::apiResource('projects', 'ProjectAPIController');
 Route::get('products/all', 'ProductAPIController@all');
 Route::apiResource('products', 'ProductAPIController');
 
-Route::get('generals/{type}/all', 'GeneralAPIController@all');
+Route::get('generals/{type}/all', 'GeneralAPIController@type');
+Route::get('generals/all', 'GeneralAPIController@all');
 Route::apiResource('generals', 'GeneralAPIController');
 
 Route::get('plants/excel', 'PlantAPIController@excel');
