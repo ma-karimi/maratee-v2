@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\User;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreateUserAPIRequest extends APIRequest
+class UserAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +23,18 @@ class CreateUserAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return User::$rules;
+        $array = [
+            'national_id' => 'nullable|string',
+            'mobile' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'nullable|string',
+            'name' => 'required',
+        ];
+
+        if ($this->isMethod('post')) {
+            $array['password'] = 'required|min:6';
+        }
+
+        return $array;
     }
 }

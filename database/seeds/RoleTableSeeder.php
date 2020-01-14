@@ -5,6 +5,8 @@ use Illuminate\Database\Seeder;
 
 class RoleTableSeeder extends Seeder
 {
+    public $rules = ['Super Administrator', 'Administrator', 'Assistantَ'];
+
     /**
      * Run the database seeds.
      *

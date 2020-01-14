@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\Api\CreateUserAPIRequest;
-use App\Http\Requests\Api\UpdateUserAPIRequest;
+use App\Http\Requests\Api\UserAPIRequest;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Exception;
@@ -70,7 +69,7 @@ class UserAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateUserAPIRequest $request
+     * @param UserAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -79,12 +78,6 @@ class UserAPIController extends AppBaseController
      *      tags={"User"},
      *      description="Store User",
      *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="title",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
      *       @SWG\Parameter(
      *          name="email",
      *          in="body",
@@ -92,7 +85,7 @@ class UserAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/User")
      *      ),
      *      @SWG\Parameter(
-     *          name="full_name",
+     *          name="name",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/User")
@@ -104,48 +97,6 @@ class UserAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/User")
      *      ),
      *      @SWG\Parameter(
-     *          name="education",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="degree",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="national_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="birthday",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="nationality",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="passport_no",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="is_author",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
      *          name="mobile",
      *          in="body",
      *          required=false,
@@ -153,12 +104,6 @@ class UserAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="phone",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="work_experience",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/User")
@@ -183,8 +128,9 @@ class UserAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(CreateUserAPIRequest $request)
+    public function store(UserAPIRequest $request)
     {
         $input = $request->all();
 
@@ -209,90 +155,6 @@ class UserAPIController extends AppBaseController
      *          type="integer",
      *          required=true,
      *          in="path"
-     *      ),
-     *       @SWG\Parameter(
-     *          name="title",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *       @SWG\Parameter(
-     *          name="email",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="full_name",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="password",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="education",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="degree",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="national_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="birthday",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="nationality",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="passport_no",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="is_author",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="mobile",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="phone",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="work_experience",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -329,7 +191,7 @@ class UserAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateUserAPIRequest $request
+     * @param UserAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -338,12 +200,6 @@ class UserAPIController extends AppBaseController
      *      tags={"User"},
      *      description="Update User",
      *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="title",
-     *          in="body",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
      *       @SWG\Parameter(
      *          name="email",
      *          in="body",
@@ -351,7 +207,7 @@ class UserAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/User")
      *      ),
      *      @SWG\Parameter(
-     *          name="first_name",
+     *          name="name",
      *          in="body",
      *          required=true,
      *          @SWG\Schema(ref="#/definitions/User")
@@ -363,43 +219,7 @@ class UserAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/User")
      *      ),
      *      @SWG\Parameter(
-     *          name="education",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="degree",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
      *          name="national_id",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="birthday",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="nationality",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="passport_no",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="is_author",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/User")
@@ -412,12 +232,6 @@ class UserAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="phone",
-     *          in="body",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="work_experience",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/User")
@@ -442,8 +256,9 @@ class UserAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update($id, UpdateUserAPIRequest $request)
+    public function update($id, UserAPIRequest $request)
     {
         $input = $request->all();
 
