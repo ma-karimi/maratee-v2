@@ -76,20 +76,6 @@ trait PaleontologyScope
         return false;
     }
 
-    protected function processLocality_AddressEnFilter(Builder $builder, Constraint $constraint)
-    {
-        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
-            $builder->whereHas('locality', function ($query) use ($constraint) {
-                return $query->whereHas('location', function ($location) use ($constraint) {
-                    return $location->where('address_id', $constraint->getOperator(), $constraint->getValue());
-                });
-            });
-
-            return true;
-        }
-        return false;
-    }
-
 
     protected function processLocation_PointFilter(Builder $builder, Constraint $constraint)
     {
@@ -109,5 +95,46 @@ trait PaleontologyScope
         return false;
     }
 
+    protected function processDeterminerFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('determine', function ($determine) use ($constraint) {
+                return $determine->whereHas('actors', function ($key) use ($constraint) {
+                    return $key->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
+                });
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processCollectorFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('collect', function ($determine) use ($constraint) {
+                return $determine->whereHas('actors', function ($key) use ($constraint) {
+                    return $key->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
+                });
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processCitations_AuthorsFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('citations', function ($determine) use ($constraint) {
+                return $determine->whereHas('actors', function ($key) use ($constraint) {
+                    return $key->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
+                });
+            });
+
+            return true;
+        }
+        return false;
+    }
 
 }

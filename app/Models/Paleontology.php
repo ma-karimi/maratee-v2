@@ -6,6 +6,7 @@ use App\Models\Accessor\PaleontologyAccessor;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ActionRelation;
 use App\Models\Relations\ArticleRelation;
+use App\Models\Scope\PaleontologyScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -23,7 +24,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Paleontology extends BaseModel implements HasMedia
 {
-    use PaleontologyAccessor, ActionRelation, ArticleRelation, HasMediaTrait;
+    use PaleontologyAccessor, ActionRelation, ArticleRelation, HasMediaTrait, PaleontologyScope;
     public static $rules = [
 
 

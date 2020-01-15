@@ -4,8 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ActionRelation;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use App\Models\Scope\HerbariumScope;
 use Illuminate\Support\Arr;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -18,7 +17,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Herbarium extends BaseModel implements HasMedia
 {
-    use ActionRelation, HasMediaTrait;
+    use ActionRelation, HasMediaTrait, HerbariumScope;
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
 
     public static $rules = [
@@ -47,40 +46,6 @@ class Herbarium extends BaseModel implements HasMedia
 
     protected $appends = ['tip_picture', 'visit', 'borrow', 'exchange_receive', 'exchange_send'];
 
-    public function plant()
-    {
-        return $this->belongsTo(Plant::class, 'taxonomy_id', 'taxonomy_id');
-    }
-
-    public function determine()
-    {
-        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 1);
-    }
-
-    public function collect()
-    {
-        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 2);
-    }
-
-    public function research()
-    {
-        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 3);
-    }
-
-    public function taxonomy(): BelongsTo
-    {
-        return $this->belongsTo(Taxonomy::class);
-    }
-
-    public function location(): BelongsTo
-    {
-        return $this->belongsTo(Location::class);
-    }
-
-    public function organization(): BelongsTo
-    {
-        return $this->belongsTo(Organization::class);
-    }
 
     public function getTipPictureAttribute()
     {
@@ -93,15 +58,6 @@ class Herbarium extends BaseModel implements HasMedia
             ->where('type_id', array_search('exchange', Transaction::TYPE))
             ->where('mode_id', array_search('receive', Transaction::MODE))
             ->first();
-    }
-
-    /**
-     * @return MorphMany
-     */
-    public function transactions(): MorphMany
-    {
-        return $this->morphMany(Transaction::class, 'transactionable')
-            ->whereNull('deleted_at');
     }
 
     public function getExchangeSendAttribute()
@@ -120,24 +76,6 @@ class Herbarium extends BaseModel implements HasMedia
     public function getVisitAttribute()
     {
         return $this->transactions()->where('type_id', array_search('visit', Transaction::TYPE))->first();
-    }
-
-
-    public function generalPhytogeography(): BelongsTo
-    {
-        return $this->belongsTo(General::class, 'general_phytogeography_id')->whereType('phytogeography');
-    }
-
-
-    public function generalSubstrate()
-    {
-        return $this->belongsTo(General::class, 'general_substrate_id')->whereIn('type', ['diatom', 'moss', 'lichen']);
-    }
-
-
-    public function generalHabitat(): BelongsTo
-    {
-        return $this->belongsTo(General::class, 'general_habitat_id')->whereType('habitat');
     }
 
 }

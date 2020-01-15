@@ -125,7 +125,7 @@ trait MedicinalPlantScope
         return false;
     }
 
-    protected function processDeterminerFilter(Builder $builder, Constraint $constraint)
+    protected function processDeterminatorsFilter(Builder $builder, Constraint $constraint)
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
             $builder->whereHas('locations', function ($query) use ($constraint) {
