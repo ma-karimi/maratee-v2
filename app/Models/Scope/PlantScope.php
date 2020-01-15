@@ -214,38 +214,4 @@ trait PlantScope
         return false;
     }
 
-    protected function processHerbarium_Determine_Actors_IdFilter(Builder $builder, Constraint $constraint)
-    {
-        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
-            $builder->whereHas('herbarium', function ($query) use ($constraint) {
-                return $query->whereHas('determine', function ($determine) use ($constraint) {
-                    return $determine->whereHas('actors', function ($key) use ($constraint) {
-                        return $key->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
-                    });
-                });
-
-            });
-
-            return true;
-        }
-        return false;
-    }
-
-    protected function processHerbarium_Collect_Actors_IdFilter(Builder $builder, Constraint $constraint)
-    {
-        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
-            $builder->whereHas('herbarium', function ($query) use ($constraint) {
-                return $query->whereHas('collect', function ($determine) use ($constraint) {
-                    return $determine->whereHas('actors', function ($key) use ($constraint) {
-                        return $key->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
-                    });
-                });
-
-            });
-
-            return true;
-        }
-        return false;
-    }
-
 }

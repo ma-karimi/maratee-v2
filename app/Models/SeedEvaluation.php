@@ -23,7 +23,7 @@ class SeedEvaluation extends BaseModel implements HasMedia
         'project.project_no' => 'required|string',
         'project.project_leader_name' => 'required|string',
         'project.research_leader_name' => 'required|string',
-        'organization_id' => 'required|exists:organizations,id',
+//        'organization_id' => 'required|exists:organizations,id',
         'specimen_type_id' => 'required|exists:seed_generals,id',
         'collection_id' => 'required|exists:seed_generals,id',
     ];

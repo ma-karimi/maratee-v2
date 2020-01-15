@@ -60,11 +60,17 @@ class SeedEvaluationRepository extends BaseRepository
         return $this->fieldSearchable;
     }
 
+    /**
+     * @todo delete research & organization with jamzad comment
+     * @param $input
+     * @return Model
+     * @throws ValidationException
+     */
     public function create($input)
     {
         $input = $this->createOrUpdateProject($input);
         $seed = parent::create(Arr::except($input, ['project', 'researchers']));
-        $this->storeResearch($input, $seed->id);
+//        $this->storeResearch($input, $seed->id);
 
         return $seed;
     }
@@ -93,11 +99,18 @@ class SeedEvaluationRepository extends BaseRepository
         return parent::update($input, $id);
     }
 
+    /**
+     * @todo delete research & organization with jamzad comment
+     * @param array $input
+     * @param int $id
+     * @return Builder|Builder[]|Collection|Model
+     * @throws ValidationException
+     */
     public function update($input, $id)
     {
         $input = $this->createOrUpdateProject($input);
         $seed = parent::update(Arr::except($input, ['project', 'researchers']), $id);
-        $this->storeResearch($input, $seed->id);
+//        $this->storeResearch($input, $seed->id);
 
         return $seed;
     }

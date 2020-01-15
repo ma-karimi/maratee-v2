@@ -19,12 +19,12 @@ class CreateSeedEvaluationsTable extends Migration
         Schema::create('seed_evaluations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('seed_collection_id');
-            $table->unsignedBigInteger('organization_id');
+//            $table->unsignedBigInteger('organization_id');
             $table->unsignedBigInteger('project_id');
-            $table->string('department_name')->nullable();
-            $table->string('organization_phone')->nullable();
-            $table->string('organization_fax')->nullable();
-            $table->string('organization_email')->nullable();
+//            $table->string('department_name')->nullable();
+//            $table->string('organization_phone')->nullable();
+//            $table->string('organization_fax')->nullable();
+//            $table->string('organization_email')->nullable();
             $table->unsignedBigInteger('specimen_type_id');
             $table->unsignedBigInteger('collection_id');
             $table->string('regeneration_code')->nullable();
@@ -58,7 +58,7 @@ class CreateSeedEvaluationsTable extends Migration
             $table->foreign('seed_collection_id')->references('id')->on('seed_collections')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('specimen_type_collect_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('dormancy_breaking_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
+//            $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('project_id')->references('id')->on('projects')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
         });

@@ -16,11 +16,10 @@ class CreateActionHubsTable extends Migration {
 		{
 		    $table->bigIncrements('id');
 			$table->integer('action_id')->default(1)->comment('1: detect, 2:collect, 3:research');
-            //plant_herbarium, cryo_bank, paleontology , medicinal plant
             $table->morphs('actionable');
 
             $table->date('date')->nullable();
-			$table->json('description')->nullable();
+			$table->text('description')->nullable();
 
             $table->timeStamps();
             $table->softDeletesTz();
