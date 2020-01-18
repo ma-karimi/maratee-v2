@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use App\Models\Scope\GeneralScope;
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
@@ -15,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class General extends BaseModel
 {
     use GeneralScope;
+
     public const TYPES = ['phytogeography', 'phenology', 'plant_type', 'species', 'sub_species', 'variety', 'family', 'genus', 'class', 'group', 'order', 'flowering', 'sperm', 'cotyledon', 'growth', 'usage', 'part', 'industry', 'application', 'habitat', 'ecology', 'origin', 'lichen', 'moss', 'diatom', 'biological', 'sample'];
     public static $rules = array(
         'name' => 'required|string',

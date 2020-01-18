@@ -4,6 +4,7 @@
 namespace App\Models\Contracts;
 
 use Exception;
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,10 +16,13 @@ use ReflectionException;
 
 class BaseModel extends Model
 {
-    use SoftDeletes, SearchableTrait, RelationManager;
+    use SoftDeletes, SearchableTrait, RelationManager, Cachable;
     public static $rules = [];
     public static $jsons = [];
     public static $messages = [];
+
+    protected $cacheCooldownSeconds = 300; // 5 minutes
+
     /**
      * The attributes that have en,fa languages.
      **/

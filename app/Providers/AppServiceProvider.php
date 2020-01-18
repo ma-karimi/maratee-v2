@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\{City,
+    Contracts\BaseModel,
     Country,
     General,
     MedicinalPlantType,
@@ -13,9 +14,9 @@ use App\Models\{City,
     Product,
     Protection,
     Province,
-    SeedExchange
-};
-use App\Observers\{CityObserver,
+    SeedExchange};
+use App\Observers\{BaseModelObserver,
+    CityObserver,
     CountryObserver,
     GeneralObserver,
     MedicinalPlantTypeObserver,
@@ -26,8 +27,7 @@ use App\Observers\{CityObserver,
     ProductObserver,
     ProtectionObserver,
     ProvinceObserver,
-    SeedExchangeObserver
-};
+    SeedExchangeObserver};
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
@@ -53,10 +53,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+            General::observe(GeneralObserver::class);
         if (App::environment() == 'production') {
             Plant::observe(PlantObserver::class);
             Protection::observe(ProtectionObserver::class);
-            General::observe(GeneralObserver::class);
             City::observe(CityObserver::class);
             Province::observe(ProvinceObserver::class);
             Country::observe(CountryObserver::class);

@@ -3,86 +3,83 @@
 namespace App\Observers;
 
 use App\Models\General;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class GeneralObserver
 {
-    public $types = ['family', 'genus', 'phytogeography', 'species', 'sub_species', 'variety', 'habitat', 'origin', 'lichen', 'moss', 'diatom', 'ecology'];
 
     /**
      * Handle the general "created" event.
      *
-     * @param General $general
+     * @param
      * @return void
      */
-    public function created(General $general)
+    public function created()
     {
-        $this->setCache($general, $this->types);
+        $this->setCache();
     }
 
     /**
-     * @param General $general
-     * @param $types
      */
-    private function setCache(General $general, array $types): void
+    private function setCache(): void
     {
-        foreach ($types as $type) {
-            Cache::put($type, $general->whereType($type)->get(), now()->addDays(10));
-        }
+        Artisan::call('modelCache:clear --model=App\\\Models\\\General');
     }
 
     /**
      * Handle the general "updated" event.
      *
-     * @param General $general
+     * @param
      * @return void
      */
-    public function updated(General $general)
+    public function updated()
     {
-        $this->setCache($general, $this->types);
+        $this->setCache();
     }
 
     /**
      * Handle the general "deleted" event.
      *
-     * @param General $general
+     * @param
      * @return void
      */
-    public function deleted(General $general)
+    public function deleted()
     {
-        $this->setCache($general, $this->types);
+        $this->setCache();
     }
 
     /**
      * Handle the general "restored" event.
      *
-     * @param General $general
+     * @param
      * @return void
      */
-    public function restored(General $general)
+    public function restored()
     {
-        $this->setCache($general, $this->types);
+        $this->setCache();
     }
 
     /**
      * Handle the general "force deleted" event.
      *
-     * @param General $general
+     * @param
      * @return void
      */
-    public function forceDeleted(General $general)
+    public function forceDeleted()
     {
-        $this->setCache($general, $this->types);
+        $this->setCache();
     }
 
     /**
      * Handle the general "saved" event.
      *
-     * @param General $general
+     * @param
      * @return void
      */
-    public function saved(General $general)
+    public function saved()
     {
-        $this->setCache($general, $this->types);
+        $this->setCache();
     }
 }

@@ -18,25 +18,7 @@ class CreatePlantAPIRequest extends APIRequest
      */
     public function authorize()
     {
-//        $array_id_life_forms = [
-//            'cycle_id' => 'life_cycle',
-//            'wooden_id' => 'wooden',
-//            'leaf_id' => 'leaf',
-//            'herbaceous_id' => 'herbaceous',
-//        ];
-//        $array_id_types = [
-////            'general_ecology_id' => 'ecology',
-//            'general_habitat_id' => 'habitat',
-//            'general_origin_id' => 'origin',
-//            'general_phenology_id' => 'phenology',
-//            'general_phytogeography_id' => 'phytogeography',
-//            'general_substrate_lichen_id' => 'lichen',
-//            'general_substrate_moss_id' => 'moss',
-//            'general_substrate_diatom_id' => 'diatom',
-//        ];
-//
-//        $this->validateGeneralIds($array_id_types);
-//        $this->validateLifeFormIds($array_id_life_forms);
+
         return true;
     }
 

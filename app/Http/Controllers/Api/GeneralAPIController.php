@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\Api\CreateGeneralAPIRequest;
-use App\Http\Requests\Api\UpdateGeneralAPIRequest;
+use App\Http\Requests\Api\GeneralAPIRequest;
 use App\Models\General;
 use App\Repositories\GeneralRepository;
 use Exception;
@@ -61,10 +60,9 @@ class GeneralAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $Generals = $this->GeneralRepository->all(
-            [],
-            null,
-            null,
+        $Generals = $this->GeneralRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
             []
         );
 
@@ -72,7 +70,7 @@ class GeneralAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateGeneralAPIRequest $request
+     * @param GeneralAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -124,7 +122,7 @@ class GeneralAPIController extends AppBaseController
      * )
      * @throws ValidationException
      */
-    public function store(CreateGeneralAPIRequest $request)
+    public function store(GeneralAPIRequest $request)
     {
 
         $input = $request->all();
@@ -186,7 +184,7 @@ class GeneralAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateGeneralAPIRequest $request
+     * @param GeneralAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -245,7 +243,7 @@ class GeneralAPIController extends AppBaseController
      * )
      * @throws ValidationException
      */
-    public function update($id, UpdateGeneralAPIRequest $request)
+    public function update($id, GeneralAPIRequest $request)
     {
         $input = $request->all();
 

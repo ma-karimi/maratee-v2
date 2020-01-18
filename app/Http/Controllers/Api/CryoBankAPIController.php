@@ -190,6 +190,7 @@ class CryoBankAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(CryoBankAPIRequest $request)
     {
@@ -371,6 +372,7 @@ class CryoBankAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, CryoBankAPIRequest $request)
     {
