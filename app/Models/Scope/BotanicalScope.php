@@ -33,6 +33,163 @@ trait BotanicalScope
         return false;
     }
 
+    protected function processOrigins_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('origins', function ($query) use ($constraint) {
+                return $query->where('botanical_generals.id', $constraint->getOperator(), $constraint->getValue());
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processInternalHabitats_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('internalHabitats', function ($query) use ($constraint) {
+                return $query->where('botanical_generals.id', $constraint->getOperator(), $constraint->getValue());
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processGardens_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('gardens', function ($query) use ($constraint) {
+                return $query->where('botanical_generals.id', $constraint->getOperator(), $constraint->getValue());
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processValues_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('values', function ($query) use ($constraint) {
+                return $query->where('botanical_generals.id', $constraint->getOperator(), $constraint->getValue());
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processUsages_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('usages', function ($query) use ($constraint) {
+                return $query->where('botanical_generals.id', $constraint->getOperator(), $constraint->getValue());
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processPropagations_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('propagations', function ($query) use ($constraint) {
+                return $query->where('botanical_generals.id', $constraint->getOperator(), $constraint->getValue());
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processPlantingConditions_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('plantingConditions', function ($query) use ($constraint) {
+                return $query->where('botanical_generals.id', $constraint->getOperator(), $constraint->getValue());
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processCycles_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('cycles', function ($query) use ($constraint) {
+                return $query->where('botanical_generals.id', $constraint->getOperator(), $constraint->getValue());
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processHabitats_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('habitats', function ($query) use ($constraint) {
+                return $query->where('botanical_generals.id', $constraint->getOperator(), $constraint->getValue());
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processFoliageColors_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('foliageColors', function ($query) use ($constraint) {
+                return $query->where('botanical_colors.id', $constraint->getOperator(), $constraint->getValue());
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processFlowerColors_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('flowerColors', function ($query) use ($constraint) {
+                return $query->where('botanical_colors.id', $constraint->getOperator(), $constraint->getValue());
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processFruitColors_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('fruitColors', function ($query) use ($constraint) {
+                return $query->where('botanical_colors.id', $constraint->getOperator(), $constraint->getValue());
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processGeographicals_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('distributions', function ($query) use ($constraint) {
+                return $query->where('geographicals.id', $constraint->getOperator(), $constraint->getValue());
+            });
+
+            return true;
+        }
+        return false;
+    }
+
+
     protected function processLocations_CityIdFilter(Builder $builder, Constraint $constraint)
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {

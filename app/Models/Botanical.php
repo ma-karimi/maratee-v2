@@ -37,7 +37,7 @@ class Botanical extends BaseModel implements HasMedia
         'collection_id' => 'required|exists:botanical_generals,id',
         'general_habitat_id' => 'nullable|integer|exists:generals,id',
         'originِ_id' => 'nullable|exists:botanical_generals,id',
-        'monopoly_of_iran_id' => 'nullable|numeric',
+//        'monopoly_of_iran_id' => 'nullable|numeric',
         'wooden_id' => 'nullable|exists:botanical_generals,id',
         'protection_id' => 'nullable|integer|exists:protections,id',
         'growth_rate_id' => 'nullable|exists:botanical_generals,id',
@@ -54,7 +54,7 @@ class Botanical extends BaseModel implements HasMedia
 
     protected $appends = [
 
-        'seed_formation',  'monopoly_of_iran', 'geographicals',
+        'seed_formation', 'geographicals',
         'cycle', 'value', 'propagation', 'plant_condition', 'usage', 'flower_color', 'fruit_color', 'foliage_color', 'seeding', 'planting', 'transfer', 'habitat', 'origin', 'garden', 'internal_habitat'
     ];
 

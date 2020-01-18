@@ -25,7 +25,7 @@ class OriginalBotanicalGeneralTableSeeder extends Seeder
     public const SOIL = [1 => 'neutral', 2 => 'alkaline', 3 => 'acid', 4 => 'indifferent'];
     public const WOODEN = [1 => 'Tree', 2 => 'Shrub'];
     public const SEED_GERMINATION = [1 => 'good', 2 => 'moderate', 3 => 'low', 4 => 'none'];
-
+    public const SOIL_TYPE = 'clay soil-loam-fine sand-coarse sand-gravel-shale-salt-gypsum-forest soil-peat-compost-manure-bone powder';
     /**
      * Run the database seeds.
      *
@@ -120,6 +120,13 @@ class OriginalBotanicalGeneralTableSeeder extends Seeder
         foreach (self::SEED_GERMINATION as $index => $item) {
             \App\Models\BotanicalGeneral::create([
                 'type_id' => 15,
+                'name' => $item
+            ]);
+        }
+
+        foreach (explode('-', self::SOIL_TYPE) as $item) {
+            \App\Models\BotanicalGeneral::firstOrCreate([
+                'type_id' => 17,
                 'name' => $item
             ]);
         }

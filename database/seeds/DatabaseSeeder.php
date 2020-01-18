@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             ProtectionTableSeeder::class,
             LifeFormTableSeeder::class,
             OriginalSeedGeneralTableSeeder::class,
+            OriginalBotanicalGeneralTableSeeder::class,
             ConvertSeeder::class,
 
         ]);

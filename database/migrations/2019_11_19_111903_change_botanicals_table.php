@@ -15,7 +15,7 @@ class ChangeBotanicalsTable extends Migration
     {
 
         Schema::table('botanicals', function (Blueprint $table) {
-            $table->dropColumn('garden_id');
+            $table->dropColumn(['garden_id', 'monopoly_of_iran_id']);
             $table->unsignedBigInteger('organization_id')->nullable();
             $table->unsignedBigInteger('internal_habitat_id')->nullable();
             $table->string('flowering_period')->nullable();

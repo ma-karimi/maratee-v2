@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 class CreateBotanicalSoilsTable extends Migration
 {
 
-    public const TYPE = 'clay soil-loam-fine sand-coarse sand-gravel-shale-salt-gypsum-forest soil-peat-compost-manure-bone powder';
+
 
     /**
      * Run the migrations.
@@ -27,13 +27,6 @@ class CreateBotanicalSoilsTable extends Migration
 
         });
 
-
-        foreach (explode('-', self::TYPE) as $item) {
-            \App\Models\BotanicalGeneral::firstOrCreate([
-                'type_id' => 17,
-                'name' => $item
-            ]);
-        }
 
 
         Schema::table('botanicals', function (Blueprint $table) {
