@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ActionRelation;
 use App\Models\Scope\HerbariumScope;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Arr;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -46,6 +47,40 @@ class Herbarium extends BaseModel implements HasMedia
 
     protected $appends = ['tip_picture', 'visit', 'borrow', 'exchange_receive', 'exchange_send'];
 
+    public function plant()
+    {
+        return $this->belongsTo(Plant::class, 'taxonomy_id', 'taxonomy_id');
+    }
+
+    public function determine()
+    {
+        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 1);
+    }
+
+    public function collect()
+    {
+        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 2);
+    }
+
+    public function research()
+    {
+        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 3);
+    }
+
+    public function taxonomy(): BelongsTo
+    {
+        return $this->belongsTo(Taxonomy::class);
+    }
+
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
+    }
+
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class);
+    }
 
     public function getTipPictureAttribute()
     {
