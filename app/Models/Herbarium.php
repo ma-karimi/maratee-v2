@@ -95,6 +95,15 @@ class Herbarium extends BaseModel implements HasMedia
             ->first();
     }
 
+    /**
+     * @return MorphMany
+     */
+    public function transactions(): MorphMany
+    {
+        return $this->morphMany(Transaction::class, 'transactionable')
+            ->whereNull('deleted_at');
+    }
+
     public function getExchangeSendAttribute()
     {
         return $this->transactions()
@@ -111,6 +120,24 @@ class Herbarium extends BaseModel implements HasMedia
     public function getVisitAttribute()
     {
         return $this->transactions()->where('type_id', array_search('visit', Transaction::TYPE))->first();
+    }
+
+
+    public function generalPhytogeography(): BelongsTo
+    {
+        return $this->belongsTo(General::class, 'general_phytogeography_id')->whereType('phytogeography');
+    }
+
+
+    public function generalSubstrate()
+    {
+        return $this->belongsTo(General::class, 'general_substrate_id')->whereIn('type', ['diatom', 'moss', 'lichen']);
+    }
+
+
+    public function generalHabitat(): BelongsTo
+    {
+        return $this->belongsTo(General::class, 'general_habitat_id')->whereType('habitat');
     }
 
 }
