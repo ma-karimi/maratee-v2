@@ -63,7 +63,7 @@ class ProvinceAPIController extends AppBaseController
             [],
             $request->get('per_page'),
             $request->except('per_page'),
-            []
+            $this->getRelationFields()
         );
 
         return $this->sendResponse($provinces->toArray(), 'Provinces retrieved successfully');
@@ -120,6 +120,7 @@ class ProvinceAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(ProvinceAPIRequest $request)
     {
@@ -171,7 +172,7 @@ class ProvinceAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Province $province */
-        $province = $this->provinceRepository->find($id, \request()->get('relations'));
+        $province = $this->provinceRepository->find($id, $this->getRelationFields());
 
         if (empty($province)) {
             return $this->sendError('Province not found');
@@ -239,6 +240,7 @@ class ProvinceAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, ProvinceAPIRequest $request)
     {
@@ -349,5 +351,10 @@ class ProvinceAPIController extends AppBaseController
 
 
         return $this->sendResponse($provinces->toArray(), 'Provinces retrieved successfully');
+    }
+
+    private function getRelationFields()
+    {
+        return ['country'];
     }
 }
