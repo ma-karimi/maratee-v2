@@ -14,7 +14,7 @@ class CreatePaleobotanyTaxonomiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('paleobtany_taxonomies', function (Blueprint $table) {
+        Schema::create('paleobotany_taxonomies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable();
             //generals
@@ -45,6 +45,6 @@ class CreatePaleobotanyTaxonomiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paleobtany_taxonomies');
+        Schema::dropIfExists('paleobotany_taxonomies');
     }
 }

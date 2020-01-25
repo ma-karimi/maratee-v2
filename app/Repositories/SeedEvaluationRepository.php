@@ -75,6 +75,11 @@ class SeedEvaluationRepository extends BaseRepository
         return $seed;
     }
 
+    public function storeValues($input, $id)
+    {
+        return parent::update($input, $id);
+    }
+
     /**
      * @param $input
      * @return mixed
@@ -116,6 +121,11 @@ class SeedEvaluationRepository extends BaseRepository
     }
 
 
+    /**
+     * @deprecated
+     * @param $input
+     * @param $seed_collection
+     */
     public function storeRadicals($input, $seed_collection)
     {
         $this->storePivot($input['radicals'], $seed_collection->id, 1);
@@ -148,11 +158,12 @@ class SeedEvaluationRepository extends BaseRepository
 
     public function storeGerminations($input, $seed_collection)
     {
-        $this->storeGerminatedNumber($input, $seed_collection);
-        return parent::update(Arr::except($input, ['germinations']), $seed_collection->id);
+//        $this->storeGerminatedNumber($input, $seed_collection);
+        return parent::update($input, $seed_collection->id);
     }
 
     /**
+     * @deprecated
      * @param $input
      * @param $seed_collection
      */

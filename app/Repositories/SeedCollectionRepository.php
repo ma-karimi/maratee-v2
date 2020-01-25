@@ -70,6 +70,8 @@ class SeedCollectionRepository extends BaseRepository
     }
 
     /**
+     * delete collectors with dr.jamzad comment
+     *
      * @param $input
      * @param $id
      * @return Builder|Builder[]|Collection|Model
@@ -79,7 +81,7 @@ class SeedCollectionRepository extends BaseRepository
     {
         $input = $this->createOrUpdateProject($input);
         $seed_collect = parent::update(Arr::except($input, ['project', 'collectors', 'date']), $id);
-        $this->storeCollect($input, $seed_collect->id);
+//        $this->storeCollect($input, $seed_collect->id);
 
         return $seed_collect;
     }
@@ -103,6 +105,11 @@ class SeedCollectionRepository extends BaseRepository
         return parent::update(Arr::except($input, ['location', 'collect', 'id']), $id);
     }
 
+    /**
+     * @deprecated  by dr.jamzad
+     * @param $input
+     * @param $seed_collect_id
+     */
     private function storeCollect($input, $seed_collect_id)
     {
         $collectors = is_array($input['collectors']) ? $input['collectors'] : explode(',', $input['collectors']);

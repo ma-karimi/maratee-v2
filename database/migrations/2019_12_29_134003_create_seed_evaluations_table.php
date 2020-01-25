@@ -43,7 +43,8 @@ class CreateSeedEvaluationsTable extends Migration
             $table->integer('fresh_non_germinated')->nullable();
             $table->integer('rotten_seed')->nullable();
             $table->integer('abnormal')->nullable();
-            $table->integer('seedling_mortality')->nullable();
+            $table->integer('germinated_number')->nullable();
+            $table->float('seedling_mortality', 5,2)->nullable()->comment('percent');
 //            $table->float('germination', 5,2)->nullable();
 //            $table->float('viability', 5,2)->nullable();
             $table->float('mean_fresh_seedling_weight', 5,2)->nullable();
@@ -52,6 +53,16 @@ class CreateSeedEvaluationsTable extends Migration
             $table->unsignedBigInteger('dormancy_breaking_id')->nullable();
             $table->text('describe_dormancy_treatment')->nullable();
             $table->text('description')->nullable();
+
+            //dr.jamzad changes
+            $table->float('min_radical', 4, 2)->nullable();
+            $table->float('max_radical', 4, 2)->nullable();
+            $table->float('max_shoot', 4, 2)->nullable();
+            $table->float('max_shoot', 4, 2)->nullable();
+            $table->float('max_seed', 4, 2)->nullable();
+            $table->float('max_seed', 4, 2)->nullable();
+            $table->float('max_seed_width', 4, 2)->nullable();
+            $table->float('max_seed_width', 4, 2)->nullable();
 
             $table->timeStamps();
             $table->softDeletesTz();

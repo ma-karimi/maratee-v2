@@ -14,7 +14,7 @@ class CreatePaleobotanyGeneralHubsTable extends Migration
      */
     public function up()
     {
-        Schema::create('paleobtany_general_hubs', function (Blueprint $table) {
+        Schema::create('paleobotany_general_hubs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('paleobotany_general_id');
             $table->morphs('modelable');
@@ -31,6 +31,6 @@ class CreatePaleobotanyGeneralHubsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paleobtany_general_hubs');
+        Schema::dropIfExists('paleobotany_general_hubs');
     }
 }

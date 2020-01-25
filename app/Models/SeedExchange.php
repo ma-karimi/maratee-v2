@@ -20,7 +20,7 @@ class SeedExchange extends BaseModel
         'weight' => 'required|numeric',
         'delivery_date' => 'required|date',
         'recipient_name' => 'required|string',
-        'recipient_phone' => 'required|string',
+//        'recipient_phone' => 'required|string',
         'request_no' => 'required|string',
     ];
     /**

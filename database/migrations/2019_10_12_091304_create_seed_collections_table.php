@@ -43,8 +43,9 @@ class CreateSeedCollectionsTable extends Migration
             $table->integer('approximate_area_of_plant')->nullable();
             $table->unsignedBigInteger('specimen_type_collect_id');
             $table->tinyInteger('flowering_time_id')->nullable();
-            $table->unsignedBigInteger('pollination_type_id')->nullable();
-            $table->unsignedBigInteger('pollination_agent_id')->nullable();
+            //deleted by dr.jamzad
+//            $table->unsignedBigInteger('pollination_type_id')->nullable();
+//            $table->unsignedBigInteger('pollination_agent_id')->nullable();
             $table->unsignedBigInteger('fruit_type_id')->nullable();
             $table->unsignedBigInteger('seed_collected_from_id')->nullable();
             $table->tinyInteger('date_harvesting_id')->nullable();
@@ -53,8 +54,9 @@ class CreateSeedCollectionsTable extends Migration
             $table->integer('plant_height')->nullable();
             $table->unsignedBigInteger('plant_mother_health_id')->nullable();
             $table->unsignedBigInteger('plant_consumption_value_id')->nullable();
-            $table->unsignedBigInteger('general_used_part_id')->nullable();
-            $table->string('how_to_use')->nullable();
+            //deleted by dr.jamzad
+//            $table->unsignedBigInteger('general_used_part_id')->nullable();
+//            $table->string('how_to_use')->nullable();
             $table->string('other_details')->nullable();
             $table->string('special_advise')->nullable();
             $table->timeStamps();
@@ -71,15 +73,15 @@ class CreateSeedCollectionsTable extends Migration
             $table->foreign('soil_lime_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('soil_erosion_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
 //            $table->foreign('specimen_type_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('pollination_type_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('pollination_agent_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
+//            $table->foreign('pollination_type_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
+//            $table->foreign('pollination_agent_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('fruit_type_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('seed_collected_from_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('life_form_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('growth_form_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('plant_mother_health_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('plant_consumption_value_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('general_used_part_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
+//            $table->foreign('general_used_part_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
         });
     }
 

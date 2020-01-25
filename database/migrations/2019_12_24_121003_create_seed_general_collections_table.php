@@ -23,9 +23,9 @@ class CreateSeedGeneralCollectionsTable extends Migration
             $table->string('harvesting_time')->nullable();
             $table->string('flowering_time')->nullable();
             $table->string('department_name')->nullable();
-            $table->float('area_sampled', 5, 2)->nullable()->change();
-            $table->float('approximate_area_of_plant', 5, 2)->nullable()->change();
-            $table->string('approximate_area_of_plant', 5, 2)->nullable()->change();
+//            $table->float('area_sampled', 5, 2)->nullable()->change();
+//            $table->float('approximate_area_of_plant', 5, 2)->nullable()->change();
+//            $table->string('approximate_area_of_plant', 5, 2)->nullable()->change();
             $table->float('plant_height', 5, 2)->nullable()->change();
             $table->boolean('dna')->default(0);
             $table->string('organization_phone')->nullable();
