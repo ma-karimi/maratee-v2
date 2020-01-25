@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\Paleontology;
 
-use App\Models\Paleontology;
+use App\Models\PaleobotanyTaxonomy;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdatePaleontologyAPIRequest extends APIRequest
+class PaleobotanyTaxonomyAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class UpdatePaleontologyAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return Paleontology::$rules;
+        return PaleobotanyTaxonomy::$rules;
     }
 }

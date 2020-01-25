@@ -82,6 +82,10 @@ Route::get('generals/{type}/all', 'GeneralAPIController@type');
 Route::get('generals/all', 'GeneralAPIController@all');
 Route::apiResource('generals', 'GeneralAPIController');
 
+Route::get('paleobotany_generals/all', 'PaleobotanyGeneralAPIController@all');
+Route::apiResource('paleobotany_generals', 'PaleobotanyGeneralAPIController');
+Route::apiResource('paleobotany_taxonomies', 'PaleobotanyTaxonomyAPIController');
+
 Route::get('plants/excel', 'PlantAPIController@excel');
 Route::post('plants/{id}/media', 'PlantAPIController@media');
 Route::apiResource('plants', 'PlantAPIController');

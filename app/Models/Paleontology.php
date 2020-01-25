@@ -35,8 +35,8 @@ class Paleontology extends BaseModel implements HasMedia
         'geology_age_stage_id' => 'nullable|integer|exists:geology_ages,id',
         'geology_age_period_id' => 'nullable|integer|exists:geology_ages,id',
         'taxonomy_id' => 'required|exists:taxonomies,id',
-        'general_order_id' => 'nullable|integer|exists:generals,id',
-        'general_plant_type_id' => 'nullable|integer|exists:generals,id',
+//        'general_order_id' => 'nullable|integer|exists:generals,id',
+//        'general_plant_type_id' => 'nullable|integer|exists:generals,id',
     ];
     /**
      * The database table used by the model.
@@ -52,7 +52,7 @@ class Paleontology extends BaseModel implements HasMedia
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
-    protected $appends = ['samples', 'fair', 'gift', 'buy', 'borrow', 'visit', 'preservations', 'citation'];
+    protected $appends = ['fair', 'gift', 'buy', 'borrow', 'visit', 'preservation', 'citation'];
 
     /**
      * @return BelongsTo
@@ -110,38 +110,44 @@ class Paleontology extends BaseModel implements HasMedia
         return $this->belongsTo(Taxonomy::class);
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function generalClass(): BelongsTo
-    {
-        return $this->belongsTo(General::class, 'general_class_id');
-    }
+//    /**
+//     * @return BelongsTo
+//     */
+//    public function generalClass(): BelongsTo
+//    {
+//        return $this->belongsTo(General::class, 'general_class_id');
+//    }
 
-    /**
-     * @return BelongsTo
-     */
-    public function generalOrder(): BelongsTo
-    {
-        return $this->belongsTo(General::class, 'general_order_id');
-    }
+//    /**
+//     * @return BelongsTo
+//     */
+//    public function generalOrder(): BelongsTo
+//    {
+//        return $this->belongsTo(General::class, 'general_order_id');
+//    }
 
-    public function generalSamples()
-    {
-        return $this->belongsToMany(General::class, 'paleontology_generals', 'paleontology_id', 'general_id')->whereType('sample')->whereNull('paleontology_generals.deleted_at')->latest()->withTimestamps();
-    }
+//    public function generalSamples()
+//    {
+//        return $this->belongsToMany(General::class, 'paleontology_generals', 'paleontology_id', 'general_id')->whereType('sample')->whereNull('paleontology_generals.deleted_at')->latest()->withTimestamps();
+//    }
+//
+//    public function generalPreservations()
+//    {
+//        return $this->belongsToMany(General::class, 'paleontology_general_hubs', 'paleontology_id', 'general_id')->whereType('preservation')->whereNull('paleontology_generals.deleted_at')->latest()->withTimestamps();
+//    }
+//
+//    /**
+//     * @return BelongsTo
+//     */
+//    public function generalPlantType(): BelongsTo
+//    {
+//        return $this->belongsTo(General::class, 'general_plant_type_id')->whereType('plant_type');
+//    }
 
-    public function generalPreservations()
-    {
-        return $this->belongsToMany(General::class, 'paleontology_generals', 'paleontology_id', 'general_id')->whereType('preservation')->whereNull('paleontology_generals.deleted_at')->latest()->withTimestamps();
-    }
 
-    /**
-     * @return BelongsTo
-     */
-    public function generalPlantType(): BelongsTo
+    public function preservations(): MorphToMany
     {
-        return $this->belongsTo(General::class, 'general_plant_type_id')->whereType('plant_type');
+        return $this->morphToMany(PaleobotanyGeneral::class, 'modelable', 'paleobotany_general_hubs')->withPivot('value')->withTimestamps()->whereNull('paleobotany_general_hubs.deleted_at')->where('paleobotany_generals.type', 'preservation');
     }
 
     /**

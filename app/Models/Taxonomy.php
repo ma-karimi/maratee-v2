@@ -21,7 +21,6 @@ class Taxonomy extends BaseModel
     public const TYPE = [
         1 => 'Flora',
         2 => 'NonFlower',
-        3 => 'Palebotany'
     ];
     public static $rules = [
         'family_id' => 'required|exists:generals,id',

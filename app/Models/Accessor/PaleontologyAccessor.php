@@ -12,23 +12,23 @@ namespace App\Models\Accessor;
 trait PaleontologyAccessor
 {
 
-    public function getSamplesAttribute()
-    {
-        $samples = null;
+//    public function getSamplesAttribute()
+//    {
+//        $samples = null;
+//
+//        if ($this->relationLoaded('generalSamples') && $this->generalSamples->count()) {
+//            $samples = $this->generalSamples->implode('name', ' & ');
+//        }
+//
+//        return $samples;
+//    }
 
-        if ($this->relationLoaded('generalSamples') && $this->generalSamples->count()) {
-            $samples = $this->generalSamples->implode('name', ' & ');
-        }
-
-        return $samples;
-    }
-
-    public function getPreservationsAttribute()
+    public function getPreservationAttribute()
     {
         $text = null;
 
-        if ($this->relationLoaded('generalPreservations') && $this->generalPreservations->count()) {
-            $text = $this->generalPreservations->implode('name', ' & ');
+        if ($this->relationLoaded('preservations') && $this->preservations->count()) {
+            $text = $this->preservations->implode('name', ' & ');
         }
 
         return $text;
