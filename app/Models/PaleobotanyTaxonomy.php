@@ -82,7 +82,15 @@ class PaleobotanyTaxonomy extends BaseModel
      */
     public function genus(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'genus_id')->ofSelect();
+        return $this->belongsTo(PaleobotanyGeneral::class, 'genus_id')->ofSelect();
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function family(): BelongsTo
+    {
+        return $this->belongsTo(PaleobotanyGeneral::class, 'family_id')->ofSelect();
     }
 
     /**
@@ -90,7 +98,7 @@ class PaleobotanyTaxonomy extends BaseModel
      */
     public function species(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'species_id')->ofSelect();
+        return $this->belongsTo(PaleobotanyGeneral::class, 'species_id')->ofSelect();
     }
 
     /**
@@ -98,7 +106,7 @@ class PaleobotanyTaxonomy extends BaseModel
      */
     public function infraSpecific(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'infra_specific_id')->ofSelect();
+        return $this->belongsTo(PaleobotanyGeneral::class, 'infra_specific_id')->ofSelect();
     }
 
     /**
@@ -106,7 +114,7 @@ class PaleobotanyTaxonomy extends BaseModel
      */
     public function typeStatus(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'type_status_id')->ofSelect();
+        return $this->belongsTo(PaleobotanyGeneral::class, 'type_status_id')->ofSelect();
     }
 
     /**
@@ -114,7 +122,7 @@ class PaleobotanyTaxonomy extends BaseModel
      */
     public function order(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'order_id')->ofSelect();
+        return $this->belongsTo(PaleobotanyGeneral::class, 'order_id')->ofSelect();
     }
 
 
