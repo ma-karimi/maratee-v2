@@ -17,7 +17,7 @@ class PaleobotanyTaxonomy extends BaseModel
 {
 
     public static $rules = [
-        'family_id' => 'required|exists:paleobotany_generals,id',
+        'family_id' => 'nullable|exists:paleobotany_generals,id',
         'genus_id' => 'exists:paleobotany_generals,id',
         'species_id' => 'nullable|exists:paleobotany_generals,id',
         'order_id' => 'nullable|exists:paleobotany_generals,id',
