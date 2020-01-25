@@ -126,11 +126,6 @@ class PaleobotanyTaxonomy extends BaseModel
     }
 
 
-    public function scopeOfSelect($query)
-    {
-        return $query->select('id', 'name');
-    }
-
 
     public function divisions(): MorphToMany
     {

@@ -29,4 +29,11 @@ class PaleobotanyGeneral extends BaseModel
             ->whereNull('actor_hubs.deleted_at')
             ->withTimestamps();
     }
+
+
+    public function scopeOfSelect($query)
+    {
+        return $query->select('id', 'name');
+    }
+
 }
