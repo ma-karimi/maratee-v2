@@ -35,7 +35,7 @@ class PaleobotanyTaxonomy extends BaseModel
      *
      * @var string
      */
-    protected $with = ['family', 'genus', 'species.authors', 'order', 'typeStatus', 'samples', 'divisions'];
+    protected $with = ['family', 'genus', 'species.authors', 'order', 'typeStatus', 'samples', 'divisions', 'infraSpecific'];
     protected $appends = ['authors', 'scientific_name', 'sample'];
 
     public function getAuthorsAttribute()

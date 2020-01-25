@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\ActorHub;
 use App\Models\General;
+use App\Models\PaleobotanyGeneral;
 use App\Models\PaleobotanyGeneralHub;
 use App\Models\PaleobotanyTaxonomy;
 use Illuminate\Container\Container as Application;
@@ -105,14 +106,14 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
     {
         $species_authors = $request->filled('species_auth') ? $request->get('species_auth') : [];
 
-        ActorHub::where(['actorable_id' => $request->get('species_id'), 'actorable_type' => General::class])
+        ActorHub::where(['actorable_id' => $request->get('species_id'), 'actorable_type' => PaleobotanyGeneral::class])
             ->whereNotIn('actor_id', $species_authors)
             ->delete();
         if (!empty($species_authors) && count($species_authors)) {
             foreach ($species_authors as $item) {
                 ActorHub::firstOrCreate([
                     'actor_id' => $item,
-                    'actorable_type' => General::class,
+                    'actorable_type' => PaleobotanyGeneral::class,
                     'actorable_id' => $request->get('species_id'),
                 ]);
             }
