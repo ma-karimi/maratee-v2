@@ -147,9 +147,7 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
 
         if (!empty($divisions) && count($divisions)) {
             foreach ($divisions as $division) {
-                PaleobotanyGeneralHub::where()
-                    ->whereNotIn('paleobotany_general_id', collect($divisions)->pluck('id'))
-                    ->updateOrCreate(
+                PaleobotanyGeneralHub::updateOrCreate(
                         [
                             'modelable_type' => PaleobotanyTaxonomy::class,
                             'modelable_id' => $id,
