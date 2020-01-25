@@ -151,9 +151,11 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
                         [
                             'modelable_type' => PaleobotanyTaxonomy::class,
                             'modelable_id' => $id,
-                            'paleobotany_general_id' => $division->id
+                            'paleobotany_general_id' => $division['id']
                         ],
-                        ['value' => $division->value]
+                        [
+                            'value' => $division['value']
+                        ]
                     );
             }
         }
