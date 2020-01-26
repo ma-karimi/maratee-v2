@@ -84,8 +84,8 @@ class MedicinalLocationRepository extends BaseRepository
 
         $model = parent::create(Arr::only($input, $this->medicinalLocationData()));
         $this->storeMetabolites($input, $model);
-        $this->storeDetermine($input, $model->id);
-        $this->storeCollect($input, $model->id);
+//        $this->storeDetermine($input, $model->id);
+//        $this->storeCollect($input, $model->id);
 
         $lastCode = $this->getLastCode($model);
         parent::update(['code' => $lastCode + 1], $model->id);
@@ -128,7 +128,10 @@ class MedicinalLocationRepository extends BaseRepository
      */
     private function medicinalLocationData(): array
     {
-        return ['location_id', 'treatment_id', 'efficiency', 'studied_sample', 'presence_in_country', 'phenology_id', 'method_distillation_id', 'method_extraction_id', 'method_analyse_id', 'herbarium_number', 'medicinal_plant_id'];
+        return ['location_id', 'treatment_id', 'efficiency', 'studied_sample', 'presence_in_country', 'phenology_id', 'method_distillation_id', 'method_extraction_id', 'method_analyse_id',
+//            'herbarium_number', deleted by comment dr.sefidkon
+            'collecting_year',
+            'medicinal_plant_id'];
     }
 
     private function storeMetabolites($input, $medicinal_location)
@@ -148,22 +151,6 @@ class MedicinalLocationRepository extends BaseRepository
         $determines = request()->filled('determines') ? explode(',', $input['determines']) : [];
 
         $this->actionHubRepo->createHub($action_hub->id, 'actors', $determines);
-    }
-
-    private function storeCollect($input, $medicinal_location_id)
-    {
-
-        $action_hub = $this->actionHub->updateOrCreate(
-            [
-                'action_id' => 2,
-                'actionable_type' => MedicinalLocation::class,
-                'actionable_id' => $medicinal_location_id
-            ],
-            [
-                'date' => $input['date'] ?? null
-            ]);
-        $collectors = request()->filled('collectors') ? explode(',', $input['collectors']) : [];
-        $this->actionHubRepo->createHub($action_hub->id, 'actors', $collectors);
     }
 
     private function getLastCode($medicinal_location): int
@@ -223,6 +210,22 @@ class MedicinalLocationRepository extends BaseRepository
         $location_input = $this->locationData($input);
 
         return $this->location_model->find($input['location_id'])->update($location_input);
+    }
+
+    private function storeCollect($input, $medicinal_location_id)
+    {
+
+        $action_hub = $this->actionHub->updateOrCreate(
+            [
+                'action_id' => 2,
+                'actionable_type' => MedicinalLocation::class,
+                'actionable_id' => $medicinal_location_id
+            ],
+            [
+                'date' => $input['date'] ?? null
+            ]);
+        $collectors = request()->filled('collectors') ? explode(',', $input['collectors']) : [];
+        $this->actionHubRepo->createHub($action_hub->id, 'actors', $collectors);
     }
 
     public function storeReference(array $input, $id)
