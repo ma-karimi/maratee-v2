@@ -95,13 +95,6 @@ class MedicinalLocationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
      *      ),
      *      @SWG\Parameter(
-     *          name="effective_materials",
-     *          in="body",
-     *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
-     *      ),
-     *      @SWG\Parameter(
      *          name="studied_sample",
      *          in="body",
      *          description="0 -> wild , 1 -> cultivated",
@@ -112,27 +105,6 @@ class MedicinalLocationAPIController extends AppBaseController
      *          name="presence_in_country",
      *          in="body",
      *          description="0 -> native , 1 -> endemic",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="medicinal_properties",
-     *          in="body",
-     *          description="medicinal_properties",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="side_effects",
-     *          in="body",
-     *          description="side_effects",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="efficiency",
-     *          in="body",
-     *          description="efficiency : float type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
      *      ),
@@ -291,13 +263,6 @@ class MedicinalLocationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
      *      ),
      *      @SWG\Parameter(
-     *          name="effective_materials",
-     *          in="body",
-     *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
-     *      ),
-     *      @SWG\Parameter(
      *          name="studied_sample",
      *          in="body",
      *          description="0 -> wild , 1 -> cultivated",
@@ -308,27 +273,6 @@ class MedicinalLocationAPIController extends AppBaseController
      *          name="presence_in_country",
      *          in="body",
      *          description="0 -> native , 1 -> endemic",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="medicinal_properties",
-     *          in="body",
-     *          description="medicinal_properties",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="side_effects",
-     *          in="body",
-     *          description="side_effects",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="efficiency",
-     *          in="body",
-     *          description="efficiency : float type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
      *      ),
