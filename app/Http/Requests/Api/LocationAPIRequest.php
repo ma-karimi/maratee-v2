@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use App\Models\Location;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateLocationAPIRequest extends APIRequest
+class LocationAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.

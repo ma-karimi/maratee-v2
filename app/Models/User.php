@@ -19,6 +19,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, UserScope, UserAccessor, Notifiable, SearchableTrait;
 
+    public const GROUPS = [1 => 'Botanical Flora', 2 => 'Botanical NonFlower', 3 => 'Botanical Paleobotany', 4 => 'Botanical Garden', 5 => 'Botanical Gene Bank', 6 => 'Medicinal', 7 => 'BioTech'];
     public $searchable = ['*'];
     public $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations'];
     protected $hidden = ['password'];

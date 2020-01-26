@@ -21,7 +21,7 @@ class Location extends BaseModel
     use SpatialTrait, LocationAccessor, LocationMutator;
 
     public static $rules = [
-        'city_id' => 'required|exists:cities,id',
+        'city_id' => 'nullable|exists:cities,id',
         'province_id' => 'required|exists:provinces,id',
         'village' => 'nullable|string',
         'min_altitude' => 'nullable|numeric',

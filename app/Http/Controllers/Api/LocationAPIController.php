@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\Api\CreateLocationAPIRequest;
-use App\Http\Requests\Api\UpdateLocationAPIRequest;
+use App\Http\Requests\Api\LocationAPIRequest;
 use App\Models\Location;
 use App\Repositories\LocationRepository;
 use Exception;
@@ -71,7 +70,7 @@ class LocationAPIController extends AppBaseController
     }
 
     /**
-     * @param CreateLocationAPIRequest $request
+     * @param LocationAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -107,7 +106,7 @@ class LocationAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="city_id",
      *          in="body",
-     *          required=true,
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
@@ -157,7 +156,7 @@ class LocationAPIController extends AppBaseController
      * )
      * @throws ValidationException
      */
-    public function store(CreateLocationAPIRequest $request)
+    public function store(LocationAPIRequest $request)
     {
         $input = $request->all();
 
@@ -218,7 +217,7 @@ class LocationAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateLocationAPIRequest $request
+     * @param LocationAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -261,7 +260,7 @@ class LocationAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="city_id",
      *          in="body",
-     *          required=true,
+     *          required=false,
      *          @SWG\Schema(ref="#/definitions/Location")
      *      ),
      *      @SWG\Parameter(
@@ -309,8 +308,9 @@ class LocationAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws ValidationException
      */
-    public function update($id, UpdateLocationAPIRequest $request)
+    public function update($id, LocationAPIRequest $request)
     {
         $input = $request->all();
 

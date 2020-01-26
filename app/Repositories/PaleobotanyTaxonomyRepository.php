@@ -187,7 +187,7 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
      * @param $id
      * @return bool
      */
-    private function taxonomyExistWhenUpdate($request, $id): bool
+    private function taxonomyExistWhenUpdate($input, $id): bool
     {
         return PaleobotanyTaxonomy::where([
             'family_id' => $input['family_id'] ?? null,

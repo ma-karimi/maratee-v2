@@ -41,6 +41,7 @@ class MedicinalPlantRepository extends BaseRepository
     {
         $model = parent::create(Arr::only($input, $this->medicinalData()));
         $this->storeEffectiveMaterials($input, $model);
+        $this->storeMedicinalProperties($input, $model);
 
 
         return $model;
@@ -51,7 +52,7 @@ class MedicinalPlantRepository extends BaseRepository
      */
     private function medicinalData(): array
     {
-        return ['taxonomy_id', 'aerial_part_id', 'ground_part_id', 'general_origin_id', 'fruit_color', 'flower_color', 'foliage_color', 'height', 'cycle_id', 'wooden_id', 'herbaceous_id', 'general_habitat_id', 'medicinal_properties'];
+        return ['taxonomy_id', 'aerial_part_id', 'ground_part_id', 'general_origin_id', 'fruit_color', 'flower_color', 'foliage_color', 'height', 'cycle_id', 'wooden_id', 'herbaceous_id', 'general_habitat_id'];
     }
 
     private function storeEffectiveMaterials($input, $medicinal)
@@ -60,10 +61,18 @@ class MedicinalPlantRepository extends BaseRepository
         $this->createHub($medicinal->id, 'effectiveMaterials', $materials);
     }
 
+    private function storeMedicinalProperties($input, $medicinal)
+    {
+        $properties = request()->filled('properties') ? explode(',', $input['properties']) : [];
+        $this->createHub($medicinal->id, 'properties', $properties);
+    }
+
     public function update($input, $id)
     {
         $model = parent::update(Arr::only($input, $this->medicinalData()), $id);
         $this->storeEffectiveMaterials($input, $model);
+        $this->storeMedicinalProperties($input, $model);
+
         return $model;
     }
 
