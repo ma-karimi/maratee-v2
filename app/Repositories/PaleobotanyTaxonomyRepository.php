@@ -66,7 +66,8 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
         $input = $this->setPaleobotanyTaxonomyData($request);
 
         $taxonomy = parent::create($this->setPrimaryData($input));
-        $this->createHub($taxonomy->id, 'samples', $input['samples']);
+        $samples = $this->getSamples($input);
+        $this->createHub($taxonomy->id, 'samples', $samples);
         $this->createDivisions($taxonomy->id, $input['divisions']);
 
         return $taxonomy;
@@ -132,6 +133,7 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
             'species_id' => $input['species_id'],
             'infra_specific_id' => $input->filled('infra_specific_id') ? $input['infra_specific_id'] : null,
             'order_id' => $input->filled('order_id') ? $input['order_id'] : null,
+            'type_status_id' => $input->filled('type_status_id') ? $input['type_status_id'] : null,
             'name' => $input->filled('name') ? $input['name'] : null,
         ];
     }
@@ -176,7 +178,8 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
 
         $taxonomy = parent::update($this->setPrimaryData($input), $id);
 
-        $this->createHub($taxonomy->id, 'samples', $input['samples']);
+        $samples = $this->getSamples($input);
+        $this->createHub($taxonomy->id, 'samples', $samples);
         $this->createDivisions($taxonomy->id, $input['divisions']);
 
         return $taxonomy;
@@ -208,5 +211,14 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
             ->with($relations)
             ->latest()
             ->get();
+    }
+
+    /**
+     * @param Request $input
+     * @return array
+     */
+    public function getSamples(Request $input): array
+    {
+        return request()->filled('samples') ? explode(',', $input['samples']) : [];
     }
 }
