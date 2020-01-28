@@ -4,10 +4,11 @@ namespace App\Repositories;
 
 use App\Models\MorphologyVariable;
 use App\Models\SeedMorphology;
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class SeedMorphologyRepository
@@ -67,12 +68,14 @@ class SeedMorphologyRepository extends BaseRepository
      * @param $morphology
      * @param $type
      */
-    public function storeVariables($input, $morphology, $type): void
+    public function storeVariables($input, $morphology, $relation): void
     {
-        $morphology->$type()
+
+        $morphology->$relation()
             ->whereNotIn('seed_general_id', collect($input)->pluck('seed_general_id')->all())
+            ->get()
             ->each(function ($query) {
-                $query->pivot->update(['deleted_at' => Carbon::now()]);
+                $query->pivot->update(['deleted_at' => \Carbon\Carbon::now()]);
             });
 
         if (!empty($input) && count($input)) {

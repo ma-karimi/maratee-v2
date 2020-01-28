@@ -11,6 +11,7 @@ use App\Models\SeedMorphology;
 use App\Repositories\SeedMorphologyRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Response;
 
@@ -324,7 +325,6 @@ class SeedMorphologyAPIController extends AppBaseController
     public function storeQuality($id, MorphologyQualityAPIRequest $request)
     {
         $input = $request->all();
-
         /** @var SeedMorphology $seedMorphology */
         $seedMorphology = $this->seedMorphologyRepository->find($id);
 
@@ -332,7 +332,7 @@ class SeedMorphologyAPIController extends AppBaseController
             return $this->sendError('Seed Morphology not found');
         }
 
-        $this->seedMorphologyRepository->storeQuantitatives($input['qualititatives'], $seedMorphology);
+        $this->seedMorphologyRepository->storeQualititatives($input['qualititatives'], $seedMorphology);
 
         return $this->sendResponse($seedMorphology->toArray(), 'SeedMorphology updated successfully');
     }

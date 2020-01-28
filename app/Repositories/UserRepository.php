@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\User;
-use Illuminate\Support\Arr;
 
 /**
  * Class UserRepository
@@ -37,18 +36,13 @@ class UserRepository extends BaseRepository
         return User::class;
     }
 
-    public function create($input)
-    {
-        return parent::create(Arr::except($input, ['roles', 'permissions']));
-    }
-
     public function update($input, $id)
     {
         if (!request()->filled('password')) {
             unset($input['password']);
         }
 
-        return parent::update(Arr::except($input, ['roles', 'permissions']), $id);
+        return parent::update($input, $id);
     }
 
 

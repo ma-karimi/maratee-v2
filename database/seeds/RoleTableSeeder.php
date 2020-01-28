@@ -13,6 +13,8 @@ class RoleTableSeeder extends Seeder
 
     ];
 
+    public $operations = ['index', 'submit', 'verify', 'delete'];
+
     /**
      * Run the database seeds.
      *
@@ -27,7 +29,9 @@ class RoleTableSeeder extends Seeder
         }
         foreach ($this->permissions as $key => $values) {
             foreach ($values as $value) {
-                \App\Models\Permission::create(['name' => "${key}:${value}", 'guard_name' => 'api']);
+                foreach ($this->operations as $operation) {
+                    \App\Models\Permission::create(['name' => "${key}:${value}:${operation}", 'guard_name' => 'api']);
+                }
             }
         }
 

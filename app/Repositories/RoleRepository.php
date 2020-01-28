@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Role;
+use App\Models\RoleHasPermission;
 
 /**
  * Class RoleRepository
@@ -34,5 +35,22 @@ class RoleRepository extends BaseRepository
     public function model()
     {
         return Role::class;
+    }
+
+    public function storePermission($input, $id)
+    {
+        $permissions = $input['permissions'];
+        RoleHasPermission::where('role_id', $id)
+            ->whereNotIn('permission_id', $permissions)
+            ->delete();
+
+
+        if (!empty($permissions) && count($permissions)) {
+            foreach ($permissions as $permission) {
+                RoleHasPermission::firstOrCreate(
+                    ['role_id' => $id, 'permission_id' => $permission]
+                );
+            }
+        }
     }
 }

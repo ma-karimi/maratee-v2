@@ -11,7 +11,11 @@ use App\Models\Contracts\BaseModel;
  */
 class MorphologyVariable extends BaseModel
 {
-    public static $rules = [
-        'variable_id' => 'required|exists:variables,id',
-    ];
+
+
+    public function seedGeneral()
+    {
+        return $this->belongsTo(SeedGeneral::class, 'seed_general_id');
+    }
+
 }
