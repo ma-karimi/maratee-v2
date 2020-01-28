@@ -23,12 +23,12 @@ class SeedMorphology extends BaseModel
 
     public function quantitatives()
     {
-        return $this->morphToMany(SeedGeneral::class, 'morphology', 'morphology_variables', 'seed_morphology_id')->withPivot('value')->whereNull('morphology_variables.deleted_at')->where('seed_generals.type_id', 26);
+        return $this->belongsToMany(SeedGeneral::class, 'morphology_variables', 'seed_morphology_id')->withPivot('value')->whereNull('morphology_variables.deleted_at')->where('seed_generals.type_id', 26);
     }
 
     public function qualititatives()
     {
-        return $this->morphToMany(SeedGeneral::class, 'morphology', 'morphology_variables', 'seed_morphology_id')->withPivot('value')->whereNull('morphology_variables.deleted_at')->where('seed_generals.type_id', 27);
+        return $this->belongsToMany(SeedGeneral::class, 'morphology_variables', 'seed_morphology_id')->withPivot('value')->whereNull('morphology_variables.deleted_at')->where('seed_generals.type_id', 27);
     }
 
     public function field()
