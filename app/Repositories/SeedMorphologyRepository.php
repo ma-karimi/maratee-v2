@@ -85,4 +85,11 @@ class SeedMorphologyRepository extends BaseRepository
             $media_record->update($media_input);
         }
     }
+
+    public function storeField(array $input, SeedMorphology $seedMorphology)
+    {
+        $seedMorphology->field->create($input);
+
+        return $seedMorphology;
+    }
 }

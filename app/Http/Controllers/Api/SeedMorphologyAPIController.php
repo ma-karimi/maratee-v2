@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\MorphologyQuantityAPIRequest;
 use App\Http\Requests\Api\SeedMorphologyAPIRequest;
+use App\Http\Requests\Api\SeedMorphologyFieldAPIRequest;
 use App\Models\SeedMorphology;
 use App\Repositories\SeedMorphologyRepository;
 use Exception;
@@ -331,6 +332,21 @@ class SeedMorphologyAPIController extends AppBaseController
         }
 
         $this->seedMorphologyRepository->storeQuantitatives($input['qualititatives'], $seedMorphology);
+
+        return $this->sendResponse($seedMorphology->toArray(), 'SeedMorphology updated successfully');
+    }
+    public function storeField($id, SeedMorphologyFieldAPIRequest $request)
+    {
+        $input = $request->all();
+
+        /** @var SeedMorphology $seedMorphology */
+        $seedMorphology = $this->seedMorphologyRepository->find($id);
+
+        if (empty($seedMorphology)) {
+            return $this->sendError('Seed Morphology not found');
+        }
+
+        $this->seedMorphologyRepository->storeField($input, $seedMorphology);
 
         return $this->sendResponse($seedMorphology->toArray(), 'SeedMorphology updated successfully');
     }

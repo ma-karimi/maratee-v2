@@ -220,6 +220,7 @@ Route::get('seed_generals/all', 'SeedGeneralAPIController@all');
 Route::apiResource('seed_generals', 'SeedGeneralAPIController');
 
 Route::post('seed_morphologies/{id}/quantity', 'SeedMorphologyAPIController@storeQuantity');
+Route::post('seed_morphologies/{id}/field', 'SeedMorphologyAPIController@storeField');
 Route::post('seed_morphologies/{id}/quality', 'SeedMorphologyAPIController@storeQuality');
 Route::post('seed_morphologies/{id}/media', 'SeedMorphologyAPIController@storeMedia');
 Route::apiResource('seed_morphologies', 'SeedMorphologyAPIController');
