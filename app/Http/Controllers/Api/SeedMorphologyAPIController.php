@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\MorphologyQualityAPIRequest;
 use App\Http\Requests\Api\MorphologyQuantityAPIRequest;
 use App\Http\Requests\Api\SeedMorphologyAPIRequest;
 use App\Http\Requests\Api\SeedMorphologyFieldAPIRequest;
@@ -320,7 +321,7 @@ class SeedMorphologyAPIController extends AppBaseController
         return $this->sendResponse($seedMorphology->toArray(), 'SeedMorphology updated successfully');
     }
 
-    public function storeQuality($id, MorphologyQuantityAPIRequest $request)
+    public function storeQuality($id, MorphologyQualityAPIRequest $request)
     {
         $input = $request->all();
 
