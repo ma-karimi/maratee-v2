@@ -70,7 +70,7 @@ class GreenHouseAPIController extends AppBaseController
     }
 
     /**
-     * @param MorphologyFieldAPIRequest $request
+     * @param GreenHouseAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -115,7 +115,7 @@ class GreenHouseAPIController extends AppBaseController
      * )
      * @throws ValidationException
      */
-    public function store(MorphologyFieldAPIRequest $request)
+    public function store(GreenHouseAPIRequest $request)
     {
         $input = $request->all();
 
@@ -176,7 +176,7 @@ class GreenHouseAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param MorphologyFieldAPIRequest $request
+     * @param GreenHouseAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -228,7 +228,7 @@ class GreenHouseAPIController extends AppBaseController
      * )
      * @throws ValidationException
      */
-    public function update($id, MorphologyFieldAPIRequest $request)
+    public function update($id, GreenHouseAPIRequest $request)
     {
         $input = $request->all();
 
