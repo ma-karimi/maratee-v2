@@ -2,14 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Models\BotanicalIrrigation;
+use App\Models\MorphologyVariable;
 use App\Models\SeedMorphology;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\ValidationException;
 
 /**
  * Class SeedMorphologyRepository
@@ -30,17 +28,6 @@ class SeedMorphologyRepository extends BaseRepository
     private $projectRepository;
 
     /**
-     * Return searchable fields
-     *
-     * @return array
-     */
-    public function getFieldsSearchable()
-    {
-        return $this->fieldSearchable;
-    }
-
-
-    /**
      * BotanicalRepository constructor.
      * @param Application $app
      * @param ProjectRepository $projectRepository
@@ -51,6 +38,17 @@ class SeedMorphologyRepository extends BaseRepository
         parent::__construct($app);
         $this->projectRepository = $projectRepository;
     }
+
+    /**
+     * Return searchable fields
+     *
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
+
     /**
      * Configure the Model
      **/
@@ -63,21 +61,6 @@ class SeedMorphologyRepository extends BaseRepository
     {
         $this->storeVariables($input, $morphology, 'quantitatives');
     }
-
-    public function create($input)
-    {
-        $input['project_id'] =  $this->storeProject($input);
-        return parent::create(Arr::except($input, ['project']));
-
-    }
-
-    public function update($input, $id)
-    {
-        $input['project_id'] = $this->storeProject($input);
-        return parent::update(Arr::except($input, ['project']), $id);
-
-    }
-
 
     /**
      * @param $input
@@ -94,8 +77,9 @@ class SeedMorphologyRepository extends BaseRepository
 
         if (!empty($input) && count($input)) {
             foreach ($input as $item) {
-                $morphology->$type()->pivot->updateOrCreate(
+                MorphologyVariable::updateOrCreate(
                     [
+                        'seed_morphology_id' => $morphology->id,
                         'seed_general_id' => $item['seed_general_id']
                     ],
                     [
@@ -104,6 +88,25 @@ class SeedMorphologyRepository extends BaseRepository
                 );
             }
         }
+    }
+
+    public function create($input)
+    {
+        $input['project_id'] = $this->storeProject($input);
+        return parent::create(Arr::except($input, ['project']));
+
+    }
+
+    public function storeProject($input)
+    {
+        return request()->filled('project_id') ? $this->projectRepository->update($input['project'], $input['project_id'])->id : $this->projectRepository->create($input['project'])->id;
+    }
+
+    public function update($input, $id)
+    {
+        $input['project_id'] = $this->storeProject($input);
+        return parent::update(Arr::except($input, ['project']), $id);
+
     }
 
     public function storeQualititatives($input, $morphology)
@@ -127,10 +130,5 @@ class SeedMorphologyRepository extends BaseRepository
         $seedMorphology->field->create($input);
 
         return $seedMorphology;
-    }
-
-    public function storeProject($input)
-    {
-        return request()->filled('project_id') ? $this->projectRepository->update($input['project'], $input['project_id'])->id : $this->projectRepository->create($input['project'])->id;
     }
 }
