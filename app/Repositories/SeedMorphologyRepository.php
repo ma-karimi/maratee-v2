@@ -66,15 +66,14 @@ class SeedMorphologyRepository extends BaseRepository
 
     public function create($input)
     {
-        $input = $this->storeProject($input);
-
+        $input['project_id'] =  $this->storeProject($input);
         return parent::create(Arr::except($input, ['project']));
 
     }
 
     public function update($input, $id)
     {
-        $input = $this->storeProject($input);
+        $input['project_id'] = $this->storeProject($input);
         return parent::update(Arr::except($input, ['project']), $id);
 
     }
@@ -132,6 +131,6 @@ class SeedMorphologyRepository extends BaseRepository
 
     public function storeProject($input)
     {
-        return $input['project_id'] = request()->filled('project_id') ? $this->projectRepository->update($input['project'], $input['project_id'])->id : $this->projectRepository->create($input['project'])->id;
+        return request()->filled('project_id') ? $this->projectRepository->update($input['project'], $input['project_id'])->id : $this->projectRepository->create($input['project'])->id;
     }
 }
