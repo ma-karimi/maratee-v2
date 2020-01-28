@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -66,6 +67,7 @@ class SeedMorphologyRepository extends BaseRepository
     public function create($input)
     {
         $input = $this->storeProject($input);
+
         return parent::create(Arr::except($input, ['project']));
 
     }
@@ -130,6 +132,6 @@ class SeedMorphologyRepository extends BaseRepository
 
     public function storeProject($input)
     {
-        return $input['project_id'] = request()->filled('project_id') ? $this->projectRepository->update($input['project'], $input['project_id']) : $this->projectRepository->create($input['project']);
+        return $input['project_id'] = request()->filled('project_id') ? $this->projectRepository->update($input['project'], $input['project_id'])->id : $this->projectRepository->create($input['project'])->id;
     }
 }
