@@ -2,8 +2,13 @@
 
 namespace App\Repositories;
 
+use App\Models\BotanicalIrrigation;
 use App\Models\SeedMorphology;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Container\Container as Application;
+use Illuminate\Support\Arr;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class SeedMorphologyRepository
@@ -18,6 +23,10 @@ class SeedMorphologyRepository extends BaseRepository
     protected $fieldSearchable = [
 
     ];
+    /**
+     * @var ProjectRepository
+     */
+    private $projectRepository;
 
     /**
      * Return searchable fields
@@ -31,6 +40,17 @@ class SeedMorphologyRepository extends BaseRepository
 
 
     /**
+     * BotanicalRepository constructor.
+     * @param Application $app
+     * @param ProjectRepository $projectRepository
+     * @throws Exception
+     */
+    public function __construct(Application $app, ProjectRepository $projectRepository)
+    {
+        parent::__construct($app);
+        $this->projectRepository = $projectRepository;
+    }
+    /**
      * Configure the Model
      **/
     public function model()
@@ -42,6 +62,21 @@ class SeedMorphologyRepository extends BaseRepository
     {
         $this->storeVariables($input, $morphology, 'quantitatives');
     }
+
+    public function create($input)
+    {
+        $input = $this->storeProject($input);
+        return parent::create(Arr::except($input, ['project']));
+
+    }
+
+    public function update($input, $id)
+    {
+        $input = $this->storeProject($input);
+        return parent::update(Arr::except($input, ['project']), $id);
+
+    }
+
 
     /**
      * @param $input
@@ -91,5 +126,10 @@ class SeedMorphologyRepository extends BaseRepository
         $seedMorphology->field->create($input);
 
         return $seedMorphology;
+    }
+
+    public function storeProject($input)
+    {
+        return $input['project_id'] = request()->filled('project_id') ? $this->projectRepository->update($input['project'], $input['project_id']) : $this->projectRepository->create($input['project']);
     }
 }
