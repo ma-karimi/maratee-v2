@@ -20,9 +20,17 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
-        \Illuminate\Support\Facades\DB::table('roles')->truncate();
+//        \Illuminate\Support\Facades\DB::table('roles')->truncate();
+//        \Illuminate\Support\Facades\DB::table('permissions')->truncate();
         foreach ($this->rules as $rule) {
-            Role::create(['name' => $rule, 'guard' => 'api']);
+            Role::create(['name' => $rule, 'guard_name' => 'api']);
         }
+        foreach ($this->permissions as $key => $values) {
+            foreach ($values as $value) {
+                \App\Models\Permission::create(['name' => "${key}:${value}", 'guard_name' => 'api']);
+            }
+        }
+
+
     }
 }

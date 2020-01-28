@@ -73,7 +73,7 @@ class SeedMorphologyAPIController extends AppBaseController
 
     private function getRelationFields()
     {
-        return ['quantitatives:seed_general_id,value', 'qualititatives:seed_general_id,value', 'field', 'seedCollection:id,accession_code,taxonomy_id', 'specimenType', 'collection', 'organization', 'project'];
+        return ['quantitatives:seed_generals.id,seed_generals.name,seed_generals.type_id', 'qualititatives:seed_generals.id,seed_generals.name,seed_generals.type_id', 'field', 'seedCollection:id,accession_code,taxonomy_id', 'specimenType', 'collection', 'organization', 'project'];
     }
 
     /**
