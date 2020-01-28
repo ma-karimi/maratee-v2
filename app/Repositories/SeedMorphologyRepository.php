@@ -94,7 +94,7 @@ class SeedMorphologyRepository extends BaseRepository
 
         if (!empty($input) && count($input)) {
             foreach ($input as $item) {
-                $morphology->$type()->updateOrCreate(
+                $morphology->$type()->pivot->updateOrCreate(
                     [
                         'seed_general_id' => $item['seed_general_id']
                     ],
