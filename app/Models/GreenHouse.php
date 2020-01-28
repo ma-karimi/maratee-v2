@@ -15,7 +15,7 @@ class GreenHouse extends BaseModel
 
     public static $rules = [
         'name_en' => 'required|string',
-        'location' => 'location|array'
+        'location' => 'required|array'
     ];
     protected $with = ['location'];
 
