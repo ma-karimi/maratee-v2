@@ -45,6 +45,7 @@ class SeedExchange extends BaseModel
     {
         return $this->belongsTo(SeedGeneral::class, 'specimen_type_id')->where('seed_generals.type_id', 1);
     }
+
     /**
      * @return BelongsTo
      */

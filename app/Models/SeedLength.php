@@ -21,6 +21,7 @@ class SeedLength extends BaseModel
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
     protected $appends = ['type'];
+
     public function getTypeAttribute()
     {
         return Arr::get(self::TYPES, $this->type_id);

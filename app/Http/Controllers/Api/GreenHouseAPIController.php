@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\Api\MorphologyFieldAPIRequest;
-use App\Models\MorphologyField;
-use App\Repositories\MorphologyFieldRepository;
+use App\Http\Requests\Api\GreenHouseAPIRequest;
+use App\Models\GreenHouse;
+use App\Repositories\GreenHouseRepository;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -15,14 +15,14 @@ use Response;
  * Class MorphologyFieldController
  * @package App\Http\Controllers\Api
  */
-class MorphologyFieldAPIController extends AppBaseController
+class GreenHouseAPIController extends AppBaseController
 {
-    /** @var  MorphologyFieldRepository */
-    private $morphologyFieldRepository;
+    /** @var  GreenHouseRepository */
+    private $greenHouseRepository;
 
-    public function __construct(MorphologyFieldRepository $morphologyFieldRepo)
+    public function __construct(GreenHouseRepository $greenHouseRepo)
     {
-        $this->morphologyFieldRepository = $morphologyFieldRepo;
+        $this->greenHouseRepository = $greenHouseRepo;
     }
 
     /**
@@ -60,13 +60,13 @@ class MorphologyFieldAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $morphologyFields = $this->morphologyFieldRepository->paginate(
+        $greenHouses = $this->greenHouseRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
             $this->getRelationFields()
         );
 
-        return $this->sendResponse($morphologyFields->toArray(), 'Morphology Fields retrieved successfully');
+        return $this->sendResponse($greenHouses->toArray(), 'Green Houses retrieved successfully');
     }
 
     /**
@@ -119,9 +119,9 @@ class MorphologyFieldAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        $morphologyField = $this->morphologyFieldRepository->create($input);
+        $greenHouse = $this->greenHouseRepository->create($input);
 
-        return $this->sendResponse($morphologyField->toArray(), 'Morphology Field saved successfully');
+        return $this->sendResponse($greenHouse->toArray(), 'Green House saved successfully');
     }
 
     /**
@@ -164,14 +164,14 @@ class MorphologyFieldAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var MorphologyField $morphologyField */
-        $morphologyField = $this->morphologyFieldRepository->find($id, $this->getRelationFields());
+        /** @var GreenHouse $greenHouse */
+        $greenHouse = $this->greenHouseRepository->find($id, $this->getRelationFields());
 
-        if (empty($morphologyField)) {
-            return $this->sendError('Morphology Field not found');
+        if (empty($greenHouse)) {
+            return $this->sendError('Green House not found');
         }
 
-        return $this->sendResponse($morphologyField->toArray(), 'Morphology Field retrieved successfully');
+        return $this->sendResponse($greenHouse->toArray(), 'Green House retrieved successfully');
     }
 
     /**
@@ -232,16 +232,16 @@ class MorphologyFieldAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var MorphologyField $morphologyField */
-        $morphologyField = $this->morphologyFieldRepository->find($id);
+        /** @var GreenHouse $greenHouse */
+        $greenHouse = $this->greenHouseRepository->find($id);
 
-        if (empty($morphologyField)) {
-            return $this->sendError('Morphology Field not found');
+        if (empty($greenHouse)) {
+            return $this->sendError('Green House not found');
         }
 
-        $morphologyField = $this->morphologyFieldRepository->update($input, $id);
+        $greenHouse = $this->greenHouseRepository->update($input, $id);
 
-        return $this->sendResponse($morphologyField->toArray(), 'MorphologyField updated successfully');
+        return $this->sendResponse($greenHouse->toArray(), 'MorphologyField updated successfully');
     }
 
     /**
@@ -285,16 +285,16 @@ class MorphologyFieldAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var MorphologyField $morphologyField */
-        $morphologyField = $this->morphologyFieldRepository->find($id);
+        /** @var GreenHouse $greenHouse */
+        $greenHouse = $this->greenHouseRepository->find($id);
 
-        if (empty($morphologyField)) {
-            return $this->sendError('Morphology Field not found');
+        if (empty($greenHouse)) {
+            return $this->sendError('Green House not found');
         }
 
-        $morphologyField->delete();
+        $greenHouse->delete();
 
-        return $this->sendResponse($id, 'Morphology Field deleted successfully');
+        return $this->sendResponse($id, 'Green House deleted successfully');
     }
 
     private function getRelationFields()

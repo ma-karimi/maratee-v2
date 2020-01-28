@@ -9,9 +9,7 @@ use App\Models\BotanicalIrrigation;
 use App\Models\BotanicalOperation;
 use App\Models\BotanicalSoil;
 use App\Models\Geographical;
-use App\Models\InternalHabitat;
 use App\Models\Location;
-use App\Models\Organization;
 use App\Models\Protection;
 use App\Models\Taxonomy;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -35,12 +33,14 @@ trait BotanicalRelation
             ->whereNull('botanical_gardens.deleted_at')
             ->withTimestamps();
     }
+
     public function gardens()
     {
         return $this->belongsToMany(BotanicalGeneral::class, 'botanical_gardens', 'botanical_id', 'garden_id')->latest()->where('botanical_generals.type_id', 19)
             ->whereNull('botanical_gardens.deleted_at')
             ->withTimestamps();
     }
+
     public function values()
     {
         return $this->belongsToMany(BotanicalGeneral::class, 'botanical_general_hubs')->latest()->where('botanical_generals.type_id', 1)

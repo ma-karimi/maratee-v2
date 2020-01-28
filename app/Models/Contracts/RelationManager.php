@@ -30,7 +30,14 @@ trait RelationManager
         MorphToMany::class
     ];
 
-    public static function getAllRelations($type = null) : array
+    public static function withAll(): Builder
+    {
+        $relations = Arr::flatten(static::getAllRelations());
+
+        return $relations ? self::with($relations) : self::query();
+    }
+
+    public static function getAllRelations($type = null): array
     {
         if (!self::$relationsInitialized) {
             self::initAllRelations();
@@ -45,19 +52,12 @@ trait RelationManager
 
         $reflect = new ReflectionClass(static::class);
 
-        foreach($reflect->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+        foreach ($reflect->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
             /** @var ReflectionMethod $method */
             if ($method->hasReturnType() && in_array((string)$method->getReturnType(), self::$relationClasses)) {
                 self::$relationsList[(string)$method->getReturnType()][] = $method->getName();
             }
         }
-    }
-
-    public static function withAll() : Builder
-    {
-        $relations = Arr::flatten(static::getAllRelations());
-
-        return $relations ? self::with($relations) : self::query();
     }
 
 }

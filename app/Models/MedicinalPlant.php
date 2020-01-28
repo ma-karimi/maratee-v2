@@ -17,7 +17,7 @@ class MedicinalPlant extends BaseModel
 {
     use MedicinalPlantAccessor, MedicinalPlantScope, MedicinalPlantRelations;
 
-    public const TRADITIONAL_IRANIAN_MEDICINE = [0 => 'unknown', 1 => 'raw', 2 => 'processed', 3=>'raw & processed'];
+    public const TRADITIONAL_IRANIAN_MEDICINE = [0 => 'unknown', 1 => 'raw', 2 => 'processed', 3 => 'raw & processed'];
     public const NATURAL_DRUG = [0 => 'unknown', 1 => 'human medicines', 2 => 'animal drugs'];
     public const INHERBAL_MEDICINE_STORE = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
     public const EXPORTING = [0 => 'unknown', 1 => 'raw', 2 => 'processed'];
@@ -25,7 +25,7 @@ class MedicinalPlant extends BaseModel
 
 
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
-    public const WOODEN = [1 => 'Tree', 2 => 'Shrubs', 3=>'Bush'];
+    public const WOODEN = [1 => 'Tree', 2 => 'Shrubs', 3 => 'Bush'];
     public const HERBACEOUS = [1 => 'Standing', 2 => 'Crawling'];
     public const CYCLE = [1 => 'Annual', 2 => 'Perennial', 3 => 'Biennal'];
 

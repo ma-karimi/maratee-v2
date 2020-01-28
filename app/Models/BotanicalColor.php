@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Illuminate\Support\Arr;
 
 /**
  * @SWG\Definition(

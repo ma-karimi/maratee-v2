@@ -68,8 +68,8 @@ class PaleontologyRepository extends BaseRepository
     public function create($input)
     {
         $paleontology = parent::create($this->setPrimaryData($input));
-
-        $this->createHub($paleontology->id, 'generalSamples', is_array($input['samples']) ? $input['samples'] : explode(',', $input['samples']));
+//
+//        $this->createHub($paleontology->id, 'generalSamples', is_array($input['samples']) ? $input['samples'] : explode(',', $input['samples']));
 
         return $paleontology;
     }
@@ -81,14 +81,16 @@ class PaleontologyRepository extends BaseRepository
     public function setPrimaryData($input): array
     {
         return Arr::only($input->all(), [
-            'catalog_no', 'specimen_no', 'field_no', 'taxonomy_id', 'general_order_id', 'general_plant_type_id', 'location_in_collection', 'additional_info']);
+            'catalog_no', 'specimen_no', 'field_no', 'taxonomy_id',
+//            'general_order_id', 'general_plant_type_id', deleted by comment dr.jamzad
+            'location_in_collection', 'additional_info']);
     }
 
     public function storeGeologyAndRemark($input, $paleontology_id)
     {
 
         $data = Arr::only($input->all(), [
-            'geology_age_era_id', 'geology_age_epoch_id', 'geology_age_period_id', 'geology_age_stage_id', 'additional_info', 'update_frequency', 'last_update', 'access_code'
+            'geology_age_era_id', 'geology_age_epoch_id', 'geology_age_period_id', 'geology_age_stage_id'
         ]);
 
         return parent::update($data, $paleontology_id);
@@ -102,7 +104,7 @@ class PaleontologyRepository extends BaseRepository
         ]);
 
         $paleontology = parent::update($data, $paleontology_id);
-        $this->createHub($paleontology->id, 'generalPreservations', is_array($input['preservations']) ? $input['preservations'] : explode(',', $input['preservations']));
+        $this->createHub($paleontology->id, 'preservations', is_array($input['preservations']) ? $input['preservations'] : explode(',', $input['preservations']));
         $this->createHub($paleontology->id, 'citations', is_array($input['citations']) ? $input['citations'] : explode(',', $input['citations']));
 
         return $paleontology;

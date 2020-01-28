@@ -27,9 +27,9 @@ class BotanicalInformationAPIRequest extends APIRequest
         //ToDo
         return [
             'seed_germination_id' => 'required',
-            'comments'=>'nullable|string',
-            'sensitivity_conditions'=>'nullable|string',
-            'flowering_period'=>'nullable|string',
+            'comments' => 'nullable|string',
+            'sensitivity_conditions' => 'nullable|string',
+            'flowering_period' => 'nullable|string',
         ];
     }
 }

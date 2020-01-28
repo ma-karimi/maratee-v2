@@ -33,7 +33,7 @@ class MorphologyQuantitativeEvaluation extends BaseModel
 
     public function morphologyField()
     {
-        return $this->belongsTo(MorphologyField::class);
+        return $this->belongsTo(SeedMorphologyField::class);
     }
 
 

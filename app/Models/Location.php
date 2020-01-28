@@ -134,7 +134,7 @@ class Location extends BaseModel
 
     public function getCountryAttribute()
     {
-        if($this->relationLoaded('province') && !empty($this->province)){
+        if ($this->relationLoaded('province') && !empty($this->province)) {
             return $this->province->country;
         }
     }

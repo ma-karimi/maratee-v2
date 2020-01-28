@@ -83,11 +83,6 @@ class SeedEvaluation extends BaseModel implements HasMedia
         return $this->hasMany(SeedLength::class)->where('type_id', 4);
     }
 
-    public function germinations()
-    {
-        return $this->hasMany(GerminationNumber::class);
-    }
-
     public function dormancyBreaking()
     {
         return $this->belongsTo(SeedGeneral::class, 'dormancy_breaking_id')->where('type_id', 23);
@@ -108,7 +103,6 @@ class SeedEvaluation extends BaseModel implements HasMedia
     {
         return $this->belongsTo(SeedGeneral::class, 'collection_id')->where('seed_generals.type_id', 19);
     }
-
 
     /**
      * @return BelongsTo
@@ -135,7 +129,6 @@ class SeedEvaluation extends BaseModel implements HasMedia
         return $this->planted_seeds == 0 ? 0 : (($germinated_seed + $fresh_non_germinated + $abnormal) * 100) / $this->planted_seeds;
     }
 
-
     public function getGerminationAttribute()
     {
         $germinated_seed = $this->germinated_seed_no ?? 0;
@@ -148,5 +141,10 @@ class SeedEvaluation extends BaseModel implements HasMedia
         if ($this->relationLoaded('germinations') && count($this->germinations)) {
             return $this->germinations()->latest()->first()->germinated_number;
         }
+    }
+
+    public function germinations()
+    {
+        return $this->hasMany(GerminationNumber::class);
     }
 }

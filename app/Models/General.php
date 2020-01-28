@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use App\Models\Scope\GeneralScope;
-use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**

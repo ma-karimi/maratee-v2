@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Arr;
 
 /**
@@ -103,13 +102,16 @@ class Taxonomy extends BaseModel
     {
         return $this->hasMany(Herbarium::class)->where('is_flowering', 1);
     }
+
     /**
      * @return HasMany
      */
     public function nonflower(): HasMany
     {
         return $this->hasMany(Herbarium::class)->where('is_flowering', 0);
-    }  /**
+    }
+
+    /**
      * @return HasMany
      */
     public function medicinalPlant(): HasMany
@@ -124,6 +126,7 @@ class Taxonomy extends BaseModel
     {
         return $this->hasMany(SeedCollection::class);
     }
+
     /**
      * @return HasMany
      */

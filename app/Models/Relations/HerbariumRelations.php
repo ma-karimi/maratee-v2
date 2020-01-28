@@ -13,7 +13,6 @@ use App\Models\Taxonomy;
 use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Support\Arr;
 
 trait HerbariumRelations
 {
@@ -60,7 +59,6 @@ trait HerbariumRelations
         return $this->morphMany(Transaction::class, 'transactionable')
             ->whereNull('deleted_at');
     }
-
 
 
     public function generalPhytogeography(): BelongsTo

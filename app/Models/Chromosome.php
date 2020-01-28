@@ -48,6 +48,7 @@ class Chromosome extends BaseModel
             ->whereNull('location_hubs.deleted_at')
             ->withTimestamps();
     }
+
     /**
      * @return BelongsTo
      */

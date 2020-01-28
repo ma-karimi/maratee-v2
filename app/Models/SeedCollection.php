@@ -57,7 +57,7 @@ class SeedCollection extends BaseModel implements HasMedia
         'corrected_code_by_nrgb' => 'required|string',
         'accession_code' => 'required|string',
         'voucher_no' => 'nullable|string',
-        'dna'=>'nullable|in:0,1'
+        'dna' => 'nullable|in:0,1'
     ];
     public static $projects = [
         'seed_collected_from_id' => 'nullable|exists:seed_generals,id',

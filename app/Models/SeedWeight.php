@@ -35,6 +35,7 @@ class SeedWeight extends BaseModel
         'total_fruit_weight' => 'float',
         'total_seed_weight' => 'float',
     ];
+
     /**
      * @return BelongsTo
      */
@@ -50,6 +51,7 @@ class SeedWeight extends BaseModel
     {
         return $this->belongsTo(SeedGeneral::class, 'specimen_type_id')->where('seed_generals.type_id', 1);
     }
+
     /**
      * @return BelongsTo
      */

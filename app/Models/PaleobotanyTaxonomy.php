@@ -23,11 +23,11 @@ class PaleobotanyTaxonomy extends BaseModel
         'order_id' => 'nullable|exists:paleobotany_generals,id',
         'infra_specific_id' => 'nullable|exists:paleobotany_generals,id',
         'type_status_id' => 'nullable|exists:paleobotany_generals,id',
-        'samples' => 'required|array',
+        'samples' => 'nullable|array',
         'samples.*' => 'required|exists:paleobotany_generals,id',
-        'divisions' => 'required|array',
-        'divisions.*.id' => 'required|exists:paleobotany_generals,id',
-        'divisions.*.value' => 'required|string',
+        'divisions' => 'nullable|array',
+        'divisions.*.id' => 'nullable|exists:paleobotany_generals,id',
+        'divisions.*.value' => 'nullable|string',
         'name' => 'nullable|string',
     ];
     /**
@@ -126,15 +126,21 @@ class PaleobotanyTaxonomy extends BaseModel
     }
 
 
-
     public function divisions(): MorphToMany
     {
-        return $this->morphToMany(PaleobotanyGeneral::class, 'modelable', 'paleobotany_general_hubs')->withPivot('value')->withTimestamps()->whereNull('paleobotany_general_hubs.deleted_at')->where('paleobotany_generals.type', 'division');
+        return $this->morphToMany(PaleobotanyGeneral::class, 'modelable', 'paleobotany_general_hubs')
+            ->withPivot('value')
+            ->withTimestamps()
+            ->whereNull('paleobotany_general_hubs.deleted_at')
+            ->where('paleobotany_generals.type', 'division');
     }
 
     public function samples(): MorphToMany
     {
-        return $this->morphToMany(PaleobotanyGeneral::class, 'modelable', 'paleobotany_general_hubs')->withTimestamps()->whereNull('paleobotany_general_hubs.deleted_at')->where('paleobotany_generals.type', 'sample');
+        return $this->morphToMany(PaleobotanyGeneral::class, 'modelable', 'paleobotany_general_hubs')
+            ->withTimestamps()
+            ->whereNull('paleobotany_general_hubs.deleted_at')
+            ->where('paleobotany_generals.type', 'sample');
     }
 
 

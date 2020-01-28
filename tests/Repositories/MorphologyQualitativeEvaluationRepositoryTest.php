@@ -1,7 +1,7 @@
 <?php namespace Tests\Repositories;
 
 use App\Models\MorphologyQualitativeEvaluation;
-use App\Repositories\MorphologyQualitativeEvaluationRepository;
+use App\Repositories\SeedMorphologyRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
@@ -11,14 +11,14 @@ class MorphologyQualitativeEvaluationRepositoryTest extends TestCase
     use ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var MorphologyQualitativeEvaluationRepository
+     * @var SeedMorphologyRepository
      */
     protected $morphologyQualitativeEvaluationRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->morphologyQualitativeEvaluationRepo = \App::make(MorphologyQualitativeEvaluationRepository::class);
+        $this->morphologyQualitativeEvaluationRepo = \App::make(SeedMorphologyRepository::class);
     }
 
     /**

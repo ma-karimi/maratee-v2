@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Api\Seed;
 
-use App\Models\SeedCollection;
 use App\Models\SeedEvaluation;
 use InfyOm\Generator\Request\APIRequest;
 

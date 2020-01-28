@@ -34,10 +34,10 @@ trait HerbariumScope
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
             $builder->whereHas('location', function ($query) use ($constraint) {
-                    return $query
-                        ->whereHas('province', function ($province) use ($constraint) {
-                            return $province->where('country_id', $constraint->getOperator(), $constraint->getValue());
-                        });
+                return $query
+                    ->whereHas('province', function ($province) use ($constraint) {
+                        return $province->where('country_id', $constraint->getOperator(), $constraint->getValue());
+                    });
             });
 
             return true;
@@ -50,10 +50,10 @@ trait HerbariumScope
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
             $builder->whereHas('determine', function ($determine) use ($constraint) {
-                    return $determine->whereHas('actors', function ($key) use ($constraint) {
-                        return $key->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
-                    });
+                return $determine->whereHas('actors', function ($key) use ($constraint) {
+                    return $key->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
                 });
+            });
 
             return true;
         }

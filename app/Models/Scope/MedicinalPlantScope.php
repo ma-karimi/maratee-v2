@@ -241,7 +241,7 @@ trait MedicinalPlantScope
     protected function processPropertiesFilter(Builder $builder, Constraint $constraint)
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
-            $builder->where('medicinal_properties', $constraint->getOperator(), $constraint->getValue());;
+            $builder->where('medicinal_properties', $constraint->getOperator(), $constraint->getValue());
             return true;
         }
         return false;
@@ -331,10 +331,10 @@ trait MedicinalPlantScope
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
             $builder->whereHas('locations', function ($query) use ($constraint) {
-                    return $query
-                        ->whereHas('province', function ($province) use ($constraint) {
-                            return $province->where('country_id', $constraint->getOperator(), $constraint->getValue());
-                        });
+                return $query
+                    ->whereHas('province', function ($province) use ($constraint) {
+                        return $province->where('country_id', $constraint->getOperator(), $constraint->getValue());
+                    });
             });
 
             return true;

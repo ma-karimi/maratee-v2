@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\MorphologyQualitativeEvaluation;
+use App\Models\SeedMorphologyField;
 use InfyOm\Generator\Request\APIRequest;
 
-class MorphologyQualitativeEvaluationAPIRequest extends APIRequest
+class SeedMorphologyFieldAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class MorphologyQualitativeEvaluationAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return MorphologyQualitativeEvaluation::$rules;
+        return SeedMorphologyField::$rules;
     }
 }

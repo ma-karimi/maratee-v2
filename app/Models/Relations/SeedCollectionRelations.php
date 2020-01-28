@@ -87,6 +87,7 @@ trait SeedCollectionRelations
     {
         return $this->belongsTo(SeedGeneral::class, 'life_form_id')->where('seed_generals.type_id', 14);
     }
+
     /**
      * @return BelongsTo
      */
@@ -110,6 +111,7 @@ trait SeedCollectionRelations
     {
         return $this->belongsTo(Organization::class);
     }
+
     /**
      * @return BelongsTo
      */
@@ -167,6 +169,7 @@ trait SeedCollectionRelations
     {
         return $this->belongsTo(SeedGeneral::class, 'slope_aspect_id')->where('seed_generals.type_id', 3);
     }
+
     /**
      * @return BelongsTo
      */

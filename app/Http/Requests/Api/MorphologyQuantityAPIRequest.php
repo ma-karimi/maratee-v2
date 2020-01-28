@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\MorphologyQuantitativeEvaluation;
 use InfyOm\Generator\Request\APIRequest;
 
-class MorphologyQuantitativeEvaluationAPIRequest extends APIRequest
+class MorphologyQuantityAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +23,10 @@ class MorphologyQuantitativeEvaluationAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return MorphologyQuantitativeEvaluation::$rules;
+        return [
+            'quantitatives' => 'required|array',
+            'quantitatives.*.value' => 'required|string',
+            'quantitatives.*.seed_general_id' => 'required|exists:seed_generals,id',
+        ];
     }
 }

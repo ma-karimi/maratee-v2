@@ -3,10 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\ActorHub;
-use App\Models\General;
 use App\Models\PaleobotanyGeneral;
 use App\Models\PaleobotanyGeneralHub;
 use App\Models\PaleobotanyTaxonomy;
+use Carbon\Carbon;
 use Illuminate\Container\Container as Application;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -66,9 +66,8 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
         $input = $this->setPaleobotanyTaxonomyData($request);
 
         $taxonomy = parent::create($this->setPrimaryData($input));
-        $samples = $this->getSamples($input);
-        $this->createHub($taxonomy->id, 'samples', $samples);
-        $this->createDivisions($taxonomy->id, $input['divisions']);
+        $this->createHub($taxonomy->id, 'samples', $input['samples']);
+        $this->createDivisions($taxonomy, $input['divisions']);
 
         return $taxonomy;
 
@@ -138,28 +137,27 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
         ];
     }
 
-    public function createDivisions($id, $divisions)
+    public function createDivisions($taxonomy, $divisions)
     {
 
-        PaleobotanyGeneralHub::where([
-            'modelable_type' => PaleobotanyTaxonomy::class,
-            'modelable_id' => $id,
-        ])
+        $taxonomy->divisions()
             ->whereNotIn('paleobotany_general_id', collect($divisions)->pluck('id'))
-            ->delete();
+            ->get()->each(function ($query) {
+                $query->pivot->update(['deleted_at' => Carbon::now()]);
+            });
 
         if (!empty($divisions) && count($divisions)) {
             foreach ($divisions as $division) {
                 PaleobotanyGeneralHub::updateOrCreate(
-                        [
-                            'modelable_type' => PaleobotanyTaxonomy::class,
-                            'modelable_id' => $id,
-                            'paleobotany_general_id' => $division['id']
-                        ],
-                        [
-                            'value' => $division['value']
-                        ]
-                    );
+                    [
+                        'modelable_type' => PaleobotanyTaxonomy::class,
+                        'modelable_id' => $taxonomy->id,
+                        'paleobotany_general_id' => $division['id']
+                    ],
+                    [
+                        'value' => $division['value']
+                    ]
+                );
             }
         }
 
@@ -178,9 +176,8 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
 
         $taxonomy = parent::update($this->setPrimaryData($input), $id);
 
-        $samples = $this->getSamples($input);
-        $this->createHub($taxonomy->id, 'samples', $samples);
-        $this->createDivisions($taxonomy->id, $input['divisions']);
+        $this->createHub($taxonomy->id, 'samples', $input['samples']);
+        $this->createDivisions($taxonomy, $input['divisions']);
 
         return $taxonomy;
     }
@@ -211,14 +208,5 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
             ->with($relations)
             ->latest()
             ->get();
-    }
-
-    /**
-     * @param Request $input
-     * @return array
-     */
-    public function getSamples(Request $input): array
-    {
-        return request()->filled('samples') ? explode(',', $input['samples']) : [];
     }
 }

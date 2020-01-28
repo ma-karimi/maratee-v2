@@ -53,20 +53,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-            General::observe(GeneralObserver::class);
-        if (App::environment() == 'production') {
-            Plant::observe(PlantObserver::class);
-            Protection::observe(ProtectionObserver::class);
-            City::observe(CityObserver::class);
-            Province::observe(ProvinceObserver::class);
-            Country::observe(CountryObserver::class);
-            Organization::observe(OrganizationObserver::class);
-            MedicinalPlantType::observe(MedicinalPlantTypeObserver::class);
-            Method::observe(MethodObserver::class);
-            Medicine::observe(MedicineObserver::class);
-            Product::observe(ProductObserver::class);
-        }
-        SeedExchange::observe(SeedExchangeObserver::class);
+//            General::observe(GeneralObserver::class);
+//        if (App::environment() == 'production') {
+//            Plant::observe(PlantObserver::class);
+//            Protection::observe(ProtectionObserver::class);
+//            City::observe(CityObserver::class);
+//            Province::observe(ProvinceObserver::class);
+//            Country::observe(CountryObserver::class);
+//            Organization::observe(OrganizationObserver::class);
+//            MedicinalPlantType::observe(MedicinalPlantTypeObserver::class);
+//            Method::observe(MethodObserver::class);
+//            Medicine::observe(MedicineObserver::class);
+//            Product::observe(ProductObserver::class);
+//        }
+//        SeedExchange::observe(SeedExchangeObserver::class);
 
         DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
         DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('point', 'point');

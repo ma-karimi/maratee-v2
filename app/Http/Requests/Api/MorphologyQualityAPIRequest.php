@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use InfyOm\Generator\Request\APIRequest;
 
-class MorphologyVariableAPIRequest extends APIRequest
+class MorphologyQualityAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,9 @@ class MorphologyVariableAPIRequest extends APIRequest
     public function rules()
     {
         return [
-            'variables' => 'required|array',
-            'variables.*.value' => 'required|string',
-            'variables.*.seed_general_id' => 'required|exists:seed_generals,id',
+            'qualititatives' => 'required|array',
+            'qualititatives.*.value' => 'required|string',
+            'qualititatives.*.seed_general_id' => 'required|exists:seed_generals,id',
         ];
     }
 }
