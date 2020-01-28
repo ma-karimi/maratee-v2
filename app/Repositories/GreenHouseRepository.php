@@ -57,14 +57,14 @@ class GreenHouseRepository extends BaseRepository
 
     public function create($input)
     {
-        $location = $this->storeLocation($input['location'], $input->filled('location_id') ? $input['location_id'] : null);
+        $location = $this->storeLocation($input['location'], request()->filled('location_id') ? $input['location_id'] : null);
         $input['location_id'] = $location->id;
         return parent::create(Arr::except($input, 'location'));
     }
 
     public function update($input, $id)
     {
-        $location = $this->storeLocation($input['location'], $input->filled('location_id') ? $input['location_id'] : null);
+        $location = $this->storeLocation($input['location'], request()->filled('location_id') ? $input['location_id'] : null);
         $input['location_id'] = $location->id;
         return parent::update(Arr::except($input, 'location'), $id);
     }
