@@ -104,7 +104,7 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
      */
     private function specieAuthor($request)
     {
-        $species_authors = $request->filled('species_auth') ? $request->get('species_auth') : [];
+        $species_authors = $request->filled('species_auth') ? collect($request->get('species_auth'))->filter()->all() : [];
 
         ActorHub::where(['actorable_id' => $request->get('species_id'), 'actorable_type' => PaleobotanyGeneral::class])
             ->whereNotIn('actor_id', $species_authors)
