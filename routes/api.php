@@ -82,6 +82,7 @@ Route::apiResource('generals', 'GeneralAPIController');
 
 Route::get('paleobotany_generals/all', 'PaleobotanyGeneralAPIController@all');
 Route::apiResource('paleobotany_generals', 'PaleobotanyGeneralAPIController');
+Route::get('paleobotany_taxonomies/all', 'PaleobotanyTaxonomyAPIController@all');
 Route::apiResource('paleobotany_taxonomies', 'PaleobotanyTaxonomyAPIController');
 
 Route::get('plants/excel', 'PlantAPIController@excel');
