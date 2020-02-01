@@ -129,7 +129,7 @@ class SeedMorphologyRepository extends BaseRepository
     public function storeField(array $input, $seedMorphology)
     {
 
-        $seedMorphology->field()->updateOrCreate(['seed_morphology_id', $seedMorphology->id], Arr::except($input, ['seed_morphology_id']));
+        $seedMorphology->field()->updateOrCreate(['seed_morphology_id' => $seedMorphology->id], Arr::except($input, ['seed_morphology_id']));
 
         return $seedMorphology;
     }
