@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -11,8 +13,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      required={"collection_id"},
  * )
  */
-class SeedMorphology extends BaseModel
+class SeedMorphology extends BaseModel implements HasMedia
 {
+    use HasMediaTrait;
 
     public static $rules = [
         'seed_collection_id' => 'required|exists:seed_collections,id',
