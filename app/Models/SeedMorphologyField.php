@@ -10,6 +10,8 @@ class SeedMorphologyField extends BaseModel
         'green_house_id' => 'required|exists:green_houses,id',
     ];
 
+    protected $with = ['greenHouse'];
+
     public function greenHouse()
     {
         return $this->belongsTo(GreenHouse::class);

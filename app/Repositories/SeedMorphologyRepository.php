@@ -7,8 +7,6 @@ use App\Models\SeedMorphology;
 use Exception;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class SeedMorphologyRepository
@@ -131,7 +129,7 @@ class SeedMorphologyRepository extends BaseRepository
     public function storeField(array $input, $seedMorphology)
     {
 
-        $seedMorphology->field()->updateOrCreate($input);
+        $seedMorphology->field()->updateOrCreate(['seed_morphology_id', $seedMorphology->id], Arr::except($input, ['seed_morphology_id']));
 
         return $seedMorphology;
     }
