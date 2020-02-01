@@ -106,7 +106,7 @@ class Paleontology extends BaseModel implements HasMedia
 
     public function taxonomy(): BelongsTo
     {
-        return $this->belongsTo(Taxonomy::class);
+        return $this->belongsTo(PaleobotanyTaxonomy::class);
     }
 
 //    /**
