@@ -6,6 +6,7 @@ use App\Models\ActionHub;
 use App\Models\ActorHub;
 use App\Models\Paleontology;
 use Illuminate\Container\Container as Application;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
 /**
@@ -169,11 +170,18 @@ class PaleontologyRepository extends BaseRepository
         }
     }
 
+    /**
+     * @deleted samples
+     * @param array $input
+     * @param int $id
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|Model
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function update($input, $id)
     {
         $paleontology = parent::update($this->setPrimaryData($input), $id);
-
-        $this->createHub($paleontology->id, 'generalSamples', is_array($input['samples']) ? $input['samples'] : explode(',', $input['samples']));
+//
+//        $this->createHub($paleontology->id, 'generalSamples', is_array($input['samples']) ? $input['samples'] : explode(',', $input['samples']));
         return $paleontology;
     }
 
