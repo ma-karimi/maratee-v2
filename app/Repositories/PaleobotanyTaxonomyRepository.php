@@ -140,6 +140,7 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
     public function createDivisions($taxonomy, $divisions)
     {
 
+        $divisions = collect($divisions)->filter()->all();
         $taxonomy->divisions()
             ->whereNotIn('paleobotany_general_id', collect($divisions)->pluck('id'))
             ->get()->each(function ($query) {
