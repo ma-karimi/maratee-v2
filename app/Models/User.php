@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Jedrzej\Searchable\SearchableTrait;
 use Laravel\Passport\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * @SWG\Definition(
@@ -17,7 +18,7 @@ use Laravel\Passport\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, UserScope, UserAccessor, Notifiable, SearchableTrait;
+    use HasApiTokens, UserScope, UserAccessor, Notifiable, SearchableTrait, HasRoles;
 
     public const GROUPS = [1 => 'Botanical Flora', 2 => 'Botanical NonFlower', 3 => 'Botanical Paleobotany', 4 => 'Botanical Garden', 5 => 'Botanical Gene Bank', 6 => 'Medicinal', 7 => 'BioTech'];
     public $searchable = ['*'];

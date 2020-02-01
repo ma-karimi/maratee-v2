@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\ResetPasswordRequest;
 use App\Http\Requests\Api\UserLoginRequest;
-use App\Http\Requests\Api\UserRegisterRequest;
-use App\Models\User;
 use App\Notifications\ResetPassword;
+use App\Repositories\UserRepository;
 use App\Services\UserServices;
 use App\Utility;
 use Carbon\Carbon;
@@ -22,170 +21,14 @@ class AuthController extends AppBaseController
 {
     use AuthenticatesUsers;
 
-    private $userServices;
-
-    public function __construct(UserServices $userServices)
-    {
-        $this->userServices = $userServices;
-    }
-
     /**
-     * @param UserRegisterRequest $request
-     *
-     * @SWG\Post(
-     *      path="/register",
-     *      summary="Register New User",
-     *      tags={"Auth"},
-     *      description="Register New User",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="title",
-     *          in="body",
-     *          description="Register that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="first_name",
-     *          in="body",
-     *          description="Register that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="last_name",
-     *          in="body",
-     *          description="Register that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="email",
-     *          in="body",
-     *          description="Register that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="password",
-     *          in="body",
-     *          description="Register that should be stored",
-     *          required=true,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="education",
-     *          in="body",
-     *          description="Action that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="degree",
-     *          in="body",
-     *          description="Action that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="national_id",
-     *          in="body",
-     *          description="Action that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="birthday",
-     *          in="body",
-     *          description="Action that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="nationality",
-     *          in="body",
-     *          description="Action that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="passport_no",
-     *          in="body",
-     *          description="Action that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="nickname",
-     *          in="body",
-     *          description="Action that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="is_author",
-     *          in="body",
-     *          description="Action that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="mobile",
-     *          in="body",
-     *          description="Action that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="phone",
-     *          in="body",
-     *          description="Action that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="work_experience",
-     *          in="body",
-     *          description="Action that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/User"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     * @return JsonResponse
-     * @throws Exception
+     * @var UserRepository
      */
-    public function register(UserRegisterRequest $request)
+    private $userRepository;
+
+    public function __construct(UserRepository $userRepository)
     {
-        $user = new User([
-            'title' => $request->title,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'password' => $request->password
-        ]);
-        $user->save();
-        return response()->json([
-            'message' => 'Successfully created user!'
-        ], 201);
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -257,21 +100,27 @@ class AuthController extends AppBaseController
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
         if ($request->remember_me) {
-            $token->expires_at = Carbon::now()->addWeeks(1);
+            $token->expires_at = Carbon::now()->addDay();
         }
         $token->save();
+
+        $permissions = $user->getAllPermissions()->map(function ($permission) {
+            return $permission->name;
+        });
+
         return response()->json([
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
             )->toDateTimeString(),
+            'permissions' => $permissions
         ]);
     }
 
     /**
      * @param Request $request
-     * @return Response
+     * @return Response|JsonResponse
      *
      * @SWG\Get(
      *      path="/logout",
@@ -371,5 +220,17 @@ class AuthController extends AppBaseController
             report($exception);
             return $this->sendError($exception->getMessage());
         }
+    }
+
+    public function user(Request $request)
+    {
+        $user = $request->user();
+        if ($user) {
+            $permissions = $user->getAllPermissions()->pluck('name');
+            unset($user->roles, $user->permissions);
+            return response()->json(['authenticated' => true, 'user' => $user, 'permissions' => $permissions]);
+        }
+
+        return response()->json(['authenticated' => false]);
     }
 }

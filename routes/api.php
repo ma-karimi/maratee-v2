@@ -32,10 +32,10 @@ Route::get('relations', 'APIController@relations');
 
 
 Route::middleware(['auth:api'])->group(function () {
+    Route::get('user', 'AuthController@user');
     Route::get('logout', 'AuthController@logout');
 });
 
-Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
 Route::post('reset_password', 'AuthController@resetPassword');
 
@@ -58,8 +58,6 @@ Route::apiResource('organizations', 'OrganizationAPIController');
 Route::apiResource('departments', 'DepartmentAPIController');
 
 Route::apiResource('locations', 'LocationAPIController');
-
-Route::apiResource('connections', 'ConnectionAPIController');
 
 Route::apiResource('users', 'UserAPIController');
 

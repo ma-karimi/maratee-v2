@@ -18,13 +18,13 @@ class PaleobotanyTaxonomy extends BaseModel
 
     public static $rules = [
         'family_id' => 'nullable|exists:paleobotany_generals,id',
-        'genus_id' => 'exists:paleobotany_generals,id',
-        'species_id' => 'nullable|exists:paleobotany_generals,id',
+        'genus_id' => 'required|exists:paleobotany_generals,id',
+        'species_id' => 'required|exists:paleobotany_generals,id',
         'order_id' => 'nullable|exists:paleobotany_generals,id',
         'infra_specific_id' => 'nullable|exists:paleobotany_generals,id',
         'type_status_id' => 'nullable|exists:paleobotany_generals,id',
         'samples' => 'nullable|array',
-        'samples.*' => 'required|exists:paleobotany_generals,id',
+        'samples.*' => 'nullable|exists:paleobotany_generals,id',
         'divisions' => 'nullable|array',
         'divisions.*.id' => 'nullable|exists:paleobotany_generals,id',
         'divisions.*.value' => 'nullable|string',
