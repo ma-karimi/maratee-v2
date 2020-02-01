@@ -196,8 +196,8 @@ class MedicinalLocationRepository extends BaseRepository
 
         $model = parent::update(Arr::only($input, $this->medicinalLocationData()), $id);
         $this->storeMetabolites($input, $model);
-        $this->storeDetermine($input, $model->id);
-        $this->storeCollect($input, $model->id);
+//        $this->storeDetermine($input, $model->id);
+//        $this->storeCollect($input, $model->id);
         return $model;
     }
 
