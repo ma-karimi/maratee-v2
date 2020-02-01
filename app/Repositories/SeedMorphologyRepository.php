@@ -131,7 +131,7 @@ class SeedMorphologyRepository extends BaseRepository
     {
 
         if (request()->filled('id')) {
-            SeedMorphologyField::find($input['id'])->update($input);
+            SeedMorphologyField::find($input['id'])->update(Arr::except($input, ['id']));
         }
         SeedMorphologyField::create($input);
         return $seedMorphology;
