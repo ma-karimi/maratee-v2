@@ -128,7 +128,7 @@ class SeedMorphologyRepository extends BaseRepository
         }
     }
 
-    public function storeField(array $input, SeedMorphology $seedMorphology)
+    public function storeField(array $input, $seedMorphology)
     {
         $seedMorphology->field->create($input);
 
