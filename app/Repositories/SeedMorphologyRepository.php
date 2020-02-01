@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\MorphologyVariable;
 use App\Models\SeedMorphology;
+use App\Models\SeedMorphologyField;
 use Exception;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
@@ -129,8 +130,10 @@ class SeedMorphologyRepository extends BaseRepository
     public function storeField(array $input, $seedMorphology)
     {
 
-        $seedMorphology->field()->updateOrCreate(['seed_morphology_id' => $seedMorphology->id], Arr::except($input, ['seed_morphology_id']));
-
+        if (request()->filled('id')) {
+            SeedMorphologyField::find($input['id'])->update($input);
+        }
+        SeedMorphologyField::create($input);
         return $seedMorphology;
     }
 }
