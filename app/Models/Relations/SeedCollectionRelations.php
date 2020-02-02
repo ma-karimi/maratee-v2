@@ -175,7 +175,7 @@ trait SeedCollectionRelations
      */
     public function taxonomy()
     {
-        return $this->belongsTo(Taxonomy::class, 'taxonomy_id');
+        return $this->belongsTo(Taxonomy::class, 'taxonomy_id')->withTrashed();
     }
 
     /**

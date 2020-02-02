@@ -34,7 +34,7 @@ trait MedicinalPlantRelations
      */
     public function taxonomy(): BelongsTo
     {
-        return $this->belongsTo(Taxonomy::class);
+        return $this->belongsTo(Taxonomy::class)->withTrashed();
     }
 
     /**

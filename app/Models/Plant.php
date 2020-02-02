@@ -81,7 +81,7 @@ class Plant extends BaseModel implements HasMedia
 
     public function taxonomy(): BelongsTo
     {
-        return $this->belongsTo(Taxonomy::class);
+        return $this->belongsTo(Taxonomy::class)->withTrashed();
     }
 
     public function locations(): MorphToMany

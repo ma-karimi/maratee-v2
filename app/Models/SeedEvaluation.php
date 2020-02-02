@@ -51,7 +51,7 @@ class SeedEvaluation extends BaseModel implements HasMedia
      * @var array
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
-    protected $appends = ['viability', 'germination', 'germinated_seed_no'];
+    protected $appends = ['viability', 'germination'];
 
     public function research()
     {
@@ -122,7 +122,7 @@ class SeedEvaluation extends BaseModel implements HasMedia
 
     public function getViabilityAttribute()
     {
-        $germinated_seed = $this->germinated_seed_no ?? 0;
+        $germinated_seed = $this->germinated_nunmber ?? 0;
         $fresh_non_germinated = $this->fresh_non_germinated ?? 0;
         $abnormal = $this->abnormal ?? 0;
 
@@ -131,20 +131,20 @@ class SeedEvaluation extends BaseModel implements HasMedia
 
     public function getGerminationAttribute()
     {
-        $germinated_seed = $this->germinated_seed_no ?? 0;
+        $germinated_seed = $this->germinated_nunmber ?? 0;
 
         return $this->planted_seeds == 0 ? 0 : (($germinated_seed) * 100) / $this->planted_seeds;
     }
-
-    public function getGerminatedSeedNoAttribute()
-    {
-        if ($this->relationLoaded('germinations') && count($this->germinations)) {
-            return $this->germinations()->latest()->first()->germinated_number;
-        }
-    }
-
-    public function germinations()
-    {
-        return $this->hasMany(GerminationNumber::class);
-    }
+//
+//    public function getGerminatedSeedNoAttribute()
+//    {
+//        if ($this->relationLoaded('germinations') && count($this->germinations)) {
+//            return $this->germinations()->latest()->first()->germinated_number;
+//        }
+//    }
+//
+//    public function germinations()
+//    {
+//        return $this->hasMany(GerminationNumber::class);
+//    }
 }

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -13,9 +15,9 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *      required={"collection_id"},
  * )
  */
-class SeedMorphology extends BaseModel implements HasMedia
+class SeedMorphology extends BaseModel implements HasMedia, AuditableContract
 {
-    use HasMediaTrait;
+    use HasMediaTrait, Auditable;
 
     public static $rules = [
         'seed_collection_id' => 'required|exists:seed_collections,id',
@@ -23,6 +25,7 @@ class SeedMorphology extends BaseModel implements HasMedia
         'specimen_type_id' => 'required|exists:seed_generals,id',
     ];
 
+    protected $with = ['audits'];
 
     public function quantitatives()
     {

@@ -560,9 +560,8 @@ class SeedEvaluationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
      *      ),
      *      @SWG\Parameter(
-     *          name="germinations",
+     *          name="germination_number",
      *          in="body",
-     *          description="[count, germinated_number]",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/SeedEvaluation")
      *      ),
@@ -849,6 +848,22 @@ class SeedEvaluationAPIController extends AppBaseController
         }
 
         $this->seedEvaluationRepository->storeRadicals($input, $seedCollection);
+
+        return $this->sendResponse([], 'SeedEvaluation updated successfully');
+    }
+
+    public function storeValues($id, Request $request)
+    {
+        $input = $request->all();
+
+        /** @var SeedEvaluation $seedCollection */
+        $seedCollection = $this->seedEvaluationRepository->find($id);
+
+        if (empty($seedCollection)) {
+            return $this->sendError('Seed Evaluation not found');
+        }
+
+        $this->seedEvaluationRepository->storeValues($input, $seedCollection->id);
 
         return $this->sendResponse([], 'SeedEvaluation updated successfully');
     }

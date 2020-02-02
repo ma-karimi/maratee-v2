@@ -7,9 +7,10 @@ class RoleTableSeeder extends Seeder
 {
     public $rules = ['Super Administrator', 'Administrator', 'Botanical Assistance', 'Medicinal Assistance', 'BioTech Assistance', 'Seed Project Boss', 'Botanical Flora Expert', 'Botanical NonFlower Expert', 'Botanical Herbarium Expert', 'Botanical Paleobotany Expert', 'Botanical Garden Expert', 'Botanical Gene Bank', 'Medicinal Expert', 'BioTech Expert'];
     public $permissions = [
-        'botanical' => ['flora', 'nonflower', 'paleobotany', 'garden', 'herbarium', 'gene', 'type'],
-        'medicinal' => ['type', 'product', 'pharmaceutical', 'location'],
-        'biotech' => ['chromosome', 'cryobank']
+//        'botanical' => ['flora', 'nonflower', 'paleobotany', 'garden', 'herbarium', 'type'],
+//        'medicinal' => ['type', 'product', 'pharmaceutical', 'location'],
+//        'biotech' => ['chromosome', 'cryobank'],
+        'gene' => ['collection', 'evaluation', 'weight', 'exchange', 'morphology'],
 
     ];
 

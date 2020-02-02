@@ -6,6 +6,8 @@ use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
 /**
  * @SWG\Definition(
@@ -13,10 +15,10 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *            required={"taxonomy_id"},
  *
  */
-class Chromosome extends BaseModel
+class Chromosome extends BaseModel implements AuditableContract
 {
 
-    use ArticleRelation;
+    use ArticleRelation, Auditable;
 
     public static $rules = [
         'taxonomy_id' => 'required|exists:taxonomies,id',
@@ -38,7 +40,7 @@ class Chromosome extends BaseModel
      */
     public function taxonomy(): BelongsTo
     {
-        return $this->belongsTo(Taxonomy::class);
+        return $this->belongsTo(Taxonomy::class)->withTrashed();
     }
 
 
