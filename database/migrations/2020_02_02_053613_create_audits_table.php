@@ -26,6 +26,7 @@ class CreateAuditsTable extends Migration
             $table->string('user_agent', 1023)->nullable();
             $table->string('tags')->nullable();
             $table->tinyInteger('status_id')->default(0)->comment('0=>not verified, 1=>verified, 2=>declined');
+            $table->text('description')->nullable();
             $table->timestampTz('approved_at')->nullable();
             $table->timestamps();
 

@@ -40,6 +40,6 @@ class AuditRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        return parent::update(['status_id' => $input['status_id'], 'approved_at' => $input['status_id'] == 1 ? Carbon::now() : null], $id);
+        return parent::update(['status_id' => $input['status_id'], 'approved_at' => $input['status_id'] == 1 ? Carbon::now() : null, 'description' => $input['description'] ?? null], $id);
     }
 }
