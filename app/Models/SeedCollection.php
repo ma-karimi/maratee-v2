@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\SeedCollectionRelations;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -13,10 +16,11 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *      required={"taxonomy_id"}
  * )
  */
-class SeedCollection extends BaseModel implements HasMedia
+class SeedCollection extends BaseModel implements HasMedia, AuditableContract
 {
 
-    use SeedCollectionRelations, HasMediaTrait;
+    use SeedCollectionRelations, HasMediaTrait, Auditable, AuditTrait;
+
     public static $climates = [
         'land_form_id' => 'nullable|exists:seed_generals,id',
         'slope_aspect_id' => 'nullable|exists:seed_generals,id',
@@ -68,5 +72,6 @@ class SeedCollection extends BaseModel implements HasMedia
         'organization_id' => 'required|exists:organizations,id',
     ];
 
-    protected $with = ['taxonomy'];
+    protected $with = ['taxonomy', 'audits'];
+    protected $appends = ['last_audit'];
 }

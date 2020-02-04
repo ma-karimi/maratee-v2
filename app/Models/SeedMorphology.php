@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use App\Models\Scope\AuditScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,7 +19,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class SeedMorphology extends BaseModel implements HasMedia, AuditableContract
 {
-    use HasMediaTrait, Auditable, AuditScope;
+    use HasMediaTrait, Auditable, AuditTrait;
 
     public static $rules = [
         'seed_collection_id' => 'required|exists:seed_collections,id',
@@ -29,10 +30,6 @@ class SeedMorphology extends BaseModel implements HasMedia, AuditableContract
     protected $with = ['audits'];
     protected $appends = ['last_audit'];
 
-    public function getLastAuditAttribute()
-    {
-        return $this->audits()->first();
-    }
 
     public function quantitatives()
     {

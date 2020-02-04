@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use App\Models\Accessor\BotanicalAccessor;
+use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\BotanicalRelation;
 use App\Models\Scope\BotanicalScope;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -15,9 +18,9 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *            required={"taxonomy_id"},
  *
  */
-class Botanical extends BaseModel implements HasMedia
+class Botanical extends BaseModel implements HasMedia, AuditableContract
 {
-    use HasMediaTrait, BotanicalAccessor, BotanicalRelation, BotanicalScope;
+    use HasMediaTrait, BotanicalAccessor, BotanicalRelation, BotanicalScope, Auditable, AuditTrait;
 
     public const SEED_FORMATION = [1 => 'yes', 2 => 'no'];
 
@@ -55,7 +58,7 @@ class Botanical extends BaseModel implements HasMedia
     protected $appends = [
 
         'seed_formation', 'geographicals',
-        'cycle', 'value', 'propagation', 'plant_condition', 'usage', 'flower_color', 'fruit_color', 'foliage_color', 'seeding', 'planting', 'transfer', 'habitat', 'origin', 'garden', 'internal_habitat'
+        'cycle', 'value', 'propagation', 'plant_condition', 'usage', 'flower_color', 'fruit_color', 'foliage_color', 'seeding', 'planting', 'transfer', 'habitat', 'origin', 'garden', 'internal_habitat', 'last_audit'
     ];
 
     /**
@@ -81,6 +84,6 @@ class Botanical extends BaseModel implements HasMedia
      * @var array
      */
     protected $dates = ['created_at', 'deleted_at', 'planting', 'updated_at', 'first_seeding', 'first_flowering'];
-
+    protected $with = ['audits'];
 
 }

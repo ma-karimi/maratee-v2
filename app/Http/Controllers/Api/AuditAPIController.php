@@ -6,6 +6,8 @@ use App\Http\Controllers\AppBaseController;
 use App\Models\Audit;
 use App\Repositories\AuditRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Response;
 
@@ -86,7 +88,6 @@ class AuditAPIController extends AppBaseController
         if ($audit === null) {
             return $this->sendError('Audit not found');
         }
-
         $audit = $this->auditRepository->update($input, $id);
 
         return $this->sendResponse($audit->toArray(), 'Audit updated successfully');

@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ActionRelation;
 use App\Models\Scope\HerbariumScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Arr;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -17,9 +20,9 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *      required={"location_id","organization_id","taxonomy_id"}
  * )
  */
-class Herbarium extends BaseModel implements HasMedia
+class Herbarium extends BaseModel implements HasMedia, AuditableContract
 {
-    use ActionRelation, HasMediaTrait, HerbariumScope;
+    use ActionRelation, HasMediaTrait, HerbariumScope, AuditTrait, Auditable;
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
 
     public static $rules = [
@@ -46,8 +49,8 @@ class Herbarium extends BaseModel implements HasMedia
      */
     protected $table = 'herbariums';
 
-    protected $appends = ['tip_picture', 'visit', 'borrow', 'exchange_receive', 'exchange_send'];
-
+    protected $appends = ['tip_picture', 'visit', 'borrow', 'exchange_receive', 'exchange_send', 'last_audit'];
+    protected $with = ['audits'];
     public function plant()
     {
         return $this->belongsTo(Plant::class, 'taxonomy_id', 'taxonomy_id');

@@ -3,9 +3,14 @@
 namespace App\Models;
 
 use App\Models\Accessor\MedicinalPlantAccessor;
+use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\MedicinalPlantRelations;
 use App\Models\Scope\MedicinalPlantScope;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -13,9 +18,9 @@ use App\Models\Scope\MedicinalPlantScope;
  *      required={"taxonomy_id", "location_id"},
  * )
  */
-class MedicinalPlant extends BaseModel
+class MedicinalPlant extends BaseModel implements HasMedia, AuditableContract
 {
-    use MedicinalPlantAccessor, MedicinalPlantScope, MedicinalPlantRelations;
+    use MedicinalPlantAccessor, MedicinalPlantScope, MedicinalPlantRelations, HasMediaTrait, Auditable, AuditTrait;
 
     public const TRADITIONAL_IRANIAN_MEDICINE = [0 => 'unknown', 1 => 'raw', 2 => 'processed', 3 => 'raw & processed'];
     public const NATURAL_DRUG = [0 => 'unknown', 1 => 'human medicines', 2 => 'animal drugs'];
@@ -80,7 +85,9 @@ class MedicinalPlant extends BaseModel
         'potentials',
         'foods',
         'industries',
-        'materials'
-
+        'materials',
+        'last_audit'
     ];
+
+    protected $with = ['audits'];
 }

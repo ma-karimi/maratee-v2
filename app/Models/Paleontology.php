@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Accessor\PaleontologyAccessor;
+use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ActionRelation;
 use App\Models\Relations\ArticleRelation;
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -21,9 +24,9 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *      required={"taxonomy_id","catalog_no"}
  * )
  */
-class Paleontology extends BaseModel implements HasMedia
+class Paleontology extends BaseModel implements HasMedia, AuditableContract
 {
-    use PaleontologyAccessor, ActionRelation, ArticleRelation, HasMediaTrait, PaleontologyScope;
+    use PaleontologyAccessor, ActionRelation, ArticleRelation, PaleontologyScope, HasMediaTrait, Auditable, AuditTrait;
     public static $rules = [
 
 
@@ -51,8 +54,8 @@ class Paleontology extends BaseModel implements HasMedia
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
-    protected $appends = ['fair', 'gift', 'buy', 'borrow', 'visit', 'preservation', 'citation'];
-
+    protected $appends = ['fair', 'gift', 'buy', 'borrow', 'visit', 'preservation', 'citation', 'last_audit'];
+    protected $with= ['audits'];
     /**
      * @return BelongsTo
      */

@@ -3,10 +3,15 @@
 namespace App\Models;
 
 use App\Models\Accessor\CryoBankAccessor;
+use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ActionRelation;
 use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -14,9 +19,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *            required={"taxonomy_id", "protection_id"},
  *
  */
-class CryoBank extends BaseModel
+class CryoBank extends BaseModel implements HasMedia, AuditableContract
 {
-    use ActionRelation, ArticleRelation, CryoBankAccessor;
+    use ActionRelation, ArticleRelation, CryoBankAccessor, HasMediaTrait, Auditable, AuditTrait;
 
     public const TYPE_SAMPLE = [
         1 => 'seed', 2 => 'shoot', 3 => 'cell'
@@ -51,8 +56,8 @@ class CryoBank extends BaseModel
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
-    protected $appends = ['sample_type', 'sample', 'genotype_code'];
-
+    protected $appends = ['sample_type', 'sample', 'genotype_code', 'last_audit'];
+    protected $with = ['audits'];
     /**
      * @return BelongsTo
      */

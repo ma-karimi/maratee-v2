@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -11,8 +16,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      required={"seed_collection_id"},
  * )
  */
-class SeedExchange extends BaseModel
+class SeedExchange extends BaseModel implements HasMedia, AuditableContract
 {
+    use HasMediaTrait, Auditable, AuditTrait;
     public static $rules = [
         'seed_collection_id' => 'required|exists:seed_collections,id',
         'collection_id' => 'required|exists:seed_generals,id',
@@ -23,6 +29,8 @@ class SeedExchange extends BaseModel
 //        'recipient_phone' => 'required|string',
         'request_no' => 'required|string',
     ];
+    protected $appends = ['last_audit'];
+    protected $with = ['audits'];
     /**
      * The database table used by the model.
      *

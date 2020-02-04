@@ -1,13 +1,13 @@
 <?php
 
 
-namespace App\Models\Scope;
+namespace App\Models\Contracts;
 
 
 use Illuminate\Database\Eloquent\Builder;
 use Jedrzej\Searchable\Constraint;
 
-trait AuditScope
+trait AuditTrait
 {
     protected function processAudits_statusIdFilter(Builder $builder, Constraint $constraint)
     {
@@ -23,5 +23,11 @@ trait AuditScope
             return true;
         }
         return false;
+    }
+
+
+    public function getLastAuditAttribute()
+    {
+        return $this->audits()->first();
     }
 }

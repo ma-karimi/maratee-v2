@@ -3,8 +3,12 @@
 namespace App\Models;
 
 use App\Models\Accessor\MedicinalLocationAccessor;
+use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\MedicinalLocationRelations;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 
 /**
  * @SWG\Definition(
@@ -12,12 +16,12 @@ use App\Models\Relations\MedicinalLocationRelations;
  *      required={"medicinal_plant_id","location_id"}
  * )
  */
-class MedicinalLocation extends BaseModel
+class MedicinalLocation extends BaseModel implements AuditableContract
 {
-    use MedicinalLocationRelations, MedicinalLocationAccessor;
+    use MedicinalLocationRelations, MedicinalLocationAccessor, Auditable, AuditTrait;
     public const STUDIED_SAMPLE = [0 => 'unknown', 1 => 'wild', 2 => 'cultivated'];
     public const PRESENCE_IN_COUNTRY = [0 => 'unknown', 1 => 'native', 2 => 'endemic'];
-    protected $with = ['determine', 'location', 'collect', 'constituents', 'treatment', 'distillation', 'secondaryMetabolites', 'phenology', 'distillation', 'extraction', 'analyse', 'article'];
+    protected $with = ['determine', 'location', 'collect', 'constituents', 'treatment', 'distillation', 'secondaryMetabolites', 'phenology', 'distillation', 'extraction', 'analyse', 'article', 'audits'];
 
 
     /**
@@ -33,5 +37,6 @@ class MedicinalLocation extends BaseModel
         'studied_sample_name',
         'presence_in_country_name',
         'metabolites',
+        'last_audit'
     ];
 }

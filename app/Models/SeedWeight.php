@@ -2,16 +2,22 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
  *      definition="SeedWeight",
  * )
  */
-class SeedWeight extends BaseModel
+class SeedWeight extends BaseModel implements HasMedia, AuditableContract
 {
+    use HasMediaTrait, Auditable, AuditTrait;
 
     public static $rules = [
         'seed_collection_id' => 'required|exists:seed_collections,id',
@@ -35,7 +41,8 @@ class SeedWeight extends BaseModel
         'total_fruit_weight' => 'float',
         'total_seed_weight' => 'float',
     ];
-
+    protected $with = ['audits'];
+    protected $appends = ['last_audit'];
     /**
      * @return BelongsTo
      */

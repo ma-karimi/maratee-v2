@@ -34,6 +34,8 @@ Route::get('relations', 'APIController@relations');
 Route::middleware(['auth:api'])->group(function () {
     Route::get('user', 'AuthController@user');
     Route::get('logout', 'AuthController@logout');
+    Route::patch('audits/{id}', 'AuditAPIController@update');
+
 });
 
 Route::post('login', 'AuthController@login');
@@ -41,7 +43,6 @@ Route::post('reset_password', 'AuthController@resetPassword');
 
 Route::apiResource('treatments', 'TreatmentAPIController');
 
-Route::patch('audits/{id}', 'AuditAPIController@update');
 Route::post('paleontologies/{id}/media', 'PaleontologyAPIController@media');
 Route::post('paleontologies/{id}/locality', 'PaleontologyAPIController@locality');
 Route::post('paleontologies/{id}/geology-remark', 'PaleontologyAPIController@geologyAndRemark');

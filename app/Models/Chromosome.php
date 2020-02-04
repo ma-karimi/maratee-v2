@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ArticleRelation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @SWG\Definition(
@@ -15,10 +18,10 @@ use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
  *            required={"taxonomy_id"},
  *
  */
-class Chromosome extends BaseModel implements AuditableContract
+class Chromosome extends BaseModel implements HasMedia, AuditableContract
 {
 
-    use ArticleRelation, Auditable;
+    use ArticleRelation, Auditable, HasMediaTrait, AuditTrait;
 
     public static $rules = [
         'taxonomy_id' => 'required|exists:taxonomies,id',
@@ -33,7 +36,8 @@ class Chromosome extends BaseModel implements AuditableContract
      * @var string
      */
     protected $table = 'chromosomes';
-    protected $appends = ['addresses'];
+    protected $appends = ['addresses', 'last_audit'];
+    protected $with = ['audits'];
 
     /**
      * @return BelongsTo

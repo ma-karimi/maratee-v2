@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -12,10 +15,11 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *      definition="SeedEvaluation",
  * )
  */
-class SeedEvaluation extends BaseModel implements HasMedia
+class SeedEvaluation extends BaseModel implements HasMedia, AuditableContract
 {
 
-    use HasMediaTrait;
+    use HasMediaTrait, Auditable, AuditTrait;
+
 
     public static $rules = [
         'seed_collection_id' => 'required|exists:seed_collections,id',
@@ -51,7 +55,8 @@ class SeedEvaluation extends BaseModel implements HasMedia
      * @var array
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
-    protected $appends = ['viability', 'germination'];
+    protected $appends = ['viability', 'germination', 'last_audit'];
+    protected $with = ['audits'];
 
     public function research()
     {
