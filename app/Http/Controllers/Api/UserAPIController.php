@@ -180,7 +180,7 @@ class UserAPIController extends AppBaseController
     public function show($id)
     {
         /** @var User $user */
-        $user = $this->userRepository->find($id, \request()->get('relations'));
+        $user = $this->userRepository->find($id, ['roles']);
 
         if ($user === null) {
             return $this->sendError('User not found');

@@ -17,6 +17,15 @@
 //    });
 //dd(\App\Models\Location::first());
 
+
+$str1 = 'yababadi';
+$str2 = 'yaba';
+
+if(strpos($str1, $str2)){
+    dd('asg');
+}
+dd('sss');
+
 Route::get('/', function () {
     return view('welcome');
 });

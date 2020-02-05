@@ -39,7 +39,7 @@ Route::middleware(['auth:api'])->group(function () {
 });
 
 Route::post('login', 'AuthController@login');
-Route::post('reset_password', 'AuthController@resetPassword');
+//Route::post('reset_password', 'AuthController@resetPassword');
 
 Route::apiResource('treatments', 'TreatmentAPIController');
 

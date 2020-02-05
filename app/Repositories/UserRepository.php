@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use Illuminate\Support\Arr;
 
 /**
  * Class UserRepository
@@ -36,13 +37,27 @@ class UserRepository extends BaseRepository
         return User::class;
     }
 
+    public function create($input)
+    {
+        $user = parent::create(Arr::except($input, ['roles']));
+        $user->syncRoles($input['roles']);
+//        $this->createHub($user->id, 'roles', $input['roles']);
+
+        return $user;
+    }
+
     public function update($input, $id)
     {
         if (!request()->filled('password')) {
             unset($input['password']);
         }
 
-        return parent::update($input, $id);
+        $user = parent::update(Arr::except($input, ['roles']), $id);
+        $user->syncRoles($input['roles']);
+
+//        $this->createHub($user->id, 'roles', $input['roles']);
+
+        return $user;
     }
 
 
