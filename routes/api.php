@@ -23,7 +23,7 @@
 });*/
 
 
-Route::delete('/{class}/{id}/{delete}', 'APIController@destroy');
+Route::delete('/{class}/{id}/{delete?}', 'APIController@destroy');
 Route::delete('/{class}/multiple_delete', 'APIController@multipleDestroy');
 Route::post('/{class}/hub', 'APIController@storeHub');
 Route::delete('/{class}/hub', 'APIController@destroyHub');
@@ -94,7 +94,7 @@ Route::apiResource('plants', 'PlantAPIController');
 
 Route::get('herbariums/excel', 'HerbariumAPIController@excel');
 Route::post('herbariums/{id}/media', 'HerbariumAPIController@media');
-Route::apiResource('herbariums', 'HerbariumAPIController');
+Route::apiResource('herbariums', 'HerbariumAPIController')->except('destroy');
 
 Route::apiResource('articles', 'ArticleAPIController');
 

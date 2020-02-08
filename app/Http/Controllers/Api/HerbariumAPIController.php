@@ -310,58 +310,6 @@ class HerbariumAPIController extends AppBaseController
         return $this->sendResponse($herbarium->toArray(), 'Herbarium updated successfully');
     }
 
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @throws Exception
-     * @SWG\Delete(
-     *      path="/herbariums/{id}",
-     *      summary="Remove the specified Herbarium from storage",
-     *      tags={"Herbarium"},
-     *      description="Delete Herbarium",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Herbarium",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="string"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function destroy($id)
-    {
-        /** @var Herbarium $herbarium */
-        $herbarium = $this->herbariumRepository->find($id, []);
-
-        if ($herbarium === null) {
-            return $this->sendError('Herbarium not found');
-        }
-
-        $herbarium->delete();
-
-        return $this->sendResponse($id, 'Herbarium deleted successfully');
-    }
 
     /**
      * @param int $id

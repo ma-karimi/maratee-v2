@@ -40,19 +40,20 @@ class Audit extends \OwenIt\Auditing\Models\Audit
     public function getMessageAttribute()
     {
 
-        $user_name = $this->user->name;
-        $admin = $this->auditor->name ?? null;
-        $time = $this->created_at;
-        $audided = $this->audited_at;
-        if ($this->status_id == 0) {
-            return "This Record Modified By ${user_name} at ${time}";
-        } elseif ($this->status_id == 1) {
-            return "This Record Approved By ${admin} at ${audided}";
-        } else {
-            return "This Record Declined By ${admin} at ${audided}";
+        if (isset($this->user->name)) {
+            $user_name = $this->user->name;
+            $admin = $this->auditor->name ?? null;
+            $time = $this->created_at;
+            $audided = $this->audited_at;
+            if ($this->status_id == 0) {
+                return "This Record Modified By ${user_name} at ${time}";
+            } elseif ($this->status_id == 1) {
+                return "This Record Approved By ${admin} at ${audided}";
+            } else {
+                return "This Record Declined By ${admin} at ${audided}";
 
+            }
         }
-
 
     }
 

@@ -336,21 +336,31 @@ class APIController extends AppBaseController
 
         $result = $repo->find($id);
 
-        $hasManyRelations = self::relationshipsWithType($result)['HasMany'];
-        $result->load($hasManyRelations->toArray());
+
+        $allRelations = self::relationshipsWithType($result);
+        if ($allRelations->isNotEmpty()) {
+            $relatedRelations = $allRelations->filter(function ($value, $key) {
+                return strpos($key, 'Belong') === false ;
+            })->flatten()->filter(function ($value, $key) {
+                return $value !== 'audits' ;
+            });
+        }
+
         if ($result === null) {
             return $this->sendError("${name} not found");
         }
 
-        if($delete === null){
-            $result = $result->loadCount($hasManyRelations->toArray());
+        if ($delete === null && isset($relatedRelations)) {
+            $result = $result->loadCount($relatedRelations->toArray());
             return $this->sendResponse($result, "${name} retrieved successfully");
         }
 
         if ($delete === 'delete') {
             $result->delete();
+            return $this->sendResponse($id, "${name} deleted successfully");
         }
-        return $this->sendResponse($id, "${name} deleted successfully");
+
+        return $this->sendError('not found any related relation');
     }
 
     /**

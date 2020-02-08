@@ -63,13 +63,21 @@ class BaseModel extends Model
 
     }
 
-    //Cascade Delete All Has Many Of Model
+    //Cascade Delete All Has Many Or Morph Many Of Model
     public function delete()
     {
-        $hasManyRelations = self::relationshipsWithType($this)['HasMany'];
-        if (isset($hasManyRelations)) {
-            $this->load($hasManyRelations->toArray());
-            foreach ($hasManyRelations as $index => $relation) {
+        $hasManyRelations = null;
+        $allRelations = self::relationshipsWithType($this);
+        if ($allRelations->isNotEmpty()) {
+            $relatedRelations = $allRelations->filter(function ($value, $key) {
+                return strpos($key, 'Belong') === false;
+            })->flatten()->filter(function ($value, $key) {
+                return $value !== 'audits';
+            });
+        }
+        if (isset($relatedRelations)) {
+            $this->load($relatedRelations->toArray());
+            foreach ($relatedRelations as $index => $relation) {
                 $this->$relation()->delete();
             }
         }
