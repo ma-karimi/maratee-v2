@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Role;
 use App\Models\RoleHasPermission;
+use Illuminate\Support\Arr;
 
 /**
  * Class RoleRepository
@@ -39,7 +40,7 @@ class RoleRepository extends BaseRepository
 
     public function create($input)
     {
-        $role = parent::create($input);
+        $role = parent::create(Arr::except($input, ['permissions']));
 
         $this->storePermission($input, $role->id);
 
@@ -48,7 +49,7 @@ class RoleRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        $role = parent::update($input, $id);
+        $role = parent::update(Arr::except($input, ['permissions']), $id);
 
         $this->storePermission($input, $id);
 
