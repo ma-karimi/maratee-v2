@@ -4,12 +4,16 @@
 namespace App\Models\Relations;
 
 
-use App\Models\{ActionHub, Article, Location, MedicinalLocationConstituent, MedicinalPlantType, Method};
+use App\Models\{ActionHub, Article, Location, MedicinalLocationConstituent, MedicinalPlant, MedicinalPlantType, Method};
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 trait MedicinalLocationRelations
 {
 
+    public function medicinal()
+    {
+        return $this->belongsTo(MedicinalPlant::class, 'medicinal_plant_id');
+    }
 
     public function determine()
     {
