@@ -59,7 +59,7 @@ class PlantRepository extends BaseRepository
         $plant = $this->createPlant($input);
 
 
-        $location = $this->storeLocation($input, $input->filled('location_id') ? $input['location_id'] : null);
+        $location = $this->storeLocation($input['location'], $input->filled('location_id') ? $input['location_id'] : null);
         $input['location_id'] = $location->id;
         $this->createHub($plant->id, 'locations', [$location->id]);
         $this->createHub($plant->id, 'geogrpahicals', $input['geographicals']);
