@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\ArticleRelation;
+use App\Models\Scope\ChromosomeScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use OwenIt\Auditing\Auditable;
@@ -21,7 +22,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class Chromosome extends BaseModel implements HasMedia, AuditableContract
 {
 
-    use ArticleRelation, Auditable, HasMediaTrait, AuditTrait;
+    use ChromosomeScope,ArticleRelation, Auditable, HasMediaTrait, AuditTrait;
 
     public static $rules = [
         'taxonomy_id' => 'required|exists:taxonomies,id',
