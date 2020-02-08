@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\Api\PermissionAPIRequest;
-use App\Http\Requests\Api\PermissionAPIRequest;
-use App\Models\Permission;
 use App\Repositories\PermissionRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Response;
 
 /**
@@ -60,224 +58,15 @@ class PermissionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $permissions = $this->permissionRepository->paginate(
-            $request->get('per_page'),
-            $request->except('per_page'),
-            $request->get('relations')
-        );
+        $permissions = $this->permissionRepository->all();
 
-        return $this->sendResponse($permissions->toArray(), 'Permissions retrieved successfully');
-    }
+        $permissions = $permissions->map(function ($data){
+           $array['name'] = ucfirst(str_replace(':', ' ', $data['name']));
+           $array['id'] = $data['id'];
 
-    /**
-     * @param PermissionAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/permissions",
-     *      summary="Store a newly created Permission in storage",
-     *      tags={"Permission"},
-     *      description="Store Permission",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="name",
-     *          in="body",
-     *          description="Permission that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Permission"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function store(PermissionAPIRequest $request)
-    {
-        $input = $request->all();
+           return $array;
+        });
 
-        $permission = Permission::create($input);
-
-        return $this->sendResponse($permission->toArray(), 'Permission saved successfully');
-    }
-
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/permissions/{id}",
-     *      summary="Display the specified Permission",
-     *      tags={"Permission"},
-     *      description="Get Permission",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Permission",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Permission"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function show($id)
-    {
-        /** @var Permission $permission */
-        $permission = $this->permissionRepository->find($id);
-
-        if (empty($permission)) {
-            return $this->sendError('Permission not found');
-        }
-
-        return $this->sendResponse($permission->toArray(), 'Permission retrieved successfully');
-    }
-
-    /**
-     * @param int $id
-     * @param PermissionAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Put(
-     *      path="/permissions/{id}",
-     *      summary="Update the specified Permission in storage",
-     *      tags={"Permission"},
-     *      description="Update Permission",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Permission",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="name",
-     *          in="body",
-     *          description="Permission that should be updated",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Permission")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Permission"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function update($id, PermissionAPIRequest $request)
-    {
-        $input = $request->all();
-
-        /** @var Permission $permission */
-        $permission = $this->permissionRepository->find($id);
-
-        if (empty($permission)) {
-            return $this->sendError('Permission not found');
-        }
-
-        $permission = $this->permissionRepository->update($input, $id);
-
-        return $this->sendResponse($permission->toArray(), 'Permission updated successfully');
-    }
-
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Delete(
-     *      path="/permissions/{id}",
-     *      summary="Remove the specified Permission from storage",
-     *      tags={"Permission"},
-     *      description="Delete Permission",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Permission",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="string"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     * @throws Exception
-     */
-    public function destroy($id)
-    {
-        /** @var Permission $permission */
-        $permission = $this->permissionRepository->find($id);
-
-        if (empty($permission)) {
-            return $this->sendError('Permission not found');
-        }
-
-        $permission->delete();
-
-        return $this->sendResponse($id, 'Permission deleted successfully');
+        return $this->sendResponse($permissions, 'Permissions retrieved successfully');
     }
 }
