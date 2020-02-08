@@ -62,12 +62,12 @@ class PlantRepository extends BaseRepository
         $location = $this->storeLocation($input, $input->filled('location_id') ? $input['location_id'] : null);
         $input['location_id'] = $location->id;
         $this->createHub($plant->id, 'locations', [$location->id]);
+        $this->createHub($plant->id, 'geogrpahicals', $input['geographicals']);
         $this->storeMedia($input, $plant);
 
 
         return $plant;
     }
-
 
     private function createPlant($input)
     {
@@ -155,7 +155,11 @@ class PlantRepository extends BaseRepository
             'n_no' => $input['n_no'] ?? null,
             'n2_no' => $input['n2_no'] ?? null,
         ];
-        return parent::update($plant_input, $id);
+        $plant =  parent::update($plant_input, $id);
+
+        $this->createHub($plant->id, 'geogrpahicals', $input['geographicals']);
+
+        return $plant;
     }
 
 

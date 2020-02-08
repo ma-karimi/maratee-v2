@@ -23,6 +23,7 @@
 });*/
 
 
+Route::delete('/{class}/{id}/{delete}', 'APIController@destroy');
 Route::delete('/{class}/multiple_delete', 'APIController@multipleDestroy');
 Route::post('/{class}/hub', 'APIController@storeHub');
 Route::delete('/{class}/hub', 'APIController@destroyHub');
@@ -182,7 +183,7 @@ Route::apiResource('transactions', 'TransactionAPIController');
 
 Route::get('taxonomies/excel', 'TaxonomyAPIController@excel');
 Route::get('taxonomies/all', 'TaxonomyAPIController@all');
-Route::delete('taxonomies/{id}/{delete}', 'TaxonomyAPIController@destroy');
+//Route::delete('taxonomies/{id}/{delete}', 'TaxonomyAPIController@destroy');
 Route::apiResource('taxonomies', 'TaxonomyAPIController')->except('delete');
 
 

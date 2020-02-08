@@ -274,6 +274,86 @@ class APIController extends AppBaseController
     }
 
     /**
+     * @param int $id
+     * @param null $delete
+     * @return Response
+     *
+     * @throws Exception
+     * @SWG\Delete(
+     *      path="/{class}/{id}/{delete}",
+     *      summary="Remove the specified Taxonomy from storage",
+     *      tags={"Class"},
+     *      description="Delete Taxonomy",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="class",
+     *          description="Class",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Class",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="delete",
+     *          description="",
+     *          type="string",
+     *          required=false,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function destroy($class, $id, $delete = null)
+    {
+
+        $name = Str::singular(Str::studly($class));
+        $repo = 'App\\Repositories\\' . $name . 'Repository';
+        $repo = resolve($repo);
+
+        $result = $repo->find($id);
+
+        $hasManyRelations = self::relationshipsWithType($result)['HasMany'];
+        $result->load($hasManyRelations->toArray());
+        if ($result === null) {
+            return $this->sendError("${name} not found");
+        }
+
+        if($delete === null){
+            $result = $result->loadCount($hasManyRelations->toArray());
+            return $this->sendResponse($result, "${name} retrieved successfully");
+        }
+
+        if ($delete === 'delete') {
+            $result->delete();
+        }
+        return $this->sendResponse($id, "${name} deleted successfully");
+    }
+
+    /**
      * @param Request $request
      * @return Response
      *

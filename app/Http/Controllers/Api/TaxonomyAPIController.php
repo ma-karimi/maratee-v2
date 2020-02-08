@@ -343,67 +343,6 @@ class TaxonomyAPIController extends AppBaseController
     }
 
     /**
-     * @param int $id
-     * @param null $delete
-     * @return Response
-     *
-     * @throws Exception
-     * @SWG\Delete(
-     *      path="/taxonomies/{id}",
-     *      summary="Remove the specified Taxonomy from storage",
-     *      tags={"Taxonomy"},
-     *      description="Delete Taxonomy",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Taxonomy",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="string"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function destroy($id, $delete = null)
-    {
-        /** @var Taxonomy $taxonomy */
-        $taxonomy = $this->taxonomyRepository->find($id);
-
-        if ($taxonomy === null) {
-            return $this->sendError('Taxonomy not found');
-        }
-
-        if (empty($delete)) {
-            $taxonomy = $taxonomy->loadCount(['flora', 'nonflower', 'herbarium', 'medicinalPlant', 'seedCollection', 'botanical', 'palebotany', 'chromosome', 'cryobank']);
-            return $this->sendResponse($taxonomy, 'Taxonomy retrieved successfully');
-        }
-
-        if ($delete == 'delete') {
-            $taxonomy->delete();
-        }
-
-        return $this->sendResponse($id, 'Taxonomy deleted successfully');
-    }
-
-    /**
      * @param Request $request
      * @return Response
      *
