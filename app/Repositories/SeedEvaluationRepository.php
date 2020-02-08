@@ -61,7 +61,7 @@ class SeedEvaluationRepository extends BaseRepository
     }
 
     /**
-     * @todo delete research & organization with jamzad comment
+     * @deprecated //delete research & organization with jamzad comment
      * @param $input
      * @return Model
      * @throws ValidationException
@@ -105,7 +105,7 @@ class SeedEvaluationRepository extends BaseRepository
     }
 
     /**
-     * @todo delete research & organization with jamzad comment
+     * @deprecated //delete research & organization with jamzad comment
      * @param array $input
      * @param int $id
      * @return Builder|Builder[]|Collection|Model
@@ -191,16 +191,31 @@ class SeedEvaluationRepository extends BaseRepository
         }
     }
 
+    /**
+     * @deprecated
+     * @param $input
+     * @param $seed_collection
+     */
     public function storeShoots($input, $seed_collection)
     {
         $this->storePivot($input['shoots'], $seed_collection->id, 2);
     }
 
+    /**
+     * @deprecated
+     * @param $input
+     * @param $seed_collection
+     */
     public function storeLengths($input, $seed_collection)
     {
         $this->storePivot($input['lengths'], $seed_collection->id, 3);
     }
 
+    /**
+     * @deprecated
+     * @param $input
+     * @param $seed_collection
+     */
     public function storeWidths($input, $seed_collection)
     {
         $this->storePivot($input['widths'], $seed_collection->id, 4);
@@ -228,6 +243,11 @@ class SeedEvaluationRepository extends BaseRepository
     }
 
 
+    /**
+     * @deprecated
+     * @param $input
+     * @param $seed_evaluation_id
+     */
     private function storeResearch($input, $seed_evaluation_id)
     {
         $researchers = is_array($input['researchers']) ? $input['researchers'] : explode(',', $input['researchers']);

@@ -26,13 +26,13 @@ class UserAPIRequest extends APIRequest
         $array = [
             'national_id' => 'nullable|string',
             'mobile' => 'required|string',
-            'email' => 'required|email',
             'phone' => 'nullable|string',
             'name' => 'required',
         ];
 
         if ($this->isMethod('post')) {
             $array['password'] = 'required|min:6';
+            $array['email'] = 'required|unique:users|email';
         }
 
         return $array;

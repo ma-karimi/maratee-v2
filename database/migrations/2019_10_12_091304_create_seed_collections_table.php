@@ -40,7 +40,7 @@ class CreateSeedCollectionsTable extends Migration
             $table->unsignedBigInteger('soil_erosion_id')->nullable();
             $table->integer('area_sampled')->nullable();
             $table->integer('plants_sampled_no')->nullable();
-            $table->integer('approximate_area_of_plant')->nullable();
+            $table->integer('area_occupancy')->nullable();
             $table->unsignedBigInteger('specimen_type_collect_id');
             $table->tinyInteger('flowering_time_id')->nullable();
             //deleted by dr.jamzad

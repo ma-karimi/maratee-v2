@@ -37,6 +37,24 @@ class RoleRepository extends BaseRepository
         return Role::class;
     }
 
+    public function create($input)
+    {
+        $role = parent::create($input);
+
+        $this->storePermission($input, $role->id);
+
+        return $role;
+    }
+
+    public function update($input, $id)
+    {
+        $role = parent::update($input, $id);
+
+        $this->storePermission($input, $id);
+
+        return $role;
+    }
+
     public function storePermission($input, $id)
     {
         $permissions = $input['permissions'];

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\RoleAPIRequest;
-use App\Http\Requests\Api\RoleAPIRequest;
 use App\Models\Role;
 use App\Repositories\RoleRepository;
 use Exception;
@@ -105,12 +104,13 @@ class RoleAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(RoleAPIRequest $request)
     {
         $input = $request->all();
 
-        $role = Role::create($input);
+        $role = $this->roleRepository->create($input);
 
         return $this->sendResponse($role->toArray(), 'Role saved successfully');
     }
@@ -156,7 +156,7 @@ class RoleAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Role $role */
-        $role = $this->roleRepository->find($id);
+        $role = $this->roleRepository->find($id, ['permissions']);
 
         if (empty($role)) {
             return $this->sendError('Role not found');
@@ -210,6 +210,7 @@ class RoleAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, RoleAPIRequest $request)
     {

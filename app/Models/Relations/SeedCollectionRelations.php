@@ -226,20 +226,15 @@ trait SeedCollectionRelations
         return $this->belongsTo(SeedGeneral::class, 'specimen_type_collect_id')->where('seed_generals.type_id', 1);
     }
 
-    /**
-     * @return BelongsToMany
-     */
-    public function associatedSpecies()
+    public function getClimateAttribute()
     {
-        return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')->where('seed_generals.type_id', 22)->latest()->withTimestamps();
-    }
+        $item = null;
+        if ($this->relationLoaded('climates') && $this->climates()->count()) {
+            $item .= $this->climates->implode('name', ' & ');
 
-    /**
-     * @return BelongsToMany
-     */
-    public function communityTypes()
-    {
-        return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')->where('seed_generals.type_id', 21)->latest()->withTimestamps();
+        }
+
+        return $item;
     }
 
     /**
@@ -250,4 +245,41 @@ trait SeedCollectionRelations
         return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')->where('seed_generals.type_id', 20)->latest()->withTimestamps();
     }
 
+    public function getAssociatedSpecieAttribute()
+    {
+        $item = null;
+        if ($this->relationLoaded('associatedSpecies') && $this->associatedSpecies()->count()) {
+            $item .= $this->associatedSpecies->implode('name', ' & ');
+
+        }
+
+        return $item;
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function associatedSpecies()
+    {
+        return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')->where('seed_generals.type_id', 22)->latest()->withTimestamps();
+    }
+
+    public function getCommunityAttribute()
+    {
+        $item = null;
+        if ($this->relationLoaded('communityTypes') && $this->communityTypes()->count()) {
+            $item .= $this->communityTypes->implode('name', ' & ');
+
+        }
+
+        return $item;
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function communityTypes()
+    {
+        return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')->where('seed_generals.type_id', 21)->latest()->withTimestamps();
+    }
 }

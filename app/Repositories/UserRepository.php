@@ -2,8 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Models\Role;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class UserRepository
@@ -40,8 +43,7 @@ class UserRepository extends BaseRepository
     public function create($input)
     {
         $user = parent::create(Arr::except($input, ['roles']));
-        $user->syncRoles($input['roles']);
-//        $this->createHub($user->id, 'roles', $input['roles']);
+        $this->createHub($user->id, 'roles', $input['roles'], ['created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()]);
 
         return $user;
     }
@@ -53,9 +55,8 @@ class UserRepository extends BaseRepository
         }
 
         $user = parent::update(Arr::except($input, ['roles']), $id);
-        $user->syncRoles($input['roles']);
 
-//        $this->createHub($user->id, 'roles', $input['roles']);
+        $this->createHub($user->id, 'roles', $input['roles'], ['created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()]);
 
         return $user;
     }

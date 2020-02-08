@@ -32,7 +32,7 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
     public static $plants = [
 //        'area_sampled' => 'nullable|integer',
         'plants_sampled_no' => 'nullable|integer',
-//        'approximate_area_of_plant' => 'nullable|integer',
+        'area_occupancy' => 'nullable',
         'flowering_time_id' => 'nullable|exists:seed_generals,id',
 //        'pollination_type_id' => 'nullable|exists:seed_generals,id',
 //        'pollination_agent_id' => 'nullable|exists:seed_generals,id',
@@ -73,5 +73,5 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
     ];
 
     protected $with = ['taxonomy', 'audits'];
-    protected $appends = ['last_audit'];
+    protected $appends = ['last_audit', 'climate', 'associated_specie', 'community'];
 }
