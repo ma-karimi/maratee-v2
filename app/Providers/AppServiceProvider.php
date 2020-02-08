@@ -16,6 +16,7 @@ use App\Models\{City,
     Province,
     SeedExchange};
 use App\Observers\{BaseModelObserver,
+    BaseObserver,
     CityObserver,
     CountryObserver,
     GeneralObserver,
@@ -53,6 +54,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
 //            General::observe(GeneralObserver::class);
 //        if (App::environment() == 'production') {
 //            Plant::observe(PlantObserver::class);

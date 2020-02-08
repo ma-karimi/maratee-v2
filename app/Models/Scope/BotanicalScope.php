@@ -232,5 +232,32 @@ trait BotanicalScope
         return false;
     }
 
+    protected function processTaxonomy_Authors_IdFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('taxonomy', function ($query) use ($constraint) {
+                return $query
+                    ->whereHas('species', function ($key) use ($constraint) {
+                        return $key->whereHas('authors', function ($author) use ($constraint) {
+                            return $author->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
+                        });
+                    })
+                    ->orWhereHas('subspecies', function ($key) use ($constraint) {
+                        return $key->whereHas('authors', function ($author) use ($constraint) {
+                            return $author->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
+                        });
+                    })
+                    ->orWhereHas('variety', function ($key) use ($constraint) {
+                        return $key->whereHas('authors', function ($author) use ($constraint) {
+                            return $author->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
+                        });
+                    });
+
+            });
+
+            return true;
+        }
+        return false;
+    }
 
 }

@@ -15,7 +15,7 @@ use ReflectionException;
 
 class BaseModel extends Model
 {
-    use SoftDeletes, SearchableTrait, RelationManager;
+    use SoftDeletes, SearchableTrait, RelationManager, Relationships;
     public static $rules = [];
     public static $jsons = [];
     public static $messages = [];
@@ -61,6 +61,19 @@ class BaseModel extends Model
 //            $builder->latest('id');
 //        });
 
+    }
+
+    //Cascade Delete All Has Many Of Model
+    public function delete()
+    {
+        $hasManyRelations = self::relationshipsWithType($this)['HasMany'];
+        if (isset($hasManyRelations)) {
+            $this->load($hasManyRelations->toArray());
+            foreach ($hasManyRelations as $index => $relation) {
+                $this->$relation()->delete();
+            }
+        }
+        parent::delete();
     }
 
     /**
