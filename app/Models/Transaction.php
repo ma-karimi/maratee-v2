@@ -75,13 +75,6 @@ class Transaction extends BaseModel implements HasMedia
             ->withPivot(['type_id', 'sheets_no']);
     }
 
-    public function seeds()
-    {
-        return $this->morphedByMany(Seed::class, 'transactionable')
-            ->withTimestamps()
-            ->withPivot(['type_id', 'sheets_no']);
-    }
-
     public function medicinalPlants()
     {
         return $this->morphedByMany(MedicinalPlant::class, 'transactionable')
