@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Accessor\UserAccessor;
+use App\Models\Contracts\RelationManager;
+use App\Models\Contracts\Relationships;
 use App\Models\Scope\UserScope;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,7 +20,7 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, UserScope, UserAccessor, Notifiable, SearchableTrait, HasRoles;
+    use HasApiTokens, UserScope, UserAccessor, Notifiable, SearchableTrait, HasRoles, RelationManager, Relationships;
 
     public const GROUPS = [1 => 'Botanical Flora', 2 => 'Botanical NonFlower', 3 => 'Botanical Paleobotany', 4 => 'Botanical Garden', 5 => 'Botanical Gene Bank', 6 => 'Medicinal', 7 => 'BioTech'];
     public $searchable = ['*'];
