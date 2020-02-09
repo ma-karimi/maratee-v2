@@ -57,25 +57,4 @@ class Transaction extends BaseModel implements HasMedia
     {
         return $this->morphTo();
     }
-
-    public function paleontologies()
-    {
-        return $this->morphedByMany(Paleontology::class, 'transactionable', 'transactions')
-            ->withTimestamps()
-            ->withPivot(['type_id', 'sheets_no']);
-    }
-
-    public function herbariums()
-    {
-        return $this->morphedByMany(Herbarium::class, 'transactionable', 'transactions')
-            ->withTimestamps()
-            ->withPivot(['type_id', 'sheets_no']);
-    }
-
-    public function medicinalPlants()
-    {
-        return $this->morphedByMany(MedicinalPlant::class, 'transactionable', 'transactions')
-            ->withTimestamps()
-            ->withPivot(['type_id', 'sheets_no']);
-    }
 }
