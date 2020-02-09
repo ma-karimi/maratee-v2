@@ -109,7 +109,7 @@ class Paleontology extends BaseModel implements HasMedia, AuditableContract
 
     public function taxonomy(): BelongsTo
     {
-        return $this->belongsTo(PaleobotanyTaxonomy::class)->withTrashed();
+        return $this->belongsTo(PaleobotanyTaxonomy::class, 'taxonomy_id')->withTrashed();
     }
 
 //    /**
