@@ -35,26 +35,6 @@ class User extends Authenticatable
 
     protected $guarded = ['id'];
 
-    //Cascade Delete All Has Many Or Morph Many Of Model
-    public function delete()
-    {
-        $hasManyRelations = null;
-        $allRelations = self::relationshipsWithType($this);
-        if ($allRelations->isNotEmpty()) {
-            $relatedRelations = $allRelations->filter(function ($value, $key) {
-                return strpos($key, 'Belong') === false;
-            })->flatten()->filter(function ($value, $key) {
-                return $value !== 'audits';
-            });
-        }
-        if (isset($relatedRelations)) {
-            $this->load($relatedRelations->toArray());
-            foreach ($relatedRelations as $index => $relation) {
-                $this->$relation()->delete();
-            }
-        }
-        parent::delete();
-    }
     /**
      * The attributes that should be mutated to dates.
      *

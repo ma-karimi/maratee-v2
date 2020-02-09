@@ -329,6 +329,11 @@ class APIController extends AppBaseController
      */
     public function destroy($class, $id, $delete = null)
     {
+
+        if ($class === 'users') {
+            return $this->sendError('Operation Not Found!');
+
+        }
         if ($class !== 'media') {
             $name = Str::singular(Str::studly($class));
         } else {
@@ -339,16 +344,16 @@ class APIController extends AppBaseController
 
         $result = $repo->find($id);
 
-
-        $allRelations = self::relationshipsWithType($result);
-        if ($class !== 'media' && $allRelations->isNotEmpty()) {
-            $relatedRelations = $allRelations->filter(function ($value, $key) {
-                return strpos($key, 'Belong') === false;
-            })->flatten()->filter(function ($value, $key) {
-                return $value !== 'audits';
-            });
+        if ($class !== 'media') {
+            $allRelations = self::relationshipsWithType($result);
+            if ($allRelations->isNotEmpty()) {
+                $relatedRelations = $allRelations->filter(function ($value, $key) {
+                    return strpos($key, 'Belong') === false;
+                })->flatten()->filter(function ($value, $key) {
+                    return $value !== 'audits';
+                });
+            }
         }
-
         if ($result === null) {
             return $this->sendError("${name} not found");
         }
