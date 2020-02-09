@@ -34,7 +34,7 @@ class Herbarium extends BaseModel implements HasMedia, AuditableContract
 //        'cf' => 'nullable|string',
         'description' => 'nullable|string',
         'country_id' => 'required|exists:countries,id',
-        'city_id' => 'required|exists:cities,id',
+        'city_id' => 'nullable|exists:cities,id',
         'province_id' => 'required|exists:provinces,id',
         'is_flowering' => 'required|numeric',
         //classification
