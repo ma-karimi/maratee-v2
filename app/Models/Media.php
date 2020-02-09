@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Accessor\MediaAccessor;
+use App\Models\Contracts\RelationManager;
+use App\Models\Contracts\Relationships;
 use App\Models\Relations\ArticleRelation;
 use App\Models\Relations\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,7 +20,7 @@ use Spatie\MediaLibrary\Models\Media as BaseMedia;
 class Media extends BaseMedia
 {
     //use BaseModelTrait instead of BaseModel Class
-    use BaseModel, MediaAccessor, ArticleRelation;
+    use BaseModel, MediaAccessor, ArticleRelation,RelationManager, Relationships;
 
     public const MEDIA_TYPE = [1 => 'sketch', 2 => 'picture', 3 => 'relevant correspondence', 4 => 'treatment document', 5 => 'expense documents', 6 => 'filed notes', 7 => 'notes'];
     public static $jsons = [];
@@ -51,13 +53,6 @@ class Media extends BaseMedia
         return $this->morphToMany(ArticleHub::class, 'articleable')->withTimestamps();
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 
 
     /**
@@ -66,15 +61,6 @@ class Media extends BaseMedia
     public function locations(): MorphToMany
     {
         return $this->morphToMany(LocationHub::class, 'locationable')->withTimestamps();
-    }
-
-
-    /**
-     * @return MorphToMany
-     */
-    public function users(): MorphToMany
-    {
-        return $this->morphToMany(UserHub::class, 'userable')->withTimestamps();
     }
 
 }
