@@ -74,7 +74,7 @@ class PaleobotanyTaxonomy extends BaseModel
      */
     public function paleobotanies(): HasMany
     {
-        return $this->hasMany(Paleontology::class);
+        return $this->hasMany(Paleontology::class, 'taxonomy_id');
     }
 
     /**
