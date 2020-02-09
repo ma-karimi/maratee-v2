@@ -341,7 +341,7 @@ class APIController extends AppBaseController
 
 
         $allRelations = self::relationshipsWithType($result);
-        if ($allRelations->isNotEmpty()) {
+        if ($class !== 'media' && $allRelations->isNotEmpty()) {
             $relatedRelations = $allRelations->filter(function ($value, $key) {
                 return strpos($key, 'Belong') === false;
             })->flatten()->filter(function ($value, $key) {
@@ -353,7 +353,7 @@ class APIController extends AppBaseController
             return $this->sendError("${name} not found");
         }
 
-        if ($delete === null && isset($relatedRelations)) {
+        if ($class !== 'media' && $delete === null && isset($relatedRelations)) {
             $result = $result->loadCount($relatedRelations->toArray());
             return $this->sendResponse($result, "${name} retrieved successfully");
         }

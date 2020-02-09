@@ -20,6 +20,6 @@ trait MediaAccessor
 
     public function getFullUrlAttribute()
     {
-        return $this->getFullUrl()  ?? null;
+        return $this->getFullUrl();
     }
 }
