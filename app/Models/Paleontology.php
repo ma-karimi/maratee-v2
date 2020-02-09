@@ -160,15 +160,6 @@ class Paleontology extends BaseModel implements HasMedia, AuditableContract
         return $this->hasOne(Locality::class);
     }
 
-
-    /**
-     * @return MorphToMany
-     */
-    public function treatments(): MorphToMany
-    {
-        return $this->morphToMany(TreatmentHub::class, 'treamentable');
-    }
-
     public function maps(): HasMany
     {
         return $this->hasMany(PaleontologyMap::class)->latest();
