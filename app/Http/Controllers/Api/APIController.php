@@ -329,8 +329,11 @@ class APIController extends AppBaseController
      */
     public function destroy($class, $id, $delete = null)
     {
-
-        $name = Str::singular(Str::studly($class));
+        if ($class !== 'media') {
+            $name = Str::singular(Str::studly($class));
+        } else {
+            $name = Str::ucfirst($class);
+        }
         $repo = 'App\\Repositories\\' . $name . 'Repository';
         $repo = resolve($repo);
 
@@ -340,9 +343,9 @@ class APIController extends AppBaseController
         $allRelations = self::relationshipsWithType($result);
         if ($allRelations->isNotEmpty()) {
             $relatedRelations = $allRelations->filter(function ($value, $key) {
-                return strpos($key, 'Belong') === false ;
+                return strpos($key, 'Belong') === false;
             })->flatten()->filter(function ($value, $key) {
-                return $value !== 'audits' ;
+                return $value !== 'audits';
             });
         }
 
