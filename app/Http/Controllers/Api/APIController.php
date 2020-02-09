@@ -355,7 +355,7 @@ class APIController extends AppBaseController
 
         if ($class !== 'media' && $delete === null && isset($relatedRelations)) {
             $result = $result->loadCount($relatedRelations->toArray());
-            return $this->sendResponse($result, "${name} retrieved successfully");
+            return $this->sendResponse($result, "${name} retrieved successfully", 200);
         }
 
         if ($delete === 'delete') {
