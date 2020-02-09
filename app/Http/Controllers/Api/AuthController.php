@@ -233,4 +233,15 @@ class AuthController extends AppBaseController
 
         return response()->json(['authenticated' => false]);
     }
+
+    public function update(Request $request)
+    {
+        $user = $request->user();
+        $change_password = false;
+        $record = $this->userRepository->updateUser($request->all(), $user->id);
+        if ($request->filled('password')) {
+            $change_password = true;
+        }
+        return response()->json(['user' => $record, 'change_password' => $change_password]);
+    }
 }

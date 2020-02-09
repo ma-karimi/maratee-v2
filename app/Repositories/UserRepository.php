@@ -61,6 +61,15 @@ class UserRepository extends BaseRepository
         return $user;
     }
 
+    public function updateUser($input, $id)
+    {
+        if (!request()->filled('password')) {
+            unset($input['password']);
+        }
+
+        return parent::update($input, $id);
+    }
+
 
     /**
      * Find the user instance for the given username.

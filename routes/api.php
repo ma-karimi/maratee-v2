@@ -35,6 +35,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('relations', 'APIController@relations');
 
     Route::get('user', 'AuthController@user');
+    Route::post('user', 'AuthController@update');
     Route::get('logout', 'AuthController@logout');
     Route::patch('audits/{id}', 'AuditAPIController@update');
 
