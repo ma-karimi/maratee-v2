@@ -53,9 +53,6 @@ class Transaction extends BaseModel implements HasMedia
         return $this->belongsTo(Organization::class);
     }
 
-    /**
-     * Get the owning transactionable model.
-     */
     public function transactionable()
     {
         return $this->morphTo();
