@@ -23,12 +23,11 @@
 });*/
 
 
-
-
-
 Route::middleware(['auth:api'])->group(function () {
 
-    Route::delete('/{class}/{id}/{delete?}', 'APIController@destroy');
+    if (!Request::is('/api/media/*')) {
+        Route::delete('/{class}/{id}/{delete?}', 'APIController@destroy');
+    }
     Route::delete('/{class}/multiple_delete', 'APIController@multipleDestroy');
     Route::post('/{class}/hub', 'APIController@storeHub');
     Route::delete('/{class}/hub', 'APIController@destroyHub');
