@@ -17,7 +17,7 @@ class City extends BaseModel
     public static $rules = [
         'province_id' => 'required|exists:provinces,id',
         'name_en' => 'required|string',
-        'name_fa' => 'string',
+        'name_fa' => 'nullable|string',
     ];
 
     /**

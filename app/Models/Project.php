@@ -65,11 +65,11 @@ class Project extends BaseModel
 {
     public static $linguistically = ['title' => true, 'research_title' => true];
     public static $rules = [
-        'project_no' => 'string',
-        'research_no' => 'string',
-        'plan_id' => 'integer',
-        'project_leader_id' => 'integer|exists:users,id',
-        'research_leader_id' => 'integer|exists:users,id',
+        'project_no' => 'nullable|string',
+        'research_no' => 'nullable|string',
+        'plan_id' => 'nullable|integer',
+        'project_leader_id' => 'nullable|integer|exists:users,id',
+        'research_leader_id' => 'nullable|integer|exists:users,id',
     ];
 
     /**

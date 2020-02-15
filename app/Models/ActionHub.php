@@ -20,9 +20,7 @@ class ActionHub extends BaseModel
     use ActionHubScope, ArticleRelation;
     public static $rules = [
 //        'action_id' => 'required|exists:actions,id',
-        'department_id' => 'exists:departments,id',
-        'project_id' => 'exists:projects,id',
-        'date' => 'date',
+        'date' => 'nullable|date',
     ];
 
     /**

@@ -61,7 +61,7 @@ class TransactionHub extends BaseModel
     public const TYPE = [1 => 'send', 2 => 'receive'];
     public static $rules = [
         'transaction_type_id' => 'required|in:1,2',
-        'sheets_no' => 'string',
+        'sheets_no' => 'nullable|string',
     ];
 
 

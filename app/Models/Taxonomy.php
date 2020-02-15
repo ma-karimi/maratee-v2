@@ -23,7 +23,7 @@ class Taxonomy extends BaseModel
     ];
     public static $rules = [
         'family_id' => 'required|exists:generals,id',
-        'genus_id' => 'exists:generals,id',
+        'genus_id' => 'nullable|exists:generals,id',
         'species_id' => 'nullable|exists:generals,id',
         'variety_id' => 'nullable|exists:generals,id',
         'subspecies_id' => 'nullable|exists:generals,id',

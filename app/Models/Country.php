@@ -17,7 +17,7 @@ class Country extends BaseModel
 
     public static $rules = [
         'name_en' => 'required|string',
-        'name_fa' => 'string',
+        'name_fa' => 'nullable|string',
         'continent_id' => 'required|exists:continents,id',
     ];
     /**

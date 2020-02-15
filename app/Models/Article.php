@@ -17,7 +17,7 @@ class Article extends BaseModel implements HasMedia
 {
     use HasMediaTrait;
     public static $rules = [
-        'page_no' => 'integer',
+        'page_no' => 'nullable|integer',
     ];
     /**
      * The database table used by the model.

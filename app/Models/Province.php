@@ -15,9 +15,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Province extends BaseModel
 {
     public static $rules = [
-        'country_id' => 'exists:countries,id',
+        'country_id' => 'required|exists:countries,id',
         'name_en' => 'required|string',
-        'name_fa' => 'string',
+        'name_fa' => 'nullable|string',
     ];
     /**
      * The database table used by the model.

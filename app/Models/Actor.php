@@ -18,8 +18,8 @@ use App\Models\Contracts\BaseModel;
 class Actor extends BaseModel
 {
     public static $rules = [
-        'user_id' => 'integer|exists:users,id',
-        'cellphone' => 'numeric',
+        'user_id' => 'nullable|integer|exists:users,id',
+        'cellphone' => 'nullable|numeric',
         'name' => 'required|min:3',
     ];
     /**

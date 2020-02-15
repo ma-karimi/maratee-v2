@@ -18,7 +18,7 @@ class Product extends BaseModel implements HasMedia
     use ProductAccessor, HasMediaTrait;
     public const STATUS = [1 => 'unregistered', 2 => 'registered'];
     public static $rules = [
-        'registration_status' => 'integer|required',
+        'registration_status' => 'nullable|integer|required',
         'consumption' => 'nullable|string',
         'active_compounds' => 'nullable|string',
         'telephone' => 'nullable|string',
