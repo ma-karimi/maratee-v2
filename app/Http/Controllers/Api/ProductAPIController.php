@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\ProductAPIRequest;
+use App\Models\Medicine;
 use App\Models\Product;
 use App\Repositories\ProductRepository;
 use Exception;
@@ -419,5 +420,21 @@ class ProductAPIController extends AppBaseController
         $product->delete();
 
         return $this->sendResponse($id, 'Product deleted successfully');
+    }
+
+
+    public function media($id)
+    {
+
+        /** @var Product $product */
+        $product = $this->productRepository->find($id);
+
+        if (empty($product)) {
+            return $this->sendError('Product not found');
+        }
+
+        $this->productRepository->storeMedia(\request()->all(), $product);
+
+        return $this->sendResponse([], 'Product Media updated successfully');
     }
 }

@@ -242,6 +242,7 @@ class TransactionAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(TransactionAPIRequest $request)
     {
@@ -476,6 +477,7 @@ class TransactionAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, TransactionAPIRequest $request)
     {

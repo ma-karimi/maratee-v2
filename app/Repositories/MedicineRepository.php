@@ -67,7 +67,7 @@ class MedicineRepository extends BaseRepository
      * @param $input
      * @param $model
      */
-    private function storeMedia($input, $model): void
+    public function storeMedia($input, $model): void
     {
         $media_input = [
             'media_type' => $input['media_type'] ?? 2,
