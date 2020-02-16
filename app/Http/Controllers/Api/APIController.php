@@ -8,13 +8,13 @@ use App\Http\Requests\Api\CreateHubRequest;
 use App\Http\Requests\Api\DeleteHubRequest;
 use App\Http\Requests\BaseDeleteAPIRequest;
 use App\Models\Contracts\Relationships;
-use App\Services\Course\Backend\ExportUserCourse;
 use Illuminate\Container\Container as Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+//use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Facades\Excel;
 use Response;
 
@@ -267,10 +267,8 @@ class APIController extends AppBaseController
         $result = $repo->all()->load(Arr::flatten($repo->model()::getAllRelations()));
         if (\request()->filled('excel')) {
             $model = Str::ucfirst(\request('model'));
-//            $file = 'App\\Exports\\' . $model . 'Export';
-            $file_excel = "Export${model}List-" . date('Y-m-d-H-i-s') . '.xlsx';
-
-            Excel::store(new ExcelExport($result, \request('model')), 'public/' . $file_excel);
+            $file_excel = "Export${model}List-" . date('Y-m-d-H-i-s') .'.xlsx';
+            Excel::store(new ExcelExport($result, \request('model')), 'public/' . $file_excel, null, 'Xlsx');
             return $this->sendResponse(Storage::url($file_excel), 'success');
         }
         return $this->sendResponse($result, $name . ' loaded successfully');
