@@ -16,20 +16,21 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 class FloraExport implements FromView, ShouldAutoSize
 {
-    private $flora;
+    private $result;
 
 
     /**
      * FloraExport constructor.
+     * @param $result
      */
-    public function __construct($flora)
+    public function __construct($result)
     {
-        $this->flora = $flora;
+        $this->result = $result;
     }
 
     public function view(): View
     {
-        $result = $this->flora;
-        return view('excels.flora', ['result' => $result, 'keys' => \request('keys')]);
+        $result = $this->result;
+        return view("excels.flora", ['result' => $result, 'keys' => \request('keys')]);
     }
 }

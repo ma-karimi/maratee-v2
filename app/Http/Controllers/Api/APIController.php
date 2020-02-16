@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exports\ExcelExport;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateHubRequest;
 use App\Http\Requests\Api\DeleteHubRequest;
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 use Response;
 
@@ -265,9 +267,10 @@ class APIController extends AppBaseController
         $result = $repo->all()->load(Arr::flatten($repo->model()::getAllRelations()));
         if (\request()->filled('excel')) {
             $model = Str::ucfirst(\request('model'));
-            $file = 'App\\Exports\\' . $model . 'Export';
+//            $file = 'App\\Exports\\' . $model . 'Export';
             $file_excel = "Export${model}List-" . date('Y-m-d-H-i-s') . '.xlsx';
-            Excel::store(new $file($result), 'public/' . $file_excel);
+
+            Excel::store(new ExcelExport($result, \request('model')), 'public/' . $file_excel);
             return $this->sendResponse(Storage::url($file_excel), 'success');
         }
         return $this->sendResponse($result, $name . ' loaded successfully');
