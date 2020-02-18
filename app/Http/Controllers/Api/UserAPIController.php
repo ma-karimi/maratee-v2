@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\UserAPIRequest;
+use App\Models\ModelHasRole;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Exception;
@@ -180,11 +181,15 @@ class UserAPIController extends AppBaseController
     public function show($id)
     {
         /** @var User $user */
-        $user = $this->userRepository->find($id, ['roles']);
+        $user = $this->userRepository->find($id);
+
 
         if ($user === null) {
             return $this->sendError('User not found');
         }
+
+        //for cache no loading roles
+        $user->roles = ModelHasRole::where(['model_type' => User::class, 'model_id' => $id])->get();
 
         return $this->sendResponse($user->toArray(), 'User retrieved successfully');
     }
