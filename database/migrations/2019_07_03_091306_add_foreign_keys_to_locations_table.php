@@ -15,7 +15,7 @@ class AddForeignKeysToLocationsTable extends Migration {
 		Schema::table('locations', function(Blueprint $table)
 		{
             $table->foreign('city_id')->references('id')->on('cities')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('province_id')->references('id')->on('cities')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('province_id')->references('id')->on('provinces')->onUpdate('NO ACTION')->onDelete('CASCADE');
 		});
 	}
 

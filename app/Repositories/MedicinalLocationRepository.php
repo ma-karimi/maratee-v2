@@ -131,7 +131,7 @@ class MedicinalLocationRepository extends BaseRepository
         return ['location_id', 'treatment_id', 'efficiency', 'studied_sample', 'presence_in_country', 'phenology_id', 'method_distillation_id', 'method_extraction_id', 'method_analyse_id',
 //            'herbarium_number', deleted by comment dr.sefidkon
             'collecting_year',
-            'medicinal_plant_id'];
+            'medicinal_plant_id', 'code'];
     }
 
     private function storeMetabolites($input, $medicinal_location)

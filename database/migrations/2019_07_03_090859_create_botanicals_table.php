@@ -18,20 +18,22 @@ class CreateBotanicalsTable extends Migration
             $table->unsignedBigInteger('taxonomy_id');
             $table->unsignedBigInteger('general_habitat_id')->nullable();
             $table->unsignedBigInteger('origin_id')->nullable();
-            $table->boolean('monopoly_of_iran_id')->default(0);
+//            $table->boolean('monopoly_of_iran_id')->default(0);
             $table->tinyInteger('wooden_id')->nullable()->comment('1:Tree, 2:Shrub');
             $table->tinyInteger('cycle_id')->nullable()->comment('1:evergreen,2:deciduous,3:semi deciduous, 4: annual climber, 5:perennial climber, 6:annual herb, 7:biennial herb, 8:perennial herb, 9:bulb, 10:tuber, 11:rhizome, 12:water plant
 ');
             $table->unsignedBigInteger('protection_id')->nullable();
             $table->float('height', 4, 2)->nullable();
-            $table->tinyInteger('value_id')->nullable()->comment('1:Shape, 2:Bark, 3: leaves, 4: autumn color, flower');
-            $table->tinyInteger('usage_id')->nullable()->comment('1:medicinal, 2:ground cover, 3: hedge, 4: ornamental, 5: industrial');
+//            $table->tinyInteger('value_id')->nullable()->comment('1:Shape, 2:Bark, 3: leaves, 4: autumn color, flower');
+//            $table->tinyInteger('usage_id')->nullable()->comment('1:medicinal, 2:ground cover, 3: hedge, 4: ornamental, 5: industrial');
 
 
-            $table->string('flower_color')->nullable();
-            $table->string('fruit_color')->nullable();
-            $table->string('foliage_color')->nullable();
-            $table->unsignedBigInteger('garden_id')->nullable();
+//            $table->string('flower_color')->nullable();
+//            $table->string('fruit_color')->nullable();
+//            $table->string('foliage_color')->nullable();
+            $table->unsignedBigInteger('organization_id')->nullable();
+            $table->unsignedBigInteger('internal_habitat_id')->nullable();
+            $table->string('flowering_period')->nullable();
             $table->tinyInteger('entrance_to_garden_id')->nullable()->comment('1 => seedling, 2 => plant, 3 => bulb, 4 => bulbil, 5 => tuber, 6 => rhizome, 7=>softwood cutting, 8=>hardwood cutting, 9=>root cutting, 10=>graft-division, 11=>meristem, 12=>spore');
 
             $table->tinyInteger('seed_germination_id')->nullable()->comment('[1: good, 2: moderate, 3: low, 4: none]');

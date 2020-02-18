@@ -57,17 +57,17 @@ class CreateSeedEvaluationsTable extends Migration
             //dr.jamzad changes
             $table->float('min_radical', 4, 2)->nullable();
             $table->float('max_radical', 4, 2)->nullable();
+            $table->float('min_shoot', 4, 2)->nullable();
             $table->float('max_shoot', 4, 2)->nullable();
-            $table->float('max_shoot', 4, 2)->nullable();
+            $table->float('min_seed', 4, 2)->nullable();
             $table->float('max_seed', 4, 2)->nullable();
-            $table->float('max_seed', 4, 2)->nullable();
-            $table->float('max_seed_width', 4, 2)->nullable();
+            $table->float('min_seed_width', 4, 2)->nullable();
             $table->float('max_seed_width', 4, 2)->nullable();
 
             $table->timeStamps();
             $table->softDeletesTz();
             $table->foreign('seed_collection_id')->references('id')->on('seed_collections')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('specimen_type_collect_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('specimen_type_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('dormancy_breaking_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
 //            $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('project_id')->references('id')->on('projects')->onUpdate('NO ACTION')->onDelete('CASCADE');

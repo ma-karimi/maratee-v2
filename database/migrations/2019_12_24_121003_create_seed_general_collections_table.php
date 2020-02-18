@@ -17,9 +17,7 @@ class CreateSeedGeneralCollectionsTable extends Migration
 
         Schema::table('seed_collections', function(Blueprint $table)
         {
-            $table->dropForeign(['seed_id']);
-            $table->dropForeign(['department_id']);
-            $table->dropColumn(['department_id','seed_id', 'climate', 'community_type', 'associated_species', 'flowering_time_id', 'date_harvesting_id']);
+            $table->dropColumn(['climate', 'community_type', 'associated_species', 'flowering_time_id', 'date_harvesting_id']);
             $table->string('harvesting_time')->nullable();
             $table->string('flowering_time')->nullable();
             $table->string('department_name')->nullable();

@@ -20,8 +20,8 @@ class MedicinalPartTableSeeder extends Seeder
         foreach ($data as $index => $datum) {
             foreach ($datum as  $item) {
                 \App\Models\MedicinalPart::create([
-                    'type' => $index,
-                    'name' => make_json($item),
+                    'type_id' => $index,
+                    'name' => $item,
                 ]);
             }
 

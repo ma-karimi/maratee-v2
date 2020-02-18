@@ -84,7 +84,7 @@ class ConvertService
 
 
         } else {
-            Log::info("herb:" . $this->id);
+//            Log::info("herb:" . $this->id);
             $this->models['location_id'] = null;
         }
         // family
@@ -159,7 +159,7 @@ class ConvertService
         }
 
         if (App::environment() == 'local') {
-            $this->log(" - TreeLeaf id : {$this->id} - ");
+            $this->log(" - Herbarium id : {$herbarium_id} - ");
         }
 
     }
@@ -293,7 +293,11 @@ class ConvertService
         if ($p = strpos($property, ' ')) {
             $prop = trim(substr($property, 0, $p));
             $authors = trim(substr($property, $p, strlen($property)));
-            $this->models[$model . '_authors'] = array_unique(explode(' & ', $authors));
+            $authors = str_replace(', ', ' & ', $authors);
+            $authors = str_replace('-', ' & ', $authors);
+            $authors = str_replace(' -', ' & ', $authors);
+            $authors = str_replace('- ', ' & ', $authors);
+            $this->models[$model . '_authors'] = collect(array_unique(explode(' & ', $authors)))->filter()->all();
         } else {
             $prop = trim($property);
             $this->models[$model . '_authors'] = [];
@@ -303,7 +307,7 @@ class ConvertService
     }
 
     /**
-     * @param $general
+     * @param $general_id
      * @param $authors
      * @return void
      */
@@ -382,7 +386,6 @@ class ConvertService
             'location_id' => $this->models['location_id'],
             'organization_id' => $this->models['organization_id'],
             'taxonomy_id' => $this->models['taxonomy_id'],
-            'plant_id' => $this->models['plant_id']['id']
         ];
 
         if (!empty($this->treeLeaf->cf)) {

@@ -18,7 +18,6 @@ class Country extends BaseModel
     public static $rules = [
         'name_en' => 'required|string',
         'name_fa' => 'nullable|string',
-        'continent_id' => 'required|exists:continents,id',
     ];
     /**
      * The database table used by the model.
@@ -27,16 +26,6 @@ class Country extends BaseModel
      */
     protected $table = 'countries';
     protected $hidden = ['created_at', 'updated_at'];
-
-//    protected $with = ['provinces.cities'];
-
-    /**
-     * @return BelongsTo
-     */
-    public function continent(): BelongsTo
-    {
-        return $this->belongsTo(Continent::class);
-    }
 
     /**
      * @return HasMany

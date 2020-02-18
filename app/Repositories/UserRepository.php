@@ -57,6 +57,7 @@ class UserRepository extends BaseRepository
         $user = parent::update(Arr::except($input, ['roles']), $id);
 
         $this->createHub($user->id, 'roles', $input['roles'], ['created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()]);
+        app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
 
         return $user;
     }

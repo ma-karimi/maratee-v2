@@ -17,8 +17,6 @@ class CreateCountriesTable extends Migration {
 			$table->bigIncrements('id');
             $table->string('name_en');
             $table->string('name_fa')->nullable();
-			$table->unsignedBigInteger('continent_id')->nullable();
-
 
             $table->timeStamps();
             $table->softDeletesTz();

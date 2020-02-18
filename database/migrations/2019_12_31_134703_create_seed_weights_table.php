@@ -41,7 +41,6 @@ class CreateSeedWeightsTable extends Migration
             $table->timeStamps();
             $table->softDeletesTz();
             $table->foreign('seed_collection_id')->references('id')->on('seed_collections')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('refrigerator_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
 
         });
         Schema::enableForeignKeyConstraints();

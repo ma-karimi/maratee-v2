@@ -24,9 +24,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             CountryTableSeeder::class,
-            ProvinceTableSeeder::class,
+//            ProvinceTableSeeder::class,
             OriginalGeneralTableSeeder::class,
-            OriginalPropagationTableSeeder::class,
             OriginalMedicinalPlantTypeTableSeeder::class,
             OriginalMethodTableSeeder::class,
             MedicinalPartTableSeeder::class,

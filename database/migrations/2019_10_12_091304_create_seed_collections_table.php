@@ -21,8 +21,8 @@ class CreateSeedCollectionsTable extends Migration
             $table->string('accession_code')->nullable();
             $table->string('voucher_no')->nullable();
             $table->unsignedBigInteger('organization_id')->nullable();
-            $table->string('department_or_group')->nullable();
             $table->unsignedBigInteger('project_id')->nullable();
+            $table->string('regeneration_and_evaluation_code')->nullable();
             $table->unsignedBigInteger('location_id')->nullable();
             $table->unsignedBigInteger('land_form_id')->nullable();
             $table->unsignedBigInteger('slope_aspect_id')->nullable();
@@ -42,7 +42,6 @@ class CreateSeedCollectionsTable extends Migration
             $table->integer('plants_sampled_no')->nullable();
             $table->integer('area_occupancy')->nullable();
             $table->unsignedBigInteger('specimen_type_collect_id');
-            $table->tinyInteger('flowering_time_id')->nullable();
             //deleted by dr.jamzad
 //            $table->unsignedBigInteger('pollination_type_id')->nullable();
 //            $table->unsignedBigInteger('pollination_agent_id')->nullable();
@@ -61,8 +60,14 @@ class CreateSeedCollectionsTable extends Migration
             $table->string('special_advise')->nullable();
             $table->timeStamps();
             $table->softDeletesTz();
+            $table->date('collecting_date')->nullable();
+            $table->unsignedBigInteger('flowering_time_id')->nullable();
+            $table->unsignedBigInteger('harvesting_time_id')->nullable();
 
-            $table->foreign('seed_id')->references('id')->on('seeds')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('specimen_type_collect_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('project_id')->references('id')->on('projects')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('slope_aspect_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('general_habitat_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');

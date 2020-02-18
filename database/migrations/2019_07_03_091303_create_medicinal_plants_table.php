@@ -17,6 +17,9 @@ class CreateMedicinalPlantsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('taxonomy_id');
             $table->unsignedBigInteger('location_id');
+
+            $table->boolean('hygienic_cosmetic_industry_id')->default(0)->change();
+            $table->boolean('cultivated_area_id')->default(0);
             $table->unsignedBigInteger('article_id')->nullable();
             $table->unsignedBigInteger('plant_herbarium_id')->nullable();
             $table->unsignedBigInteger('aerial_part_id')->nullable();
@@ -53,6 +56,7 @@ class CreateMedicinalPlantsTable extends Migration
             $table->unsignedBigInteger('general_habitat_id')->nullable();
 
             $table->string('fruit_color')->nullable();
+            $table->string('foliage_color')->nullable();
             $table->string('flower_color')->nullable();
             $table->string('height')->nullable()->comment('unit: cm');
             $table->unsignedBigInteger('cycle_id')->nullable();

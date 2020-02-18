@@ -21,9 +21,9 @@ class ConvertSeeder extends Seeder
 //            'name_en'=> 'Iran', 'name_fa' => 'ایران'
 //        ]);
 
-        if(\Illuminate\Support\Facades\App::environment() == 'local' && env('srico') == true){
-            $limit = 500;
-        }
+//        if(\Illuminate\Support\Facades\App::environment() == 'local' && env('srico') == true){
+//            $limit = 500;
+//        }
         Treeleaf::where('id',  '>', 0)
             ->when($limit, function ($query) use ($limit) {
                 return $query->limit($limit);

@@ -95,13 +95,6 @@ class CountryAPIController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Country")
      *      ),
-     *      @SWG\Parameter(
-     *          name="continent_id",
-     *          in="body",
-     *          description="Country that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Country")
-     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -122,6 +115,7 @@ class CountryAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(CountryAPIRequest $request)
     {
@@ -214,13 +208,6 @@ class CountryAPIController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/Country")
      *      ),
-     *      @SWG\Parameter(
-     *          name="continent_id",
-     *          in="body",
-     *          description="Country that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Country")
-     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -241,6 +228,7 @@ class CountryAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, CountryAPIRequest $request)
     {
@@ -295,6 +283,7 @@ class CountryAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws Exception
      */
     public function destroy($id)
     {
