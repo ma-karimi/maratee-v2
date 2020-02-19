@@ -16,12 +16,9 @@ class CreateMedicinalPlantsTable extends Migration
         Schema::create('medicinal_plants', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('taxonomy_id');
-            $table->unsignedBigInteger('location_id');
 
             $table->boolean('hygienic_cosmetic_industry_id')->default(0)->change();
             $table->boolean('cultivated_area_id')->default(0);
-            $table->unsignedBigInteger('article_id')->nullable();
-            $table->unsignedBigInteger('plant_herbarium_id')->nullable();
             $table->unsignedBigInteger('aerial_part_id')->nullable();
             $table->unsignedBigInteger('ground_part_id')->nullable();
             $table->unsignedBigInteger('food_industry_id')->nullable();
@@ -34,7 +31,6 @@ class CreateMedicinalPlantsTable extends Migration
             $table->unsignedBigInteger('method_extraction_id')->nullable();
             $table->unsignedBigInteger('method_analyse_id')->nullable();
             $table->unsignedBigInteger('secondary_metabolite_id')->nullable()->comment('from medicinal_plant_types');
-            $table->unsignedBigInteger('effective_material_id')->nullable()->comment('from medicinal_plant_types');
             $table->unsignedBigInteger('pharmaceutical_form_id')->nullable()->comment('from medicinal_plant_types');
             $table->unsignedBigInteger('product_id')->nullable();
             $table->tinyInteger('traditional_iranian_medicine')->comment('0:unknown, 1:raw, 2: processed')->default(0);

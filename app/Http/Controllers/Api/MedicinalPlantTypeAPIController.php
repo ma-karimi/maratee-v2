@@ -116,6 +116,7 @@ class MedicinalPlantTypeAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(MedicinalPlantTypeAPIRequest $request)
     {
@@ -235,6 +236,7 @@ class MedicinalPlantTypeAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, UpdateMedicinalPlantTypeAPIRequest $request)
     {

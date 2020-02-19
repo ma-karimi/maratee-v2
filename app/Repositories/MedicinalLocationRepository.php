@@ -87,8 +87,6 @@ class MedicinalLocationRepository extends BaseRepository
 //        $this->storeDetermine($input, $model->id);
 //        $this->storeCollect($input, $model->id);
 
-        $lastCode = $this->getLastCode($model);
-        parent::update(['code' => $lastCode + 1], $model->id);
         return $model;
     }
 

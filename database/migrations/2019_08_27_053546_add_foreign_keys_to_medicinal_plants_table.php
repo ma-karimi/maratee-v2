@@ -24,7 +24,6 @@ class AddForeignKeysToMedicinalPlantsTable extends Migration {
 			$table->foreign('method_extraction_id')->references('id')->on('methods')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('method_analyse_id')->references('id')->on('methods')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('secondary_metabolite_id')->references('id')->on('medicinal_plant_types')->onUpdate('NO ACTION')->onDelete('CASCADE');
-			$table->foreign('effective_material_id')->references('id')->on('medicinal_plant_types')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('pharmaceutical_form_id')->references('id')->on('medicinal_plant_types')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('product_id')->references('id')->on('products')->onUpdate('NO ACTION')->onDelete('CASCADE');
 			$table->foreign('medicine_id')->references('id')->on('medicines')->onUpdate('NO ACTION')->onDelete('CASCADE');
