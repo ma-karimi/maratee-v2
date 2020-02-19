@@ -8,7 +8,7 @@ use App\Models\Contracts\BaseModel;
 class ModelHasRole extends BaseModel
 {
     protected $appends = ['name'];
-
+    protected $with = ['role'];
     public function role()
     {
         return $this->belongsTo(Role::class);
@@ -16,7 +16,6 @@ class ModelHasRole extends BaseModel
 
     public function getNameAttribute()
     {
-        $item = $this->load('role');
-        return $item->role->name;
+        return $this->role->name;
     }
 }
