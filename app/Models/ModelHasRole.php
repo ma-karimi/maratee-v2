@@ -16,7 +16,7 @@ class ModelHasRole extends BaseModel
 
     public function getNameAttribute()
     {
-        $role = $this->load('role');
-        return $role->name;
+        $item = $this->load('role');
+        return $item->role->name;
     }
 }
