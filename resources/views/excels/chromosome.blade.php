@@ -64,7 +64,7 @@
             @if($keys['location'] ?? false)
                 <td>
                     @foreach($item->locations as $location)
-                        {{$location['address_en']}}
+                        {{$location['address_en']}},
                     @endforeach
                 </td>
             @endif
