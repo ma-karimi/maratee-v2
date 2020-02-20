@@ -22,6 +22,7 @@
     });
 });*/
 
+Route::get('/test/generals/all', 'GeneralAPIController@all');
 
 Route::middleware(['auth:api'])->group(function () {
 
