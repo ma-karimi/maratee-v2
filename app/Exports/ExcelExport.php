@@ -34,7 +34,7 @@ class ExcelExport implements FromView, ShouldAutoSize
     public function view(): View
     {
         $result = $this->result;
-        $model = $this->model;
-        return view("excels.flora", ['result' => $result, 'keys' => \request('keys')]);
+        $model = $this->result;
+        return view("excels.${model}", ['result' => $result, 'keys' => \request('keys')]);
     }
 }

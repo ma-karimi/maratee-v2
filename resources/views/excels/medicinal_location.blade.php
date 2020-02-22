@@ -136,8 +136,7 @@
     <tbody>
     @foreach($result as $item)
         <tr>
-{{--            <td style="{{$td}}">{{ $item->code ?? null }}</td>--}}
-            <td style="{{$td}}">{{ $item['medicinal']['taxonomy']['family'] ?? null }}</td>
+            <td style="{{$td}}">{{ $item->code ?? null }}</td>
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['medicinal']['taxonomy'], 'keys'=>$keys])
             @if($keys['origin'] ?? false)
                 <td style="{{$td}}">{{ $item['medicinal']['origin']['name'] ?? null }}</td>
