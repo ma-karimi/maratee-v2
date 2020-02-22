@@ -7,6 +7,7 @@ namespace App\Models\Relations;
 use App\Models\{ActionHub, Article, Location, MedicinalLocationConstituent, MedicinalPlant, MedicinalPlantType, Method};
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait MedicinalLocationRelations
 {
@@ -96,9 +97,9 @@ trait MedicinalLocationRelations
     }
 
     /**
-     * @return mixed
+     * @return MorphToMany
      */
-    public function secondaryMetabolites()
+    public function secondaryMetabolites(): MorphToMany
     {
         return $this->morphedByMany(MedicinalPlantType::class, 'hub', 'medicinal_location_hubs'
         )->where('medicinal_plant_types.type_id', array_search('secondary_metabolite', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_location_hubs.deleted_at');

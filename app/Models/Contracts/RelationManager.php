@@ -54,9 +54,9 @@ trait RelationManager
 
         foreach ($reflect->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
             /** @var ReflectionMethod $method */
-//            if ($method->hasReturnType() && in_array((string)$method->getReturnType(), self::$relationClasses)) {
+            if ($method->hasReturnType() && in_array((string)$method->getReturnType(), self::$relationClasses)) {
                 self::$relationsList[(string)$method->getReturnType()][] = $method->getName();
-//            }
+            }
         }
     }
 
