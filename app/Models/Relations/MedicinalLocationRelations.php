@@ -14,11 +14,14 @@ trait MedicinalLocationRelations
     /**
      * @return BelongsTo
      */
-    public function medicinal()
+    public function medicinal(): BelongsTo
     {
         return $this->belongsTo(MedicinalPlant::class, 'medicinal_plant_id');
     }
 
+    /**
+     * @return mixed
+     */
     public function determine()
     {
         return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 1);
@@ -30,12 +33,18 @@ trait MedicinalLocationRelations
     }
 
 
-    public function article()
+    /**
+     * @return BelongsTo
+     */
+    public function article(): BelongsTo
     {
         return $this->belongsTo(Article::class);
     }
 
-    public function location()
+    /**
+     * @return BelongsTo
+     */
+    public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class);
     }
@@ -49,31 +58,46 @@ trait MedicinalLocationRelations
     }
 
 
-    public function treatment()
+    /**
+     * @return BelongsTo
+     */
+    public function treatment(): BelongsTo
     {
         return $this->belongsTo(MedicinalPlantType::class, 'treatment_id'
         )->where('type_id', array_search('treatment', MedicinalPlantType::TYPE));
     }
 
 
-    public function distillation()
+    /**
+     * @return BelongsTo
+     */
+    public function distillation(): BelongsTo
     {
         return $this->belongsTo(Method::class, 'method_distillation_id'
         )->where('type_id', 1);
     }
 
-    public function extraction()
+    /**
+     * @return BelongsTo
+     */
+    public function extraction(): BelongsTo
     {
         return $this->belongsTo(Method::class, 'method_extraction_id'
         )->where('type_id', 2);
     }
 
-    public function analyse()
+    /**
+     * @return BelongsTo
+     */
+    public function analyse(): BelongsTo
     {
         return $this->belongsTo(Method::class, 'method_analyse_id'
         )->where('type_id', 3);
     }
 
+    /**
+     * @return mixed
+     */
     public function secondaryMetabolites()
     {
         return $this->morphedByMany(MedicinalPlantType::class, 'hub', 'medicinal_location_hubs'
@@ -81,7 +105,10 @@ trait MedicinalLocationRelations
     }
 
 
-    public function phenology()
+    /**
+     * @return BelongsTo
+     */
+    public function phenology(): BelongsTo
     {
         return $this->belongsTo(MedicinalPlantType::class, 'phenology_id'
         )->where('type_id', array_search('stage_of_phenology', MedicinalPlantType::TYPE));
