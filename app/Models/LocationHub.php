@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @SWG\Definition(
@@ -26,7 +27,10 @@ class LocationHub extends BaseModel
     protected $table = 'location_hubs';
     protected $with = ['location'];
 
-    public function location()
+    /**
+     * @return BelongsTo
+     */
+    public function location():BelongsTo
     {
         return $this->belongsTo(Location::class);
     }

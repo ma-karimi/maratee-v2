@@ -343,7 +343,6 @@ class APIController extends AppBaseController
         }
         $repo = 'App\\Repositories\\' . $name . 'Repository';
         $repo = resolve($repo);
-
         $result = $repo->find($id);
 
         if ($class !== 'media') {
