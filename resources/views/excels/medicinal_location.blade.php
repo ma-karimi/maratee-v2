@@ -187,7 +187,7 @@
             @endif
             @if($keys['constituent'] ?? false)
                 <td style="{{$td}}">
-                    @forelse($constituents as $constituent)
+                    @forelse($item['constituents'] as $constituent)
                         {{$constituent['constituent_type']['name_en'] ?? null}}:{{$constituent['value'] ?? null}}
                         @if(!$loop->last)
                             |
