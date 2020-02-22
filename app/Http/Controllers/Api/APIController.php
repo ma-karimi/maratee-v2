@@ -265,13 +265,12 @@ class APIController extends AppBaseController
         $name = Str::singular(Str::studly($class));
         $repo = 'App\\Repositories\\' . $name . 'Repository';
         $repo = resolve($repo);
-        \Log::info($repo->model()::getAllRelations());
         $result = $repo->all()->load(Arr::flatten($repo->model()::getAllRelations()));
         if (\request()->filled('excel')) {
             $model = Str::ucfirst(\request('model'));
             $file_excel = "Export${model}List-" . date('Y-m-d-H-i-s') .'.xlsx';
-            Excel::store(new ExcelExport($result, \request('model')), 'public/' . $file_excel, null, 'Xlsx');
-            return $this->sendResponse(Storage::url($file_excel), 'success');
+//            Excel::store(new ExcelExport($result, \request('model')), 'public/' . $file_excel, null, 'Xlsx');
+//            return $this->sendResponse(Storage::url($file_excel), 'success');
         }
         return $this->sendResponse($result, $name . ' loaded successfully');
     }
