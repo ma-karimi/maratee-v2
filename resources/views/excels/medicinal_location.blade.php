@@ -18,6 +18,7 @@
     $th_transaction = 'background: #ccc; text-align: center; border-spacing: 10px; border-collapse: separate;';
     $td = 'max-width:250px border-spacing: 10px; border-collapse: separate;';
 @endphp
+
 <table class="table">
     <thead>
     <tr>
@@ -134,9 +135,10 @@
     </thead>
     <tbody>
     @foreach($result as $item)
+        {{dd($item)}}
         <tr>
             <td style="{{$td}}">{{ $item->code ?? null }}</td>
-            @include('excels.partials.taxonomyRow', ['taxonomy'=>$item->medicinal->taxonomy, 'keys'=>$keys])
+            @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['medicinal']['taxonomy'], 'keys'=>$keys])
             @if($keys['origin'] ?? false)
                 <td style="{{$td}}">{{ $item['medicinal']['origin']['name'] ?? null }}</td>
             @endif
