@@ -15,7 +15,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 /**
  * @SWG\Definition(
  *      definition="MedicinalPlant",
- *      required={"taxonomy_id", "location_id"},
+ *      required={"taxonomy_id"},
  * )
  */
 class MedicinalPlant extends BaseModel implements HasMedia, AuditableContract
@@ -37,7 +37,7 @@ class MedicinalPlant extends BaseModel implements HasMedia, AuditableContract
     public static $rules = [
         'herbarium_number' => 'nullable|string',
         'taxonomy_id' => 'required|exists:taxonomies,id',
-        'aerial_part_id' => 'nullable|exists:medicinal_parts,id',
+//        'aerial_part_id' => 'nullable|exists:medicinal_parts,id',
         'ground_part_id' => 'nullable|exists:medicinal_parts,id',
         'general_origin_id' => 'nullable|exists:generals,id',
         'presence_in_country' => 'nullable|integer',
@@ -86,7 +86,8 @@ class MedicinalPlant extends BaseModel implements HasMedia, AuditableContract
         'foods',
         'industries',
         'materials',
-        'last_audit'
+        'last_audit',
+        'aerial_type'
     ];
 
     protected $with = ['audits'];

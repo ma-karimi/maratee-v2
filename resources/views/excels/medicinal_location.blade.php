@@ -141,7 +141,7 @@
                 <td style="{{$td}}">{{ $item['medicinal']['origin']['name'] ?? null }}</td>
             @endif
             @if($keys['part_used'] ?? false)
-                <td style="{{$td}}">{{ $item['medicinal']['aerial_type']['name'] ?? null }}</td>
+                <td style="{{$td}}">{{ $item['medicinal']['aerial_type'] ?? null }}</td>
                 <td style="{{$td}}">{{ $item['medicinal']['ground_type']['name'] ?? null }}</td>
             @endif
             @if($keys['plants_used'] ?? false)

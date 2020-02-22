@@ -54,12 +54,12 @@ trait MedicinalPlantRelations
     {
         return $this->morphedByMany(Product::class, 'hub', 'medicinal_hubs', 'medicinal_plant_id')->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
     }
-
-    public function aerialType()
-    {
-        return $this->belongsTo(MedicinalPart::class, 'aerial_part_id'
-        )->where('type_id', array_search('aerial', MedicinalPart::TYPE));
-    }
+//
+//    public function aerialType()
+//    {
+//        return $this->belongsTo(MedicinalPart::class, 'aerial_part_id'
+//        )->where('type_id', array_search('aerial', MedicinalPart::TYPE));
+//    }
 
     public function groundType()
     {
@@ -71,6 +71,12 @@ trait MedicinalPlantRelations
     {
         return $this->morphedByMany(MedicinalPlantType::class, 'hub', 'medicinal_hubs', 'medicinal_plant_id'
         )->where('medicinal_plant_types.type_id', array_search('food_industry', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
+    }
+
+    public function aerialTypes()
+    {
+        return $this->morphedByMany(MedicinalPart::class, 'hub', 'medicinal_hubs', 'medicinal_plant_id'
+        )->where('medicinal_plant_types.type_id', array_search('aerial', MedicinalPart::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
     }
 
     public function properties()

@@ -97,6 +97,16 @@ trait MedicinalPlantAccessor
         return $item;
     }
 
+    public function getAerialTypeAttribute()
+    {
+        $item = null;
+
+        if ($this->relationLoaded('aerialTypes') && $this->aerialTypes->count()) {
+            $item .= $this->aerialTypes->implode('name', ' & ');
+        }
+        return $item;
+    }
+
     public function getFoodsAttribute()
     {
         $item = null;
