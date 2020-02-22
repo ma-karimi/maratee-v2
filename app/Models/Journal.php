@@ -13,6 +13,6 @@ use App\Models\Contracts\BaseModel;
 class Journal extends BaseModel
 {
     public static $rules = [
-        'title' => 'require',
+        'title' => 'required',
     ];
 }
