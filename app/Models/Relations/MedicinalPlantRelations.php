@@ -76,7 +76,7 @@ trait MedicinalPlantRelations
     public function aerialTypes()
     {
         return $this->morphedByMany(MedicinalPart::class, 'hub', 'medicinal_hubs', 'medicinal_plant_id'
-        )->where('medicinal_plant_types.type_id', array_search('aerial', MedicinalPart::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
+        )->where('medicinal_parts.type_id', array_search('aerial', MedicinalPart::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
     }
 
     public function properties()
