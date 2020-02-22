@@ -11,6 +11,7 @@ use App\Models\Contracts\Relationships;
 use Illuminate\Container\Container as Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -264,6 +265,7 @@ class APIController extends AppBaseController
         $name = Str::singular(Str::studly($class));
         $repo = 'App\\Repositories\\' . $name . 'Repository';
         $repo = resolve($repo);
+        \Log::info($repo->model()::getAllRelations());
         $result = $repo->all()->load(Arr::flatten($repo->model()::getAllRelations()));
         if (\request()->filled('excel')) {
             $model = Str::ucfirst(\request('model'));
