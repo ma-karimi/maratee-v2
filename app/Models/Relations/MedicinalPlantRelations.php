@@ -112,7 +112,6 @@ trait MedicinalPlantRelations
 
     /**
      *
-     * secondary metabolites data == effective materials data
      *
      *
      * @return mixed
@@ -120,7 +119,7 @@ trait MedicinalPlantRelations
     public function effectiveMaterials()
     {
         return $this->morphedByMany(MedicinalPlantType::class, 'hub', 'medicinal_hubs'
-        )->where('medicinal_plant_types.type_id', array_search('secondary_metabolite', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
+        )->where('medicinal_plant_types.type_id', array_search('material', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
     }
 
 
