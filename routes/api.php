@@ -41,6 +41,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::patch('audits/{id}', 'AuditAPIController@update');
 
     Route::apiResource('treatments', 'TreatmentAPIController');
+    Route::get('journals/all', 'JournalAPIController@all');
     Route::apiResource('journals', 'JournalAPIController');
 
     Route::post('paleontologies/{id}/media', 'PaleontologyAPIController@media');
