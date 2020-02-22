@@ -210,6 +210,11 @@ class MedicinalLocationRepository extends BaseRepository
         return $this->location_model->find($input['location_id'])->update($location_input);
     }
 
+    /**
+     * @deprecated
+     * @param $input
+     * @param $medicinal_location_id
+     */
     private function storeCollect($input, $medicinal_location_id)
     {
 
@@ -238,7 +243,7 @@ class MedicinalLocationRepository extends BaseRepository
         $data = [
             'title' => $input['title'],
             'year' => $input['year'] ?? null,
-            'journal_name' => $input['journal_name'] ?? null,
+            'journal_id' => $input['journal_id'] ?? null,
             'page_no' => $input['page_no'] ?? null
         ];
         if ($article_id) {

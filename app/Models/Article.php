@@ -32,7 +32,7 @@ class Article extends BaseModel implements HasMedia
      * @var array
      */
 
-    protected $with = ['actors'];
+    protected $with = ['actors', 'journal'];
     protected $appends = ['authors'];
 
     /**
@@ -56,5 +56,10 @@ class Article extends BaseModel implements HasMedia
         }
 
         return $authors;
+    }
+
+    public function journal()
+    {
+        return $this->belongsTo(Journal::class);
     }
 }
