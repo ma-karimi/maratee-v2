@@ -57,7 +57,6 @@ class MedicinalPlant extends BaseModel implements HasMedia, AuditableContract
      * @var string
      */
     protected $table = 'medicinal_plants';
-
     /**
      * The attributes that should be casted to native types.
      *
@@ -90,5 +89,5 @@ class MedicinalPlant extends BaseModel implements HasMedia, AuditableContract
         'aerial_type'
     ];
 
-    protected $with = ['audits'];
+    protected $with = ['audits','taxonomy'];
 }

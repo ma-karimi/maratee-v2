@@ -18,10 +18,17 @@
 //dd(\App\Models\Location::first());
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
+Route::get('/', function () {
+    $name = Str::singular(Str::studly('medicinal_locations'));
+    $repo = 'App\\Repositories\\' . $name . 'Repository';
+    $repo = resolve($repo);
+    \Log::info($repo->model()::getAllRelations());
+    $result = $repo->all()->load(Arr::flatten($repo->model()::getAllRelations()));
+    dd($result);
+});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
