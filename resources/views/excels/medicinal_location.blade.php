@@ -135,10 +135,9 @@
     </thead>
     <tbody>
     @foreach($result as $item)
-        {{logger($item['medicinal']['taxonomy'])}}
-        {{logger($item['medicinal'])}}
         <tr>
-            <td style="{{$td}}">{{ $item->code ?? null }}</td>
+{{--            <td style="{{$td}}">{{ $item->code ?? null }}</td>--}}
+            <td style="{{$td}}">{{ $item['medicinal']['taxonomy']['family'] ?? null }}</td>
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['medicinal']['taxonomy'], 'keys'=>$keys])
             @if($keys['origin'] ?? false)
                 <td style="{{$td}}">{{ $item['medicinal']['origin']['name'] ?? null }}</td>
