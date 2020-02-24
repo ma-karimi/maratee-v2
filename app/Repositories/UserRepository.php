@@ -71,7 +71,7 @@ class UserRepository extends BaseRepository
 
         if (!empty($roles) && count($roles)) {
             foreach ($roles as $role) {
-                ModelHasRole::firstOrCreate(['model_type' => User::class, 'model_id' => $id, 'role_id' => $role['id']]);
+                ModelHasRole::firstOrCreate(['model_type' => User::class, 'model_id' => $id, 'role_id' => $role]);
             }
         }
     }
