@@ -83,7 +83,7 @@ class ChromosomeRepository extends BaseRepository
     private function storeArticle($input, $article_id = null)
     {
         $data = Arr::only($input, [
-            'title', 'year', 'journal_name', 'page_no'
+            'title', 'year', 'journal_id', 'page_no'
         ]);
         $article = null;
         if (Arr::exists($input, 'title')) {
