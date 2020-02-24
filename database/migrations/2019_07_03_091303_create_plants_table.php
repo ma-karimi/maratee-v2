@@ -27,7 +27,7 @@ class CreatePlantsTable extends Migration
 //            $table->integer('physical_tip_qt')->nullable()->comment('it means how many physical tips we have.
 //if it is equal to zero, it means we don\'t have any physical tip and if tip_qt >0, it means we have image tips, rather than physical tips.');
             $table->text('description')->nullable();
-            $table->boolean('is_flowering')->default(0);
+//            $table->boolean('is_flowering')->default(0);
             //$table->json('life_forms')->comment('life_form_leaf_id, life_form_cycle_id, life_form_wooden_id, life_form_herbaceous_id')->nullable();
             $table->text('habitat_description')->nullable();
             $table->text('ecology_description')->nullable();

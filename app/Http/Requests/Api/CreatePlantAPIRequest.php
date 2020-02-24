@@ -30,7 +30,7 @@ class CreatePlantAPIRequest extends APIRequest
     public function rules()
     {
         return [
-            'protection_id' => 'required_if:is_flowering,1|exists:protections,id',
+            'protection_id' => 'nullable|exists:protections,id',
 //            'organization_id' => 'required_if:is_flowering,0|exists:organizations,id',
 //            'location_id' => 'required_if:is_flowering,0|exists:locations,id',
             //taxonomy
