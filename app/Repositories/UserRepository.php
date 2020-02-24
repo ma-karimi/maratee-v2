@@ -2,11 +2,10 @@
 
 namespace App\Repositories;
 
-use App\Models\Role;
+use App\Models\ModelHasRole;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class UserRepository
@@ -43,7 +42,7 @@ class UserRepository extends BaseRepository
     public function create($input)
     {
         $user = parent::create(Arr::except($input, ['roles']));
-        $this->createHub($user->id, 'roles', $input['roles'], ['created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()]);
+        $this->createHub($user->id, 'roles', $input['roles'], ['created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
 
         return $user;
     }
@@ -56,9 +55,25 @@ class UserRepository extends BaseRepository
 
         $user = parent::update(Arr::except($input, ['roles']), $id);
 
-        $this->createHub($user->id, 'roles', $input['roles'], ['created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()]);
+//        $this->createHub($user->id, 'roles', $input['roles'], ['created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
+
+        $this->setRoles($user->id, $input['roles']);
 
         return $user;
+    }
+
+    private function setRoles($id, $roles)
+    {
+
+        ModelHasRole::where(['model_type' => User::class, 'model_id' => $id])
+            ->whereNotIn('role_id', $roles)
+            ->delete();
+
+        if (!empty($roles) && count($roles)) {
+            foreach ($roles as $role) {
+                ModelHasRole::firstOrCreate(['model_type' => User::class, 'model_id' => $id, 'role_id' => $role['id']]);
+            }
+        }
     }
 
     public function updateUser($input, $id)
@@ -69,7 +84,6 @@ class UserRepository extends BaseRepository
 
         return parent::update($input, $id);
     }
-
 
     /**
      * Find the user instance for the given username.
