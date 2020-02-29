@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\ResetPasswordRequest;
 use App\Http\Requests\Api\UserLoginRequest;
+use App\Models\Permission;
+use App\Models\Role;
+use App\Models\RoleHasPermission;
+use App\Models\User;
 use App\Notifications\ResetPassword;
 use App\Repositories\UserRepository;
 use App\Services\UserServices;
@@ -104,9 +108,15 @@ class AuthController extends AppBaseController
         }
         $token->save();
 
-        $permissions = $user->getAllPermissions()->map(function ($permission) {
-            return $permission->name;
-        });
+        $roles = Role::where(['model_id'=>$user->id, 'model_type'=>User::class])->whereNull('deleted_at')->pluck('role_id')->toArray();
+
+        $roleHasPermissions = RoleHasPermission::whereIn('role_id', $roles)->pluck('permission_id')->toArray();
+
+        $permissions = Permission::whereIn('id', collect($roleHasPermissions)->filter()->all())->pluck('name')->toArray();
+
+//        $permissions = $user->getAllPermissions()->map(function ($permission) {
+//            return $permission->name;
+//        });
 
         return response()->json([
             'access_token' => $tokenResult->accessToken,
