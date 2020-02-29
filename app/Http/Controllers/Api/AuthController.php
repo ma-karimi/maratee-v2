@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\ResetPasswordRequest;
 use App\Http\Requests\Api\UserLoginRequest;
+use App\Models\ModelHasRole;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\RoleHasPermission;
@@ -108,7 +109,7 @@ class AuthController extends AppBaseController
         }
         $token->save();
 
-        $roles = Role::where(['model_id'=>$user->id, 'model_type'=>User::class])->whereNull('deleted_at')->pluck('role_id')->toArray();
+        $roles = ModelHasRole::where(['model_id'=>$user->id, 'model_type'=>User::class])->whereNull('deleted_at')->pluck('role_id')->toArray();
 
         $roleHasPermissions = RoleHasPermission::whereIn('role_id', $roles)->pluck('permission_id')->toArray();
 
