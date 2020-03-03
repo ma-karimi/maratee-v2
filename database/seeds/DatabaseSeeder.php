@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             CountryTableSeeder::class,
 //            ProvinceTableSeeder::class,
             OriginalGeneralTableSeeder::class,
+            OriginalNonflowerGeneralTableSeeder::class,
             OriginalMedicinalPlantTypeTableSeeder::class,
             OriginalMethodTableSeeder::class,
             MedicinalPartTableSeeder::class,

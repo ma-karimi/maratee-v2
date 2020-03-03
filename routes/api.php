@@ -82,6 +82,10 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('generals/all', 'GeneralAPIController@all');
     Route::apiResource('generals', 'GeneralAPIController');
 
+    Route::get('nonflower_generals/{type}/all', 'NonflowerGeneralAPIController@type');
+    Route::get('nonflower_generals/all', 'NonflowerGeneralAPIController@all');
+    Route::apiResource('nonflower_generals', 'NonflowerGeneralAPIController');
+
     Route::get('paleobotany_generals/all', 'PaleobotanyGeneralAPIController@all');
     Route::apiResource('paleobotany_generals', 'PaleobotanyGeneralAPIController');
     Route::get('paleobotany_taxonomies/all', 'PaleobotanyTaxonomyAPIController@all');
@@ -94,6 +98,9 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('herbariums/excel', 'HerbariumAPIController@excel');
     Route::post('herbariums/{id}/media', 'HerbariumAPIController@media');
     Route::apiResource('herbariums', 'HerbariumAPIController')->except('destroy');
+
+    Route::post('nonflowers/{id}/media', 'NonflowerAPIController@media');
+    Route::apiResource('nonflowers', 'NonflowerAPIController')->except('destroy');
 
     Route::apiResource('articles', 'ArticleAPIController');
 
@@ -182,6 +189,9 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('taxonomies/all', 'TaxonomyAPIController@all');
 //Route::delete('taxonomies/{id}/{delete}', 'TaxonomyAPIController@destroy');
     Route::apiResource('taxonomies', 'TaxonomyAPIController')->except('destroy');
+
+    Route::get('nonflower_taxonomies/all', 'NonflowerTaxonomyAPIController@all');
+    Route::apiResource('nonflower_taxonomies', 'NonflowerTaxonomyAPIController')->except('destroy');
 
 
     Route::apiResource('planting_conditions', 'PlantingConditionAPIController');

@@ -109,9 +109,10 @@ class AuthController extends AppBaseController
         }
         $token->save();
 
-        $roles = ModelHasRole::where(['model_id'=>$user->id, 'model_type'=>User::class])->whereNull('deleted_at')->pluck('role_id')->toArray();
+        $modelHasRoles = ModelHasRole::where(['model_id' => $user->id, 'model_type' => User::class])->whereNull('deleted_at')->pluck('role_id')->toArray();
 
-        $roleHasPermissions = RoleHasPermission::whereIn('role_id', $roles)->pluck('permission_id')->toArray();
+        $roles = Role::whereIn('id', $modelHasRoles)->pluck('name')->toArray();
+        $roleHasPermissions = RoleHasPermission::whereIn('role_id', $modelHasRoles)->pluck('permission_id')->toArray();
 
         $permissions = Permission::whereIn('id', collect($roleHasPermissions)->filter()->all())->pluck('name')->toArray();
 
@@ -125,7 +126,8 @@ class AuthController extends AppBaseController
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
             )->toDateTimeString(),
-            'permissions' => $permissions
+            'permissions' => $permissions,
+            'roles' => $roles
         ]);
     }
 

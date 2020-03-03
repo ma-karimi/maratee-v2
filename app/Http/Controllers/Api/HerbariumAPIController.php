@@ -64,7 +64,7 @@ class HerbariumAPIController extends AppBaseController
         $herbariums = $this->herbariumRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $request->get('is_flowering') == 1 ? $this->getRelationFields() : $this->getFieldNonFlowerRelations()
+            $this->getRelationFields()
         );
 
         return $this->sendResponse($herbariums->toArray(), 'Herbariums retrieved successfully');
@@ -73,11 +73,6 @@ class HerbariumAPIController extends AppBaseController
     public function getRelationFields()
     {
         return ['taxonomy', 'organization', 'media', 'determine', 'collect', 'location'];
-    }
-
-    private function getFieldNonFlowerRelations()
-    {
-        return ['generalPhytogeography', 'taxonomy', 'generalHabitat', 'media', 'generalSubstrate', 'collect.actors', 'determine.actors', 'transactions', 'location'];
     }
 
     /**
@@ -203,13 +198,12 @@ class HerbariumAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Herbarium $herbarium */
-        $herbarium = $this->herbariumRepository->find($id);
+        $herbarium = $this->herbariumRepository->find($id, $this->getRelationFields());
 
         if ($herbarium === null) {
             return $this->sendError('Herbarium not found');
         }
 
-        $herbarium = $herbarium->is_flowering == 1 ? $herbarium->load($this->getRelationFields()) : $herbarium->load($this->getFieldNonFlowerRelations());
         return $this->sendResponse($herbarium->toArray(), 'Herbarium retrieved successfully');
     }
 
@@ -362,31 +356,4 @@ class HerbariumAPIController extends AppBaseController
         return $this->sendResponse($id, 'Herbarium Media Stored successfully');
     }
 
-
-    public function excel(Request $request)
-    {
-        $herbariums = $this->herbariumRepository->all(
-            [],
-            null,
-            null,
-            $request->get('is_flowering') == 1 ? $this->getRelationFields() : $this->getFieldNonFlowerRelations()
-        );
-
-
-        $view = \request()->is_flowering == 1 ? 'exports.herbarium' : 'exports.nonflower';
-        $herbarium = \request()->is_flowering == 1 ? 'Herbarium' : 'NonFlower';
-        return Excel::create("Export${$herbarium}List-" . date('Y-m-d-H-i-s'), function ($excel) use ($herbariums, $view, $herbarium) {
-
-            $excel->sheet($herbarium, function ($sheet) use ($herbariums, $view) {
-                $sheet->freezeFirstRow()
-//                    ->setAutoSize(array(
-//                        'J'
-//                    ))
-//                    ->setWidth('J', 45)
-                    ->loadView($view, compact('herbariums'));
-
-            });
-
-        })->export('xls');
-    }
 }
