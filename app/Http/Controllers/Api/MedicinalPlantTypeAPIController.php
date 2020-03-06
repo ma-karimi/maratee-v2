@@ -8,6 +8,7 @@ use App\Http\Requests\Api\UpdateMedicinalPlantTypeAPIRequest;
 use App\Models\MedicinalPlantType;
 use App\Repositories\MedicinalPlantTypeRepository;
 use Exception;
+use Illuminate\Http\Request;
 use Response;
 
 /**
@@ -56,10 +57,14 @@ class MedicinalPlantTypeAPIController extends AppBaseController
      * )
      * @throws Exception
      */
-    public function index()
+    public function index(Request $request)
     {
         $medicinalPlantTypes =
-            $this->medicinalPlantTypeRepository->all();
+            $this->medicinalPlantTypeRepository->paginate(
+                $request->get('per_page'),
+                $request->except('per_page'),
+                []
+            );
 
 
         return $this->sendResponse($medicinalPlantTypes->toArray(), 'Medicinal Plant Types retrieved successfully');
@@ -305,5 +310,12 @@ class MedicinalPlantTypeAPIController extends AppBaseController
         $medicinalPlantType->delete();
 
         return $this->sendResponse($id, 'Medicinal Plant Type deleted successfully');
+    }
+
+    public function all(Request $request)
+    {
+        $places = $this->medicinalPlantTypeRepository->all();
+
+        return $this->sendResponse($places->toArray(), 'Medicinal Plant Type retrieved successfully');
     }
 }

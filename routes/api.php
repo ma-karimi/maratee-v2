@@ -180,6 +180,7 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::apiResource('medicinal_parts', 'MedicinalPartAPIController');
 
+    Route::get('medicinal_plant_types/all', 'MedicinalPlantTypeAPIController@all');
     Route::apiResource('medicinal_plant_types', 'MedicinalPlantTypeAPIController');
 
     Route::post('transactions/{id}/media', 'TransactionAPIController@media');
