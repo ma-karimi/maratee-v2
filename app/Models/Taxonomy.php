@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Arr;
 
 /**
  * @SWG\Definition(
@@ -16,11 +15,6 @@ use Illuminate\Support\Arr;
 class Taxonomy extends BaseModel
 {
 
-
-    public const TYPE = [
-        1 => 'Flora',
-        2 => 'NonFlower',
-    ];
     public static $rules = [
         'family_id' => 'required|exists:generals,id',
         'genus_id' => 'nullable|exists:generals,id',
@@ -28,7 +22,6 @@ class Taxonomy extends BaseModel
         'variety_id' => 'nullable|exists:generals,id',
         'subspecies_id' => 'nullable|exists:generals,id',
         'name' => 'nullable|string',
-        'type_id' => 'required|in:1,2,3'
     ];
     /**
      * The database table used by the model.
@@ -37,12 +30,7 @@ class Taxonomy extends BaseModel
      */
     protected $table = 'taxonomies';
     protected $with = ['family', 'genus', 'subspecies.authors', 'species.authors', 'variety.authors'];
-    protected $appends = ['type', 'authors', 'scientific_name'];
-
-    public function getTypeAttribute()
-    {
-        return Arr::get(self::TYPE, $this->type_id);
-    }
+    protected $appends = ['authors', 'scientific_name', 'scientific'];
 
     public function getAuthorsAttribute()
     {
@@ -86,6 +74,10 @@ class Taxonomy extends BaseModel
         return $name;
     }
 
+    public function getScientificAttribute()
+    {
+        return $this->scientific_name . ' ' . $this->authors;
+    }
 
     /**
      * @return HasMany

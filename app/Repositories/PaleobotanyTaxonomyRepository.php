@@ -7,7 +7,6 @@ use App\Models\PaleobotanyGeneral;
 use App\Models\PaleobotanyGeneralHub;
 use App\Models\PaleobotanyTaxonomy;
 use Carbon\Carbon;
-use Illuminate\Container\Container as Application;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -24,17 +23,6 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
     protected $fieldSearchable = [
 
     ];
-
-    /**
-     * @var PaleobotanyGeneralRepository
-     */
-    private $generalRepo;
-
-    public function __construct(Application $app, PaleobotanyGeneralRepository $generalRepo)
-    {
-        parent::__construct($app);
-        $this->generalRepo = $generalRepo;
-    }
 
 
     /**
@@ -63,11 +51,10 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
                 'name' => 'Paleobotany Taxonomy Already Exists!'
             ]);
         }
-        $input = $this->setPaleobotanyTaxonomyData($request);
 
-        $taxonomy = parent::create($this->setPrimaryData($input));
-        $this->createHub($taxonomy->id, 'samples', $input['samples']);
-        $this->createDivisions($taxonomy, $input['divisions']);
+        $taxonomy = parent::create($this->setPrimaryData($request));
+        $this->createHub($taxonomy->id, 'samples', \request()->filled('samples') ? $request['samples'] : []);
+        $this->createHub($taxonomy->id, 'divisions', \request()->filled('divisions') ? $request['divisions'] : []);
 
         return $taxonomy;
 
@@ -80,44 +67,10 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
     private function taxonomyExistWhenCreate($request): bool
     {
         return PaleobotanyTaxonomy::where([
-            'family_id' => $request['family_id'],
             'genus_id' => $request['genus_id'],
-            'species_id' => $request->filled('species_id') && is_numeric($request['species_id']) ? $request['species_id'] : null,
+            'species_id' => $request->filled('species_id') ? $request['species_id'] : null,
         ])->exists();
 
-    }
-
-    /**
-     * @param $request
-     * @return Request
-     */
-    private function setPaleobotanyTaxonomyData($request)
-    {
-
-        $this->specieAuthor($request);
-        return $request;
-    }
-
-    /**
-     * @param $request
-     * @return mixed
-     */
-    private function specieAuthor($request)
-    {
-        $species_authors = $request->filled('species_auth') ? collect($request->get('species_auth'))->filter()->all() : [];
-
-        ActorHub::where(['actorable_id' => $request->get('species_id'), 'actorable_type' => PaleobotanyGeneral::class])
-            ->whereNotIn('actor_id', $species_authors)
-            ->delete();
-        if (!empty($species_authors) && count($species_authors)) {
-            foreach ($species_authors as $item) {
-                ActorHub::firstOrCreate([
-                    'actor_id' => $item,
-                    'actorable_type' => PaleobotanyGeneral::class,
-                    'actorable_id' => $request->get('species_id'),
-                ]);
-            }
-        }
     }
 
     /**
@@ -137,6 +90,11 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
         ];
     }
 
+    /**
+     * @param $taxonomy
+     * @param $divisions
+     * @deprecated
+     */
     public function createDivisions($taxonomy, $divisions)
     {
 
@@ -173,12 +131,11 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
                 'name' => 'Paleobotany Taxonomy Already Exists!'
             ]);
         }
-        $input = $this->setPaleobotanyTaxonomyData($request);
 
-        $taxonomy = parent::update($this->setPrimaryData($input), $id);
+        $taxonomy = parent::update($this->setPrimaryData($request), $id);
 
-        $this->createHub($taxonomy->id, 'samples', $input['samples']);
-        $this->createDivisions($taxonomy, $input['divisions']);
+        $this->createHub($taxonomy->id, 'samples', \request()->filled('samples') ? $request['samples'] : []);
+        $this->createHub($taxonomy->id, 'divisions', \request()->filled('divisions') ? $request['divisions'] : []);
 
         return $taxonomy;
     }

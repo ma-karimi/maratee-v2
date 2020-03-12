@@ -63,7 +63,7 @@ class GeneralAPIController extends AppBaseController
         $Generals = $this->GeneralRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            []
+            $this->getRelationFields()
         );
 
         return $this->sendResponse($Generals->toArray(), ' Generals retrieved successfully');
@@ -95,6 +95,13 @@ class GeneralAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="description",
+     *          in="body",
+     *          description="General that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/General")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="authors",
      *          in="body",
      *          description="General that should be stored",
      *          required=false,
@@ -173,7 +180,7 @@ class GeneralAPIController extends AppBaseController
     public function show($id)
     {
         /** @var General $General */
-        $General = $this->GeneralRepository->find($id, \request()->get('relations'));
+        $General = $this->GeneralRepository->find($id, $this->getRelationFields());
 
         if (empty($General)) {
             return $this->sendError(' General not found');
@@ -216,6 +223,13 @@ class GeneralAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="description",
+     *          in="body",
+     *          description="General that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/General")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="authors",
      *          in="body",
      *          description="General that should be stored",
      *          required=false,
@@ -406,5 +420,13 @@ class GeneralAPIController extends AppBaseController
 
 
         return $this->sendResponse($General->toArray(), ' General retrieved successfully');
+    }
+
+    /**
+     * @return array
+     */
+    private function getRelationFields(): array
+    {
+        return ['authors'];
     }
 }

@@ -29,58 +29,13 @@ class Plant extends BaseModel implements HasMedia, AuditableContract
 
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
     protected $with = ['audits'];
-    protected $appends = ['monopoly_of_iran', 'plant_geographicals', 'life_form', 'last_audit'];
+    protected $appends = ['monopoly_of_iran', 'plant_geographicals', 'iran_plant_geographicals',  'life_form', 'last_audit'];
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'plants';
-
-    public function determine()
-    {
-        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 1);
-    }
-
-    public function collect()
-    {
-        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 2);
-    }
-
-    public function research()
-    {
-        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 3);
-    }
-
-    /**
-     * @return MorphToMany
-     */
-    public function users(): MorphToMany
-    {
-        return $this->morphToMany(User::class, 'userable', 'user_hubs')
-            ->whereNull('user_hubs.deleted_at')
-            ->withTimestamps();
-    }
-
-    /**
-     * @return MorphToMany
-     */
-    public function actors(): MorphToMany
-    {
-        return $this->morphToMany(Actor::class, 'actorable',
-            'actor_hubs')
-            ->whereNull('actor_hubs.deleted_at')
-            ->withTimestamps();
-    }
-
-    /**
-     * @return MorphMany
-     */
-    public function transactions(): MorphMany
-    {
-        return $this->morphMany(Transaction::class, 'transactionable')
-            ->whereNull('deleted_at');
-    }
 
     public function taxonomy(): BelongsTo
     {
@@ -94,25 +49,9 @@ class Plant extends BaseModel implements HasMedia, AuditableContract
             ->withTimestamps();
     }
 
-    public function organization(): BelongsTo
-    {
-        return $this->belongsTo(Organization::class);
-    }
-
     public function protection()
     {
         return $this->belongsTo(Protection::class);
-    }
-
-
-    public function generalHabitat(): BelongsTo
-    {
-        return $this->belongsTo(General::class, 'general_habitat_id');
-    }
-
-    public function generalOrigin(): BelongsTo
-    {
-        return $this->belongsTo(General::class, 'general_origin_id');
     }
 
     public function generalPhytogeography(): BelongsTo
@@ -120,23 +59,18 @@ class Plant extends BaseModel implements HasMedia, AuditableContract
         return $this->belongsTo(General::class, 'general_phytogeography_id');
     }
 
-
-    public function generalSubstrate()
-    {
-        return $this->belongsTo(General::class, 'general_substrate_id');
-    }
-
-    //Todo
-//    public function geographicals(): MorphToMany
-//    {
-//        return $this->morphToMany(Geographical::class, 'distributable', 'distribution_hubs')
-//            ->whereNull('distribution_hubs.deleted_at')
-//            ->withTimestamps();
-//    }
-
     public function geographicals()
     {
         return $this->belongsToMany(Geographical::class, 'plant_geographicals')
+            ->whereNull('plant_geographicals.deleted_at')
+            ->where('geographicals.type_id', 1)
+            ->withTimestamps();
+    }
+
+    public function iranGeographicals()
+    {
+        return $this->belongsToMany(Geographical::class, 'plant_geographicals')
+            ->where('geographicals.type_id', 2)
             ->whereNull('plant_geographicals.deleted_at')
             ->withTimestamps();
     }

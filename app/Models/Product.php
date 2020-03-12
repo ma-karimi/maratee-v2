@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Accessor\ProductAccessor;
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -25,6 +26,8 @@ class Product extends BaseModel implements HasMedia
         'address' => 'nullable|string',
         'company' => 'nullable|string',
         'pharmaceutical_forms' => 'nullable|string',
+        'taxonomy_id' => 'required|exists:taxonomies,id'
+
     ];
     /**
      * The database table used by the model.
@@ -34,7 +37,7 @@ class Product extends BaseModel implements HasMedia
     protected $table = 'products';
 
 
-    protected $with = ['pharmaceutical_form', 'media'];
+    protected $with = ['pharmaceutical_form', 'media', 'taxonomy'];
 
     protected $appends = ['status_name'];
 
@@ -43,10 +46,19 @@ class Product extends BaseModel implements HasMedia
         return $this->belongsTo(MedicinalPlantType::class, 'pharmaceutical_form_id')
             ->where('type_id', 7);
     }
+//
+//    public function medicinals()
+//    {
+//        return $this->morphToMany(MedicinalPlant::class, 'hub', 'medicinal_hubs');
+//    }
 
-    public function medicinals()
+
+    /**
+     * @return BelongsTo
+     */
+    public function taxonomy(): BelongsTo
     {
-        return $this->morphToMany(MedicinalPlant::class, 'hub', 'medicinal_hubs');
+        return $this->belongsTo(Taxonomy::class)->withTrashed();
     }
 
 }

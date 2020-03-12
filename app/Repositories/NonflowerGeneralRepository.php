@@ -35,4 +35,30 @@ class NonflowerGeneralRepository extends BaseRepository
     {
         return NonflowerGeneral::class;
     }
+
+
+    public function create($input)
+    {
+        $model = parent::create($this->setPrimaryData($input));
+        $this->createHub($model->id, 'authors', request()->filled('authors') ? $input['authors'] : []);
+
+        return $model;
+    }
+
+    public function update($input, $id)
+    {
+        $model = parent::update($this->setPrimaryData($input), $id);
+        $this->createHub($model->id, 'authors', request()->filled('authors') ? $input['authors'] : []);
+
+        return $model;
+    }
+
+    /**
+     * @param $input
+     * @return array
+     */
+    private function setPrimaryData($input): array
+    {
+        return collect($input)->except('authors')->all();
+    }
 }

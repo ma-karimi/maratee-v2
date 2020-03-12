@@ -29,6 +29,16 @@ trait PlantAccessor
         return $distributions;
     }
 
+    public function getIranPlantGeographicalsAttribute()
+    {
+        $distributions = null;
+
+        if ($this->relationLoaded('iranGeographicals') && $this->iranGeographicals->count()) {
+            $distributions .= $this->iranGeographicals->implode('name', ' & ');
+        }
+        return $distributions;
+    }
+
     public function getLifeFormAttribute()
     {
         return !empty($this->attributes['life_form_id']) ? Arr::get(self::LIFE_FORM, $this->attributes['life_form_id']) : null;

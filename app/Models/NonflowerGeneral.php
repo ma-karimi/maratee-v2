@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Contracts\GeneralTrait;
 use App\Models\Scope\GeneralScope;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
@@ -14,8 +15,10 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class NonflowerGeneral extends BaseModel
 {
-    use GeneralScope;
+    use GeneralScope, GeneralTrait;
+    protected $with = ['authors'];
 
+    protected $appends = ['name_author', 'actors'];
     public const TYPES = ['phytogeography', 'phenology', 'plant_type', 'species', 'sub_species', 'variety', 'family', 'genus', 'class', 'group', 'order', 'flowering', 'sperm', 'cotyledon', 'growth', 'usage', 'part', 'industry', 'application', 'habitat', 'ecology', 'origin', 'lichen', 'moss', 'diatom', 'biological', 'sample'];
     public static $rules = array(
         'name' => 'required|string',

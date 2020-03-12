@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Contracts\GeneralTrait;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
@@ -18,6 +19,10 @@ class PaleobotanyGeneral extends BaseModel
         'name' => 'required|string',
         'type' => 'required|string',
     );
+    use GeneralTrait;
+    protected $with = ['authors'];
+
+    protected $appends = ['name_author', 'actors'];
     protected $hidden = ['created_at', 'updated_at'];
 
     /**

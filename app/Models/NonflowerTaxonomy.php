@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use App\Models\Contracts\GeneralTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
@@ -18,11 +19,11 @@ class NonflowerTaxonomy extends BaseModel
 
 
     public static $rules = [
-        'family_id' => 'required|exists:generals,id',
-        'genus_id' => 'nullable|exists:generals,id',
-        'species_id' => 'nullable|exists:generals,id',
-        'variety_id' => 'nullable|exists:generals,id',
-        'subspecies_id' => 'nullable|exists:generals,id',
+        'family_id' => 'required|exists:nonflower_generals,id',
+        'genus_id' => 'nullable|exists:nonflower_generals,id',
+        'species_id' => 'nullable|exists:nonflower_generals,id',
+        'variety_id' => 'nullable|exists:nonflower_generals,id',
+        'subspecies_id' => 'nullable|exists:nonflower_generals,id',
         'name' => 'nullable|string',
     ];
     /**
@@ -32,12 +33,10 @@ class NonflowerTaxonomy extends BaseModel
      */
     protected $table = 'nonflower_taxonomies';
     protected $with = ['family', 'genus', 'subspecies.authors', 'species.authors', 'variety.authors'];
-    protected $appends = ['authors', 'scientific_name'];
+    protected $appends = ['authors', 'scientific_name', 'scientific'];
 
-    public function getTypeAttribute()
-    {
-        return Arr::get(self::TYPE, $this->type_id);
-    }
+    use GeneralTrait;
+
 
     public function getAuthorsAttribute()
     {
@@ -80,6 +79,13 @@ class NonflowerTaxonomy extends BaseModel
 
         return $name;
     }
+
+
+    public function getScientificAttribute()
+    {
+        return $this->scientific_name . ' ' . $this->authors;
+    }
+
 
     /**
      * @return HasMany

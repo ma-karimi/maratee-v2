@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\Api\GeneralAPIRequest;
+use App\Http\Requests\Api\Paleontology\PaleobotanyGeneralAPIRequest;
 use App\Models\General;
 use App\Repositories\PaleobotanyGeneralRepository;
 use Exception;
@@ -70,9 +70,10 @@ class PaleobotanyGeneralAPIController extends AppBaseController
     }
 
     /**
-     * @param GeneralAPIRequest $request
+     * @param PaleobotanyGeneralAPIRequest $request
      * @return Response
      *
+     * @throws ValidationException
      * @SWG\Post(
      *      path="/paleobotany_generals",
      *      summary="Store a newly created General in storage",
@@ -113,9 +114,8 @@ class PaleobotanyGeneralAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws ValidationException
      */
-    public function store(GeneralAPIRequest $request)
+    public function store(PaleobotanyGeneralAPIRequest $request)
     {
 
         $input = $request->all();
@@ -177,7 +177,7 @@ class PaleobotanyGeneralAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param GeneralAPIRequest $request
+     * @param PaleobotanyGeneralAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -229,7 +229,7 @@ class PaleobotanyGeneralAPIController extends AppBaseController
      * )
      * @throws ValidationException
      */
-    public function update($id, GeneralAPIRequest $request)
+    public function update($id, PaleobotanyGeneralAPIRequest $request)
     {
         $input = $request->all();
 

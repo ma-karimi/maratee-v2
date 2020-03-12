@@ -67,7 +67,18 @@ class ProductAPIController extends AppBaseController
             $request->get('relations')
         );
 
-        return $this->sendResponse($products->toArray(), 'Products retrieved successfully');
+
+        $keys = [
+            ['name' => 'family', 'title' => 'Family', 'value' => false],
+            ['name' => 'genus', 'title' => 'Genus', 'value' => false],
+            ['name' => 'species', 'title' => 'Species', 'value' => false],
+            ['name' => 'subspecies', 'title' => 'SubSpecies', 'value' => false],
+            ['name' => 'variety', 'title' => 'Variety', 'value' => false],
+            ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
+            ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
+
+        ];
+        return $this->sendResponse(compact('products', 'keys'), 'Products retrieved successfully');
     }
 
     /**
@@ -124,6 +135,13 @@ class ProductAPIController extends AppBaseController
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="name_en",
+     *          in="body",
+     *          description="Product that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Product")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="taxonomy_id",
      *          in="body",
      *          description="Product that should be stored",
      *          required=true,
@@ -277,7 +295,14 @@ class ProductAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="name",
+     *          name="name_en",
+     *          in="body",
+     *          description="Product that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Product")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="taxonomy_id",
      *          in="body",
      *          description="Product that should be stored",
      *          required=true,

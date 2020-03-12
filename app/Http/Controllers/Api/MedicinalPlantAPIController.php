@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantAPIRequest;
-use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantApplicationAPIRequest;
-use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantProductAPIRequest;
 use App\Models\MedicinalPlant;
 use App\Repositories\MedicinalPlantRepository;
 use Exception;
@@ -68,7 +66,24 @@ class MedicinalPlantAPIController extends AppBaseController
             $this->getRelationFields()
         );
 
-        return $this->sendResponse($medicinalPlants->toArray(), 'Medicinal Plants retrieved successfully');
+        $keys = [
+            ['name' => 'family', 'title' => 'Family', 'value' => false],
+            ['name' => 'genus', 'title' => 'Genus', 'value' => false],
+            ['name' => 'species', 'title' => 'Species', 'value' => false],
+            ['name' => 'subspecies', 'title' => 'SubSpecies', 'value' => false],
+            ['name' => 'variety', 'title' => 'Variety', 'value' => false],
+            ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
+            ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
+            ['name' => 'origin', 'title' => 'Origin', 'value' => false],
+            ['name' => 'part_used', 'title' => 'Part Used', 'value' => false],
+            ['name' => 'habitat', 'title' => 'Habitat', 'value' => false],
+            ['name' => 'herbaceous', 'title' => 'Herbaceous', 'value' => false],
+            ['name' => 'cycle', 'title' => 'Cycle', 'value' => false],
+            ['name' => 'properties', 'title' => 'Properties', 'value' => false],
+            ['name' => 'material', 'title' => 'Material', 'value' => false],
+
+        ];
+        return $this->sendResponse(compact('medicinalPlants', 'keys'), 'Medicinal Plants retrieved successfully');
     }
 
 
@@ -77,7 +92,7 @@ class MedicinalPlantAPIController extends AppBaseController
      */
     private function getRelationFields(): array
     {
-        return ['taxonomy', 'provinces.geographical', 'aerialTypes', 'groundType', 'foodIndustries', 'otherIndustries', 'industrialPotentials', 'origin', 'habitat', 'locations', 'medicines', 'effectiveMaterials', 'products', 'properties'];
+        return ['taxonomy', 'aerialTypes', 'groundType', 'origin', 'habitat', 'effectiveMaterials', 'properties'];
     }
 
 
@@ -92,28 +107,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *      description="Store MedicinalPlant",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="herbarium_number",
-     *          in="body",
-     *          description="MedicinalPlant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
      *          name="taxonomy_id",
-     *          in="body",
-     *          description="MedicinalPlant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="location_id",
-     *          in="body",
-     *          description="MedicinalPlant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="medicine_id",
      *          in="body",
      *          description="MedicinalPlant that should be stored",
      *          required=false,
@@ -134,42 +128,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="food_industry_id",
-     *          in="body",
-     *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="hygienic_cosmetic_industry_id",
-     *          in="body",
-     *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="other_industry_id",
-     *          in="body",
-     *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="industrial_potential_id",
-     *          in="body",
-     *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
      *          name="general_phenology_id",
-     *          in="body",
-     *          description="from general",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="pharmaceutical_form_id",
      *          in="body",
      *          description="from general",
      *          required=false,
@@ -204,13 +163,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="product_id",
-     *          in="body",
-     *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
      *          name="treatment_id",
      *          in="body",
      *          description="from medicinal_plant_type",
@@ -218,51 +170,9 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="effective_material_id",
+     *          name="materials",
      *          in="body",
      *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="traditional_iranian_medicine",
-     *          in="body",
-     *          description="0 -> raw , 1 -> processed",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="inherbal_medicine_store",
-     *          in="body",
-     *          description=" 1 => 'raw', 2 => 'processed'",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="natural_drug",
-     *          in="body",
-     *          description="0 -> Human medicines , 1 -> Animal drugs",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="exporting",
-     *          in="body",
-     *          description="0 -> raw , 1 -> processed",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="importing",
-     *          in="body",
-     *          description="0 -> raw , 1 -> processed",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="cultivated_area",
-     *          in="body",
-     *          description="0 -> raw , 1 -> processed",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
@@ -270,13 +180,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *          name="studied_sample",
      *          in="body",
      *          description="0 -> wild , 1 -> cultivated",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="presence_in_country",
-     *          in="body",
-     *          description="0 -> native , 1 -> endemic",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
@@ -305,27 +208,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *          name="code_no",
      *          in="body",
      *          description="code_no",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="flower_color",
-     *          in="body",
-     *          description="flower_color",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="fruit_color",
-     *          in="body",
-     *          description="fruit_color",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="height",
-     *          in="body",
-     *          description="height",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
@@ -436,35 +318,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="herbarium_number",
-     *          in="body",
-     *          description="MedicinalPlant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="article_id",
-     *          in="body",
-     *          description="MedicinalPlant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
      *          name="taxonomy_id",
-     *          in="body",
-     *          description="MedicinalPlant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="location_id",
-     *          in="body",
-     *          description="MedicinalPlant that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="medicine_id",
      *          in="body",
      *          description="MedicinalPlant that should be stored",
      *          required=false,
@@ -485,42 +339,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="food_industry_id",
-     *          in="body",
-     *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="hygienic_cosmetic_industry_id",
-     *          in="body",
-     *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="other_industry_id",
-     *          in="body",
-     *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="industrial_potential_id",
-     *          in="body",
-     *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
      *          name="general_phenology_id",
-     *          in="body",
-     *          description="from general",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="pharmaceutical_form_id",
      *          in="body",
      *          description="from general",
      *          required=false,
@@ -555,13 +374,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="product_id",
-     *          in="body",
-     *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
      *          name="treatment_id",
      *          in="body",
      *          description="from medicinal_plant_type",
@@ -569,51 +381,9 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="effective_material_id",
+     *          name="materials",
      *          in="body",
      *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="traditional_iranian_medicine",
-     *          in="body",
-     *          description="0 -> raw , 1 -> processed",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="inherbal_medicine_store",
-     *          in="body",
-     *          description=" 1 => 'raw', 2 => 'processed'",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="natural_drug",
-     *          in="body",
-     *          description="0 -> Human medicines , 1 -> Animal drugs",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="exporting",
-     *          in="body",
-     *          description="0 -> raw , 1 -> processed",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="importing",
-     *          in="body",
-     *          description="0 -> raw , 1 -> processed",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="cultivated_area",
-     *          in="body",
-     *          description="0 -> raw , 1 -> processed",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
@@ -621,13 +391,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *          name="studied_sample",
      *          in="body",
      *          description="0 -> wild , 1 -> cultivated",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="presence_in_country",
-     *          in="body",
-     *          description="0 -> native , 1 -> endemic",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
@@ -656,27 +419,6 @@ class MedicinalPlantAPIController extends AppBaseController
      *          name="code_no",
      *          in="body",
      *          description="code_no",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="flower_color",
-     *          in="body",
-     *          description="flower_color",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="fruit_color",
-     *          in="body",
-     *          description="fruit_color",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="height",
-     *          in="body",
-     *          description="height",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
@@ -776,38 +518,5 @@ class MedicinalPlantAPIController extends AppBaseController
         $medicinalPlant->delete();
 
         return $this->sendResponse($id, 'Medicinal Plant deleted successfully');
-    }
-
-
-    public function storeProductOrMedicine(MedicinalPlantProductAPIRequest $request, $id)
-    {
-        $input = $request->all();
-
-        /** @var MedicinalPlant $medicinalPlant */
-        $medicinalPlant = $this->medicinalPlantRepository->find($id, []);
-
-        if ($medicinalPlant === null) {
-            return $this->sendError('Medicinal Plant not found');
-        }
-
-        $medicinalPlant = $this->medicinalPlantRepository->storeProductOrMedicine($input, $id);
-
-        return $this->sendResponse($medicinalPlant->toArray(), 'MedicinalPlant updated successfully');
-    }
-
-    public function storeApplication(MedicinalPlantApplicationAPIRequest $request, $id)
-    {
-        $input = $request->all();
-
-        /** @var MedicinalPlant $medicinalPlant */
-        $medicinalPlant = $this->medicinalPlantRepository->find($id, []);
-
-        if ($medicinalPlant === null) {
-            return $this->sendError('Medicinal Plant not found');
-        }
-
-        $medicinalPlant = $this->medicinalPlantRepository->storeMedicinalApplication($input, $id);
-
-        return $this->sendResponse($medicinalPlant->toArray(), 'MedicinalPlant updated successfully');
     }
 }

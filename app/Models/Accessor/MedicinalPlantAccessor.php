@@ -48,18 +48,18 @@ trait MedicinalPlantAccessor
     {
         return !empty($this->cultivated_area_id) ? Arr::get(self::BOOLEAN, $this->cultivated_area_id) : null;
     }
-
-
-    public function getDistributionsAttribute()
-    {
-        $item = null;
-
-        if ($this->relationLoaded('provinces') && $this->provinces->count()) {
-            $item = $this->provinces->implode('name', ' & ');
-        }
-
-        return $item;
-    }
+//
+//
+//    public function getDistributionsAttribute()
+//    {
+//        $item = null;
+//
+//        if ($this->relationLoaded('provinces') && $this->provinces->count()) {
+//            $item = $this->provinces->implode('name', ' & ');
+//        }
+//
+//        return $item;
+//    }
 
     public function getCycleAttribute()
     {

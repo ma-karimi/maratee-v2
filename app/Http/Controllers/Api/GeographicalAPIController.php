@@ -58,12 +58,7 @@ class GeographicalAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $geographicals = $this->geographicalRepository->all(
-            [],
-            null,
-            null,
-            $request->get('relations')
-        );
+        $geographicals = $this->geographicalRepository->all()->groupBy('type');
 
         return $this->sendResponse($geographicals->toArray(), 'Geographicals retrieved successfully');
     }
@@ -104,6 +99,7 @@ class GeographicalAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(GeographicalAPIRequest $request)
     {
@@ -154,7 +150,7 @@ class GeographicalAPIController extends AppBaseController
      */
     public function show($id)
     {
-        $geographical = $this->geographicalRepository->find($id, \request()->get('relations'));
+        $geographical = $this->geographicalRepository->find($id);
 
         if ($geographical === null) {
             return $this->sendError('Geographical not found');
@@ -207,12 +203,13 @@ class GeographicalAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, GeographicalAPIRequest $request)
     {
         $input = $request->all();
 
-        $geographical = $this->geographicalRepository->find($id, \request()->get('relations'));
+        $geographical = $this->geographicalRepository->find($id);
 
         if ($geographical === null) {
             return $this->sendError('Geographical not found');
@@ -264,7 +261,7 @@ class GeographicalAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        $geographical = $this->geographicalRepository->find($id, \request()->get('relations'));
+        $geographical = $this->geographicalRepository->find($id);
 
         if ($geographical === null) {
             return $this->sendError('Geographical not found');

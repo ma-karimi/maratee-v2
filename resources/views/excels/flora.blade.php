@@ -22,8 +22,10 @@
     <tr>
         <th style="{{$th}}">Number</th>
         @include('excels.partials.taxonomyHeader')
+        @if($keys['iran_georgaphical'] ?? false)
+            <th style="{{$th}}">Iran Distributions</th>
+        @endif
         @if($keys['georgaphical'] ?? false)
-            <th style="{{$th}}">Geographical Locations</th>
             <th style="{{$th}}">Distributions</th>
         @endif
         @if($keys['life_form'] ?? false)
@@ -45,15 +47,10 @@
         <tr>
             <td style="{{$td}}">{{ $item->id ?? null }}</td>
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item->taxonomy, 'keys'=>$keys])
+            @if($keys['iran_georgaphical'] ?? false)
+                <td style="{{$td}}">{{ $item->iran_plant_geographicals }}</td>
+            @endif
             @if($keys['georgaphical'] ?? false)
-                <td>
-                    @foreach($item->locations as $location)
-                        {{$location['address_en']}} | {{$location['point']['DMS'][0]}}
-                        - {{$location['point']['DMS'][1]}}
-                        | {{$location['min_altitude']}} - {{$location['max_altitude']}}
-                        <hr>
-                    @endforeach
-                </td>
                 <td style="{{$td}}">{{ $item->plant_geographicals }}</td>
             @endif
             @if($keys['life_form'] ?? false)

@@ -4,33 +4,26 @@
 namespace App\Models\Relations;
 
 
-use App\Models\{ActionHub, Article, Location, MedicinalLocationConstituent, MedicinalPlant, MedicinalPlantType, Method};
+use App\Models\{ActionHub,
+    Article,
+    Location,
+    MedicinalLocationConstituent,
+    MedicinalPlant,
+    MedicinalPlantType,
+    Method,
+    Taxonomy};
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait MedicinalLocationRelations
 {
-
     /**
      * @return BelongsTo
      */
-    public function medicinal(): BelongsTo
+    public function taxonomy(): BelongsTo
     {
-        return $this->belongsTo(MedicinalPlant::class, 'medicinal_plant_id');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function determine()
-    {
-        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 1);
-    }
-
-    public function collect()
-    {
-        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 2);
+        return $this->belongsTo(Taxonomy::class)->withTrashed();
     }
 
 

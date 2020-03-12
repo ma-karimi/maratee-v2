@@ -129,34 +129,13 @@ class MedicinalLocationRepository extends BaseRepository
         return ['location_id', 'treatment_id', 'efficiency', 'studied_sample', 'presence_in_country', 'phenology_id', 'method_distillation_id', 'method_extraction_id', 'method_analyse_id',
 //            'herbarium_number', deleted by comment dr.sefidkon
             'collecting_year',
-            'medicinal_plant_id', 'code'];
+            'taxonomy_id', 'code'];
     }
 
     private function storeMetabolites($input, $medicinal_location)
     {
-        $metabolites = request()->filled('metabolites') ? explode(',', $input['metabolites']) : [];
+        $metabolites = request()->filled('metabolites') ? $input['metabolites'] : [];
         $this->createHub($medicinal_location->id, 'secondaryMetabolites', $metabolites);
-    }
-
-    private function storeDetermine($input, $medicinal_location_id)
-    {
-        $action_hub = $this->actionHub->firstOrCreate([
-            'action_id' => 1,
-            'actionable_type' => MedicinalLocation::class,
-            'actionable_id' => $medicinal_location_id
-        ]);
-
-        $determines = request()->filled('determines') ? explode(',', $input['determines']) : [];
-
-        $this->actionHubRepo->createHub($action_hub->id, 'actors', $determines);
-    }
-
-    private function getLastCode($medicinal_location): int
-    {
-        $lastMedicinal = $this->model->where('medicinal_plant_id', $medicinal_location->medicinal_plant_id)
-            ->where('id', '!=', $medicinal_location->id)->withTrashed()->latest()->first();
-
-        return $lastMedicinal ? $lastMedicinal->code : 0;
     }
 
     public function storeConstituent($input, $medicinal_location_id)
@@ -259,7 +238,7 @@ class MedicinalLocationRepository extends BaseRepository
      */
     private function storeArticleAuthors(array $input, $article_id)
     {
-        $authors = request()->filled('authors') ? explode(',', $input['authors']) : [];
+        $authors = request()->filled('authors') ? $input['authors'] : [];
         $this->articleRepo->createHub($article_id, 'actors', $authors);
     }
 

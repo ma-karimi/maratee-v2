@@ -26,8 +26,8 @@ class PaleobotanyTaxonomy extends BaseModel
         'samples' => 'nullable|array',
         'samples.*' => 'nullable|exists:paleobotany_generals,id',
         'divisions' => 'nullable|array',
-        'divisions.*.id' => 'nullable|exists:paleobotany_generals,id',
-        'divisions.*.value' => 'nullable|string',
+//        'divisions.*.id' => 'nullable|exists:paleobotany_generals,id',
+//        'divisions.*.value' => 'nullable|string',
         'name' => 'nullable|string',
     ];
     /**
@@ -36,7 +36,7 @@ class PaleobotanyTaxonomy extends BaseModel
      * @var string
      */
     protected $with = ['family', 'genus', 'species.authors', 'order', 'typeStatus', 'samples', 'divisions', 'infraSpecific'];
-    protected $appends = ['authors', 'scientific_name', 'sample'];
+    protected $appends = ['authors', 'scientific_name', 'sample', 'division'];
 
     public function getAuthorsAttribute()
     {
@@ -129,7 +129,7 @@ class PaleobotanyTaxonomy extends BaseModel
     public function divisions(): MorphToMany
     {
         return $this->morphToMany(PaleobotanyGeneral::class, 'modelable', 'paleobotany_general_hubs')
-            ->withPivot('value')
+//            ->withPivot('value')
             ->withTimestamps()
             ->whereNull('paleobotany_general_hubs.deleted_at')
             ->where('paleobotany_generals.type', 'division');
@@ -150,6 +150,17 @@ class PaleobotanyTaxonomy extends BaseModel
 
         if ($this->relationLoaded('samples') && $this->samples->count()) {
             $item = $this->samples->implode('name', ' & ');
+        }
+
+        return $item;
+    }
+
+    public function getDivisionAttribute()
+    {
+        $item = null;
+
+        if ($this->relationLoaded('divisions') && $this->divisions->count()) {
+            $item = $this->divisions->implode('name', ' & ');
         }
 
         return $item;

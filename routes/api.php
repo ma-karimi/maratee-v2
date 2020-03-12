@@ -150,10 +150,9 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::post('medicinal_locations/{id}/constituents', 'MedicinalLocationAPIController@storeConstituent');
     Route::post('medicinal_locations/{id}/reference', 'MedicinalLocationAPIController@storeReference');
-    Route::post('medicinal_plants/{id}/product', 'MedicinalPlantAPIController@storeProductOrMedicine');
-    Route::post('medicinal_plants/{id}/applications', 'MedicinalPlantAPIController@storeApplication');
-    Route::apiResource('medicinal_locations', 'MedicinalLocationAPIController')->except('index', 'show');
+    Route::apiResource('medicinal_locations', 'MedicinalLocationAPIController')->except('destroy');
     Route::apiResource('medicinal_plants', 'MedicinalPlantAPIController')->except('destroy');
+    Route::apiResource('medicinal_applications', 'MedicinalApplicationAPIController')->except('destroy');
 
     Route::post('medicines/{id}/media', 'MedicineAPIController@media');
     Route::get('medicines/all', 'MedicineAPIController@all');

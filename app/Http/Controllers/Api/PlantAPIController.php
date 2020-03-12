@@ -66,7 +66,22 @@ class PlantAPIController extends AppBaseController
             $request->except('per_page'),
             $this->fieldFloraRelations()
         );
-        return $this->sendResponse($plants->toArray(), 'Plants retrieved successfully');
+
+        $keys = [
+            ['name' => 'family', 'title' => 'Family', 'value' => false],
+            ['name' => 'genus', 'title' => 'Genus', 'value' => false],
+            ['name' => 'species', 'title' => 'Species', 'value' => false],
+            ['name' => 'subspecies', 'title' => 'SubSpecies', 'value' => false],
+            ['name' => 'variety', 'title' => 'Variety', 'value' => false],
+            ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
+            ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
+            ['name' => 'author', 'title' => 'Author', 'value' => false],
+            ['name' => 'geographical', 'title' => 'World Geographical', 'value' => false],
+            ['name' => 'iran_geographical', 'title' => 'Iran Geographical', 'value' => false],
+            ['name' => 'life_form', 'title' => 'LifeForm', 'value' => false],
+            ['name' => 'dna', 'title' => 'DNA', 'value' => false],
+        ];
+        return $this->sendResponse(compact('plants', 'keys'), 'Plants retrieved successfully');
     }
 
     /**
@@ -74,7 +89,7 @@ class PlantAPIController extends AppBaseController
      */
     private function fieldFloraRelations(): array
     {
-        return ['generalPhytogeography', 'taxonomy', 'protection', 'locations', 'media', 'geographicals'];
+        return ['generalPhytogeography', 'taxonomy', 'protection', 'locations', 'media', 'geographicals', 'iranGeographicals'];
     }
 
 

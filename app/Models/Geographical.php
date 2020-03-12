@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Support\Arr;
 
 /**
  * @SWG\Definition(
@@ -12,8 +13,11 @@ use App\Models\Contracts\BaseModel;
  */
 class Geographical extends BaseModel
 {
+
+    public const TYPE = [1 => 'world', 2 => 'iran'];
     public static $rules = [
         'name' => 'required|string',
+        'type_id' => 'required|in:1,2'
     ];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
     /**
@@ -22,6 +26,7 @@ class Geographical extends BaseModel
      * @var string
      */
     protected $table = 'geographicals';
+    protected $appends = ['type'];
 
     /**
      * Get all of the posts that are assigned this tag.
@@ -37,5 +42,10 @@ class Geographical extends BaseModel
     public function botanicals()
     {
         return $this->morphedByMany(Botanical::class, 'distributable');
+    }
+
+    public function getTypeAttribute()
+    {
+        return Arr::get(self::TYPE, $this->type_id);
     }
 }

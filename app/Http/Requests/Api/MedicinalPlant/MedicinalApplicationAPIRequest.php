@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api\MedicinalPlant;
 
 use InfyOm\Generator\Request\APIRequest;
 
-class MedicinalPlantApplicationAPIRequest extends APIRequest
+class MedicinalApplicationAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class MedicinalPlantApplicationAPIRequest extends APIRequest
     public function rules()
     {
         return [
-            'traditional_iranian_medicine' => 'nullable|numeric'
+            'taxonomy_id'
         ];
     }
 }

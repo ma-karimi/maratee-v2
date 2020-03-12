@@ -8,12 +8,11 @@ use App\Models\Contracts\BaseModel;
 use App\Models\Relations\MedicinalLocationRelations;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
 
 /**
  * @SWG\Definition(
  *      definition="MedicinalLocation",
- *      required={"medicinal_plant_id","location_id"}
+ *      required={"taxonomy","location_id"}
  * )
  */
 class MedicinalLocation extends BaseModel implements AuditableContract
@@ -21,7 +20,7 @@ class MedicinalLocation extends BaseModel implements AuditableContract
     use MedicinalLocationRelations, MedicinalLocationAccessor, Auditable, AuditTrait;
     public const STUDIED_SAMPLE = [0 => 'unknown', 1 => 'wild', 2 => 'cultivated'];
     public const PRESENCE_IN_COUNTRY = [0 => 'unknown', 1 => 'native', 2 => 'endemic'];
-    protected $with = ['determine', 'location', 'collect', 'constituents', 'treatment', 'distillation', 'secondaryMetabolites', 'phenology', 'distillation', 'extraction', 'analyse', 'article', 'audits'];
+    protected $with = ['audits', 'taxonomy'];
 
 
     /**
@@ -39,4 +38,5 @@ class MedicinalLocation extends BaseModel implements AuditableContract
         'metabolites',
         'last_audit'
     ];
+
 }

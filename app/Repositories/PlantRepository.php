@@ -5,6 +5,10 @@ namespace App\Repositories;
 use App\Models\Plant;
 use Exception;
 use Illuminate\Container\Container as Application;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class PlantRepository
@@ -58,11 +62,8 @@ class PlantRepository extends BaseRepository
     {
         $plant = $this->createPlant($input);
 
-
-        $location = $this->storeLocation($input['location'], $input->filled('location_id') ? $input['location_id'] : null);
-        $input['location_id'] = $location->id;
-        $this->createHub($plant->id, 'locations', [$location->id]);
         $this->createHub($plant->id, 'geographicals', $input['geographicals']);
+        $this->createHub($plant->id, 'iranGeographicals', $input['iran_geographicals']);
         $this->storeMedia($input, $plant);
 
 
@@ -91,6 +92,13 @@ class PlantRepository extends BaseRepository
         return parent::create($plant_input);
     }
 
+    /**
+     * @param $input
+     * @param $location_id
+     * @return Builder|Builder[]|Collection|Model
+     * @throws ValidationException
+     * @deprecated by dr.jamzad
+     */
     private function storeLocation($input, $location_id)
     {
         if ($location_id) {
@@ -147,7 +155,6 @@ class PlantRepository extends BaseRepository
             'description' => $input['description'] ?? null,
             'habitat_description' => $input['habitat_description'] ?? null,
             'ecology_description' => $input['ecology_description'] ?? null,
-//            'is_flowering' => $input['is_flowering'] ?? 0,
             'flowering_time' => $input['flowering_time'] ?? null,
             'number' => $input['number'] ?? null,
             'monopoly_of_iran_id' => $input['monopoly_of_iran_id'] ?? null,
@@ -158,6 +165,7 @@ class PlantRepository extends BaseRepository
         $plant =  parent::update($plant_input, $id);
 
         $this->createHub($plant->id, 'geographicals', $input['geographicals']);
+        $this->createHub($plant->id, 'iranGeographicals', $input['iran_geographicals']);
 
         return $plant;
     }

@@ -9,6 +9,7 @@ use App\Http\Requests\Api\MedicinalPlant\MedicinalLocationReferenceAPIRequest;
 use App\Models\MedicinalLocation;
 use App\Repositories\MedicinalLocationRepository;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Response;
 
@@ -25,7 +26,59 @@ class MedicinalLocationAPIController extends AppBaseController
     {
         $this->medicinalLocationRepository = $medicinalPlantRepo;
     }
+    /**
+     * @param Request $request
+     * @return Response
+     *
+     * @throws Exception
+     * @SWG\Get(
+     *      path="/medicinal_locations",
+     *      summary="Get a listing of the Natural Compounds",
+     *      tags={"Plant"},
+     *      description="Get all Natural Compounds",
+     *      produces={"application/json"},
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/Plant")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function index(Request $request)
+    {
 
+        $compounds = $this->medicinalLocationRepository->paginate(
+            $request->get('per_page'),
+            $request->except('per_page'),
+            $this->getRelationFields()
+        );
+
+        $keys = [
+            ['name' => 'family', 'title' => 'Family', 'value' => false],
+            ['name' => 'genus', 'title' => 'Genus', 'value' => false],
+            ['name' => 'species', 'title' => 'Species', 'value' => false],
+            ['name' => 'subspecies', 'title' => 'SubSpecies', 'value' => false],
+            ['name' => 'variety', 'title' => 'Variety', 'value' => false],
+            ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
+            ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
+        ];
+        return $this->sendResponse(compact('compounds', 'keys'), 'Natural Compounds retrieved successfully');
+    }
 
     /**
      * @param MedicinalLocationAPIRequest $request
@@ -39,14 +92,14 @@ class MedicinalLocationAPIController extends AppBaseController
      *      description="Store MedicinalLocation",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="herbarium_number",
+     *          name="taxonomy_id",
      *          in="body",
      *          description="MedicinalLocation that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
      *      ),
      *      @SWG\Parameter(
-     *          name="medicinal_plant_id",
+     *          name="article_id",
      *          in="body",
      *          description="MedicinalLocation that should be stored",
      *          required=false,
@@ -102,9 +155,8 @@ class MedicinalLocationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
      *      ),
      *      @SWG\Parameter(
-     *          name="presence_in_country",
+     *          name="collecting_year",
      *          in="body",
-     *          description="0 -> native , 1 -> endemic",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
      *      ),
@@ -207,14 +259,14 @@ class MedicinalLocationAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="herbarium_number",
+     *          name="taxonomy_id",
      *          in="body",
      *          description="MedicinalLocation that should be stored",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
      *      ),
      *      @SWG\Parameter(
-     *          name="medicinal_plant_id",
+     *          name="article_id",
      *          in="body",
      *          description="MedicinalLocation that should be stored",
      *          required=false,
@@ -270,9 +322,8 @@ class MedicinalLocationAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
      *      ),
      *      @SWG\Parameter(
-     *          name="presence_in_country",
+     *          name="collecting_year",
      *          in="body",
-     *          description="0 -> native , 1 -> endemic",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalLocation")
      *      ),
@@ -320,58 +371,6 @@ class MedicinalLocationAPIController extends AppBaseController
         return $this->sendResponse($medicinalPlant->toArray(), 'MedicinalLocation updated successfully');
     }
 
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @throws Exception
-     * @SWG\Delete(
-     *      path="/medicinal_locations/{id}",
-     *      summary="Remove the specified MedicinalLocation from storage",
-     *      tags={"MedicinalLocation"},
-     *      description="Delete MedicinalLocation",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of MedicinalLocation",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="string"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function destroy($id)
-    {
-        /** @var MedicinalLocation $medicinalPlant */
-        $medicinalPlant = $this->medicinalLocationRepository->find($id, []);
-
-        if ($medicinalPlant === null) {
-            return $this->sendError('Medicinal Location not found');
-        }
-
-        $medicinalPlant->delete();
-
-        return $this->sendResponse($id, 'Medicinal Location deleted successfully');
-    }
 
     public function storeReference(MedicinalLocationReferenceAPIRequest $request, $id)
     {
@@ -403,5 +402,13 @@ class MedicinalLocationAPIController extends AppBaseController
         $this->medicinalLocationRepository->storeConstituent($input, $id);
 
         return $this->sendResponse($medicinalLocation->toArray(), 'MedicinalLocation updated successfully');
+    }
+
+    /**
+     * @return array
+     */
+    public function getRelationFields(): array
+    {
+        return ['location', 'constituents', 'treatment', 'distillation', 'secondaryMetabolites', 'phenology', 'distillation', 'extraction', 'analyse', 'article'];
     }
 }
