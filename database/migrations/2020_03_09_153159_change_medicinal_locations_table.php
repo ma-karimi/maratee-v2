@@ -15,9 +15,8 @@ class ChangeMedicinalLocationsTable extends Migration
     {
         Schema::dropIfExists('medicinal_plant_constituents');
         Schema::table('medicinal_locations', function (Blueprint $table) {
-            $table->dropForeign(['medicinal_plant_id']);
-            $table->dropColumn(['medicinal_plant_id', 'presence_in_country']);
             $table->unsignedBigInteger('taxonomy_id');
+            $table->text('description');
 //
             $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onUpdate('NO ACTION')->onDelete('CASCADE');
 

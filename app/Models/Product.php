@@ -37,7 +37,7 @@ class Product extends BaseModel implements HasMedia
     protected $table = 'products';
 
 
-    protected $with = ['pharmaceutical_form', 'media', 'taxonomy'];
+    protected $with = ['pharmaceutical_form', 'media', 'taxonomy', 'manufacture'];
 
     protected $appends = ['status_name'];
 

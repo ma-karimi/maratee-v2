@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Accessor\MedicinalPlantTypeAccessor;
 use App\Models\Contracts\BaseModel;
+use Illuminate\Support\Str;
 
 /**
  * @SWG\Definition(
@@ -24,7 +25,8 @@ class MedicinalPlantType extends BaseModel
         7 => 'pharmaceutical',
         8 => 'stage_of_phenology',
         9 => 'treatment',
-        10 => 'properties'
+        10 => 'properties',
+        11 => 'manufacture'
     ];
     public static $rules = [
         'type_id' => 'required|integer',
@@ -37,6 +39,16 @@ class MedicinalPlantType extends BaseModel
     public function medicinals()
     {
         return $this->morphToMany(MedicinalPlant::class, 'hub', 'medicinal_hubs');
+    }
+
+    public function getNameAttribute($value)
+    {
+        return Str::ucfirst($value);
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = Str::lower($value);
     }
 
 }

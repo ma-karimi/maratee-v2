@@ -22,7 +22,6 @@ class CreateNonflowersTable extends Migration
             $table->unsignedBigInteger('phytogeography_id')->nullable();
             $table->unsignedBigInteger('substrate_id')->nullable();
             $table->text('description')->nullable();
-
             $table->timeStamps();
             $table->softDeletesTz();
             $table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('CASCADE');

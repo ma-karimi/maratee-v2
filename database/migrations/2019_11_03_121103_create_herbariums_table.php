@@ -16,12 +16,13 @@ class CreateHerbariumsTable extends Migration
         Schema::create('herbariums', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('herbarium_number')->nullable();
-            $table->string('herbarium_index')->nullable();
-            $table->string('cf')->nullable();
             $table->unsignedBigInteger('location_id')->nullable();
-            $table->unsignedBigInteger('organization_id');
+            $table->unsignedBigInteger('organization_id')->nullable();
+            $table->unsignedBigInteger('general_habitat_id')->nullable();
+            $table->unsignedBigInteger('general_phytogeography_id')->nullable();
             $table->unsignedBigInteger('taxonomy_id');
             $table->text('description')->nullable();
+
             $table->text('consideration')->nullable();
             $table->boolean('tip_picture_id')->nullable();
 

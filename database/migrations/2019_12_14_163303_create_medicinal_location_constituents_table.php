@@ -20,7 +20,7 @@ class CreateMedicinalLocationConstituentsTable extends Migration
             $table->unsignedBigInteger('medicinal_location_id');
             $table->unsignedBigInteger('constituent_id');
             $table->unsignedBigInteger('constituent_type_id');
-            $table->float('value', 4, 2);
+            $table->string('value')->nullable();
             $table->timestamps();
             $table->softDeletesTz();
         });

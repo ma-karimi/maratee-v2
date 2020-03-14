@@ -14,10 +14,7 @@ class CreateMedicinalApplicationsTable extends Migration
     public function up()
     {
 
-        Schema::table('medicinal_plants', function (Blueprint $table) {
-            $table->dropColumn(['natural_drug', 'inherbal_medicine_store', 'exporting', 'importing', 'cultivated_area_id', 'traditional_iranian_medicine', 'fruit_color', 'foliage_color', 'height', 'article_id', 'location_id', 'flower_color', 'medicinal_properties', 'hygienic_cosmetic_industry_id', 'presence_in_country', 'pharmaceutical_form_id']);
 
-        });
         Schema::create('medicinal_applications', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('taxonomy_id');

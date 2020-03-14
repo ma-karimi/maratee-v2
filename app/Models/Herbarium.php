@@ -26,17 +26,15 @@ class Herbarium extends BaseModel implements HasMedia, AuditableContract
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
 
     public static $rules = [
-        'organization_id' => 'required_if:is_flowering,1|exists:organizations,id',
+        'organization_id' => 'required|exists:organizations,id',
         'location_id' => 'nullable|exists:locations,id',
         'taxonomy_id' => 'nullable|exists:taxonomies,id',
         'herbarium_number' => 'nullable|string',
-        'herbarium_index' => 'nullable|string',
-//        'cf' => 'nullable|string',
+
         'description' => 'nullable|string',
         'country_id' => 'required|exists:countries,id',
         'city_id' => 'nullable|exists:cities,id',
         'province_id' => 'required|exists:provinces,id',
-        'is_flowering' => 'required|numeric',
         //classification
         'general_habitat_id' => 'nullable|exists:generals,id',
         'general_phytogeography_id' => 'nullable|exists:generals,id',
@@ -51,24 +49,10 @@ class Herbarium extends BaseModel implements HasMedia, AuditableContract
 
     protected $appends = ['tip_picture', 'visit', 'borrow', 'exchange_receive', 'exchange_send', 'last_audit'];
     protected $with = ['audits'];
+
     public function plant()
     {
         return $this->belongsTo(Plant::class, 'taxonomy_id', 'taxonomy_id');
-    }
-
-    public function determine()
-    {
-        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 1);
-    }
-
-    public function collect()
-    {
-        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 2);
-    }
-
-    public function research()
-    {
-        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 3);
     }
 
     public function taxonomy(): BelongsTo

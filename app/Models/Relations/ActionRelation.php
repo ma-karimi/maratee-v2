@@ -9,6 +9,11 @@ use App\Models\ActionHub;
 
 trait ActionRelation
 {
+    public function determine()
+    {
+        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 1);
+    }
+
     public function collect()
     {
         return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 2);

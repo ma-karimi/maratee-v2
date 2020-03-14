@@ -5,8 +5,6 @@ namespace App\Repositories;
 use App\Models\ActionHub;
 use App\Models\ActorHub;
 use App\Models\Herbarium;
-use App\Models\LocationHub;
-use App\Models\Plant;
 use Illuminate\Container\Container as Application;
 
 /**
@@ -34,18 +32,14 @@ class HerbariumRepository extends BaseRepository
      * @var LocationRepository
      */
     private $locationRepo;
-    /**
-     * @var PlantRepository
-     */
-    private $plantRepo;
 
-    public function __construct(Application $app, ActionHub $actionHubRepo, ActorHub $actorHubRepo, LocationRepository $locationRepo, PlantRepository $plantRepo)
+
+    public function __construct(Application $app, ActionHub $actionHubRepo, ActorHub $actorHubRepo, LocationRepository $locationRepo)
     {
         parent::__construct($app);
         $this->actionHubRepo = $actionHubRepo;
         $this->actorHubRepo = $actorHubRepo;
         $this->locationRepo = $locationRepo;
-        $this->plantRepo = $plantRepo;
     }
 
     /**
@@ -69,26 +63,14 @@ class HerbariumRepository extends BaseRepository
     public function create($input)
     {
 
-//        $is_flowering = $input['is_flowering'] != 1 ? $input['is_flowering'] : 1;
-//        $plant = $this->firstOrCreatePlant($input);
         $location = $this->storeLocation($input, $input->filled('location_id') ? $input['location_id'] : null);
         $input['location_id'] = $location->id;
-//        if ($is_flowering == 1) {
-//            $this->plantRepo->createHub($plant->id, 'locations', [$location->id]);
-//        }
+
         $herbarium = parent::create($this->herbariumData($input));
         $this->storeDetermine($input, $herbarium->id);
         $this->storeCollect($input, $herbarium->id);
-        $this->storeMedia($input, $herbarium);
 
         return $herbarium;
-    }
-
-
-    private function firstOrCreatePlant($input)
-    {
-
-        return Plant::firstOrCreate(['taxonomy_id' => $input['taxonomy_id'], 'is_flowering' => 1]);
     }
 
     private function storeLocation($input, $location_id)
@@ -118,10 +100,7 @@ class HerbariumRepository extends BaseRepository
     private function herbariumData($input): array
     {
         return [
-            'herbarium_index' => $input->herbarium_index ?? null,
             'herbarium_number' => $input->herbarium_number ?? null,
-            'cf' => $input->cf ?? null,
-            'is_flowering' => $input->is_flowering ?? null,
             'location_id' => $input->location_id ?? null,
             'taxonomy_id' => $input->taxonomy_id ?? null,
             'organization_id' => $input->organization_id ?? null,
@@ -130,7 +109,6 @@ class HerbariumRepository extends BaseRepository
             'description' => $input->description ?? null,
             'general_phytogeography_id' => $input['general_phytogeography_id'] ?? null,
             'general_habitat_id' => $input['general_habitat_id'] ?? null,
-            'general_substrate_id' => $input['general_substrate_id'] ?? null,
         ];
     }
 
@@ -203,42 +181,13 @@ class HerbariumRepository extends BaseRepository
 
     public function update($input, $id)
     {
-//        $is_flowering = $input['is_flowering'] != 1 ? $input['is_flowering'] : 1;
 
         $this->storeLocation($input, $input->filled('location_id') ? $input['location_id'] : null);
-
-//        $this->changeFloraLocationHubWhenChangeTaxonomyId($input, $id, $is_flowering);
 
         $model = parent::update($this->herbariumData($input), $id);
         $this->storeDetermine($input, $model->id);
         $this->storeCollect($input, $model->id);
 
         return $model;
-    }
-
-    /**
-     * @param $input
-     * @param $id
-     * @param $is_flowering
-     */
-    private function changeFloraLocationHubWhenChangeTaxonomyId($input, $id, int $is_flowering): void
-    {
-        $herbarium = $this->find($id)->load('plant');
-        if ($herbarium->taxonomy_id != $input['taxonomy_id']) {
-            $plant = $this->firstOrCreatePlant($input);
-            if ($herbarium->plant && $herbarium->is_flowering == 1) {
-                LocationHub::where(['locationable_type' => Plant::class, 'locationable_id' => $herbarium->plant->id, 'location_id' => $input['location_id']])->delete();
-                LocationHub::create(['locationable_type' => Plant::class, 'locationable_id' => $plant->id, 'location_id' => $input['location_id']]);
-            }
-        }
-    }
-
-    private function nonFlowerData($input)
-    {
-        return [
-            'general_phytogeography_id' => $input['general_phytogeography_id'],
-            'general_origin_id' => $input['general_origin_id'] ?? null,
-            'general_substrate_id' => $input['general_substrate_id'] ?? null,
-        ];
     }
 }

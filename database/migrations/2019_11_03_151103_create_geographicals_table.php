@@ -16,7 +16,7 @@ class CreateGeographicalsTable extends Migration
         Schema::create('geographicals', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->tinyInteger('type_id')->default(1);
+            $table->tinyInteger('type_id')->default(1)->comment('1: world, 2:iran');
             $table->timeStamps();
             $table->softDeletesTz();
         });

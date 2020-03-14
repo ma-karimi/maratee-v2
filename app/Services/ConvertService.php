@@ -10,15 +10,16 @@ use App\Models\{ActionHub,
     City,
     Convert\Treeleaf,
     General,
+    Geographical,
     Herbarium,
     Location,
-    LocationHub,
     Organization,
     Plant,
+    PlantGeographical,
     Province,
-    Taxonomy};
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Log;
+    Taxonomy
+};
+use Illuminate\Support\Str;
 
 class ConvertService
 {
@@ -97,24 +98,15 @@ class ConvertService
 
         // species
         if (!empty($this->treeLeaf['spe']['name'])) {
-            $this->models['general']['species_id'] = $specie_id = General::firstOrCreate($this->speciesData())->id;
-            if (count($this->models['species_authors'])) {
-                $this->firstOrCreateActorAndActorHub($specie_id, $this->models['species_authors']);
-            }
+            $this->firstOrCreateSpecies();
         }
         // subspecies
         if (!empty($this->treeLeaf['subspe']['name'])) {
-            $this->models['general']['subspecies_id'] = $sub_specie_id = General::firstOrCreate($this->subspeciesData())->id;
-            if (count($this->models['sub_species_authors'])) {
-                $this->firstOrCreateActorAndActorHub($sub_specie_id, $this->models['sub_species_authors']);
-            }
+            $this->firstOrCreateSubSpecies();
         }
         // variety
         if (!empty($this->treeLeaf['var']['name'])) {
-            $this->models['general']['variety_id'] = $variety_id = General::firstOrCreate($this->varietyData())->id;
-            if (count($this->models['variety_authors'])) {
-                $this->firstOrCreateActorAndActorHub($variety_id, $this->models['variety_authors']);
-            }
+            $this->firstOrCreateVariety();
         }
         // taxonomy
         $this->models['taxonomy_id'] = Taxonomy::firstOrCreate($this->taxonomyData())->id;
@@ -123,12 +115,11 @@ class ConvertService
 
         // plant herbarium
         $this->models['plant_id'] = Plant::firstOrCreate($this->plantData())->id;
-        if (!empty($this->models['location_id'])) {
-            LocationHub::firstOrCreate(
+        if (!empty($this->models['geographical_id'])) {
+            PlantGeographical::firstOrCreate(
                 [
-                    'locationable_type' => Plant::class,
-                    'locationable_id' => $this->models['plant_id'],
-                    'location_id' => $this->models['location_id']
+                    'plant_id' => $this->models['plant_id'],
+                    'geographical_id' => $this->models['geographical_id'],
                 ]
             );
         }
@@ -158,16 +149,17 @@ class ConvertService
             }
         }
 
-        if (App::environment() == 'local') {
+//        if (App::environment() == 'local') {
             $this->log(" - Herbarium id : {$herbarium_id} - ");
-        }
+//        }
 
     }
 
     private function firstOrCreateProvince($model, $type): void
     {
-
+        $province = $this->provinceData($model, $type);
         $this->models['province'] = Province::firstOrCreate($this->provinceData($model, $type));
+        $this->models['geographical_id'] = Geographical::firstOrCreate(['name' => $province['name_en'], 'type_id' => 2])->id;
     }
 
     private function provinceData($model, $type): array
@@ -273,12 +265,37 @@ class ConvertService
         ];
     }
 
+    private function firstOrCreateSpecies()
+    {
+        $speciesData = $this->speciesData();
+        $species = General::where($speciesData)->get();
+        if (count($species) == 0) {
+            $this->models['general']['species_id'] = $specie_id = General::create($this->speciesData())->id;
+            if (count($this->models['species_authors'])) {
+                $this->firstOrCreateActorAndActorHub($specie_id, $this->models['species_authors']);
+            }
+        } else {
+            foreach ($species as $item) {
+                $species_authors = collect($item->authors)->pluck('name')->all();
+                $diff = collect($this->models['species_authors'])->diff($species_authors)->all();
+                if (count($diff) <= 0) {
+                    return $this->models['general']['species_id'] = $item->id;
+                }
+            }
+            $this->models['general']['species_id'] = $specie_id = General::create($this->speciesData())->id;
+            if (count($this->models['species_authors'])) {
+                $this->firstOrCreateActorAndActorHub($specie_id, $this->models['species_authors']);
+            }
+
+        }
+    }
+
     private function speciesData(): array
     {
         $specie = $this->trimPropAuthor($this->treeLeaf->spe->name, 'species');
         return [
             'type' => 'species',
-            'name' => $specie ?? '',
+            'name' => Str::lower($specie) ?? '',
         ];
     }
 
@@ -334,13 +351,64 @@ class ConvertService
         ]);
     }
 
+    private function firstOrCreateSubSpecies()
+    {
+        $subspeciesData = $this->subspeciesData();
+        $subspecies = General::where($subspeciesData)->get();
+        if (count($subspecies) == 0) {
+            $this->models['general']['subspecies_id'] = $sub_specie_id = General::create($this->subspeciesData())->id;
+            if (count($this->models['sub_species_authors'])) {
+                $this->firstOrCreateActorAndActorHub($sub_specie_id, $this->models['sub_species_authors']);
+            }
+        } else {
+            foreach ($subspecies as $item) {
+                $subspecies_authors = collect($item->authors)->pluck('name')->all();
+                $diff = collect($this->models['sub_species_authors'])->diff($subspecies_authors)->all();
+
+                if (count($diff) <= 0) {
+                    return $this->models['general']['subspecies_id'] = $item->id;
+                }
+            }
+            $this->models['general']['subspecies_id'] = $sub_specie_id = General::create($this->subspeciesData())->id;
+            if (count($this->models['sub_species_authors'])) {
+                $this->firstOrCreateActorAndActorHub($sub_specie_id, $this->models['sub_species_authors']);
+            }
+        }
+    }
+
     private function subspeciesData(): array
     {
         $subSpecie = $this->trimPropAuthor($this->treeLeaf->subspe->name, 'sub_species');
         return [
             'type' => 'sub_species',
-            'name' => $subSpecie ?? '',
+            'name' => Str::lower($subSpecie) ?? '',
         ];
+    }
+
+    private function firstOrCreateVariety()
+    {
+        $varietyData = $this->varietyData();
+        $variety = General::where($varietyData)->get();
+        if (count($variety) == 0) {
+
+            $this->models['general']['variety_id'] = $specie_id = General::create($this->varietyData())->id;
+            if (count($this->models['variety_authors'])) {
+                $this->firstOrCreateActorAndActorHub($specie_id, $this->models['variety_authors']);
+            }
+        } else {
+            foreach ($variety as $item) {
+                $variety_authors = collect($item->authors)->pluck('name')->all();
+                $diff = collect($this->models['variety_authors'])->diff($variety_authors)->all();
+
+                if (count($diff) <= 0) {
+                    return $this->models['general']['variety_id'] = $item->id;
+                }
+            }
+            $this->models['general']['variety_id'] = $specie_id = General::create($this->varietyData())->id;
+            if (count($this->models['variety_authors'])) {
+                $this->firstOrCreateActorAndActorHub($specie_id, $this->models['variety_authors']);
+            }
+        }
     }
 
     private function varietyData(): array
@@ -348,7 +416,7 @@ class ConvertService
         $variety = $this->trimPropAuthor($this->treeLeaf->var->name, 'variety');
         return [
             'type' => 'variety',
-            'name' => $variety ?? '',
+            'name' => Str::lower($variety) ?? '',
         ];
     }
 
@@ -374,7 +442,6 @@ class ConvertService
     private function plantData(): array
     {
         return [
-            'is_flowering' => 1,
             'taxonomy_id' => $this->models['taxonomy_id'],
         ];
     }
@@ -388,12 +455,6 @@ class ConvertService
             'taxonomy_id' => $this->models['taxonomy_id'],
         ];
 
-        if (!empty($this->treeLeaf->cf)) {
-            $array['cf'] = $this->treeLeaf->cf;
-        }
-        if (!empty($this->treeLeaf->herbariumindex)) {
-            $array['herbarium_index'] = $this->treeLeaf->herbariumindex;
-        }
         if (!empty($this->treeLeaf->note1)) {
             $array['description'] = $this->treeLeaf->note1;
         }
