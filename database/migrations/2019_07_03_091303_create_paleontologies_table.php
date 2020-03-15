@@ -26,7 +26,7 @@ class CreatePaleontologiesTable extends Migration
             $table->integer('closet')->nullable();
             $table->integer('drawer')->nullable();
 
-            $table->unsignedBigInteger('taxonomy_id');
+            $table->unsignedBigInteger('taxonomy_id')->nullable();
             $table->unsignedBigInteger('general_order_id')->nullable();
             $table->unsignedBigInteger('general_plant_type_id')->nullable();
 

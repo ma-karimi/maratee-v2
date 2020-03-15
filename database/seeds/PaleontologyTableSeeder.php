@@ -1,6 +1,8 @@
 <?php
 
+use App\Imports\PaleobotanyImport;
 use Illuminate\Database\Seeder;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PaleontologyTableSeeder extends Seeder
 {
@@ -11,6 +13,6 @@ class PaleontologyTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Paleontology::class, 50)->create();
+        Excel::import(new PaleobotanyImport(), public_path('/excels/paleobotany.xls'));
     }
 }
