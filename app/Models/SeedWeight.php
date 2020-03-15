@@ -35,12 +35,7 @@ class SeedWeight extends BaseModel implements HasMedia, AuditableContract
      * @var string
      */
     protected $table = 'seed_weights';
-    protected $casts = [
-        'thousand_fruits_weight' => 'float',
-        'thousand_seeds_weight' => 'float',
-        'total_fruit_weight' => 'float',
-        'total_seed_weight' => 'float',
-    ];
+
     protected $with = ['audits'];
     protected $appends = ['last_audit'];
     /**
