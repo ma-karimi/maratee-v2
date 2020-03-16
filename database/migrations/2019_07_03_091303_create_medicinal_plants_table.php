@@ -25,6 +25,8 @@ class CreateMedicinalPlantsTable extends Migration
             $table->unsignedBigInteger('cycle_id')->nullable();
             $table->unsignedBigInteger('wooden_id')->nullable();
             $table->unsignedBigInteger('herbaceous_id')->nullable();
+            $table->text('properties_description')->nullable();
+            $table->text('compounds')->nullable();
 
             $table->timeStamps();
             $table->softDeletesTz();

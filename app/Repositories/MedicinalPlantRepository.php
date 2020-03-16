@@ -53,7 +53,7 @@ class MedicinalPlantRepository extends BaseRepository
      */
     private function medicinalData(): array
     {
-        return ['taxonomy_id', 'ground_part_id', 'general_origin_id', 'cycle_id', 'wooden_id', 'herbaceous_id', 'general_habitat_id'];
+        return ['taxonomy_id', 'ground_part_id', 'general_origin_id', 'cycle_id', 'wooden_id', 'herbaceous_id', 'general_habitat_id', 'properties_description', 'compounds'];
     }
 
     private function storeEffectiveMaterials($input, $medicinal)

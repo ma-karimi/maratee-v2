@@ -1,6 +1,8 @@
 <?php
 
+use App\Imports\MedicinalImport;
 use Illuminate\Database\Seeder;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MedicinalPlantTableSeeder extends Seeder
 {
@@ -11,6 +13,6 @@ class MedicinalPlantTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\MedicinalPlant::class, 50)->create();
+        Excel::import(new MedicinalImport(), public_path('/excels/medicinal.xlsx'));
     }
 }
