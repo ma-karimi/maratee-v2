@@ -18,7 +18,7 @@ class ChangeConstituentTypesTable extends Migration
             $table->dropColumn('name', 'description');
         });
         Schema::table('constituent_types', function (Blueprint $table) {
-            $table->string('name_en');
+            $table->string('name');
             $table->text('description');
         });
     }
