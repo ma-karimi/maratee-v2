@@ -18,7 +18,7 @@ class ConstituentType extends BaseModel
      *
      * @var array
      */
-    public static $rules = ['name_en' => 'required|string'];
+    public static $rules = ['name' => 'required|string'];
     /**
      * The database table used by the model.
      *
