@@ -7,7 +7,7 @@ use App\Models\Contracts\BaseModel;
 /**
  * @SWG\Definition(
  *            definition="ConstituentType",
- *            required={"name_en"},
+ *            required={"name"},
  *        )
  **/
 class ConstituentType extends BaseModel

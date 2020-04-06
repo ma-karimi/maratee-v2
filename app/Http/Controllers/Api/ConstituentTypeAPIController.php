@@ -87,7 +87,7 @@ class ConstituentTypeAPIController extends AppBaseController
      *      description="Store ConstituentType",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="name_en",
+     *          name="name",
      *          in="body",
      *          description="ConstituentType that should be stored",
      *          required=true,
@@ -200,7 +200,7 @@ class ConstituentTypeAPIController extends AppBaseController
      *          in="path"
      *      ),
      *      @SWG\Parameter(
-     *          name="name_en",
+     *          name="name",
      *          in="body",
      *          description="ConstituentType that should be stored",
      *          required=true,
