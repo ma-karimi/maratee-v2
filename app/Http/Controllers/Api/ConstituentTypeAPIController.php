@@ -68,6 +68,14 @@ class ConstituentTypeAPIController extends AppBaseController
         return $this->sendResponse($constituents->toArray(), 'ConstituentTypes retrieved successfully');
     }
 
+
+    public function all()
+    {
+        $constituents = $this->constituentTypeRepository->all();
+
+        return $this->sendResponse($constituents->toArray(), 'ConstituentTypes retrieved successfully');
+    }
+
     /**
      * @param ConstituentTypeAPIRequest $request
      * @return Response
@@ -112,6 +120,7 @@ class ConstituentTypeAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(ConstituentTypeAPIRequest $request)
     {
@@ -224,6 +233,7 @@ class ConstituentTypeAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id, ConstituentTypeAPIRequest $request)
     {

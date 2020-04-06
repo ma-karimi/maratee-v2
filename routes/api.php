@@ -134,6 +134,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::apiResource('cities', 'CityAPIController');
 
     Route::apiResource('constituents', 'ConstituentAPIController');
+    Route::get('constituent_types/all', 'ConstituentTypeAPIController@all');
     Route::apiResource('constituent_types', 'ConstituentTypeAPIController');
     Route::get('countries/all', 'CountryAPIController@all');
 
