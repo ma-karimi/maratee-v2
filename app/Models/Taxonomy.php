@@ -98,14 +98,6 @@ class Taxonomy extends BaseModel
     /**
      * @return HasMany
      */
-    public function nonflower(): HasMany
-    {
-        return $this->hasMany(Herbarium::class)->where('is_flowering', 0);
-    }
-
-    /**
-     * @return HasMany
-     */
     public function medicinalPlant(): HasMany
     {
         return $this->hasMany(MedicinalPlant::class);

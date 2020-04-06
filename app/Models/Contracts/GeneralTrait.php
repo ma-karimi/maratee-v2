@@ -9,15 +9,6 @@ use Illuminate\Support\Str;
 trait GeneralTrait
 {
 
-    public function getNameAttribute($value)
-    {
-        return Str::ucfirst($value);
-    }
-
-    public function setNameAttribute($value)
-    {
-        $this->attributes['name'] = Str::lower($value);
-    }
 
     public function getActorsAttribute()
     {
