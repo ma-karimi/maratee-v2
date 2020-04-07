@@ -78,6 +78,7 @@ class MedicinalPlant extends BaseModel implements HasMedia, AuditableContract
         'herbaceous',
         'cycle',
         'pharmaceuticals',
+        'medicinal_properties',
         'other_products',
         'potentials',
         'foods',

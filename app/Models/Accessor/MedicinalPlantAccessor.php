@@ -146,4 +146,14 @@ trait MedicinalPlantAccessor
         }
         return $item;
     }
+
+    public function getMedicinalPropertiesAttribute()
+    {
+        $item = null;
+
+        if ($this->relationLoaded('properties') && $this->properties->count()) {
+            $item .= $this->properties->implode('name', ' & ');
+        }
+        return $item;
+    }
 }
