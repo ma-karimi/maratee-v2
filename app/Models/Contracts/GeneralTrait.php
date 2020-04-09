@@ -4,8 +4,6 @@
 namespace App\Models\Contracts;
 
 
-use Illuminate\Support\Str;
-
 trait GeneralTrait
 {
 

@@ -40,8 +40,8 @@ class MedicinalPlantRepository extends BaseRepository
     public function create($input)
     {
         $model = parent::create(Arr::only($input, $this->medicinalData()));
-        $this->storeEffectiveMaterials($input, $model);
-        $this->storeMedicinalProperties($input, $model);
+        $this->storeMetabolites($input, $model);
+        $this->storeProperties($input, $model);
         $this->storeAerialParts($input, $model);
 
 
@@ -53,35 +53,35 @@ class MedicinalPlantRepository extends BaseRepository
      */
     private function medicinalData(): array
     {
-        return ['taxonomy_id', 'ground_part_id', 'general_origin_id', 'cycle_id', 'wooden_id', 'herbaceous_id', 'general_habitat_id', 'properties_description', 'compounds'];
+        return ['taxonomy_id', 'ground_part_id', 'general_origin_id', 'wooden_id', 'properties_description'];
     }
 
-    private function storeEffectiveMaterials($input, $medicinal)
+    private function storeMetabolites($input, $medicinal)
     {
-        $materials = request()->filled('materials') ? $input['materials'] : [];
-        $this->createHub($medicinal->id, 'effectiveMaterials', $materials);
+        $metabolites = request()->filled('metabolites') ? $input['metabolites'] : [];
+        $this->createHub($medicinal->id, 'secondaryMetabolites', $metabolites);
     }
 
-    private function storeMedicinalProperties($input, $medicinal)
+    private function storeProperties($input, $medicinal)
     {
         $properties = request()->filled('properties') ? $input['properties'] : [];
         $this->createHub($medicinal->id, 'properties', $properties);
     }
 
+    private function storeAerialParts($input, $medicinal)
+    {
+        $aerialTypes = request()->filled('aerialTypes') ? $input['aerialTypes'] : [];
+        $this->createHub($medicinal->id, 'aerialTypes', $aerialTypes);
+    }
+
     public function update($input, $id)
     {
         $model = parent::update(Arr::only($input, $this->medicinalData()), $id);
-        $this->storeEffectiveMaterials($input, $model);
-        $this->storeMedicinalProperties($input, $model);
+        $this->storeMetabolites($input, $model);
+        $this->storeProperties($input, $model);
         $this->storeAerialParts($input, $model);
 
         return $model;
-    }
-
-    private function storeAerialParts($input, $medicinal)
-    {
-        $aerialTypes = request()->filled('aerialTypes') ?  $input['aerialTypes'] : [];
-        $this->createHub($medicinal->id, 'aerialTypes', $aerialTypes);
     }
 
 }

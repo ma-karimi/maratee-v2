@@ -6,6 +6,7 @@ namespace App\Models\Relations;
 
 use App\Models\{General, MedicinalPart, MedicinalPlantType, Taxonomy};
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait MedicinalPlantRelations
 {
@@ -50,10 +51,24 @@ trait MedicinalPlantRelations
         )->where('type', 'habitat');
     }
 
+    /**
+     * @deprecated by dr.sefidkon
+     * @return mixed
+     */
     public function effectiveMaterials()
     {
         return $this->morphedByMany(MedicinalPlantType::class, 'hub', 'medicinal_hubs'
         )->where('medicinal_plant_types.type_id', array_search('material', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
+    }
+
+
+    /**
+     * @return MorphToMany
+     */
+    public function secondaryMetabolites(): MorphToMany
+    {
+        return $this->morphedByMany(MedicinalPlantType::class, 'hub', 'medicinal_location_hubs'
+        )->where('medicinal_plant_types.type_id', array_search('secondary_metabolite', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_location_hubs.deleted_at');
     }
 
 

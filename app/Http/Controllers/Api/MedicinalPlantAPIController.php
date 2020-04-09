@@ -76,11 +76,11 @@ class MedicinalPlantAPIController extends AppBaseController
             ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
             ['name' => 'origin', 'title' => 'Origin', 'value' => false],
             ['name' => 'part_used', 'title' => 'Part Used', 'value' => false],
-            ['name' => 'habitat', 'title' => 'Habitat', 'value' => false],
-            ['name' => 'herbaceous', 'title' => 'Herbaceous', 'value' => false],
-            ['name' => 'cycle', 'title' => 'Cycle', 'value' => false],
+//            ['name' => 'habitat', 'title' => 'Habitat', 'value' => false],
+//            ['name' => 'herbaceous', 'title' => 'Herbaceous', 'value' => false],
+//            ['name' => 'cycle', 'title' => 'Cycle', 'value' => false],
             ['name' => 'properties', 'title' => 'Properties', 'value' => false],
-            ['name' => 'material', 'title' => 'Material', 'value' => false],
+            ['name' => 'metabolite', 'title' => 'Metabolite', 'value' => false],
 
         ];
         return $this->sendResponse(compact('medicinalPlants', 'keys'), 'Medicinal Plants retrieved successfully');
@@ -92,7 +92,7 @@ class MedicinalPlantAPIController extends AppBaseController
      */
     private function getRelationFields(): array
     {
-        return ['taxonomy', 'aerialTypes', 'groundType', 'origin', 'habitat', 'effectiveMaterials', 'properties'];
+        return ['taxonomy', 'aerialTypes', 'groundType', 'origin', 'secondaryMetabolites', 'properties'];
     }
 
 
@@ -114,7 +114,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="aerial_part_id",
+     *          name="aerialTypes",
      *          in="body",
      *          description="from medicinal_parts where type=aerial",
      *          required=false,
@@ -128,58 +128,15 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="general_phenology_id",
-     *          in="body",
-     *          description="from general",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="method_distillation_id",
-     *          in="body",
-     *          description="from methods",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="method_extraction_id",
-     *          in="body",
-     *          description="from methods",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="method_analyse_id",
-     *          in="body",
-     *          description="from methods",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="secondary_metabolite_id",
+     *          name="metabolites",
      *          in="body",
      *          description="from medicinal_plant_type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="treatment_id",
+     *          name="properties_description",
      *          in="body",
-     *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="materials",
-     *          in="body",
-     *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="studied_sample",
-     *          in="body",
-     *          description="0 -> wild , 1 -> cultivated",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
@@ -191,30 +148,9 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="side_effects",
-     *          in="body",
-     *          description="side_effects",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="efficiency",
-     *          in="body",
-     *          description="efficiency : float type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
      *          name="code_no",
      *          in="body",
      *          description="code_no",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="life_forms",
-     *          in="body",
-     *          description="life_forms",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
@@ -325,7 +261,7 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="aerial_part_id",
+     *          name="aerialTypes",
      *          in="body",
      *          description="from medicinal_parts where type=aerial",
      *          required=false,
@@ -339,58 +275,15 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="general_phenology_id",
-     *          in="body",
-     *          description="from general",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="method_distillation_id",
-     *          in="body",
-     *          description="from methods",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="method_extraction_id",
-     *          in="body",
-     *          description="from methods",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="method_analyse_id",
-     *          in="body",
-     *          description="from methods",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="secondary_metabolite_id",
+     *          name="metabolites",
      *          in="body",
      *          description="from medicinal_plant_type",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="treatment_id",
+     *          name="properties_description",
      *          in="body",
-     *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="materials",
-     *          in="body",
-     *          description="from medicinal_plant_type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="studied_sample",
-     *          in="body",
-     *          description="0 -> wild , 1 -> cultivated",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
@@ -402,30 +295,9 @@ class MedicinalPlantAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
      *      @SWG\Parameter(
-     *          name="side_effects",
-     *          in="body",
-     *          description="side_effects",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="efficiency",
-     *          in="body",
-     *          description="efficiency : float type",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
      *          name="code_no",
      *          in="body",
      *          description="code_no",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
-     *      ),
-     *      @SWG\Parameter(
-     *          name="life_forms",
-     *          in="body",
-     *          description="life_forms",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/MedicinalPlant")
      *      ),
