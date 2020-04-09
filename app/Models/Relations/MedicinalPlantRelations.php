@@ -67,8 +67,8 @@ trait MedicinalPlantRelations
      */
     public function secondaryMetabolites(): MorphToMany
     {
-        return $this->morphedByMany(MedicinalPlantType::class, 'hub', 'medicinal_location_hubs'
-        )->where('medicinal_plant_types.type_id', array_search('secondary_metabolite', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_location_hubs.deleted_at');
+        return $this->morphedByMany(MedicinalPlantType::class, 'hub', 'medicinal_hubs'
+        )->where('medicinal_plant_types.type_id', array_search('secondary_metabolite', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
     }
 
 
