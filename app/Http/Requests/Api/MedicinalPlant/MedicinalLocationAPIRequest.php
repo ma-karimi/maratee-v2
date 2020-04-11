@@ -26,6 +26,7 @@ class MedicinalLocationAPIRequest extends APIRequest
         return [
             'traditional_iranian_medicine' => 'nullable|numeric',
             'natural_drug' => 'nullable|numeric',
+            'taxonomy_id' => 'required|exists:taxonomies,id',
             'food_industry_id' => 'nullable|exists:medicinal_plant_types,id',
             'other_industry_id' => 'nullable|exists:medicinal_plant_types,id',
             'industrial_potential_id' => 'nullable|exists:medicinal_plant_types,id',
