@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use OwenIt\Auditing\Auditable;
 
 /**
  * @SWG\Definition(
@@ -15,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Taxonomy extends BaseModel
 {
 
+    use AuditTrait, Auditable;
     public static $rules = [
         'family_id' => 'required|exists:generals,id',
         'genus_id' => 'nullable|exists:generals,id',
@@ -29,8 +32,8 @@ class Taxonomy extends BaseModel
      * @var string
      */
     protected $table = 'taxonomies';
-    protected $with = ['family', 'genus', 'subspecies.authors', 'species.authors', 'variety.authors'];
-    protected $appends = ['authors', 'scientific_name', 'scientific'];
+    protected $with = ['family', 'genus', 'subspecies.authors', 'species.authors', 'variety.authors', 'audits'];
+    protected $appends = ['authors', 'scientific_name', 'scientific', 'last_audit'];
 
     public function getAuthorsAttribute()
     {
