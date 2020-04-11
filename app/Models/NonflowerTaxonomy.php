@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use App\Models\Contracts\GeneralTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Arr;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
 /**
  * @SWG\Definition(
@@ -14,9 +16,10 @@ use Illuminate\Support\Arr;
  *      required={"family_id"}
  * )
  */
-class NonflowerTaxonomy extends BaseModel
+class NonflowerTaxonomy extends BaseModel implements AuditableContract
 {
 
+    use AuditTrait, Auditable;
 
     public static $rules = [
         'family_id' => 'required|exists:nonflower_generals,id',
@@ -32,8 +35,8 @@ class NonflowerTaxonomy extends BaseModel
      * @var string
      */
     protected $table = 'nonflower_taxonomies';
-    protected $with = ['family', 'genus', 'subspecies.authors', 'species.authors', 'variety.authors'];
-    protected $appends = ['authors', 'scientific_name', 'scientific'];
+    protected $with = ['family', 'genus', 'subspecies.authors', 'species.authors', 'variety.authors', 'audits'];
+    protected $appends = ['authors', 'scientific_name', 'scientific', 'last_audit'];
 
     use GeneralTrait;
 

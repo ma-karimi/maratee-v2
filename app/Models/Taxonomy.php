@@ -7,6 +7,7 @@ use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
 /**
  * @SWG\Definition(
@@ -14,7 +15,7 @@ use OwenIt\Auditing\Auditable;
  *      required={"family_id"}
  * )
  */
-class Taxonomy extends BaseModel
+class Taxonomy extends BaseModel implements AuditableContract
 {
 
     use AuditTrait, Auditable;

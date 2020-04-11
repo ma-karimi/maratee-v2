@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
 /**
  * @SWG\Definition(
@@ -13,8 +16,10 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  *      required={"genus_is", "species_id"}
  * )
  */
-class PaleobotanyTaxonomy extends BaseModel
+class PaleobotanyTaxonomy extends BaseModel implements AuditableContract
 {
+
+    use AuditTrait, Auditable;
 
     public static $rules = [
         'family_id' => 'nullable|exists:paleobotany_generals,id',
@@ -35,8 +40,8 @@ class PaleobotanyTaxonomy extends BaseModel
      *
      * @var string
      */
-    protected $with = ['family', 'genus', 'species.authors', 'order', 'typeStatus', 'samples', 'divisions', 'infraSpecific'];
-    protected $appends = ['authors', 'scientific_name', 'sample', 'division'];
+    protected $with = ['family', 'genus', 'species.authors', 'order', 'typeStatus', 'samples', 'divisions', 'infraSpecific', 'audits'];
+    protected $appends = ['authors', 'scientific_name', 'sample', 'division', 'last_audit'];
 
     public function getAuthorsAttribute()
     {
