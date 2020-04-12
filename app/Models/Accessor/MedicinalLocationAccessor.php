@@ -20,11 +20,6 @@ trait MedicinalLocationAccessor
         return Arr::get(self::STUDIED_SAMPLE, $this->studied_sample);
     }
 
-    public function getPresenceInCountryNameAttribute()
-    {
-        return Arr::get(self::PRESENCE_IN_COUNTRY, $this->presence_in_country);
-    }
-
 
     public function getMetabolitesAttribute()
     {

@@ -19,7 +19,6 @@ class MedicinalLocation extends BaseModel implements AuditableContract
 {
     use MedicinalLocationRelations, MedicinalLocationAccessor, Auditable, AuditTrait;
     public const STUDIED_SAMPLE = [0 => 'unknown', 1 => 'wild', 2 => 'cultivated'];
-    public const PRESENCE_IN_COUNTRY = [0 => 'unknown', 1 => 'native', 2 => 'endemic'];
     protected $with = ['audits', 'taxonomy'];
 
 
@@ -34,7 +33,6 @@ class MedicinalLocation extends BaseModel implements AuditableContract
 
     protected $appends = [
         'studied_sample_name',
-        'presence_in_country_name',
         'metabolites',
         'last_audit'
     ];
