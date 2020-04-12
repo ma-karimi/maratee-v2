@@ -42,6 +42,8 @@
         @endif
         @if($keys['collect'] ?? false)
             <th style="{{$th}}">Collector</th>
+        @endif
+        @if($keys['year'] ?? false)
             <th style="{{$th}}">Year</th>
         @endif
         @if($keys['type_sample'] ?? false)
@@ -49,6 +51,9 @@
         @endif
         @if($keys['treatment'] ?? false)
             <th style="{{$th}}">Treatment</th>
+        @endif
+        @if($keys['sample_number'] ?? false)
+            <th style="{{$th}}">Sample Number</th>
         @endif
         @if($keys['repeat'] ?? false)
             <th style="{{$th}}">Repeat</th>
@@ -73,7 +78,7 @@
     @foreach($result as $item)
         <tr>
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item->taxonomy, 'keys'=>$keys])
-            @if($keys['genotype_code'] ?? false)
+            @if($keys['genotype'] ?? false)
                 <td style="{{$td}}">{{ $item['genotype_code'] ?? null}}</td>
             @endif
             @if($keys['conversation'] ?? false)
@@ -93,13 +98,18 @@
             @endif
             @if($keys['collect'] ?? false)
                 <td style="{{$td}}">{{ $item['collect']['authors'] ?? null}}</td>
-                <td style="{{$td}}">{{ $item['collect']['date'] ?? null}}</td>
+            @endif
+            @if($keys['year'] ?? false)
+                <td style="{{$td}}">{{ $item['year'] ?? null}}</td>
             @endif
             @if($keys['type_sample'] ?? false)
                 <td style="{{$td}}">{{ $item['sample_type'] ?? null}}</td>
             @endif
             @if($keys['treatment'] ?? false)
                 <td style="{{$td}}">{{ $item['treatment']['name_en'] ?? null}}</td>
+            @endif
+            @if($keys['sample_number'] ?? false)
+                <td style="{{$td}}">{{ $item['sample_number'] ?? null}}</td>
             @endif
             @if($keys['repeat'] ?? false)
                 <td style="{{$td}}">{{$item['repeat'] ?? null}}</td>

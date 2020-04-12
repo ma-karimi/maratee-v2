@@ -17,6 +17,9 @@
 //    });
 //dd(\App\Models\Location::first());
 
+use Illuminate\Support\Str;
+
+
 Route::get('/', function () {
     $name = Str::singular(Str::studly('medicinal_locations'));
     $repo = 'App\\Repositories\\' . $name . 'Repository';
