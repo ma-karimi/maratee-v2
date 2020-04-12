@@ -165,7 +165,7 @@ class CryoBankAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
-     *          name="treatment_values",
+     *          name="sample_number",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
@@ -347,7 +347,7 @@ class CryoBankAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
-     *          name="treatment_values",
+     *          name="sample_number",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
