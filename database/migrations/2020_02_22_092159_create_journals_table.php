@@ -25,7 +25,7 @@ class CreateJournalsTable extends Migration
 
         Schema::table('articles', function (Blueprint $table){
             $table->dropColumn('journal_name');
-            $table->unsignedBigInteger('journal_id');
+            $table->unsignedBigInteger('journal_id')->nullable();
         });
 
     }

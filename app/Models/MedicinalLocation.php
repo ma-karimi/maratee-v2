@@ -21,15 +21,15 @@ class MedicinalLocation extends BaseModel implements AuditableContract
     public const STUDIED_SAMPLE = [0 => 'unknown', 1 => 'wild', 2 => 'cultivated'];
     protected $with = ['audits', 'taxonomy'];
 
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'efficiency' => 'float',
-    ];
+//
+//    /**
+//     * The attributes that should be casted to native types.
+//     *
+//     * @var array
+//     */
+//    protected $casts = [
+//        'efficiency' => 'float',
+//    ];
 
     protected $appends = [
         'studied_sample_name',

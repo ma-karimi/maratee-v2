@@ -17,23 +17,19 @@ use App\Models\Method;
 use App\Models\Province;
 use App\Models\Taxonomy;
 use App\Repositories\MedicinalLocationRepository;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\OnEachRow;
-use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Row;
 
 class MedicinalLocationImport implements OnEachRow, WithHeadingRow
 {
 
-
     public function onRow(Row $row)
     {
         ini_set('max_execution_time', 9000);
 //        ini_set('memory_limit', '2000M');
-        $row      = $row->toArray();
-
+        $row = $row->toArray();
         if (!empty($row)) {
             $row = $this->storeTaxonomy($row);
 
@@ -44,17 +40,12 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
             $row = $this->storeTreatment($row);
             $row = $this->storeStudiedSample($row);
             $row = $this->storeAuthor($row);
-            $model = MedicinalLocation::create(Arr::only($row, $this->medicinalLocationData()));
+            $model = MedicinalLocation::create($this->medicinalLocationData($row));
             $this->storeMetabolites($row, $model);
             $this->storeConstituent($row, $model->id);
             $this->log('MLocation:' . $model->id);
         }
 
-    }
-
-    private function log(string $message)
-    {
-        echo "$message\n";
     }
 
     private function storeTaxonomy($row)
@@ -265,20 +256,23 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
      */
     private function createLocation($row)
     {
-        $row['location_id'] = null;
-        if (!empty($row['province'])) {
+        $row['location_id'] = $row['province_id'] = null;
+        if (!empty($row['province']) && !empty($row['address_fa'])) {
             $province = Province::where('name_en', Str::ucfirst($row['province']))->first();
 
             if ($province) {
                 $row['province_id'] = $province->id;
-                $location_input = $this->locationData($row);
-                $row['location_id'] = Location::create($location_input)->id;
             }
 
-        } else {
+            $location_input = $this->locationData($row);
+            $row['location_id'] = Location::create($location_input)->id;
+
+        } elseif (!empty($row['address_fa']) && empty($row['province'])) {
             $province_value = $row['province'] ?? '';
             $and = !empty($province_value) ? ', ' : '';
             $address_fa_value = $row['address_fa'] ?? '';
+            $location_input = $this->locationData($row);
+            $row['location_id'] = Location::create($location_input)->id;
             $row['description'] = "Location = {$province_value} {$and} {$address_fa_value}";
         }
 
@@ -293,16 +287,16 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
     private function locationData($row): array
     {
         return [
-            'province_id' => $row['province_id'],
-            'address_fa' => $row['address_fa'] ?? null,
+            'province_id' => $row['province_id'] ?: null,
+            'address_en' => $row['address_fa'] ?: null,
         ];
     }
 
     private function storeAnalyse($row)
     {
-        $row['analyse_id'] = null;
+        $row['method_analyse_id'] = null;
         if (!empty($row['analyse'])) {
-            $row['analyse_id'] = Method::firstOrCreate(['name' => Str::lower($row['analyse']), 'type_id' => 3])->id;
+            $row['method_analyse_id'] = Method::firstOrCreate(['name' => Str::lower($row['analyse']), 'type_id' => 3])->id;
         }
 
         return $row;
@@ -340,9 +334,10 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
 
     private function storeStudiedSample($row)
     {
-        $row['studied_sample'] = 0;
         if (!empty($row['studied_sample'])) {
             $row['studied_sample'] = Str::lower($row['studied_sample']) == 'wild' ? 1 : 2;
+        } else {
+            $row['studied_sample'] = 0;
         }
         return $row;
 
@@ -350,13 +345,15 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
 
     private function storeAuthor($row)
     {
-        $journal_id = Journal::firstOrCreate(['title' => Str::lower($row['journal'])])->id;
 
+        if (!empty($row['journal'])) {
+            $journal_id = Journal::firstOrCreate(['title' => $row['journal']])->id;
+        }
         $article = Article::create([
-            'title' => Str::lower($row['title']),
+            'title' => $row['title'] ?? null,
             'page_no' => $row['page_id'] ?? null,
             'year' => $row['year'] ?? null,
-            'journal_id' => $journal_id,
+            'journal_id' => $journal_id ?? null,
         ]);
 
         $authors = collect(explode(', ', $row['authors']))->filter()->all();
@@ -378,25 +375,26 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
     }
 
     /**
+     * @param $row
      * @return array
      */
-    private function medicinalLocationData(): array
+    private function medicinalLocationData($row): array
     {
         return [
-            'location_id',
-            'treatment_id',
-            'efficiency',
-            'studied_sample',
-            'article_id',
-            'phenology_id',
-            'method_distillation_id',
-            'method_extraction_id',
-            'method_analyse_id',
-//            'herbarium_number', deleted by comment dr.sefidkon
-            'collecting_year',
-            'description',
-            'taxonomy_id',
-            'code'];
+            'location_id' => $row['location_id'] ?? null,
+            'treatment_id' => $row['treatment_id'] ?? null,
+            'efficiency' => $row['efficiency'] ? (string)$row['efficiency'] : null,
+            'studied_sample' => $row['studied_sample'] ?? 0,
+            'article_id' => $row['article_id'] ?? null,
+            'phenology_id' => $row['phenology_id'] ?? null,
+            'method_distillation_id' => $row['method_distillation_id'] ?? null,
+            'method_extraction_id' => $row['method_extraction_id'] ?? null,
+            'method_analyse_id' => $row['method_analyse_id'] ?? null,
+            'collecting_year' => $row['collecting_year'] ?? null,
+            'description' => $row['description'] ?? null,
+            'taxonomy_id' => $row['taxonomy_id'] ?? null,
+            'code' => $row['code'] ?? null,
+        ];
     }
 
     private function storeMetabolites($row, $medicinal_location)
@@ -423,30 +421,36 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
 
         $constituents = collect($constituents)->filter()->all();
         $items = [];
-        foreach ($constituents as $index=>$item) {
+        foreach ($constituents as $index => $item) {
             $strrpos = strrpos($item, '(');
             $substr = substr($item, $strrpos);
             $type = str_replace($substr, '', $item);
             $value = trim($substr, '()');
             $items[$index]['value'] = $value;
-            $cons_collection[] = $items[$index]['id'] = ConstituentType::firstOrCreate(['name_en' => trim($type)])->id;
+            $cons_collection[] = $items[$index]['id'] = ConstituentType::firstOrCreate(['name' => trim($type)])->id;
         }
 
         MedicinalLocationConstituent::where('medicinal_location_id', $medicinal_location_id)
             ->whereNotIn('constituent_type_id', $cons_collection)
             ->delete();
 
-        foreach ($items as $item) {
+        foreach ($items as $index => $item) {
             MedicinalLocationConstituent::updateOrCreate(
                 [
                     'constituent_type_id' => $item['id'],
-                    'medicinal_location_id' => $medicinal_location_id
+                    'medicinal_location_id' => $medicinal_location_id,
+                    'constituent_id' => $index + 1
                 ],
                 [
-                    'value' => $item['value']
+                    'value' => (string)$item['value']
                 ]
             );
         }
+    }
+
+    private function log(string $message)
+    {
+        echo "$message\n";
     }
 
 }
