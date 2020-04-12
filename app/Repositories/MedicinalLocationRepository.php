@@ -186,7 +186,11 @@ class MedicinalLocationRepository extends BaseRepository
     {
         $location_input = $this->locationData($input);
         if (request()->filled('location_id')) {
-            return $this->location_model->find($input['location_id'])->fill($location_input)->save();
+            $location = $this->location_model->find($input['location_id']);
+            $location->fill($location_input);
+            $location->save();
+
+            return $location;
         }
 
         return $this->location_model->create($location_input);
