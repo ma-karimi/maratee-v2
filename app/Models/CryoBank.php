@@ -22,7 +22,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class CryoBank extends BaseModel implements HasMedia, AuditableContract
 {
-    use CryoBankScope,ActionRelation, ArticleRelation, CryoBankAccessor, HasMediaTrait, Auditable, AuditTrait;
+    use CryoBankScope, ActionRelation, ArticleRelation, CryoBankAccessor, HasMediaTrait, Auditable, AuditTrait;
 
     public const TYPE_SAMPLE = [
         1 => 'seed', 2 => 'shoot', 3 => 'cell'
@@ -59,6 +59,7 @@ class CryoBank extends BaseModel implements HasMedia, AuditableContract
 
     protected $appends = ['sample_type', 'sample', 'genotype_code', 'last_audit'];
     protected $with = ['audits'];
+
     /**
      * @return BelongsTo
      */

@@ -169,7 +169,7 @@ class MedicinalLocationRepository extends BaseRepository
     public function update($input, $id)
     {
 
-        $this->updateLocation($input);
+        $input['location_id'] = $this->updateLocation($input)->id;
 
         $model = parent::update(Arr::only($input, $this->medicinalLocationData()), $id);
         $this->storeMetabolites($input, $model);
@@ -185,29 +185,11 @@ class MedicinalLocationRepository extends BaseRepository
     private function updateLocation($input)
     {
         $location_input = $this->locationData($input);
+        if (request()->filled('location_id')) {
+            return $this->location_model->find($input['location_id'])->fill($location_input)->save();
+        }
 
-        return $this->location_model->find($input['location_id'])->update($location_input);
-    }
-
-    /**
-     * @deprecated
-     * @param $input
-     * @param $medicinal_location_id
-     */
-    private function storeCollect($input, $medicinal_location_id)
-    {
-
-        $action_hub = $this->actionHub->updateOrCreate(
-            [
-                'action_id' => 2,
-                'actionable_type' => MedicinalLocation::class,
-                'actionable_id' => $medicinal_location_id
-            ],
-            [
-                'date' => $input['date'] ?? null
-            ]);
-        $collectors = request()->filled('collectors') ? explode(',', $input['collectors']) : [];
-        $this->actionHubRepo->createHub($action_hub->id, 'actors', $collectors);
+        return $this->location_model->create($location_input);
     }
 
     public function storeReference(array $input, $id)
@@ -240,6 +222,27 @@ class MedicinalLocationRepository extends BaseRepository
     {
         $authors = request()->filled('authors') ? $input['authors'] : [];
         $this->articleRepo->createHub($article_id, 'actors', $authors);
+    }
+
+    /**
+     * @param $input
+     * @param $medicinal_location_id
+     * @deprecated
+     */
+    private function storeCollect($input, $medicinal_location_id)
+    {
+
+        $action_hub = $this->actionHub->updateOrCreate(
+            [
+                'action_id' => 2,
+                'actionable_type' => MedicinalLocation::class,
+                'actionable_id' => $medicinal_location_id
+            ],
+            [
+                'date' => $input['date'] ?? null
+            ]);
+        $collectors = request()->filled('collectors') ? explode(',', $input['collectors']) : [];
+        $this->actionHubRepo->createHub($action_hub->id, 'actors', $collectors);
     }
 
 }

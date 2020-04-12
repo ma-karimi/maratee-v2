@@ -73,7 +73,7 @@ class CryoBankAPIController extends AppBaseController
      */
     private function getRelationFields(): array
     {
-        return ['taxonomy', 'protection', 'location', 'treatment', 'research', 'collect'];
+        return ['taxonomy', 'protection', 'location', 'treatment', 'research', 'collect', 'media'];
     }
 
     /**
@@ -442,4 +442,54 @@ class CryoBankAPIController extends AppBaseController
         return $this->sendResponse($id, 'Cryo Bank deleted successfully');
     }
 
+    /**
+     * @param int $id
+     * @return Response
+     *
+     * @SWG\Post(
+     *      path="/cryo_banks/{id}/media",
+     *      tags={"Plant"},
+     *      description="Store CryoBank Media",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of CryoBank",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     * @throws Exception
+     */
+    public function media($id)
+    {
+        $plant = $this->cryoBankRepository->find($id, []);
+
+        if (empty($plant)) {
+            return $this->sendError('CryoBank not found');
+        }
+
+        $this->cryoBankRepository->storeMedia(\request()->all(), $plant);
+
+        return $this->sendResponse($id, 'CryoBank Media Stored successfully');
+    }
 }

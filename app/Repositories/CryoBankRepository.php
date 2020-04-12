@@ -188,4 +188,21 @@ class CryoBankRepository extends BaseRepository
 
         return $cryo_bank;
     }
+
+
+    /**
+     * @param $input
+     * @param $model
+     */
+    public function storeMedia($input, $model): void
+    {
+        $media_input = [
+            'media_type' => $input['media_type'] ?? 2,
+        ];
+        //store media
+        if (request()->hasFile('file')) {
+            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('images');
+            $media_record->update($media_input);
+        }
+    }
 }

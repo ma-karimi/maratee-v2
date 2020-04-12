@@ -139,6 +139,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('countries/all', 'CountryAPIController@all');
 
     Route::apiResource('countries', 'CountryAPIController');
+    Route::post('cryo_banks/{id}/media', 'CryoBankAPIController@media');
 
     Route::apiResource('cryo_banks', 'CryoBankAPIController');
 
