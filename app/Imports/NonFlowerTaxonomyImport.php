@@ -7,7 +7,6 @@ use App\Models\Actor;
 use App\Models\ActorHub;
 use App\Models\NonflowerGeneral;
 use App\Models\NonflowerTaxonomy;
-use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\OnEachRow;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Row;
@@ -32,7 +31,7 @@ class NonFlowerTaxonomyImport implements OnEachRow, WithHeadingRow
 
     private function storeTaxonomy($row)
     {
-        $row['genus_id'] = NonflowerGeneral::firstOrCreate(['name' => Str::lower($row['genus']), 'type' => 'genus'])->id;
+        $row['genus_id'] = NonflowerGeneral::firstOrCreate(['name' => $row['genus'], 'type' => 'genus'])->id;
 
         // species
         $row['species_id'] = $this->firstOrCreateSpecies($row);
@@ -85,19 +84,14 @@ class NonFlowerTaxonomyImport implements OnEachRow, WithHeadingRow
      */
     private function trimPropAuthor($property, $model)
     {
-        $array = [];
-        if ($p = strpos($property, ' ')) {
-//            $array[$model] = trim(substr($property, 0, $p));
-            $authors = trim(substr($property, $p, strlen($property)));
-            $authors = str_replace(', ', ' & ', $authors);
-            $authors = str_replace('-', ' & ', $authors);
-            $authors = str_replace(' -', ' & ', $authors);
-            $authors = str_replace('- ', ' & ', $authors);
-            $array[$model . '_authors'] = collect(array_unique(explode(' & ', $authors)))->filter()->all();
-        } else {
-//            $array[$model] = trim($property);
-            $array[$model . '_authors'] = [];
-        }
+        $array[$model . '_authors'] = [];
+
+        $authors = trim($property);
+        $authors = str_replace(', ', ' & ', $authors);
+        $authors = str_replace('-', ' & ', $authors);
+        $authors = str_replace(' -', ' & ', $authors);
+        $authors = str_replace('- ', ' & ', $authors);
+        $array[$model . '_authors'] = collect(array_unique(explode(' & ', $authors)))->filter()->all();
 
         return $array;
 
