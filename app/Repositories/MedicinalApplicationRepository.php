@@ -53,12 +53,12 @@ class MedicinalApplicationRepository extends BaseRepository
     {
         return [
             'taxonomy_id' => $input['taxonomy_id'],
-            'traditional_iranian_medicine' => $input['traditional_iranian_medicine'] ?? 0,
-            'natural_drug' => $input['natural_drug'] ?? 0,
-            'inherbal_medicine_store' => $input['inherbal_medicine_store'] ?? 0,
+            'traditional_iranian_medicine' => $input['traditional_iranian_medicine'] ?? null,
+            'natural_drug' => $input['natural_drug'] ?? null,
+            'inherbal_medicine_store' => $input['inherbal_medicine_store'] ?? null,
             'hygienic_cosmetic_industry_id' => $input['hygienic_cosmetic_industry_id'] ?? 0,
-            'exporting' => $input['exporting'] ?? 0,
-            'importing' => $input['importing'] ?? 0,
+            'exporting' => $input['exporting'] ?? null,
+            'importing' => $input['importing'] ?? null,
             'cultivated_area_id' => $input['cultivated_area_id'] ?? 0,
         ];
     }
