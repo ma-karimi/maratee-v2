@@ -6,6 +6,7 @@ use App\Models\Accessor\MedicinalLocationAccessor;
 use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use App\Models\Relations\MedicinalLocationRelations;
+use App\Models\Scope\MedicinalLocationScope;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
@@ -17,7 +18,7 @@ use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
  */
 class MedicinalLocation extends BaseModel implements AuditableContract
 {
-    use MedicinalLocationRelations, MedicinalLocationAccessor, Auditable, AuditTrait;
+    use MedicinalLocationRelations, MedicinalLocationScope, MedicinalLocationAccessor, Auditable, AuditTrait;
     public const STUDIED_SAMPLE = [0 => 'unknown', 1 => 'wild', 2 => 'cultivated'];
     protected $with = ['audits', 'taxonomy'];
 

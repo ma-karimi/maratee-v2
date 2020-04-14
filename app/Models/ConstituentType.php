@@ -26,4 +26,7 @@ class ConstituentType extends BaseModel
      */
     protected $table = 'constituent_types';
 
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at', 'description'];
+
+
 }
