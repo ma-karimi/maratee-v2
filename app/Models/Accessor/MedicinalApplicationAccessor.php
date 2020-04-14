@@ -20,22 +20,22 @@ trait MedicinalApplicationAccessor
 
     public function getNaturalDrugNameAttribute()
     {
-        return !empty($this->traditional_iranian_medicine) ? Arr::get(self::NATURAL_DRUG, $this->natural_drug) : null;
+        return !empty($this->natural_drug) ? Arr::get(self::NATURAL_DRUG, $this->natural_drug) : null;
     }
 
     public function getInherbalMedicineStoreNameAttribute()
     {
-        return !empty($this->traditional_iranian_medicine) ? Arr::get(self::INHERBAL_MEDICINE_STORE, $this->inherbal_medicine_store) : null;
+        return !empty($this->inherbal_medicine_store) ? Arr::get(self::INHERBAL_MEDICINE_STORE, $this->inherbal_medicine_store) : null;
     }
 
     public function getExportingNameAttribute()
     {
-        return !empty($this->traditional_iranian_medicine) ? Arr::get(self::EXPORTING, $this->exporting) : null;
+        return !empty($this->exporting) ? Arr::get(self::EXPORTING, $this->exporting) : null;
     }
 
     public function getImportingNameAttribute()
     {
-        return !empty($this->traditional_iranian_medicine) ? Arr::get(self::IMPORTING, $this->importing) : null;
+        return !empty($this->importing) ? Arr::get(self::IMPORTING, $this->importing) : null;
     }
 
 
