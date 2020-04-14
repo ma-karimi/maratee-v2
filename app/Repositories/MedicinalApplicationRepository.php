@@ -57,8 +57,8 @@ class MedicinalApplicationRepository extends BaseRepository
             'natural_drug' => $input['natural_drug'] ?? 0,
             'inherbal_medicine_store' => $input['inherbal_medicine_store'] ?? 0,
             'hygienic_cosmetic_industry_id' => $input['hygienic_cosmetic_industry_id'] ?? 0,
-            'exporting' => $input['exporting'] ?? null,
-            'importing' => $input['importing'] ?? null,
+            'exporting' => $input['exporting'] ?? 0,
+            'importing' => $input['importing'] ?? 0,
             'cultivated_area_id' => $input['cultivated_area_id'] ?? 0,
         ];
     }
