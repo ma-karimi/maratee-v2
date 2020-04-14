@@ -34,8 +34,6 @@ class MedicinalApplication extends BaseModel implements HasMedia, AuditableContr
     public static $rules = [
         'taxonomy_id' => 'required|exists:taxonomies,id',
         'traditional_iranian_medicine' => 'nullable|numeric',
-        'exporting' => 'required',
-        'importing' => 'required',
     ];
 
     /**
