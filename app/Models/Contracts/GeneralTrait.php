@@ -4,6 +4,8 @@
 namespace App\Models\Contracts;
 
 
+use Illuminate\Support\Str;
+
 trait GeneralTrait
 {
 
@@ -27,5 +29,21 @@ trait GeneralTrait
             $name .= ' ' . $this->actors;
         }
         return $name;
+    }
+
+    public function getNameAttribute($value)
+    {
+        if (in_array($this->type, ['family', 'genus'])) {
+            return Str::ucfirst($value);
+        } elseif ($this->type === 'species') {
+            return Str::lower($value);
+        }
+
+        return $value;
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = trim($value);
     }
 }
