@@ -78,22 +78,7 @@ class OriginalGeneralTableSeeder extends Seeder
         ['en' => 'Spike'],
         ['en' => 'Panicle'],
     ];
-    public $cotyledons = [
-        ['en' => 'Monocotyledonous'],
-        ['en' => 'Dicotyledonous'],
-    ];
-    public $sperms = [
-        ['en' => 'Diatom'],
-        ['en' => 'Laminaria'],
-        ['en' => 'Fucus'],
-        ['en' => 'Liverwort'],
-        ['en' => 'Moss'],
-        ['en' => 'Lycopodium'],
-        ['en' => 'Selaginella'],
-        ['en' => 'Psilotum'],
-        ['en' => 'Fern'],
-        ['en' => 'Equisetum'],
-    ];
+
     public $substrates = [
 
         ['name' => 'Tree', 'type' => 'lichen'],
@@ -142,34 +127,16 @@ class OriginalGeneralTableSeeder extends Seeder
                 ['name' => $type['en'], 'type' => 'plant_type']
             );
         }
-//        foreach ($this->phenologies as $type) {
-//            General::create(
-//                ['name' => $type['en'], 'type' => 'phenology']
-//            );
-//        }
-        foreach ($this->cotyledons as $type) {
-            General::create(
-                ['name' => $type['en'], 'type' => 'cotyledon']
-            );
-        }
+
         foreach ($this->flowers as $type) {
             General::create(
                 ['name' => $type['en'], 'type' => 'flowering']
             );
         }
-        foreach ($this->sperms as $type) {
-            General::create(
-                ['name' => $type['en'], 'type' => 'sperm']
-            );
-        }
+
         foreach ($this->ecologies as $type) {
             General::create(
                 ['name' => $type['en'], 'type' => 'ecology']
-            );
-        }
-        foreach ($this->getSubstrates() as $type) {
-            $general = General::create(
-                ['name' => $type['name'], 'type' => $type['type']]
             );
         }
 

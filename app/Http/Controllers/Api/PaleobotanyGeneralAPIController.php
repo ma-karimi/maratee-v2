@@ -340,7 +340,9 @@ class PaleobotanyGeneralAPIController extends AppBaseController
     {
 
         $General = $this->PaleobotanyGeneralRepository->all()->groupBy('type');
-
+        foreach ($General as $index => $item){
+            $General[$index] = collect($item)->sortBy('name')->values()->all();
+        }
 
         return $this->sendResponse($General->toArray(), ' General retrieved successfully');
     }

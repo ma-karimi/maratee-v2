@@ -19,6 +19,14 @@
 
 use Illuminate\Support\Str;
 
+Route::get('/test-general', function () {
+    $General = App\Models\General::all()->groupBy('type');
+
+    foreach ($General as $index => $item){
+        $General[$index] = collect($item)->sortBy('name')->take(10)->values()->all();
+    }
+    return response()->json($General);
+});
 
 Route::get('/', function () {
     $name = Str::singular(Str::studly('medicinal_locations'));

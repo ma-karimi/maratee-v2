@@ -354,7 +354,9 @@ class NonflowerGeneralAPIController extends AppBaseController
     {
 
         $nonflowerGeneral = $this->nonflowerGeneralRepository->all()->groupBy('type');
-
+        foreach ($nonflowerGeneral as $index => $item){
+            $General[$index] = collect($item)->sortBy('name')->values()->all();
+        }
 
         return $this->sendResponse($nonflowerGeneral->toArray(), ' NonflowerGeneral retrieved successfully');
     }
