@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api\MedicinalPlant;
 
+use App\Models\MedicinalApplication;
 use InfyOm\Generator\Request\APIRequest;
 
 class MedicinalApplicationAPIRequest extends APIRequest
@@ -24,8 +25,6 @@ class MedicinalApplicationAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return [
-            'taxonomy_id'
-        ];
+        MedicinalApplication::$rules;
     }
 }

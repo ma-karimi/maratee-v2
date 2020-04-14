@@ -23,7 +23,7 @@ class MedicinalApplication extends BaseModel implements HasMedia, AuditableContr
     use MedicinalApplicationAccessor, MedicinalApplicationScope, MedicinalApplicationRelations, HasMediaTrait, Auditable, AuditTrait;
 
     public const TRADITIONAL_IRANIAN_MEDICINE = [1 => 'raw', 2 => 'processed', 3 => 'raw & processed'];
-    public const NATURAL_DRUG = [1 => 'human medicines', 2 => 'animal drugs'];
+    public const NATURAL_DRUG = [1 => 'Human medicines', 2 => 'Animal drugs', 3 => 'Human medicines and animal drugs'];
     public const INHERBAL_MEDICINE_STORE = [1 => 'raw', 2 => 'processed', 3 => 'raw & processed'];
     public const EXPORTING = [1 => 'raw', 2 => 'processed'];
     public const IMPORTING = [1 => 'raw', 2 => 'processed'];
