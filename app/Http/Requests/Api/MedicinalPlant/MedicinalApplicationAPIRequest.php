@@ -25,6 +25,6 @@ class MedicinalApplicationAPIRequest extends APIRequest
      */
     public function rules()
     {
-        MedicinalApplication::$rules;
+       return MedicinalApplication::$rules;
     }
 }
