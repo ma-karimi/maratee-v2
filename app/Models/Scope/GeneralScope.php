@@ -34,6 +34,6 @@ trait GeneralScope
 
     public function scopeOfSelect($query)
     {
-        return $query->select('id', 'name');
+        return $query->select('id', 'name', 'type');
     }
 }
