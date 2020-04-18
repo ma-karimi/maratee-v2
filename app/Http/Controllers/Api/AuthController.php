@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\ResetPasswordRequest;
 use App\Http\Requests\Api\UserLoginRequest;
+use App\Http\Requests\Api\UserPasswordRequest;
+use App\Http\Requests\Api\UserUpdateRequest;
 use App\Models\ModelHasRole;
 use App\Models\Permission;
 use App\Models\Role;
@@ -219,14 +221,14 @@ class AuthController extends AppBaseController
      */
     public function resetPassword(ResetPasswordRequest $request)
     {
-        $user = $this->userServices->findByEmail($request->email);
+        $user = User::whereEmail($request->email)->first();
         if (!$user) {
             return $this->sendError('User not found');
         }
 
         try {
             $newPassword = Utility::randomStringGenerator(6);
-            $this->userServices->updateUserWithNewPassword($user, $newPassword);
+            $user->update(['password'=>$newPassword]);
             $user->notify(new ResetPassword($newPassword));
             return $this->sendResponse(null, 'The Password reset token and sent to Email');
         } catch (Exception $exception) {
@@ -247,14 +249,17 @@ class AuthController extends AppBaseController
         return response()->json(['authenticated' => false]);
     }
 
-    public function update(Request $request)
+    public function update(UserUpdateRequest $request)
     {
         $user = $request->user();
-        $change_password = false;
         $record = $this->userRepository->updateUser($request->all(), $user->id);
-        if ($request->filled('password')) {
-            $change_password = true;
-        }
-        return response()->json(['user' => $record, 'change_password' => $change_password]);
+        return response()->json(['user' => $record]);
+    }
+
+    public function password(UserPasswordRequest $request)
+    {
+        $user = $request->user();
+        $record = $this->userRepository->updateUser($request->all(), $user->id);
+        return response()->json(['user' => $record]);
     }
 }

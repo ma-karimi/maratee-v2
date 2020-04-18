@@ -10,9 +10,9 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('password/reset', 'AuthController@resetPassword');
 
 /*Route::prefix('v1')->group(function () {
-    Route::post('password/reset', 'AuthController@resetPassword');
 
     Route::group(['middleware' => ['auth:api']], function () {
 
@@ -36,6 +36,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('relations', 'APIController@relations');
 
     Route::get('user', 'AuthController@user');
+    Route::post('change/password', 'AuthController@password');
     Route::post('user', 'AuthController@update');
     Route::get('logout', 'AuthController@logout');
     Route::patch('audits/{id}', 'AuditAPIController@update');
@@ -237,6 +238,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('seed_morphologies/{id}/media', 'SeedMorphologyAPIController@storeMedia');
     Route::apiResource('seed_morphologies', 'SeedMorphologyAPIController')->except('destroy');
     Route::apiResource('green_houses', 'GreenHouseAPIController');
+    Route::post('password', 'AuthController@login');
 
 });
 

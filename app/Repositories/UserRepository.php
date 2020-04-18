@@ -81,7 +81,7 @@ class UserRepository extends BaseRepository
         if (!request()->filled('password')) {
             unset($input['password']);
         }
-
+        unset($input['password_confirmation']);
         return parent::update($input, $id);
     }
 
