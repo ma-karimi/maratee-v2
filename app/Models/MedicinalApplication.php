@@ -55,6 +55,8 @@ class MedicinalApplication extends BaseModel implements HasMedia, AuditableContr
         'foods',
         'industries',
         'last_audit',
+        'aerial_type'
+
     ];
 
     protected $with = ['audits', 'taxonomy'];

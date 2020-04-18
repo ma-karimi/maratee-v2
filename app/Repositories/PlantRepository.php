@@ -93,6 +93,14 @@ class PlantRepository extends BaseRepository
     }
 
     /**
+     * @return array
+     */
+    public function getRelationFields(): array
+    {
+        return ['generalPhytogeography', 'taxonomy', 'protection', 'locations', 'media', 'geographicals', 'iranGeographicals'];
+    }
+
+    /**
      * @param $input
      * @param $location_id
      * @return Builder|Builder[]|Collection|Model

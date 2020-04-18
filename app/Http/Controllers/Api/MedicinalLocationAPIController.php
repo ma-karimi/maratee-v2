@@ -65,7 +65,7 @@ class MedicinalLocationAPIController extends AppBaseController
         $compounds = $this->medicinalLocationRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->medicinalLocationRepository->getRelationFields()
         );
 
         $keys = [
@@ -231,7 +231,7 @@ class MedicinalLocationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var MedicinalLocation $medicinalPlant */
-        $medicinalPlant = $this->medicinalLocationRepository->find($id, $this->getRelationFields());
+        $medicinalPlant = $this->medicinalLocationRepository->find($id, $this->medicinalLocationRepository->getRelationFields());
 
         if ($medicinalPlant === null) {
             return $this->sendError('Medicinal Location not found');
@@ -404,11 +404,4 @@ class MedicinalLocationAPIController extends AppBaseController
         return $this->sendResponse($medicinalLocation->toArray(), 'MedicinalLocation updated successfully');
     }
 
-    /**
-     * @return array
-     */
-    public function getRelationFields(): array
-    {
-        return ['location', 'constituents', 'treatment', 'distillation', 'secondaryMetabolites', 'phenology', 'distillation', 'extraction', 'analyse', 'article'];
-    }
 }

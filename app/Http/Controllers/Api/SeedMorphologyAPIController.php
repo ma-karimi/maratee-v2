@@ -11,7 +11,6 @@ use App\Models\SeedMorphology;
 use App\Repositories\SeedMorphologyRepository;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Response;
 
@@ -67,15 +66,10 @@ class SeedMorphologyAPIController extends AppBaseController
         $seedMorphologys = $this->seedMorphologyRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->seedMorphologyRepository->getRelationFields()
         );
 
         return $this->sendResponse($seedMorphologys->toArray(), 'Seed Morphologys retrieved successfully');
-    }
-
-    private function getRelationFields()
-    {
-        return ['quantitatives:seed_generals.id,seed_generals.name,seed_generals.type_id', 'qualititatives:seed_generals.id,seed_generals.name,seed_generals.type_id', 'field', 'seedCollection:id,accession_code,taxonomy_id', 'specimenType', 'collection', 'organization', 'project', 'media'];
     }
 
     /**
@@ -174,7 +168,7 @@ class SeedMorphologyAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedMorphology $seedMorphology */
-        $seedMorphology = $this->seedMorphologyRepository->find($id, $this->getRelationFields());
+        $seedMorphology = $this->seedMorphologyRepository->find($id, $this->seedMorphologyRepository->getRelationFields());
 
         if (empty($seedMorphology)) {
             return $this->sendError('Seed Morphology not found');

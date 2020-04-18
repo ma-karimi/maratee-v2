@@ -9,7 +9,6 @@ use App\Repositories\NonflowerRepository;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
-use Maatwebsite\Excel\Facades\Excel;
 use Response;
 
 /**
@@ -64,15 +63,10 @@ class NonflowerAPIController extends AppBaseController
         $nonflowers = $this->nonflowerRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->nonflowerRepository->getRelationFields()
         );
 
         return $this->sendResponse($nonflowers->toArray(), 'Nonflowers retrieved successfully');
-    }
-
-    private function getRelationFields()
-    {
-        return ['phytogeography', 'taxonomy', 'habitat', 'media', 'substrate', 'collect', 'determine', 'transactions', 'location'];
     }
 
     /**
@@ -177,7 +171,7 @@ class NonflowerAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Nonflower $nonflower */
-        $nonflower = $this->nonflowerRepository->find($id, $this->getRelationFields());
+        $nonflower = $this->nonflowerRepository->find($id, $this->nonflowerRepository->getRelationFields());
 
         if ($nonflower === null) {
             return $this->sendError('Nonflower not found');

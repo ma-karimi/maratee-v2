@@ -62,7 +62,7 @@ class CityAPIController extends AppBaseController
         $cities = $this->cityRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->cityRepository->getRelationFields()
         );
 
         return $this->sendResponse($cities->toArray(), 'Cities retrieved successfully');
@@ -168,7 +168,7 @@ class CityAPIController extends AppBaseController
     public function show($id)
     {
         /** @var City $city */
-        $city = $this->cityRepository->find($id, $this->getRelationFields());
+        $city = $this->cityRepository->find($id, $this->cityRepository->getRelationFields());
 
         if ($city === null) {
             return $this->sendError('City not found');
@@ -346,8 +346,4 @@ class CityAPIController extends AppBaseController
         return $this->sendResponse($cities->toArray(), 'Cities retrieved successfully');
     }
 
-    private function getRelationFields()
-    {
-        return ['province'];
-    }
 }

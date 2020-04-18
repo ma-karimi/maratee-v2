@@ -9,7 +9,6 @@ use App\Repositories\HerbariumRepository;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
-use Maatwebsite\Excel\Facades\Excel;
 use Response;
 
 /**
@@ -64,15 +63,10 @@ class HerbariumAPIController extends AppBaseController
         $herbariums = $this->herbariumRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->herbariumRepository->getRelationFields()
         );
 
         return $this->sendResponse($herbariums->toArray(), 'Herbariums retrieved successfully');
-    }
-
-    public function getRelationFields()
-    {
-        return ['taxonomy', 'organization', 'media', 'determine', 'collect', 'location'];
     }
 
     /**
@@ -198,7 +192,7 @@ class HerbariumAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Herbarium $herbarium */
-        $herbarium = $this->herbariumRepository->find($id, $this->getRelationFields());
+        $herbarium = $this->herbariumRepository->find($id, $this->herbariumRepository->getRelationFields());
 
         if ($herbarium === null) {
             return $this->sendError('Herbarium not found');

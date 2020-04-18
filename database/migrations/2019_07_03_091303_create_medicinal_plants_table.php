@@ -16,15 +16,9 @@ class CreateMedicinalPlantsTable extends Migration
         Schema::create('medicinal_plants', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('taxonomy_id');
-            $table->unsignedBigInteger('aerial_part_id')->nullable();
             $table->unsignedBigInteger('ground_part_id')->nullable();
             $table->unsignedBigInteger('general_origin_id')->nullable();
-            //morphology
-            $table->unsignedBigInteger('general_habitat_id')->nullable();
-
-            $table->unsignedBigInteger('cycle_id')->nullable();
             $table->unsignedBigInteger('wooden_id')->nullable();
-            $table->unsignedBigInteger('herbaceous_id')->nullable();
             $table->text('properties_description')->nullable();
             $table->text('compounds')->nullable();
 

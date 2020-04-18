@@ -64,18 +64,10 @@ class OrganizationAPIController extends AppBaseController
         $organizations = $this->organizationRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->organizationRepository->getRelationFields()
         );
 
         return $this->sendResponse($organizations->toArray(), 'Organizations retrieved successfully');
-    }
-
-    /**
-     * @return mixed
-     */
-    private function getRelationFields()
-    {
-        return ['city'];
     }
 
     /**
@@ -230,7 +222,7 @@ class OrganizationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Organization $organization */
-        $organization = $this->organizationRepository->find($id, $this->getRelationFields());
+        $organization = $this->organizationRepository->find($id, $this->organizationRepository->getRelationFields());
 
         if (empty($organization)) {
             return $this->sendError('Organization not found');

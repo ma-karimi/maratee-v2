@@ -63,7 +63,7 @@ class MedicinalPlantAPIController extends AppBaseController
         $medicinalPlants = $this->medicinalPlantRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->medicinalPlantRepository->getRelationFields()
         );
 
         $keys = [
@@ -84,15 +84,6 @@ class MedicinalPlantAPIController extends AppBaseController
 
         ];
         return $this->sendResponse(compact('medicinalPlants', 'keys'), 'Medicinal Plants retrieved successfully');
-    }
-
-
-    /**
-     * @return array
-     */
-    private function getRelationFields(): array
-    {
-        return ['taxonomy', 'aerialTypes', 'groundType', 'origin', 'secondaryMetabolites', 'properties'];
     }
 
 
@@ -226,7 +217,7 @@ class MedicinalPlantAPIController extends AppBaseController
     public function show($id)
     {
         /** @var MedicinalPlant $medicinalPlant */
-        $medicinalPlant = $this->medicinalPlantRepository->find($id, $this->getRelationFields());
+        $medicinalPlant = $this->medicinalPlantRepository->find($id, $this->medicinalPlantRepository->getRelationFields());
 
         if ($medicinalPlant === null) {
             return $this->sendError('Medicinal Plant not found');

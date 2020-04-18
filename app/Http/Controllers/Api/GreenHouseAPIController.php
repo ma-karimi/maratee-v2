@@ -63,7 +63,7 @@ class GreenHouseAPIController extends AppBaseController
         $greenHouses = $this->greenHouseRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->greenHouseRepository->getRelationFields()
         );
 
         return $this->sendResponse($greenHouses->toArray(), 'Green Houses retrieved successfully');
@@ -165,7 +165,7 @@ class GreenHouseAPIController extends AppBaseController
     public function show($id)
     {
         /** @var GreenHouse $greenHouse */
-        $greenHouse = $this->greenHouseRepository->find($id, $this->getRelationFields());
+        $greenHouse = $this->greenHouseRepository->find($id, $this->greenHouseRepository->getRelationFields());
 
         if (empty($greenHouse)) {
             return $this->sendError('Green House not found');
@@ -297,8 +297,4 @@ class GreenHouseAPIController extends AppBaseController
         return $this->sendResponse($id, 'Green House deleted successfully');
     }
 
-    private function getRelationFields()
-    {
-        return ['location'];
-    }
 }

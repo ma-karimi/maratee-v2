@@ -229,6 +229,14 @@ class MedicinalLocationRepository extends BaseRepository
     }
 
     /**
+     * @return array
+     */
+    public function getRelationFields(): array
+    {
+        return ['location', 'constituents', 'treatment', 'distillation', 'secondaryMetabolites', 'phenology', 'distillation', 'extraction', 'analyse', 'article'];
+    }
+
+    /**
      * @param $input
      * @param $medicinal_location_id
      * @deprecated

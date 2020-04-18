@@ -84,4 +84,12 @@ class MedicinalPlantRepository extends BaseRepository
         return $model;
     }
 
+    /**
+     * @return array
+     */
+    public function getRelationFields(): array
+    {
+        return ['taxonomy', 'aerialTypes', 'groundType', 'origin', 'secondaryMetabolites', 'properties'];
+    }
+
 }

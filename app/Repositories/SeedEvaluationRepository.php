@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Models\ActionHub;
 use App\Models\ActorHub;
 use App\Models\GerminationNumber;
-use App\Models\SeedCollection;
 use App\Models\SeedEvaluation;
 use App\Models\SeedLength;
 use Illuminate\Container\Container as Application;
@@ -240,6 +239,11 @@ class SeedEvaluationRepository extends BaseRepository
             $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('images');
             $media_record->update($media_input);
         }
+    }
+
+    public function getRelationFields()
+    {
+        return ['organization.city', 'organization:id,name_en,city_id', 'seedCollection:id,accession_code,taxonomy_id', 'project', 'shoots', 'radicals', 'lengths', 'widths', 'media', 'dormancyBreaking', 'specimenType', 'research', 'collection'];
     }
 
 

@@ -26,6 +26,8 @@ class CreateProductsTable extends Migration {
             $table->text('side_effects')->nullable();
             $table->string('name_en');
             $table->string('name_fa')->nullable();
+            $table->string('drug_name_fa')->nullable();
+            $table->string('drug_name_en')->nullable();
             $table->timeStamps();
             $table->softDeletesTz();
 		});

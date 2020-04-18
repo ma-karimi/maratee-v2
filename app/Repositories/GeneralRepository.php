@@ -69,4 +69,12 @@ class GeneralRepository extends BaseRepository
     {
         return collect($input)->except('authors')->all();
     }
+
+    /**
+     * @return array
+     */
+    public function getRelationFields(): array
+    {
+        return ['authors'];
+    }
 }

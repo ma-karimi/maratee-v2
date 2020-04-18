@@ -63,7 +63,7 @@ class MedicinalApplicationAPIController extends AppBaseController
         $applications = $this->medicinalApplicationRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->medicinalApplicationRepository->getRelationFields()
         );
         $keys = [
             ['name' => 'family', 'title' => 'Family', 'value' => false],
@@ -79,15 +79,6 @@ class MedicinalApplicationAPIController extends AppBaseController
             ['name' => 'industrial', 'title' => 'Industrial Potential', 'value' => false],
         ];
         return $this->sendResponse(compact('applications', 'keys'), 'Medicinal Applications retrieved successfully');
-    }
-
-
-    /**
-     * @return array
-     */
-    private function getRelationFields(): array
-    {
-        return ['taxonomy','foodIndustries', 'otherIndustries', 'industrialPotentials'];
     }
 
 
@@ -110,6 +101,20 @@ class MedicinalApplicationAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="food_industries",
+     *          in="body",
+     *          description="from medicinal_plant_type",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalApplication")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="aerial_types",
+     *          in="body",
+     *          description="from medicinal_plant_type",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalApplication")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_origin_id",
      *          in="body",
      *          description="from medicinal_plant_type",
      *          required=false,
@@ -250,7 +255,7 @@ class MedicinalApplicationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var MedicinalApplication $medicinalPlant */
-        $medicinalPlant = $this->medicinalApplicationRepository->find($id, $this->getRelationFields());
+        $medicinalPlant = $this->medicinalApplicationRepository->find($id, $this->medicinalApplicationRepository->getRelationFields());
 
         if ($medicinalPlant === null) {
             return $this->sendError('Medicinal Plant not found');
@@ -286,6 +291,20 @@ class MedicinalApplicationAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="food_industries",
+     *          in="body",
+     *          description="from medicinal_plant_type",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalApplication")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="aerial_types",
+     *          in="body",
+     *          description="from medicinal_plant_type",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/MedicinalApplication")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="general_origin_id",
      *          in="body",
      *          description="from medicinal_plant_type",
      *          required=false,

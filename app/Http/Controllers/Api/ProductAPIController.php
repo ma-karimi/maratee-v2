@@ -140,6 +140,13 @@ class ProductAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Product")
      *      ),
      *      @SWG\Parameter(
+     *          name="drug_name_en",
+     *          in="body",
+     *          description="Product that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Product")
+     *      ),
+     *      @SWG\Parameter(
      *          name="taxonomy_id",
      *          in="body",
      *          description="Product that should be stored",
@@ -295,6 +302,13 @@ class ProductAPIController extends AppBaseController
      *      ),
      *      @SWG\Parameter(
      *          name="name_en",
+     *          in="body",
+     *          description="Product that should be stored",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Product")
+     *      ),
+     *      @SWG\Parameter(
+     *          name="drug_name_en",
      *          in="body",
      *          description="Product that should be stored",
      *          required=true,

@@ -69,15 +69,10 @@ class BotanicalAPIController extends AppBaseController
         $botanicals = $this->botanicalRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->botanicalRepository->getRelationFields()
         );
 
         return $this->sendResponse($botanicals->toArray(), 'Botanicals retrieved successfully');
-    }
-
-    private function getRelationFields()
-    {
-        return ['distributions', 'protection:id,name', 'internalHabitats', 'gardens', 'origins', 'habitats', 'botanicalIrrigation', 'plantingConditions', 'propagations', 'usages', 'values', 'operations', 'media', 'taxonomy', 'locations', 'cycles', 'flowerColors', 'fruitColors', 'foliageColors', 'soil', 'summerTolerance', 'winterTolerance', 'seedGermination', 'seedRate', 'growthRate', 'wooden', 'soilTypes', 'collection'];
     }
 
     /**
@@ -216,7 +211,7 @@ class BotanicalAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Botanical $botanical */
-        $botanical = $this->botanicalRepository->find($id, $this->getRelationFields());
+        $botanical = $this->botanicalRepository->find($id, $this->botanicalRepository->getRelationFields());
 
         if ($botanical === null) {
             return $this->sendError('Botanical not found');

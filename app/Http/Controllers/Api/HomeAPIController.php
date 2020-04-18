@@ -3,17 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\Api\Botanical\BotanicalAPIRequest;
-use App\Http\Requests\Api\Botanical\BotanicalInformationAPIRequest;
-use App\Http\Requests\Api\Botanical\BotanicalIrrigationAPIRequest;
-use App\Http\Requests\Api\Botanical\BotanicalLocationAPIRequest;
-use App\Http\Requests\Api\Botanical\BotanicalMediaAPIRequest;
-use App\Http\Requests\Api\Botanical\BotanicalSoilAPIRequest;
-use App\Models\Botanical;
-use App\Repositories\BotanicalRepository;
+use App\Models\Actor;
+use App\Models\General;
+use App\Models\NonflowerGeneral;
+use App\Models\PaleobotanyGeneral;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 use Response;
 
 /**
@@ -23,63 +18,63 @@ use Response;
 class HomeAPIController extends AppBaseController
 {
 
-    public $classes= [
-        ['name'=>'botanicals', 'repository'=>'BotanicalRepository'],
-        ['name'=>'plants', 'repository'=>'PlantRepository'],
-        ['name'=>'medicinal_properties', 'repository'=>'MedicinalPlantRepository'],
-        ['name'=>'medicinal_applications', 'repository'=>'MedicinalApplicationRepository'],
-        ['name'=>'natural_compounds', 'repository'=>'NaturalCompoundRepository'],
-        ['name'=>'herbariums', 'repository'=>'HerbariumRepository'],
+    public $classes = [
+        'botanicals' => 'BotanicalRepository',
+        'plants' => 'PlantRepository',
+        'nonflowers' => 'NonflowerRepository',
+        'medicinal_properties' => 'MedicinalPlantRepository',
+        'medicinal_applications' => 'MedicinalApplicationRepository',
+        'natural_compounds' => 'MedicinalLocationRepository',
+        'herbariums' => 'HerbariumRepository',
+        'cryo_banks' => 'CryoBankRepository',
+        'chromosomes' => 'ChromosomeRepository'
 
     ];
 
-    /**
-     * @param Request $request
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/botanicals",
-     *      summary="Get a listing of the Botanicals.",
-     *      tags={"Botanical"},
-     *      description="Get all Botanicals",
-     *      produces={"application/json"},
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/Botanical")
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     * @throws Exception
-     */
+    public $types = ['family', 'genus', 'species', 'sub_species', 'variety'];
+    public $generals = [
+        'generals' => 'General',
+        'nonflowerGenerals' => 'NonflowerGeneral',
+        'paleobotanyGenerals' => 'PaleobotanyGeneral',
+    ];
+
     public function index(Request $request)
     {
 
-        $botanicals = $this->botanicalRepository->paginate(
-            $request->get('per_page'),
-            $request->except('per_page'),
-            $this->getRelationFields()
-        );
+        $data = [];
+        $data['loaded'] = false;
+        if (collect($request->all())->filter()->count() > 0) {
 
-        return $this->sendResponse($botanicals->toArray(), 'Botanicals retrieved successfully');
+            foreach ($this->classes as $index => $repository) {
+                $class = resolve('App\Repositories\\' . $repository);
+                $data[$index] = $class
+                    ->all([], null, null, $class->getRelationFields());
+
+                $data['loaded'] = true;
+            }
+
+        }
+
+        return $this->sendResponse($data, 'Data retrieved successfully');
     }
 
-    private function getRelationFields()
+    public function data()
     {
-        return ['distributions', 'protection:id,name', 'internalHabitats', 'gardens', 'origins', 'habitats', 'botanicalIrrigation', 'plantingConditions', 'propagations', 'usages', 'values', 'operations', 'media', 'taxonomy', 'locations', 'cycles', 'flowerColors', 'fruitColors', 'foliageColors', 'soil', 'summerTolerance', 'winterTolerance', 'seedGermination', 'seedRate', 'growthRate', 'wooden', 'soilTypes', 'collection'];
+
+        $data = [];
+
+        foreach ($this->generals as $index => $model) {
+            $data[$index] = resolve('App\Models\\' . $model)->whereIn('type', $this->types)
+                ->get()
+                ->sortBy('name_author')
+                ->mapToGroups(function ($item, $key) {
+                    return [$item['type'] => ['id' => $item['id'], 'name' => $item['name_author']]];
+                })
+                ->all();
+
+        }
+        $data['generals']['actors'] = Actor::all();
+
+        return $this->sendResponse($data, 'Data retrieved successfully');
     }
 }

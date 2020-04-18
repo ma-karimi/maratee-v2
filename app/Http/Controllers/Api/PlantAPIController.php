@@ -64,7 +64,7 @@ class PlantAPIController extends AppBaseController
         $plants = $this->plantRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->fieldFloraRelations()
+            $this->plantRepository->getRelationFields()
         );
 
         $keys = [
@@ -82,14 +82,6 @@ class PlantAPIController extends AppBaseController
             ['name' => 'dna', 'title' => 'DNA', 'value' => false],
         ];
         return $this->sendResponse(compact('plants', 'keys'), 'Plants retrieved successfully');
-    }
-
-    /**
-     * @return array
-     */
-    private function fieldFloraRelations(): array
-    {
-        return ['generalPhytogeography', 'taxonomy', 'protection', 'locations', 'media', 'geographicals', 'iranGeographicals'];
     }
 
 
@@ -320,7 +312,7 @@ class PlantAPIController extends AppBaseController
     public function show($id)
     {
 
-        $plant = $this->plantRepository->find($id, $this->fieldFloraRelations());
+        $plant = $this->plantRepository->find($id, $this->plantRepository->getRelationFields());
 
         if (empty($plant)) {
             return $this->sendError('Plant not found');
@@ -639,7 +631,7 @@ class PlantAPIController extends AppBaseController
             [],
             null,
             null,
-            $this->fieldFloraRelations()
+            $this->plantRepository->getRelationFields()
         );
 
         return Excel::create("ExportFloraList-" . date('Y-m-d-H-i-s'), function ($excel) use ($plants) {

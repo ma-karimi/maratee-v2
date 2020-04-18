@@ -63,7 +63,7 @@ class GeneralAPIController extends AppBaseController
         $Generals = $this->GeneralRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->GeneralRepository->getRelationFields()
         );
 
         return $this->sendResponse($Generals->toArray(), ' Generals retrieved successfully');
@@ -180,7 +180,7 @@ class GeneralAPIController extends AppBaseController
     public function show($id)
     {
         /** @var General $General */
-        $General = $this->GeneralRepository->find($id, $this->getRelationFields());
+        $General = $this->GeneralRepository->find($id, $this->GeneralRepository->getRelationFields());
 
         if (empty($General)) {
             return $this->sendError(' General not found');
@@ -425,11 +425,4 @@ class GeneralAPIController extends AppBaseController
         return $this->sendResponse($General->toArray(), ' General retrieved successfully');
     }
 
-    /**
-     * @return array
-     */
-    private function getRelationFields(): array
-    {
-        return ['authors'];
-    }
 }

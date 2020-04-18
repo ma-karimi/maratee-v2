@@ -65,15 +65,10 @@ class SeedEvaluationAPIController extends AppBaseController
         $seed_evaluations = $this->seedEvaluationRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->seedEvaluationRepository->getRelationFields()
         );
 
         return $this->sendResponse($seed_evaluations->toArray(), 'Seed Evaluations retrieved successfully');
-    }
-
-    private function getRelationFields()
-    {
-        return ['organization.city', 'organization:id,name_en,city_id', 'seedCollection:id,accession_code,taxonomy_id', 'project', 'shoots', 'radicals', 'lengths', 'widths', 'media', 'dormancyBreaking', 'specimenType', 'research', 'collection'];
     }
 
     /**
@@ -221,7 +216,7 @@ class SeedEvaluationAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedEvaluation $seedCollection */
-        $seedCollection = $this->seedEvaluationRepository->find($id, $this->getRelationFields());
+        $seedCollection = $this->seedEvaluationRepository->find($id, $this->seedEvaluationRepository->getRelationFields());
 
         if (empty($seedCollection)) {
             return $this->sendError('Seed Evaluation not found');

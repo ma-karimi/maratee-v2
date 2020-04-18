@@ -97,4 +97,9 @@ class GreenHouseRepository extends BaseRepository
             'point' => $input['point'] ?? null,
         ];
     }
+
+    public function getRelationFields()
+    {
+        return ['location'];
+    }
 }

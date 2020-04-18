@@ -49,4 +49,21 @@ trait MedicinalApplicationRelations
     }
 
 
+    public function groundType()
+    {
+        return $this->belongsTo(MedicinalPart::class, 'ground_part_id'
+        )->where('type_id', array_search('ground', MedicinalPart::TYPE));
+    }
+    public function origin()
+    {
+        return $this->belongsTo(General::class, 'general_origin_id'
+        )->where('type', 'origin');
+    }
+
+    public function aerialTypes()
+    {
+        return $this->morphedByMany(MedicinalPart::class, 'hub', 'medicinal_hubs', 'medicinal_plant_id'
+        )->where('medicinal_parts.type_id', array_search('aerial', MedicinalPart::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
+    }
+
 }

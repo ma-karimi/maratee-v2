@@ -63,15 +63,10 @@ class SeedWeightAPIController extends AppBaseController
         $seedWeights = $this->seedWeightRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->seedWeightRepository->getRelationFields()
         );
 
         return $this->sendResponse($seedWeights->toArray(), 'Seed Weights retrieved successfully');
-    }
-
-    private function getRelationFields()
-    {
-        return ['seedCollection:id,accession_code,taxonomy_id', 'collection'];
     }
 
     /**
@@ -275,7 +270,7 @@ class SeedWeightAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedWeight $seedWeight */
-        $seedWeight = $this->seedWeightRepository->find($id, $this->getRelationFields());
+        $seedWeight = $this->seedWeightRepository->find($id, $this->seedWeightRepository->getRelationFields());
 
         if (empty($seedWeight)) {
             return $this->sendError('Seed Weight not found');

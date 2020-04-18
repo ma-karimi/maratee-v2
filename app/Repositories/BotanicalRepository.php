@@ -3,11 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Botanical;
-use App\Models\BotanicalGarden;
 use App\Models\BotanicalIrrigation;
 use App\Models\BotanicalSoil;
-use App\Models\MorphologyQuantitativeEvaluation;
-use App\Models\MorphologyVariable;
 use Exception;
 use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Model;
@@ -216,6 +213,11 @@ class BotanicalRepository extends BaseRepository
             $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('images');
             $media_record->update($media_input);
         }
+    }
+
+    public function getRelationFields()
+    {
+        return ['distributions', 'protection:id,name', 'internalHabitats', 'gardens', 'origins', 'habitats', 'botanicalIrrigation', 'plantingConditions', 'propagations', 'usages', 'values', 'operations', 'media', 'taxonomy', 'locations', 'cycles', 'flowerColors', 'fruitColors', 'foliageColors', 'soil', 'summerTolerance', 'winterTolerance', 'seedGermination', 'seedRate', 'growthRate', 'wooden', 'soilTypes', 'collection'];
     }
 
 }

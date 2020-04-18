@@ -63,15 +63,10 @@ class SeedExchangeAPIController extends AppBaseController
         $seedExchanges = $this->seedExchangeRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->seedExchangeRepository->getRelationFields()
         );
 
         return $this->sendResponse($seedExchanges->toArray(), 'Seed Exchanges retrieved successfully');
-    }
-
-    private function getRelationFields()
-    {
-        return ['organization.city', 'organization:id,name_en,city_id', 'project', 'specimenType', 'seedCollection:id,accession_code,taxonomy_id', 'collection'];
     }
 
     /**
@@ -226,7 +221,7 @@ class SeedExchangeAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedExchange $seedExchange */
-        $seedExchange = $this->seedExchangeRepository->find($id, $this->getRelationFields());
+        $seedExchange = $this->seedExchangeRepository->find($id, $this->seedExchangeRepository->getRelationFields());
 
         if (empty($seedExchange)) {
             return $this->sendError('Seed Exchange not found');

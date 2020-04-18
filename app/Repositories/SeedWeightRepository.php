@@ -35,4 +35,9 @@ class SeedWeightRepository extends BaseRepository
     {
         return SeedWeight::class;
     }
+
+    public function getRelationFields()
+    {
+        return ['seedCollection:id,accession_code,taxonomy_id', 'collection'];
+    }
 }

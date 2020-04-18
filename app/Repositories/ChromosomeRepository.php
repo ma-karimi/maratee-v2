@@ -135,4 +135,12 @@ class ChromosomeRepository extends BaseRepository
         $input = $this->createOrUpdateChromosomeData($input);
         return parent::update($this->chromosomeData($input->all()), $id);
     }
+
+    /**
+     * @return array
+     */
+    public function getRelationFields(): array
+    {
+        return ['article', 'taxonomy', 'generalClass', 'locations'];
+    }
 }

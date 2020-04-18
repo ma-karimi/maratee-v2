@@ -35,4 +35,9 @@ class ProvinceRepository extends BaseRepository
     {
         return Province::class;
     }
+
+    public function getRelationFields()
+    {
+        return ['country'];
+    }
 }

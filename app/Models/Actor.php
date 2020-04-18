@@ -34,7 +34,7 @@ class Actor extends BaseModel
      * @var array
      */
 
-    protected $hidden = ['created_at', 'updated_at'];
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at', 'user_id', 'cellphone'];
 
     /**
      * Get all of the posts that are assigned this tag.

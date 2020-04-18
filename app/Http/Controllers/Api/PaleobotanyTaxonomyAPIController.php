@@ -63,18 +63,10 @@ class PaleobotanyTaxonomyAPIController extends AppBaseController
         $taxonomies = $this->paleobotanyTaxonomyRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->paleobotanyTaxonomyRepository->getRelationFields()
         );
 
         return $this->sendResponse($taxonomies->toArray(), 'Paleobotany Taxonomies retrieved successfully');
-    }
-
-    /**
-     * @return array
-     */
-    private function getRelationFields(): array
-    {
-        return ['family', 'genus', 'species.authors'];
     }
 
     /**
@@ -206,7 +198,7 @@ class PaleobotanyTaxonomyAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Taxonomy $taxonomy */
-        $taxonomy = $this->paleobotanyTaxonomyRepository->find($id, $this->getRelationFields());
+        $taxonomy = $this->paleobotanyTaxonomyRepository->find($id, $this->paleobotanyTaxonomyRepository->getRelationFields());
 
         if ($taxonomy === null) {
             return $this->sendError('Paleobotany Taxonomy not found');
@@ -426,7 +418,7 @@ class PaleobotanyTaxonomyAPIController extends AppBaseController
      */
     public function all(Request $request)
     {
-        $taxonomies = $this->paleobotanyTaxonomyRepository->getByGroup($request, $this->getRelationFields());
+        $taxonomies = $this->paleobotanyTaxonomyRepository->getByGroup($request, $this->paleobotanyTaxonomyRepository->getRelationFields());
 
         return $this->sendResponse($taxonomies->toArray(), 'Paleobotany Taxonomies retrieved successfully');
     }
@@ -437,7 +429,7 @@ class PaleobotanyTaxonomyAPIController extends AppBaseController
             [],
             null,
             null,
-            $this->getRelationFields()
+            $this->paleobotanyTaxonomyRepository->getRelationFields()
         );
         return Excel::create('ExportTaxonomyList-' . date('Y-m-d-H-i-s'), function ($excel) use ($taxonomies) {
 

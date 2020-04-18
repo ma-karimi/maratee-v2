@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\ActionHub;
 use App\Models\ActorHub;
-use App\Models\Herbarium;
 use App\Models\SeedCollection;
 use App\Models\SeedGeneralCollection;
 use Illuminate\Container\Container as Application;
@@ -103,6 +102,11 @@ class SeedCollectionRepository extends BaseRepository
     {
         $this->locationRepo->update($input['location'], $input['location']['id']);
         return parent::update(Arr::except($input, ['location', 'collect', 'id']), $id);
+    }
+
+    public function getRelationFields()
+    {
+        return ['location', 'organization.city', 'organization:id,name_en,city_id', 'landForm', 'taxonomy', 'project', 'collect', 'drainage', 'fruitType', 'habitat', 'usedPart', 'growthForm', 'lifeForm', 'consumption', 'motherHealth', 'pollinationAgent', 'pollinationType', 'collectedFrom', 'slopeAspect', 'soilDepth', 'soilErosion', 'soilLime', 'soilSalinity', 'soilTexture', 'specimenType', 'associatedSpecies', 'communityTypes', 'climates', 'media', 'floweringTime', 'harvestingTime'];
     }
 
     /**

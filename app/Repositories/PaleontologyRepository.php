@@ -235,4 +235,9 @@ class PaleontologyRepository extends BaseRepository
             $media_record->update($media_input);
         }
     }
+
+    public function getRelationFields()
+    {
+        return ['taxonomy', 'geologyAgePeriod', 'geologyAgeStage', 'geologyAgeEpoch', 'geologyAgeEra', 'locality.location', 'maps.media', 'collect', 'determine', 'media', 'preservations', 'citations', 'transactions.media'];
+    }
 }

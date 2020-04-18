@@ -35,4 +35,9 @@ class CityRepository extends BaseRepository
     {
         return City::class;
     }
+
+    public function getRelationFields()
+    {
+        return ['province'];
+    }
 }

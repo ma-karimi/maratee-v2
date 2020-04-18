@@ -2,10 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\ActorHub;
-use App\Models\General;
 use App\Models\Taxonomy;
-use Illuminate\Container\Container as Application;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -126,5 +123,13 @@ class TaxonomyRepository extends BaseRepository
             'non_native' => $input['non_native'] ?? 0,
             'name' => $input->filled('name') ? $input['name'] : null,
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getRelationFields(): array
+    {
+        return ['family', 'genus', 'species.authors', 'subspecies.authors', 'variety.authors'];
     }
 }

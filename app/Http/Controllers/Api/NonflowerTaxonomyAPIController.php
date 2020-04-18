@@ -62,18 +62,10 @@ class NonflowerTaxonomyAPIController extends AppBaseController
         $taxonomies = $this->taxonomyRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->taxonomyRepository->getRelationFields()
         );
 
         return $this->sendResponse($taxonomies->toArray(), 'Nonflower Taxonomies retrieved successfully');
-    }
-
-    /**
-     * @return array
-     */
-    private function getRelationFields(): array
-    {
-        return ['family', 'genus', 'species.authors', 'subspecies.authors', 'variety.authors'];
     }
 
     /**
@@ -217,7 +209,7 @@ class NonflowerTaxonomyAPIController extends AppBaseController
     public function show($id)
     {
         /** @var NonflowerTaxonomy $taxonomy */
-        $taxonomy = $this->taxonomyRepository->find($id, $this->getRelationFields());
+        $taxonomy = $this->taxonomyRepository->find($id, $this->taxonomyRepository->getRelationFields());
 
         if ($taxonomy === null) {
             return $this->sendError('NonflowerTaxonomy not found');
@@ -388,7 +380,7 @@ class NonflowerTaxonomyAPIController extends AppBaseController
      */
     public function all(Request $request)
     {
-        $taxonomies = $this->taxonomyRepository->getByGroup($request, $this->getRelationFields());
+        $taxonomies = $this->taxonomyRepository->getByGroup($request, $this->taxonomyRepository->getRelationFields());
 
         return $this->sendResponse($taxonomies->toArray(), 'Nonflower Taxonomies retrieved successfully');
     }

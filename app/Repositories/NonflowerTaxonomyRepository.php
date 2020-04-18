@@ -122,4 +122,12 @@ class NonflowerTaxonomyRepository extends BaseRepository
             ->latest()
             ->get();
     }
+
+    /**
+     * @return array
+     */
+    public function getRelationFields(): array
+    {
+        return ['family', 'genus', 'species.authors', 'subspecies.authors', 'variety.authors'];
+    }
 }

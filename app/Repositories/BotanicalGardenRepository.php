@@ -51,4 +51,9 @@ class BotanicalGardenRepository extends BaseRepository
 
         return $item;
     }
+
+    public function getRelationFields()
+    {
+        return ['internalHabitat', 'garden'];
+    }
 }

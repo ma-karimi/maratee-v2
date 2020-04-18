@@ -62,18 +62,10 @@ class ChromosomeAPIController extends AppBaseController
         $chromosomes = $this->chromosomeRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->chromosomeRepository->getRelationFields()
         );
 
         return $this->sendResponse($chromosomes->toArray(), 'Chromosomes retrieved successfully');
-    }
-
-    /**
-     * @return array
-     */
-    private function getRelationFields(): array
-    {
-        return ['article', 'taxonomy', 'generalClass', 'locations'];
     }
 
     /**
@@ -199,7 +191,7 @@ class ChromosomeAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Chromosome $chromosome */
-        $chromosome = $this->chromosomeRepository->find($id, $this->getRelationFields()
+        $chromosome = $this->chromosomeRepository->find($id, $this->chromosomeRepository->getRelationFields()
         );
 
         if ($chromosome === null) {

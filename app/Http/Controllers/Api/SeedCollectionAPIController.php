@@ -67,15 +67,10 @@ class SeedCollectionAPIController extends AppBaseController
         $seedCollections = $this->seedCollectionRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
-            $this->getRelationFields()
+            $this->seedCollectionRepository->getRelationFields()
         );
 
         return $this->sendResponse($seedCollections->toArray(), 'Seed Collections retrieved successfully');
-    }
-
-    private function getRelationFields()
-    {
-        return ['location', 'organization.city', 'organization:id,name_en,city_id', 'landForm', 'taxonomy', 'project', 'collect', 'drainage', 'fruitType', 'habitat', 'usedPart', 'growthForm', 'lifeForm', 'consumption', 'motherHealth', 'pollinationAgent', 'pollinationType', 'collectedFrom', 'slopeAspect', 'soilDepth', 'soilErosion', 'soilLime', 'soilSalinity', 'soilTexture', 'specimenType', 'associatedSpecies', 'communityTypes', 'climates', 'media', 'floweringTime', 'harvestingTime'];
     }
 
     /**
@@ -216,7 +211,7 @@ class SeedCollectionAPIController extends AppBaseController
     public function show($id)
     {
         /** @var SeedCollection $seedCollection */
-        $seedCollection = $this->seedCollectionRepository->find($id, $this->getRelationFields());
+        $seedCollection = $this->seedCollectionRepository->find($id, $this->seedCollectionRepository->getRelationFields());
 
         if (empty($seedCollection)) {
             return $this->sendError('Seed Collection not found');

@@ -2,8 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\ActorHub;
-use App\Models\PaleobotanyGeneral;
 use App\Models\PaleobotanyGeneralHub;
 use App\Models\PaleobotanyTaxonomy;
 use Carbon\Carbon;
@@ -166,5 +164,13 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
             ->with($relations)
             ->latest()
             ->get();
+    }
+
+    /**
+     * @return array
+     */
+    public function getRelationFields(): array
+    {
+        return ['family', 'genus', 'species.authors'];
     }
 }

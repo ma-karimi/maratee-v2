@@ -205,4 +205,12 @@ class CryoBankRepository extends BaseRepository
             $media_record->update($media_input);
         }
     }
+
+    /**
+     * @return array
+     */
+    public function getRelationFields(): array
+    {
+        return ['taxonomy', 'protection', 'location', 'treatment', 'research', 'collect', 'media'];
+    }
 }

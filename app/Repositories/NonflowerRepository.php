@@ -188,4 +188,9 @@ class NonflowerRepository extends BaseRepository
         return $model;
     }
 
+    public function getRelationFields()
+    {
+        return ['phytogeography', 'taxonomy', 'habitat', 'media', 'substrate', 'collect', 'determine', 'transactions', 'location'];
+    }
+
 }

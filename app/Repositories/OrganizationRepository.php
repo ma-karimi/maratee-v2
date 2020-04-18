@@ -35,4 +35,12 @@ class OrganizationRepository extends BaseRepository
     {
         return Organization::class;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getRelationFields()
+    {
+        return ['city'];
+    }
 }

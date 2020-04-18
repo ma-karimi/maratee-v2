@@ -60,6 +60,8 @@ class MedicinalApplicationRepository extends BaseRepository
             'exporting' => $input['exporting'] ?? null,
             'importing' => $input['importing'] ?? null,
             'cultivated_area_id' => $input['cultivated_area_id'] ?? 0,
+            'ground_part_id' => $input['ground_part_id'] ?? null,
+            'general_origin_id' => $input['general_origin_id'] ?? null,
         ];
     }
 
@@ -72,6 +74,8 @@ class MedicinalApplicationRepository extends BaseRepository
         $this->createHub($model->id, 'foodIndustries', request()->filled('food_industries') ? $input['food_industries'] : []);
         $this->createHub($model->id, 'otherIndustries', request()->filled('other_industries') ? $input['other_industries'] : []);
         $this->createHub($model->id, 'industrialPotentials', request()->filled('industrial_potentials') ? $input['industrial_potentials'] : []);
+        $this->storeAerialParts($input, $model);
+
     }
 
     public function create($input)
@@ -84,4 +88,18 @@ class MedicinalApplicationRepository extends BaseRepository
 
     }
 
+    /**
+     * @return array
+     */
+    public function getRelationFields(): array
+    {
+        return ['taxonomy', 'aerialTypes', 'groundType', 'origin', 'foodIndustries', 'otherIndustries', 'industrialPotentials'];
+    }
+
+
+    private function storeAerialParts($input, $medicinal)
+    {
+        $aerialTypes = request()->filled('aerialTypes') ? $input['aerialTypes'] : [];
+        $this->createHub($medicinal->id, 'aerialTypes', $aerialTypes);
+    }
 }

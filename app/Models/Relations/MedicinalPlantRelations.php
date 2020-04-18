@@ -25,7 +25,11 @@ trait MedicinalPlantRelations
         return $this->belongsTo(MedicinalPart::class, 'ground_part_id'
         )->where('type_id', array_search('ground', MedicinalPart::TYPE));
     }
-
+    public function origin()
+    {
+        return $this->belongsTo(General::class, 'general_origin_id'
+        )->where('type', 'origin');
+    }
 
     public function aerialTypes()
     {
@@ -39,11 +43,7 @@ trait MedicinalPlantRelations
         )->where('medicinal_plant_types.type_id', array_search('properties', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
     }
 
-    public function origin()
-    {
-        return $this->belongsTo(General::class, 'general_origin_id'
-        )->where('type', 'origin');
-    }
+
 
     public function habitat()
     {

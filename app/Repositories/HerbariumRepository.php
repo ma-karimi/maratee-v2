@@ -190,4 +190,9 @@ class HerbariumRepository extends BaseRepository
 
         return $model;
     }
+
+    public function getRelationFields()
+    {
+        return ['taxonomy', 'organization', 'media', 'determine', 'collect', 'location'];
+    }
 }
