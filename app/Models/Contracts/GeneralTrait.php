@@ -34,9 +34,9 @@ trait GeneralTrait
     public function getNameAttribute($value)
     {
         if (in_array($this->type, ['family', 'genus'])) {
-            return Str::ucfirst($value);
+            return Str::ucfirst(trim($value));
         } elseif ($this->type === 'species') {
-            return Str::lower($value);
+            return Str::lower(trim($value));
         }
 
         return $value;
