@@ -27,6 +27,7 @@ class HomeAPIController extends AppBaseController
         'natural_compounds' => 'MedicinalLocationRepository',
         'herbariums' => 'HerbariumRepository',
         'pharmaceuticals' => 'ProductRepository',
+        'seed_collections' => 'SeedCollectionRepository',
         'cryo_banks' => 'CryoBankRepository',
         'chromosomes' => 'ChromosomeRepository'
 
