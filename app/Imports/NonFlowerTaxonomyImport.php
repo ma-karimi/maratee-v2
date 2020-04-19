@@ -31,6 +31,7 @@ class NonFlowerTaxonomyImport implements OnEachRow, WithHeadingRow
 
     private function storeTaxonomy($row)
     {
+        $row['family_id'] = NonflowerGeneral::firstOrCreate(['name' => $row['family'], 'type' => 'family'])->id;
         $row['genus_id'] = NonflowerGeneral::firstOrCreate(['name' => $row['genus'], 'type' => 'genus'])->id;
 
         // species
