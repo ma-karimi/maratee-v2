@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use App\Models\Accessor\ProductAccessor;
+use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -14,9 +17,10 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *      required={"name"}
  * )
  */
-class Product extends BaseModel implements HasMedia
+class Product extends BaseModel implements HasMedia, AuditableContract
 {
-    use ProductAccessor, HasMediaTrait;
+    use ProductAccessor, HasMediaTrait, Auditable, AuditTrait;
+
     public const STATUS = [1 => 'unregistered', 2 => 'registered'];
     public static $rules = [
         'registration_status' => 'nullable|integer|required',
@@ -39,7 +43,7 @@ class Product extends BaseModel implements HasMedia
 
     protected $with = ['pharmaceutical_form', 'media', 'taxonomy'];
 
-    protected $appends = ['status_name'];
+    protected $appends = ['status_name', 'last_audit'];
 
     public function pharmaceutical_form()
     {
