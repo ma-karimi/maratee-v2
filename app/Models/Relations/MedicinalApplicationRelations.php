@@ -66,4 +66,10 @@ trait MedicinalApplicationRelations
         )->where('medicinal_parts.type_id', array_search('aerial', MedicinalPart::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
     }
 
+    public function undergroundParts()
+    {
+        return $this->morphedByMany(MedicinalPart::class, 'hub', 'medicinal_hubs', 'medicinal_plant_id'
+        )->where('medicinal_parts.type_id', array_search('ground', MedicinalPart::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
+    }
+
 }

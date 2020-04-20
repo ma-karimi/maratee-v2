@@ -89,5 +89,14 @@ trait MedicinalApplicationAccessor
         }
         return $item;
     }
+    public function getUndergroundPartAttribute()
+    {
+        $item = null;
+
+        if ($this->relationLoaded('undergroundParts') && $this->undergroundParts->count()) {
+            $item .= $this->undergroundParts->implode('name', ' & ');
+        }
+        return $item;
+    }
 
 }
