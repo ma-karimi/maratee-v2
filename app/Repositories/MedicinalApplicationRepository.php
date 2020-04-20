@@ -106,7 +106,7 @@ class MedicinalApplicationRepository extends BaseRepository
 
     private function storeUndergroundParts($input, $medicinal)
     {
-        $undergroundParts = request()->filled('undergroundParts') ? $input['undergroundParts'] : [];
+        $undergroundParts = request()->filled('groundParts') ? $input['groundParts'] : [];
         $this->createHub($medicinal->id, 'undergroundParts', $undergroundParts);
     }
 }
