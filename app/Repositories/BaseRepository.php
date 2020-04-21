@@ -94,6 +94,12 @@ abstract class BaseRepository
         })->latest()->paginate($perPage ?? 25, $columns);
     }
 
+
+    public function getRelationFields()
+    {
+        return [];
+    }
+
     /**
      * Build a query for retrieving all records.
      *

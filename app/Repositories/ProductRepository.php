@@ -67,4 +67,9 @@ class ProductRepository extends BaseRepository
         $this->storeMedia($input, $model);
         return $model;
     }
+
+    public function getRelationFields()
+    {
+        return [];
+    }
 }
