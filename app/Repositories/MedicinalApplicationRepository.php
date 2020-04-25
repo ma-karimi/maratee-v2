@@ -60,6 +60,8 @@ class MedicinalApplicationRepository extends BaseRepository
             'exporting' => $input['exporting'] ?? null,
             'importing' => $input['importing'] ?? null,
             'cultivated_area_id' => $input['cultivated_area_id'] ?? 0,
+            'has_ground_part' => $input['has_ground_part'] ?? 0,
+            'has_aerial_part' => $input['has_aerial_part'] ?? 0,
             'general_origin_id' => $input['general_origin_id'] ?? null,
         ];
     }
