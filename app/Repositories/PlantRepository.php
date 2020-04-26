@@ -62,8 +62,7 @@ class PlantRepository extends BaseRepository
     {
         $plant = $this->createPlant($input);
 
-        $this->createHub($plant->id, 'geographicals', $input['geographicals']);
-        $this->createHub($plant->id, 'iranGeographicals', $input['iran_geographicals']);
+        $this->storeRelations($plant, $input);
         $this->storeMedia($input, $plant);
 
 
@@ -75,7 +74,7 @@ class PlantRepository extends BaseRepository
         $plant_input = [
             'taxonomy_id' => $input['taxonomy_id'],
             'protection_id' => $input['protection_id'] ?? null,
-            'general_phytogeography_id' => $input['general_phytogeography_id'],
+//            'general_phytogeography_id' => $input['general_phytogeography_id'],
             'general_origin_id' => $input['general_origin_id'] ?? null,
             'description' => $input['description'] ?? null,
             'habitat_description' => $input['habitat_description'] ?? null,
@@ -97,7 +96,7 @@ class PlantRepository extends BaseRepository
      */
     public function getRelationFields(): array
     {
-        return ['generalPhytogeography', 'taxonomy', 'protection', 'locations', 'media', 'geographicals', 'iranGeographicals'];
+        return ['phytogeographics', 'taxonomy', 'protection', 'locations', 'media', 'geographicals', 'iranGeographicals'];
     }
 
     /**
@@ -170,12 +169,22 @@ class PlantRepository extends BaseRepository
             'n_no' => $input['n_no'] ?? null,
             'n2_no' => $input['n2_no'] ?? null,
         ];
-        $plant =  parent::update($plant_input, $id);
-
-        $this->createHub($plant->id, 'geographicals', $input['geographicals']);
-        $this->createHub($plant->id, 'iranGeographicals', $input['iran_geographicals']);
+        $plant = parent::update($plant_input, $id);
+        $this->storeRelations($plant, $input);
 
         return $plant;
+    }
+
+    /**
+     * @param Model $plant
+     * @param $input
+     */
+    private function storeRelations(Model $plant, $input): void
+    {
+
+        $this->createHub($plant->id, 'geographicals', request()->filled('geographicals') ? $input['geographicals'] : []);
+        $this->createHub($plant->id, 'iranGeographicals', request()->filled('iran_geographicals') ? $input['iran_geographicals'] : []);
+        $this->createHub($plant->id, 'phytogeographics', request()->filled('phytogeographics') ? $input['phytogeographics'] : []);
     }
 
 

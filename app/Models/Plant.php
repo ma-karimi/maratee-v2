@@ -8,6 +8,7 @@ use App\Models\Contracts\BaseModel;
 use App\Models\Relations\{ActionRelation, ArticleRelation};
 use App\Models\Scope\PlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use OwenIt\Auditing\Auditable;
@@ -29,7 +30,7 @@ class Plant extends BaseModel implements HasMedia, AuditableContract
 
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
     protected $with = ['audits'];
-    protected $appends = ['monopoly_of_iran', 'plant_geographicals', 'iran_plant_geographicals',  'life_form', 'last_audit'];
+    protected $appends = ['monopoly_of_iran', 'plant_geographicals','plant_phytogeographics', 'iran_plant_geographicals',  'life_form', 'last_audit'];
     /**
      * The database table used by the model.
      *
@@ -53,10 +54,17 @@ class Plant extends BaseModel implements HasMedia, AuditableContract
     {
         return $this->belongsTo(Protection::class);
     }
-
-    public function generalPhytogeography(): BelongsTo
+//
+//    public function generalPhytogeography(): BelongsTo
+//    {
+//        return $this->belongsTo(General::class, 'general_phytogeography_id');
+//    }
+    public function phytogeographics(): BelongsToMany
     {
-        return $this->belongsTo(General::class, 'general_phytogeography_id');
+        return $this->belongsToMany(General::class, 'plant_phytogeographics')
+            ->whereNull('plant_phytogeographics.deleted_at')
+            ->where('generals.type', 'phytogeography')
+            ->withTimestamps();
     }
 
     public function geographicals()

@@ -28,6 +28,15 @@ trait PlantAccessor
         }
         return $distributions;
     }
+    public function getPlantPhytogeographicsAttribute()
+    {
+        $record = null;
+
+        if ($this->relationLoaded('phytogeographics') && $this->phytogeographics->count()) {
+            $record .= $this->phytogeographics->implode('name', ' & ');
+        }
+        return $record;
+    }
 
     public function getIranPlantGeographicalsAttribute()
     {
