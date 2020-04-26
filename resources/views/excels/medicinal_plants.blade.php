@@ -31,24 +31,17 @@
             <th style="{{$th}}">Underground Part</th>
         @endif
 
-        @if($keys['habitat'] ?? false)
-            <th style="{{$th}}">Habitat</th>
-        @endif
-
-        @if($keys['herbaceous'] ?? false)
+        @if($keys['wooden'] ?? false)
             <th style="{{$th}}">Wooden</th>
-            <th style="{{$th}}">Herbaceous</th>
         @endif
 
-        @if($keys['cycle'] ?? false)
-            <th style="{{$th}}">Plant life cycle</th>
-        @endif
         @if($keys['properties'] ?? false)
             <th style="{{$th}}">The most important medicinal properties</th>
+            <th style="{{$th}}">Properties Description</th>
         @endif
-        @if($keys['material'] ?? false)
+        @if($keys['metabolite'] ?? false)
 
-            <th style="{{$th_transaction}}">effective material</th>
+            <th style="{{$th_transaction}}">Secondary Metabolite</th>
         @endif
     </tr>
     </thead>
@@ -64,22 +57,16 @@
                 <td style="{{$td}}">{{ $item['ground_type']['name'] ?? null }}</td>
             @endif
 
-            @if($keys['habitat'] ?? false)
-                <td style="{{$td}}">{{$item['habitat']['name'] ?? null}}</td>
-            @endif
-            @if($keys['herbaceous'] ?? false)
+            @if($keys['wooden'] ?? false)
                 <td style="{{$td}}">{{$item['wooden'] ?? null}}</td>
-                <td style="{{$td}}">{{$item['herbaceous'] ?? null}}</td>
-            @endif
-            @if($keys['cycle'] ?? false)
-                <td style="{{$td}}">{{$item['cycle'] ?? null}}</td>
             @endif
             @if($keys['properties'] ?? false)
                 <td style="{{$td}}">{{$item['medicinal_properties'] ?? null}}</td>
+                <td style="{{$td}}">{{$item['properties_description'] ?? null}}</td>
             @endif
 
-            @if($keys['material'] ?? false)
-                <td style="{{$td}}">{{$item['materials'] ?? null}}</td>
+            @if($keys['metabolite'] ?? false)
+                <td style="{{$td}}">{{$item['metabolites'] ?? null}}</td>
             @endif
         </tr>
     @endforeach
