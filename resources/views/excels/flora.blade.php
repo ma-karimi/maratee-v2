@@ -55,7 +55,7 @@
             @endif
             @if($keys['life_form'] ?? false)
                 <td style="{{$td}}">{{$item['life_form'] ?? null}}</td>
-                <td style="{{$td}}">{{$item['general_phytogeography']['name'] ?? null}}</td>
+                <td style="{{$td}}">{{$item['plant_phytogeographics'] ?? null}}</td>
                 <td style="{{$td}}">{{$item['flowering_time'] ?? null}}</td>
                 <td style="{{$td}}">{{$item['ecology_description'] ?? null}}</td>
                 <td style="{{$td}}">{{$item['protection']['name']['en'] ?? null}}</td>
