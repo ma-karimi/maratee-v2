@@ -12,15 +12,9 @@ class GeneralAPIRequest extends APIRequest
      * Determine if the user is authorized to make this request.
      *
      * @return bool
-     * @throws ValidationException
      */
     public function authorize()
     {
-        if (General::where(['name' => $this->name])->exists()) {
-            $duplicateErrorMessage = 'General Name & Type Repetitive!';
-
-            throw ValidationException::withMessages(['name' => $duplicateErrorMessage, 'type' => $duplicateErrorMessage]);
-        }
         return true;
     }
 
