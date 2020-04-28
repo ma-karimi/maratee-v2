@@ -96,7 +96,7 @@ class Taxonomy extends BaseModel implements AuditableContract
      */
     public function herbarium(): HasMany
     {
-        return $this->hasMany(Herbarium::class)->where('is_flowering', 1);
+        return $this->hasMany(Herbarium::class);
     }
 
     /**
