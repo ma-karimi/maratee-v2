@@ -24,8 +24,10 @@
     <tr>
         @include('excels.partials.taxonomyHeader')
 
-        <th style="{{$th}}">Pharmaceutical in English</th>
-        <th style="{{$th}}">Pharmaceutical in Persian</th>
+        <th style="{{$th}}">Medicinal product in English</th>
+        <th style="{{$th}}">Medicinal product in Persian</th>
+        <th style="{{$th}}">Product in English</th>
+        <th style="{{$th}}">Product in Persian</th>
         <th style="{{$th}}">Company</th>
         <th style="{{$th}}">Telephone</th>
         <th style="{{$th}}">Address</th>
@@ -42,6 +44,8 @@
         <tr>
             <td style="{{$td}}">{{ $item->code ?? null }}</td>
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['taxonomy'], 'keys'=>$keys])
+            <td style="{{$td}}">{{ $item['drug_name_en'] ?? null }}</td>
+            <td style="{{$td}}">{{ $item['drug_name_fa'] ?? null }}</td>
             <td style="{{$td}}">{{ $item['name_en'] ?? null }}</td>
             <td style="{{$td}}">{{ $item['name_fa'] ?? null }}</td>
             <td style="{{$td}}">{{ $item['company'] ?? null }}</td>
