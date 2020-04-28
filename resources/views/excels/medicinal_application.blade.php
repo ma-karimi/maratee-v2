@@ -23,6 +23,12 @@
     <thead>
     <tr>
         @include('excels.partials.taxonomyHeader')
+        @if($keys['part_used'] ?? false)
+            <th style="{{$th}}">Has Aerial Part</th>
+            <th style="{{$th}}">Has Underground Part</th>
+            <th style="{{$th}}">Aerial Types</th>
+            <th style="{{$th}}">Underground Parts</th>
+        @endif
         @if($keys['plants_used'] ?? false)
             <th style="{{$th}}">Plants Used in Traditional Iranian Medicine</th>
             <th style="{{$th}}">Official Natural Drugs</th>
@@ -48,6 +54,13 @@
     @foreach($result as $item)
         <tr>
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['taxonomy'], 'keys'=>$keys])
+
+            @if($keys['part_used'] ?? false)
+                <td style="{{$td}}">{{ $item['has_aerial_part'] == 1 }}</td>
+                <td style="{{$td}}">{{ $item['has_ground_part'] == 1 }}</td>
+                <td style="{{$td}}">{{ $item['aerial_type'] ?? null }}</td>
+                <td style="{{$td}}">{{ $item['underground_part'] ?? null }}</td>
+            @endif
             @if($keys['plants_used'] ?? false)
                 <td style="{{$td}}">{{ $item['traditional_iranian_medicine_name'] ?? null }}</td>
                 <td style="{{$td}}">{{ $item['natural_drug_name'] ?? null }}</td>

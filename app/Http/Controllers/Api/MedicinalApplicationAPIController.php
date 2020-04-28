@@ -77,6 +77,7 @@ class MedicinalApplicationAPIController extends AppBaseController
             ['name' => 'import_export', 'title' => 'Import/Export', 'value' => false],
             ['name' => 'cultivate', 'title' => 'Cultivated area', 'value' => false],
             ['name' => 'industrial', 'title' => 'Industrial Potential', 'value' => false],
+            ['name' => 'part_used', 'title' => 'Part Used', 'value' => false],
         ];
         return $this->sendResponse(compact('applications', 'keys'), 'Medicinal Applications retrieved successfully');
     }

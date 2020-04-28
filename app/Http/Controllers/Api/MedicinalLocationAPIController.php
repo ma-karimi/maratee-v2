@@ -80,6 +80,15 @@ class MedicinalLocationAPIController extends AppBaseController
             ['name' => 'variety', 'title' => 'Variety', 'value' => false],
             ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
             ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
+            ['name' => 'place', 'title' => 'Place of collection', 'value' => false],
+            ['name' => 'treatment', 'title' => 'Treatment', 'value' => false],
+            ['name' => 'phenology', 'title' => 'Phenology', 'value' => false],
+            ['name' => 'methods', 'title' => 'Methods', 'value' => false],
+            ['name' => 'metabolite', 'title' => 'Metabolite', 'value' => false],
+            ['name' => 'efficiency', 'title' => 'Efficiency', 'value' => false],
+            ['name' => 'constituent', 'title' => 'Constituent', 'value' => false],
+            ['name' => 'article', 'title' => 'Article', 'value' => false],
+            ['name' => 'description', 'title' => 'Description', 'value' => false],
         ];
         return $this->sendResponse(compact('compounds', 'keys'), 'Natural Compounds retrieved successfully');
     }
