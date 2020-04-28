@@ -86,7 +86,7 @@
                 <td style="{{$td}}">{{$item['extraction']['name'] ?? null}}</td>
                 <td style="{{$td}}">{{$item['analyse']['name'] ?? null}}</td>
             @endif
-            @if($keys['metabolites'] ?? false)
+            @if($keys['metabolite'] ?? false)
                 <td style="{{$td}}">{{$item['metabolites'] ?? null}}</td>
             @endif
             @if($keys['efficiency'] ?? false)
@@ -95,7 +95,7 @@
             @if($keys['constituent'] ?? false)
                 <td style="{{$td}}">
                     @forelse($item['constituents'] as $constituent)
-                        {{$constituent['constituent_type']['name_en'] ?? null}}:{{$constituent['value'] ?? null}}
+                        {{$constituent['constituent_type']['name'] ?? null}}:{{$constituent['value'] ?? null}}
                         @if(!$loop->last)
                             |
                         @endif
