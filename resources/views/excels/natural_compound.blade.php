@@ -97,7 +97,7 @@
                     @forelse($item['constituents'] as $constituent)
                         {{$constituent['constituentType']['name'] ?? null}}:{{$constituent['value'] ?? null}}
                         @if(!$loop->last)
-                            |
+                            &nbsp;&nbsp;|&nbsp;&nbsp;
                         @endif
                     @empty
                     @endforelse
