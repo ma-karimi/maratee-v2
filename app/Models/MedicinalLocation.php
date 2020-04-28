@@ -21,6 +21,7 @@ class MedicinalLocation extends BaseModel implements AuditableContract
     use MedicinalLocationRelations, MedicinalLocationScope, MedicinalLocationAccessor, Auditable, AuditTrait;
     public const STUDIED_SAMPLE = [0 => 'unknown', 1 => 'wild', 2 => 'cultivated'];
     protected $with = ['audits', 'taxonomy'];
+    public $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations', 'groupby', 'excel', 'model', 'keys', 'constituent'];
 
 //
 //    /**

@@ -10,6 +10,7 @@ use App\Models\MedicinalLocation;
 use App\Repositories\MedicinalLocationRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Response;
 
@@ -26,6 +27,7 @@ class MedicinalLocationAPIController extends AppBaseController
     {
         $this->medicinalLocationRepository = $medicinalPlantRepo;
     }
+
     /**
      * @param Request $request
      * @return Response
@@ -61,7 +63,9 @@ class MedicinalLocationAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-
+        if ($request->filled(['constituents:constituent_type_id', 'constituents:value'])) {
+            $request['constituent'] = [$request->get('constituents:constituent_type_id'), $request->get('constituents:value')];
+        }
         $compounds = $this->medicinalLocationRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
@@ -403,5 +407,6 @@ class MedicinalLocationAPIController extends AppBaseController
 
         return $this->sendResponse($medicinalLocation->toArray(), 'MedicinalLocation updated successfully');
     }
+
 
 }

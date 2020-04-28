@@ -5,7 +5,9 @@ namespace App\Repositories;
 use App\Models\{ActionHub, Location, MedicinalLocation, MedicinalLocationConstituent};
 use Exception;
 use Illuminate\Container\Container as Application;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
+use Jedrzej\Searchable\Constraint;
 
 /**
  * Class MedicinalLocationRepository
@@ -58,6 +60,30 @@ class MedicinalLocationRepository extends BaseRepository
         $this->medicinalLocationConstituentRepo = $medicinalLocationConstituentRepo;
         $this->actionHub = $actionHub;
     }
+
+
+    /**
+     * Paginate records for scaffold.
+     *
+     * @param array $search
+     * @param int $perPage
+     * @param array|null $with_relations
+     * @param array $columns
+     * @return LengthAwarePaginator
+     * @throws Exception
+     */
+    public function paginate($perPage, array $search = [], array $with_relations = null, $columns = ['*'])
+    {
+        $query = $this->allQuery($search);
+        return $query
+            ->when(request()->filled('constituent'), function ($query){
+                return $query->ofConstituent();
+            })
+            ->when($with_relations, function ($query, $with_relations) {
+            return $query->with($with_relations);
+        })->latest()->paginate($perPage ?? 25, $columns);
+    }
+
 
     /**
      * Return searchable fields
