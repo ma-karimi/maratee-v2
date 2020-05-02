@@ -38,6 +38,8 @@
             <th style="{{$th}}">Plants used inHerbal medicine store</th>
         @endif
         @if($keys['import_export'] ?? false)
+            <th style="{{$th}}">Has Exporting</th>
+            <th style="{{$th}}">Has Importing</th>
             <th style="{{$th}}">Exporting</th>
             <th style="{{$th}}">Importing</th>
         @endif
@@ -70,6 +72,8 @@
                 <td style="{{$td}}">{{ $item['inherbal_medicine_store_name'] ?? null }}</td>
             @endif
             @if($keys['import_export'] ?? false)
+                <td>{{ $item['has_exporting']}} </td>
+                <td>{{ $item['has_importing']}} </td>
                 <td>{{ $item['exporting_name']}} </td>
                 <td>{{ $item['importing_name']}} </td>
             @endif
