@@ -39,6 +39,8 @@ class CryoBank extends BaseModel implements HasMedia, AuditableContract
         'tank' => 'required|string',
         'cell' => 'required|string',
         'row' => 'required|string',
+        'servival' => 'required|string',
+        'germination' => 'required|string',
         'proposal_name' => 'nullable|string',
         'treatment_id' => 'nullable|exists:treatments,id',
         'treatment_values' => 'nullable|string',
