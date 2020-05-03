@@ -48,8 +48,16 @@
             <th style="{{$th}}">Efficiency</th>
         @endif
         @if($keys['constituent'] ?? false)
-
-            <th style="{{$th}}">Constituent</th>
+            <th style="{{$th}}">Constituent 1</th>
+            <th style="{{$th}}">Constituent 2</th>
+            <th style="{{$th}}">Constituent 3</th>
+            <th style="{{$th}}">Constituent 4</th>
+            <th style="{{$th}}">Constituent 5</th>
+            <th style="{{$th}}">Constituent 6</th>
+            <th style="{{$th}}">Constituent 7</th>
+            <th style="{{$th}}">Constituent 8</th>
+            <th style="{{$th}}">Constituent 9</th>
+            <th style="{{$th}}">Constituent 10</th>
         @endif
         @if($keys['article'] ?? false)
             <th style="{{$th}}">Authors</th>
@@ -92,17 +100,20 @@
             @if($keys['efficiency'] ?? false)
                 <td style="{{$td}}">{{$item['efficiency'] ?? null}}</td>
             @endif
+            @php
+                $count = count($item['constituents']);
+                $array = array_fill(0, 10 - $count, null);
+                $constituents= collect($item['constituents'])->concat($array)->all();
+            @endphp
             @if($keys['constituent'] ?? false)
-                <td style="{{$td}}">
-                    @forelse($item['constituents'] as $constituent)
-                        <b>{{$loop->iteration}}: {{$constituent['constituentType']['name'] ?? null}}</b>
-                        {{!empty($constituent['value']) ? ' ('.$constituent['value'].')' :  ''}}
-                        @if(!$loop->last)
-                            &nbsp;&nbsp;|&nbsp;&nbsp;
+                @foreach($constituents as $constituent)
+                    <td style="{{$td}}">
+                        @if(!empty($constituent))
+                            <b>{{$constituent['constituentType']['name'] ?? null}}</b>
+                            {{!empty($constituent['value']) ? ' ('.$constituent['value'].')' :  ''}}
                         @endif
-                    @empty
-                    @endforelse
-                </td>
+                    </td>
+                @endforeach
             @endif
             @if($keys['article'] ?? false)
                 <td style="{{$td}}">{{$item['article']['authors'] ?? null}}</td>

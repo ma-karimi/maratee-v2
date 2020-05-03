@@ -16,6 +16,7 @@
 //        $query->update(['village'=>!empty($query['villager']['name_en']) ? $query['villager']['name_en'] : null ]);
 //    });
 //dd(\App\Models\Location::first());
+
 use Illuminate\Support\Str;
 
 
