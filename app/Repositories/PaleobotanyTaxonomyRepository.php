@@ -6,6 +6,7 @@ use App\Models\PaleobotanyGeneralHub;
 use App\Models\PaleobotanyTaxonomy;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -51,6 +52,7 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
         }
 
         $taxonomy = parent::create($this->setPrimaryData($request));
+
         $this->createHub($taxonomy->id, 'samples', \request()->filled('samples') ? $request['samples'] : []);
         $this->createHub($taxonomy->id, 'divisions', \request()->filled('divisions') ? $request['divisions'] : []);
 
@@ -131,7 +133,7 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
         }
 
         $taxonomy = parent::update($this->setPrimaryData($request), $id);
-
+        Log::info($request['samples']);
         $this->createHub($taxonomy->id, 'samples', \request()->filled('samples') ? $request['samples'] : []);
         $this->createHub($taxonomy->id, 'divisions', \request()->filled('divisions') ? $request['divisions'] : []);
 

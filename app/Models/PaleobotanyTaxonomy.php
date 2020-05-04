@@ -140,12 +140,13 @@ class PaleobotanyTaxonomy extends BaseModel implements AuditableContract
             ->where('paleobotany_generals.type', 'division');
     }
 
+
     public function samples(): MorphToMany
     {
         return $this->morphToMany(PaleobotanyGeneral::class, 'modelable', 'paleobotany_general_hubs')
             ->withTimestamps()
             ->whereNull('paleobotany_general_hubs.deleted_at')
-            ->where('paleobotany_generals.type', 'sample');
+            ->where('paleobotany_generals.type', 'genus');
     }
 
 
