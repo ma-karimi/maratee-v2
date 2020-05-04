@@ -23,6 +23,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Mews\Captcha\Facades\Captcha;
 
 
 class AuthController extends AppBaseController
@@ -37,6 +38,11 @@ class AuthController extends AppBaseController
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
+    }
+
+    public function captcha()
+    {
+        return $this->sendResponse(['captcha' => Captcha::img()], 'Captcha retrieved successfully');
     }
 
     /**
@@ -229,7 +235,7 @@ class AuthController extends AppBaseController
 
         try {
             $newPassword = Utility::randomStringGenerator(6);
-            $user->update(['password'=>$newPassword]);
+            $user->update(['password' => $newPassword]);
             $user->notify(new ResetPassword($newPassword));
             return $this->sendResponse(null, 'The Password reset token and sent to Email');
         } catch (Exception $exception) {

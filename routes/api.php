@@ -24,6 +24,7 @@ Route::post('password/reset', 'AuthController@resetPassword');
 
 Route::get('/home/data', 'HomeAPIController@data');
 Route::get('/home', 'HomeAPIController@index');
+Route::get('/captcha', 'AuthController@captcha');
 
 Route::middleware(['auth:api'])->group(function () {
 

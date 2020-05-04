@@ -26,7 +26,8 @@ class UserLoginRequest extends FormRequest
         return [
             'email' => 'required|string|email',
             'password' => 'required|string',
-            'remember_me' => 'boolean'
+            'remember_me' => 'boolean',
+            'captcha' => 'required|captcha_api:'. request('key')
         ];
     }
 }
