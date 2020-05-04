@@ -28,6 +28,8 @@ class CreateCryoBanksTable extends Migration
             $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('treatment_id');
             $table->integer('sample_number')->nullable();
+            $table->decimal('servival', 5, 2)->nullable();
+            $table->decimal('germination', 5, 2)->nullable();
 
             $table->timeStamps();
             $table->softDeletesTz();

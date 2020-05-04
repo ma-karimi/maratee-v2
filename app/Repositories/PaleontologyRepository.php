@@ -6,6 +6,7 @@ use App\Models\ActionHub;
 use App\Models\ActorHub;
 use App\Models\Paleontology;
 use Illuminate\Container\Container as Application;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
@@ -46,6 +47,24 @@ class PaleontologyRepository extends BaseRepository
         $this->actorHubRepo = $actorHubRepo;
         $this->locationRepo = $locationRepo;
         $this->localityRepo = $localityRepo;
+    }
+
+    /**
+     * Paginate records for scaffold.
+     *
+     * @param array $search
+     * @param int $perPage
+     * @param array|null $with_relations
+     * @param array $columns
+     * @return LengthAwarePaginator
+     * @throws Exception
+     */
+    public function paginate($perPage, array $search = [], array $with_relations = null, $columns = ['*'])
+    {
+        $query = $this->allQuery($search);
+        return $query->when($with_relations, function ($query, $with_relations) {
+            return $query->with($with_relations);
+        })->orderBy('catalog_no')->paginate($perPage ?? 25, $columns);
     }
 
     /**
@@ -191,7 +210,7 @@ class PaleontologyRepository extends BaseRepository
         $data = [
             'paleontology_id' => $input['paleontology_id'] ?? null,
             'formation' => $input['formation'] ?? null,
-            'layer' => $input['layer'] ?? null,
+            'thickness' => $input['thickness'] ?? null,
             'stratigraphy' => $input['stratigraphy'] ?? null,
             'lithology' => $input['lithology'] ?? null,
             'fauna' => $input['fauna'] ?? null,

@@ -15,6 +15,7 @@ class CreatePaleontologiesTable extends Migration
     {
         Schema::create('paleontologies', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('sample_no')->nullable();
             $table->integer('catalog_no')->nullable();
             $table->string('specimen_no')->nullable();
             $table->string('field_no')->nullable();

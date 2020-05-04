@@ -17,7 +17,7 @@ class Locality extends BaseModel
         'paleontology_id' => 'required|exists:paleontologies,id',
         'location_id' => 'required|exists:locations,id',
         'formation' => 'nullable|string',
-        'layer' => 'nullable|string',
+        'thickness' => 'nullable|string',
         'stratigraphy' => 'nullable|string',
         'fauna' => 'nullable|string',
         'description' => 'nullable|string',

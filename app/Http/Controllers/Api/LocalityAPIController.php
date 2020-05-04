@@ -101,7 +101,7 @@ class LocalityAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/Locality")
      *      ),
      *      @SWG\Parameter(
-     *          name="layer",
+     *          name="thickness",
      *          in="body",
      *          description="Locality that should be stored",
      *          required=false,
