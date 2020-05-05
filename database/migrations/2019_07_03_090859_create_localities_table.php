@@ -18,7 +18,7 @@ class CreateLocalitiesTable extends Migration {
 			$table->unsignedBigInteger('paleontology_id');
 			$table->unsignedBigInteger('location_id');
 			$table->string('formation')->nullable();
-			$table->string('layer')->nullable();
+			$table->string('thickness')->nullable();
 			$table->string('stratigraphy')->nullable();
 			$table->string('lithology')->nullable();
 			$table->string('fauna')->nullable();
