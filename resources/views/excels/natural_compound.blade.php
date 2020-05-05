@@ -50,6 +50,7 @@
         @if($keys['constituent'] ?? false)
             @for ($i = 10; $i >= 1; $i--)
                 <th style="{{$th}}">Constituent {{$i}}</th>
+                <th style="{{$th}}">Constituent Value {{$i}}</th>
             @endfor
         @endif
         @if($keys['article'] ?? false)
@@ -103,7 +104,11 @@
                     <td style="{{$td}}">
                         @if(!empty($constituent))
                             <b>{{$constituent['constituentType']['name'] ?? null}}</b>
-                            {{!empty($constituent['value']) ? ' ('.$constituent['value'].')' :  ''}}
+                        @endif
+                    </td>
+                    <td style="{{$td}}">
+                        @if(!empty($constituent))
+                            {{!empty($constituent['value']) ? $constituent['value'] :  ''}}
                         @endif
                     </td>
                 @endforeach
