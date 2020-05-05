@@ -48,7 +48,7 @@ trait MedicinalLocationRelations
      */
     public function constituents(): HasMany
     {
-        return $this->hasMany(MedicinalLocationConstituent::class);
+        return $this->hasMany(MedicinalLocationConstituent::class)->orderBy('created_at');
     }
 
 

@@ -48,16 +48,9 @@
             <th style="{{$th}}">Efficiency</th>
         @endif
         @if($keys['constituent'] ?? false)
-            <th style="{{$th}}">Constituent 1</th>
-            <th style="{{$th}}">Constituent 2</th>
-            <th style="{{$th}}">Constituent 3</th>
-            <th style="{{$th}}">Constituent 4</th>
-            <th style="{{$th}}">Constituent 5</th>
-            <th style="{{$th}}">Constituent 6</th>
-            <th style="{{$th}}">Constituent 7</th>
-            <th style="{{$th}}">Constituent 8</th>
-            <th style="{{$th}}">Constituent 9</th>
-            <th style="{{$th}}">Constituent 10</th>
+            @for ($i = 10; $i >= 1; $i--)
+                <th style="{{$th}}">Constituent {{$i}}</th>
+            @endfor
         @endif
         @if($keys['article'] ?? false)
             <th style="{{$th}}">Authors</th>
