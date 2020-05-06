@@ -47,4 +47,35 @@ trait LocationAccessor
     {
         return [];
     }
+
+
+    public function getLatitudeDegreeAttribute()
+    {
+
+    }
+
+    public function getLatitudeMinuteAttribute()
+    {
+
+    }
+
+    public function getLatitudeSecondAttribute()
+    {
+
+    }
+
+    public function getLongitudeDegreeAttribute()
+    {
+
+    }
+
+    public function getLongitudeMinuteAttribute()
+    {
+
+    }
+
+    public function getLongitudeSecondAttribute()
+    {
+
+    }
 }

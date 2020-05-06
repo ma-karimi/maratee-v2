@@ -103,6 +103,7 @@ class TaxonomyRepository extends BaseRepository
         return $this->allQuery($request->all())->when($request->groupby, function ($query) use ($request) {
             return $query->whereNotNull($request->groupby)->groupBy($request->groupby);
         })
+            ->filtered()
             ->with($relations)
             ->latest()
             ->get();
