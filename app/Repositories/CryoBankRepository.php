@@ -118,7 +118,7 @@ class CryoBankRepository extends BaseRepository
     private function cryoBankData($input)
     {
         return Arr::only($input, [
-            'genotype_code', 'sample_type_id', 'repeat', 'tank', 'taxonomy_id', 'protection_id', 'location_id', 'treatment_id', 'sample_number', 'year', 'cell', 'row', 'rack', 'proposal_name'
+            'genotype_code', 'sample_type_id', 'repeat', 'tank', 'taxonomy_id', 'protection_id', 'location_id', 'treatment_id', 'sample_number', 'year', 'cell', 'row', 'rack', 'proposal_name', 'servival', 'germination'
         ]);
     }
 
