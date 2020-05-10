@@ -114,6 +114,7 @@
                         @foreach($constituents as $constituent)
                             @if($constituent['constituentType']['name'] == $constituentType)
                                 {{!empty($constituent['value']) ? $constituent['value'] :  ''}}
+                                @break
                             @endif
                         @endforeach
                     </td>
