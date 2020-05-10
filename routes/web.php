@@ -16,7 +16,11 @@
 //        $query->update(['village'=>!empty($query['villager']['name_en']) ? $query['villager']['name_en'] : null ]);
 //    });
 //dd(\App\Models\Location::first());
+use App\Exports\ExcelExport;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 Route::get('/test-general', function () {
@@ -28,13 +32,22 @@ Route::get('/test-general', function () {
     return response()->json($General);
 });
 
-Route::get('/', function () {
-    $name = Str::singular(Str::studly('medicinal_locations'));
+Route::get('/natural_compound', function () {
+    $name = Str::singular(Str::studly('MedicinalLocation'));
     $repo = 'App\\Repositories\\' . $name . 'Repository';
     $repo = resolve($repo);
-    \Log::info($repo->model()::getAllRelations());
     $result = $repo->all()->load(Arr::flatten($repo->model()::getAllRelations()));
-    dd($result);
+
+
+
+//    if (\request()->filled('excel')) {
+        $model = Str::ucfirst(\request('model'));
+        $file_excel = "Export${model}List-" . date('Y-m-d-H-i-s') .'.xlsx';
+
+
+        Excel::store(new ExcelExport($result, \request('model')), 'public/' . $file_excel, null, 'Xlsx');
+        return $this->sendResponse(Storage::url($file_excel), 'success');
+//    }
 });
 Auth::routes();
 

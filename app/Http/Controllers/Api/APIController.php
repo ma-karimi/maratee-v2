@@ -266,6 +266,9 @@ class APIController extends AppBaseController
         $repo = 'App\\Repositories\\' . $name . 'Repository';
         $repo = resolve($repo);
         $result = $repo->all()->load(Arr::flatten($repo->model()::getAllRelations()));
+
+
+
         if (\request()->filled('excel')) {
             $model = Str::ucfirst(\request('model'));
             $file_excel = "Export${model}List-" . date('Y-m-d-H-i-s') .'.xlsx';
