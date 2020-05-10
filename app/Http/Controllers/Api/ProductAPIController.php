@@ -75,7 +75,7 @@ class ProductAPIController extends AppBaseController
             ['name' => 'subspecies', 'title' => 'SubSpecies', 'value' => false],
             ['name' => 'variety', 'title' => 'Variety', 'value' => false],
             ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
-            ['name' => 'local_name', 'title' => 'Local Name', 'value' => false]
+            ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
         ];
         return $this->sendResponse(compact('products', 'keys'), 'Products retrieved successfully');
     }

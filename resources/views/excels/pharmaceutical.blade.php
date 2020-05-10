@@ -42,7 +42,6 @@
     <tbody>
     @foreach($result as $item)
         <tr>
-            <td style="{{$td}}">{{ $item->code ?? null }}</td>
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['taxonomy'], 'keys'=>$keys])
             <td style="{{$td}}">{{ $item['drug_name_en'] ?? null }}</td>
             <td style="{{$td}}">{{ $item['drug_name_fa'] ?? null }}</td>
