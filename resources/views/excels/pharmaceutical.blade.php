@@ -24,10 +24,10 @@
     <tr>
         @include('excels.partials.taxonomyHeader')
 
-        <th style="{{$th}}">Medicinal product in English</th>
-        <th style="{{$th}}">Medicinal product in Persian</th>
-        <th style="{{$th}}">Product in English</th>
-        <th style="{{$th}}">Product in Persian</th>
+        <th style="{{$th}}">product in English</th>
+        <th style="{{$th}}">product in Persian</th>
+        <th style="{{$th}}">Name of medicine in English</th>
+        <th style="{{$th}}">Name of medicine in Persian</th>
         <th style="{{$th}}">Company</th>
         <th style="{{$th}}">Telephone</th>
         <th style="{{$th}}">Address</th>
