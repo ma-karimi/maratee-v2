@@ -103,13 +103,19 @@
             @endif
 
             @if($keys['constituent'] ?? false)
+
                 @foreach ($constituentTypes as $constituentType)
+                    @php $valFlag = false @endphp
                     <td style="{{$td}}">
                         @foreach($item['constituents'] as $constituent)
                             @if($constituent['constituentType']['name'] == $constituentType)
                                 {{!empty($constituent['value']) ? $constituent['value'] :  ''}}
+                                @php $valFlag = true @endphp
                             @endif
                         @endforeach
+                        @if($valFlag === false)
+                            0
+                        @endif
                     </td>
                 @endforeach
             @endif
