@@ -102,19 +102,14 @@
                 <td style="{{$td}}">{{$item['efficiency'] ?? null}}</td>
             @endif
 
-            @php
-                $count = count($item['constituents']);
-                $array = array_fill(0, 10 - $count, null);
-                $constituents= collect($item['constituents'])->concat($array)->all();
-            @endphp
-
             @if($keys['constituent'] ?? false)
                 @foreach ($constituentTypes as $constituentType)
                     <td style="{{$td}}">
-                        @foreach($constituents as $constituent)
+                        @foreach($item['constituents'] as $constituent)
                             @if($constituent['constituentType']['name'] == $constituentType)
                                 {{!empty($constituent['value']) ? $constituent['value'] :  ''}}
-                                @break
+                            @else
+                                0
                             @endif
                         @endforeach
                     </td>
