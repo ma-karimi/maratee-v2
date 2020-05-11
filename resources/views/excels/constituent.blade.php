@@ -107,9 +107,7 @@
                     <td style="{{$td}}">
                         @foreach($item['constituents'] as $constituent)
                             @if($constituent['constituentType']['name'] == $constituentType)
-                                {{!empty($constituent['value']) ? $constituent['value'] :  ''}}
-                            @else
-                                0
+                                {{!empty($constituent['value']) ? $constituent['value'] :  '0'}}
                             @endif
                         @endforeach
                     </td>
