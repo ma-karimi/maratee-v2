@@ -16,7 +16,8 @@ class MedicinalLocationTableSeeder extends Seeder
      */
     public function run()
     {
-        Excel::import(new MedicinalLocationImport(), public_path('/excels/MedicinalLocation.xlsx'));
+//        Excel::import(new MedicinalLocationImport(), public_path('/excels/MedicinalLocation.xlsx'));
+        Excel::import(new MedicinalLocationImport(), public_path('/excels/natural_compound.xlsx'));
 
     }
 }

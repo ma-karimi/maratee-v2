@@ -50,8 +50,8 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
 
     private function storeTaxonomy($row)
     {
-        $row['family_id'] = General::firstOrCreate(['name' => Str::lower($row['family']), 'type' => 'family'])->id;
-        $row['genus_id'] = General::firstOrCreate(['name' => Str::lower($row['genus']), 'type' => 'genus'])->id;
+        $row['family_id'] = General::firstOrCreate(['name' => trim($row['family']), 'type' => 'family'])->id;
+        $row['genus_id'] = General::firstOrCreate(['name' => trim($row['genus']), 'type' => 'genus'])->id;
 
         // species
         if (!empty($row['species'])) {
@@ -193,7 +193,7 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
         $data = $this->trimPropAuthor($row['subspecies'], 'subspecies');
         $data['subspecies_data'] = [
             'type' => 'sub_species',
-            'name' => Str::lower($row['subspecies']) ?? '',
+            'name' => trim($row['subspecies']) ?? '',
         ];
 
         return $data;
@@ -232,7 +232,7 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
         $data = $this->trimPropAuthor($row['variety'], 'variety');
         $data['variety_data'] = [
             'type' => 'variety',
-            'name' => Str::lower($row['variety']) ?? '',
+            'name' => trim($row['variety']) ?? '',
         ];
 
         return $data;
@@ -267,7 +267,7 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
             $location_input = $this->locationData($row);
             $row['location_id'] = Location::create($location_input)->id;
 
-        } elseif (!empty($row['address_fa']) && empty($row['province'])) {
+        } else {
             $province_value = $row['province'] ?? '';
             $and = !empty($province_value) ? ', ' : '';
             $address_fa_value = $row['address_fa'] ?? '';
