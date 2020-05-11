@@ -105,16 +105,10 @@
             @if($keys['constituent'] ?? false)
                 @foreach ($constituentTypes as $constituentType)
                     <td style="{{$td}}">
-                        @php
-                            $t = 0;
-                        @endphp
                         @foreach($item['constituents'] as $constituent)
                             @if($constituent['constituentType']['name'] == $constituentType)
-                                @php
-                                    $t = !empty($constituent['value']) ? $constituent['value'] :  '0';
-                                @endphp
+                                {{!empty($constituent['value']) ? $constituent['value'] :  ''}}
                             @endif
-                            {{$t}}
                         @endforeach
                     </td>
                 @endforeach
