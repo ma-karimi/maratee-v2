@@ -67,11 +67,11 @@ class Taxonomy extends BaseModel implements AuditableContract
             $name .= $and . $this->species->name;
         }
         if ($this->relationLoaded('subspecies') && !empty($this->subspecies)) {
-            $and = !empty($name) ? ' ' : null;
+            $and = !empty($name) ? ' Subsp.' : null;
             $name .= $and . $this->subspecies->name;
         }
         if ($this->relationLoaded('variety') && !empty($this->variety)) {
-            $and = !empty($name) ? ' ' : null;
+            $and = !empty($name) ? ' Var.' : null;
             $name .= $and . $this->variety->name;
         }
 
