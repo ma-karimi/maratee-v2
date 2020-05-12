@@ -4,9 +4,11 @@ namespace App\Repositories;
 
 use App\Models\ActionHub;
 use App\Models\ActorHub;
+use App\Models\Location;
 use App\Models\Nonflower;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Container\Container as Application;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class NonflowerRepository
@@ -76,10 +78,14 @@ class NonflowerRepository extends BaseRepository
     private function storeLocation($input, $location_id)
     {
         if ($location_id) {
-            $location = $this->locationRepo->update($this->locationData($input), $location_id);
+            $location = Location::find($location_id);
         } else {
-            $location = $this->locationRepo->create($this->locationData($input));
+            $location = new Location();
         }
+        $location->preventAttrSet = false;
+        $location->fill($this->locationData($input));
+        $location = $location->save();
+        Log::info($location);
         return $location;
     }
 
@@ -93,7 +99,7 @@ class NonflowerRepository extends BaseRepository
             'village' => $input['village'] ?? null,
             'min_altitude' => $input['min_altitude'] ?? null,
             'max_altitude' => $input['max_altitude'] ?? null,
-            'point' => new Point($input['latitude'], $input['longitude']),
+            'point' => $input['point'] ?? null,
         ];
     }
 

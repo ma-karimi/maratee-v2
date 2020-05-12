@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class Location extends BaseModel
 {
     use SpatialTrait, LocationAccessor, LocationMutator;
+    public $preventAttrSet = true;
 
     public static $rules = [
         'city_id' => 'nullable|exists:cities,id',

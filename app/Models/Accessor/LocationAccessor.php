@@ -45,12 +45,12 @@ trait LocationAccessor
 
     public function getLongitudeAttribute()
     {
-        return !empty($this->point) ? round($this->point->getLng(), 5) : null;
+        return !empty($this->point['UTM'][0]) ? $this->point['UTM'][0] : null;
     }
 
     public function getLatitudeAttribute()
     {
-        return !empty($this->point) ? round($this->point->getLat(), 5) : null;
+        return !empty($this->point['UTM'][1]) ? $this->point['UTM'][1] : null;
     }
 
     public function getAddressAttribute()
