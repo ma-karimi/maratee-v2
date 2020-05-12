@@ -43,6 +43,16 @@ trait LocationAccessor
 
     }
 
+    public function getLongitudeAttribute()
+    {
+        return !empty($this->point) ? round($this->point->getLng(), 5) : null;
+    }
+
+    public function getLatitudeAttribute()
+    {
+        return !empty($this->point) ? round($this->point->getLat(), 5) : null;
+    }
+
     public function getAddressAttribute()
     {
         return [];

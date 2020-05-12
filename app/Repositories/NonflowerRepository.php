@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\ActionHub;
 use App\Models\ActorHub;
 use App\Models\Nonflower;
+use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Container\Container as Application;
 
 /**
@@ -92,7 +93,7 @@ class NonflowerRepository extends BaseRepository
             'village' => $input['village'] ?? null,
             'min_altitude' => $input['min_altitude'] ?? null,
             'max_altitude' => $input['max_altitude'] ?? null,
-            'point' => $input['point'] ?? null,
+            'point' => new Point($input['latitude'], $input['longitude']),
         ];
     }
 

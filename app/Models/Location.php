@@ -48,7 +48,7 @@ class Location extends BaseModel
 
     protected $with = ['city.province.country', 'province.country'];
 
-    protected $appends = ['address', 'country', 'longitudeSecond', 'longitudeMinute', 'longitudeDegree', 'latitudeSecond', 'latitudeMinute', 'latitudeDegree'];
+    protected $appends = ['address', 'country', 'longitudeSecond', 'longitudeMinute', 'longitudeDegree', 'latitudeSecond', 'latitudeMinute', 'latitudeDegree', 'longitude', 'latitude'];
 
     /**
      * @return HasMany
