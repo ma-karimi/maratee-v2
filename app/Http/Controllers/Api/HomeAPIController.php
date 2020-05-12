@@ -21,7 +21,7 @@ class HomeAPIController extends AppBaseController
     public $classes = [
         'botanicals' => 'BotanicalRepository',
         'plants' => 'PlantRepository',
-        'nonflowers' => 'NonflowerRepository',
+//        'nonflowers' => 'NonflowerRepository',
         'medicinal_properties' => 'MedicinalPlantRepository',
         'medicinal_applications' => 'MedicinalApplicationRepository',
         'natural_compounds' => 'MedicinalLocationRepository',
@@ -29,15 +29,15 @@ class HomeAPIController extends AppBaseController
         'pharmaceuticals' => 'ProductRepository',
         'seed_collections' => 'SeedCollectionRepository',
         'cryo_banks' => 'CryoBankRepository',
-        'chromosomes' => 'ChromosomeRepository'
+//        'chromosomes' => 'ChromosomeRepository'
 
     ];
 
     public $types = ['family', 'genus', 'species', 'sub_species', 'variety'];
     public $generals = [
         'generals' => 'General',
-        'nonflowerGenerals' => 'NonflowerGeneral',
-        'paleobotanyGenerals' => 'PaleobotanyGeneral',
+//        'nonflowerGenerals' => 'NonflowerGeneral',
+//        'paleobotanyGenerals' => 'PaleobotanyGeneral',
     ];
 
     public function index(Request $request)
@@ -75,7 +75,7 @@ class HomeAPIController extends AppBaseController
                 ->all();
 
         }
-        $data['generals']['actors'] = Actor::all();
+//        $data['generals']['actors'] = Actor::all();
 
         return $this->sendResponse($data, 'Data retrieved successfully');
     }
