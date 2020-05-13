@@ -9,6 +9,7 @@ use App\Models\Scope\NonflowerScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -23,6 +24,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class Nonflower extends BaseModel implements HasMedia, AuditableContract
 {
     use ActionRelation, HasMediaTrait, NonflowerScope, AuditTrait, Auditable;
+
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
 
     public static $rules = [
@@ -36,7 +38,8 @@ class Nonflower extends BaseModel implements HasMedia, AuditableContract
         //classification
         'habitat_id' => 'nullable|exists:generals,id',
         'phytogeography_id' => 'nullable|exists:generals,id',
-        'substrate_id' => 'required|exists:nonflower_generals,id',
+        'layer_id' => 'required|exists:nonflower_generals,id',
+        'substrates.*' => 'exists:nonflower_generals,id',
     ];
     /**
      * The database table used by the model.
@@ -45,7 +48,7 @@ class Nonflower extends BaseModel implements HasMedia, AuditableContract
      */
     protected $table = 'nonflowers';
 
-    protected $appends = ['visit', 'borrow', 'exchange_receive', 'exchange_send', 'last_audit'];
+    protected $appends = ['visit', 'borrow', 'exchange_receive', 'exchange_send', 'last_audit', 'substrate'];
     protected $with = ['audits'];
 
     public function determine()
@@ -110,9 +113,24 @@ class Nonflower extends BaseModel implements HasMedia, AuditableContract
     }
 
 
-    public function substrate()
+//
+//    public function substrate()
+//    {
+//        return $this->belongsTo(NonflowerGeneral::class, 'substrate_id')->whereIn('type', ['diatom', 'moss', 'lichen']);
+//    }
+
+    public function layer()
     {
-        return $this->belongsTo(NonflowerGeneral::class, 'substrate_id')->whereIn('type', ['diatom', 'moss', 'lichen']);
+        return $this->belongsTo(NonflowerGeneral::class, 'layer_id')->where('type', 'layer');
+
+    }
+
+    public function substrates()
+    {
+        return $this->belongsToMany(NonflowerGeneral::class, 'nonflower_substrates')
+            ->whereNull('nonflower_substrates.deleted_at')
+            ->whereIn('nonflower_generals.type', ['diatom', 'lichen', 'moss'])
+            ->withTimestamps();
     }
 
 
@@ -121,6 +139,16 @@ class Nonflower extends BaseModel implements HasMedia, AuditableContract
         return $this->belongsTo(General::class, 'habitat_id')->whereType('habitat');
     }
 
+
+    public function getSubstrateAttribute()
+    {
+        $item = null;
+
+        if ($this->relationLoaded('substrates') && $this->substrates->count()) {
+            $item .= $this->substrates->implode('name', ' & ');
+        }
+        return $item;
+    }
 }
 
 

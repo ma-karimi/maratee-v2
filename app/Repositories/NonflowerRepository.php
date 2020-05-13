@@ -8,6 +8,7 @@ use App\Models\Location;
 use App\Models\Nonflower;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Container\Container as Application;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -67,12 +68,12 @@ class NonflowerRepository extends BaseRepository
     {
 
         $location = $this->storeLocation($input, $input->filled('location_id') ? $input['location_id'] : null);
+        Log::info($location);
         $input['location_id'] = $location->id;
-        $record = parent::create($this->recordData($input));
-        $this->storeDetermine($input, $record->id);
-        $this->storeCollect($input, $record->id);
+        $model = parent::create($this->recordData($input));
+        $this->storeRelations($input, $model);
 
-        return $record;
+        return $model;
     }
 
     private function storeLocation($input, $location_id)
@@ -84,8 +85,7 @@ class NonflowerRepository extends BaseRepository
         }
         $location->preventAttrSet = false;
         $location->fill($this->locationData($input));
-        $location = $location->save();
-        Log::info($location);
+        $location->save();
         return $location;
     }
 
@@ -112,7 +112,7 @@ class NonflowerRepository extends BaseRepository
             'description' => $input->description ?? null,
             'phytogeography_id' => $input['phytogeography_id'] ?? null,
             'habitat_id' => $input['habitat_id'] ?? null,
-            'substrate_id' => $input['substrate_id'] ?? null,
+            'layer_id' => $input['layer_id'] ?? null,
         ];
     }
 
@@ -189,15 +189,25 @@ class NonflowerRepository extends BaseRepository
         $this->storeLocation($input, $input->filled('location_id') ? $input['location_id'] : null);
 
         $model = parent::update($this->recordData($input), $id);
-        $this->storeDetermine($input, $model->id);
-        $this->storeCollect($input, $model->id);
+        $this->storeRelations($input, $model);
 
         return $model;
     }
 
     public function getRelationFields()
     {
-        return ['phytogeography', 'taxonomy', 'habitat', 'media', 'substrate', 'collect', 'determine', 'transactions', 'location'];
+        return ['phytogeography', 'taxonomy', 'habitat', 'media', 'layer', 'substrates', 'collect', 'determine', 'transactions', 'location'];
+    }
+
+    /**
+     * @param $input
+     * @param Model $model
+     */
+    private function storeRelations($input, Model $model): void
+    {
+        $this->storeDetermine($input, $model->id);
+        $this->storeCollect($input, $model->id);
+        $this->createHub($model->id, 'substrates', request()->filled('substrates') ? $input['substrates'] : []);
     }
 
 }

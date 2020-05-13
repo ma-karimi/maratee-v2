@@ -19,6 +19,9 @@ class OriginalNonflowerGeneralTableSeeder extends Seeder
         ['name' => 'Soil', 'type' => 'moss'],
         ['name' => 'Sweet water', 'type' => 'diatom'],
         ['name' => 'Salty water', 'type' => 'diatom'],
+        ['name' => 'Lichen', 'type' => 'layer'],
+        ['name' => 'Moss', 'type' => 'layer'],
+        ['name' => 'Diatom', 'type' => 'layer'],
     ];
 
     /**
