@@ -27,6 +27,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class Paleontology extends BaseModel implements HasMedia, AuditableContract
 {
     use PaleontologyAccessor, ActionRelation, ArticleRelation, PaleontologyScope, HasMediaTrait, Auditable, AuditTrait;
+
     public static $rules = [
 
 
@@ -54,8 +55,9 @@ class Paleontology extends BaseModel implements HasMedia, AuditableContract
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
-    protected $appends = ['fair', 'gift', 'buy', 'borrow', 'visit', 'preservation', 'citation', 'last_audit'];
-    protected $with= ['audits'];
+    protected $appends = ['fair', 'gift', 'buy', 'borrow', 'visit', 'preservation', 'citation', 'last_audit', 'sample'];
+    protected $with = ['audits'];
+
     /**
      * @return BelongsTo
      */
@@ -128,10 +130,10 @@ class Paleontology extends BaseModel implements HasMedia, AuditableContract
 //        return $this->belongsTo(General::class, 'general_order_id');
 //    }
 
-//    public function generalSamples()
-//    {
-//        return $this->belongsToMany(General::class, 'paleontology_generals', 'paleontology_id', 'general_id')->whereType('sample')->whereNull('paleontology_generals.deleted_at')->latest()->withTimestamps();
-//    }
+    public function samples()
+    {
+        return $this->belongsToMany(PaleobotanyGeneral::class, 'paleontology_generals', 'paleontology_id', 'general_id')->where('paleobotany_generals.type', 'genus')->whereNull('paleontology_generals.deleted_at')->withTimestamps();
+    }
 //
 //    public function generalPreservations()
 //    {

@@ -5,10 +5,12 @@ namespace App\Repositories;
 use App\Models\ActionHub;
 use App\Models\ActorHub;
 use App\Models\Paleontology;
+use App\Models\PaleontologyGeneral;
 use Illuminate\Container\Container as Application;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class PaleontologyRepository
@@ -89,7 +91,7 @@ class PaleontologyRepository extends BaseRepository
     {
         $paleontology = parent::create($this->setPrimaryData($input));
 //
-//        $this->createHub($paleontology->id, 'generalSamples', is_array($input['samples']) ? $input['samples'] : explode(',', $input['samples']));
+        $this->createHub($paleontology->id, 'samples', request()->filled('samples') ? $input['samples'] : []);
 
         return $paleontology;
     }
@@ -124,8 +126,8 @@ class PaleontologyRepository extends BaseRepository
         ]);
 
         $paleontology = parent::update($data, $paleontology_id);
-        $this->createHub($paleontology->id, 'preservations', is_array($input['preservations']) ? $input['preservations'] : explode(',', $input['preservations']));
-        $this->createHub($paleontology->id, 'citations', is_array($input['citations']) ? $input['citations'] : explode(',', $input['citations']));
+        $this->createHub($paleontology->id, 'preservations', request()->filled('preservations') ? $input['preservations'] : []);
+        $this->createHub($paleontology->id, 'citations', request()->filled('citations') ? $input['citations'] : []);
 
         return $paleontology;
 
@@ -133,7 +135,7 @@ class PaleontologyRepository extends BaseRepository
 
     private function storeDetermine($input, $paleontology_id)
     {
-        $determines = is_array($input['determines']) ? $input['determines'] : explode(',', $input['determines']);
+        $determines = request()->filled('determines') ? $input['determines'] : [];
 
         $action_hub = $this->actionHubRepo->updateOrCreate([
             'action_id' => 1,
@@ -162,7 +164,7 @@ class PaleontologyRepository extends BaseRepository
 
     private function storeCollect($input, $paleontology_id)
     {
-        $collectors = is_array($input['collectors']) ? $input['collectors'] : explode(',', $input['collectors']);
+        $collectors = request()->filled('collectors') ? $input['collectors'] : [];
 
         $action_hub = $this->actionHubRepo->updateOrCreate(
             [
@@ -199,8 +201,7 @@ class PaleontologyRepository extends BaseRepository
     public function update($input, $id)
     {
         $paleontology = parent::update($this->setPrimaryData($input), $id);
-//
-//        $this->createHub($paleontology->id, 'generalSamples', is_array($input['samples']) ? $input['samples'] : explode(',', $input['samples']));
+        $this->createHub($paleontology->id, 'samples', request()->filled('samples') ? $input['samples'] : []);
         return $paleontology;
     }
 
@@ -257,6 +258,6 @@ class PaleontologyRepository extends BaseRepository
 
     public function getRelationFields()
     {
-        return ['taxonomy', 'geologyAgePeriod', 'geologyAgeStage', 'geologyAgeEpoch', 'geologyAgeEra', 'locality.location', 'maps.media', 'collect', 'determine', 'media', 'preservations', 'citations', 'transactions.media'];
+        return ['taxonomy', 'geologyAgePeriod', 'geologyAgeStage', 'geologyAgeEpoch', 'geologyAgeEra', 'locality.location', 'maps.media', 'collect', 'determine', 'media', 'preservations', 'citations', 'transactions.media', 'samples'];
     }
 }

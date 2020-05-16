@@ -44,4 +44,15 @@ trait PaleontologyAccessor
 
         return $text;
     }
+
+    public function getSampleAttribute()
+    {
+        $text = null;
+
+        if ($this->relationLoaded('samples') && $this->samples->count()) {
+            $text = $this->samples->implode('name', ' & ');
+        }
+
+        return $text;
+    }
 }

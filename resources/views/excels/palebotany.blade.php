@@ -85,7 +85,7 @@
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item->taxonomy, 'keys'=>$keys])
             @if($keys['taxonomy'] ?? false)
                 <td style="{{$td}}">{{ $item['general_order']['name'] ?? null}}</td>
-                <td style="{{$td}}">{{ $item['samples'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['sample'] ?? null}}</td>
             @endif
             @if($keys['locality'] ?? false)
                 <td style="{{$td}}">{{ $item['locality']['location']['village']['name_en'] ?? null}}</td>
