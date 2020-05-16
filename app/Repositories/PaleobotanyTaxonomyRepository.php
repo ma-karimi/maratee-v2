@@ -69,6 +69,10 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
         return PaleobotanyTaxonomy::where([
             'genus_id' => $request['genus_id'],
             'species_id' => $request->filled('species_id') ? $request['species_id'] : null,
+            'infra_specific_id' => $request->filled('infra_specific_id') ? $request['infra_specific_id'] : null,
+            'family_id' => $request->filled('family_id') ? $request['family_id'] : null,
+            'order_id' => $request->filled('order_id') ? $request['order_id'] : null,
+            'type_status_id' => $request->filled('type_status_id') ? $request['type_status_id'] : null
         ])->exists();
 
     }
