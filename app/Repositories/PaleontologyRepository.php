@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\ActionHub;
 use App\Models\ActorHub;
+use App\Models\Location;
 use App\Models\Paleontology;
 use App\Models\PaleontologyGeneral;
 use Illuminate\Container\Container as Application;
@@ -232,9 +233,14 @@ class PaleontologyRepository extends BaseRepository
         ]);
 
         if ($location_id) {
-            return $this->locationRepo->update($data, $location_id);
+            $location = Location::find($location_id);
+        } else {
+            $location = new Location();
         }
-        return $this->locationRepo->create($data);
+        $location->preventAttrSet = false;
+        $location->fill($data);
+        $location->save();
+        return $location;
 
     }
 

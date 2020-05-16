@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class Location extends BaseModel
 {
     use SpatialTrait, LocationAccessor, LocationMutator;
+
     public $preventAttrSet = true;
 
     public static $rules = [
@@ -47,9 +48,9 @@ class Location extends BaseModel
     ];
 
 
-    protected $with = ['city.province.country', 'province.country'];
+    protected $with = ['city', 'province', 'country'];
 
-    protected $appends = ['address', 'country', 'longitudeSecond', 'longitudeMinute', 'longitudeDegree', 'latitudeSecond', 'latitudeMinute', 'latitudeDegree', 'longitude', 'latitude'];
+    protected $appends = ['address', 'longitudeSecond', 'longitudeMinute', 'longitudeDegree', 'latitudeSecond', 'latitudeMinute', 'latitudeDegree', 'longitude', 'latitude', 'cities', 'provinces'];
 
     /**
      * @return HasMany
@@ -117,6 +118,13 @@ class Location extends BaseModel
     {
         return $this->belongsTo(City::class);
     }
+    /**
+     * @return BelongsTo
+     */
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
+    }
 
     /**
      * @return BelongsTo
@@ -132,11 +140,27 @@ class Location extends BaseModel
         return $this->morphedByMany(ActionHub::class, 'actionable');
     }
 
+//
+//    public function getCountryAttribute()
+//    {
+//        if ($this->relationLoaded('province') && !empty($this->province)) {
+//            return $this->province->country;
+//        }
+//    }
 
-    public function getCountryAttribute()
+    public function getProvincesAttribute()
     {
-        if ($this->relationLoaded('province') && !empty($this->province)) {
-            return $this->province->country;
+        if (!empty($this->country_id)) {
+            return Province::where('country_id', $this->country_id)->get();
         }
+        return [];
+    }
+
+    public function getCitiesAttribute()
+    {
+        if (!empty($this->province_id)) {
+            return City::where('province_id', $this->province_id)->get();
+        }
+        return [];
     }
 }
