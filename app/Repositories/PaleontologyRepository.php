@@ -237,7 +237,6 @@ class PaleontologyRepository extends BaseRepository
         } else {
             $location = new Location();
         }
-        $location->preventAttrSet = false;
         $location->fill($data);
         $location->save();
         return $location;
