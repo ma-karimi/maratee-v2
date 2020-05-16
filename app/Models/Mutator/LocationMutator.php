@@ -10,6 +10,7 @@ namespace App\Models\Mutator;
 
 
 use Grimzy\LaravelMysqlSpatial\Types\Point;
+use Illuminate\Support\Facades\Log;
 use League\Geotools\Coordinate\Coordinate;
 
 trait LocationMutator

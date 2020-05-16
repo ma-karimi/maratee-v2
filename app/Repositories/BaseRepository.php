@@ -244,7 +244,6 @@ abstract class BaseRepository
             $model = $query->findOrFail($id);
             $model->fill($input);
 
-            Log::info($input);
             $model->save();
             return $model;
         }

@@ -85,7 +85,6 @@ class CryoBankRepository extends BaseRepository
 
     private function storeLocation($input, $location_id = null)
     {
-
         $data = [
             'village' => $input['village'] ?? null,
             'city_id' => $input['city_id'] ?? null,
@@ -93,7 +92,7 @@ class CryoBankRepository extends BaseRepository
             'address_en' => $input['address_en'] ?? null,
             'region_name' => $input['region_name'] ?? null,
             'address_fa' => $input['address_fa'] ?? null,
-            'point' => $input['point'] ?? null,
+            'point' => request()->filled('point') ? $input['point'] : null,
             'min_altitude' => $input['min_altitude'] ?? null,
             'max_altitude' => $input['max_altitude'] ?? null,
         ];

@@ -17,10 +17,7 @@ trait LocationAccessor
     public function getPointAttribute($value)
     {
         if (isset($value)) {
-            $lat = $value->getLat();
-            $lng = $value->getLng();
-            $coordinate = new Coordinate("$lat, $lng");
-            $DMS = explode(', ', (new Geotools())->convert($coordinate)->toDMS());
+            $DMS = $this->getDms($value);
 
 
             $s10 = explode('°', $DMS[0]);
@@ -61,31 +58,57 @@ trait LocationAccessor
 
     public function getLatitudeDegreeAttribute()
     {
+        if (!empty($value = $this->point)) {
+            return $value['DMSN'][0];
+        }
 
     }
 
     public function getLatitudeMinuteAttribute()
     {
-
+        if (!empty($value = $this->point)) {
+            return $value['DMSN'][1];
+        }
     }
 
     public function getLatitudeSecondAttribute()
     {
-
+        if (!empty($value = $this->point)) {
+            return $value['DMSN'][2];
+        }
     }
 
     public function getLongitudeDegreeAttribute()
     {
-
+        if (!empty($value = $this->point)) {
+            return $value['DMSE'][0];
+        }
     }
 
     public function getLongitudeMinuteAttribute()
     {
-
+        if (!empty($value = $this->point)) {
+            return $value['DMSE'][1];
+        }
     }
 
     public function getLongitudeSecondAttribute()
     {
+        if (!empty($value = $this->point)) {
+            return $value['DMSE'][2];
+        }
+    }
 
+    /**
+     * @param $value
+     * @return false|string[]
+     */
+    private function getDms($value)
+    {
+        $lat = $value->getLat();
+        $lng = $value->getLng();
+        $coordinate = new Coordinate("$lat, $lng");
+        $DMS = explode(', ', (new Geotools())->convert($coordinate)->toDMS());
+        return $DMS;
     }
 }
