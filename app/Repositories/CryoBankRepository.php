@@ -92,7 +92,7 @@ class CryoBankRepository extends BaseRepository
             'address_en' => $input['address_en'] ?? null,
             'region_name' => $input['region_name'] ?? null,
             'address_fa' => $input['address_fa'] ?? null,
-            'point' => request()->filled('point') ? $input['point'] : null,
+            'point' => $input['point'] ?? null,
             'min_altitude' => $input['min_altitude'] ?? null,
             'max_altitude' => $input['max_altitude'] ?? null,
         ];
