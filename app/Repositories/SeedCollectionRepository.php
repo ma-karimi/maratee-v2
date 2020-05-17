@@ -64,7 +64,9 @@ class SeedCollectionRepository extends BaseRepository
 
     public function create($input)
     {
-        $input['location_id'] = $this->locationRepo->create($input['location'])->id;
+        if (request()->filled('location')) {
+            $input['location_id'] = $this->locationRepo->create($input['location'])->id;
+        }
         return parent::create(Arr::except($input, ['location']));
     }
 
@@ -100,7 +102,9 @@ class SeedCollectionRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        $this->locationRepo->update($input['location'], $input['location']['id']);
+        if (request()->filled('location_id')) {
+            $this->locationRepo->update($input['location'], $input['location']['id']);
+        }
         return parent::update(Arr::except($input, ['location', 'collect', 'id']), $id);
     }
 
@@ -110,9 +114,9 @@ class SeedCollectionRepository extends BaseRepository
     }
 
     /**
-     * @deprecated  by dr.jamzad
      * @param $input
      * @param $seed_collect_id
+     * @deprecated  by dr.jamzad
      */
     private function storeCollect($input, $seed_collect_id)
     {
@@ -192,7 +196,7 @@ class SeedCollectionRepository extends BaseRepository
     {
         $media_input = [
             'media_type' => $input['media_type'] ?? 2,
-            'description' =>$input['description'] ?? null
+            'description' => $input['description'] ?? null
         ];
         //store media
         if (request()->hasFile('file')) {

@@ -15,7 +15,7 @@ class CreateSeedCollectionsTable extends Migration
     {
         Schema::create('seed_collections', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('taxonomy_id');
+            $table->unsignedBigInteger('taxonomy_id')->nullable();
             $table->string('encoded_code_by_collector')->nullable();
             $table->string('corrected_code_by_nrgb')->nullable();
             $table->string('accession_code')->nullable();
@@ -41,7 +41,7 @@ class CreateSeedCollectionsTable extends Migration
             $table->integer('area_sampled')->nullable();
             $table->integer('plants_sampled_no')->nullable();
             $table->integer('area_occupancy')->nullable();
-            $table->unsignedBigInteger('specimen_type_collect_id');
+            $table->unsignedBigInteger('specimen_type_collect_id')->nullable();
             //deleted by dr.jamzad
 //            $table->unsignedBigInteger('pollination_type_id')->nullable();
 //            $table->unsignedBigInteger('pollination_agent_id')->nullable();
