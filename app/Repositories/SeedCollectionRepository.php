@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -103,7 +104,9 @@ class SeedCollectionRepository extends BaseRepository
     public function update($input, $id)
     {
         if (request()->filled('location_id')) {
-            $this->locationRepo->update($input['location'], $input['location']['id']);
+            $input['location_id'] = $this->locationRepo->update($input['location'], $input['location']['id'])->id;
+        }else{
+            $input['location_id'] = $this->locationRepo->create($input['location'])->id;
         }
         return parent::update(Arr::except($input, ['location', 'collect', 'id']), $id);
     }
