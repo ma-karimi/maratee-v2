@@ -22,7 +22,7 @@ class SeedEvaluation extends BaseModel implements HasMedia, AuditableContract
 
 
     public static $rules = [
-        'seed_collection_id' => 'required|exists:seed_collections,id',
+        'accession_code'=>'required|string',
         'project.title' => 'required|string',
         'project.project_no' => 'required|string',
         'project.project_leader_name' => 'required|string',

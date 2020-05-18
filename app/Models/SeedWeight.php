@@ -20,7 +20,8 @@ class SeedWeight extends BaseModel implements HasMedia, AuditableContract
     use HasMediaTrait, Auditable, AuditTrait;
 
     public static $rules = [
-        'seed_collection_id' => 'required|exists:seed_collections,id',
+        'accession_code'=>'required|string',
+//        'seed_collection_id' => 'required|exists:seed_collections,id',
         'collection_id' => 'required|exists:seed_generals,id',
         'thousand_fruits_weight' => 'nullable|numeric',
         'thousand_seeds_weight' => 'nullable|numeric',
