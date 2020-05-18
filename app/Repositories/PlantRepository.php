@@ -96,7 +96,7 @@ class PlantRepository extends BaseRepository
      */
     public function getRelationFields(): array
     {
-        return ['phytogeographics', 'taxonomy', 'protection', 'locations', 'media', 'geographicals', 'iranGeographicals'];
+        return ['phytogeographics', 'taxonomy', 'protection', 'locations', 'media', 'geographicals', 'iranGeographicals', 'directionGeographicals'];
     }
 
     /**
@@ -184,6 +184,7 @@ class PlantRepository extends BaseRepository
 
         $this->createHub($plant->id, 'geographicals', request()->filled('geographicals') ? $input['geographicals'] : []);
         $this->createHub($plant->id, 'iranGeographicals', request()->filled('iran_geographicals') ? $input['iran_geographicals'] : []);
+        $this->createHub($plant->id, 'directionGeographicals', request()->filled('direction_geographicals') ? $input['direction_geographicals'] : []);
         $this->createHub($plant->id, 'phytogeographics', request()->filled('phytogeographics') ? $input['phytogeographics'] : []);
     }
 

@@ -48,6 +48,16 @@ trait PlantAccessor
         return $distributions;
     }
 
+    public function getIranDirectionGeographicalsAttribute()
+    {
+        $distributions = null;
+
+        if ($this->relationLoaded('directionGeographicals') && $this->directionGeographicals->count()) {
+            $distributions .= $this->directionGeographicals->implode('name', ' & ');
+        }
+        return $distributions;
+    }
+
     public function getLifeFormAttribute()
     {
         return !empty($this->attributes['life_form_id']) ? Arr::get(self::LIFE_FORM, $this->attributes['life_form_id']) : null;

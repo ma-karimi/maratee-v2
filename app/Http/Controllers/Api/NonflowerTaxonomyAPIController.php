@@ -65,7 +65,16 @@ class NonflowerTaxonomyAPIController extends AppBaseController
             $this->taxonomyRepository->getRelationFields()
         );
 
-        return $this->sendResponse($taxonomies->toArray(), 'Nonflower Taxonomies retrieved successfully');
+        $keys = [
+            ['name' => 'family', 'title' => 'Family', 'value' => false],
+            ['name' => 'genus', 'title' => 'Genus', 'value' => false],
+            ['name' => 'species', 'title' => 'Species', 'value' => false],
+            ['name' => 'subspecies', 'title' => 'SubSpecies', 'value' => false],
+            ['name' => 'variety', 'title' => 'Variety', 'value' => false],
+            ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
+            ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
+        ];
+        return $this->sendResponse(compact('taxonomies', 'keys'), 'Nonflower Taxonomies retrieved successfully');
     }
 
     /**

@@ -30,7 +30,7 @@ class Plant extends BaseModel implements HasMedia, AuditableContract
 
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
     protected $with = ['audits'];
-    protected $appends = ['monopoly_of_iran', 'plant_geographicals','plant_phytogeographics', 'iran_plant_geographicals',  'life_form', 'last_audit'];
+    protected $appends = ['monopoly_of_iran', 'plant_geographicals','plant_phytogeographics', 'iran_plant_geographicals','iran_direction_geographicals',  'life_form', 'last_audit'];
     /**
      * The database table used by the model.
      *
@@ -79,6 +79,14 @@ class Plant extends BaseModel implements HasMedia, AuditableContract
     {
         return $this->belongsToMany(Geographical::class, 'plant_geographicals')
             ->where('geographicals.type_id', 2)
+            ->whereNull('plant_geographicals.deleted_at')
+            ->withTimestamps();
+    }
+
+    public function directionGeographicals()
+    {
+        return $this->belongsToMany(Geographical::class, 'plant_geographicals')
+            ->where('geographicals.type_id', 3)
             ->whereNull('plant_geographicals.deleted_at')
             ->withTimestamps();
     }

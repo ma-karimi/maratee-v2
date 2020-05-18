@@ -72,11 +72,11 @@ class NonflowerTaxonomy extends BaseModel implements AuditableContract
             $name .= $and . $this->species->name;
         }
         if ($this->relationLoaded('subspecies') && !empty($this->subspecies)) {
-            $and = !empty($name) ? ' Subsp. ' : null;
+            $and = !empty($name) ? ' subsp. ' : null;
             $name .= $and . $this->subspecies->name;
         }
         if ($this->relationLoaded('variety') && !empty($this->variety)) {
-            $and = !empty($name) ? ' Var. ' : null;
+            $and = !empty($name) ? ' var. ' : null;
             $name .= $and . $this->variety->name;
         }
 

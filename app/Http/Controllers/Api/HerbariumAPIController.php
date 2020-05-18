@@ -66,7 +66,27 @@ class HerbariumAPIController extends AppBaseController
             $this->herbariumRepository->getRelationFields()
         );
 
-        return $this->sendResponse($herbariums->toArray(), 'Herbariums retrieved successfully');
+        $keys = [
+            ['name' => 'family', 'title' => 'Family', 'value' => false],
+            ['name' => 'genus', 'title' => 'Genus', 'value' => false],
+            ['name' => 'species', 'title' => 'Species', 'value' => false],
+            ['name' => 'subspecies', 'title' => 'SubSpecies', 'value' => false],
+            ['name' => 'variety', 'title' => 'Variety', 'value' => false],
+            ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
+            ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
+            ['name' => 'author', 'title' => 'Author', 'value' => false],
+            ['name' => 'location', 'title' => 'Location', 'value' => false],
+            ['name' => 'collect', 'title' => 'Collect', 'value' => false],
+            ['name' => 'determine', 'title' => 'Determine', 'value' => false],
+            ['name' => 'description', 'title' => 'Description', 'value' => false],
+            ['name' => 'herbarium', 'title' => 'Herbarium', 'value' => false],
+            ['name' => 'borrow', 'title' => 'Borrow', 'value' => false],
+            ['name' => 'visit', 'title' => 'Visit', 'value' => false],
+            ['name' => 'exchange', 'title' => 'Exchange', 'value' => false],
+            ['name' => 'type_sample_image', 'title' => 'Type Sample', 'value' => false],
+            ['name' => 'consideration', 'title' => 'Consideration', 'value' => false],
+        ];
+        return $this->sendResponse(compact('herbariums', 'keys'), 'Herbariums retrieved successfully');
     }
 
     /**

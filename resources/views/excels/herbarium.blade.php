@@ -37,17 +37,17 @@
         @if($keys['determine'] ?? false)
             <th style="{{$th}}">Det</th>
         @endif
-        @if($keys['determine'] ?? false)
+        @if($keys['description'] ?? false)
 
             <th style="{{$th}}">Description</th>
         @endif
 
-        @if($keys['determine'] ?? false)
+        @if($keys['herbarium'] ?? false)
 
             <th style="{{$th}}">Herbarium Name</th>
         @endif
 
-        @if($keys['determine'] ?? false)
+        @if($keys['borrow'] ?? false)
 
             <th style="{{$th_transaction}}">Borrower's name (Last Lending)</th>
             <th style="{{$th_transaction}}">Organization or university</th>
@@ -55,7 +55,7 @@
             <th style="{{$th_transaction}}">Return date</th>
         @endif
 
-        @if($keys['determine'] ?? false)
+        @if($keys['visit'] ?? false)
 
             <th style="{{$th_transaction}}">Sample impression (Last Visit)</th>
             <th style="{{$th_transaction}}">Organization or university</th>
@@ -63,18 +63,18 @@
             <th style="{{$th_transaction}}">Referred Name</th>
         @endif
 
-        @if($keys['determine'] ?? false)
+        @if($keys['exchange'] ?? false)
 
             <th style="{{$th_transaction}}">Last Exchange Receive</th>
             <th style="{{$th_transaction}}">Last Exchange Send</th>
         @endif
 
-        @if($keys['determine'] ?? false)
+        @if($keys['type_sample_image'] ?? false)
 
             <th style="{{$th}}">Type Sample</th>
         @endif
 
-        @if($keys['determine'] ?? false)
+        @if($keys['consideration'] ?? false)
 
             <th style="{{$th}}">Consideration</th>
         @endif

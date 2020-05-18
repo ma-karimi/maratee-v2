@@ -50,32 +50,23 @@
     @foreach($result as $item)
         <tr>
             @if($keys['family'] ?? false)
-                <td style="{{$td}}">{{ $item->family->name ?? null }}</td>
+                <td style="{{$td}}">{{ $item->family->name_author ?? null }}</td>
             @endif
             @if($keys['genus'] ?? false)
-                <td style="{{$td}}">{{ $item->genus->name ?? null }}</td>
+                <td style="{{$td}}">{{ $item->genus->name_author ?? null }}</td>
 
             @endif
             @if($keys['species'] ?? false)
                 <td style="{{$td}}">
-                    {{ $item->species->name ?? null }}
-                    @if (!empty($item->species->authors) && count($item->species->authors))
-                        | {{$item->species->actors}}
-                    @endif
+                    {{ $item->species->name_author ?? null }}
                 </td>
             @endif
             @if($keys['subspecies'] ?? false)
-                <td style="{{$td}}">{{ $item->subspecies->name ?? null }}
-                    @if (!empty($item->subspecies->authors) && count($item->subspecies->authors))
-                        | {{$item->subspecies->actors}}
-                    @endif
+                <td style="{{$td}}">{{ $item->subspecies->name_author ?? null }}
                 </td>
             @endif
             @if($keys['variety'] ?? false)
-                <td style="{{$td}}">{{ $item->variety->name ?? null }}
-                    @if (!empty($item->variety->authors) && count($item->variety->authors))
-                        | {{$item->variety->actors}}
-                    @endif
+                <td style="{{$td}}">{{ $item->variety->name_author ?? null }}
                 </td>
             @endif
             @if($keys['local_name'] ?? false)
@@ -84,6 +75,9 @@
             @endif
             @if($keys['scientific'] ?? false)
                 <td style="{{$td}}">{{ $item->scientific_name ?? null }}</td>
+            @endif
+            @if($keys['non_native'] ?? false)
+                <td style="{{$td}}">{{ $item->non_native == 1 ? 'exotic' : 'native' }}</td>
             @endif
         </tr>
     @endforeach

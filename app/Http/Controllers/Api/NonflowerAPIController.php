@@ -66,7 +66,28 @@ class NonflowerAPIController extends AppBaseController
             $this->nonflowerRepository->getRelationFields()
         );
 
-        return $this->sendResponse($nonflowers->toArray(), 'Nonflowers retrieved successfully');
+        $keys = [
+            ['name' => 'family', 'title' => 'Family', 'value' => false],
+            ['name' => 'genus', 'title' => 'Genus', 'value' => false],
+            ['name' => 'species', 'title' => 'Species', 'value' => false],
+            ['name' => 'subspecies', 'title' => 'SubSpecies', 'value' => false],
+            ['name' => 'variety', 'title' => 'Variety', 'value' => false],
+            ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
+            ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
+            ['name' => 'author', 'title' => 'Author', 'value' => false],
+            ['name' => 'location', 'title' => 'Location', 'value' => false],
+            ['name' => 'collect', 'title' => 'Collect', 'value' => false],
+            ['name' => 'substrate', 'title' => 'Substrate', 'value' => false],
+            ['name' => 'description', 'title' => 'Description', 'value' => false],
+            ['name' => 'phytogeography', 'title' => 'Phytogeography', 'value' => false],
+            ['name' => 'determine', 'title' => 'Determine', 'value' => false],
+            ['name' => 'habitat', 'title' => 'Habitat', 'value' => false],
+            ['name' => 'borrow', 'title' => 'Borrow', 'value' => false],
+            ['name' => 'visit', 'title' => 'Visit', 'value' => false],
+            ['name' => 'exchange', 'title' => 'Exchange', 'value' => false],
+        ];
+
+        return $this->sendResponse(compact('nonflowers', 'keys'), 'Nonflowers retrieved successfully');
     }
 
     /**

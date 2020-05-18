@@ -33,7 +33,7 @@ trait GeneralTrait
 
     public function getNameAttribute($value)
     {
-        if (in_array($this->type, ['family', 'genus'])) {
+        if (in_array($this->type, ['family', 'genus', 'phytogeography'])) {
             return Str::ucfirst(trim($value));
         } elseif ($this->type === 'species') {
             return Str::lower(trim($value));

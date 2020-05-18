@@ -66,7 +66,18 @@ class PaleobotanyTaxonomyAPIController extends AppBaseController
             $this->paleobotanyTaxonomyRepository->getRelationFields()
         );
 
-        return $this->sendResponse($taxonomies->toArray(), 'Paleobotany Taxonomies retrieved successfully');
+        $keys = [
+            ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
+            ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
+            ['name' => 'family', 'title' => 'Family', 'value' => false],
+            ['name' => 'genus', 'title' => 'Genus', 'value' => false],
+            ['name' => 'species', 'title' => 'Species', 'value' => false],
+            ['name' => 'order', 'title' => 'Order', 'value' => false],
+            ['name' => 'subspecies', 'title' => 'Infra Specific', 'value' => false],
+            ['name' => 'type_status', 'title' => 'Type Status', 'value' => false],
+            ['name' => 'division', 'title' => 'Division', 'value' => false],
+        ];
+        return $this->sendResponse(compact('taxonomies', 'keys'), 'Paleobotany Taxonomies retrieved successfully');
     }
 
     /**

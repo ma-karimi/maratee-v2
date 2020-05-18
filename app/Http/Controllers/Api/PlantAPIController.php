@@ -76,8 +76,7 @@ class PlantAPIController extends AppBaseController
             ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
             ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
             ['name' => 'author', 'title' => 'Author', 'value' => false],
-            ['name' => 'geographical', 'title' => 'World Geographical', 'value' => false],
-            ['name' => 'iran_geographical', 'title' => 'Iran Geographical', 'value' => false],
+            ['name' => 'distribution', 'title' => 'Distribution', 'value' => false],
             ['name' => 'life_form', 'title' => 'LifeForm', 'value' => false],
             ['name' => 'dna', 'title' => 'DNA', 'value' => false],
         ];
