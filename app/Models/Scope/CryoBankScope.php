@@ -56,4 +56,17 @@ trait CryoBankScope
         }
         return false;
     }
+    protected function processResearcherFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereHas('research', function ($determine) use ($constraint) {
+                return $determine->whereHas('actors', function ($key) use ($constraint) {
+                    return $key->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
+                });
+            });
+
+            return true;
+        }
+        return false;
+    }
 }
