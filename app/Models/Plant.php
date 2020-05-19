@@ -67,7 +67,7 @@ class Plant extends BaseModel implements HasMedia, AuditableContract
             ->withTimestamps();
     }
 
-    public function geographicals()
+    public function geographicals(): BelongsToMany
     {
         return $this->belongsToMany(Geographical::class, 'plant_geographicals')
             ->whereNull('plant_geographicals.deleted_at')
@@ -75,7 +75,7 @@ class Plant extends BaseModel implements HasMedia, AuditableContract
             ->withTimestamps();
     }
 
-    public function iranGeographicals()
+    public function iranGeographicals(): BelongsToMany
     {
         return $this->belongsToMany(Geographical::class, 'plant_geographicals')
             ->where('geographicals.type_id', 2)
@@ -83,7 +83,7 @@ class Plant extends BaseModel implements HasMedia, AuditableContract
             ->withTimestamps();
     }
 
-    public function directionGeographicals()
+    public function directionGeographicals(): BelongsToMany
     {
         return $this->belongsToMany(Geographical::class, 'plant_geographicals')
             ->where('geographicals.type_id', 3)
