@@ -17,6 +17,7 @@ class ChangeMedicinalLocationsTable extends Migration
         Schema::table('medicinal_locations', function (Blueprint $table) {
             $table->unsignedBigInteger('taxonomy_id');
             $table->text('description');
+            $table->string('local_name')->nullable();
 //
             $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onUpdate('NO ACTION')->onDelete('CASCADE');
 

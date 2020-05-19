@@ -25,7 +25,7 @@ class CreateSeedCollectionsTable extends Migration
             $table->string('regeneration_and_evaluation_code')->nullable();
             $table->unsignedBigInteger('location_id')->nullable();
             $table->unsignedBigInteger('land_form_id')->nullable();
-            $table->unsignedBigInteger('slope_aspect_id')->nullable();
+            $table->unsignedBigIntseger('slope_aspect_id')->nullable();
             $table->string('slope_degree')->nullable();
             $table->unsignedBigInteger('general_habitat_id')->nullable();
             $table->unsignedBigInteger('soil_depth_id')->nullable();

@@ -18,9 +18,11 @@ class CreateSeedEvaluationsTable extends Migration
         Schema::dropIfExists('seed_evaluations');
         Schema::create('seed_evaluations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('seed_collection_id');
+            $table->unsignedBigInteger('seed_collection_id')->nullable();
+            $table->string('accession_code')->nullable();
+
 //            $table->unsignedBigInteger('organization_id');
-            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('project_id')->nullable();
 //            $table->string('department_name')->nullable();
 //            $table->string('organization_phone')->nullable();
 //            $table->string('organization_fax')->nullable();

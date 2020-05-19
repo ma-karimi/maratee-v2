@@ -155,6 +155,7 @@ class MedicinalLocationRepository extends BaseRepository
         return ['location_id', 'treatment_id', 'efficiency', 'studied_sample', 'presence_in_country', 'phenology_id', 'method_distillation_id', 'method_extraction_id', 'method_analyse_id',
 //            'herbarium_number', deleted by comment dr.sefidkon
             'collecting_year',
+            'local_name',
             'taxonomy_id', 'code'];
     }
 

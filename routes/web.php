@@ -24,13 +24,24 @@ use Maatwebsite\Excel\Facades\Excel;
 
 
 Route::get('/test-general', function () {
-    $General = App\Models\General::all()->groupBy('type');
+    \App\Models\MedicinalLocation::whereNotNull('taxonomy_id')
+        ->with('taxonomy')
+        ->whereHas('taxonomy', function ($query) {
+            return $query->whereNotNull('name');
+        })
+        ->get()
+        ->each(function ($query) {
+            $query->local_name = $query->taxonomy['name'];
+            $query->save();
 
-    foreach ($General as $index => $item){
-        $General[$index] = collect($item)->sortBy('name')->take(10)->values()->all();
-    }
-    return response()->json($General);
+            $query->taxonomy->name = null;
+            $query->taxonomy->save();
+        });
+
+    \App\Models\Taxonomy::whereNotNull('name')->update(['name' => null]);
+
 });
+
 
 Route::get('/natural_compound', function () {
     $name = Str::singular(Str::studly('MedicinalLocation'));
@@ -39,14 +50,13 @@ Route::get('/natural_compound', function () {
     $result = $repo->all()->load(Arr::flatten($repo->model()::getAllRelations()));
 
 
-
 //    if (\request()->filled('excel')) {
-        $model = Str::ucfirst(\request('model'));
-        $file_excel = "Export${model}List-" . date('Y-m-d-H-i-s') .'.xlsx';
+    $model = Str::ucfirst(\request('model'));
+    $file_excel = "Export${model}List-" . date('Y-m-d-H-i-s') . '.xlsx';
 
 
-        Excel::store(new ExcelExport($result, \request('model')), 'public/' . $file_excel, null, 'Xlsx');
-        return $this->sendResponse(Storage::url($file_excel), 'success');
+    Excel::store(new ExcelExport($result, \request('model')), 'public/' . $file_excel, null, 'Xlsx');
+    return $this->sendResponse(Storage::url($file_excel), 'success');
 //    }
 });
 Auth::routes();

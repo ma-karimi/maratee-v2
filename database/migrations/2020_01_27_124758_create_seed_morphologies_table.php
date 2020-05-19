@@ -20,11 +20,13 @@ class CreateSeedMorphologiesTable extends Migration
         Schema::dropIfExists('morphology_variables');
         Schema::create('seed_morphologies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('seed_collection_id');
+            $table->unsignedBigInteger('seed_collection_id')->nullable();
+            $table->string('accession_code')->nullable();
+
             $table->unsignedBigInteger('specimen_type_id');
             $table->unsignedBigInteger('collection_id');
-            $table->unsignedBigInteger('organization_id');
-            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('organization_id')->nullable();
+            $table->unsignedBigInteger('project_id')->nullable();
             $table->string('regeneration_code')->nullable();
 
             $table->string('department_name')->nullable();

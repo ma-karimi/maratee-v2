@@ -18,6 +18,7 @@ class CreateMedicinalApplicationsTable extends Migration
         Schema::create('medicinal_applications', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('taxonomy_id');
+            $table->string('local_name')->nullable();
             $table->tinyInteger('traditional_iranian_medicine')->comment('1:raw, 2: processed')->nullable();
 
             $table->tinyInteger('natural_drug')->comment('1:Human medicines, 2: Animal drugs')->nullable();

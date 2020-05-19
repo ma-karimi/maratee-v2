@@ -18,9 +18,10 @@ class CreateSeedExchangesTable extends Migration
         Schema::dropIfExists('seed_exchanges');
         Schema::create('seed_exchanges', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('seed_collection_id');
-            $table->unsignedBigInteger('organization_id');
-            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('seed_collection_id')->nullable();
+            $table->string('accession_code')->nullable();
+            $table->unsignedBigInteger('organization_id')->nullable();
+            $table->unsignedBigInteger('project_id')->nullable();
             $table->string('regeneration_code')->nullable();
             $table->string('department_name')->nullable();
 
@@ -31,11 +32,11 @@ class CreateSeedExchangesTable extends Migration
             $table->unsignedBigInteger('specimen_type_id');
             $table->unsignedBigInteger('collection_id');
             $table->float('weight', 5, 2)->nullable();
-            $table->date('delivery_date');
+            $table->date('delivery_date')->nullable();
 
-            $table->string('recipient_name');
+            $table->string('recipient_name')->nullable();
 //            $table->string('recipient_phone');
-            $table->string('request_no');
+            $table->string('request_no')->nullable();
             $table->text('description')->nullable();
             $table->timeStamps();
             $table->softDeletesTz();
