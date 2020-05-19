@@ -46,7 +46,7 @@
         <tr>
             <td style="{{$td}}">{{ $item->id ?? null }}</td>
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item->taxonomy, 'keys'=>$keys])
-            @if($keys['iran_georgaphical'] ?? false)
+            @if($keys['distribution'] ?? false)
                 <td style="{{$td}}">{{ $item->iran_plant_geographicals }}</td>
                 <td style="{{$td}}">{{ $item->plant_geographicals }}</td>
                 <td style="{{$td}}">{{ $item->iran_direction_geographicals }}</td>
