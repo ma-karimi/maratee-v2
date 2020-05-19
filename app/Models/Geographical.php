@@ -17,7 +17,7 @@ class Geographical extends BaseModel
     public const TYPE = [1 => 'world', 2 => 'iran', 3=>'direction'];
     public static $rules = [
         'name' => 'required|string',
-        'type_id' => 'required|in:1,2'
+        'type_id' => 'required|in:1,2,3'
     ];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
     /**
