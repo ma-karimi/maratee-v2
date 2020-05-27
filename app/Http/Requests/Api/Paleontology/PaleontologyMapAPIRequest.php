@@ -23,7 +23,7 @@ class PaleontologyMapAPIRequest extends APIRequest
             'reference' => 'required|string',
             'scale' => 'nullable|string',
             'year' => 'nullable|numeric',
-            'file' => 'required|image|mimes:jpeg,png',
+            'file' => 'required|image|mimes:jpeg,png,jpg',
             'paleontology_id' => 'required|exists:paleontologies,id'
         ];
     }
