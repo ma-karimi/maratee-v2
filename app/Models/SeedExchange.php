@@ -43,7 +43,7 @@ class SeedExchange extends BaseModel implements HasMedia, AuditableContract
      */
     public function seedCollection()
     {
-        return $this->belongsTo(SeedCollection::class);
+        return $this->belongsTo(SeedCollection::class, 'accession_code', 'accession_code');
     }
 
     /**

@@ -65,7 +65,7 @@
                     /{{ $item['research']['research_title'] ?? null}}
                     /{{ $item['research']['research_leader_name'] ?? null}}</td>
             @endif
-            @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['seed_collection']['taxonomy'], 'keys'=>$keys])
+            @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['seedCollection']['taxonomy'], 'keys'=>$keys])
             @if($keys['exchange'] ?? false)
                 <td style="{{$td}}">{{ $item['weight'] ?? null }}</td>
                 <td style="{{$td}}">{{ $item['delivery_date'] ?? null }}</td>

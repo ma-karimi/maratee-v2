@@ -63,7 +63,7 @@
             <td style="{{$td}}">{{ $item['specimen_type']['name'] ?? null}}</td>
             <td style="{{$td}}">{{ $item['collection']['name'] ?? null}}</td>
             <td style="{{$td}}">{{ $item['regeneration_code'] ?? null}}</td>
-            @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['seed_collection']['taxonomy'], 'keys'=>$keys])
+            @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['seedCollection']['taxonomy'], 'keys'=>$keys])
 
             @if($keys['row&column'] ?? false)
                 <td style="{{$td}}">{{ $item['row'] ?? null}}</td>

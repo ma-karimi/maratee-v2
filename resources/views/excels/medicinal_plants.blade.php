@@ -57,9 +57,9 @@
                 <td style="{{$td}}">{{ $item['ground_type']['name'] ?? null }}</td>
             @endif
 
-            @if($keys['wooden'] ?? false)
-                <td style="{{$td}}">{{$item['wooden'] ?? null}}</td>
-            @endif
+{{--            @if($keys['wooden'] ?? false)--}}
+{{--                <td style="{{$td}}">{{$item['wooden'] ?? null}}</td>--}}
+{{--            @endif--}}
             @if($keys['properties'] ?? false)
                 <td style="{{$td}}">{{$item['medicinal_properties'] ?? null}}</td>
                 <td style="{{$td}}">{{$item['properties_description'] ?? null}}</td>

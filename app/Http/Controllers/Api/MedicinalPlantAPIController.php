@@ -76,7 +76,7 @@ class MedicinalPlantAPIController extends AppBaseController
             ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
             ['name' => 'origin', 'title' => 'Origin', 'value' => false],
             ['name' => 'part_used', 'title' => 'Part Used', 'value' => false],
-            ['name' => 'wooden', 'title' => 'Wooden', 'value' => false],
+//            ['name' => 'wooden', 'title' => 'Wooden', 'value' => false],
 //            ['name' => 'habitat', 'title' => 'Habitat', 'value' => false],
 //            ['name' => 'herbaceous', 'title' => 'Herbaceous', 'value' => false],
 //            ['name' => 'cycle', 'title' => 'Cycle', 'value' => false],
