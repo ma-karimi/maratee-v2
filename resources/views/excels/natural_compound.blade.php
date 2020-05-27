@@ -116,7 +116,7 @@
             @if($keys['article'] ?? false)
                 <td style="{{$td}}">{{$item['article']['authors'] ?? null}}</td>
                 <td style="{{$td}}">{{$item['article']['title'] ?? null}}</td>
-                <td style="{{$td}}">{{$item['article']['journal_name'] ?? null}}</td>
+                <td style="{{$td}}">{{$item['article']['journal']['name'] ?? null}}</td>
                 <td style="{{$td}}">{{$item['article']['page_no'] ?? null}}</td>
                 <td style="{{$td}}">{{$item['article']['year'] ?? null}}</td>
             @endif
