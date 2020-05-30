@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 /**
  * @SWG\Definition(
@@ -47,5 +48,10 @@ class GeologyAge extends BaseModel
     public function scopeOfType($query, $type_id)
     {
         return $query->where('type_id', $type_id);
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = trim(Str::ucfirst($value));
     }
 }
