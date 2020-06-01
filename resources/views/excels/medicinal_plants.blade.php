@@ -47,7 +47,6 @@
     </thead>
     <tbody>
     @foreach($result as $item)
-        @php(\Illuminate\Support\Facades\Log::info($item))
         <tr>
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['taxonomy'], 'keys'=>$keys])
             @if($keys['origin'] ?? false)
