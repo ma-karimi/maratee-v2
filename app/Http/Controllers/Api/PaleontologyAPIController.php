@@ -7,6 +7,7 @@ use App\Http\Requests\Api\Paleontology\PaleontologyAPIRequest;
 use App\Http\Requests\Api\Paleontology\PaleontologyGeologyRemarkAPIRequest;
 use App\Http\Requests\Api\Paleontology\PaleontologyInformationAPIRequest;
 use App\Http\Requests\Api\Paleontology\PaleontologyLocalityAPIRequest;
+use App\Http\Requests\MediaAPIRequest;
 use App\Models\Paleontology;
 use App\Repositories\PaleontologyRepository;
 use Exception;
@@ -397,6 +398,7 @@ class PaleontologyAPIController extends AppBaseController
     }
 
     /**
+     * @param MediaAPIRequest $mediaAPIRequest
      * @param int $id
      * @return Response
      *
@@ -432,9 +434,8 @@ class PaleontologyAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws Exception
      */
-    public function media($id)
+    public function media(MediaAPIRequest $mediaAPIRequest, $id)
     {
         $plant = $this->paleontologyRepository->find($id, []);
 
@@ -442,7 +443,7 @@ class PaleontologyAPIController extends AppBaseController
             return $this->sendError('Paleontology not found');
         }
 
-        $this->paleontologyRepository->storeMedia(\request()->all(), $plant);
+        $this->paleontologyRepository->storeMedia($mediaAPIRequest->all(), $plant);
 
         return $this->sendResponse($id, 'Paleontology Media Stored successfully');
     }
