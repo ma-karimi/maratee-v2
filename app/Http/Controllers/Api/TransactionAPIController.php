@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\TransactionAPIRequest;
+use App\Http\Requests\MediaAPIRequest;
 use App\Models\Transaction;
 use App\Repositories\TransactionRepository;
 use Exception;
@@ -548,7 +549,7 @@ class TransactionAPIController extends AppBaseController
         return $this->sendResponse($id, 'Transaction deleted successfully');
     }
 
-    public function media($id)
+    public function media(MediaAPIRequest $mediaAPIRequest, $id)
     {
 
         /** @var Transaction $transaction */
@@ -558,7 +559,7 @@ class TransactionAPIController extends AppBaseController
             return $this->sendError('Transaction not found');
         }
 
-        $transaction = $this->transactionRepository->storeMedia(\request()->all(), $id);
+        $transaction = $this->transactionRepository->storeMedia($mediaAPIRequest->all(), $id);
 
         return $this->sendResponse($transaction->toArray(), 'Transaction Media updated successfully');
     }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\ProductAPIRequest;
-use App\Models\Medicine;
+use App\Http\Requests\MediaAPIRequest;
 use App\Models\Product;
 use App\Repositories\ProductRepository;
 use Exception;
@@ -461,7 +461,7 @@ class ProductAPIController extends AppBaseController
     }
 
 
-    public function media($id)
+    public function media(MediaAPIRequest $mediaAPIRequest, $id)
     {
 
         /** @var Product $product */
@@ -471,7 +471,7 @@ class ProductAPIController extends AppBaseController
             return $this->sendError('Product not found');
         }
 
-        $this->productRepository->storeMedia(\request()->all(), $product);
+        $this->productRepository->storeMedia($mediaAPIRequest->all(), $product);
 
         return $this->sendResponse([], 'Product Media updated successfully');
     }

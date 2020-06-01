@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CryoBankAPIRequest;
+use App\Http\Requests\MediaAPIRequest;
 use App\Models\CryoBank;
 use App\Repositories\CryoBankRepository;
 use Exception;
@@ -472,7 +473,7 @@ class CryoBankAPIController extends AppBaseController
      * )
      * @throws Exception
      */
-    public function media($id)
+    public function media(MediaAPIRequest $mediaAPIRequest, $id)
     {
         $plant = $this->cryoBankRepository->find($id, []);
 
@@ -480,7 +481,7 @@ class CryoBankAPIController extends AppBaseController
             return $this->sendError('CryoBank not found');
         }
 
-        $this->cryoBankRepository->storeMedia(\request()->all(), $plant);
+        $this->cryoBankRepository->storeMedia($mediaAPIRequest->all(), $plant);
 
         return $this->sendResponse($id, 'CryoBank Media Stored successfully');
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\MedicineAPIRequest;
+use App\Http\Requests\MediaAPIRequest;
 use App\Models\Medicine;
 use App\Models\Transaction;
 use App\Repositories\MedicineRepository;
@@ -381,7 +382,7 @@ class MedicineAPIController extends AppBaseController
     }
 
 
-    public function media($id)
+    public function media(MediaAPIRequest $mediaAPIRequest, $id)
     {
 
         /** @var Medicine $medicine */
@@ -391,7 +392,7 @@ class MedicineAPIController extends AppBaseController
             return $this->sendError('Medicine not found');
         }
 
-        $this->medicineRepository->storeMedia(\request()->all(), $medicine);
+        $this->medicineRepository->storeMedia($mediaAPIRequest->all(), $medicine);
 
         return $this->sendResponse([], 'Medicine Media updated successfully');
     }

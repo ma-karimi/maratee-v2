@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreatePlantAPIRequest;
 use App\Http\Requests\Api\UpdatePlantAPIRequest;
+use App\Http\Requests\MediaAPIRequest;
 use App\Repositories\PlantRepository;
 use Exception;
 use Illuminate\Http\Request;
@@ -610,7 +611,7 @@ class PlantAPIController extends AppBaseController
      * )
      * @throws Exception
      */
-    public function media($id)
+    public function media(MediaAPIRequest $mediaAPIRequest, $id)
     {
         $plant = $this->plantRepository->find($id, []);
 
@@ -618,7 +619,7 @@ class PlantAPIController extends AppBaseController
             return $this->sendError('Plant not found');
         }
 
-        $this->plantRepository->storeMedia(\request()->all(), $plant);
+        $this->plantRepository->storeMedia($mediaAPIRequest->all(), $plant);
 
         return $this->sendResponse($id, 'Plant Media Stored successfully');
     }

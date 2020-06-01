@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\HerbariumAPIRequest;
+use App\Http\Requests\MediaAPIRequest;
 use App\Models\Herbarium;
 use App\Repositories\HerbariumRepository;
 use Exception;
@@ -357,7 +358,7 @@ class HerbariumAPIController extends AppBaseController
      * )
      * @throws Exception
      */
-    public function media($id)
+    public function media(MediaAPIRequest $mediaAPIRequest, $id)
     {
         $plant = $this->herbariumRepository->find($id, []);
 
@@ -365,7 +366,7 @@ class HerbariumAPIController extends AppBaseController
             return $this->sendError('Herbarium not found');
         }
 
-        $this->herbariumRepository->storeMedia(\request()->all(), $plant);
+        $this->herbariumRepository->storeMedia($mediaAPIRequest->all(), $plant);
 
         return $this->sendResponse($id, 'Herbarium Media Stored successfully');
     }

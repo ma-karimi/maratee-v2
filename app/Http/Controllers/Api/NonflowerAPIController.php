@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\NonflowerAPIRequest;
+use App\Http\Requests\MediaAPIRequest;
 use App\Models\Nonflower;
 use App\Repositories\NonflowerRepository;
 use Exception;
@@ -316,7 +317,7 @@ class NonflowerAPIController extends AppBaseController
      * )
      * @throws Exception
      */
-    public function media($id)
+    public function media(MediaAPIRequest $mediaAPIRequest, $id)
     {
         $plant = $this->nonflowerRepository->find($id, []);
 
@@ -324,7 +325,7 @@ class NonflowerAPIController extends AppBaseController
             return $this->sendError('Nonflower not found');
         }
 
-        $this->nonflowerRepository->storeMedia(\request()->all(), $plant);
+        $this->nonflowerRepository->storeMedia($mediaAPIRequest->all(), $plant);
 
         return $this->sendResponse($id, 'Nonflower Media Stored successfully');
     }
