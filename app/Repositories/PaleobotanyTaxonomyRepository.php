@@ -47,7 +47,8 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
         $exist = $this->taxonomyExistWhenCreate($request);
         if ($exist) {
             throw ValidationException::withMessages([
-                'name' => 'Paleobotany Taxonomy Already Exists!'
+                'genus_id' => 'Paleobotany Taxonomy Already Exists!',
+                'species_id' => 'Paleobotany Taxonomy Already Exists!'
             ]);
         }
 
@@ -132,7 +133,8 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
 
         if ($exist) {
             throw ValidationException::withMessages([
-                'name' => 'Paleobotany Taxonomy Already Exists!'
+                'genus_id' => 'Paleobotany Taxonomy Already Exists!',
+                'species_id' => 'Paleobotany Taxonomy Already Exists!'
             ]);
         }
 
