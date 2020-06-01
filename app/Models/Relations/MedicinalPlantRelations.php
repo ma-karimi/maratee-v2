@@ -20,42 +20,42 @@ trait MedicinalPlantRelations
         return $this->belongsTo(Taxonomy::class)->withTrashed();
     }
 
-    public function groundType()
+    public function groundType(): BelongsTo
     {
         return $this->belongsTo(MedicinalPart::class, 'ground_part_id'
         )->where('type_id', array_search('ground', MedicinalPart::TYPE));
     }
-    public function origin()
+
+    public function origin(): BelongsTo
     {
         return $this->belongsTo(General::class, 'general_origin_id'
         )->where('type', 'origin');
     }
 
-    public function aerialTypes()
+    public function aerialTypes(): MorphToMany
     {
         return $this->morphedByMany(MedicinalPart::class, 'hub', 'medicinal_hubs', 'medicinal_plant_id'
         )->where('medicinal_parts.type_id', array_search('aerial', MedicinalPart::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
     }
 
-    public function properties()
+    public function properties(): MorphToMany
     {
         return $this->morphedByMany(MedicinalPlantType::class, 'hub', 'medicinal_hubs', 'medicinal_plant_id'
         )->where('medicinal_plant_types.type_id', array_search('properties', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
     }
 
 
-
-    public function habitat()
+    public function habitat(): BelongsTo
     {
         return $this->belongsTo(General::class, 'general_habitat_id'
         )->where('type', 'habitat');
     }
 
     /**
-     * @deprecated by dr.sefidkon
      * @return mixed
+     * @deprecated by dr.sefidkon
      */
-    public function effectiveMaterials()
+    public function effectiveMaterials(): MorphToMany
     {
         return $this->morphedByMany(MedicinalPlantType::class, 'hub', 'medicinal_hubs'
         )->where('medicinal_plant_types.type_id', array_search('material', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
