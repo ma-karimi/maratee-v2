@@ -31,13 +31,13 @@
             <th style="{{$th}}">Underground Part</th>
         @endif
 
-        @if($keys['wooden'] ?? false)
-            <th style="{{$th}}">Wooden</th>
-        @endif
+{{--        @if($keys['wooden'] ?? false)--}}
+{{--            <th style="{{$th}}">Wooden</th>--}}
+{{--        @endif--}}
 
         @if($keys['properties'] ?? false)
-            <th style="{{$th}}">The most important medicinal properties</th>
             <th style="{{$th}}">Properties Description</th>
+            <th style="{{$th}}">The most important medicinal properties</th>
         @endif
         @if($keys['metabolite'] ?? false)
 
@@ -61,8 +61,8 @@
 {{--                <td style="{{$td}}">{{$item['wooden'] ?? null}}</td>--}}
 {{--            @endif--}}
             @if($keys['properties'] ?? false)
-                <td style="{{$td}}">{{$item['medicinalProperties'] ?? null}}</td>
                 <td style="{{$td}}">{{$item['properties_description'] ?? null}}</td>
+                <td style="{{$td}}">{{$item['medicinal_properties'] ?? null}}</td>
             @endif
 
             @if($keys['metabolite'] ?? false)
