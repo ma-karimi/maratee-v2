@@ -24,7 +24,7 @@ class MediaAPIRequest extends APIRequest
     public function rules()
     {
         return [
-            'file' => 'required|image|max:7168|mimes:jpeg,jpg,png'
+            'file' => 'required|image|max:2024|mimes:jpeg,jpg,png'
         ];
     }
 }
