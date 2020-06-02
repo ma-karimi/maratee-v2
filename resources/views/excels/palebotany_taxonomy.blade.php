@@ -20,6 +20,15 @@
 <table class="table">
     <thead>
     <tr>
+        @if($keys['local_name'] ?? false)
+            <th style="{{$th}}">Local/Persian Name</th>
+        @endif
+        @if($keys['scientific'] ?? false)
+            <th style="{{$th}}">Scientific Name</th>
+        @endif
+        @if($keys['family'] ?? false)
+            <th style="{{$th}}">Family</th>
+        @endif
         @if($keys['family'] ?? false)
             <th style="{{$th}}">Family</th>
         @endif
@@ -29,23 +38,30 @@
         @if($keys['species'] ?? false)
             <th style="{{$th}}">Species</th>
         @endif
-        @if($keys['subspecies'] ?? false)
-            <th style="{{$th}}">SubSpecies</th>
+        @if($keys['order'] ?? false)
+            <th style="{{$th}}">Order</th>
         @endif
-        @if($keys['variety'] ?? false)>
-        <th style="{{$th}}">Variety</th>
+        @if($keys['subspecies'] ?? false)>
+        <th style="{{$th}}">Infra Specific</th>
         @endif
-        @if($keys['local_name'] ?? false)
-            <th style="{{$th}}">Local/Persian Name</th>
+        @if($keys['type_status'] ?? false)>
+        <th style="{{$th}}">Type Status</th>
         @endif
-        @if($keys['scientific'] ?? false)
-            <th style="{{$th}}">Scientific Name</th>
+        @if($keys['division'] ?? false)>
+        <th style="{{$th}}">Division</th>
         @endif
+
     </tr>
     </thead>
     <tbody>
     @foreach($result as $item)
         <tr>
+            @if($keys['scientific'] ?? false)
+                <td style="{{$td}}">{{ $item->scientific_name ?? null }}</td>
+            @endif
+            @if($keys['local_name'] ?? false)
+                <td style="{{$td}}">{{ $item->name ?? null }}</td>
+            @endif
             @if($keys['family'] ?? false)
                 <td style="{{$td}}">{{ $item->family->name_author ?? null }}</td>
             @endif
@@ -59,22 +75,15 @@
                 </td>
             @endif
             @if($keys['subspecies'] ?? false)
-                <td style="{{$td}}">{{ $item->subspecies->name_author ?? null }}
+                <td style="{{$td}}">{{ $item->infra_specific->name ?? null }}
                 </td>
             @endif
-            @if($keys['variety'] ?? false)
-                <td style="{{$td}}">{{ $item->variety->name_author ?? null }}
+            @if($keys['type_status'] ?? false)
+                <td style="{{$td}}">{{ $item->type_status->name ?? null }}
                 </td>
             @endif
-            @if($keys['local_name'] ?? false)
-                <td style="{{$td}}">{{ $item->name ?? null }}</td>
-
-            @endif
-            @if($keys['scientific'] ?? false)
-                <td style="{{$td}}">{{ $item->scientific_name ?? null }}</td>
-            @endif
-            @if($keys['scientific'] ?? false)
-                <td style="{{$td}}">{{ $item->scientific_name ?? null }}</td>
+            @if($keys['division'] ?? false)
+                <td style="{{$td}}">{{ $item['division'] ?? null }}</td>
             @endif
         </tr>
     @endforeach

@@ -24,7 +24,7 @@ class SeedMorphology extends BaseModel implements HasMedia, AuditableContract
     public static $rules = [
         'accession_code'=>'required|string',
         'collection_id' => 'required|exists:seed_generals,id',
-        'specimen_type_id' => 'required|exists:seed_generals,id',
+        'specimen_type_id' => 'nullable|exists:seed_generals,id',
     ];
 
     protected $with = ['audits'];

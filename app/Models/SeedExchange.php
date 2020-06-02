@@ -19,15 +19,16 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class SeedExchange extends BaseModel implements HasMedia, AuditableContract
 {
     use HasMediaTrait, Auditable, AuditTrait;
+
     public static $rules = [
-        'accession_code'=>'required|string',
+        'accession_code' => 'required|string',
         'collection_id' => 'required|exists:seed_generals,id',
-        'specimen_type_id' => 'required|exists:seed_generals,id',
-        'weight' => 'required|numeric',
-        'delivery_date' => 'required|date',
-        'recipient_name' => 'required|string',
+        'specimen_type_id' => 'nullable|exists:seed_generals,id',
+        'weight' => 'nullable|numeric',
+        'delivery_date' => 'nullable|date',
+        'recipient_name' => 'nullable|string',
 //        'recipient_phone' => 'required|string',
-        'request_no' => 'required|string',
+        'request_no' => 'nullable|string',
     ];
     protected $appends = ['last_audit'];
     protected $with = ['audits'];
@@ -41,7 +42,7 @@ class SeedExchange extends BaseModel implements HasMedia, AuditableContract
     /**
      * @return BelongsTo
      */
-    public function seedCollection()
+    public function seedCollection(): BelongsTo
     {
         return $this->belongsTo(SeedCollection::class, 'accession_code', 'accession_code');
     }
@@ -49,7 +50,7 @@ class SeedExchange extends BaseModel implements HasMedia, AuditableContract
     /**
      * @return BelongsTo
      */
-    public function specimenType()
+    public function specimenType(): BelongsTo
     {
         return $this->belongsTo(SeedGeneral::class, 'specimen_type_id')->where('seed_generals.type_id', 1);
     }
@@ -57,7 +58,7 @@ class SeedExchange extends BaseModel implements HasMedia, AuditableContract
     /**
      * @return BelongsTo
      */
-    public function collection()
+    public function collection(): BelongsTo
     {
         return $this->belongsTo(SeedGeneral::class, 'collection_id')->where('seed_generals.type_id', 19);
     }
@@ -65,7 +66,7 @@ class SeedExchange extends BaseModel implements HasMedia, AuditableContract
     /**
      * @return BelongsTo
      */
-    public function organization()
+    public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);
     }
@@ -73,7 +74,7 @@ class SeedExchange extends BaseModel implements HasMedia, AuditableContract
     /**
      * @return BelongsTo
      */
-    public function project()
+    public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
     }
