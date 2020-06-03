@@ -76,6 +76,7 @@ class PaleobotanyTaxonomyAPIController extends AppBaseController
             ['name' => 'subspecies', 'title' => 'Infra Specific', 'value' => false],
             ['name' => 'type_status', 'title' => 'Type Status', 'value' => false],
             ['name' => 'division', 'title' => 'Division', 'value' => false],
+            ['name' => 'sample', 'title' => 'Sample', 'value' => false],
         ];
         return $this->sendResponse(compact('taxonomies', 'keys'), 'Paleobotany Taxonomies retrieved successfully');
     }

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use OwenIt\Auditing\Auditable;
@@ -29,7 +30,7 @@ class PaleobotanyTaxonomy extends BaseModel implements AuditableContract
         'infra_specific_id' => 'nullable|exists:paleobotany_generals,id',
         'type_status_id' => 'nullable|exists:paleobotany_generals,id',
         'samples' => 'nullable|array',
-        'samples.*' => 'nullable|exists:paleobotany_generals,id',
+        'samples.*' => 'nullable|exists:paleobotany_taxonomies,id',
         'divisions' => 'nullable|array',
 //        'divisions.*.id' => 'nullable|exists:paleobotany_generals,id',
 //        'divisions.*.value' => 'nullable|string',
@@ -141,13 +142,11 @@ class PaleobotanyTaxonomy extends BaseModel implements AuditableContract
     }
 
 
-    public function samples(): MorphToMany
+    public function samples(): BelongsToMany
     {
-        return $this->morphToMany(PaleobotanyGeneral::class, 'modelable', 'paleobotany_general_hubs')
+        return $this->belongsToMany(PaleobotanyTaxonomy::class, 'paleobotany_samples', 'paleobotany_taxonomy_id', 'sample_id')
             ->withTimestamps()
-            ->whereNull('paleobotany_general_hubs.deleted_at')
-            ->where('paleobotany_generals.type', 'genus');
-        ;
+            ->whereNull('paleobotany_samples.deleted_at');;
     }
 
 

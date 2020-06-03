@@ -140,6 +140,7 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
 
         $taxonomy = parent::update($this->setPrimaryData($request), $id);
         $this->createHub($taxonomy->id, 'divisions', \request()->filled('divisions') ? $request['divisions'] : []);
+        $this->createHub($taxonomy->id, 'samples', \request()->filled('samples') ? $request['samples'] : []);
 
         return $taxonomy;
     }

@@ -29,9 +29,6 @@
         @if($keys['family'] ?? false)
             <th style="{{$th}}">Family</th>
         @endif
-        @if($keys['family'] ?? false)
-            <th style="{{$th}}">Family</th>
-        @endif
         @if($keys['genus'] ?? false)
             <th style="{{$th}}">Genus</th>
         @endif
@@ -48,7 +45,10 @@
         <th style="{{$th}}">Type Status</th>
         @endif
         @if($keys['division'] ?? false)>
-        <th style="{{$th}}">Division</th>
+        <th style="{{$th}}">Divisions</th>
+        @endif
+        @if($keys['sample'] ?? false)>
+        <th style="{{$th}}">Samples</th>
         @endif
 
     </tr>
@@ -84,6 +84,9 @@
             @endif
             @if($keys['division'] ?? false)
                 <td style="{{$td}}">{{ $item['division'] ?? null }}</td>
+            @endif
+            @if($keys['sample'] ?? false)
+                <td style="{{$td}}">{{ $item['sample'] ?? null }}</td>
             @endif
         </tr>
     @endforeach
