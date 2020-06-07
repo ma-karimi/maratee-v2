@@ -6,6 +6,8 @@ use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use App\Models\Scope\AuditScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -22,7 +24,7 @@ class SeedMorphology extends BaseModel implements HasMedia, AuditableContract
     use HasMediaTrait, Auditable, AuditTrait;
 
     public static $rules = [
-        'accession_code'=>'required|string',
+        'accession_code' => 'required|string',
         'collection_id' => 'required|exists:seed_generals,id',
         'specimen_type_id' => 'nullable|exists:seed_generals,id',
     ];
@@ -31,17 +33,17 @@ class SeedMorphology extends BaseModel implements HasMedia, AuditableContract
     protected $appends = ['last_audit'];
 
 
-    public function quantitatives()
+    public function quantitatives(): BelongsToMany
     {
         return $this->belongsToMany(SeedGeneral::class, 'morphology_variables', 'seed_morphology_id')->withPivot('value')->whereNull('morphology_variables.deleted_at')->where('seed_generals.type_id', 26)->withTimestamps();
     }
 
-    public function qualititatives()
+    public function qualititatives(): BelongsToMany
     {
         return $this->belongsToMany(SeedGeneral::class, 'morphology_variables', 'seed_morphology_id')->withPivot('value')->whereNull('morphology_variables.deleted_at')->where('seed_generals.type_id', 27)->withTimestamps();
     }
 
-    public function field()
+    public function field(): HasOne
     {
         return $this->hasOne(SeedMorphologyField::class);
     }
@@ -50,7 +52,7 @@ class SeedMorphology extends BaseModel implements HasMedia, AuditableContract
     /**
      * @return BelongsTo
      */
-    public function seedCollection()
+    public function seedCollection(): BelongsTo
     {
         return $this->belongsTo(SeedCollection::class);
     }
@@ -58,7 +60,7 @@ class SeedMorphology extends BaseModel implements HasMedia, AuditableContract
     /**
      * @return BelongsTo
      */
-    public function specimenType()
+    public function specimenType(): BelongsTo
     {
         return $this->belongsTo(SeedGeneral::class, 'specimen_type_id')->where('seed_generals.type_id', 1);
     }
@@ -66,7 +68,7 @@ class SeedMorphology extends BaseModel implements HasMedia, AuditableContract
     /**
      * @return BelongsTo
      */
-    public function collection()
+    public function collection(): BelongsTo
     {
         return $this->belongsTo(SeedGeneral::class, 'collection_id')->where('seed_generals.type_id', 19);
     }
@@ -74,7 +76,7 @@ class SeedMorphology extends BaseModel implements HasMedia, AuditableContract
     /**
      * @return BelongsTo
      */
-    public function organization()
+    public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);
     }
@@ -82,7 +84,7 @@ class SeedMorphology extends BaseModel implements HasMedia, AuditableContract
     /**
      * @return BelongsTo
      */
-    public function project()
+    public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
     }

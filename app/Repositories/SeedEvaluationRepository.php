@@ -8,10 +8,6 @@ use App\Models\GerminationNumber;
 use App\Models\SeedEvaluation;
 use App\Models\SeedLength;
 use Illuminate\Container\Container as Application;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -59,21 +55,6 @@ class SeedEvaluationRepository extends BaseRepository
         return $this->fieldSearchable;
     }
 
-    /**
-     * @deprecated //delete research & organization with jamzad comment
-     * @param $input
-     * @return Model
-     * @throws ValidationException
-     */
-    public function create($input)
-    {
-        $input = $this->createOrUpdateProject($input);
-        $seed = parent::create(Arr::except($input, ['project', 'researchers']));
-//        $this->storeResearch($input, $seed->id);
-
-        return $seed;
-    }
-
     public function storeValues($input, $id)
     {
         return parent::update($input, $id);
@@ -81,49 +62,8 @@ class SeedEvaluationRepository extends BaseRepository
 
     /**
      * @param $input
-     * @return mixed
-     * @throws ValidationException
-     */
-    private function createOrUpdateProject($input)
-    {
-        $input['project_id'] = !empty($input['project_id']) ?
-            $this->projectRepo->update($input['project'], $input['project_id'])->id :
-            $this->projectRepo->create($input['project'])->id;
-        return $input;
-    }
-
-    /**
-     * @param $input
-     * @param $id
-     * @return Builder|Builder[]|Collection|Model
-     * @throws ValidationException
-     */
-    public function storeTest($input, $id)
-    {
-        return parent::update($input, $id);
-    }
-
-    /**
-     * @deprecated //delete research & organization with jamzad comment
-     * @param array $input
-     * @param int $id
-     * @return Builder|Builder[]|Collection|Model
-     * @throws ValidationException
-     */
-    public function update($input, $id)
-    {
-        $input = $this->createOrUpdateProject($input);
-        $seed = parent::update(Arr::except($input, ['project', 'researchers']), $id);
-//        $this->storeResearch($input, $seed->id);
-
-        return $seed;
-    }
-
-
-    /**
-     * @deprecated
-     * @param $input
      * @param $seed_collection
+     * @deprecated
      */
     public function storeRadicals($input, $seed_collection)
     {
@@ -162,9 +102,9 @@ class SeedEvaluationRepository extends BaseRepository
     }
 
     /**
-     * @deprecated
      * @param $input
      * @param $seed_collection
+     * @deprecated
      */
     public function storeGerminatedNumber($input, $seed_collection): void
     {
@@ -191,9 +131,9 @@ class SeedEvaluationRepository extends BaseRepository
     }
 
     /**
-     * @deprecated
      * @param $input
      * @param $seed_collection
+     * @deprecated
      */
     public function storeShoots($input, $seed_collection)
     {
@@ -201,9 +141,9 @@ class SeedEvaluationRepository extends BaseRepository
     }
 
     /**
-     * @deprecated
      * @param $input
      * @param $seed_collection
+     * @deprecated
      */
     public function storeLengths($input, $seed_collection)
     {
@@ -211,9 +151,9 @@ class SeedEvaluationRepository extends BaseRepository
     }
 
     /**
-     * @deprecated
      * @param $input
      * @param $seed_collection
+     * @deprecated
      */
     public function storeWidths($input, $seed_collection)
     {
@@ -243,14 +183,26 @@ class SeedEvaluationRepository extends BaseRepository
 
     public function getRelationFields()
     {
-        return ['organization.city', 'organization:id,name_en,city_id', 'seedCollection:id,accession_code,taxonomy_id', 'project', 'shoots', 'radicals', 'lengths', 'widths', 'media', 'dormancyBreaking', 'specimenType', 'research', 'collection'];
+        return ['organization.city', 'organization:id,name_en,city_id', 'seedCollection:id,accession_code,taxonomy_id',  'shoots', 'radicals', 'lengths', 'widths', 'media', 'dormancyBreaking', 'specimenType', 'research', 'collection'];
     }
 
+    /**
+     * @param $input
+     * @return mixed
+     * @throws ValidationException
+     */
+    private function createOrUpdateProject($input)
+    {
+        $input['project_id'] = !empty($input['project_id']) ?
+            $this->projectRepo->update($input['project'], $input['project_id'])->id :
+            $this->projectRepo->create($input['project'])->id;
+        return $input;
+    }
 
     /**
-     * @deprecated
      * @param $input
      * @param $seed_evaluation_id
+     * @deprecated
      */
     private function storeResearch($input, $seed_evaluation_id)
     {

@@ -91,7 +91,8 @@
                 <td style="{{$td}}">{{ $item['research']['authors'] ?? null}}</td>
             @endif
             @if($keys['gathering'] ?? false)
-                <td>{{ $item['location']['address_en']}} | {{$item['location']['address_fa']}}</td>
+                <td>{{ $item['location']['address_en'] ?? null}}</td>
+                <td>{{$item['location']['address_fa'] ?? null}}</td>
                 <td style="{{$td}}">{{ $item['location']['min_altitude'] ?? null}}}}</td>
                 <td style="{{$td}}">{{ $item['location']['point']['DMS'][0] ?? null }}</td>
                 <td style="{{$td}}">{{ $item['location']['point']['DMS'][1] ?? null }}</td>

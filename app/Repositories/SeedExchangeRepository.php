@@ -4,8 +4,6 @@ namespace App\Repositories;
 
 use App\Models\SeedExchange;
 use Illuminate\Container\Container as Application;
-use Illuminate\Support\Arr;
-use Illuminate\Validation\ValidationException;
 
 /**
  * Class SeedExchangeRepository
@@ -31,6 +29,7 @@ class SeedExchangeRepository extends BaseRepository
 
         $this->projectRepo = $projectRepo;
     }
+
     /**
      * Return searchable fields
      *
@@ -49,34 +48,8 @@ class SeedExchangeRepository extends BaseRepository
         return SeedExchange::class;
     }
 
-
-    public function create($input)
-    {
-        $input = $this->createOrUpdateProject($input);
-        return parent::create(Arr::except($input, ['project']));
-    }
-
-    /**
-     * @param $input
-     * @return mixed
-     * @throws ValidationException
-     */
-    private function createOrUpdateProject($input)
-    {
-        $input['project_id'] = !empty($input['project_id']) ?
-            $this->projectRepo->update($input['project'], $input['project_id'])->id :
-            $this->projectRepo->create($input['project'])->id;
-        return $input;
-    }
-
-    public function update($input, $id)
-    {
-        $input = $this->createOrUpdateProject($input);
-        return parent::update(Arr::except($input, ['project']), $id);
-    }
-
     public function getRelationFields()
     {
-        return ['organization.city', 'organization:id,name_en,city_id', 'project', 'specimenType', 'seedCollection:id,accession_code,taxonomy_id', 'collection'];
+        return ['organization.city', 'organization:id,name_en,city_id', 'specimenType', 'seedCollection:id,accession_code,taxonomy_id', 'collection'];
     }
 }

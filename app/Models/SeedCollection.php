@@ -20,7 +20,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class SeedCollection extends BaseModel implements HasMedia, AuditableContract
 {
 
-    use SeedCollectionRelations,SeedCollectionScope, HasMediaTrait, Auditable, AuditTrait;
+    use SeedCollectionRelations, SeedCollectionScope, HasMediaTrait, Auditable, AuditTrait;
 
     public static $climates = [
         'land_form_id' => 'nullable|exists:seed_generals,id',
@@ -60,7 +60,7 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
         'taxonomy_id' => 'nullable|exists:taxonomies,id',
         'encoded_code_by_collector' => 'nullable|string',
         'corrected_code_by_nrgb' => 'nullable|string',
-        'accession_code' => 'required|string',
+        'accession_code' => 'required|string|unique:seed_collections',
         'voucher_no' => 'nullable|string',
         'dna' => 'nullable|in:0,1'
     ];

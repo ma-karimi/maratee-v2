@@ -23,10 +23,10 @@ class SeedEvaluation extends BaseModel implements HasMedia, AuditableContract
 
     public static $rules = [
         'accession_code'=>'required|string',
-        'project.title' => 'nullable|string',
-        'project.project_no' => 'nullable|string',
-        'project.project_leader_name' => 'nullable|string',
-        'project.research_leader_name' => 'nullable|string',
+        'project_title' => 'nullable|string',
+        'project_no' => 'nullable|string',
+        'project_leader_name' => 'nullable|string',
+        'research_leader_name' => 'nullable|string',
 //        'organization_id' => 'required|exists:organizations,id',
 //        'specimen_type_id' => 'required|exists:seed_generals,id',
         'collection_id' => 'required|exists:seed_generals,id',

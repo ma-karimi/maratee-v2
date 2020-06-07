@@ -92,25 +92,6 @@ class SeedMorphologyRepository extends BaseRepository
         }
     }
 
-    public function create($input)
-    {
-        $input['project_id'] = $this->storeProject($input);
-        return parent::create(Arr::except($input, ['project']));
-
-    }
-
-    public function storeProject($input)
-    {
-        return request()->filled('project_id') ? $this->projectRepository->update($input['project'], $input['project_id'])->id : $this->projectRepository->create($input['project'])->id;
-    }
-
-    public function update($input, $id)
-    {
-        $input['project_id'] = $this->storeProject($input);
-        return parent::update(Arr::except($input, ['project']), $id);
-
-    }
-
     public function storeQualititatives($input, $morphology)
     {
         $this->storeVariables($input, $morphology, 'qualititatives');
@@ -140,6 +121,6 @@ class SeedMorphologyRepository extends BaseRepository
 
     public function getRelationFields()
     {
-        return ['quantitatives:seed_generals.id,seed_generals.name,seed_generals.type_id', 'qualititatives:seed_generals.id,seed_generals.name,seed_generals.type_id', 'field', 'seedCollection:id,accession_code,taxonomy_id', 'specimenType', 'collection', 'organization', 'project', 'media'];
+        return ['quantitatives:seed_generals.id,seed_generals.name,seed_generals.type_id', 'qualititatives:seed_generals.id,seed_generals.name,seed_generals.type_id', 'field', 'seedCollection:id,accession_code,taxonomy_id', 'specimenType', 'collection', 'organization', 'media'];
     }
 }

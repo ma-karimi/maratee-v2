@@ -25,10 +25,14 @@
             <th style="{{$th}}">Organization/Department</th>
         @endif
         @if($keys['project'] ?? false)
-            <th style="{{$th}}">Project No./Project/Project leader name</th>
+            <th style="{{$th}}">Project No.</th>
+            <th style="{{$th}}">Project</th>
+            <th style="{{$th}}">Project leader name</th>
         @endif
         @if($keys['research'] ?? false)
-            <th style="{{$th}}">Research No./Research title/Research leader name</th>
+            <th style="{{$th}}">Research No.</th>
+            <th style="{{$th}}">Research title</th>
+            <th style="{{$th}}">Research leader name</th>
         @endif
         @if($keys['accession'] ?? false)
             <th style="{{$th}}">Field code (encoded by collector)</th>
@@ -90,13 +94,15 @@
                     /{{ $item['department_name'] ?? null}}</td>
             @endif
             @if($keys['project'] ?? false)
-                <td style="{{$td}}">{{ $item['project']['project_no'] ?? null}}/{{ $item['project']['title'] ?? null}}
-                    /{{ $item['project']['project_leader_name'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['project_no'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['project_title'] ?? null}}
+                </td>
+                <td style="{{$td}}">{{ $item['project_leader_name'] ?? null}}</td>
             @endif
             @if($keys['research'] ?? false)
-                <td style="{{$td}}">{{ $item['research']['research_no'] ?? null}}
-                    /{{ $item['research']['research_title'] ?? null}}
-                    /{{ $item['research']['research_leader_name'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['research_no'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['research_title'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['research_leader_name'] ?? null}}</td>
             @endif
 
             @if($keys['accession'] ?? false)
@@ -108,15 +114,15 @@
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['seed_collection']['taxonomy'], 'keys'=>$keys])
 
             @if($keys['location'] ?? false)
-                    <td style="{{$td}}">{{ $item['location']['country']['name_en'] ?? null}}</td>
-                    <td style="{{$td}}">{{ $item['location']['province']['name_en'] ?? null}}</td>
-                    <td style="{{$td}}">{{ $item['location']['city']['name_en'] ?? null}}</td>
-                    <td style="{{$td}}">{{ $item['location']['region_name'] ?? null}}</td>
-                    <td style="{{$td}}">{{ $item['location']['village'] ?? null}}</td>
-                    <td style="{{$td}}">{{ $item['location']['DMS'][0] ?? null}}</td>
-                    <td style="{{$td}}">{{ $item['location']['DMS'][1] ?? null}}</td>
-                    <td style="{{$td}}">{{ $item['location']['gps_used'] ?? 0}}</td>
-                    <td style="{{$td}}">{{ $item['location']['gps_datum'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['country']['name_en'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['province']['name_en'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['city']['name_en'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['region_name'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['village'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['DMS'][0] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['DMS'][1] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['gps_used'] ?? 0}}</td>
+                <td style="{{$td}}">{{ $item['location']['gps_datum'] ?? null}}</td>
 
             @endif
             @if($keys['plant_flowering'] ?? false)

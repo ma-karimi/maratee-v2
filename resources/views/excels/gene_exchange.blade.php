@@ -29,10 +29,14 @@
             <th style="{{$th}}">Organization/Department</th>
         @endif
         @if($keys['project'] ?? false)
-            <th style="{{$th}}">Project No./Project/Project leader name</th>
+            <th style="{{$th}}">Project No.</th>
+            <th style="{{$th}}">Project</th>
+            <th style="{{$th}}">Project leader name</th>
         @endif
         @if($keys['research'] ?? false)
-            <th style="{{$th}}">Research No./Research title/Research leader name</th>
+            <th style="{{$th}}">Research No.</th>
+            <th style="{{$th}}">Research title</th>
+            <th style="{{$th}}">Research leader name</th>
         @endif
         @include('excels.partials.taxonomyHeader')
         @if($keys['exchange'] ?? false)
@@ -57,13 +61,15 @@
                     /{{ $item['department_name'] ?? null}}</td>
             @endif
             @if($keys['project'] ?? false)
-                <td style="{{$td}}">{{ $item['project']['project_no'] ?? null}}/{{ $item['project']['title'] ?? null}}
-                    /{{ $item['project']['project_leader_name'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['project_no'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['project_title'] ?? null}}
+                </td>
+                <td style="{{$td}}">{{ $item['project_leader_name'] ?? null}}</td>
             @endif
             @if($keys['research'] ?? false)
-                <td style="{{$td}}">{{ $item['research']['research_no'] ?? null}}
-                    /{{ $item['research']['research_title'] ?? null}}
-                    /{{ $item['research']['research_leader_name'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['research_no'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['research_title'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['research_leader_name'] ?? null}}</td>
             @endif
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['seedCollection']['taxonomy'], 'keys'=>$keys])
             @if($keys['exchange'] ?? false)
