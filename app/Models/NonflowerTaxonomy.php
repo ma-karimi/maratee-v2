@@ -28,6 +28,7 @@ class NonflowerTaxonomy extends BaseModel implements AuditableContract
         'variety_id' => 'nullable|exists:nonflower_generals,id',
         'subspecies_id' => 'nullable|exists:nonflower_generals,id',
         'name' => 'nullable|string',
+        'phylum' => 'required|string'
     ];
     /**
      * The database table used by the model.
@@ -40,6 +41,11 @@ class NonflowerTaxonomy extends BaseModel implements AuditableContract
 
     use GeneralTrait;
 
+
+    public function getPhylumAttribute($value)
+    {
+        return ['id' => $value, 'name' => $value];
+    }
 
     public function getAuthorsAttribute()
     {

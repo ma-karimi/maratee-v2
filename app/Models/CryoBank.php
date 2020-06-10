@@ -57,8 +57,8 @@ class CryoBank extends BaseModel implements HasMedia, AuditableContract
      */
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
 
-    protected $appends = ['sample_type', 'sample', 'genotype_code', 'last_audit'];
-    protected $with = ['audits'];
+    protected $appends = ['genotype_code', 'last_audit'];
+    protected $with = ['audits', 'sampleType'];
 
     /**
      * @return BelongsTo
@@ -74,6 +74,15 @@ class CryoBank extends BaseModel implements HasMedia, AuditableContract
     public function taxonomy(): BelongsTo
     {
         return $this->belongsTo(Taxonomy::class)->withTrashed();
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function sampleType(): BelongsTo
+    {
+        return $this->belongsTo(CryobankGeneral::class, 'sample_type_id', 'id')->whereNull('cryobank_generals.deleted_at')
+            ->where('cryobank_generals.type', 'sample');
     }
 
     /**

@@ -6,10 +6,8 @@ use App\Models\ActionHub;
 use App\Models\ActorHub;
 use App\Models\Location;
 use App\Models\Nonflower;
-use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class NonflowerRepository
@@ -68,7 +66,6 @@ class NonflowerRepository extends BaseRepository
     {
 
         $location = $this->storeLocation($input, $input->filled('location_id') ? $input['location_id'] : null);
-        Log::info($location);
         $input['location_id'] = $location->id;
         $model = parent::create($this->recordData($input));
         $this->storeRelations($input, $model);
@@ -114,6 +111,17 @@ class NonflowerRepository extends BaseRepository
             'habitat_id' => $input['habitat_id'] ?? null,
             'layer_id' => $input['layer_id'] ?? null,
         ];
+    }
+
+    /**
+     * @param $input
+     * @param Model $model
+     */
+    private function storeRelations($input, Model $model): void
+    {
+        $this->storeDetermine($input, $model->id);
+        $this->storeCollect($input, $model->id);
+        $this->createHub($model->id, 'substrates', request()->filled('substrates') ? $input['substrates'] : []);
     }
 
     private function storeDetermine($input, $record_id)
@@ -197,17 +205,6 @@ class NonflowerRepository extends BaseRepository
     public function getRelationFields()
     {
         return ['phytogeography', 'taxonomy', 'habitat', 'media', 'layer', 'substrates', 'collect', 'determine', 'transactions', 'location'];
-    }
-
-    /**
-     * @param $input
-     * @param Model $model
-     */
-    private function storeRelations($input, Model $model): void
-    {
-        $this->storeDetermine($input, $model->id);
-        $this->storeCollect($input, $model->id);
-        $this->createHub($model->id, 'substrates', request()->filled('substrates') ? $input['substrates'] : []);
     }
 
 }

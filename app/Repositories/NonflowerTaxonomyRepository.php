@@ -62,7 +62,8 @@ class NonflowerTaxonomyRepository extends BaseRepository
             'genus_id' => $request['genus_id'],
             'species_id' => $request->filled('species_id') ? $request['species_id'] : null,
             'subspecies_id' => $request->filled('subspecies_id') ? $request['subspecies_id'] : null,
-            'variety_id' => $request->filled('variety_id') ? $request['variety_id'] : null
+            'variety_id' => $request->filled('variety_id') ? $request['variety_id'] : null,
+            'phylum' => $request['phylum']
         ])->exists();
 
     }
@@ -104,6 +105,7 @@ class NonflowerTaxonomyRepository extends BaseRepository
     private function taxonomyExistWhenUpdate($request, $id): bool
     {
         return NonflowerTaxonomy::where([
+            'phylum' => $request['phylum'],
             'family_id' => $request['family_id'],
             'genus_id' => $request['genus_id'],
             'species_id' => $request->filled('species_id') ? $request['species_id'] : null,

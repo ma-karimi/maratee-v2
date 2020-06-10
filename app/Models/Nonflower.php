@@ -38,7 +38,7 @@ class Nonflower extends BaseModel implements HasMedia, AuditableContract
         //classification
         'habitat_id' => 'nullable|exists:generals,id',
         'phytogeography_id' => 'nullable|exists:generals,id',
-        'layer_id' => 'required|exists:nonflower_generals,id',
+//        'layer_id' => 'required|exists:nonflower_generals,id',
         'substrates.*' => 'exists:nonflower_generals,id',
     ];
     /**

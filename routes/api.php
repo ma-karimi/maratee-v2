@@ -209,8 +209,10 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('distribution_hubs/{$distributable_id}', 'DistributionHubAPIController@store');
 
     Route::apiResource('permissions', 'PermissionAPIController');
+    Route::apiResource('distributions', 'DistributionAPIController');
     Route::apiResource('geographicals', 'GeographicalAPIController');
     Route::apiResource('plant_geographicals', 'PlantGeographicalAPIController')->except('update', 'edit');
+    Route::apiResource('cryobank_generals', 'CryobankGeneralAPIController')->except('update', 'edit');
 
     Route::apiResource('roles', 'RoleAPIController');
 
