@@ -21,6 +21,8 @@
     <thead>
     <tr>
         <th style="{{$th}}">Herbarium Number</th>
+        <th style="{{$th}}">Herbarium Name</th>
+        <th style="{{$th}}">Phylum</th>
         @include('excels.partials.taxonomyHeader')
         @if($keys['location'] ?? false)
             <th style="{{$th}}">Location</th>
@@ -70,6 +72,8 @@
     @foreach($result as $item)
         <tr>
             <td style="{{$td}}">{{ $item->herbarium_number ?? null }}</td>
+            <td style="{{$td}}">{{ $item->herbarium_name ?? null }}</td>
+            <td style="{{$td}}">{{ $item->taxonomy->phylum['name'] ?? null }}</td>
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item->taxonomy, 'keys'=>$keys])
             @if($keys['location'] ?? false)
                 <td>{{ $item['location']['address_en'] ?? null}}</td>
@@ -83,8 +87,7 @@
             @endif
 
             @if($keys['substrate'] ?? false)
-                <td style="{{$td}}">{{$item['general_substrate']['type'] ?? null}}
-                    | {{$item['general_substrate']['name'] ?? null}}</td>
+                <td style="{{$td}}">{{$item['substrate'] ?? null}}</td>
             @endif
             @if($keys['description'] ?? false)
                 <td style="{{$td}}">{{$item['description'] ?? null}}</td>

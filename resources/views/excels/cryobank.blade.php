@@ -104,7 +104,7 @@
                 <td style="{{$td}}">{{ $item['year'] ?? null}}</td>
             @endif
             @if($keys['type_sample'] ?? false)
-                <td style="{{$td}}">{{ $item['sample_type'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['sample_type']['name'] ?? null}}</td>
             @endif
             @if($keys['treatment'] ?? false)
                 <td style="{{$td}}">{{ $item['treatment']['name_en'] ?? null}}</td>

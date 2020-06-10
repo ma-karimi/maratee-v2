@@ -20,6 +20,7 @@
 <table class="table">
     <thead>
     <tr>
+        <th style="{{$th}}">Phylum</th>
         @if($keys['family'] ?? false)
             <th style="{{$th}}">Family</th>
         @endif
@@ -46,6 +47,7 @@
     <tbody>
     @foreach($result as $item)
         <tr>
+            <td style="{{$td}}">{{ $item->phylum['name'] ?? null }}</td>
             @if($keys['family'] ?? false)
                 <td style="{{$td}}">{{ $item->family->name_author ?? null }}</td>
             @endif
