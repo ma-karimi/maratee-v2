@@ -14,6 +14,19 @@ class ActionActorTableSeeder extends Seeder
     {
         ini_set('max_execution_time', 3000);
         ini_set('memory_limit', '2000M');
+//        $this->changeHerbarium();
+        $actions = \App\Models\ActionHub::where('actionable_type', \App\Models\Herbarium::class)->whereNull('deleted_at')->get();
+
+        ActorHub::where('actorable_type', \App\Models\ActionHub::class)->whereIn('actorable_id', $actions->pluck('id')->toArray())->delete();
+
+        foreach ($actions as $index => $action) {
+            $action->delete();
+        }
+
+    }
+
+    public function changeHerbarium(): void
+    {
         \App\Models\Herbarium::all()->each(function ($query) {
 
             if (!empty($query->collect->date)) {
@@ -26,7 +39,7 @@ class ActionActorTableSeeder extends Seeder
             foreach (collect($query->determine->actors->pluck('id')->toArray())->filter()->all() as $item) {
                 \App\Models\ActionActor::create([
                     'actorable_type' => \App\Models\Herbarium::class,
-                    'actor_id'=>$item,
+                    'actor_id' => $item,
                     'actorable_id' => $query->id,
                     'type_id' => 1
                 ]);
@@ -34,7 +47,7 @@ class ActionActorTableSeeder extends Seeder
             foreach (collect($query->collect->actors->pluck('id')->toArray())->filter()->all() as $item) {
                 \App\Models\ActionActor::create([
                     'actorable_type' => \App\Models\Herbarium::class,
-                    'actor_id'=>$item,
+                    'actor_id' => $item,
                     'actorable_id' => $query->id,
                     'type_id' => 2
                 ]);
@@ -44,13 +57,5 @@ class ActionActorTableSeeder extends Seeder
             echo "$query->id\n";
 
         });
-        $actions = \App\Models\ActionHub::where('actionable_type', \App\Models\Herbarium::class)->whereNull('deleted_at')->get();
-
-        ActorHub::where('actorable_type', \App\Models\ActionHub::class)->whereIn('actorable_id', $actions->pluck('id')->toArray())->delete();
-
-        foreach ($actions as $index => $action) {
-            $action->delete();
-        }
-
     }
 }
