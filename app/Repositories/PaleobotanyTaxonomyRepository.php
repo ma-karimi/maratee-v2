@@ -6,7 +6,6 @@ use App\Models\PaleobotanyGeneralHub;
 use App\Models\PaleobotanyTaxonomy;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -73,7 +72,8 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
             'infra_specific_id' => $request->filled('infra_specific_id') ? $request['infra_specific_id'] : null,
             'family_id' => $request->filled('family_id') ? $request['family_id'] : null,
             'order_id' => $request->filled('order_id') ? $request['order_id'] : null,
-            'type_status_id' => $request->filled('type_status_id') ? $request['type_status_id'] : null
+            'type_status_id' => $request->filled('type_status_id') ? $request['type_status_id'] : null,
+            'species_authors' => $request->filled('species_authors') ? $request['species_authors'] : null
         ])->exists();
 
     }
@@ -92,6 +92,7 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
             'order_id' => $input->filled('order_id') ? $input['order_id'] : null,
             'type_status_id' => $input->filled('type_status_id') ? $input['type_status_id'] : null,
             'name' => $input->filled('name') ? $input['name'] : null,
+            'species_authors' => $input->filled('species_authors') ? $input['species_authors'] : null,
         ];
     }
 
@@ -159,6 +160,7 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
             'infra_specific_id' => $input->filled('infra_specific_id') ? $input['infra_specific_id'] : null,
             'order_id' => $input->filled('order_id') ? $input['order_id'] : null,
             'name' => $input->filled('name') ? $input['name'] : null,
+            'species_authors' => $input->filled('species_authors') ? $input['species_authors'] : null,
         ])->where('id', '!=', $id)->exists();
 
     }
@@ -171,13 +173,5 @@ class PaleobotanyTaxonomyRepository extends BaseRepository
             ->with($relations)
             ->latest()
             ->get();
-    }
-
-    /**
-     * @return array
-     */
-    public function getRelationFields(): array
-    {
-        return ['family', 'genus', 'species.authors'];
     }
 }

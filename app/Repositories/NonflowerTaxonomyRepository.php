@@ -81,6 +81,10 @@ class NonflowerTaxonomyRepository extends BaseRepository
             'subspecies_id' => $input->filled('subspecies_id') ? $input['subspecies_id'] : null,
             'variety_id' => $input->filled('variety_id') ? $input['variety_id'] : null,
             'name' => $input->filled('name') ? $input['name'] : null,
+            'species_authors' => $input->filled('species_authors') ? $input['species_authors'] : null,
+            'subspecies_authors' => $input->filled('subspecies_authors') ? $input['subspecies_authors'] : null,
+            'variety_authors' => $input->filled('variety_authors') ? $input['variety_authors'] : null,
+
         ];
     }
 

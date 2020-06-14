@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\AuthorTraits;
 use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,10 +21,11 @@ use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 class PaleobotanyTaxonomy extends BaseModel implements AuditableContract
 {
 
-    use AuditTrait, Auditable;
+    use AuditTrait, Auditable, AuthorTraits;
 
     public static $rules = [
         'family_id' => 'nullable|exists:paleobotany_generals,id',
+        'species_authors' => 'nullable|string',
         'genus_id' => 'required|exists:paleobotany_generals,id',
         'species_id' => 'required|exists:paleobotany_generals,id',
         'order_id' => 'nullable|exists:paleobotany_generals,id',
@@ -48,12 +50,8 @@ class PaleobotanyTaxonomy extends BaseModel implements AuditableContract
     {
         $authors = null;
 
-        if ($this->relationLoaded('genus') && !empty($this->genus) && $this->genus->authors->count()) {
-            $authors = $this->genus->authors->implode('name', ' & ');
-        }
-        if ($this->relationLoaded('species') && !empty($this->species) && $this->species->authors->count()) {
-            $and = !empty($authors) ? ' & ' : null;
-            $authors .= $and . $this->species->authors->implode('name', ' & ');
+        if ($this->relationLoaded('species') && !empty($this->species)) {
+            $authors .= $this->species_authors;
         }
 
         return $authors;

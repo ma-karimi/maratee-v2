@@ -49,31 +49,28 @@
         <tr>
             <td style="{{$td}}">{{ $item->phylum['name'] ?? null }}</td>
             @if($keys['family'] ?? false)
-                <td style="{{$td}}">{{ $item->family->name_author ?? null }}</td>
+                <td style="{{$td}}">{{ $item->family->name ?? null }}</td>
             @endif
             @if($keys['genus'] ?? false)
-                <td style="{{$td}}">{{ $item->genus->name_author ?? null }}</td>
+                <td style="{{$td}}">{{ $item->genus->name ?? null }}</td>
 
             @endif
             @if($keys['species'] ?? false)
                 <td style="{{$td}}">
-                    {{ $item->species->name_author ?? null }}
+                    {{ $item->species->name ?? null }} {{$item->species_authors ?? null}}
                 </td>
             @endif
             @if($keys['subspecies'] ?? false)
-                <td style="{{$td}}">{{ $item->subspecies->name_author ?? null }}
+                <td style="{{$td}}">{{ $item->subspecies->name ?? null }} {{$item->subspecies_authors ?? null}}
                 </td>
             @endif
             @if($keys['variety'] ?? false)
-                <td style="{{$td}}">{{ $item->variety->name_author ?? null }}
+                <td style="{{$td}}">{{ $item->variety->name ?? null }} {{$item->variety_authors ?? null}}
                 </td>
             @endif
             @if($keys['local_name'] ?? false)
                 <td style="{{$td}}">{{ $item->name ?? null }}</td>
 
-            @endif
-            @if($keys['scientific'] ?? false)
-                <td style="{{$td}}">{{ $item->scientific_name ?? null }}</td>
             @endif
             @if($keys['scientific'] ?? false)
                 <td style="{{$td}}">{{ $item->scientific_name ?? null }}</td>

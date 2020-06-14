@@ -24,7 +24,7 @@ class NonflowerGeneral extends BaseModel
         'name' => 'required|string',
         'type' => 'required|string',
     );
-    protected $hidden = ['created_at', 'updated_at'];
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at', 'type', 'authors', 'actors'];
 
     /**
      * @return MorphToMany

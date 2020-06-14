@@ -31,6 +31,7 @@ class CreatePaleobotanyTaxonomiesTable extends Migration
             $table->foreign('order_id')->references('id')->on('paleobotany_generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('type_status_id')->references('id')->on('paleobotany_generals')->onUpdate('NO ACTION')->onDelete('cascade');
             $table->foreign('infra_specific_id')->references('id')->on('paleobotany_generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->string('species_authors')->nullable();
 
 
             $table->timeStamps();

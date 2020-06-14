@@ -22,8 +22,8 @@ class PaleobotanyGeneral extends BaseModel
     use GeneralTrait;
     protected $with = ['authors'];
 
-    protected $appends = ['name_author', 'actors'];
-    protected $hidden = ['created_at', 'updated_at'];
+    protected $appends = ['actors'];
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at', 'type', 'authors', 'actors'];
 
     /**
      * @return MorphToMany

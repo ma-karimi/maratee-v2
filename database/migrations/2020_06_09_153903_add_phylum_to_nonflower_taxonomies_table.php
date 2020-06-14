@@ -15,6 +15,9 @@ class AddPhylumToNonflowerTaxonomiesTable extends Migration
     {
         Schema::table('nonflower_taxonomies', function (Blueprint $table) {
             $table->enum('phylum', ['Lichen', 'Moss', 'Diatom', 'Algae'])->default('Lichen');
+            $table->string('species_authors')->nullable();
+            $table->string('subspecies_authors')->nullable();
+            $table->string('variety_authors')->nullable();
         });
 
         Schema::table('nonflowers', function (Blueprint $table) {

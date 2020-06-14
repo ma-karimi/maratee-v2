@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\AuthorTraits;
 use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,7 +19,7 @@ use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 class Taxonomy extends BaseModel implements AuditableContract
 {
 
-    use AuditTrait, Auditable;
+    use AuditTrait, Auditable, AuthorTraits;
     public static $rules = [
         'family_id' => 'required|exists:generals,id',
         'genus_id' => 'nullable|exists:generals,id',

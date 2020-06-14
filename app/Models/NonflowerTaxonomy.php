@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\AuthorTraits;
 use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use App\Models\Contracts\GeneralTrait;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Jedrzej\Searchable\Constraint;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
@@ -19,7 +22,7 @@ use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 class NonflowerTaxonomy extends BaseModel implements AuditableContract
 {
 
-    use AuditTrait, Auditable;
+    use AuditTrait, Auditable,AuthorTraits;
 
     public static $rules = [
         'family_id' => 'required|exists:nonflower_generals,id',
@@ -51,16 +54,16 @@ class NonflowerTaxonomy extends BaseModel implements AuditableContract
     {
         $authors = null;
 
-        if ($this->relationLoaded('species') && !empty($this->species) && $this->species->authors->count()) {
-            $authors = $this->species->authors->implode('name', ' & ');
+        if ($this->relationLoaded('species') && !empty($this->species)) {
+            $authors = $this->species_authors;
         }
-        if ($this->relationLoaded('subspecies') && !empty($this->subspecies) && $this->subspecies->authors->count()) {
+        if ($this->relationLoaded('subspecies') && !empty($this->subspecies)) {
             $and = !empty($authors) ? ' & ' : null;
-            $authors .= $and . $this->subspecies->authors->implode('name', ' & ');
+            $authors .= $and . $this->subspecies_authors;
         }
-        if ($this->relationLoaded('variety') && !empty($this->variety) && $this->variety->authors->count()) {
+        if ($this->relationLoaded('variety') && !empty($this->variety)) {
             $and = !empty($authors) ? ' & ' : null;
-            $authors .= $and . $this->variety->authors->implode('name', ' & ');
+            $authors .= $and . $this->variety_authors;
         }
 
         return $authors;
@@ -144,6 +147,5 @@ class NonflowerTaxonomy extends BaseModel implements AuditableContract
     {
         return $this->belongsTo(NonflowerGeneral::class, 'family_id')->ofSelect();
     }
-
 
 }

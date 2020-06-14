@@ -16,12 +16,28 @@
 //        $query->update(['village'=>!empty($query['villager']['name_en']) ? $query['villager']['name_en'] : null ]);
 //    });
 //dd(\App\Models\Location::first());
+
 use App\Exports\ExcelExport;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
+
+Route::get('/paleo-fix', function () {
+    \App\Models\PaleobotanyTaxonomy::all()->each(function ($query) {
+
+        $query->species_id = \App\Models\PaleobotanyGeneral::where(['name' => $query['species']['name'], 'type' => 'species'])->first()->id;
+
+        \App\Models\PaleobotanyGeneral::where(['name' => $query['species']['name'], 'type' => 'species'])->where('id', '!=', $query->species_id)->delete();
+        $query->species_authors = $query['speAuthors'] ?? null;
+
+        $query->save();
+        echo 'Taxonomy:' . $query->id . PHP_EOL;
+
+    });
+
+});
 
 Route::get('/test-general', function () {
     \App\Models\MedicinalLocation::whereNotNull('taxonomy_id')
