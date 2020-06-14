@@ -5,13 +5,13 @@
     <td style="{{$td}}">{{ $taxonomy->genus->name ?? null }}</td>
 @endif
 @if($keys['species'] ?? false)
-    <td style="{{$td}}">{{ $taxonomy->species->name_author ?? null }}</td>
+    <td style="{{$td}}">{{ $taxonomy->species->name ?? null }}</td> {{$taxonomy->species_authors ?? null}}
 @endif
 @if($keys['subspecies'] ?? false)
-    <td style="{{$td}}">{{ $taxonomy->subspecies->name_author ?? null }}</td>
+    <td style="{{$td}}">{{ $taxonomy->subspecies->name ?? null }}</td> {{$taxonomy->subspecies_authors ?? null}}
 @endif
 @if($keys['variety'] ?? false)
-    <td style="{{$td}}">{{ $taxonomy->variety->name_author ?? null }}</td>
+    <td style="{{$td}}">{{ $taxonomy->variety->name ?? null }}</td> {{$taxonomy->variety_authors ?? null}}
 @endif
 @if($keys['scientific'] ?? false)
     <td style="{{$td}}">{{ $taxonomy->scientific ?? null }}</td>

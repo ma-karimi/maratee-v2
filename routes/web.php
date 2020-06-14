@@ -38,6 +38,54 @@ Route::get('/paleo-fix', function () {
     });
 
 });
+Route::get('/flora-fix', function () {
+    \App\Models\Taxonomy::all()->each(function ($query) {
+
+
+        if (!empty($query->species_id)) {
+            $query->species_id = \App\Models\General::where(['name' => $query['species']['name'], 'type' => 'species'])->first()->id;
+            $query->species_authors = $query['speAuthors'] ?? null;
+            $species = \App\Models\General::where(['name' => $query['species']['name'], 'type' => 'species'])->where('id', '!=', $query->species_id)->get();
+            \App\Models\Taxonomy::whereIn('species_id', $species->pluck('id')->toArray())->update(['species_id' => $query->species_id]);
+            foreach ($species as $index => $item) {
+//                    $query->authors()->delete();
+                $item->forceDelete();
+            }
+        }
+        if (!empty($query->subspecies_id)) {
+            $query->subspecies_id = \App\Models\General::where(['name' => $query['subspecies']['name'], 'type' => 'sub_species'])->first()->id;
+
+            $query->species_authors = $query['subSpeAuthors'] ?? null;
+            $subspecies = \App\Models\General::where(['name' => $query['subspecies']['name'], 'type' => 'sub_species'])->where('id', '!=', $query->subspecies_id)
+                ->get();
+            \App\Models\Taxonomy::whereIn('subspecies_id', $species->pluck('id')->toArray())->update(['subspecies_id' => $query->subspecies_id]);
+            foreach ($subspecies as $index => $item) {
+//                    $query->authors()->delete();
+                $item->forceDelete();
+            }
+        }
+        if (!empty($query->variety_id)) {
+            $query->variety_id = \App\Models\General::where(['name' => $query['variety']['name'], 'type' => 'variety'])->first()->id;
+
+            $query->variety_authors = $query['varAuthors'] ?? null;
+            $varieties = \App\Models\General::where(['name' => $query['variety']['name'], 'type' => 'variety'])->where('id', '!=', $query->variety_id)
+                ->get();
+
+            \App\Models\Taxonomy::whereIn('variety_id', $species->pluck('id')->toArray())->update(['variety_id' => $query->variety_id]);
+            foreach ($varieties as $index => $item) {
+//                    $query->authors()->delete();
+                $item->forceDelete();
+            }
+        }
+        $query->save();
+        echo 'Taxonomy:' . $query->id . '<br>';
+
+    });
+    \App\Models\ActorHub::where('actorable_type', \App\Models\General::class)->forceDelete();
+    \App\Models\ActorHub::where('actorable_type', \App\Models\NonflowerGeneral::class)->forceDelete();
+    \App\Models\ActorHub::where('actorable_type', \App\Models\PaleobotanyGeneral::class)->forceDelete();
+
+});
 
 Route::get('/test-general', function () {
     \App\Models\MedicinalLocation::whereNotNull('taxonomy_id')

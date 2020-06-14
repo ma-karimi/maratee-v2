@@ -39,26 +39,11 @@ class GeneralRepository extends BaseRepository
 
     public function create($input)
     {
-        $model = parent::create($this->setPrimaryData($input));
-        $this->createHub($model->id, 'authors', request()->filled('authors') ? $input['authors'] : []);
+        //        $this->createHub($model->id, 'authors', request()->filled('authors') ? $input['authors'] : []);
+        if (General::where($this->setPrimaryData($input))->exist()) {
 
-        return $model;
-    }
-
-    public function update($input, $id)
-    {
-        $model = parent::update($this->setPrimaryData($input), $id);
-        $this->createHub($model->id, 'authors', request()->filled('authors') ? $input['authors'] : []);
-
-        return $model;
-    }
-
-    public function allWithType($type)
-    {
-        if (!in_array($type, General::TYPES)) {
-            throw ValidationException::withMessages(['errors' => ['message' => 'Operation Failed!']]);
         }
-        return $this->model->whereType($type)->get();
+        return parent::create($this->setPrimaryData($input));
     }
 
     /**
@@ -70,11 +55,18 @@ class GeneralRepository extends BaseRepository
         return collect($input)->except('authors')->all();
     }
 
-    /**
-     * @return array
-     */
-    public function getRelationFields(): array
+    public function update($input, $id)
     {
-        return ['authors'];
+        //        $this->createHub($model->id, 'authors', request()->filled('authors') ? $input['authors'] : []);
+
+        return parent::update($this->setPrimaryData($input), $id);
+    }
+
+    public function allWithType($type)
+    {
+        if (!in_array($type, General::TYPES)) {
+            throw ValidationException::withMessages(['errors' => ['message' => 'Operation Failed!']]);
+        }
+        return $this->model->whereType($type)->get();
     }
 }

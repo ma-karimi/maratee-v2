@@ -18,14 +18,13 @@ class General extends BaseModel
     use GeneralScope, GeneralTrait;
     protected $with = ['authors'];
 
-    protected $appends = ['name_author', 'actors'];
     public const TYPES = ['phytogeography', 'phenology', 'plant_type', 'species', 'sub_species', 'variety', 'family', 'genus', 'class', 'group', 'order', 'flowering', 'cotyledon', 'growth', 'usage', 'part', 'industry', 'application', 'habitat', 'ecology', 'origin', 'lichen', 'moss', 'diatom', 'biological', 'sample'];
     public static $rules = array(
         'name' => 'required|string',
         'type' => 'required|string',
         'parent_id' => 'nullable|integer',
     );
-    protected $hidden = ['created_at', 'updated_at', 'parent_id'];
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at', 'type', 'authors', 'actors'];
 
     /**
      * @return MorphToMany

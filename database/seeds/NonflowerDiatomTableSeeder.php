@@ -15,40 +15,59 @@ class NonflowerDiatomTableSeeder extends Seeder
      */
     public function run()
     {
-//        $this->setTaxonomyAuthors();
+        $this->setTaxonomyAuthors();
         Excel::import(new NonFlowerDiatomImport(), public_path('/excels/diatom.xlsx'));
-    }
-
-
-    private function log(string $message)
-    {
-        echo "$message\n";
     }
 
     public function setTaxonomyAuthors(): void
     {
         NonflowerTaxonomy::all()->each(function ($query) {
 
-            $query->species_id = NonflowerGeneral::where(['name' => $query['species']['name'], 'type' => 'species'])->first()->id;
+            if (!empty($query->species_id)) {
+                $query->species_id = NonflowerGeneral::where(['name' => $query['species']['name'], 'type' => 'species'])->first()->id;
+                $query->species_authors = $query['speAuthors'] ?? null;
 
-            NonflowerGeneral::where(['name' => $query['species']['name'], 'type' => 'species'])->where('id', '!=', $query->species_id)->delete();
-            $query->species_authors = $query['speAuthors'] ?? null;
-
+                $species = \App\Models\NonflowerGeneral::where(['name' => $query['species']['name'], 'type' => 'species'])->where('id', '!=', $query->species_id)->get();
+                \App\Models\NonflowerTaxonomy::whereIn('species_id', $species->pluck('id')->toArray())->update(['species_id' => $query->species_id]);
+                foreach ($species as $index => $item) {
+//                    $query->authors()->delete();
+                    $item->forceDelete();
+                }
+            }
             if (!empty($query->subspecies_id)) {
                 $query->subspecies_id = NonflowerGeneral::where(['name' => $query['subspecies']['name'], 'type' => 'sub_species'])->first()->id;
 
-                NonflowerGeneral::where(['name' => $query['subspecies']['name'], 'type' => 'sub_species'])->where('id', '!=', $query->subspecies_id)->delete();
+
                 $query->species_authors = $query['subSpeAuthors'] ?? null;
+                $subspecies = \App\Models\NonflowerGeneral::where(['name' => $query['subspecies']['name'], 'type' => 'sub_species'])->where('id', '!=', $query->subspecies_id)
+                    ->get();
+                \App\Models\NonflowerTaxonomy::whereIn('subspecies_id', $species->pluck('id')->toArray())->update(['subspecies_id' => $query->subspecies_id]);
+                foreach ($subspecies as $index => $item) {
+//                    $query->authors()->delete();
+                    $item->forceDelete();
+                }
             }
             if (!empty($query->variety_id)) {
                 $query->variety_id = NonflowerGeneral::where(['name' => $query['variety']['name'], 'type' => 'variety'])->first()->id;
 
-                NonflowerGeneral::where(['name' => $query['variety']['name'], 'type' => 'variety'])->where('id', '!=', $query->variety_id)->delete();
                 $query->variety_authors = $query['varAuthors'] ?? null;
+                $varieties = \App\Models\NonflowerGeneral::where(['name' => $query['variety']['name'], 'type' => 'variety'])->where('id', '!=', $query->variety_id)
+                    ->get();
+
+                \App\Models\NonflowerTaxonomy::whereIn('variety_id', $species->pluck('id')->toArray())->update(['variety_id' => $query->variety_id]);
+                foreach ($varieties as $index => $item) {
+//                    $query->authors()->delete();
+                    $item->forceDelete();
+                }
             }
             $query->save();
             $this->log('Taxonomy:' . $query->id);
 
         });
+    }
+
+    private function log(string $message)
+    {
+        echo "$message\n";
     }
 }
