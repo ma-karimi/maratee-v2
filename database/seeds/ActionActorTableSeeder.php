@@ -44,7 +44,7 @@ class ActionActorTableSeeder extends Seeder
             echo "$query->id\n";
 
         });
-        $actions = \App\Models\ActionHub::where('actionable_type', \App\Models\Herbarium::class)->get();
+        $actions = \App\Models\ActionHub::where('actionable_type', \App\Models\Herbarium::class)->whereNull('deleted_at')->get();
 
         ActorHub::where('actorable_type', \App\Models\ActionHub::class)->whereIn('actorable_id', $actions->pluck('id')->toArray())->delete();
 
