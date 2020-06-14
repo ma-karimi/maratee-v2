@@ -39,6 +39,8 @@ Route::get('/paleo-fix', function () {
 
 });
 Route::get('/flora-fix', function () {
+    ini_set('max_execution_time', 3000);
+    ini_set('memory_limit', '2000M');
     \App\Models\Taxonomy::all()->each(function ($query) {
 
 
