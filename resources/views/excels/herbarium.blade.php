@@ -25,7 +25,8 @@
         <th style="{{$th}}">Herbarium Index</th>
         @include('excels.partials.taxonomyHeader')
         @if($keys['location'] ?? false)
-            <th style="{{$th}}">Location</th>
+            <th style="{{$th}}">Location En</th>
+            <th style="{{$th}}">Location Fa</th>
             <th style="{{$th}}">Alt</th>
             <th style="{{$th}}">N</th>
             <th style="{{$th}}">E</th>
@@ -89,17 +90,18 @@
             <td style="{{$td}}">{{ $item->herbarium_index ?? null }}</td>
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item->taxonomy, 'keys'=>$keys])
             @if($keys['location'] ?? false)
-                <td>{{ $item['location']['address_en']}} | {{$item['location']['address_fa']}}</td>
-                <td style="{{$td}}">{{ $item['location']['min_altitude']}} - {{ $item['location']['max_altitude']}}</td>
+                <td>{{ $item['location']['address_en']}}</td>
+                <td>{{$item['location']['address_fa']}}</td>
+                <td style="{{$td}}">{{ $item['location']['min_altitude']}}</td>
                 <td style="{{$td}}">{{ $item['location']['point']['DMS'][0] ?? null }}</td>
                 <td style="{{$td}}">{{ $item['location']['point']['DMS'][1] ?? null }}</td>
             @endif
             @if($keys['collect'] ?? false)
-                <td style="{{$td}}">{{$item['collect']['date'] ?? null}}</td>
-                <td style="{{$td}}">{{ $item['collect']['authors'] ?? null}}</td>
+                <td style="{{$td}}">{{$item['collection_date'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['collector'] ?? null}}</td>
             @endif
             @if($keys['determine'] ?? false)
-                <td style="{{$td}}">{{ $item['determine']['authors'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['determiner'] ?? null}}</td>
             @endif
             @if($keys['description'] ?? false)
                 <td style="{{$td}}">{{$item['description'] ?? null}}</td>

@@ -8,6 +8,7 @@ use App\Models\Relations\ActionRelation;
 use App\Models\Scope\HerbariumScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Arr;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
@@ -23,6 +24,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class Herbarium extends BaseModel implements HasMedia, AuditableContract
 {
     use ActionRelation, HasMediaTrait, HerbariumScope, AuditTrait, Auditable;
+
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
 
     public static $rules = [
@@ -47,8 +49,8 @@ class Herbarium extends BaseModel implements HasMedia, AuditableContract
      */
     protected $table = 'herbariums';
 
-    protected $appends = ['tip_picture', 'visit', 'borrow', 'exchange_receive', 'exchange_send', 'last_audit'];
-    protected $with = ['audits'];
+    protected $appends = ['tip_picture', 'visit', 'borrow', 'exchange_receive', 'exchange_send', 'last_audit', 'collector', 'determiner'];
+    protected $with = ['audits', 'collectors', 'determiners', 'collect', 'determine'];
 
     public function plant()
     {
@@ -126,6 +128,45 @@ class Herbarium extends BaseModel implements HasMedia, AuditableContract
     public function generalHabitat(): BelongsTo
     {
         return $this->belongsTo(General::class, 'general_habitat_id')->whereType('habitat');
+    }
+
+
+    public function determiners(): MorphToMany
+    {
+        return $this->morphToMany(Actor::class, 'actorable', 'action_actors')->withTimestamps()
+            ->where('action_actors.type_id', 1)
+            ->whereNull('action_actors.deleted_at');
+    }
+
+    public function collectors(): MorphToMany
+    {
+        return $this->morphToMany(Actor::class, 'actorable', 'action_actors')->withTimestamps()
+            ->where('action_actors.type_id', 2)
+            ->whereNull('action_actors.deleted_at');
+    }
+
+
+    public function getCollectorAttribute()
+    {
+        $authors = null;
+
+        if ($this->relationLoaded('collectors') && $this->collectors->count()) {
+            $authors = $this->collectors->implode('name', ' & ');
+        }
+
+        return $authors;
+    }
+
+
+    public function getDeterminerAttribute()
+    {
+        $authors = null;
+
+        if ($this->relationLoaded('determines') && $this->determines->count()) {
+            $authors = $this->determines->implode('name', ' & ');
+        }
+
+        return $authors;
     }
 
 }

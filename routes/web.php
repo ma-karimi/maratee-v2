@@ -88,6 +88,24 @@ Route::get('/flora-fix', function () {
     \App\Models\ActorHub::where('actorable_type', \App\Models\PaleobotanyGeneral::class)->forceDelete();
 
 });
+Route::get('/herbarium-fix', function () {
+    ini_set('max_execution_time', 3000);
+    ini_set('memory_limit', '2000M');
+    \App\Models\Herbarium::all()->each(function ($query) {
+
+
+        $query->collection_date = $query->collect->date ?? null;
+        $query->determine_date = $query->determine->date ?? null;
+        resolve(\App\Repositories\HerbariumRepository::class)->createHub($query->id, 'collectors', collect($query->collect->actors->pluck('id')->toArray())->filter()->all());
+        resolve(\App\Repositories\HerbariumRepository::class)->createHub($query->id, 'determiners', collect($query->determine->actors->pluck('id')->toArray())->filter()->all());
+
+        $query->save();
+        echo 'Taxonomy:' . $query->id . '<br>';
+
+    });
+    \App\Models\ActionHub::where('actorable_type', \App\Models\Herbarium::class)->forceDelete();
+
+});
 
 Route::get('/test-general', function () {
     \App\Models\MedicinalLocation::whereNotNull('taxonomy_id')

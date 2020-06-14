@@ -49,10 +49,8 @@ trait HerbariumScope
     protected function processDeterminerFilter(Builder $builder, Constraint $constraint)
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
-            $builder->whereHas('determine', function ($determine) use ($constraint) {
-                return $determine->whereHas('actors', function ($key) use ($constraint) {
-                    return $key->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
-                });
+            $builder->whereHas('determiners', function ($determine) use ($constraint) {
+                return $determine->where('action_actors.actor_id', $constraint->getOperator(), $constraint->getValue());
             });
 
             return true;
@@ -64,9 +62,7 @@ trait HerbariumScope
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
             $builder->whereHas('collect', function ($determine) use ($constraint) {
-                return $determine->whereHas('actors', function ($key) use ($constraint) {
-                    return $key->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
-                });
+                return $determine->where('action_actors.actor_id', $constraint->getOperator(), $constraint->getValue());
             });
 
             return true;

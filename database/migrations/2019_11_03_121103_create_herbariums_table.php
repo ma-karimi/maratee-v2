@@ -25,7 +25,8 @@ class CreateHerbariumsTable extends Migration
 
             $table->text('consideration')->nullable();
             $table->boolean('tip_picture_id')->nullable();
-
+            $table->date('collection_date')->nullable();
+            $table->date('determine_date')->nullable();
             $table->timeStamps();
             $table->softDeletesTz();
             $table->foreign('location_id')->references('id')->on('locations')->onUpdate('NO ACTION')->onDelete('CASCADE');
