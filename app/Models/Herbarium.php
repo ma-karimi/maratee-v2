@@ -50,7 +50,7 @@ class Herbarium extends BaseModel implements HasMedia, AuditableContract
     protected $table = 'herbariums';
 
     protected $appends = ['tip_picture', 'visit', 'borrow', 'exchange_receive', 'exchange_send', 'last_audit', 'collector', 'determiner'];
-    protected $with = ['audits', 'collectors', 'determiners', 'collect', 'determine'];
+    protected $with = ['audits', 'collectors', 'determiners'];
 
     public function plant()
     {
