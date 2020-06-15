@@ -2,8 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\ActionHub;
-use App\Models\ActorHub;
+use App\Models\ActionActor;
 use App\Models\Herbarium;
 use Illuminate\Container\Container as Application;
 
@@ -21,24 +20,14 @@ class HerbariumRepository extends BaseRepository
 
     ];
     /**
-     * @var ActionHubRepository
-     */
-    private $actionHubRepo;
-    /**
-     * @var ActorHubRepository
-     */
-    private $actorHubRepo;
-    /**
      * @var LocationRepository
      */
     private $locationRepo;
 
 
-    public function __construct(Application $app, ActionHub $actionHubRepo, ActorHub $actorHubRepo, LocationRepository $locationRepo)
+    public function __construct(Application $app, LocationRepository $locationRepo)
     {
         parent::__construct($app);
-        $this->actionHubRepo = $actionHubRepo;
-        $this->actorHubRepo = $actorHubRepo;
         $this->locationRepo = $locationRepo;
     }
 
@@ -109,6 +98,8 @@ class HerbariumRepository extends BaseRepository
             'description' => $input->description ?? null,
             'general_phytogeography_id' => $input['general_phytogeography_id'] ?? null,
             'general_habitat_id' => $input['general_habitat_id'] ?? null,
+            'collection_date' => $input['collection_date'] ?? null,
+            'determine_date' => $input['determine_date'] ?? null,
         ];
     }
 
@@ -116,23 +107,18 @@ class HerbariumRepository extends BaseRepository
     {
         $determines = is_array($input['determines']) ? $input['determines'] : explode(',', $input['determines']);
 
-        $action_hub = $this->actionHubRepo->firstOrCreate([
-            'action_id' => 1,
-            'actionable_type' => Herbarium::class,
-            'actionable_id' => $herbarium_id
-        ]);
-
-        $this->actorHubRepo
-            ->where('actorable_id', $action_hub->id)
-            ->where('actorable_type', ActionHub::class)
+        ActionActor::where('actorable_id', $herbarium_id)
+            ->where('actorable_type', Herbarium::class)
             ->whereNotIn('actor_id', $determines)
+            ->where('type_id', 1)
             ->delete();
         if (count($determines) && !empty($determines[0])) {
             foreach ($determines as $item) {
-                $this->actorHubRepo->firstOrCreate([
-                    'actorable_id' => $action_hub->id,
-                    'actorable_type' => ActionHub::class,
+                ActionActor::firstOrCreate([
+                    'actorable_id' => $herbarium_id,
+                    'actorable_type' => Herbarium::class,
                     'actor_id' => (int)$item,
+                    'type_id' => 1
                 ]);
             }
         }
@@ -142,26 +128,18 @@ class HerbariumRepository extends BaseRepository
     {
         $collectors = is_array($input['collectors']) ? $input['collectors'] : explode(',', $input['collectors']);
 
-        $action_hub = $this->actionHubRepo->updateOrCreate(
-            [
-                'action_id' => 2,
-                'actionable_type' => Herbarium::class,
-                'actionable_id' => $herbarium_id
-            ],
-            [
-                'date' => $input['date'] ?? null
-            ]);
-        $this->actorHubRepo
-            ->where('actorable_id', $action_hub->id)
-            ->where('actorable_type', ActionHub::class)
+        ActionActor::where('actorable_id', $herbarium_id)
+            ->where('actorable_type', Herbarium::class)
             ->whereNotIn('actor_id', $collectors)
+            ->where('type_id', 2)
             ->delete();
         if (count($collectors) && !empty($collectors[0])) {
             foreach ($collectors as $item) {
-                $this->actorHubRepo->firstOrCreate([
-                    'actorable_id' => $action_hub->id,
-                    'actorable_type' => ActionHub::class,
+                ActionActor::firstOrCreate([
+                    'actorable_id' => $herbarium_id,
+                    'actorable_type' => Herbarium::class,
                     'actor_id' => (int)$item,
+                    'type_id' => 2
                 ]);
             }
         }
@@ -193,6 +171,6 @@ class HerbariumRepository extends BaseRepository
 
     public function getRelationFields()
     {
-        return ['taxonomy', 'organization:id,name_en', 'media','location'];
+        return ['taxonomy', 'organization:id,name_en', 'media', 'location'];
     }
 }
