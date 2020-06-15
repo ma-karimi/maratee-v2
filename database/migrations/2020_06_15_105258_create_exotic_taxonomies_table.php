@@ -1,0 +1,49 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateExoticTaxonomiesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('exotic_taxonomies', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name')->nullable();
+            //generals
+            $table->unsignedBigInteger('family_id')->nullable();
+            $table->unsignedBigInteger('genus_id')->nullable();
+            $table->unsignedBigInteger('species_id')->nullable();
+            $table->unsignedBigInteger('subspecies_id')->nullable();
+            $table->unsignedBigInteger('variety_id')->nullable();
+
+            $table->foreign('genus_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('species_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('variety_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('family_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->foreign('subspecies_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+            $table->string('species_authors')->nullable();
+            $table->string('subspecies_authors')->nullable();
+            $table->string('variety_authors')->nullable();
+
+            $table->timeStamps();
+            $table->softDeletesTz();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('exotic_taxonomies');
+    }
+}

@@ -34,23 +34,23 @@ class Taxonomy extends BaseModel implements AuditableContract
      * @var string
      */
     protected $table = 'taxonomies';
-    protected $with = ['family', 'genus', 'subspecies.authors', 'species.authors', 'variety.authors', 'audits'];
+    protected $with = ['family', 'genus', 'subspecies', 'species', 'variety', 'audits'];
     protected $appends = ['authors', 'scientific_name', 'scientific', 'last_audit'];
 
     public function getAuthorsAttribute()
     {
         $authors = null;
 
-        if ($this->relationLoaded('species') && !empty($this->species) && $this->species->authors->count()) {
-            $authors = $this->species->authors->implode('name', ' & ');
+        if ($this->relationLoaded('species') && !empty($this->species_authors)) {
+            $authors = $this->species_authors;
         }
-        if ($this->relationLoaded('subspecies') && !empty($this->subspecies) && $this->subspecies->authors->count()) {
+        if ($this->relationLoaded('subspecies') && !empty($this->subspecies_authors)) {
             $and = !empty($authors) ? ' & ' : null;
-            $authors .= $and . $this->subspecies->authors->implode('name', ' & ');
+            $authors .= $and . $this->subspecies_authors;
         }
-        if ($this->relationLoaded('variety') && !empty($this->variety) && $this->variety->authors->count()) {
+        if ($this->relationLoaded('variety') && !empty($this->variety_authors)) {
             $and = !empty($authors) ? ' & ' : null;
-            $authors .= $and . $this->variety->authors->implode('name', ' & ');
+            $authors .= $and . $this->variety_authors;
         }
 
         return $authors;

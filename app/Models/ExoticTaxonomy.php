@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Accessor\AuthorTraits;
 use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,20 +12,24 @@ use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
 /**
  * @SWG\Definition(
- *      definition="ExoticFlowerTaxonomy",
+ *      definition="ExoticTaxonomy",
  *      required={"family_id"}
  * )
  */
-class ExoticFlowerTaxonomy extends BaseModel implements AuditableContract
+class ExoticTaxonomy extends BaseModel implements AuditableContract
 {
 
-    use AuditTrait, Auditable;
+    use AuditTrait, Auditable, AuthorTraits;
+
     public static $rules = [
         'family_id' => 'required|exists:generals,id',
         'genus_id' => 'nullable|exists:generals,id',
         'species_id' => 'nullable|exists:generals,id',
         'variety_id' => 'nullable|exists:generals,id',
         'subspecies_id' => 'nullable|exists:generals,id',
+        'subspecies_authors' => 'nullable|string',
+        'species_authors' => 'nullable|string',
+        'variety_authors' => 'nullable|string',
         'name' => 'nullable|string',
     ];
     /**
@@ -33,23 +38,23 @@ class ExoticFlowerTaxonomy extends BaseModel implements AuditableContract
      * @var string
      */
     protected $table = 'taxonomies';
-    protected $with = ['family', 'genus', 'subspecies.authors', 'species.authors', 'variety.authors', 'audits'];
+    protected $with = ['family', 'genus', 'subspecies', 'species', 'variety', 'audits'];
     protected $appends = ['authors', 'scientific_name', 'scientific', 'last_audit'];
 
     public function getAuthorsAttribute()
     {
         $authors = null;
 
-        if ($this->relationLoaded('species') && !empty($this->species) && $this->species->authors->count()) {
-            $authors = $this->species->authors->implode('name', ' & ');
+        if ($this->relationLoaded('species') && !empty($this->species_authors)) {
+            $authors = $this->species_authors;
         }
-        if ($this->relationLoaded('subspecies') && !empty($this->subspecies) && $this->subspecies->authors->count()) {
+        if ($this->relationLoaded('subspecies') && !empty($this->subspecies_authors)) {
             $and = !empty($authors) ? ' & ' : null;
-            $authors .= $and . $this->subspecies->authors->implode('name', ' & ');
+            $authors .= $and . $this->subspecies_authors;
         }
-        if ($this->relationLoaded('variety') && !empty($this->variety) && $this->variety->authors->count()) {
+        if ($this->relationLoaded('variety') && !empty($this->variety_authors)) {
             $and = !empty($authors) ? ' & ' : null;
-            $authors .= $and . $this->variety->authors->implode('name', ' & ');
+            $authors .= $and . $this->variety_authors;
         }
 
         return $authors;
