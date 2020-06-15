@@ -62,11 +62,33 @@ class TaxonomyRepository extends BaseRepository
             'type_id' => $request['type_id'],
             'species_id' => $request->filled('species_id') ? $request['species_id'] : null,
             'subspecies_id' => $request->filled('subspecies_id') ? $request['subspecies_id'] : null,
-            'variety_id' => $request->filled('variety_id') ? $request['variety_id'] : null
+            'variety_id' => $request->filled('variety_id') ? $request['variety_id'] : null,
+            'species_authors' => $request->filled('species_authors') ? $request['species_authors'] : null,
+            'subspecies_authors' => $request->filled('subspecies_authors') ? $request['subspecies_authors'] : null,
+            'variety_authors' => $request->filled('variety_authors') ? $request['variety_authors'] : null,
         ])->exists();
 
     }
 
+    /**
+     * @param Request $input
+     * @return array
+     */
+    public function setPrimaryData(Request $input): array
+    {
+        return [
+            'family_id' => $input['family_id'],
+            'genus_id' => $input['genus_id'],
+            'species_id' => $input->filled('species_id') ? $input['species_id'] : null,
+            'subspecies_id' => $input->filled('subspecies_id') ? $input['subspecies_id'] : null,
+            'variety_id' => $input->filled('variety_id') ? $input['variety_id'] : null,
+            'non_native' => $input['non_native'] ?? 0,
+            'name' => $input->filled('name') ? $input['name'] : null,
+            'species_authors' => $input->filled('species_authors') ? $input['species_authors'] : null,
+            'subspecies_authors' => $input->filled('subspecies_authors') ? $input['subspecies_authors'] : null,
+            'variety_authors' => $input->filled('variety_authors') ? $input['variety_authors'] : null,
+        ];
+    }
 
     public function update($request, $id)
     {
@@ -93,7 +115,10 @@ class TaxonomyRepository extends BaseRepository
             'genus_id' => $request['genus_id'],
             'species_id' => $request->filled('species_id') ? $request['species_id'] : null,
             'subspecies_id' => $request->filled('subspecies_id') ? $request['subspecies_id'] : null,
-            'variety_id' => $request->filled('variety_id') ? $request['variety_id'] : null
+            'variety_id' => $request->filled('variety_id') ? $request['variety_id'] : null,
+            'species_authors' => $request->filled('species_authors') ? $request['species_authors'] : null,
+            'subspecies_authors' => $request->filled('subspecies_authors') ? $request['subspecies_authors'] : null,
+            'variety_authors' => $request->filled('variety_authors') ? $request['variety_authors'] : null,
         ])->where('id', '!=', $id)->exists();
 
     }
@@ -110,27 +135,10 @@ class TaxonomyRepository extends BaseRepository
     }
 
     /**
-     * @param Request $input
-     * @return array
-     */
-    public function setPrimaryData(Request $input): array
-    {
-        return [
-            'family_id' => $input['family_id'],
-            'genus_id' => $input['genus_id'],
-            'species_id' => $input->filled('species_id') ? $input['species_id'] : null,
-            'subspecies_id' => $input->filled('subspecies_id') ? $input['subspecies_id'] : null,
-            'variety_id' => $input->filled('variety_id') ? $input['variety_id'] : null,
-            'non_native' => $input['non_native'] ?? 0,
-            'name' => $input->filled('name') ? $input['name'] : null,
-        ];
-    }
-
-    /**
      * @return array
      */
     public function getRelationFields(): array
     {
-        return ['family', 'genus', 'species.authors', 'subspecies.authors', 'variety.authors'];
+        return ['family', 'genus', 'species', 'subspecies', 'variety'];
     }
 }
