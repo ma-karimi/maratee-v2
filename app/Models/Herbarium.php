@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
-use App\Models\Relations\ActionRelation;
 use App\Models\Scope\HerbariumScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -23,7 +22,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Herbarium extends BaseModel implements HasMedia, AuditableContract
 {
-    use ActionRelation, HasMediaTrait, HerbariumScope, AuditTrait, Auditable;
+    use HasMediaTrait, HerbariumScope, AuditTrait, Auditable;
 
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
 

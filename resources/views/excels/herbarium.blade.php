@@ -90,8 +90,8 @@
             <td style="{{$td}}">{{ $item->herbarium_index ?? null }}</td>
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item->taxonomy, 'keys'=>$keys])
             @if($keys['location'] ?? false)
-                <td>{{ $item['location']['address_en']}}</td>
-                <td>{{$item['location']['address_fa']}}</td>
+                <td>{{ $item['location']['address_en'] ?? null}}</td>
+                <td>{{ $item['location']['address_fa'] ?? null}}</td>
                 <td style="{{$td}}">{{ $item['location']['min_altitude']}}</td>
                 <td style="{{$td}}">{{ $item['location']['point']['DMS'][0] ?? null }}</td>
                 <td style="{{$td}}">{{ $item['location']['point']['DMS'][1] ?? null }}</td>
