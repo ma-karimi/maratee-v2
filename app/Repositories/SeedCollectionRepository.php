@@ -64,6 +64,10 @@ class SeedCollectionRepository extends BaseRepository
 
     public function create($input)
     {
+        if (SeedCollection::where('accession_code', $input['accession_code'])->exists()) {
+            throw ValidationException::withMessages(['accession_code' => 'The accession code has already been taken.']);
+        }
+
         if (request()->filled('location')) {
             $input['location_id'] = $this->locationRepo->create($input['location'])->id;
         }
@@ -102,6 +106,9 @@ class SeedCollectionRepository extends BaseRepository
 
     public function update($input, $id)
     {
+        if (SeedCollection::where('accession_code', $input['accession_code'])->where('id', '!=', $id)->exists()) {
+            throw ValidationException::withMessages(['accession_code' => 'The accession code has already been taken.']);
+        }
         if (request()->filled(['location_id', 'location'])) {
             $input['location_id'] = $this->locationRepo->update($input['location'], $input['location']['id'])->id;
         } else if (request()->filled(['location'])) {
@@ -113,40 +120,6 @@ class SeedCollectionRepository extends BaseRepository
     public function getRelationFields()
     {
         return ['location', 'organization.city', 'organization:id,name_en,city_id', 'landForm', 'taxonomy', 'project', 'collect', 'drainage', 'fruitType', 'habitat', 'usedPart', 'growthForm', 'lifeForm', 'consumption', 'motherHealth', 'pollinationAgent', 'pollinationType', 'collectedFrom', 'slopeAspect', 'soilDepth', 'soilErosion', 'soilLime', 'soilSalinity', 'soilTexture', 'specimenType', 'associatedSpecies', 'communityTypes', 'climates', 'media', 'floweringTime', 'harvestingTime'];
-    }
-
-    /**
-     * @param $input
-     * @param $seed_collect_id
-     * @deprecated  by dr.jamzad
-     */
-    private function storeCollect($input, $seed_collect_id)
-    {
-        $collectors = is_array($input['collectors']) ? $input['collectors'] : explode(',', $input['collectors']);
-
-        $action_hub = $this->actionHubRepo->updateOrCreate(
-            [
-                'action_id' => 2,
-                'actionable_type' => SeedCollection::class,
-                'actionable_id' => $seed_collect_id
-            ],
-            [
-                'date' => $input['date'] ?? null
-            ]);
-        $this->actorHubRepo
-            ->where('actorable_id', $action_hub->id)
-            ->where('actorable_type', ActionHub::class)
-            ->whereNotIn('actor_id', $collectors)
-            ->delete();
-        if (count($collectors) && !empty($collectors[0])) {
-            foreach ($collectors as $item) {
-                $this->actorHubRepo::firstOrCreate([
-                    'actorable_id' => $action_hub->id,
-                    'actorable_type' => ActionHub::class,
-                    'actor_id' => (int)$item,
-                ]);
-            }
-        }
     }
 
     public function storePlantFlowering($input, $id)
@@ -204,6 +177,40 @@ class SeedCollectionRepository extends BaseRepository
         if (request()->hasFile('file')) {
             $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('images');
             $media_record->update($media_input);
+        }
+    }
+
+    /**
+     * @param $input
+     * @param $seed_collect_id
+     * @deprecated  by dr.jamzad
+     */
+    private function storeCollect($input, $seed_collect_id)
+    {
+        $collectors = is_array($input['collectors']) ? $input['collectors'] : explode(',', $input['collectors']);
+
+        $action_hub = $this->actionHubRepo->updateOrCreate(
+            [
+                'action_id' => 2,
+                'actionable_type' => SeedCollection::class,
+                'actionable_id' => $seed_collect_id
+            ],
+            [
+                'date' => $input['date'] ?? null
+            ]);
+        $this->actorHubRepo
+            ->where('actorable_id', $action_hub->id)
+            ->where('actorable_type', ActionHub::class)
+            ->whereNotIn('actor_id', $collectors)
+            ->delete();
+        if (count($collectors) && !empty($collectors[0])) {
+            foreach ($collectors as $item) {
+                $this->actorHubRepo::firstOrCreate([
+                    'actorable_id' => $action_hub->id,
+                    'actorable_type' => ActionHub::class,
+                    'actor_id' => (int)$item,
+                ]);
+            }
         }
     }
 }

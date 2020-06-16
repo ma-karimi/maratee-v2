@@ -60,7 +60,7 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
         'taxonomy_id' => 'nullable|exists:taxonomies,id',
         'encoded_code_by_collector' => 'nullable|string',
         'corrected_code_by_nrgb' => 'nullable|string',
-        'accession_code' => 'required|string|unique:seed_collections',
+        'accession_code' => 'required|string',
         'voucher_no' => 'nullable|string',
         'dna' => 'nullable|in:0,1'
     ];
