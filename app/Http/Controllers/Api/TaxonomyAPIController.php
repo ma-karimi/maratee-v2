@@ -75,7 +75,6 @@ class TaxonomyAPIController extends AppBaseController
             ['name' => 'variety', 'title' => 'Variety', 'value' => false],
             ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
             ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
-            ['name' => 'non_native', 'title' => 'Non Native', 'value' => false],
         ];
         return $this->sendResponse(compact('taxonomies', 'keys'), 'Taxonomies retrieved successfully');
     }

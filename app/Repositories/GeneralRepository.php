@@ -40,8 +40,8 @@ class GeneralRepository extends BaseRepository
     public function create($input)
     {
         //        $this->createHub($model->id, 'authors', request()->filled('authors') ? $input['authors'] : []);
-        if (General::where($this->setPrimaryData($input))->exist()) {
-
+        if (General::where($this->setPrimaryData($input))->exists()) {
+            throw ValidationException::withMessages(['name'=>'General Name Duplicated!']);
         }
         return parent::create($this->setPrimaryData($input));
     }

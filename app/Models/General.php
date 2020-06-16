@@ -22,7 +22,6 @@ class General extends BaseModel
     public static $rules = array(
         'name' => 'required|string',
         'type' => 'required|string',
-        'parent_id' => 'nullable|integer',
     );
     protected $hidden = ['created_at', 'updated_at', 'deleted_at', 'type', 'authors', 'actors'];
 
