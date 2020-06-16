@@ -4,17 +4,9 @@
 namespace App\Models\Relations;
 
 
-use App\Models\{General,
-    MedicinalLocation,
-    MedicinalPart,
-    MedicinalPlantType,
-    Medicine,
-    Plant,
-    PlantGeographical,
-    Product,
-    Taxonomy};
+use App\Models\{General, MedicinalPart, MedicinalPlantType, Taxonomy};
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait MedicinalApplicationRelations
 {
@@ -29,44 +21,45 @@ trait MedicinalApplicationRelations
     }
 
 
-    public function foodIndustries()
+    public function foodIndustries(): MorphToMany
     {
         return $this->morphedByMany(MedicinalPlantType::class, 'hub', 'medicinal_hubs', 'medicinal_plant_id'
         )->where('medicinal_plant_types.type_id', array_search('food_industry', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
     }
 
 
-    public function otherIndustries()
+    public function otherIndustries(): MorphToMany
     {
         return $this->morphedByMany(MedicinalPlantType::class, 'hub', 'medicinal_hubs', 'medicinal_plant_id'
         )->where('medicinal_plant_types.type_id', array_search('other_industry', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
     }
 
-    public function industrialPotentials()
+    public function industrialPotentials(): MorphToMany
     {
         return $this->morphedByMany(MedicinalPlantType::class, 'hub', 'medicinal_hubs', 'medicinal_plant_id'
         )->where('medicinal_plant_types.type_id', array_search('industrial_potential', MedicinalPlantType::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
     }
 
 
-    public function groundType()
+    public function groundType(): BelongsTo
     {
         return $this->belongsTo(MedicinalPart::class, 'ground_part_id'
         )->where('type_id', array_search('ground', MedicinalPart::TYPE));
     }
-    public function origin()
+
+    public function origin(): BelongsTo
     {
         return $this->belongsTo(General::class, 'general_origin_id'
         )->where('type', 'origin');
     }
 
-    public function aerialTypes()
+    public function aerialTypes(): MorphToMany
     {
         return $this->morphedByMany(MedicinalPart::class, 'hub', 'medicinal_hubs', 'medicinal_plant_id'
         )->where('medicinal_parts.type_id', array_search('aerial', MedicinalPart::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');
     }
 
-    public function undergroundParts()
+    public function undergroundParts(): MorphToMany
     {
         return $this->morphedByMany(MedicinalPart::class, 'hub', 'medicinal_hubs', 'medicinal_plant_id'
         )->where('medicinal_parts.type_id', array_search('ground', MedicinalPart::TYPE))->withTimestamps()->whereNull('medicinal_hubs.deleted_at');

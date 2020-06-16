@@ -135,7 +135,7 @@ class Location extends BaseModel
     }
 
 
-    public function locationHubs()
+    public function locationHubs(): MorphToMany
     {
         return $this->morphedByMany(ActionHub::class, 'actionable');
     }

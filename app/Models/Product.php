@@ -45,7 +45,7 @@ class Product extends BaseModel implements HasMedia, AuditableContract
 
     protected $appends = ['status_name', 'last_audit'];
 
-    public function pharmaceutical_form()
+    public function pharmaceutical_form(): BelongsTo
     {
         return $this->belongsTo(MedicinalPlantType::class, 'pharmaceutical_form_id')
             ->where('type_id', 7);

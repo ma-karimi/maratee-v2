@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @SWG\Definition(
@@ -39,7 +41,7 @@ class Actor extends BaseModel
     /**
      * Get all of the posts that are assigned this tag.
      */
-    public function plants()
+    public function plants(): MorphToMany
     {
         return $this->morphedByMany(Plant::class, 'actorable', 'actor_hubs')
             ->whereNull('actor_hubs.deleted_at')
@@ -49,7 +51,7 @@ class Actor extends BaseModel
     /**
      * Get all of the videos that are assigned this tag.
      */
-    public function generals()
+    public function generals(): MorphToMany
     {
         return $this->morphedByMany(General::class, 'actorable', 'actor_hubs')
             ->whereNull('actor_hubs.deleted_at')
@@ -60,12 +62,12 @@ class Actor extends BaseModel
     /**
      * Get all of the videos that are assigned this tag.
      */
-    public function user()
+    public function user():BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function actions()
+    public function actions(): MorphToMany
     {
         return $this->morphedByMany(ActionHub::class, 'actorable', 'actor_hubs');
     }
