@@ -38,9 +38,12 @@ class ExoticTaxonomyImport implements OnEachRow, WithHeadingRow
 
         // species
         $row['species_id'] = General::firstOrCreate(['name' => $row['species'], 'type' => 'species'])->id;
-        $row['subspecies_id'] = General::firstOrCreate(['name' => $row['subspecies'], 'type' => 'sub_species'])->id;
-        $row['variety_id'] = General::firstOrCreate(['name' => $row['variety'], 'type' => 'variety'])->id;
-
+        if (!empty($row['subspecies'])) {
+            $row['subspecies_id'] = General::firstOrCreate(['name' => $row['subspecies'], 'type' => 'sub_species'])->id;
+        }
+        if (!empty($row['variety'])) {
+            $row['variety_id'] = General::firstOrCreate(['name' => $row['variety'], 'type' => 'variety'])->id;
+        }
         // taxonomy
         return Taxonomy::firstOrCreate($this->taxonomyData($row));
     }
