@@ -20,7 +20,7 @@ class BotanicalAPIRequest extends APIRequest
 
         if (Botanical::where('taxonomy_id', $this->taxonomy_id)->where('collection_id', $this->collection_id)->exists() && $this->isMethod('post')) {
             $botanicalDuplicateErrorMessage = 'Taxonomy & Collection Repetitive!';
-            throw ValidationException::withMessages(['family_id' => $botanicalDuplicateErrorMessage, 'genus_id' => $botanicalDuplicateErrorMessage, 'collection_id' => $botanicalDuplicateErrorMessage]);
+            throw ValidationException::withMessages(['collection_id' => 'Botanical Duplicated']);
         }
 
         return true;

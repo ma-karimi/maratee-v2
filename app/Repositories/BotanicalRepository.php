@@ -97,20 +97,19 @@ class BotanicalRepository extends BaseRepository
     public function createBotanicalHub($input, Model $botanical): void
     {
         $this->storeDistributions($input, $botanical);
-        $this->createHub($botanical->id, 'values', is_array($input['values']) ? $input['values'] : explode(',', $input['values']));
-        $this->createHub($botanical->id, 'habitats', is_array($input['habitats']) ? $input['habitats'] : explode(',', $input['habitats']));
-        $this->createHub($botanical->id, 'origins', is_array($input['origins']) ? $input['origins'] : explode(',', $input['origins']));
-        $this->createHub($botanical->id, 'usages', is_array($input['usages']) ? $input['usages'] : explode(',', $input['usages']));
-        $this->createHub($botanical->id, 'cycles', is_array($input['cycles']) ? $input['cycles'] : explode(',', $input['cycles']));
-        $this->createHub($botanical->id, 'fruitColors', is_array($input['fruit_colors']) ? $input['fruit_colors'] : explode(',', $input['fruit_colors']), ['type_id' => 2]);
-        $this->createHub($botanical->id, 'flowerColors', is_array($input['flower_colors']) ? $input['flower_colors'] : explode(',', $input['flower_colors']), ['type_id' => 1]);
-        $this->createHub($botanical->id, 'foliageColors', is_array($input['foliage_colors']) ? $input['foliage_colors'] : explode(',', $input['foliage_colors']), ['type_id' => 3]);
+        $this->createHub($botanical->id, 'values', request()->filled('values') ? collect($input['values'])->filter()->all() : []);
+        $this->createHub($botanical->id, 'habitats', request()->filled('habitats') ? collect($input['habitats'])->filter()->all() : []);
+        $this->createHub($botanical->id, 'origins', request()->filled('origins') ? collect($input['origins'])->filter()->all() : []);
+        $this->createHub($botanical->id, 'usages', request()->filled('usages') ? collect($input['usages'])->filter()->all() : []);
+        $this->createHub($botanical->id, 'cycles', request()->filled('cycles') ? collect($input['cycles'])->filter()->all() : []);
+        $this->createHub($botanical->id, 'fruitColors', request()->filled('fruit_colors') ? collect($input['fruit_colors'])->filter()->all() : [], ['type_id' => 2]);
+        $this->createHub($botanical->id, 'flowerColors', request()->filled('flower_colors') ? collect($input['flower_colors'])->filter()->all() : [], ['type_id' => 1]);
+        $this->createHub($botanical->id, 'foliageColors', request()->filled('foliage_colors') ? collect($input['foliage_colors'])->filter()->all() : [], ['type_id' => 3]);
     }
 
     private function storeDistributions($input, $botanical)
     {
-        $distributions = request()->filled('distributions') ? explode(',', $input['distributions']) : [];
-        $this->createHub($botanical->id, 'distributions', $distributions);
+        $this->createHub($botanical->id, 'distributions', request()->filled('distributions') ? collect($input['distributions'])->filter()->all() : []);
     }
 
     public function storeLocation($input, $id)
