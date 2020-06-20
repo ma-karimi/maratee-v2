@@ -58,8 +58,8 @@
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['taxonomy'], 'keys'=>$keys])
 
             @if($keys['part_used'] ?? false)
-                <td style="{{$td}}">{{ $item['has_aerial_part'] == 1 }}</td>
-                <td style="{{$td}}">{{ $item['has_ground_part'] == 1 }}</td>
+                <td style="{{$td}}">{{ $item['has_aerial_part'] == 1 ? 'yes' : '' }}</td>
+                <td style="{{$td}}">{{ $item['has_ground_part'] == 1 ? 'yes' : '' }}</td>
                 <td style="{{$td}}">{{ $item['aerial_type'] ?? null }}</td>
                 <td style="{{$td}}">{{ $item['underground_part'] ?? null }}</td>
             @endif
@@ -67,13 +67,13 @@
                 <td style="{{$td}}">{{ $item['traditional_iranian_medicine_name'] ?? null }}</td>
                 <td style="{{$td}}">{{ $item['natural_drug_name'] ?? null }}</td>
                 <td style="{{$td}}">{{ $item['foods'] ?? null }}</td>
-                <td style="{{$td}}">{{ $item['hygienic_cosmetic']['name'] ?? null }}</td>
+                <td style="{{$td}}">{{ $item['hygienic_cosmetic'] ?? null }}</td>
                 <td style="{{$td}}">{{ $item['industries'] ?? null }}</td>
                 <td style="{{$td}}">{{ $item['inherbal_medicine_store_name'] ?? null }}</td>
             @endif
             @if($keys['import_export'] ?? false)
-                <td>{{ $item['has_exporting']}} </td>
-                <td>{{ $item['has_importing']}} </td>
+                <td>{{ $item['has_exporting'] == 1 ? 'yes' : ''}} </td>
+                <td>{{ $item['has_importing'] == 1 ? 'yes' : ''}} </td>
                 <td>{{ $item['exporting_name']}} </td>
                 <td>{{ $item['importing_name']}} </td>
             @endif
