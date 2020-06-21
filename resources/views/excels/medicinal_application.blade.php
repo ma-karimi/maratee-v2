@@ -23,6 +23,9 @@
     <thead>
     <tr>
         @include('excels.partials.taxonomyHeader')
+        @if($keys['origin'] ?? false)
+            <th style="{{$th}}">Origin</th>
+        @endif
         @if($keys['part_used'] ?? false)
             <th style="{{$th}}">Has Aerial Part</th>
             <th style="{{$th}}">Has Underground Part</th>
@@ -57,6 +60,9 @@
         <tr>
             @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['taxonomy'], 'keys'=>$keys])
 
+            @if($keys['origin'] ?? false)
+                <td style="{{$td}}">{{ $item['origin']['name'] ?? '' }}</td>
+            @endif
             @if($keys['part_used'] ?? false)
                 <td style="{{$td}}">{{ $item['has_aerial_part'] == 1 ? 'yes' : '' }}</td>
                 <td style="{{$td}}">{{ $item['has_ground_part'] == 1 ? 'yes' : '' }}</td>

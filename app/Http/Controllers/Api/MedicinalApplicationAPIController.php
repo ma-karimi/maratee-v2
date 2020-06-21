@@ -74,6 +74,7 @@ class MedicinalApplicationAPIController extends AppBaseController
             ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
             ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
             ['name' => 'plants_used', 'title' => 'Plants Used', 'value' => false],
+            ['name' => 'origin', 'title' => 'Origin', 'value' => false],
             ['name' => 'import_export', 'title' => 'Import/Export', 'value' => false],
             ['name' => 'cultivate', 'title' => 'Cultivated area', 'value' => false],
             ['name' => 'industrial', 'title' => 'Industrial Potential', 'value' => false],

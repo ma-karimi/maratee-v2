@@ -76,6 +76,17 @@ class ProductAPIController extends AppBaseController
             ['name' => 'variety', 'title' => 'Variety', 'value' => false],
             ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
             ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
+            ['name' => 'code', 'title' => 'Code', 'value' => false],
+            ['name' => 'Number', 'title' => 'Number', 'value' => false],
+            ['name' => 'Product Name', 'title' => 'product', 'value' => false],
+            ['name' => 'Medicine Name', 'title' => 'medicine', 'value' => false],
+            ['name' => 'Company', 'title' => 'company', 'value' => false],
+            ['name' => 'Pharmaceutical', 'title' => 'pharmaceutical', 'value' => false],
+            ['name' => 'Consumption', 'title' => 'consumption', 'value' => false],
+            ['name' => 'Component', 'title' => 'component', 'value' => false],
+            ['name' => 'Compound', 'title' => 'compound', 'value' => false],
+            ['name' => 'Side Effects', 'title' => 'side_effect', 'value' => false],
+            ['name' => 'registration', 'title' => 'registration', 'value' => false],
         ];
         return $this->sendResponse(compact('products', 'keys'), 'Products retrieved successfully');
     }
