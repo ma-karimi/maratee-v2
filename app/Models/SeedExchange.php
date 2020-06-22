@@ -60,7 +60,7 @@ class SeedExchange extends BaseModel implements HasMedia, AuditableContract
      */
     public function collection(): BelongsTo
     {
-        return $this->belongsTo(SeedGeneral::class, 'collection_id')->where('seed_generals.type_id', 19);
+        return $this->belongsTo(SeedGeneral::class, 'collection_id')->where('seed_generals.type_id', 28);
     }
 
     /**

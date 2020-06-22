@@ -60,7 +60,7 @@ class SeedWeight extends BaseModel implements HasMedia, AuditableContract
      */
     public function collection()
     {
-        return $this->belongsTo(SeedGeneral::class, 'collection_id')->where('seed_generals.type_id', 19);
+        return $this->belongsTo(SeedGeneral::class, 'collection_id')->where('seed_generals.type_id', 28);
     }
 
     public function scopeByCollection($query, $collection_id)
