@@ -35,11 +35,13 @@ class NonFlowerMossImport implements OnEachRow, WithHeadingRow
     {
         $row['phylum'] = 'Moss';
 
-        $row['family_id'] = NonflowerGeneral::firstOrCreate(['name' => $row['family'], 'type' => 'family'])->id;
+        if (!empty($row['family'])) {
+            $row['family_id'] = NonflowerGeneral::firstOrCreate(['name' => $row['family'], 'type' => 'family'])->id;
+        }
         $row['genus_id'] = NonflowerGeneral::firstOrCreate(['name' => $row['genus'], 'type' => 'genus'])->id;
 
         // species
-        $row['species_id'] = NonflowerGeneral::firstOrCreate(['nae' => $row['species'], 'type' => 'species'])->id;
+        $row['species_id'] = NonflowerGeneral::firstOrCreate(['name' => $row['species'], 'type' => 'species'])->id;
         if (!empty($row['subspecies'])) {
             $row['subspecies_id'] = NonflowerGeneral::firstOrCreate(['name' => $row['subspecies'], 'type' => 'sub_species'])->id;
         }
