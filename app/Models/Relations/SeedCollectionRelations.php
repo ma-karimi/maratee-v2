@@ -18,12 +18,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 trait SeedCollectionRelations
 {
 
-
-    public function collect()
-    {
-        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 2);
-    }
-
     /**
      * @return BelongsTo
      */

@@ -84,24 +84,7 @@ class SeedCollectionRepository extends BaseRepository
      */
     public function storeProject($input, $id)
     {
-        $input = $this->createOrUpdateProject($input);
-        $seed_collect = parent::update(Arr::except($input, ['project', 'collectors', 'date']), $id);
-//        $this->storeCollect($input, $seed_collect->id);
-
-        return $seed_collect;
-    }
-
-    /**
-     * @param $input
-     * @return mixed
-     * @throws ValidationException
-     */
-    private function createOrUpdateProject($input)
-    {
-        $input['project_id'] = !empty($input['project_id']) ?
-            $this->projectRepo->update($input['project'], $input['project_id'])->id :
-            $this->projectRepo->create($input['project'])->id;
-        return $input;
+        return parent::update($input, $id);
     }
 
     public function update($input, $id)
@@ -119,7 +102,7 @@ class SeedCollectionRepository extends BaseRepository
 
     public function getRelationFields()
     {
-        return ['location', 'organization.city', 'organization:id,name_en,city_id', 'landForm', 'taxonomy', 'project', 'collect', 'drainage', 'fruitType', 'habitat', 'usedPart', 'growthForm', 'lifeForm', 'consumption', 'motherHealth', 'pollinationAgent', 'pollinationType', 'collectedFrom', 'slopeAspect', 'soilDepth', 'soilErosion', 'soilLime', 'soilSalinity', 'soilTexture', 'specimenType', 'associatedSpecies', 'communityTypes', 'climates', 'media', 'floweringTime', 'harvestingTime'];
+        return ['location', 'organization.city', 'organization:id,name_en,city_id', 'landForm', 'taxonomy', 'project', 'drainage', 'fruitType', 'habitat', 'usedPart', 'growthForm', 'lifeForm', 'consumption', 'motherHealth', 'pollinationAgent', 'pollinationType', 'collectedFrom', 'slopeAspect', 'soilDepth', 'soilErosion', 'soilLime', 'soilSalinity', 'soilTexture', 'specimenType', 'associatedSpecies', 'communityTypes', 'climates', 'media', 'floweringTime', 'harvestingTime'];
     }
 
     public function storePlantFlowering($input, $id)
