@@ -39,7 +39,7 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
 //        'pollination_agent_id' => 'nullable|exists:seed_generals,id',
         'fruit_type_id' => 'nullable|exists:seed_generals,id',
         'date_harvesting_id' => 'nullable||exists:seed_generals,id',
-        'plant_height' => 'nullable|integer',
+        'plant_height' => 'nullable|string',
         'plant_mother_health_id' => 'nullable|exists:seed_generals,id',
         'plant_consumption_value_id' => 'nullable|exists:seed_generals,id',
 //        'general_used_part_id' => 'required|exists:seed_generals,id',
@@ -66,10 +66,10 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
     ];
     public static $projects = [
         'seed_collected_from_id' => 'nullable|exists:seed_generals,id',
-        'project.title' => 'nullable|string',
-        'project.project_no' => 'nullable|string',
-        'project.project_leader_name' => 'nullable|string',
-        'project.research_leader_name' => 'nullable|string',
+        'project_title' => 'nullable|string',
+        'project_no' => 'nullable|string',
+        'project_leader_name' => 'nullable|string',
+        'research_leader_name' => 'nullable|string',
         'organization_id' => 'nullable|exists:organizations,id',
     ];
 
