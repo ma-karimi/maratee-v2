@@ -7,18 +7,6 @@ use App\Models\Contracts\BaseModel;
 class SeedMorphologyField extends BaseModel
 {
     public static $rules = [
-        'green_house_id' => 'required|exists:green_houses,id',
+        'name' => 'required|string',
     ];
-
-    protected $with = ['greenHouse'];
-
-    public function greenHouse()
-    {
-        return $this->belongsTo(GreenHouse::class);
-    }
-
-    public function seedMorphology()
-    {
-        return $this->belongsTo(SeedMorphology::class);
-    }
 }

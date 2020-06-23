@@ -20,8 +20,6 @@ class AddProjectToSeedMorphologiesTable extends Migration
             $table->string('research_leader_name')->nullable();
             $table->string('project_no')->nullable();
             $table->string('research_no')->nullable();
-
-            $table->dropForeign(['project_id']);
         });
     }
 

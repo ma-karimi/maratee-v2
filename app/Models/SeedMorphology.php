@@ -7,7 +7,6 @@ use App\Models\Contracts\BaseModel;
 use App\Models\Scope\AuditScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -43,9 +42,9 @@ class SeedMorphology extends BaseModel implements HasMedia, AuditableContract
         return $this->belongsToMany(SeedGeneral::class, 'morphology_variables', 'seed_morphology_id')->withPivot('value')->whereNull('morphology_variables.deleted_at')->where('seed_generals.type_id', 27)->withTimestamps();
     }
 
-    public function field(): HasOne
+    public function field(): BelongsTo
     {
-        return $this->hasOne(SeedMorphologyField::class);
+        return $this->belongsTo(SeedMorphologyField::class, 'field_id');
     }
 
 

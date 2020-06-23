@@ -24,9 +24,9 @@ class CreateSeedMorphologiesTable extends Migration
             $table->string('accession_code')->nullable();
 
             $table->unsignedBigInteger('specimen_type_id');
+            $table->unsignedBigInteger('field_id')->nullable();
             $table->unsignedBigInteger('collection_id');
             $table->unsignedBigInteger('organization_id')->nullable();
-            $table->unsignedBigInteger('project_id')->nullable();
             $table->string('regeneration_code')->nullable();
 
             $table->string('department_name')->nullable();
@@ -45,7 +45,7 @@ class CreateSeedMorphologiesTable extends Migration
             $table->foreign('specimen_type_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('collection_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('project_id')->references('id')->on('projects')->onUpdate('NO ACTION')->onDelete('CASCADE');
+            $table->foreign('field_id')->references('id')->on('seed_morphology_fields')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
 
         Schema::create('morphology_variables', function (Blueprint $table) {

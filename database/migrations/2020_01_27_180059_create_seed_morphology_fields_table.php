@@ -22,8 +22,7 @@ class CreateSeedMorphologyFieldsTable extends Migration
         Schema::dropIfExists('stations');
         Schema::create('seed_morphology_fields', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('green_house_id');
-            $table->unsignedBigInteger('seed_morphology_id');
+            $table->string('name');
             $table->string('soil_ph')->nullable();
             $table->string('soil_ec')->nullable()->comment('ds/m');
             $table->string('soil_depth')->nullable()->comment('cm');
@@ -44,8 +43,6 @@ class CreateSeedMorphologyFieldsTable extends Migration
             $table->string('water_ec')->nullable()->comment('ds/m');
             $table->timeStamps();
             $table->softDeletesTz();
-            $table->foreign('green_house_id')->references('id')->on('green_houses')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('seed_morphology_id')->references('id')->on('seed_morphologies')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
 
     }

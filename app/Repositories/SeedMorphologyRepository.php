@@ -5,8 +5,6 @@ namespace App\Repositories;
 use App\Models\MorphologyVariable;
 use App\Models\SeedMorphology;
 use App\Models\SeedMorphologyField;
-use Exception;
-use Illuminate\Container\Container as Application;
 use Illuminate\Support\Arr;
 
 /**
@@ -22,22 +20,6 @@ class SeedMorphologyRepository extends BaseRepository
     protected $fieldSearchable = [
 
     ];
-    /**
-     * @var ProjectRepository
-     */
-    private $projectRepository;
-
-    /**
-     * BotanicalRepository constructor.
-     * @param Application $app
-     * @param ProjectRepository $projectRepository
-     * @throws Exception
-     */
-    public function __construct(Application $app, ProjectRepository $projectRepository)
-    {
-        parent::__construct($app);
-        $this->projectRepository = $projectRepository;
-    }
 
     /**
      * Return searchable fields
@@ -108,6 +90,12 @@ class SeedMorphologyRepository extends BaseRepository
         }
     }
 
+    /**
+     * @param array $input
+     * @param $seedMorphology
+     * @return mixed
+     * @deprecated
+     */
     public function storeField(array $input, $seedMorphology)
     {
 
