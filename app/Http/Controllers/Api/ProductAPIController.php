@@ -77,24 +77,24 @@ class ProductAPIController extends AppBaseController
             ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
             ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
             ['name' => 'code', 'title' => 'Code', 'value' => false],
-            ['name' => 'Number', 'title' => 'Number', 'value' => false],
-            ['name' => 'Product Name', 'title' => 'product', 'value' => false],
-            ['name' => 'Medicine Name', 'title' => 'medicine', 'value' => false],
-            ['name' => 'Company', 'title' => 'company', 'value' => false],
-            ['name' => 'Pharmaceutical', 'title' => 'pharmaceutical', 'value' => false],
-            ['name' => 'Consumption', 'title' => 'consumption', 'value' => false],
-            ['name' => 'Component', 'title' => 'component', 'value' => false],
-            ['name' => 'Compound', 'title' => 'compound', 'value' => false],
-            ['name' => 'Side Effects', 'title' => 'side_effect', 'value' => false],
+            ['name' => 'number', 'title' => 'Number', 'value' => false],
+            ['name' => 'product', 'title' => 'Product Name', 'value' => false],
+            ['name' => 'medicine', 'title' => 'Medicine Name', 'value' => false],
+            ['name' => 'company', 'title' => 'Company', 'value' => false],
+            ['name' => 'pharmaceutical', 'title' => 'Pharmaceutical', 'value' => false],
+            ['name' => 'consumption', 'title' => 'Consumption', 'value' => false],
+            ['name' => 'component', 'title' => 'Component', 'value' => false],
+            ['name' => 'compound', 'title' => 'Compound', 'value' => false],
+            ['name' => 'side_effect', 'title' => 'Side Effects', 'value' => false],
             ['name' => 'registration', 'title' => 'registration', 'value' => false],
         ];
         return $this->sendResponse(compact('products', 'keys'), 'Products retrieved successfully');
     }
 
     /**
-     * @param Request $request
      * @return Response
      *
+     * @throws Exception
      * @SWG\Get(
      *      path="/products/all",
      *      summary="Get a listing of the Products.",
@@ -122,7 +122,6 @@ class ProductAPIController extends AppBaseController
      *          )
      *      )
      * )
-     * @throws Exception
      */
     public function all()
     {
