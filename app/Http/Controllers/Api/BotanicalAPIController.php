@@ -72,7 +72,46 @@ class BotanicalAPIController extends AppBaseController
             $this->botanicalRepository->getRelationFields()
         );
 
-        return $this->sendResponse($botanicals->toArray(), 'Botanicals retrieved successfully');
+        $keys = [
+            ['name' => 'family', 'title' => 'Family', 'value' => false],
+            ['name' => 'genus', 'title' => 'Genus', 'value' => false],
+            ['name' => 'species', 'title' => 'Species', 'value' => false],
+            ['name' => 'subspecies', 'title' => 'SubSpecies', 'value' => false],
+            ['name' => 'variety', 'title' => 'Variety', 'value' => false],
+            ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
+            ['name' => 'local_name', 'title' => 'Local Name', 'value' => false],
+            ['name' => 'collection_name', 'title' => 'Collection', 'value' => false],
+            ['name' => 'origin', 'title' => 'Origin', 'value' => false],
+            ['name' => 'habitat', 'title' => 'Habitat', 'value' => false],
+            ['name' => 'place', 'title' => 'Place', 'value' => false],
+            ['name' => 'life_form', 'title' => 'Life Form', 'value' => false],
+            ['name' => 'status', 'title' => 'Conversation status', 'value' => false],
+            ['name' => 'height', 'title' => 'Height', 'value' => false],
+            ['name' => 'value', 'title' => 'Value', 'value' => false],
+            ['name' => 'usage', 'title' => 'Usage', 'value' => false],
+            ['name' => 'colors', 'title' => 'Colors', 'value' => false],
+            ['name' => 'garden', 'title' => 'Garden', 'value' => false],
+            ['name' => 'internal_habitat', 'title' => 'Internal Habitat', 'value' => false],
+            ['name' => 'entrance', 'title' => 'Entrance form', 'value' => false],
+            ['name' => 'seeding_planting', 'title' => 'Seeding/Planting', 'value' => false],
+            ['name' => 'transfer', 'title' => 'Transfer', 'value' => false],
+            ['name' => 'seed_germination', 'title' => 'Seed germination', 'value' => false],
+            ['name' => 'method', 'title' => 'Propagation method', 'value' => false],
+            ['name' => 'planting_date', 'title' => 'Date of planting', 'value' => false],
+            ['name' => 'cutting_rooting', 'title' => 'Percent of cutting rooting', 'value' => false],
+            ['name' => 'treatment', 'title' => 'Treatment', 'value' => false],
+            ['name' => 'growth_rate', 'title' => 'Growth rate', 'value' => false],
+            ['name' => 'first_flowering', 'title' => 'First flowering', 'value' => false],
+            ['name' => 'flowering_period', 'title' => 'Flowering period', 'value' => false],
+            ['name' => 'seed', 'title' => 'Seed', 'value' => false],
+            ['name' => 'tolerances', 'title' => 'Tolerances', 'value' => false],
+            ['name' => 'irrigation', 'title' => 'Irrigation', 'value' => false],
+            ['name' => 'soil', 'title' => 'Soil', 'value' => false],
+            ['name' => 'planting_condition', 'title' => 'Planting conditions', 'value' => false],
+            ['name' => 'sensitivity', 'title' => 'Sensitivity to the conditions', 'value' => false],
+            ['name' => 'comment', 'title' => 'Comments', 'value' => false],
+        ];
+        return $this->sendResponse(compact('botanicals', 'keys'), 'Botanicals retrieved successfully');
     }
 
     /**
