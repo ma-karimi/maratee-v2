@@ -19,10 +19,113 @@
 
 use App\Exports\ExcelExport;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
+Route::get('taxonomy-fix', function () {
+    DB::table('generals')
+        ->select('name', DB::raw('count(name)'), DB::raw('GROUP_CONCAT(`id` SEPARATOR ", ") as ids'), DB::raw('GROUP_CONCAT(`type` SEPARATOR ", ")'), DB::raw('Min(`id`) as primary_id'))
+        ->where('type', 'species')
+        ->groupBy('name')
+        ->havingRaw('count(name) > 1')
+        ->get()
+//        ->dd()
+        ->each(function ($data) {
+            $explode = explode(', ', $data->ids);
+            $items = collect($explode)->filter(function ($value, $key) use ($data) {
+                return $value != $data->primary_id;
+            })->all();
+
+            \App\Models\Taxonomy::whereIn('species_id', $explode)->select('id', 'species_id', 'updated_at')->update(['species_id' => $data->primary_id]);
+
+            DB::table('generals')->whereIn('id', $items)->delete();
+
+        }
+        );
+
+    DB::table('generals')
+        ->select('name', DB::raw('count(name)'), DB::raw('GROUP_CONCAT(`id` SEPARATOR ", ") as ids'), DB::raw('GROUP_CONCAT(`type` SEPARATOR ", ")'), DB::raw('Min(`id`) as primary_id'))
+        ->where('type', 'family')
+        ->groupBy('name')
+        ->havingRaw('count(name) > 1')
+        ->get()
+//        ->dd()
+        ->each(function ($data) {
+            $explode = explode(', ', $data->ids);
+            $items = collect($explode)->filter(function ($value, $key) use ($data) {
+                return $value != $data->primary_id;
+            })->all();
+
+            \App\Models\Taxonomy::whereIn('family_id', $explode)->select('id', 'family_id', 'updated_at')->update(['family_id' => $data->primary_id]);
+
+            DB::table('generals')->whereIn('id', $items)->delete();
+
+        }
+        );
+
+    DB::table('generals')
+        ->select('name', DB::raw('count(name)'), DB::raw('GROUP_CONCAT(`id` SEPARATOR ", ") as ids'), DB::raw('GROUP_CONCAT(`type` SEPARATOR ", ")'), DB::raw('Min(`id`) as primary_id'))
+        ->where('type', 'genus')
+        ->groupBy('name')
+        ->havingRaw('count(name) > 1')
+        ->get()
+//        ->dd()
+        ->each(function ($data) {
+            $explode = explode(', ', $data->ids);
+            $items = collect($explode)->filter(function ($value, $key) use ($data) {
+                return $value != $data->primary_id;
+            })->all();
+
+            \App\Models\Taxonomy::whereIn('genus_id', $explode)->select('id', 'genus_id', 'updated_at')->update(['genus_id' => $data->primary_id]);
+
+            DB::table('generals')->whereIn('id', $items)->delete();
+
+        }
+        );
+    DB::table('generals')
+        ->select('name', DB::raw('count(name)'), DB::raw('GROUP_CONCAT(`id` SEPARATOR ", ") as ids'), DB::raw('GROUP_CONCAT(`type` SEPARATOR ", ")'), DB::raw('Min(`id`) as primary_id'))
+        ->where('type', 'sub_species')
+        ->groupBy('name')
+        ->havingRaw('count(name) > 1')
+        ->get()
+//        ->dd()
+        ->each(function ($data) {
+            $explode = explode(', ', $data->ids);
+            $items = collect($explode)->filter(function ($value, $key) use ($data) {
+                return $value != $data->primary_id;
+            })->all();
+
+            \App\Models\Taxonomy::whereIn('subspecies_id', $explode)->select('id', 'subspecies_id', 'updated_at')->update(['subspecies_id' => $data->primary_id]);
+
+            DB::table('generals')->whereIn('id', $items)->delete();
+
+        }
+        );
+
+    DB::table('generals')
+        ->select('name', DB::raw('count(name)'), DB::raw('GROUP_CONCAT(`id` SEPARATOR ", ") as ids'), DB::raw('GROUP_CONCAT(`type` SEPARATOR ", ")'), DB::raw('Min(`id`) as primary_id'))
+        ->where('type', 'variety')
+        ->groupBy('name')
+        ->havingRaw('count(name) > 1')
+        ->get()
+//        ->dd()
+        ->each(function ($data) {
+            $explode = explode(', ', $data->ids);
+            $items = collect($explode)->filter(function ($value, $key) use ($data) {
+                return $value != $data->primary_id;
+            })->all();
+
+            \App\Models\Taxonomy::whereIn('variety_id', $explode)->select('id', 'variety_id', 'updated_at')->update(['variety_id' => $data->primary_id]);
+
+            DB::table('generals')->whereIn('id', $items)->delete();
+
+        }
+        );
+
+
+});
 
 Route::get('/paleo-fix', function () {
     \App\Models\PaleobotanyTaxonomy::all()->each(function ($query) {
