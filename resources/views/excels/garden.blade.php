@@ -164,8 +164,11 @@
                 <td style="{{$td}}">{{ $item['wooden']['name'] ?? null}}</td>
                 <td style="{{$td}}">{{ $item['cycle'] ?? null}}</td>
             @endif
-            @if($keys['status'] ?? false)
+            @if($keys['life_form'] ?? false)
                 <td style="{{$td}}">{{ $item['wooden']['name'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['cycle'] ?? null}}</td>
+            @endif
+            @if($keys['status'] ?? false)
                 <td style="{{$td}}">{{ $item['protection']['name']['en'] ?? null}}</td>
             @endif
             @if($keys['height'] ?? false)
@@ -190,7 +193,7 @@
             @endif
             @if($keys['entrance'] ?? false)
                 <td style="{{$td}}">{{ $item['garden']['entrance'] ?? null}}
-                    | {{ $item['internal_habitat']['entrance'] ?? null}}</td>
+                    {{$item['garden']['entrance'] && $item['internal_habitat']['entrance'] ? ' | ' : null}}{{ $item['internal_habitat']['entrance'] ?? null}}</td>
             @endif
             @if($keys['seeding_planting'] ?? false)
                 <td style="{{$td}}">{{ $item['planting']['place']['name_en'] ?? null}}</td>
