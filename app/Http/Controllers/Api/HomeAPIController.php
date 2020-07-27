@@ -42,7 +42,8 @@ class HomeAPIController extends AppBaseController
 
     public function index(Request $request)
     {
-
+        ini_set('max_execution_time', 3000);
+        ini_set('memory_limit', '3000M');
         $data = [];
         $data['loaded'] = false;
         if (collect($request->all())->filter()->count() > 0) {

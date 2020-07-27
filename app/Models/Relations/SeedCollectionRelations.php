@@ -8,7 +8,6 @@ use App\Models\General;
 use App\Models\Location;
 use App\Models\Organization;
 use App\Models\Project;
-use App\Models\Seed;
 use App\Models\SeedGeneral;
 use App\Models\Taxonomy;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -235,7 +234,9 @@ trait SeedCollectionRelations
      */
     public function climates(): BelongsToMany
     {
-        return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')->where('seed_generals.type_id', 20)->latest()->withTimestamps();
+        return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')
+            ->whereNull('seed_general_collections.deleted_at')
+            ->where('seed_generals.type_id', 20)->latest()->withTimestamps();
     }
 
     public function getAssociatedSpecieAttribute()

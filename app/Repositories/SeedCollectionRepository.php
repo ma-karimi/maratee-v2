@@ -38,18 +38,13 @@ class SeedCollectionRepository extends BaseRepository
      * @var LocationRepository
      */
     private $locationRepo;
-    /**
-     * @var ProjectRepository
-     */
-    private $projectRepo;
 
-    public function __construct(Application $app, ActionHub $actionHubRepo, ActorHub $actorHubRepo, LocationRepository $locationRepo, ProjectRepository $projectRepo)
+    public function __construct(Application $app, ActionHub $actionHubRepo, ActorHub $actorHubRepo, LocationRepository $locationRepo)
     {
         parent::__construct($app);
         $this->actionHubRepo = $actionHubRepo;
         $this->actorHubRepo = $actorHubRepo;
         $this->locationRepo = $locationRepo;
-        $this->projectRepo = $projectRepo;
     }
 
     /**
@@ -118,9 +113,9 @@ class SeedCollectionRepository extends BaseRepository
     public function storeClimate($input, $id)
     {
         $seed_collection = parent::update(Arr::except($input, ['climates', 'community_types', 'associated_species']), $id);
-        $this->storePivot($input['climates'], $seed_collection->id, 20);
-        $this->storePivot($input['community_types'], $seed_collection->id, 21);
-        $this->storePivot($input['associated_species'], $seed_collection->id, 22);
+        $this->storePivot(is_array($input['climates']) ? $input['climates'] : [], $seed_collection->id, 20);
+        $this->storePivot(is_array($input['community_types']) ? $input['community_types'] : [], $seed_collection->id, 21);
+        $this->storePivot(is_array($input['associated_species']) ? $input['associated_species'] : [], $seed_collection->id, 22);
         return $seed_collection;
     }
 
