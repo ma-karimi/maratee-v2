@@ -167,7 +167,7 @@ class CountryAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Country $country */
-        $country = $this->countryRepository->find($id, \request()->get('relations'));
+        $country = $this->countryRepository->find($id, ['provinces.cities']);
 
         if (empty($country)) {
             return $this->sendError('Country not found');

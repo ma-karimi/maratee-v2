@@ -3,11 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
-use App\Models\Actor;
-use App\Models\General;
-use App\Models\NonflowerGeneral;
-use App\Models\PaleobotanyGeneral;
-use Exception;
 use Illuminate\Http\Request;
 use Response;
 
@@ -46,17 +41,15 @@ class HomeAPIController extends AppBaseController
         ini_set('memory_limit', '3000M');
         $data = [];
         $data['loaded'] = false;
-        if (collect($request->all())->filter()->count() > 0) {
 
-            foreach ($this->classes as $index => $repository) {
-                $class = resolve('App\Repositories\\' . $repository);
-                $data[$index] = $class
-                    ->all([], null, null, $class->getRelationFields());
+        foreach ($this->classes as $index => $repository) {
+            $class = resolve('App\Repositories\\' . $repository);
+            $data[$index] = $class
+                ->all([], null, null, $class->getRelationFields());
 
-                $data['loaded'] = true;
-            }
-
+            $data['loaded'] = true;
         }
+
 
         return $this->sendResponse($data, 'Data retrieved successfully');
     }

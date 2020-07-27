@@ -126,6 +126,29 @@ Route::get('taxonomy-fix', function () {
 
 
 });
+Route::get('city-fix', function () {
+    DB::table('cities')
+        ->select('name_en', DB::raw('count(name_en)'), DB::raw('GROUP_CONCAT(`id` SEPARATOR ", ") as ids'),DB::raw('GROUP_CONCAT(`province_id` SEPARATOR ", ") as provinces'),  DB::raw('Min(`id`) as primary_id'))
+        ->groupBy('name_en')
+//        ->groupBy('province_id')
+        ->havingRaw('count(name_en) > 1')
+        ->get()
+        ->dd()
+        ->each(function ($data) {
+            $explode = explode(', ', $data->ids);
+            $items = collect($explode)->filter(function ($value, $key) use ($data) {
+                return $value != $data->primary_id;
+            })->all();
+
+            \App\Models\Taxonomy::whereIn('species_id', $explode)->select('id', 'species_id', 'updated_at')->update(['species_id' => $data->primary_id]);
+
+            DB::table('generals')->whereIn('id', $items)->delete();
+
+        }
+        );
+
+
+});
 
 Route::get('/paleo-fix', function () {
     \App\Models\PaleobotanyTaxonomy::all()->each(function ($query) {

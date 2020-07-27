@@ -26,7 +26,7 @@ class Province extends BaseModel
      */
     protected $table = 'provinces';
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
-    protected $with = ['cities'];
+//    protected $with = ['cities'];
 
     /**
      * @return BelongsTo

@@ -50,7 +50,7 @@ class Location extends BaseModel
 
     protected $with = ['city', 'province', 'country'];
 
-    protected $appends = ['address', 'longitudeSecond', 'longitudeMinute', 'longitudeDegree', 'latitudeSecond', 'latitudeMinute', 'latitudeDegree', 'longitude', 'latitude', 'cities', 'provinces'];
+    protected $appends = ['address', 'longitudeSecond', 'longitudeMinute', 'longitudeDegree', 'latitudeSecond', 'latitudeMinute', 'latitudeDegree', 'longitude', 'latitude'];
 
     /**
      * @return HasMany
@@ -150,17 +150,17 @@ class Location extends BaseModel
 
     public function getProvincesAttribute()
     {
-        if (!empty($this->country_id)) {
-            return Province::where('country_id', $this->country_id)->get();
-        }
+//        if (!empty($this->country_id)) {
+//            return Province::where('country_id', $this->country_id)->get();
+//        }
         return [];
     }
 
     public function getCitiesAttribute()
     {
-        if (!empty($this->province_id)) {
-            return City::where('province_id', $this->province_id)->get();
-        }
+//        if (!empty($this->province_id)) {
+//            return City::where('province_id', $this->province_id)->get();
+//        }
         return [];
     }
 }
