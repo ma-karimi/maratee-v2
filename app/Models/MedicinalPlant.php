@@ -28,7 +28,7 @@ class MedicinalPlant extends BaseModel implements HasMedia, AuditableContract
     public const WOODEN = [1 => 'Tree', 2 => 'Shrubs', 3 => 'Bush'];
 
     public static $rules = [
-        'taxonomy_id' => 'required|exists:taxonomies,id',
+        'taxonomy_id' => 'required|exists:taxonomies,id|unique:medicinal_plants',
         'ground_part_id' => 'nullable|exists:medicinal_parts,id',
         'general_origin_id' => 'nullable|exists:generals,id',
 

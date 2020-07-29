@@ -126,6 +126,33 @@ Route::get('taxonomy-fix', function () {
 
 
 });
+Route::get('medicinal-fix', function () {
+    DB::table('medicinal_plants')
+        ->select('taxonomy_id', DB::raw('count(taxonomy_id)'),
+            DB::raw('GROUP_CONCAT(`id` SEPARATOR ", ") as ids'),
+            DB::raw('GROUP_CONCAT(DISTINCT `properties_description` SEPARATOR ", ") as properties_description'),
+            DB::raw('GROUP_CONCAT(DISTINCT `compounds` SEPARATOR ", ") as compounds'),
+            DB::raw('Min(`id`) as primary_id'))
+        ->groupBy('taxonomy_id')
+        ->havingRaw('count(taxonomy_id) > 1')
+        ->get()
+//        ->dd()
+        ->each(function ($data) {
+
+            $explode = explode(', ', $data->ids);
+            $items = collect($explode)->filter(function ($value, $key) use ($data) {
+                return $value != $data->primary_id;
+            })->all();
+
+            \App\Models\MedicinalHub::whereIn('medicinal_plant_id', $items)->update(['medicinal_plant_id'=>$data->primary_id]);
+
+
+            DB::table('medicinal_plants')->where('id', $data->primary_id)->update(['compounds'=>$data->compounds, 'properties_description'=>$data->properties_description]);
+            DB::table('medicinal_plants')->whereIn('id', $items)->delete();
+        }
+        );
+
+});
 Route::get('city-fix', function () {
     DB::table('cities')
         ->select('name_en', DB::raw('count(name_en)'), DB::raw('GROUP_CONCAT(`id` SEPARATOR ", ") as ids'),DB::raw('GROUP_CONCAT(`province_id` SEPARATOR ", ") as provinces'),  DB::raw('Min(`id`) as primary_id'))
