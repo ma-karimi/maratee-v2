@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\Api\MedicinalPlant\MedicinalPlantAPIRequest;
+use App\Http\Requests\Api\MedicinalPlant\StoreMedicinalPlantAPIRequest;
+use App\Http\Requests\Api\MedicinalPlant\UpdateMedicinalPlantAPIRequest;
 use App\Models\MedicinalPlant;
 use App\Repositories\MedicinalPlantRepository;
 use Exception;
@@ -89,7 +90,7 @@ class MedicinalPlantAPIController extends AppBaseController
 
 
     /**
-     * @param MedicinalPlantAPIRequest $request
+     * @param StoreMedicinalPlantAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -168,7 +169,7 @@ class MedicinalPlantAPIController extends AppBaseController
      * )
      * @throws ValidationException
      */
-    public function store(MedicinalPlantAPIRequest $request)
+    public function store(StoreMedicinalPlantAPIRequest $request)
     {
         $input = $request->all();
 
@@ -229,7 +230,7 @@ class MedicinalPlantAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param MedicinalPlantAPIRequest $request
+     * @param StoreMedicinalPlantAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
@@ -315,7 +316,7 @@ class MedicinalPlantAPIController extends AppBaseController
      * )
      * @throws ValidationException
      */
-    public function update(MedicinalPlantAPIRequest $request, $id)
+    public function update(UpdateMedicinalPlantAPIRequest $request, $id)
     {
         $input = $request->all();
 

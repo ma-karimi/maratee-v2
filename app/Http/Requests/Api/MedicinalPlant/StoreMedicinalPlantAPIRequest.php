@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api\MedicinalPlant;
 use App\Models\MedicinalPlant;
 use InfyOm\Generator\Request\APIRequest;
 
-class MedicinalPlantAPIRequest extends APIRequest
+class StoreMedicinalPlantAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
