@@ -96,7 +96,7 @@ class PlantRepository extends BaseRepository
      */
     public function getRelationFields(): array
     {
-        return ['phytogeographics', 'taxonomy', 'protection', 'locations', 'media', 'geographicals', 'iranGeographicals', 'directionGeographicals'];
+        return ['phytogeographics', 'taxonomy', 'protection', 'media', 'geographicals', 'iranGeographicals', 'directionGeographicals'];
     }
 
     /**
