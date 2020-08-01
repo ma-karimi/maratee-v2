@@ -9,8 +9,6 @@ use App\Models\Relations\{ActionRelation, ArticleRelation};
 use App\Models\Scope\PlantScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -30,7 +28,7 @@ class Plant extends BaseModel implements HasMedia, AuditableContract
 
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
     protected $with = ['audits'];
-    protected $appends = ['monopoly_of_iran', 'plant_geographicals','plant_phytogeographics', 'iran_plant_geographicals','iran_direction_geographicals',  'life_form', 'last_audit'];
+    protected $appends = ['monopoly_of_iran', 'plant_geographicals', 'plant_phytogeographics', 'iran_plant_geographicals', 'iran_direction_geographicals', 'life_form', 'last_audit'];
     /**
      * The database table used by the model.
      *
@@ -42,15 +40,15 @@ class Plant extends BaseModel implements HasMedia, AuditableContract
     {
         return $this->belongsTo(Taxonomy::class)->withTrashed();
     }
+//
+//    public function locations(): MorphToMany
+//    {
+//        return $this->morphToMany(Location::class, 'locationable', 'location_hubs')
+//            ->whereNull('location_hubs.deleted_at')
+//            ->withTimestamps();
+//    }
 
-    public function locations(): MorphToMany
-    {
-        return $this->morphToMany(Location::class, 'locationable', 'location_hubs')
-            ->whereNull('location_hubs.deleted_at')
-            ->withTimestamps();
-    }
-
-    public function protection()
+    public function protection(): BelongsTo
     {
         return $this->belongsTo(Protection::class);
     }
