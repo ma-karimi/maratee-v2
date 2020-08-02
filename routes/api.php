@@ -105,12 +105,6 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('nonflowers/{id}/media', 'NonflowerAPIController@media');
     Route::apiResource('nonflowers', 'NonflowerAPIController')->except('destroy');
 
-    Route::apiResource('articles', 'ArticleAPIController');
-
-    Route::apiResource('article_hubs', 'ArticleHubAPIController');
-
-    Route::apiResource('evaluations', 'EvaluationAPIController');
-
     Route::get('actors/all', 'ActorAPIController@all');
     Route::apiResource('actors', 'ActorAPIController');
 
@@ -170,10 +164,6 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::apiResource('permissions', 'PermissionAPIController');
 
-    Route::apiResource('germinations', 'GerminationAPIController');
-
-    Route::apiResource('repeats', 'RepeatAPIController');
-
     Route::get('places/all', 'PlaceAPIController@all');
     Route::apiResource('places', 'PlaceAPIController');
 
@@ -198,8 +188,6 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('nonflower_taxonomies/all', 'NonflowerTaxonomyAPIController@all');
     Route::apiResource('nonflower_taxonomies', 'NonflowerTaxonomyAPIController')->except('destroy');
 
-
-    Route::apiResource('planting_conditions', 'PlantingConditionAPIController');
 
 //CryoBank action
     Route::post('cryo_banks/{id}/determine', 'CryoBankAPIController@storeDetermine');
