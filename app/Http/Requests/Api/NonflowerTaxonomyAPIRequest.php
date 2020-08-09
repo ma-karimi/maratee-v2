@@ -3,8 +3,6 @@
 namespace App\Http\Requests\Api;
 
 use App\Models\NonflowerTaxonomy;
-use App\Models\Taxonomy;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use InfyOm\Generator\Request\APIRequest;
 
