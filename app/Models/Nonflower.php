@@ -29,7 +29,7 @@ class Nonflower extends BaseModel implements HasMedia, AuditableContract
 
     public static $rules = [
         'location_id' => 'nullable|exists:locations,id',
-        'taxonomy_id' => 'nullable|exists:taxonomies,id',
+        'taxonomy_id' => 'nullable|exists:nonflower_taxonomies,id',
         'herbarium_number' => 'nullable|string',
         'description' => 'nullable|string',
         'country_id' => 'required|exists:countries,id',
