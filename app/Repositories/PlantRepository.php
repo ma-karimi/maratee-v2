@@ -60,6 +60,8 @@ class PlantRepository extends BaseRepository
 
     public function create($input)
     {
+        $input['life_forms'] = $this->setFilterAttribute($input['life_forms']);
+        $input['phytogeographics'] = $this->setFilterAttribute($input['phytogeographics']);
         $plant = $this->createPlant($input);
 
         $this->storeRelations($plant, $input);
@@ -79,7 +81,9 @@ class PlantRepository extends BaseRepository
             'description' => $input['description'] ?? null,
             'habitat_description' => $input['habitat_description'] ?? null,
             'ecology_description' => $input['ecology_description'] ?? null,
-            'life_form_id' => $input['life_form_id'] ?? null,
+//            'life_form_id' => $input['life_form_id'] ?? null,
+            'life_forms' => $input['life_forms'] ?? null,
+            'phytogeographics' => $input['phytogeographics'] ?? null,
 //            'is_flowering' => $input['is_flowering'] ?? 1,
             'flowering_time' => $input['flowering_time'] ?? null,
             'number' => $input['number'] ?? null,
@@ -96,7 +100,7 @@ class PlantRepository extends BaseRepository
      */
     public function getRelationFields(): array
     {
-        return ['phytogeographics', 'taxonomy', 'protection', 'media', 'geographicals', 'iranGeographicals', 'directionGeographicals'];
+        return ['taxonomy', 'protection', 'media', 'geographicals', 'iranGeographicals', 'directionGeographicals'];
     }
 
     /**
@@ -154,18 +158,23 @@ class PlantRepository extends BaseRepository
 
     public function update($input, $id)
     {
+        $input['life_forms'] = $this->setFilterAttribute($input['life_forms']);
+        $input['phytogeographics'] = $this->setFilterAttribute($input['phytogeographics']);
+
         $plant_input = [
             'taxonomy_id' => $input['taxonomy_id'],
             'protection_id' => $input['protection_id'] ?? null,
-            'general_phytogeography_id' => $input['general_phytogeography_id'],
+//            'general_phytogeography_id' => $input['general_phytogeography_id'],
             'general_origin_id' => $input['general_origin_id'] ?? null,
+            'phytogeographics' => $input['phytogeographics'] ?? null,
             'description' => $input['description'] ?? null,
             'habitat_description' => $input['habitat_description'] ?? null,
             'ecology_description' => $input['ecology_description'] ?? null,
             'flowering_time' => $input['flowering_time'] ?? null,
             'number' => $input['number'] ?? null,
             'monopoly_of_iran_id' => $input['monopoly_of_iran_id'] ?? null,
-            'life_form_id' => $input['life_form_id'] ?? null,
+//            'life_form_id' => $input['life_form_id'] ?? null,
+            'life_forms' => $input['life_forms'] ?? null,
             'n_no' => $input['n_no'] ?? null,
             'n2_no' => $input['n2_no'] ?? null,
         ];
@@ -185,7 +194,16 @@ class PlantRepository extends BaseRepository
         $this->createHub($plant->id, 'geographicals', request()->filled('geographicals') ? $input['geographicals'] : []);
         $this->createHub($plant->id, 'iranGeographicals', request()->filled('iran_geographicals') ? $input['iran_geographicals'] : []);
         $this->createHub($plant->id, 'directionGeographicals', request()->filled('direction_geographicals') ? $input['direction_geographicals'] : []);
-        $this->createHub($plant->id, 'phytogeographics', request()->filled('phytogeographics') ? $input['phytogeographics'] : []);
+//        $this->createHub($plant->id, 'phytogeographics', request()->filled('phytogeographics') ? $input['phytogeographics'] : []);
+    }
+
+    /**
+     * @param $input
+     * @return mixed
+     */
+    private function setFilterAttribute($input)
+    {
+        return collect($input)->filter()->all();
     }
 
 

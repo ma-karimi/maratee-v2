@@ -28,14 +28,15 @@ trait PlantAccessor
         }
         return $distributions;
     }
+
     public function getPlantPhytogeographicsAttribute()
     {
-        $record = null;
+        $text = null;
 
-        if ($this->relationLoaded('phytogeographics') && $this->phytogeographics->count()) {
-            $record .= $this->phytogeographics->implode('name', ' & ');
+        if (!empty($this->phytogeographics) && count($this->phytogeographics)) {
+            $text .= collect($this->phytogeographics)->implode('name', ' & ');
         }
-        return $record;
+        return $text;
     }
 
     public function getIranPlantGeographicalsAttribute()
@@ -60,6 +61,16 @@ trait PlantAccessor
 
     public function getLifeFormAttribute()
     {
-        return !empty($this->attributes['life_form_id']) ? Arr::get(self::LIFE_FORM, $this->attributes['life_form_id']) : null;
+        $text = null;
+
+        if (!empty($this->life_forms) && count($this->life_forms)) {
+            $text .= collect($this->life_forms)->implode('name', ' & ');
+        }
+        return $text;
+    }
+
+    public function getLifeAttribute()
+    {
+        return collect(self::LIFE_FORM)->firstWhere('id', $this->attributes['life_form_id']);
     }
 }

@@ -24,10 +24,11 @@ class Plant extends BaseModel implements HasMedia, AuditableContract
 {
     use PlantScope, PlantAccessor, ActionRelation, ArticleRelation, HasMediaTrait, Auditable, AuditTrait;
 
-    public const LIFE_FORM = [1 => 'annual', 2 => 'perennial', 3 => 'tree', 4 => 'shrubs'];
+    public const LIFE_FORM = [['id' => "1", 'name' => 'annual'], ['id' => "2", 'name' => 'perennial'], ['id' => "3", 'name' => 'tree'], ['id' => "4", 'name' => 'shrubs']];
 
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
     protected $with = ['audits'];
+    protected $casts = ['life_forms' => 'json', 'phytogeographics' => 'json'];
     protected $appends = ['monopoly_of_iran', 'plant_geographicals', 'plant_phytogeographics', 'iran_plant_geographicals', 'iran_direction_geographicals', 'life_form', 'last_audit'];
     /**
      * The database table used by the model.
@@ -57,7 +58,7 @@ class Plant extends BaseModel implements HasMedia, AuditableContract
 //    {
 //        return $this->belongsTo(General::class, 'general_phytogeography_id');
 //    }
-    public function phytogeographics(): BelongsToMany
+    public function phytogeographic(): BelongsToMany
     {
         return $this->belongsToMany(General::class, 'plant_phytogeographics')
             ->whereNull('plant_phytogeographics.deleted_at')

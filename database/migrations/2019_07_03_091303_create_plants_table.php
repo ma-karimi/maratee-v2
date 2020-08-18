@@ -31,6 +31,8 @@ class CreatePlantsTable extends Migration
             //$table->json('life_forms')->comment('life_form_leaf_id, life_form_cycle_id, life_form_wooden_id, life_form_herbaceous_id')->nullable();
             $table->text('habitat_description')->nullable();
             $table->text('ecology_description')->nullable();
+            $table->json('phytogeographics')->nullable();
+            $table->json('life_forms')->nullable();
             $table->string('flowering_time')->nullable();
 
             $table->unsignedBigInteger('protection_id')->nullable();

@@ -24,6 +24,22 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
+//dd(\App\Models\Plant::whereNotNull('life_form_id')->first()->life_form);
+
+Route::get('plant-form', function () {
+    $plants = \App\Models\Plant::all()->each(function ($data) {
+        if($data->life_form_id){
+        $life_forms = $phytogeographics = [];
+        $life_forms[] = $data->life;
+        $data->life_forms = $life_forms;
+        }
+//        $phytogeographics[]= $data->phytogeographic;
+        $data->phytogeographics = $data->phytogeographic()->count() ? collect($data->phytogeographic)->map(function ($item, $key) {
+            return ['id' => (string) $item['id'], 'name' => $item['name']];
+        })->all() : null;
+        $data->save();
+    });
+});
 Route::get('nonflower-general-fix', function () {
     DB::table('nonflower_generals')
         ->select('name', DB::raw('count(name)'), DB::raw('GROUP_CONCAT(`id` SEPARATOR ", ") as ids'), DB::raw('GROUP_CONCAT(`type` SEPARATOR ", ")'), DB::raw('Min(`id`) as primary_id'))
@@ -246,10 +262,10 @@ Route::get('medicinal-fix', function () {
                 return $value != $data->primary_id;
             })->all();
 
-            \App\Models\MedicinalHub::whereIn('medicinal_plant_id', $items)->update(['medicinal_plant_id'=>$data->primary_id]);
+            \App\Models\MedicinalHub::whereIn('medicinal_plant_id', $items)->update(['medicinal_plant_id' => $data->primary_id]);
 
 
-            DB::table('medicinal_plants')->where('id', $data->primary_id)->update(['compounds'=>$data->compounds, 'properties_description'=>$data->properties_description]);
+            DB::table('medicinal_plants')->where('id', $data->primary_id)->update(['compounds' => $data->compounds, 'properties_description' => $data->properties_description]);
             DB::table('medicinal_plants')->whereIn('id', $items)->delete();
         }
         );
@@ -257,7 +273,7 @@ Route::get('medicinal-fix', function () {
 });
 Route::get('city-fix', function () {
     DB::table('cities')
-        ->select('name_en', DB::raw('count(name_en)'), DB::raw('GROUP_CONCAT(`id` SEPARATOR ", ") as ids'),DB::raw('GROUP_CONCAT(`province_id` SEPARATOR ", ") as provinces'),  DB::raw('Min(`id`) as primary_id'))
+        ->select('name_en', DB::raw('count(name_en)'), DB::raw('GROUP_CONCAT(`id` SEPARATOR ", ") as ids'), DB::raw('GROUP_CONCAT(`province_id` SEPARATOR ", ") as provinces'), DB::raw('Min(`id`) as primary_id'))
         ->groupBy('name_en')
 //        ->groupBy('province_id')
         ->havingRaw('count(name_en) > 1')

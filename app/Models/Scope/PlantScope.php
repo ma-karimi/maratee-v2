@@ -9,39 +9,53 @@
 namespace App\Models\Scope;
 
 
-use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Builder;
 use Jedrzej\Searchable\Constraint;
-use League\Geotools\Coordinate\Coordinate;
 
 trait PlantScope
 {
 
-    protected function processTaxonomy_Authors_IdFilter(Builder $builder, Constraint $constraint)
+    protected function processTaxonomy_AuthorsFilter(Builder $builder, Constraint $constraint)
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
             $builder->whereHas('taxonomy', function ($query) use ($constraint) {
                 return $query
-                    ->whereHas('species', function ($key) use ($constraint) {
-                        return $key->whereHas('authors', function ($author) use ($constraint) {
-                            return $author->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
-                        });
-                    })
-                    ->orWhereHas('subspecies', function ($key) use ($constraint) {
-                        return $key->whereHas('authors', function ($author) use ($constraint) {
-                            return $author->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
-                        });
-                    })
-                    ->orWhereHas('variety', function ($key) use ($constraint) {
-                        return $key->whereHas('authors', function ($author) use ($constraint) {
-                            return $author->where('actor_hubs.actor_id', $constraint->getOperator(), $constraint->getValue());
-                        });
-                    });
+                    ->where('species_authors', $constraint->getOperator(), $constraint->getValue())
+                    ->orWhere('subspecies_authors', $constraint->getOperator(), $constraint->getValue())
+                    ->where('variety_authors', $constraint->getOperator(), $constraint->getValue());
 
             });
 
             return true;
         }
+        return false;
+    }
+
+    protected function processPhytogeographicsFilter(Builder $builder, Constraint $constraint)
+    {
+        // this logic should happen for LIKE/EQUAL operators only
+
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereJsonContains('phytogeographics', ['id' => $constraint->getValue()]);
+
+            return true;
+        }
+
+        // default logic should be executed otherwise
+        return false;
+    }
+
+    protected function processlifeFormsFilter(Builder $builder, Constraint $constraint)
+    {
+        // this logic should happen for LIKE/EQUAL operators only
+
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->whereJsonContains('life_forms', ['id' => $constraint->getValue()]);
+
+            return true;
+        }
+
+        // default logic should be executed otherwise
         return false;
     }
 
