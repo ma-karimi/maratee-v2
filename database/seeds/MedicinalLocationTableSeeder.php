@@ -16,6 +16,9 @@ class MedicinalLocationTableSeeder extends Seeder
      */
     public function run()
     {
+
+        ini_set('max_execution_time', 9000);
+        ini_set('memory_limit', '-1');
 //        Excel::import(new MedicinalLocationImport(), public_path('/excels/MedicinalLocation.xlsx'));
         Excel::import(new MedicinalLocationImport(), public_path('/excels/99-05-7-new-Final-Medicinal-Plant.xlsx'));
 
