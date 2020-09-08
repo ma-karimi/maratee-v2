@@ -33,6 +33,8 @@ class ExcelExport implements FromView, ShouldAutoSize
 
     public function view(): View
     {
+        ini_set('max_execution_time', 9000);
+        ini_set('memory_limit', '-1');
         $result = $this->result;
         $model = $this->model;
         return view("excels.${model}", ['result' => $result, 'keys' => \request('keys')]);
