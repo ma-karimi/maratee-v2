@@ -30,9 +30,8 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
         ini_set('max_execution_time', 9000);
 //        ini_set('memory_limit', '2000M');
         $row = $row->toArray();
-        if (!empty($row)) {
+        if (!empty($row) && !empty($row['genus'])) {
             $row = $this->storeTaxonomy($row);
-
             $row = $this->createLocation($row);
             $row = $this->storeAnalyse($row);
             $row = $this->storeExtract($row);
@@ -50,52 +49,35 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
 
     private function storeTaxonomy($row)
     {
+
         $row['family_id'] = General::firstOrCreate(['name' => trim($row['family']), 'type' => 'family'])->id;
         $row['genus_id'] = General::firstOrCreate(['name' => trim($row['genus']), 'type' => 'genus'])->id;
 
         // species
         if (!empty($row['species'])) {
-            $row['species_id'] = $this->firstOrCreateSpecies($row);
+            $row = $this->firstOrCreateSpecies($row);
         }
         // subspecies
         if (!empty($row['subspecies'])) {
-            $row['subspecies_id'] = $this->firstOrCreateSubSpecies($row);
+            $row = $this->firstOrCreateSubSpecies($row);
         }
         // variety
         if (!empty($row['variety'])) {
-            $row['variety_id'] = $this->firstOrCreateVariety($row);
+            $row = $this->firstOrCreateVariety($row);
         }
         // taxonomy
         $row['taxonomy_id'] = Taxonomy::firstOrCreate($this->taxonomyData($row))->id;
-
         return $row;
     }
 
     private function firstOrCreateSpecies($row)
     {
         $data = $this->speciesData($row);
-        $species = General::where($data['species_data'])->get();
-        if (count($species) == 0) {
-            $specie_id = General::create($data['species_data'])->id;
-            if (count($data['species_authors'])) {
-                $this->firstOrCreateActorAndActorHub($specie_id, $data['species_authors']);
-            }
-        } else {
-            foreach ($species as $item) {
-                $species_authors = collect($item->authors)->pluck('name')->all();
-                $diff = collect($data['species_authors'])->diff($species_authors)->all();
-                if (count($diff) <= 0) {
-                    return $item->id;
-                }
-            }
-            $specie_id = General::create($data['species_data'])->id;
-            if (count($data['species_authors'])) {
-                $this->firstOrCreateActorAndActorHub($specie_id, $data['species_authors']);
-            }
+        $species = General::firstOrCreate($data['species_data']);
+        $row['species_id'] = $species->id;
+        $row['species_authors'] = $data['species_authors'];
 
-        }
-
-        return $specie_id;
+        return $row;
     }
 
     private function speciesData($row)
@@ -123,10 +105,10 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
             $authors = str_replace('-', ' & ', $authors);
             $authors = str_replace(' -', ' & ', $authors);
             $authors = str_replace('- ', ' & ', $authors);
-            $array[$model . '_authors'] = collect(array_unique(explode(' & ', $authors)))->filter()->all();
+            $array[$model . '_authors'] = $authors;
         } else {
             $array[$model] = trim($property);
-            $array[$model . '_authors'] = [];
+            $array[$model . '_authors'] = null;
         }
 
         return $array;
@@ -134,58 +116,14 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
 
     }
 
-    /**
-     * @param $general_id
-     * @param $authors
-     * @return void
-     */
-    private function firstOrCreateActorAndActorHub($general_id, $authors)
-    {
-        if (count($authors)) {
-            foreach ($authors as $author) {
-                $author = Actor::firstOrCreate(['name' => $author]);
-                $this->setActorHub($author, $general_id);
-            }
-        }
-    }
-
-    /**
-     * @param $author
-     * @param $general
-     */
-    private function setActorHub($author, $general_id): void
-    {
-        ActorHub::firstOrCreate([
-            'actor_id' => $author->id,
-            'actorable_id' => $general_id,
-            'actorable_type' => General::class,
-        ]);
-    }
-
     private function firstOrCreateSubSpecies($row)
     {
         $data = $this->subspeciesData($row);
-        $subspecies = General::where($data['subspecies_data'])->get();
-        if (count($subspecies) == 0) {
-            $subspecies_id = General::create($data['subspecies_data'])->id;
-            if (count($data['subspecies_authors'])) {
-                $this->firstOrCreateActorAndActorHub($subspecies_id, $data['subspecies_authors']);
-            }
-        } else {
-            foreach ($subspecies as $item) {
-                $subspecies_authors = collect($item->authors)->pluck('name')->all();
-                $diff = collect($data['subspecies_authors'])->diff($subspecies_authors)->all();
+        $subspecies = General::firstOrCreate($data['subspecies_data']);
+        $row['subspecies_id'] = $subspecies->id;
+        $row['subspecies_authors'] = $data['subspecies_authors'];
 
-                if (count($diff) <= 0) {
-                    return $item->id;
-                }
-            }
-            $subspecies_id = General::create($data['subspecies_data'])->id;
-            if (count($data['subspecies_authors'])) {
-                $this->firstOrCreateActorAndActorHub($subspecies_id, $data['subspecies_authors']);
-            }
-        }
-        return $subspecies_id;
+        return $row;
     }
 
     private function subspeciesData($row)
@@ -202,29 +140,11 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
     private function firstOrCreateVariety($row)
     {
         $data = $this->varietyData($row);
-        $variety = General::where($data['variety_data'])->get();
-        if (count($variety) == 0) {
+        $variety = General::firstOrCreate($data['variety_data']);
+        $row['variety_id'] = $variety->id;
+        $row['variety_authors'] = $data['variety_authors'];
 
-            $variety_id = General::create($data['variety_data'])->id;
-            if (count($data['variety_authors'])) {
-                $this->firstOrCreateActorAndActorHub($variety_id, $data['variety_authors']);
-            }
-        } else {
-            foreach ($variety as $item) {
-                $variety_authors = collect($item->authors)->pluck('name')->all();
-                $diff = collect($data['variety_authors'])->diff($variety_authors)->all();
-
-                if (count($diff) <= 0) {
-                    return $item->id;
-                }
-            }
-            $variety_id = General::create($data['variety_data'])->id;
-            if (count($data['variety_authors'])) {
-                $this->firstOrCreateActorAndActorHub($variety_id, $data['variety_authors']);
-            }
-        }
-
-        return $variety_id;
+        return $row;
     }
 
     private function varietyData($row)
@@ -241,12 +161,15 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
     private function taxonomyData($row): array
     {
         return [
-            'name' => $row['name'] ?? null,
+//            'name' => $row['name'] ?? null,
             'family_id' => $row['family_id'] ?? null,
             'genus_id' => $row['genus_id'] ?? null,
             'species_id' => $row['species_id'] ?? null,
             'subspecies_id' => $row['subspecies_id'] ?? null,
             'variety_id' => $row['variety_id'] ?? null,
+            'species_authors' => $row['species_authors'] ?? null,
+            'subspecies_authors' => $row['subspecies_authors'] ?? null,
+            'variety_authors' => $row['variety_authors'] ?? null,
         ];
     }
 
@@ -383,6 +306,7 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
         return [
             'location_id' => $row['location_id'] ?? null,
             'treatment_id' => $row['treatment_id'] ?? null,
+            'local_name' => $row['local_name'] ?? null,
             'efficiency' => $row['efficiency'] ? (string)$row['efficiency'] : null,
             'studied_sample' => $row['studied_sample'] ?? 0,
             'article_id' => $row['article_id'] ?? null,
@@ -451,6 +375,34 @@ class MedicinalLocationImport implements OnEachRow, WithHeadingRow
     private function log(string $message)
     {
         echo "$message\n";
+    }
+
+    /**
+     * @param $general_id
+     * @param $authors
+     * @return void
+     */
+    private function firstOrCreateActorAndActorHub($general_id, $authors)
+    {
+        if (count($authors)) {
+            foreach ($authors as $author) {
+                $author = Actor::firstOrCreate(['name' => $author]);
+                $this->setActorHub($author, $general_id);
+            }
+        }
+    }
+
+    /**
+     * @param $author
+     * @param $general
+     */
+    private function setActorHub($author, $general_id): void
+    {
+        ActorHub::firstOrCreate([
+            'actor_id' => $author->id,
+            'actorable_id' => $general_id,
+            'actorable_type' => General::class,
+        ]);
     }
 
 }

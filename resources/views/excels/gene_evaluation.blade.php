@@ -85,12 +85,18 @@
             <th style="{{$th}}">Min Seed Width</th>
             <th style="{{$th}}">Max Seed Width</th>
         @endif
+        @if($keys['recipient'] ?? false)
+            <th style="{{$th}}">Recipient Name</th>
+        @endif
+        @if($keys['delivery'] ?? false)
+            <th style="{{$th}}">Delivery Date</th>
+        @endif
     </tr>
     </thead>
     <tbody>
     @foreach($result as $item)
         <tr>
-            <td style="{{$td}}">{{ $item['seed_collection']['accession_code'] ?? null}}</td>
+            <td style="{{$td}}">{{ $item['accession_code'] ?? null}}</td>
             <td style="{{$td}}">{{ $item['specimen_type']['name'] ?? null}}</td>
             <td style="{{$td}}">{{ $item['collection']['name'] ?? null}}</td>
             <td style="{{$td}}">{{ $item['regeneration_code'] ?? null}}</td>
@@ -154,6 +160,12 @@
             @if($keys['seed_width'] ?? false)
                 <td style="{{$td}}">{{ $item['min_seed_width'] ?? null}}</td>
                 <td style="{{$td}}">{{ $item['max_seed_width'] ?? null}}</td>
+            @endif
+            @if($keys['recipient'] ?? false)
+                <td style="{{$td}}">{{ $item['recipient_name'] ?? null}}</td>
+            @endif
+            @if($keys['delivery'] ?? false)
+                <td style="{{$td}}">{{ $item['delivery_date'] ?? null}}</td>
             @endif
         </tr>
     @endforeach

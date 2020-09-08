@@ -264,7 +264,7 @@ class APIController extends AppBaseController
     {
 
         ini_set('max_execution_time', 9000);
-        ini_set('memory_limit', '3000M');
+        ini_set('memory_limit', '-1');
         $name = Str::singular(Str::studly($class));
         $repo = 'App\\Repositories\\' . $name . 'Repository';
         $repo = resolve($repo);

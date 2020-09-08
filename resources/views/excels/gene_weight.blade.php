@@ -59,7 +59,7 @@
     <tbody>
     @foreach($result as $item)
         <tr>
-            <td style="{{$td}}">{{ $item['seed_collection']['accession_code'] ?? null}}</td>
+            <td style="{{$td}}">{{ $item['accession_code'] ?? null}}</td>
             <td style="{{$td}}">{{ $item['specimen_type']['name'] ?? null}}</td>
             <td style="{{$td}}">{{ $item['collection']['name'] ?? null}}</td>
             <td style="{{$td}}">{{ $item['regeneration_code'] ?? null}}</td>
