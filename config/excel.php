@@ -20,7 +20,7 @@ return [
         | Drivers: memory|illuminate|batch
         |
         */
-        'driver'     => 'memory',
+        'driver'     => 'batch',
 
         /*
         |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
         */
         'default' => Maatwebsite\Excel\DefaultValueBinder::class,
         'batch'     => [
-            'memory_limit' => 600000,
+            'memory_limit' => 6000000,
         ],
 
         /*
