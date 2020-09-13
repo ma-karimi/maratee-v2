@@ -42,11 +42,17 @@ class NonFlowerMossImport implements OnEachRow, WithHeadingRow
 
         // species
         $row['species_id'] = NonflowerGeneral::firstOrCreate(['name' => $row['species'], 'type' => 'species'])->id;
+
         if (!empty($row['subspecies'])) {
             $row['subspecies_id'] = NonflowerGeneral::firstOrCreate(['name' => $row['subspecies'], 'type' => 'sub_species'])->id;
+            $row['subspecies_authors'] = !empty($row['authors']) ? trim($row['authors']) : null;
         }
         if (!empty($row['variety'])) {
             $row['variety_id'] = NonflowerGeneral::firstOrCreate(['name' => $row['variety'], 'type' => 'variety'])->id;
+            $row['variety_authors'] = !empty($row['authors']) ? trim($row['authors']) : null;
+        }
+        if (empty($row['subspecies']) && empty($row['variety'])) {
+            $row['species_authors'] = !empty($row['authors']) ? trim($row['authors']) : null;
         }
         // taxonomy
         return NonflowerTaxonomy::firstOrCreate($this->taxonomyData($row));
@@ -62,7 +68,9 @@ class NonFlowerMossImport implements OnEachRow, WithHeadingRow
             'species_id' => $row['species_id'] ?? null,
             'subspecies_id' => $row['subspecies_id'] ?? null,
             'variety_id' => $row['variety_id'] ?? null,
-            'species_authors' => !empty($row['authors']) ? trim($row['authors']) : null,
+            'species_authors' => $row['species_authors'] ?? null,
+            'variety_authors' => $row['variety_authors'] ?? null,
+            'subspecies_authors' => $row['subspecies_authors'] ?? null,
         ];
     }
 
