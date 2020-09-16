@@ -49,6 +49,16 @@ trait BotanicalAccessor
         return $gardens;
     }
 
+    public function getEntrancesGardenAttribute()
+    {
+        $gardens = null;
+
+        if ($this->relationLoaded('gardens') && $this->gardens->count()) {
+            $gardens .= $this->gardens->implode('entrance', ' & ');
+        }
+        return $gardens;
+    }
+
     public function getUsageAttribute()
     {
         $usages = null;

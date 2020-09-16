@@ -58,7 +58,8 @@ class Botanical extends BaseModel implements HasMedia, AuditableContract
     protected $appends = [
 
         'seed_formation', 'geographicals',
-        'cycle', 'value', 'propagation', 'plant_condition', 'usage', 'flower_color', 'fruit_color', 'foliage_color', 'seeding', 'planting', 'transfer', 'habitat', 'origin', 'garden', 'internal_habitat', 'last_audit'
+        'cycle', 'value', 'propagation', 'plant_condition', 'usage', 'flower_color', 'fruit_color', 'foliage_color', 'seeding', 'planting', 'transfer', 'habitat', 'origin', 'garden', 'internal_habitat', 'last_audit',
+        'entrances_garden'
     ];
 
     /**

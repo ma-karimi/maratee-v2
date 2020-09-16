@@ -192,8 +192,8 @@
                 <td style="{{$td}}">{{ $item['internal_habitat'] ?? null}}</td>
             @endif
             @if($keys['entrance'] ?? false)
-                <td style="{{$td}}">{{ $item['garden']['entrance'] ?? null}}
-                    {{$item['garden']['entrance'] && $item['internal_habitat']['entrance'] ? ' | ' : null}}{{ $item['internal_habitat']['entrance'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['entrances_garden'] ?? null}}
+                    {{$item['entrances_garden'] && $item['internal_habitat']['entrance'] ? ' | ' : null}}{{ $item['internal_habitat']['entrance'] ?? null}}</td>
             @endif
             @if($keys['seeding_planting'] ?? false)
                 <td style="{{$td}}">{{ $item['planting']['place']['name_en'] ?? null}}</td>
