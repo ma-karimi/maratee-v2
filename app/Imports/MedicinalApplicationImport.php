@@ -5,6 +5,7 @@ namespace App\Imports;
 
 use App\Models\General;
 use App\Models\MedicinalApplication;
+use App\Models\MedicinalHub;
 use App\Models\MedicinalPart;
 use App\Models\MedicinalPlantType;
 use Illuminate\Support\Arr;
@@ -37,12 +38,57 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
             $row = $this->storeNaturalDrug($row);
             $row = $this->storeHasImporting($row);
             $model = MedicinalApplication::create(Arr::only($row, $this->medicinalData()));
+            $foods = collect($this->storeFoodIndustries($row))->filter()->all();
+            $industries = collect($this->storeOtherIndustries($row))->filter()->all();
+            $potentials = collect($this->storePotential($row))->filter()->all();
+            $aerials = collect($this->storeAerialTypes($row))->filter()->all();
+            $undergrounds = collect($this->storeUndergroundTypes($row))->filter()->all();
+            if (count($foods)) {
+                foreach ($foods as $item) {
+                    MedicinalHub::create([
+                        'medicinal_plant_id' => $model->id,
+                        'hub_type' => 'App\Models\MedicinalPlantType',
+                        'hub_id' => $item,
+                    ]);
+                }
+            }
+            if (count($industries)) {
+                foreach ($industries as $item) {
+                    MedicinalHub::create([
+                        'medicinal_plant_id' => $model->id,
+                        'hub_type' => 'App\Models\MedicinalPlantType',
+                        'hub_id' => $item,
+                    ]);
+                }
+            }
+            if (count($potentials)) {
+                foreach ($potentials as $item) {
+                    MedicinalHub::create([
+                        'medicinal_plant_id' => $model->id,
+                        'hub_type' => 'App\Models\MedicinalPlantType',
+                        'hub_id' => $item,
+                    ]);
+                }
+            }
+            if (count($aerials)) {
 
-            $model->foodIndustries()->sync($this->storeFoodIndustries($row));
-            $model->otherIndustries()->sync($this->storeOtherIndustries($row));
-            $model->industrialPotentials()->sync($this->storePotential($row));
-            $model->aerialTypes()->sync($this->storeAerialTypes($row));
-            $model->undergroundParts()->sync($this->storeUndergroundTypes($row));
+                foreach ($aerials as $item) {
+                    MedicinalHub::create([
+                        'medicinal_plant_id' => $model->id,
+                        'hub_type' => 'App\Models\MedicinalPart',
+                        'hub_id' => $item,
+                    ]);
+                }
+            }
+            if (count($undergrounds)) {
+                foreach ($undergrounds as $item) {
+                    MedicinalHub::create([
+                        'medicinal_plant_id' => $model->id,
+                        'hub_type' => 'App\Models\MedicinalPart',
+                        'hub_id' => $item,
+                    ]);
+                }
+            }
             $this->log('Medicinal:' . $model->id);
         }
 
@@ -50,8 +96,8 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
 
     private function storeOrigin($row)
     {
-        if (!empty($row['Origin'])) {
-            $row['general_origin_id'] = General::firstOrCreate(['name' => trim($row['Origin']), 'type' => 'origin'])->id;
+        if (!empty($row['origin'])) {
+            $row['general_origin_id'] = General::firstOrCreate(['name' => trim($row['origin']), 'type' => 'origin'])->id;
         }
         return $row;
     }
@@ -62,7 +108,9 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
      */
     private function storeHasAerialPart($row)
     {
-        if (!empty($row['Has Aerial Part']) && trim($row['Has Aerial Part']) == 'yes') {
+        $row['has_aerial_part'] = 0;
+
+        if (!empty($row['has_aerial_part']) && trim($row['has_aerial_part']) == 'yes') {
             $row['has_aerial_part'] = 1;
         }
         return $row;
@@ -74,7 +122,9 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
      */
     private function storeHasUndergroundPart($row)
     {
-        if (!empty($row['Has Underground Part']) && trim($row['Has Underground Part']) == 'yes') {
+        $row['has_ground_part'] = 0;
+
+        if (!empty($row['has_underground_part']) && trim($row['has_underground_part']) == 'yes') {
             $row['has_ground_part'] = 1;
         }
         return $row;
@@ -86,8 +136,8 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
      */
     private function storeHygenic($row)
     {
-        if (!empty($row['Hygenic-Cosmetic industries']) && trim($row['Hygenic-Cosmetic industries']) == 'yes') {
-            $row['has_ground_part'] = 1;
+        if (!empty($row['hygenic_cosmetic_industries']) && trim($row['hygenic_cosmetic_industries']) == 'yes') {
+            $row['hygienic_cosmetic_industry_id'] = 1;
         }
         return $row;
     }
@@ -98,7 +148,7 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
      */
     private function storeCultivated($row)
     {
-        if (!empty($row['The cultivated area in the country']) && trim($row['The cultivated area in the country']) == 'yes') {
+        if (!empty($row['the_cultivated_area_in_the_country']) && trim($row['the_cultivated_area_in_the_country']) == 'yes') {
             $row['cultivated_area_id'] = 1;
         }
         return $row;
@@ -110,8 +160,8 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
      */
     private function storeTraditional($row)
     {
-        if (!empty($row['Plants Used in Traditional Iranian Medicine'])) {
-            $row['traditional_iranian_medicine'] = array_search(trim($row['Plants Used in Traditional Iranian Medicine']), MedicinalApplication::TRADITIONAL_IRANIAN_MEDICINE);
+        if (!empty($row['plants_used_in_traditional_iranian_medicine'])) {
+            $row['traditional_iranian_medicine'] = array_search(trim($row['plants_used_in_traditional_iranian_medicine']), MedicinalApplication::TRADITIONAL_IRANIAN_MEDICINE);
         }
         return $row;
     }
@@ -122,8 +172,8 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
      */
     private function storeInHerbal($row)
     {
-        if (!empty($row['Plants used inHerbal medicine store'])) {
-            $row['inherbal_medicine_store'] = array_search(trim($row['Plants used inHerbal medicine store']), MedicinalApplication::INHERBAL_MEDICINE_STORE);
+        if (!empty($row['plants_used_inherbal_medicine_store'])) {
+            $row['inherbal_medicine_store'] = array_search(trim($row['plants_used_inherbal_medicine_store']), MedicinalApplication::INHERBAL_MEDICINE_STORE);
         }
         return $row;
     }
@@ -134,8 +184,8 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
      */
     private function storeExporting($row)
     {
-        if (!empty($row['Exporting'])) {
-            $row['exporting'] = array_search(trim($row['Exporting']), MedicinalApplication::EXPORTING);
+        if (!empty($row['exporting'])) {
+            $row['exporting'] = array_search(trim($row['exporting']), MedicinalApplication::EXPORTING);
         }
         return $row;
     }
@@ -146,8 +196,8 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
      */
     private function storeImporting($row)
     {
-        if (!empty($row['Importing'])) {
-            $row['importing'] = array_search(trim($row['Importing']), MedicinalApplication::IMPORTING);
+        if (!empty($row['importing'])) {
+            $row['importing'] = array_search(trim($row['importing']), MedicinalApplication::IMPORTING);
         }
         return $row;
     }
@@ -158,7 +208,9 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
      */
     private function storeHasExporting($row)
     {
-        if (!empty($row['Has Exporting']) && trim($row['Has Exporting']) == 'yes') {
+        $row['has_exporting'] = 0;
+
+        if (!empty($row['has_exporting']) && trim($row['has_exporting']) == 'yes') {
             $row['has_exporting'] = 1;
         }
         return $row;
@@ -170,8 +222,8 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
      */
     private function storeNaturalDrug($row)
     {
-        if (!empty($row['Official Natural Drugs'])) {
-            $row['natural_drug'] = array_search(trim($row['Official Natural Drugs']), MedicinalApplication::NATURAL_DRUG);
+        if (!empty($row['official_natural_drugs'])) {
+            $row['natural_drug'] = array_search(trim($row['official_natural_drugs']), MedicinalApplication::NATURAL_DRUG);
         }
         return $row;
     }
@@ -182,7 +234,9 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
      */
     private function storeHasImporting($row)
     {
-        if (!empty($row['Has Importing']) && trim($row['Has Importing']) == 'yes') {
+        $row['has_importing'] = 0;
+
+        if (!empty($row['has_importing']) && trim($row['has_importing']) == 'yes') {
             $row['has_importing'] = 1;
         }
         return $row;
@@ -195,8 +249,19 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
     {
         return [
             'taxonomy_id',
-            'properties_description',
-            'compounds'
+            'traditional_iranian_medicine',
+            'natural_drug',
+            'inherbal_medicine_store',
+            'exporting',
+            'importing',
+            'cultivated_area_id',
+            'hygienic_cosmetic_industry_id',
+            'general_origin_id',
+            'has_aerial_part',
+            'has_ground_part',
+            'has_importing',
+            'has_exporting',
+            'local_name'
         ];
     }
 
@@ -206,12 +271,12 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
      */
     private function storeFoodIndustries($row)
     {
-        if (!empty($row['Food Industries'])) {
-            $food_industries = explode(' & ', trim($row['Food Industries']));
+        if (!empty($row['food_industries'])) {
+            $food_industries = explode(' & ', trim($row['food_industries']));
             foreach ($food_industries as $index => $food_industry) {
                 MedicinalPlantType::firstOrCreate(['name' => trim($food_industry), 'type_id' => 1]);
             }
-            $food_industries = MedicinalPlantType::whereIn($food_industries)->where('type_id', 1)->pluck('id')->toArray();
+            $food_industries = MedicinalPlantType::whereIn('name', $food_industries)->where('type_id', 1)->pluck('id')->toArray();
         }
         return $food_industries ?? [];
     }
@@ -222,12 +287,13 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
      */
     private function storeOtherIndustries($row)
     {
-        if (!empty($row['Other Industries'])) {
-            $other_industries = explode(' & ', trim($row['Other Industries']));
+        if (!empty($row['other_industries'])) {
+            $other_industries = explode(' & ', trim($row['other_industries']));
+
             foreach ($other_industries as $index => $other_industry) {
                 MedicinalPlantType::firstOrCreate(['name' => trim($other_industry), 'type_id' => 4]);
             }
-            $other_industries = MedicinalPlantType::whereIn($other_industries)->where('type_id', 4)->pluck('id')->toArray();
+            $other_industries = MedicinalPlantType::whereIn('name', $other_industries)->where('type_id', 4)->pluck('id')->toArray();
         }
         return $other_industries ?? [];
     }
@@ -238,14 +304,14 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
      */
     private function storePotential($row)
     {
-        if (!empty($row['Industrial Potential'])) {
-            $potentials = explode(' & ', trim($row['Industrial Potential']));
+        if (!empty($row['industrial_potential'])) {
+            $potentials = explode(' & ', trim($row['industrial_potential']));
             foreach ($potentials as $index => $potential) {
                 MedicinalPlantType::firstOrCreate(['name' => trim($potential), 'type_id' => 3]);
             }
-            $row['potentials'] = MedicinalPlantType::whereIn($potentials)->where('type_id', 3)->pluck('id')->toArray();
+            $potentials = MedicinalPlantType::whereIn('name', $potentials)->where('type_id', 3)->pluck('id')->toArray();
         }
-        return $row;
+        return $potentials ?? [];
     }
 
     /**
@@ -254,12 +320,12 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
      */
     private function storeAerialTypes($row)
     {
-        if (!empty($row['Aerial Types'])) {
-            $aerial_types = explode(' & ', trim($row['Aerial Types']));
+        if (!empty($row['aerial_types'])) {
+            $aerial_types = explode(' & ', trim($row['aerial_types']));
             foreach ($aerial_types as $index => $aerial_type) {
                 MedicinalPart::firstOrCreate(['name' => trim($aerial_type), 'type_id' => 1]);
             }
-            $aerial_types = MedicinalPart::whereIn($aerial_types)->where('type_id', 1)->pluck('id')->toArray();
+            $aerial_types = MedicinalPart::whereIn('name', $aerial_types)->where('type_id', 1)->pluck('id')->toArray();
         }
         return $aerial_types ?? [];
     }
@@ -270,12 +336,12 @@ class MedicinalApplicationImport implements OnEachRow, WithHeadingRow
      */
     private function storeUndergroundTypes($row)
     {
-        if (!empty($row['Underground Parts'])) {
-            $underground_types = explode(' & ', trim($row['Underground Parts']));
+        if (!empty($row['underground_parts'])) {
+            $underground_types = explode(' & ', trim($row['underground_parts']));
             foreach ($underground_types as $index => $underground_type) {
                 MedicinalPart::firstOrCreate(['name' => trim($underground_type), 'type_id' => 2]);
             }
-            $underground_types = MedicinalPart::whereIn($underground_types)->where('type_id', 2)->pluck('id')->toArray();
+            $underground_types = MedicinalPart::whereIn('name', $underground_types)->where('type_id', 2)->pluck('id')->toArray();
         }
         return $underground_types ?? [];
     }
