@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
-//dd(\App\Models\Plant::whereNotNull('life_form_id')->first()->life_form);
+//dd(explode(' & ', trim('flowering shoot & side products')));
 
 Route::get('plant-form', function () {
     $plants = \App\Models\Plant::all()->each(function ($data) {
