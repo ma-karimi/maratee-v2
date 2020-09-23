@@ -36,7 +36,7 @@ class Nonflower extends BaseModel implements HasMedia, AuditableContract
         'city_id' => 'nullable|exists:cities,id',
         'province_id' => 'required|exists:provinces,id',
         //classification
-        'habitat_id' => 'nullable|exists:generals,id',
+        'habitat_id' => 'nullable|exists:nonflower_generals,id',
         'phytogeography_id' => 'nullable|exists:generals,id',
 //        'layer_id' => 'required|exists:nonflower_generals,id',
         'substrates.*' => 'exists:nonflower_generals,id',

@@ -44,11 +44,11 @@ class NonflowerTaxonomy extends BaseModel implements AuditableContract
 
     use GeneralTrait;
 
-
-    public function getPhylumAttribute($value)
-    {
-        return ['id' => $value, 'name' => $value];
-    }
+//
+//    public function getPhylumAttribute($value)
+//    {
+//        return ['id' => $value, 'name' => $value];
+//    }
 
     public function getAuthorsAttribute()
     {

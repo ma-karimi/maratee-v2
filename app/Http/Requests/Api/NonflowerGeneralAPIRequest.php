@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api;
 
 use App\Models\NonflowerGeneral;
+use Illuminate\Validation\ValidationException;
 use InfyOm\Generator\Request\APIRequest;
 
 class NonflowerGeneralAPIRequest extends APIRequest
@@ -14,6 +15,9 @@ class NonflowerGeneralAPIRequest extends APIRequest
      */
     public function authorize()
     {
+        if (NonflowerGeneral::where(['name' => $this->request->get('name'), 'type' => $this->request->get('type')])->exists()) {
+            throw ValidationException::withMessages(['name' => 'Name Duplicated!']);
+        }
         return true;
     }
 
