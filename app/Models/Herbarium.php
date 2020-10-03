@@ -161,8 +161,8 @@ class Herbarium extends BaseModel implements HasMedia, AuditableContract
     {
         $authors = null;
 
-        if ($this->relationLoaded('determines') && $this->determines->count()) {
-            $authors = $this->determines->implode('name', ' & ');
+        if ($this->relationLoaded('determiners') && $this->determiners->count()) {
+            $authors = $this->determiners->implode('name', ' & ');
         }
 
         return $authors;

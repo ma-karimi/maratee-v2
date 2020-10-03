@@ -33,7 +33,6 @@ class NonFlowerAlgaeRhodophytaImport implements OnEachRow, WithHeadingRow
 
     private function storeTaxonomy($row)
     {
-        $row['phylum'] = 'Algae-Rhodophyta';
 
         if (!empty($row['family'])) {
             $row['family_id'] = NonflowerGeneral::firstOrCreate(['name' => $row['family'], 'type' => 'family'])->id;
