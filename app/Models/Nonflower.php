@@ -37,7 +37,7 @@ class Nonflower extends BaseModel implements HasMedia, AuditableContract
         'province_id' => 'required|exists:provinces,id',
         //classification
         'habitat_id' => 'nullable|exists:nonflower_generals,id',
-        'phytogeography_id' => 'nullable|exists:generals,id',
+        'phytogeography_id' => 'nullable|exists:nonflower_generals,id',
 //        'layer_id' => 'required|exists:nonflower_generals,id',
         'substrates.*' => 'exists:nonflower_generals,id',
     ];
@@ -109,7 +109,7 @@ class Nonflower extends BaseModel implements HasMedia, AuditableContract
 
     public function phytogeography(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'phytogeography_id')->whereType('phytogeography');
+        return $this->belongsTo(NonflowerGeneral::class, 'phytogeography_id')->whereType('phytogeography');
     }
 
 
@@ -129,14 +129,14 @@ class Nonflower extends BaseModel implements HasMedia, AuditableContract
     {
         return $this->belongsToMany(NonflowerGeneral::class, 'nonflower_substrates')
             ->whereNull('nonflower_substrates.deleted_at')
-            ->whereIn('nonflower_generals.type', ['diatom', 'lichen', 'moss'])
+//            ->whereIn('nonflower_generals.type', ['diatom', 'lichen', 'moss'])
             ->withTimestamps();
     }
 
 
     public function habitat(): BelongsTo
     {
-        return $this->belongsTo(General::class, 'habitat_id')->whereType('habitat');
+        return $this->belongsTo(NonflowerGeneral::class, 'habitat_id')->whereType('habitat');
     }
 
 
