@@ -17,6 +17,7 @@ class HerbariumAPIRequest extends APIRequest
     public function authorize()
     {
         $herbarium = Herbarium::where('herbarium_number', $this->request->get('herbarium_number'))
+        ->where('organization_id', $this->request->get('organization_id'))
             ->when($this->route('herbarium'), function ($query) {
                 return $query->where('id', '!=', $this->route('herbarium'));
             })
