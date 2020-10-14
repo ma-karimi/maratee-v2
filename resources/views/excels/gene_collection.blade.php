@@ -34,7 +34,7 @@
             <th style="{{$th}}">Research title</th>
             <th style="{{$th}}">Research leader name</th>
         @endif
-        @if($keys['accession'] ?? false)
+        @if($keys['accession_code'] ?? false)
             <th style="{{$th}}">Field code (encoded by collector)</th>
             <th style="{{$th}}">Field code (corrected by NRGB)</th>
             <th style="{{$th}}">Accession code (released by NRGB)</th>
@@ -105,7 +105,7 @@
                 <td style="{{$td}}">{{ $item['research_leader_name'] ?? null}}</td>
             @endif
 
-            @if($keys['accession'] ?? false)
+            @if($keys['accession_code'] ?? false)
                 <td style="{{$td}}">{{ $item['encoded_code_by_collector'] ?? null}}</td>
                 <td style="{{$td}}">{{ $item['encoded_code_by_collector'] ?? null}}</td>
                 <td style="{{$td}}">{{ $item['accession_code'] ?? null}}</td>
