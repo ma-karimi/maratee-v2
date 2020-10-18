@@ -6,6 +6,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\SeedWeightAPIRequest;
 use App\Models\SeedWeight;
 use App\Repositories\SeedWeightRepository;
+use Cache;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -66,7 +67,24 @@ class SeedWeightAPIController extends AppBaseController
             $this->seedWeightRepository->getRelationFields()
         );
 
-        return $this->sendResponse($seedWeights->toArray(), 'Seed Weights retrieved successfully');
+
+        $keys = [
+            ['name' => 'family', 'title' => 'Family', 'value' => false],
+            ['name' => 'genus', 'title' => 'Genus', 'value' => false],
+            ['name' => 'species', 'title' => 'Species', 'value' => false],
+            ['name' => 'subspecies', 'title' => 'SubSpecies', 'value' => false],
+            ['name' => 'variety', 'title' => 'Variety', 'value' => false],
+            ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
+            ['name' => 'row&column', 'title' => 'Row & Column', 'value' => false],
+            ['name' => 'humidity', 'title' => 'Humidity', 'value' => false],
+            ['name' => 'purity', 'title' => 'Purity', 'value' => false],
+            ['name' => 'weight', 'title' => 'Weight', 'value' => false],
+            ['name' => 'banked', 'title' => 'Banked', 'value' => false],
+            ['name' => 'other', 'title' => 'Detail', 'value' => false],
+        ];
+        $excel = Cache::has('seed_weight_excel') ? Cache::get('seed_weight_excel') : null;
+
+        return $this->sendResponse(compact('seedWeights', 'keys', 'excel'), 'Seed Weights retrieved successfully');
     }
 
     /**

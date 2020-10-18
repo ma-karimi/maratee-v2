@@ -20,7 +20,7 @@ class SeedWeight extends BaseModel implements HasMedia, AuditableContract
     use HasMediaTrait, Auditable, AuditTrait;
 
     public static $rules = [
-        'accession_code'=>'required|string',
+        'accession_code' => 'required|string',
 //        'seed_collection_id' => 'required|exists:seed_collections,id',
         'collection_id' => 'required|exists:seed_generals,id',
         'thousand_fruits_weight' => 'nullable|numeric',
@@ -39,10 +39,11 @@ class SeedWeight extends BaseModel implements HasMedia, AuditableContract
 
     protected $with = ['audits'];
     protected $appends = ['last_audit'];
+
     /**
      * @return BelongsTo
      */
-    public function seedCollection()
+    public function seedCollection(): BelongsTo
     {
         return $this->belongsTo(SeedCollection::class, 'accession_code', 'accession_code');
     }
@@ -50,7 +51,7 @@ class SeedWeight extends BaseModel implements HasMedia, AuditableContract
     /**
      * @return BelongsTo
      */
-    public function specimenType()
+    public function specimenType(): BelongsTo
     {
         return $this->belongsTo(SeedGeneral::class, 'specimen_type_id')->where('seed_generals.type_id', 1);
     }
@@ -58,7 +59,7 @@ class SeedWeight extends BaseModel implements HasMedia, AuditableContract
     /**
      * @return BelongsTo
      */
-    public function collection()
+    public function collection(): BelongsTo
     {
         return $this->belongsTo(SeedGeneral::class, 'collection_id')->where('seed_generals.type_id', 28);
     }

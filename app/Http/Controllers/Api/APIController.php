@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\ExportSeedWeight;
 use App\Exports\ExcelExport;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreateHubRequest;
@@ -14,10 +15,10 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Validation\ValidationException;
-//use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Facades\Excel;
 use Response;
+
+//use Maatwebsite\Excel\Facades\Excel;
 
 /**
  * Class ActionController
@@ -268,16 +269,25 @@ class APIController extends AppBaseController
         $name = Str::singular(Str::studly($class));
         $repo = 'App\\Repositories\\' . $name . 'Repository';
         $repo = resolve($repo);
-        $result = $repo->all()->load(Arr::flatten($repo->model()::getAllRelations()));
 
+        $result = $repo->all()->load(collect(Arr::flatten($repo->model()::getAllRelations()))->filter(function ($value) {
+            return $value != 'audits';
+        })->all());
 
-
-        if (\request()->filled('excel')) {
+        if (\request()->filled('excel') && $class != 'seed_weights') {
             $model = Str::ucfirst(\request('model'));
-            $file_excel = "Export${model}List-" . date('Y-m-d-H-i-s') .'.xlsx';
+            $file_excel = "Export${model}List-" . date('Y-m-d-H-i-s') . '.xlsx';
             Excel::store(new ExcelExport($result, \request('model')), 'public/' . $file_excel, null, 'Xlsx');
             return $this->sendResponse(Storage::url($file_excel), 'success');
         }
+        if (\request()->filled('excel') && $class == 'seed_weights') {
+            $model = Str::ucfirst(\request('model'));
+            $file_excel = "Export${model}List-" . date('Y-m-d-H-i-s') . '.xlsx';
+            event(new ExportSeedWeight($result, $file_excel));
+            return $this->sendResponse(true, 'success');
+
+        }
+
         return $this->sendResponse($result, $name . ' loaded successfully');
     }
 
