@@ -12,7 +12,6 @@ use App\Models\Contracts\Relationships;
 use Illuminate\Container\Container as Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
@@ -263,7 +262,11 @@ class APIController extends AppBaseController
 
     public function all($class)
     {
-
+        $model = Str::ucfirst(\request()->get('model'));
+        if (\request()->filled('excel') && $class == 'seed_weights') {
+            event(new ExportSeedWeight($class, $model));
+            return $this->sendResponse(true, 'success');
+        }
         ini_set('max_execution_time', 9000);
         ini_set('memory_limit', '-1');
         $name = Str::singular(Str::studly($class));
@@ -275,17 +278,9 @@ class APIController extends AppBaseController
         })->all());
 
         if (\request()->filled('excel') && $class != 'seed_weights') {
-            $model = Str::ucfirst(\request('model'));
             $file_excel = "Export${model}List-" . date('Y-m-d-H-i-s') . '.xlsx';
-            Excel::store(new ExcelExport($result, \request('model')), 'public/' . $file_excel, null, 'Xlsx');
+            Excel::store(new ExcelExport($result, $model), 'public/' . $file_excel, null, 'Xlsx');
             return $this->sendResponse(Storage::url($file_excel), 'success');
-        }
-        if (\request()->filled('excel') && $class == 'seed_weights') {
-            $model = Str::ucfirst(\request('model'));
-            $file_excel = "Export${model}List-" . date('Y-m-d-H-i-s') . '.xlsx';
-            event(new ExportSeedWeight($result, $file_excel));
-            return $this->sendResponse(true, 'success');
-
         }
 
         return $this->sendResponse($result, $name . ' loaded successfully');

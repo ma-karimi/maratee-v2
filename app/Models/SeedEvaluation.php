@@ -22,7 +22,7 @@ class SeedEvaluation extends BaseModel implements HasMedia, AuditableContract
 
 
     public static $rules = [
-        'accession_code'=>'required|string',
+        'accession_code' => 'required|string',
         'project_title' => 'nullable|string',
         'project_no' => 'nullable|string',
         'project_leader_name' => 'nullable|string',
@@ -131,14 +131,14 @@ class SeedEvaluation extends BaseModel implements HasMedia, AuditableContract
         $fresh_non_germinated = $this->fresh_non_germinated ?? 0;
         $abnormal = $this->abnormal ?? 0;
 
-        return $this->planted_seeds == 0 ? 0 : (($germinated_seed + $fresh_non_germinated + $abnormal) * 100) / $this->planted_seeds;
+        return $this->planted_seeds == 0 ? 0 : (($germinated_seed + $fresh_non_germinated + $abnormal) / $this->planted_seeds) * 100;
     }
 
     public function getGerminationAttribute()
     {
         $germinated_seed = $this->germinated_nunmber ?? 0;
 
-        return $this->planted_seeds == 0 ? 0 : (($germinated_seed) * 100) / $this->planted_seeds;
+        return (integer)$this->planted_seeds === 0 || (integer)$germinated_seed === 0 ? 0 : ($germinated_seed / $this->planted_seeds) * 100;
     }
 //
 //    public function getGerminatedSeedNoAttribute()

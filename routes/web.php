@@ -24,22 +24,27 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
-//dd(explode(' & ', trim('flowering shoot & side products')));
+
+Route::get('herbarium/{id}', 'Api\HerbariumAPIController@show');
+Route::get('herbarium', 'Api\HerbariumAPIController@index');
+Route::get('nonflower/{id}', 'Api\NonflowerAPIController@show');
+Route::get('nonflower', 'Api\NonflowerAPIController@index');
 
 Route::get('plant-form', function () {
     $plants = \App\Models\Plant::all()->each(function ($data) {
-        if($data->life_form_id){
-        $life_forms = $phytogeographics = [];
-        $life_forms[] = $data->life;
-        $data->life_forms = $life_forms;
+        if ($data->life_form_id) {
+            $life_forms = $phytogeographics = [];
+            $life_forms[] = $data->life;
+            $data->life_forms = $life_forms;
         }
 //        $phytogeographics[]= $data->phytogeographic;
         $data->phytogeographics = $data->phytogeographic()->count() ? collect($data->phytogeographic)->map(function ($item, $key) {
-            return ['id' => (string) $item['id'], 'name' => $item['name']];
+            return ['id' => (string)$item['id'], 'name' => $item['name']];
         })->all() : null;
         $data->save();
     });
 });
+
 Route::get('nonflower-general-fix', function () {
     DB::table('nonflower_generals')
         ->select('name', DB::raw('count(name)'), DB::raw('GROUP_CONCAT(`id` SEPARATOR ", ") as ids'), DB::raw('GROUP_CONCAT(`type` SEPARATOR ", ")'), DB::raw('Min(`id`) as primary_id'))

@@ -25,7 +25,7 @@ class BaseModel extends Model
      **/
     public static $linguistically = [];
     public $searchable = ['*'];
-    public $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations', 'groupby', 'excel', 'model', 'keys'];
+    public $notSearchable = ['page', 'per_page', 'limit', 'skip', 'relations', 'groupby', 'excel', 'model', 'keys', 'print'];
     protected $guarded = ['id'];
     /**
      * The attributes excluded from the model's JSON form.

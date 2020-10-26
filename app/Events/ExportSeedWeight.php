@@ -10,19 +10,19 @@ class ExportSeedWeight
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $result;
-    public $file;
+    public $class;
+    public $model;
 
     /**
      * Create a new event instance.
      *
-     * @param $result
-     * @param $file
+     * @param $class
+     * @param $model
      */
-    public function __construct($result, $file)
+    public function __construct($class, $model)
     {
         //
-        $this->result = $result;
-        $this->file = $file;
+        $this->class = $class;
+        $this->model = $model;
     }
 }

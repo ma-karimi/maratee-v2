@@ -28,7 +28,7 @@ class HerbariumAPIController extends AppBaseController
 
     /**
      * @param Request $request
-     * @return Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|Response
      *
      * @SWG\Get(
      *      path="/herbariums",
@@ -67,6 +67,9 @@ class HerbariumAPIController extends AppBaseController
             $this->herbariumRepository->getRelationFields()
         );
 
+        if (!empty($request->filled('print'))) {
+            return view('print.herbarium', compact('herbariums'));
+        }
         $keys = [
             ['name' => 'family', 'title' => 'Family', 'value' => false],
             ['name' => 'genus', 'title' => 'Genus', 'value' => false],
@@ -174,7 +177,7 @@ class HerbariumAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @return Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|Response
      *
      * @SWG\Get(
      *      path="/herbariums/{id}",
@@ -219,6 +222,9 @@ class HerbariumAPIController extends AppBaseController
             return $this->sendError('Herbarium not found');
         }
 
+        if (!empty(\request()->filled('print'))) {
+            return view('print.herbarium', compact('herbarium'));
+        }
         return $this->sendResponse($herbarium->toArray(), 'Herbarium retrieved successfully');
     }
 

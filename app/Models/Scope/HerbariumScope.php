@@ -30,6 +30,20 @@ trait HerbariumScope
     }
 
 
+    protected function processHerbariumNumbersFilter(Builder $builder, Constraint $constraint)
+    {
+        if ($constraint->getOperator() === Constraint::OPERATOR_IN) {
+            $builder
+                ->where('herbarium_number', '>=', (integer)$constraint->getValue()[0])
+                ->where('herbarium_number', '<=', (integer)$constraint->getValue()[1])
+                ->orderBy('herbarium_number');
+
+            return true;
+        }
+        return false;
+    }
+
+
     protected function processLocation_CountryIdFilter(Builder $builder, Constraint $constraint)
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {

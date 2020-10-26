@@ -39,6 +39,7 @@ return [
             'table' => 'jobs',
             'queue' => 'default',
             'retry_after' => 90,
+            'expire' => 1200,
         ],
 
         'beanstalkd' => [
@@ -63,6 +64,7 @@ return [
             'connection' => 'default',
             'queue' => env('REDIS_QUEUE', 'default'),
             'retry_after' => 90,
+            'expire' => 1200,
             'block_for' => null,
         ],
 
