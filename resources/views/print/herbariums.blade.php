@@ -54,68 +54,70 @@
     </style>
 </head>
 <body>
-<page size="140mm 330mm">
-    @foreach($herbariums as $herbarium)
-        <div
-            class="box">
-            <table width="100%">
-                <tr>
-                    <td colspan="2" style="text-align: center">
-                        <strong>CENTRAL HERBARIUM OF IRAN</strong>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="50%"><b>No.</b> {{ $herbarium->herbarium_number ?? null }}</td>
-                    <td width="50%"><b>Fam.</b> {{ $herbarium->taxonomy->family->name ?? null }}</td>
-                </tr>
-                <tr>
-                    <td colspan="2"><b>Name.</b> {{ $herbarium->taxonomy->scientific_name ?? null }}</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <b>Prov.</b> {{ !empty($herbarium->location) ? $herbarium->location->address_en : null }}
-                    </td>
-                </tr>
+@foreach ($herbariums->chunk(4) as $chunk)
+    <page size="140mm 330mm">
+        @foreach($chunk as $herbarium)
+            <div
+                    class="box">
+                <table width="100%">
+                    <tr>
+                        <td colspan="2" style="text-align: center">
+                            <strong>CENTRAL HERBARIUM OF IRAN</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><b>No.</b> {{ $herbarium->herbarium_number ?? null }}</td>
+                        <td width="50%"><b>Fam.</b> {{ $herbarium->taxonomy->family->name ?? null }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><b>Name.</b> {{ $herbarium->taxonomy->scientific_name ?? null }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>Prov.</b> {{ !empty($herbarium->location) ? $herbarium->location->address_en : null }}
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td><b>N.</b> {{
+                    <tr>
+                        <td><b>N.</b> {{
               !empty($herbarium->location->point) ?
                 $herbarium->location->point['DMS'][0] : null
             }}
-                    </td>
-                    <td><b>Date.</b>
-                        {{ $herbarium->collection_date }}
-                    </td>
-                </tr>
+                        </td>
+                        <td><b>Date.</b>
+                            {{ $herbarium->collection_date }}
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td><b>E.</b> {{
+                    <tr>
+                        <td><b>E.</b> {{
               !empty($herbarium->location->point) ?
                 $herbarium->location->point['DMS'][1] : null
             }}
-                    </td>
-                    <td><b>Alt.</b> {{ !empty($herbarium->location) ? $herbarium->location->min_altitude : null }}{{
+                        </td>
+                        <td><b>Alt.</b> {{ !empty($herbarium->location) ? $herbarium->location->min_altitude : null }}{{
              !empty($herbarium->location) && $herbarium->location['max_altitude'] != '' ? ' - ' . $herbarium->location['max_altitude'] : ''
             }}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <b>Notes.</b> {{ $herbarium->description }}
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>Leg.</b>
-                        {{ $herbarium->collector ?? null }}
-                    </td>
-                    <td><b>Det.</b>
-                        {{ $herbarium->determiner ?? null }}
-                    </td>
-                </tr>
-            </table>
-        </div>
-    @endforeach
-</page>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>Notes.</b> {{ $herbarium->description }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Leg.</b>
+                            {{ $herbarium->collector ?? null }}
+                        </td>
+                        <td><b>Det.</b>
+                            {{ $herbarium->determiner ?? null }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        @endforeach
+    </page>
+@endforeach
 </body>
 </html>
 
