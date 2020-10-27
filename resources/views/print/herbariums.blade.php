@@ -40,7 +40,7 @@
             width: 100%;
             font-size: 90% !important;
             /*border-bottom: 1px dashed #ccc5b9;*/
-            height: 8.2cm;
+            height: 8.1cm;
             box-sizing: border-box;
             padding-top: 15px
         }
