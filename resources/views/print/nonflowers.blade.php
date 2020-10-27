@@ -108,10 +108,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><b>Leg.</b>
+                        <td colspan="2"><b>Leg.</b>
                             {{ $herbarium->collect->authors ?? null }}
                         </td>
-                        <td><b>Det.</b>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2"><b>Det.</b>
                             {{ $herbarium->determine->authors ?? null }}
                         </td>
                     </tr>

@@ -106,10 +106,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><b>Leg.</b>
+                        <td colspan="2"><b>Leg.</b>
                             {{ $herbarium->collector ?? null }}
                         </td>
-                        <td><b>Det.</b>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>Det.</b>
                             {{ $herbarium->determiner ?? null }}
                         </td>
                     </tr>
