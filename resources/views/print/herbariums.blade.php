@@ -38,9 +38,9 @@
 
         .box {
             width: 100%;
-            font-size: 90% !important;
+            font-size: 93% !important;
             /*border-bottom: 1px dashed #ccc5b9;*/
-            height: 8.1cm;
+            height: 8.15cm;
             box-sizing: border-box;
             padding-top: 15px
         }
