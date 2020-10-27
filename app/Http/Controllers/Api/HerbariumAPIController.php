@@ -68,7 +68,7 @@ class HerbariumAPIController extends AppBaseController
         );
 
         if (!empty($request->filled('print'))) {
-            return view('print.herbarium', compact('herbariums'));
+            return view('print.herbariums', compact('herbariums'));
         }
         $keys = [
             ['name' => 'family', 'title' => 'Family', 'value' => false],

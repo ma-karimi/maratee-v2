@@ -28,7 +28,7 @@ class NonflowerAPIController extends AppBaseController
 
     /**
      * @param Request $request
-     * @return Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|Response
      *
      * @SWG\Get(
      *      path="/nonflowers",
@@ -67,6 +67,9 @@ class NonflowerAPIController extends AppBaseController
             $this->nonflowerRepository->getRelationFields()
         );
 
+        if (!empty(\request()->filled('print'))) {
+            return view('print.nonflowers', compact('nonflowers'));
+        }
         $keys = [
             ['name' => 'family', 'title' => 'Family', 'value' => false],
             ['name' => 'genus', 'title' => 'Genus', 'value' => false],
@@ -154,7 +157,7 @@ class NonflowerAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @return Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|Response
      *
      * @SWG\Get(
      *      path="/nonflowers/{id}",
@@ -199,6 +202,9 @@ class NonflowerAPIController extends AppBaseController
             return $this->sendError('Nonflower not found');
         }
 
+        if (!empty(\request()->filled('print'))) {
+            return view('print.nonflower', compact('nonflower'));
+        }
         return $this->sendResponse($nonflower->toArray(), 'Nonflower retrieved successfully');
     }
 
