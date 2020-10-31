@@ -51,14 +51,14 @@
                 display: none;
             }
 
-            .box:first-child {
-                padding-top: 0;
-            }
+            /*.box:first-child {*/
+            /*    padding-top: 0;*/
+            /*}*/
 
 
-            .box:last-child {
-                padding-top: 25px;
-            }
+            /*.box:last-child {*/
+            /*    padding-top: 25px;*/
+            /*}*/
         }
     </style>
 </head>
