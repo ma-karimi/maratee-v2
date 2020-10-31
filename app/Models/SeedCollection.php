@@ -26,7 +26,7 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
         'land_form_id' => 'nullable|exists:seed_generals,id',
         'slope_aspect_id' => 'nullable|exists:seed_generals,id',
         'slope_degree' => 'nullable|string',
-        'general_habitat_id' => 'nullable|exists:generals,id',
+        'general_habitat_id' => 'nullable|exists:seed_generals,id',
         'growth_form_id' => 'nullable|exists:seed_generals,id',
         'specimen_type_collect_id' => 'nullable|exists:seed_generals,id',
     ];

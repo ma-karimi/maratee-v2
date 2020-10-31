@@ -27,9 +27,6 @@
             font-family: Roboto, SansSerif, Tahoma;
         }
 
-        @page {
-            margin: 1cm;
-        }
 
         .no-print {
             margin: 5px;
@@ -45,11 +42,24 @@
             padding-top: 15px
         }
 
+
+        @page {
+            margin: 1cm;
+        }
+
         @media print {
             .no-print {
                 display: none;
             }
 
+            .box:first-child {
+                padding-top: 0;
+            }
+
+
+            .box:last-child {
+                padding-top: 25px;
+            }
         }
     </style>
 </head>
@@ -58,7 +68,7 @@
     <page size="140mm 330mm">
         @foreach($chunk as $herbarium)
             <div
-                    class="box">
+                class="box">
                 <table width="100%">
                     <tr>
                         <td colspan="2" style="text-align: center">

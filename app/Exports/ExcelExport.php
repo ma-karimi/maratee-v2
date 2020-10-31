@@ -10,6 +10,7 @@ namespace App\Exports;
 
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
@@ -36,7 +37,7 @@ class ExcelExport implements FromView, ShouldAutoSize
         ini_set('max_execution_time', 9000);
         ini_set('memory_limit', '-1');
         $result = $this->result;
-        $model = $this->model;
+        $model = Str::lower($this->model);
         return view("excels.${model}", ['result' => $result, 'keys' => \request('keys')]);
     }
 }

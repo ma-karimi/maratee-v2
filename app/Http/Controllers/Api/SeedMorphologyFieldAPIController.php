@@ -65,8 +65,28 @@ class SeedMorphologyFieldAPIController extends AppBaseController
             $request->except('per_page'),
             $this->seedMorphologyFieldRepository->getRelationFields()
         );
-
-        return $this->sendResponse($seedMorphologyFields->toArray(), 'Seed Morphology Fields retrieved successfully');
+        $keys = [
+            ['name' => 'name', 'title' => 'Name', 'value' => false],
+            ['name' => 'soil_ph', 'title' => 'Soil PH', 'value' => false],
+            ['name' => 'soil_ec', 'title' => 'Soil EC', 'value' => false],
+            ['name' => 'soil_depth', 'title' => 'Soil depth', 'value' => false],
+            ['name' => 'sand', 'title' => 'Sand', 'value' => false],
+            ['name' => 'loam', 'title' => 'Loam', 'value' => false],
+            ['name' => 'clay', 'title' => 'Clay', 'value' => false],
+            ['name' => 'soil_texture', 'title' => 'Soil texture', 'value' => false],
+            ['name' => 'n', 'title' => 'N', 'value' => false],
+            ['name' => 'p', 'title' => 'P', 'value' => false],
+            ['name' => 'k', 'title' => 'K', 'value' => false],
+            ['name' => 'soil_organic_matter', 'title' => 'Soil organic matter', 'value' => false],
+            ['name' => 'source_of_water', 'title' => 'Source of water', 'value' => false],
+            ['name' => 'irrigation_system', 'title' => 'Irrigation system', 'value' => false],
+            ['name' => 'irrigation_circuit', 'title' => 'Irrigation circuit', 'value' => false],
+            ['name' => 'irrigation_time', 'title' => 'Irrigation time', 'value' => false],
+            ['name' => 'flow_rate', 'title' => 'Flow rate', 'value' => false],
+            ['name' => 'water', 'title' => 'Water', 'value' => false],
+            ['name' => 'water_ec', 'title' => 'Water EC', 'value' => false],
+        ];
+        return $this->sendResponse(compact('seedMorphologyFields', 'keys'), 'Seed Morphology Fields retrieved successfully');
     }
 
     /**

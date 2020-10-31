@@ -45,11 +45,20 @@
             padding-top: 15px
         }
 
+
         @media print {
             .no-print {
                 display: none;
             }
 
+            .box:first-child {
+                padding-top: 0;
+            }
+
+
+            .box:last-child {
+                padding-top: 25px;
+            }
         }
     </style>
 </head>
