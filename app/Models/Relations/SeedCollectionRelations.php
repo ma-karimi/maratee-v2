@@ -37,7 +37,7 @@ trait SeedCollectionRelations
      */
     public function habitat(): BelongsTo
     {
-        return $this->belongsTo(SeedGeneral::class, 'general_habitat_id')->where('seed_generals.type_id', 6);
+        return $this->belongsTo(SeedGeneral::class, 'general_habitat_id')->where('seed_generals.type_id', 29);
     }
 
     /**
