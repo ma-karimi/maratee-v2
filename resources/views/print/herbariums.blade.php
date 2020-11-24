@@ -41,7 +41,7 @@
             box-sizing: border-box;
             padding-top: 15px
         }
-        .box:nth-child(even) {
+        .box:nth-child(odd) {
             margin-top: 10px
         }
 
