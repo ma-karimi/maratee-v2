@@ -35,11 +35,15 @@
 
         .box {
             width: 100%;
-            font-size: 93% !important;
+            font-size: 90% !important;
             /*border-bottom: 1px dashed #ccc5b9;*/
             height: 8.15cm;
             box-sizing: border-box;
             padding-top: 15px
+        }
+
+        .box:nth-child(even){
+            padding-top: 25px;
         }
 
 
@@ -51,6 +55,7 @@
             .no-print {
                 display: none;
             }
+            footer {page-break-after: always;}
 
             /*.box:first-child {*/
             /*    padding-top: 0;*/
@@ -129,6 +134,7 @@
                 </table>
             </div>
         @endforeach
+        <footer>&nbsp;k</footer>
     </page>
 @endforeach
 </body>
