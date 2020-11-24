@@ -41,9 +41,9 @@
             box-sizing: border-box;
             padding-top: 15px
         }
-        .box:nth-child(odd) {
-            margin-top: 10px
-        }
+        /*.box:nth-child(odd) {*/
+        /*    margin-top: 10px*/
+        /*}*/
 
 
         /*@page {*/
@@ -60,9 +60,9 @@
             /*    margin: 0;*/
             /*}*/
 
-            .box {
-                column-gap: 8.15cm;
-            }
+            /*.box {*/
+            /*    column-gap: 8.15cm;*/
+            /*}*/
 
             /*.box:nth-child(even) {*/
             /*    margin-top: 10px*/
