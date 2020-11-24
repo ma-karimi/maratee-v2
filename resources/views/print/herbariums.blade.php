@@ -52,9 +52,9 @@
                 display: none;
             }
 
-            body {
-                margin: 0;
-            }
+            /*body {*/
+            /*    margin: 0;*/
+            /*}*/
 
             /*.box {*/
             /*    column-gap: 8.15cm;*/
