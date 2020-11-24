@@ -52,10 +52,13 @@
                 display: none;
             }
 
-            /*.box:first-child {*/
-            /*    padding-top: 0;*/
-            /*}*/
+            body {
+                margin: 0;
+            }
 
+            .box {
+                column-gap: 8.15cm;
+            }
 
             /*.box:last-child {*/
             /*    padding-top: 25px;*/
