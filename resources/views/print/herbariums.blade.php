@@ -43,7 +43,7 @@
         }
 
         .box:nth-child(even){
-            padding-top: 25px;
+            padding-top: 1cm;
         }
 
 
