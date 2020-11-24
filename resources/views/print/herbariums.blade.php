@@ -60,6 +60,10 @@
                 column-gap: 8.15cm;
             }
 
+            .box:nth-child(even) {
+                margin-top: 10px
+            }
+
             /*.box:last-child {*/
             /*    padding-top: 25px;*/
             /*}*/
