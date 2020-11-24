@@ -37,36 +37,25 @@
             width: 100%;
             font-size: 93% !important;
             /*border-bottom: 1px dashed #ccc5b9;*/
-            height: 8.15cm !important;
+            height: 8.15cm;
             box-sizing: border-box;
             padding-top: 15px
         }
-        /*.box:nth-child(odd) {*/
-        /*    margin-top: 10px*/
-        /*}*/
 
 
-        /*@page {*/
-        /*    margin: 1cm;*/
-        /*}*/
+        @page {
+            margin: 1cm;
+        }
 
         @media print {
             .no-print {
                 display: none;
             }
-            footer {page-break-after: always;}
 
-            /*body {*/
-            /*    margin: 0;*/
+            /*.box:first-child {*/
+            /*    padding-top: 0;*/
             /*}*/
 
-            /*.box {*/
-            /*    column-gap: 8.15cm;*/
-            /*}*/
-
-            /*.box:nth-child(even) {*/
-            /*    margin-top: 10px*/
-            /*}*/
 
             /*.box:last-child {*/
             /*    padding-top: 25px;*/
