@@ -54,6 +54,7 @@
             .no-print {
                 display: none;
             }
+            footer {page-break-after: always;}
 
             /*body {*/
             /*    margin: 0;*/
