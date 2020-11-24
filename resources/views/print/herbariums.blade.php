@@ -134,7 +134,7 @@
                 </table>
             </div>
         @endforeach
-        <footer>&nbsp;k</footer>
+        <footer>&nbsp;</footer>
     </page>
 @endforeach
 </body>
