@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Log;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -127,18 +128,21 @@ class SeedEvaluation extends BaseModel implements HasMedia, AuditableContract
 
     public function getViabilityAttribute()
     {
-        $germinated_seed = $this->germinated_nunmber ?? 0;
+        $germinated_seed = $this->germinated_seed_no ?? 0;
         $fresh_non_germinated = $this->fresh_non_germinated ?? 0;
         $abnormal = $this->abnormal ?? 0;
 
-        return $this->planted_seeds == 0 ? 0 : (($germinated_seed + $fresh_non_germinated + $abnormal) / $this->planted_seeds) * 100;
+        $f = $this->planted_seeds == 0 ? 0 : (($germinated_seed + $fresh_non_germinated + $abnormal) / $this->planted_seeds) * 100;
+        return round($f, 3);
     }
 
     public function getGerminationAttribute()
     {
-        $germinated_seed = $this->germinated_nunmber ?? 0;
+        $germinated_seed = $this->germinated_seed_no ?? 0;
+        $planted_seeds = $this->planted_seeds ?? 0;
 
-        return (integer)$this->planted_seeds === 0 || (integer)$germinated_seed === 0 ? 0 : ($germinated_seed / $this->planted_seeds) * 100;
+        $f = $germinated_seed == 0 || $planted_seeds == 0 ? 0 : ($germinated_seed / $planted_seeds) * 100;
+        return round($f, 3);
     }
 //
 //    public function getGerminatedSeedNoAttribute()
