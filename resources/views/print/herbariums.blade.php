@@ -46,9 +46,9 @@
         }
 
 
-        @page {
-            margin: 1cm;
-        }
+        /*@page {*/
+        /*    margin: 1cm;*/
+        /*}*/
 
         @media print {
             .no-print {
@@ -60,9 +60,9 @@
             /*    margin: 0;*/
             /*}*/
 
-            /*.box {*/
-            /*    column-gap: 8.15cm;*/
-            /*}*/
+            .box {
+                column-gap: 8.15cm;
+            }
 
             /*.box:nth-child(even) {*/
             /*    margin-top: 10px*/
