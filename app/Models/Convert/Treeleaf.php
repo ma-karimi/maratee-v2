@@ -7,7 +7,7 @@ class Treeleaf extends BaseModel
 {
     protected $table = 'treeleaf';
 
-    protected $with = ['fam', 'gen', 'var', 'subspe', 'spe', 'village', 'cityR', 'provinceR'];
+    protected $with = ['fam', 'gen', 'var', 'subspe', 'spe', 'village', 'cityR', 'provinceR', 'collect', 'detect'];
 
     public function village()
     {
