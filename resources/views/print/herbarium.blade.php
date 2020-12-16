@@ -95,14 +95,14 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <b>Prov.</b> {{ !empty($herbarium->location) ? $herbarium->location->address_en : '-' }}
+                    <b>Prov.</b> {{ !empty($herbarium->location) ? $herbarium->location->address_en : null }}
                 </td>
             </tr>
 
             <tr>
                 <td><b>N.</b> {{
               !empty($herbarium->location->point) ?
-                $herbarium->location->point['DMS'][0] : '-'
+                $herbarium->location->point['DMS'][0] : null
             }}
                 </td>
                 <td><b>Date.</b>
@@ -113,7 +113,7 @@
             <tr>
                 <td><b>E.</b> {{
               !empty($herbarium->location->point) ?
-                $herbarium->location->point['DMS'][1] : '-'
+                $herbarium->location->point['DMS'][1] : null
             }}
                 </td>
                 <td><b>Alt.</b> {{ !empty($herbarium->location) ? $herbarium->location->min_altitude : null }}{{
@@ -123,15 +123,15 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <b>Notes.</b> {{ $herbarium->description ?? '-' }}
+                    <b>Notes.</b> {{ $herbarium->description ?? null }}
                 </td>
             </tr>
             <tr>
                 <td><b>Leg.</b>
-                    {{ $herbarium->collector ?? '-' }}
+                    {{ $herbarium->collector ?? null }}
                 </td>
                 <td><b>Det.</b>
-                    {{ $herbarium->determiner ?? '-' }}
+                    {{ $herbarium->determiner ?? null }}
                 </td>
             </tr>
         </table>
