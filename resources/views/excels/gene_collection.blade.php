@@ -40,7 +40,7 @@
             <th style="{{$th}}">Accession code (released by NRGB)</th>
             <th style="{{$th}}">Voucher No. (released by TARI)</th>
         @endif
-        @include('excels.partials.taxonomyHeader')
+        @include('excels.partials.geneTaxonomyHeader')
         @if($keys['location'] ?? false)
             <th style="{{$th}}">Country</th>
             <th style="{{$th}}">Province/state</th>
@@ -111,7 +111,7 @@
                 <td style="{{$td}}">{{ $item['accession_code'] ?? null}}</td>
                 <td style="{{$td}}">{{ $item['voucher_no'] ?? null}}</td>
             @endif
-            @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['seed_collection']['taxonomy'], 'keys'=>$keys])
+            @include('excels.partials.getTaxonomyRow', ['taxonomy'=>$item['seed_collection']['taxonomy'], 'keys'=>$keys])
 
             @if($keys['location'] ?? false)
                 <td style="{{$td}}">{{ $item['location']['country']['name_en'] ?? null}}</td>
