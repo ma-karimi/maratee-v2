@@ -7,61 +7,71 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,700" rel="stylesheet"
           type="text/css">
     <style type="text/css">
-        h1 {
-            page-break-before: right
-        }
 
-        h2 {
-            page-break-after: avoid
-        }
-
-        table {
-            page-break-inside: avoid
-        }
-
-        td {
-            padding: 5px;
-        }
-
-        body {
-            font-family: Roboto, SansSerif, Tahoma;
-        }
-
-
-        .no-print {
-            margin: 5px;
-            font-size: 15px;
-        }
-
-        .box {
-            width: 100%;
-            font-size: 90% !important;
-            /*border-bottom: 1px dashed #ccc5b9;*/
-            height: 8.15cm;
-            box-sizing: border-box;
-            padding-top: 15px
-        }
-
-        .box:nth-child(even){
-            padding-top: 1cm;
-        }
-
-
-        @page {
-            margin: 1cm;
-        }
 
         @media print {
+            h1 {
+                page-break-before: right
+            }
+
+            h2 {
+                page-break-after: avoid
+            }
+
+            table {
+                page-break-inside: avoid
+            }
+
+            td {
+                padding: 5px;
+            }
+
+            body {
+                font-family: Roboto, SansSerif, Tahoma;
+            }
+
+
+            .no-print {
+                margin: 5px;
+                font-size: 15px;
+            }
+
+            .box {
+                width: 100%;
+                font-size: 90% !important;
+                /*border-bottom: 1px dashed #ccc5b9;*/
+                height: 8cm;
+                box-sizing: border-box;
+                padding-top: 20px;
+                padding-bottom: 15px;
+            }
+
+            /** Setting margins */
+            @page {
+                margin: 2cm;
+                size: 140mm 330mm;
+            }
+
+            /* Or: */
+            @page :left {
+                margin: 2cm;
+            }
+
+            @page :right {
+                margin: 2cm;
+            }
+
             .no-print {
                 display: none;
             }
-            footer {page-break-after: always;}
+
+            footer {
+                page-break-after: always;
+            }
 
             /*.box:first-child {*/
             /*    padding-top: 0;*/
             /*}*/
-
-
             /*.box:last-child {*/
             /*    padding-top: 25px;*/
             /*}*/
@@ -70,7 +80,7 @@
 </head>
 <body>
 @foreach ($herbariums->chunk(4) as $chunk)
-    <page size="140mm 330mm">
+    <page>
         @foreach($chunk as $herbarium)
             <div
                 class="box">
@@ -85,18 +95,20 @@
                         <td width="50%"><b>Fam.</b> {{ $herbarium->taxonomy->family->name ?? null }}</td>
                     </tr>
                     <tr>
-                        <td colspan="2"><b>Name.</b> {{ $herbarium->taxonomy->scientific_name ?? null }}</td>
+                        <td colspan="2">
+                            <b>Name.</b> {{ $herbarium->taxonomy->scientific_name ?? null }} {{ $herbarium->taxonomy->authors ?? null }}
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <b>Prov.</b> {{ !empty($herbarium->location) ? $herbarium->location->address_en : null }}
+                            <b>Prov.</b> {{ !empty($herbarium->location) ? $herbarium->location->address_en : '-' }}
                         </td>
                     </tr>
 
                     <tr>
                         <td><b>N.</b> {{
               !empty($herbarium->location->point) ?
-                $herbarium->location->point['DMS'][0] : null
+                $herbarium->location->point['DMS'][0] : '-'
             }}
                         </td>
                         <td><b>Date.</b>
@@ -107,7 +119,7 @@
                     <tr>
                         <td><b>E.</b> {{
               !empty($herbarium->location->point) ?
-                $herbarium->location->point['DMS'][1] : null
+                $herbarium->location->point['DMS'][1] : '-'
             }}
                         </td>
                         <td><b>Alt.</b> {{ !empty($herbarium->location) ? $herbarium->location->min_altitude : null }}{{
@@ -117,18 +129,18 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <b>Notes.</b> {{ $herbarium->description }}
+                            <b>Notes.</b> {{ $herbarium->description ?? '-' }}
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2"><b>Leg.</b>
-                            {{ $herbarium->collector ?? null }}
+                            {{ $herbarium->collector ?? '-' }}
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
                             <b>Det.</b>
-                            {{ $herbarium->determiner ?? null }}
+                            {{ $herbarium->determiner ?? '-' }}
                         </td>
                     </tr>
                 </table>
