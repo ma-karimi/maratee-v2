@@ -111,7 +111,7 @@
                 <td style="{{$td}}">{{ $item['accession_code'] ?? null}}</td>
                 <td style="{{$td}}">{{ $item['voucher_no'] ?? null}}</td>
             @endif
-            @include('excels.partials.getTaxonomyRow', ['taxonomy'=>$item['seed_collection']['taxonomy'], 'keys'=>$keys])
+            @include('excels.partials.geneTaxonomyRow', ['taxonomy'=>$item['seed_collection']['taxonomy'], 'keys'=>$keys])
 
             @if($keys['location'] ?? false)
                 <td style="{{$td}}">{{ $item['location']['country']['name_en'] ?? null}}</td>
