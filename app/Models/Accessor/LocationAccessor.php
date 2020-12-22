@@ -29,7 +29,6 @@ trait LocationAccessor
             $s21 = explode('′', $s11[1]);
             $s31 = explode('″', $s21[1]);
             $DMSE = [$s11[0] ?? null, $s21[0] ?? null, $s31[0] ?? null];
-
             return [
                 'UTM' => [round($value->getLng(), 5), round($value->getLat(), 5)],
                 'DMS' => $DMS,
@@ -50,6 +49,7 @@ trait LocationAccessor
         $lng = $value->getLng();
         $coordinate = new Coordinate("$lat, $lng");
         $DMS = explode(', ', (new Geotools())->convert($coordinate)->toDMS());
+        $DMS = [substr($DMS[0], 0, '-1'), substr($DMS[1], 0, '-1')];
         return $DMS;
     }
 

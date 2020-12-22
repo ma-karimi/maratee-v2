@@ -54,7 +54,7 @@
 
             /* Or: */
             @page :left {
-                margin: 2cm;
+                margin: 2.5cm;
             }
 
             @page :right {
