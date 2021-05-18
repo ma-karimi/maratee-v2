@@ -41,12 +41,11 @@ class RemoveRepetitiveProvince extends Command
 
     /**
      * Execute the console command.
-     *
+     * This function get repetitive province and delete them and replace that province has minimum id in location and city
      * @return mixed
      */
     public function handle()
     {
-        $extraProvince = [];
         $provinces = DB::table('provinces')
                             ->select('name_en', (DB::raw('COUNT(name_en), group_concat(id), min(id)')))
                             ->groupBy('name_en')
