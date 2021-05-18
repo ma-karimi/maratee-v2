@@ -56,6 +56,10 @@ class RemoveRepetitiveOrganization extends Command
             $organizationIdies  = explode(",", $organization->{"group_concat(id)"});
 
             DB::table('transactions')->whereIn('organization_id', $organizationIdies)->update(['organization_id' => $organization->{"min(id)"}]);
+            DB::table('herbariums')->whereIn('organization_id', $organizationIdies)->update(['organization_id' => $organization->{"min(id)"}]);
+            DB::table('seed_collections')->whereIn('organization_id', $organizationIdies)->update(['organization_id' => $organization->{"min(id)"}]);
+            DB::table('seed_morphologies')->whereIn('organization_id', $organizationIdies)->update(['organization_id' => $organization->{"min(id)"}]);
+            DB::table('seed_exchanges')->whereIn('organization_id', $organizationIdies)->update(['organization_id' => $organization->{"min(id)"}]);
 
             if (($key = array_search($organization->{"min(id)"}, $organizationIdies)) !== false)
             {
