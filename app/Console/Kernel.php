@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\FixHerbarium;
 use App\Console\Commands\ImportHerbarium;
+use App\Console\Commands\RemoveRepetitiveProvince;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,7 +17,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         ImportHerbarium::class,
-        FixHerbarium::class
+        FixHerbarium::class,
+        RemoveRepetitiveProvince::class
     ];
 
     /**
