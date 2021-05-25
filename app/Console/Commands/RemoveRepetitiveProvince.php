@@ -2,8 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Location;
-use App\Models\Province;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -47,24 +45,39 @@ class RemoveRepetitiveProvince extends Command
     public function handle()
     {
         $provinces = DB::table('provinces')
-                            ->select('name_en', (DB::raw('COUNT(name_en), group_concat(id), min(id)')))
-                            ->groupBy('name_en')
-                            ->havingRaw('COUNT(name_en) > 1')
-                            ->get();
+            ->select('name_en', (DB::raw('COUNT(name_en), group_concat(id), min(id)')))
+            ->groupBy('name_en')
+            ->havingRaw('COUNT(name_en) > 1')
+            ->get();
 
-        foreach ($provinces as $province)
-        {
-            $provincIdies  = explode(",", $province->{"group_concat(id)"});
+        foreach ($provinces as $province) {
+            $provincIdies = explode(",", $province->{"group_concat(id)"});
 
             DB::table('locations')->whereIn('province_id', $provincIdies)->update(['province_id' => $province->{"min(id)"}]);
             DB::table('cities')->whereIn('province_id', $provincIdies)->update(['province_id' => $province->{"min(id)"}]);
 
-            if (($key = array_search($province->{"min(id)"}, $provincIdies)) !== false)
-            {
+            if (($key = array_search($province->{"min(id)"}, $provincIdies)) !== false) {
                 unset($provincIdies[$key]);
             }
 
             DB::table('provinces')->whereIn('id', $provincIdies)->delete();
+        }
+
+        $provinces = [
+            ['ids' => [68, 69], 'id' => 5],
+            ['ids' => [86], 'id' => 1],
+            ['ids' => [17, 71], 'id' => 101],
+            ['ids' => [67], 'id' => 18],
+            ['ids' => [88, 39], 'id' => 4],
+            ['ids' => [74], 'id' => 16],
+            ['ids' => [75], 'id' => 11],
+        ];
+
+        foreach ($provinces as $province) {
+            DB::table('locations')->whereIn('province_id', $province['ids'])->update(['province_id' => $province['id']]);
+            DB::table('cities')->whereIn('province_id', $province['ids'])->update(['province_id' => $province['id']]);
+
+            DB::table('provinces')->whereIn('id', $province['ids'])->delete();
         }
     }
 }

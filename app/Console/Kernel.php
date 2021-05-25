@@ -17,8 +17,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        ImportHerbarium::class,
-        FixHerbarium::class,
+//        ImportHerbarium::class,
+//        FixHerbarium::class,
         RemoveRepetitiveProvince::class,
         RemoveRepetitiveOrganization::class
     ];
