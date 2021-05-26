@@ -20,6 +20,6 @@ trait CryoBankAccessor
 
     public function getGenotypeCodeAttribute()
     {
-        return $this->year . $this->sample . $this->tank . $this->row . $this->rack . $this->cell;
+        return $this->year . $this->sample . $this->tank . $this->rack . $this->box . $this->cell;
     }
 }

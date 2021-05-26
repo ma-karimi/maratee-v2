@@ -116,13 +116,13 @@ class CryoBankAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
-     *          name="row",
+     *          name="rack",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
-     *          name="rack",
+     *          name="box",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
@@ -298,13 +298,13 @@ class CryoBankAPIController extends AppBaseController
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
-     *          name="row",
+     *          name="rack",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
      *      ),
      *      @SWG\Parameter(
-     *          name="rack",
+     *          name="box",
      *          in="body",
      *          required=false,
      *          @SWG\Schema(ref="#/definitions/CryoBank")
