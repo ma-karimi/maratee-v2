@@ -61,11 +61,11 @@
         @if($keys['tank'] ?? false)
             <th style="{{$th}}">Tank</th>
         @endif
-        @if($keys['row'] ?? false)
-            <th style="{{$th}}">Row</th>
-        @endif
         @if($keys['rack'] ?? false)
             <th style="{{$th}}">Rack</th>
+        @endif
+        @if($keys['box'] ?? false)
+            <th style="{{$th}}">Box</th>
         @endif
         @if($keys['cell'] ?? false)
             <th style="{{$th}}">Cell</th>
@@ -118,11 +118,11 @@
             @if($keys['tank'] ?? false)
                 <td style="{{$td}}">{{$item['tank'] ?? null}}</td>
             @endif
-            @if($keys['row'] ?? false)
-                <td style="{{$td}}">{{$item['row'] ?? null}}</td>
-            @endif
             @if($keys['rack'] ?? false)
                 <td style="{{$td}}">{{$item['rack'] ?? null}}</td>
+            @endif
+            @if($keys['box'] ?? false)
+                <td style="{{$td}}">{{$item['box'] ?? null}}</td>
             @endif
             @if($keys['cell'] ?? false)
                 <td style="{{$td}}">{{$item['cell'] ?? null}}</td>
