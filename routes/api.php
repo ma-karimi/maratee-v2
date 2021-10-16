@@ -10,6 +10,9 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+use Illuminate\Support\Facades\Route;
+
 Route::post('password/reset', 'AuthController@resetPassword');
 
 /*Route::prefix('v1')->group(function () {
@@ -27,7 +30,6 @@ Route::get('/home', 'HomeAPIController@index');
 Route::get('/captcha', 'AuthController@captcha');
 
 Route::middleware(['auth:api'])->group(function () {
-
 
     Route::delete('/{class}/{id}/{delete?}', 'APIController@destroy');
     Route::delete('/{class}/multiple_delete', 'APIController@multipleDestroy');
