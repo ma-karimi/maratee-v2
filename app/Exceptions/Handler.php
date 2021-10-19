@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use Exception;
+use Throwable;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\RelationNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -28,17 +28,31 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontFlash = [
+        'current_password',
         'password',
         'password_confirmation',
     ];
 
     /**
-     * Report or log an exception.
+     * Register the exception handling callbacks for the application.
      *
-     * @param Exception $exception
      * @return void
      */
-    public function report(Exception $exception)
+    public function register()
+    {
+        $this->reportable(function (Throwable $e) {
+            //
+        });
+    }
+
+    /**
+     * Report or log an exception.
+     *
+     * @param Throwable $exception
+     * @return void
+     * @throws Throwable
+     */
+    public function report(Throwable $exception)
     {
         parent::report($exception);
     }
@@ -47,10 +61,11 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param Request $request
-     * @param Exception $exception
+     * @param Throwable $exception
      * @return Response
+     * @throws Throwable
      */
-    public function render($request, Exception $exception)
+    public function render($request, Throwable $exception)
     {
         if ($exception instanceof ValidationException && $request->is('api/*')) {
             report($exception);
