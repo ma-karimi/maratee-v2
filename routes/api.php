@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ImportExcelAPIController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('password/reset', 'AuthController@resetPassword');
@@ -27,7 +29,8 @@ Route::post('password/reset', 'AuthController@resetPassword');
 
 Route::get('/home/data', 'HomeAPIController@data');
 Route::get('/home', 'HomeAPIController@index');
-Route::get('/captcha', 'AuthController@captcha');
+Route::get('captcha', [AuthController::class,'captcha']);
+//Route::get('/captcha', 'AuthController@captcha');
 
 Route::middleware(['auth:api'])->group(function () {
 
@@ -236,7 +239,10 @@ Route::middleware(['auth:api'])->group(function () {
     Route::apiResource('green_houses', 'GreenHouseAPIController');
     Route::post('password', 'AuthController@login');
 
-});
+    Route::post('import-excel', [ImportExcelAPIController::class,'importFile']);
 
-Route::post('login', 'AuthController@login');
+});
+Route::post('login', [AuthController::class,'login']);
+
+//Route::post('login', 'AuthController@login');
 //Route::post('reset_password', 'AuthController@resetPassword');
