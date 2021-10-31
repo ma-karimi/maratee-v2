@@ -15,13 +15,16 @@ define('LARAVEL_START', microtime(true));
 /*
 |--------------------------------------------------------------------------
 | Check If The Application Is Under Maintenance
-|--------------------------------------------------------------------------
+|-------------------------k-------------------------------------------------
 |
 | If the application is in maintenance / demo mode via the "down" command
 | we will load this file so that any pre-rendered content can be shown
 | instead of starting the framework, which could cause an exception.
-|
+|k
 */
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, PUT, POST, PATCH, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, x-xsrf-token');
 
 if (file_exists(__DIR__.'/../storage/framework/maintenance.php')) {
     require __DIR__.'/../storage/framework/maintenance.php';
