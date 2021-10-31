@@ -97,7 +97,7 @@ class SeedCollectionRepository extends BaseRepository
 
     public function getRelationFields()
     {
-        return ['location', 'organization.city', 'organization:id,name_en,city_id', 'landForm', 'taxonomy', 'project', 'drainage', 'fruitType', 'habitat', 'usedPart', 'growthForm', 'lifeForm', 'consumption', 'motherHealth', 'pollinationAgent', 'pollinationType', 'collectedFrom', 'slopeAspect', 'soilDepth', 'soilErosion', 'soilLime', 'soilSalinity', 'soilTexture', 'specimenType', 'associatedSpecies', 'communityTypes', 'climates', 'media', 'floweringTime', 'harvestingTime'];
+        return ['location', 'approximate_area_of_plant','organization.city', 'organization:id,name_en,city_id', 'landForm', 'taxonomy', 'project', 'drainage', 'fruitType', 'habitat', 'usedPart', 'growthForm', 'lifeForm', 'consumption', 'motherHealth', 'pollinationAgent', 'pollinationType', 'collectedFrom', 'slopeAspect', 'soilDepth', 'soilErosion', 'soilLime', 'soilSalinity', 'soilTexture', 'specimenType', 'associatedSpecies', 'communityTypes', 'climates', 'media', 'floweringTime', 'harvestingTime'];
     }
 
     public function storePlantFlowering($input, $id)
