@@ -78,7 +78,7 @@ class Handler extends ExceptionHandler
         }*/
 
         if ($exception instanceof RelationNotFoundException && $request->is('api/*')) {
-            $model = get_class($exception->model);
+            $model = $exception->model;
             $relation = $exception->relation;
             report($exception);
             return response()->json(['errors' => "Call to undefined relationship [{$model}] on model [{$relation}]."], JsonResponse::HTTP_NOT_ACCEPTABLE);
