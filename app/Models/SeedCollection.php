@@ -32,6 +32,7 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
     ];
     public static $plants = [
 //        'area_sampled' => 'nullable|integer',
+        'approximare_area_of_plant' => 'nullable|integer',
         'plants_sampled_no' => 'nullable|integer',
         'area_occupancy' => 'nullable',
         'flowering_time_id' => 'nullable|exists:seed_generals,id',
