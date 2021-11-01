@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @SWG\Definition(
@@ -14,7 +14,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class PaleontologyMap extends BaseModel implements HasMedia
 {
-    use HasMediaTrait;
+    use InteractsWithMedia;
     public $table = 'paleontology_maps';
 
     public function paleontology()

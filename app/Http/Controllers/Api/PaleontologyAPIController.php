@@ -7,7 +7,7 @@ use App\Http\Requests\Api\Paleontology\PaleontologyAPIRequest;
 use App\Http\Requests\Api\Paleontology\PaleontologyGeologyRemarkAPIRequest;
 use App\Http\Requests\Api\Paleontology\PaleontologyInformationAPIRequest;
 use App\Http\Requests\Api\Paleontology\PaleontologyLocalityAPIRequest;
-use App\Http\Requests\MediaAPIRequest;
+use App\Http\Requests\ListQueueAPIRequest;
 use App\Models\Paleontology;
 use App\Repositories\PaleontologyRepository;
 use Exception;
@@ -398,7 +398,7 @@ class PaleontologyAPIController extends AppBaseController
     }
 
     /**
-     * @param MediaAPIRequest $mediaAPIRequest
+     * @param ListQueueAPIRequest $mediaAPIRequest
      * @param int $id
      * @return Response
      *
@@ -435,7 +435,7 @@ class PaleontologyAPIController extends AppBaseController
      *      )
      * )
      */
-    public function media(MediaAPIRequest $mediaAPIRequest, $id)
+    public function media(ListQueueAPIRequest $mediaAPIRequest, $id)
     {
         $plant = $this->paleontologyRepository->find($id, []);
 

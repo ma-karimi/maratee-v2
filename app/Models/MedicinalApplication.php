@@ -9,8 +9,8 @@ use App\Models\Relations\MedicinalApplicationRelations;
 use App\Models\Scope\MedicinalApplicationScope;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @SWG\Definition(
@@ -20,7 +20,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class MedicinalApplication extends BaseModel implements HasMedia, AuditableContract
 {
-    use MedicinalApplicationAccessor, MedicinalApplicationScope, MedicinalApplicationRelations, HasMediaTrait, Auditable, AuditTrait;
+    use MedicinalApplicationAccessor, MedicinalApplicationScope, MedicinalApplicationRelations, InteractsWithMedia, Auditable, AuditTrait;
 
     public const TRADITIONAL_IRANIAN_MEDICINE = [1 => 'raw', 2 => 'processed', 3 => 'raw & processed'];
     public const NATURAL_DRUG = [1 => 'Human medicines', 2 => 'Animal drugs', 3 => 'Human medicines and animal drugs'];

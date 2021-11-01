@@ -15,9 +15,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 /**
  * @SWG\Definition(
  *      definition="Paleontology",
@@ -26,7 +25,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Paleontology extends BaseModel implements HasMedia, AuditableContract
 {
-    use PaleontologyAccessor, ActionRelation, ArticleRelation, PaleontologyScope, HasMediaTrait, Auditable, AuditTrait;
+    use PaleontologyAccessor, ActionRelation, ArticleRelation, PaleontologyScope, InteractsWithMedia, Auditable, AuditTrait;
 
     public static $rules = [
 
