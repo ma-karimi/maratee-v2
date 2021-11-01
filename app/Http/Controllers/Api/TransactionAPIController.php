@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\TransactionAPIRequest;
-use App\Http\Requests\MediaAPIRequest;
+use App\Http\Requests\ListQueueAPIRequest;
 use App\Models\Transaction;
 use App\Repositories\TransactionRepository;
 use Exception;
@@ -549,7 +549,7 @@ class TransactionAPIController extends AppBaseController
         return $this->sendResponse($id, 'Transaction deleted successfully');
     }
 
-    public function media(MediaAPIRequest $mediaAPIRequest, $id)
+    public function media(ListQueueAPIRequest $mediaAPIRequest, $id)
     {
 
         /** @var Transaction $transaction */

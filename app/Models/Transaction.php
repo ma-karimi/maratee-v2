@@ -5,9 +5,8 @@ namespace App\Models;
 use App\Models\Accessor\TransactionAccessor;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 /**
  * @SWG\Definition(
  *      definition="Transaction",
@@ -17,7 +16,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class Transaction extends BaseModel implements HasMedia
 {
     public const MODE = [1 => 'send', 2 => 'receive'];
-    use TransactionAccessor, HasMediaTrait;
+    use TransactionAccessor, InteractsWithMedia;
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
     public const TYPE = [1 => 'visit', 2 => 'borrow', 3 => 'exchange', 4 => 'gift', 5 => 'fair', 6 => 'buy'];
     public const VISIT = [1 => 'Sample', 2 => 'All/Museum'];
