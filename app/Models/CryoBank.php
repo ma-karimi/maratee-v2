@@ -11,8 +11,8 @@ use App\Models\Scope\CryoBankScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @SWG\Definition(
@@ -22,7 +22,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class CryoBank extends BaseModel implements HasMedia, AuditableContract
 {
-    use CryoBankScope, ActionRelation, ArticleRelation, CryoBankAccessor, HasMediaTrait, Auditable, AuditTrait;
+    use CryoBankScope, ActionRelation, ArticleRelation, CryoBankAccessor, InteractsWithMedia, Auditable, AuditTrait;
 
     public const TYPE_SAMPLE = [
         1 => 'seed', 2 => 'shoot', 3 => 'cell'

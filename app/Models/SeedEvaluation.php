@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Log;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 /**
  * @SWG\Definition(
  *      definition="SeedEvaluation",
@@ -19,7 +18,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class SeedEvaluation extends BaseModel implements HasMedia, AuditableContract
 {
 
-    use HasMediaTrait, Auditable, AuditTrait;
+    use InteractsWithMedia, Auditable, AuditTrait;
 
 
     public static $rules = [

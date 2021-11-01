@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @SWG\Definition(
@@ -22,7 +22,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Plant extends BaseModel implements HasMedia, AuditableContract
 {
-    use PlantScope, PlantAccessor, ActionRelation, ArticleRelation, HasMediaTrait, Auditable, AuditTrait;
+    use PlantScope, PlantAccessor, ActionRelation, ArticleRelation, InteractsWithMedia, Auditable, AuditTrait;
 
     public const LIFE_FORM = [['id' => "1", 'name' => 'annual'], ['id' => "2", 'name' => 'perennial'], ['id' => "3", 'name' => 'tree'], ['id' => "4", 'name' => 'shrubs']];
 

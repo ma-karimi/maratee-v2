@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\ProductAPIRequest;
-use App\Http\Requests\MediaAPIRequest;
+use App\Http\Requests\ListQueueAPIRequest;
 use App\Models\Product;
 use App\Repositories\ProductRepository;
 use Exception;
@@ -471,7 +471,7 @@ class ProductAPIController extends AppBaseController
     }
 
 
-    public function media(MediaAPIRequest $mediaAPIRequest, $id)
+    public function media(ListQueueAPIRequest $mediaAPIRequest, $id)
     {
 
         /** @var Product $product */

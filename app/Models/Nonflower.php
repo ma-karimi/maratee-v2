@@ -12,9 +12,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 /**
  * @SWG\Definition(
  *      definition="Nonflower",
@@ -23,7 +22,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Nonflower extends BaseModel implements HasMedia, AuditableContract
 {
-    use ActionRelation, HasMediaTrait, NonflowerScope, AuditTrait, Auditable;
+    use ActionRelation, InteractsWithMedia, NonflowerScope, AuditTrait, Auditable;
 
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
 

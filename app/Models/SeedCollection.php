@@ -8,8 +8,8 @@ use App\Models\Relations\SeedCollectionRelations;
 use App\Models\Scope\SeedCollectionScope;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @SWG\Definition(
@@ -20,7 +20,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class SeedCollection extends BaseModel implements HasMedia, AuditableContract
 {
 
-    use SeedCollectionRelations, SeedCollectionScope, HasMediaTrait, Auditable, AuditTrait;
+    use SeedCollectionRelations, SeedCollectionScope, InteractsWithMedia, Auditable, AuditTrait;
 
     public static $climates = [
         'land_form_id' => 'nullable|exists:seed_generals,id',

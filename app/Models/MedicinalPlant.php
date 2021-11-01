@@ -9,8 +9,8 @@ use App\Models\Relations\MedicinalPlantRelations;
 use App\Models\Scope\MedicinalPlantScope;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @SWG\Definition(
@@ -20,7 +20,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class MedicinalPlant extends BaseModel implements HasMedia, AuditableContract
 {
-    use MedicinalPlantAccessor, MedicinalPlantScope, MedicinalPlantRelations, HasMediaTrait, Auditable, AuditTrait;
+    use MedicinalPlantAccessor, MedicinalPlantScope, MedicinalPlantRelations, InteractsWithMedia, Auditable, AuditTrait;
 
 
 

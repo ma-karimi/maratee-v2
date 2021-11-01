@@ -7,9 +7,8 @@ use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 /**
  * @SWG\Definition(
  *      definition="SeedExchange",
@@ -18,7 +17,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class SeedExchange extends BaseModel implements HasMedia, AuditableContract
 {
-    use HasMediaTrait, Auditable, AuditTrait;
+    use InteractsWithMedia, Auditable, AuditTrait;
 
     public static $rules = [
         'accession_code' => 'required|string',

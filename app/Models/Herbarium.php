@@ -11,9 +11,8 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Arr;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 /**
  * @SWG\Definition(
  *      definition="Herbarium",
@@ -22,7 +21,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Herbarium extends BaseModel implements HasMedia, AuditableContract
 {
-    use HasMediaTrait, HerbariumScope, AuditTrait, Auditable;
+    use InteractsWithMedia, HerbariumScope, AuditTrait, Auditable;
 
     public const BOOLEAN = [0 => 'No', 1 => 'Yes'];
 
