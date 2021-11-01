@@ -10,9 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 /**
  * @SWG\Definition(
  *            definition="Chromosome",
@@ -22,7 +21,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class Chromosome extends BaseModel implements HasMedia, AuditableContract
 {
 
-    use ChromosomeScope,ArticleRelation, Auditable, HasMediaTrait, AuditTrait;
+    use ChromosomeScope,ArticleRelation, Auditable, InteractsWithMedia, AuditTrait;
 
     public static $rules = [
         'taxonomy_id' => 'required|exists:taxonomies,id',

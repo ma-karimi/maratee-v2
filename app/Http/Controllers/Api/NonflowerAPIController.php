@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\NonflowerAPIRequest;
-use App\Http\Requests\MediaAPIRequest;
+use App\Http\Requests\ListQueueAPIRequest;
 use App\Models\Nonflower;
 use App\Repositories\NonflowerRepository;
 use Exception;
@@ -323,7 +323,7 @@ class NonflowerAPIController extends AppBaseController
      * )
      * @throws Exception
      */
-    public function media(MediaAPIRequest $mediaAPIRequest, $id)
+    public function media(ListQueueAPIRequest $mediaAPIRequest, $id)
     {
         $plant = $this->nonflowerRepository->find($id, []);
 

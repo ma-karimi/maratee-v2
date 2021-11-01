@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\MedicineAPIRequest;
-use App\Http\Requests\MediaAPIRequest;
+use App\Http\Requests\ListQueueAPIRequest;
 use App\Models\Medicine;
 use App\Models\Transaction;
 use App\Repositories\MedicineRepository;
@@ -382,7 +382,7 @@ class MedicineAPIController extends AppBaseController
     }
 
 
-    public function media(MediaAPIRequest $mediaAPIRequest, $id)
+    public function media(ListQueueAPIRequest $mediaAPIRequest, $id)
     {
 
         /** @var Medicine $medicine */

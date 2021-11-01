@@ -9,7 +9,7 @@ use App\Models\Relations\ArticleRelation;
 use App\Models\Relations\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Spatie\MediaLibrary\Models\Media as BaseMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media  as BaseMedia;
 
 /**
  * @SWG\Definition(

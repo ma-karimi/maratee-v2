@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\CreatePlantAPIRequest;
 use App\Http\Requests\Api\UpdatePlantAPIRequest;
-use App\Http\Requests\MediaAPIRequest;
+use App\Http\Requests\ListQueueAPIRequest;
 use App\Repositories\PlantRepository;
 use Exception;
 use Illuminate\Http\Request;
@@ -611,7 +611,7 @@ class PlantAPIController extends AppBaseController
      * )
      * @throws Exception
      */
-    public function media(MediaAPIRequest $mediaAPIRequest, $id)
+    public function media(ListQueueAPIRequest $mediaAPIRequest, $id)
     {
         $plant = $this->plantRepository->find($id, []);
 

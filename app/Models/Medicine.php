@@ -4,9 +4,8 @@ namespace App\Models;
 
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 /**
  * @SWG\Definition(
  *      definition="Medicine",
@@ -15,7 +14,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Medicine extends BaseModel implements HasMedia
 {
-    use HasMediaTrait;
+    use InteractsWithMedia;
     public static $rules = [
         'name_en' => 'required|string',
         'name_fa' => 'nullable|string',

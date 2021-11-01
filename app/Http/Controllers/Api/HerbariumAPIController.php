@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\HerbariumAPIRequest;
-use App\Http\Requests\MediaAPIRequest;
+use App\Http\Requests\ListQueueAPIRequest;
 use App\Models\Herbarium;
 use App\Repositories\HerbariumRepository;
 use Exception;
@@ -364,7 +364,7 @@ class HerbariumAPIController extends AppBaseController
      * )
      * @throws Exception
      */
-    public function media(MediaAPIRequest $mediaAPIRequest, $id)
+    public function media(ListQueueAPIRequest $mediaAPIRequest, $id)
     {
         $plant = $this->herbariumRepository->find($id, []);
 

@@ -9,8 +9,8 @@ use App\Models\Relations\BotanicalRelation;
 use App\Models\Scope\BotanicalScope;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @SWG\Definition(
@@ -20,7 +20,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Botanical extends BaseModel implements HasMedia, AuditableContract
 {
-    use HasMediaTrait, BotanicalAccessor, BotanicalRelation, BotanicalScope, Auditable, AuditTrait;
+    use InteractsWithMedia, BotanicalAccessor, BotanicalRelation, BotanicalScope, Auditable, AuditTrait;
 
     public const SEED_FORMATION = [1 => 'yes', 2 => 'no'];
 

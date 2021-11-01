@@ -8,9 +8,8 @@ use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 /**
  * @SWG\Definition(
  *      definition="Product",
@@ -19,7 +18,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Product extends BaseModel implements HasMedia, AuditableContract
 {
-    use ProductAccessor, HasMediaTrait, Auditable, AuditTrait;
+    use ProductAccessor, InteractsWithMedia, Auditable, AuditTrait;
 
     public const STATUS = [1 => 'unregistered', 2 => 'registered'];
     public static $rules = [
