@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "aws/aws-sdk-php": "^3.199",
         "darkaonline/l5-swagger": "8.0.7",
         "felixkiss/uniquewith-validator": "3.4.2",
         "fideloper/proxy": "^4.0",

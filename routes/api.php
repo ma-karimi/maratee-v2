@@ -11,8 +11,10 @@
 |
 */
 
+
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ImportExcelAPIController;
+use App\Http\Controllers\Api\OrganizationAPIController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('password/reset', 'AuthController@resetPassword');
@@ -240,6 +242,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('password', 'AuthController@login');
 
     Route::post('import-excel', [ImportExcelAPIController::class,'importFile']);
+    Route::get('list-queue', [ImportExcelAPIController::class,'listQueue']);
 
 });
 Route::post('login', [AuthController::class,'login']);
