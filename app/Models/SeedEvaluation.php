@@ -57,7 +57,7 @@ class SeedEvaluation extends BaseModel implements HasMedia, AuditableContract
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
     protected $appends = ['viability', 'germination', 'last_audit'];
     protected $with = ['audits'];
-    protected $casts = ['germination_values', 'seedling_sizes', 'seed_sizes', 'traits'];
+    protected $casts = ['germination_values'=>[], 'seedling_sizes'=>[], 'seed_sizes'=>[], 'traits'=>[]];
     public function research()
     {
         return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 3);
