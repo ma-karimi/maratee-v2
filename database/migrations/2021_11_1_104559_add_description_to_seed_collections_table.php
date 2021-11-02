@@ -27,8 +27,8 @@ class AddDescriptionToSeedCollectionsTable extends Migration
      */
     public function down()
     {
-        $table->dropColumn('description')
+
     }
-    }
+
 
 }
