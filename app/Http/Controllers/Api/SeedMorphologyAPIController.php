@@ -312,6 +312,7 @@ class SeedMorphologyAPIController extends AppBaseController
         }
 
         $this->seedMorphologyRepository->storeQuantitatives($input['quantitatives'], $seedMorphology);
+        $this->seedMorphologyRepository->update($request->except('quantitatives'), $id);
 
         return $this->sendResponse($seedMorphology->toArray(), 'SeedMorphology updated successfully');
     }
