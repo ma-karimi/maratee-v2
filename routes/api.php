@@ -32,6 +32,8 @@ Route::post('password/reset', 'AuthController@resetPassword');
 Route::get('/home/data', 'HomeAPIController@data');
 Route::get('/home', 'HomeAPIController@index');
 Route::get('captcha', [AuthController::class,'captcha']);
+Route::post('login', [AuthController::class,'login']);
+
 //Route::get('/captcha', 'AuthController@captcha');
 
 Route::middleware(['auth:api'])->group(function () {
@@ -239,13 +241,12 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('seed_morphologies/{id}/media', 'SeedMorphologyAPIController@storeMedia');
     Route::apiResource('seed_morphologies', 'SeedMorphologyAPIController')->except('destroy');
     Route::apiResource('green_houses', 'GreenHouseAPIController');
-    Route::post('password', 'AuthController@login');
+//    Route::post('password', 'AuthController@login');
 
     Route::post('import-excel', [ImportExcelAPIController::class,'importFile']);
     Route::get('list-queue', [ImportExcelAPIController::class,'listQueue']);
 
 });
-Route::post('login', [AuthController::class,'login']);
 
 //Route::post('login', 'AuthController@login');
 //Route::post('reset_password', 'AuthController@resetPassword');

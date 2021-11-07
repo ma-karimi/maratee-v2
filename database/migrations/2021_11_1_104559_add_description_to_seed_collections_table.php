@@ -27,8 +27,9 @@ class AddDescriptionToSeedCollectionsTable extends Migration
      */
     public function down()
     {
-        $table->dropColumn('description')
-    }
+        Schema::table('seed_collections', function (Blueprint $table) {
+            $table->dropColumn('description');
+        });
     }
 
 }

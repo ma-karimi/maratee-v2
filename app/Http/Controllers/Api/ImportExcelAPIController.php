@@ -8,6 +8,7 @@ use App\Jobs\ProcessExcel;
 use App\Models\ImportJobs;
 use App\Repositories\ImportJobsRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ImportExcelAPIController extends AppBaseController
 {
@@ -18,10 +19,10 @@ class ImportExcelAPIController extends AppBaseController
         app(ImportJobsRepository::class)->create([
             'name' => $fileName,
             'status' => 'process',
-            'modelable_type' => "App\Models\\$request->tableName"
+            'modelable_type' => "App\Models\\$request->excelName"
         ]);
 
-        ProcessExcel::dispatch()->onQueue('excel');
+//        ProcessExcel::dispatch($request->excelName, $fileName)->onQueue('excel');
 
         return $this->sendResponse([], 'فایل ارسالی در وضعیت process در صف قرار گرفت. ');
     }
