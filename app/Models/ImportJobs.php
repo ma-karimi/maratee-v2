@@ -12,7 +12,7 @@ class ImportJobs extends Model
     protected $table = "import_jobs";
 
     protected $fillable = [
-        'name' , 'status' , 'modelable_type', 'modelable_id'
+        'name' , 'status' , 'modelable_type', 'modelable_id', 'description'
     ];
 
     public $status = [

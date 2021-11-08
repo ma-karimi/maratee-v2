@@ -25,7 +25,8 @@ class UploadExcelAPIRequest extends APIRequest
     {
         return [
             'file' => 'required|mimes:xlsx, csv, xls',
-            'tableName' => 'required|string'
+            'excelName' => 'required|string',
+            'modelName' => 'required|string',
         ];
     }
 

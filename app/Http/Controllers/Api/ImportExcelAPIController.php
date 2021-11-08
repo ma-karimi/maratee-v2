@@ -4,24 +4,25 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\ListQueueAPIRequest;
+use App\Http\Requests\UploadExcelAPIRequest;
 use App\Jobs\ProcessExcel;
 use App\Models\ImportJobs;
 use App\Repositories\ImportJobsRepository;
-use Illuminate\Http\Request;
 
 class ImportExcelAPIController extends AppBaseController
 {
     // upload file in public and create new record in import-jobs table
-    public function importFile(ListQueueAPIRequest $request)
+    public function importFile(UploadExcelAPIRequest $request)
     {
         $fileName = $this->uploadFile($request->file);
-        app(ImportJobsRepository::class)->create([
+        $job = app(ImportJobsRepository::class)->create([
             'name' => $fileName,
             'status' => 'process',
-            'modelable_type' => "App\Models\\$request->tableName"
+            'modelable_type' => "App\Models\\$request->modelName"
         ]);
 
-        ProcessExcel::dispatch()->onQueue('excel');
+        ProcessExcel::dispatch($request->excelName, $fileName, $job->id);
+//        ProcessExcel::dispatch($request->excelName, $fileName, $job)->onQueue('excel');
 
         return $this->sendResponse([], 'فایل ارسالی در وضعیت process در صف قرار گرفت. ');
     }
@@ -36,7 +37,7 @@ class ImportExcelAPIController extends AppBaseController
 
     public function listQueue(ListQueueAPIRequest $request)
     {
-        $jobs = ImportJobs::where('modelable_type', "App\Models\\$request->tableName")->get();
+        $jobs = ImportJobs::where('modelable_type', "App\Models\\$request->modelName")->get();
         return $this->sendResponse($jobs, 'success');
     }
 }

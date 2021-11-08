@@ -2,12 +2,17 @@
 
 namespace App\Jobs;
 
+use App\Imports\SeedWeightImport;
+use App\Models\ImportJobs;
+use App\Repositories\ImportJobsRepository;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProcessExcel implements ShouldQueue
 {
@@ -18,9 +23,8 @@ class ProcessExcel implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public $excelName, public $fileName, public $jobId)
     {
-
     }
 
     /**
@@ -30,6 +34,17 @@ class ProcessExcel implements ShouldQueue
      */
     public function handle()
     {
-        //
+        try {
+            ini_set('max_execution_time', 360000);
+            Excel::import(app("App\\Imports\\" . $this->excelName), public_path('/importExcel/' . $this->fileName));
+            ImportJobs::find($this->jobId)->update(['status' => 'success']);
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
+            Log::info($message);
+            ImportJobs::find($this->jobId)->update([
+                'status' => 'faild',
+                'description' => $message
+            ]);
+        }
     }
 }
