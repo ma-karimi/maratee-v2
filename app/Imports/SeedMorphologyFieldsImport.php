@@ -19,7 +19,7 @@ class SeedMorphologyFieldsImport implements OnEachRow, WithHeadingRow
 //        ini_set('memory_limit', '2000M');
         $row = $row->toArray();
 
-        if (!empty($row) && !empty($row['accession_code'])) {
+        if (!empty($row)) {
 
 //            $row = $this->storeCollection($row);
             $row = collect($row)->filter()->all();

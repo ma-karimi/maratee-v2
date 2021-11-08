@@ -245,7 +245,7 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::post('import-excel', [ImportExcelAPIController::class,'importFile']);
     Route::get('list-queue', [ImportExcelAPIController::class,'listQueue']);
-
+    Route::get('download-excel', [ImportExcelAPIController::class,'getDownloadExcel']);
 });
 
 //Route::post('login', 'AuthController@login');
