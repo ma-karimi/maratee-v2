@@ -47,7 +47,6 @@ class SeedExchangesImport implements OnEachRow, WithHeadingRow
     private function data(array $row)
     {
         return [
-            'seed_collection_id' => $row['seed_collection_id'],
             'regeneration_code' => $row['regeneration_code'],
             'organization_id' => $row['organization_id'] ?? null,
             'project_id' => $row['project_id'] ?? null,
