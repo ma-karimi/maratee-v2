@@ -13,13 +13,15 @@ class CreateExoticGeneralsTable extends Migration
      */
     public function up()
     {
-        Schema::create('exotic_generals', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->enum('type', ['species', 'sub_species', 'variety', 'family', 'genus']);
-            $table->timestamps();
-            $table->softDeletesTz();
-        });
+        if (!Schema::hasTable('exotic_generals')) {
+            Schema::create('exotic_generals', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('name');
+                $table->enum('type', ['species', 'sub_species', 'variety', 'family', 'genus']);
+                $table->timestamps();
+                $table->softDeletesTz();
+            });
+        }
     }
 
     /**

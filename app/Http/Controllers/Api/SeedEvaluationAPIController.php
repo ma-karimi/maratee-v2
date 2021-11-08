@@ -10,8 +10,8 @@ use App\Models\SeedEvaluation;
 use App\Repositories\SeedEvaluationRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
-use Response;
 
 /**
  * Class SeedEvaluationAPIController
@@ -847,7 +847,34 @@ class SeedEvaluationAPIController extends AppBaseController
         return $this->sendResponse([], 'SeedEvaluation updated successfully');
     }
 
+    /**
+     * @param $id
+     * @param Request $request
+     * @return mixed
+     * @deprecated 14000811
+     */
     public function storeValues($id, Request $request)
+    {
+        $input = $request->all();
+
+        /** @var SeedEvaluation $seedCollection */
+        $seedCollection = $this->seedEvaluationRepository->find($id);
+
+        if (empty($seedCollection)) {
+            return $this->sendError('Seed Evaluation not found');
+        }
+
+        $this->seedEvaluationRepository->storeValues($input, $seedCollection->id);
+
+        return $this->sendResponse([], 'SeedEvaluation updated successfully');
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return mixed
+     */
+    public function storeGerminationValues($id, Request $request)
     {
         $input = $request->all();
 

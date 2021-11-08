@@ -55,9 +55,12 @@ class SeedEvaluationRepository extends BaseRepository
         return $this->fieldSearchable;
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function storeValues($input, $id)
     {
-        return parent::update($input, $id);
+        return $this->update($input, $id);
     }
 
     /**

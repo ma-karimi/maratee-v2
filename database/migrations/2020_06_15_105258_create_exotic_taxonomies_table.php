@@ -13,28 +13,30 @@ class CreateExoticTaxonomiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('exotic_taxonomies', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name')->nullable();
-            //generals
-            $table->unsignedBigInteger('family_id')->nullable();
-            $table->unsignedBigInteger('genus_id')->nullable();
-            $table->unsignedBigInteger('species_id')->nullable();
-            $table->unsignedBigInteger('subspecies_id')->nullable();
-            $table->unsignedBigInteger('variety_id')->nullable();
+        if (!Schema::hasTable('exotic_taxonomies')) {
+            Schema::create('exotic_taxonomies', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('name')->nullable();
+                //generals
+                $table->unsignedBigInteger('family_id')->nullable();
+                $table->unsignedBigInteger('genus_id')->nullable();
+                $table->unsignedBigInteger('species_id')->nullable();
+                $table->unsignedBigInteger('subspecies_id')->nullable();
+                $table->unsignedBigInteger('variety_id')->nullable();
 
-            $table->foreign('genus_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('species_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('variety_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('family_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->foreign('subspecies_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
-            $table->string('species_authors')->nullable();
-            $table->string('subspecies_authors')->nullable();
-            $table->string('variety_authors')->nullable();
+                $table->foreign('genus_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+                $table->foreign('species_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+                $table->foreign('variety_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+                $table->foreign('family_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+                $table->foreign('subspecies_id')->references('id')->on('generals')->onUpdate('NO ACTION')->onDelete('cascade');
+                $table->string('species_authors')->nullable();
+                $table->string('subspecies_authors')->nullable();
+                $table->string('variety_authors')->nullable();
 
-            $table->timeStamps();
-            $table->softDeletesTz();
-        });
+                $table->timeStamps();
+                $table->softDeletesTz();
+            });
+        }
     }
 
     /**
