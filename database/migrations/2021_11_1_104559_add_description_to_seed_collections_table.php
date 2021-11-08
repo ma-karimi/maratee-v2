@@ -32,4 +32,5 @@ class AddDescriptionToSeedCollectionsTable extends Migration
         });
     }
 
+
 }
