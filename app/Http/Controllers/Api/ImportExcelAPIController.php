@@ -8,11 +8,18 @@ use App\Http\Requests\UploadExcelAPIRequest;
 use App\Jobs\ProcessExcel;
 use App\Models\ImportJobs;
 use App\Repositories\ImportJobsRepository;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ImportExcelAPIController extends AppBaseController
 {
     // upload file in public and create new record in import-jobs table
-    public function importFile(UploadExcelAPIRequest $request)
+    /**
+     * @param UploadExcelAPIRequest $request
+     * @return mixed
+     */
+    public function importFile(UploadExcelAPIRequest $request): mixed
     {
         $fileName = $this->uploadFile($request->file);
         $job = app(ImportJobsRepository::class)->create([
@@ -28,16 +35,35 @@ class ImportExcelAPIController extends AppBaseController
     }
 
     // upload excel sent in public folder
-    public function uploadFile($file)
+
+    /**
+     * @param $file
+     * @return string
+     */
+    public function uploadFile($file): string
     {
         $imageName = time().'.'.$file->getClientOriginalName();
         $file->move(public_path('/importExcel'), $imageName);
         return $imageName;
     }
 
-    public function listQueue(ListQueueAPIRequest $request)
+    /**
+     * @param ListQueueAPIRequest $request
+     * @return mixed
+     */
+    public function listQueue(ListQueueAPIRequest $request): mixed
     {
         $jobs = ImportJobs::where('modelable_type', "App\Models\\$request->modelName")->get();
         return $this->sendResponse($jobs, 'success');
+    }
+
+    /**
+     * @param Request $request
+     * @return BinaryFileResponse
+     */
+    public function getDownloadExcel(Request $request): BinaryFileResponse
+    {
+        $file= public_path(). "/excels/".$request->filename.".xlsx";
+        return Response::download($file, "$request->filename.xlsx");
     }
 }
