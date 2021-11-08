@@ -63,7 +63,8 @@ class ImportExcelAPIController extends AppBaseController
      */
     public function getDownloadExcel(Request $request): BinaryFileResponse
     {
-        $file= public_path(). "/excels/".$request->filename.".xlsx";
-        return Response::download($file, "$request->filename.xlsx");
+        $filename = $request->filename . ".xlsx";
+        $file= public_path() . "/excels/" . $filename;
+        return Response::download($file, $filename);
     }
 }
