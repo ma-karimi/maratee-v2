@@ -12,21 +12,17 @@ use Maatwebsite\Excel\Row;
 class SeedWeightImport implements OnEachRow, WithHeadingRow
 {
 
-
     public function onRow(Row $row)
     {
-        ini_set('max_execution_time', 9000);
+//        ini_set('max_execution_time', 360000);
 //        ini_set('memory_limit', '2000M');
         $row = $row->toArray();
-
         if (!empty($row) && !empty($row['accession_code'])) {
-
             $row = $this->storeCollection($row);
             $row = collect($row)->filter()->all();
             $model = SeedWeight::create($this->data($row));
             $this->log('SeedWeight:' . $model->id);
         }
-
     }
 
     private function storeCollection($row)
@@ -54,6 +50,8 @@ class SeedWeightImport implements OnEachRow, WithHeadingRow
             'thousand_seeds_weight' => !empty($row['thousand_seeds_weight']) ? "{$row['thousand_seeds_weight']}" :  null,
             'total_fruit_weight' => !empty($row['total_fruit_weight']) ? "{$row['total_fruit_weight']}" :  null,
             'total_seed_weight' => !empty($row['total_seed_weight']) ? "{$row['total_seed_weight']}" :  null,
+            'banked' => !empty($row['banked']) ? "{$row['banked']}" :  null,
+            'collected_seeds_no' => !empty($row['collected_seeds_no']) ? "{$row['collected_seeds_no']}" :  null,
             'number_seeds_per_fruit' => $row['number_seeds_per_fruit'] ?? null,
             'range_seeds_per_fruit' => $row['range_seeds_per_fruit'] ?? null,
             'description' => $row['description'] ?? null,

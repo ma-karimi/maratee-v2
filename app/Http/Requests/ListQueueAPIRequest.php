@@ -24,7 +24,7 @@ class ListQueueAPIRequest extends APIRequest
     public function rules()
     {
         return [
-            'excelName' => 'required|string'
+            'modelName' => 'required|string'
         ];
     }
 

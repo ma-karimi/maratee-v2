@@ -1,6 +1,5 @@
-<?php        Excel::import(new SeedExchangesImport(), public_path('/excels/seed_weight2.xlsx'));
-
-use App\Imports\SeedExchangesImport;
+<?php
+namespace Database\Seeders;
 use App\Imports\SeedWeightImport;
 use Illuminate\Database\Seeder;
 use Maatwebsite\Excel\Facades\Excel;
@@ -18,6 +17,5 @@ class SeedWeightTableSeeder extends Seeder
     public function run()
     {
         Excel::import(new SeedWeightImport(), public_path('/excels/seed_weight2.xlsx'));
-
     }
 }

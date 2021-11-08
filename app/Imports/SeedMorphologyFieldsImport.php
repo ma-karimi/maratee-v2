@@ -4,7 +4,7 @@
 namespace App\Imports;
 
 use App\Models\SeedGeneral;
-use App\Models\SeedWeight;
+use App\Models\SeedMorphologyField;
 use Maatwebsite\Excel\Concerns\OnEachRow;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Row;
@@ -15,50 +15,52 @@ class SeedMorphologyFieldsImport implements OnEachRow, WithHeadingRow
 
     public function onRow(Row $row)
     {
-        ini_set('max_execution_time', 9000);
+//        ini_set('max_execution_time', 9000);
 //        ini_set('memory_limit', '2000M');
         $row = $row->toArray();
 
         if (!empty($row) && !empty($row['accession_code'])) {
 
-            $row = $this->storeCollection($row);
+//            $row = $this->storeCollection($row);
             $row = collect($row)->filter()->all();
-            $model = SeedWeight::create($this->data($row));
+            $model = SeedMorphologyField::create($this->data($row));
             $this->log('SeedWeight:' . $model->id);
         }
 
     }
 
-    private function storeCollection($row)
-    {
-        $row['collection_id'] = null;
-        if (!empty($row['collection'])) {
-            $row['collection_id'] = SeedGeneral::firstOrCreate(['name' => $row['collection'], 'type_id' => 19])->id;
-        }
-
-        return $row;
-    }
+//    private function storeCollection($row)
+//    {
+//        $row['collection_id'] = null;
+//        if (!empty($row['collection'])) {
+//            $row['collection_id'] = SeedGeneral::firstOrCreate(['name' => $row['collection'], 'type_id' => 19])->id;
+//        }
+//
+//        return $row;
+//    }
 
     private function data(array $row)
     {
         return [
-            'collection_id' => $row['collection_id'],
-            'regeneration_code' => $row['regeneration_code'] ?? null,
-            'row' => $row['row'] ?? null,
-            'column' => $row['column'] ?? null,
-            'fruit_humidity' => !empty($row['fruit_humidity']) ? "{$row['fruit_humidity']}" :  null,
-            'seed_humidity' => !empty($row['seed_humidity']) ? "{$row['seed_humidity']}" :  null,
-            'fruit_purity' => !empty($row['fruit_purity']) ? "{$row['fruit_purity']}" :  null,
-            'seed_purity' => !empty($row['seed_purity']) ? "{$row['seed_purity']}" :  null,
-            'thousand_fruits_weight' => !empty($row['thousand_fruits_weight']) ? "{$row['thousand_fruits_weight']}" :  null,
-            'thousand_seeds_weight' => !empty($row['thousand_seeds_weight']) ? "{$row['thousand_seeds_weight']}" :  null,
-            'total_fruit_weight' => !empty($row['total_fruit_weight']) ? "{$row['total_fruit_weight']}" :  null,
-            'total_seed_weight' => !empty($row['total_seed_weight']) ? "{$row['total_seed_weight']}" :  null,
-            'number_seeds_per_fruit' => $row['number_seeds_per_fruit'] ?? null,
-            'range_seeds_per_fruit' => $row['range_seeds_per_fruit'] ?? null,
-            'description' => $row['description'] ?? null,
-            'accession_code' => $row['accession_code'] ?? null,
-
+            'soil_ph' => $row['soil_ph'],
+            'soil_ec' => $row['soil_ec'] ?? null,
+            'soil_depth' => $row['soil_depth'] ?? null,
+            'sand' => $row['sand'] ?? null,
+            'loam' => !empty($row['loam']) ? "{$row['loam']}" :  null,
+            'clay' => !empty($row['clay']) ? "{$row['clay']}" :  null,
+            'soil_texture' => !empty($row['soil_texture']) ? "{$row['soil_texture']}" :  null,
+            'n' => !empty($row['n']) ? "{$row['n']}" :  null,
+            'p' => !empty($row['p']) ? "{$row['p']}" :  null,
+            'k' => !empty($row['k']) ? "{$row['k']}" :  null,
+            'soil_organic_matter' => !empty($row['soil_organic_matter']) ? "{$row['soil_organic_matter']}" :  null,
+            'source_of_water' => !empty($row['source_of_water']) ? "{$row['source_of_water']}" :  null,
+            'irrigation_system' => $row['irrigation_system'] ?? null,
+            'irrigation_circuit' => $row['irrigation_circuit'] ?? null,
+            'irrigation_time' => $row['irrigation_time'] ?? null,
+            'flow_rate' => $row['flow_rate'] ?? null,
+            'water' => $row['water'] ?? null,
+            'water_ec' => $row['water_ec'] ?? null,
+            'name' => $row['name'] ?? null,
         ];
     }
 
