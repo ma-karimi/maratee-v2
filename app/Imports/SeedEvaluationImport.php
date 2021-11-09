@@ -93,7 +93,7 @@ class SeedEvaluationImport implements OnEachRow, WithHeadingRow
             'research_leader_name' => !empty($row['research_leader_name']) ? "{$row['research_leader_name']}" :  null,
             'project_no' => !empty($row['project_no']) ? "{$row['project_no']}" :  null,
             'research_no' => !empty($row['research_no']) ? "{$row['research_no']}" :  null,
-            'accession_code' => !empty($row['accession_code']) ? "{$row['accession_code']}" :  null,
+            'accession_code' => !empty($row['accession_code']) ? "{$row['accession_code']}" :  0,
             'germinated_seed_no' => !empty($row['germinated_seed_no']) ? "{$row['germinated_seed_no']}" :  null,
         ];
     }

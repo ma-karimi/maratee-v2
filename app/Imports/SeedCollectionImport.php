@@ -176,7 +176,7 @@ class SeedCollectionImport implements OnEachRow, WithHeadingRow
             'research_no' => !empty($row['research_no']) ? "{$row['research_no']}" : null,
             'approximate_area_of_plant' => !empty($row['approximate_area_of_plant']) ? "{$row['approximate_area_of_plant']}" : null,
             'description' => !empty($row['description']) ? "{$row['description']}" : null,
-            'dna' => !empty($row['dna']) ? "{$row['dna']}" : null,
+            'dna' => !empty($row['dna']) ? "{$row['dna']}" : 0,
 
         ];
     }
