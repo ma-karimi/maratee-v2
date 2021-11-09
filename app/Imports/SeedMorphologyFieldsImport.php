@@ -60,7 +60,7 @@ class SeedMorphologyFieldsImport implements OnEachRow, WithHeadingRow
             'flow_rate' => $row['flow_rate'] ?? null,
             'water' => $row['water'] ?? null,
             'water_ec' => $row['water_ec'] ?? null,
-            'name' => $row['name'] ?? null,
+            'name' => $row['name'] ?? '',
         ];
     }
 
