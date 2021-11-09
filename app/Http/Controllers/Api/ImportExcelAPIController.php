@@ -9,8 +9,6 @@ use App\Jobs\ProcessExcel;
 use App\Models\ImportJobs;
 use App\Repositories\ImportJobsRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ImportExcelAPIController extends AppBaseController
 {
@@ -29,7 +27,6 @@ class ImportExcelAPIController extends AppBaseController
         ]);
 
         ProcessExcel::dispatch($request->excelName, $fileName, $job->id);
-//        ProcessExcel::dispatch($request->excelName, $fileName, $job)->onQueue('excel');
 
         return $this->sendResponse([], 'فایل ارسالی در وضعیت process در صف قرار گرفت. ');
     }
@@ -59,12 +56,10 @@ class ImportExcelAPIController extends AppBaseController
 
     /**
      * @param Request $request
-     * @return BinaryFileResponse
+     * @return mixed
      */
-    public function getDownloadExcel(Request $request): BinaryFileResponse
+    public function getDownloadExcel(Request $request): mixed
     {
-        $filename = $request->filename . ".xlsx";
-        $file= public_path() . "/excels/" . $filename;
-        return Response::download($file, $filename);
+        return $this->sendResponse(asset("/excels/" . $request->filename . ".xlsx"), 'success');
     }
 }
