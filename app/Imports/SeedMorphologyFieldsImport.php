@@ -42,7 +42,7 @@ class SeedMorphologyFieldsImport implements OnEachRow, WithHeadingRow
     private function data(array $row)
     {
         return [
-            'soil_ph' => $row['soil_ph'],
+            'soil_ph' => $row['soil_ph'] ?? null,
             'soil_ec' => $row['soil_ec'] ?? null,
             'soil_depth' => $row['soil_depth'] ?? null,
             'sand' => $row['sand'] ?? null,

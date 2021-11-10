@@ -47,8 +47,8 @@ class SeedMorphologiesImport implements OnEachRow, WithHeadingRow
     private function data(array $row)
     {
         return [
-            'collection_id' => $row['collection_id'],
-            'specimen_type_id' => $row['specimen_type_id'],
+            'collection_id' => $row['collection_id'] ?? null,
+            'specimen_type_id' => $row['specimen_type_id'] ?? null,
             'organization_id' => $row['organization_id'] ?? null,
             'field_id' => $row['field_id'] ?? null,
             'regeneration_code' => $row['regeneration_code'] ?? null,
@@ -65,7 +65,7 @@ class SeedMorphologiesImport implements OnEachRow, WithHeadingRow
             'project_no' => !empty($row['project_no']) ? "{$row['project_no']}" :  null,
             'research_no' => !empty($row['research_no']) ? "{$row['research_no']}" :  null,
             'days_to_seed_ripening' => $row['days_to_seed_ripening'] ?? null,
-            'accession_code' => $row['accession_code'] ?? null,
+            'accession_code' => $row['accession_code'] ?? 0,
             'project_title' => $row['project_title'] ?? null,
             'research_title' => $row['research_title'] ?? null,
 
