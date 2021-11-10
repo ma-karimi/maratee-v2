@@ -38,7 +38,7 @@ class SeedWeightImport implements OnEachRow, WithHeadingRow
     private function data(array $row)
     {
         return [
-            'collection_id' => $row['collection_id'],
+            'collection_id' => $row['collection_id'] ?? null,
             'regeneration_code' => $row['regeneration_code'] ?? null,
             'row' => $row['row'] ?? null,
             'column' => $row['column'] ?? null,
@@ -55,7 +55,7 @@ class SeedWeightImport implements OnEachRow, WithHeadingRow
             'number_seeds_per_fruit' => $row['number_seeds_per_fruit'] ?? null,
             'range_seeds_per_fruit' => $row['range_seeds_per_fruit'] ?? null,
             'description' => $row['description'] ?? null,
-            'accession_code' => $row['accession_code'] ?? null,
+            'accession_code' => $row['accession_code'] ?? 0,
 
         ];
     }

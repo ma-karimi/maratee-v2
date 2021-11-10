@@ -53,7 +53,7 @@ class SeedEvaluationImport implements OnEachRow, WithHeadingRow
     private function data(array $row)
     {
         return [
-            'collection_id' => $row['collection_id'],
+            'collection_id' => $row['collection_id'] ?? null,
             'project_id' => $row['project_id'] ?? null,
             'specimen_type_id' => $row['specimen_type_id'] ?? null,
             'regeneration_code' => $row['regeneration_code'] ?? null,

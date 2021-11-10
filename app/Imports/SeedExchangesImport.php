@@ -47,7 +47,7 @@ class SeedExchangesImport implements OnEachRow, WithHeadingRow
     private function data(array $row)
     {
         return [
-            'regeneration_code' => $row['regeneration_code'],
+            'regeneration_code' => $row['regeneration_code'] ?? null,
             'organization_id' => $row['organization_id'] ?? null,
             'project_id' => $row['project_id'] ?? null,
             'department_name' => $row['department_name'] ?? null,
@@ -64,7 +64,7 @@ class SeedExchangesImport implements OnEachRow, WithHeadingRow
             'recipient_name' => $row['recipient_name'] ?? null,
             'request_no' => $row['request_no'] ?? null,
             'description' => $row['description'] ?? null,
-            'accession_code' => $row['accession_code'] ?? null,
+            'accession_code' => $row['accession_code'] ?? 0,
 
         ];
     }
