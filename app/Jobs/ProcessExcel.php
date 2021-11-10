@@ -32,20 +32,17 @@ class ProcessExcel implements ShouldQueue
      */
     public function handle()
     {
-        DB::beginTransaction();
         try {
+            DB::beginTransaction();
             ini_set('max_execution_time', 360000);
             Excel::import(app("App\\Imports\\" . $this->excelName), public_path('/importExcel/' . $this->fileName));
             ImportJobs::find($this->jobId)->update(['status' => 'success']);
-
             DB::commit();
         } catch (\Exception $e) {
             ImportJobs::find($this->jobId)->update([
                 'status' => 'failed',
                 'description' => $e->getMessage()
             ]);
-
-            DB::commit();
         }
     }
 }
