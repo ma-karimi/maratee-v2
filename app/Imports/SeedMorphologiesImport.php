@@ -23,7 +23,7 @@ class SeedMorphologiesImport implements OnEachRow, WithHeadingRow
             $row = $this->storeCollection($row);
             $row = collect($row)->filter()->all();
             $model = SeedMorphology::create($this->data($row));
-            $this->log('SeedWeight:' . $model->id);
+            $this->log('SeedMorphology:' . $model->id);
         }
 
     }

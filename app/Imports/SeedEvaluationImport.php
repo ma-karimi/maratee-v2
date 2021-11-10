@@ -23,10 +23,8 @@ class SeedEvaluationImport implements OnEachRow, WithHeadingRow
             $row = $this->storeCollection($row);
             $row = collect($row)->filter()->all();
             $model = SeedEvaluation::create($this->data($row));
-            $this->log('SeedWeight:' . $model->id);
-            return true;
+            $this->log('SeedEvaluation:' . $model->id);
         }
-        return false;
     }
 
     private function storeCollection($row)

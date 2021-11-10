@@ -23,11 +23,8 @@ class SeedExchangesImport implements OnEachRow, WithHeadingRow
             $row = $this->storeCollection($row);
             $row = collect($row)->filter()->all();
             $model = SeedExchange::create($this->data($row));
-            $this->log('SeedWeight:' . $model->id);
-            return true;
+            $this->log('SeedExchangeWeight:' . $model->id);
         }
-        return false;
-
     }
 
     private function storeCollection($row)

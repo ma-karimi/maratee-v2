@@ -22,9 +22,7 @@ class SeedWeightImport implements OnEachRow, WithHeadingRow
             $row = collect($row)->filter()->all();
             $model = SeedWeight::create($this->data($row));
             $this->log('SeedWeight:' . $model->id);
-            return true;
         }
-        return false;
     }
 
     private function storeCollection($row)
