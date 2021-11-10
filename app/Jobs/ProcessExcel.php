@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -31,17 +32,20 @@ class ProcessExcel implements ShouldQueue
      */
     public function handle()
     {
+        DB::beginTransaction();
         try {
             ini_set('max_execution_time', 360000);
             Excel::import(app("App\\Imports\\" . $this->excelName), public_path('/importExcel/' . $this->fileName));
             ImportJobs::find($this->jobId)->update(['status' => 'success']);
+
+            DB::commit();
         } catch (\Exception $e) {
-            $message = $e->getMessage();
-            Log::info($message);
             ImportJobs::find($this->jobId)->update([
-                'status' => 'faild',
-                'description' => $message
+                'status' => 'failed',
+                'description' => $e->getMessage()
             ]);
+
+            DB::commit();
         }
     }
 }

@@ -19,13 +19,14 @@ class SeedExchangesImport implements OnEachRow, WithHeadingRow
 //        ini_set('memory_limit', '2000M');
         $row = $row->toArray();
 
-        if (!empty($row) && !empty($row['accession_code'])) {
-
+        if (!empty($row) && !empty($row['accession_code']) && !empty($row['collection'])) {
             $row = $this->storeCollection($row);
             $row = collect($row)->filter()->all();
             $model = SeedExchange::create($this->data($row));
             $this->log('SeedWeight:' . $model->id);
+            return true;
         }
+        return false;
 
     }
 
@@ -47,12 +48,13 @@ class SeedExchangesImport implements OnEachRow, WithHeadingRow
     private function data(array $row)
     {
         return [
+            'accession_code' => $row['accession_code'],
+            'collection_id' => $row['collection_id'],
             'regeneration_code' => $row['regeneration_code'] ?? null,
             'organization_id' => $row['organization_id'] ?? null,
             'project_id' => $row['project_id'] ?? null,
             'department_name' => $row['department_name'] ?? null,
             'project_title' => $row['project_title'] ?? null,
-            'collection_id' => $row['collection_id'] ?? null,
             'research_title' => !empty($row['research_title']) ? "{$row['research_title']}" :  null,
             'project_leader_name' => !empty($row['project_leader_name']) ? "{$row['project_leader_name']}" :  null,
             'research_leader_name' => !empty($row['research_leader_name']) ? "{$row['research_leader_name']}" :  null,
@@ -64,7 +66,6 @@ class SeedExchangesImport implements OnEachRow, WithHeadingRow
             'recipient_name' => $row['recipient_name'] ?? null,
             'request_no' => $row['request_no'] ?? null,
             'description' => $row['description'] ?? null,
-            'accession_code' => $row['accession_code'] ?? 0,
 
         ];
     }

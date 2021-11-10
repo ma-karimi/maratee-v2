@@ -20,13 +20,13 @@ class SeedCollectionImport implements OnEachRow, WithHeadingRow
         $row = $row->toArray();
 
         if (!empty($row) && !empty($row['accession_code'])) {
-
             $row = $this->storeCollection($row);
             $row = collect($row)->filter()->all();
             $model = SeedCollection::create($this->data($row));
             $this->log('SeedWeight:' . $model->id);
+            return true;
         }
-
+        return false;
     }
 
     private function storeCollection($row)
@@ -128,9 +128,9 @@ class SeedCollectionImport implements OnEachRow, WithHeadingRow
     {
 
         return [
+            'accession_code' => $row['accession_code'],
             'encoded_code_by_collector' => $row['encoded_code_by_collector'] ?? null,
             'corrected_code_by_nrgb' => $row['corrected_code_by_nrgb'] ?? null,
-            'accession_code' => $row['accession_code'] ?? 0,
             'voucher_no' => $row['voucher_no'] ?? null,
             'organization_id' => !empty($row['organization_id']) ? "{$row['organization_id']}" : null,
             'location_id' => !empty($row['location_id']) ? "{$row['location_id']}" : null,

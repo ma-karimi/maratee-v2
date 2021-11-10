@@ -19,14 +19,14 @@ class SeedEvaluationImport implements OnEachRow, WithHeadingRow
 //        ini_set('memory_limit', '2000M');
         $row = $row->toArray();
 
-        if (!empty($row) && !empty($row['accession_code'])) {
-
+        if (!empty($row) && !empty($row['accession_code']) && !empty($row['collection'])) {
             $row = $this->storeCollection($row);
             $row = collect($row)->filter()->all();
             $model = SeedEvaluation::create($this->data($row));
             $this->log('SeedWeight:' . $model->id);
+            return true;
         }
-
+        return false;
     }
 
     private function storeCollection($row)
