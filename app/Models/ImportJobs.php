@@ -17,7 +17,7 @@ class ImportJobs extends Model
 
     public $status = [
         'process' => 'در حال پردازش',
-        'faild' => 'ناموفق',
+        'failed' => 'ناموفق',
         'success' => 'موفق'
     ];
 }

@@ -19,12 +19,11 @@ class SeedMorphologiesImport implements OnEachRow, WithHeadingRow
 //        ini_set('memory_limit', '2000M');
         $row = $row->toArray();
 
-        if (!empty($row) && !empty($row['accession_code'])) {
-
+        if (!empty($row) && !empty($row['accession_code']) && !empty($row['collection'])) {
             $row = $this->storeCollection($row);
             $row = collect($row)->filter()->all();
             $model = SeedMorphology::create($this->data($row));
-            $this->log('SeedWeight:' . $model->id);
+            $this->log('SeedMorphology:' . $model->id);
         }
 
     }
@@ -47,7 +46,8 @@ class SeedMorphologiesImport implements OnEachRow, WithHeadingRow
     private function data(array $row)
     {
         return [
-            'collection_id' => $row['collection_id'] ?? null,
+            'collection_id' => $row['collection_id'],
+            'accession_code' => $row['accession_code'],
             'specimen_type_id' => $row['specimen_type_id'] ?? null,
             'organization_id' => $row['organization_id'] ?? null,
             'field_id' => $row['field_id'] ?? null,
@@ -65,7 +65,6 @@ class SeedMorphologiesImport implements OnEachRow, WithHeadingRow
             'project_no' => !empty($row['project_no']) ? "{$row['project_no']}" :  null,
             'research_no' => !empty($row['research_no']) ? "{$row['research_no']}" :  null,
             'days_to_seed_ripening' => $row['days_to_seed_ripening'] ?? null,
-            'accession_code' => $row['accession_code'] ?? 0,
             'project_title' => $row['project_title'] ?? null,
             'research_title' => $row['research_title'] ?? null,
 

@@ -17,7 +17,7 @@ class SeedWeightImport implements OnEachRow, WithHeadingRow
 //        ini_set('max_execution_time', 360000);
 //        ini_set('memory_limit', '2000M');
         $row = $row->toArray();
-        if (!empty($row) && !empty($row['accession_code'])) {
+        if (!empty($row) && !empty($row['accession_code']) && !empty($row['collection'])) {
             $row = $this->storeCollection($row);
             $row = collect($row)->filter()->all();
             $model = SeedWeight::create($this->data($row));
@@ -38,7 +38,8 @@ class SeedWeightImport implements OnEachRow, WithHeadingRow
     private function data(array $row)
     {
         return [
-            'collection_id' => $row['collection_id'] ?? null,
+            'collection_id' => $row['collection_id'],
+            'accession_code' => $row['accession_code'],
             'regeneration_code' => $row['regeneration_code'] ?? null,
             'row' => $row['row'] ?? null,
             'column' => $row['column'] ?? null,
@@ -55,7 +56,6 @@ class SeedWeightImport implements OnEachRow, WithHeadingRow
             'number_seeds_per_fruit' => $row['number_seeds_per_fruit'] ?? null,
             'range_seeds_per_fruit' => $row['range_seeds_per_fruit'] ?? null,
             'description' => $row['description'] ?? null,
-            'accession_code' => $row['accession_code'] ?? 0,
 
         ];
     }
