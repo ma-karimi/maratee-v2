@@ -71,7 +71,7 @@
                 <td style="{{$td}}">{{ $item['research_title'] ?? null}}</td>
                 <td style="{{$td}}">{{ $item['research_leader_name'] ?? null}}</td>
             @endif
-            @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['seedCollection']['taxonomy'], 'keys'=>$keys])
+            @include('excels.partials.taxonomyRow', ['taxonomy'=>$item['seedCollection']['taxonomy'] ?? null, 'keys'=>$keys])
             @if($keys['exchange'] ?? false)
                 <td style="{{$td}}">{{ $item['weight'] ?? null }}</td>
                 <td style="{{$td}}">{{ $item['delivery_date'] ?? null }}</td>
