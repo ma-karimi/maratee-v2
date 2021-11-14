@@ -32,11 +32,7 @@ class Media extends BaseMedia
         'media_type' => 'required|integer|in:1,2',
     ];
     protected $appends = ['full_url', 'media_type_name'];
-    protected $casts = [
-        'manipulations' => 'array',
-        'responsive_images' => 'array',
-        'custom_properties' => 'array',
-    ];
+
     protected $dates = ['date'];
     /**
      * The database table used by the model.

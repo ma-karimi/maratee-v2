@@ -22,6 +22,19 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
 
     use SeedCollectionRelations, SeedCollectionScope, InteractsWithMedia, Auditable, AuditTrait;
 
+    /**
+     * build image in different sizes
+     */
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('images')
+            ->useFallbackUrl('/assets/img/no-image.jpg')
+            ->useFallbackPath(public_path('/assets/img/no-image.jpg'))
+            ->singleFile()
+            ->withResponsiveImages();
+    }
+
     public static $climates = [
         'land_form_id' => 'nullable|exists:seed_generals,id',
         'slope_aspect_id' => 'nullable|exists:seed_generals,id',
@@ -76,4 +89,6 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
 
     protected $with = ['taxonomy', 'audits'];
     protected $appends = ['last_audit', 'climate', 'associated_specie', 'community'];
+
+
 }
