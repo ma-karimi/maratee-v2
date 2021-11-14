@@ -153,7 +153,17 @@ class SeedCollectionRepository extends BaseRepository
         ];
         //store media
         if (request()->hasFile('file')) {
-            $media_record = $model->addMedia(request()->file('file'))->toMediaCollection('images');
+//            $media_record = $model->addMediaFromRequest('file')->toMediaCollection('images');
+
+            $extension = request()->file('file')->getClientOriginalExtension();
+            $media_record = $model
+                ->addMedia(request()->file('file'))
+                ->usingName(sha1('image' . time()) . '.' . $extension)
+                ->usingFileName(sha1('image' . time()) . '.' . $extension)
+                ->sanitizingFileName(function ($fileName) {
+                    return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
+                })->toMediaCollection('images');
+
             $media_record->update($media_input);
         }
     }
