@@ -5,6 +5,7 @@ namespace App\Imports;
 
 use App\Models\SeedGeneral;
 use App\Models\SeedWeight;
+use Exception;
 use Maatwebsite\Excel\Concerns\OnEachRow;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Row;
@@ -17,6 +18,8 @@ class SeedWeightImport implements OnEachRow, WithHeadingRow
 //        ini_set('max_execution_time', 360000);
 //        ini_set('memory_limit', '2000M');
         $row = $row->toArray();
+
+        throw_if(empty($row['accession_code']) || empty($row['collection']), new Exception('accession_code and collection fields are required'));
         if (!empty($row) && !empty($row['accession_code']) && !empty($row['collection'])) {
             $row = $this->storeCollection($row);
             $row = collect($row)->filter()->all();
@@ -29,7 +32,7 @@ class SeedWeightImport implements OnEachRow, WithHeadingRow
     {
         $row['collection_id'] = null;
         if (!empty($row['collection'])) {
-            $row['collection_id'] = SeedGeneral::firstOrCreate(['name' => $row['collection'], 'type_id' => 19])->id;
+            $row['collection_id'] = SeedGeneral::firstOrCreate(['name' => $row['collection'], 'type_id' => 28])->id;
         }
 
         return $row;

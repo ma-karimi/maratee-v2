@@ -3,8 +3,8 @@
 
 namespace App\Imports;
 
-use App\Models\SeedGeneral;
 use App\Models\SeedMorphologyField;
+use Exception;
 use Maatwebsite\Excel\Concerns\OnEachRow;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Row;
@@ -19,6 +19,7 @@ class SeedMorphologyFieldsImport implements OnEachRow, WithHeadingRow
 //        ini_set('memory_limit', '2000M');
         $row = $row->toArray();
 
+        throw_if(empty($row), new Exception('file is empty'));
         if (!empty($row)) {
 //            $row = $this->storeCollection($row);
             $row = collect($row)->filter()->all();
