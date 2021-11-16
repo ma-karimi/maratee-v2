@@ -36,13 +36,14 @@ class ProcessExcel implements ShouldQueue
             DB::beginTransaction();
             ini_set('max_execution_time', 360000);
             Excel::import(app("App\\Imports\\" . $this->excelName), public_path('/importExcel/' . $this->fileName));
-            ImportJobs::find($this->jobId)->update(['status' => 'success']);
+            ImportJobs::find($this->jobId)->update(['status' => 'success', 'description' => 'success process']);
             DB::commit();
         } catch (\Exception $e) {
             ImportJobs::find($this->jobId)->update([
                 'status' => 'failed',
-                'description' => $e->getMessage()
+                'description' => $e->getMessage() == "Start row (2) is beyond highest row (1)" ? "file is empty" : $e->getMessage()
             ]);
+            DB::commit();
         }
     }
 }

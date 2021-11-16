@@ -5,6 +5,7 @@ namespace App\Imports;
 
 use App\Models\SeedEvaluation;
 use App\Models\SeedGeneral;
+use Exception;
 use Maatwebsite\Excel\Concerns\OnEachRow;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Row;
@@ -19,6 +20,7 @@ class SeedEvaluationImport implements OnEachRow, WithHeadingRow
 //        ini_set('memory_limit', '2000M');
         $row = $row->toArray();
 
+        throw_if(empty($row['accession_code']) || empty($row['collection']), new Exception('accession_code and collection fields are required'));
         if (!empty($row) && !empty($row['accession_code']) && !empty($row['collection'])) {
             $row = $this->storeCollection($row);
             $row = collect($row)->filter()->all();

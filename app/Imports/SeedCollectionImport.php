@@ -5,6 +5,7 @@ namespace App\Imports;
 
 use App\Models\SeedCollection;
 use App\Models\SeedGeneral;
+use Exception;
 use Maatwebsite\Excel\Concerns\OnEachRow;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Row;
@@ -12,13 +13,13 @@ use Maatwebsite\Excel\Row;
 class SeedCollectionImport implements OnEachRow, WithHeadingRow
 {
 
-
     public function onRow(Row $row)
     {
 //        ini_set('max_execution_time', 9000);
 //        ini_set('memory_limit', '2000M');
         $row = $row->toArray();
 
+        throw_if(empty($row['accession_code']), new Exception('accession_code field is required'));
         if (!empty($row) && !empty($row['accession_code'])) {
             $row = $this->storeCollection($row);
             $row = collect($row)->filter()->all();

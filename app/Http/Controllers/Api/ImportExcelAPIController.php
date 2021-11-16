@@ -50,7 +50,7 @@ class ImportExcelAPIController extends AppBaseController
      */
     public function listQueue(ListQueueAPIRequest $request): mixed
     {
-        $jobs = ImportJobs::where('modelable_type', "App\Models\\$request->modelName")->get();
+        $jobs = ImportJobs::where('modelable_type', "App\Models\\$request->modelName")->latest()->get();
         return $this->sendResponse($jobs, 'success');
     }
 
