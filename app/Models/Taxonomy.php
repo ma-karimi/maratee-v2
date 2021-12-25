@@ -34,7 +34,7 @@ class Taxonomy extends BaseModel implements AuditableContract
      * @var string
      */
     protected $table = 'taxonomies';
-    protected $with = ['family', 'genus', 'subspecies', 'species', 'variety', 'audits'];
+    protected $with = ['family', 'genus', 'subspecies', 'species', 'variety'];
     protected $appends = ['authors', 'scientific_name', 'scientific', 'last_audit'];
 
     public function getAuthorsAttribute()

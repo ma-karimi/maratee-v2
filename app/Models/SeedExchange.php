@@ -9,6 +9,7 @@ use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+
 /**
  * @SWG\Definition(
  *      definition="SeedExchange",
@@ -20,17 +21,19 @@ class SeedExchange extends BaseModel implements HasMedia, AuditableContract
     use InteractsWithMedia, Auditable, AuditTrait;
 
     public static $rules = [
-        'accession_code' => 'required|string',
-        'collection_id' => 'required|exists:seed_generals,id',
-        'specimen_type_id' => 'nullable|exists:seed_generals,id',
-        'weight' => 'nullable|numeric',
+//        'accession_code' => 'required|string',
+//        'collection_id' => 'required|exists:seed_generals,id',
+//        'specimen_type_id' => 'nullable|exists:seed_generals,id',
+        'seed_weight_id' => 'required|exists:seed_weights,id',
+        'seed_weight_value' => 'nullable|numeric',
+        'fruit_weight_value' => 'nullable|numeric',
         'delivery_date' => 'nullable|date',
         'recipient_name' => 'nullable|string',
 //        'recipient_phone' => 'required|string',
         'request_no' => 'nullable|string',
     ];
-    protected $appends = ['last_audit'];
-    protected $with = ['audits'];
+//    protected $appends = ['last_audit'];
+//    protected $with = ['audits'];
     /**
      * The database table used by the model.
      *
@@ -60,6 +63,14 @@ class SeedExchange extends BaseModel implements HasMedia, AuditableContract
     public function collection(): BelongsTo
     {
         return $this->belongsTo(SeedGeneral::class, 'collection_id')->where('seed_generals.type_id', 28);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function seed_weight(): BelongsTo
+    {
+        return $this->belongsTo(SeedWeight::class, 'seed_weight_id');
     }
 
     /**

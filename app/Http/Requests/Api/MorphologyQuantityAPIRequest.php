@@ -25,8 +25,6 @@ class MorphologyQuantityAPIRequest extends APIRequest
     {
         return [
             'quantitatives' => 'required|array',
-            'quantitatives.*.value' => 'required|string',
-            'quantitatives.*.seed_general_id' => 'required|exists:seed_generals,id',
         ];
     }
 }

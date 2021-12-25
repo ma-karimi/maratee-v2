@@ -109,6 +109,6 @@ class SeedMorphologyRepository extends BaseRepository
 
     public function getRelationFields()
     {
-        return ['quantitatives:seed_generals.id,seed_generals.name,seed_generals.type_id', 'qualititatives:seed_generals.id,seed_generals.name,seed_generals.type_id', 'field', 'seedCollection:id,accession_code,taxonomy_id', 'specimenType', 'collection', 'organization', 'media'];
+        return ['qualititatives:seed_generals.id,seed_generals.name,seed_generals.type_id', 'field', 'seedCollection:id,accession_code,taxonomy_id', 'specimenType', 'collection', 'organization', 'media'];
     }
 }

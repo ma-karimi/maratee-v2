@@ -35,11 +35,11 @@ class SeedCollectionRepository extends BaseRepository
      */
     private $actorHubRepo;
     /**
-     * @var LocationRepository
+     * @var SeedLocationRepository
      */
     private $locationRepo;
 
-    public function __construct(Application $app, ActionHub $actionHubRepo, ActorHub $actorHubRepo, LocationRepository $locationRepo)
+    public function __construct(Application $app, ActionHub $actionHubRepo, ActorHub $actorHubRepo, SeedLocationRepository $locationRepo)
     {
         parent::__construct($app);
         $this->actionHubRepo = $actionHubRepo;
@@ -97,7 +97,7 @@ class SeedCollectionRepository extends BaseRepository
 
     public function getRelationFields()
     {
-        return ['location','organization.city', 'organization:id,name_en,city_id', 'landForm', 'taxonomy', 'project', 'drainage', 'fruitType', 'habitat', 'usedPart', 'growthForm', 'lifeForm', 'consumption', 'motherHealth', 'pollinationAgent', 'pollinationType', 'collectedFrom', 'slopeAspect', 'soilDepth', 'soilErosion', 'soilLime', 'soilSalinity', 'soilTexture', 'specimenType', 'associatedSpecies', 'communityTypes', 'climates', 'media', 'floweringTime', 'harvestingTime'];
+        return ['location', 'landForm', 'project', 'drainage', 'fruitType', 'habitat', 'usedPart', 'growthForm', 'lifeForm', 'consumption', 'motherHealth', 'pollinationAgent', 'pollinationType', 'collectedFrom', 'slopeAspect', 'soilDepth', 'soilErosion', 'soilLime', 'soilSalinity', 'soilTexture', 'specimenType', 'associatedSpecies', 'communityTypes', 'climates', 'media', 'floweringTime', 'harvestingTime'];
     }
 
     public function storePlantFlowering($input, $id)

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Spatie\MediaLibrary\HasMedia;
@@ -62,6 +63,15 @@ class SeedWeight extends BaseModel implements HasMedia, AuditableContract
     public function collection(): BelongsTo
     {
         return $this->belongsTo(SeedGeneral::class, 'collection_id')->where('seed_generals.type_id', 28);
+    }
+
+
+    /**
+     * @return HasMany
+     */
+    public function seed_exchanges(): HasMany
+    {
+        return $this->hasMany(SeedExchange::class, 'seed_weight_id');
     }
 
     public function scopeByCollection($query, $collection_id)

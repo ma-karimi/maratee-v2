@@ -11,6 +11,7 @@ use App\Models\SeedMorphology;
 use App\Repositories\SeedMorphologyRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\ValidationException;
 use Response;
 
@@ -34,9 +35,9 @@ class SeedMorphologyAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/seed_morphologies",
-     *      summary="Get a listing of the SeedMorphologys.",
+     *      summary="Get a listing of the SeedMorphologies.",
      *      tags={"SeedMorphology"},
-     *      description="Get all SeedMorphologys",
+     *      description="Get all SeedMorphologies",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -63,13 +64,13 @@ class SeedMorphologyAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $seedMorphologys = $this->seedMorphologyRepository->paginate(
+        $seedMorphologies = $this->seedMorphologyRepository->paginate(
             $request->get('per_page'),
             $request->except('per_page'),
             $this->seedMorphologyRepository->getRelationFields()
         );
 
-        return $this->sendResponse($seedMorphologys->toArray(), 'Seed Morphologys retrieved successfully');
+        return $this->sendResponse($seedMorphologies->toArray(), 'Seed Morphologies retrieved successfully');
     }
 
     /**
@@ -311,8 +312,8 @@ class SeedMorphologyAPIController extends AppBaseController
             return $this->sendError('Seed Morphology not found');
         }
 
-        $this->seedMorphologyRepository->storeQuantitatives($input['quantitatives'], $seedMorphology);
-        $this->seedMorphologyRepository->update($request->except('quantitatives'), $id);
+//        $this->seedMorphologyRepository->storeQuantitatives($input['quantitatives'], $seedMorphology);
+        $this->seedMorphologyRepository->update($request->only('quantitatives'), $id);
 
         return $this->sendResponse($seedMorphology->toArray(), 'SeedMorphology updated successfully');
     }
@@ -331,6 +332,7 @@ class SeedMorphologyAPIController extends AppBaseController
 
         return $this->sendResponse($seedMorphology->toArray(), 'SeedMorphology updated successfully');
     }
+
     public function storeField($id, SeedMorphologyFieldAPIRequest $request)
     {
         $input = $request->all();
@@ -346,6 +348,7 @@ class SeedMorphologyAPIController extends AppBaseController
 
         return $this->sendResponse($seedMorphology->toArray(), 'SeedMorphology updated successfully');
     }
+
     public function storeMedia($id)
     {
 

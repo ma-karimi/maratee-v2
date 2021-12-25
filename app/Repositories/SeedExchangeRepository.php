@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\SeedExchange;
-use Illuminate\Container\Container as Application;
 
 /**
  * Class SeedExchangeRepository
@@ -18,17 +17,6 @@ class SeedExchangeRepository extends BaseRepository
     protected $fieldSearchable = [
 
     ];
-    /**
-     * @var ProjectRepository
-     */
-    private $projectRepo;
-
-    public function __construct(Application $app, ProjectRepository $projectRepo)
-    {
-        parent::__construct($app);
-
-        $this->projectRepo = $projectRepo;
-    }
 
     /**
      * Return searchable fields
@@ -50,6 +38,6 @@ class SeedExchangeRepository extends BaseRepository
 
     public function getRelationFields()
     {
-        return ['organization.city', 'organization:id,name_en,city_id', 'specimenType', 'seedCollection:id,accession_code,taxonomy_id', 'collection'];
+        return ['organization.city', 'organization:id,name_en,city_id', 'seed_weight.seedCollection', 'seed_weight.collection'];
     }
 }

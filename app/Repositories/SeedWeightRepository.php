@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\SeedWeight;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 /**
  * Class SeedWeightRepository
@@ -39,5 +40,23 @@ class SeedWeightRepository extends BaseRepository
     public function getRelationFields()
     {
         return ['seedCollection:id,accession_code,taxonomy_id', 'collection'];
+    }
+
+    /**
+     * Paginate records for scaffold.
+     *
+     * @param int $perPage
+     * @param array $search
+     * @param array|null $with_relations
+     * @param array $columns
+     * @return LengthAwarePaginator
+     * @throws \Exception
+     */
+    public function paginate($perPage, array $search = [], array $with_relations = null, $columns = ['*'])
+    {
+        $query = $this->allQuery($search);
+        return $query->when($with_relations, function ($query, $with_relations) {
+            return $query->with($with_relations);
+        })->latest()->withSum('seed_exchanges', 'seed_weight_value')->withSum('seed_exchanges', 'fruit_weight_value')->paginate($perPage ?? 25, $columns);
     }
 }

@@ -6,9 +6,9 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\SeedWeightAPIRequest;
 use App\Models\SeedWeight;
 use App\Repositories\SeedWeightRepository;
-use Cache;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\ValidationException;
 use Response;
 

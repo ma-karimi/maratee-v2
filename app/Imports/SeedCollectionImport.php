@@ -18,7 +18,7 @@ class SeedCollectionImport implements OnEachRow, WithHeadingRow
 //        ini_set('max_execution_time', 9000);
 //        ini_set('memory_limit', '2000M');
         $row = $row->toArray();
-
+        dd($row);
         throw_if(empty($row['accession_code']), new Exception('accession_code field is required'));
         if (!empty($row) && !empty($row['accession_code'])) {
             $row = $this->storeCollection($row);

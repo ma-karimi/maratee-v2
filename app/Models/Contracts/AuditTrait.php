@@ -9,6 +9,11 @@ use Jedrzej\Searchable\Constraint;
 
 trait AuditTrait
 {
+    public function getLastAuditAttribute()
+    {
+        return $this->relationLoaded('audits') ? $this->audits()->first() : null;
+    }
+
     protected function processAudits_statusIdFilter(Builder $builder, Constraint $constraint)
     {
         if ($constraint->getOperator() === Constraint::OPERATOR_IN) {
@@ -23,11 +28,5 @@ trait AuditTrait
             return true;
         }
         return false;
-    }
-
-
-    public function getLastAuditAttribute()
-    {
-        return $this->audits()->first();
     }
 }

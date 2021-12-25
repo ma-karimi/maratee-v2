@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
-use App\Models\Scope\AuditScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use OwenIt\Auditing\Auditable;
@@ -22,19 +21,24 @@ class SeedMorphology extends BaseModel implements HasMedia, AuditableContract
 {
     use InteractsWithMedia, Auditable, AuditTrait;
 
+    public const QUANTITATIVES = [['replication_or_block_number' => '', 'observation_no' => '', 'values' => [['seed_general' => '', 'value' => '']]]];
+
     public static $rules = [
         'accession_code' => 'required|string',
         'collection_id' => 'required|exists:seed_generals,id',
         'specimen_type_id' => 'nullable|exists:seed_generals,id',
     ];
-
-    protected $with = ['audits'];
     protected $appends = ['last_audit'];
+    protected $casts = ['quantitatives' => 'json'];
 
-
-    public function quantitatives(): BelongsToMany
+    public function __construct(array $attributes = array())
     {
-        return $this->belongsToMany(SeedGeneral::class, 'morphology_variables', 'seed_morphology_id')->withPivot('value')->whereNull('morphology_variables.deleted_at')->where('seed_generals.type_id', 26)->withTimestamps();
+        $this->setRawAttributes(
+            array(
+                'quantitatives' => json_encode(self::QUANTITATIVES, JSON_THROW_ON_ERROR),
+            ), true
+        );
+        parent::__construct($attributes);
     }
 
     public function qualititatives(): BelongsToMany

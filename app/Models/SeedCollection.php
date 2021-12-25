@@ -22,19 +22,8 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
 
     use SeedCollectionRelations, SeedCollectionScope, InteractsWithMedia, Auditable, AuditTrait;
 
-    /**
-     * build image in different sizes
-     */
-    public function registerMediaCollections(): void
-    {
-        $this
-            ->addMediaCollection('images')
-            ->useFallbackUrl('/assets/img/no-image.jpg')
-            ->useFallbackPath(public_path('/assets/img/no-image.jpg'))
-            ->singleFile()
-            ->withResponsiveImages();
-    }
-
+    const TAXONOMY = ['family' => '', 'genus' => '', 'species' => '', 'subspecies' => '', 'variety' => '', 'persian_name' => '', 'local_name' => ''];
+    const ORGANIZATION = ['name' => '', 'city' => '', 'phone' => '', 'fax' => '', 'email' => '', 'department_name'];
     public static $climates = [
         'land_form_id' => 'nullable|exists:seed_generals,id',
         'slope_aspect_id' => 'nullable|exists:seed_generals,id',
@@ -71,7 +60,6 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
         'soil_erosion_id' => 'nullable|exists:seed_generals,id',
     ];
     public static $rules = [
-        'taxonomy_id' => 'nullable|exists:taxonomies,id',
         'encoded_code_by_collector' => 'nullable|string',
         'corrected_code_by_nrgb' => 'nullable|string',
         'accession_code' => 'required|string',
@@ -84,11 +72,34 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
         'project_no' => 'nullable|string',
         'project_leader_name' => 'nullable|string',
         'research_leader_name' => 'nullable|string',
-        'organization_id' => 'nullable|exists:organizations,id',
     ];
-
+    protected $casts = ['taxonomy_data' => 'json', 'organization' => 'json'];
     protected $with = ['taxonomy', 'audits'];
     protected $appends = ['last_audit', 'climate', 'associated_specie', 'community'];
+
+    public function __construct(array $attributes = array())
+    {
+        $this->setRawAttributes(
+            array(
+                'taxonomy_data' => json_encode(self::TAXONOMY, JSON_THROW_ON_ERROR),
+                'organization' => json_encode(self::ORGANIZATION, JSON_THROW_ON_ERROR),
+            ), true
+        );
+        parent::__construct($attributes);
+    }
+
+    /**
+     * build image in different sizes
+     */
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('images')
+            ->useFallbackUrl('/assets/img/no-image.jpg')
+            ->useFallbackPath(public_path('/assets/img/no-image.jpg'))
+            ->singleFile()
+            ->withResponsiveImages();
+    }
 
 
 }

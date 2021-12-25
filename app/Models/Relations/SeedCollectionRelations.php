@@ -9,6 +9,7 @@ use App\Models\Location;
 use App\Models\Organization;
 use App\Models\Project;
 use App\Models\SeedGeneral;
+use App\Models\SeedLocation;
 use App\Models\Taxonomy;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -93,15 +94,7 @@ trait SeedCollectionRelations
      */
     public function location(): BelongsTo
     {
-        return $this->belongsTo(Location::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function organization(): BelongsTo
-    {
-        return $this->belongsTo(Organization::class);
+        return $this->belongsTo(SeedLocation::class);
     }
 
     /**
