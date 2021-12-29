@@ -11,6 +11,14 @@ class AddTaxonomyToSeedCollectionsTable extends Migration
     public function up()
     {
         Schema::table('seed_collections', function (Blueprint $table) {
+            Schema::disableForeignKeyConstraints();
+            \App\Models\SeedCollection::truncate();
+            \App\Models\SeedEvaluation::truncate();
+            \App\Models\SeedExchange::truncate();
+            \App\Models\SeedMorphology::truncate();
+            \App\Models\SeedMorphologyField::truncate();
+            \App\Models\SeedWeight::truncate();
+            Schema::enableForeignKeyConstraints();
             $table->longtext('taxonomy_data')->nullable();
         });
     }

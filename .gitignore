@@ -10,3 +10,5 @@
 /composer.lock
 composer.lock
 /.idea
+rr
+.rr.yaml

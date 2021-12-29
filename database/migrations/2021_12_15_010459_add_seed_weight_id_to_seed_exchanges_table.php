@@ -10,8 +10,14 @@ class AddSeedWeightIdToSeedExchangesTable extends Migration
     public function up()
     {
         Schema::table('seed_exchanges', function (Blueprint $table) {
-            $table->foreignIdFor(\App\Models\SeedWeight::class, 'seed_weight_id')->constrained();
-            $table->dropConstrainedForeignId('specimen_type_id');
+            Schema::disableForeignKeyConstraints();
+            \App\Models\SeedExchange::truncate();
+            Schema::enableForeignKeyConstraints();
+            if (!Schema::hasColumn('seed_exchanges', 'seed_weight_id')) {
+                $table->foreignIdFor(\App\Models\SeedWeight::class, 'seed_weight_id')->constrained();
+                $table->dropConstrainedForeignId('specimen_type_id');
+            }
+
             $table->dropColumn('collection_id');
             $table->dropConstrainedForeignId('seed_collection_id');
         });
