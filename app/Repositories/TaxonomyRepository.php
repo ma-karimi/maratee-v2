@@ -139,6 +139,6 @@ class TaxonomyRepository extends BaseRepository
      */
     public function getRelationFields(): array
     {
-        return ['family', 'genus', 'species', 'subspecies', 'variety', 'audtits'];
+        return ['family', 'genus', 'species', 'subspecies', 'variety', 'audits'];
     }
 }
