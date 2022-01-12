@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\ConvertTaxonomySeedCollection;
 use App\Console\Commands\FixHerbarium;
 use App\Console\Commands\ImportHerbarium;
 use App\Console\Commands\RemoveRepetitiveOrganization;
@@ -20,7 +21,8 @@ class Kernel extends ConsoleKernel
 //        ImportHerbarium::class,
 //        FixHerbarium::class,
         RemoveRepetitiveProvince::class,
-        RemoveRepetitiveOrganization::class
+        RemoveRepetitiveOrganization::class,
+        ConvertTaxonomySeedCollection::class
     ];
 
     /**

@@ -23,7 +23,22 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
     use SeedCollectionRelations, SeedCollectionScope, InteractsWithMedia, Auditable, AuditTrait;
 
     const TAXONOMY = ['family' => '', 'genus' => '', 'species' => '', 'subspecies' => '', 'variety' => '', 'persian_name' => '', 'local_name' => ''];
-    const ORGANIZATION = ['name' => '', 'city' => '', 'phone' => '', 'fax' => '', 'email' => '', 'department_name'];
+    const ORGANIZATION = ['name_en' => '', 'city' => '', 'phone' => '', 'fax' => '', 'email' => '', 'department_name' => ''];
+    const Location = [
+        "country" => '',
+        "provincestate" => '',
+        "region" => '',
+        "villageroad_no_or_name" => '',
+        "latitude_degree" => '',
+        "latitude_minute" => '',
+        "latitude_second" => '',
+        "longitude_degree" => '',
+        "longitude_minute" => '',
+        "longitude_second" => '',
+        "altitude_m" => '',
+        "gps_used" => false,
+        "gps_datum" => '',
+    ];
     public static $climates = [
         'land_form_id' => 'nullable|exists:seed_generals,id',
         'slope_aspect_id' => 'nullable|exists:seed_generals,id',
@@ -38,8 +53,8 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
         'plants_sampled_no' => 'nullable|integer',
         'area_occupancy' => 'nullable',
         'flowering_time_id' => 'nullable|exists:seed_generals,id',
-//        'pollination_type_id' => 'nullable|exists:seed_generals,id',
-//        'pollination_agent_id' => 'nullable|exists:seed_generals,id',
+        'pollination_type_id' => 'nullable|exists:seed_generals,id',
+        'pollination_agent_id' => 'nullable|exists:seed_generals,id',
         'fruit_type_id' => 'nullable|exists:seed_generals,id',
         'date_harvesting_id' => 'nullable||exists:seed_generals,id',
         'plant_height' => 'nullable|string',
@@ -64,7 +79,6 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
         'corrected_code_by_nrgb' => 'nullable|string',
         'accession_code' => 'required|string',
         'voucher_no' => 'nullable|string',
-        'dna' => 'nullable|in:0,1'
     ];
     public static $projects = [
         'seed_collected_from_id' => 'nullable|exists:seed_generals,id',
@@ -73,9 +87,9 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
         'project_leader_name' => 'nullable|string',
         'research_leader_name' => 'nullable|string',
     ];
-    protected $casts = ['taxonomy_data' => 'json', 'organization' => 'json'];
-    protected $with = ['taxonomy', 'audits'];
-    protected $appends = ['last_audit', 'climate', 'associated_specie', 'community'];
+    protected $casts = ['taxonomy_data' => 'json', 'organization' => 'json', 'location' => 'json'];
+    protected $with = ['audits'];
+    protected $appends = ['last_audit'];
 
     public function __construct(array $attributes = array())
     {
@@ -83,6 +97,7 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
             array(
                 'taxonomy_data' => json_encode(self::TAXONOMY, JSON_THROW_ON_ERROR),
                 'organization' => json_encode(self::ORGANIZATION, JSON_THROW_ON_ERROR),
+                'location' => json_encode(self::Location, JSON_THROW_ON_ERROR),
             ), true
         );
         parent::__construct($attributes);

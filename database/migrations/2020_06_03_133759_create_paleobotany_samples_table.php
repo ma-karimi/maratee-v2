@@ -33,7 +33,7 @@ class CreatePaleobotanySamplesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('paleo_taxonomies');
+        Schema::drop('paleobotany_samples');
     }
 
 }

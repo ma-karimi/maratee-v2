@@ -20,8 +20,7 @@ class CreateSeedLocationsTable extends Migration
             $table->string('city_name')->nullable();
             $table->string('region_name')->nullable();
             $table->string('village_name')->nullable();
-            $table->integer('min_altitude')->nullable();
-            $table->integer('max_altitude')->nullable();
+            $table->integer('altitude')->nullable();
             $table->point('point')->nullable();
             $table->text('description')->nullable();
             $table->boolean('gps_used')->default(0);

@@ -45,7 +45,7 @@ class CreateSeedMorphologiesTable extends Migration
             $table->foreign('specimen_type_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('collection_id')->references('id')->on('seed_generals')->onUpdate('NO ACTION')->onDelete('CASCADE');
             $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('NO ACTION')->onDelete('CASCADE');
-            $table->foreign('field_id')->references('id')->on('seed_morphology_fields')->onUpdate('NO ACTION')->onDelete('CASCADE');
+//            $table->foreign('field_id')->references('id')->on('seed_morphology_fields')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
 
         Schema::create('morphology_variables', function (Blueprint $table) {

@@ -158,14 +158,6 @@ trait SeedCollectionRelations
     /**
      * @return BelongsTo
      */
-    public function taxonomy(): BelongsTo
-    {
-        return $this->belongsTo(Taxonomy::class, 'taxonomy_id')->withTrashed();
-    }
-
-    /**
-     * @return BelongsTo
-     */
     public function soilDepth(): BelongsTo
     {
         return $this->belongsTo(SeedGeneral::class, 'soil_depth_id')->where('seed_generals.type_id', 4);
@@ -208,69 +200,6 @@ trait SeedCollectionRelations
      */
     public function specimenType(): BelongsTo
     {
-        return $this->belongsTo(SeedGeneral::class, 'specimen_type_collect_id')->where('seed_generals.type_id', 1);
-    }
-
-    public function getClimateAttribute()
-    {
-        $item = null;
-        if ($this->relationLoaded('climates') && $this->climates()->count()) {
-            $item .= $this->climates->implode('name', ' & ');
-
-        }
-
-        return $item;
-    }
-
-    /**
-     * @return BelongsToMany
-     */
-    public function climates(): BelongsToMany
-    {
-        return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')
-            ->whereNull('seed_general_collections.deleted_at')
-            ->where('seed_generals.type_id', 20)->latest()->withTimestamps();
-    }
-
-    public function getAssociatedSpecieAttribute()
-    {
-        $item = null;
-        if ($this->relationLoaded('associatedSpecies') && $this->associatedSpecies()->count()) {
-            $item .= $this->associatedSpecies->implode('name', ' & ');
-
-        }
-
-        return $item;
-    }
-
-    /**
-     * @return BelongsToMany
-     */
-    public function associatedSpecies(): BelongsToMany
-    {
-        return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')
-            ->where('seed_generals.type_id', 22)
-            ->latest()->withTimestamps()->whereNull('seed_general_collections.deleted_at');
-    }
-
-    public function getCommunityAttribute()
-    {
-        $item = null;
-        if ($this->relationLoaded('communityTypes') && $this->communityTypes()->count()) {
-            $item .= $this->communityTypes->implode('name', ' & ');
-
-        }
-
-        return $item;
-    }
-
-    /**
-     * @return BelongsToMany
-     */
-    public function communityTypes(): BelongsToMany
-    {
-        return $this->belongsToMany(SeedGeneral::class, 'seed_general_collections')
-            ->where('seed_generals.type_id', 21)->latest()->withTimestamps()
-            ->whereNull('seed_general_collections.deleted_at');
+        return $this->belongsTo(SeedGeneral::class, 'specimen_type_id')->where('seed_generals.type_id', 1);
     }
 }

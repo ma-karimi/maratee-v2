@@ -2,8 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Imports\SeedCollectionImport;
+use App\Imports\SeedWeightImport;
 use App\Models\SeedCollection;
 use Illuminate\Console\Command;
+use Maatwebsite\Excel\Facades\Excel;
 
 /**
  * Class ConvertTaxonomySeedCollection
@@ -44,10 +47,8 @@ class ConvertTaxonomySeedCollection extends Command
      */
     public function handle()
     {
-
-        SeedCollection::without(['audit', 'audits'])->with('taxonomy')->has('taxonomy')->get()
-            ->each(function ($q) {
-                $q->update(['taxonomy_data' => SeedCollection::TAXONOMY]);
-            });
+        ini_set('max_execution_time', 9000);
+        ini_set('memory_limit', '4000M');
+        Excel::import(new SeedCollectionImport(), public_path('/excels/collection1400.xlsx'));
     }
 }

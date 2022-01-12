@@ -20,7 +20,6 @@ class AddProjectToSeedEvaluationsTable extends Migration
             $table->string('research_leader_name')->nullable();
             $table->string('project_no')->nullable();
             $table->string('research_no')->nullable();
-            $table->string('accession_code');
 
             $table->dropForeign(['project_id']);
             $table->dropForeign(['seed_collection_id']);
