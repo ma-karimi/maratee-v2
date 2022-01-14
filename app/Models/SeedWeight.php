@@ -40,6 +40,41 @@ class SeedWeight extends BaseModel implements HasMedia, AuditableContract
 
     protected $with = ['audits'];
     protected $appends = ['last_audit'];
+    protected $casts = ['specimen_type_collections' => 'json'];
+
+    /**
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \JsonException
+     */
+    public function __construct(array $attributes = array())
+    {
+        $specimen_type_collections = [];
+        if (request()->get('collection_name') == 'Active Collection') {
+            $specimen_type_collections = ['Seed in Active Collection', 'Fruit in Active Collection'];
+        }
+        if (request()->get('collection_name') == 'Base Collection') {
+            $specimen_type_collections = ['Seed in Base Collection', 'Fruit in Base Collection'];
+        }
+        if (request()->get('collection_name') == 'Duplicate Collection') {
+            $specimen_type_collections = ['Seed in Duplicate Collection', 'Fruit in Duplicate Collection'];
+        }
+        if (request()->get('collection_name') == 'Regenerated in Base Collection') {
+            $specimen_type_collections = ['Regenerated Seed in Base Collection', 'Regenerated Fruit in Base Collection'];
+        }
+        if (request()->get('collection_name') == 'Regenerated in Active Collection') {
+            $specimen_type_collections = ['Regenerated Seed in Active Collection', 'Regenerated Fruit in Active Collection'];
+        }
+        if (request()->get('collection_name') == 'Regenerated in Duplicate Collection') {
+            $specimen_type_collections = ['Regenerated Seed in Duplicate Collection', 'Regenerated Fruit in Duplicate Collection'];
+        }
+        $this->setRawAttributes(
+            array(
+                'specimen_type_collections' => json_encode($specimen_type_collections, JSON_THROW_ON_ERROR),
+            ), true
+        );
+        parent::__construct($attributes);
+    }
 
     /**
      * @return BelongsTo

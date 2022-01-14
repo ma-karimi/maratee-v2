@@ -62,11 +62,9 @@ class SeedCollectionRepository extends BaseRepository
         if (SeedCollection::where('accession_code', $input['accession_code'])->exists()) {
             throw ValidationException::withMessages(['accession_code' => 'The accession code has already been taken.']);
         }
-
-        if (request()->filled('location')) {
-            $input['location_id'] = $this->locationRepo->create($input['location'])->id;
-        }
-        return parent::create(Arr::except($input, ['location']));
+        $input['taxonomy_data'] = array_merge(SeedCollection::TAXONOMY, collect($input['taxonomy_data'])->filter()->all());
+        $input['location'] = array_merge(SeedCollection::Location, collect($input['location'])->filter()->all());
+        return parent::create($input);
     }
 
     /**
@@ -87,17 +85,15 @@ class SeedCollectionRepository extends BaseRepository
         if (SeedCollection::where('accession_code', $input['accession_code'])->where('id', '!=', $id)->exists()) {
             throw ValidationException::withMessages(['accession_code' => 'The accession code has already been taken.']);
         }
-        if (request()->filled(['location_id', 'location'])) {
-            $input['location_id'] = $this->locationRepo->update($input['location'], $input['location']['id'])->id;
-        } else if (request()->filled(['location'])) {
-            $input['location_id'] = $this->locationRepo->create($input['location'])->id;
+        if (request()->filled('organization')) {
+            $input['organization'] = array_merge(SeedCollection::ORGANIZATION, collect($input['organization'])->filter()->all());
         }
-        return parent::update(Arr::except($input, ['location', 'collect', 'id']), $id);
+        return parent::update(Arr::except($input, ['collect', 'id']), $id);
     }
 
     public function getRelationFields()
     {
-        return ['location', 'landForm', 'project', 'drainage', 'fruitType', 'habitat', 'usedPart', 'growthForm', 'lifeForm', 'consumption', 'motherHealth', 'pollinationAgent', 'pollinationType', 'collectedFrom', 'slopeAspect', 'soilDepth', 'soilErosion', 'soilLime', 'soilSalinity', 'soilTexture', 'specimenType', 'associatedSpecies', 'communityTypes', 'climates', 'media', 'floweringTime', 'harvestingTime'];
+        return ['landForm', 'drainage', 'fruitType', 'habitat', 'usedPart', 'growthForm', 'lifeForm', 'consumption', 'motherHealth', 'pollinationAgent', 'pollinationType', 'collectedFrom', 'slopeAspect', 'soilDepth', 'soilErosion', 'soilLime', 'soilSalinity', 'soilTexture', 'specimenType',/* 'associatedSpecies',*/ /*'communityTypes',*/ /*'climates',*/ 'media'/*, 'floweringTime', 'harvestingTime'*/];
     }
 
     public function storePlantFlowering($input, $id)
@@ -112,29 +108,11 @@ class SeedCollectionRepository extends BaseRepository
 
     public function storeClimate($input, $id)
     {
-        $seed_collection = parent::update(Arr::except($input, ['climates', 'community_types', 'associated_species']), $id);
-        $this->storePivot(is_array($input['climates']) ? $input['climates'] : [], $seed_collection->id, 20);
-        $this->storePivot(is_array($input['community_types']) ? $input['community_types'] : [], $seed_collection->id, 21);
-        $this->storePivot(is_array($input['associated_species']) ? $input['associated_species'] : [], $seed_collection->id, 22);
+        $seed_collection = parent::update(/*Arr::except($input, ['climates', 'community_types', 'associated_species'])*/ $input, $id);
+//        $this->storePivot(is_array($input['climates']) ? $input['climates'] : [], $seed_collection->id, 20);
+//        $this->storePivot(is_array($input['community_types']) ? $input['community_types'] : [], $seed_collection->id, 21);
+//        $this->storePivot(is_array($input['associated_species']) ? $input['associated_species'] : [], $seed_collection->id, 22);
         return $seed_collection;
-    }
-
-    private function storePivot($input, $id, $type_id)
-    {
-        SeedGeneralCollection::where('seed_collection_id', $id)
-            ->whereNotIn('seed_general_id', $input)
-            ->where('seed_general_type_id', $type_id)
-            ->delete();
-
-        if (!empty($input) && count($input)) {
-            foreach ($input as $item) {
-                SeedGeneralCollection::firstOrCreate([
-                    'seed_collection_id' => $id,
-                    'seed_general_type_id' => $type_id,
-                    'seed_general_id' => $item,
-                ]);
-            }
-        }
     }
 
     /**
@@ -168,10 +146,23 @@ class SeedCollectionRepository extends BaseRepository
         }
     }
 
+    private function storePivot($input, $id, $type_id)
+    {
+        SeedGeneralCollection::where('seed_collection_id', $id)
+            ->whereNotIn('seed_general_id', $input)
+            ->where('seed_general_type_id', $type_id)
+            ->delete();
 
-
-
-
+        if (!empty($input) && count($input)) {
+            foreach ($input as $item) {
+                SeedGeneralCollection::firstOrCreate([
+                    'seed_collection_id' => $id,
+                    'seed_general_type_id' => $type_id,
+                    'seed_general_id' => $item,
+                ]);
+            }
+        }
+    }
 
     /**
      * @param $input

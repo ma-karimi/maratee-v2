@@ -4,8 +4,9 @@ namespace App\Models;
 
 use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Facades\Log;
+use Jedrzej\Searchable\Constraint;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Spatie\MediaLibrary\HasMedia;
@@ -21,6 +22,17 @@ class SeedEvaluation extends BaseModel implements HasMedia, AuditableContract
 
     use InteractsWithMedia, Auditable, AuditTrait;
 
+    const ORGANIZATION = ['name_en' => '', 'city' => '', 'phone' => '', 'fax' => '', 'email' => '', 'department_name' => ''];
+
+    public function __construct(array $attributes = array())
+    {
+        $this->setRawAttributes(
+            array(
+                'organization' => json_encode(self::ORGANIZATION, JSON_THROW_ON_ERROR),
+            ), true
+        );
+        parent::__construct($attributes);
+    }
 
     public static $rules = [
         'accession_code' => 'required|string',
@@ -58,7 +70,7 @@ class SeedEvaluation extends BaseModel implements HasMedia, AuditableContract
     protected $dates = ['created_at', 'deleted_at', 'updated_at'];
     protected $appends = ['viability', 'germination', 'last_audit'];
     protected $with = ['audits'];
-    protected $casts = ['germination_values' => 'json', 'seedling_sizes' => 'json', 'seed_sizes' => 'json', 'traits' => 'json'];
+    protected $casts = ['germination_values' => 'json', 'seedling_sizes' => 'json', 'seed_sizes' => 'json', 'traits' => 'json', 'organization' => 'json'];
 
     public function research()
     {
@@ -157,4 +169,74 @@ class SeedEvaluation extends BaseModel implements HasMedia, AuditableContract
 //    {
 //        return $this->hasMany(GerminationNumber::class);
 //    }
+
+    protected function processOrganizationNameFilter(Builder $builder, Constraint $constraint)
+    {
+        $data = $constraint->getValue();
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->where('organization->name_en', 'LIKE', "%${data}%");
+
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processOrganizationCityFilter(Builder $builder, Constraint $constraint)
+    {
+        $data = $constraint->getValue();
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->where('organization->city', 'LIKE', "%${data}%");
+
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processOrganizationPhoneFilter(Builder $builder, Constraint $constraint)
+    {
+        $data = $constraint->getValue();
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->where('organization->phone', 'LIKE', "%${data}%");
+
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processOrganizationFaxFilter(Builder $builder, Constraint $constraint)
+    {
+        $data = $constraint->getValue();
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->where('organization->fax', 'LIKE', "%${data}%");
+
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processOrganizationEmailFilter(Builder $builder, Constraint $constraint)
+    {
+        $data = $constraint->getValue();
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->where('organization->email', 'LIKE', "%${data}%");
+
+
+            return true;
+        }
+        return false;
+    }
+
+    protected function processOrganizationDepartmentFilter(Builder $builder, Constraint $constraint)
+    {
+        $data = $constraint->getValue();
+        if ($constraint->getOperator() === Constraint::OPERATOR_LIKE || $constraint->getOperator() === Constraint::OPERATOR_EQUAL) {
+            $builder->where('organization->department_name', 'LIKE', "%${data}%");
+            return true;
+        }
+        return false;
+    }
 }

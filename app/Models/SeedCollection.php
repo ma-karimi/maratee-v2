@@ -27,6 +27,7 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
     const Location = [
         "country" => '',
         "provincestate" => '',
+        "city" => '',
         "region" => '',
         "villageroad_no_or_name" => '',
         "latitude_degree" => '',
@@ -52,7 +53,6 @@ class SeedCollection extends BaseModel implements HasMedia, AuditableContract
         'approximare_area_of_plant' => 'nullable|integer',
         'plants_sampled_no' => 'nullable|integer',
         'area_occupancy' => 'nullable',
-        'flowering_time_id' => 'nullable|exists:seed_generals,id',
         'pollination_type_id' => 'nullable|exists:seed_generals,id',
         'pollination_agent_id' => 'nullable|exists:seed_generals,id',
         'fruit_type_id' => 'nullable|exists:seed_generals,id',

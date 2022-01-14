@@ -4,15 +4,10 @@
 namespace App\Models\Relations;
 
 
-use App\Models\General;
-use App\Models\Location;
-use App\Models\Organization;
 use App\Models\Project;
 use App\Models\SeedGeneral;
 use App\Models\SeedLocation;
-use App\Models\Taxonomy;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait SeedCollectionRelations
 {
@@ -46,7 +41,7 @@ trait SeedCollectionRelations
      */
     public function usedPart(): BelongsTo
     {
-        return $this->belongsTo(SeedGeneral::class, 'general_used_part_id')->where('seed_generals.type_id', 18);
+        return $this->belongsTo(SeedGeneral::class, 'used_part_id')->where('seed_generals.type_id', 18);
     }
 
     /**

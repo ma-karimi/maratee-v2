@@ -2,9 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Imports\SeedCollectionImport;
-use App\Imports\SeedWeightImport;
-use App\Models\SeedCollection;
+use App\Imports\SeedExchangesImport;
 use Illuminate\Console\Command;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -49,6 +47,11 @@ class ConvertTaxonomySeedCollection extends Command
     {
         ini_set('max_execution_time', 9000);
         ini_set('memory_limit', '4000M');
-        Excel::import(new SeedCollectionImport(), public_path('/excels/collection1400.xlsx'));
+//        Excel::import(new SeedCollectionImport(), public_path('/excels/collection1400.xlsx'));
+//        Excel::import(new SeedWeightImport(), public_path('/excels/seed_weight.xlsx'));
+//        Excel::import(new SeedEvaluationImport(), public_path('/excels/Germination.xlsx'));
+//        Excel::import(new SeedMorphologiesImport(), public_path('/excels/Morphology.xlsx'));
+//        Excel::import(new SeedMorphologyFieldsImport(), public_path('/excels/MorphologyField.xlsx'));
+        Excel::import(new SeedExchangesImport(), public_path('/excels/Exchange.xlsx'));
     }
 }

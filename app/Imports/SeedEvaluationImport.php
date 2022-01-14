@@ -14,14 +14,19 @@ class SeedEvaluationImport implements OnEachRow, WithHeadingRow
 {
 
 
+    /**
+     * @throws \Throwable
+     */
     public function onRow(Row $row)
     {
 //        ini_set('max_execution_time', 9000);
 //        ini_set('memory_limit', '2000M');
         $row = $row->toArray();
-
-        throw_if(empty($row['accession_code']) || empty($row['collection']), new Exception('accession_code and collection fields are required'));
-        if (!empty($row) && !empty($row['accession_code']) && !empty($row['collection'])) {
+        foreach (array_keys($this->keys()) as $key) {
+            throw_if(!in_array($key, array_keys($row)), new Exception("{$key} column is required"));
+        }
+        throw_if(empty($row['accession_code']) || empty($row['specimen_typecollection_name']), new Exception('Accession code and Specimen type/collection name fields are required'));
+        if (!empty($row) && !empty($row['accession_code']) && !empty($row['specimen_typecollection_name'])) {
             $row = $this->storeCollection($row);
             $row = collect($row)->filter()->all();
             $model = SeedEvaluation::create($this->data($row));
@@ -29,21 +34,69 @@ class SeedEvaluationImport implements OnEachRow, WithHeadingRow
         }
     }
 
+    private function keys()
+    {
+        return [
+            "accession_code" => null,
+            "regeneration_and_evaluation_code" => null,
+            "specimen_typecollection_name" => null,
+            "name_of_organization" => null,
+            "name_of_departmentgroup" => null,
+            "city" => null,
+            "phone" => null,
+            "fax" => null,
+            "email_address" => null,
+            "project_title" => null,
+            "research_title" => null,
+            "project_leader_name" => null,
+            "research_leader_name" => null,
+            "project_no" => null,
+            "research_no" => null,
+            "research_leader_mobile" => null,
+            "co_reasercher_name" => null,
+            "number_of_exchanged_seeds" => null,
+            "dormancy_breaking_treatments" => null,
+            "light_hr" => null,
+            "dark_hr" => null,
+            "light_c" => null,
+            "dark_c" => null,
+            "date_started_test_year" => null,
+            "date_started_test_month" => null,
+            "date_started_test_day" => null,
+            "date_started_germination_counting_year" => null,
+            "date_started_grmination_counting_month" => null,
+            "date_started_grmination_counting_day" => null,
+            "repeat" => null,
+            "number_of_planted_seeds" => null,
+            "dormancy_termination_day" => null,
+            "germination_period_day" => null,
+            "number_of_fresh_non_germinated_seed" => null,
+            "number_of_rotten_seed" => null,
+            "number_of_abnormal_seedling" => null,
+            "germination" => null,
+            "viability" => null,
+            "number_of_seedling_mortality" => null,
+            "mean_fresh_seedling_weight_g_in_10_seedlings" => null,
+            "mean_dry_seedling_weight_g_in_10_seedlings" => null,
+            "dry_matter" => null,
+            "describe_the_dormancy_breaking_treatment" => null,
+            "other_detales" => null,
+            "day" => null,
+            "germinated_number" => null,
+            "radical_length" => null,
+            "pedicle_length" => null,
+            "seed_lenght" => null,
+            "seed_width" => null,
+            "seed_image_jpg_up_to_200_kb" => null,
+
+        ];
+    }
+
     private function storeCollection($row)
     {
         $row['collection_id'] = null;
-        if (!empty($row['collection'])) {
-            $row['collection_id'] = SeedGeneral::firstOrCreate(['name' => $row['collection'], 'type_id' => 19])->id;
-        }
-
-        $row['specimen_type_id'] = null;
-        if (!empty($row['specimen_type_id'])) {
-            $row['specimen_type_id'] = SeedGeneral::firstOrCreate(['name' => $row['specimen_type_id'], 'type_id' => 1])->id;
-        }
-
-        $row['dormancy_breaking_id'] = null;
-        if (!empty($row['dormancy_breaking_id'])) {
-            $row['dormancy_breaking_id'] = SeedGeneral::firstOrCreate(['name' => $row['dormancy_breaking_id'], 'type_id' => 23])->id;
+        if (!empty($row['specimen_typecollection_name'])) {
+            $row['collection_id'] = SeedGeneral::firstOrCreate(['name' => $row['specimen_typecollection_name'], 'type_id' => 19])->id;
         }
 
 
@@ -52,49 +105,87 @@ class SeedEvaluationImport implements OnEachRow, WithHeadingRow
 
     private function data(array $row)
     {
+        $germinationValues = [];
+        for ($i = 1; $i = 100; $i++) {
+            $d = $row['day_' . $i];
+            $g = $row['germinated_number_' . $i];
+            if (!empty($d) && !empty($g)) {
+                $germinationValues[] = ['day' => $d, 'germinatedNo' => $g];
+            }
+        }
+        $seedlingSizes = [];
+        for ($i = 1; $i = 100; $i++) {
+            $d = $row['radical_length_' . $i];
+            $g = $row['pedicle_length_' . $i];
+            if (!empty($d) && !empty($g))
+                $seedlingSizes[] = ['radical' => $d, 'pedical' => $g];
+        }
+        $seedSizes = [];
+        for ($i = 1; $i = 100; $i++) {
+            $l = $row['seed_lenght_' . $i];
+            $w = $row['seed_width_' . $i];
+            if (!empty($d) && !empty($g))
+                $seedSizes[] = ['length' => $l, 'width' => $w];
+        }
+//        $radicals = [];
+//        for ($i = 1; $i = 100; $i++) {
+//            $r = $row['radical_length_' . $i];
+//            if (!empty($d) && !empty($g))
+//                $radicals[] = ['value' => $r];
+//        }
+        $traits = [];
+        for ($i = 1; $i = 100; $i++) {
+            $t = $row['trait_value_' . $i];
+            if (!empty($d) && !empty($g))
+                $traits[] = ['value' => $t];
+        }
+        $organization = [
+            'name_en' => $row['name_of_organization'] ?? '',
+            'city' => $row['city'] ?? '',
+            'phone' => $row['phone'] ?? '',
+            'fax' => $row['fax'] ?? '',
+            'email' => $row['email_address'] ?? '',
+            'department_name' => $row['name_of_departmentgroup'] ?? ''
+        ];
         return [
+            'germination_values' => $germinationValues,
+            'seedling_sizes' => $seedlingSizes,
+            'seed_sizes' => $seedSizes,
+            'traits' => $traits,
+            'organization' => $organization,
             'collection_id' => $row['collection_id'] ?? null,
-            'project_id' => $row['project_id'] ?? null,
             'specimen_type_id' => $row['specimen_type_id'] ?? null,
-            'regeneration_code' => $row['regeneration_code'] ?? null,
-            'number_of_exchanged_seeds' => !empty($row['number_of_exchanged_seeds']) ? "{$row['number_of_exchanged_seeds']}" :  null,
-            'light_hr' => !empty($row['light_hr']) ? "{$row['light_hr']}" :  null,
-            'light_c' => !empty($row['light_c']) ? "{$row['light_c']}" :  null,
-            'dark_hr' => !empty($row['dark_hr']) ? "{$row['dark_hr']}" :  null,
-            'dark_c' => !empty($row['dark_c']) ? "{$row['dark_c']}" :  null,
-            'started_test' => !empty($row['started_test']) ? "{$row['started_test']}" :  null,
-            'started_germination' => !empty($row['started_germination']) ? "{$row['started_germination']}" :  null,
-            'repeat' => !empty($row['repeat']) ? "{$row['repeat']}" :  null,
-            'planted_seeds' => !empty($row['planted_seeds']) ? "{$row['planted_seeds']}" :  null,
-            'dormancy_termination' => !empty($row['dormancy_termination']) ? "{$row['dormancy_termination']}" :  null,
-            'germination_period' => !empty($row['germination_period']) ? "{$row['germination_period']}" :  null,
-            'fresh_non_germinated' => !empty($row['fresh_non_germinated']) ? "{$row['fresh_non_germinated']}" :  null,
-            'rotten_seed' => !empty($row['rotten_seed']) ? "{$row['rotten_seed']}" :  null,
-            'abnormal' => !empty($row['abnormal']) ? "{$row['abnormal']}" :  null,
-            'germinated_number' => !empty($row['germinated_number']) ? "{$row['germinated_number']}" :  null,
-            'seedling_mortality' => !empty($row['seedling_mortality']) ? "{$row['seedling_mortality']}" :  null,
-            'mean_fresh_seedling_weight' => !empty($row['mean_fresh_seedling_weight']) ? "{$row['mean_fresh_seedling_weight']}" :  null,
-            'mean_dry_seedling_weight' => !empty($row['mean_dry_seedling_weight']) ? "{$row['mean_dry_seedling_weight']}" :  null,
-            'dry_matter' => !empty($row['dry_matter']) ? "{$row['dry_matter']}" :  null,
-            'dormancy_breaking_id' => !empty($row['dormancy_breaking_id']) ? "{$row['dormancy_breaking_id']}" :  null,
-            'describe_dormancy_treatment' => !empty($row['describe_dormancy_treatment']) ? "{$row['describe_dormancy_treatment']}" :  null,
-            'description' => !empty($row['description']) ? "{$row['description']}" :  null,
-            'min_radical' => !empty($row['min_radical']) ? "{$row['min_radical']}" :  null,
-            'max_radical' => !empty($row['max_radical']) ? "{$row['max_radical']}" :  null,
-            'min_shoot' => !empty($row['min_shoot']) ? "{$row['min_shoot']}" :  null,
-            'max_shoot' => !empty($row['max_shoot']) ? "{$row['max_shoot']}" :  null,
-            'min_seed' => !empty($row['min_seed']) ? "{$row['min_seed']}" :  null,
-            'max_seed' => !empty($row['max_seed']) ? "{$row['max_seed']}" :  null,
-            'min_seed_width' => !empty($row['min_seed_width']) ? "{$row['min_seed_width']}" :  null,
-            'max_seed_width' => !empty($row['max_seed_width']) ? "{$row['max_seed_width']}" :  null,
-            'project_title' => !empty($row['project_title']) ? "{$row['project_title']}" :  null,
-            'research_title' => !empty($row['research_title']) ? "{$row['research_title']}" :  null,
-            'project_leader_name' => !empty($row['project_leader_name']) ? "{$row['project_leader_name']}" :  null,
-            'research_leader_name' => !empty($row['research_leader_name']) ? "{$row['research_leader_name']}" :  null,
-            'project_no' => !empty($row['project_no']) ? "{$row['project_no']}" :  null,
-            'research_no' => !empty($row['research_no']) ? "{$row['research_no']}" :  null,
-            'accession_code' => !empty($row['accession_code']) ? "{$row['accession_code']}" :  0,
-            'germinated_seed_no' => !empty($row['germinated_seed_no']) ? "{$row['germinated_seed_no']}" :  null,
+            'regeneration_code' => $row['regeneration_and_evaluation_code'] ?? null,
+            'number_of_exchanged_seeds' => !empty($row['number_of_exchanged_seeds']) ? "{$row['number_of_exchanged_seeds']}" : null,
+            'light_hr' => !empty($row['light_hr']) ? $row['light_hr'] : null,
+            'light_c' => !empty($row['light_c']) ? $row['light_c'] : null,
+            'dark_hr' => !empty($row['dark_hr']) ? $row['dark_hr'] : null,
+            'dark_c' => !empty($row['dark_c']) ? $row['dark_c'] : null,
+            'started_test' => !empty($row['started_test']) ? $row['started_test'] : null,
+            'started_germination' => !empty($row['started_germination']) ? $row['started_germination'] : null,
+            'repeat' => !empty($row['repeat']) ? $row['repeat'] : null,
+            'planted_seeds' => !empty($row['number_of_planted_seeds']) ? $row['number_of_planted_seeds'] : null,
+            'dormancy_termination' => !empty($row['dormancy_termination_day']) ? $row['dormancy_termination_day'] : null,
+            'germination_period' => !empty($row['germination_period_day']) ? $row['germination_period_day'] : null,
+            'fresh_non_germinated' => !empty($row['number_of_fresh_non_germinated_seed']) ? $row['number_of_fresh_non_germinated_seed'] : null,
+            'rotten_seed' => !empty($row['number_of_rotten_seed']) ? $row['number_of_rotten_seed'] : null,
+            'abnormal' => !empty($row['number_of_abnormal_seedling']) ? $row['number_of_abnormal_seedling'] : null,
+            'germinated_number' => !empty($row['germinated_number']) ? $row['germinated_number'] : null,
+            'seedling_mortality' => !empty($row['number_of_seedling_mortality']) ? $row['number_of_seedling_mortality'] : null,
+            'mean_fresh_seedling_weight' => !empty($row['mean_fresh_seedling_weight_g_in_10_seedlings']) ? $row['mean_fresh_seedling_weight_g_in_10_seedlings'] : null,
+            'mean_dry_seedling_weight' => !empty($row['mean_dry_seedling_weight_g_in_10_seedlings']) ? $row['mean_dry_seedling_weight_g_in_10_seedlings'] : null,
+            'dry_matter' => !empty($row['dry_matter']) ? $row['dry_matter'] : null,
+            'dormancy_breaking_treatments' => !empty($row['dormancy_breaking_treatments']) ? $row['dormancy_breaking_treatments'] : null,
+            'describe_dormancy_treatment' => !empty($row['describe_the_dormancy_breaking_treatment']) ? $row['describe_the_dormancy_breaking_treatment'] : null,
+            'description' => !empty($row['other_detales']) ? $row['other_detales'] : null,
+            'project_title' => !empty($row['project_title']) ? $row['project_title'] : null,
+            'research_title' => !empty($row['research_title']) ? $row['research_title'] : null,
+            'project_leader_name' => !empty($row['project_leader_name']) ? $row['project_leader_name'] : null,
+            'research_leader_name' => !empty($row['research_leader_name']) ? $row['research_leader_name'] : null,
+            'research_leader_mobile' => !empty($row['research_leader_mobile']) ? $row['research_leader_mobile'] : null,
+            'project_no' => !empty($row['project_no']) ? $row['project_no'] : null,
+            'research_no' => !empty($row['research_no']) ? $row['research_no'] : null,
+            'accession_code' => !empty($row['accession_code']) ? $row['accession_code'] : 0,
         ];
     }
 

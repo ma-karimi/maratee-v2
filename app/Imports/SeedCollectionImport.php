@@ -192,15 +192,6 @@ class SeedCollectionImport implements OnEachRow, WithHeadingRow
             $row['plant_consumption_value_id'] = SeedGeneral::firstOrCreate(['name' => $row['plant_consumption_value'], 'type_id' => 17])->id;
         }
 
-        $row['harvesting_time_id'] = null;
-        if (!empty($row['date_harvesting_month'])) {
-            $row['harvesting_time_id'] = SeedGeneral::firstOrCreate(['name' => $row['date_harvesting_month'], 'type_id' => 25])->id;
-        }
-
-        $row['flowering_time_id'] = null;
-        if (!empty($row['flowering_time_month'])) {
-            $row['flowering_time_id'] = SeedGeneral::firstOrCreate(['name' => $row['flowering_time_month'], 'type_id' => 25])->id;
-        }
         $row['pollination_type_id'] = null;
         if (!empty($row['pollination_type'])) {
             $row['pollination_type_id'] = SeedGeneral::firstOrCreate(['name' => $row['pollination_type'], 'type_id' => 10])->id;
@@ -239,6 +230,7 @@ class SeedCollectionImport implements OnEachRow, WithHeadingRow
         $location = [
             'country_name' => $row['country'] ?? '',
             'provincestate' => $row['provincestate'] ?? '',
+            'city' => $row['city'] ?? '',
             'region' => $row['region'] ?? '',
             'villageroad_no_or_name' => $row['villageroad_no_or_name'] ?? '',
             'altitude_m' => $row['altitude_m'] ?? '',
@@ -285,8 +277,8 @@ class SeedCollectionImport implements OnEachRow, WithHeadingRow
             'other_details' => !empty($row['other_details']) ? $row['other_details'] : null,
             'special_advise' => !empty($row['special_advise']) ? $row['special_advise'] : null,
             'collecting_date' => !empty($row['collecting_date']) ? $row['collecting_date'] : null,
-            'harvesting_time_id' => !empty($row['harvesting_time_id']) ? $row['harvesting_time_id'] : null,
-            'flowering_time_id' => !empty($row['flowering_time_id']) ? $row['flowering_time_id'] : null,
+            'date_harvesting_month' => !empty($row['date_harvesting_month']) ? $row['date_harvesting_month'] : null,
+            'flowering_time_month' => !empty($row['flowering_time_month']) ? $row['flowering_time_month'] : null,
             'shipping_date_year' => !empty($row['shipping_date_year']) ? $row['shipping_date_year'] : null,
             'shipping_date_month' => !empty($row['shipping_date_month']) ? $row['shipping_date_month'] : null,
             'shipping_date_day' => !empty($row['shipping_date_day']) ? $row['shipping_date_day'] : null,
