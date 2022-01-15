@@ -404,7 +404,7 @@ class SeedExchangeAPIController extends AppBaseController
             return $this->sendError('Seed Exchange not found');
         }
 
-        $seedExchange->delete();
+        $this->seedExchangeRepository->delete($id);
 
         return $this->sendResponse($id, 'Seed Exchange deleted successfully');
     }

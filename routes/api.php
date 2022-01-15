@@ -75,7 +75,7 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::apiResource('seed_weights', 'SeedWeightAPIController')->except('destroy');
 
-    Route::apiResource('seed_exchanges', 'SeedExchangeAPIController')->except('destroy');
+    Route::apiResource('seed_exchanges', 'SeedExchangeAPIController');
 
     Route::get('provinces/all', 'ProvinceAPIController@all');
 
@@ -212,12 +212,12 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::apiResource('roles', 'RoleAPIController');
 
-    Route::post('seed_collections/{id}/plant', 'SeedCollectionAPIController@storePlant')->withoutMiddleware('auth:api');
-    Route::post('seed_collections/{id}/soil', 'SeedCollectionAPIController@storeSoil')->withoutMiddleware('auth:api');
-    Route::post('seed_collections/{id}/climate', 'SeedCollectionAPIController@storeClimate')->withoutMiddleware('auth:api');
-    Route::post('seed_collections/{id}/project', 'SeedCollectionAPIController@storeProject')->withoutMiddleware('auth:api');
-    Route::post('seed_collections/{id}/media', 'SeedCollectionAPIController@storeMedia')->withoutMiddleware('auth:api');
-    Route::apiResource('seed_collections', 'SeedCollectionAPIController')->except('destroy')->withoutMiddleware('auth:api');
+    Route::post('seed_collections/{id}/plant', 'SeedCollectionAPIController@storePlant');
+    Route::post('seed_collections/{id}/soil', 'SeedCollectionAPIController@storeSoil');
+    Route::post('seed_collections/{id}/climate', 'SeedCollectionAPIController@storeClimate');
+    Route::post('seed_collections/{id}/project', 'SeedCollectionAPIController@storeProject');
+    Route::post('seed_collections/{id}/media', 'SeedCollectionAPIController@storeMedia');
+    Route::apiResource('seed_collections', 'SeedCollectionAPIController')->except('destroy');
 
 //Route::post('seed_evaluations/{id}/shoot', 'SeedEvaluationAPIController@storeShoot');
 //Route::post('seed_evaluations/{id}/length', 'SeedEvaluationAPIController@storeLength');

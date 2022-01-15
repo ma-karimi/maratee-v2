@@ -4,7 +4,6 @@ namespace App\Observers;
 
 
 use App\Models\SeedExchange;
-use App\Models\SeedGeneral;
 use App\Models\SeedWeight;
 use Illuminate\Support\Facades\Log;
 
@@ -20,91 +19,10 @@ class SeedExchangeObserver
      */
     public function deleting(SeedExchange $seedExchange)
     {
-        // weight has changed
-        $new_weight = $seedExchange->weight;
-        $old_weight = $seedExchange->getOriginal('weight');
-
-        $new_collection_id = $seedExchange->collection_id;
-        $old_collection_id = $seedExchange->getOriginal('collection_id');
-
-        $new_specimen_type_id = $seedExchange->specimen_type_id;
-        $old_specimen_type_id = $seedExchange->getOriginal('specimen_type_id');
-
-        $new_seed_collection_id = $seedExchange->seed_collection_id;
-        $old_seed_collection_id = $seedExchange->getOriginal('seed_collection_id');
-
-        $new_specimen_type = SeedGeneral::withTrashed()->find($new_specimen_type_id)->name;
-        if ($old_specimen_type_id) {
-            $old_specimen_type = SeedGeneral::withTrashed()->find($old_specimen_type_id)->name;
-        }
-
-
-        if ($old_specimen_type_id) {
-            Log::info([
-                'new_weight' => $new_weight,
-                'old_weight' => $old_weight,
-                'new_collection_id' => $new_collection_id,
-                'old_collection_id' => $old_collection_id,
-                'new_specimen_type_id' => $new_specimen_type_id,
-                'old_specimen_type_id' => $old_specimen_type_id,
-                'new_seed_collection_id' => $new_seed_collection_id,
-                'old_seed_collection_id' => $old_seed_collection_id,
-                'new_specimen_type' => $new_specimen_type,
-                'old_specimen_type' => $old_specimen_type,
-            ]);
-
-
-                SeedWeight::byCollection($old_collection_id)
-                    ->bySeedCollection($old_seed_collection_id)
-                    ->increment("total_${old_specimen_type}_weight", $old_weight);
-        }
+        $seedWeight = SeedWeight::find($seedExchange->seed_weight_id);
+        Log::info($seedWeight);
+        $seedWeight->increment($seedExchange->type, $seedExchange->exchanged_weight);
+        Log::info([$seedExchange->type, $seedExchange->exchanged_weight]);
     }
 
-    public function saving(SeedExchange $seedExchange)
-    {
-
-        // weight has changed
-        $new_weight = $seedExchange->weight;
-        $old_weight = $seedExchange->getOriginal('weight');
-
-        $new_collection_id = $seedExchange->collection_id;
-        $old_collection_id = $seedExchange->getOriginal('collection_id');
-
-        $new_specimen_type_id = $seedExchange->specimen_type_id;
-        $old_specimen_type_id = $seedExchange->getOriginal('specimen_type_id');
-
-        $new_seed_collection_id = $seedExchange->seed_collection_id;
-        $old_seed_collection_id = $seedExchange->getOriginal('seed_collection_id');
-
-        $new_specimen_type = SeedGeneral::withTrashed()->find($new_specimen_type_id)->name;
-        if ($old_specimen_type_id) {
-            $old_specimen_type = SeedGeneral::withTrashed()->find($old_specimen_type_id)->name;
-        }
-
-
-        if ($old_specimen_type_id) {
-            Log::info([
-                'new_weight' => $new_weight,
-                'old_weight' => $old_weight,
-                'new_collection_id' => $new_collection_id,
-                'old_collection_id' => $old_collection_id,
-                'new_specimen_type_id' => $new_specimen_type_id,
-                'old_specimen_type_id' => $old_specimen_type_id,
-                'new_seed_collection_id' => $new_seed_collection_id,
-                'old_seed_collection_id' => $old_seed_collection_id,
-                'new_specimen_type' => $new_specimen_type,
-                'old_specimen_type' => $old_specimen_type,
-            ]);
-            SeedWeight::byCollection($old_collection_id)
-                ->bySeedCollection($old_seed_collection_id)
-                ->increment("total_${old_specimen_type}_weight", $old_weight);
-
-        }
-        SeedWeight::byCollection($new_collection_id)
-            ->bySeedCollection($new_seed_collection_id)
-            ->decrement("total_${new_specimen_type}_weight", $new_weight);
-
-
-
-    }
 }

@@ -2,34 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\{City,
-    Contracts\BaseModel,
-    Country,
-    General,
-    MedicinalPlantType,
-    Medicine,
-    Method,
-    Organization,
-    Plant,
-    Product,
-    Protection,
-    Province,
-    SeedExchange};
-use App\Observers\{BaseModelObserver,
-    BaseObserver,
-    CityObserver,
-    CountryObserver,
-    GeneralObserver,
-    MedicinalPlantTypeObserver,
-    MedicineObserver,
-    MethodObserver,
-    OrganizationObserver,
-    PlantObserver,
-    ProductObserver,
-    ProtectionObserver,
-    ProvinceObserver,
-    SeedExchangeObserver};
-use Illuminate\Support\Facades\App;
+use App\Models\{SeedExchange};
+use App\Observers\{SeedExchangeObserver};
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
@@ -69,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
 //            Medicine::observe(MedicineObserver::class);
 //            Product::observe(ProductObserver::class);
 //        }
-//        SeedExchange::observe(SeedExchangeObserver::class);
+        SeedExchange::observe(SeedExchangeObserver::class);
 
         DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
         DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('point', 'point');

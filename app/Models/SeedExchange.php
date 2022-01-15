@@ -2,12 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\Contracts\AuditTrait;
 use App\Models\Contracts\BaseModel;
 use Illuminate\Database\Eloquent\Builder;
 use Jedrzej\Searchable\Constraint;
-use OwenIt\Auditing\Auditable;
-use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -17,9 +14,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  *      required={"seed_collection_id"},
  * )
  */
-class SeedExchange extends BaseModel implements HasMedia, AuditableContract
+class SeedExchange extends BaseModel implements HasMedia
 {
-    use InteractsWithMedia, Auditable, AuditTrait;
+    use InteractsWithMedia;
 
     const ORGANIZATION = ['name_en' => '', 'city' => '', 'phone' => '', 'fax' => '', 'email' => '', 'department_name' => ''];
     const SPECIMEN_TYPE_COLLECTION_NAME = [
