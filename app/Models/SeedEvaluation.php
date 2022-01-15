@@ -72,11 +72,6 @@ class SeedEvaluation extends BaseModel implements HasMedia, AuditableContract
     protected $with = ['audits'];
     protected $casts = ['germination_values' => 'json', 'seedling_sizes' => 'json', 'seed_sizes' => 'json', 'traits' => 'json', 'organization' => 'json'];
 
-    public function research()
-    {
-        return $this->morphOne(ActionHub::class, 'actionable')->where('action_id', 3);
-    }
-
     public function seedCollection()
     {
         return $this->belongsTo(SeedCollection::class, 'accession_code', 'accession_code');
@@ -121,22 +116,6 @@ class SeedEvaluation extends BaseModel implements HasMedia, AuditableContract
     public function collection()
     {
         return $this->belongsTo(SeedGeneral::class, 'collection_id')->where('seed_generals.type_id', 19);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function organization()
-    {
-        return $this->belongsTo(Organization::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function project()
-    {
-        return $this->belongsTo(Project::class);
     }
 
     public function getViabilityAttribute()

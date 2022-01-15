@@ -186,7 +186,7 @@ class SeedEvaluationRepository extends BaseRepository
 
     public function getRelationFields()
     {
-        return ['organization.city', 'organization:id,name_en,city_id', 'seedCollection:id,accession_code,taxonomy_id',  'shoots', 'radicals', 'lengths', 'widths', 'media', 'dormancyBreaking', 'specimenType', 'research', 'collection'];
+        return ['seedCollection:id,accession_code,taxonomy_data', 'shoots', 'radicals', 'lengths', 'widths', 'media', 'specimenType', 'collection'];
     }
 
     /**
