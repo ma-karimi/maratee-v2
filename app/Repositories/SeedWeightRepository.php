@@ -39,7 +39,32 @@ class SeedWeightRepository extends BaseRepository
 
     public function getRelationFields()
     {
-        return ['seedCollection:id,accession_code,taxonomy_id', 'collection'];
+        return ['seedCollection:id,accession_code,taxonomy_data', 'collection'];
+    }
+
+    public function create($input)
+    {
+        $specimen_type_collections = [];
+
+        if ($input['collection_name'] == 'Active Collection') {
+            $specimen_type_collections = ['Seed in Active Collection', 'Fruit in Active Collection'];
+        }
+        if ($input['collection_name'] == 'Base Collection') {
+            $specimen_type_collections = ['Seed in Base Collection', 'Fruit in Base Collection'];
+        }
+        if ($input['collection_name'] == 'Duplicate Collection') {
+            $specimen_type_collections = ['Seed in Duplicate Collection', 'Fruit in Duplicate Collection'];
+        }
+        if ($input['collection_name'] == 'Regenerated in Base Collection') {
+            $specimen_type_collections = ['Regenerated Seed in Base Collection', 'Regenerated Fruit in Base Collection'];
+        }
+        if ($input['collection_name'] == 'Regenerated in Active Collection') {
+            $specimen_type_collections = ['Regenerated Seed in Active Collection', 'Regenerated Fruit in Active Collection'];
+        }
+        if ($input['collection_name'] == 'Regenerated in Duplicate Collection') {
+            $specimen_type_collections = ['Regenerated Seed in Duplicate Collection', 'Regenerated Fruit in Duplicate Collection'];
+        }
+        return parent::create(array_merge($input, ['specimen_type_collections' => $specimen_type_collections]));
     }
 
     /**
@@ -57,6 +82,6 @@ class SeedWeightRepository extends BaseRepository
         $query = $this->allQuery($search);
         return $query->when($with_relations, function ($query, $with_relations) {
             return $query->with($with_relations);
-        })->latest()->withSum('seed_exchanges', 'seed_weight_value')->withSum('seed_exchanges', 'fruit_weight_value')->paginate($perPage ?? 25, $columns);
+        })->latest()->withSum('seed_exchanges', 'exchanged_weight')->paginate($perPage ?? 25, $columns);
     }
 }

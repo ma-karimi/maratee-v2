@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\SeedExchange;
+use App\Models\SeedWeight;
+use Illuminate\Support\Str;
 
 /**
  * Class SeedExchangeRepository
@@ -38,6 +40,20 @@ class SeedExchangeRepository extends BaseRepository
 
     public function getRelationFields()
     {
-        return ['organization.city', 'organization:id,name_en,city_id', 'seed_weight.seedCollection', 'seed_weight.collection'];
+        return ['seed_weight.seedCollection', 'seed_weight.collection', 'collection'];
+    }
+
+    public function create($input)
+    {
+        $seedWeight = SeedWeight::find($input['seed_weight_id']);
+        $exchanged = request()->get('exchanged_weight');
+        $seedExchange = parent::create(array_merge($input, ['seedfruit_weight' => Str::contains($input['specimen_type_name'], 'seed') ? $seedWeight->total_seed_weight - $exchanged : $seedWeight->total_fruit_weight - $exchanged]));
+        if (Str::contains($input['specimen_type_name'], 'seed')) {
+            $data = ['total_seed_weight' => $seedWeight->total_seed_weight - $exchanged];
+        } else {
+            $data = ['total_fruit_weight' => $seedWeight->total_fruit_weight - $exchanged];
+        }
+        $seedWeight->update($data);
+        return $seedExchange;
     }
 }

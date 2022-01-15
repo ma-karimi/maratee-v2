@@ -65,6 +65,9 @@ class SeedExchangesImport implements OnEachRow, WithHeadingRow
         ];
     }
 
+    /**
+     * @throws \Throwable
+     */
     private function storeCollection($row)
     {
         $row['collection_id'] = null;
@@ -72,12 +75,15 @@ class SeedExchangesImport implements OnEachRow, WithHeadingRow
             $row['collection_id'] = SeedGeneral::firstOrCreate(['name' => $row['specimen_typecollection_name'], 'type_id' => 19])->id;
         }
 
-        $row['specimen_type_id'] = null;
-        if (!empty($row['specimen_type_id'])) {
-            $row['specimen_type_id'] = SeedGeneral::firstOrCreate(['name' => $row['specimen_type_id'], 'type_id' => 1])->id;
-        }
+//        $row['specimen_type_id'] = null;
+//        if (!empty($row['specimen_type_id'])) {
+//            $row['specimen_type_id'] = SeedGeneral::firstOrCreate(['name' => $row['specimen_type_id'], 'type_id' => 1])->id;
+//        }
         $seedGeneralCollection = SeedGeneral::firstWhere(['name' => Arr::get(SeedExchange::SPECIMEN_TYPE_COLLECTION_NAME, $row['specimen_typecollection_name']), 'type_id' => 28]);
+        throw_if(!$seedGeneralCollection, new Exception('SPECIMEN TYPE/COLLECTION NAME does not exist'));
         $seedWeight = SeedWeight::firstWhere(['accession_code' => $row['accession_code'], 'collection_id' => $seedGeneralCollection->id]);
+        throw_if(!$seedWeight, new Exception('Seed Weight does not exist'));
+
         $row['seed_weight_id'] = $seedWeight->id;
         $row['seedfruit_weight'] = Str::contains($row['specimen_typecollection_name'], 'seed') ? $seedWeight->total_seed_weight : $seedWeight->total_fruit_weight;
 
@@ -100,7 +106,6 @@ class SeedExchangesImport implements OnEachRow, WithHeadingRow
             'regeneration_code' => $row['regeneration_code'] ?? null,
             'seed_weight_id' => $row['seed_weight_id'] ?? null,
             'project_id' => $row['project_id'] ?? null,
-            'department_name' => $row['department_name'] ?? null,
             'project_title' => $row['project_title'] ?? null,
             'seedfruit_weight' => $row['seedfruit_weight'] ?? null,
             'exchanged_weight' => $row['exchanged_weight'] ?? null,
@@ -112,7 +117,7 @@ class SeedExchangesImport implements OnEachRow, WithHeadingRow
             'research_leader_name' => !empty($row['research_leader_name']) ? "{$row['research_leader_name']}" : null,
             'project_no' => !empty($row['project_no']) ? "{$row['project_no']}" : null,
             'research_no' => !empty($row['research_no']) ? "{$row['research_no']}" : null,
-            'specimen_type_id' => !empty($row['specimen_type_id']) ? "{$row['specimen_type_id']}" : null,
+//            'specimen_type_id' => !empty($row['specimen_type_id']) ? "{$row['specimen_type_id']}" : null,
             'weight' => !empty($row['weight']) ? "{$row['weight']}" : null,
             'recipient_name' => $row['recipient_name'] ?? null,
             'request_no' => $row['request_no'] ?? null,

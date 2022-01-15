@@ -69,12 +69,6 @@ class SeedWeightAPIController extends AppBaseController
 
 
         $keys = [
-            ['name' => 'family', 'title' => 'Family', 'value' => false],
-            ['name' => 'genus', 'title' => 'Genus', 'value' => false],
-            ['name' => 'species', 'title' => 'Species', 'value' => false],
-            ['name' => 'subspecies', 'title' => 'SubSpecies', 'value' => false],
-            ['name' => 'variety', 'title' => 'Variety', 'value' => false],
-            ['name' => 'scientific', 'title' => 'Scientific', 'value' => false],
             ['name' => 'row&column', 'title' => 'Row & Column', 'value' => false],
             ['name' => 'humidity', 'title' => 'Humidity', 'value' => false],
             ['name' => 'purity', 'title' => 'Purity', 'value' => false],
