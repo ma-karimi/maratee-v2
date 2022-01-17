@@ -4,7 +4,6 @@
     <th style="{{$th}}">Species</th>
     <th style="{{$th}}">SubSpecies</th>
     <th style="{{$th}}">Variety</th>
-    <th style="{{$th}}">Scientific Name</th>
-    <th style="{{$th}}">Local/Persian Name</th>
-    <th style="{{$th}}">Author</th>
+    <th style="{{$th}}">Persian Name</th>
+    <th style="{{$th}}">Local Name</th>
 @endif

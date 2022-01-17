@@ -22,7 +22,12 @@
     <thead>
     <tr>
         @if($keys['organization'] ?? false)
-            <th style="{{$th}}">Organization/Department</th>
+            <th style="{{$th}}">name En</th>
+            <th style="{{$th}}">City</th>
+            <th style="{{$th}}">Phone</th>
+            <th style="{{$th}}">Fax</th>
+            <th style="{{$th}}">Email</th>
+            <th style="{{$th}}">Department Name</th>
         @endif
         @if($keys['project'] ?? false)
             <th style="{{$th}}">Project No.</th>
@@ -47,15 +52,18 @@
             <th style="{{$th}}">City</th>
             <th style="{{$th}}">Region</th>
             <th style="{{$th}}">Village/road No. or name</th>
-            <th style="{{$th}}">Latitude</th>
-            <th style="{{$th}}">Longitude</th>
+            <th style="{{$th}}">Latitude Degree</th>
+            <th style="{{$th}}">Latitude Minute</th>
+            <th style="{{$th}}">Latitude Second</th>
+            <th style="{{$th}}">Longitude Degree</th>
+            <th style="{{$th}}">Longitude Minute</th>
+            <th style="{{$th}}">Longitude Second</th>
             <th style="{{$th}}">Altitude</th>
             <th style="{{$th}}">GPS used</th>
             <th style="{{$th}}">GPS datum</th>
         @endif
         @if($keys['plant_flowering'] ?? false)
             <th style="{{$th}}">Number of plants sampled</th>
-            <th style="{{$th}}">area occupancy m2</th>
             <th style="{{$th}}">Flowering time (month)</th>
             <th style="{{$th}}">Fruit Type</th>
             <th style="{{$th}}">Date harvesting (month)</th>
@@ -82,7 +90,7 @@
             <th style="{{$th}}">Associated Species</th>
             <th style="{{$th}}">Specimen Type</th>
             <th style="{{$th}}">Life Form</th>
-        @endif
+        @endif=
 
     </tr>
     </thead>
@@ -90,13 +98,16 @@
     @foreach($result as $item)
         <tr>
             @if($keys['organization'] ?? false)
-                <td style="{{$td}}">{{ $item['organization']['name_en'] ?? null}}
-                    /{{ $item['department_name'] ?? null}}</td>
+                <td style="{{$td}}"> {{ $item['organization']['name_en'] ?? null}} </td>
+                <td style="{{$td}}"> {{ $item['organization']['city'] ?? null}} </td>
+                <td style="{{$td}}"> {{ $item['organization']['phone'] ?? null}} </td>
+                <td style="{{$td}}"> {{ $item['organization']['fax'] ?? null}} </td>
+                <td style="{{$td}}"> {{ $item['organization']['email'] ?? null}} </td>
+                <td style="{{$td}}"> {{ $item['organization']['department_name'] ?? null}} </td>
             @endif
             @if($keys['project'] ?? false)
                 <td style="{{$td}}">{{ $item['project_no'] ?? null}}</td>
-                <td style="{{$td}}">{{ $item['project_title'] ?? null}}
-                </td>
+                <td style="{{$td}}">{{ $item['project_title'] ?? null}}</td>
                 <td style="{{$td}}">{{ $item['project_leader_name'] ?? null}}</td>
             @endif
             @if($keys['research'] ?? false)
@@ -106,21 +117,26 @@
             @endif
 
             @if($keys['accession_code'] ?? false)
-                <td style="{{$td}}">{{ $item['encoded_code_by_collector'] ?? null}}</td>
-                <td style="{{$td}}">{{ $item['encoded_code_by_collector'] ?? null}}</td>
-                <td style="{{$td}}">{{ $item['accession_code'] ?? null}}</td>
-                <td style="{{$td}}">{{ $item['voucher_no'] ?? null}}</td>
+                    <td style="{{$td}}">{{ $item['field_code_encoded_by_collector'] ?? null}}</td>
+                    <td style="{{$td}}">{{ $item['field_code_corrected_by_nrgb'] ?? null}}</td>
+                    <td style="{{$td}}">{{ $item['accession_code_released_by_nrgb'] ?? null}}</td>
+                    <td style="{{$td}}">{{ $item['voucher_no_released_by_tari'] ?? null}}</td>
             @endif
-            @include('excels.partials.geneTaxonomyRow', ['taxonomy'=>$item['seed_collection']['taxonomy'] ?? null, 'keys'=>$keys])
+            @include('excels.partials.geneTaxonomyRow', ['taxonomy'=>$item['taxonomy_data'] ?? null, 'keys'=>$keys])
 
             @if($keys['location'] ?? false)
-                <td style="{{$td}}">{{ $item['location']['country']['name_en'] ?? null}}</td>
-                <td style="{{$td}}">{{ $item['location']['province']['name_en'] ?? null}}</td>
-                <td style="{{$td}}">{{ $item['location']['city']['name_en'] ?? null}}</td>
-                <td style="{{$td}}">{{ $item['location']['region_name'] ?? null}}</td>
-                <td style="{{$td}}">{{ $item['location']['village'] ?? null}}</td>
-                <td style="{{$td}}">{{ $item['location']['DMS'][0] ?? null}}</td>
-                <td style="{{$td}}">{{ $item['location']['DMS'][1] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['country_name'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['provincestate'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['city'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['region'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['villageroad_no_or_name'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['latitude_degree'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['latitude_minute'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['latitude_second'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['longitude_degree'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['longitude_minute'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['longitude_second'] ?? null}}</td>
+                <td style="{{$td}}">{{ $item['location']['altitude_m'] ?? null}}</td>
                 <td style="{{$td}}">{{ $item['location']['gps_used'] ?? 0}}</td>
                 <td style="{{$td}}">{{ $item['location']['gps_datum'] ?? null}}</td>
 
@@ -154,6 +170,12 @@
                 <td style="{{$td}}">{{ $item['specimen_type']['name'] ?? null}}</td>
                 <td style="{{$td}}">{{ $item['life_form']['name'] ?? null}}</td>
             @endif
+            <td style="{{$td}}">{{ $item['plants_sampled_no'] ?? null}}</td>
+            <td style="{{$td}}">{{ $item['approximate_area_of_plant'] ?? null}}</td>
+            <td style="{{$td}}">{{ $item['pollination_type']['name'] ?? null}}</td>
+            <td style="{{$td}}">{{ $item['pollination_agent']['name'] ?? null}}</td>
+            <td style="{{$td}}">{{ $item['seed_collected_from']['name'] ?? null}}</td>
+            <td style="{{$td}}">{{ $item['seed_collected_from']['name'] ?? null}}</td>
 
         </tr>
     @endforeach
